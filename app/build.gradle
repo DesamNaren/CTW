@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.twdinspection"
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    Map<String, String> dependencies = rootProject.ext.dependencies
+    implementation dependencies.appCompat
+    implementation dependencies.support
+    implementation dependencies.supportV4
+    implementation dependencies.design
+    implementation dependencies.cardView
+    implementation dependencies.recyclerView
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitConverterGson
+    implementation dependencies.retrofitAdapterRxJava
+    implementation dependencies.rxAndroid
+    implementation dependencies.rxJava2
+    implementation dependencies.constraint
+    implementation dependencies.location
+    implementation dependencies.dexter
+    implementation dependencies.multidex
+    implementation dependencies.inetrceptor
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation dependencies.glide
+    implementation dependencies.room
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    annotationProcessor dependencies.roomCompiler
+    implementation dependencies.roomCompiler
+    implementation dependencies.roomRxJava2
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation dependencies.logging
+    implementation dependencies.crashlytics
+    implementation dependencies.core
+    implementation dependencies.itext
+}

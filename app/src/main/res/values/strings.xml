@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TWDInspection</string>
+    <string name="font_name_source_opensans">OpenSans</string>
+    <string name="districts">districts</string>
+    <string-array name="districts">
+        <item>--Select--</item>
+        <item>Hyderabad</item>
+        <item>Khammam</item>
+        <item>Warangal</item>
+    </string-array>
+
+    <string name="verify_your_number">Verify Your Number</string>
+    <string name="plz_enter_mob">Please enter your mobile number to \n receive a verification code.</string>
+    <string name="enter_mobile_number">Enter mobile number</string>
+    <string name="con">Continue</string>
+</resources>
