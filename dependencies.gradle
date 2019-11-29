@@ -20,6 +20,7 @@ ext {
     core = '16.0.3'
     itext = '5.5.9'
     lifecycle_version = '2.1.0'
+    circularImage_version='3.0.1'
 
     dependencies = [
             appCompat            : "com.android.support:appcompat-v7:$supportLibraryVersion",
@@ -47,7 +48,8 @@ ext {
             logging              : "com.squareup.okhttp3:logging-interceptor:$logging",
             core                 : "com.google.firebase:firebase-core:$core",
             itext                : "com.itextpdf:itextg:$itext",
-            lifecycle_version    : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+            lifecycle_version    : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
+            circularImageView    :"de.hdodenhof:circleimageview:$circularImage_version"
 
     ]
 }

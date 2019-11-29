@@ -59,4 +59,6 @@ dependencies {
     implementation dependencies.core
     implementation dependencies.itext
     implementation dependencies.lifecycle_version
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
 }

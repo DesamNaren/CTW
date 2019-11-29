@@ -1,20 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.ui.BasicDetailsViewModel" />
+    </data>
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dimen_50dp"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/drawable_amber_gradient"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/profile"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    app:civ_border_color="#FFFF"
+                    app:civ_border_width="1dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+                    <include layout="@layout/include_login_details" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="5dp"
+        android:layout_below="@+id/cv_profile"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_50dp"
+
+        android:layout_marginRight="@dimen/dimen_5dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
@@ -41,7 +85,8 @@
                     android:id="@+id/sp_dist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/districts" />
+                    android:entries="@array/districts"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -61,7 +106,8 @@
                     android:id="@+id/sp_jurisdiction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/districts" />
+                    android:entries="@array/districts"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,23 +127,27 @@
                     android:id="@+id/sp_institution"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/districts" />
+                    android:entries="@array/districts"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <com.example.twdinspection.custom.CustomFontButtonView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:layout_margin="@dimen/dimen_5dp"
-                android:textAllCaps="false"
-                android:background="@drawable/shape_btn_rounded"
-                android:textColor="@color/white"
-                android:layout_weight="1"/>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.example.twdinspection.custom.CustomFontButtonView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_btn_rounded"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
+</layout>
