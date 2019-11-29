@@ -72,6 +72,8 @@
                 <com.example.twdinspection.custom.CustomFontEditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_user_name"
                     android:text="@={viewModel.username}" />
@@ -86,14 +88,33 @@
                 app:errorEnabled="true"
                 android:layout_marginRight="@dimen/dimen_20dp">
 
-
-                <com.example.twdinspection.custom.CustomFontEditText
-                    android:id="@+id/et_pwd"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_pwd"
-                    android:inputType="textPassword"
-                    android:text="@={viewModel.password}" />
+                    android:layout_height="wrap_content">
+
+                    <com.example.twdinspection.custom.CustomFontEditText
+                        android:id="@+id/et_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_pwd"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:text="@={viewModel.password}" />
+
+                    <ImageView
+                        android:onClick="@{()-> viewModel.onViewPwd()}"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@android:drawable/ic_secure"
+                        android:layout_width="@dimen/dimen_20dp"
+                        android:layout_height="@dimen/dimen_20dp"/>
+
+                </RelativeLayout>
+
+
+
 
             </com.google.android.material.textfield.TextInputLayout>
 

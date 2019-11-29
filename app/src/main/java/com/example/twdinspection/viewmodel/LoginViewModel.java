@@ -1,9 +1,8 @@
 package com.example.twdinspection.viewmodel;
 
 import android.content.Context;
-import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -32,7 +31,7 @@ public class LoginViewModel extends ViewModel {
     private Context context;
     private ActivityLoginCreBinding binding;
 
-    LoginViewModel(ActivityLoginCreBinding binding,Context context) {
+    LoginViewModel(ActivityLoginCreBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
     }
@@ -51,9 +50,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void onBtnClick() {
-
         LoginUser loginUser = new LoginUser(username.getValue(), password.getValue());
-
         if (TextUtils.isEmpty(loginUser.getEmail())) {
             binding.tName.setError("Please enter username");
             return;
@@ -67,14 +64,21 @@ public class LoginViewModel extends ViewModel {
         } else {
             binding.tPwd.setError(null);
         }
-
-
         callEmployeeData();
     }
 
+    public void onViewPwd() {
+        if (binding.etPwd.getInputType() == InputType.TYPE_CLASS_TEXT) {
+            binding.etPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            binding.etPwd.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
+        if (password.getValue() != null)
+            binding.etPwd.setSelection(password.getValue().length());
+    }
 
     private void callEmployeeData() {
-        Utils.hideKeyboard(context);
+        Utils.hideKeyboard(context, binding.btnLogin);
         binding.btnLogin.setVisibility(View.GONE);
         binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create();
