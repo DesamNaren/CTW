@@ -2,13 +2,17 @@ package com.example.twdinspection.network;
 
 
 import com.example.twdinspection.BuildConfig;
+import com.example.twdinspection.source.EmployeeResponse;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
 
 public interface TWDService {
     class Factory {
@@ -38,6 +42,10 @@ public interface TWDService {
         }
 
     }
+
+    @GET("v1/employees")
+    Call<List<EmployeeResponse>> getAllEmployees();
+
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

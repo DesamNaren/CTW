@@ -1,22 +1,41 @@
 package com.example.twdinspection.viewmodel;
 
+import android.content.Context;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.twdinspection.databinding.ActivityLoginCreBinding;
+import com.example.twdinspection.network.TWDService;
+import com.example.twdinspection.source.EmployeeResponse;
 import com.example.twdinspection.source.LoginUser;
+import com.example.twdinspection.utils.Utils;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
-    public MutableLiveData<String> errorName = new MutableLiveData<>();
-    public MutableLiveData<String> errorPassword = new MutableLiveData<>();
 
+    private MutableLiveData<List<EmployeeResponse>> responseMutableLiveData;
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     private MutableLiveData<Integer> busy;
+    private Context context;
+    private ActivityLoginCreBinding binding;
 
-    private MutableLiveData<LoginUser> userMutableLiveData;
+    LoginViewModel(ActivityLoginCreBinding binding,Context context) {
+        this.binding = binding;
+        this.context = context;
+    }
 
     public MutableLiveData<Integer> getBusy() {
         if (busy == null) {
@@ -26,35 +45,55 @@ public class LoginViewModel extends ViewModel {
         return busy;
     }
 
-
-    public LoginViewModel() {
-
+    public LiveData<List<EmployeeResponse>> geListLiveData() {
+        responseMutableLiveData = new MutableLiveData<>();
+        return responseMutableLiveData;
     }
-
-    public LiveData<LoginUser> getUser() {
-        if (userMutableLiveData == null) {
-            userMutableLiveData = new MutableLiveData<>();
-        }
-        return userMutableLiveData;
-    }
-
 
     public void onBtnClick() {
 
-        getBusy().setValue(0); //View.VISIBLE
-        LoginUser user = new LoginUser(username.getValue(), password.getValue());
-        if (TextUtils.isEmpty(user.getEmail())) {
-            errorName.setValue("Please enter username");
-            busy.setValue(8); //8 == View.GONE
+        LoginUser loginUser = new LoginUser(username.getValue(), password.getValue());
+
+        if (TextUtils.isEmpty(loginUser.getEmail())) {
+            binding.tName.setError("Please enter username");
+            return;
+
         } else {
-            errorName.setValue(null);
+            binding.tName.setError(null);
         }
-        if (TextUtils.isEmpty(user.getPassword())) {
-            errorPassword.setValue("Please enter password");
-            busy.setValue(8); //8 == View.GONE
+        if (TextUtils.isEmpty(loginUser.getPassword())) {
+            binding.tPwd.setError("Please enter password");
+            return;
         } else {
-            errorPassword.setValue(null);
+            binding.tPwd.setError(null);
         }
-        userMutableLiveData.setValue(user);
+
+
+        callEmployeeData();
+    }
+
+
+    private void callEmployeeData() {
+        Utils.hideKeyboard(context);
+        binding.btnLogin.setVisibility(View.GONE);
+        binding.progress.setVisibility(View.VISIBLE);
+        TWDService twdService = TWDService.Factory.create();
+        twdService.getAllEmployees().enqueue(new Callback<List<EmployeeResponse>>() {
+            @Override
+            public void onResponse(Call<List<EmployeeResponse>> call, Response<List<EmployeeResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    binding.btnLogin.setVisibility(View.VISIBLE);
+                    binding.progress.setVisibility(View.GONE);
+                    responseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EmployeeResponse>> call, Throwable t) {
+                binding.progress.setVisibility(View.GONE);
+                binding.btnLogin.setVisibility(View.VISIBLE);
+                Log.i("UU", "onFailure: " + t.getMessage());
+            }
+        });
     }
 }

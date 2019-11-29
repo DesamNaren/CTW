@@ -59,44 +59,41 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_20dp">
 
-
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/t_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_20dp"
-                app:error="@{viewModel.errorName}"
                 android:layout_marginTop="@dimen/dimen_50dp"
                 app:errorEnabled="true"
                 android:layout_marginRight="@dimen/dimen_20dp">
 
 
                 <com.example.twdinspection.custom.CustomFontEditText
+                    android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_user_name"
-                    android:text="@={viewModel.username}"
-                    app:errorEnabled="true"
-                    />
+                    android:text="@={viewModel.username}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/t_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_20dp"
-                app:error="@{viewModel.errorPassword}"
                 app:errorEnabled="true"
                 android:layout_marginRight="@dimen/dimen_20dp">
 
 
                 <com.example.twdinspection.custom.CustomFontEditText
+                    android:id="@+id/et_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_pwd"
                     android:inputType="textPassword"
-                    android:text="@={viewModel.password}"
-                    />
+                    android:text="@={viewModel.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +106,7 @@
                 android:padding="@dimen/dimen_10dp">
 
                 <com.example.twdinspection.custom.CustomFontTextView
+                    android:id="@+id/btn_login"
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:layout_gravity="center"
@@ -121,6 +119,7 @@
                     android:textColor="@color/white" />
 
                 <ProgressBar
+                    android:id="@+id/progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/ProgressBarTheme"
