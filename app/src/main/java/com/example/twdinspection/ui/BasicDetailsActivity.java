@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityBasicDetailsBinding;
+import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
 
 public class BasicDetailsActivity extends AppCompatActivity {
 
