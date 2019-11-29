@@ -58,4 +58,5 @@ dependencies {
     implementation dependencies.crashlytics
     implementation dependencies.core
     implementation dependencies.itext
+    implementation dependencies.lifecycle_version
 }
