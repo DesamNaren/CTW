@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <!--<color name="headerTextColor">#f26222</color>-->
     <color name="headerTextColor">#018679</color>
     <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
     <color name="yellow">#FCFC14</color>
     <color name="green">#008000</color>
     <color name="topbar">#333333</color>
@@ -29,7 +28,7 @@
     <color name="md__defaultBackground">#FF555555</color>
     <color name="cb_dark_gray">#ff2a3a44</color>
     <color name="light_red">#fffa87ce</color>
-    <color name="light_gray">#ff848284</color>
+    <color name="light_gray_1">#ff848284</color>
     <color name="red_selection">#ff5b5b</color>
     <color name="darkblue">#ff0000ff</color>
     <color name="thik_blue">#6600ff</color>
@@ -38,7 +37,7 @@
     <color name="honeydew">#ff838b83</color>
     <color name="slate_gray">#ff2f4f4f</color>
     <color name="dark_slate_gray">#ff494949</color>
-    <color name="cb_light_gray">#ff323a3e</color>
+    <color name="cb_light_gray_old">#ff323a3e</color>
     <color name="cb_heading">#ff2a2b2c</color>
     <color name="separator_gray">#ff545454</color>
     <color name="separator">#ff545454</color>
@@ -444,4 +443,16 @@
     <color name="metroTeal">#00aba9</color>
     <color name="metroViolet">#aa00ff</color>
     <color name="metroYellow">#e3c800</color>
+
+
+    <color name="text_selected">#b0003a</color>
+    <color name="text_focused">#E91E63</color>
+    <color name="text_default">#F8BBD0</color>
+    <color name="text_hint_default">#BDBDBD</color>
+    <color name="line_selected">#E91E63</color>
+    <color name="line_focused">#3F51B5</color>
+    <color name="line_default">#C5CAE9</color>
+    <color name="light_gray">#A9A9A9</color>
+    <color name="black">#000</color>
+    <color name="design_snackbar_background_color" tools:override="true">@color/colorAccent</color>
 </resources>
