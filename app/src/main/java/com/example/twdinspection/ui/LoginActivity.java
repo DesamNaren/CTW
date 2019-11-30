@@ -1,5 +1,6 @@
 package com.example.twdinspection.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<EmployeeResponse> employeeResponses) {
                 if (employeeResponses != null && employeeResponses.size() > 0) {
-                    Toast.makeText(LoginActivity.this, "" + employeeResponses.size(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LoginActivity.this, OTPActivity.class));
                 }
             }
         });

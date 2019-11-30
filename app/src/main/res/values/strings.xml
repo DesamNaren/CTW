@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TWDInspection</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
@@ -17,4 +17,16 @@
     <string name="enter_user_name">USERNAME</string>
     <string name="enter_pwd">PASSWORD</string>
     <string name="log_in">Log In</string>
+
+
+    <color name="text_selected">#b0003a</color>
+    <color name="text_focused">#E91E63</color>
+    <color name="text_default">#F8BBD0</color>
+    <color name="text_hint_default">#BDBDBD</color>
+    <color name="line_selected">#E91E63</color>
+    <color name="line_focused">#3F51B5</color>
+    <color name="line_default">#C5CAE9</color>
+    <color name="light_gray">#A9A9A9</color>
+    <color name="black">#000</color>
+    <color name="design_snackbar_background_color" tools:override="true">@color/colorAccent</color>
 </resources>

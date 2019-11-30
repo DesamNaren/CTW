@@ -68,8 +68,7 @@ public class LoginViewModel extends ViewModel {
         callEmployeeData();
     }
 
-    public void onViewPwd() {
-        if (binding.etPwd.getInputType() == InputType.TYPE_CLASS_TEXT) {
+    public void onViewPwd() { if (binding.etPwd.getInputType() == InputType.TYPE_CLASS_TEXT) {
             binding.pwdImage.setImageDrawable(context.getResources().getDrawable(R.drawable.pwd_hide));
             binding.etPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         } else {
