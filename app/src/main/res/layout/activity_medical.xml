@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MedicalActivity">
+
+    <include layout="@layout/header_layout" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/fever" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_fever"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_fever"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Fever"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/cough" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_cold"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_cold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Cold &amp; cough"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/headache" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_headache"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_headache"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Headache"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/diarrhea" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_diarrhea"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_diarrhea"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Diarrhea"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/mosquito" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_malaria"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_malaria"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Malaria"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/medical"
+                            android:padding="@dimen/dimen_5dp"
+                            android:src="@drawable/heartbeat" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_others"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.custom.CustomFontEditText
+                                android:id="@+id/et_others"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Others"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_10dp">
+
+                <ImageView
+                    android:id="@+id/iv_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:background="@android:drawable/ic_menu_my_calendar"
+                    android:backgroundTint="@color/list_blue" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:textColorHint="@color/colorAccent"
+                    app:errorEnabled="true">
+
+
+                    <com.example.twdinspection.custom.CustomFontEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="@string/medical_checkup"
+                        android:imeOptions="actionNext"
+                        android:paddingLeft="@dimen/dimen_30dp"
+                        android:singleLine="true"
+                        android:text="Select date" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/black" />
+
+
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/medical"
+                        android:src="@drawable/fever" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fever"
+                        android:textColor="@color/list_blue"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/list_blue" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/medical"
+                        android:src="@drawable/fever" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fever"
+                        android:textColor="@color/list_blue"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/list_blue" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>-->
+    </ScrollView>
+
+</LinearLayout>
