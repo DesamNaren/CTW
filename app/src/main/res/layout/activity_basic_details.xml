@@ -7,178 +7,199 @@
             name="viewModel"
             type="com.example.twdinspection.viewmodel.BasicDetailsViewModel" />
     </data>
-<RelativeLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_profile"
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardElevation="2dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardElevation="2dp">
 
-            <LinearLayout
-                android:id="@+id/ll"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/drawable_amber_gradient"
-                android:gravity="bottom"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/profile"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    app:civ_border_color="#FFFF"
-                    app:civ_border_width="1dp" />
+                <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:orientation="horizontal">
-                    <include layout="@layout/include_login_details" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:id="@+id/cover"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/drawable_amber_gradient"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/drawable_amber_gradient" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cv_profile"
-        android:layout_marginLeft="@dimen/dimen_5dp"
-        android:layout_marginTop="@dimen/dimen_50dp"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:src="@drawable/profile"
+                        app:civ_border_color="#FFFF"
+                        app:civ_border_width="1dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/cover"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.01"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cover"
+                        app:layout_constraintVertical_bias="0.1" />
 
-        android:layout_marginRight="@dimen/dimen_5dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp">
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cv_profile"
-                android:layout_marginLeft="@dimen/dimen_5dp"
-                android:layout_marginRight="@dimen/dimen_5dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ll_selectDistrict"
-                android:orientation="vertical"
-                android:padding="@dimen/dimen_5dp">
-
-                <com.example.twdinspection.custom.CustomFontTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_10dp"
-                    android:text="Select District"
-                    android:textColor="@color/black" />
-
-                <Spinner
-                    android:id="@+id/sp_dist"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/districts"
-                    android:spinnerMode="dialog" />
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cv_profile"
-                android:layout_marginLeft="@dimen/dimen_5dp"
-                android:layout_marginRight="@dimen/dimen_5dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="2dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ll_selectJunction"
-                android:orientation="vertical"
-                android:padding="@dimen/dimen_5dp">
-
-                <com.example.twdinspection.custom.CustomFontTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_10dp"
-                    android:text="Select Jurisdiction"
-                    android:textColor="@color/black" />
-
-                <Spinner
-                    android:id="@+id/sp_jurisdiction"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/districts"
-                    android:spinnerMode="dialog" />
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cv_profile"
-                android:layout_marginLeft="@dimen/dimen_5dp"
-                android:layout_marginRight="@dimen/dimen_5dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ll_selectInstitute"
-                android:orientation="vertical"
-                android:padding="@dimen/dimen_5dp">
-
-                <com.example.twdinspection.custom.CustomFontTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dimen_10dp"
-                    android:text="Select Institution"
-                    android:textColor="@color/black" />
-
-                <Spinner
-                    android:id="@+id/sp_institution"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/districts"
-                    android:spinnerMode="dialog" />
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.example.twdinspection.custom.CustomFontButtonView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_background"
-                    android:text="Submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_loginDetails"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_below="@+id/cv_profile">
+        <include layout="@layout/include_login_details" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_loginDetails"
+            android:layout_marginLeft="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_50dp"
+
+            android:layout_marginRight="@dimen/dimen_5dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_profile"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_selectDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_10dp"
+                            android:text="Select District"
+                            android:textColor="@color/black" />
+
+                        <Spinner
+                            android:id="@+id/sp_dist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/districts"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_profile"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_selectJunction"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_10dp"
+                            android:text="Select Jurisdiction"
+                            android:textColor="@color/black" />
+
+                        <Spinner
+                            android:id="@+id/sp_jurisdiction"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/districts"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_profile"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_selectInstitute"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_10dp"
+                            android:text="Select Institution"
+                            android:textColor="@color/black" />
+
+                        <Spinner
+                            android:id="@+id/sp_institution"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/districts"
+                            android:spinnerMode="dialog" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.example.twdinspection.custom.CustomFontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:padding="@dimen/dimen_20dp"
+                        android:text="Submit"
+                        android:background="@color/colorPrimary"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </layout>

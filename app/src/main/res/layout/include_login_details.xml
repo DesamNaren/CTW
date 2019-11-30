@@ -16,8 +16,14 @@
         android:drawableTint="@color/colorPrimary"
         android:padding="@dimen/dimen_5dp"
         android:text="Username"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <com.example.twdinspection.custom.CustomFontTextView
             android:layout_width="wrap_content"
@@ -26,21 +32,18 @@
             android:drawableTint="@color/colorPrimary"
             android:padding="@dimen/dimen_5dp"
             android:text="Designation"
-            android:textColor="@color/white" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
+            android:textColor="@color/black" />
         <com.example.twdinspection.custom.CustomFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTint="@color/colorPrimary"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_10dp"
             android:drawablePadding="@dimen/dimen_5dp"
             android:padding="@dimen/dimen_5dp"
             android:text="Date"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
-    </LinearLayout>
+    </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
