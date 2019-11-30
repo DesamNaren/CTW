@@ -26,4 +26,8 @@
     <string name="verification">VERIFICATION</string>
     <string name="set_mpin">GENERATE MPIN</string>
     <string name="forgot_mpin">Forgot mPIN?</string>
+    <string name="select_district">Select District</string>
+    <string name="select_jurisdiction">Select Jurisdiction</string>
+    <string name="select_institution">Select Institution</string>
+    <string name="submit">Submit</string>
 </resources>
