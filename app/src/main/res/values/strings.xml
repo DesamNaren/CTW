@@ -49,4 +49,10 @@
     <string name="malaria">Malaria</string>
     <string name="others">Others</string>
     <string name="select_date">Select date</string>
+    <string name="students_on_roll">Students on Roll</string>
+    <string name="password">Password</string>
+    <string name="is_students_attendance_marked">Is students attendance marked?</string>
+    <string name="students_marked_present_in_register">Students marked present in register</string>
+    <string name="students_present_during_inspection">Students present during Inspection</string>
+    <string name="variance">Variance</string>
 </resources>
