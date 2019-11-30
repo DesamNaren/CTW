@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.twdinspection.viewmodel.MPINViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/header_layout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/item_staff_attendance"
+            android:background="@color/dark_gray"
+            android:id="@+id/staffRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/root"
+            android:padding="10dp" />
+    </RelativeLayout>
+
+
+</layout>
