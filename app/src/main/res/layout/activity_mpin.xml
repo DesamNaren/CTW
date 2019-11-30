@@ -4,6 +4,7 @@
 
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.twdinspection.viewmodel.MPINViewModel" />
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="VERIFICATION"
+            android:text="@string/verification"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorPrimary" />
 
@@ -51,16 +52,16 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="16dp"
                 android:padding="10dp"
-                android:text="OTP has been sent to you on your registered mobile phone. Please enter it below" />
+                android:text="@string/mpin_text" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
@@ -68,14 +69,14 @@
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:singleLine="true"
                         android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:maxLength="1"
-                        android:textAlignment="center"
-                        android:id="@+id/edit1"/>
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,14 +87,14 @@
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:singleLine="true"
                         android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:maxLength="1"
-                        android:textAlignment="center"
-                        android:id="@+id/edit2"/>
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -104,14 +105,14 @@
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:singleLine="true"
                         android:imeOptions="actionNext"
+                        android:inputType="number"
                         android:maxLength="1"
-                        android:textAlignment="center"
-                        android:id="@+id/edit3"/>
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -122,50 +123,63 @@
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:singleLine="true"
                         android:imeOptions="actionDone"
+                        android:inputType="number"
                         android:maxLength="1"
-                        android:textAlignment="center"
-                        android:id="@+id/edit4"/>
+                        android:singleLine="true"
+                        android:textAlignment="center" />
 
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <com.chaos.view.PinView
-                android:text="@={viewmodel.mpin}"
                 android:id="@+id/pinview"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:lineColor="@color/line_colors"
+                android:layout_gravity="center"
+                android:cursorVisible="true"
                 android:inputType="number"
                 android:padding="6dp"
-                app:cursorColor="@color/line_selected"
-                android:cursorVisible="true"
-                app:cursorWidth="2dp"
+                android:text="@={viewmodel.mpin}"
                 android:textColor="@color/text_colors"
+                app:cursorColor="@color/line_selected"
+                app:cursorWidth="2dp"
                 app:itemCount="4"
-                app:lineWidth="1dp"
                 app:itemWidth="72dp"
+                app:lineColor="@color/line_colors"
+                app:lineWidth="1dp"
                 app:viewType="line" />
 
+
             <TextView
-                android:onClick="@{()-> viewmodel.onVerifyClick()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
+                android:onClick="@{()-> viewmodel.onVerifyClick()}"
                 android:padding="10dp"
-                android:text="VERIFY"
+                android:text="@string/verify"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="12dp"
+            android:onClick="@{()-> viewmodel.onVerifyClick()}"
+            android:padding="10dp"
+            android:text="@string/forgot_mpin"
+            android:textColor="@color/materialRed300"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

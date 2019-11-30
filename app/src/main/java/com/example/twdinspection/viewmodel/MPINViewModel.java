@@ -7,16 +7,16 @@ import android.view.View;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.twdinspection.databinding.ActivityOtpBinding;
+import com.example.twdinspection.databinding.ActivityMpinBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MPINViewModel extends ViewModel {
 
-    private ActivityOtpBinding binding;
+    private ActivityMpinBinding binding;
 
     public MutableLiveData<String> mpin = new MutableLiveData<>();
 
-    MPINViewModel(ActivityOtpBinding binding) {
+    MPINViewModel(ActivityMpinBinding binding) {
         this.binding = binding;
     }
 

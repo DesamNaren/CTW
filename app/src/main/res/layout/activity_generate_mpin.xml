@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.twdinspection.viewmodel.GenerateMPINViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/set_mpin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/smartphone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="16dp"
+                android:padding="10dp"
+                android:text="@string/gen_mpin_text" />
+
+
+            <com.chaos.view.PinView
+                android:text="@={viewmodel.mpin}"
+                android:id="@+id/pinview"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lineColor="@color/line_colors"
+                android:inputType="number"
+                android:padding="6dp"
+                app:cursorColor="@color/line_selected"
+                android:cursorVisible="true"
+                app:cursorWidth="2dp"
+                android:textColor="@color/text_colors"
+                app:itemCount="4"
+                app:lineWidth="1dp"
+                app:itemWidth="72dp"
+                app:viewType="line" />
+
+            <com.chaos.view.PinView
+                android:text="@={viewmodel.cmfMPin}"
+                android:id="@+id/cnf_pinview"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lineColor="@color/line_colors"
+                android:inputType="numberPassword"
+                android:padding="6dp"
+                app:cursorColor="@color/line_selected"
+                android:cursorVisible="true"
+                app:cursorWidth="2dp"
+                android:textColor="@color/text_colors"
+                app:itemCount="4"
+                app:lineWidth="1dp"
+                app:itemWidth="72dp"
+                app:viewType="line" />
+
+            <TextView
+                android:onClick="@{()-> viewmodel.onVerifyClick()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:padding="10dp"
+                android:text="@string/proceed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -37,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<EmployeeResponse> employeeResponses) {
                 if (employeeResponses != null && employeeResponses.size() > 0) {
-                    startActivity(new Intent(LoginActivity.this, OTPActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MPINActivity.class));
                 }
             }
         });

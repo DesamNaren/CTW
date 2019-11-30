@@ -17,7 +17,13 @@
     <string name="enter_user_name">USERNAME</string>
     <string name="enter_pwd">PASSWORD</string>
     <string name="log_in">Log In</string>
-
-
-
+    <string name="otp_text">OTP has been sent to you on your registered mobile phone. Please enter it below</string>
+    <string name="mpin_text">Please enter your 4 digit mPIN below</string>
+    <string name="gen_mpin_text">Set your mPIN by enter 4 digit pin below</string>
+    <string name="verify">VERIFY</string>
+    <string name="generate">GENERATE</string>
+    <string name="proceed">PROCEED</string>
+    <string name="verification">VERIFICATION</string>
+    <string name="set_mpin">GENERATE MPIN</string>
+    <string name="forgot_mpin">Forgot mPIN?</string>
 </resources>

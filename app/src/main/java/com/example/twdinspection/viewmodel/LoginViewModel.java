@@ -16,8 +16,7 @@ import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.network.TWDService;
 import com.example.twdinspection.source.EmployeeResponse;
 import com.example.twdinspection.source.LoginUser;
-import com.example.twdinspection.ui.LoginActivity;
-import com.example.twdinspection.ui.OTPActivity;
+import com.example.twdinspection.ui.GenerateMPINActivity;
 import com.example.twdinspection.utils.Utils;
 
 import java.util.List;
@@ -68,7 +67,7 @@ public class LoginViewModel extends ViewModel {
         } else {
             binding.tPwd.setError(null);
         }
-        context.startActivity(new Intent(context, OTPActivity.class));
+        context.startActivity(new Intent(context, GenerateMPINActivity.class));
 
 //        callEmployeeData();
     }

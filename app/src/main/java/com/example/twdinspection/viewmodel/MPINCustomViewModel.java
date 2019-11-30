@@ -4,12 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.twdinspection.databinding.ActivityOtpBinding;
+import com.example.twdinspection.databinding.ActivityMpinBinding;
+
 
 public class MPINCustomViewModel implements ViewModelProvider.Factory {
-    private ActivityOtpBinding binding;
+    private ActivityMpinBinding binding;
 
-    public MPINCustomViewModel(ActivityOtpBinding binding) {
+    public MPINCustomViewModel(ActivityMpinBinding binding) {
         this.binding = binding;
     }
 
