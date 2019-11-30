@@ -60,7 +60,7 @@
                                 android:id="@+id/et_fever"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Fever"
+                                android:hint="@string/fever"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -97,7 +97,7 @@
                                 android:id="@+id/et_cold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Cold &amp; cough"
+                                android:hint="@string/cold_amp_cough"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -134,7 +134,7 @@
                                 android:id="@+id/et_headache"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Headache"
+                                android:hint="@string/headache"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -178,7 +178,7 @@
                                 android:id="@+id/et_diarrhea"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Diarrhea"
+                                android:hint="@string/diarrhea"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -215,7 +215,7 @@
                                 android:id="@+id/et_malaria"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Malaria"
+                                android:hint="@string/malaria"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -252,7 +252,7 @@
                                 android:id="@+id/et_others"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Others"
+                                android:hint="@string/others"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true" />
@@ -303,7 +303,7 @@
                         android:imeOptions="actionNext"
                         android:paddingLeft="@dimen/dimen_30dp"
                         android:singleLine="true"
-                        android:text="Select date" />
+                        android:text="@string/select_date" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

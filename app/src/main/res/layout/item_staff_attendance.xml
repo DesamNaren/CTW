@@ -1,74 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="staff"
+            type="com.example.twdinspection.source.EmployeeResponse" />
+    </data>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:padding="@dimen/dimen_10dp"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/user1" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:elevation="3dp">
 
-        <LinearLayout
-            android:padding="@dimen/dimen_10dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <com.example.twdinspection.custom.CustomFontTextView
-                android:text="ID: 123456"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <com.example.twdinspection.custom.CustomFontTextView
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="Name: XYZXYZ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <com.example.twdinspection.custom.CustomFontTextView
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="Des: XYZXYZ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_10dp"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_10dp">
 
-        <LinearLayout
-            android:paddingRight="@dimen/dimen_10dp"
-            android:paddingLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_8dp"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:src="@drawable/user1" />
 
-            <ImageView
-                android:src="@drawable/attended"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
-            <ImageView
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:src="@android:mipmap/sym_def_app_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
-            <ImageView
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:src="@android:mipmap/sym_def_app_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_10dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="123456" />
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:text="XYZXYZ, DES" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="@dimen/dimen_10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_10dp">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/success" />
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_marginLeft="4dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/present" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/absent" />
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_marginLeft="4dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/absent" />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/on_dep" />
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_marginLeft="4dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dep" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingRight="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp">
+
+                    <com.example.twdinspection.custom.CustomFontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/yesterday_supervision_duty_allotted" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/light_gray"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Yes"
+                            android:textColor="@color/white" />
+
+                        <Space
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content" />
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/light_gray"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="No"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_10dp"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.example.twdinspection.custom.CustomFontEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_week"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+</layout>

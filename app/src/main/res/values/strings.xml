@@ -36,4 +36,17 @@
     <string name="name_of_the_institution">Name of the Institution</string>
     <string name="mandal">Mandal</string>
     <string name="medical_checkup">When was the last Medical Checkup done?</string>
+
+    <string name="yesterday_supervision_duty_allotted">Yesterday supervision duty allotted</string>
+    <string name="last_week">Last week turn duties teacher attended</string>
+    <string name="present">Present</string>
+    <string name="dep">On Deputation</string>
+    <string name="absent">Absent</string>
+    <string name="fever">Fever</string>
+    <string name="cold_amp_cough">Cold &amp; cough></string>
+    <string name="headache">Headache</string>
+    <string name="diarrhea">Diarrhea</string>
+    <string name="malaria">Malaria</string>
+    <string name="others">Others</string>
+    <string name="select_date">Select date</string>
 </resources>
