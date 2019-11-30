@@ -49,4 +49,5 @@
     <string name="malaria">Malaria</string>
     <string name="others">Others</string>
     <string name="select_date">Select date</string>
+    <string name="enter_number">Enter number of suffering students</string>
 </resources>
