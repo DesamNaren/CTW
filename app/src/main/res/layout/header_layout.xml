@@ -8,15 +8,18 @@
     android:padding="10dp">
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/back_btn"
         android:src="@drawable/left" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/staff_att"
+        android:text="Title"
+        android:id="@+id/header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorPrimary" />
 
