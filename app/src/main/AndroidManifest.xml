@@ -33,6 +33,9 @@
             android:name=".ui.BasicDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.UploadedPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>

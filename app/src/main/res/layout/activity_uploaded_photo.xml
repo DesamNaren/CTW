@@ -13,7 +13,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/btn_layout"
+            android:layout_above="@+id/btn_submit"
             android:layout_below="@id/header_layout"
             android:background="@color/light_gray">
 
@@ -346,8 +346,18 @@
             </LinearLayout>
         </ScrollView>
 
-        <include
-            android:id="@+id/btn_layout"
-            layout="@layout/buttons_layout" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:padding="@dimen/dimen_5dp"
+            android:textColor="@color/white"
+            android:id="@+id/btn_submit"
+            android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/rightarrow"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_alignParentBottom="true"
+            android:text="@string/submit" />
     </RelativeLayout>
 </layout>
