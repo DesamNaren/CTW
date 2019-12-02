@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -44,6 +45,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             viewToAnimate.startAnimation(anim);
             lastPosition = position;
         }
+
+
     }
 
     @Override
@@ -51,6 +54,15 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         EmployeeResponse employeeResponse = employeeResponses.get(position);
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
+
+        holder.binding.getRoot().findViewById(R.id.icon).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                }
+        );
     }
 
     @Override
