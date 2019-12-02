@@ -19,7 +19,7 @@ import com.example.twdinspection.viewmodel.LoginViewModel;
 
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends LocBaseActivity {
     ActivityLoginCreBinding binding;
 
     @Override
