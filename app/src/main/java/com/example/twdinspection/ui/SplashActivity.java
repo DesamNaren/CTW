@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.application.TWDApplication;
+import com.example.twdinspection.custom.CustomFontTextView;
 import com.example.twdinspection.databinding.CustomLayoutForPermissionsBinding;
 import com.example.twdinspection.utils.AppConstants;
 
@@ -154,13 +156,12 @@ public class SplashActivity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_permission);
+                dialog.setContentView(R.layout.info_dialog);
                 dialog.setCancelable(false);
-                TextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
                 dialogMessage.setText(getString(R.string.plz_grant));
-                TextView yes = dialog.findViewById(R.id.BtnOk);
-//                Button no = dialog.findViewById(R.id.btDialogCancel);
+                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
+                CustomFontTextView no = dialog.findViewById(R.id.BtnCancel);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -173,13 +174,13 @@ public class SplashActivity extends AppCompatActivity {
                                 REQUEST_PERMISSION_CODE);
                     }
                 });
-//                no.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                        finish();
-//                    }
-//                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
                 if (!dialog.isShowing())
                     dialog.show();
             }

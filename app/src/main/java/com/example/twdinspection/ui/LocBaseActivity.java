@@ -19,9 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.custom.CustomFontTextView;
 import com.example.twdinspection.utils.Utils;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -84,6 +86,7 @@ public class LocBaseActivity extends AppCompatActivity {
 
     String[] permissions = new String[]{
             ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE};
+    private int REQUEST_PERMISSION_CODE=100;
 
 
     @Override
@@ -123,7 +126,33 @@ public class LocBaseActivity extends AppCompatActivity {
 
     private void customPerAlert() {
         try {
-
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.setContentView(R.layout.info_dialog);
+                dialog.setCancelable(false);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
+                dialogMessage.setText(getString(R.string.plz_grant));
+                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
+                CustomFontTextView no = dialog.findViewById(R.id.BtnCancel);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                      callPermissions();
+                    }
+                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
