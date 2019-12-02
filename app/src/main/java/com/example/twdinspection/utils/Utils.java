@@ -52,20 +52,18 @@ public class Utils {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 if (type.equalsIgnoreCase(AppConstants.SUCCESS)) {
-                    dialog.setContentView(R.layout.custom_alert_success);
+                    dialog.setContentView(R.layout.success_dialog);
                 } else if (type.equalsIgnoreCase(AppConstants.FAILURE)) {
-                    dialog.setContentView(R.layout.custom_alert_error);
+                    dialog.setContentView(R.layout.error_dialog);
                 } else if (type.equalsIgnoreCase(AppConstants.WARNING)) {
-                    dialog.setContentView(R.layout.custom_alert_warning);
+                    dialog.setContentView(R.layout.warning_dialog);
                 } else {
-                    dialog.setContentView(R.layout.custom_alert_information);
+                    dialog.setContentView(R.layout.info_dialog);
                 }
                 dialog.setCancelable(false);
-                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
-                dialogTitle.setText(activity.getResources().getString(R.string.app_name) + ": " + title);
-                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                TextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
                 dialogMessage.setText(msg);
-                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button yes = dialog.findViewById(R.id.BtnOk);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
