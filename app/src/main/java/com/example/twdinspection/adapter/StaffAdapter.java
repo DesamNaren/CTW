@@ -55,14 +55,14 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
 
-        holder.binding.getRoot().findViewById(R.id.icon).setOnClickListener(
+     /*   holder.binding.getRoot().findViewById(R.id.icon).setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                     }
                 }
-        );
+        );*/
     }
 
     @Override

@@ -4,21 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.twdinspection.viewmodel.StudentsAttndViewModel" />
 
     </data>
-    <LinearLayout
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/materialGrey300"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/materialGrey300">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/adapter_stud_attnd"
-                 android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header"
+            tools:listitem="@layout/adapter_stud_attnd" />
 
-    </LinearLayout>
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
+
+
+    </RelativeLayout>
 </layout>

@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <com.example.twdinspection.custom.CustomFontTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/dimen_5dp"
-        android:drawableTint="@color/colorPrimary"
-        android:padding="@dimen/dimen_5dp"
-        android:text="Username"
-        android:textColor="@color/black" />
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <com.example.twdinspection.custom.CustomFontTextView
             android:layout_width="wrap_content"
@@ -31,19 +16,35 @@
             android:drawablePadding="@dimen/dimen_5dp"
             android:drawableTint="@color/colorPrimary"
             android:padding="@dimen/dimen_5dp"
-            android:text="Designation"
+            android:text="asfbd_atwo_2_st"
             android:textColor="@color/black" />
+
         <com.example.twdinspection.custom.CustomFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/dimen_5dp"
             android:drawableTint="@color/colorPrimary"
+            android:padding="@dimen/dimen_5dp"
+            android:text="ATDO"
+            android:textColor="@color/black" />
+
+        <com.example.twdinspection.custom.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dimen_10dp"
             android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableTint="@color/colorPrimary"
             android:padding="@dimen/dimen_5dp"
-            android:text="Date"
+            android:text="02/12/2019 15:34:32 PM"
             android:textColor="@color/black" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -9,21 +9,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.databinding.ActivityInfoBinding;
+import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
 
-public class InfoActivity extends AppCompatActivity {
+public class InfraActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityInfoBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_info);
-
+        ActivityInfrastructureBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
         TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("General Information");
-        binding.btnNext.setOnClickListener(new View.OnClickListener() {
+        tv_title.setText("Infrastructure & Maintenance");
+
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InfoActivity.this, StudentsAttendance_2.class));
+                startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
             }
         });
     }

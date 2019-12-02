@@ -366,7 +366,8 @@
 
         </ScrollView>
 
-        <include layout="@layout/buttons_layout" />
+        <include layout="@layout/buttons_layout"
+            android:id="@+id/btn_layout"/>
 
     </RelativeLayout>
 </layout>

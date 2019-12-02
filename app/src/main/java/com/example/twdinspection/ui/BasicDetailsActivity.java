@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityBasicDetailsBinding;
@@ -20,5 +22,13 @@ public class BasicDetailsActivity extends AppCompatActivity {
         activityMainBinding.setViewModel(new BasicDetailsViewModel());
         activityMainBinding.executePendingBindings();
         mContext=this;
+
+        activityMainBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class));
+            }
+        });
+
     }
 }

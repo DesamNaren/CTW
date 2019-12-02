@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.twdinspection.viewmodel.StaffViewModel" />
@@ -11,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            layout="@layout/header_layout" />
+        <include layout="@layout/header_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/staffRV"
@@ -21,7 +22,10 @@
             android:layout_below="@+id/root"
             android:background="@color/light_gray"
             android:padding="5dp"
-            tools:listitem="@layout/item_staff_attendance" />
+            tools:listitem="@layout/item_staff_attendance"/>
+
+        <include layout="@layout/buttons_layout"
+            android:id="@+id/btn_layout"/>
     </RelativeLayout>
 
 

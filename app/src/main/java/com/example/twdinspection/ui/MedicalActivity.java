@@ -5,9 +5,11 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
@@ -21,11 +23,19 @@ public class MedicalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_medical);
-
+        TextView tv_title=findViewById(R.id.header_title);
+        tv_title.setText("Medical & Health Issues");
         binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 medicalCheckupDateSelection();
+            }
+        });
+
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
             }
         });
 

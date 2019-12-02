@@ -1,6 +1,9 @@
 package com.example.twdinspection.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +33,8 @@ public class StaffAttendActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityStaffAttBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_staff_att);
-
+        TextView tv_title=findViewById(R.id.header_title);
+        tv_title.setText("Staff Attendance");
         StaffViewModel staffViewModel = ViewModelProviders.of(
                 this, new StaffAttendCustomViewModel(binding, this)).get(StaffViewModel.class);
         binding.setViewmodel(staffViewModel);
@@ -52,6 +56,13 @@ public class StaffAttendActivity extends AppCompatActivity{
         StaffAdapter staffAdapter = new StaffAdapter(list);
         binding.staffRV.setAdapter(staffAdapter);
         binding.staffRV.setHasFixedSize(true);
+
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StaffAttendActivity.this, MedicalActivity.class));
+            }
+        });
 //        staffViewModel.getUserResponseLiveData().observe(this,
 //                new Observer<CreateUserResponse>() {
 //                    @Override

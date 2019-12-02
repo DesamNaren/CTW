@@ -15,14 +15,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.EntitlementsActivity"></activity>
-        <activity android:name=".ui.DietIssuesActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".ui.DietIssuesActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.InfraActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.AcademicActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.RegistersActivity"
+            android:screenOrientation="portrait"></activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".ui.MedicalActivity"></activity>
         <activity
             android:name=".ui.BasicDetailsActivity"
