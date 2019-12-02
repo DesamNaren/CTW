@@ -171,4 +171,27 @@
     <string name="_85_toilet">85.Toilet</string>
     <string name="_86_kitchen">86.Kitchen</string>
     <string name="_87_classroom">87.ClassRoom</string>
+    <string name="Fruits">Fruits</string>
+    <string name="food_provisions">Whether Food provisions supplied on Time?</string>
+    <string name="eggs">Eggs</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="food">Food Provisions</string>
+    <string name="quality_of_food">What is the Quality of food provisions supplied?</string>
+    <string name="inferior">Inferior</string>
+    <string name="personal_hygiene">How is the Personal Hygiene of students</string>
+    <string name="haircut_on_time">Hair cutting on time</string>
+    <string name="students_found_anemic">Students Found Anemic</string>
+    <string name="attire_of_students">Attire of students</string>
+    <string name="hygiene_staff">How is Hygiene of staff</string>
+    <string name="cooks_wearing_cap_during_cook_and_serving">Cooks wearing cap during cook and serving</string>
+    <string name="hands_of_cooking_staff">Hands of cooking staff are clean</string>
+    <string name="attire_of_staff_is_appropriate">Attire of staff is appropriate</string>
+    <string name="sanitation_at_this_institution">How is the sanitation at this institution</string>
+    <string name="toilets_not_clean">Toilets not clean</string>
+    <string name="kitchen_not_clean">Kitchen not clean</string>
+    <string name="dormitory_not_clean">Dormitory not clean</string>
+    <string name="class_rooms_not_clean">Class rooms not clean</string>
+    <string name="running_water_available_to_toilets">Running water available to toilets</string>
+    <string name="store_room_not_clean">Store room not clean</string>
+    <string name="general_comments_date">Date of lasted intent raised by GCC or other supplier and whether the stock is supplied as per the intent or not and capture supplied date.</string>
 </resources>

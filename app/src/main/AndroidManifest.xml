@@ -14,24 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.EntitlementsActivity"></activity>
+        <activity android:name=".ui.GeneralCommentsActivity"></activity>
+        <activity android:name=".ui.EntitlementsActivity" />
         <activity
             android:name=".ui.DietIssuesActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.InfraActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.AcademicActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RegistersActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity android:name=".ui.MedicalActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.MedicalActivity" />
         <activity
             android:name=".ui.BasicDetailsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.LoginActivity"
             android:screenOrientation="portrait">
