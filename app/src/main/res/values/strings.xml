@@ -194,4 +194,5 @@
     <string name="running_water_available_to_toilets">Running water available to toilets</string>
     <string name="store_room_not_clean">Store room not clean</string>
     <string name="general_comments_date">Date of lasted intent raised by GCC or other supplier and whether the stock is supplied as per the intent or not and capture supplied date.</string>
+    <string name="completed">COMPLETED</string>
 </resources>

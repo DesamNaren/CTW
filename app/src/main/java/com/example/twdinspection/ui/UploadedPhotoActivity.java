@@ -23,8 +23,8 @@ public class UploadedPhotoActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         TextView tv_title = findViewById(R.id.header_title);
         tv_title.setText("Uploaded Photographs");
-
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.completed));
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(UploadedPhotoActivity.this, "Completed", Toast.LENGTH_SHORT).show();

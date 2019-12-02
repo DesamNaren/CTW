@@ -13,7 +13,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/btn_submit"
+            android:layout_above="@+id/btn_layout"
             android:layout_below="@id/header_layout"
             android:background="@color/light_gray">
 
@@ -25,9 +25,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_10dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -64,6 +62,11 @@
                                 android:src="@drawable/storeroom" />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -88,15 +91,14 @@
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/varandah" />
                         </LinearLayout>
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_10dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -133,6 +135,11 @@
                                 android:src="@drawable/playground" />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -163,9 +170,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_10dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -202,6 +207,11 @@
                                 android:src="@drawable/dormitory" />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -232,9 +242,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_10dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -271,6 +279,11 @@
                                 android:src="@drawable/toilet" />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light"/>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -301,9 +314,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_10dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -346,18 +357,8 @@
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
-            android:padding="@dimen/dimen_5dp"
-            android:textColor="@color/white"
-            android:id="@+id/btn_submit"
-            android:layout_centerHorizontal="true"
-            android:drawableRight="@drawable/rightarrow"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_alignParentBottom="true"
-            android:text="@string/submit" />
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>
