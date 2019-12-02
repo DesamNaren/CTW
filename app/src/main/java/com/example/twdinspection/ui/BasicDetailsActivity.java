@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityBasicDetailsBinding;
+import com.example.twdinspection.databinding.ProfileLayoutBinding;
 import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
 
 public class BasicDetailsActivity extends AppCompatActivity {
@@ -18,12 +19,12 @@ public class BasicDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityBasicDetailsBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_basic_details);
-        activityMainBinding.setViewModel(new BasicDetailsViewModel());
-        activityMainBinding.executePendingBindings();
+        ProfileLayoutBinding profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.profile_layout);
+        profileLayoutBinding.setViewModel(new BasicDetailsViewModel());
+        profileLayoutBinding.executePendingBindings();
         mContext=this;
 
-        activityMainBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
+        profileLayoutBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class));
