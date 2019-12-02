@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.Settings;
@@ -42,13 +44,44 @@ public class Utils {
         }
     }
 
-    private void customPerAlert() {
+    public static void customAlert(final Activity activity, String title, String msg, String type, final boolean flag) {
         try {
-
-        } catch (Exception e) {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                if (type.equalsIgnoreCase(AppConstants.SUCCESS)) {
+                    dialog.setContentView(R.layout.custom_alert_success);
+                } else if (type.equalsIgnoreCase(AppConstants.FAILURE)) {
+                    dialog.setContentView(R.layout.custom_alert_error);
+                } else if (type.equalsIgnoreCase(AppConstants.WARNING)) {
+                    dialog.setContentView(R.layout.custom_alert_warning);
+                } else {
+                    dialog.setContentView(R.layout.custom_alert_information);
+                }
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(activity.getResources().getString(R.string.app_name) + ": " + title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        if (flag)
+                            activity.finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
+
 
 
 }
