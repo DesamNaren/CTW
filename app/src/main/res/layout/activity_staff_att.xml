@@ -16,6 +16,7 @@
         <include layout="@layout/header_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_above="@+id/btn_layout"
             android:id="@+id/staffRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
