@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +49,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
+                    int permissionCheck = ContextCompat.checkSelfPermission(
+                            SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
                     int permissionCheck1 = ContextCompat.checkSelfPermission(
                             SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                     int permissionCheck2 = ContextCompat.checkSelfPermission(
@@ -58,7 +59,8 @@ public class SplashActivity extends AppCompatActivity {
                             SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
-                    if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
+                    if ((permissionCheck != PackageManager.PERMISSION_GRANTED)
+                            && (permissionCheck1 != PackageManager.PERMISSION_GRANTED)
                             && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
                             && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)) {
 
@@ -88,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
                 switch (view.getId()) {
                     case R.id.accept:
                         ActivityCompat.requestPermissions(SplashActivity.this,
-                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                                new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION
                                         , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSION_CODE);
                         break;
@@ -117,7 +119,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)
                             && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
+                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)
+                            && (grantResults[3] == PackageManager.PERMISSION_GRANTED)) {
                         //TODO
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -152,19 +155,18 @@ public class SplashActivity extends AppCompatActivity {
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog.setContentView(R.layout.info_dialog);
+                dialog.setContentView(R.layout.custom_alert_permission);
                 dialog.setCancelable(false);
-
                 TextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
                 dialogMessage.setText(getString(R.string.plz_grant));
-                Button yes = dialog.findViewById(R.id.BtnOk);
+                TextView yes = dialog.findViewById(R.id.BtnOk);
 //                Button no = dialog.findViewById(R.id.btDialogCancel);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                         ActivityCompat.requestPermissions(SplashActivity.this,
-                                new String[]{
+                                new String[]{Manifest.permission.READ_PHONE_STATE,
                                         Manifest.permission.ACCESS_FINE_LOCATION
                                         , Manifest.permission.CAMERA
                                         , Manifest.permission.WRITE_EXTERNAL_STORAGE},
