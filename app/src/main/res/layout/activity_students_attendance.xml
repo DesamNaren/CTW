@@ -14,8 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/materialGrey300">
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/header"
@@ -24,6 +23,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
+            android:background="@color/materialGrey300"
             android:layout_height="match_parent"
             android:layout_below="@+id/header"
             tools:listitem="@layout/adapter_stud_attnd" />

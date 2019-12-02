@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -22,7 +23,7 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
 
     Context context;
     LiveData<List<StudentsAttendanceBean>> list;
-
+    private int selectedPos=-1;
     public StudentsAttAdapter(Context context, LiveData<List<StudentsAttendanceBean>> list) {
         this.context = context;
         this.list = list;
@@ -40,27 +41,51 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ItemHolder holder, int position) {
-        StudentsAttendanceBean dataModel = list.getValue().get(position);
+    public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
+        final int position = i;
+        final StudentsAttendanceBean dataModel = list.getValue().get(position);
         holder.listItemBinding.setStudentAttnd(dataModel);
+
         holder.listItemBinding.tvClass.setText("Class " + (position + 1));
         holder.listItemBinding.getRoot().findViewById(R.id.tv_expand).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                minimiseAll();
-                holder.listItemBinding.llEntries.setVisibility(View.VISIBLE);
+                selectedPos = position;
+                notifyDataSetChanged();
+//                selectedPos=position;
+//                holder.listItemBinding.llEntries.setVisibility(View.VISIBLE);
+//                minimiseAll(selectedPos,holder);
+
             }
         });
+        if (selectedPos == position) {
+
+            if (holder.listItemBinding.llEntries.getVisibility() == View.VISIBLE) {
+
+                holder.listItemBinding.llEntries.setVisibility(View.GONE);
+                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downbutton));
+
+            } else {
+
+                holder.listItemBinding.llEntries.setVisibility(View.VISIBLE);
+                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.up_arrow));
+            }
+        } else {
+            holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downbutton));
+            holder.listItemBinding.llEntries.setVisibility(View.GONE);
+        }
         holder.bind(dataModel);
     }
 
-    private void minimiseAll() {
-
+    private void minimiseAll(int selectedPos,ItemHolder holder) {
+        if(holder.getAdapterPosition()!=selectedPos){
+            holder.listItemBinding.llEntries.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return list.getValue().size();
+        return list!=null && list.getValue()!=null? list.getValue().size():0;
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {

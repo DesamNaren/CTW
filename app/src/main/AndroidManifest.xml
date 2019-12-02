@@ -35,11 +35,7 @@
         <activity
             android:name=".ui.LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.MPINActivity"
@@ -52,7 +48,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.StudentsAttendance_2"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.InfoActivity"
             android:screenOrientation="portrait" />
