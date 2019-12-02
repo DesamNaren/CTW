@@ -145,4 +145,21 @@
     <string name="entitlements_haircut">Whether Hait cutting has been completed (Boys)</string>
     <string name="entitlements_haircut_date">Populated the date of last Haircut</string>
     <string name="entitlements_dress_distributed">How many Pairs of dress distributed to each candidate</string>
+    <string name="rice">Rice</string>
+    <string name="a_book_balance">a.Book Balance</string>
+    <string name="b_ground_balance">b.Ground Balance</string>
+    <string name="weather_menu_chart_painted_on_wall">23.Weather menu chart Painted on wall</string>
+    <string name="_24_image_capture_option_to_take_photograph_of_menu">24.Image capture option to take Photograph of menu</string>
+    <string name="_25_whether_prescribed_menu_served">25.Whether Prescribed Menu served?</string>
+    <string name="_26_does_the_supplier_provides_samples_of_food_provisions">26.Does the supplier provides samples of food provisions</string>
+    <string name="_27_does_food_provisions_matching_with_samples_provided">27.Does food provisions matching with samples provided</string>
+    <string name="_28_does_mess_committee_exist_or_not">28.Does mess committee exist or not</string>
+    <string name="have_you_met_discussed_with_mess_committee"><![CDATA[29.a.Have you met & discussed with Mess Committee]]></string>
+    <string name="are_you_maintaining_mess_register">29.b.Are you maintaining mess register?</string>
+    <string name="_30_weather_prescribed_menu_served">30.Weather Prescribed menu Served?</string>
+    <string name="_31_picture_of_the_inspecting_officer">31.Picture of the Inspecting officer</string>
+    <string name="rg_dal_kg">RG Dal(KG)</string>
+    <string name="palm_oil_number">Palm Oil (Number)</string>
+    <string name="eggs_number">Eggs (Number)</string>
+    <string name="fruits_dozens">Fruits (Dozens)</string>
 </resources>

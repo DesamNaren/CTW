@@ -7,22 +7,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.StudentsAttendanceBean;
+import com.example.twdinspection.source.StudentsAttendanceBean;
 import com.example.twdinspection.adapters.StudentsAttAdapter;
-import com.example.twdinspection.databinding.ActivityLoginCreBinding;
-import com.example.twdinspection.databinding.ActivityMpinBinding;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
-import com.example.twdinspection.source.EmployeeResponse;
-import com.example.twdinspection.viewmodel.LoginCustomViewModel;
-import com.example.twdinspection.viewmodel.LoginViewModel;
 import com.example.twdinspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.viewmodel.StudentsAttndViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentsAttendance_2 extends AppCompatActivity {

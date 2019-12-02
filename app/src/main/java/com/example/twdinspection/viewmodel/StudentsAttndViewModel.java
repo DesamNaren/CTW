@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.twdinspection.StudentsAttendanceBean;
+import com.example.twdinspection.source.StudentsAttendanceBean;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
 import java.util.ArrayList;

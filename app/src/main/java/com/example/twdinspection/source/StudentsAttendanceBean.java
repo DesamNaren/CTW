@@ -1,4 +1,4 @@
-package com.example.twdinspection;
+package com.example.twdinspection.source;
 
 public class StudentsAttendanceBean {
     private String studentsOnRoll_1_1;
