@@ -12,6 +12,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/light_gray"
             android:layout_below="@id/header_layout">
 
             <LinearLayout
@@ -22,7 +23,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
@@ -58,7 +59,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/storeroom" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -83,7 +84,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/varandah" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -91,7 +92,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
@@ -127,7 +128,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/playground" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -152,7 +153,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/dining" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -160,7 +161,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
@@ -196,7 +197,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/dormitory" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -221,7 +222,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/main_buildings" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -229,7 +230,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
@@ -265,7 +266,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/toilet" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -290,7 +291,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/cooking" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -298,7 +299,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
@@ -334,7 +335,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/camera" />
+                                android:src="@drawable/classroom" />
                         </LinearLayout>
 
                     </LinearLayout>
