@@ -136,4 +136,13 @@
     <string name="par_meet">Parents Meeting Register</string>
     <string name="ins_reg">Inspection Register for Departmental Officers</string>
     <string name="visit_book">Visit Book (Remarks) for Officials &amp; Non-Officials</string>
+
+    <string name="previous">PREVIOUS</string>
+    <string name="next">NEXT</string>
+    <string name="entitlements_provided_to_students">All Entitlements provided to students</string>
+    <string name="entitlements_cosmetics">Cosmetics distributed up to month</string>
+    <string name="entitlements_uniforms">Uniforms Provided are in good quality, properly stitched as per student size</string>
+    <string name="entitlements_haircut">Whether Hait cutting has been completed (Boys)</string>
+    <string name="entitlements_haircut_date">Populated the date of last Haircut</string>
+    <string name="entitlements_dress_distributed">How many Pairs of dress distributed to each candidate</string>
 </resources>
