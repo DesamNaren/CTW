@@ -1,6 +1,11 @@
 package com.example.twdinspection.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +26,7 @@ import java.util.List;
 
 public class LoginActivity extends LocBaseActivity {
     ActivityLoginCreBinding binding;
+    private static final int REQUEST_READ_PHONE_STATE = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,5 +81,31 @@ public class LoginActivity extends LocBaseActivity {
             }
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(mGpsSwitchStateReceiver);
+    }
+
+    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                    callPermissions();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
 }

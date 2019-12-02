@@ -14,7 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.GeneralCommentsActivity"></activity>
+        <activity android:name=".ui.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.GeneralCommentsActivity" />
         <activity android:name=".ui.EntitlementsActivity" />
         <activity
             android:name=".ui.DietIssuesActivity"
@@ -37,9 +44,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.LoginActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.MPINActivity"
             android:screenOrientation="portrait" />
@@ -51,12 +56,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.StudentsAttendance_2"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:screenOrientation="portrait">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.InfoActivity"
