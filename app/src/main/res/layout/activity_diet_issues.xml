@@ -306,23 +306,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_10dp"
-                        android:layout_weight="2"
                         android:padding="5dp"
                         android:text="@string/weather_menu_chart_painted_on_wall"
                         android:textColor="@color/black" />
 
                     <RadioGroup
                         android:id="@+id/rg_menu_chart_painted"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="Password"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -393,22 +391,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
-                        android:layout_weight="2"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:padding="5dp"
                         android:text="@string/_25_whether_prescribed_menu_served"
                         android:textColor="@color/black" />
 
                     <RadioGroup
                         android:id="@+id/rg_prescribed_menu_served"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -448,7 +445,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
                         android:inputType="textEmailAddress"
                         android:text="@string/_26_does_the_supplier_provides_samples_of_food_provisions"
                         android:textColor="@color/black" />
@@ -456,6 +453,7 @@
                     <RadioGroup
                         android:id="@+id/rg_food_provisions"
                         android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:orientation="horizontal">
@@ -504,6 +502,7 @@
                         android:id="@+id/rg_matching_with_samples"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:hint="Password"
                         android:orientation="horizontal">
 
@@ -550,6 +549,7 @@
                     <RadioGroup
                         android:id="@+id/rg_committee_exist"
                         android:layout_width="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_height="wrap_content"
                         android:hint="Password"
                         android:orientation="horizontal">
@@ -605,6 +605,7 @@
                             android:id="@+id/rg_discussed_with_committee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
                             android:hint="Password"
                             android:orientation="horizontal">
 
@@ -625,6 +626,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:layout_margin="@dimen/dimen_10dp"
                         android:background="@color/light_gray"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -643,6 +645,7 @@
                         <RadioGroup
                             android:id="@+id/rg__maintaining_register"
                             android:layout_width="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
                             android:layout_height="wrap_content"
                             android:hint="Password"
                             android:orientation="horizontal">
