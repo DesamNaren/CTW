@@ -19,16 +19,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.DashboardActivity"></activity>
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.MedicalDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.GeneralCommentsActivity" />
-        <activity android:name=".ui.EntitlementsActivity" />
+        <activity android:name=".ui.DashboardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait">
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.GeneralCommentsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.EntitlementsActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.DietIssuesActivity"
             android:screenOrientation="portrait" />
@@ -62,7 +75,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.StudentsAttendance_2"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.InfoActivity"
             android:screenOrientation="portrait" />

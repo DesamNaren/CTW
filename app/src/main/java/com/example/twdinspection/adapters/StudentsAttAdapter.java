@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
-import com.example.twdinspection.generated.callback.OnClickListener;
+
 import com.example.twdinspection.source.StudentsAttendanceBean;
 import com.example.twdinspection.databinding.AdapterStudAttndBinding;
 

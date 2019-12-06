@@ -3,6 +3,7 @@ package com.example.twdinspection.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.adapters.StudentsAttAdapter;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 
 import java.util.Calendar;
@@ -38,6 +40,8 @@ public class MedicalActivity extends AppCompatActivity {
                 startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
             }
         });
+
+
 
     }
 

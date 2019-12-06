@@ -14,7 +14,7 @@ import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
 
 public class DietIssuesActivity extends AppCompatActivity {
 
-    LruCache<String,String> chachememory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
