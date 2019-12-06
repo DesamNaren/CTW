@@ -376,6 +376,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/img_menu"
                             android:layout_gravity="center"
                             android:layout_margin="@dimen/dimen_10dp"
                             android:background="@color/list_blue"
@@ -704,6 +705,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:id="@+id/img_inspOfficer"
                             android:layout_margin="@dimen/dimen_10dp"
                             android:background="@color/list_blue"
                             android:padding="@dimen/dimen_10dp"

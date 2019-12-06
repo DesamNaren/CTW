@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.LruCache;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,6 +13,8 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
 
 public class DietIssuesActivity extends AppCompatActivity {
+
+    LruCache<String,String> chachememory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

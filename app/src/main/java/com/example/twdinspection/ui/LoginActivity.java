@@ -42,7 +42,7 @@ public class LoginActivity extends LocBaseActivity {
             @Override
             public void onChanged(List<EmployeeResponse> employeeResponses) {
                 if (employeeResponses != null && employeeResponses.size() > 0) {
-                    startActivity(new Intent(LoginActivity.this, MPINActivity.class));
+                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                 }
             }
         });
