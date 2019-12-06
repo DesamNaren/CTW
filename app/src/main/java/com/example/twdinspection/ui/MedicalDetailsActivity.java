@@ -4,16 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.adapters.MedicalDetailsAdapter;
+import com.example.twdinspection.adapter.MedicalDetailsAdapter;
 import com.example.twdinspection.custom.CustomFontTextView;
 import com.example.twdinspection.databinding.ActivityMedialDetailsBinding;
 import com.example.twdinspection.source.MedicalDetailsBean;

@@ -4,23 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.adapter.StaffAdapter;
-import com.example.twdinspection.databinding.ActivityLoginBinding;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
-import com.example.twdinspection.interfaces.AuthListener;
 import com.example.twdinspection.source.EmployeeResponse;
-import com.example.twdinspection.viewmodel.MPINCustomViewModel;
-import com.example.twdinspection.viewmodel.MPINViewModel;
 import com.example.twdinspection.viewmodel.StaffAttendCustomViewModel;
 import com.example.twdinspection.viewmodel.StaffViewModel;
 

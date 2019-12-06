@@ -1,21 +1,17 @@
-package com.example.twdinspection.adapters;
+package com.example.twdinspection.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterMedicalDetailsBinding;
-import com.example.twdinspection.databinding.AdapterStudAttndBinding;
 import com.example.twdinspection.source.MedicalDetailsBean;
-import com.example.twdinspection.source.StudentsAttendanceBean;
 
 import java.util.List;
 

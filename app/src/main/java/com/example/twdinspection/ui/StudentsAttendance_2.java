@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.source.StudentsAttendanceBean;
-import com.example.twdinspection.adapters.StudentsAttAdapter;
+import com.example.twdinspection.adapter.StudentsAttAdapter;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 import com.example.twdinspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.viewmodel.StudentsAttndViewModel;
