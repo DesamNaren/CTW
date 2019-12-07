@@ -5,6 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:id="@+id/btn_layout"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
@@ -15,7 +16,7 @@
             android:layout_marginRight="2dp"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
-            android:drawableLeft="@drawable/left_arrow"
+            android:drawableLeft="@drawable/left_arrow_24"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/previous"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -29,7 +30,7 @@
             android:layout_marginLeft="2dp"
             android:layout_weight="1"
             android:background="@drawable/btn_bg"
-            android:drawableRight="@drawable/right_arrow"
+            android:drawableRight="@drawable/right_arrow_24"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/next"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

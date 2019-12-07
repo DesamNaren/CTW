@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/root_layout"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -122,7 +123,7 @@
 
 
                             <com.example.twdinspection.custom.CustomFontEditText
-                                android:id="@+id/hospital_name"
+                                android:id="@+id/et_hospital"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Hospital Name"
@@ -147,7 +148,7 @@
 
 
                             <com.example.twdinspection.custom.CustomFontEditText
-                                android:id="@+id/name"
+                                android:id="@+id/et_acc_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Accompanied Name"
@@ -172,7 +173,7 @@
 
 
                             <com.example.twdinspection.custom.CustomFontEditText
-                                android:id="@+id/des"
+                                android:id="@+id/et_acc_des"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Accompanied Designation"
@@ -237,6 +238,11 @@
                         </RelativeLayout>
 
                     </LinearLayout>
+
+                    <include
+                        android:id="@+id/btn_layout"
+                        android:visibility="gone"
+                        layout="@layout/buttons_layout" />
 
                 </LinearLayout>
             </LinearLayout>

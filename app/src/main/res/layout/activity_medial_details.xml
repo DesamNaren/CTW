@@ -47,10 +47,10 @@
                     android:padding="@dimen/dimen_10dp">
 
                     <ImageView
+                        android:id="@+id/iv_fever"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:id="@+id/iv_fever"
                         android:background="@drawable/medical"
                         android:padding="@dimen/dimen_5dp"
                         android:src="@drawable/fever" />
@@ -61,8 +61,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/fever"
                         android:singleLine="true"
+                        android:text="@string/fever"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -79,10 +79,10 @@
                     android:padding="@dimen/dimen_10dp">
 
                     <ImageView
+                        android:id="@+id/iv_cold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:id="@+id/iv_cold"
                         android:background="@drawable/medical"
                         android:padding="@dimen/dimen_5dp"
                         android:src="@drawable/cough" />
@@ -93,8 +93,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/cold_amp_cough"
                         android:singleLine="true"
+                        android:text="@string/cold_amp_cough"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -125,8 +125,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/headache"
                         android:singleLine="true"
+                        android:text="@string/headache"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -164,8 +164,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/diarrhea"
                         android:singleLine="true"
+                        android:text="@string/diarrhea"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -196,8 +196,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/malaria"
                         android:singleLine="true"
+                        android:text="@string/malaria"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -214,12 +214,12 @@
                     android:padding="@dimen/dimen_10dp">
 
                     <ImageView
+                        android:id="@+id/iv_others"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/medical"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/iv_others"
                         android:src="@drawable/heartbeat" />
 
 
@@ -228,8 +228,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="@string/others"
                         android:singleLine="true"
+                        android:text="@string/others"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -241,6 +241,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_5dp"
+                android:visibility="gone"
                 android:background="@color/list_blue"
                 android:orientation="horizontal"
                 android:padding="@dimen/dimen_5dp">
@@ -256,19 +257,39 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                tools:listitem="@layout/adapter_medical_details" />
+               >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:nestedScrollingEnabled="false"
+                        tools:listitem="@layout/adapter_medical_details" />
+
+                    <TextView
+                        android:id="@+id/tv_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:gravity="center"
+                        android:text="No Data"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_20dp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-
-        <include
-            android:id="@+id/btn_layout"
-            layout="@layout/buttons_layout" />
 
 
     </RelativeLayout>
