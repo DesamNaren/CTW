@@ -65,7 +65,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
             @Override
             public void onClick(View view) {
 
-                if (holder.binding.etStudentName.getText().toString().trim().isEmpty()) {
+               /* if (holder.binding.etStudentName.getText().toString().trim().isEmpty()) {
                     holder.binding.etStudentName.setError("Please enter student name");
                     holder.binding.etStudentName.requestFocus();
                 } else if (holder.binding.etClass.getText().toString().trim().isEmpty()) {
@@ -86,12 +86,12 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                 } else if (holder.binding.etAccDes.getText().toString().trim().isEmpty()) {
                     holder.binding.etAccDes.setError("Please enter Accompanied Designation");
                     holder.binding.etAccDes.requestFocus();
-                } else {
+                } else {*/
                     if (position < list.size()) {
                         selectedPos = position + 1;
                         callback.onItemClick(position + 1);
                     }
-                }
+//                }
             }
         });
 
