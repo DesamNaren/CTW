@@ -140,7 +140,6 @@
                             android:id="@+id/sp_dist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

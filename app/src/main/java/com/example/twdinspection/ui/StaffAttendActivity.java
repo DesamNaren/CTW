@@ -20,7 +20,7 @@ import com.example.twdinspection.viewmodel.StaffViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaffAttendActivity extends AppCompatActivity{
+public class StaffAttendActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class StaffAttendActivity extends AppCompatActivity{
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
         layoutManager.setReverseLayout(false);
-        binding.staffRV.setLayoutManager(layoutManager);
+        binding.staffRv.setLayoutManager(layoutManager);
 
         List<EmployeeResponse> list = new ArrayList<>();
         for(int x=0;x<10;x++){
@@ -47,8 +47,8 @@ public class StaffAttendActivity extends AppCompatActivity{
         }
 
         StaffAdapter staffAdapter = new StaffAdapter(list);
-        binding.staffRV.setAdapter(staffAdapter);
-        binding.staffRV.setHasFixedSize(true);
+        binding.staffRv.setAdapter(staffAdapter);
+        binding.staffRv.setHasFixedSize(true);
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

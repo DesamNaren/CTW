@@ -2,6 +2,7 @@ package com.example.twdinspection.source.GeneralInformation;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.RoomDatabase;
 
 @Entity(primaryKeys = {"officer_id", "institute_id","inspection_time"})
 public class GeneralInformationEntity {

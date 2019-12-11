@@ -2,25 +2,34 @@ package com.example.twdinspection.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.databinding.ActivityBasicDetailsBinding;
 import com.example.twdinspection.databinding.ProfileLayoutBinding;
+import com.example.twdinspection.source.DistManVillage.DistrictEntity;
+import com.example.twdinspection.source.GeneralInformation.GeneralInformationEntity;
 import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
+
+import java.util.List;
 
 public class BasicDetailsActivity extends AppCompatActivity {
 
+    LiveData<List<DistrictEntity>> districtResponse;
     private static Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ProfileLayoutBinding profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.profile_layout);
-        profileLayoutBinding.setViewModel(new BasicDetailsViewModel());
+        profileLayoutBinding.setViewModel(new BasicDetailsViewModel(getApplication(),profileLayoutBinding));
         profileLayoutBinding.executePendingBindings();
         mContext=this;
 
