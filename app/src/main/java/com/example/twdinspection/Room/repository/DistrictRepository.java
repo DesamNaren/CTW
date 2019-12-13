@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.source.DistManVillage.Districts;
+import com.example.twdinspection.source.DistManVillage.Mandals;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class DistrictRepository {
 
     public DistrictDao districtDao;
     public LiveData<List<Districts>> districts = new MutableLiveData<>();
+    public LiveData<List<Mandals>> mandals = new MutableLiveData<>();
     public int count;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
@@ -35,24 +37,13 @@ public class DistrictRepository {
        return districtDao.getDistricts();
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class getAllDistrictsAsyncTask extends AsyncTask<Void, Void, LiveData<List<Districts>>> {
-
-        private DistrictDao mAsyncTaskDao;
-
-        getAllDistrictsAsyncTask(DistrictDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected LiveData<List<Districts>> doInBackground(Void... voids) {
-            districts = mAsyncTaskDao.getDistricts();
-            return districts;
-        }
-
-        @Override
-        protected void onPostExecute(LiveData<List<Districts>> districtEntities) {
-            super.onPostExecute(districtEntities);
-        }
+    public LiveData<List<Mandals>> getMandals(int dist_id) {
+       return districtDao.getMandals(dist_id);
     }
+
+    public LiveData<Integer> getDistId(String dist_name) {
+           return districtDao.getDistId(dist_name);
+        }
+
+
 }

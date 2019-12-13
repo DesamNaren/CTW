@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,7 +9,7 @@
             type="com.example.twdinspection.viewmodel.BasicDetailsViewModel" />
     </data>
 
-    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -153,8 +154,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cv_profile"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -170,17 +169,54 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_10dp"
-                            android:text="@string/select_jurisdiction"
+                            android:text="@string/select_mandal"
                             android:textColor="@color/black" />
 
                         <Spinner
-                            android:id="@+id/sp_jurisdiction"
+                            android:id="@+id/sp_Mandal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_gray" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cv_profile"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_selectMandal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_10dp"
+                            android:text="@string/select_village"
+                            android:textColor="@color/black" />
+
+                        <Spinner
+                            android:id="@+id/sp_village"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
 
                 <View
                     android:layout_width="match_parent"
@@ -215,7 +251,6 @@
                             android:id="@+id/sp_institution"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

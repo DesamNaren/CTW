@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 import com.example.twdinspection.source.DistManVillage.Districts;
+import com.example.twdinspection.source.DistManVillage.Mandals;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public interface DistrictDao {
     // we are notified whenever any of the database contents have changed.
     @Query("SELECT * from Districts")
     LiveData<List<Districts>> getDistricts();
+
+    @Query("SELECT * from Tbl_Mandals where dist_id LIKE :dist_id")
+    LiveData<List<Mandals>> getMandals(int dist_id);
+
+    @Query("SELECT dist_id from Districts where dist_name LIKE :dist_name")
+    LiveData<Integer> getDistId(String dist_name);
 
     @Query("SELECT count(*) from Districts")
     int getCount();
