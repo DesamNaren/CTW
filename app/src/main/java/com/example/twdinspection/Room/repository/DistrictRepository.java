@@ -1,21 +1,23 @@
 package com.example.twdinspection.Room.repository;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.source.DistManVillage.DistrictEntity;
+import com.example.twdinspection.source.DistManVillage.Districts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DistrictRepository {
 
     public DistrictDao districtDao;
-    public List<DistrictEntity> districts=new ArrayList<>();
-    public  int count;
+    public LiveData<List<Districts>> districts = new MutableLiveData<>();
+    public int count;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -29,53 +31,28 @@ public class DistrictRepository {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public List<DistrictEntity> getDistricts() {
-        new insertAsyncTask(districtDao).execute();
-        new countAsyncTask(districtDao).execute();
-        return districts;
+    public LiveData<List<Districts>> getDistricts() {
+       return districtDao.getDistricts();
     }
-    private class insertAsyncTask extends AsyncTask<Void, Void, List<DistrictEntity>> {
+
+    @SuppressLint("StaticFieldLeak")
+    private class getAllDistrictsAsyncTask extends AsyncTask<Void, Void, LiveData<List<Districts>>> {
 
         private DistrictDao mAsyncTaskDao;
 
-        insertAsyncTask(DistrictDao dao) {
+        getAllDistrictsAsyncTask(DistrictDao dao) {
             mAsyncTaskDao = dao;
         }
 
-
-
         @Override
-        protected List<DistrictEntity> doInBackground(Void... voids) {
+        protected LiveData<List<Districts>> doInBackground(Void... voids) {
             districts = mAsyncTaskDao.getDistricts();
             return districts;
         }
 
         @Override
-        protected void onPostExecute(List<DistrictEntity> districtEntities) {
+        protected void onPostExecute(LiveData<List<Districts>> districtEntities) {
             super.onPostExecute(districtEntities);
         }
     }
-    private class countAsyncTask extends AsyncTask<Void, Void, Integer> {
-
-        private DistrictDao mAsyncTaskDao;
-
-        countAsyncTask(DistrictDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-
-
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            count = mAsyncTaskDao.getCount();
-            return count;
-        }
-
-        @Override
-        protected void onPostExecute(Integer districtEntities) {
-            Log.i("Count",""+count);
-            super.onPostExecute(count);
-        }
-    }
-
 }

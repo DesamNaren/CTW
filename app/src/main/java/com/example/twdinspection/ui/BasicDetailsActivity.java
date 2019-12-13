@@ -1,39 +1,49 @@
 package com.example.twdinspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ArrayAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ProfileLayoutBinding;
-import com.example.twdinspection.source.DistManVillage.DistrictEntity;
 import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class BasicDetailsActivity extends AppCompatActivity {
+    BasicDetailsViewModel viewModel;
+    ProfileLayoutBinding profileLayoutBinding;
+    private Context context;
 
-    LiveData<List<DistrictEntity>> districtResponse;
-    private static Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProfileLayoutBinding profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.profile_layout);
-        profileLayoutBinding.setViewModel(new BasicDetailsViewModel(getApplication(),profileLayoutBinding));
-        profileLayoutBinding.executePendingBindings();
-        mContext=this;
+        context = BasicDetailsActivity.this;
 
-        profileLayoutBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class));
+        profileLayoutBinding = DataBindingUtil.setContentView(this, R.layout.profile_layout);
+        viewModel = new BasicDetailsViewModel(getApplication());
+        profileLayoutBinding.setViewModel(viewModel);
+        profileLayoutBinding.executePendingBindings();
+
+        viewModel.getAllDistricts().observe(this, districts -> {
+            if (districts != null && districts.size() > 0) {
+                ArrayList<String> distNames = new ArrayList<>();
+                for (int i = 0; i < districts.size(); i++) {
+                    distNames.add(districts.get(i).getDist_name());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_dropdown_item, distNames
+                );
+                profileLayoutBinding.spDist.setAdapter(adapter);
             }
         });
+
+        profileLayoutBinding.btnProceed.setOnClickListener(
+                view -> startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class)));
 
     }
 }

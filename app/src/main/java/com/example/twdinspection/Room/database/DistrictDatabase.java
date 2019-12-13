@@ -10,14 +10,14 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.Room.Dao.DistrictDao;
-import com.example.twdinspection.source.DistManVillage.DistrictEntity;
+import com.example.twdinspection.source.DistManVillage.Districts;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {DistrictEntity.class}, version = 1,  exportSchema = false)
+@Database(entities = {Districts.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
@@ -29,11 +29,11 @@ public abstract class DistrictDatabase extends RoomDatabase {
             synchronized (DistrictDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            DistrictDatabase.class, "TWDDatabase.db")
+                            DistrictDatabase.class, "TWD_NEW.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
 //                            .createFromFile(new File("database/districts.json"))
-//                            .createFromAsset("database/DistrictEntity.db")
+                            .createFromAsset("database/TWD_NEW.db")
                             .build();
                 }
             }
@@ -45,10 +45,10 @@ public abstract class DistrictDatabase extends RoomDatabase {
      * Override the onOpen method to populate the database.
      * For this sample, we clear the database every time it is created or opened.
      */
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback(){
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
 
         @Override
-        public void onOpen (@NonNull SupportSQLiteDatabase db){
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
         }
     };

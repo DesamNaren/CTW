@@ -64,8 +64,8 @@
 
                 <ImageView
                     android:id="@+id/iv_cal"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/dimen_70dp"
+                    android:layout_height="@dimen/dimen_70dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="@dimen/dimen_10dp"
