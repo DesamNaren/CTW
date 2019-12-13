@@ -11,16 +11,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.source.DistManVillage.DistrictEntity;
-import com.example.twdinspection.ui.BasicDetailsActivity;
-
-import java.io.File;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {DistrictEntity.class}, version = 2,  exportSchema = false)
+@Database(entities = {DistrictEntity.class}, version = 1,  exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
@@ -36,7 +33,7 @@ public abstract class DistrictDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
 //                            .createFromFile(new File("database/districts.json"))
-                            .createFromAsset("database/TWD.db")
+//                            .createFromAsset("database/DistrictEntity.db")
                             .build();
                 }
             }

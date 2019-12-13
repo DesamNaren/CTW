@@ -1,9 +1,6 @@
 package com.example.twdinspection.Room.Dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.twdinspection.source.DistManVillage.DistrictEntity;
@@ -26,9 +23,10 @@ public interface DistrictDao {
     // Always holds/caches latest version of data. Notifies its active observers when the
     // data has changed. Since we are getting all the contents of the database,
     // we are notified whenever any of the database contents have changed.
-    @Query("SELECT * from districtstable")
+    @Query("SELECT * from DistrictEntity")
     List<DistrictEntity> getDistricts();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(DistrictEntity word);
+    @Query("SELECT count(*) from DistrictEntity")
+    int getCount();
+
 }

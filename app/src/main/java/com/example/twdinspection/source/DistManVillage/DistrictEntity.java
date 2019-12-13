@@ -5,13 +5,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "districtstable")
+@Entity
 public class DistrictEntity {
-    @NonNull
     @PrimaryKey
-    private int id;
-    private int dist_id;
-    private String dist_name;
+    public int id;
+    public String dist_name;
+
+    public int dist_id;
 
     public int getId() {
         return id;

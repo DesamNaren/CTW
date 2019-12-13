@@ -4,7 +4,6 @@ import android.app.Application;
 import android.widget.ArrayAdapter;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.Room.repository.DistrictRepository;
 import com.example.twdinspection.databinding.ProfileLayoutBinding;

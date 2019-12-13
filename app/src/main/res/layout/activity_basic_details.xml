@@ -92,8 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cv_profile"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -130,8 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cv_profile"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
@@ -168,8 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cv_profile"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
+
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="2dp">
