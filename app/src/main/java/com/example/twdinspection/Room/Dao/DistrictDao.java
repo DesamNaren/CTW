@@ -28,7 +28,7 @@ public interface DistrictDao {
     @Query("SELECT * from Districts")
     LiveData<List<Districts>> getDistricts();
 
-    @Query("SELECT * from Tbl_Mandals where dist_id LIKE :dist_id")
+    @Query("SELECT * from Mandals where dist_id LIKE :dist_id")
     LiveData<List<Mandals>> getMandals(int dist_id);
 
     @Query("SELECT dist_id from Districts where dist_name LIKE :dist_name")

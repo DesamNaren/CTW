@@ -9,7 +9,6 @@ public class Districts {
     @PrimaryKey
     public int id;
     public String dist_name;
-
     public int dist_id;
 
     public int getId() {

@@ -2,15 +2,15 @@ package com.example.twdinspection.source.DistManVillage;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-@Entity(tableName = "Tbl_Mandals")
+
+@Entity
 public class Mandals {
     @PrimaryKey
     public int id;
-
     public int dist_id;
+
     public int mandal_id;
     public String mandal_name;
-
 
     public int getId() {
         return id;
