@@ -21,7 +21,9 @@ public class BasicDetailsActivity extends AppCompatActivity implements AdapterVi
     BasicDetailsViewModel viewModel;
     ProfileLayoutBinding profileLayoutBinding;
     private Context context;
-
+    int selectedDistId;
+    ArrayList<String> villageNames;
+    ArrayList<String> mandalNames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,12 @@ public class BasicDetailsActivity extends AppCompatActivity implements AdapterVi
         profileLayoutBinding.setViewModel(viewModel);
         profileLayoutBinding.executePendingBindings();
 
+        mandalNames = new ArrayList<>();
+        villageNames = new ArrayList<>();
         viewModel.getAllDistricts().observe(this, districts -> {
             if (districts != null && districts.size() > 0) {
                 ArrayList<String> distNames = new ArrayList<>();
+                distNames.add("-Select-");
                 for (int i = 0; i < districts.size(); i++) {
                     distNames.add(districts.get(i).getDist_name());
                 }
@@ -46,6 +51,7 @@ public class BasicDetailsActivity extends AppCompatActivity implements AdapterVi
         });
 
         profileLayoutBinding.spDist.setOnItemSelectedListener(this);
+        profileLayoutBinding.spMandal.setOnItemSelectedListener(this);
         profileLayoutBinding.btnProceed.setOnClickListener(
                 view -> startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class)));
 
@@ -54,25 +60,58 @@ public class BasicDetailsActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if(adapterView.getId()==R.id.sp_dist){
-            viewModel.getDistId(profileLayoutBinding.spDist.getSelectedItem().toString()).observe(BasicDetailsActivity.this, new Observer<Integer>() {
-                @Override
-                public void onChanged(Integer integer) {
-                    if(integer!=null){
-                        viewModel.getAllMandals(integer).observe(BasicDetailsActivity.this, mandals -> {
-                            if (mandals != null && mandals.size() > 0) {
-                                ArrayList<String> mandalNames = new ArrayList<>();
-                                for (int i = 0; i < mandals.size(); i++) {
-                                    mandalNames.add(mandals.get(i).getMandal_name());
+            mandalNames.clear();
+            mandalNames.add("-Select-");
+            if(i!=0){
+                viewModel.getDistId(profileLayoutBinding.spDist.getSelectedItem().toString()).observe(BasicDetailsActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        if(integer!=null){
+                            selectedDistId=integer;
+                            viewModel.getAllMandals(integer).observe(BasicDetailsActivity.this, mandals -> {
+                                if (mandals != null && mandals.size() > 0) {
+                                    for (int i = 0; i < mandals.size(); i++) {
+                                        mandalNames.add(mandals.get(i).getMandal_name());
+                                    }
                                 }
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                        android.R.layout.simple_spinner_dropdown_item, mandalNames
-                                );
-                                profileLayoutBinding.spMandal.setAdapter(adapter);
-                            }
-                        });
+                            });
+                        }
                     }
-                }
-            });
+                });
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_dropdown_item, mandalNames
+                );
+                profileLayoutBinding.spMandal.setAdapter(adapter);
+            }else{
+                profileLayoutBinding.spMandal.setAdapter(null);
+                profileLayoutBinding.spVillage.setAdapter(null);
+            }
+        }else if(adapterView.getId()==R.id.sp_Mandal) {
+            villageNames.clear();
+            villageNames.add("-Select-");
+            if (i != 0) {
+                viewModel.getMandalId(profileLayoutBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(BasicDetailsActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        if (integer != null) {
+                            viewModel.getAllVillages(integer, selectedDistId).observe(BasicDetailsActivity.this, villages -> {
+                                if (villages != null && villages.size() > 0) {
+
+                                    for (int i = 0; i < villages.size(); i++) {
+                                        villageNames.add(villages.get(i).getVillage_name());
+                                    }
+
+                                }
+                            });
+                        }
+                    }
+                });
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_dropdown_item, villageNames);
+                profileLayoutBinding.spVillage.setAdapter(adapter);
+            }else{
+                profileLayoutBinding.spVillage.setAdapter(null);
+            }
         }
     }
 

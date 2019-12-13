@@ -11,6 +11,7 @@ import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
+import com.example.twdinspection.source.DistManVillage.Villages;
 
 import java.util.List;
 
@@ -34,16 +35,22 @@ public class DistrictRepository {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<Districts>> getDistricts() {
-       return districtDao.getDistricts();
+        return districtDao.getDistricts();
     }
 
     public LiveData<List<Mandals>> getMandals(int dist_id) {
-       return districtDao.getMandals(dist_id);
+        return districtDao.getMandals(dist_id);
+    }
+
+    public LiveData<List<Villages>> getVillages(int mandalId, int distId) {
+        return districtDao.getVillages(mandalId, distId);
     }
 
     public LiveData<Integer> getDistId(String dist_name) {
-           return districtDao.getDistId(dist_name);
-        }
+        return districtDao.getDistId(dist_name);
+    }
 
-
+    public LiveData<Integer> getMandalId(String mandalName, int distId) {
+        return districtDao.getMandalId(mandalName, distId);
+    }
 }

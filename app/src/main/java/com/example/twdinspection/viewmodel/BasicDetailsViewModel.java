@@ -10,18 +10,21 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.twdinspection.Room.repository.DistrictRepository;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
+import com.example.twdinspection.source.DistManVillage.Villages;
 
 import java.util.List;
 
 public class BasicDetailsViewModel extends AndroidViewModel {
     private LiveData<List<Districts>> districts;
     private LiveData<List<Mandals>> mandals;
+    private LiveData<List<Villages>> villages;
     private DistrictRepository mRepository;
 
     public BasicDetailsViewModel(Application application) {
         super(application);
         districts = new MutableLiveData<>();
         mandals = new MutableLiveData<>();
+        villages = new MutableLiveData<>();
         mRepository = new DistrictRepository(application);
     }
 
@@ -37,6 +40,11 @@ public class BasicDetailsViewModel extends AndroidViewModel {
             mandals=mRepository.getMandals(distId);
         }
         return mandals;
+    }
+
+    public LiveData<List<Villages>> getAllVillages(int mandalId,int distId) {
+            villages=mRepository.getVillages(mandalId,distId);
+        return villages;
     }
 
     @SuppressLint("CheckResult")
@@ -65,5 +73,9 @@ public class BasicDetailsViewModel extends AndroidViewModel {
     public LiveData<Integer> getDistId(String distName){
       LiveData<Integer> distId= mRepository.getDistId(distName);
         return distId;
+    }
+    public LiveData<Integer> getMandalId(String mandalName,int distId){
+        LiveData<Integer> mandalId= mRepository.getMandalId(mandalName,distId);
+        return mandalId;
     }
 }
