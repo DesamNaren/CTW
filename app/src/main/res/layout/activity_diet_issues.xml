@@ -41,7 +41,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/list_blue"
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/rice"
                             android:textColor="@color/white"
@@ -96,7 +96,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/list_blue"
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/rg_dal_kg"
                             android:textColor="@color/white"
@@ -151,7 +151,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/list_blue"
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/palm_oil_number"
                             android:textColor="@color/white"
@@ -206,7 +206,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/list_blue"
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/eggs_number"
                             android:textColor="@color/white"
@@ -262,7 +262,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimary"
+                            android:background="@color/list_blue"
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/fruits_dozens"
                             android:textColor="@color/white"

@@ -127,7 +127,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
         }
 
         void bind(Object obj) {
-            binding.setVariable(BR.studentAttnd, obj);
+            binding.setVariable(BR.medicalDetails, obj);
             binding.executePendingBindings();
         }
 

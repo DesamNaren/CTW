@@ -22,7 +22,7 @@ public class MedicalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_medical);
-        TextView tv_title=findViewById(R.id.header_title);
+        TextView tv_title = findViewById(R.id.header_title);
         tv_title.setText("Medical & Health Issues");
         binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +34,13 @@ public class MedicalActivity extends AppCompatActivity {
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
+                if (binding.medicalCheckupYes.isChecked()) {
+                    startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class));
+                } else {
+                    startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
+                }
             }
         });
-
 
 
     }
