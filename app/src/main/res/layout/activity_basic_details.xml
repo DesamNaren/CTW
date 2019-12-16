@@ -205,7 +205,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/btn_bg"
-            android:drawableRight="@drawable/rightarrow"
+            android:drawableRight="@drawable/right_arrow_16"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/proceed"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"

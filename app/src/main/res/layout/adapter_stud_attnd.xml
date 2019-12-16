@@ -57,15 +57,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:background="@drawable/downbutton"
+                    android:background="@drawable/downarrow_16"
+                    android:gravity="center_vertical"
                     android:onClick="@{}" />
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_entries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_entries"
                 android:orientation="vertical">
 
                 <LinearLayout

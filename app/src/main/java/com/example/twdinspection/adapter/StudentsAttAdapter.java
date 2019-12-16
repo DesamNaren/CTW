@@ -62,15 +62,15 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
             if (holder.listItemBinding.llEntries.getVisibility() == View.VISIBLE) {
 
                 holder.listItemBinding.llEntries.setVisibility(View.GONE);
-                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downbutton));
+                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downarrow_16));
 
             } else {
 
                 holder.listItemBinding.llEntries.setVisibility(View.VISIBLE);
-                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.up_arrow));
+                holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.uparrow_16));
             }
         } else {
-            holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downbutton));
+            holder.listItemBinding.tvExpand.setBackground(context.getResources().getDrawable(R.drawable.downarrow_16));
             holder.listItemBinding.llEntries.setVisibility(View.GONE);
         }
         holder.bind(dataModel);
