@@ -2,6 +2,7 @@ package com.example.twdinspection.viewmodel;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -18,6 +19,7 @@ public class BasicDetailsViewModel extends AndroidViewModel {
     private LiveData<List<Districts>> districts;
     private LiveData<List<Mandals>> mandals;
     private LiveData<List<Villages>> villages;
+    private LiveData<List<String>> inst_names;
     private DistrictRepository mRepository;
 
     public BasicDetailsViewModel(Application application) {
@@ -25,6 +27,7 @@ public class BasicDetailsViewModel extends AndroidViewModel {
         districts = new MutableLiveData<>();
         mandals = new MutableLiveData<>();
         villages = new MutableLiveData<>();
+        inst_names = new MutableLiveData<>();
         mRepository = new DistrictRepository(application);
     }
 
@@ -35,11 +38,23 @@ public class BasicDetailsViewModel extends AndroidViewModel {
         return districts;
     }
 
+    public LiveData<String> getStudCount(int class_id) {
+        LiveData<String> count= mRepository.getStudCount(class_id);
+        return count;
+    }
+
     public LiveData<List<Mandals>> getAllMandals(int distId) {
         if (mandals != null) {
             mandals=mRepository.getMandals(distId);
         }
         return mandals;
+    }
+
+    public LiveData<List<String>> getInstitutes() {
+        if (inst_names != null) {
+            inst_names=mRepository.getInstitutes();
+        }
+        return inst_names;
     }
 
     public LiveData<List<Villages>> getAllVillages(int mandalId,int distId) {

@@ -2,11 +2,27 @@ package com.example.twdinspection.source.StaffAttendance;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class StaffAttendanceEntity {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private String id;
+    @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
     @ColumnInfo()
     private String emp_id;
+
+    @ColumnInfo(name = "inst_id")
+    private String hostel_id;
 
     @ColumnInfo()
     private String emp_presence;
@@ -17,11 +33,17 @@ public class StaffAttendanceEntity {
     @ColumnInfo()
     private String designation;
 
+   @ColumnInfo()
+    private String leave_type;
+
     @ColumnInfo()
         private String yday_duty_allotted;
 
     @ColumnInfo()
         private String last_week_turn_duties_attended;
+
+    public StaffAttendanceEntity() {
+    }
 
     public String getEmp_id() {
         return emp_id;

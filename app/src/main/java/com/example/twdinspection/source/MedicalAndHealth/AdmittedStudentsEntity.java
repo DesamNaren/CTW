@@ -6,6 +6,15 @@ import androidx.room.Entity;
 @Entity
 public class AdmittedStudentsEntity {
     @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
+    @ColumnInfo()
     private String name;
 
     @ColumnInfo()

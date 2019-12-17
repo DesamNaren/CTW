@@ -9,6 +9,15 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class DietIssuesEntity {
 
+    @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
     @SerializedName("mill_meaker_book_bal")
     @Expose
     private Integer millMeakerBookBal;

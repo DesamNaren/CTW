@@ -7,6 +7,15 @@ import androidx.room.Entity;
 public class AcademicOveriewEntity {
 
     @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
+    @ColumnInfo()
     private String highest_class_syllabus_completed;
 
     @ColumnInfo()

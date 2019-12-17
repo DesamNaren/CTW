@@ -13,13 +13,16 @@ import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
+import com.example.twdinspection.source.GeneralInformation.GeneralInformationEntity;
+import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.source.StudentAttendenceInfo.StudAttendInfoEntity;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {Districts.class, Mandals.class, Villages.class}, version = 1, exportSchema = false)
+@Database(entities = {Districts.class, Mandals.class, Villages.class, StudAttendInfoEntity.class, InstitutesEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();

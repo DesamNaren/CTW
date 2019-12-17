@@ -1,10 +1,12 @@
 package com.example.twdinspection.source.GeneralInformation;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import androidx.room.RoomDatabase;
 
-@Entity(primaryKeys = {"officer_id", "institute_id","inspection_time"})
+@Entity()
 public class GeneralInformationEntity {
     @ColumnInfo()
     private String HM_HWO_presence;
@@ -19,13 +21,18 @@ public class GeneralInformationEntity {
     private String officer_designation;
 
     @ColumnInfo()
+    private String inst_name;
+
+    @ColumnInfo()
     private String inspection_time;
 
     @ColumnInfo()
     private String mandal_id;
 
+    @PrimaryKey
     @ColumnInfo()
-    private String institute_id;
+    @NonNull
+        private String institute_id;
 
     @ColumnInfo()
     private String dist_id;
@@ -39,6 +46,14 @@ public class GeneralInformationEntity {
 
     public void setHM_HWO_presence(String HM_HWO_presence) {
         this.HM_HWO_presence = HM_HWO_presence;
+    }
+
+    public String getInst_name() {
+        return inst_name;
+    }
+
+    public void setInst_name(String inst_name) {
+        this.inst_name = inst_name;
     }
 
     public String getHaving_headquarters() {

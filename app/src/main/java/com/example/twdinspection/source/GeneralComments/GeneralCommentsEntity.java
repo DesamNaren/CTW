@@ -6,6 +6,15 @@ import androidx.room.Entity;
 @Entity
 public class GeneralCommentsEntity {
     @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
+    @ColumnInfo()
     private String food_provisions_supplied_on_time_fruits;
 
     @ColumnInfo()

@@ -41,6 +41,12 @@ public interface DistrictDao {
     @Query("SELECT mandal_id from Mandals where mandal_name LIKE :mandalName AND dist_id LIKE :distId")
     LiveData<Integer> getMandalId(String mandalName,int distId);
 
+   @Query("SELECT total_students from ClassInfo where class_id LIKE :class_id")
+    LiveData<String> getStudCount(int class_id);
+
+   @Query("SELECT Inst_Name from InstInfo")
+    LiveData<List<String>> getInstitutes();
+
     @Query("SELECT count(*) from Districts")
     int getCount();
 }

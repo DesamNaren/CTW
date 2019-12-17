@@ -3,6 +3,7 @@ package com.example.twdinspection.Room.repository;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,6 +21,7 @@ public class DistrictRepository {
     public DistrictDao districtDao;
     public LiveData<List<Districts>> districts = new MutableLiveData<>();
     public LiveData<List<Mandals>> mandals = new MutableLiveData<>();
+    public LiveData<List<String>> institute_names = new MutableLiveData<>();
     public int count;
 
     // Note that in order to unit test the WordRepository, you have to remove the Application
@@ -49,6 +51,18 @@ public class DistrictRepository {
     public LiveData<Integer> getDistId(String dist_name) {
         return districtDao.getDistId(dist_name);
     }
+
+    public LiveData<String> getStudCount(int class_id) {
+        LiveData<String> count=districtDao.getStudCount(class_id);
+        return count;
+    }
+
+    public LiveData<List<String>> getInstitutes() {
+        LiveData<List<String>> institutes=districtDao.getInstitutes();
+        return institutes;
+    }
+
+
 
     public LiveData<Integer> getMandalId(String mandalName, int distId) {
         return districtDao.getMandalId(mandalName, distId);
