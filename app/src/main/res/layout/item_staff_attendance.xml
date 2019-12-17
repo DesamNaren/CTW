@@ -66,69 +66,77 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
-                    android:padding="@dimen/dimen_10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
                     android:orientation="horizontal"
+                    android:padding="@dimen/dimen_10dp"
                     android:paddingLeft="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_10dp">
 
                     <LinearLayout
-                        android:layout_weight="1"
+                        android:id="@+id/ll_present"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/iv_present"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/success" />
+                            android:src="@drawable/present_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
-                            android:layout_marginLeft="4dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:id="@+id/tv_present"
+                            android:layout_marginLeft="4dp"
                             android:text="@string/present" />
                     </LinearLayout>
 
 
                     <LinearLayout
-                        android:layout_weight="1"
+                        android:id="@+id/ll_absent"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/iv_absent"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/absent" />
+                            android:src="@drawable/absent_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
-                            android:layout_marginLeft="4dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:id="@+id/tv_absent"
+                            android:layout_marginLeft="4dp"
                             android:text="@string/absent" />
                     </LinearLayout>
 
 
-
                     <LinearLayout
-                        android:layout_weight="1"
+                        android:id="@+id/ll_ondep"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/iv_ondep"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/on_dep" />
+                            android:src="@drawable/ondep_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
-                            android:layout_marginLeft="4dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:id="@+id/tv_ondep"
                             android:text="@string/dep" />
                     </LinearLayout>
 
@@ -136,19 +144,19 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dimen_5dp"
                     android:paddingRight="@dimen/dimen_5dp"
-                    android:paddingBottom="@dimen/dimen_5dp">
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:visibility="visible">
 
                     <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:text="@string/yesterday_supervision_duty_allotted" />
 
                     <LinearLayout
@@ -158,11 +166,11 @@
                         android:layout_marginLeft="@dimen/dimen_10dp">
 
                         <com.example.twdinspection.custom.CustomFontTextView
-                            android:backgroundTint="@color/colorPrimary"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@color/light_gray"
+                            android:backgroundTint="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="@dimen/dimen_5dp"
                             android:text="Yes"
@@ -201,24 +209,28 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
                     android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
                     android:paddingTop="2dp"
-                    android:visibility="gone">
+                    android:paddingRight="2dp"
+                    android:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_height="wrap_content">
 
                         <com.example.twdinspection.custom.CustomFontEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_week"
-                            android:inputType="number" />
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

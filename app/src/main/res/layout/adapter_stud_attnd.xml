@@ -29,6 +29,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/class_header"
                 android:background="@color/list_blue"
                 android:orientation="horizontal"
                 android:padding="@dimen/dimen_5dp">

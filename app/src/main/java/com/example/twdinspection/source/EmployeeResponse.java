@@ -23,6 +23,34 @@ public class EmployeeResponse implements Serializable {
     @Expose
     private String profileImage;
 
+    private boolean presentFlag;
+    private boolean absentFlag;
+    private boolean ondepFlag;
+
+    public boolean isAbsentFlag() {
+        return absentFlag;
+    }
+
+    public void setAbsentFlag(boolean absentFlag) {
+        this.absentFlag = absentFlag;
+    }
+
+    public boolean isOndepFlag() {
+        return ondepFlag;
+    }
+
+    public void setOndepFlag(boolean ondepFlag) {
+        this.ondepFlag = ondepFlag;
+    }
+
+    public boolean isPresentFlag() {
+        return presentFlag;
+    }
+
+    public void setPresentFlag(boolean presentFlag) {
+        this.presentFlag = presentFlag;
+    }
+
     public String getId() {
         return id;
     }

@@ -46,7 +46,7 @@ public class StaffAttendActivity extends AppCompatActivity {
             list.add(e);
         }
 
-        StaffAdapter staffAdapter = new StaffAdapter(list);
+        StaffAdapter staffAdapter = new StaffAdapter(StaffAttendActivity.this,list);
         binding.staffRv.setAdapter(staffAdapter);
         binding.staffRv.setHasFixedSize(true);
 
