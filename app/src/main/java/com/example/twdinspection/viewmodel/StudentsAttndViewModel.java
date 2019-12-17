@@ -1,40 +1,34 @@
 package com.example.twdinspection.viewmodel;
 
-import android.content.Context;
+import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.twdinspection.source.StudentsAttendanceBean;
+import com.example.twdinspection.Room.repository.ClassInfoRepository;
+import com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentsAttndViewModel extends ViewModel {
 
-    private MutableLiveData<List<StudentsAttendanceBean>> studentAttndLiveData;
-    private Context context;
+    private MutableLiveData<List<StudAttendInfoEntity>> studentAttndLiveData;
+    private Application application;
     private ActivityStudentsAttendanceBinding binding;
+    private ClassInfoRepository mRepository;
 
-    public StudentsAttndViewModel(ActivityStudentsAttendanceBinding binding, Context context) {
+    public StudentsAttndViewModel(ActivityStudentsAttendanceBinding binding, Application application) {
         this.binding = binding;
-        this.context = context;
+        this.application = application;
+        mRepository = new ClassInfoRepository(application);
 
     }
 
-
-
-    public LiveData<List<StudentsAttendanceBean>> geListLiveData() {
-        studentAttndLiveData = new MutableLiveData<>();
-        ArrayList<StudentsAttendanceBean> list=new ArrayList<>();
-        StudentsAttendanceBean bean=new StudentsAttendanceBean("23","yes","","","");
-        list.add(bean);
-        list.add(bean);
-        list.add(bean);
-        studentAttndLiveData.setValue(list);
-        return studentAttndLiveData;
+    public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
+        LiveData<List<StudAttendInfoEntity>> classIdsList= mRepository.getClassIdsList(inst_id);
+        return classIdsList;
     }
 
 }

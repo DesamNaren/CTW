@@ -24,17 +24,4 @@ public class MedicalDetailsViewModel extends ViewModel {
 
     }
 
-
-
-    public LiveData<List<StudentsAttendanceBean>> geListLiveData() {
-        studentAttndLiveData = new MutableLiveData<>();
-        ArrayList<StudentsAttendanceBean> list=new ArrayList<>();
-        StudentsAttendanceBean bean=new StudentsAttendanceBean("23","yes","","","");
-        list.add(bean);
-        list.add(bean);
-        list.add(bean);
-        studentAttndLiveData.setValue(list);
-        return studentAttndLiveData;
-    }
-
 }

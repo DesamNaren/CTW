@@ -9,4 +9,5 @@ public class AppConstants {
     public static final String INFO = "INFO";
 
     public static final String LOGIN_FLAG = "LOGIN_FLAG";
+    public static String InstId="INSTITUTE_ID";
 }

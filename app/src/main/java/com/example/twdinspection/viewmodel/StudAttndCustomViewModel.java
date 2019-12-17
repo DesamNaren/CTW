@@ -1,5 +1,6 @@
 package com.example.twdinspection.viewmodel;
 
+import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,17 @@ import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 public class StudAttndCustomViewModel implements ViewModelProvider.Factory {
     private ActivityStudentsAttendanceBinding binding;
     private Context context;
+    Application application;
 
-    public StudAttndCustomViewModel(ActivityStudentsAttendanceBinding binding, Context context) {
+    public StudAttndCustomViewModel(ActivityStudentsAttendanceBinding binding, Context context, Application application) {
         this.binding = binding;
         this.context = context;
+        this.application = application;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new StudentsAttndViewModel(binding, context);
+        return (T) new StudentsAttndViewModel(binding, application);
     }
 }

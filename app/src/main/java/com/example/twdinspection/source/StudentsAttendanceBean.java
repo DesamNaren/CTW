@@ -7,15 +7,6 @@ public class StudentsAttendanceBean {
     private String PresentInspection1_4;
     private String variance1_5;
 
-    public StudentsAttendanceBean(String studentsOnRoll_1_1, String isAttndMarked_1_2, String markedPresent_1_3,
-                                  String presentInspection1_4, String variance1_5) {
-        this.studentsOnRoll_1_1 = studentsOnRoll_1_1;
-        IsAttndMarked_1_2 = isAttndMarked_1_2;
-        MarkedPresent_1_3 = markedPresent_1_3;
-        PresentInspection1_4 = presentInspection1_4;
-        this.variance1_5 = variance1_5;
-    }
-
     public String getStudentsOnRoll_1_1() {
         return studentsOnRoll_1_1;
     }

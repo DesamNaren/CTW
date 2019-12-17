@@ -1,14 +1,8 @@
-package com.example.twdinspection.source.StudentAttendenceInfo;
+package com.example.twdinspection.source.studentAttendenceInfo;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import com.example.twdinspection.source.GeneralInformation.GeneralInformationEntity;
-
-import javax.annotation.Nullable;
 
 @Entity(tableName = "ClassInfo")
 public class StudAttendInfoEntity {
@@ -17,6 +11,7 @@ public class StudAttendInfoEntity {
 
     @ColumnInfo()
     private String officer_id;
+
     @ColumnInfo()
     private String institute_id;
 
@@ -31,9 +26,6 @@ public class StudAttendInfoEntity {
 
     @ColumnInfo()
     private String total_students;
-
-    @ColumnInfo()
-    private String inst_name;
 
     @ColumnInfo()
     private String attendence_marked;
@@ -87,14 +79,6 @@ public class StudAttendInfoEntity {
 
     public void setStudent_count_in_register(String student_count_in_register) {
         this.student_count_in_register = student_count_in_register;
-    }
-
-    public String getInst_name() {
-        return inst_name;
-    }
-
-    public void setInst_name(String inst_name) {
-        this.inst_name = inst_name;
     }
 
     public String getStudent_count_during_inspection() {

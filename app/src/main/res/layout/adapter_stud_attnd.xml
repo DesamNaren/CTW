@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="studentAttnd"
-            type="com.example.twdinspection.source.StudentsAttendanceBean" />
+            name="studentAttend"
+            type="com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity" />
 
     </data>
 
@@ -61,14 +61,14 @@
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:background="@drawable/downarrow_16"
-                    android:gravity="center_vertical"
-                    android:onClick="@{}" />
+                    android:gravity="center_vertical" />
             </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_entries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="@{studentAttnd.studentsOnRoll_1_1}" />
+                        android:text="@={studentAttend.total_students}" />
 
 
                 </LinearLayout>
@@ -130,7 +130,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Password"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -242,7 +241,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="@{studentAttnd.variance1_5}" />
+                        android:text="@={studentAttend.variance}" />
 
 
                 </LinearLayout>

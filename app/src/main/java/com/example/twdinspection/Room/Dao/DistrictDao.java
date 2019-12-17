@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
+import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 
 import java.util.List;
 
@@ -21,11 +22,6 @@ import java.util.List;
 
 @Dao
 public interface DistrictDao {
-
-    // LiveData is a data holder class that can be observed within a given lifecycle.
-    // Always holds/caches latest version of data. Notifies its active observers when the
-    // data has changed. Since we are getting all the contents of the database,
-    // we are notified whenever any of the database contents have changed.
     @Query("SELECT * from Districts")
     LiveData<List<Districts>> getDistricts();
 
@@ -33,19 +29,16 @@ public interface DistrictDao {
     LiveData<List<Mandals>> getMandals(int dist_id);
 
     @Query("SELECT * from Villages where mandal_id LIKE :mandalId AND dist_id LIKE :distId")
-    LiveData<List<Villages>> getVillages(int mandalId,int distId);
+    LiveData<List<Villages>> getVillages(int mandalId, int distId);
 
     @Query("SELECT dist_id from Districts where dist_name LIKE :dist_name")
     LiveData<Integer> getDistId(String dist_name);
 
     @Query("SELECT mandal_id from Mandals where mandal_name LIKE :mandalName AND dist_id LIKE :distId")
-    LiveData<Integer> getMandalId(String mandalName,int distId);
+    LiveData<Integer> getMandalId(String mandalName, int distId);
 
-   @Query("SELECT total_students from ClassInfo where class_id LIKE :class_id")
-    LiveData<String> getStudCount(int class_id);
-
-   @Query("SELECT Inst_Name from InstInfo")
-    LiveData<List<String>> getInstitutes();
+    @Query("SELECT * from InstInfo")
+    LiveData<List<InstitutesEntity>> getInstitutes();
 
     @Query("SELECT count(*) from Districts")
     int getCount();

@@ -13,6 +13,7 @@ import com.example.twdinspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
+import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 
 import java.util.List;
 
@@ -52,13 +53,10 @@ public class DistrictRepository {
         return districtDao.getDistId(dist_name);
     }
 
-    public LiveData<String> getStudCount(int class_id) {
-        LiveData<String> count=districtDao.getStudCount(class_id);
-        return count;
-    }
 
-    public LiveData<List<String>> getInstitutes() {
-        LiveData<List<String>> institutes=districtDao.getInstitutes();
+
+    public LiveData<List<InstitutesEntity>> getInstitutes() {
+        LiveData<List<InstitutesEntity>> institutes=districtDao.getInstitutes();
         return institutes;
     }
 

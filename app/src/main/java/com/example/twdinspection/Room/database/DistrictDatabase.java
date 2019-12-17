@@ -9,13 +9,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.twdinspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
-import com.example.twdinspection.source.GeneralInformation.GeneralInformationEntity;
 import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
-import com.example.twdinspection.source.StudentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
@@ -26,6 +26,7 @@ import com.example.twdinspection.source.StudentAttendenceInfo.StudAttendInfoEnti
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
+    public abstract ClassInfoDao classInfoDao();
 
     private static DistrictDatabase INSTANCE;
 

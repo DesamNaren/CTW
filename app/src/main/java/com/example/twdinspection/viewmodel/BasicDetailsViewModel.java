@@ -12,6 +12,7 @@ import com.example.twdinspection.Room.repository.DistrictRepository;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
+import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class BasicDetailsViewModel extends AndroidViewModel {
     private LiveData<List<Districts>> districts;
     private LiveData<List<Mandals>> mandals;
     private LiveData<List<Villages>> villages;
-    private LiveData<List<String>> inst_names;
+    private LiveData<List<InstitutesEntity>> inst_names;
     private DistrictRepository mRepository;
 
     public BasicDetailsViewModel(Application application) {
@@ -38,10 +39,7 @@ public class BasicDetailsViewModel extends AndroidViewModel {
         return districts;
     }
 
-    public LiveData<String> getStudCount(int class_id) {
-        LiveData<String> count= mRepository.getStudCount(class_id);
-        return count;
-    }
+
 
     public LiveData<List<Mandals>> getAllMandals(int distId) {
         if (mandals != null) {
@@ -50,7 +48,7 @@ public class BasicDetailsViewModel extends AndroidViewModel {
         return mandals;
     }
 
-    public LiveData<List<String>> getInstitutes() {
+    public LiveData<List<InstitutesEntity>> getInstitutes() {
         if (inst_names != null) {
             inst_names=mRepository.getInstitutes();
         }
