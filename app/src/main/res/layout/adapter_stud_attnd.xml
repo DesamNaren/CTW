@@ -68,7 +68,7 @@
                 android:id="@+id/ll_entries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -90,6 +90,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="@dimen/dimen_15dp"
                             android:layout_marginLeft="@dimen/dimen_8dp"
                             android:inputType="textEmailAddress"
                             android:text="@string/students_on_roll"
@@ -113,13 +114,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_8dp"
-                        android:layout_weight="2"
+                        android:textSize="@dimen/dimen_15dp"
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:text="@string/is_students_attendance_marked"
@@ -127,9 +128,9 @@
 
                     <RadioGroup
                         android:id="@+id/rg_IsAttndMarked_1_2"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -154,17 +155,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:visibility="gone"
+                    android:id="@+id/ll_stud_pres"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/inEmail"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:padding="5dp"
-                        android:text="@string/students_marked_present_in_register"
-                        android:textColor="@color/black"
-                        android:visibility="gone" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -175,6 +168,8 @@
                         <com.example.twdinspection.custom.CustomFontEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/et_studMarkedPres"
+                            android:textSize="@dimen/dimen_15dp"
                             android:hint="@string/students_marked_present_in_register"
                             android:inputType="number" />
 
@@ -196,7 +191,6 @@
                         android:layout_weight="2"
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
-                        android:text="@string/students_present_during_inspection"
                         android:textColor="@color/black"
                         android:visibility="gone" />
 
@@ -208,6 +202,8 @@
 
                         <com.example.twdinspection.custom.CustomFontEditText
                             android:layout_width="match_parent"
+                            android:textSize="@dimen/dimen_15dp"
+                            android:id="@+id/et_studPresInsp"
                             android:layout_height="wrap_content"
                             android:hint="@string/students_present_during_inspection"
                             android:inputType="number" />
@@ -240,8 +236,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text="@={studentAttend.variance}" />
+                        android:padding="5dp" />
 
 
                 </LinearLayout>
