@@ -175,5 +175,14 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         }
 
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 }
 
