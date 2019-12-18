@@ -55,7 +55,7 @@ public class LoginViewModel extends ViewModel {
 
     public void onBtnClick() {
         LoginUser loginUser = new LoginUser(username.getValue(), password.getValue());
-        if (TextUtils.isEmpty(loginUser.getEmail())) {
+       /* if (TextUtils.isEmpty(loginUser.getEmail())) {
             binding.tName.setError("Please enter username");
             return;
 
@@ -67,7 +67,7 @@ public class LoginViewModel extends ViewModel {
             return;
         } else {
             binding.tPwd.setError(null);
-        }
+        }*/
         context.startActivity(new Intent(context, DashboardActivity.class));
 
 //        callEmployeeData();

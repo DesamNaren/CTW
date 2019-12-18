@@ -11,10 +11,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.Room.Dao.DistrictDao;
+import com.example.twdinspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
 import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 /**
@@ -22,11 +24,13 @@ import com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEnti
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {Districts.class, Mandals.class, Villages.class, StudAttendInfoEntity.class, InstitutesEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {Districts.class, Mandals.class, Villages.class, StudAttendInfoEntity.class,
+        InstitutesEntity.class, StaffAttendanceEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
     public abstract ClassInfoDao classInfoDao();
+    public abstract StaffInfoDao staffInfoDao();
 
     private static DistrictDatabase INSTANCE;
 

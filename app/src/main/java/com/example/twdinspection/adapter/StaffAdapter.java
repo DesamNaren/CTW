@@ -18,18 +18,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ItemStaffAttendanceBinding;
-import com.example.twdinspection.source.EmployeeResponse;
+import com.example.twdinspection.source.staffAttendance.StaffAttendanceEntity;
 
 import java.util.List;
 import java.util.Random;
 
 public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> {
 
-    private List<EmployeeResponse> employeeResponses;
+    private List<StaffAttendanceEntity> staffAttendanceEntities;
     private Context context;
 
-    public StaffAdapter(Context context, List<EmployeeResponse> employeeResponses) {
-        this.employeeResponses = employeeResponses;
+    public StaffAdapter(Context context, List<StaffAttendanceEntity> employeeResponses) {
+        this.staffAttendanceEntities = employeeResponses;
         this.context = context;
     }
 
@@ -57,7 +57,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        EmployeeResponse employeeResponse = employeeResponses.get(position);
+        StaffAttendanceEntity employeeResponse = staffAttendanceEntities.get(position);
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
 
@@ -137,7 +137,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
     @Override
     public int getItemCount() {
-        return employeeResponses != null ? employeeResponses.size() : 0;
+        return staffAttendanceEntities != null ? staffAttendanceEntities.size() : 0;
     }
 
     class UserHolder extends RecyclerView.ViewHolder {
@@ -148,15 +148,15 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             this.binding = binding;
         }
 
-        void bind(EmployeeResponse employeeResponse) {
+        void bind(StaffAttendanceEntity employeeResponse) {
             this.binding.setVariable(BR.staff, employeeResponse);
             this.binding.executePendingBindings();
         }
 
     }
 
-    public void setEmployeeList(List<EmployeeResponse> employees) {
-        this.employeeResponses = employees;
+    public void setEmployeeList(List<StaffAttendanceEntity> employees) {
+        this.staffAttendanceEntities = employees;
         notifyDataSetChanged();
     }
 

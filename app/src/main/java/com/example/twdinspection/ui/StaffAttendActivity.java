@@ -7,17 +7,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.adapter.StaffAdapter;
+import com.example.twdinspection.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
-import com.example.twdinspection.source.EmployeeResponse;
+import com.example.twdinspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.utils.AppConstants;
 import com.example.twdinspection.viewmodel.StaffAttendCustomViewModel;
 import com.example.twdinspection.viewmodel.StaffViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StaffAttendActivity extends AppCompatActivity {
@@ -26,29 +28,12 @@ public class StaffAttendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityStaffAttBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_staff_att);
-        TextView tv_title=findViewById(R.id.header_title);
+        TextView tv_title = findViewById(R.id.header_title);
         tv_title.setText("Staff Attendance");
         StaffViewModel staffViewModel = ViewModelProviders.of(
                 this, new StaffAttendCustomViewModel(binding, this)).get(StaffViewModel.class);
         binding.setViewmodel(staffViewModel);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-        layoutManager.setReverseLayout(false);
-        binding.staffRv.setLayoutManager(layoutManager);
-
-        List<EmployeeResponse> list = new ArrayList<>();
-        for(int x=0;x<10;x++){
-            EmployeeResponse e = new EmployeeResponse();
-            e.setId(""+x);
-            e.setEmployeeName("XYZ "+x);
-            e.setEmployeeSalary("SAL "+x);
-            e.setEmployeeAge("AGE "+x);
-            list.add(e);
-        }
-
-        StaffAdapter staffAdapter = new StaffAdapter(StaffAttendActivity.this,list);
-        binding.staffRv.setAdapter(staffAdapter);
-        binding.staffRv.setHasFixedSize(true);
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +41,18 @@ public class StaffAttendActivity extends AppCompatActivity {
                 startActivity(new Intent(StaffAttendActivity.this, MedicalActivity.class));
             }
         });
+
+        staffViewModel.getStaffInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.InstId, "")).observe(this, new Observer<List<StaffAttendanceEntity>>() {
+            @Override
+            public void onChanged(List<StaffAttendanceEntity> staffAttendanceEntities) {
+                StaffAdapter staffAdapter = new StaffAdapter(StaffAttendActivity.this, staffAttendanceEntities);
+                binding.staffRv.setAdapter(staffAdapter);
+                binding.staffRv.setHasFixedSize(true);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+                binding.staffRv.setLayoutManager(layoutManager);
+            }
+        });
+
 //        staffViewModel.getUserResponseLiveData().observe(this,
 //                new Observer<CreateUserResponse>() {
 //                    @Override

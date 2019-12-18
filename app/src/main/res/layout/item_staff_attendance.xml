@@ -6,7 +6,7 @@
 
         <variable
             name="staff"
-            type="com.example.twdinspection.source.EmployeeResponse" />
+            type="com.example.twdinspection.source.staffAttendance.StaffAttendanceEntity" />
     </data>
 
     <LinearLayout
@@ -48,17 +48,22 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_10dp">
+                        <com.example.twdinspection.custom.CustomFontTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@={staff.emp_id}" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="123456" />
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:text="@={staff.emp_name}" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_8dp"
-                            android:text="XYZXYZ, DES" />
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:text="@={staff.designation}" />
 
                     </LinearLayout>
 
@@ -88,10 +93,10 @@
                             android:src="@drawable/present_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
+                            android:id="@+id/tv_present"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:id="@+id/tv_present"
                             android:layout_marginLeft="4dp"
                             android:text="@string/present" />
                     </LinearLayout>
@@ -110,10 +115,10 @@
                             android:src="@drawable/absent_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
+                            android:id="@+id/tv_absent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:id="@+id/tv_absent"
                             android:layout_marginLeft="4dp"
                             android:text="@string/absent" />
                     </LinearLayout>
@@ -132,11 +137,11 @@
                             android:src="@drawable/ondep_init" />
 
                         <com.example.twdinspection.custom.CustomFontTextView
+                            android:id="@+id/tv_ondep"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="4dp"
-                            android:id="@+id/tv_ondep"
                             android:text="@string/dep" />
                     </LinearLayout>
 
@@ -220,8 +225,8 @@
                     android:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <com.example.twdinspection.custom.CustomFontEditText
@@ -230,7 +235,7 @@
                             android:hint="@string/last_week"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
-                            android:singleLine="true"/>
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
