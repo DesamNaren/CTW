@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cv_profile"
-        android:layout_margin="@dimen/dimen_10dp"
-        android:layout_marginLeft="@dimen/dimen_5dp"
-        android:layout_marginRight="@dimen/dimen_5dp"
+        android:layout_margin="@dimen/dimen_5dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
@@ -30,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/class_header"
-                android:background="@color/list_blue"
                 android:orientation="horizontal"
                 android:padding="@dimen/dimen_5dp">
 
@@ -48,199 +45,26 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:text="Class"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_20dp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/list_blue"
+                    android:textSize="@dimen/dimen_20dp" />
 
 
                 <TextView
                     android:id="@+id/tv_expand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:background="@drawable/downarrow_16"
+                    android:layout_marginStart="@dimen/dimen_5dp"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:layout_marginEnd="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:background="@android:drawable/ic_menu_edit"
                     android:gravity="center_vertical" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_entries"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/students_on_roll"
-                        android:textColor="@color/black">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/dimen_15dp"
-                            android:layout_marginLeft="@dimen/dimen_8dp"
-                            android:inputType="textEmailAddress"
-                            android:text="@string/students_on_roll"
-                            android:textColor="@color/black" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.example.twdinspection.custom.CustomFontTextView
-                        android:id="@+id/studentsOnRoll_1_1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text="@={studentAttend.total_students}" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical">
-
-                    <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
-                        android:textSize="@dimen/dimen_15dp"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/is_students_attendance_marked"
-                        android:textColor="@color/black" />
-
-                    <RadioGroup
-                        android:id="@+id/rg_IsAttndMarked_1_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_20dp"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/rb_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yes" />
-
-                        <RadioButton
-                            android:id="@+id/rb_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="No" />
-                    </RadioGroup>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:visibility="gone"
-                    android:id="@+id/ll_stud_pres"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/et_studMarkedPres"
-                            android:textSize="@dimen/dimen_15dp"
-                            android:hint="@string/students_marked_present_in_register"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
-
-                    <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:visibility="gone" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:textSize="@dimen/dimen_15dp"
-                            android:id="@+id/et_studPresInsp"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/students_present_during_inspection"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
-
-                    <com.example.twdinspection.custom.CustomFontTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
-                        android:layout_weight="2"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/variance"
-                        android:textColor="@color/black" />
-
-                    <com.example.twdinspection.custom.CustomFontTextView
-                        android:id="@+id/variance"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp" />
-
-
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

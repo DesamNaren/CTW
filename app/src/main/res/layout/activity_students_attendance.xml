@@ -33,6 +33,5 @@
             android:id="@+id/btn_layout"
             layout="@layout/buttons_layout" />
 
-
     </RelativeLayout>
 </layout>

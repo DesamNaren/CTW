@@ -2,6 +2,7 @@ package com.example.twdinspection.source.studentAttendenceInfo;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ClassInfo")
@@ -11,6 +12,9 @@ public class StudAttendInfoEntity {
 
     @ColumnInfo()
     private String officer_id;
+
+    @ColumnInfo()
+    private int flag_completed;
 
     @ColumnInfo()
     private String institute_id;
@@ -48,6 +52,13 @@ public class StudAttendInfoEntity {
         this.variance = variance;
     }
 
+    public int getFlag_completed() {
+        return flag_completed;
+    }
+
+    public void setFlag_completed(int flag_completed) {
+        this.flag_completed = flag_completed;
+    }
 
     public String getClass_type() {
         return class_type;

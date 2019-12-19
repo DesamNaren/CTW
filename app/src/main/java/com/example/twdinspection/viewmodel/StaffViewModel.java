@@ -23,10 +23,13 @@ public class StaffViewModel extends ViewModel {
         this.context = context;
         staffInfoRepository = new StaffInfoRepository(application);
     }
+
     public LiveData<List<StaffAttendanceEntity>> getStaffInfo(String inst_id) {
         LiveData<List<StaffAttendanceEntity>> staffInfoList= staffInfoRepository.getStaffInfoList(inst_id);
         return staffInfoList;
     }
+
+
 
 
 }

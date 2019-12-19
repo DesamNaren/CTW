@@ -10,4 +10,6 @@ public class AppConstants {
 
     public static final String LOGIN_FLAG = "LOGIN_FLAG";
     public static String InstId="INSTITUTE_ID";
+    public static String Yes="YES";
+    public static String No="NO";
 }
