@@ -20,6 +20,7 @@
         app:cardElevation="2dp">
 
         <LinearLayout
+            android:id="@+id/ll_class_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -45,7 +46,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:text="Class"
-                    android:textColor="@color/list_blue"
                     android:textSize="@dimen/dimen_20dp" />
 
 
@@ -61,7 +61,8 @@
                     android:layout_marginEnd="@dimen/dimen_5dp"
                     android:layout_marginRight="@dimen/dimen_5dp"
                     android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:background="@android:drawable/ic_menu_edit"
+                    android:backgroundTint="@color/light_gray"
+                    android:background="@drawable/ic_edit"
                     android:gravity="center_vertical" />
             </RelativeLayout>
 

@@ -57,6 +57,11 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         final StudAttendInfoEntity dataModel = list.get(position);
         holder.listItemBinding.setStudentAttend(dataModel);
 
+        if(dataModel.getFlag_completed()==1){
+            holder.listItemBinding.llClassHeader.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+            holder.listItemBinding.tvClass.setTextColor(context.getResources().getColor(R.color.white));
+        }
+
 
 //        holder.listItemBinding.tvClass.setText("Class " + (position + 1));
         holder.listItemBinding.tvClass.setText(list.get(i).getClass_type());
