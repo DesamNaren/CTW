@@ -3,92 +3,62 @@ package com.example.twdinspection.source;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+public class EmployeeResponse {
 
-public class EmployeeResponse implements Serializable {
-
-    @SerializedName("id")
+    @SerializedName("user_name")
     @Expose
-    private String id;
-    @SerializedName("employee_name")
+    private String userName;
+    @SerializedName("Status_Code")
     @Expose
-    private String employeeName;
-    @SerializedName("employee_salary")
+    private String statusCode;
+    @SerializedName("designation")
     @Expose
-    private String employeeSalary;
-    @SerializedName("employee_age")
+    private String designation;
+    @SerializedName("user_id")
     @Expose
-    private String employeeAge;
-    @SerializedName("profile_image")
+    private String userId;
+    @SerializedName("Status_Message")
     @Expose
-    private String profileImage;
+    private String statusMessage;
 
-    private boolean presentFlag;
-    private boolean absentFlag;
-    private boolean ondepFlag;
-
-    public boolean isAbsentFlag() {
-        return absentFlag;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAbsentFlag(boolean absentFlag) {
-        this.absentFlag = absentFlag;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public boolean isOndepFlag() {
-        return ondepFlag;
+    public String getStatusCode() {
+        return statusCode;
     }
 
-    public void setOndepFlag(boolean ondepFlag) {
-        this.ondepFlag = ondepFlag;
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 
-    public boolean isPresentFlag() {
-        return presentFlag;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setPresentFlag(boolean presentFlag) {
-        this.presentFlag = presentFlag;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getStatusMessage() {
+        return statusMessage;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
-    }
-
-    public String getEmployeeSalary() {
-        return employeeSalary;
-    }
-
-    public void setEmployeeSalary(String employeeSalary) {
-        this.employeeSalary = employeeSalary;
-    }
-
-    public String getEmployeeAge() {
-        return employeeAge;
-    }
-
-    public void setEmployeeAge(String employeeAge) {
-        this.employeeAge = employeeAge;
-    }
-
-    public String getProfileImage() {
-        return profileImage;
-    }
-
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
 }

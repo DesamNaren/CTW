@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -10,28 +11,29 @@
         android:padding="@dimen/dimen_10dp">
 
         <com.example.twdinspection.custom.CustomFontTextView
+            android:id="@+id/offNme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/user_16"
             android:drawableTint="@color/list_blue"
-            android:drawablePadding="@dimen/dimen_10dp"
-            android:text="USERNAME: XYZ" />
+            android:drawablePadding="@dimen/dimen_10dp" />
 
         <com.example.twdinspection.custom.CustomFontTextView
+            android:id="@+id/offDes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_8dp"
             android:layout_marginBottom="@dimen/dimen_8dp"
             android:drawableLeft="@drawable/role_16"
-            android:drawablePadding="@dimen/dimen_10dp"
-            android:text="ROLE: DTO" />
+            android:drawablePadding="@dimen/dimen_10dp" />
 
         <com.example.twdinspection.custom.CustomFontTextView
+            android:id="@+id/inspectionTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/clock_16"
-            android:drawablePadding="@dimen/dimen_10dp"
-            android:text="2019-02-18: 16:40:00 PM" />
+            android:drawablePadding="@dimen/dimen_10dp" />
     </LinearLayout>
 
 </LinearLayout>
+</layout>

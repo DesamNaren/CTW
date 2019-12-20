@@ -60,35 +60,18 @@ public class BasicDetailsViewModel extends AndroidViewModel {
         return villages;
     }
 
-    @SuppressLint("CheckResult")
-//    public void getDistId(final DMVInterface dmvInterface, String distName) {
-//
-//        PublishSubject.create(new ObservableOnSubscribe<String>() {
-//            @Override
-//            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-//                String bankNmae = mRepository.getM(distName);
-//                if (!emitter.isDisposed())
-//                    if (TextUtils.isEmpty(bankNmae)) {
-//                        bankNmae = "";
-//                    }
-//                emitter.onNext(bankNmae);
-//
-//            }
-//        }).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<String>() {
-//                    @Override
-//                    public void accept(String bName) throws Exception {
-//                        bbInterface.getBankName(bName);
-//                    }
-//                });
-//    }
     public LiveData<Integer> getDistId(String distName){
-      LiveData<Integer> distId= mRepository.getDistId(distName);
-        return distId;
+        return mRepository.getDistId(distName);
     }
     public LiveData<Integer> getMandalId(String mandalName,int distId){
-        LiveData<Integer> mandalId= mRepository.getMandalId(mandalName,distId);
-        return mandalId;
+        return mRepository.getMandalId(mandalName,distId);
+    }
+
+    public LiveData<Integer> getVillageId(String mandalName,int manId, int distId){
+        return mRepository.getVillageId(mandalName,manId,distId);
+    }
+
+    public LiveData<String> getInstId(String instName){
+        return mRepository.getInstId(instName);
     }
 }

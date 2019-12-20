@@ -4,29 +4,29 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.source.EmployeeResponse;
+import com.example.twdinspection.utils.AppConstants;
 import com.example.twdinspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.viewmodel.LoginViewModel;
-
-import java.util.List;
+import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends LocBaseActivity {
     ActivityLoginCreBinding binding;
-    private static final int REQUEST_READ_PHONE_STATE = 2000;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,26 @@ public class LoginActivity extends LocBaseActivity {
         binding.setViewModel(loginViewModel);
 
 
-        loginViewModel.geListLiveData().observe(this, new Observer<List<EmployeeResponse>>() {
+        try {
+            editor = TWDApplication.get(this).getPreferences().edit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
             @Override
-            public void onChanged(List<EmployeeResponse> employeeResponses) {
-                if (employeeResponses != null && employeeResponses.size() > 0) {
-                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+            public void onChanged(EmployeeResponse employeeResponses) {
+                if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
+                    if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                        editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
+                        editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
+                        editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
+                        editor.commit();
+
+                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                    } else {
+                        Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

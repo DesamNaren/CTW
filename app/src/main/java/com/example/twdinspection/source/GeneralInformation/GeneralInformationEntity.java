@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.RoomDatabase;
 
 @Entity()
 public class GeneralInformationEntity {
@@ -32,7 +31,7 @@ public class GeneralInformationEntity {
     @PrimaryKey
     @ColumnInfo()
     @NonNull
-        private String institute_id;
+    private String institute_id;
 
     @ColumnInfo()
     private String dist_id;

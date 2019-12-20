@@ -141,7 +141,7 @@ public class LocBaseActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         dialog.dismiss();
                       callPermissions();
-                    }
+                    }   
                 });
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override

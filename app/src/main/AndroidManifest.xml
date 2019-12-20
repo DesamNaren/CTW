@@ -61,7 +61,8 @@
         <activity
             android:name=".ui.RegistersActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.MedicalActivity" />
+        <activity android:name=".ui.MedicalActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.BasicDetailsActivity"
             android:screenOrientation="portrait" />
@@ -86,6 +87,8 @@
         <activity
             android:name=".ui.InfoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.BaseActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

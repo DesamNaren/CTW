@@ -9,30 +9,20 @@
             type="com.example.twdinspection.viewmodel.BasicDetailsViewModel" />
     </data>
 
-    <RelativeLayout
 
+
+    <RelativeLayout
+        android:id="@+id/rl_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_gray">
+
 
         <RelativeLayout
             android:id="@+id/cv_profile"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/root"
             android:background="@color/list_blue" />
-
-        <com.example.twdinspection.custom.CustomFontTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:padding="@dimen/dimen_10dp"
-            android:text="School Inspection"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimen_20dp"
-
-            android:textStyle="bold" />
 
         <RelativeLayout
             android:id="@+id/rl_profile"
@@ -69,15 +59,16 @@
 
                     <ImageView
                         android:id="@+id/iv_cal"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginTop="@dimen/dimen_10dp"
-                        android:src="@drawable/user1" />
+                        android:src="@drawable/user1"
+                        android:layout_alignParentStart="true" />
 
 
-                    <include layout="@layout/details_layout" />
+                    <include android:id="@+id/include_basic_layout"
+                        layout="@layout/details_layout" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -85,7 +76,7 @@
 
         <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_above="@+id/btn_proceed"
             android:layout_below="@+id/rl_profile"
             android:layout_marginLeft="@dimen/dimen_20dp"
@@ -211,6 +202,14 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cl"
+            android:layout_above="@+id/btn_proceed"
+            android:background="@android:color/transparent">
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <Button
             android:id="@+id/btn_proceed"

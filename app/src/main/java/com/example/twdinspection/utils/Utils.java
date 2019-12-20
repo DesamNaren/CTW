@@ -19,6 +19,10 @@ import android.widget.TextView;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Utils {
     public static void hideKeyboard(Context context, View mView){
         try {
@@ -82,4 +86,11 @@ public class Utils {
     }
 
 
+    public static String getCurrentDateTime() {
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
+    }
+
+    public static String getCurrentDate() {
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+    }
 }

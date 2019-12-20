@@ -1,7 +1,6 @@
 package com.example.twdinspection.viewmodel;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,8 +15,6 @@ import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.network.TWDService;
 import com.example.twdinspection.source.EmployeeResponse;
 import com.example.twdinspection.source.LoginUser;
-import com.example.twdinspection.ui.DashboardActivity;
-import com.example.twdinspection.ui.GenerateMPINActivity;
 import com.example.twdinspection.utils.Utils;
 
 import java.util.List;
@@ -28,7 +25,7 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<List<EmployeeResponse>> responseMutableLiveData;
+    private MutableLiveData<EmployeeResponse> responseMutableLiveData;
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     private MutableLiveData<Integer> busy;
@@ -48,14 +45,14 @@ public class LoginViewModel extends ViewModel {
         return busy;
     }
 
-    public LiveData<List<EmployeeResponse>> geListLiveData() {
+    public LiveData<EmployeeResponse> geListLiveData() {
         responseMutableLiveData = new MutableLiveData<>();
         return responseMutableLiveData;
     }
 
     public void onBtnClick() {
         LoginUser loginUser = new LoginUser(username.getValue(), password.getValue());
-       /* if (TextUtils.isEmpty(loginUser.getEmail())) {
+       if (TextUtils.isEmpty(loginUser.getEmail())) {
             binding.tName.setError("Please enter username");
             return;
 
@@ -67,10 +64,10 @@ public class LoginViewModel extends ViewModel {
             return;
         } else {
             binding.tPwd.setError(null);
-        }*/
-        context.startActivity(new Intent(context, DashboardActivity.class));
+        }
 
-//        callEmployeeData();
+
+        callLoginAPI(loginUser);
     }
 
     public void onViewPwd() { if (binding.etPwd.getInputType() == InputType.TYPE_CLASS_TEXT) {
@@ -84,14 +81,14 @@ public class LoginViewModel extends ViewModel {
             binding.etPwd.setSelection(password.getValue().length());
     }
 
-    private void callEmployeeData() {
+    private void callLoginAPI(LoginUser loginUser) {
         Utils.hideKeyboard(context, binding.btnLogin);
         binding.btnLogin.setVisibility(View.GONE);
         binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create();
-        twdService.getAllEmployees().enqueue(new Callback<List<EmployeeResponse>>() {
+        twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<EmployeeResponse>() {
             @Override
-            public void onResponse(Call<List<EmployeeResponse>> call, Response<List<EmployeeResponse>> response) {
+            public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     binding.btnLogin.setVisibility(View.VISIBLE);
                     binding.progress.setVisibility(View.GONE);
@@ -100,7 +97,7 @@ public class LoginViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<EmployeeResponse>> call, Throwable t) {
+            public void onFailure(Call<EmployeeResponse> call, Throwable t) {
                 binding.progress.setVisibility(View.GONE);
                 binding.btnLogin.setVisibility(View.VISIBLE);
                 Log.i("UU", "onFailure: " + t.getMessage());

@@ -65,4 +65,13 @@ public class DistrictRepository {
     public LiveData<Integer> getMandalId(String mandalName, int distId) {
         return districtDao.getMandalId(mandalName, distId);
     }
+
+    public LiveData<Integer> getVillageId(String mandalName, int manId, int distId) {
+        return districtDao.getVillageId(mandalName, manId, distId);
+    }
+
+    public LiveData<String> getInstId(String inst_name) {
+        return districtDao.getInstId(inst_name);
+    }
+
 }

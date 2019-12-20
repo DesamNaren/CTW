@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface TWDService {
     class Factory {
@@ -43,8 +44,8 @@ public interface TWDService {
 
     }
 
-    @GET("v1/employees")
-    Call<List<EmployeeResponse>> getAllEmployees();
+    @GET("validateLogin")
+    Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
 
     //------------------- Login & Logout ----------------------------------------
 

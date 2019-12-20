@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.viewmodel.GeneralInfoViewModel" />
+    </data>
+
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +35,8 @@
                 android:background="@color/white"
                 android:padding="@dimen/dimen_10dp">
 
-                <include layout="@layout/include_login_details" />
+                <include android:id="@+id/include_basic_layout"
+                    layout="@layout/details_layout" />
             </LinearLayout>
 
             <ScrollView
