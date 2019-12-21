@@ -73,10 +73,10 @@
                 <com.example.twdinspection.custom.CustomFontEditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
-                    android:singleLine="true"
-                    android:imeOptions="actionNext"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_user_name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:text="@={viewModel.username}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -98,10 +98,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_pwd"
-                        android:singleLine="true"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
-                        android:text="@={viewModel.password}" />
+                        android:singleLine="true"
+                        android:text="@={viewModel.password}"
+                        tools:text="guest" />
 
                     <ImageView
                         android:id="@+id/pwdImage"

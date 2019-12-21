@@ -5,35 +5,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.application.TWDApplication;
-import com.example.twdinspection.databinding.ProfileLayoutBinding;
+import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.utils.AppConstants;
 import com.example.twdinspection.utils.Utils;
-import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
+import com.example.twdinspection.viewmodel.DMVDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicDetailsActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
-    BasicDetailsViewModel viewModel;
-    ProfileLayoutBinding profileLayoutBinding;
+public class DMVSelectionActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+    DMVDetailsViewModel viewModel;
+    DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
     int selectedDistId, selectedManId, selectedVilId;
-    String selectedInstId;
+    String selectedInstId, selectedManName, selInstName;
     ArrayList<String> villageNames;
     ArrayList<String> instNames;
     ArrayList<String> mandalNames;
@@ -44,23 +39,23 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = BasicDetailsActivity.this;
+        context = DMVSelectionActivity.this;
 
-        profileLayoutBinding = putContentView(R.layout.profile_layout, getResources().getString(R.string.general_info));
+        dmvSelectionActivityBinding = putContentView(R.layout.dmv_selection_activity, getResources().getString(R.string.general_info));
 
-        viewModel = new BasicDetailsViewModel(getApplication());
-        profileLayoutBinding.setViewModel(viewModel);
-        profileLayoutBinding.executePendingBindings();
+        viewModel = new DMVDetailsViewModel(getApplication());
+        dmvSelectionActivityBinding.setViewModel(viewModel);
+        dmvSelectionActivityBinding.executePendingBindings();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-            profileLayoutBinding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
-            profileLayoutBinding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+            dmvSelectionActivityBinding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
+            dmvSelectionActivityBinding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             String curTime = Utils.getCurrentDateTime();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
-            profileLayoutBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+            dmvSelectionActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,19 +74,28 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                         android.R.layout.simple_spinner_dropdown_item, distNames
                 );
-                profileLayoutBinding.spDist.setAdapter(adapter);
+                dmvSelectionActivityBinding.spDist.setAdapter(adapter);
             }
         });
 
-        profileLayoutBinding.spDist.setOnItemSelectedListener(this);
-        profileLayoutBinding.spMandal.setOnItemSelectedListener(this);
-        profileLayoutBinding.spVillage.setOnItemSelectedListener(this);
-        profileLayoutBinding.spInstitution.setOnItemSelectedListener(this);
-        profileLayoutBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
+        dmvSelectionActivityBinding.spDist.setOnItemSelectedListener(this);
+        dmvSelectionActivityBinding.spMandal.setOnItemSelectedListener(this);
+        dmvSelectionActivityBinding.spVillage.setOnItemSelectedListener(this);
+        dmvSelectionActivityBinding.spInstitution.setOnItemSelectedListener(this);
+        dmvSelectionActivityBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateFields())
-                    startActivity(new Intent(BasicDetailsActivity.this, InfoActivity.class));
+                if (validateFields()) {
+                    editor.putInt(AppConstants.DIST_ID, selectedDistId);
+                    editor.putInt(AppConstants.MAN_ID, selectedManId);
+                    editor.putInt(AppConstants.VILL_ID, selectedVilId);
+                    editor.putString(AppConstants.INST_ID, selectedInstId);
+                    editor.putString(AppConstants.INST_NAME, selInstName);
+                    editor.putString(AppConstants.MAN_NAME, selectedManName);
+                    editor.commit();
+                    startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                    finish();
+                }
             }
         });
     }
@@ -108,7 +112,7 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
         } else if (selectedVilId == 0) {
             showSnackBar("Please select village");
             return false;
-        }else if (TextUtils.isEmpty(selectedInstId)) {
+        } else if (TextUtils.isEmpty(selectedInstId)) {
             showSnackBar("Please select institute");
             return false;
         }
@@ -116,7 +120,7 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
     }
 
     private void showSnackBar(String str) {
-        Snackbar snackbar = Snackbar.make(profileLayoutBinding.cl, str, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(dmvSelectionActivityBinding.cl, str, Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 
@@ -126,12 +130,12 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
             mandalNames.clear();
             mandalNames.add("-Select-");
             if (i != 0) {
-                viewModel.getDistId(profileLayoutBinding.spDist.getSelectedItem().toString()).observe(BasicDetailsActivity.this, new Observer<Integer>() {
+                viewModel.getDistId(dmvSelectionActivityBinding.spDist.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
                         if (integer != null) {
                             selectedDistId = integer;
-                            viewModel.getAllMandals(integer).observe(BasicDetailsActivity.this, mandals -> {
+                            viewModel.getAllMandals(integer).observe(DMVSelectionActivity.this, mandals -> {
                                 if (mandals != null && mandals.size() > 0) {
                                     for (int i = 0; i < mandals.size(); i++) {
                                         mandalNames.add(mandals.get(i).getMandal_name());
@@ -144,24 +148,29 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                         android.R.layout.simple_spinner_dropdown_item, mandalNames
                 );
-                profileLayoutBinding.spMandal.setAdapter(adapter);
+                dmvSelectionActivityBinding.spMandal.setAdapter(adapter);
             } else {
-                selectedDistId =0; selectedManId=0; selectedVilId=0;
-                profileLayoutBinding.spMandal.setAdapter(null);
-                profileLayoutBinding.spVillage.setAdapter(null);
-                profileLayoutBinding.spInstitution.setAdapter(null);
+                selectedDistId = 0;
+                selectedManId = 0;
+                selectedVilId = 0;
+                selectedManName = "";
+                selInstName = "";
+                dmvSelectionActivityBinding.spMandal.setAdapter(null);
+                dmvSelectionActivityBinding.spVillage.setAdapter(null);
+                dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_Mandal) {
             villageNames.clear();
             villageNames.add("-Select-");
             if (i != 0) {
 
-                viewModel.getMandalId(profileLayoutBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(BasicDetailsActivity.this, new Observer<Integer>() {
+                viewModel.getMandalId(dmvSelectionActivityBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
                         if (integer != null) {
                             selectedManId = integer;
-                            viewModel.getAllVillages(integer, selectedDistId).observe(BasicDetailsActivity.this, villages -> {
+                            selectedManName = dmvSelectionActivityBinding.spMandal.getSelectedItem().toString();
+                            viewModel.getAllVillages(integer, selectedDistId).observe(DMVSelectionActivity.this, villages -> {
                                 if (villages != null && villages.size() > 0) {
 
                                     for (int i = 0; i < villages.size(); i++) {
@@ -175,18 +184,21 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
                 });
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                         android.R.layout.simple_spinner_dropdown_item, villageNames);
-                profileLayoutBinding.spVillage.setAdapter(adapter);
+                dmvSelectionActivityBinding.spVillage.setAdapter(adapter);
             } else {
-                selectedManId=0; selectedVilId=0;
-                profileLayoutBinding.spVillage.setAdapter(null);
-                profileLayoutBinding.spInstitution.setAdapter(null);
+                selectedManId = 0;
+                selectedVilId = 0;
+                selectedManName = "";
+                selInstName = "";
+                dmvSelectionActivityBinding.spVillage.setAdapter(null);
+                dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_village) {
             instNames.clear();
             instNames.add("-Select-");
             if (i != 0) {
 
-                viewModel.getVillageId(profileLayoutBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(BasicDetailsActivity.this, new Observer<Integer>() {
+                viewModel.getVillageId(dmvSelectionActivityBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
                         if (integer != null) {
@@ -194,7 +206,7 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
                         }
                     }
                 });
-                viewModel.getInstitutes().observe(BasicDetailsActivity.this, new Observer<List<InstitutesEntity>>() {
+                viewModel.getInstitutes().observe(DMVSelectionActivity.this, new Observer<List<InstitutesEntity>>() {
                     @Override
                     public void onChanged(List<InstitutesEntity> institutesEntities) {
                         institutesEntityList.addAll(institutesEntities);
@@ -204,20 +216,23 @@ public class BasicDetailsActivity extends BaseActivity implements AdapterView.On
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                     android.R.layout.simple_spinner_dropdown_item, instNames);
-                            profileLayoutBinding.spInstitution.setAdapter(adapter);
+                            dmvSelectionActivityBinding.spInstitution.setAdapter(adapter);
                         }
                     }
                 });
             } else {
-                selectedVilId=0; selectedInstId="";
-                profileLayoutBinding.spInstitution.setAdapter(null);
+                selectedVilId = 0;
+                selectedInstId = "";
+                selInstName = "";
+                dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
             if (i != 0) {
-                viewModel.getInstId(profileLayoutBinding.spInstitution.getSelectedItem().toString()).observe(BasicDetailsActivity.this, new Observer<String>() {
+                viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String inst_id) {
                         if (inst_id != null) {
+                            selInstName = dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString();
                             selectedInstId = inst_id;
                         }
                     }

@@ -35,6 +35,9 @@ public class LoginViewModel extends ViewModel {
     LoginViewModel(ActivityLoginCreBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
+
+        username.setValue("maadhavisriram");
+        password.setValue("guest");
     }
 
     public MutableLiveData<Integer> getBusy() {
@@ -51,6 +54,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void onBtnClick() {
+
         LoginUser loginUser = new LoginUser(username.getValue(), password.getValue());
        if (TextUtils.isEmpty(loginUser.getEmail())) {
             binding.tName.setError("Please enter username");

@@ -42,7 +42,7 @@ public class StaffAttendActivity extends AppCompatActivity {
             }
         });
 
-        staffViewModel.getStaffInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.InstId, "")).observe(this, new Observer<List<StaffAttendanceEntity>>() {
+        staffViewModel.getStaffInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, "")).observe(this, new Observer<List<StaffAttendanceEntity>>() {
             @Override
             public void onChanged(List<StaffAttendanceEntity> staffAttendanceEntities) {
                 StaffAdapter staffAdapter = new StaffAdapter(StaffAttendActivity.this, staffAttendanceEntities);

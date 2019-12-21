@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.viewmodel.BasicDetailsViewModel" />
+            type="com.example.twdinspection.viewmodel.DMVDetailsViewModel" />
     </data>
 
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"

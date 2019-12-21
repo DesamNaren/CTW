@@ -61,10 +61,11 @@
         <activity
             android:name=".ui.RegistersActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.MedicalActivity"
-            android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.BasicDetailsActivity"
+            android:name=".ui.MedicalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.DMVSelectionActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.UploadedPhotoActivity"
@@ -85,10 +86,12 @@
             android:name=".ui.StudentsAttendance_2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.InfoActivity"
+            android:name=".ui.GeneralInfoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.BaseActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.InstMenuMainActivity" />
     </application>
 
 </manifest>

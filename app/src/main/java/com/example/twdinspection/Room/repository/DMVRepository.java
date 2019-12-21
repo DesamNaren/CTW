@@ -17,7 +17,7 @@ import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 
 import java.util.List;
 
-public class DistrictRepository {
+public class DMVRepository {
 
     public DistrictDao districtDao;
     public LiveData<List<Districts>> districts = new MutableLiveData<>();
@@ -29,7 +29,7 @@ public class DistrictRepository {
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
-    public DistrictRepository(Application application) {
+    public DMVRepository(Application application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         districtDao = db.distDao();
 

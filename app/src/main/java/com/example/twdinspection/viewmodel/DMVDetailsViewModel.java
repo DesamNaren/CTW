@@ -1,14 +1,12 @@
 package com.example.twdinspection.viewmodel;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.Room.repository.DistrictRepository;
+import com.example.twdinspection.Room.repository.DMVRepository;
 import com.example.twdinspection.source.DistManVillage.Districts;
 import com.example.twdinspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.source.DistManVillage.Villages;
@@ -16,20 +14,20 @@ import com.example.twdinspection.source.GeneralInformation.InstitutesEntity;
 
 import java.util.List;
 
-public class BasicDetailsViewModel extends AndroidViewModel {
+public class DMVDetailsViewModel extends AndroidViewModel {
     private LiveData<List<Districts>> districts;
     private LiveData<List<Mandals>> mandals;
     private LiveData<List<Villages>> villages;
     private LiveData<List<InstitutesEntity>> inst_names;
-    private DistrictRepository mRepository;
+    private DMVRepository mRepository;
 
-    public BasicDetailsViewModel(Application application) {
+    public DMVDetailsViewModel(Application application) {
         super(application);
         districts = new MutableLiveData<>();
         mandals = new MutableLiveData<>();
         villages = new MutableLiveData<>();
         inst_names = new MutableLiveData<>();
-        mRepository = new DistrictRepository(application);
+        mRepository = new DMVRepository(application);
     }
 
     public LiveData<List<Districts>> getAllDistricts() {

@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import com.example.twdinspection.R;
 import com.example.twdinspection.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityDashboardBinding;
@@ -41,7 +38,7 @@ public class DashboardActivity extends BaseActivity {
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, BasicDetailsActivity.class));
+                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
             }
         });
     }

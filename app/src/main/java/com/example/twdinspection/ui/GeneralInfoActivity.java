@@ -1,37 +1,31 @@
 package com.example.twdinspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.application.TWDApplication;
-import com.example.twdinspection.databinding.ActivityInfoBinding;
+import com.example.twdinspection.databinding.ActivityGeneralInfoBinding;
 import com.example.twdinspection.utils.AppConstants;
-import com.example.twdinspection.utils.Utils;
-import com.example.twdinspection.viewmodel.BasicDetailsViewModel;
 import com.example.twdinspection.viewmodel.GeneralInfoViewModel;
 
-public class InfoActivity extends AppCompatActivity {
+public class GeneralInfoActivity extends BaseActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    ActivityGeneralInfoBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityInfoBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_info);
-
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("General Information");
+        binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
 
         GeneralInfoViewModel viewModel = new GeneralInfoViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
+
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -39,6 +33,8 @@ public class InfoActivity extends AppCompatActivity {
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+            binding.manNameTv.setText(sharedPreferences.getString(AppConstants.MAN_NAME, ""));
+            binding.instNameTv.setText(sharedPreferences.getString(AppConstants.INST_NAME, ""));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,8 +43,9 @@ public class InfoActivity extends AppCompatActivity {
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InfoActivity.this, StudentsAttendance_2.class));
+                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
             }
         });
     }
+
 }

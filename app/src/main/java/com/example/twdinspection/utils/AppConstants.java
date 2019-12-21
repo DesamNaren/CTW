@@ -13,7 +13,12 @@ public class AppConstants {
     public static final String OFFICER_NAME = "OFFICER_NAME";
     public static final String OFFICER_DES = "OFFICER_DES";
     public static final String INSP_TIME = "INSP_TIME";
-    public static String InstId="INSTITUTE_ID";
+    public static final String DIST_ID = "DIST_ID";
+    public static final String MAN_ID = "MAN_ID";
+    public static final String VILL_ID = "VILL_ID";
+    public static final String INST_ID = "INST_ID";
+    public static final String INST_NAME = "INST_NAME";
+    public static final String MAN_NAME = "MAN_NAME";
     public static String Yes="YES";
     public static String No="NO";
 

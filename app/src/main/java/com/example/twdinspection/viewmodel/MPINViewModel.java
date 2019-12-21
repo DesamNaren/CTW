@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityMpinBinding;
-import com.example.twdinspection.ui.BasicDetailsActivity;
+import com.example.twdinspection.ui.DMVSelectionActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MPINViewModel extends ViewModel {
@@ -32,7 +32,7 @@ public class MPINViewModel extends ViewModel {
             showError();
         }
 
-        context.startActivity(new Intent(context, BasicDetailsActivity.class));
+        context.startActivity(new Intent(context, DMVSelectionActivity.class));
     }
 
     private void showError() {

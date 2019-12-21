@@ -77,7 +77,7 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
         binding.setViewModel(studentsAttndViewModel);
 
 
-        studentsAttndViewModel.getClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.InstId, "")).observe(this, new Observer<List<StudAttendInfoEntity>>() {
+        studentsAttndViewModel.getClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, "")).observe(this, new Observer<List<StudAttendInfoEntity>>() {
 
             @Override
             public void onChanged(List<StudAttendInfoEntity> studentsAttendanceBeans) {
