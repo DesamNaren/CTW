@@ -9,28 +9,26 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.adapter.InstMenuAdapter;
 import com.example.twdinspection.adapter.StudentsAttAdapter;
-import com.example.twdinspection.application.TWDApplication;
 import com.example.twdinspection.databinding.InstMainActivityBinding;
-import com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-import com.example.twdinspection.utils.AppConstants;
 import com.example.twdinspection.viewmodel.InstMainViewModel;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class InstMenuMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     InstMainActivityBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
+        binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         InstMainViewModel instMainViewModel = new InstMainViewModel(getApplication());
         binding.setViewmodel(instMainViewModel);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -46,11 +44,12 @@ public class InstMenuMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        instMainViewModel.getAllSections();
-//        studAttendInfoEntities = studentsAttendanceBeans;
-//        adapter = new StudentsAttAdapter(InstMenuMainActivity.this, studAttendInfoEntities);
-//        binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendance_2.this));
-//        binding.recyclerView.setAdapter(adapter);
+        ArrayList<String> sections = instMainViewModel.getAllSections();
+        if (sections != null && sections.size() > 0) {
+            InstMenuAdapter adapter = new InstMenuAdapter(InstMenuMainActivity.this, sections);
+            binding.appbar.includeMenuLayout.rvMenu.setLayoutManager(new LinearLayoutManager(InstMenuMainActivity.this));
+            binding.appbar.includeMenuLayout.rvMenu.setAdapter(adapter);
+        }
     }
 
 
