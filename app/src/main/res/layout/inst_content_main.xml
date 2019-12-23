@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.InstMenuMainActivity"
+    tools:context=".inspection.ui.InstMenuMainActivity"
     tools:showIn="@layout/inst_app_bar_main">
 
     <androidx.recyclerview.widget.RecyclerView

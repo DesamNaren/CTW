@@ -21,7 +21,7 @@
                 android:padding="@dimen/dimen_4dp"
                 app:srcCompat="@mipmap/ic_launcher_round" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -29,7 +29,7 @@
                 android:padding="@dimen/dimen_4dp"
                 android:text="@string/permissionText" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -64,14 +64,14 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_4dp">
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/phone"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -112,7 +112,7 @@
                             android:textSize="@dimen/dimen_16sp"
                             android:textStyle="bold" />
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -146,14 +146,14 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_4dp">
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/camera"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -188,14 +188,14 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_4dp">
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/storage"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"

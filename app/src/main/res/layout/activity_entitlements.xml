@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MedicalActivity">
+        tools:context=".inspection.ui.MedicalActivity">
 
         <include
             android:id="@+id/header"
@@ -167,7 +167,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/entitlements_dress_distributed"
@@ -339,7 +339,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:focusableInTouchMode="false"

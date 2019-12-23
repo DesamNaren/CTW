@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/dimen_5dp"
@@ -26,7 +26,7 @@
                 android:padding="@dimen/dimen_5dp"
                 android:textColor="@color/black" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/dimen_5dp"
@@ -35,7 +35,7 @@
                 android:text="ATDO"
                 android:textColor="@color/black" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

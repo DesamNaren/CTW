@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".application.TWDApplication"
+        android:name=".common.application.TWDApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.MedicalDetailsActivity"
+            android:name=".inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 
@@ -32,10 +32,10 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".ui.DashboardActivity"
+            android:name=".inspection.ui.DashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".inspection.ui.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,54 +44,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.GeneralCommentsActivity"
+            android:name=".inspection.ui.GeneralCommentsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.EntitlementsActivity"
+            android:name=".inspection.ui.EntitlementsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.DietIssuesActivity"
+            android:name=".inspection.ui.DietIssuesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.InfraActivity"
+            android:name=".inspection.ui.InfraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.AcademicActivity"
+            android:name=".inspection.ui.AcademicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.RegistersActivity"
+            android:name=".inspection.ui.RegistersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MedicalActivity"
+            android:name=".inspection.ui.MedicalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.DMVSelectionActivity"
+            android:name=".inspection.ui.DMVSelectionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.UploadedPhotoActivity"
+            android:name=".inspection.ui.UploadedPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".inspection.ui.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MPINActivity"
+            android:name=".inspection.ui.MPINActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.GenerateMPINActivity"
+            android:name=".inspection.ui.GenerateMPINActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.StaffAttendActivity"
+            android:name=".inspection.ui.StaffAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.StudentsAttendance_2"
+            android:name=".inspection.ui.StudentsAttendance_2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.GeneralInfoActivity"
+            android:name=".inspection.ui.GeneralInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.BaseActivity"
+            android:name=".inspection.ui.BaseActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.InstMenuMainActivity" />
+        <activity android:name=".inspection.ui.InstMenuMainActivity" />
     </application>
 
 </manifest>

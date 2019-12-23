@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.GeneralInfoActivity">
+        tools:context=".inspection.ui.GeneralInfoActivity">
 
         <include
             android:id="@+id/header"
@@ -152,7 +152,7 @@
                         android:orientation="vertical"
                         android:visibility="visible">
 
-                        <com.example.twdinspection.custom.CustomFontTextView
+                        <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/capture_tds_meter_reading" />
@@ -175,7 +175,7 @@
                         android:visibility="gone"
                         app:errorEnabled="true">
 
-                        <com.example.twdinspection.custom.CustomFontEditText
+                        <com.example.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -412,7 +412,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/working"
@@ -431,7 +431,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/non_working"
@@ -490,7 +490,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/working"
@@ -509,7 +509,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/non_working"
@@ -642,7 +642,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.custom.CustomFontEditText
+                        <com.example.twdinspection.common.custom.CustomFontEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/how_many_buildings"
@@ -1574,7 +1574,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_to_toilets"
@@ -1620,7 +1620,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_to_door"

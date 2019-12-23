@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.GeneralCommentsActivity">
+        tools:context=".inspection.ui.GeneralCommentsActivity">
 
         <include
             android:id="@+id/header"
@@ -581,7 +581,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_general_comments_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

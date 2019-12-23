@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.LoginActivity">
+    tools:context=".inspection.ui.LoginActivity">
 
     <data>
         <variable
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.twdinspection.custom.CustomFontTextView
+        <com.example.twdinspection.common.custom.CustomFontTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp"
@@ -41,7 +41,7 @@
                 android:layout_height="3dp"
                 android:background="@color/list_blue" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
@@ -70,7 +70,7 @@
                 android:layout_marginRight="@dimen/dimen_20dp">
 
 
-                <com.example.twdinspection.custom.CustomFontEditText
+                <com.example.twdinspection.common.custom.CustomFontEditText
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.example.twdinspection.custom.CustomFontEditText
+                    <com.example.twdinspection.common.custom.CustomFontEditText
                         android:id="@+id/et_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:padding="@dimen/dimen_10dp">
 
-                <com.example.twdinspection.custom.CustomFontTextView
+                <com.example.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/btn_login"
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"

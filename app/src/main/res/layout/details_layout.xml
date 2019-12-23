@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:padding="@dimen/dimen_10dp">
 
-        <com.example.twdinspection.custom.CustomFontTextView
+        <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/offNme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
             android:drawableTint="@color/list_blue"
             android:drawablePadding="@dimen/dimen_10dp" />
 
-        <com.example.twdinspection.custom.CustomFontTextView
+        <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/offDes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:drawableLeft="@drawable/role_16"
             android:drawablePadding="@dimen/dimen_10dp" />
 
-        <com.example.twdinspection.custom.CustomFontTextView
+        <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/inspectionTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

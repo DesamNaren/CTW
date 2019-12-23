@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.MedicalActivity">
+        tools:context=".inspection.ui.MedicalActivity">
 
         <include
             android:id="@+id/header"
@@ -38,7 +38,7 @@
                         android:text="17."
                         android:textColor="@color/black" />
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_10dp"
@@ -81,7 +81,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_fever"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_cold"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_headache"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_diarrhea"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_malaria"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -278,7 +278,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.custom.CustomFontEditText
+                                <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_others"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.custom.CustomFontEditText
+                            <com.example.twdinspection.common.custom.CustomFontEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/medical_checkup"

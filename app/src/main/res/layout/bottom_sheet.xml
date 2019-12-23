@@ -29,7 +29,7 @@
                         android:src="@drawable/ic_cancel"
                         android:tint="@color/white" />
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_classType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                             android:textSize="@dimen/dimen_15dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_classCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_8dp"
@@ -147,7 +147,7 @@
                         android:layout_marginLeft="@dimen/dimen_8dp">
 
 
-                        <com.example.twdinspection.custom.CustomFontEditText
+                        <com.example.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_studMarkedPres"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     android:layout_margin="5dp"
                     android:orientation="horizontal">
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -182,7 +182,7 @@
                         android:layout_marginLeft="@dimen/dimen_8dp">
 
 
-                        <com.example.twdinspection.custom.CustomFontEditText
+                        <com.example.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_studPresInsp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
                     android:layout_margin="5dp"
                     android:orientation="horizontal">
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_8dp"
@@ -213,7 +213,7 @@
                         android:text="@string/variance"
                         android:textColor="@color/black" />
 
-                    <com.example.twdinspection.custom.CustomFontTextView
+                    <com.example.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_variance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

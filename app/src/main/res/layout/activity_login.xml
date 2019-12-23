@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.LoginActivity">
+    tools:context=".inspection.ui.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                 android:layout_height="@dimen/_100dp"
                 android:layout_gravity="center" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                 android:text="@string/verify_your_number"
                 android:textStyle="bold" />
 
-            <com.example.twdinspection.custom.CustomFontTextView
+            <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <com.example.twdinspection.custom.CustomFontEditText
+                    <com.example.twdinspection.common.custom.CustomFontEditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+91" />
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <com.example.twdinspection.custom.CustomFontEditText
+                    <com.example.twdinspection.common.custom.CustomFontEditText
                         android:ellipsize="end"
                         android:inputType="number"
                         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <com.example.twdinspection.custom.CustomFontButtonView
+            <com.example.twdinspection.common.custom.CustomFontButtonView
                 android:textColor="@color/white"
                 android:text="@string/con"
                 android:layout_marginLeft="@dimen/dimen_20dp"
