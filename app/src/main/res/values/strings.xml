@@ -226,7 +226,33 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-
+    <string name="whether_sports_material_received_during_the_year_2019_2020">Whether sports material received during the year 2019- 2020</string>
+    <string name="entered_in_stock_entry_register">Entered in stock entry register</string>
+    <string name="separate_games_sports_room_available">Separate games &amp; sports room available</string>
+    <string name="name_of_the_pd_pft">Name of the PD/ PFT</string>
+    <string name="play_ground_available">Playground available</string>
+    <string name="plan_to_procure_playground">Plan to procure playground</string>
+    <string name="measurement_of_land_available_for_games">Measurement of land available for games</string>
+    <string name="ground_leveling_completed">Ground leveling completed</string>
+    <string name="whether_scouts_guides_implemented_in_school">Whether scouts / guides implemented in school</string>
+    <string name="scout_master_guide_captain_name">Scout Master/ Guide captain name</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="whether_ncc_student_implemented_in_school">Whether NCC student implemented in school</string>
+    <string name="name_of_the_ncc_teacher">Name of the NCC teacher</string>
+    <string name="battalion_number">Battalion number</string>
+    <string name="whether_smc_elections_conducted">Whether SMC elections conducted.</string>
+    <string name="name_of_the_smc_chairman">Name of the SMC chairman</string>
+    <string name="conducting_of_parents_meeting_resolution_noted">Conducting of parents meeting resolution noted</string>
+    <string name="whether_kitchen_garden_available">Whether kitchen garden available</string>
+    <string name="event_of_kitchen_in_charge">Event of kitchen in charge</string>
+    <string name="types_of_kitchen_garden">Types of kitchen garden</string>
+    <string name="name_of_the_kitchen_garden_in_charge_teacher">Name of the kitchen garden in charge/ teacher</string>
+    <string name="whether_haritha_haram_conducted_2019_2020">Whether Haritha Haram conducted 2019-2020</string>
+    <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019- 2020</string>
+    <string name="reason">Reason</string>
+    <string name="name_of_the_student_s_council_captain">Name of the student’s council captain</string>
+    <string name="last_meeting_conducted_with_students_council_date">Last meeting conducted with students council date</string>
+    <string name="select_financial_year">Select Financial Year</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>
@@ -241,6 +267,6 @@
         <item>General Comments</item>
         <item>General Comments</item>
         <item>Uploaded Photographs</item>
-<!--        <item>Following escalation matrix was defined </item>-->
+        <!--        <item>Following escalation matrix was defined </item>-->
     </string-array>
 </resources>

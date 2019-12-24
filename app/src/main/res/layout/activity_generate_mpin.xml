@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.twdinspection.viewmodel.GenerateMPINViewModel" />
+            type="com.example.twdinspection.inspection.viewmodel.GenerateMPINViewModel" />
     </data>
 
     <RelativeLayout

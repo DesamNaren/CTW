@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".schemes.ui.SchemesDMVActivity"></activity>
         <activity
             android:name=".inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait"

@@ -6,7 +6,7 @@
 
         <variable
             name="medicalDetails"
-            type="com.example.twdinspection.source.MedicalDetailsBean" />
+            type="com.example.twdinspection.inspection.source.MedicalDetailsBean" />
 
     </data>
 

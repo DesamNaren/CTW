@@ -10,6 +10,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityDashboardBinding;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
 public class DashboardActivity extends BaseActivity {
     private SharedPreferences sharedPreferences;
@@ -35,10 +36,17 @@ public class DashboardActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        binding.btnNext.setOnClickListener(new View.OnClickListener() {
+        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+            }
+        });
+
+        binding.btnSchemes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, SchemesDMVActivity.class));
             }
         });
     }

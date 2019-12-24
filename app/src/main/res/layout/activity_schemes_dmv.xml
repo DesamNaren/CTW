@@ -115,6 +115,7 @@
                             android:id="@+id/sp_dist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:entries="@array/inst_sections"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
 
@@ -141,6 +142,7 @@
                         <Spinner
                             android:id="@+id/sp_Mandal"
                             android:layout_width="match_parent"
+                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
@@ -167,6 +169,7 @@
                         <Spinner
                             android:id="@+id/sp_village"
                             android:layout_width="match_parent"
+                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
@@ -188,12 +191,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@string/select_institution"
+                            android:text="@string/select_financial_year"
                             android:textColor="@color/black" />
 
                         <Spinner
-                            android:id="@+id/sp_institution"
+                            android:id="@+id/sp_fin_yr"
                             android:layout_width="match_parent"
+                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>

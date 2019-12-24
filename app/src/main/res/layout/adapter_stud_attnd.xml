@@ -6,7 +6,7 @@
 
         <variable
             name="studentAttend"
-            type="com.example.twdinspection.source.studentAttendenceInfo.StudAttendInfoEntity" />
+            type="com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity" />
 
     </data>
 

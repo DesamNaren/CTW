@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.twdinspection.viewmodel.InstMainViewModel" />
+            type="com.example.twdinspection.inspection.viewmodel.InstMainViewModel" />
 
         <import type="android.view.View" />
     </data>

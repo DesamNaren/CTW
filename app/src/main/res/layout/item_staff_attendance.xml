@@ -6,7 +6,7 @@
 
         <variable
             name="staff"
-            type="com.example.twdinspection.source.staffAttendance.StaffAttendanceEntity" />
+            type="com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity" />
     </data>
 
     <LinearLayout

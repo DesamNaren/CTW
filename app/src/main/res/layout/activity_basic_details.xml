@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.viewmodel.DMVDetailsViewModel" />
+            type="com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel" />
     </data>
 
     <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,7 +115,6 @@
                             android:id="@+id/sp_dist"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dialog" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -152,7 +151,6 @@
                             android:id="@+id/sp_jurisdiction"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -189,7 +187,6 @@
                             android:id="@+id/sp_institution"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:entries="@array/districts"
                             android:spinnerMode="dialog" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

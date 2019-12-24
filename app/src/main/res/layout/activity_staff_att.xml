@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.twdinspection.viewmodel.StaffViewModel" />
+            type="com.example.twdinspection.inspection.viewmodel.StaffViewModel" />
     </data>
 
     <RelativeLayout
