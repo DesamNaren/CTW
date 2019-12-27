@@ -253,6 +253,24 @@
     <string name="name_of_the_student_s_council_captain">Name of the student’s council captain</string>
     <string name="last_meeting_conducted_with_students_council_date">Last meeting conducted with students council date</string>
     <string name="select_financial_year">Select Financial Year</string>
+    <string name="leave_reason_type">Leave reason type</string>
+    <string name="od_capture_type">OD capture type</string>
+    <string name="out_of_station">out of station</string>
+    <string name="within_campus">within campus</string>
+    <string name="within_mandal">Within Mandal</string>
+    <string name="within_district">Within District</string>
+    <string name="itda_level">ITDA level</string>
+    <string name="state_level">State Level</string>
+    <string name="movement_register_entry">movement register entry</string>
+    <string name="whether_staff_quarters_available">Whether Staff quarters Available</string>
+    <string name="capture_operating_from_distance">Capture operating from distance (in KMS)</string>
+    <string name="below_30">below 30</string>
+    <string name="_31_50">31-50</string>
+    <string name="above_50">above 50</string>
+    <string name="capture_staying_facilities_type">Capture staying facilities type</string>
+    <string name="pvt_building">Pvt. Building</string>
+    <string name="in_school_building">in School Building</string>
+    <string name="in_staff_quarters">in Staff Quarters</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>

@@ -33,14 +33,28 @@
         <include android:id="@+id/include_menu_layout"
             layout="@layout/inst_content_main" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+        <Button
+            android:id="@+id/btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:visibility="gone"
             app:srcCompat="@android:drawable/ic_dialog_email" />
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|end"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_bg"
+            android:drawableRight="@drawable/right_arrow_16"
+            android:padding="@dimen/dimen_5dp"
+            android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

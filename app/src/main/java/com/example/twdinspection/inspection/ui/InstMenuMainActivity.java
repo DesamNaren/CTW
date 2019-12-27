@@ -1,7 +1,9 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +51,12 @@ public class InstMenuMainActivity extends AppCompatActivity
             binding.appbar.includeMenuLayout.rvMenu.setLayoutManager(new LinearLayoutManager(InstMenuMainActivity.this));
             binding.appbar.includeMenuLayout.rvMenu.setAdapter(adapter);
         }
+        binding.appbar.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(InstMenuMainActivity.this, GeneralInfoActivity.class));
+            }
+        });
     }
 
 
