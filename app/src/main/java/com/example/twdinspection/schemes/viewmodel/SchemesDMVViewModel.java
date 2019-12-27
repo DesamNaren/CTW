@@ -11,6 +11,7 @@ import com.example.twdinspection.inspection.source.DistManVillage.Districts;
 import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.schemes.room.repository.SchemesDMVRepository;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class SchemesDMVViewModel extends AndroidViewModel {
     private LiveData<List<Mandals>> mandals;
     private LiveData<List<Villages>> villages;
     private LiveData<List<InstitutesEntity>> inst_names;
-    private DMVRepository mRepository;
+    private SchemesDMVRepository mRepository;
 
     public SchemesDMVViewModel(Application application) {
         super(application);
@@ -27,7 +28,7 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         mandals = new MutableLiveData<>();
         villages = new MutableLiveData<>();
         inst_names = new MutableLiveData<>();
-        mRepository = new DMVRepository(application);
+        mRepository = new SchemesDMVRepository(application);
     }
 
     public LiveData<List<Districts>> getAllDistricts() {

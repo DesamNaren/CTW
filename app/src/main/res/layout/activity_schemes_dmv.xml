@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel" />
+            type="com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel" />
     </data>
 
 
