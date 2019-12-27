@@ -172,14 +172,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="yes" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/rb_no_present_time"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="No" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
                         </LinearLayout>
@@ -212,42 +212,49 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/leave_reason_type"
-                                android:textColor="@color/black" />
+                                android:orientation="vertical">
 
-                            <RadioGroup
-                                android:id="@+id/rg_leavetype"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_leaves"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="Leaves " />
+                                    android:text="@string/leave_reason_type"
+                                    android:textColor="@color/black" />
 
-                                <RadioButton
-                                    android:id="@+id/rb_absent"
+                                <RadioGroup
+                                    android:id="@+id/rg_leavetype"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Unauthorized Absent " />
+                                    android:orientation="horizontal">
 
-                                <RadioButton
-                                    android:id="@+id/rb_od"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="OD " />
 
-                            </RadioGroup>
+                                    <RadioButton
+                                        android:id="@+id/rb_leaves"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Leaves " />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_absent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Unauthorized Absent " />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_od"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="OD " />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/ll_od_capture_type"
@@ -403,14 +410,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="yes" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/rb_no_head_quarters"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="No" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
                         </LinearLayout>
@@ -459,14 +466,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="yes" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/rb_no_staff_quarters"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="No" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
                         </LinearLayout>
@@ -478,12 +485,12 @@
                         android:background="@color/black" />
 
                     <LinearLayout
+                        android:id="@+id/ll_capture"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:visibility="gone"
-                        android:id="@+id/ll_capture"
-                        android:padding="@dimen/dimen_5dp">
+                        android:padding="@dimen/dimen_5dp"
+                        android:visibility="gone">
 
 
                         <TextView
@@ -499,9 +506,9 @@
                             android:orientation="vertical">
 
                             <LinearLayout
+                                android:id="@+id/ll_capture_distance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/ll_capture_distance"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -544,9 +551,9 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_capture_staying_facilities_type"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/ll_capture_staying_facilities_type"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -588,7 +595,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 

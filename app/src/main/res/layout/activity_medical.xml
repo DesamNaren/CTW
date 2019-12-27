@@ -86,8 +86,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/fever"
-                                    android:inputType="number"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -123,9 +123,9 @@
                                     android:id="@+id/et_cold"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
                                     android:hint="@string/cold_amp_cough"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -161,9 +161,9 @@
                                     android:id="@+id/et_headache"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
                                     android:hint="@string/headache"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -206,9 +206,9 @@
                                     android:id="@+id/et_diarrhea"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
                                     android:hint="@string/diarrhea"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -244,9 +244,9 @@
                                     android:id="@+id/et_malaria"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
                                     android:hint="@string/malaria"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -282,9 +282,9 @@
                                     android:id="@+id/et_others"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:inputType="number"
                                     android:hint="@string/others"
                                     android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -328,24 +328,24 @@
                             android:backgroundTint="@color/list_blue" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_medical_checkup_date"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_5dp"
                             android:layout_marginTop="@dimen/dimen_10dp"
-                            android:id="@+id/t_medical_checkup_date"
                             android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_medical_checkup_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/medical_checkup"
                                 android:imeOptions="actionNext"
-                                android:focusableInTouchMode="false"
                                 android:paddingLeft="@dimen/dimen_30dp"
-                                android:id="@+id/et_medical_checkup_date"
                                 android:singleLine="true"
                                 android:text="@string/select_date" />
 
@@ -354,6 +354,164 @@
 
                     </RelativeLayout>
 
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="18.1."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_check_up_done_by_whom"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_medical_check_up_done_by_whom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_medical_officer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/medical_officer" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_anm"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/anm" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/tabs_of_anm_weekly_updated"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_anm_weekly_updated"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_yes_anm_weekly_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_no_anm_weekly_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="18.2."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_health_100"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_call_health_100"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/yes_call_health_100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:id="@+id/no_call_health_100"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <View
@@ -388,39 +546,38 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/medicalCheckup_rg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/medicalCheckup_rg"
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/medical_checkup_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/medical_checkup_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/medical_checkup_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/medical_checkup_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
                 </LinearLayout>
 
-
-
             </LinearLayout>
 
         </ScrollView>
 
-        <include layout="@layout/buttons_layout"
-            android:id="@+id/btn_layout"/>
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>
