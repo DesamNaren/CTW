@@ -4,12 +4,13 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.DistManVillage.Districts;
 import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
-import com.example.twdinspection.schemes.room.database.SchemesDatabase;
 
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class SchemesDMVRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public SchemesDMVRepository(Application application) {
-        SchemesDatabase db = SchemesDatabase.getDatabase(application);
+        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+//        DistrictDatabase db = DistrictDatabase.getSchemeDatabase(application);
         dmvDao = db.dmvDao();
-
     }
 
     // Room executes all queries on a separate thread.

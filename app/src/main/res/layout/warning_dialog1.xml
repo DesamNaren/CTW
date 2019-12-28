@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dimen_10dp"
+            android:paddingBottom="@dimen/dimen_10dp">
+
+            <TextView
+                android:id="@+id/tv_errorHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/warning_64"
+                android:drawableTint="@color/materialAccentAmber"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10dp"
+                app:textStyle="@integer/bold"
+                android:text="Warning"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/tv_Msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingTop="@dimen/dimen_10dp"
+            android:paddingBottom="@dimen/dimen_30dp"
+            android:text="data added successfully"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dimen_20dp"
+        android:orientation="horizontal">
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/BtnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/close_dialog"
+            android:backgroundTint="@color/white"
+            android:gravity="center" />
+    </LinearLayout>
+
+
+</LinearLayout>

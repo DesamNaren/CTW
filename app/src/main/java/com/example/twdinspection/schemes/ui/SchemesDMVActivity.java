@@ -19,8 +19,6 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBindingImpl;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
-import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
 

@@ -24,6 +24,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.custom.CustomFontTextView;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
@@ -226,8 +227,9 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
 //                            ,studAttendInfoEntity.getClass_id());
 //
                         long x = studentsAttndViewModel.updateClassInfo(studAttendInfoEntity);
-                        Toast.makeText(StudentsAttendance_2.this, "Updated " + x, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(StudentsAttendance_2.this, "Updated " + x, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        Utils.customAlert(StudentsAttendance_2.this,"Data submitted successfully",AppConstants.SUCCESS,false);
                     }
 
 

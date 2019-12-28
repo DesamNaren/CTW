@@ -20,7 +20,7 @@ import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInf
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-
+import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
@@ -38,14 +38,16 @@ public abstract class DistrictDatabase extends RoomDatabase {
     public abstract StaffInfoDao staffInfoDao();
 
     public abstract GeneralInfoDao generalInfoDao();
+    
+    public abstract SchemeDmvDao dmvDao();
 
-    private static DistrictDatabase INSTANCE;
+    private static DistrictDatabase INSTANCE1,INSTANCE2;
 
     public static DistrictDatabase getDatabase(final Context context) {
-        if (INSTANCE == null) {
+        if (INSTANCE1 == null) {
             synchronized (DistrictDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                if (INSTANCE1 == null) {
+                    INSTANCE1 = Room.databaseBuilder(context.getApplicationContext(),
                             DistrictDatabase.class, "TWD_NEW.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
@@ -55,7 +57,24 @@ public abstract class DistrictDatabase extends RoomDatabase {
                 }
             }
         }
-        return INSTANCE;
+        return INSTANCE1;
+    }
+
+    public static DistrictDatabase getSchemeDatabase(final Context context) {
+        if (INSTANCE2 == null) {
+            synchronized (DistrictDatabase.class) {
+                if (INSTANCE2 == null) {
+                    INSTANCE2 = Room.databaseBuilder(context.getApplicationContext(),
+                            DistrictDatabase.class, "TWD_NEW.db")
+                            // Wipes and rebuilds instead of migrating if no Migration object.
+                            // Migration is not part of this codelab.
+//                            .createFromFile(new File("database/districts.json"))
+                            .createFromAsset("database/TWD_NEW.db")
+                            .build();
+                }
+            }
+        }
+        return INSTANCE2;
     }
 
     /**

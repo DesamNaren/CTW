@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.custom.CustomFontTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +49,7 @@ public class Utils {
         }
     }
 
-    public static void customAlert(final Activity activity, String title, String msg, String type, final boolean flag) {
+    public static void customAlert(final Activity activity, String msg, String type, final boolean flag) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -56,18 +57,18 @@ public class Utils {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 if (type.equalsIgnoreCase(AppConstants.SUCCESS)) {
-                    dialog.setContentView(R.layout.success_dialog);
+                    dialog.setContentView(R.layout.success_dialog1);
                 } else if (type.equalsIgnoreCase(AppConstants.FAILURE)) {
-                    dialog.setContentView(R.layout.error_dialog);
+                    dialog.setContentView(R.layout.error_dialog1);
                 } else if (type.equalsIgnoreCase(AppConstants.WARNING)) {
-                    dialog.setContentView(R.layout.warning_dialog);
+                    dialog.setContentView(R.layout.warning_dialog1);
                 } else {
                     dialog.setContentView(R.layout.info_dialog);
                 }
                 dialog.setCancelable(false);
                 TextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
                 dialogMessage.setText(msg);
-                Button yes = dialog.findViewById(R.id.BtnOk);
+                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

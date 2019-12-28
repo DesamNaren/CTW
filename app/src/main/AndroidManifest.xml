@@ -19,9 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".schemes.ui.BenDetailsActivty"></activity>
-        <activity android:name=".schemes.ui.BeneficiaryReportActivity" />
-        <activity android:name=".schemes.ui.SchemesDMVActivity" />
+        <activity android:name=".schemes.ui.BenDetailsActivty"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".inspection.ui.CoCurricularActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".schemes.ui.BeneficiaryReportActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".schemes.ui.SchemesDMVActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait"

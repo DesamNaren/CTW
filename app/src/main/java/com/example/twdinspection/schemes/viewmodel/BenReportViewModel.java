@@ -14,6 +14,5 @@ public class BenReportViewModel extends AndroidViewModel {
     public BenReportViewModel(Application application) {
         super(application);
 
-
     }
 }

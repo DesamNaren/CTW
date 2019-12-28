@@ -23,7 +23,7 @@ public class AcademicActivity extends AppCompatActivity {
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AcademicActivity.this, EntitlementsActivity.class));
+                startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
             }
         });
     }
