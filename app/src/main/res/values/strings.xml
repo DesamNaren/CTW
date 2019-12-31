@@ -105,7 +105,7 @@
     <string name="b">B</string>
     <string name="c">C</string>
     <string name="total">Total</string>
-    <string name="are_the">71. Are the following registers update?</string>
+    <string name="are_the">90. Are the following registers update?</string>
     <string name="adm_reg">Admission Register</string>
     <string name="att_boa_reg">Attendance Boarders Register</string>
     <string name="boa_sign_reg">Boarders Signature Register</string>
@@ -158,15 +158,15 @@
     <string name="are_you_maintaining_mess_register">B.Are you maintaining mess register?</string>
     <string name="_30_weather_prescribed_menu_served">Weather Prescribed menu Served?</string>
     <string name="_31_picture_of_the_inspecting_officer">Picture of the Inspecting officer</string>
-    <string name="_79_store_room">79.Store Room</string>
-    <string name="_80_varandah">80.Varandah</string>
-    <string name="_81_playground">81.Playground</string>
-    <string name="_82_dining_hall">82.Dining Hall</string>
-    <string name="_83_dormitory">83.Dormitory</string>
-    <string name="_84_main_building">84.Main Building</string>
-    <string name="_85_toilet">85.Toilet</string>
-    <string name="_86_kitchen">86.Kitchen</string>
-    <string name="_87_classroom">87.ClassRoom</string>
+    <string name="_79_store_room">98.Store Room</string>
+    <string name="_80_varandah">99.Varandah</string>
+    <string name="_81_playground">100.Playground</string>
+    <string name="_82_dining_hall">101.Dining Hall</string>
+    <string name="_83_dormitory">102.Dormitory</string>
+    <string name="_84_main_building">103.Main Building</string>
+    <string name="_85_toilet">104.Toilet</string>
+    <string name="_86_kitchen">105.Kitchen</string>
+    <string name="_87_classroom">106.ClassRoom</string>
     <string name="Fruits">Fruits</string>
     <string name="food_provisions">Whether Food provisions supplied on Time?</string>
     <string name="eggs">Eggs</string>
@@ -292,6 +292,15 @@
     <string name="repairs_required_to_bathrooms">Repairs required to Bathrooms</string>
     <string name="painting_coloring_of_the_building">Painting, coloring of the building</string>
     <string name="suggest_for_coloring">suggest for coloring</string>
+    <string name="bedsheets">Bedsheets</string>
+    <string name="carpets">Carpets</string>
+    <string name="uniforms">Uniforms</string>
+    <string name="sports_dress">Sports Dress</string>
+    <string name="slippers">Slippers</string>
+    <string name="night_dress">Night Dress</string>
+    <string name="school_bags">School Bags</string>
+    <string name="sanitary_napkins_supplied">Sanitary Napkins supplied</string>
+    <string name="notes_supplied">Notes supplied</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>

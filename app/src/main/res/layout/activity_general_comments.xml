@@ -13,7 +13,6 @@
             android:id="@+id/header"
             layout="@layout/header_layout" />
 
-
         <ScrollView
             android:id="@+id/scrl"
             android:layout_width="match_parent"
@@ -46,7 +45,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="72."
+                            android:text="91."
                             android:textColor="@color/black" />
 
                         <TextView
@@ -73,7 +72,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/fruits" />
 
                         <LinearLayout
@@ -128,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/egg" />
 
                         <LinearLayout
@@ -185,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/vegetables" />
 
                         <LinearLayout
@@ -242,7 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/food" />
 
                         <LinearLayout
@@ -303,7 +302,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="73."
+                            android:text="92."
                             android:textColor="@color/black" />
 
                         <TextView
@@ -330,7 +329,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/fruits" />
 
                         <LinearLayout
@@ -385,7 +384,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/egg" />
 
                         <LinearLayout
@@ -442,7 +441,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/vegetables" />
 
                         <LinearLayout
@@ -499,7 +498,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/food" />
 
                         <LinearLayout
@@ -554,7 +553,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="74."
+                        android:text="93."
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -618,7 +617,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="75."
+                            android:text="94."
                             android:textColor="@color/black" />
 
                         <TextView
@@ -700,7 +699,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/blood" />
 
                         <LinearLayout
@@ -757,7 +756,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/student_attire" />
 
                         <LinearLayout
@@ -818,7 +817,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="76."
+                            android:text="95."
                             android:textColor="@color/black" />
 
                         <TextView
@@ -845,7 +844,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/chef" />
 
                         <LinearLayout
@@ -900,7 +899,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/washing_hand" />
 
                         <LinearLayout
@@ -957,7 +956,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/staff_attire" />
 
                         <LinearLayout
@@ -1018,7 +1017,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="77."
+                            android:text="96."
                             android:textColor="@color/black" />
 
                         <TextView
@@ -1045,7 +1044,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/toilet_32" />
 
                         <LinearLayout
@@ -1100,7 +1099,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/kitchen_32" />
 
                         <LinearLayout
@@ -1157,7 +1156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/dorm_32" />
 
                         <LinearLayout
@@ -1213,7 +1212,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/classroom_32" />
 
                         <LinearLayout
@@ -1268,7 +1267,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/water_leak" />
 
                         <LinearLayout
@@ -1324,7 +1323,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@drawable/medical"
-                            android:padding="@dimen/dimen_2dp"
+                            android:padding="@dimen/dimen_5dp"
                             android:src="@drawable/storeroom_32" />
 
                         <LinearLayout
