@@ -14,45 +14,50 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterBenReportBinding;
+import com.example.twdinspection.databinding.SchemeInfoNamesBinding;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
+import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.ui.BenDetailsActivity;
 
 import java.util.List;
 import java.util.Random;
 
-public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.ItemHolder> {
+public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.ItemHolder> {
 
     private Context context;
-    private List<BeneficiaryDetail> list;
+    private List<SchemesInfoEntity> list;
+    private SchemeClickCallback schemeClickCallback;
 
-
-    public BenReportAdapter(Context context, List<BeneficiaryDetail> list) {
+    public SchemeInfoAdapter(Context context, List<SchemesInfoEntity> list) {
         this.context = context;
         this.list = list;
+        try {
+            schemeClickCallback = (SchemeClickCallback)context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    private int lastPosition = -1;
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AdapterBenReportBinding listItemBinding = DataBindingUtil.inflate(
+        SchemeInfoNamesBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.adapter_ben_report, parent, false);
+                R.layout.scheme_info_names, parent, false);
 
         return new ItemHolder(listItemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
-        final BeneficiaryDetail dataModel = list.get(i);
-        holder.listItemBinding.setBenReport(dataModel);
-        setAnimation(holder.itemView, i);
+        final SchemesInfoEntity dataModel = list.get(i);
+        holder.listItemBinding.setSchemeInfo(dataModel);
 
         holder.listItemBinding.cvBenReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, BenDetailsActivity.class));
+                schemeClickCallback.onItemClick(String.valueOf(dataModel.getScheme_id()));
             }
         });
 
@@ -60,14 +65,6 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
     }
 
 
-    private void setAnimation(View viewToAnimate, int position) {
-        if (position > lastPosition) {
-            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(new Random().nextInt(501));//to make duration random number between [0,501)
-            viewToAnimate.startAnimation(anim);
-            lastPosition = position;
-        }
-    }
     @Override
     public int getItemCount() {
         return list != null && list.size() > 0 ? list.size() : 0;
@@ -76,9 +73,9 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
     class ItemHolder extends RecyclerView.ViewHolder {
 
 
-        AdapterBenReportBinding listItemBinding;
+        SchemeInfoNamesBinding listItemBinding;
 
-        ItemHolder(AdapterBenReportBinding listItemBinding) {
+        ItemHolder(SchemeInfoNamesBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }

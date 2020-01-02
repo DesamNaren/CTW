@@ -2,6 +2,7 @@ package com.example.twdinspection.schemes.source;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "schemesInfo")
@@ -15,6 +16,23 @@ public class SchemesInfoEntity {
 
     @ColumnInfo()
     private String scheme_type;
+
+    @Ignore
+    private int selection;
+
+    public int getSelection() {
+        return selection;
+    }
+
+
+    public void setSelection(int selection) {
+        this.selection = selection;
+    }
+
+    public SchemesInfoEntity(int scheme_id, String scheme_type) {
+        this.scheme_id = scheme_id;
+        this.scheme_type = scheme_type;
+    }
 
     public int getId() {
         return id;
