@@ -1,6 +1,5 @@
 package com.example.twdinspection.schemes.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.content.Context;
@@ -9,35 +8,34 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivitySchemesDmvBindingImpl;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
 import com.example.twdinspection.inspection.ui.BaseActivity;
+import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class SchemesDMVActivity extends BaseActivity {
 
     SchemesDMVViewModel viewModel;
-    ActivitySchemesDmvBindingImpl schemesDMVActivityBinding;
+    ActivitySchemesDmvBinding schemesDMVActivityBinding;
     private Context context;
     int selectedDistId, selectedManId, selectedVilId;
     String selectedInstId, selectedManName, selInstName;
     ArrayList<String> villageNames;
-    ArrayList<String> instNames;
+    ArrayList<String> finYearvalues;
     ArrayList<String> mandalNames;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    List<InstitutesEntity> institutesEntityList;
+    List<FinancialYrsEntity> institutesEntityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,26 +63,42 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
 
         mandalNames = new ArrayList<>();
         villageNames = new ArrayList<>();
-        instNames = new ArrayList<>();
+        finYearvalues = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
-        viewModel.getAllDistricts().observe(this, districts -> {
-            if (districts != null && districts.size() > 0) {
-                ArrayList<String> distNames = new ArrayList<>();
-                distNames.add("-Select-");
-                for (int i = 0; i < districts.size(); i++) {
-                    distNames.add(districts.get(i).getDist_name());
+
+        viewModel.getFinancialYrs().observe(SchemesDMVActivity.this, new Observer<List<FinancialYrsEntity>>() {
+            @Override
+            public void onChanged(List<FinancialYrsEntity> institutesEntities) {
+                institutesEntityList.addAll(institutesEntities);
+                if (institutesEntityList != null && institutesEntityList.size() > 0) {
+                    for (int i = 0; i < institutesEntityList.size(); i++) {
+                        finYearvalues.add(institutesEntityList.get(i).getFin_year());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, finYearvalues);
+                    schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item, distNames
-                );
-                schemesDMVActivityBinding.spDist.setAdapter(adapter);
             }
         });
 
-        schemesDMVActivityBinding.spDist.setOnItemSelectedListener(this);
-        schemesDMVActivityBinding.spMandal.setOnItemSelectedListener(this);
-        schemesDMVActivityBinding.spVillage.setOnItemSelectedListener(this);
-        schemesDMVActivityBinding.spFinYr.setOnItemSelectedListener(this);
+//        viewModel.getAllDistricts().observe(this, districts -> {
+//            if (districts != null && districts.size() > 0) {
+//                ArrayList<String> distNames = new ArrayList<>();
+//                distNames.add("-Select-");
+//                for (int i = 0; i < districts.size(); i++) {
+//                    distNames.add(districts.get(i).getDist_name());
+//                }
+//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+//                        android.R.layout.simple_spinner_dropdown_item, distNames
+//                );
+//                schemesDMVActivityBinding.spDist.setAdapter(adapter);
+//            }
+//        });
+//
+//        schemesDMVActivityBinding.spDist.setOnItemSelectedListener(this);
+//        schemesDMVActivityBinding.spMandal.setOnItemSelectedListener(this);
+//        schemesDMVActivityBinding.spVillage.setOnItemSelectedListener(this);
+//        schemesDMVActivityBinding.spFinYr.setOnItemSelectedListener(this);
         schemesDMVActivityBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,125 +140,112 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         snackbar.show();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (adapterView.getId() == R.id.sp_dist) {
-            mandalNames.clear();
-            mandalNames.add("-Select-");
-            if (i != 0) {
-                viewModel.getDistId(schemesDMVActivityBinding.spDist.getSelectedItem().toString()).observe(SchemesDMVActivity.this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedDistId = integer;
-                            viewModel.getAllMandals(integer).observe(SchemesDMVActivity.this, mandals -> {
-                                if (mandals != null && mandals.size() > 0) {
-                                    for (int i = 0; i < mandals.size(); i++) {
-                                        mandalNames.add(mandals.get(i).getMandal_name());
-                                    }
-                                }
-                            });
-                        }
-                    }
-                });
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item, mandalNames
-                );
-                schemesDMVActivityBinding.spMandal.setAdapter(adapter);
-            } else {
-                selectedDistId = 0;
-                selectedManId = 0;
-                selectedVilId = 0;
-                selectedManName = "";
-                selInstName = "";
-                schemesDMVActivityBinding.spMandal.setAdapter(null);
-                schemesDMVActivityBinding.spVillage.setAdapter(null);
-                schemesDMVActivityBinding.spFinYr.setAdapter(null);
-            }
-        } else if (adapterView.getId() == R.id.sp_Mandal) {
-            villageNames.clear();
-            villageNames.add("-Select-");
-            if (i != 0) {
+//    @Override
+//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//        if (adapterView.getId() == R.id.sp_dist) {
+//            mandalNames.clear();
+//            mandalNames.add("-Select-");
+//            if (i != 0) {
+//                viewModel.getDistId(schemesDMVActivityBinding.spDist.getSelectedItem().toString()).observe(SchemesDMVActivity.this, new Observer<Integer>() {
+//                    @Override
+//                    public void onChanged(Integer integer) {
+//                        if (integer != null) {
+//                            selectedDistId = integer;
+//                            viewModel.getAllMandals(integer).observe(SchemesDMVActivity.this, mandals -> {
+//                                if (mandals != null && mandals.size() > 0) {
+//                                    for (int i = 0; i < mandals.size(); i++) {
+//                                        mandalNames.add(mandals.get(i).getMandal_name());
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+//                        android.R.layout.simple_spinner_dropdown_item, mandalNames
+//                );
+//                schemesDMVActivityBinding.spMandal.setAdapter(adapter);
+//            } else {
+//                selectedDistId = 0;
+//                selectedManId = 0;
+//                selectedVilId = 0;
+//                selectedManName = "";
+//                selInstName = "";
+//                schemesDMVActivityBinding.spMandal.setAdapter(null);
+//                schemesDMVActivityBinding.spVillage.setAdapter(null);
+//                schemesDMVActivityBinding.spFinYr.setAdapter(null);
+//            }
+//        } else if (adapterView.getId() == R.id.sp_Mandal) {
+//            villageNames.clear();
+//            villageNames.add("-Select-");
+//            if (i != 0) {
+//
+//                viewModel.getMandalId(schemesDMVActivityBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(SchemesDMVActivity.this, new Observer<Integer>() {
+//                    @Override
+//                    public void onChanged(Integer integer) {
+//                        if (integer != null) {
+//                            selectedManId = integer;
+//                            selectedManName = schemesDMVActivityBinding.spMandal.getSelectedItem().toString();
+//                            viewModel.getAllVillages(integer, selectedDistId).observe(SchemesDMVActivity.this, villages -> {
+//                                if (villages != null && villages.size() > 0) {
+//
+//                                    for (int i = 0; i < villages.size(); i++) {
+//                                        villageNames.add(villages.get(i).getVillage_name());
+//                                    }
+//
+//                                }
+//                            });
+//                        }
+//                    }
+//                });
+//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+//                        android.R.layout.simple_spinner_dropdown_item, villageNames);
+//                schemesDMVActivityBinding.spVillage.setAdapter(adapter);
+//            } else {
+//                selectedManId = 0;
+//                selectedVilId = 0;
+//                selectedManName = "";
+//                selInstName = "";
+//                schemesDMVActivityBinding.spVillage.setAdapter(null);
+//                schemesDMVActivityBinding.spFinYr.setAdapter(null);
+//            }
+//        } else if (adapterView.getId() == R.id.sp_village) {
+//            finYearvalues.clear();
+//            finYearvalues.add("-Select-");
+//            if (i != 0) {
+//
+//                viewModel.getVillageId(schemesDMVActivityBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(SchemesDMVActivity.this, new Observer<Integer>() {
+//                    @Override
+//                    public void onChanged(Integer integer) {
+//                        if (integer != null) {
+//                            selectedVilId = integer;
+//                        }
+//                    }
+//                });
+//
+//            } else {
+//                selectedVilId = 0;
+//                selectedInstId = "";
+//                selInstName = "";
+//                schemesDMVActivityBinding.spFinYr.setAdapter(null);
+//            }
+//        } else if (adapterView.getId() == R.id.sp_institution) {
+//            if (i != 0) {
+//                viewModel.getInstId(schemesDMVActivityBinding.spFinYr.getSelectedItem().toString()).observe(SchemesDMVActivity.this, new Observer<String>() {
+//                    @Override
+//                    public void onChanged(String inst_id) {
+//                        if (inst_id != null) {
+//                            selInstName = schemesDMVActivityBinding.spFinYr.getSelectedItem().toString();
+//                            selectedInstId = inst_id;
+//                        }
+//                    }
+//                });
+//            }
+//        }
+//    }
 
-                viewModel.getMandalId(schemesDMVActivityBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(SchemesDMVActivity.this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedManId = integer;
-                            selectedManName = schemesDMVActivityBinding.spMandal.getSelectedItem().toString();
-                            viewModel.getAllVillages(integer, selectedDistId).observe(SchemesDMVActivity.this, villages -> {
-                                if (villages != null && villages.size() > 0) {
-
-                                    for (int i = 0; i < villages.size(); i++) {
-                                        villageNames.add(villages.get(i).getVillage_name());
-                                    }
-
-                                }
-                            });
-                        }
-                    }
-                });
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item, villageNames);
-                schemesDMVActivityBinding.spVillage.setAdapter(adapter);
-            } else {
-                selectedManId = 0;
-                selectedVilId = 0;
-                selectedManName = "";
-                selInstName = "";
-                schemesDMVActivityBinding.spVillage.setAdapter(null);
-                schemesDMVActivityBinding.spFinYr.setAdapter(null);
-            }
-        } else if (adapterView.getId() == R.id.sp_village) {
-            instNames.clear();
-            instNames.add("-Select-");
-            if (i != 0) {
-
-                viewModel.getVillageId(schemesDMVActivityBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(SchemesDMVActivity.this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedVilId = integer;
-                        }
-                    }
-                });
-                viewModel.getInstitutes().observe(SchemesDMVActivity.this, new Observer<List<InstitutesEntity>>() {
-                    @Override
-                    public void onChanged(List<InstitutesEntity> institutesEntities) {
-                        institutesEntityList.addAll(institutesEntities);
-                        if (institutesEntityList != null && institutesEntityList.size() > 0) {
-                            for (int i = 0; i < institutesEntityList.size(); i++) {
-                                instNames.add(institutesEntityList.get(i).getInst_Name());
-                            }
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item, instNames);
-                            schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
-                        }
-                    }
-                });
-            } else {
-                selectedVilId = 0;
-                selectedInstId = "";
-                selInstName = "";
-                schemesDMVActivityBinding.spFinYr.setAdapter(null);
-            }
-        } else if (adapterView.getId() == R.id.sp_institution) {
-            if (i != 0) {
-                viewModel.getInstId(schemesDMVActivityBinding.spFinYr.getSelectedItem().toString()).observe(SchemesDMVActivity.this, new Observer<String>() {
-                    @Override
-                    public void onChanged(String inst_id) {
-                        if (inst_id != null) {
-                            selInstName = schemesDMVActivityBinding.spFinYr.getSelectedItem().toString();
-                            selectedInstId = inst_id;
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
+//    @Override
+//    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//    }
 }

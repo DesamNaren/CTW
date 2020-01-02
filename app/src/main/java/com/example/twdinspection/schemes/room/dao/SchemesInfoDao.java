@@ -8,6 +8,7 @@ import com.example.twdinspection.inspection.source.DistManVillage.Districts;
 import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 
 import java.util.List;
@@ -25,4 +26,7 @@ import java.util.List;
 public interface SchemesInfoDao {
     @Query("SELECT * from schemesInfo")
     LiveData<List<SchemesInfoEntity>> getSchemesInfo();
+
+    @Query("SELECT * from financialyears")
+    LiveData<List<FinancialYrsEntity>> getFinancialYrs();
 }

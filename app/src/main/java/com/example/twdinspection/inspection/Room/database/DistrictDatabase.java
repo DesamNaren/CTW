@@ -20,7 +20,6 @@ import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInf
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
@@ -38,8 +37,6 @@ public abstract class DistrictDatabase extends RoomDatabase {
     public abstract StaffInfoDao staffInfoDao();
 
     public abstract GeneralInfoDao generalInfoDao();
-    
-    public abstract SchemeDmvDao dmvDao();
 
     private static DistrictDatabase INSTANCE1;
 

@@ -9,7 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
 import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
+import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 
 /**
@@ -17,10 +19,11 @@ import com.example.twdinspection.schemes.source.SchemesInfoEntity;
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {SchemesInfoEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {SchemesInfoEntity.class, FinancialYrsEntity.class}, version = 1, exportSchema = false)
 public abstract class SchemesDatabase extends RoomDatabase {
 
     public abstract SchemesInfoDao schemesInfoDao();
+    public abstract SchemeDmvDao schemeDmvDao();
 
 
     private static SchemesDatabase INSTANCE;

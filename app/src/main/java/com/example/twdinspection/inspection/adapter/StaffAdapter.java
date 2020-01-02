@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
@@ -149,7 +148,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         }
 
         void bind(StaffAttendanceEntity employeeResponse) {
-            this.binding.setVariable(BR.staff, employeeResponse);
+            this.binding.setVariable(com.example.twdinspection.BR.staff, employeeResponse);
             this.binding.executePendingBindings();
         }
 

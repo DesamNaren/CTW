@@ -2,15 +2,17 @@ package com.example.twdinspection.schemes.source;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity(tableName = "financialYrs")
+@Entity(tableName = "financialyears")
 public class FinancialYrsEntity {
 
+    @PrimaryKey
     @ColumnInfo()
     private int id;
 
     @ColumnInfo()
-    private int fin_year;
+    private String fin_year;
 
     @ColumnInfo()
     private int fin_id;
@@ -23,11 +25,11 @@ public class FinancialYrsEntity {
         this.id = id;
     }
 
-    public int getFin_year() {
+    public String getFin_year() {
         return fin_year;
     }
 
-    public void setFin_year(int fin_year) {
+    public void setFin_year(String fin_year) {
         this.fin_year = fin_year;
     }
 

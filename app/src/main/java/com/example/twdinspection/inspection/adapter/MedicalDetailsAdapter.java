@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterMedicalDetailsBinding;
 import com.example.twdinspection.inspection.interfaces.ClickCallback;
@@ -124,7 +123,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
         }
 
         void bind(Object obj) {
-            binding.setVariable(BR.medicalDetails, obj);
+            binding.setVariable(com.example.twdinspection.BR.medicalDetails, obj);
             binding.executePendingBindings();
         }
 
