@@ -23,24 +23,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:visibility="gone"
             android:layout_below="@+id/header"
             android:orientation="horizontal"
             android:id="@+id/ll_filter">
 
             <Spinner
-                android:id="@+id/spfilter"
-                android:layout_width="200dp"
+                android:id="@+id/sp_schemes"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/filter"
-                android:layout_margin="@dimen/dimen_5dp"
-                android:backgroundTint="@color/list_blue"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

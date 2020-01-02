@@ -184,8 +184,8 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (et_studMarkedPres.getVisibility() == View.VISIBLE) {
                     if (et_studMarkedPres.getVisibility() == View.VISIBLE) {
-                        if (!et_studMarkedPres.getText().toString().isEmpty() &&
-                                !et_studPresInsp.getText().toString().isEmpty()) {
+                        if (!TextUtils.isEmpty(et_studMarkedPres.getText().toString()) &&
+                                !TextUtils.isEmpty(et_studPresInsp.getText().toString())) {
                             String var = String.valueOf(Integer.parseInt(et_studMarkedPres.getText().toString().trim()) -
                                     Integer.parseInt(et_studPresInsp.getText().toString().trim()));
                             tv_variance.setText(var);
@@ -214,7 +214,7 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
                     count_during_insp = et_studPresInsp.getText().toString().trim();
                     variance = tv_variance.getText().toString().trim();
 
-                    if (validate()) {
+                    if (validate(studAttendInfoEntity)) {
 
                         studAttendInfoEntity.setAttendence_marked(IsattenMarked);
                         studAttendInfoEntity.setStudent_count_in_register(count_reg);
@@ -239,7 +239,7 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
 
     }
 
-    private boolean validate() {
+    private boolean validate(StudAttendInfoEntity studAttendInfoEntity) {
         boolean flag = true;
         if (TextUtils.isEmpty(IsattenMarked)) {
             Toast.makeText(this, "Check weather students attendance marked", Toast.LENGTH_SHORT).show();
@@ -250,6 +250,14 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
                 flag = false;
         } else if (TextUtils.isEmpty(count_during_insp)) {
             et_studPresInsp.setError("Please enter students count during inspection ");
+            et_studPresInsp.requestFocus();
+            flag = false;
+        }else if (Integer.parseInt(et_studMarkedPres.getText().toString())>Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+            et_studMarkedPres.setError("Students marked cannot be greater than students on roll");
+            et_studMarkedPres.requestFocus();
+            flag = false;
+        }else if (Integer.parseInt(et_studPresInsp.getText().toString())>Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+            et_studPresInsp.setError("Students present cannot be greater than students on roll");
             et_studPresInsp.requestFocus();
             flag = false;
         }

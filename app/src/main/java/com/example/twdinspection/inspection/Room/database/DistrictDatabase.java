@@ -41,7 +41,7 @@ public abstract class DistrictDatabase extends RoomDatabase {
     
     public abstract SchemeDmvDao dmvDao();
 
-    private static DistrictDatabase INSTANCE1,INSTANCE2;
+    private static DistrictDatabase INSTANCE1;
 
     public static DistrictDatabase getDatabase(final Context context) {
         if (INSTANCE1 == null) {
@@ -58,23 +58,6 @@ public abstract class DistrictDatabase extends RoomDatabase {
             }
         }
         return INSTANCE1;
-    }
-
-    public static DistrictDatabase getSchemeDatabase(final Context context) {
-        if (INSTANCE2 == null) {
-            synchronized (DistrictDatabase.class) {
-                if (INSTANCE2 == null) {
-                    INSTANCE2 = Room.databaseBuilder(context.getApplicationContext(),
-                            DistrictDatabase.class, "TWD_NEW.db")
-                            // Wipes and rebuilds instead of migrating if no Migration object.
-                            // Migration is not part of this codelab.
-//                            .createFromFile(new File("database/districts.json"))
-                            .createFromAsset("database/TWD_NEW.db")
-                            .build();
-                }
-            }
-        }
-        return INSTANCE2;
     }
 
     /**

@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.twdinspection.R;
@@ -25,6 +26,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity {
     BenReportViewModel viewModel;
     BenReportAdapter adapter;
     ActivityBeneficiaryReportBinding beneficiaryReportBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +39,32 @@ public class BeneficiaryReportActivity extends AppCompatActivity {
         adapter = new BenReportAdapter(this, getList());
         beneficiaryReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         beneficiaryReportBinding.recyclerView.setAdapter(adapter);
+
+        viewModel.getSchemesInfo().observe(this, schemesInfoEntities -> {
+            if (schemesInfoEntities != null && schemesInfoEntities.size() > 0) {
+                ArrayList<String> schemeNames = new ArrayList<>();
+                schemeNames.add("-Select-");
+                for (int i = 0; i < schemesInfoEntities.size(); i++) {
+                    schemeNames.add(schemesInfoEntities.get(i).getScheme_type().toString());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(BeneficiaryReportActivity.this,
+                        android.R.layout.simple_spinner_dropdown_item, schemeNames
+                );
+                beneficiaryReportBinding.spSchemes.setAdapter(adapter);
+            }
+        });
     }
 
     private List<BeneficiaryReport> getList() {
-        ArrayList<BeneficiaryReport> list=new ArrayList<>();
-        for(int i=1;i<10;i++){
-            BeneficiaryReport beneficiaryReport=new BeneficiaryReport();
+        ArrayList<BeneficiaryReport> list = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            BeneficiaryReport beneficiaryReport = new BeneficiaryReport();
             beneficiaryReport.setBen_id(i);
             list.add(beneficiaryReport);
         }
 
         return list;
     }
+
+
 }
