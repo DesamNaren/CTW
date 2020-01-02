@@ -3,14 +3,18 @@ package com.example.twdinspection.inspection.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityCoCurricularBinding;
+
+import java.util.Calendar;
 
 public class CoCurricularActivity extends AppCompatActivity {
 
@@ -120,5 +124,40 @@ public class CoCurricularActivity extends AppCompatActivity {
                 }
             }
         });
+        binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lastMeetingDateSelection();
+            }
+        });
+        binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
+    private void lastMeetingDateSelection() {
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CoCurricularActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        binding.etMedicalCheckupDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+        datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+    }
+
 }

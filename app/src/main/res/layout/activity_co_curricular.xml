@@ -229,6 +229,35 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Achievement of the student during the year 2019- 2020"
+                                android:textColor="@color/black" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_cocur"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"/>
+                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:id="@+id/btn_addStud"
+                                android:text="Add"
+                                android:layout_gravity="center"
+                                android:background="@drawable/btn_background"
+                                android:textColor="@color/white"
+                                android:textAllCaps="false"/>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1127,7 +1156,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1167,49 +1196,28 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                            <LinearLayout
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
 
-                                <RelativeLayout
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_medical_checkup_date"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/last_meeting_conducted_with_students_council_date"
+                                    android:imeOptions="actionNext"
+                                    android:text="@string/select_date"
+                                    android:textSize="@dimen/dimen_15dp" />
 
-                                    <ImageView
-                                        android:id="@+id/iv_cal"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:background="@android:drawable/ic_menu_my_calendar"
-                                        android:backgroundTint="@color/list_blue"
-                                        android:visibility="gone" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
-
-
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_medical_checkup_date"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="@string/last_meeting_conducted_with_students_council_date"
-                                            android:imeOptions="actionNext"
-                                            android:text="@string/select_date"
-                                            android:textSize="@dimen/dimen_15dp" />
-
-                                    </com.google.android.material.textfield.TextInputLayout>
-                                </RelativeLayout>
-
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
