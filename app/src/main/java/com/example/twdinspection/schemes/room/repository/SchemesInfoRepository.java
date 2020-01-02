@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SchemesInfoRepository {
 
-    public SchemesInfoDao schemesInfoDao;
+    private SchemesInfoDao schemesInfoDao;
 
     public SchemesInfoRepository(Application application) {
         SchemesDatabase db = SchemesDatabase.getDatabase(application);

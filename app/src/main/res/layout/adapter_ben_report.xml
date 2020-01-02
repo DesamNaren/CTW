@@ -6,7 +6,7 @@
 
         <variable
             name="benReport"
-            type="com.example.twdinspection.schemes.source.BeneficiaryReport" />
+            type="com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail" />
 
     </data>
 
@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="ABC" />
+                    android:text="@{benReport.benID}" />
 
 
             </LinearLayout>
@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="XYZ"/>
+                    android:text="@{benReport.benName}" />
 
 
             </LinearLayout>
@@ -92,7 +92,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="PQR"/>
+                    android:text="@{benReport.activity}" />
 
 
             </LinearLayout>

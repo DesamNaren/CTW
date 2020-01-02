@@ -33,10 +33,6 @@ public class TWDApplication extends MultiDexApplication {
     }
 
 
-    public TWDService getTwdService() {
-        return TWDService.Factory.create();
-    }
-
 
     public SharedPreferences getPreferences() {
         if (sharedPreferences == null) {

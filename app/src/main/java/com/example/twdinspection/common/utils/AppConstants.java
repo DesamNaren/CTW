@@ -25,4 +25,7 @@ public class AppConstants {
 
     public static final int SUCCESS_CODE = 200;
     public static final int FAILURE_CODE = 201;
+
+    public static final String SUCCESS_STRING_CODE = "200";
+    public static final String FAILURE_STRING_CODE = "200";
 }

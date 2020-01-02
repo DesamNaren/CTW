@@ -10,14 +10,12 @@ import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterBenReportBinding;
-import com.example.twdinspection.databinding.AdapterStudAttndBinding;
-import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
-import com.example.twdinspection.schemes.source.BeneficiaryReport;
+import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
+import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.ui.BenDetailsActivty;
 
 import java.util.List;
@@ -25,10 +23,10 @@ import java.util.Random;
 
 public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.ItemHolder> {
 
-    Context context;
-    List<BeneficiaryReport> list;
+    private Context context;
+    private List<BeneficiaryDetail> list;
 
-    public BenReportAdapter(Context context, List<BeneficiaryReport> list) {
+    public BenReportAdapter(Context context, List<BeneficiaryDetail> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,10 +44,9 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
-        final int position = i;
-        final BeneficiaryReport dataModel = list.get(position);
+        final BeneficiaryDetail dataModel = list.get(i);
         holder.listItemBinding.setBenReport(dataModel);
-        setAnimation(holder.itemView, position);
+        setAnimation(holder.itemView, i);
 
         holder.listItemBinding.cvBenReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,14 +75,14 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
     class ItemHolder extends RecyclerView.ViewHolder {
 
 
-        public AdapterBenReportBinding listItemBinding;
+        AdapterBenReportBinding listItemBinding;
 
-        public ItemHolder(AdapterBenReportBinding listItemBinding) {
+        ItemHolder(AdapterBenReportBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }
 
-        public void bind(Object obj) {
+        void bind(Object obj) {
             listItemBinding.executePendingBindings();
         }
 

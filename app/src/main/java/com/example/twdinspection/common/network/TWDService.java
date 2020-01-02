@@ -3,6 +3,7 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,14 @@ import retrofit2.http.Query;
 
 public interface TWDService {
     class Factory {
-        public static TWDService create() {
+        public static TWDService create(String type) {
+            String BASEURL="";
+            if(type.equals("school")){
+                BASEURL = TWDURL.TWD_BASE_URL;
+            }else {
+                BASEURL = TWDURL.SCHEME_BASE_URL;
+            }
+
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             if (BuildConfig.DEBUG) {
@@ -33,7 +41,7 @@ public interface TWDService {
             httpClient.writeTimeout(60, TimeUnit.SECONDS);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(TWDURL.TWD_BASE_URL)
+                    .baseUrl(BASEURL)
                     .addConverterFactory(GsonConverterFactory.create())
 //                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(httpClient.build())
@@ -46,6 +54,8 @@ public interface TWDService {
     @GET("validateLogin")
     Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
 
+    @GET("getBenificiaryDetails")
+    Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

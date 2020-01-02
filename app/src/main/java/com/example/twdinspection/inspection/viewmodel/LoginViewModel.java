@@ -87,7 +87,7 @@ public class LoginViewModel extends ViewModel {
         Utils.hideKeyboard(context, binding.btnLogin);
         binding.btnLogin.setVisibility(View.GONE);
         binding.progress.setVisibility(View.VISIBLE);
-        TWDService twdService = TWDService.Factory.create();
+        TWDService twdService = TWDService.Factory.create("school");
         twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {

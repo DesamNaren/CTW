@@ -16,7 +16,6 @@ public class BenDetailsActivty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         benDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_ben_details_activty);
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("Beneficiary Details");
+        benDetailsBinding.header.headerTitle.setText(getString(R.string.ben_details));
     }
 }
