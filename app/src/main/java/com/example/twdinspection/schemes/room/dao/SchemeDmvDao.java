@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import com.example.twdinspection.inspection.source.DistManVillage.Districts;
+import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
 import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 
@@ -49,9 +51,10 @@ import java.util.List;
 
 @Dao
 public interface SchemeDmvDao {
-    @Query("SELECT * from schemesInfo")
-    LiveData<List<SchemesInfoEntity>> getSchemesInfo();
 
     @Query("SELECT * from financialyears")
     LiveData<List<FinancialYrsEntity>> getFinancialYrs();
+
+    @Query("SELECT * from schemesDistricts")
+    LiveData<List<SchemesDistricts>> getDistricts();
 }

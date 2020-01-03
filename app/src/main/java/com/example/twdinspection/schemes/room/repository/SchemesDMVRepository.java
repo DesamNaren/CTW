@@ -10,6 +10,7 @@ import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
 import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
 import com.example.twdinspection.schemes.room.database.SchemesDatabase;
+import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
 import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 
 import java.util.List;
@@ -17,7 +18,6 @@ import java.util.List;
 public class SchemesDMVRepository {
 
     public SchemeDmvDao dmvDao;
-    public SchemesInfoDao infoDao;
 //    public LiveData<List<Districts>> districts = new MutableLiveData<>();
 //    public LiveData<List<Mandals>> mandals = new MutableLiveData<>();
 
@@ -32,9 +32,10 @@ public class SchemesDMVRepository {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-//    public LiveData<List<Districts>> getDistricts() {
-//        return dmvDao.getDistricts();
-//    }
+    public LiveData<List<SchemesDistricts>> getDistricts() {
+        LiveData<List<SchemesDistricts>> districts=dmvDao.getDistricts();
+        return districts;
+    }
 //
 //    public LiveData<List<Mandals>> getMandals(int dist_id) {
 //        return dmvDao.getMandals(dist_id);

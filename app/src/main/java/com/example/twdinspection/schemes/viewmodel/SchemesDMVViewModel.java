@@ -10,12 +10,13 @@ import com.example.twdinspection.inspection.source.DistManVillage.Districts;
 import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.schemes.room.repository.SchemesDMVRepository;
+import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
 import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 
 import java.util.List;
 
 public class SchemesDMVViewModel extends AndroidViewModel {
-    private LiveData<List<Districts>> districts;
+    private LiveData<List<SchemesDistricts>> districts;
     private LiveData<List<Mandals>> mandals;
     private LiveData<List<Villages>> villages;
     private LiveData<List<FinancialYrsEntity>> financialYrs;
@@ -30,15 +31,13 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         mRepository = new SchemesDMVRepository(application);
     }
 
-//    public LiveData<List<Districts>> getAllDistricts() {
-//        if (districts != null) {
-//            districts = mRepository.getDistricts();
-//        }
-//        return districts;
-//    }
-//
-//
-//
+    public LiveData<List<SchemesDistricts>> getAllDistricts() {
+        if (districts != null) {
+            districts = mRepository.getDistricts();
+        }
+        return districts;
+    }
+
 //    public LiveData<List<Mandals>> getAllMandals(int distId) {
 //        if (mandals != null) {
 //            mandals=mRepository.getMandals(distId);

@@ -81,19 +81,19 @@ public class SchemesDMVActivity extends BaseActivity {
             }
         });
 
-//        viewModel.getAllDistricts().observe(this, districts -> {
-//            if (districts != null && districts.size() > 0) {
-//                ArrayList<String> distNames = new ArrayList<>();
-//                distNames.add("-Select-");
-//                for (int i = 0; i < districts.size(); i++) {
-//                    distNames.add(districts.get(i).getDist_name());
-//                }
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-//                        android.R.layout.simple_spinner_dropdown_item, distNames
-//                );
-//                schemesDMVActivityBinding.spDist.setAdapter(adapter);
-//            }
-//        });
+        viewModel.getAllDistricts().observe(this, districts -> {
+            if (districts != null && districts.size() > 0) {
+                ArrayList<String> distNames = new ArrayList<>();
+                distNames.add("-Select-");
+                for (int i = 0; i < districts.size(); i++) {
+                    distNames.add(districts.get(i).getDist_name());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_dropdown_item, distNames
+                );
+                schemesDMVActivityBinding.spDist.setAdapter(adapter);
+            }
+        });
 //
 //        schemesDMVActivityBinding.spDist.setOnItemSelectedListener(this);
 //        schemesDMVActivityBinding.spMandal.setOnItemSelectedListener(this);
