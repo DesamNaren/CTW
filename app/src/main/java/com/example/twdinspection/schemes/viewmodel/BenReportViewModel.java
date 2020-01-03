@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.schemes.room.repository.SchemesInfoRepository;
+import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
@@ -23,10 +25,14 @@ import retrofit2.Response;
 
 public class BenReportViewModel extends AndroidViewModel {
     private MutableLiveData<List<BeneficiaryDetail>> beneficiaryLiveData;
+    private LiveData<List<SchemesInfoEntity>> schemesMutableLiveData;
+    private SchemesInfoRepository schemesInfoRepository;
 
     public BenReportViewModel(Application application) {
         super(application);
         beneficiaryLiveData = new MutableLiveData<>();
+        schemesMutableLiveData = new MutableLiveData<>();
+        schemesInfoRepository= new SchemesInfoRepository(application);
     }
 
     public LiveData<List<BeneficiaryDetail>> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
@@ -34,6 +40,13 @@ public class BenReportViewModel extends AndroidViewModel {
             getBeneficiaryDetails(beneficiaryRequest);
         }
         return beneficiaryLiveData;
+    }
+
+    public LiveData<List<SchemesInfoEntity>> getSchemeInfo() {
+        if (schemesMutableLiveData != null) {
+            schemesMutableLiveData = schemesInfoRepository.getSchemesInfo();
+        }
+        return schemesMutableLiveData;
     }
 
     private void getBeneficiaryDetails(BeneficiaryRequest beneficiaryRequest) {

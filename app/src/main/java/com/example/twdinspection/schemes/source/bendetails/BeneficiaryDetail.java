@@ -4,7 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class BeneficiaryDetail {
-
+    @SerializedName("scheme_Id")
+    @Expose
+    private String schemeID;
     @SerializedName("bank_Loan")
     @Expose
     private Long bankLoan;
@@ -29,6 +31,15 @@ public class BeneficiaryDetail {
     @SerializedName("status")
     @Expose
     private String status;
+
+
+    public String getSchemeID() {
+        return schemeID;
+    }
+
+    public void setSchemeID(String schemeID) {
+        this.schemeID = schemeID;
+    }
 
     public Long getBankLoan() {
         return bankLoan;

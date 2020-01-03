@@ -44,9 +44,13 @@ public class LoginActivity extends LocBaseActivity {
             e.printStackTrace();
         }
 
+
+        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+
         loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
             @Override
             public void onChanged(EmployeeResponse employeeResponses) {
+
                 if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
                     if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                         editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
