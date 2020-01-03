@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterBenReportBinding;
+import com.example.twdinspection.schemes.interfaces.BenClickCallback;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.ui.BenDetailsActivity;
@@ -25,11 +26,16 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
 
     private Context context;
     private List<BeneficiaryDetail> list;
-
+    private BenClickCallback benClickCallback;
 
     public BenReportAdapter(Context context, List<BeneficiaryDetail> list) {
         this.context = context;
         this.list = list;
+        try {
+            benClickCallback = (BenClickCallback) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     private int lastPosition = -1;
 
@@ -52,7 +58,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
         holder.listItemBinding.cvBenReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, BenDetailsActivity.class));
+                benClickCallback.onItemClick(dataModel);
             }
         });
 

@@ -3,8 +3,11 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.SchemeRemarksResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -56,6 +59,9 @@ public interface TWDService {
 
     @GET("getBenificiaryDetails")
     Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);
+
+    @GET("getInspectionRemarks")
+    Call<SchemeRemarksResponse> getInspectionRemarks();
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

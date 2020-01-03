@@ -18,14 +18,13 @@ public class SchemesInfoEntity {
     private String scheme_type;
 
     @Ignore
-    private int selection;
+    private boolean selection;
 
-    public int getSelection() {
+    public boolean isSelection() {
         return selection;
     }
 
-
-    public void setSelection(int selection) {
+    public void setSelection(boolean selection) {
         this.selection = selection;
     }
 

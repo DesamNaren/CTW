@@ -28,9 +28,6 @@
             android:background="@color/materialGrey300"
             tools:listitem="@layout/adapter_ben_report" />
 
-        <include
-            android:id="@+id/btn_layout"
-            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>

@@ -28,6 +28,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
     private Context context;
     private List<SchemesInfoEntity> list;
     private SchemeClickCallback schemeClickCallback;
+    private int selectedPos=-1;
 
     public SchemeInfoAdapter(Context context, List<SchemesInfoEntity> list) {
         this.context = context;
@@ -51,15 +52,33 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
+
         final SchemesInfoEntity dataModel = list.get(i);
         holder.listItemBinding.setSchemeInfo(dataModel);
+
+        if(dataModel.isSelection()) {
+            holder.listItemBinding.llItem.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+            holder.listItemBinding.tvItem.setTextColor(context.getResources().getColor(R.color.white));
+        }else {
+            holder.listItemBinding.llItem.setBackgroundColor(context.getResources().getColor(R.color.white));
+            holder.listItemBinding.tvItem.setTextColor(context.getResources().getColor(R.color.black));
+        }
 
         holder.listItemBinding.cvBenReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectedPos = i;
+                notifyDataSetChanged();
+                dataModel.setSelection(true);
                 schemeClickCallback.onItemClick(String.valueOf(dataModel.getScheme_id()));
             }
         });
+
+        if (selectedPos == i) {
+            dataModel.setSelection(true);
+        } else {
+            dataModel.setSelection(false);
+        }
 
         holder.bind(dataModel);
     }

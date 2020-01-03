@@ -1,12 +1,5 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,16 +13,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.custom.CustomFontTextView;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
+import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
-import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -47,6 +47,7 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
     LinearLayout ll_stud_pres;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -229,7 +230,7 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
                         long x = studentsAttndViewModel.updateClassInfo(studAttendInfoEntity);
                         //Toast.makeText(StudentsAttendance_2.this, "Updated " + x, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        Utils.customAlert(StudentsAttendance_2.this,"Data submitted successfully",AppConstants.SUCCESS,false);
+                        Utils.customAlert(StudentsAttendance_2.this, "Data submitted successfully", AppConstants.SUCCESS, false);
                     }
 
 
@@ -245,18 +246,24 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
             Toast.makeText(this, "Check weather students attendance marked", Toast.LENGTH_SHORT).show();
             flag = false;
         } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE) {
-                et_studMarkedPres.setError("Please enter students count in register ");
-                et_studMarkedPres.requestFocus();
-                flag = false;
+            et_studMarkedPres.setError("Please enter students count in register ");
+            et_studMarkedPres.requestFocus();
+            flag = false;
         } else if (TextUtils.isEmpty(count_during_insp)) {
             et_studPresInsp.setError("Please enter students count during inspection ");
             et_studPresInsp.requestFocus();
             flag = false;
-        }else if (Integer.parseInt(et_studMarkedPres.getText().toString())>Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
-            et_studMarkedPres.setError("Students marked cannot be greater than students on roll");
-            et_studMarkedPres.requestFocus();
-            flag = false;
-        }else if (Integer.parseInt(et_studPresInsp.getText().toString())>Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+        } else if (IsattenMarked.equals(AppConstants.Yes)) {
+            if (Integer.parseInt(et_studMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+                et_studMarkedPres.setError("Students marked cannot be greater than students on roll");
+                et_studMarkedPres.requestFocus();
+                flag = false;
+            }else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+                et_studPresInsp.setError("Students present cannot be greater than students on roll");
+                et_studPresInsp.requestFocus();
+                flag = false;
+            }
+        }else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
             et_studPresInsp.setError("Students present cannot be greater than students on roll");
             et_studPresInsp.requestFocus();
             flag = false;

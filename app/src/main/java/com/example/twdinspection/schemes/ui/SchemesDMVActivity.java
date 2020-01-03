@@ -17,11 +17,14 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
 import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.example.twdinspection.schemes.source.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import afu.org.checkerframework.checker.oigj.qual.O;
 
 public class SchemesDMVActivity extends BaseActivity {
 
@@ -92,6 +95,12 @@ public class SchemesDMVActivity extends BaseActivity {
                         android.R.layout.simple_spinner_dropdown_item, distNames
                 );
                 schemesDMVActivityBinding.spDist.setAdapter(adapter);
+            }
+        });
+        viewModel.getInspectionRemarks().observe(SchemesDMVActivity.this, new Observer<List<InspectionRemarksEntity>>() {
+            @Override
+            public void onChanged(List<InspectionRemarksEntity> inspectionRemarksEntities) {
+
             }
         });
 //

@@ -18,6 +18,7 @@ public class AppConstants {
     public static final String VILL_ID = "VILL_ID";
     public static final String INST_ID = "INST_ID";
     public static final String INST_NAME = "INST_NAME";
+    public static final String BEN_DETAIL = "BEN_DETAIL";
     public static final String MAN_NAME = "MAN_NAME";
     public static String Yes="YES";
     public static String No="NO";

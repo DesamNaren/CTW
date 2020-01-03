@@ -1,5 +1,6 @@
 package com.example.twdinspection.schemes.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
 import com.example.twdinspection.schemes.adapter.BenReportAdapter;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
+import com.example.twdinspection.schemes.interfaces.BenClickCallback;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
@@ -24,7 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeneficiaryReportActivity extends AppCompatActivity implements SchemeClickCallback {
+public class BeneficiaryReportActivity extends AppCompatActivity implements SchemeClickCallback, BenClickCallback {
 
     BenReportViewModel viewModel;
     BenReportAdapter adapter;
@@ -105,6 +108,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         if (dialog != null && dialog.isShowing())
             dialog.dismiss();
         tempBeneficiaryDetails.clear();
+
         if (beneficiaryDetailsMain.size() > 0) {
             if (schemeID.equals("-1")) {
                 tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
@@ -126,5 +130,11 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         } else {
             //no data tag
         }
+    }
+
+    @Override
+    public void onItemClick(BeneficiaryDetail beneficiaryDetail) {
+        startActivity(new Intent(this, BenDetailsActivity.class)
+                .putExtra(AppConstants.BEN_DETAIL, beneficiaryDetail));
     }
 }
