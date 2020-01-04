@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.MedicalViewModel" />
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -547,7 +554,7 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
-                            android:id="@+id/medicalCheckup_rg"
+                            android:id="@+id/rg_medicalCheckup_details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_5dp"
@@ -555,14 +562,14 @@
 
 
                             <RadioButton
-                                android:id="@+id/medical_checkup_yes"
+                                android:id="@+id/medical_checkup_details_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:id="@+id/medical_checkup_no"
+                                android:id="@+id/medical_checkup_details_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"

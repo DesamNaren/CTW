@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.InfraViewModel" />
+
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,6 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_5dp"
+                            android:id="@+id/rg_drinking_water_facility"
                             android:orientation="horizontal">
 
 
@@ -67,12 +75,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:id="@+id/drinking_water_facility_yes"
                                 android:text="@string/good" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:id="@+id/drinking_water_facility_no"
                                 android:text="@string/bad" />
 
                         </RadioGroup>
@@ -115,6 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
+                            android:id="@+id/rg_big_school_name_board"
                             android:orientation="horizontal">
 
 
@@ -122,12 +133,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:id="@+id/big_school_name_board_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:id="@+id/big_school_name_board_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>

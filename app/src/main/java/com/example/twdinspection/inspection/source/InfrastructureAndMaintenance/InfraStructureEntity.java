@@ -2,9 +2,15 @@ package com.example.twdinspection.inspection.source.InfrastructureAndMaintenance
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
-public class InfrastuctureEntity {
+public class InfraStructureEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
+
     @ColumnInfo()
     private String officer_id;
 
@@ -18,12 +24,13 @@ public class InfrastuctureEntity {
     private String drinking_water_facility;
 
     @ColumnInfo()
-    private String ro_plant_woking;
+    private String bigSchoolNameBoard;
 
+    @ColumnInfo()
+    private String ro_plant_woking;
 
     @ColumnInfo()
     private String drinking_water_source;
-
 
     @ColumnInfo()
     private String lighting_facility;
@@ -31,25 +38,20 @@ public class InfrastuctureEntity {
     @ColumnInfo()
     private String enough_fans;
 
-
     @ColumnInfo()
     private String ceilingfans_count;
 
-  @ColumnInfo()
+    @ColumnInfo()
     private String ceilingfans_working;
-
 
     @ColumnInfo()
     private String ceilingfans_nonworking;
 
-
     @ColumnInfo()
     private String dininghall_available;
 
-
     @ColumnInfo()
     private String dininghall_used;
-
 
     @ColumnInfo()
     private String buildings_dilapidatedState;
@@ -98,6 +100,46 @@ public class InfrastuctureEntity {
 
     @ColumnInfo()
     private String additional_infra_required;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
+
+    public String getBigSchoolNameBoard() {
+        return bigSchoolNameBoard;
+    }
+
+    public void setBigSchoolNameBoard(String bigSchoolNameBoard) {
+        this.bigSchoolNameBoard = bigSchoolNameBoard;
+    }
 
     public String getDrinking_water_facility() {
         return drinking_water_facility;

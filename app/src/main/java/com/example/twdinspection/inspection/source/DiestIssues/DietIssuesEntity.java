@@ -2,12 +2,17 @@ package com.example.twdinspection.inspection.source.DiestIssues;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity
 public class DietIssuesEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
 
     @ColumnInfo()
     private String officer_id;

@@ -22,6 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ClassInfoRepository {
 
     public ClassInfoDao classInfoDao;
+    public String tag=ClassInfoRepository.class.getSimpleName();
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
@@ -96,27 +97,27 @@ public class ClassInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", "onSubscribe: ");
+                Log.i("Tag", tag+"onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", "onNext: " + x);
+                Log.i("Tag", tag+"onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", "onError: " + x);
+                Log.i("Tag", tag+"onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", "onComplete: " + x);
+                Log.i("Tag", tag+"onComplete: " + x);
             }
         };
 
