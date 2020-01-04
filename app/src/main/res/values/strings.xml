@@ -70,7 +70,7 @@
     <string name="working">Working</string>
     <string name="non_working">Non Working</string>
     <string name="wall_mounted_fans">Wall mounted fans</string>
-    <string name="drinking_hall">Dining hall available</string>
+    <string name="dining_hall">Dining hall available</string>
     <string name="being_used">Being used or not</string>
     <string name="how_many_buildings">How many buildings are dilapidated state</string>
     <string name="trans_avail">Transformers available</string>

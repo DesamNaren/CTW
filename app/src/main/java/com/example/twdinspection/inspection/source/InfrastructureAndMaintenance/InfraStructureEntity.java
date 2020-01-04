@@ -33,7 +33,13 @@ public class InfraStructureEntity {
     private String drinking_water_source;
 
     @ColumnInfo()
+    private String inverter_available;
+
+    @ColumnInfo()
     private String lighting_facility;
+
+    @ColumnInfo()
+    private String electricity_wiring;
 
     @ColumnInfo()
     private String enough_fans;
@@ -48,7 +54,28 @@ public class InfraStructureEntity {
     private String ceilingfans_nonworking;
 
     @ColumnInfo()
+    private String mountedfans_working;
+
+    @ColumnInfo()
+    private String mountedfans_nonworking;
+
+    @ColumnInfo()
     private String dininghall_available;
+
+    @ColumnInfo()
+    private String separate_kitchen_room_available;
+
+    @ColumnInfo()
+    private String construct_kitchen_room;
+
+    @ColumnInfo()
+    private String is_it_in_good_condition;
+
+    @ColumnInfo()
+    private String repair_required;
+
+    @ColumnInfo()
+    private String how_many_buildings;
 
     @ColumnInfo()
     private String dininghall_used;
@@ -85,7 +112,7 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String sewage_allowed;
-
+    //
     @ColumnInfo()
     private String sewage_raise_request;
 
@@ -100,6 +127,9 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String additional_infra_required;
+
+    @ColumnInfo()
+    private String painting;
 
     public int getId() {
         return id;
@@ -347,5 +377,85 @@ public class InfraStructureEntity {
 
     public void setAdditional_infra_required(String additional_infra_required) {
         this.additional_infra_required = additional_infra_required;
+    }
+
+    public String getInverter_available() {
+        return inverter_available;
+    }
+
+    public void setInverter_available(String inverter_available) {
+        this.inverter_available = inverter_available;
+    }
+
+    public String getElectricity_wiring() {
+        return electricity_wiring;
+    }
+
+    public void setElectricity_wiring(String electricity_wiring) {
+        this.electricity_wiring = electricity_wiring;
+    }
+
+    public String getMountedfans_working() {
+        return mountedfans_working;
+    }
+
+    public void setMountedfans_working(String mountedfans_working) {
+        this.mountedfans_working = mountedfans_working;
+    }
+
+    public String getMountedfans_nonworking() {
+        return mountedfans_nonworking;
+    }
+
+    public void setMountedfans_nonworking(String mountedfans_nonworking) {
+        this.mountedfans_nonworking = mountedfans_nonworking;
+    }
+
+    public String getSeparate_kitchen_room_available() {
+        return separate_kitchen_room_available;
+    }
+
+    public void setSeparate_kitchen_room_available(String separate_kitchen_room_available) {
+        this.separate_kitchen_room_available = separate_kitchen_room_available;
+    }
+
+    public String getConstruct_kitchen_room() {
+        return construct_kitchen_room;
+    }
+
+    public void setConstruct_kitchen_room(String construct_kitchen_room) {
+        this.construct_kitchen_room = construct_kitchen_room;
+    }
+
+    public String getIs_it_in_good_condition() {
+        return is_it_in_good_condition;
+    }
+
+    public void setIs_it_in_good_condition(String is_it_in_good_condition) {
+        this.is_it_in_good_condition = is_it_in_good_condition;
+    }
+
+    public String getRepair_required() {
+        return repair_required;
+    }
+
+    public void setRepair_required(String repair_required) {
+        this.repair_required = repair_required;
+    }
+
+    public String getHow_many_buildings() {
+        return how_many_buildings;
+    }
+
+    public void setHow_many_buildings(String how_many_buildings) {
+        this.how_many_buildings = how_many_buildings;
+    }
+
+    public String getPainting() {
+        return painting;
+    }
+
+    public void setPainting(String painting) {
+        this.painting = painting;
     }
 }
