@@ -11,7 +11,7 @@ import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
 import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 
 import java.util.List;
 

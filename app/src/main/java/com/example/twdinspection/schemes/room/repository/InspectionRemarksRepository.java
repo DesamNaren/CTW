@@ -5,10 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.schemes.room.dao.InspectionRemarksDao;
-import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
 import com.example.twdinspection.schemes.room.database.SchemesDatabase;
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 
 import java.util.List;
 

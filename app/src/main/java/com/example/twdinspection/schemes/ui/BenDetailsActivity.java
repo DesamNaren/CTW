@@ -11,7 +11,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
 import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
 

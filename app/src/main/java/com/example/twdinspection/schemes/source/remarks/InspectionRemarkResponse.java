@@ -1,15 +1,11 @@
-package com.example.twdinspection.schemes.source;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+package com.example.twdinspection.schemes.source.remarks;
+import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+public class InspectionRemarkResponse {
 
-public class SchemeRemarksResponse {
     @SerializedName("schemes")
     @Expose
     private List<InspectionRemarksEntity> schemes = null;

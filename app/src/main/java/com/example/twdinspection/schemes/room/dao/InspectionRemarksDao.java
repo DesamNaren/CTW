@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 
 import java.util.List;
 

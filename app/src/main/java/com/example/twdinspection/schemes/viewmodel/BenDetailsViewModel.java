@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.schemes.room.repository.InspectionRemarksRepository;
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 
 import java.util.List;

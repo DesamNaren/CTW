@@ -5,11 +5,8 @@ import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
-import com.example.twdinspection.schemes.source.SchemeRemarksResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
