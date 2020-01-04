@@ -11,9 +11,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.schemes.room.dao.InspectionRemarksDao;
 import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
+import com.example.twdinspection.schemes.room.dao.SchemeSyncDao;
 import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
-import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
-import com.example.twdinspection.schemes.source.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
+import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
+import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
+import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 
@@ -22,12 +25,14 @@ import com.example.twdinspection.schemes.source.SchemesInfoEntity;
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {SchemesInfoEntity.class, FinancialYrsEntity.class, InspectionRemarksEntity.class, SchemesDistricts.class},
+@Database(entities = {SchemesInfoEntity.class, FinancialYrsEntity.class,
+        InspectionRemarksEntity.class, SchemeDistrict.class, SchemeMandal.class, SchemeVillage.class},
         version = 1, exportSchema = false)
 public abstract class SchemesDatabase extends RoomDatabase {
 
     public abstract SchemesInfoDao schemesInfoDao();
     public abstract SchemeDmvDao schemeDmvDao();
+    public abstract SchemeSyncDao schemeSyncDao();
     public abstract InspectionRemarksDao inspectionRemarksDao();
 
 

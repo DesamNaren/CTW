@@ -8,7 +8,6 @@ public class Mandals {
     @PrimaryKey
     public int id;
     public int dist_id;
-
     public int mandal_id;
     public String mandal_name;
 

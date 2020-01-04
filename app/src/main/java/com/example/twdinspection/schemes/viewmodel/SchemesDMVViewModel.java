@@ -1,38 +1,24 @@
 package com.example.twdinspection.schemes.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.schemes.room.repository.SchemesDMVRepository;
-import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
-import com.example.twdinspection.schemes.source.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
+import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
+import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
+import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
-import com.example.twdinspection.schemes.source.SchemeRemarksResponse;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SchemesDMVViewModel extends AndroidViewModel {
-    private LiveData<List<SchemesDistricts>> districts;
-    private LiveData<List<Mandals>> mandals;
-    private LiveData<List<Villages>> villages;
+    private LiveData<List<SchemeDistrict>> districts;
+    private LiveData<List<SchemeMandal>> mandals;
+    private LiveData<List<SchemeVillage>> villages;
     private LiveData<List<FinancialYrsEntity>> financialYrs;
     private SchemesDMVRepository mRepository;
     private MutableLiveData<List<InspectionRemarksEntity>> iListMutableLiveData;
@@ -47,19 +33,24 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         mRepository = new SchemesDMVRepository(application);
     }
 
-    public LiveData<List<SchemesDistricts>> getAllDistricts() {
+    public LiveData<List<SchemeDistrict>> getAllDistricts() {
         if (districts != null) {
             districts = mRepository.getDistricts();
         }
         return districts;
     }
 
-//    public LiveData<List<Mandals>> getAllMandals(int distId) {
-//        if (mandals != null) {
-//            mandals=mRepository.getMandals(distId);
-//        }
-//        return mandals;
-//    }
+    public LiveData<List<SchemeMandal>> getAllMandals(String distId) {
+        if (mandals != null) {
+            mandals=mRepository.getMandals(distId);
+        }
+        return mandals;
+    }
+
+    public LiveData<List<SchemeVillage>> getAllVillages(String mandalId,String distId) {
+        villages=mRepository.getVillages(mandalId,distId);
+        return villages;
+    }
 
     public LiveData<List<FinancialYrsEntity>> getFinancialYrs() {
         if (financialYrs != null) {
@@ -68,25 +59,20 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         return financialYrs;
     }
 
-//    public LiveData<List<Villages>> getAllVillages(int mandalId,int distId) {
-//            villages=mRepository.getVillages(mandalId,distId);
-//        return villages;
-//    }
-//
-//    public LiveData<Integer> getDistId(String distName){
-//        return mRepository.getDistId(distName);
-//    }
-//    public LiveData<Integer> getMandalId(String mandalName,int distId){
-//        return mRepository.getMandalId(mandalName,distId);
-//    }
-//
-//    public LiveData<Integer> getVillageId(String mandalName,int manId, int distId){
-//        return mRepository.getVillageId(mandalName,manId,distId);
-//    }
-//
-//    public LiveData<String> getInstId(String instName){
-//        return mRepository.getInstId(instName);
-//    }
+    public LiveData<String> getDistId(String distName){
+        return mRepository.getDistId(distName);
+    }
+    public LiveData<String> getMandalId(String mandalName,String distId){
+        return mRepository.getMandalId(mandalName,distId);
+    }
+
+    public LiveData<String> getVillageId(String mandalName,String manId, String distId){
+        return mRepository.getVillageId(mandalName,manId,distId);
+    }
+
+    public LiveData<String> getFinYearId(String finYear){
+        return mRepository.getFinYearId(finYear);
+    }
 
 
 //    public MutableLiveData<List<InspectionRemarksEntity>> getInspectionRemarks() {

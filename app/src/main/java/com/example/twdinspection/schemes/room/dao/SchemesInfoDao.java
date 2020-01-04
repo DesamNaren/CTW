@@ -4,11 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
-import com.example.twdinspection.schemes.source.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 
 import java.util.List;

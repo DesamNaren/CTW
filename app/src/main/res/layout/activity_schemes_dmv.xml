@@ -141,7 +141,6 @@
                         <Spinner
                             android:id="@+id/sp_Mandal"
                             android:layout_width="match_parent"
-                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
@@ -168,7 +167,6 @@
                         <Spinner
                             android:id="@+id/sp_village"
                             android:layout_width="match_parent"
-                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
@@ -196,7 +194,6 @@
                         <Spinner
                             android:id="@+id/sp_fin_yr"
                             android:layout_width="match_parent"
-                            android:entries="@array/inst_sections"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
                     </LinearLayout>

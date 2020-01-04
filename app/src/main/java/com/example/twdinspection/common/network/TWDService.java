@@ -3,7 +3,9 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.schemes.source.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
+import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
 import com.example.twdinspection.schemes.source.SchemeRemarksResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 
@@ -62,6 +64,13 @@ public interface TWDService {
 
     @GET("getInspectionRemarks")
     Call<SchemeRemarksResponse> getInspectionRemarks();
+
+    @GET("getDMVMasters")
+    Call<SchemeDMVResponse> getSchemeDMV();
+
+    @GET("getFinancialYears")
+    Call<FinancialYearResponse> getFinancialYears();
+
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

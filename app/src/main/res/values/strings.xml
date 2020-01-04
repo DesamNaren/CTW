@@ -302,8 +302,8 @@
     <string name="sanitary_napkins_supplied">Sanitary Napkins supplied</string>
     <string name="notes_supplied">Notes supplied</string>
     <string name="whether_online">Whether online status and field status match?</string>
-    <string name="ben_report">Beneficiary Report</string>
-    <string name="ben_details">Beneficiary Details</string>
+    <string name="ben_report">BENEFICIARY REPORT</string>
+    <string name="ben_details">BENEFICIARY DETAILS</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>

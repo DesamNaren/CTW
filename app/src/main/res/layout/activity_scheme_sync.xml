@@ -10,10 +10,21 @@
     </data>
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <Button
-        android:text="Sync Mandals"
+        android:text="Sync Scheme DMV"
         android:id="@+id/syncMandals"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="Sync Scheme Financial Years"
+        android:id="@+id/syncYears"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
 </layout>

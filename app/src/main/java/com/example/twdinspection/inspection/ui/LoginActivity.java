@@ -45,8 +45,6 @@ public class LoginActivity extends LocBaseActivity {
         }
 
 
-        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-
         loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
             @Override
             public void onChanged(EmployeeResponse employeeResponses) {

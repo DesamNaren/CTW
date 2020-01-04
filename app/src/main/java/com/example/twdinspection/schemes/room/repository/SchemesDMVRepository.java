@@ -3,15 +3,13 @@ package com.example.twdinspection.schemes.room.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
-import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
 import com.example.twdinspection.schemes.room.database.SchemesDatabase;
-import com.example.twdinspection.schemes.source.DMV.SchemesDistricts;
-import com.example.twdinspection.schemes.source.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
+import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
+import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
+import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
 
 import java.util.List;
 
@@ -32,22 +30,22 @@ public class SchemesDMVRepository {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<SchemesDistricts>> getDistricts() {
-        LiveData<List<SchemesDistricts>> districts=dmvDao.getDistricts();
+    public LiveData<List<SchemeDistrict>> getDistricts() {
+        LiveData<List<SchemeDistrict>> districts=dmvDao.getDistricts();
         return districts;
     }
-//
-//    public LiveData<List<Mandals>> getMandals(int dist_id) {
-//        return dmvDao.getMandals(dist_id);
-//    }
-//
-//    public LiveData<List<Villages>> getVillages(int mandalId, int distId) {
-//        return dmvDao.getVillages(mandalId, distId);
-//    }
-//
-//    public LiveData<Integer> getDistId(String dist_name) {
-//        return dmvDao.getDistId(dist_name);
-//    }
+
+    public LiveData<List<SchemeMandal>> getMandals(String dist_id) {
+        return dmvDao.getMandals(dist_id);
+    }
+
+    public LiveData<List<SchemeVillage>> getVillages(String mandalId, String distId) {
+        return dmvDao.getVillages(mandalId, distId);
+    }
+
+    public LiveData<String> getDistId(String dist_name) {
+        return dmvDao.getDistId(dist_name);
+    }
 
 
     public LiveData<List<FinancialYrsEntity>> getFinancialYrs() {
@@ -55,13 +53,16 @@ public class SchemesDMVRepository {
         return financialYrs;
     }
 
-//    public LiveData<Integer> getMandalId(String mandalName, int distId) {
-//        return dmvDao.getMandalId(mandalName, distId);
-//    }
-//
-//    public LiveData<Integer> getVillageId(String mandalName, int manId, int distId) {
-//        return dmvDao.getVillageId(mandalName, manId, distId);
-//    }
-//
+    public LiveData<String> getMandalId(String mandalName, String distId) {
+        return dmvDao.getMandalId(mandalName, distId);
+    }
+
+    public LiveData<String> getVillageId(String mandalName, String manId, String distId) {
+        return dmvDao.getVillageId(mandalName, manId, distId);
+    }
+
+    public LiveData<String> getFinYearId(String finYear) {
+        return dmvDao.getFinYearId(finYear);
+    }
 
 }

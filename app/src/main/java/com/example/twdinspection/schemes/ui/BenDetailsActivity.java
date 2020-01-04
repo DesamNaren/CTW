@@ -26,7 +26,7 @@ public class BenDetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        benDetailsBinding = putContentView(R.layout.activity_ben_details_activty, getString(R.string.ben_report));
+        benDetailsBinding = putContentView(R.layout.activity_ben_details_activty, getString(R.string.ben_details));
         try {
             BeneficiaryDetail beneficiaryDetail = getIntent().getParcelableExtra(AppConstants.BEN_DETAIL);
             if (beneficiaryDetail != null) {
