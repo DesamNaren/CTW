@@ -8,6 +8,8 @@ import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
+import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
+import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +18,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface TWDService {
@@ -72,6 +76,9 @@ public interface TWDService {
 
     @GET("getSchemes")
     Call<SchemeResponse> getSchemeResponse();
+
+    @POST("submitSchemeInspectionDetails")
+    Call<SchemeSubmitResponse> getSchemeSubmitResponse(@Body SchemeSubmitRequest schemeSubmitRequest);
 
     //------------------- Login & Logout ----------------------------------------
 

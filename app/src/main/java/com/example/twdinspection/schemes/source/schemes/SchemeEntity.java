@@ -22,6 +22,15 @@ public class SchemeEntity {
         this.id = id;
     }
 
+    public SchemeEntity() {
+    }
+
+    public SchemeEntity(boolean selection, String schemeType, String schemeId) {
+        this.selection = selection;
+        this.schemeType = schemeType;
+        this.schemeId = schemeId;
+    }
+
     @Ignore
     private boolean selection;
 

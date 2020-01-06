@@ -23,4 +23,7 @@ public interface InspectionRemarksDao {
 
     @Query("SELECT * from InspectionRemarksEntity")
     LiveData<List<InspectionRemarksEntity>> getInspectionRemarks();
+
+    @Query("SELECT remark_id from InspectionRemarksEntity where remark_type LIKE :rem_type")
+    LiveData<String> getRemarkId(String rem_type);
 }

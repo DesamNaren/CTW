@@ -36,6 +36,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private List<BeneficiaryDetail> tempBeneficiaryDetails;
     private List<SchemeEntity> schemesInfoEntitiesMain;
     private BottomSheetDialog dialog;
+    ArrayList<String> schemeValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         beneficiaryDetailsMain = new ArrayList<>();
         tempBeneficiaryDetails = new ArrayList<>();
         schemesInfoEntitiesMain = new ArrayList<>();
+        schemeValues = new ArrayList<>();
 
         beneficiaryReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_beneficiary_report);
         beneficiaryReportBinding.header.headerTitle.setText(getResources().getString(R.string.ben_report));
@@ -84,8 +86,6 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         });
     }
 
-    private SchemeInfoAdapter schemeInfoAdapter;
-
     public void showSchemeDetails(List<SchemeEntity> schemesInfoEntitiesMain) {
         View view = getLayoutInflater().inflate(R.layout.scheme_bottom_sheet, null);
         RecyclerView filterRecyclerView = view.findViewById(R.id.schemeRV);
@@ -98,7 +98,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         dialog.show();
 
 
-        schemeInfoAdapter = new SchemeInfoAdapter(this, schemesInfoEntitiesMain);
+        SchemeInfoAdapter schemeInfoAdapter = new SchemeInfoAdapter(this, schemesInfoEntitiesMain);
         filterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         filterRecyclerView.setAdapter(schemeInfoAdapter);
     }
@@ -114,7 +114,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                 tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
             } else {
                 for (BeneficiaryDetail beneficiaryDetail : beneficiaryDetailsMain) {
-                    if (schemeID.equals(beneficiaryDetail.getSchemeID())) {
+                    if (schemeID.equals(beneficiaryDetail.getSchemeId())) {
                         tempBeneficiaryDetails.add(beneficiaryDetail);
                     }
                 }

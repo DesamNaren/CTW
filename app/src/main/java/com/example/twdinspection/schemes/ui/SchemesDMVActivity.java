@@ -30,7 +30,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
     ActivitySchemesDmvBinding schemesDMVActivityBinding;
     private Context context;
     String selectedDistId, selectedManId, selectedVilId;
-    String selectedManName, selFinValue;
+    String selectedManName,selectedDistName, selectedVilName, selFinValue;
     String selectedFinYearId;
     ArrayList<String> villageNames;
     ArrayList<String> finYearValues;
@@ -119,12 +119,16 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
 
 
                 if (validateFields()) {
-                    editor.putString(AppConstants.DIST_ID, selectedDistId);
-                    editor.putString(AppConstants.MAN_ID, selectedManId);
-                    editor.putString(AppConstants.VILL_ID, selectedVilId);
-                    editor.putString(AppConstants.INST_ID, selectedFinYearId);
-                    editor.putString(AppConstants.INST_NAME, selFinValue);
-                    editor.putString(AppConstants.MAN_NAME, selectedManName);
+                    editor.putString(AppConstants.SCHEME_DIST_ID, selectedDistId);
+                    editor.putString(AppConstants.SCHEME_MAN_ID, selectedManId);
+                    editor.putString(AppConstants.SCHEME_VIL_ID, selectedVilId);
+                    editor.putString(AppConstants.SCHEME_FIN_ID, selectedFinYearId);
+
+                    editor.putString(AppConstants.SCHEME_DIST_NAME, selectedDistName);
+                    editor.putString(AppConstants.SCHEME_MAN_NAME, selectedManName);
+                    editor.putString(AppConstants.SCHEME_VIL_NAME, selectedVilName);
+                    editor.putString(AppConstants.SCHEME_FIN_YEAR, selFinValue);
+
                     editor.commit();
                     startActivity(new Intent(SchemesDMVActivity.this, BeneficiaryReportActivity.class));
                 }
@@ -165,6 +169,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                     public void onChanged(String value) {
                         if (value != null) {
                             selectedDistId = value;
+                            selectedDistName = schemesDMVActivityBinding.spDist.getSelectedItem().toString();
                             viewModel.getAllMandals(value).observe(SchemesDMVActivity.this, mandals -> {
                                 if (mandals != null && mandals.size() > 0) {
                                     for (int i = 0; i < mandals.size(); i++) {
@@ -184,6 +189,8 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                 selectedManId = "";
                 selectedVilId = "";
                 selectedManName = "";
+                selectedDistName = "";
+                selectedVilName = "";
                 schemesDMVActivityBinding.spMandal.setAdapter(null);
                 schemesDMVActivityBinding.spVillage.setAdapter(null);
             }
@@ -217,6 +224,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                 selectedManId = "";
                 selectedVilId = "";
                 selectedManName = "";
+                selectedVilName = "";
                 schemesDMVActivityBinding.spVillage.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_village) {
@@ -225,6 +233,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                     @Override
                     public void onChanged(String value) {
                         if (value != null) {
+                            selectedVilName = schemesDMVActivityBinding.spVillage.getSelectedItem().toString();
                             selectedVilId = value;
                         }
                     }
@@ -232,7 +241,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
 
             } else {
                 selectedVilId = "";
-                selectedFinYearId = "";
+                selectedVilName = "";
             }
         } else if (adapterView.getId() == R.id.sp_fin_yr) {
             if (i != 0) {
@@ -245,6 +254,9 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                         }
                     }
                 });
+            }else {
+                selectedFinYearId="";
+                selFinValue="";
             }
         }
     }

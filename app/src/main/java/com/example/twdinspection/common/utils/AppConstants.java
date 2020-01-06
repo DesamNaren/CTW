@@ -14,6 +14,16 @@ public class AppConstants {
     public static final String OFFICER_DES = "OFFICER_DES";
     public static final String INSP_TIME = "INSP_TIME";
     public static final String DIST_ID = "DIST_ID";
+    public static final String SCHEME_DIST_ID = "SCHEME_DIST_ID";
+    public static final String SCHEME_MAN_ID = "SCHEME_MAN_ID";
+    public static final String SCHEME_VIL_ID = "SCHEME_VIL_ID";
+    public static final String SCHEME_DIST_NAME = "SCHEME_DIST_NAME";
+    public static final String SCHEME_MAN_NAME = "SCHEME_MAN_NAME";
+    public static final String SCHEME_VIL_NAME = "SCHEME_VIL_NAME";
+    public static final String SCHEME_FIN_ID = "SCHEME_FIN_ID";
+    public static final String SCHEME_FIN_YEAR = "SCHEME_FIN_YEAR";
+
+
     public static final String MAN_ID = "MAN_ID";
     public static final String VILL_ID = "VILL_ID";
     public static final String INST_ID = "INST_ID";

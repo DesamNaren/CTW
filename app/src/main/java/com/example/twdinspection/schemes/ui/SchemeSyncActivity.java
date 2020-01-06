@@ -15,6 +15,7 @@ import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 import com.example.twdinspection.schemes.viewmodel.SchemeSyncViewModel;
 
@@ -104,6 +105,7 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
                     public void onChanged(SchemeResponse schemeResponse) {
                         SchemeSyncActivity.this.schemeResponse=schemeResponse;
                         if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
+                            schemeResponse.getSchemes().add(0, new SchemeEntity(false, "ALL", "-1"));
                             schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
                         }
                     }
@@ -174,7 +176,7 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
     public void insRemCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("IN_CNT", "finCount: "+cnt);
+                Log.i("IN_CNT", "insCount: "+cnt);
                 startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
                 // Success Alert;
             } else {
@@ -189,7 +191,7 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
     public void schemeCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("SC_CNT", "finCount: "+cnt);
+                Log.i("SC_CNT", "schCount: "+cnt);
                 startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
                 // Success Alert;
             } else {

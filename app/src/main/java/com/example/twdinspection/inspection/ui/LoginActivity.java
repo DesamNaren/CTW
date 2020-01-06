@@ -43,7 +43,7 @@ public class LoginActivity extends LocBaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
 
         loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
             @Override

@@ -9,10 +9,42 @@ import com.google.gson.annotations.SerializedName;
 public class BeneficiaryDetail implements Parcelable {
     @SerializedName("scheme_Id")
     @Expose
-    private String schemeID;
+    private String schemeId;
     @SerializedName("scheme_type")
     @Expose
     private String schemeType;
+    @SerializedName("officer_id")
+    @Expose
+    private String officerId;
+    @SerializedName("inspection_time")
+    @Expose
+    private String inspectionTime;
+    @SerializedName("dist_id")
+    @Expose
+    private String distId;
+    @SerializedName("district_name")
+    @Expose
+    private String districtName;
+    @SerializedName("mandal_id")
+    @Expose
+    private String mandalId;
+    @SerializedName("mandal_name")
+    @Expose
+    private String mandalName;
+    @SerializedName("village_id")
+    @Expose
+    private String villageId;
+    @SerializedName("village_name")
+    @Expose
+    private String villageName;
+    @SerializedName("fin_year_id")
+    @Expose
+    private String finYearId;
+    @SerializedName("fin_year")
+    @Expose
+    private String finYear;
+
+
     @SerializedName("bank_Loan")
     @Expose
     private Long bankLoan;
@@ -41,6 +73,93 @@ public class BeneficiaryDetail implements Parcelable {
     @Expose
     private String statusValue;
 
+    public String getSchemeId() {
+        return schemeId;
+    }
+
+    public void setSchemeId(String schemeId) {
+        this.schemeId = schemeId;
+    }
+
+    public String getOfficerId() {
+        return officerId;
+    }
+
+    public void setOfficerId(String officerId) {
+        this.officerId = officerId;
+    }
+
+    public String getInspectionTime() {
+        return inspectionTime;
+    }
+
+    public void setInspectionTime(String inspectionTime) {
+        this.inspectionTime = inspectionTime;
+    }
+
+    public String getDistId() {
+        return distId;
+    }
+
+    public void setDistId(String distId) {
+        this.distId = distId;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getMandalId() {
+        return mandalId;
+    }
+
+    public void setMandalId(String mandalId) {
+        this.mandalId = mandalId;
+    }
+
+    public String getMandalName() {
+        return mandalName;
+    }
+
+    public void setMandalName(String mandalName) {
+        this.mandalName = mandalName;
+    }
+
+    public String getVillageId() {
+        return villageId;
+    }
+
+    public void setVillageId(String villageId) {
+        this.villageId = villageId;
+    }
+
+    public String getVillageName() {
+        return villageName;
+    }
+
+    public void setVillageName(String villageName) {
+        this.villageName = villageName;
+    }
+
+    public String getFinYearId() {
+        return finYearId;
+    }
+
+    public void setFinYearId(String finYearId) {
+        this.finYearId = finYearId;
+    }
+
+    public String getFinYear() {
+        return finYear;
+    }
+
+    public void setFinYear(String finYear) {
+        this.finYear = finYear;
+    }
 
     public String getSchemeType() {
         return schemeType;
@@ -56,14 +175,6 @@ public class BeneficiaryDetail implements Parcelable {
 
     public void setStatusValue(String statusValue) {
         this.statusValue = statusValue;
-    }
-
-    public String getSchemeID() {
-        return schemeID;
-    }
-
-    public void setSchemeID(String schemeID) {
-        this.schemeID = schemeID;
     }
 
     public Long getBankLoan() {
@@ -130,6 +241,7 @@ public class BeneficiaryDetail implements Parcelable {
         this.status = status;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -137,7 +249,18 @@ public class BeneficiaryDetail implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.schemeID);
+        dest.writeString(this.schemeId);
+        dest.writeString(this.schemeType);
+        dest.writeString(this.officerId);
+        dest.writeString(this.inspectionTime);
+        dest.writeString(this.distId);
+        dest.writeString(this.districtName);
+        dest.writeString(this.mandalId);
+        dest.writeString(this.mandalName);
+        dest.writeString(this.villageId);
+        dest.writeString(this.villageName);
+        dest.writeString(this.finYearId);
+        dest.writeString(this.finYear);
         dest.writeValue(this.bankLoan);
         dest.writeString(this.benName);
         dest.writeString(this.benID);
@@ -147,14 +270,24 @@ public class BeneficiaryDetail implements Parcelable {
         dest.writeValue(this.subsidy);
         dest.writeString(this.status);
         dest.writeString(this.statusValue);
-        dest.writeString(this.schemeType);
     }
 
     public BeneficiaryDetail() {
     }
 
     protected BeneficiaryDetail(Parcel in) {
-        this.schemeID = in.readString();
+        this.schemeId = in.readString();
+        this.schemeType = in.readString();
+        this.officerId = in.readString();
+        this.inspectionTime = in.readString();
+        this.distId = in.readString();
+        this.districtName = in.readString();
+        this.mandalId = in.readString();
+        this.mandalName = in.readString();
+        this.villageId = in.readString();
+        this.villageName = in.readString();
+        this.finYearId = in.readString();
+        this.finYear = in.readString();
         this.bankLoan = (Long) in.readValue(Long.class.getClassLoader());
         this.benName = in.readString();
         this.benID = in.readString();
@@ -164,10 +297,9 @@ public class BeneficiaryDetail implements Parcelable {
         this.subsidy = (Long) in.readValue(Long.class.getClassLoader());
         this.status = in.readString();
         this.statusValue = in.readString();
-        this.schemeType = in.readString();
     }
 
-    public static final Parcelable.Creator<BeneficiaryDetail> CREATOR = new Parcelable.Creator<BeneficiaryDetail>() {
+    public static final Creator<BeneficiaryDetail> CREATOR = new Creator<BeneficiaryDetail>() {
         @Override
         public BeneficiaryDetail createFromParcel(Parcel source) {
             return new BeneficiaryDetail(source);
