@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -11,20 +10,32 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Button
-        android:text="Sync Scheme DMV"
-        android:id="@+id/syncMandals"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/syncDMV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Scheme DMV" />
 
-    <Button
-        android:text="Sync Scheme Financial Years"
-        android:id="@+id/syncYears"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/syncYears"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Scheme Financial Years" />
+
+        <Button
+            android:id="@+id/syncInsRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Inspection Remarks" />
+
+        <Button
+            android:id="@+id/syncSchemes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sync Schemes" />
     </LinearLayout>
 </layout>

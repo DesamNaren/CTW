@@ -21,6 +21,6 @@ import java.util.List;
 public interface InspectionRemarksDao {
 
 
-    @Query("SELECT * from inspectionRemarks")
+    @Query("SELECT * from InspectionRemarksEntity")
     LiveData<List<InspectionRemarksEntity>> getInspectionRemarks();
 }

@@ -1,36 +1,29 @@
 package com.example.twdinspection.schemes.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.databinding.AdapterBenReportBinding;
 import com.example.twdinspection.databinding.SchemeInfoNamesBinding;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
-import com.example.twdinspection.schemes.ui.BenDetailsActivity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
-import java.util.Random;
 
 public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.ItemHolder> {
 
     private Context context;
-    private List<SchemesInfoEntity> list;
+    private List<SchemeEntity> list;
     private SchemeClickCallback schemeClickCallback;
     private int selectedPos=-1;
 
-    public SchemeInfoAdapter(Context context, List<SchemesInfoEntity> list) {
+    public SchemeInfoAdapter(Context context, List<SchemeEntity> list) {
         this.context = context;
         this.list = list;
         try {
@@ -53,7 +46,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
 
-        final SchemesInfoEntity dataModel = list.get(i);
+        final SchemeEntity dataModel = list.get(i);
         holder.listItemBinding.setSchemeInfo(dataModel);
 
         if(dataModel.isSelection()) {
@@ -70,7 +63,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
                 selectedPos = i;
                 notifyDataSetChanged();
                 dataModel.setSelection(true);
-                schemeClickCallback.onItemClick(String.valueOf(dataModel.getScheme_id()));
+                schemeClickCallback.onItemClick(String.valueOf(dataModel.getSchemeId()));
             }
         });
 

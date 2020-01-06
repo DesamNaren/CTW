@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
 import com.example.twdinspection.schemes.room.database.SchemesDatabase;
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class SchemesInfoRepository {
         schemesInfoDao = db.schemesInfoDao();
     }
 
-    public LiveData<List<SchemesInfoEntity>> getSchemesInfo() {
+    public LiveData<List<SchemeEntity>> getSchemesInfo() {
         return schemesInfoDao.getSchemesInfo();
     }
 

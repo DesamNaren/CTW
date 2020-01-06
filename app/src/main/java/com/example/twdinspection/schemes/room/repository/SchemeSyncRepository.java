@@ -10,7 +10,9 @@ import com.example.twdinspection.schemes.room.database.SchemesDatabase;
 import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -35,8 +37,17 @@ public class SchemeSyncRepository {
         new InsertVillageAsyncTask(dmvInterface, villageEntities).execute();
     }
 
-    public void insertFinYears(final SchemeDMVInterface dmvInterface, final List<FinancialYrsEntity> financialYrsEntities) {
+    public void insertFinYears(final SchemeDMVInterface dmvInterface, final List<FinancialYearsEntity> financialYrsEntities) {
         new InsertFinYearAsyncTask(dmvInterface, financialYrsEntities).execute();
+    }
+
+
+    public void insertInsRemarks(final SchemeDMVInterface dmvInterface, final List<InspectionRemarksEntity> inspectionRemarksEntities) {
+        new InsertInsRemarkAsyncTask(dmvInterface, inspectionRemarksEntities).execute();
+    }
+
+    public void insertSchemes(final SchemeDMVInterface dmvInterface, final List<SchemeEntity> schemeEntities) {
+        new InsertSchemeAsyncTask(dmvInterface, schemeEntities).execute();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -116,11 +127,11 @@ public class SchemeSyncRepository {
 
     @SuppressLint("StaticFieldLeak")
     private class InsertFinYearAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<FinancialYrsEntity> financialYrsEntities;
+        List<FinancialYearsEntity> financialYrsEntities;
         SchemeDMVInterface dmvInterface;
 
         InsertFinYearAsyncTask(SchemeDMVInterface dmvInterface,
-                                List<FinancialYrsEntity> financialYrsEntities) {
+                                List<FinancialYearsEntity> financialYrsEntities) {
             this.financialYrsEntities = financialYrsEntities;
             this.dmvInterface = dmvInterface;
         }
@@ -138,4 +149,55 @@ public class SchemeSyncRepository {
             dmvInterface.finYear(integer);
         }
     }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertInsRemarkAsyncTask extends AsyncTask<Void, Void, Integer> {
+        List<InspectionRemarksEntity> inspectionRemarksEntities;
+        SchemeDMVInterface dmvInterface;
+
+        InsertInsRemarkAsyncTask(SchemeDMVInterface dmvInterface,
+                               List<InspectionRemarksEntity> inspectionRemarksEntities) {
+            this.inspectionRemarksEntities = inspectionRemarksEntities;
+            this.dmvInterface = dmvInterface;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            syncDao.deleteInsRemarks();
+            syncDao.insertInsRemark(inspectionRemarksEntities);
+            return syncDao.insRemarksCount();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            dmvInterface.insRemCount(integer);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertSchemeAsyncTask extends AsyncTask<Void, Void, Integer> {
+        List<SchemeEntity> schemeEntities;
+        SchemeDMVInterface dmvInterface;
+
+        InsertSchemeAsyncTask(SchemeDMVInterface dmvInterface,
+                                 List<SchemeEntity> schemeEntities) {
+            this.schemeEntities = schemeEntities;
+            this.dmvInterface = dmvInterface;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            syncDao.deleteschemes();
+            syncDao.insertSchemes(schemeEntities);
+            return syncDao.schemeCount();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            dmvInterface.schemeCount(integer);
+        }
+    }
+
 }

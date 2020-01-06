@@ -52,8 +52,6 @@ public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract GeneralInfoDao generalInfoDao();
 
-    public abstract SchemeDmvDao dmvDao();
-
     private static DistrictDatabase INSTANCE1;
 
     public static DistrictDatabase getDatabase(final Context context) {

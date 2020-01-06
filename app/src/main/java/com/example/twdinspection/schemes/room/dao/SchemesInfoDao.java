@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ import java.util.List;
 
 @Dao
 public interface SchemesInfoDao {
-    @Query("SELECT * from schemesInfo")
-    LiveData<List<SchemesInfoEntity>> getSchemesInfo();
+    @Query("SELECT * from SchemeEntity")
+    LiveData<List<SchemeEntity>> getSchemesInfo();
 }

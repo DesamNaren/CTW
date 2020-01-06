@@ -9,37 +9,39 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
+import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SchemeSyncViewModel extends AndroidViewModel {
-    protected MutableLiveData<SchemeDMVResponse> schemeDMVResponseMutableLiveData;
-    protected MutableLiveData<FinancialYearResponse> financialYearResponseMutableLiveData;
+    private MutableLiveData<SchemeDMVResponse> schemeDMVResponseMutableLiveData;
+    private MutableLiveData<FinancialYearResponse> financialYearResponseMutableLiveData;
+    private MutableLiveData<InspectionRemarkResponse> inspectionRemarkResponseMutableLiveData;
+    private MutableLiveData<SchemeResponse> schemeResponseMutableLiveData;
 
     public SchemeSyncViewModel(Application application) {
         super(application);
         schemeDMVResponseMutableLiveData = new MutableLiveData<>();
         financialYearResponseMutableLiveData = new MutableLiveData<>();
+        inspectionRemarkResponseMutableLiveData = new MutableLiveData<>();
+        schemeResponseMutableLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<SchemeDMVResponse> getSchemeReposnse() {
+    public LiveData<SchemeDMVResponse> getSchemeDMVReposnse() {
         if (schemeDMVResponseMutableLiveData != null) {
-            getSchemeReposnseCall();
+            getSchemeDMVReposnseCall();
         }
         return schemeDMVResponseMutableLiveData;
     }
 
-    private void getSchemeReposnseCall() {
+    private void getSchemeDMVReposnseCall() {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeDMV().enqueue(new Callback<SchemeDMVResponse>() {
             @Override
@@ -91,6 +93,70 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<FinancialYearResponse> call, @NotNull Throwable t) {
+                Log.i("UU", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public LiveData<InspectionRemarkResponse> getInspectionRemarks() {
+        if (inspectionRemarkResponseMutableLiveData != null) {
+            getInspectionRemarksCall();
+        }
+        return inspectionRemarkResponseMutableLiveData;
+    }
+
+    private void getInspectionRemarksCall() {
+        TWDService twdService = TWDService.Factory.create("schemes");
+        twdService.getInspectionRemarks().enqueue(new Callback<InspectionRemarkResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<InspectionRemarkResponse> call, @NotNull Response<InspectionRemarkResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+                        inspectionRemarkResponseMutableLiveData.setValue(response.body());
+                    } else if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<InspectionRemarkResponse> call, @NotNull Throwable t) {
+                Log.i("UU", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public LiveData<SchemeResponse> getSchemeResponse() {
+        if (schemeResponseMutableLiveData != null) {
+            getSchemeResponseCall();
+        }
+        return schemeResponseMutableLiveData;
+    }
+
+    private void getSchemeResponseCall() {
+        TWDService twdService = TWDService.Factory.create("schemes");
+        twdService.getSchemeResponse().enqueue(new Callback<SchemeResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<SchemeResponse> call, @NotNull Response<SchemeResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+                        schemeResponseMutableLiveData.setValue(response.body());
+                    } else if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<SchemeResponse> call, @NotNull Throwable t) {
                 Log.i("UU", "onFailure: " + t.getMessage());
             }
         });

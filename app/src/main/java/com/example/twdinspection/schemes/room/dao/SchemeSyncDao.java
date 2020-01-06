@@ -7,7 +7,9 @@ import androidx.room.Query;
 import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -51,12 +53,30 @@ public interface SchemeSyncDao {
     @Query("SELECT COUNT(*) FROM SchemeVillage")
     int villageCount();
 
-    @Query("DELETE FROM FinancialYrsEntity")
+    @Query("DELETE FROM FinancialYearsEntity")
     void deleteFinYears();
 
     @Insert
-    void insertFinYears(List<FinancialYrsEntity> financialYrsEntities);
+    void insertFinYears(List<FinancialYearsEntity> financialYrsEntities);
 
-    @Query("SELECT COUNT(*) FROM FinancialYrsEntity")
+    @Query("SELECT COUNT(*) FROM FinancialYearsEntity")
     int finYearCount();
+
+    @Query("DELETE FROM InspectionRemarksEntity")
+    void deleteInsRemarks();
+
+    @Insert
+    void insertInsRemark(List<InspectionRemarksEntity> inspectionRemarksEntities);
+
+    @Query("SELECT COUNT(*) FROM InspectionRemarksEntity")
+    int insRemarksCount();
+
+    @Query("DELETE FROM SchemeEntity")
+    void deleteschemes();
+
+    @Insert
+    void insertSchemes(List<SchemeEntity> schemeEntities);
+
+    @Query("SELECT COUNT(*) FROM SchemeEntity")
+    int schemeCount();
 }

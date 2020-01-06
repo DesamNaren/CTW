@@ -17,7 +17,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
 import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -37,7 +37,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
     ArrayList<String> mandalNames;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    List<FinancialYrsEntity> finYearList;
+    List<FinancialYearsEntity> finYearList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,13 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         viewModel = new SchemesDMVViewModel(getApplication());
         schemesDMVActivityBinding.setViewModel(viewModel);
         schemesDMVActivityBinding.executePendingBindings();
+
+        schemesDMVActivityBinding.ivCal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SchemesDMVActivity.this, SchemeSyncActivity.class));
+            }
+        });
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -68,9 +75,11 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         finYearValues = new ArrayList<>();
         finYearList = new ArrayList<>();
 
-        viewModel.getFinancialYrs().observe(SchemesDMVActivity.this, new Observer<List<FinancialYrsEntity>>() {
+
+
+        viewModel.getFinancialYrs().observe(SchemesDMVActivity.this, new Observer<List<FinancialYearsEntity>>() {
             @Override
-            public void onChanged(List<FinancialYrsEntity> institutesEntities) {
+            public void onChanged(List<FinancialYearsEntity> institutesEntities) {
                 finYearList.addAll(institutesEntities);
                 if (finYearList != null && finYearList.size() > 0) {
                     finYearValues.add("-Select-");
@@ -106,6 +115,9 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         schemesDMVActivityBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 if (validateFields()) {
                     editor.putString(AppConstants.DIST_ID, selectedDistId);
                     editor.putString(AppConstants.MAN_ID, selectedManId);

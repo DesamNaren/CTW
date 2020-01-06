@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity
-public class FinancialYrsEntity {
+public class FinancialYearsEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

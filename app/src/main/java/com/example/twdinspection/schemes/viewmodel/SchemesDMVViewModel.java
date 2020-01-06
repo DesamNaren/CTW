@@ -10,7 +10,7 @@ import com.example.twdinspection.schemes.room.repository.SchemesDMVRepository;
 import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class SchemesDMVViewModel extends AndroidViewModel {
     private LiveData<List<SchemeDistrict>> districts;
     private LiveData<List<SchemeMandal>> mandals;
     private LiveData<List<SchemeVillage>> villages;
-    private LiveData<List<FinancialYrsEntity>> financialYrs;
+    private LiveData<List<FinancialYearsEntity>> financialYrs;
     private SchemesDMVRepository mRepository;
     private MutableLiveData<List<InspectionRemarksEntity>> iListMutableLiveData;
 
@@ -52,7 +52,7 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         return villages;
     }
 
-    public LiveData<List<FinancialYrsEntity>> getFinancialYrs() {
+    public LiveData<List<FinancialYearsEntity>> getFinancialYrs() {
         if (financialYrs != null) {
             financialYrs=mRepository.getFinancialYrs();
         }

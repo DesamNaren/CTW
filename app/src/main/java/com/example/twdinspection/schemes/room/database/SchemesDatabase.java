@@ -16,16 +16,16 @@ import com.example.twdinspection.schemes.room.dao.SchemesInfoDao;
 import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
-import com.example.twdinspection.schemes.source.finyear.FinancialYrsEntity;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {SchemesInfoEntity.class, FinancialYrsEntity.class,
+@Database(entities = {SchemeEntity.class, FinancialYearsEntity.class,
         InspectionRemarksEntity.class, SchemeDistrict.class, SchemeMandal.class, SchemeVillage.class},
         version = 1, exportSchema = false)
 public abstract class SchemesDatabase extends RoomDatabase {

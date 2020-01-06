@@ -10,4 +10,6 @@ public interface SchemeDMVInterface {
     void manCount(int cnt);
     void vilCount(int cnt);
     void finYear(int cnt);
+    void insRemCount(int cnt);
+    void schemeCount(int cnt);
 }

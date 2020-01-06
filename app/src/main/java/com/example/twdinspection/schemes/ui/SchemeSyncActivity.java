@@ -13,16 +13,17 @@ import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.example.twdinspection.schemes.interfaces.SchemeDMVInterface;
 import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
+import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 import com.example.twdinspection.schemes.viewmodel.SchemeSyncViewModel;
-
-import java.util.List;
 
 public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterface {
     private SchemeSyncRepository schemeSyncRepository;
     private SchemeDMVResponse schemeDMVResponse;
     private FinancialYearResponse financialYearResponse;
+    private InspectionRemarkResponse inspectionRemarkResponse;
+    private SchemeResponse schemeResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +36,10 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
         binding.executePendingBindings();
         schemeSyncRepository = new SchemeSyncRepository(getApplication());
 
-        binding.syncMandals.setOnClickListener(new View.OnClickListener() {
+        binding.syncDMV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               viewModel.getSchemeReposnse().observe(SchemeSyncActivity.this, new Observer<SchemeDMVResponse>() {
+               viewModel.getSchemeDMVReposnse().observe(SchemeSyncActivity.this, new Observer<SchemeDMVResponse>() {
                    @Override
                    public void onChanged(SchemeDMVResponse schemeDMVResponse) {
                        SchemeSyncActivity.this.schemeDMVResponse=schemeDMVResponse;
@@ -62,6 +63,51 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
                        }
                    }
                });
+            }
+        });
+
+        binding.syncInsRemarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.getInspectionRemarks().observe(SchemeSyncActivity.this, new Observer<InspectionRemarkResponse>() {
+                    @Override
+                    public void onChanged(InspectionRemarkResponse inspectionRemarkResponse) {
+                        SchemeSyncActivity.this.inspectionRemarkResponse=inspectionRemarkResponse;
+                        if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
+                            schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
+                        }
+                    }
+                });
+            }
+        });
+
+        binding.syncInsRemarks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.getInspectionRemarks().observe(SchemeSyncActivity.this, new Observer<InspectionRemarkResponse>() {
+                    @Override
+                    public void onChanged(InspectionRemarkResponse inspectionRemarkResponse) {
+                        SchemeSyncActivity.this.inspectionRemarkResponse=inspectionRemarkResponse;
+                        if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
+                            schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
+                        }
+                    }
+                });
+            }
+        });
+
+        binding.syncSchemes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.getSchemeResponse().observe(SchemeSyncActivity.this, new Observer<SchemeResponse>() {
+                    @Override
+                    public void onChanged(SchemeResponse schemeResponse) {
+                        SchemeSyncActivity.this.schemeResponse=schemeResponse;
+                        if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
+                            schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
+                        }
+                    }
+                });
             }
         });
     }
@@ -114,6 +160,36 @@ public class SchemeSyncActivity extends BaseActivity implements SchemeDMVInterfa
         try {
             if (cnt > 0) {
                 Log.i("F_CNT", "finCount: "+cnt);
+                startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
+                // Success Alert;
+            } else {
+                // onDataNotAvailable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insRemCount(int cnt) {
+        try {
+            if (cnt > 0) {
+                Log.i("IN_CNT", "finCount: "+cnt);
+                startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
+                // Success Alert;
+            } else {
+                // onDataNotAvailable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void schemeCount(int cnt) {
+        try {
+            if (cnt > 0) {
+                Log.i("SC_CNT", "finCount: "+cnt);
                 startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
                 // Success Alert;
             } else {

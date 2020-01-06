@@ -1,15 +1,14 @@
-package com.example.twdinspection.schemes.source.finyear;
-
-import java.util.List;
-
+package com.example.twdinspection.schemes.source.schemes;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FinancialYearResponse {
+import java.util.List;
 
-    @SerializedName("fin_years")
+public class SchemeResponse {
+
+    @SerializedName("schemes")
     @Expose
-    private List<FinancialYearsEntity> finYears = null;
+    private List<SchemeEntity> schemes = null;
     @SerializedName("status_Code")
     @Expose
     private String statusCode;
@@ -17,12 +16,12 @@ public class FinancialYearResponse {
     @Expose
     private String statusMessage;
 
-    public List<FinancialYearsEntity> getFinYears() {
-        return finYears;
+    public List<SchemeEntity> getSchemes() {
+        return schemes;
     }
 
-    public void setFinYears(List<FinancialYearsEntity> finYears) {
-        this.finYears = finYears;
+    public void setSchemes(List<SchemeEntity> schemes) {
+        this.schemes = schemes;
     }
 
     public String getStatusCode() {

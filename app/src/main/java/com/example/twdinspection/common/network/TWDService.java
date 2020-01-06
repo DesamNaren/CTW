@@ -6,6 +6,8 @@ import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
+import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
+import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,13 +62,16 @@ public interface TWDService {
     Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);
 
     @GET("getInspectionRemarks")
-    Call<SchemeRemarksResponse> getInspectionRemarks();
+    Call<InspectionRemarkResponse> getInspectionRemarks();
 
     @GET("getDMVMasters")
     Call<SchemeDMVResponse> getSchemeDMV();
 
     @GET("getFinancialYears")
     Call<FinancialYearResponse> getFinancialYears();
+
+    @GET("getSchemes")
+    Call<SchemeResponse> getSchemeResponse();
 
     //------------------- Login & Logout ----------------------------------------
 

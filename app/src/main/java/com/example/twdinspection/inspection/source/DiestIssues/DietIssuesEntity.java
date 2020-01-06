@@ -3059,4 +3059,68 @@ public class DietIssuesEntity {
     public void setBaadamGroundBal(Integer baadamGroundBal) {
         this.baadamGroundBal = baadamGroundBal;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
+
+    public Integer getpOilGroundBal() {
+        return pOilGroundBal;
+    }
+
+    public void setpOilGroundBal(Integer pOilGroundBal) {
+        this.pOilGroundBal = pOilGroundBal;
+    }
+
+    public Integer getpOilBookBal() {
+        return pOilBookBal;
+    }
+
+    public void setpOilBookBal(Integer pOilBookBal) {
+        this.pOilBookBal = pOilBookBal;
+    }
+
+    public Integer getgGDalBookBal() {
+        return gGDalBookBal;
+    }
+
+    public void setgGDalBookBal(Integer gGDalBookBal) {
+        this.gGDalBookBal = gGDalBookBal;
+    }
+
+    public Integer getgGDalGroundBal() {
+        return gGDalGroundBal;
+    }
+
+    public void setgGDalGroundBal(Integer gGDalGroundBal) {
+        this.gGDalGroundBal = gGDalGroundBal;
+    }
 }

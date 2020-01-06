@@ -17,9 +17,9 @@ import com.example.twdinspection.schemes.adapter.BenReportAdapter;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.interfaces.BenClickCallback;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
-import com.example.twdinspection.schemes.source.SchemesInfoEntity;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.example.twdinspection.schemes.viewmodel.BenReportViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -34,7 +34,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     ActivityBeneficiaryReportBinding beneficiaryReportBinding;
     private List<BeneficiaryDetail> beneficiaryDetailsMain;
     private List<BeneficiaryDetail> tempBeneficiaryDetails;
-    private List<SchemesInfoEntity> schemesInfoEntitiesMain;
+    private List<SchemeEntity> schemesInfoEntitiesMain;
     private BottomSheetDialog dialog;
 
     @Override
@@ -86,7 +86,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
     private SchemeInfoAdapter schemeInfoAdapter;
 
-    public void showSchemeDetails(List<SchemesInfoEntity> schemesInfoEntitiesMain) {
+    public void showSchemeDetails(List<SchemeEntity> schemesInfoEntitiesMain) {
         View view = getLayoutInflater().inflate(R.layout.scheme_bottom_sheet, null);
         RecyclerView filterRecyclerView = view.findViewById(R.id.schemeRV);
         dialog = new BottomSheetDialog(BeneficiaryReportActivity.this);
