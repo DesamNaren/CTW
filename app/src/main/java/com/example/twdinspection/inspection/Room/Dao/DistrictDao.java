@@ -12,7 +12,7 @@ import com.example.twdinspection.inspection.source.GeneralInformation.Institutes
 import java.util.List;
 
 /**
- * The Room Magic is in this file, where you map a Java method call to an SQL query.
+ * The Room Magic is in this file, where you map file_provider_paths Java method call to an SQL query.
  * <p>
  * When you are using complex data types, such as Date, you have to also supply type converters.
  * To keep this example basic, no types that require type converters are used.

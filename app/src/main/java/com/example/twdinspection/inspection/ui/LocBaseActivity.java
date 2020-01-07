@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,7 +59,7 @@ public class LocBaseActivity extends AppCompatActivity {
 
     // location updates interval - 10sec
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 0;
-
+    boolean flag= false;
     // fastest updates interval - 5 sec
     // location updates will be received if another app is requesting the locations
     // than your app can handle
@@ -77,11 +78,9 @@ public class LocBaseActivity extends AppCompatActivity {
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates = false;
 
-    private static final String TAG = LocBaseActivity.class.getSimpleName();
 
     String[] permissions = new String[]{
             ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE};
-    private int REQUEST_PERMISSION_CODE=100;
 
 
     @Override
@@ -91,7 +90,7 @@ public class LocBaseActivity extends AppCompatActivity {
         callPermissions();
     }
 
-    public void callPermissions() {
+    public boolean callPermissions() {
 
         Dexter.withActivity(this)
                 .withPermissions(permissions)
@@ -99,14 +98,18 @@ public class LocBaseActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
+                            flag= true;
                             mRequestingLocationUpdates = true;
                             init();
                             startLocationUpdates();
                         } else if (report.isAnyPermissionPermanentlyDenied()) {
+
+                            flag= false;
                             Utils.openSettings(LocBaseActivity.this);
                             Toast.makeText(LocBaseActivity.this, getString(R.string.all_per), Toast.LENGTH_SHORT).show();
 
                         } else if (report.getDeniedPermissionResponses().size() > 0) {
+                            flag= false;
                             customPerAlert();
                         }
 
@@ -117,6 +120,7 @@ public class LocBaseActivity extends AppCompatActivity {
                         token.continuePermissionRequest();
                     }
                 }).check();
+        return flag;
     }
 
     private void customPerAlert() {
@@ -125,18 +129,18 @@ public class LocBaseActivity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.setContentView(R.layout.info_dialog);
+                dialog.setContentView(R.layout.custom_alert_information);
                 dialog.setCancelable(false);
-                CustomFontTextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.dialog_message);
                 dialogMessage.setText(getString(R.string.plz_grant));
-                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
-                CustomFontTextView no = dialog.findViewById(R.id.BtnCancel);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                      callPermissions();
-                    }   
+                        callPermissions();
+                    }
                 });
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -240,23 +244,19 @@ public class LocBaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch (requestCode) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CHECK_SETTINGS) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    startLocationUpdates();
+                    break;
 
-            case REQUEST_CHECK_SETTINGS:
+                case Activity.RESULT_CANCELED:
+                    mRequestingLocationUpdates = false;
 
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        startLocationUpdates();
-                        break;
-
-                    case Activity.RESULT_CANCELED:
-                        mRequestingLocationUpdates = false;
-
-                        customPerAlert();
-                        break;
-                }
-
-                break;
+                    customPerAlert();
+                    break;
+            }
         }
     }
 
@@ -274,7 +274,6 @@ public class LocBaseActivity extends AppCompatActivity {
         super.onPause();
 
         if (mRequestingLocationUpdates) {
-            // pausing location updates
             stopLocationUpdates();
         }
     }

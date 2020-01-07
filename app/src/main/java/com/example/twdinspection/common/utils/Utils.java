@@ -43,7 +43,7 @@ public class Utils {
             intent.setData(uri);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
-//            activity.finish();
+            activity.finish();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,18 +57,18 @@ public class Utils {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 if (type.equalsIgnoreCase(AppConstants.SUCCESS)) {
-                    dialog.setContentView(R.layout.success_dialog1);
+                    dialog.setContentView(R.layout.custom_alert_success);
                 } else if (type.equalsIgnoreCase(AppConstants.FAILURE)) {
-                    dialog.setContentView(R.layout.error_dialog1);
+                    dialog.setContentView(R.layout.custom_alert_error);
                 } else if (type.equalsIgnoreCase(AppConstants.WARNING)) {
-                    dialog.setContentView(R.layout.warning_dialog1);
+                    dialog.setContentView(R.layout.custom_alert_warning);
                 } else {
-                    dialog.setContentView(R.layout.info_dialog);
+                    dialog.setContentView(R.layout.custom_alert_information);
                 }
                 dialog.setCancelable(false);
-                TextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
                 dialogMessage.setText(msg);
-                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

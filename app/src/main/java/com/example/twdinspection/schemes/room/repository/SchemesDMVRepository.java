@@ -28,7 +28,7 @@ public class SchemesDMVRepository {
         dmvDao = db.schemeDmvDao();
     }
 
-    // Room executes all queries on a separate thread.
+    // Room executes all queries on file_provider_paths separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<SchemeDistrict>> getDistricts() {
         LiveData<List<SchemeDistrict>> districts=dmvDao.getDistricts();

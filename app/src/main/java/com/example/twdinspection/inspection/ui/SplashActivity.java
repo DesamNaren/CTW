@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -153,12 +154,12 @@ public class SplashActivity extends AppCompatActivity {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.setContentView(R.layout.info_dialog);
+                dialog.setContentView(R.layout.custom_alert_information);
                 dialog.setCancelable(false);
-                CustomFontTextView dialogMessage = dialog.findViewById(R.id.tv_Msg);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.dialog_message);
                 dialogMessage.setText(getString(R.string.plz_grant));
-                CustomFontTextView yes = dialog.findViewById(R.id.BtnOk);
-                CustomFontTextView no = dialog.findViewById(R.id.BtnCancel);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

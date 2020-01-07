@@ -27,8 +27,9 @@
             android:textColor="@color/white" />
 
         <ImageView
+
             android:tint="@color/white"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:id="@+id/filet_iv"
             android:layout_width="20dp"

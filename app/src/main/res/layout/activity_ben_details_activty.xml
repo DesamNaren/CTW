@@ -13,12 +13,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <include
+            android:id="@+id/header"
+            layout="@layout/header_layout" />
 
 
         <ScrollView
             android:layout_marginBottom="@dimen/dimen_10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/header"
             android:layout_above="@+id/cl"
             android:background="@color/white">
 
@@ -369,6 +373,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_8dp"
                             android:visibility="gone" />
+
+                        <ImageView
+                            android:layout_marginBottom="@dimen/dimen_10dp"
+                            android:id="@+id/iv_cam"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/camera_per"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"/>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

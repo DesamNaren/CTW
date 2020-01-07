@@ -320,4 +320,6 @@
         <item>Uploaded Photographs</item>
         <!--        <item>Following escalation matrix was defined </item>-->
     </string-array>
+    <string name="Ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>
