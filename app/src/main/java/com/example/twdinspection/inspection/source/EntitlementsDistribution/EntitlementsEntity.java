@@ -2,9 +2,15 @@ package com.example.twdinspection.inspection.source.EntitlementsDistribution;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "EntitlementsInfo")
 public class EntitlementsEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
+
     @ColumnInfo()
     private String officer_id;
 
@@ -18,18 +24,158 @@ public class EntitlementsEntity {
     private String entitlements_provided;
 
     @ColumnInfo()
-    private String dress_count;
-
+    private String bedSheets;
 
     @ColumnInfo()
-    private String hait_cut_complted;
+    private String carpets;
 
+    @ColumnInfo()
+    private String uniforms;
+
+    @ColumnInfo()
+    private String sportsDress;
+
+    @ColumnInfo()
+    private String slippers;
+
+    @ColumnInfo()
+    private String nightDress;
+
+    @ColumnInfo()
+    private String schoolBags;
+
+    @ColumnInfo()
+    private String sanitaryNapkins;
+
+    @ColumnInfo()
+    private String notesSupplied;
+
+    @ColumnInfo()
+    private String PairOfDressDistributedCount;
+
+    @ColumnInfo()
+    private String cosmetic_distributed;
+
+    @ColumnInfo()
+    private String entitlementsUniforms;
+
+    @ColumnInfo()
+    private String hair_cut_complted;
 
     @ColumnInfo()
     private String last_haircut_date;
 
-    @ColumnInfo()
-    private String cosmetic_distributed;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
+
+    public String getBedSheets() {
+        return bedSheets;
+    }
+
+    public void setBedSheets(String bedSheets) {
+        this.bedSheets = bedSheets;
+    }
+
+    public String getCarpets() {
+        return carpets;
+    }
+
+    public void setCarpets(String carpets) {
+        this.carpets = carpets;
+    }
+
+    public String getUniforms() {
+        return uniforms;
+    }
+
+    public void setUniforms(String uniforms) {
+        this.uniforms = uniforms;
+    }
+
+    public String getSportsDress() {
+        return sportsDress;
+    }
+
+    public void setSportsDress(String sportsDress) {
+        this.sportsDress = sportsDress;
+    }
+
+    public String getSlippers() {
+        return slippers;
+    }
+
+    public void setSlippers(String slippers) {
+        this.slippers = slippers;
+    }
+
+    public String getNightDress() {
+        return nightDress;
+    }
+
+    public void setNightDress(String nightDress) {
+        this.nightDress = nightDress;
+    }
+
+    public String getSchoolBags() {
+        return schoolBags;
+    }
+
+    public void setSchoolBags(String schoolBags) {
+        this.schoolBags = schoolBags;
+    }
+
+    public String getSanitaryNapkins() {
+        return sanitaryNapkins;
+    }
+
+    public void setSanitaryNapkins(String sanitaryNapkins) {
+        this.sanitaryNapkins = sanitaryNapkins;
+    }
+
+    public String getNotesSupplied() {
+        return notesSupplied;
+    }
+
+    public void setNotesSupplied(String notesSupplied) {
+        this.notesSupplied = notesSupplied;
+    }
+
+    public String getPairOfDressDistributedCount() {
+        return PairOfDressDistributedCount;
+    }
+
+    public void setPairOfDressDistributedCount(String pairOfDressDistributedCount) {
+        PairOfDressDistributedCount = pairOfDressDistributedCount;
+    }
 
     public String getEntitlements_provided() {
         return entitlements_provided;
@@ -39,20 +185,20 @@ public class EntitlementsEntity {
         this.entitlements_provided = entitlements_provided;
     }
 
-    public String getDress_count() {
-        return dress_count;
+    public String getEntitlementsUniforms() {
+        return entitlementsUniforms;
     }
 
-    public void setDress_count(String dress_count) {
-        this.dress_count = dress_count;
+    public void setEntitlementsUniforms(String entitlementsUniforms) {
+        this.entitlementsUniforms = entitlementsUniforms;
     }
 
-    public String getHait_cut_complted() {
-        return hait_cut_complted;
+    public String getHair_cut_complted() {
+        return hair_cut_complted;
     }
 
-    public void setHait_cut_complted(String hait_cut_complted) {
-        this.hait_cut_complted = hait_cut_complted;
+    public void setHair_cut_complted(String hair_cut_complted) {
+        this.hair_cut_complted = hair_cut_complted;
     }
 
     public String getLast_haircut_date() {

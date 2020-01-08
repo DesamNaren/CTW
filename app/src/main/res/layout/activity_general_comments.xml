@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.GenCommentsViewModel" />
+
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +35,6 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
@@ -89,18 +96,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_time_fruits"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_time_fruits_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/food_time_fruits_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -144,18 +154,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_time_eggs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_time_eggs_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/food_time_eggs_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -201,18 +214,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_time_veg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_time_veg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/food_time_veg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -258,18 +274,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_time_provisions"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_time_provisions_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/food_time_provisions_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -346,18 +365,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_quality_fruits"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_fruits_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_fruits_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -401,18 +423,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_quality_eggs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_eggs_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_eggs_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -458,18 +483,20 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_quality_veg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-
                                 <RadioButton
+                                    android:id="@+id/food_quality_veg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_veg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -515,18 +542,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_food_quality_provisions"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_provisions_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
                                 <RadioButton
+                                    android:id="@+id/food_quality_provisions_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -556,45 +586,128 @@
                         android:text="93."
                         android:textColor="@color/black" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/iv_cal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/dimen_5dp"
-                            android:background="@android:drawable/ic_menu_my_calendar"
-                            android:backgroundTint="@color/list_blue" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_5dp"
-                            android:layout_marginTop="@dimen/dimen_10dp"
-                            android:textColorHint="@color/colorAccent"
-                            app:errorEnabled="true">
+                            android:layout_height="wrap_content">
 
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:background="@android:drawable/ic_menu_my_calendar"
+                                android:backgroundTint="@color/list_blue" />
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_general_comments_date"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/general_comments_date"
-                                android:imeOptions="actionNext"
-                                android:paddingLeft="@dimen/dimen_30dp"
-                                android:singleLine="true"
-                                android:text="@string/select_date" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
 
 
-                    </RelativeLayout>
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_gcc_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/gcc_date"
+                                    android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_30dp"
+                                    android:singleLine="true"
+                                    android:text="@string/select_date" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stocks_supplied"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_stocks_supplied"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/stocks_supplied_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/stocks_supplied_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:background="@android:drawable/ic_menu_my_calendar"
+                                android:backgroundTint="@color/list_blue" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_supplied_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/supplied_date"
+                                    android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_30dp"
+                                    android:singleLine="true"
+                                    android:text="@string/select_date" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -663,6 +776,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_haircut"
                                 android:orientation="horizontal">
 
 
@@ -670,12 +784,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/haircut_yes"
                                     android:text="@string/good" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/haircut_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -718,12 +834,14 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_students_found_anemic"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/students_found_anemic_yes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
@@ -731,6 +849,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/students_found_anemic_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -775,12 +894,14 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_attire_of_students"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/attire_of_students_yes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
@@ -788,6 +909,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/attire_of_students_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -863,6 +985,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_cooks_wearing_cap"
                                 android:orientation="horizontal">
 
 
@@ -870,12 +993,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/cooks_wearing_cap_yes"
                                     android:text="@string/good" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/cooks_wearing_cap_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -918,6 +1043,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_hands_of_cooking_staff"
                                 android:orientation="horizontal">
 
 
@@ -925,12 +1051,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/hands_of_cooking_staff_yes"
                                     android:text="@string/good" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/hands_of_cooking_staff_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -975,6 +1103,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_attire_of_staff"
                                 android:orientation="horizontal">
 
 
@@ -982,12 +1111,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/attire_of_staff_yes"
                                     android:text="@string/good" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/attire_of_staff_no"
                                     android:text="@string/inferior" />
 
                             </RadioGroup>
@@ -1063,6 +1194,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_toilets"
                                 android:orientation="horizontal">
 
 
@@ -1070,12 +1202,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/toilets_yes"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/toilets_no"
                                     android:text="@string/no" />
 
                             </RadioGroup>
@@ -1118,12 +1252,14 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_kitchen"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/kitchen_yes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1131,6 +1267,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/kitchen_no"
                                     android:text="@string/no" />
 
                             </RadioGroup>
@@ -1175,6 +1312,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_dormitory"
                                 android:orientation="horizontal">
 
 
@@ -1182,12 +1320,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/dormitory_yes"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/dormitory_no"
                                     android:text="@string/no" />
 
                             </RadioGroup>
@@ -1231,6 +1371,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_class_rooms"
                                 android:orientation="horizontal">
 
 
@@ -1238,12 +1379,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/class_rooms_yes"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/class_rooms_no"
                                     android:text="@string/no" />
 
                             </RadioGroup>
@@ -1286,6 +1429,7 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_running_water"
                                 android:orientation="horizontal">
 
 
@@ -1293,12 +1437,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/running_water_yes"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:id="@+id/running_water_no"
                                     android:text="@string/no" />
 
                             </RadioGroup>
@@ -1342,18 +1488,21 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_storeroom"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/storeroom_yes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/storeroom_no"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 

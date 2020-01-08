@@ -2,19 +2,32 @@ package com.example.twdinspection.inspection.source.RegistersUptoDate;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "RegistersInfo")
 public class RegistersEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
+
+    @ColumnInfo()
+    private String officer_id;
+
+    @ColumnInfo()
+    private String inspection_time;
+
+    @ColumnInfo()
+    private String institute_id;
+
     @ColumnInfo()
     private String admission_reg;
 
     @ColumnInfo()
     private String attendance_reg;
 
-
     @ColumnInfo()
     private String boarder_sign_reg;
-
 
     @ColumnInfo()
     private String boarder_movement_reg;
@@ -22,25 +35,20 @@ public class RegistersEntity {
     @ColumnInfo()
     private String daily_purchase_reg;
 
-
     @ColumnInfo()
     private String cash_book_reg;
-
 
     @ColumnInfo()
     private String daily_menu_reg;
 
-
     @ColumnInfo()
     private String attend_staff_reg;
-
 
     @ColumnInfo()
     private String staff_order_book;
 
-
     @ColumnInfo()
-    private String staff_issue_prov;
+    private String stock_issue_prov;
 
     @ColumnInfo()
     private String permanent_article;
@@ -86,6 +94,38 @@ public class RegistersEntity {
 
     @ColumnInfo()
     private String visit_book;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
 
     public String getAdmission_reg() {
         return admission_reg;
@@ -159,12 +199,12 @@ public class RegistersEntity {
         this.staff_order_book = staff_order_book;
     }
 
-    public String getStaff_issue_prov() {
-        return staff_issue_prov;
+    public String getStock_issue_prov() {
+        return stock_issue_prov;
     }
 
-    public void setStaff_issue_prov(String staff_issue_prov) {
-        this.staff_issue_prov = staff_issue_prov;
+    public void setStock_issue_prov(String stock_issue_prov) {
+        this.stock_issue_prov = stock_issue_prov;
     }
 
     public String getPermanent_article() {

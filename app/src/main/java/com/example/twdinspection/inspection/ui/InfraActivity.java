@@ -21,7 +21,7 @@ public class InfraActivity extends AppCompatActivity {
     InfraViewModel infraViewModel;
     InfraStructureEntity infrastuctureEntity;
     String drinkingWaterFacility = "", bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, lighting_facility, electricity_wiring, enough_fans, dining_hall;
-    String separate_kitchen_room_available, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
+    String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
     String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, painting;
 
     @Override
@@ -151,6 +151,17 @@ public class InfraActivity extends AppCompatActivity {
                     separate_kitchen_room_available = "YES";
                 else
                     separate_kitchen_room_available = "NO";
+            }
+        });
+
+        binding.rgConstructKitchenRoom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgConstructKitchenRoom.getCheckedRadioButtonId();
+                if (selctedItem == R.id.construct_kitchen_room_yes)
+                    construct_kitchen_room = "YES";
+                else
+                    construct_kitchen_room = "NO";
             }
         });
 
@@ -336,7 +347,7 @@ public class InfraActivity extends AppCompatActivity {
                 String mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
                 String repair_required = binding.etRepairRequired.getText().toString().trim();
                 String how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
-                String painting = binding.etPainting.getText().toString().trim();
+                String color = binding.etPainting.getText().toString().trim();
 
                 infrastuctureEntity = new InfraStructureEntity();
                 infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
@@ -346,8 +357,34 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setInverter_available(inverter_available);
                 infrastuctureEntity.setLighting_facility(lighting_facility);
                 infrastuctureEntity.setElectricity_wiring(electricity_wiring);
+                infrastuctureEntity.setEnough_fans(enough_fans);
+                infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
+                infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
+                infrastuctureEntity.setMountedfans_working(mountedFansWorking);
+                infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
+                infrastuctureEntity.setDininghall_available(dining_hall);
+                infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
+                infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
+                infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
+                infrastuctureEntity.setRepair_required(repair_required);
+                infrastuctureEntity.setHow_many_buildings(how_many_buildings);
+                infrastuctureEntity.setTransformer_available(transformer_available);
+                infrastuctureEntity.setPowerConnection_type(powerConnectionType);
+                infrastuctureEntity.setIndividual_connection(individual_connection);
+                infrastuctureEntity.setRunningWater_source(sourceOfDrinkingWater);
+                infrastuctureEntity.setRoad_required(road_required);
+                infrastuctureEntity.setCompWall_required(compWall_required);
+                infrastuctureEntity.setGate_required(gate_required);
+                infrastuctureEntity.setPathway_required(pathway_required);
+                infrastuctureEntity.setSump_required(sump_required);
+                infrastuctureEntity.setSewage_allowed(sewage_allowed);
+                infrastuctureEntity.setDrainage_functioning(drainage_functioning);
+                infrastuctureEntity.setHeater_available(heater_available);
+                infrastuctureEntity.setHeater_workingStatus(heater_workingStatus);
+                infrastuctureEntity.setPainting(painting);
+                infrastuctureEntity.setColor(color);
 
-                
+
                 startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
             }
         });

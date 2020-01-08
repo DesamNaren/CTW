@@ -2,9 +2,15 @@ package com.example.twdinspection.inspection.source.GeneralComments;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "GeneralCommentsInfo")
 public class GeneralCommentsEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
+
     @ColumnInfo()
     private String officer_id;
 
@@ -15,18 +21,16 @@ public class GeneralCommentsEntity {
     private String institute_id;
 
     @ColumnInfo()
-    private String food_provisions_supplied_on_time_fruits;
+    private String supplied_on_time_fruits;
 
     @ColumnInfo()
-    private String food_provisions_supplied_on_time_eggs;
-
-
-    @ColumnInfo()
-    private String food_provisions_supplied_on_time_vegetables;
-
+    private String supplied_on_time_eggs;
 
     @ColumnInfo()
-    private String food_provisions_supplied_on_time_food_provisions;
+    private String supplied_on_time_vegetables;
+
+    @ColumnInfo()
+    private String supplied_on_time_food_provisions;
 
     @ColumnInfo()
     private String quality_of_food_fruits;
@@ -41,7 +45,13 @@ public class GeneralCommentsEntity {
     private String quality_of_food_food_provisions;
 
     @ColumnInfo()
-    private String intent_supplied_date;
+    private String gcc_date;
+
+    @ColumnInfo()
+    private String supplied_date;
+
+    @ColumnInfo()
+    private String stocksSupplied;
 
     @ColumnInfo()
     private String hair_cut_onTime;
@@ -59,7 +69,7 @@ public class GeneralCommentsEntity {
     private String staff_hands_clean;
 
     @ColumnInfo()
-    private String staff_attire_appropriate;
+    private String staff_attire;
 
     @ColumnInfo()
     private String toilets_not_clean;
@@ -79,36 +89,85 @@ public class GeneralCommentsEntity {
     @ColumnInfo()
     private String storeroom_not_clean;
 
-    public String getFood_provisions_supplied_on_time_fruits() {
-        return food_provisions_supplied_on_time_fruits;
+
+    public String getGcc_date() {
+        return gcc_date;
     }
 
-    public void setFood_provisions_supplied_on_time_fruits(String food_provisions_supplied_on_time_fruits) {
-        this.food_provisions_supplied_on_time_fruits = food_provisions_supplied_on_time_fruits;
+    public void setGcc_date(String gcc_date) {
+        this.gcc_date = gcc_date;
     }
 
-    public String getFood_provisions_supplied_on_time_eggs() {
-        return food_provisions_supplied_on_time_eggs;
+    public String getStocksSupplied() {
+        return stocksSupplied;
     }
 
-    public void setFood_provisions_supplied_on_time_eggs(String food_provisions_supplied_on_time_eggs) {
-        this.food_provisions_supplied_on_time_eggs = food_provisions_supplied_on_time_eggs;
+    public void setStocksSupplied(String stocksSupplied) {
+        this.stocksSupplied = stocksSupplied;
     }
 
-    public String getFood_provisions_supplied_on_time_vegetables() {
-        return food_provisions_supplied_on_time_vegetables;
+    public int getId() {
+        return id;
     }
 
-    public void setFood_provisions_supplied_on_time_vegetables(String food_provisions_supplied_on_time_vegetables) {
-        this.food_provisions_supplied_on_time_vegetables = food_provisions_supplied_on_time_vegetables;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getFood_provisions_supplied_on_time_food_provisions() {
-        return food_provisions_supplied_on_time_food_provisions;
+    public String getOfficer_id() {
+        return officer_id;
     }
 
-    public void setFood_provisions_supplied_on_time_food_provisions(String food_provisions_supplied_on_time_food_provisions) {
-        this.food_provisions_supplied_on_time_food_provisions = food_provisions_supplied_on_time_food_provisions;
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
+
+    public String getSupplied_on_time_fruits() {
+        return supplied_on_time_fruits;
+    }
+
+    public void setSupplied_on_time_fruits(String supplied_on_time_fruits) {
+        this.supplied_on_time_fruits = supplied_on_time_fruits;
+    }
+
+    public String getSupplied_on_time_eggs() {
+        return supplied_on_time_eggs;
+    }
+
+    public void setSupplied_on_time_eggs(String supplied_on_time_eggs) {
+        this.supplied_on_time_eggs = supplied_on_time_eggs;
+    }
+
+    public String getSupplied_on_time_vegetables() {
+        return supplied_on_time_vegetables;
+    }
+
+    public void setSupplied_on_time_vegetables(String supplied_on_time_vegetables) {
+        this.supplied_on_time_vegetables = supplied_on_time_vegetables;
+    }
+
+    public String getSupplied_on_time_food_provisions() {
+        return supplied_on_time_food_provisions;
+    }
+
+    public void setSupplied_on_time_food_provisions(String supplied_on_time_food_provisions) {
+        this.supplied_on_time_food_provisions = supplied_on_time_food_provisions;
     }
 
     public String getQuality_of_food_fruits() {
@@ -143,12 +202,12 @@ public class GeneralCommentsEntity {
         this.quality_of_food_food_provisions = quality_of_food_food_provisions;
     }
 
-    public String getIntent_supplied_date() {
-        return intent_supplied_date;
+    public String getSupplied_date() {
+        return supplied_date;
     }
 
-    public void setIntent_supplied_date(String intent_supplied_date) {
-        this.intent_supplied_date = intent_supplied_date;
+    public void setSupplied_date(String supplied_date) {
+        this.supplied_date = supplied_date;
     }
 
     public String getHair_cut_onTime() {
@@ -191,12 +250,12 @@ public class GeneralCommentsEntity {
         this.staff_hands_clean = staff_hands_clean;
     }
 
-    public String getStaff_attire_appropriate() {
-        return staff_attire_appropriate;
+    public String getStaff_attire() {
+        return staff_attire;
     }
 
-    public void setStaff_attire_appropriate(String staff_attire_appropriate) {
-        this.staff_attire_appropriate = staff_attire_appropriate;
+    public void setStaff_attire(String staff_attire) {
+        this.staff_attire = staff_attire;
     }
 
     public String getToilets_not_clean() {

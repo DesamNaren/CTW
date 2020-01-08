@@ -2,9 +2,14 @@ package com.example.twdinspection.inspection.source.AcademicOverview;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "AcademicInfo")
 public class AcademicOveriewEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
 
     @ColumnInfo()
     private String officer_id;
@@ -28,10 +33,6 @@ public class AcademicOveriewEntity {
     private String plan_prepared;
 
     @ColumnInfo()
-    private String highest_class;
-
-
-    @ColumnInfo()
     private String highest_class_gradeA;
 
     @ColumnInfo()
@@ -47,6 +48,38 @@ public class AcademicOveriewEntity {
 
     @ColumnInfo()
     private String assessment_test_conducted;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getOfficer_id() {
+        return officer_id;
+    }
+
+    public void setOfficer_id(String officer_id) {
+        this.officer_id = officer_id;
+    }
+
+    public String getInspection_time() {
+        return inspection_time;
+    }
+
+    public void setInspection_time(String inspection_time) {
+        this.inspection_time = inspection_time;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
 
     public String getHighest_class_syllabus_completed() {
         return highest_class_syllabus_completed;
@@ -78,14 +111,6 @@ public class AcademicOveriewEntity {
 
     public void setPlan_prepared(String plan_prepared) {
         this.plan_prepared = plan_prepared;
-    }
-
-    public String getHighest_class() {
-        return highest_class;
-    }
-
-    public void setHighest_class(String highest_class) {
-        this.highest_class = highest_class;
     }
 
     public String getHighest_class_gradeA() {

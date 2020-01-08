@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "InfraStructureInfo")
 public class InfraStructureEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -45,9 +45,6 @@ public class InfraStructureEntity {
     private String enough_fans;
 
     @ColumnInfo()
-    private String ceilingfans_count;
-
-    @ColumnInfo()
     private String ceilingfans_working;
 
     @ColumnInfo()
@@ -76,12 +73,6 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String how_many_buildings;
-
-    @ColumnInfo()
-    private String dininghall_used;
-
-    @ColumnInfo()
-    private String buildings_dilapidatedState;
 
     @ColumnInfo()
     private String transformer_available;
@@ -124,12 +115,15 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String heater_workingStatus;
-
+    //
     @ColumnInfo()
     private String additional_infra_required;
 
     @ColumnInfo()
     private String painting;
+
+    @ColumnInfo()
+    private String color;
 
     public int getId() {
         return id;
@@ -211,14 +205,6 @@ public class InfraStructureEntity {
         this.enough_fans = enough_fans;
     }
 
-    public String getCeilingfans_count() {
-        return ceilingfans_count;
-    }
-
-    public void setCeilingfans_count(String ceilingfans_count) {
-        this.ceilingfans_count = ceilingfans_count;
-    }
-
     public String getCeilingfans_working() {
         return ceilingfans_working;
     }
@@ -241,22 +227,6 @@ public class InfraStructureEntity {
 
     public void setDininghall_available(String dininghall_available) {
         this.dininghall_available = dininghall_available;
-    }
-
-    public String getDininghall_used() {
-        return dininghall_used;
-    }
-
-    public void setDininghall_used(String dininghall_used) {
-        this.dininghall_used = dininghall_used;
-    }
-
-    public String getBuildings_dilapidatedState() {
-        return buildings_dilapidatedState;
-    }
-
-    public void setBuildings_dilapidatedState(String buildings_dilapidatedState) {
-        this.buildings_dilapidatedState = buildings_dilapidatedState;
     }
 
     public String getTransformer_available() {
@@ -457,5 +427,13 @@ public class InfraStructureEntity {
 
     public void setPainting(String painting) {
         this.painting = painting;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

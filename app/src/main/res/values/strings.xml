@@ -96,7 +96,7 @@
     <string name="repairs_to_toilets">No of Toilets</string>
     <string name="repairs_to_door">Door and window repairs</string>
     <string name="whether_highest">Whether (Highest class) syllabus completed as per schedule in all subjects?</string>
-    <string name="is_strength">Is the strength accommodtaed as per infrastructure availability</string>
+    <string name="is_strength">Is the strength accommodated as per infrastructure availability</string>
     <string name="does_staff">Does staff strength accommodate as per student strength</string>
     <string name="is_school">Is school plan for next academic year is prepared</string>
     <string name="does_any_assessment">Does any assessment tests conducted</string>
@@ -189,7 +189,9 @@
     <string name="class_rooms_not_clean">Class rooms not clean</string>
     <string name="running_water_available_to_toilets">Running water available to toilets</string>
     <string name="store_room_not_clean">Store room not clean</string>
-    <string name="general_comments_date">Date of lasted intent raised by GCC or other supplier and whether the stock is supplied as per the intent or not and capture supplied date.</string>
+    <string name="gcc_date">Date of lasted intent raised by GCC or other supplier</string>
+    <string name="stocks_supplied">whether the stock is supplied as per the intent or not</string>
+    <string name="supplied_date">capture supplied date</string>
     <string name="completed">COMPLETED</string>
     <string name="all_per">Allow permission from settings</string>
     <string name="loc_sett">Location settings are inadequate, and cannot be fixed here. Fix in Settings.</string>

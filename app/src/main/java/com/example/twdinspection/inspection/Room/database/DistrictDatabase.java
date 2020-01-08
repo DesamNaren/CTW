@@ -9,21 +9,29 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.DietIssuesInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.DistrictDao;
+import com.example.twdinspection.inspection.Room.Dao.EntitlementsInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.GenCommentsInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.GeneralInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.InfraStructureInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
 import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.DistManVillage.Districts;
 import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
 import com.example.twdinspection.inspection.source.DistManVillage.Villages;
+import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInformationEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
@@ -35,7 +43,8 @@ import com.example.twdinspection.schemes.room.dao.SchemeDmvDao;
 
 @Database(entities = {Districts.class, Mandals.class, Villages.class, StudAttendInfoEntity.class,
         InstitutesEntity.class, StaffAttendanceEntity.class, MedicalInfoEntity.class, DietIssuesEntity.class,
-        InfraStructureEntity.class,GeneralInformationEntity.class}, version = 1, exportSchema = false)
+        InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
+        RegistersEntity.class, GeneralCommentsEntity.class, GeneralInformationEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
@@ -47,6 +56,14 @@ public abstract class DistrictDatabase extends RoomDatabase {
     public abstract InfraStructureInfoDao infraStructureInfoDao();
 
     public abstract DietIssuesInfoDao dietIssuesInfoDao();
+
+    public abstract AcademicInfoDao academicInfoDao();
+
+    public abstract EntitlementsInfoDao entitlementsInfoDao();
+
+    public abstract RegistersInfoDao registersInfoDao();
+
+    public abstract GenCommentsInfoDao genCommentsInfoDao();
 
     public abstract StaffInfoDao staffInfoDao();
 
