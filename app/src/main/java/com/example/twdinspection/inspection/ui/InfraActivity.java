@@ -23,7 +23,7 @@ public class InfraActivity extends AppCompatActivity {
     InfraStructureEntity infrastuctureEntity;
     String drinkingWaterFacility = "", bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
-    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus,repairs_to_door, painting;
+    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting,electricity_wiring_repairs_req;
 
     @Override
 
@@ -62,22 +62,18 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
-                if (selctedItem == R.id.ro_plant_yes)
+                if (selctedItem == R.id.ro_plant_yes) {
                     roPlant = "YES";
-                else
+                    binding.llTdsMeterReading.setVisibility(View.VISIBLE);
+                    binding.llReason.setVisibility(View.GONE);
+                } else {
                     roPlant = "NO";
+                    binding.llTdsMeterReading.setVisibility(View.GONE);
+                    binding.llReason.setVisibility(View.VISIBLE);
+                }
             }
         });
-        binding.rgRoPlant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
-                if (selctedItem == R.id.ro_plant_yes)
-                    roPlant = "YES";
-                else
-                    roPlant = "NO";
-            }
-        });
+
         binding.rgSourceOfDrinkingWater.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -96,10 +92,13 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgIsInverterAvailable.getCheckedRadioButtonId();
-                if (selctedItem == R.id.is_inverter_available_yes)
+                if (selctedItem == R.id.is_inverter_available_yes) {
                     inverter_available = "YES";
-                else
+                    binding.llInverterWorkingStatus.setVisibility(View.VISIBLE);
+                } else {
                     inverter_available = "NO";
+                    binding.llInverterWorkingStatus.setVisibility(View.GONE);
+                }
             }
         });
         binding.rgInverterWorkingStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -127,10 +126,24 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgElectricityWiring.getCheckedRadioButtonId();
-                if (selctedItem == R.id.electricity_wiring_yes)
+                if (selctedItem == R.id.electricity_wiring_yes) {
                     electricity_wiring = "YES";
-                else
+                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
+                }
+                else {
                     electricity_wiring = "NO";
+                    binding.llElectricityWiringRepairsReq.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        binding.rgElectricityWiringRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgElectricityWiringRepairsReq.getCheckedRadioButtonId();
+                if (selctedItem == R.id.electricity_wiring_repairs_req_yes)
+                    electricity_wiring_repairs_req = "YES";
+                else
+                    electricity_wiring_repairs_req = "NO";
             }
         });
         binding.rgEnoughFans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -336,7 +349,7 @@ public class InfraActivity extends AppCompatActivity {
             }
         });
 
-     binding.rgRepairsToDoor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.rgRepairsToDoor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgRepairsToDoor.getCheckedRadioButtonId();
@@ -363,6 +376,7 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String roplant_reason = binding.etReason.getText().toString().trim();
                 String ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
                 String ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
                 String mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
@@ -381,11 +395,13 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
                 infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
                 infrastuctureEntity.setRo_plant_woking(roPlant);
+                infrastuctureEntity.setRo_plant_reason(roplant_reason);
                 infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
                 infrastuctureEntity.setInverter_available(inverter_available);
                 infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
                 infrastuctureEntity.setLighting_facility(lighting_facility);
                 infrastuctureEntity.setElectricity_wiring(electricity_wiring);
+                infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
                 infrastuctureEntity.setEnough_fans(enough_fans);
                 infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
                 infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);

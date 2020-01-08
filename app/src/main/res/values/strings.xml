@@ -284,6 +284,7 @@
     <string name="is_inverter_available">Is Inverter available</string>
     <string name="inverter_working_status">Inverter working status</string>
     <string name="whether_electricity_wiring_switch_board_are_good">Whether electricity wiring, switch board are good.</string>
+    <string name="repairs_required">repairs required</string>
     <string name="separate_kitchen_room_available">Separate kitchen room available</string>
     <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for construct kitchen room</string>
     <string name="is_it_in_good_condition">Is it in good condition</string>
