@@ -1,7 +1,9 @@
 package com.example.twdinspection.common.network;
 
 
+import com.example.twdinspection.BuildConfig;
+
 class TWDURL {
-    static String TWD_BASE_URL = "http://10.2.24.11:8080/inspectionCTWWebservice/CTWServiceDetails/";
-    static String SCHEME_BASE_URL = "http://uat4.cgg.gov.in/TSOBMMSWebServices/";
+    static String TWD_BASE_URL = BuildConfig.SERVER_URL;
+    static String SCHEME_BASE_URL = BuildConfig.SCHEME_SERVER_URL;
 }

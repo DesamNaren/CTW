@@ -13,6 +13,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
+
+    signingConfigs {
+        release {
+            storeFile file("ctw.jks")
+            storePassword "cggmapps"
+            keyAlias "cggmapps"
+            keyPassword "cggmapps"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -27,7 +37,40 @@ android {
     dataBinding {
         enabled = true
     }
+
+
+    buildTypes {
+        release {
+            buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
+            buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            buildConfigField("String", "SERVER_URL", "\"http://dev2.cgg.gov.in/InspectionAppServices/\"")
+            buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            signingConfig signingConfigs.release
+        }
+
+        qa {
+            buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
+            buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            signingConfig signingConfigs.release
+            debuggable true
+        }
+        uat {
+            buildConfigField("String", "SERVER_URL", "\"http://uat2.cgg.gov.in/InspectionAppServices/\"")
+            buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            signingConfig signingConfigs.release
+            debuggable true
+        }
+    }
 }
+
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -73,3 +116,5 @@ dependencies {
     implementation 'com.chaos.view:pinview:1.4.3'
 
 }
+
+

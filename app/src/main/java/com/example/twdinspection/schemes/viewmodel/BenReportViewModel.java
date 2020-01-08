@@ -1,16 +1,18 @@
 package com.example.twdinspection.schemes.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
+import android.content.Context;
+import android.view.View;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.room.repository.SchemesInfoRepository;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
 import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
@@ -23,19 +25,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BenReportViewModel extends AndroidViewModel {
-    private MutableLiveData<List<BeneficiaryDetail>> beneficiaryLiveData;
+public class BenReportViewModel extends ViewModel {
+    private MutableLiveData<BeneficiaryReport> beneficiaryLiveData;
     private LiveData<List<SchemeEntity>> schemesMutableLiveData;
     private SchemesInfoRepository schemesInfoRepository;
+    private ErrorHandlerInterface errorHandlerInterface;
+    private Context context;
+    private ActivityBeneficiaryReportBinding binding;
 
-    public BenReportViewModel(Application application) {
-        super(application);
+
+    BenReportViewModel(ActivityBeneficiaryReportBinding binding, Context context) {
+        this.binding = binding;
+        this.context= context;
         beneficiaryLiveData = new MutableLiveData<>();
         schemesMutableLiveData = new MutableLiveData<>();
-        schemesInfoRepository= new SchemesInfoRepository(application);
+        schemesInfoRepository = new SchemesInfoRepository(context);
+        try {
+            errorHandlerInterface = (ErrorHandlerInterface) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public LiveData<List<BeneficiaryDetail>> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
+    public LiveData<BeneficiaryReport> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
         if (beneficiaryLiveData != null) {
             getBeneficiaryDetails(beneficiaryRequest);
         }
@@ -50,30 +62,21 @@ public class BenReportViewModel extends AndroidViewModel {
     }
 
     private void getBeneficiaryDetails(BeneficiaryRequest beneficiaryRequest) {
+        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getBeneficiaryDetails(beneficiaryRequest.getDistId(), beneficiaryRequest.getMandalId(), beneficiaryRequest.getVillageId(), beneficiaryRequest.getFinYearId()).enqueue(new Callback<BeneficiaryReport>() {
             @Override
             public void onResponse(@NotNull Call<BeneficiaryReport> call, @NotNull Response<BeneficiaryReport> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                        if (response.body().getBeneficiaryDetails() != null && response.body().getBeneficiaryDetails().size() > 0) {
-                            List<BeneficiaryDetail> beneficiaryDetails = response.body().getBeneficiaryDetails();
-                            beneficiaryLiveData.setValue(beneficiaryDetails);
-                        }
-                    } else if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-
-                    } else {
-
-                    }
-                } else {
-
-                }
+                binding.progress.setVisibility(View.GONE);
+                beneficiaryLiveData.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<BeneficiaryReport> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                binding.progress.setVisibility(View.GONE);
+                errorHandlerInterface.handleError(t, context);
             }
         });
     }
+
 }

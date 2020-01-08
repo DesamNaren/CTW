@@ -49,8 +49,6 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    int permissionCheck = ContextCompat.checkSelfPermission(
-                            SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
                     int permissionCheck1 = ContextCompat.checkSelfPermission(
                             SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                     int permissionCheck2 = ContextCompat.checkSelfPermission(
@@ -59,8 +57,7 @@ public class SplashActivity extends AppCompatActivity {
                             SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
 
-                    if ((permissionCheck != PackageManager.PERMISSION_GRANTED)
-                            && (permissionCheck1 != PackageManager.PERMISSION_GRANTED)
+                    if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
                             && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
                             && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)) {
 
@@ -90,7 +87,7 @@ public class SplashActivity extends AppCompatActivity {
                 switch (view.getId()) {
                     case R.id.accept:
                         ActivityCompat.requestPermissions(SplashActivity.this,
-                                new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION
                                         , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSION_CODE);
                         break;
@@ -117,10 +114,9 @@ public class SplashActivity extends AppCompatActivity {
             switch (requestCode) {
                 case REQUEST_PERMISSION_CODE:
 
-                    if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)
                             && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[3] == PackageManager.PERMISSION_GRANTED)) {
+                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
                         //TODO
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -165,7 +161,7 @@ public class SplashActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         dialog.dismiss();
                         ActivityCompat.requestPermissions(SplashActivity.this,
-                                new String[]{Manifest.permission.READ_PHONE_STATE,
+                                new String[]{
                                         Manifest.permission.ACCESS_FINE_LOCATION
                                         , Manifest.permission.CAMERA
                                         , Manifest.permission.WRITE_EXTERNAL_STORAGE},

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityDashboardBinding;
@@ -12,7 +15,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
-public class DashboardActivity extends BaseActivity {
+public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -21,7 +24,14 @@ public class DashboardActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_dashboard, getResources().getString(R.string.dashboard));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
+        binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -36,12 +46,12 @@ public class DashboardActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
-            }
-        });
+//        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+//            }
+//        });
 
         binding.btnSchemes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +62,9 @@ public class DashboardActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+    public void onBackPressed() {
+        Utils.customExitAlert(this,
+                getResources().getString(R.string.app_name),
+                getString(R.string.exit_msg));
     }
 }

@@ -22,7 +22,10 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
@@ -63,7 +66,7 @@ public interface TWDService {
 
     }
 
-    @GET("validateLogin")
+    @GET("CTWServiceDetails/validateLogin")
     Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
 
     @GET("getBenificiaryDetails")
@@ -81,9 +84,10 @@ public interface TWDService {
     @GET("getSchemes")
     Call<SchemeResponse> getSchemeResponse();
 
-    @POST("submitSchemeInspectionDetails")
+    @POST("CTWSubmitDetails/submitSchemeInspectionDetails")
     Call<SchemeSubmitResponse> getSchemeSubmitResponse(@Body SchemeSubmitRequest schemeSubmitRequest);
 
+    @Multipart
     @POST("upload/uploadSchemePhotos")
     Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image);
 

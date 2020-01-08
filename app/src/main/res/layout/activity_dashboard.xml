@@ -15,7 +15,9 @@
         android:layout_height="200dp"
         android:background="@color/list_blue" />
 
-
+    <include
+        android:id="@+id/header"
+        layout="@layout/action_bar_layout" />
 
     <RelativeLayout
         android:id="@+id/rl_profile"
@@ -87,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:layout_weight="1"
+                    android:padding="@dimen/dimen_10dp"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="5dp">
 
@@ -94,8 +97,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_10dp"
+                        android:id="@+id/btn_schemes"
                         android:gravity="center"
-                        android:id="@+id/btn_instInsp"
                         android:orientation="vertical">
 
                         <ImageView
@@ -105,15 +108,17 @@
                             android:background="@drawable/medical"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
-                            android:src="@drawable/inspection" />
+                            android:src="@drawable/schemes" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Institute Inspection"
+                            android:text="Schemes"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+
 
 
                 <androidx.cardview.widget.CardView
@@ -162,7 +167,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dimen_10dp"
                     android:layout_weight="1"
-                    android:padding="@dimen/dimen_10dp"
                     app:cardCornerRadius="6dp"
                     app:cardElevation="5dp">
 
@@ -170,23 +174,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_10dp"
-                        android:id="@+id/btn_schemes"
                         android:gravity="center"
+                        android:id="@+id/btn_instInsp"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dimen_70dp"
                             android:layout_height="@dimen/dimen_70dp"
                             android:layout_margin="@dimen/dimen_10dp"
-                            android:background="@drawable/medical"
+                            android:background="@drawable/disabled"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
-                            android:src="@drawable/schemes" />
+                            android:src="@drawable/inspection" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Schemes"
+                            android:text="Institute Inspection"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

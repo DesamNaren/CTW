@@ -1,5 +1,6 @@
 package com.example.twdinspection.schemes.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -19,17 +20,23 @@ import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
+import com.example.twdinspection.schemes.viewmodel.BenCustomDetailViewModel;
 import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -44,7 +51,7 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class BenDetailsActivity extends LocBaseActivity {
+public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerInterface, SchemeSubmitInterface {
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ActivityBenDetailsActivtyBinding benDetailsBinding;
@@ -74,13 +81,18 @@ public class BenDetailsActivity extends LocBaseActivity {
         try {
             beneficiaryDetail = getIntent().getParcelableExtra(AppConstants.BEN_DETAIL);
             if (beneficiaryDetail != null) {
-                viewModel = new BenDetailsViewModel(getApplication(), beneficiaryDetail);
+                viewModel =
+                        ViewModelProviders.of(this,
+                                new BenCustomDetailViewModel(beneficiaryDetail, benDetailsBinding, this))
+                                .get(BenDetailsViewModel.class);
+
                 benDetailsBinding.setViewModel(viewModel);
                 benDetailsBinding.executePendingBindings();
             } else {
-                //something went wrong ..
+                Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -107,6 +119,7 @@ public class BenDetailsActivity extends LocBaseActivity {
             String finValue = sharedPreferences.getString(AppConstants.SCHEME_FIN_YEAR, "");
             beneficiaryDetail.setFinYear(finValue);
         } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -125,6 +138,8 @@ public class BenDetailsActivity extends LocBaseActivity {
                             android.R.layout.simple_spinner_dropdown_item, remarks
                     );
                     benDetailsBinding.remarksSP.setAdapter(adapter);
+                } else {
+                    callSnackBar(getResources().getString(R.string.no_remarks));
                 }
             }
         });
@@ -187,7 +202,6 @@ public class BenDetailsActivity extends LocBaseActivity {
         benDetailsBinding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Submit Call
 
                 if (TextUtils.isEmpty(fieldSelVal)) {
                     Snackbar.make(benDetailsBinding.cl, "Please select online status value", Snackbar.LENGTH_SHORT).show();
@@ -229,51 +243,17 @@ public class BenDetailsActivity extends LocBaseActivity {
         schemeSubmitRequest.setRemarksId(String.valueOf(selectedRemId));
         schemeSubmitRequest.setRemarksType(benDetailsBinding.remarksSP.getSelectedItem().toString());
 
-        viewModel.getSchemeSubmitResponse(schemeSubmitRequest).observe(this, new Observer<SchemeSubmitResponse>() {
-            @Override
-            public void onChanged(SchemeSubmitResponse schemeSubmitResponse) {
-                if (schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-                    FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
-
-                    File file = new File(FilePath);
-                    RequestBody requestFile =
-                            RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                    MultipartBody.Part body =
-                            MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-//                    progressDialog = new ProgressDialog(UpdateLocationActivity.this);
-//                    progressDialog.show();
-//                    progressDialog.setMessage("Loading...");
-//                    progressDialog.setCancelable(false);
-
-
-//                    if (Utils.checkInternetConnection(UpdateLocationActivity.this)) {
-                    callUploadPhoto(body);
-//                    } else {
-//                        progressDialog.dismiss();
-//                        Utils.showAlert(UpdateLocationActivity.this, getResources().getString(R.string.app_name),
-//                                "No internet connection", false);
-//                    }
-                } else {
-                    Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+        viewModel.submitSchemeDetails(schemeSubmitRequest);
 
     }
 
 
     void callUploadPhoto(final MultipartBody.Part body) {
-        viewModel.getSchemePhotoSubmitResponse(body).observe(this, new Observer<SchemePhotoSubmitResponse>() {
-            @Override
-            public void onChanged(SchemePhotoSubmitResponse schemeSubmitResponse) {
-                if (schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-                    Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
+        viewModel.UploadImageServiceCall(body);
+    }
+
+    private void CallSuccessAlert(String msg) {
+        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 
     public Uri getOutputMediaFileUri(int type) {
@@ -314,15 +294,9 @@ public class BenDetailsActivity extends LocBaseActivity {
     public void updateLocationUI() {
         super.updateLocationUI();
     }
-//
-//    @Override
-//    public boolean callPermissions() {
-//        return super.callPermissions();
-//    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -355,12 +329,60 @@ public class BenDetailsActivity extends LocBaseActivity {
             }
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
         image.compress(compressFormat, quality, byteArrayOS);
         return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(benDetailsBinding.root, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+
+        snackbar.show();
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        String errMsg = ErrorHandler.handleError(e, context);
+        callSnackBar(errMsg);
+    }
+
+    @Override
+    public void getData(SchemeSubmitResponse schemeSubmitResponse) {
+        if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
+
+            File file = new File(FilePath);
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("", file.getName(), requestFile);
+            callUploadPhoto(body);
+        } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+
+        } else {
+            Snackbar.make(benDetailsBinding.cl, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
+        if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            CallSuccessAlert(schemePhotoSubmitResponse.getStatusMessage());
+        } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            Snackbar.make(benDetailsBinding.cl, schemePhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(benDetailsBinding.cl, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

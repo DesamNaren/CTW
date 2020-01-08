@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,15 +17,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginViewModel;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 
-public class LoginActivity extends LocBaseActivity {
+public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
     private SharedPreferences.Editor editor;
 
@@ -43,7 +46,7 @@ public class LoginActivity extends LocBaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+
 
         loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
             @Override
@@ -57,9 +60,15 @@ public class LoginActivity extends LocBaseActivity {
                         editor.commit();
 
                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                    } else {
+                        finish();
+                    } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
                         Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        callSnackBar(getString(R.string.something));
                     }
+                } else {
+                    callSnackBar(getString(R.string.something));
+
                 }
             }
         });
@@ -67,6 +76,25 @@ public class LoginActivity extends LocBaseActivity {
         binding.etName.addTextChangedListener(new GenericTextWatcher(binding.etName));
         binding.etPwd.addTextChangedListener(new GenericTextWatcher(binding.etPwd));
 
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        String errMsg = ErrorHandler.handleError(e, context);
+        callSnackBar(errMsg);
+    }
+
+    void callSnackBar(String msg){
+        Snackbar snackbar = Snackbar.make(binding.rlRoot, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+
+        snackbar.show();
     }
 
     private class GenericTextWatcher implements TextWatcher {

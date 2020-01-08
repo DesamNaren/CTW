@@ -1,14 +1,16 @@
 package com.example.twdinspection.schemes.viewmodel;
 
-import android.app.Application;
-import android.util.Log;
+import android.content.Context;
+import android.view.View;
 
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.example.twdinspection.schemes.room.repository.InspectionRemarksRepository;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
@@ -21,24 +23,34 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BenDetailsViewModel extends AndroidViewModel {
+public class BenDetailsViewModel extends ViewModel {
     public BeneficiaryDetail beneficiaryDetail;
     private LiveData<List<InspectionRemarksEntity>> inspectionRemarks = new MutableLiveData<>();
     private MutableLiveData<SchemeSubmitResponse> schemeSubmitResponseMutableLiveData;
     private MutableLiveData<SchemePhotoSubmitResponse> schemePhotoSubmitResponseMutableLiveData;
     private InspectionRemarksRepository remarksRepository;
+    private Context context;
+    private ActivityBenDetailsActivtyBinding benDetailsActivtyBinding;
+    private ErrorHandlerInterface errorHandlerInterface;
+    private SchemeSubmitInterface schemeSubmitInterface;
 
-    public BenDetailsViewModel(Application application, BeneficiaryDetail beneficiaryDetail) {
-        super(application);
+    BenDetailsViewModel(BeneficiaryDetail beneficiaryDetail,
+                        ActivityBenDetailsActivtyBinding benDetailsActivtyBinding,
+                        Context context) {
+
+        this.context = context;
         this.beneficiaryDetail = beneficiaryDetail;
+        this.benDetailsActivtyBinding = benDetailsActivtyBinding;
+
         schemeSubmitResponseMutableLiveData = new MutableLiveData<>();
         schemePhotoSubmitResponseMutableLiveData = new MutableLiveData<>();
-        remarksRepository = new InspectionRemarksRepository(application);
+        remarksRepository = new InspectionRemarksRepository(context);
+        errorHandlerInterface = (ErrorHandlerInterface) context;
+        schemeSubmitInterface = (SchemeSubmitInterface) context;
     }
 
     public LiveData<List<InspectionRemarksEntity>> getRemarks() {
@@ -52,68 +64,38 @@ public class BenDetailsViewModel extends AndroidViewModel {
         return remarksRepository.getRemarkId(remType);
     }
 
-    public LiveData<SchemeSubmitResponse> getSchemeSubmitResponse(SchemeSubmitRequest schemeSubmitRequest) {
-        if(schemeSubmitResponseMutableLiveData!=null){
-            submitSchemeDetails(schemeSubmitRequest);
-        }
-        return schemeSubmitResponseMutableLiveData;
-    }
-
-    public LiveData<SchemePhotoSubmitResponse> getSchemePhotoSubmitResponse(final  MultipartBody.Part body) {
-        if(schemePhotoSubmitResponseMutableLiveData!=null){
-            UploadImageServiceCall(body);
-        }
-        return schemePhotoSubmitResponseMutableLiveData;
-    }
-
-    private void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
+    public void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
+        benDetailsActivtyBinding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchemeSubmitResponse(schemeSubmitRequest).enqueue(new Callback<SchemeSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeSubmitResponse> call, @NotNull Response<SchemeSubmitResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                        schemeSubmitResponseMutableLiveData.setValue(response.body());
-
-                    } else if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-
-                    } else {
-
-                    }
-                } else {
-
-                }
+                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
+                schemeSubmitInterface.getData(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<SchemeSubmitResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
+                errorHandlerInterface.handleError(t, context);
             }
         });
     }
 
-    public void UploadImageServiceCall(final  MultipartBody.Part body) {
+    public void UploadImageServiceCall(final MultipartBody.Part body) {
+        benDetailsActivtyBinding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.uploadSchemeImageCall(body).enqueue(new Callback<SchemePhotoSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                        schemePhotoSubmitResponseMutableLiveData.setValue(response.body());
-
-                    } else if (response.body().getStatusCode() != null && response.body().getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-
-                    } else {
-
-                    }
-                } else {
-
-                }
+                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
+                schemeSubmitInterface.getPhotoData(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
+                errorHandlerInterface.handleError(t, context);
             }
         });
     }

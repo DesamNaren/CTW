@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <RelativeLayout
-        android:backgroundTint="@color/list_blue"
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:backgroundTint="@color/list_blue"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -17,10 +18,10 @@
             android:src="@drawable/back_arrow" />
 
         <TextView
-            android:layout_centerInParent="true"
             android:id="@+id/header_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@id/back_btn"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -28,15 +29,15 @@
 
         <ImageView
 
-            android:tint="@color/white"
-            android:visibility="gone"
-            android:layout_alignParentEnd="true"
             android:id="@+id/filet_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/filter"
-            android:layout_alignParentRight="true" />
+            android:tint="@color/white"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

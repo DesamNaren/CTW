@@ -12,12 +12,13 @@
 
 
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
             android:id="@+id/header"
-            layout="@layout/header_layout" />
+            layout="@layout/action_bar_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_below="@+id/header"
@@ -27,8 +28,20 @@
             android:background="@color/materialGrey300"
             tools:listitem="@layout/adapter_ben_report" />
 
-
-
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_empty"
+            android:text="@string/no_records_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
     </RelativeLayout>
 
 

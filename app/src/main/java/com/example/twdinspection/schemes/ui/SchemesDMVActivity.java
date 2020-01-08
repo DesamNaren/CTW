@@ -8,7 +8,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
@@ -16,7 +19,6 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
-import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,13 +26,13 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class SchemesDMVActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     SchemesDMVViewModel viewModel;
     ActivitySchemesDmvBinding schemesDMVActivityBinding;
     private Context context;
     String selectedDistId, selectedManId, selectedVilId;
-    String selectedManName,selectedDistName, selectedVilName, selFinValue;
+    String selectedManName, selectedDistName, selectedVilName, selFinValue;
     String selectedFinYearId;
     ArrayList<String> villageNames;
     ArrayList<String> finYearValues;
@@ -44,7 +46,14 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         context = SchemesDMVActivity.this;
 
-        schemesDMVActivityBinding = putContentView(R.layout.activity_schemes_dmv, getResources().getString(R.string.general_info));
+        schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
+        schemesDMVActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
+        schemesDMVActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         viewModel = new SchemesDMVViewModel(getApplication());
         schemesDMVActivityBinding.setViewModel(viewModel);
@@ -67,6 +76,7 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
             editor.commit();
             schemesDMVActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
+            Toast.makeText(context, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -74,7 +84,6 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         villageNames = new ArrayList<>();
         finYearValues = new ArrayList<>();
         finYearList = new ArrayList<>();
-
 
 
         viewModel.getFinancialYrs().observe(SchemesDMVActivity.this, new Observer<List<FinancialYearsEntity>>() {
@@ -89,6 +98,8 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_dropdown_item, finYearValues);
                     schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
+                }else {
+                    callSnackBar(getResources().getString(R.string.no_fin_year));
                 }
             }
         });
@@ -104,6 +115,8 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                         android.R.layout.simple_spinner_dropdown_item, distNames
                 );
                 schemesDMVActivityBinding.spDist.setAdapter(adapter);
+            }else {
+                callSnackBar(getResources().getString(R.string.no_districts));
             }
         });
 
@@ -115,7 +128,6 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
         schemesDMVActivityBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
 
                 if (validateFields()) {
@@ -138,19 +150,32 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
 
     private boolean validateFields() {
         if (TextUtils.isEmpty(selectedDistId)) {
-            showSnackBar("Please select district");
+            showSnackBar(getResources().getString(R.string.plz_sel_dis));
             return false;
-        } else  if (TextUtils.isEmpty(selectedManId)) {
-            showSnackBar("Please select mandal");
+        } else if (TextUtils.isEmpty(selectedManId)) {
+            showSnackBar(getResources().getString(R.string.plz_sel_man));
             return false;
         } else if (TextUtils.isEmpty(selectedVilId)) {
-            showSnackBar("Please select village");
+            showSnackBar(getResources().getString(R.string.plz_sel_vil));
             return false;
-        } else  if (TextUtils.isEmpty(selectedFinYearId)) {
-            showSnackBar("Please select financial year");
+        } else if (TextUtils.isEmpty(selectedFinYearId)) {
+            showSnackBar(getResources().getString(R.string.plz_sel_fin));
             return false;
         }
         return true;
+    }
+
+    void callSnackBar(String msg){
+        Snackbar snackbar = Snackbar.make(schemesDMVActivityBinding.cl, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+
+        snackbar.show();
     }
 
     private void showSnackBar(String str) {
@@ -175,6 +200,8 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                                     for (int i = 0; i < mandals.size(); i++) {
                                         mandalNames.add(mandals.get(i).getMandalName());
                                     }
+                                }else {
+                                    callSnackBar(getResources().getString(R.string.no_mandals));
                                 }
                             });
                         }
@@ -212,6 +239,8 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                                         villageNames.add(villages.get(i).getVillageName());
                                     }
 
+                                }else {
+                                    callSnackBar(getResources().getString(R.string.no_villages));
                                 }
                             });
                         }
@@ -254,9 +283,9 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
                         }
                     }
                 });
-            }else {
-                selectedFinYearId="";
-                selFinValue="";
+            } else {
+                selectedFinYearId = "";
+                selFinValue = "";
             }
         }
     }
@@ -272,5 +301,10 @@ public class SchemesDMVActivity extends BaseActivity implements AdapterView.OnIt
 //
 //            }
 //        });
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
 

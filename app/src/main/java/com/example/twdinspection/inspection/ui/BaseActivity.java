@@ -23,13 +23,13 @@ public class BaseActivity extends AppCompatActivity {
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(BaseActivity.this, "Back press", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
 
     protected <T extends ViewDataBinding> T putContentView(@LayoutRes int resId, String title) {
-        binding.toolbarTitle.setText(title);
+        binding.headerTitle.setText(title);
         return DataBindingUtil.inflate(getLayoutInflater(), resId, binding.appbar, true);
     }
 }

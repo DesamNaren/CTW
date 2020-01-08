@@ -5,6 +5,7 @@
     tools:context=".inspection.ui.LoginActivity">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.LoginViewModel" />
@@ -66,8 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginTop="@dimen/dimen_50dp"
-                app:errorEnabled="true"
-                android:layout_marginRight="@dimen/dimen_20dp">
+                android:layout_marginRight="@dimen/dimen_20dp"
+                app:errorEnabled="true">
 
 
                 <com.example.twdinspection.common.custom.CustomFontEditText
@@ -81,17 +82,18 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/t_pwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_20dp"
-                app:errorEnabled="true"
-                android:layout_marginRight="@dimen/dimen_20dp">
 
-                <RelativeLayout
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/t_pwd"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    app:errorEnabled="true">
 
                     <com.example.twdinspection.common.custom.CustomFontEditText
                         android:id="@+id/et_pwd"
@@ -101,25 +103,20 @@
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:text="@={viewModel.password}"
-                        tools:text="guest" />
+                        android:text="@={viewModel.password}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageView
-                        android:id="@+id/pwdImage"
-                        android:onClick="@{()-> viewModel.onViewPwd()}"
-                        android:layout_marginRight="@dimen/dimen_10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/pwd_hide"
-                        android:layout_width="@dimen/dimen_20dp"
-                        android:layout_height="@dimen/dimen_20dp"/>
+                <ImageView
+                    android:id="@+id/pwdImage"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:onClick="@{()-> viewModel.onViewPwd()}"
+                    android:src="@drawable/pwd_hide" />
 
-                </RelativeLayout>
-
-
-
-
-            </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
 
 
             <FrameLayout
@@ -134,7 +131,7 @@
                     android:layout_width="@dimen/dimen_50dp"
                     android:layout_height="@dimen/dimen_50dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/btn_background"
+                    android:background="@drawable/btn_background1"
                     android:gravity="center"
                     android:onClick="@{()-> viewModel.onBtnClick()}"
                     android:text=">"

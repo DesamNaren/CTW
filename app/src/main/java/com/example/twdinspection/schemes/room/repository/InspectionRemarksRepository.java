@@ -1,6 +1,7 @@
 package com.example.twdinspection.schemes.room.repository;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
@@ -14,7 +15,7 @@ public class InspectionRemarksRepository {
 
     private InspectionRemarksDao remarksDao;
 
-    public InspectionRemarksRepository(Application application) {
+    public InspectionRemarksRepository(Context application) {
         SchemesDatabase db = SchemesDatabase.getDatabase(application);
         remarksDao = db.inspectionRemarksDao();
     }
