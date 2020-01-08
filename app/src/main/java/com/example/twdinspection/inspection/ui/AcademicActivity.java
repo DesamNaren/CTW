@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -104,6 +105,11 @@ public class AcademicActivity extends AppCompatActivity {
                 academicOveriewEntity.setHighest_class_gradeB(highestClassGradeB);
                 academicOveriewEntity.setHighest_class_gradeC(highestClassGradeC);
                 academicOveriewEntity.setHighest_class_total(highestClassGradeTotal);
+                academicOveriewEntity.setAssessment_test_conducted(assessment_test_conducted);
+
+                long x = academicViewModel.insertAcademicInfo(academicOveriewEntity);
+                Toast.makeText(AcademicActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+
 
                 startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
             }

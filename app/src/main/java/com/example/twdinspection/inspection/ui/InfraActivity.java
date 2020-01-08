@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
@@ -20,9 +21,9 @@ public class InfraActivity extends AppCompatActivity {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility = "", bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, lighting_facility, electricity_wiring, enough_fans, dining_hall;
+    String drinkingWaterFacility = "", bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
-    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, painting;
+    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus,repairs_to_door, painting;
 
     @Override
 
@@ -99,6 +100,16 @@ public class InfraActivity extends AppCompatActivity {
                     inverter_available = "YES";
                 else
                     inverter_available = "NO";
+            }
+        });
+        binding.rgInverterWorkingStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgInverterWorkingStatus.getCheckedRadioButtonId();
+                if (selctedItem == R.id.inverter_working_status_yes)
+                    inverterWorkingStatus = "GOOD";
+                else
+                    inverterWorkingStatus = "BAD";
             }
         });
 
@@ -325,14 +336,25 @@ public class InfraActivity extends AppCompatActivity {
             }
         });
 
+     binding.rgRepairsToDoor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgRepairsToDoor.getCheckedRadioButtonId();
+                if (selctedItem == R.id.repairs_to_door_yes)
+                    repairs_to_door = "YES";
+                else
+                    repairs_to_door = "NO";
+            }
+        });
+
         binding.rgPainting.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPainting.getCheckedRadioButtonId();
                 if (selctedItem == R.id.painting_yes)
-                    painting = "YES";
+                    painting = "GOOD";
                 else
-                    painting = "NO";
+                    painting = "BAD";
             }
         });
 
@@ -347,6 +369,12 @@ public class InfraActivity extends AppCompatActivity {
                 String mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
                 String repair_required = binding.etRepairRequired.getText().toString().trim();
                 String how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
+                String totalToilets = binding.etTotalToilets.getText().toString().trim();
+                String totalBathrooms = binding.etTotalBathrooms.getText().toString().trim();
+                String functioningToilets = binding.etFunctioningToilets.getText().toString().trim();
+                String functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
+                String repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
+                String repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
                 String color = binding.etPainting.getText().toString().trim();
 
                 infrastuctureEntity = new InfraStructureEntity();
@@ -355,6 +383,7 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setRo_plant_woking(roPlant);
                 infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
                 infrastuctureEntity.setInverter_available(inverter_available);
+                infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
                 infrastuctureEntity.setLighting_facility(lighting_facility);
                 infrastuctureEntity.setElectricity_wiring(electricity_wiring);
                 infrastuctureEntity.setEnough_fans(enough_fans);
@@ -381,9 +410,18 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setDrainage_functioning(drainage_functioning);
                 infrastuctureEntity.setHeater_available(heater_available);
                 infrastuctureEntity.setHeater_workingStatus(heater_workingStatus);
+                infrastuctureEntity.setTotal_toilets(totalToilets);
+                infrastuctureEntity.setTotal_bathrooms(totalBathrooms);
+                infrastuctureEntity.setFunctioning_toilets(functioningToilets);
+                infrastuctureEntity.setFunctioning_bathrooms(functioningBathrooms);
+                infrastuctureEntity.setRepairs_req_toilets(repairsReqToilets);
+                infrastuctureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
+                infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
                 infrastuctureEntity.setPainting(painting);
                 infrastuctureEntity.setColor(color);
 
+                long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
+                Toast.makeText(InfraActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
             }

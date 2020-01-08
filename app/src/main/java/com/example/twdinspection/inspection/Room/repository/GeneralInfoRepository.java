@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.GeneralInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInformationEntity;
+import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -72,7 +72,7 @@ public class GeneralInfoRepository {
         return x;
     }
 
-    public long insertGeneralInfo(GeneralInformationEntity generalInformationEntity) {
+    public long insertGeneralInfo(GeneralInfoEntity generalInformationEntity) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {

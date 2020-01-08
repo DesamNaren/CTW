@@ -36,6 +36,9 @@ public class InfraStructureEntity {
     private String inverter_available;
 
     @ColumnInfo()
+    private String inverterWorkingStatus;
+
+    @ColumnInfo()
     private String lighting_facility;
 
     @ColumnInfo()
@@ -120,10 +123,95 @@ public class InfraStructureEntity {
     private String additional_infra_required;
 
     @ColumnInfo()
+    private String total_toilets;
+
+    @ColumnInfo()
+    private String total_bathrooms;
+
+    @ColumnInfo()
+    private String functioning_toilets;
+
+    @ColumnInfo()
+    private String functioning_bathrooms;
+
+    @ColumnInfo()
+    private String repairs_req_toilets;
+
+    @ColumnInfo()
+    private String repairs_req_bathrooms;
+
+    @ColumnInfo()
+    private String door_window_repairs;
+
+    @ColumnInfo()
     private String painting;
 
     @ColumnInfo()
     private String color;
+
+    public String getInverterWorkingStatus() {
+        return inverterWorkingStatus;
+    }
+
+    public void setInverterWorkingStatus(String inverterWorkingStatus) {
+        this.inverterWorkingStatus = inverterWorkingStatus;
+    }
+
+    public String getTotal_toilets() {
+        return total_toilets;
+    }
+
+    public void setTotal_toilets(String total_toilets) {
+        this.total_toilets = total_toilets;
+    }
+
+    public String getTotal_bathrooms() {
+        return total_bathrooms;
+    }
+
+    public void setTotal_bathrooms(String total_bathrooms) {
+        this.total_bathrooms = total_bathrooms;
+    }
+
+    public String getFunctioning_toilets() {
+        return functioning_toilets;
+    }
+
+    public void setFunctioning_toilets(String functioning_toilets) {
+        this.functioning_toilets = functioning_toilets;
+    }
+
+    public String getFunctioning_bathrooms() {
+        return functioning_bathrooms;
+    }
+
+    public void setFunctioning_bathrooms(String functioning_bathrooms) {
+        this.functioning_bathrooms = functioning_bathrooms;
+    }
+
+    public String getRepairs_req_toilets() {
+        return repairs_req_toilets;
+    }
+
+    public void setRepairs_req_toilets(String repairs_req_toilets) {
+        this.repairs_req_toilets = repairs_req_toilets;
+    }
+
+    public String getRepairs_req_bathrooms() {
+        return repairs_req_bathrooms;
+    }
+
+    public void setRepairs_req_bathrooms(String repairs_req_bathrooms) {
+        this.repairs_req_bathrooms = repairs_req_bathrooms;
+    }
+
+    public String getDoor_window_repairs() {
+        return door_window_repairs;
+    }
+
+    public void setDoor_window_repairs(String door_window_repairs) {
+        this.door_window_repairs = door_window_repairs;
+    }
 
     public int getId() {
         return id;

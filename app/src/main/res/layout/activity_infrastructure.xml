@@ -360,36 +360,79 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/is_inverter_available"
-                            android:textColor="@color/black" />
+                            android:orientation="vertical">
 
-                        <RadioGroup
-                            android:id="@+id/rg_is_inverter_available"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
-
-
-                            <RadioButton
-                                android:id="@+id/is_inverter_available_yes"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/is_inverter_available"
+                                android:textColor="@color/black" />
 
-                            <RadioButton
-                                android:id="@+id/is_inverter_available_no"
+                            <RadioGroup
+                                android:id="@+id/rg_is_inverter_available"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/is_inverter_available_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/is_inverter_available_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
+                                android:text="@string/is_inverter_available"
+                                android:textColor="@color/black" />
 
-                        </RadioGroup>
+                            <RadioGroup
+                                android:id="@+id/rg_inverter_working_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/inverter_working_status_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/good" />
+
+                                <RadioButton
+                                    android:id="@+id/inverter_working_status_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/bad" />
+
+                            </RadioGroup>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1674,19 +1717,19 @@
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/drainage_functioning_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/drainage_functioning_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/drainage_functioning_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/drainage_functioning_no"
                                 android:text="@string/no" />
 
 
@@ -1729,25 +1772,25 @@
 
 
                         <RadioGroup
+                            android:id="@+id/rg_heater_available"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/rg_heater_available"
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/heater_available_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/heater_available_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/heater_available_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/heater_available_no"
                                 android:text="@string/no" />
 
 
@@ -1762,7 +1805,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="@dimen/dimen_5dp"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1773,25 +1816,25 @@
 
 
                     <RadioGroup
+                        android:id="@+id/rg_heater_workingStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/rg_heater_workingStatus"
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/heater_workingStatus_yes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/heater_workingStatus_yes"
                             android:text="@string/yes" />
 
                         <RadioButton
+                            android:id="@+id/heater_workingStatus_no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/heater_workingStatus_no"
                             android:text="@string/no" />
 
 
@@ -1966,6 +2009,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_total_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_to_toilets"
@@ -1983,6 +2027,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_total_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/no_of_bath_rooms"
@@ -2030,6 +2075,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_functioning_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/no_of_functioning_toilets"
@@ -2047,6 +2093,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_funtioning_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/no_of_functioning_bathrooms"
@@ -2064,6 +2111,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_required_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_required_to_toilets"
@@ -2081,6 +2129,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_required_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_required_to_bathrooms"
@@ -2113,29 +2162,42 @@
                         android:textColor="@color/black" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/dimen_5dp">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:errorEnabled="true">
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/repairs_to_door"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_repairs_to_door"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:layout_width="match_parent"
+                            <RadioButton
+                                android:id="@+id/repairs_to_door_yes"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/repairs_to_door"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true" />
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <RadioButton
+                                android:id="@+id/repairs_to_door_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
 
+                        </RadioGroup>
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <View
@@ -2169,25 +2231,25 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/rg_painting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:id="@+id/rg_painting"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/painting_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/painting_yes"
                                 android:text="@string/good" />
 
                             <RadioButton
+                                android:id="@+id/painting_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/painting_no"
                                 android:text="@string/bad" />
 
                         </RadioGroup>
@@ -2197,15 +2259,15 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             app:errorEnabled="true">
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_painting"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/suggest_for_coloring"
-                                android:id="@+id/et_painting"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
                                 android:singleLine="true" />

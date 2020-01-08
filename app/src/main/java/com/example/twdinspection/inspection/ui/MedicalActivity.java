@@ -48,7 +48,7 @@ public class MedicalActivity extends AppCompatActivity {
         binding.rgMedicalCheckupDetails.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMedicalCheckUpDoneByWhom.getCheckedRadioButtonId();
+                int selctedItem = binding.rgMedicalCheckupDetails.getCheckedRadioButtonId();
                 if (selctedItem == R.id.medical_checkup_details_yes)
                     recorderedInRegister = "YES";
                 else
@@ -99,6 +99,19 @@ public class MedicalActivity extends AppCompatActivity {
                 String malariaCount = binding.etMalaria.getText().toString().trim();
                 String othersCount = binding.etOthers.getText().toString().trim();
                 String CheckupDate = binding.etMedicalCheckupDate.getText().toString().trim();
+
+                if (feverCount.isEmpty())
+                    feverCount = "0";
+                if (coldCount.isEmpty())
+                    coldCount = "0";
+                if (diarrheaCount.isEmpty())
+                    diarrheaCount = "0";
+                if (headacheCount.isEmpty())
+                    headacheCount = "0";
+                if (malariaCount.isEmpty())
+                    malariaCount = "0";
+                if (othersCount.isEmpty())
+                    othersCount = "0";
 
 
                 medicalInfoEntity = new MedicalInfoEntity();

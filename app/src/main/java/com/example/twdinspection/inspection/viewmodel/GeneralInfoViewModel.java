@@ -6,7 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.twdinspection.inspection.Room.repository.GeneralInfoRepository;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInformationEntity;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
+import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 
 public class GeneralInfoViewModel extends AndroidViewModel {
     private GeneralInfoRepository mRepository;
@@ -16,12 +17,10 @@ public class GeneralInfoViewModel extends AndroidViewModel {
         mRepository = new GeneralInfoRepository(application);
     }
 
-    public long updateClassInfo(String attendence_marked, String count_reg, String count_during_insp,
-                                String variance, int flag_completed, String inst_id, int class_id) {
-        return mRepository.updateClassInfo(attendence_marked, count_reg, count_during_insp, variance, flag_completed, inst_id, class_id);
+
+    public long insertGeneralInfo(GeneralInfoEntity generalInfoEntity) {
+        long flag = mRepository.insertGeneralInfo(generalInfoEntity);
+        return flag;
     }
 
-    public long insertClassInfo(GeneralInformationEntity generalInformationEntity) {
-        return mRepository.insertGeneralInfo(generalInformationEntity);
-    }
 }

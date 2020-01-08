@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -323,6 +324,9 @@ public class RegistersActivity extends AppCompatActivity {
                 registersEntity.setParents_meeting(parMeet);
                 registersEntity.setInspection_reg(insReg);
                 registersEntity.setVisit_book(visitBook);
+
+                long x = registersViewModel.insertRegistersInfo(registersEntity);
+                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(RegistersActivity.this, GeneralCommentsActivity.class));
             }

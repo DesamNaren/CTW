@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityEntitlementsBinding;
@@ -205,6 +206,9 @@ public class EntitlementsActivity extends AppCompatActivity {
                 entitlementsEntity.setHair_cut_complted(hair_cut_complted);
                 entitlementsEntity.setLast_haircut_date(haircutDate);
                 entitlementsEntity.setCosmetic_distributed(cosmetics);
+
+                long x = entitlementsViewModel.insertEntitlementsInfo(entitlementsEntity);
+                Toast.makeText(EntitlementsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(EntitlementsActivity.this, RegistersActivity.class));
             }

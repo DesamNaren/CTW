@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityGeneralCommentsBinding;
@@ -283,6 +284,8 @@ public class GeneralCommentsActivity extends AppCompatActivity {
                 generalCommentsEntity.setWater_available(runningWater);
                 generalCommentsEntity.setStoreroom_not_clean(storeroom);
 
+                long x = genCommentsViewModel.insertGeneralCommentsInfo(generalCommentsEntity);
+                Toast.makeText(GeneralCommentsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(GeneralCommentsActivity.this, UploadedPhotoActivity.class));
             }
