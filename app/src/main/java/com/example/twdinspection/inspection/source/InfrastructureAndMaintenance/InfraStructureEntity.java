@@ -30,6 +30,9 @@ public class InfraStructureEntity {
     private String ro_plant_woking;
 
     @ColumnInfo()
+    private String ro_plant_reason;
+
+    @ColumnInfo()
     private String drinking_water_source;
 
     @ColumnInfo()
@@ -43,6 +46,9 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String electricity_wiring;
+
+    @ColumnInfo()
+    private String electricity_wiring_repairs_req;
 
     @ColumnInfo()
     private String enough_fans;
@@ -155,6 +161,22 @@ public class InfraStructureEntity {
 
     public void setInverterWorkingStatus(String inverterWorkingStatus) {
         this.inverterWorkingStatus = inverterWorkingStatus;
+    }
+
+    public String getElectricity_wiring_repairs_req() {
+        return electricity_wiring_repairs_req;
+    }
+
+    public void setElectricity_wiring_repairs_req(String electricity_wiring_repairs_req) {
+        this.electricity_wiring_repairs_req = electricity_wiring_repairs_req;
+    }
+
+    public String getRo_plant_reason() {
+        return ro_plant_reason;
+    }
+
+    public void setRo_plant_reason(String ro_plant_reason) {
+        this.ro_plant_reason = ro_plant_reason;
     }
 
     public String getTotal_toilets() {
