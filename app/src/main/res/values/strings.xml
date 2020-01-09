@@ -329,4 +329,24 @@
     <string name="leaves">Leaves</string>
     <string name="unauthorized_absent">Unauthorized Absent</string>
     <string name="od">OD</string>
+
+    <string name="con_time_out">The Connection has timed out, Please try again</string>
+    <string name="io_exe">:IO Exception</string>
+    <string name="something">Something went wrong, Please try again</string>
+    <string name="server_not">Server not responding, Please try later</string>
+    <string name="exit">Yes, Logout</string>
+    <string name="exit_no">No, Cancel</string>
+    <string name="no_districts">No districts found</string>
+    <string name="no_mandals">No mandals found</string>
+    <string name="no_villages">No villages found</string>
+    <string name="no_fin_year">No financial years found</string>
+    <string name="plz_sel_dis">Please select district</string>
+    <string name="plz_sel_man">Please select mandal</string>
+    <string name="plz_sel_vil">Please select village</string>
+    <string name="plz_sel_fin">Please select financial year</string>
+    <string name="no_scheme">No schemes found</string>
+    <string name="no_records_found">No records found</string>
+    <string name="no_remarks">No remarks found</string>
+    <string name="exit_msg">Do you want to exit?</string>
+
 </resources>
