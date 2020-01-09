@@ -214,6 +214,7 @@
     <string name="whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register">whether the details of medical checkup entered in the visitor\'s register</string>
     <string name="save">Save</string>
     <string name="general_info">GENERAL INFO</string>
+    <string name="sync_activity">SYNC DATA</string>
     <string name="dashboard">DASHBOARD</string>
     <string name="title_activity_institute_menu">InstituteMenuActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

@@ -46,6 +46,18 @@
                     android:visibility="gone"
                     android:layout_marginEnd="@dimen/dimen_10dp" />
 
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/sync_iv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@android:drawable/ic_popup_sync"
+                    android:tint="@color/white"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/dimen_10dp" />
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </RelativeLayout>

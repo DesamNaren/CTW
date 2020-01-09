@@ -71,8 +71,11 @@ public class LoginViewModel extends ViewModel {
             binding.tPwd.setError(null);
         }
 
-
-        callLoginAPI(loginUser);
+        if (Utils.checkInternetConnection(context)) {
+            callLoginAPI(loginUser);
+        }else{
+            Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
+        }
     }
 
     public void onViewPwd() {

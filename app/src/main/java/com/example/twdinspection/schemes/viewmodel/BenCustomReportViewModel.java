@@ -1,5 +1,6 @@
 package com.example.twdinspection.schemes.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.view.View;
@@ -29,9 +30,9 @@ import retrofit2.Response;
 
 public class BenCustomReportViewModel implements ViewModelProvider.Factory {
     private ActivityBeneficiaryReportBinding binding;
-    private Context context;
+    private Activity context;
 
-    public BenCustomReportViewModel(ActivityBeneficiaryReportBinding binding, Context context) {
+    public BenCustomReportViewModel(ActivityBeneficiaryReportBinding binding, Activity context) {
         this.binding = binding;
         this.context = context;
     }

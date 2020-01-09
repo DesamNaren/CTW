@@ -48,6 +48,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
 
         schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
         schemesDMVActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
+        schemesDMVActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         schemesDMVActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,16 +56,17 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        schemesDMVActivityBinding.header.syncIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              startActivity(new Intent(SchemesDMVActivity.this,SchemeSyncActivity.class));
+            }
+        });
+
         viewModel = new SchemesDMVViewModel(getApplication());
         schemesDMVActivityBinding.setViewModel(viewModel);
         schemesDMVActivityBinding.executePendingBindings();
 
-        schemesDMVActivityBinding.ivCal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SchemesDMVActivity.this, SchemeSyncActivity.class));
-            }
-        });
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

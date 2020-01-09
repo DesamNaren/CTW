@@ -1,5 +1,6 @@
 package com.example.twdinspection.schemes.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.view.View;
@@ -9,7 +10,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.twdinspection.R;
 import com.example.twdinspection.common.network.TWDService;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.room.repository.SchemesInfoRepository;
@@ -30,11 +33,11 @@ public class BenReportViewModel extends ViewModel {
     private LiveData<List<SchemeEntity>> schemesMutableLiveData;
     private SchemesInfoRepository schemesInfoRepository;
     private ErrorHandlerInterface errorHandlerInterface;
-    private Context context;
+    private Activity context;
     private ActivityBeneficiaryReportBinding binding;
 
 
-    BenReportViewModel(ActivityBeneficiaryReportBinding binding, Context context) {
+    BenReportViewModel(ActivityBeneficiaryReportBinding binding, Activity context) {
         this.binding = binding;
         this.context= context;
         beneficiaryLiveData = new MutableLiveData<>();
@@ -49,7 +52,13 @@ public class BenReportViewModel extends ViewModel {
 
     public LiveData<BeneficiaryReport> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
         if (beneficiaryLiveData != null) {
-            getBeneficiaryDetails(beneficiaryRequest);
+            if (Utils.checkInternetConnection(context)) {
+                getBeneficiaryDetails(beneficiaryRequest);
+            }else{
+                binding.tvEmpty.setVisibility(View.VISIBLE);
+                binding.recyclerView.setVisibility(View.GONE);
+                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet",true);
+            }
         }
         return beneficiaryLiveData;
     }

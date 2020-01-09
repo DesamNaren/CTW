@@ -210,7 +210,11 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 } else if (imgflag == 0) {
                     Toast.makeText(BenDetailsActivity.this, "Please capture image", Toast.LENGTH_SHORT).show();
                 } else {
-                    submitCall(beneficiaryDetail);
+                    if (Utils.checkInternetConnection(BenDetailsActivity.this)) {
+                        submitCall(beneficiaryDetail);
+                    }else{
+                        Utils.customWarningAlert(BenDetailsActivity.this,getResources().getString(R.string.app_name),"Please check internet");
+                    }
                 }
             }
         });
@@ -279,7 +283,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + ".png";
+            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() +"~"+Utils.getCurrentDateTime()+ ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -365,7 +369,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part body =
-                    MultipartBody.Part.createFormData("", file.getName(), requestFile);
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
             callUploadPhoto(body);
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();

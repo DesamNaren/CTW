@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,34 +9,192 @@
             type="com.example.twdinspection.schemes.viewmodel.SchemeSyncViewModel" />
     </data>
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/grey_light"
+        android:id="@+id/root"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/syncDMV"
+        <include
+            layout="@layout/action_bar_layout"
+            android:id="@+id/header"/>
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sync Scheme DMV" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimen_20dp">
 
-        <Button
-            android:id="@+id/syncYears"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sync Scheme Financial Years" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/syncInsRemarks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sync Inspection Remarks" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/syncSchemes"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_10dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_10dp"
+                            android:id="@+id/btn_schemes"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@drawable/medical"
+                                android:id="@+id/syncDMV"
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:src="@drawable/schemes" />
+
+                            <com.example.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Districts"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_10dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_10dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/syncYears"
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:tint="@color/white"
+                                android:src="@drawable/calendar" />
+
+                            <com.example.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Financial Years"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_10dp"
+                            android:gravity="center"
+                            android:id="@+id/btn_instInsp"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/syncInsRemarks"
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:src="@drawable/inspection" />
+
+                            <com.example.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Inspection Remarks"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_10dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_10dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/syncSchemes"
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:src="@drawable/schemes" />
+
+                            <com.example.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Schemes"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+        <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sync Schemes" />
-    </LinearLayout>
+            android:layout_centerInParent="true"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 </layout>
