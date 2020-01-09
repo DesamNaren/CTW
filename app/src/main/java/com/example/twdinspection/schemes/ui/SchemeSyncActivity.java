@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
@@ -35,12 +36,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVInterface, ErrorHandlerInterface {
     private SchemeSyncRepository schemeSyncRepository;
     private SchemeDMVResponse schemeDMVResponse;
-    private FinancialYearResponse financialYearResponse;
-    private InspectionRemarkResponse inspectionRemarkResponse;
-    private SchemeResponse schemeResponse;
     ActivitySchemeSyncBinding binding;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,30 +68,35 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 onBackPressed();
             }
         });
-        binding.syncDMV.setOnClickListener(new View.OnClickListener() {
+        binding.btnSchemes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               viewModel.getSchemeDMVReposnse().observe(SchemeSyncActivity.this, new Observer<SchemeDMVResponse>() {
-                   @Override
-                   public void onChanged(SchemeDMVResponse schemeDMVResponse) {
-                       SchemeSyncActivity.this.schemeDMVResponse=schemeDMVResponse;
-                       if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
-                           schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
-                       }
-                   }
-               });
+                LiveData<SchemeDMVResponse> schemeDMVReposnse= viewModel.getSchemeDMVReposnse();
+                schemeDMVReposnse.observe(SchemeSyncActivity.this, new Observer<SchemeDMVResponse>() {
+                    @Override
+                    public void onChanged(SchemeDMVResponse schemeDMVResponse) {
+                        schemeDMVReposnse.removeObservers(SchemeSyncActivity.this);
+                        SchemeSyncActivity.this.schemeDMVResponse=schemeDMVResponse;
+                        if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
+                            schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
+                        }
+                    }
+                });
             }
         });
 
-        binding.syncYears.setOnClickListener(new View.OnClickListener() {
+        binding.syncBtnYears.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               viewModel.getFinYearResponse().observe(SchemeSyncActivity.this, new Observer<FinancialYearResponse>() {
+                LiveData<FinancialYearResponse> financialYearResponseLiveData = viewModel.getFinYearResponse();
+
+
+                financialYearResponseLiveData.observe(SchemeSyncActivity.this, new Observer<FinancialYearResponse>() {
                    @Override
                    public void onChanged(FinancialYearResponse financialYearResponse) {
+                       financialYearResponseLiveData.removeObservers(SchemeSyncActivity.this);
                        if (financialYearResponse != null && financialYearResponse.getStatusCode() != null) {
                            if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
-                               SchemeSyncActivity.this.financialYearResponse=financialYearResponse;
                                if (financialYearResponse.getFinYears() != null && financialYearResponse.getFinYears().size() > 0) {
                                    schemeSyncRepository.insertFinYears(SchemeSyncActivity.this, financialYearResponse.getFinYears());
                                }
@@ -111,16 +113,16 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             }
         });
 
-        binding.syncInsRemarks.setOnClickListener(new View.OnClickListener() {
+        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.getInspectionRemarks().observe(SchemeSyncActivity.this, new Observer<InspectionRemarkResponse>() {
+                LiveData<InspectionRemarkResponse> inspectionRemarkResponseLiveData = viewModel.getInspectionRemarks();
+                inspectionRemarkResponseLiveData.observe(SchemeSyncActivity.this, new Observer<InspectionRemarkResponse>() {
                     @Override
                     public void onChanged(InspectionRemarkResponse inspectionRemarkResponse) {
-
+                        inspectionRemarkResponseLiveData.removeObservers(SchemeSyncActivity.this);
                         if (inspectionRemarkResponse != null && inspectionRemarkResponse.getStatusCode() != null) {
                             if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
-                                SchemeSyncActivity.this.inspectionRemarkResponse=inspectionRemarkResponse;
                                 if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
                                     schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
                                 }
@@ -140,16 +142,16 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             }
         });
 
-        binding.syncSchemes.setOnClickListener(new View.OnClickListener() {
+        binding.syncLlSchemes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.getSchemeResponse().observe(SchemeSyncActivity.this, new Observer<SchemeResponse>() {
+                LiveData<SchemeResponse> schemeResponseLiveData = viewModel.getSchemeResponse();
+                schemeResponseLiveData.observe(SchemeSyncActivity.this, new Observer<SchemeResponse>() {
                     @Override
                     public void onChanged(SchemeResponse schemeResponse) {
+                        schemeResponseLiveData.removeObservers(SchemeSyncActivity.this);
                         if (schemeResponse != null && schemeResponse.getStatusCode() != null) {
                             if (Integer.valueOf(schemeResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
-
-                                SchemeSyncActivity.this.schemeResponse=schemeResponse;
                                 if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
                                     schemeResponse.getSchemes().add(0, new SchemeEntity(false, "ALL", "-1"));
                                     schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
@@ -228,7 +230,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 Log.i("V_CNT", "vilCount: "+cnt);
                 binding.progress.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this,getResources().getString(R.string.app_name),
-                        "Districts synced successfully");
+                        "District master synced successfully");
                 // Success Alert;
             } else {
                 // onDataNotAvailable();
