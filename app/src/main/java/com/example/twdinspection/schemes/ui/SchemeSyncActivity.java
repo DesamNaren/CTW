@@ -2,9 +2,11 @@ package com.example.twdinspection.schemes.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,6 +14,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemeSyncBinding;
@@ -36,6 +39,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     private InspectionRemarkResponse inspectionRemarkResponse;
     private SchemeResponse schemeResponse;
     ActivitySchemeSyncBinding binding;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,18 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         binding.executePendingBindings();
         schemeSyncRepository = new SchemeSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
+
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
+            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+            binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

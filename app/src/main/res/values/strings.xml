@@ -349,5 +349,6 @@
     <string name="no_records_found">No records found</string>
     <string name="no_remarks">No remarks found</string>
     <string name="exit_msg">Do you want to exit?</string>
+    <string name="districs_mandals_villages">District Master</string>
 
 </resources>

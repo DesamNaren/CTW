@@ -19,6 +19,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
+import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -306,7 +307,8 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onBackPressed() {
-        finish();
+        startActivity(new Intent(this, DashboardActivity.class)
+        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
 
