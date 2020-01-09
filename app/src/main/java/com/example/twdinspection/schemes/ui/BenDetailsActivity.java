@@ -54,6 +54,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerInterface, SchemeSubmitInterface {
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE2 = 200;
     ActivityBenDetailsActivtyBinding benDetailsBinding;
     private BenDetailsViewModel viewModel;
     private BeneficiaryDetail beneficiaryDetail;
@@ -62,9 +63,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     SharedPreferences sharedPreferences;
     public Uri fileUri;
     public static final String IMAGE_DIRECTORY_NAME = "SCHEME_IMAGES";
-    String FilePath;
+    String FilePath,FilePath2;
     Bitmap bm;
-    String PIC_NAME;
+    String PIC_NAME,PIC_NAME2;
     ;
     int imgflag = 0;
     private String officerId;
@@ -169,7 +170,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             }
         });
 
-        benDetailsBinding.ivCam.setOnClickListener(new View.OnClickListener() {
+        benDetailsBinding.ivCam1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callPermissions()) {
@@ -178,6 +179,19 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     if (fileUri != null) {
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
+        benDetailsBinding.ivCam2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri2(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE2);
                     }
                 }
             }
@@ -252,8 +266,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     }
 
 
-    void callUploadPhoto(final MultipartBody.Part body) {
-        viewModel.UploadImageServiceCall(body);
+    void callUploadPhoto(final MultipartBody.Part body,final MultipartBody.Part body2) {
+        viewModel.UploadImageServiceCall(body,body2);
     }
 
     private void CallSuccessAlert(String msg) {
@@ -262,6 +276,17 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     public Uri getOutputMediaFileUri(int type) {
         File imageFile = getOutputMediaFile(type);
+        Uri imageUri = null;
+        if (imageFile != null) {
+            imageUri = FileProvider.getUriForFile(
+                    BenDetailsActivity.this,
+                    "com.example.twdinspection.provider", //(use your app signature + ".provider" )
+                    imageFile);
+        }
+        return imageUri;
+    }
+    public Uri getOutputMediaFileUri2(int type) {
+        File imageFile = getOutputMediaFile2(type);
         Uri imageUri = null;
         if (imageFile != null) {
             imageUri = FileProvider.getUriForFile(
@@ -292,7 +317,26 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
         return mediaFile;
     }
+    private File getOutputMediaFile2(int type) {
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                        + " directory");
+                return null;
+            }
+        }
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() +"~"+Utils.getCurrentDateTime()+ ".png";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + PIC_NAME2);
+        } else {
+            return null;
+        }
 
+        return mediaFile;
+    }
 
     @Override
     public void updateLocationUI() {
@@ -320,7 +364,36 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
                 imgflag = 1;
 
-                benDetailsBinding.ivCam.setImageBitmap(bm);
+                benDetailsBinding.ivCam1.setImageBitmap(bm);
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getApplicationContext(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }else if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE2) {
+            if (resultCode == RESULT_OK) {
+                FilePath = getExternalFilesDir(null)
+                        + "/" + IMAGE_DIRECTORY_NAME;
+
+                String Image_name = PIC_NAME2;
+                FilePath = FilePath + "/" + Image_name;
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 8;
+                bm = BitmapFactory.decodeFile(FilePath, options);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
+                        100);
+
+                imgflag = 1;
+
+                benDetailsBinding.ivCam2.setImageBitmap(bm);
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
@@ -332,6 +405,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                         .show();
             }
         }
+
 
     }
 
@@ -364,13 +438,19 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     public void getData(SchemeSubmitResponse schemeSubmitResponse) {
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
+            File file1 = new File(FilePath);
 
-            File file = new File(FilePath);
+            FilePath2= getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME2;
+            File file2 = new File(FilePath2);
             RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file1);
             MultipartBody.Part body =
-                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-            callUploadPhoto(body);
+                    MultipartBody.Part.createFormData("image", file1.getName(), requestFile);
+            RequestBody requestFile1 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file2);
+            MultipartBody.Part body2 =
+                    MultipartBody.Part.createFormData("image", file1.getName(), requestFile1);
+            callUploadPhoto(body,body2);
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
 

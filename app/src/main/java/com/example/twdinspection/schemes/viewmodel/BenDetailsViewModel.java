@@ -82,10 +82,10 @@ public class BenDetailsViewModel extends ViewModel {
         });
     }
 
-    public void UploadImageServiceCall(final MultipartBody.Part body) {
+    public void UploadImageServiceCall(final MultipartBody.Part body,final MultipartBody.Part body2) {
         benDetailsActivtyBinding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.uploadSchemeImageCall(body).enqueue(new Callback<SchemePhotoSubmitResponse>() {
+        twdService.uploadSchemeImageCall(body,body2).enqueue(new Callback<SchemePhotoSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
                 benDetailsActivtyBinding.progress.setVisibility(View.GONE);

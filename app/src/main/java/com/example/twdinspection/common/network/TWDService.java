@@ -89,7 +89,7 @@ public interface TWDService {
 
     @Multipart
     @POST("upload/uploadSchemePhotos")
-    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image);
+    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image2);
 
     //------------------- Login & Logout ----------------------------------------
 
