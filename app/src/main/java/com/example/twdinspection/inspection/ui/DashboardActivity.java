@@ -46,12 +46,12 @@ public class DashboardActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
-//            }
-//        });
+        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+            }
+        });
 
         binding.btnSchemes.setOnClickListener(new View.OnClickListener() {
             @Override

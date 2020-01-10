@@ -182,7 +182,7 @@
                             android:layout_width="@dimen/dimen_70dp"
                             android:layout_height="@dimen/dimen_70dp"
                             android:layout_margin="@dimen/dimen_10dp"
-                            android:background="@drawable/disabled"
+                            android:background="@drawable/medical"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/inspection" />

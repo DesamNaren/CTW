@@ -133,11 +133,13 @@ public class MedicalActivity extends AppCompatActivity {
 
 //                Utils.customAlert(MedicalActivity.this, "Data submitted successfully", AppConstants.SUCCESS, false);
 
-                if (binding.medicalCheckupDetailsYes.isChecked()) {
-                    startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class));
-                } else {
-                    startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
-                }
+//                if (binding.medicalCheckupDetailsYes.isChecked()) {
+//                    startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class));
+//                } else {
+//                    startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
+//                }
+                startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
+
             }
         });
 

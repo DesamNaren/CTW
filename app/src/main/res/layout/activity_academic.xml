@@ -2,12 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.AcademicViewModel" />
 
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,6 +21,11 @@
             android:id="@+id/header"
             layout="@layout/header_layout" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Will be Implemented Soon"
+            android:gravity="center"/>
 
         <ScrollView
             android:id="@+id/scrl"
@@ -25,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
             android:layout_below="@+id/header"
+            android:visibility="gone"
             android:background="@color/grey_light">
 
             <LinearLayout
@@ -63,25 +72,25 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/rg_highest_class_syllabus_completed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_5dp"
-                            android:id="@+id/rg_highest_class_syllabus_completed"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/highest_class_syllabus_completed_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/highest_class_syllabus_completed_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/highest_class_syllabus_completed_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/highest_class_syllabus_completed_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>
@@ -121,25 +130,25 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/rg_strength_accomodated_asper_infrastructure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:id="@+id/rg_strength_accomodated_asper_infrastructure"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/strength_accomodated_asper_infrastructure_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/strength_accomodated_asper_infrastructure_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/strength_accomodated_asper_infrastructure_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/strength_accomodated_asper_infrastructure_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>
@@ -239,19 +248,19 @@
                             android:orientation="horizontal">
 
                             <RadioButton
+                                android:id="@+id/staff_accomodated_asper_stud_strength_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/staff_accomodated_asper_stud_strength_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/staff_accomodated_asper_stud_strength_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/staff_accomodated_asper_stud_strength_no"
                                 android:text="@string/no" />
 
 
@@ -291,25 +300,25 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/rg_plan_prepared"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_5dp"
-                            android:id="@+id/rg_plan_prepared"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/plan_prepared_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/plan_prepared_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/plan_prepared_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/plan_prepared_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>
@@ -348,25 +357,25 @@
                             android:textColor="@color/black" />
 
                         <RadioGroup
+                            android:id="@+id/rg_assessment_test_conducted"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_5dp"
-                            android:id="@+id/rg_assessment_test_conducted"
                             android:orientation="horizontal">
 
 
                             <RadioButton
+                                android:id="@+id/assessment_test_conducted_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/assessment_test_conducted_yes"
                                 android:text="@string/yes" />
 
                             <RadioButton
+                                android:id="@+id/assessment_test_conducted_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:id="@+id/assessment_test_conducted_no"
                                 android:text="@string/no" />
 
                         </RadioGroup>
@@ -419,11 +428,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/highest_class_gradeA"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:hint="@string/a"
-                                    android:id="@+id/highest_class_gradeA"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -440,11 +449,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/highest_class_gradeB"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:hint="@string/b"
-                                    android:id="@+id/highest_class_gradeB"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -460,11 +469,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/highest_class_gradeC"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:hint="@string/c"
-                                    android:id="@+id/highest_class_gradeC"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -481,11 +490,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:hint="@string/total"
-                                    android:id="@+id/highest_class_total"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true" />
