@@ -1,25 +1,25 @@
-package com.example.twdinspection.inspection.source.InstMenuInfo;
+package com.example.twdinspection.inspection.source.instMenuInfo;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "InstMenuEntitiy")
+import org.jetbrains.annotations.NotNull;
+
+@Entity
 public class InstMenuInfoEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
-
-    @ColumnInfo()
     private int section_id;
-
-    @ColumnInfo()
     private int flag_completed;
-
-    @ColumnInfo()
     private String section_name;
-
-    @ColumnInfo()
     private String section_time;
+
+    public InstMenuInfoEntity(int section_id, int flag_completed, String section_name, String section_time) {
+        this.section_id = section_id;
+        this.flag_completed = flag_completed;
+        this.section_name = section_name;
+        this.section_time = section_time;
+    }
 
     public int getId() {
         return id;

@@ -3,32 +3,40 @@ package com.example.twdinspection.inspection.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
-import com.example.twdinspection.databinding.ActivityGeneralInfoBinding;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.databinding.ActivityGeneralInfoBinding;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.GeneralInfoViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
-public class GeneralInfoActivity extends BaseActivity {
+public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     private static final String TAG = GeneralInfoActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
     GeneralInfoViewModel generalInfoViewModel;
+    InstMainViewModel instMainViewModel;
     GeneralInfoEntity generalInfoEntity;
     String headQuarters;
     String presentTime, leavetype, capturetype, movementRegisterEntry, staffQuarters, stayingFacilitiesType, captureDistance;
+    private String officerID, instID, insTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
 
+        instMainViewModel = new InstMainViewModel(getApplication());
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         binding.setViewModel(generalInfoViewModel);
         binding.executePendingBindings();
@@ -37,34 +45,28 @@ public class GeneralInfoActivity extends BaseActivity {
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
+            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-            binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+
+            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            binding.includeBasicLayout.inspectionTime.setText(insTime);
+
             binding.manNameTv.setText(sharedPreferences.getString(AppConstants.MAN_NAME, ""));
             binding.instNameTv.setText(sharedPreferences.getString(AppConstants.INST_NAME, ""));
+            instID = sharedPreferences.getString(AppConstants.INST_ID, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        int selectedId = binding.rgPresentTime.getCheckedRadioButtonId();
 
         binding.rgHeadQuarters.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHeadQuarters.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_head_quarters)
-                    headQuarters = "YES";
+                    headQuarters = AppConstants.Yes;
                 else
-                    headQuarters = "NO";
-            }
-        });
-        binding.rgStaffQuarters.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgStaffQuarters.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_staff_quarters)
-                    staffQuarters = "YES";
-                else
-                    staffQuarters = "NO";
+                    headQuarters = AppConstants.No;
             }
         });
 
@@ -73,7 +75,7 @@ public class GeneralInfoActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPresentTime.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_no_present_time) {
-                    presentTime = "YES";
+                    presentTime = AppConstants.No;
                     binding.llLeavetype.setVisibility(View.VISIBLE);
                     binding.viewLeaveType.setVisibility(View.VISIBLE);
 
@@ -93,7 +95,7 @@ public class GeneralInfoActivity extends BaseActivity {
                                 binding.llOdCaptureType.setVisibility(View.GONE);
                                 binding.rgCapturetype.clearCheck();
                                 binding.rgMovementRegisterEntry.clearCheck();
-                            } else {
+                            } else if (selctedItem == R.id.rb_od) {
                                 leavetype = "OD";
                                 binding.llOdCaptureType.setVisibility(View.VISIBLE);
                                 binding.rgCapturetype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -108,9 +110,11 @@ public class GeneralInfoActivity extends BaseActivity {
                                                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                                                     int selctedItem = binding.rgMovementRegisterEntry.getCheckedRadioButtonId();
                                                     if (selctedItem == R.id.rb_yes_movement_register_entry)
-                                                        movementRegisterEntry = "YES";
+                                                        movementRegisterEntry = AppConstants.Yes;
+                                                    else if (selctedItem == R.id.rb_no_movement_register_entry)
+                                                        movementRegisterEntry = AppConstants.No;
                                                     else
-                                                        movementRegisterEntry = "NO";
+                                                        movementRegisterEntry = null;
                                                 }
                                             });
                                         } else if (selctedItem == R.id.rb_within_campus) {
@@ -133,19 +137,23 @@ public class GeneralInfoActivity extends BaseActivity {
                                             binding.llMovementRegisterEntry.setVisibility(View.GONE);
                                             binding.rgMovementRegisterEntry.clearCheck();
 
-                                        } else {
+                                        } else if (selctedItem == R.id.rb_state_level) {
                                             capturetype = "State Level";
                                             binding.llMovementRegisterEntry.setVisibility(View.GONE);
                                             binding.rgMovementRegisterEntry.clearCheck();
 
+                                        } else {
+                                            capturetype = null;
                                         }
                                     }
                                 });
+                            } else {
+                                leavetype = null;
                             }
                         }
                     });
-                } else {
-                    presentTime = "NO";
+                } else if (selctedItem == R.id.rb_yes_present_time) {
+                    presentTime = AppConstants.Yes;
 
                     binding.llLeavetype.setVisibility(View.GONE);
                     binding.viewLeaveType.setVisibility(View.GONE);
@@ -153,6 +161,8 @@ public class GeneralInfoActivity extends BaseActivity {
                     binding.rgLeavetype.clearCheck();
                     binding.rgCapturetype.clearCheck();
                     binding.rgMovementRegisterEntry.clearCheck();
+                } else {
+                    presentTime = null;
                 }
 
             }
@@ -163,7 +173,7 @@ public class GeneralInfoActivity extends BaseActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgStaffQuarters.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_no_staff_quarters) {
-                    staffQuarters = "YES";
+                    staffQuarters = AppConstants.No;
                     binding.llCapture.setVisibility(View.VISIBLE);
                     binding.llCaptureDistance.setVisibility(View.VISIBLE);
 
@@ -178,13 +188,15 @@ public class GeneralInfoActivity extends BaseActivity {
                                 captureDistance = "BELOW 30";
                             else if (selctedItem == R.id.rb_31_50)
                                 captureDistance = "31-50";
-                            else
+                            else if (selctedItem == R.id.rb_above_50)
                                 captureDistance = "ABOVE 50";
+                            else
+                                captureDistance = null;
 
                         }
                     });
-                } else {
-                    staffQuarters = "NO";
+                } else if (selctedItem == R.id.rb_yes_staff_quarters) {
+                    staffQuarters = AppConstants.Yes;
                     binding.llCapture.setVisibility(View.VISIBLE);
                     binding.llCaptureDistance.setVisibility(View.GONE);
                     binding.rgCaptureDistance.clearCheck();
@@ -199,10 +211,14 @@ public class GeneralInfoActivity extends BaseActivity {
                                 stayingFacilitiesType = "in Staff Quarters";
                             else if (selctedItem == R.id.rb_in_school_building)
                                 stayingFacilitiesType = "in School Building";
-                            else
+                            else if (selctedItem == R.id.rb_pvt_building)
                                 stayingFacilitiesType = "Pvt. Building";
+                            else
+                                stayingFacilitiesType = null;
                         }
                     });
+                } else {
+                    staffQuarters = null;
                 }
             }
         });
@@ -211,23 +227,88 @@ public class GeneralInfoActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
 
+                if (validateData()) {
+                    generalInfoEntity = new GeneralInfoEntity();
+                    generalInfoEntity.setOfficer_id(officerID);
+                    generalInfoEntity.setInstitute_id(instID);
+                    generalInfoEntity.setInspection_time(instID);
+                    generalInfoEntity.setHM_HWO_presence(presentTime);
+                    generalInfoEntity.setHaving_headquarters(headQuarters);
+                    generalInfoEntity.setLeaveType(leavetype);
+                    generalInfoEntity.setCapturetype(capturetype);
+                    generalInfoEntity.setMovementRegisterEntry(movementRegisterEntry);
+                    generalInfoEntity.setCaptureDistance(captureDistance);
+                    generalInfoEntity.setStaffQuarters(staffQuarters);
+                    generalInfoEntity.setStayingFacilitiesType(stayingFacilitiesType);
 
-                generalInfoEntity = new GeneralInfoEntity();
-                generalInfoEntity.setHM_HWO_presence(presentTime);
-                generalInfoEntity.setHaving_headquarters(headQuarters);
-                generalInfoEntity.setLeaveType(leavetype);
-                generalInfoEntity.setCapturetype(capturetype);
-                generalInfoEntity.setMovementRegisterEntry(movementRegisterEntry);
-                generalInfoEntity.setCaptureDistance(captureDistance);
-                generalInfoEntity.setStaffQuarters(staffQuarters);
-                generalInfoEntity.setStayingFacilitiesType(stayingFacilitiesType);
-
-                long x = generalInfoViewModel.insertGeneralInfo(generalInfoEntity);
-//                Toast.makeText(GeneralInfoActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
+                    Utils.customSaveAlert(GeneralInfoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                }
             }
         });
     }
 
+    private boolean validateData() {
+        if (TextUtils.isEmpty(presentTime)) {
+            showSnackBar(getResources().getString(R.string.hm_hwo));
+            return false;
+        }
+        if (presentTime.equals(AppConstants.No) && TextUtils.isEmpty(leavetype)) {
+            showSnackBar(getResources().getString(R.string.sel_leave_type));
+            return false;
+        }
+        if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && TextUtils.isEmpty(capturetype)) {
+            showSnackBar(getResources().getString(R.string.sel_od_type));
+            return false;
+        }
+        if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && !TextUtils.isEmpty(capturetype)
+                && capturetype.equalsIgnoreCase("Out of station") && TextUtils.isEmpty(movementRegisterEntry)) {
+            showSnackBar(getResources().getString(R.string.sel_mov_reg));
+            return false;
+        }
+        if (TextUtils.isEmpty(headQuarters)) {
+            showSnackBar(getResources().getString(R.string.sel_head_qua));
+            return false;
+        }
+        if (TextUtils.isEmpty(staffQuarters)) {
+            showSnackBar(getResources().getString(R.string.sel_staff_qua));
+            return false;
+        }
+
+        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(stayingFacilitiesType)) {
+            showSnackBar(getResources().getString(R.string.sel_stay_facility));
+            return false;
+        }
+        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(captureDistance)) {
+            showSnackBar(getResources().getString(R.string.sel_distance));
+            return false;
+        }
+        return true;
+    }
+
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void submitData() {
+        long x = generalInfoViewModel.insertGeneralInfo(generalInfoEntity);
+        if (x >= 0) {
+            long z = 0;
+            try {
+                InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
+                z = instMainViewModel.updateSectionInfo(instMenuInfoEntity);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z >= 0) {
+                showSnackBar(getString(R.string.data_saved));
+                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
+    }
 }

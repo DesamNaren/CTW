@@ -37,12 +37,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.List;
 
-public class StudentsAttendance_2 extends AppCompatActivity implements StudAttendInterface {
+public class StudentsAttendance_2 extends BaseActivity implements StudAttendInterface {
     ActivityStudentsAttendanceBinding binding;
     StudentsAttAdapter adapter;
     BottomSheetDialog dialog;
     StudentsAttndViewModel studentsAttndViewModel;
-    private MutableLiveData<List<StudAttendInfoEntity>> MutableLiveData;
     List<StudAttendInfoEntity> studAttendInfoEntities;
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
@@ -51,12 +50,10 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityStudentsAttendanceBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_students_attendance);
+        binding = putContentView(R.layout.activity_students_attendance, getResources().getString(R.string.stu_att));
 
 
-        MutableLiveData = new MutableLiveData<>();
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("Students Attendance");
+        androidx.lifecycle.MutableLiveData<List<StudAttendInfoEntity>> mutableLiveData = new MutableLiveData<>();
         studentsAttndViewModel =
                 ViewModelProviders.of(StudentsAttendance_2.this,
                         new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
@@ -271,5 +268,9 @@ public class StudentsAttendance_2 extends AppCompatActivity implements StudAtten
         return flag;
     }
 
+    public void onHomeClick(View view){
+        startActivity(new Intent(this, InstMenuMainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
 
 }

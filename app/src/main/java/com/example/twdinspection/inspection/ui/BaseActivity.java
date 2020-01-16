@@ -1,8 +1,8 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -23,7 +23,16 @@ public class BaseActivity extends AppCompatActivity {
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                //alert -on Yes
+                startActivity(new Intent(BaseActivity.this, InstMenuMainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+        binding.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BaseActivity.this, InstMenuMainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
     }

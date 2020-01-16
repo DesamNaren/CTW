@@ -53,9 +53,22 @@
                     android:id="@+id/sync_iv"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@android:drawable/ic_popup_sync"
+                    android:src="@drawable/sync"
                     android:tint="@color/white"
                     android:visibility="gone"
+                    android:layout_marginEnd="@dimen/dimen_10dp" />
+
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_gravity="right"
+                    android:id="@+id/iv_home"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/home"
+                    android:tint="@color/white"
+                    android:visibility="visible"
                     android:layout_marginEnd="@dimen/dimen_10dp" />
 
             </androidx.appcompat.widget.Toolbar>

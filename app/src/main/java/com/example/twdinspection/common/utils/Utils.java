@@ -15,12 +15,13 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.LoginActivity;
-import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
 import org.json.JSONObject;
 
@@ -198,6 +199,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
     public static void customSyncSuccessAlert(Activity activity, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(activity);
@@ -262,7 +264,7 @@ public class Utils {
         }
     }
 
-    public static void customWarningAlert(Activity context, String title, String msg,final boolean goBack) {
+    public static void customWarningAlert(Activity context, String title, String msg, final boolean goBack) {
         try {
             final Dialog dialog = new Dialog(context);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -281,7 +283,7 @@ public class Utils {
                     public void onClick(View v) {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
-                            if(goBack)
+                            if (goBack)
                                 context.finish();
                         }
                     }
@@ -296,4 +298,51 @@ public class Utils {
         }
     }
 
+    public static void customSaveAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+                        SaveListener saveListener = (SaveListener) activity;
+                        saveListener.submitData();
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showToast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
 }

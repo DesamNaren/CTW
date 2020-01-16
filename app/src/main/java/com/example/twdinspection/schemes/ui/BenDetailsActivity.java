@@ -346,6 +346,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 FilePath = getExternalFilesDir(null)
@@ -376,7 +377,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();
             }
-        }else if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE2) {
+        } else if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE2) {
             if (resultCode == RESULT_OK) {
                 FilePath = getExternalFilesDir(null)
                         + "/" + IMAGE_DIRECTORY_NAME;

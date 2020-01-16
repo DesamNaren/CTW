@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="studentAttend"
-            type="com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity" />
+            name="section_menu"
+            type="com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity" />
 
     </data>
 
@@ -19,52 +19,32 @@
         app:cardElevation="2dp">
 
         <LinearLayout
+            android:padding="@dimen/dimen_8dp"
             android:id="@+id/ll_class_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/class_header"
-                android:orientation="horizontal"
-                android:padding="@dimen/dimen_5dp">
+            <TextView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:id="@+id/tv_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/tv_completed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:background="@drawable/check"
-                    android:visibility="gone" />
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/iv_sync"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:layout_marginEnd="@dimen/dimen_5dp"
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:layout_marginBottom="@dimen/dimen_5dp"
+                android:gravity="center_vertical" />
 
-                <TextView
-                    android:id="@+id/tv_class"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:textSize="@dimen/dimen_20dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
 
-
-                <TextView
-                    android:id="@+id/tv_expand"
-                    android:layout_width="@dimen/dimen_20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:layout_marginEnd="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
-                    android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:backgroundTint="@color/light_gray"
-                    android:background="@android:drawable/ic_popup_sync"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentEnd="true" />
-            </RelativeLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 </layout>

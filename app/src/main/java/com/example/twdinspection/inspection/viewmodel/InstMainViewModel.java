@@ -3,27 +3,37 @@ package com.example.twdinspection.inspection.viewmodel;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.R;
+import com.example.twdinspection.inspection.Room.repository.MenuSectionsRepository;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class InstMainViewModel extends AndroidViewModel {
-    private ArrayList<String> sections;
-    private Application application;
+    private MenuSectionsRepository mRepository;
+    private LiveData<List<InstMenuInfoEntity>> instMenuInfoEntities;
 
     public InstMainViewModel(Application application) {
         super(application);
-        this.application = application;
-        sections = new ArrayList<>();
+        mRepository = new MenuSectionsRepository(application);
+        instMenuInfoEntities = new MutableLiveData<>();
     }
 
-    public ArrayList<String> getAllSections() {
-        if (sections != null) {
-            String[] stringArray = application.getResources().getStringArray(R.array.inst_sections);
-            sections = new ArrayList<String>(Arrays.asList(stringArray));
+    public void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities) {
+        mRepository.insertMenuSections(menuInfoEntities);
+    }
+
+    public LiveData<List<InstMenuInfoEntity>> getAllSections() {
+        if (instMenuInfoEntities != null) {
+            instMenuInfoEntities = mRepository.getSections();
         }
-        return sections;
+        return instMenuInfoEntities;
+    }
+
+    public long updateSectionInfo(InstMenuInfoEntity instMenuInfoEntity) {
+        return mRepository.updateSectionInfo(instMenuInfoEntity);
     }
 }

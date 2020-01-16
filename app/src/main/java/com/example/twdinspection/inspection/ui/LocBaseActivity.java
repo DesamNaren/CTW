@@ -65,7 +65,7 @@ public class LocBaseActivity extends AppCompatActivity {
     // than your app can handle
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 0;
 
-    private static final int REQUEST_CHECK_SETTINGS = 100;
+    private static final int REQUEST_CHECK_SETTINGS = 109;
 
     // bunch of location related apis
     private FusedLocationProviderClient mFusedLocationClient;

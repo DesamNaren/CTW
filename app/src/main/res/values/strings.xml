@@ -133,7 +133,7 @@
     <string name="visit_book">Visit Book (Remarks) for Officials &amp; Non-Officials</string>
 
     <string name="previous">PREVIOUS</string>
-    <string name="next">NEXT</string>
+    <string name="next">SAVE &amp; NEXT</string>
     <string name="entitlements_provided_to_students">All Entitlements provided to students</string>
     <string name="entitlements_cosmetics">Cosmetics distributed up to month</string>
     <string name="entitlements_uniforms">Uniforms Provided are in good quality, properly stitched as per student size</string>
@@ -317,7 +317,7 @@
         <item>Diet Issues</item>
         <item>Infrastructure &amp; Maintenance</item>
         <item>Academic Overview</item>
-        <item>Co Circulator &amp; Extra Curricular activities overview</item>
+        <item>Co Curricular &amp; Extra Curricular activities overview</item>
         <item>Entitlements Distributions</item>
         <item>Registers Up to date</item>
         <item>General Comments</item>
@@ -350,5 +350,18 @@
     <string name="no_remarks">No remarks found</string>
     <string name="exit_msg">Do you want to exit?</string>
     <string name="districs_mandals_villages">District Master</string>
+    <string name="stu_att">Students Attendance</string>
+    <string name="sta_att">Staff Attendance</string>
+    <string name="failed">Failed to insert data, Please try again!</string>
+    <string name="data_saved">Data saved successfully!</string>
+    <string name="are_you_sure">Are you sure to submit the data?</string>
+    <string name="hm_hwo">Select H.M/HWO presence</string>
+    <string name="sel_leave_type">Select leave type</string>
+    <string name="sel_od_type">Select OD capture type</string>
+    <string name="sel_mov_reg">Select movement register entry</string>
+    <string name="sel_head_qua">Select H.M/HWO maintaining head quarters</string>
+    <string name="sel_staff_qua">Select staff quarters available</string>
+    <string name="sel_stay_facility">Select statying facilities type</string>
+    <string name="sel_distance">Select operating from distance</string>
 
 </resources>

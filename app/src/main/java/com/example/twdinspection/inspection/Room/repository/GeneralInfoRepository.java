@@ -28,49 +28,6 @@ public class GeneralInfoRepository {
     }
 
 
-    public long updateClassInfo(String attendence_marked, String count_reg, String count_during_insp,
-                                String variance, int flag_completed, String inst_id, int class_id) {
-//
-//
-//        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
-//            @Override
-//            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-//                classInfoDao.updateClassInfo(attendence_marked,count_reg,count_during_insp,variance,inst_id,inst_id,class_id);
-//            }
-//        });
-//
-//        Observer<Long> observer = new Observer<Long>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//                Log.i("Tag", "onSubscribe: ");
-//            }
-//
-//            @Override
-//            public void onNext(Long aLong) {
-//                x = aLong;
-////                flag = true;
-//                Log.i("Tag", "onNext: " + x);
-//            }
-//
-//
-//            @Override
-//            public void onError(Throwable e) {
-////                flag = false;
-//                Log.i("Tag", "onError: " + x);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-////                flag = true;
-//                Log.i("Tag", "onComplete: " + x);
-//            }
-//        };
-//
-//        observable.observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(observer);
-        return x;
-    }
 
     public long insertGeneralInfo(GeneralInfoEntity generalInformationEntity) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {

@@ -28,7 +28,6 @@
             android:textColor="@color/white" />
 
         <ImageView
-
             android:id="@+id/filet_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -38,6 +37,17 @@
             android:src="@drawable/filter"
             android:tint="@color/white"
             android:visibility="gone" />
+
+        <ImageView
+            android:onClick="onHomeClick"
+            android:id="@+id/iv_home"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/home"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

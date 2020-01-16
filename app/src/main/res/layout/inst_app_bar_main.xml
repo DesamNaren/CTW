@@ -54,7 +54,8 @@
             android:text="@string/next"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:drawableEnd="@drawable/right_arrow_16" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

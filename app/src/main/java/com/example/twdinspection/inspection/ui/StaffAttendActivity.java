@@ -22,14 +22,15 @@ import com.example.twdinspection.inspection.viewmodel.StaffViewModel;
 
 import java.util.List;
 
-public class StaffAttendActivity extends AppCompatActivity {
+public class StaffAttendActivity extends BaseActivity {
+
+    ActivityStaffAttBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityStaffAttBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_staff_att);
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("Staff Attendance");
+        binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.sta_att));
+
         StaffViewModel staffViewModel = ViewModelProviders.of(
                 this, new StaffAttendCustomViewModel(binding, this)).get(StaffViewModel.class);
         binding.setViewmodel(staffViewModel);
