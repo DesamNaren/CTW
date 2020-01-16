@@ -208,7 +208,7 @@ public class EntitlementsActivity extends AppCompatActivity {
                 entitlementsEntity.setCosmetic_distributed(cosmetics);
 
                 long x = entitlementsViewModel.insertEntitlementsInfo(entitlementsEntity);
-                Toast.makeText(EntitlementsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(EntitlementsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(EntitlementsActivity.this, RegistersActivity.class));
             }

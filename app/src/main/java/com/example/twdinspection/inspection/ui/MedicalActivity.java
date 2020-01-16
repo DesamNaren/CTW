@@ -129,7 +129,7 @@ public class MedicalActivity extends AppCompatActivity {
                 medicalInfoEntity.setCallHealth100(callHealth100);
 
                 long x = medicalViewModel.insertMedicalInfo(medicalInfoEntity);
-                Toast.makeText(MedicalActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MedicalActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
 //                Utils.customAlert(MedicalActivity.this, "Data submitted successfully", AppConstants.SUCCESS, false);
 

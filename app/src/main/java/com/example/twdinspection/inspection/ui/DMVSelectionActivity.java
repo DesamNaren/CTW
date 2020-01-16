@@ -93,7 +93,7 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
                     editor.putString(AppConstants.INST_NAME, selInstName);
                     editor.putString(AppConstants.MAN_NAME, selectedManName);
                     editor.commit();
-                    startActivity(new Intent(DMVSelectionActivity.this, GeneralInfoActivity.class));
+                    startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
                     finish();
                 }
             }

@@ -248,6 +248,7 @@
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"/>
                             <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/dimen_30dp"
                                 android:id="@+id/btn_addStud"

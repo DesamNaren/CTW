@@ -285,7 +285,7 @@ public class GeneralCommentsActivity extends AppCompatActivity {
                 generalCommentsEntity.setStoreroom_not_clean(storeroom);
 
                 long x = genCommentsViewModel.insertGeneralCommentsInfo(generalCommentsEntity);
-                Toast.makeText(GeneralCommentsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(GeneralCommentsActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(GeneralCommentsActivity.this, UploadedPhotoActivity.class));
             }

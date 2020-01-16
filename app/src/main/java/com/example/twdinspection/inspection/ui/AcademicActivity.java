@@ -108,7 +108,7 @@ public class AcademicActivity extends AppCompatActivity {
                 academicOveriewEntity.setAssessment_test_conducted(assessment_test_conducted);
 
                 long x = academicViewModel.insertAcademicInfo(academicOveriewEntity);
-                Toast.makeText(AcademicActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AcademicActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
 
                 startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));

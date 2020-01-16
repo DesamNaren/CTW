@@ -326,7 +326,7 @@ public class RegistersActivity extends AppCompatActivity {
                 registersEntity.setVisit_book(visitBook);
 
                 long x = registersViewModel.insertRegistersInfo(registersEntity);
-                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(RegistersActivity.this, GeneralCommentsActivity.class));
             }

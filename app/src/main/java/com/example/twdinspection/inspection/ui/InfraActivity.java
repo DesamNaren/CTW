@@ -437,7 +437,7 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setColor(color);
 
                 long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
-                Toast.makeText(InfraActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(InfraActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
             }

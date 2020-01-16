@@ -223,7 +223,7 @@ public class GeneralInfoActivity extends BaseActivity {
                 generalInfoEntity.setStayingFacilitiesType(stayingFacilitiesType);
 
                 long x = generalInfoViewModel.insertGeneralInfo(generalInfoEntity);
-                Toast.makeText(GeneralInfoActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(GeneralInfoActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
             }

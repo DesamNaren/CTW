@@ -67,7 +67,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     Bitmap bm;
     String PIC_NAME,PIC_NAME2;
     ;
-    int imgflag = 0;
+    int imgflag1 = 0;
+    int imgflag2 = 0;
     private String officerId;
 
     @Override
@@ -221,8 +222,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     Snackbar.make(benDetailsBinding.cl, "Please select online status value", Snackbar.LENGTH_SHORT).show();
                 } else if (fieldSelVal.equals(AppConstants.No) && TextUtils.isEmpty(selectedRemId)) {
                     Snackbar.make(benDetailsBinding.cl, "Please select remark type", Snackbar.LENGTH_SHORT).show();
-                } else if (imgflag == 0) {
-                    Toast.makeText(BenDetailsActivity.this, "Please capture image", Toast.LENGTH_SHORT).show();
+                } else if (imgflag1 == 0 && imgflag2==0) {
+                    Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
                     if (Utils.checkInternetConnection(BenDetailsActivity.this)) {
                         submitCall(beneficiaryDetail);
@@ -264,7 +265,6 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         viewModel.submitSchemeDetails(schemeSubmitRequest);
 
     }
-
 
     void callUploadPhoto(final MultipartBody.Part body,final MultipartBody.Part body2) {
         viewModel.UploadImageServiceCall(body,body2);
@@ -362,7 +362,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
 
-                imgflag = 1;
+                imgflag1 = 1;
+
 
                 benDetailsBinding.ivCam1.setImageBitmap(bm);
 
@@ -391,7 +392,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
 
-                imgflag = 1;
+                imgflag2 = 1;
 
                 benDetailsBinding.ivCam2.setImageBitmap(bm);
 
