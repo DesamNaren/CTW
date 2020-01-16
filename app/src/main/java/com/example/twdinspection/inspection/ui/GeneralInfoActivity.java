@@ -25,7 +25,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
     GeneralInfoViewModel generalInfoViewModel;
-    InstMainViewModel instMainViewModel;
     GeneralInfoEntity generalInfoEntity;
     String headQuarters;
     String presentTime, leavetype, capturetype, movementRegisterEntry, staffQuarters, stayingFacilitiesType, captureDistance;
@@ -36,7 +35,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
 
-        instMainViewModel = new InstMainViewModel(getApplication());
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         binding.setViewModel(generalInfoViewModel);
         binding.executePendingBindings();
@@ -297,7 +295,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             long z = 0;
             try {
                 InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
-                z = instMainViewModel.updateSectionInfo(instMenuInfoEntity);
+                z = generalInfoViewModel.updateSectionInfo(instMenuInfoEntity);
             } catch (Exception e) {
                 e.printStackTrace();
             }

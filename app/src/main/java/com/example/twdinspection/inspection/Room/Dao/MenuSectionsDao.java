@@ -19,6 +19,4 @@ public interface MenuSectionsDao {
     LiveData<List<InstMenuInfoEntity>> getSections();
 
 
-    @Update()
-    void updateSectionInfo(InstMenuInfoEntity instMenuInfoEntity);
 }

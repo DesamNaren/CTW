@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import com.example.twdinspection.inspection.Room.repository.GeneralInfoRepository;
 import com.example.twdinspection.inspection.Room.repository.MenuSectionsRepository;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 
 public class GeneralInfoViewModel extends AndroidViewModel {
     private GeneralInfoRepository mRepository;
@@ -20,6 +21,10 @@ public class GeneralInfoViewModel extends AndroidViewModel {
 
     public long insertGeneralInfo(GeneralInfoEntity generalInfoEntity) {
         return mRepository.insertGeneralInfo(generalInfoEntity);
+    }
+
+    public long updateSectionInfo(InstMenuInfoEntity instMenuInfoEntity) {
+        return mRepository.updateSectionInfo(instMenuInfoEntity);
     }
 
 }
