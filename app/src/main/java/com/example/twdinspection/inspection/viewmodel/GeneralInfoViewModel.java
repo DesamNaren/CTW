@@ -23,8 +23,6 @@ public class GeneralInfoViewModel extends AndroidViewModel {
         return mRepository.insertGeneralInfo(generalInfoEntity);
     }
 
-    public long updateSectionInfo(String time,int id) {
-        return mRepository.updateSectionInfo(time,id);
-    }
+
 
 }

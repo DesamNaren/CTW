@@ -32,5 +32,8 @@ public class InstMainViewModel extends AndroidViewModel {
         }
         return instMenuInfoEntities;
     }
+    public long updateSectionInfo(String time,int id) {
+        return mRepository.updateSectionInfo(time,id);
+    }
 
 }
