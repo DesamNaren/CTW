@@ -18,7 +18,7 @@ public interface MenuSectionsDao {
     @Query("SELECT * from InstMenuInfoEntity")
     LiveData<List<InstMenuInfoEntity>> getSections();
 
-    @Query("Update InstMenuInfoEntity set flag_completed=1, section_time=:time where section_id=:id")
-    void updateSectionInfo(String time, int id);
+    @Query("Update InstMenuInfoEntity set flag_completed=1, section_time=:time where section_id=:id and instId=:instId")
+    void updateSectionInfo(String time, int id,String instId);
 
 }

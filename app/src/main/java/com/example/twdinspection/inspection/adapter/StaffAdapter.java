@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 
@@ -53,6 +54,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
 
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
@@ -109,6 +111,25 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                 }
             }
         });
+
+        holder.binding.tvYesDutyAlloted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.binding.tvYesDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+                holder.binding.tvNoDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
+                employeeResponse.setYday_duty_allotted(AppConstants.Yes);
+            }
+        });
+
+        holder.binding.tvNoDutyAlloted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.binding.tvYesDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
+                holder.binding.tvNoDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+                employeeResponse.setYday_duty_allotted(AppConstants.No);
+            }
+        });
+
 
      /*   holder.binding.getRoot().findViewById(R.id.icon).setOnClickListener(
                 new View.OnClickListener() {

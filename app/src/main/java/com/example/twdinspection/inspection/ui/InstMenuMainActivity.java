@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.InstMainActivityBinding;
 import com.example.twdinspection.inspection.adapter.MenuSectionsAdapter;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
@@ -30,7 +33,9 @@ import java.util.List;
 public class InstMenuMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     InstMainActivityBinding binding;
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String instId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +55,9 @@ public class InstMenuMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         LiveData<List<InstMenuInfoEntity>> arrayListLiveData = instMainViewModel.getAllSections();
-
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
+        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
 
         arrayListLiveData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
@@ -65,7 +72,7 @@ public class InstMenuMainActivity extends AppCompatActivity
                     if (sections.size() > 0) {
                         menuInfoEntities = new ArrayList<>();
                         for (int x=0;x<sections.size();x++) {
-                            menuInfoEntities.add(new InstMenuInfoEntity(x+1, 0, sections.get(x), null));
+                            menuInfoEntities.add(new InstMenuInfoEntity(instId,x+1, 0, sections.get(x), null));
                         }
                         if (menuInfoEntities.size() > 0) {
                             instMainViewModel.insertMenuSections(menuInfoEntities);

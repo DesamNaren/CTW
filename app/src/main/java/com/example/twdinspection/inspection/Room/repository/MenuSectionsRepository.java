@@ -78,11 +78,11 @@ public class MenuSectionsRepository {
         return x;
     }
 
-    public long updateSectionInfo(String time,int id) {
+    public long updateSectionInfo(String time,int id,String instId) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                menuSectionsDao.updateSectionInfo(time,id);
+                menuSectionsDao.updateSectionInfo(time,id,instId);
             }
         });
 

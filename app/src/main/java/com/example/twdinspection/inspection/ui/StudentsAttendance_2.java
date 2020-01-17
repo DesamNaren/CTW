@@ -59,7 +59,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
                 ViewModelProviders.of(StudentsAttendance_2.this,
                         new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
         binding.setViewModel(studentsAttndViewModel);
-
+        binding.btnLayout.btnPrevious.setVisibility(View.GONE);
 
         studentsAttndViewModel.getClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, "")).observe(this, new Observer<List<StudAttendInfoEntity>>() {
 

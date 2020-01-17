@@ -173,9 +173,9 @@
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@color/light_gray"
-                            android:backgroundTint="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="@dimen/dimen_5dp"
                             android:text="Yes"
@@ -188,6 +188,7 @@
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/tv_no_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@color/light_gray"
                             android:gravity="center"

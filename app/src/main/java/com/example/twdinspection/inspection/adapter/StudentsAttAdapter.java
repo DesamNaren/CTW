@@ -60,7 +60,7 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         }
 
         holder.listItemBinding.tvClass.setText(list.get(i).getClass_type());
-        holder.listItemBinding.tvExpand.setOnClickListener(new View.OnClickListener() {
+        holder.listItemBinding.llClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectedPos = position;

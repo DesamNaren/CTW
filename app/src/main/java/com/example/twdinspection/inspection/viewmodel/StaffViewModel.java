@@ -29,6 +29,9 @@ public class StaffViewModel extends ViewModel {
         return staffInfoList;
     }
 
+    public long updateStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
+        return staffInfoRepository.updateStaffInfo(staffAttendanceEntities);
+    }
 
 
 

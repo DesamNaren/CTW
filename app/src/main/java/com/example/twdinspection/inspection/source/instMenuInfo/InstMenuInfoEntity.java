@@ -9,16 +9,26 @@ import org.jetbrains.annotations.NotNull;
 public class InstMenuInfoEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;
+    public String instId;
     private int section_id;
     private int flag_completed;
     private String section_name;
     private String section_time;
 
-    public InstMenuInfoEntity(int section_id, int flag_completed, String section_name, String section_time) {
+    public InstMenuInfoEntity(String instId, int section_id, int flag_completed, String section_name, String section_time) {
+        this.instId = instId;
         this.section_id = section_id;
         this.flag_completed = flag_completed;
         this.section_name = section_name;
         this.section_time = section_time;
+    }
+
+    public String getInstId() {
+        return instId;
+    }
+
+    public void setInstId(String instId) {
+        this.instId = instId;
     }
 
     public int getId() {

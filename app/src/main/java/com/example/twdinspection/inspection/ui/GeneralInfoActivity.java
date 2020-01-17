@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     private static final String TAG = GeneralInfoActivity.class.getSimpleName();
-    SharedPreferences sharedPreferences;
+        SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
     GeneralInfoViewModel generalInfoViewModel;
@@ -297,7 +297,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             long z = 0;
             try {
 //                InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 1);
+                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 1,instID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
