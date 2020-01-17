@@ -294,8 +294,8 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         if (x >= 0) {
             long z = 0;
             try {
-                InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
-                z = generalInfoViewModel.updateSectionInfo(instMenuInfoEntity);
+//                InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
+                z = generalInfoViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 1);
             } catch (Exception e) {
                 e.printStackTrace();
             }

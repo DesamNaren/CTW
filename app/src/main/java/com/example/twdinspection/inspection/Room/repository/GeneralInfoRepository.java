@@ -68,11 +68,11 @@ public class GeneralInfoRepository {
         return x;
     }
 
-    public long updateSectionInfo(InstMenuInfoEntity instMenuInfoEntity) {
+    public long updateSectionInfo(String time,int id) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                generalInfoDao.updateSectionInfo(instMenuInfoEntity);
+                generalInfoDao.updateSectionInfo(time,id);
             }
         });
 

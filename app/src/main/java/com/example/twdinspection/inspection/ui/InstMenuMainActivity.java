@@ -64,8 +64,8 @@ public class InstMenuMainActivity extends AppCompatActivity
                     ArrayList<String> sections = new ArrayList<String>(Arrays.asList(stringArray));
                     if (sections.size() > 0) {
                         menuInfoEntities = new ArrayList<>();
-                        for (String section : sections) {
-                            menuInfoEntities.add(new InstMenuInfoEntity(1, 0, section, null));
+                        for (int x=0;x<sections.size();x++) {
+                            menuInfoEntities.add(new InstMenuInfoEntity(x+1, 0, sections.get(x), null));
                         }
                         if (menuInfoEntities.size() > 0) {
                             instMainViewModel.insertMenuSections(menuInfoEntities);
