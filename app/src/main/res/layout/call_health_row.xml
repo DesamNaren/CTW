@@ -6,7 +6,7 @@
 
         <variable
             name="callModel"
-            type="com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity" />
+            type="com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity" />
 
     </data>
 

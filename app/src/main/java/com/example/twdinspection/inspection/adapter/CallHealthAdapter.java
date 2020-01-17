@@ -2,7 +2,6 @@ package com.example.twdinspection.inspection.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
-import com.example.twdinspection.databinding.AdapterStudAttndBinding;
 import com.example.twdinspection.databinding.CallHealthRowBinding;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import java.util.List;
 
 public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.ItemHolder>{

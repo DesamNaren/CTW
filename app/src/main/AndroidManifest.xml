@@ -108,6 +108,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".inspection.ui.InstMenuMainActivity" />
         <activity android:name=".schemes.ui.SchemeSyncActivity" />
+        <activity android:name=".inspection.ui.SchoolSyncActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

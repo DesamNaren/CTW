@@ -3,6 +3,7 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
@@ -91,6 +92,8 @@ public interface TWDService {
     @POST("upload/uploadSchemePhotos")
     Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image2);
 
+    @GET("CTWServiceDetails/getDMVMasters")
+    Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
@@ -18,12 +20,14 @@ import com.example.twdinspection.inspection.source.GeneralInformation.Institutes
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
+import com.example.twdinspection.schemes.ui.SchemeSyncActivity;
+import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DMVSelectionActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+public class DMVSelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     DMVDetailsViewModel viewModel;
     DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
@@ -41,7 +45,9 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         context = DMVSelectionActivity.this;
 
-        dmvSelectionActivityBinding = putContentView(R.layout.dmv_selection_activity, getResources().getString(R.string.general_info));
+        dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
+        dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
+        dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
 
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
@@ -69,7 +75,7 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
                 ArrayList<String> distNames = new ArrayList<>();
                 distNames.add("-Select-");
                 for (int i = 0; i < districts.size(); i++) {
-                    distNames.add(districts.get(i).getDist_name());
+                    distNames.add(districts.get(i).getDistName());
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                         android.R.layout.simple_spinner_dropdown_item, distNames
@@ -97,6 +103,13 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
                     startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
                     finish();
                 }
+            }
+        });
+
+        dmvSelectionActivityBinding.header.syncIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DMVSelectionActivity.this, SchoolSyncActivity.class));
             }
         });
     }
@@ -131,15 +144,15 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
             mandalNames.clear();
             mandalNames.add("-Select-");
             if (i != 0) {
-                viewModel.getDistId(dmvSelectionActivityBinding.spDist.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<Integer>() {
+                viewModel.getDistId(dmvSelectionActivityBinding.spDist.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<String>() {
                     @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedDistId = integer;
-                            viewModel.getAllMandals(integer).observe(DMVSelectionActivity.this, mandals -> {
+                    public void onChanged(String str) {
+                        if (str != null) {
+                            selectedDistId = Integer.valueOf(str);
+                            viewModel.getAllMandals(selectedDistId).observe(DMVSelectionActivity.this, mandals -> {
                                 if (mandals != null && mandals.size() > 0) {
                                     for (int i = 0; i < mandals.size(); i++) {
-                                        mandalNames.add(mandals.get(i).getMandal_name());
+                                        mandalNames.add(mandals.get(i).getMandalName());
                                     }
                                 }
                             });
@@ -165,17 +178,17 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
             villageNames.add("-Select-");
             if (i != 0) {
 
-                viewModel.getMandalId(dmvSelectionActivityBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(DMVSelectionActivity.this, new Observer<Integer>() {
+                viewModel.getMandalId(dmvSelectionActivityBinding.spMandal.getSelectedItem().toString(), selectedDistId).observe(DMVSelectionActivity.this, new Observer<String>() {
                     @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedManId = integer;
+                    public void onChanged(String str) {
+                        if (str != null) {
+                            selectedManId = Integer.valueOf(str);
                             selectedManName = dmvSelectionActivityBinding.spMandal.getSelectedItem().toString();
-                            viewModel.getAllVillages(integer, selectedDistId).observe(DMVSelectionActivity.this, villages -> {
+                            viewModel.getAllVillages(selectedManId, selectedDistId).observe(DMVSelectionActivity.this, villages -> {
                                 if (villages != null && villages.size() > 0) {
 
                                     for (int i = 0; i < villages.size(); i++) {
-                                        villageNames.add(villages.get(i).getVillage_name());
+                                        villageNames.add(villages.get(i).getVillageName());
                                     }
 
                                 }
@@ -199,11 +212,11 @@ public class DMVSelectionActivity extends BaseActivity implements AdapterView.On
             instNames.add("-Select-");
             if (i != 0) {
 
-                viewModel.getVillageId(dmvSelectionActivityBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(DMVSelectionActivity.this, new Observer<Integer>() {
+                viewModel.getVillageId(dmvSelectionActivityBinding.spVillage.getSelectedItem().toString(), selectedManId, selectedDistId).observe(DMVSelectionActivity.this, new Observer<String>() {
                     @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            selectedVilId = integer;
+                    public void onChanged(String str) {
+                        if (str != null) {
+                            selectedVilId = Integer.valueOf(str);
                         }
                     }
                 });

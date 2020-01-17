@@ -12,11 +12,8 @@ import android.widget.TextView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
 import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
-import com.example.twdinspection.inspection.viewmodel.MedicalCustomViewModel;
-import com.example.twdinspection.inspection.viewmodel.MedicalViewModel;
 
 public class DietIssuesActivity extends AppCompatActivity {
 

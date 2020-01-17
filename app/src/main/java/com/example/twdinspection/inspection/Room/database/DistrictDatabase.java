@@ -20,21 +20,22 @@ import com.example.twdinspection.inspection.Room.Dao.InfraStructureInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.MenuSectionsDao;
 import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
 import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
+import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
+import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
@@ -43,10 +44,11 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {Districts.class, Mandals.class, Villages.class, StudAttendInfoEntity.class,
+@Database(entities = {StudAttendInfoEntity.class,
         InstitutesEntity.class, StaffAttendanceEntity.class, MedicalInfoEntity.class, DietIssuesEntity.class,
         InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
+        , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class
         , InstMenuInfoEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
@@ -73,6 +75,8 @@ public abstract class DistrictDatabase extends RoomDatabase {
     public abstract GeneralInfoDao generalInfoDao();
 
     public abstract MenuSectionsDao menuSectionsDao();
+
+    public abstract SchoolSyncDao schoolSyncDao();
 
     private static DistrictDatabase INSTANCE1;
 

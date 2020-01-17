@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
+import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
+import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
 
 import java.util.List;
 
@@ -22,23 +22,23 @@ import java.util.List;
 
 @Dao
 public interface DistrictDao {
-    @Query("SELECT * from Districts")
-    LiveData<List<Districts>> getDistricts();
+    @Query("SELECT * from SchoolDistrict")
+    LiveData<List<SchoolDistrict>> getDistricts();
 
-    @Query("SELECT * from Mandals where dist_id LIKE :dist_id")
-    LiveData<List<Mandals>> getMandals(int dist_id);
+    @Query("SELECT * from SchoolMandal where distId LIKE :dist_id")
+    LiveData<List<SchoolMandal>> getMandals(int dist_id);
 
-    @Query("SELECT * from Villages where mandal_id LIKE :mandalId AND dist_id LIKE :distId")
-    LiveData<List<Villages>> getVillages(int mandalId, int distId);
+    @Query("SELECT * from SchoolVillage where mandalID LIKE :mandalId AND distId LIKE :distId")
+    LiveData<List<SchoolVillage>> getVillages(int mandalId, int distId);
 
-    @Query("SELECT dist_id from Districts where dist_name LIKE :dist_name")
-    LiveData<Integer> getDistId(String dist_name);
+    @Query("SELECT distId from SchoolDistrict where distName LIKE :dist_name")
+    LiveData<String> getDistId(String dist_name);
 
-    @Query("SELECT mandal_id from Mandals where mandal_name LIKE :mandalName AND dist_id LIKE :distId")
-    LiveData<Integer> getMandalId(String mandalName, int distId);
+    @Query("SELECT mandalID from SchoolMandal where mandalName LIKE :mandalName AND distId LIKE :distId")
+    LiveData<String> getMandalId(String mandalName, int distId);
 
-    @Query("SELECT village_id from Villages where village_name LIKE :villageName AND mandal_id LIKE :manId AND dist_id LIKE :distId")
-    LiveData<Integer> getVillageId(String villageName, int manId,  int distId);
+    @Query("SELECT villageID from SchoolVillage where villageName LIKE :villageName AND mandalID LIKE :manId AND distId LIKE :distId")
+    LiveData<String> getVillageId(String villageName, int manId,  int distId);
 
     @Query("SELECT Inst_Id from InstInfo where Inst_Name LIKE :inst_name")
     LiveData<String> getInstId(String inst_name);
@@ -46,6 +46,6 @@ public interface DistrictDao {
     @Query("SELECT * from InstInfo")
     LiveData<List<InstitutesEntity>> getInstitutes();
 
-    @Query("SELECT count(*) from Districts")
+    @Query("SELECT count(*) from SchoolDistrict")
     int getCount();
 }

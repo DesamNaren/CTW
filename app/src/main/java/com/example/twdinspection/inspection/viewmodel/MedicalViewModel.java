@@ -3,16 +3,12 @@ package com.example.twdinspection.inspection.viewmodel;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-
-import java.util.List;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 public class MedicalViewModel extends ViewModel {
 

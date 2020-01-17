@@ -4,10 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
-import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

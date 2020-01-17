@@ -7,17 +7,17 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.inspection.Room.repository.DMVRepository;
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
+import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
+import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
 
 import java.util.List;
 
 public class DMVDetailsViewModel extends AndroidViewModel {
-    private LiveData<List<Districts>> districts;
-    private LiveData<List<Mandals>> mandals;
-    private LiveData<List<Villages>> villages;
+    private LiveData<List<SchoolDistrict>> districts;
+    private LiveData<List<SchoolMandal>> mandals;
+    private LiveData<List<SchoolVillage>> villages;
     private LiveData<List<InstitutesEntity>> inst_names;
     private DMVRepository mRepository;
 
@@ -30,7 +30,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         mRepository = new DMVRepository(application);
     }
 
-    public LiveData<List<Districts>> getAllDistricts() {
+    public LiveData<List<SchoolDistrict>> getAllDistricts() {
         if (districts != null) {
             districts = mRepository.getDistricts();
         }
@@ -39,7 +39,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
 
 
 
-    public LiveData<List<Mandals>> getAllMandals(int distId) {
+    public LiveData<List<SchoolMandal>> getAllMandals(int distId) {
         if (mandals != null) {
             mandals=mRepository.getMandals(distId);
         }
@@ -53,19 +53,20 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         return inst_names;
     }
 
-    public LiveData<List<Villages>> getAllVillages(int mandalId,int distId) {
+    public LiveData<List<SchoolVillage>> getAllVillages(int mandalId,int distId) {
             villages=mRepository.getVillages(mandalId,distId);
         return villages;
     }
 
-    public LiveData<Integer> getDistId(String distName){
+    public LiveData<String> getDistId(String distName){
         return mRepository.getDistId(distName);
     }
-    public LiveData<Integer> getMandalId(String mandalName,int distId){
+
+    public LiveData<String> getMandalId(String mandalName,int distId){
         return mRepository.getMandalId(mandalName,distId);
     }
 
-    public LiveData<Integer> getVillageId(String mandalName,int manId, int distId){
+    public LiveData<String> getVillageId(String mandalName,int manId, int distId){
         return mRepository.getVillageId(mandalName,manId,distId);
     }
 

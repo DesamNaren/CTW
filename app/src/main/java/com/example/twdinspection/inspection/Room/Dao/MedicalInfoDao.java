@@ -5,8 +5,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 @Dao
 public interface MedicalInfoDao {

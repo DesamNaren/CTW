@@ -7,18 +7,18 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.DistManVillage.Districts;
-import com.example.twdinspection.inspection.source.DistManVillage.Mandals;
-import com.example.twdinspection.inspection.source.DistManVillage.Villages;
 import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
+import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
+import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
+import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
 
 import java.util.List;
 
 public class DMVRepository {
 
     public DistrictDao districtDao;
-    public LiveData<List<Districts>> districts = new MutableLiveData<>();
-    public LiveData<List<Mandals>> mandals = new MutableLiveData<>();
+    public LiveData<List<SchoolDistrict>> districts = new MutableLiveData<>();
+    public LiveData<List<SchoolMandal>> mandals = new MutableLiveData<>();
     public LiveData<List<String>> institute_names = new MutableLiveData<>();
     public int count;
 
@@ -34,19 +34,19 @@ public class DMVRepository {
 
     // Room executes all queries on file_provider_paths separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    public LiveData<List<Districts>> getDistricts() {
+    public LiveData<List<SchoolDistrict>> getDistricts() {
         return districtDao.getDistricts();
     }
 
-    public LiveData<List<Mandals>> getMandals(int dist_id) {
+    public LiveData<List<SchoolMandal>> getMandals(int dist_id) {
         return districtDao.getMandals(dist_id);
     }
 
-    public LiveData<List<Villages>> getVillages(int mandalId, int distId) {
+    public LiveData<List<SchoolVillage>> getVillages(int mandalId, int distId) {
         return districtDao.getVillages(mandalId, distId);
     }
 
-    public LiveData<Integer> getDistId(String dist_name) {
+    public LiveData<String> getDistId(String dist_name) {
         return districtDao.getDistId(dist_name);
     }
 
@@ -59,11 +59,11 @@ public class DMVRepository {
 
 
 
-    public LiveData<Integer> getMandalId(String mandalName, int distId) {
+    public LiveData<String> getMandalId(String mandalName, int distId) {
         return districtDao.getMandalId(mandalName, distId);
     }
 
-    public LiveData<Integer> getVillageId(String mandalName, int manId, int distId) {
+    public LiveData<String> getVillageId(String mandalName, int manId, int distId) {
         return districtDao.getVillageId(mandalName, manId, distId);
     }
 

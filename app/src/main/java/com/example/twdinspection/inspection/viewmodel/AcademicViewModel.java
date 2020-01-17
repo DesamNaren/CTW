@@ -5,11 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
-import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.Room.repository.AcademicRepository;
-import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
 
 public class AcademicViewModel extends ViewModel {
 

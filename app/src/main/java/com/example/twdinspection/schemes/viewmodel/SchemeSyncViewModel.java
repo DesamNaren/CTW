@@ -65,6 +65,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         twdService.getSchemeDMV().enqueue(new Callback<SchemeDMVResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeDMVResponse> call, @NotNull Response<SchemeDMVResponse> response) {
+                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                     schemeDMVResponseMutableLiveData.setValue(response.body());
                 }
@@ -72,7 +73,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<SchemeDMVResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -96,13 +97,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         twdService.getFinancialYears().enqueue(new Callback<FinancialYearResponse>() {
             @Override
             public void onResponse(@NotNull Call<FinancialYearResponse> call, @NotNull Response<FinancialYearResponse> response) {
+                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         financialYearResponseMutableLiveData.setValue(response.body());
                 }
             }
             @Override
             public void onFailure(@NotNull Call<FinancialYearResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -126,6 +128,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         twdService.getInspectionRemarks().enqueue(new Callback<InspectionRemarkResponse>() {
             @Override
             public void onResponse(@NotNull Call<InspectionRemarkResponse> call, @NotNull Response<InspectionRemarkResponse> response) {
+                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         inspectionRemarkResponseMutableLiveData.setValue(response.body());
                 }
@@ -133,7 +136,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<InspectionRemarkResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -157,6 +160,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         twdService.getSchemeResponse().enqueue(new Callback<SchemeResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeResponse> call, @NotNull Response<SchemeResponse> response) {
+                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         schemeResponseMutableLiveData.setValue(response.body());
                 }
@@ -164,7 +168,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<SchemeResponse> call, @NotNull Throwable t) {
-                Log.i("UU", "onFailure: " + t.getMessage());
+                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });

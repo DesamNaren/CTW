@@ -1,16 +1,14 @@
 package com.example.twdinspection.inspection.Room.repository;
 
 import android.app.Application;
-import android.telecom.Call;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

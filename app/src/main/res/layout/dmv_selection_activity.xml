@@ -10,7 +10,6 @@
     </data>
 
 
-
     <RelativeLayout
         android:id="@+id/rl_root"
         android:layout_width="match_parent"
@@ -23,6 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/list_blue" />
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
 
         <RelativeLayout
             android:id="@+id/rl_profile"
@@ -61,13 +64,14 @@
                         android:id="@+id/iv_cal"
                         android:layout_width="@dimen/dimen_70dp"
                         android:layout_height="@dimen/dimen_70dp"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginTop="@dimen/dimen_10dp"
-                        android:src="@drawable/user1"
-                        android:layout_alignParentStart="true" />
+                        android:src="@drawable/user1" />
 
 
-                    <include android:id="@+id/include_basic_layout"
+                    <include
+                        android:id="@+id/include_basic_layout"
                         layout="@layout/details_layout" />
 
                 </LinearLayout>
@@ -204,12 +208,11 @@
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cl"
             android:layout_above="@+id/btn_proceed"
-            android:background="@android:color/transparent">
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:background="@android:color/transparent"></androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <Button
             android:id="@+id/btn_proceed"

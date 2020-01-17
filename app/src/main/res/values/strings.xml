@@ -215,6 +215,7 @@
     <string name="save">Save</string>
     <string name="general_info">GENERAL INFO</string>
     <string name="sync_activity">SYNC DATA</string>
+    <string name="sync_school_activity">SYNC SCHOOL DATA</string>
     <string name="dashboard">DASHBOARD</string>
     <string name="title_activity_institute_menu">InstituteMenuActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

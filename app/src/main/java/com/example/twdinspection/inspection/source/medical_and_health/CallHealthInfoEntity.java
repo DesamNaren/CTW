@@ -1,6 +1,5 @@
-package com.example.twdinspection.inspection.source.MedicalAndHealth;
+package com.example.twdinspection.inspection.source.medical_and_health;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
