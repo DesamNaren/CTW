@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
         <variable
@@ -16,15 +17,12 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.MedicalActivity">
 
-        <include
-            android:id="@+id/header"
-            layout="@layout/header_layout" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/header"
             android:layout_above="@+id/btn_layout"
+            android:layout_below="@+id/header"
             android:background="@color/light_gray">
 
             <LinearLayout
@@ -496,29 +494,63 @@
                             android:text="@string/call_health_100"
                             android:textColor="@color/black" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_call_health_100"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="horizontal">
 
+                            <RadioGroup
+                                android:id="@+id/rg_call_health_100"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/yes_call_health_100"
+
+                                <RadioButton
+                                    android:id="@+id/yes_call_health_100"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/no_call_health_100"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
 
-                            <RadioButton
-                                android:id="@+id/no_call_health_100"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
-
-                        </RadioGroup>
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_addCall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:background="@drawable/btn_background"
+                                    android:text="Add"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:visibility="visible" />
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_view"
+                                    android:layout_marginTop="@dimen/dimen_5dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:background="@drawable/btn_background1"
+                                    android:text="View"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -553,29 +585,47 @@
                             android:text="@string/whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register"
                             android:textColor="@color/black" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_medicalCheckup_details"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="horizontal">
 
-
-                            <RadioButton
-                                android:id="@+id/medical_checkup_details_yes"
-                                android:layout_width="wrap_content"
+                            <RadioGroup
+                                android:id="@+id/rg_medicalCheckup_details"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/medical_checkup_details_no"
+
+                                <RadioButton
+                                    android:id="@+id/medical_checkup_details_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/medical_checkup_details_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:id="@+id/btn_addStud"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
-
-                        </RadioGroup>
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/btn_background"
+                                android:text="Add"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:visibility="visible" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

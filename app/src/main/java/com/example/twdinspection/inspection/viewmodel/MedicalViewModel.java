@@ -2,11 +2,13 @@ package com.example.twdinspection.inspection.viewmodel;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
+import com.example.twdinspection.inspection.source.MedicalAndHealth.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.MedicalAndHealth.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
@@ -27,7 +29,14 @@ public class MedicalViewModel extends ViewModel {
 
 
     public long insertMedicalInfo(MedicalInfoEntity medicalInfoEntity) {
-       long flag=mRepository.insertMedicalInfo(medicalInfoEntity);
-        return flag;
+        return mRepository.insertMedicalInfo(medicalInfoEntity);
+    }
+
+    public long insertCallInfo(CallHealthInfoEntity callHealthInfoEntity) {
+        return mRepository.insertCallInfo(callHealthInfoEntity);
+    }
+
+    public LiveData<Integer> getCallCnt() {
+        return mRepository.getCallCnt();
     }
 }

@@ -366,5 +366,13 @@
     <string name="count_in_register">Please enter students count in register</string>
     <string name="count_dur_insp">Please enter students count during inspection</string>
     <string name="stud_greater_than_roll">Students present cannot be greater than students on roll</string>
+    <string name="medical_health"><![CDATA[Medical & Health Issues]]></string>
+    <string name="sl.no">Sl.No</string>
+    <string name="stu_name">Student Name</string>
+    <string name="disease">Disease</string>
+    <string name="plan_to_cure">Plan to cure</string>
+    <string name="enter_stu_name">Enter student name</string>
+    <string name="enter_disease">Enter disease</string>
+    <string name="sel_plan_date">Select date</string>
 
 </resources>
