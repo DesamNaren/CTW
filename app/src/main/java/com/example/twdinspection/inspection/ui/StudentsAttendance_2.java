@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -28,16 +29,18 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class StudentsAttendance_2 extends BaseActivity implements StudAttendInterface {
+public class StudentsAttendance_2 extends BaseActivity implements StudAttendInterface, SaveListener {
     ActivityStudentsAttendanceBinding binding;
     StudentsAttAdapter adapter;
     BottomSheetDialog dialog;
@@ -46,14 +49,12 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
     LinearLayout ll_stud_pres;
-
+    CoordinatorLayout rootLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_students_attendance, getResources().getString(R.string.stu_att));
 
-
-        androidx.lifecycle.MutableLiveData<List<StudAttendInfoEntity>> mutableLiveData = new MutableLiveData<>();
         studentsAttndViewModel =
                 ViewModelProviders.of(StudentsAttendance_2.this,
                         new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
@@ -74,11 +75,31 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+                if(validateSubmit()) {
+                    Utils.customSaveAlert(StudentsAttendance_2.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                }else{
+                    showSnackBar("Please inspect all the classes");
+                }
             }
         });
     }
 
+    private boolean validateSubmit() {
+        boolean returnFlag=true;
+        for(int i=0;i<studAttendInfoEntities.size();i++){
+            if(!(studAttendInfoEntities.get(i).getFlag_completed()==1))
+                returnFlag=false;
+        }
+        return returnFlag;
+    }
+
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void showBottomSheetSnackBar(String str) {
+        Snackbar.make(rootLayout, str, Snackbar.LENGTH_SHORT).show();
+    }
     @Override
     public void openBottomSheet(StudAttendInfoEntity studAttendInfoEntity) {
         showContactDetails(studAttendInfoEntity);
@@ -86,6 +107,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
     public void showContactDetails(StudAttendInfoEntity studAttendInfoEntity) {
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+        rootLayout=view.findViewById(R.id.root_layout);
         dialog = new BottomSheetDialog(StudentsAttendance_2.this);
         LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
@@ -240,29 +262,24 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     private boolean validate(StudAttendInfoEntity studAttendInfoEntity) {
         boolean flag = true;
         if (TextUtils.isEmpty(IsattenMarked)) {
-            Toast.makeText(this, "Check weather students attendance marked", Toast.LENGTH_SHORT).show();
+            showBottomSheetSnackBar(getResources().getString(R.string.attendance_marked));
             flag = false;
         } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE) {
-            et_studMarkedPres.setError("Please enter students count in register ");
-            et_studMarkedPres.requestFocus();
+            showBottomSheetSnackBar(getResources().getString(R.string.count_in_register));
             flag = false;
         } else if (TextUtils.isEmpty(count_during_insp)) {
-            et_studPresInsp.setError("Please enter students count during inspection ");
-            et_studPresInsp.requestFocus();
+            showBottomSheetSnackBar(getResources().getString(R.string.count_dur_insp));
             flag = false;
         } else if (IsattenMarked.equals(AppConstants.Yes)) {
             if (Integer.parseInt(et_studMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
-                et_studMarkedPres.setError("Students marked cannot be greater than students on roll");
-                et_studMarkedPres.requestFocus();
+                showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
                 flag = false;
             }else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
-                et_studPresInsp.setError("Students present cannot be greater than students on roll");
-                et_studPresInsp.requestFocus();
+                showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
                 flag = false;
             }
         }else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
-            et_studPresInsp.setError("Students present cannot be greater than students on roll");
-            et_studPresInsp.requestFocus();
+            showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
             flag = false;
         }
         return flag;
@@ -273,4 +290,8 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
+    @Override
+    public void submitData() {
+        startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+    }
 }

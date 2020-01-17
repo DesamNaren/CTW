@@ -321,7 +321,6 @@
         <item>Entitlements Distributions</item>
         <item>Registers Up to date</item>
         <item>General Comments</item>
-        <item>General Comments</item>
         <item>Uploaded Photographs</item>
         <!--        <item>Following escalation matrix was defined </item>-->
     </string-array>
@@ -363,5 +362,9 @@
     <string name="sel_staff_qua">Select staff quarters available</string>
     <string name="sel_stay_facility">Select statying facilities type</string>
     <string name="sel_distance">Select operating from distance</string>
+    <string name="attendance_marked">Check weather students attendance marked</string>
+    <string name="count_in_register">Please enter students count in register</string>
+    <string name="count_dur_insp">Please enter students count during inspection</string>
+    <string name="stud_greater_than_roll">Students present cannot be greater than students on roll</string>
 
 </resources>

@@ -49,7 +49,7 @@
                     android:textSize="@dimen/dimen_20dp" />
 
 
-                <TextView
+                <ImageView
                     android:id="@+id/tv_expand"
                     android:layout_width="@dimen/dimen_20dp"
                     android:layout_height="20dp"
@@ -62,7 +62,6 @@
                     android:layout_marginRight="@dimen/dimen_5dp"
                     android:layout_marginBottom="@dimen/dimen_5dp"
                     android:backgroundTint="@color/light_gray"
-                    android:background="@drawable/ic_edit"
                     android:gravity="center_vertical" />
             </RelativeLayout>
 

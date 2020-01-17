@@ -54,23 +54,17 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         holder.listItemBinding.setStudentAttend(dataModel);
 
         if(dataModel.getFlag_completed()==1){
-            holder.listItemBinding.llClassHeader.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
-            holder.listItemBinding.tvClass.setTextColor(context.getResources().getColor(R.color.white));
+            holder.listItemBinding.tvExpand.setImageDrawable(context.getResources().getDrawable(R.drawable.completed));
+        }else{
+            holder.listItemBinding.tvExpand.setImageDrawable(context.getResources().getDrawable(R.drawable.pending));
         }
 
-
-//        holder.listItemBinding.tvClass.setText("Class " + (position + 1));
         holder.listItemBinding.tvClass.setText(list.get(i).getClass_type());
         holder.listItemBinding.tvExpand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectedPos = position;
                 studAttendInterface.openBottomSheet(dataModel);
-//                selectedPos=position;
-//                holder.listItemBinding.llEntries.setVisibility(View.VISIBLE);
-//                minimiseAll(selectedPos,holder);
-
-
             }
         });
 

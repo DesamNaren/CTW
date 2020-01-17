@@ -57,10 +57,10 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
         if (dataModel.getFlag_completed()==1) {
             holder.listItemBinding.ivSync.setImageDrawable(context.getResources().getDrawable(R.drawable.completed));
         } else {
-            holder.listItemBinding.ivSync.setImageDrawable(context.getResources().getDrawable(R.drawable.sync));
+            holder.listItemBinding.ivSync.setImageDrawable(context.getResources().getDrawable(R.drawable.pending));
         }
 
-        holder.listItemBinding.ivSync.setOnClickListener(new View.OnClickListener() {
+        holder.listItemBinding.llClassHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (dataModel.getFlag_completed()==0) {

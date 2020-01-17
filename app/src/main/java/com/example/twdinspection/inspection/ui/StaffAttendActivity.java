@@ -29,7 +29,7 @@ public class StaffAttendActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.sta_att));
+        binding = putContentView(R.layout.activity_staff_att, getResources().getString(R.string.sta_att));
 
         StaffViewModel staffViewModel = ViewModelProviders.of(
                 this, new StaffAttendCustomViewModel(binding, this)).get(StaffViewModel.class);
