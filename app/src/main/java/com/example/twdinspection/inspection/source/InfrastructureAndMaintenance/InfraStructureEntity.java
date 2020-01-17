@@ -69,6 +69,9 @@ public class InfraStructureEntity {
     private String dininghall_available;
 
     @ColumnInfo()
+    private String dininghall_used;
+
+    @ColumnInfo()
     private String separate_kitchen_room_available;
 
     @ColumnInfo()
@@ -154,6 +157,14 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String color;
+
+    public String getDininghall_used() {
+        return dininghall_used;
+    }
+
+    public void setDininghall_used(String dininghall_used) {
+        this.dininghall_used = dininghall_used;
+    }
 
     public String getInverterWorkingStatus() {
         return inverterWorkingStatus;

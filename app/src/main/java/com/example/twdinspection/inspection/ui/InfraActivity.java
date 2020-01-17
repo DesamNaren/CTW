@@ -21,9 +21,9 @@ public class InfraActivity extends AppCompatActivity {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility = "", bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall;
+    String drinkingWaterFacility, bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall,dining_hall_used;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
-    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting,electricity_wiring_repairs_req;
+    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req;
 
     @Override
 
@@ -44,8 +44,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgDrinkingWaterFacility.getCheckedRadioButtonId();
                 if (selctedItem == R.id.drinking_water_facility_yes)
                     drinkingWaterFacility = "GOOD";
-                else
+                else if (selctedItem == R.id.drinking_water_facility_no)
                     drinkingWaterFacility = "BAD";
+                else
+                    drinkingWaterFacility = null;
             }
         });
         binding.rgBigSchoolNameBoard.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -54,8 +56,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgBigSchoolNameBoard.getCheckedRadioButtonId();
                 if (selctedItem == R.id.big_school_name_board_yes)
                     bigSchoolNameBoard = "YES";
-                else
+                else if (selctedItem == R.id.big_school_name_board_no)
                     bigSchoolNameBoard = "NO";
+                else
+                    bigSchoolNameBoard = null;
             }
         });
         binding.rgRoPlant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -66,10 +70,14 @@ public class InfraActivity extends AppCompatActivity {
                     roPlant = "YES";
                     binding.llTdsMeterReading.setVisibility(View.VISIBLE);
                     binding.llReason.setVisibility(View.GONE);
-                } else {
+                } else if (selctedItem == R.id.ro_plant_no) {
                     roPlant = "NO";
                     binding.llTdsMeterReading.setVisibility(View.GONE);
                     binding.llReason.setVisibility(View.VISIBLE);
+                } else {
+                    roPlant = null;
+                    binding.llTdsMeterReading.setVisibility(View.GONE);
+                    binding.llReason.setVisibility(View.GONE);
                 }
             }
         });
@@ -84,8 +92,10 @@ public class InfraActivity extends AppCompatActivity {
                     sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
                 else if (selctedItem == R.id.drinking_water_source_municipal)
                     sourceOfDrinkingWater = getResources().getString(R.string.municipal);
-                else
+                else if (selctedItem == R.id.drinking_water_source_hand_pump)
                     sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
+                else
+                    sourceOfDrinkingWater = null;
             }
         });
         binding.rgIsInverterAvailable.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -95,8 +105,11 @@ public class InfraActivity extends AppCompatActivity {
                 if (selctedItem == R.id.is_inverter_available_yes) {
                     inverter_available = "YES";
                     binding.llInverterWorkingStatus.setVisibility(View.VISIBLE);
-                } else {
+                } else if (selctedItem == R.id.is_inverter_available_no) {
                     inverter_available = "NO";
+                    binding.llInverterWorkingStatus.setVisibility(View.GONE);
+                } else {
+                    inverter_available = null;
                     binding.llInverterWorkingStatus.setVisibility(View.GONE);
                 }
             }
@@ -107,8 +120,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgInverterWorkingStatus.getCheckedRadioButtonId();
                 if (selctedItem == R.id.inverter_working_status_yes)
                     inverterWorkingStatus = "GOOD";
-                else
+                else if (selctedItem == R.id.inverter_working_status_no)
                     inverterWorkingStatus = "BAD";
+                else
+                    inverterWorkingStatus = null;
             }
         });
 
@@ -118,8 +133,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgLightingFacility.getCheckedRadioButtonId();
                 if (selctedItem == R.id.lighting_facility_yes)
                     lighting_facility = "GOOD";
-                else
+                else if (selctedItem == R.id.lighting_facility_no)
                     lighting_facility = "BAD";
+                else
+                    lighting_facility = null;
             }
         });
         binding.rgElectricityWiring.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -129,10 +146,12 @@ public class InfraActivity extends AppCompatActivity {
                 if (selctedItem == R.id.electricity_wiring_yes) {
                     electricity_wiring = "YES";
                     binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
-                }
-                else {
+                } else if (selctedItem == R.id.electricity_wiring_no) {
                     electricity_wiring = "NO";
                     binding.llElectricityWiringRepairsReq.setVisibility(View.VISIBLE);
+                } else {
+                    electricity_wiring = null;
+                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
                 }
             }
         });
@@ -142,8 +161,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgElectricityWiringRepairsReq.getCheckedRadioButtonId();
                 if (selctedItem == R.id.electricity_wiring_repairs_req_yes)
                     electricity_wiring_repairs_req = "YES";
-                else
+                else if (selctedItem == R.id.electricity_wiring_repairs_req_no)
                     electricity_wiring_repairs_req = "NO";
+                else
+                    electricity_wiring_repairs_req = null;
             }
         });
         binding.rgEnoughFans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -152,8 +173,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgEnoughFans.getCheckedRadioButtonId();
                 if (selctedItem == R.id.enough_fans_yes)
                     enough_fans = "YES";
-                else
+                else if (selctedItem == R.id.enough_fans_no)
                     enough_fans = "NO";
+                else
+                    enough_fans = null;
             }
         });
         binding.rgDiningHall.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -162,8 +185,23 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgDiningHall.getCheckedRadioButtonId();
                 if (selctedItem == R.id.dining_hall_yes)
                     dining_hall = "YES";
-                else
+                else if (selctedItem == R.id.dining_hall_no)
                     dining_hall = "NO";
+                else
+                    dining_hall = null;
+            }
+        });
+
+        binding.rgDininghallUsed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgDininghallUsed.getCheckedRadioButtonId();
+                if (selctedItem == R.id.dininghall_used_yes)
+                    dining_hall_used = "YES";
+                else if (selctedItem == R.id.dininghall_used_no)
+                    dining_hall_used = "NO";
+                else
+                    dining_hall_used = null;
             }
         });
 
@@ -173,8 +211,11 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgSeparateKitchenRoomAvailable.getCheckedRadioButtonId();
                 if (selctedItem == R.id.separate_kitchen_room_available_yes)
                     separate_kitchen_room_available = "YES";
-                else
+                else if (selctedItem == R.id.separate_kitchen_room_available_no)
                     separate_kitchen_room_available = "NO";
+                else
+                    separate_kitchen_room_available = null;
+
             }
         });
 
@@ -184,8 +225,11 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgConstructKitchenRoom.getCheckedRadioButtonId();
                 if (selctedItem == R.id.construct_kitchen_room_yes)
                     construct_kitchen_room = "YES";
-                else
+                else if (selctedItem == R.id.construct_kitchen_room_no)
                     construct_kitchen_room = "NO";
+                else
+                    construct_kitchen_room = null;
+
             }
         });
 
@@ -196,8 +240,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgIsItInGoodCondition.getCheckedRadioButtonId();
                 if (selctedItem == R.id.is_it_in_good_condition_yes)
                     is_it_in_good_condition = "YES";
-                else
+                else if (selctedItem == R.id.is_it_in_good_condition_no)
                     is_it_in_good_condition = "NO";
+                else
+                    is_it_in_good_condition = null;
             }
         });
 
@@ -207,8 +253,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgTransformerAvailable.getCheckedRadioButtonId();
                 if (selctedItem == R.id.transformer_available_yes)
                     transformer_available = "YES";
-                else
+                else if (selctedItem == R.id.transformer_available_no)
                     transformer_available = "NO";
+                else
+                    transformer_available = null;
             }
         });
 
@@ -219,8 +267,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgPowerConnectionType.getCheckedRadioButtonId();
                 if (selctedItem == R.id.single_phase)
                     powerConnectionType = "SINGLE PHASE";
-                else
+                else if (selctedItem == R.id.three_phase)
                     powerConnectionType = "3 PHASE";
+                else
+                    powerConnectionType = null;
             }
         });
 
@@ -230,8 +280,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgIndividualConnection.getCheckedRadioButtonId();
                 if (selctedItem == R.id.individual_connection_yes)
                     individual_connection = "YES";
-                else
+                else if (selctedItem == R.id.individual_connection_no)
                     individual_connection = "NO";
+                else
+                    individual_connection = null;
             }
         });
 
@@ -245,8 +297,10 @@ public class InfraActivity extends AppCompatActivity {
                     sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
                 else if (selctedItem == R.id.runningWater_source_municipal)
                     sourceOfDrinkingWater = getResources().getString(R.string.municipal);
-                else
+                else if (selctedItem == R.id.runningWater_source_hand_pump)
                     sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
+                else
+                    sourceOfDrinkingWater = null;
             }
         });
 
@@ -256,8 +310,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgRoadRequired.getCheckedRadioButtonId();
                 if (selctedItem == R.id.road_required_yes)
                     road_required = "YES";
-                else
+                else if (selctedItem == R.id.road_required_no)
                     road_required = "NO";
+                else
+                    road_required = null;
             }
         });
 
@@ -267,8 +323,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgCompWallRequired.getCheckedRadioButtonId();
                 if (selctedItem == R.id.compWall_required_yes)
                     compWall_required = "YES";
-                else
+                else if (selctedItem == R.id.compWall_required_no)
                     compWall_required = "NO";
+                else
+                    compWall_required = null;
             }
         });
 
@@ -278,8 +336,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgGateRequired.getCheckedRadioButtonId();
                 if (selctedItem == R.id.gate_required_yes)
                     gate_required = "YES";
-                else
+                else if (selctedItem == R.id.gate_required_no)
                     gate_required = "NO";
+                else
+                    gate_required = null;
             }
         });
 
@@ -289,8 +349,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgPathwayRequired.getCheckedRadioButtonId();
                 if (selctedItem == R.id.pathway_required_yes)
                     pathway_required = "YES";
-                else
+                else if (selctedItem == R.id.pathway_required_no)
                     pathway_required = "NO";
+                else
+                    pathway_required = null;
             }
         });
 
@@ -300,8 +362,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgSumpRequired.getCheckedRadioButtonId();
                 if (selctedItem == R.id.sump_required_yes)
                     sump_required = "YES";
-                else
+                else if (selctedItem == R.id.sump_required_no)
                     sump_required = "NO";
+                else
+                    sump_required = null;
             }
         });
 
@@ -311,8 +375,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgSewageAllowed.getCheckedRadioButtonId();
                 if (selctedItem == R.id.sewage_allowed_yes)
                     sewage_allowed = "YES";
-                else
+                else if (selctedItem == R.id.sewage_allowed_no)
                     sewage_allowed = "NO";
+                else
+                    sewage_allowed = null;
             }
         });
 
@@ -322,8 +388,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgDrainageFunctioning.getCheckedRadioButtonId();
                 if (selctedItem == R.id.drainage_functioning_yes)
                     drainage_functioning = "YES";
-                else
+                else if (selctedItem == R.id.drainage_functioning_no)
                     drainage_functioning = "NO";
+                else
+                    drainage_functioning = null;
             }
         });
 
@@ -333,8 +401,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgHeaterAvailable.getCheckedRadioButtonId();
                 if (selctedItem == R.id.heater_available_yes)
                     heater_available = "YES";
-                else
+                else if (selctedItem == R.id.heater_available_no)
                     heater_available = "NO";
+                else
+                    heater_available = null;
             }
         });
 
@@ -344,8 +414,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgHeaterWorkingStatus.getCheckedRadioButtonId();
                 if (selctedItem == R.id.heater_workingStatus_yes)
                     heater_workingStatus = "YES";
-                else
+                else if (selctedItem == R.id.heater_workingStatus_no)
                     heater_workingStatus = "NO";
+                else
+                    heater_workingStatus = null;
             }
         });
 
@@ -355,8 +427,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgRepairsToDoor.getCheckedRadioButtonId();
                 if (selctedItem == R.id.repairs_to_door_yes)
                     repairs_to_door = "YES";
-                else
+                else if (selctedItem == R.id.repairs_to_door_no)
                     repairs_to_door = "NO";
+                else
+                    repairs_to_door = null;
             }
         });
 
@@ -366,8 +440,10 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgPainting.getCheckedRadioButtonId();
                 if (selctedItem == R.id.painting_yes)
                     painting = "GOOD";
-                else
+                else if (selctedItem == R.id.painting_no)
                     painting = "BAD";
+                else
+                    painting = null;
             }
         });
 
@@ -408,6 +484,7 @@ public class InfraActivity extends AppCompatActivity {
                 infrastuctureEntity.setMountedfans_working(mountedFansWorking);
                 infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
                 infrastuctureEntity.setDininghall_available(dining_hall);
+                infrastuctureEntity.setDininghall_used(dining_hall_used);
                 infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
                 infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
                 infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);

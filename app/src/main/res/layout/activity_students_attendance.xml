@@ -24,6 +24,7 @@
             android:background="@color/materialGrey300"
             android:layout_height="match_parent"
             android:layout_below="@+id/header"
+            android:padding="@dimen/dimen_5dp"
             tools:listitem="@layout/adapter_stud_attnd" />
 
         <include

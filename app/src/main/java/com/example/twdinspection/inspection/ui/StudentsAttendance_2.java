@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -32,6 +33,7 @@ import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -49,7 +51,10 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
     LinearLayout ll_stud_pres;
+    InstMainViewModel instMainViewModel;
     CoordinatorLayout rootLayout;
+    SharedPreferences sharedPreferences;
+    String instId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +63,12 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
         studentsAttndViewModel =
                 ViewModelProviders.of(StudentsAttendance_2.this,
                         new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
+        instMainViewModel = new InstMainViewModel(getApplication());
+
         binding.setViewModel(studentsAttndViewModel);
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
-
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         studentsAttndViewModel.getClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, "")).observe(this, new Observer<List<StudAttendInfoEntity>>() {
 
             @Override
@@ -117,7 +125,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
         ImageView ic_close = view.findViewById(R.id.ic_close);
         RadioGroup rg_IsAttndMarked_1_2 = view.findViewById(R.id.rg_IsAttndMarked_1_2);
-        CustomFontTextView tv_classType = view.findViewById(R.id.tv_classType);
+        TextView tv_classType = view.findViewById(R.id.tv_classType);
         CustomFontTextView tv_classCount = view.findViewById(R.id.tv_classCount);
         RadioButton rb_attMark_yes = view.findViewById(R.id.rb_yes);
         RadioButton rb_attMark_yno = view.findViewById(R.id.rb_no);
@@ -292,6 +300,12 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
     @Override
     public void submitData() {
-        startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+//        startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+        long z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 2,instId);
+        if (z >= 0) {
+            startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
     }
 }

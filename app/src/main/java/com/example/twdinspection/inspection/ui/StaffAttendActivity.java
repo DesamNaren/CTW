@@ -33,7 +33,6 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
     StaffViewModel staffViewModel;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     String instId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         binding.setViewmodel(staffViewModel);
         instMainViewModel = new InstMainViewModel(getApplication());
         sharedPreferences = TWDApplication.get(this).getPreferences();
-        editor = sharedPreferences.edit();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

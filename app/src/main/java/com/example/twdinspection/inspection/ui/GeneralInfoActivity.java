@@ -231,7 +231,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     generalInfoEntity = new GeneralInfoEntity();
                     generalInfoEntity.setOfficer_id(officerID);
                     generalInfoEntity.setInstitute_id(instID);
-                    generalInfoEntity.setInspection_time(instID);
+                    generalInfoEntity.setInspection_time(insTime);
                     generalInfoEntity.setHM_HWO_presence(presentTime);
                     generalInfoEntity.setHaving_headquarters(headQuarters);
                     generalInfoEntity.setLeaveType(leavetype);

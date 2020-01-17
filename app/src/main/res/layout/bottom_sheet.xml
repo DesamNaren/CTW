@@ -6,34 +6,35 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:paddingBottom="@dimen/_100dp"
         android:id="@+id/ll_entries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/_100dp"
         android:visibility="visible"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
 
         <RelativeLayout
-            android:paddingLeft="@dimen/dimen_8dp"
-            android:paddingRight="@dimen/dimen_8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/list_blue"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingTop="@dimen/dimen_8dp"
+            android:paddingRight="@dimen/dimen_8dp"
+            android:paddingBottom="@dimen/dimen_8dp">
 
             <ImageView
                 android:id="@+id/ic_close"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen_20dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dimen_5dp"
-                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
                 android:src="@drawable/ic_cancel"
                 android:tint="@color/white" />
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <TextView
                 android:id="@+id/tv_classType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
                 android:layout_toEndOf="@+id/ic_close"
                 android:layout_toRightOf="@+id/ic_close"
                 android:padding="@dimen/dimen_5dp"
-                android:text="hdfsdcg"
+                android:text="Class Name"
                 android:textColor="@color/white"
                 android:textSize="22dp"
                 android:textStyle="bold" />
