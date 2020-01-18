@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.inspection.Room.repository.DMVRepository;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
     private LiveData<List<SchoolDistrict>> districts;
     private LiveData<List<SchoolMandal>> mandals;
     private LiveData<List<SchoolVillage>> villages;
-    private LiveData<List<InstitutesEntity>> inst_names;
+    private LiveData<List<MasterInstituteInfo>> inst_names;
     private DMVRepository mRepository;
 
     public DMVDetailsViewModel(Application application) {
@@ -46,7 +46,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         return mandals;
     }
 
-    public LiveData<List<InstitutesEntity>> getInstitutes() {
+    public LiveData<List<MasterInstituteInfo>> getInstitutes() {
         if (inst_names != null) {
             inst_names=mRepository.getInstitutes();
         }
@@ -70,7 +70,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         return mRepository.getVillageId(mandalName,manId,distId);
     }
 
-    public LiveData<String> getInstId(String instName){
+    public LiveData<Integer> getInstId(String instName){
         return mRepository.getInstId(instName);
     }
 }

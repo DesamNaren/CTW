@@ -18,27 +18,20 @@ import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivitySchemeSyncBinding;
 import com.example.twdinspection.databinding.ActivitySchoolSyncBinding;
 import com.example.twdinspection.inspection.Room.repository.SchoolSyncRepository;
 import com.example.twdinspection.inspection.interfaces.SchoolDMVInterface;
+import com.example.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
+import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeDMVInterface;
-import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
-import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
-import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
-import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
-import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
-import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
-import com.example.twdinspection.schemes.viewmodel.SchemeSyncViewModel;
 import com.example.twdinspection.schemes.viewmodel.SchoolSyncViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
-public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, ErrorHandlerInterface {
+public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, ErrorHandlerInterface {
     private SchoolSyncRepository schoolSyncRepository;
     private SchoolDMVResponse schoolDMVResponse;
+    private InstMasterResponse instMasterResponse;
     ActivitySchoolSyncBinding binding;
     SharedPreferences sharedPreferences;
     private String officerId;
@@ -47,9 +40,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = DataBindingUtil.setContentView(SchoolSyncActivity.this,R.layout.activity_school_sync);
+        binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
 
-        SchoolSyncViewModel viewModel = new SchoolSyncViewModel(SchoolSyncActivity.this,getApplication(),binding);
+        SchoolSyncViewModel viewModel = new SchoolSyncViewModel(SchoolSyncActivity.this, getApplication(), binding);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         schoolSyncRepository = new SchoolSyncRepository(getApplication());
@@ -77,12 +70,12 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.btnDmv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LiveData<SchoolDMVResponse> schoolDMVResponseLiveData= viewModel.getSchoolDMVReposnse(officerId);
+                LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse("maadhavisriram");
                 schoolDMVResponseLiveData.observe(SchoolSyncActivity.this, new Observer<SchoolDMVResponse>() {
                     @Override
                     public void onChanged(SchoolDMVResponse schoolDMVResponse) {
                         schoolDMVResponseLiveData.removeObservers(SchoolSyncActivity.this);
-                        SchoolSyncActivity.this.schoolDMVResponse=schoolDMVResponse;
+                        SchoolSyncActivity.this.schoolDMVResponse = schoolDMVResponse;
                         if (schoolDMVResponse.getDistricts() != null && schoolDMVResponse.getDistricts().size() > 0) {
                             schoolSyncRepository.insertSchoolDistricts(SchoolSyncActivity.this, schoolDMVResponse.getDistricts());
                         }
@@ -90,9 +83,27 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 });
             }
         });
+
+        binding.syncInstitutes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LiveData<InstMasterResponse> instMasterResponseLiveData = viewModel.getInstMasterResponse();
+                instMasterResponseLiveData.observe(SchoolSyncActivity.this, new Observer<InstMasterResponse>() {
+                    @Override
+                    public void onChanged(InstMasterResponse instMasterResponse) {
+                        instMasterResponseLiveData.removeObservers(SchoolSyncActivity.this);
+                        SchoolSyncActivity.this.instMasterResponse = instMasterResponse;
+                        if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
+                            schoolSyncRepository.insertMasterInstitutes(SchoolSyncActivity.this, instMasterResponse.getInstituteInfo());
+                        }
+                    }
+                });
+            }
+        });
     }
 
-    void callSnackBar(String msg){
+
+    void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -107,12 +118,13 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SchoolSyncActivity.this,DMVSelectionActivity.class));
+        startActivity(new Intent(SchoolSyncActivity.this, DMVSelectionActivity.class));
     }
 
     @Override
     public void handleError(Throwable e, Context context) {
         String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: "+errMsg);
         callSnackBar(errMsg);
     }
 
@@ -120,10 +132,10 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void distCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("D_CNT", "distCount: "+cnt);
+                Log.i("D_CNT", "distCount: " + cnt);
                 schoolSyncRepository.insertSchoolMandals(SchoolSyncActivity.this, schoolDMVResponse.getMandals());
             } else {
-               // onDataNotAvailable();
+                // onDataNotAvailable();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +146,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void manCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("M_CNT", "manCount: "+cnt);
+                Log.i("M_CNT", "manCount: " + cnt);
                 schoolSyncRepository.insertSchoolVillages(SchoolSyncActivity.this, schoolDMVResponse.getVillages());
             } else {
                 // onDataNotAvailable();
@@ -148,9 +160,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     public void vilCount(int cnt) {
         try {
             if (cnt > 0) {
-                Log.i("V_CNT", "vilCount: "+cnt);
+                Log.i("V_CNT", "vilCount: " + cnt);
                 binding.progress.setVisibility(View.GONE);
-                Utils.customSyncSuccessAlert(SchoolSyncActivity.this,getResources().getString(R.string.app_name),
+                Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         "District master synced successfully");
                 // Success Alert;
             } else {
@@ -161,4 +173,25 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         }
     }
 
+    @Override
+    public void instCount(int cnt) {
+        binding.progress.setVisibility(View.GONE);
+        try {
+            if (cnt > 0) {
+                Log.i("I_CNT", "instCount: " + cnt);
+                binding.progress.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Institute master synced successfully");
+            } else {
+                // onDataNotAvailable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void clstCount(int cnt) {
+
+    }
 }

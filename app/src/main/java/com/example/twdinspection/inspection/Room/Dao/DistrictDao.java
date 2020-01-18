@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
 
@@ -40,11 +40,11 @@ public interface DistrictDao {
     @Query("SELECT villageID from SchoolVillage where villageName LIKE :villageName AND mandalID LIKE :manId AND distId LIKE :distId")
     LiveData<String> getVillageId(String villageName, int manId,  int distId);
 
-    @Query("SELECT Inst_Id from InstInfo where Inst_Name LIKE :inst_name")
-    LiveData<String> getInstId(String inst_name);
+    @Query("SELECT instId from MasterInstituteInfo where instName LIKE :inst_name")
+    LiveData<Integer> getInstId(String inst_name);
 
-    @Query("SELECT * from InstInfo")
-    LiveData<List<InstitutesEntity>> getInstitutes();
+    @Query("SELECT * from MasterInstituteInfo")
+    LiveData<List<MasterInstituteInfo>> getInstitutes();
 
     @Query("SELECT count(*) from SchoolDistrict")
     int getCount();

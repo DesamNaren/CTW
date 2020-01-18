@@ -16,12 +16,10 @@ import androidx.lifecycle.Observer;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
-import com.example.twdinspection.schemes.ui.SchemeSyncActivity;
-import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     ArrayList<String> mandalNames;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    List<InstitutesEntity> institutesEntityList;
+    List<MasterInstituteInfo> institutesEntityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,13 +218,13 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         }
                     }
                 });
-                viewModel.getInstitutes().observe(DMVSelectionActivity.this, new Observer<List<InstitutesEntity>>() {
+                viewModel.getInstitutes().observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
                     @Override
-                    public void onChanged(List<InstitutesEntity> institutesEntities) {
+                    public void onChanged(List<MasterInstituteInfo> institutesEntities) {
                         institutesEntityList.addAll(institutesEntities);
                         if (institutesEntityList != null && institutesEntityList.size() > 0) {
                             for (int i = 0; i < institutesEntityList.size(); i++) {
-                                instNames.add(institutesEntityList.get(i).getInst_Name());
+                                instNames.add(institutesEntityList.get(i).getInstName());
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                     android.R.layout.simple_spinner_dropdown_item, instNames);
@@ -242,12 +240,12 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
             if (i != 0) {
-                viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<String>() {
+                viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
-                    public void onChanged(String inst_id) {
+                    public void onChanged(Integer inst_id) {
                         if (inst_id != null) {
                             selInstName = dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString();
-                            selectedInstId = inst_id;
+                            selectedInstId = String.valueOf(inst_id);
                         }
                     }
                 });

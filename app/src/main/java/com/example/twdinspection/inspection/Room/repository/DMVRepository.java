@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;
 
@@ -52,8 +52,8 @@ public class DMVRepository {
 
 
 
-    public LiveData<List<InstitutesEntity>> getInstitutes() {
-        LiveData<List<InstitutesEntity>> institutes=districtDao.getInstitutes();
+    public LiveData<List<MasterInstituteInfo>> getInstitutes() {
+        LiveData<List<MasterInstituteInfo>> institutes=districtDao.getInstitutes();
         return institutes;
     }
 
@@ -67,7 +67,7 @@ public class DMVRepository {
         return districtDao.getVillageId(mandalName, manId, distId);
     }
 
-    public LiveData<String> getInstId(String inst_name) {
+    public LiveData<Integer> getInstId(String inst_name) {
         return districtDao.getInstId(inst_name);
     }
 

@@ -4,6 +4,7 @@ package com.example.twdinspection.common.network;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
+import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
@@ -94,6 +95,9 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/getDMVMasters")
     Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);
+
+    @GET("CTWServiceDetails/getInstInfo")
+    Call<InstMasterResponse> getInstMasterResponse();
     //------------------- Login & Logout ----------------------------------------
 
 //    @POST("MasterData/ValidateUser")

@@ -7,9 +7,12 @@ import android.os.AsyncTask;
 import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.interfaces.SchoolDMVInterface;
+import com.example.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.schemes.interfaces.SchemeDMVInterface;
 import com.example.twdinspection.schemes.room.dao.SchemeSyncDao;
 import com.example.twdinspection.schemes.room.database.SchemesDatabase;
@@ -41,6 +44,10 @@ public class SchoolSyncRepository {
 
     public void insertSchoolVillages(final SchoolDMVInterface dmvInterface, final List<SchoolVillage> villageEntities) {
         new InsertVillageAsyncTask(dmvInterface, villageEntities).execute();
+    }
+
+    public void insertMasterInstitutes(final SchoolInstInterface schoolInstInterface, final List<MasterInstituteInfo> masterInstituteInfos) {
+        new InsertInstAsyncTask(schoolInstInterface, masterInstituteInfos).execute();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -114,6 +121,30 @@ public class SchoolSyncRepository {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             dmvInterface.vilCount(integer);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertInstAsyncTask extends AsyncTask<Void, Void, Integer> {
+        SchoolInstInterface schoolInstInterface;
+        List<MasterInstituteInfo> masterInstituteInfos;
+
+        InsertInstAsyncTask(SchoolInstInterface schoolInstInterface, List<MasterInstituteInfo> masterInstituteInfos) {
+            this.masterInstituteInfos = masterInstituteInfos;
+            this.schoolInstInterface = schoolInstInterface;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            syncDao.deleteMasterInst();
+            syncDao.insertMasterInst(masterInstituteInfos);
+            return syncDao.instCount();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            schoolInstInterface.instCount(integer);
         }
     }
 }

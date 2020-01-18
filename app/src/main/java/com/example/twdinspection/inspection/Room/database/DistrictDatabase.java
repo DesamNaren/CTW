@@ -27,15 +27,15 @@ import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.GeneralInformation.InstitutesEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
@@ -45,10 +45,10 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
  */
 
 @Database(entities = {StudAttendInfoEntity.class,
-        InstitutesEntity.class, StaffAttendanceEntity.class, MedicalInfoEntity.class, DietIssuesEntity.class,
+        StaffAttendanceEntity.class, MedicalInfoEntity.class, DietIssuesEntity.class,
         InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
-        , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class
+        , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class
         , InstMenuInfoEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 

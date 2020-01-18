@@ -7,6 +7,8 @@ import androidx.room.Query;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
 import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
 import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
@@ -55,4 +57,14 @@ public interface SchoolSyncDao {
 
     @Query("SELECT COUNT(*) FROM SchoolVillage")
     int villageCount();
+
+    @Query("DELETE FROM MasterInstituteInfo")
+    void deleteMasterInst();
+
+    @Insert
+    void insertMasterInst(List<MasterInstituteInfo> masterInstituteInfos);
+
+    @Query("SELECT COUNT(*) FROM MasterInstituteInfo")
+    int instCount();
+
 }

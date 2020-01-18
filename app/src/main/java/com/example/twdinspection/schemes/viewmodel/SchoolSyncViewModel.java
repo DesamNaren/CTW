@@ -15,6 +15,7 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemeSyncBinding;
 import com.example.twdinspection.databinding.ActivitySchoolSyncBinding;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
+import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 
 public class SchoolSyncViewModel extends AndroidViewModel {
     private MutableLiveData<SchoolDMVResponse> schoolDMVResponseMutableLiveData;
+    private MutableLiveData<InstMasterResponse> instMasterResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivitySchoolSyncBinding binding;
@@ -38,6 +40,7 @@ public class SchoolSyncViewModel extends AndroidViewModel {
         this.context=context;
         this.binding=binding;
         schoolDMVResponseMutableLiveData = new MutableLiveData<>();
+        instMasterResponseMutableLiveData = new MutableLiveData<>();
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
 
@@ -70,6 +73,37 @@ public class SchoolSyncViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public LiveData<InstMasterResponse> getInstMasterResponse() {
+        if (instMasterResponseMutableLiveData != null) {
+            if (Utils.checkInternetConnection(context)) {
+                getInstMasterResponseCall();
+            }else{
+                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
+            }
+        }
+        return instMasterResponseMutableLiveData;
+    }
+
+    private void getInstMasterResponseCall() {
+        binding.progress.setVisibility(View.VISIBLE);
+        TWDService twdService = TWDService.Factory.create("school");
+        twdService.getInstMasterResponse().enqueue(new Callback<InstMasterResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<InstMasterResponse> call, @NotNull Response<InstMasterResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    instMasterResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<InstMasterResponse> call, @NotNull Throwable t) {
+                binding.progress.setVisibility(View.GONE);
+                errorHandlerInterface.handleError(t, context);
+            }
+        });
+    }
+
 
 }
 
