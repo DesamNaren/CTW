@@ -52,7 +52,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     BottomSheetDialog dialog;
     StudentsAttndViewModel studentsAttndViewModel;
     MasterInstituteInfo masterInstituteInfos;
-    List<StudAttendInfoEntity> studAttendInfoEntityList;
+    List<StudAttendInfoEntity> studAttendInfoEntityListMain;
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
     LinearLayout ll_stud_pres;
@@ -70,55 +70,64 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
                 ViewModelProviders.of(StudentsAttendance_2.this,
                         new StudAttndCustomViewModel(binding, this, getApplication())).get(StudentsAttndViewModel.class);
         instMainViewModel = new InstMainViewModel(getApplication());
-        studAttendInfoEntityList = new ArrayList<>();
+        studAttendInfoEntityListMain = new ArrayList<>();
         binding.setViewModel(studentsAttndViewModel);
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
-        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, ""));
-        masterInstituteInfoLiveData.observe(this, new Observer<MasterInstituteInfo>() {
-            @Override
-            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
-                masterInstituteInfoLiveData.removeObservers(StudentsAttendance_2.this);
-                StudentsAttendance_2.this.masterInstituteInfos = masterInstituteInfos;
-                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
-                if (masterClassInfos != null && masterClassInfos.size() > 0) {
-                    for (int i = 0; i < masterClassInfos.size(); i++) {
-                        StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0, instId, masterClassInfos.get(i).getType(), masterClassInfos.get(i).getClassId(), String.valueOf(masterClassInfos.get(i).getStudentCount()));
-                        studAttendInfoEntityList.add(studAttendInfoEntity);
-                    }
-                }
 
-                if (studAttendInfoEntityList.size() > 0)
-                    studentsAttndViewModel.insertClassInfo(studAttendInfoEntityList);
-
-            }
-        });
-
-        studentsAttndViewModel.getClassInfo(TWDApplication.get(this).getPreferences().getString(AppConstants.INST_ID, "")).observe(this, new Observer<List<StudAttendInfoEntity>>() {
+        studentsAttndViewModel.getClassInfo(TWDApplication.get(StudentsAttendance_2.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(StudentsAttendance_2.this, new Observer<List<StudAttendInfoEntity>>() {
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
-                StudentsAttendance_2.this.studAttendInfoEntityList = studAttendInfoEntityList;
-
-                if (studAttendInfoEntityList.size() > 0) {
+                if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
                     adapter = new StudentsAttAdapter(StudentsAttendance_2.this, studAttendInfoEntityList);
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendance_2.this));
                     binding.recyclerView.setAdapter(adapter);
-                }else {
+                } else {
 
+
+                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(TWDApplication.get(StudentsAttendance_2.this).getPreferences().getString(AppConstants.INST_ID, ""));
+                    masterInstituteInfoLiveData.observe(StudentsAttendance_2.this, new Observer<MasterInstituteInfo>() {
+                        @Override
+                        public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                            masterInstituteInfoLiveData.removeObservers(StudentsAttendance_2.this);
+                            StudentsAttendance_2.this.masterInstituteInfos = masterInstituteInfos;
+                            List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                            if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                                for (int i = 0; i < masterClassInfos.size(); i++) {
+                                    StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0, instId, masterClassInfos.get(i).getType(), masterClassInfos.get(i).getClassId(), String.valueOf(masterClassInfos.get(i).getStudentCount()));
+                                    studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                                }
+                            }
+
+                            if (studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) {
+                                studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain);
+                            }else {
+                                binding.emptyView.setVisibility(View.VISIBLE);
+                                binding.recyclerView.setVisibility(View.GONE);
+                            }
+
+                        }
+                    });
                 }
+
             }
         });
+
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateSubmit()) {
-                    Utils.customSaveAlert(StudentsAttendance_2.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                if (studAttendInfoEntityListMain.size() == 0) {
+                    startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
                 } else {
-                    showSnackBar("Please inspect all the classes");
+                    if (validateSubmit()) {
+                        Utils.customSaveAlert(StudentsAttendance_2.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                    } else {
+                        showSnackBar("Please inspect all the classes");
+                    }
                 }
             }
         });
@@ -126,9 +135,9 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
     private boolean validateSubmit() {
         boolean returnFlag = true;
-        for(int i=0;i<studAttendInfoEntityList.size();i++){
-            if(!(studAttendInfoEntityList.get(i).getFlag_completed()==1))
-                returnFlag=false;
+        for (int i = 0; i < studAttendInfoEntityListMain.size(); i++) {
+            if (!(studAttendInfoEntityListMain.get(i).getFlag_completed() == 1))
+                returnFlag = false;
         }
         return returnFlag;
     }

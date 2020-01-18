@@ -13,19 +13,30 @@
 
 
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/root">
+        android:background="@color/light_gray">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_above="@+id/btn_layout"
-            android:background="@color/materialGrey300"
             android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
             android:layout_below="@+id/header"
             android:padding="@dimen/dimen_5dp"
             tools:listitem="@layout/adapter_stud_attnd" />
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/no_records_found"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
         <include
             android:id="@+id/btn_layout"

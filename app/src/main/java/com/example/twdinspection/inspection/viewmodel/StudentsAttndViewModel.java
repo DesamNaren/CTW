@@ -35,14 +35,8 @@ public class StudentsAttndViewModel extends ViewModel {
     }
 
      public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
-        LiveData<List<StudAttendInfoEntity>> classIdsList = mRepository.getClassIdsList(inst_id);
+         LiveData<List<StudAttendInfoEntity>> classIdsList = mRepository.getClassIdsList(inst_id);
         return classIdsList;
-    }
-
-    public long updateClassInfo(String attendence_marked, String count_reg, String count_during_insp,
-                                String variance, int flag_completed, String inst_id, int class_id) {
-        long flag = mRepository.updateClassInfo(attendence_marked, count_reg, count_during_insp, variance, flag_completed, inst_id, class_id);
-        return flag;
     }
 
     public long updateClassInfo(StudAttendInfoEntity studAttendInfoEntity) {
@@ -50,8 +44,7 @@ public class StudentsAttndViewModel extends ViewModel {
         return flag;
     }
 
-    public long insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
-        long flag = mRepository.insertClassInfo(studAttendInfoEntityList);
-        return flag;
+    public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
+        mRepository.insertClassInfo(studAttendInfoEntityList);
     }
 }
