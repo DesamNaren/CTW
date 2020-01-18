@@ -15,18 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:id="@+id/root"
+        android:background="@color/white"
         tools:context=".inspection.ui.GeneralInfoActivity">
-
-        <include
-            android:id="@+id/header"
-            layout="@layout/header_layout" />
-
 
         <View
             android:id="@+id/base_view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/header"
             android:background="@color/light_gray"
             android:padding="@dimen/dimen_10dp" />
 

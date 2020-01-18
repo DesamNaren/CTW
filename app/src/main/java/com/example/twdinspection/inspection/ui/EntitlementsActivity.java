@@ -37,7 +37,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     String entitlementsProvidedToStudents, bedSheets, carpets, uniforms, sportsDress, slippers, nightDress, sanitaryNapkins, schoolBags, notesSupplied, cosmetics, hair_cut_complted, entitlementsUniforms;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
-    String instId;
+    String instId,officerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         instMainViewModel = new InstMainViewModel(getApplication());
         sharedPreferences=TWDApplication.get(this).getPreferences();
         instId=sharedPreferences.getString(AppConstants.INST_ID, "");
-
+        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         binding.etEntitlementsHaircutDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,6 +294,9 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         String haircutDate = binding.etEntitlementsHaircutDate.getText().toString().trim();
 
         entitlementsEntity = new EntitlementsEntity();
+        entitlementsEntity.setOfficer_id(officerID);
+        entitlementsEntity.setInstitute_id(instId);
+        entitlementsEntity.setInspection_time(Utils.getCurrentDateTime());
         entitlementsEntity.setEntitlements_provided(entitlementsProvidedToStudents);
         entitlementsEntity.setBedSheets(bedSheets);
         entitlementsEntity.setCarpets(carpets);
