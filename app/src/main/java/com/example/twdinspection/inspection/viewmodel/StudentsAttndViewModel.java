@@ -7,6 +7,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.inspection.Room.repository.ClassInfoRepository;
+import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
@@ -26,19 +29,29 @@ public class StudentsAttndViewModel extends ViewModel {
 
     }
 
-    public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
-        LiveData<List<StudAttendInfoEntity>> classIdsList= mRepository.getClassIdsList(inst_id);
+    public LiveData<MasterInstituteInfo> getMasterClassInfo(String inst_id) {
+        LiveData<MasterInstituteInfo> classIdsList = mRepository.getMasterClassIdsList(inst_id);
+        return classIdsList;
+    }
+
+     public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
+        LiveData<List<StudAttendInfoEntity>> classIdsList = mRepository.getClassIdsList(inst_id);
         return classIdsList;
     }
 
     public long updateClassInfo(String attendence_marked, String count_reg, String count_during_insp,
-                                   String variance,int flag_completed,String inst_id,int class_id) {
-       long flag=mRepository.updateClassInfo(attendence_marked,count_reg,count_during_insp,variance,flag_completed,inst_id,class_id);
+                                String variance, int flag_completed, String inst_id, int class_id) {
+        long flag = mRepository.updateClassInfo(attendence_marked, count_reg, count_during_insp, variance, flag_completed, inst_id, class_id);
         return flag;
     }
 
     public long updateClassInfo(StudAttendInfoEntity studAttendInfoEntity) {
-       long flag=mRepository.updateClassInfo(studAttendInfoEntity);
+        long flag = mRepository.updateClassInfo(studAttendInfoEntity);
+        return flag;
+    }
+
+    public long insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
+        long flag = mRepository.insertClassInfo(studAttendInfoEntityList);
         return flag;
     }
 }

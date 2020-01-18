@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterStudAttndBinding;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;

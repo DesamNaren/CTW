@@ -25,6 +25,7 @@ public class MasterClassInfo {
     @Expose
     private String instName;
 
+
     public Integer getInstId() {
         return instId;
     }

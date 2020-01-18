@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "ClassInfo")
 public class StudAttendInfoEntity {
-    @PrimaryKey
-    public int id;
+    @PrimaryKey(autoGenerate = true)
+    public int r_id;
 
     @ColumnInfo()
     private String officer_id;
@@ -24,7 +24,7 @@ public class StudAttendInfoEntity {
     @ColumnInfo()
     private String class_type;
 
-     @ColumnInfo()
+    @ColumnInfo()
     private int class_id;
 
     @ColumnInfo()
@@ -35,13 +35,22 @@ public class StudAttendInfoEntity {
 
 
     @ColumnInfo()
-     private String student_count_in_register;
+    private String student_count_in_register;
 
     @ColumnInfo()
     private String student_count_during_inspection;
 
     @ColumnInfo()
     private String variance;
+
+    public StudAttendInfoEntity(String officer_id, int flag_completed, String institute_id, String class_type, int class_id, String total_students) {
+        this.officer_id = officer_id;
+        this.flag_completed = flag_completed;
+        this.institute_id = institute_id;
+        this.class_type = class_type;
+        this.class_id = class_id;
+        this.total_students = total_students;
+    }
 
     public String getVariance() {
         return variance;
@@ -124,12 +133,12 @@ public class StudAttendInfoEntity {
         this.inspection_time = inspection_time;
     }
 
-    public int getId() {
-        return id;
+    public int getR_id() {
+        return r_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setR_id(int r_id) {
+        this.r_id = r_id;
     }
 
     public int getClass_id() {

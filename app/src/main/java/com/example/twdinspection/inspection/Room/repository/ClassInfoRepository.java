@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;
@@ -22,7 +24,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ClassInfoRepository {
 
     public ClassInfoDao classInfoDao;
-    public String tag=ClassInfoRepository.class.getSimpleName();
+    public String tag = ClassInfoRepository.class.getSimpleName();
+
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
@@ -33,15 +36,19 @@ public class ClassInfoRepository {
 
     }
 
-    public LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
-        LiveData<List<StudAttendInfoEntity>> classIdList=classInfoDao.getClassIdList(inst_id);
+    public LiveData<MasterInstituteInfo> getMasterClassIdsList(String inst_id) {
+        LiveData<MasterInstituteInfo> classIdList = classInfoDao.getMasterClassIdList(inst_id);
         return classIdList;
     }
 
+    public LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
+        LiveData<List<StudAttendInfoEntity>> classIdList = classInfoDao.getClassIdList(inst_id);
+        return classIdList;
+    }
     long x;
 
     public long updateClassInfo(String attendence_marked, String count_reg, String count_during_insp,
-                              String variance,int flag_completed,String inst_id,int class_id) {
+                                String variance, int flag_completed, String inst_id, int class_id) {
 //
 //
 //        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
@@ -97,27 +104,71 @@ public class ClassInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
+
+    public long insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
+
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                classInfoDao.deleteClassInfo();
+                classInfoDao.insertStudAttendInfo(studAttendInfoEntityList);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag + "onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag + "onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag + "onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
