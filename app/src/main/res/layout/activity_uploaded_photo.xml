@@ -6,15 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/header_layout"
-            layout="@layout/header_layout" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@id/header_layout"
             android:background="@color/light_gray">
 
             <LinearLayout

@@ -392,5 +392,7 @@
     <string name="select_mountedFansNonWorking" >Select Mounted fans Non Working</string>
     <string name="title_entitlements">Entitlements Distributions</string>
     <string name="title_registers">Registers Up to date</string>
+    <string name="title_general_comments">General Comments</string>
+    <string name="title_uploaded_photo">Uploaded Photographs</string>
 
 </resources>
