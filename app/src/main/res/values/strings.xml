@@ -375,5 +375,20 @@
     <string name="enter_stu_name">Enter student name</string>
     <string name="enter_disease">Enter disease</string>
     <string name="sel_plan_date">Select date</string>
+    <string name="select_water">Select Drinking water facility</string>
+    <string name="select_school">Select Big School name board is available</string>
+    <string name="select_roPlant" >Select RO plant working</string>
+    <string name="select_roPlant_reason" >Enter RO plant Reason</string>
+    <string name="select_src_drinking_water" >Select Source of drinking water</string>
+    <string name="select_inverter" >Select Is Inverter available</string>
+    <string name="select_inverter_working" >Select Inverter working status</string>
+    <string name="select_lighting_facility" >Select lighting facility</string>
+    <string name="select_electricity" >Select electricity wiring, switch board are good</string>
+    <string name="select_electricity_repairs" >Select repair required</string>
+    <string name="select_fans" >Select Does the institute have enough fans</string>
+    <string name="select_ceilingFansWorking" >Select Ceiling fans Working</string>
+    <string name="select_ceilingFansNonWorking" >Select Ceiling fans Non Working</string>
+    <string name="select_mountedFansWorking" >Select Mounted fans Working</string>
+    <string name="select_mountedFansNonWorking" >Select Mounted fans Non Working</string>
 
 </resources>

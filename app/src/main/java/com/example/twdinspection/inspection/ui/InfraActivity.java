@@ -6,24 +6,29 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class InfraActivity extends AppCompatActivity {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility, bigSchoolNameBoard = "", roPlant = "", sourceOfDrinkingWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall,dining_hall_used;
+    String drinkingWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
     String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req;
+    String roplant_reason, ceilingFansWorking, ceilingFansNonWorking, mountedFansWorking, mountedFansNonWorking, repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms, functioningToilets;
+    String repairsReqToilets, repairsReqBathrooms, color;
 
     @Override
 
@@ -292,15 +297,15 @@ public class InfraActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgRunningWaterSource.getCheckedRadioButtonId();
                 if (selctedItem == R.id.runningWater_source_open_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.open_well);
+                    sourceOfRunningWater = getResources().getString(R.string.open_well);
                 else if (selctedItem == R.id.runningWater_source_bore_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
+                    sourceOfRunningWater = getResources().getString(R.string.bore_well);
                 else if (selctedItem == R.id.runningWater_source_municipal)
-                    sourceOfDrinkingWater = getResources().getString(R.string.municipal);
+                    sourceOfRunningWater = getResources().getString(R.string.municipal);
                 else if (selctedItem == R.id.runningWater_source_hand_pump)
-                    sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
+                    sourceOfRunningWater = getResources().getString(R.string.hand_pump);
                 else
-                    sourceOfDrinkingWater = null;
+                    sourceOfRunningWater = null;
             }
         });
 
@@ -452,72 +457,169 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String roplant_reason = binding.etReason.getText().toString().trim();
-                String ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
-                String ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
-                String mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
-                String mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
-                String repair_required = binding.etRepairRequired.getText().toString().trim();
-                String how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
-                String totalToilets = binding.etTotalToilets.getText().toString().trim();
-                String totalBathrooms = binding.etTotalBathrooms.getText().toString().trim();
-                String functioningToilets = binding.etFunctioningToilets.getText().toString().trim();
-                String functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
-                String repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
-                String repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
-                String color = binding.etPainting.getText().toString().trim();
+                if (validateData()) {
+                    roplant_reason = binding.etReason.getText().toString().trim();
+                    ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
+                    ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
+                    mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
+                    mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
+                    repair_required = binding.etRepairRequired.getText().toString().trim();
+                    how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
+                    totalToilets = binding.etTotalToilets.getText().toString().trim();
+                    totalBathrooms = binding.etTotalBathrooms.getText().toString().trim();
+                    functioningToilets = binding.etFunctioningToilets.getText().toString().trim();
+                    functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
+                    repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
+                    repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
+                    color = binding.etPainting.getText().toString().trim();
 
-                infrastuctureEntity = new InfraStructureEntity();
-                infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
-                infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
-                infrastuctureEntity.setRo_plant_woking(roPlant);
-                infrastuctureEntity.setRo_plant_reason(roplant_reason);
-                infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
-                infrastuctureEntity.setInverter_available(inverter_available);
-                infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
-                infrastuctureEntity.setLighting_facility(lighting_facility);
-                infrastuctureEntity.setElectricity_wiring(electricity_wiring);
-                infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
-                infrastuctureEntity.setEnough_fans(enough_fans);
-                infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
-                infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
-                infrastuctureEntity.setMountedfans_working(mountedFansWorking);
-                infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
-                infrastuctureEntity.setDininghall_available(dining_hall);
-                infrastuctureEntity.setDininghall_used(dining_hall_used);
-                infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
-                infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
-                infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
-                infrastuctureEntity.setRepair_required(repair_required);
-                infrastuctureEntity.setHow_many_buildings(how_many_buildings);
-                infrastuctureEntity.setTransformer_available(transformer_available);
-                infrastuctureEntity.setPowerConnection_type(powerConnectionType);
-                infrastuctureEntity.setIndividual_connection(individual_connection);
-                infrastuctureEntity.setRunningWater_source(sourceOfDrinkingWater);
-                infrastuctureEntity.setRoad_required(road_required);
-                infrastuctureEntity.setCompWall_required(compWall_required);
-                infrastuctureEntity.setGate_required(gate_required);
-                infrastuctureEntity.setPathway_required(pathway_required);
-                infrastuctureEntity.setSump_required(sump_required);
-                infrastuctureEntity.setSewage_allowed(sewage_allowed);
-                infrastuctureEntity.setDrainage_functioning(drainage_functioning);
-                infrastuctureEntity.setHeater_available(heater_available);
-                infrastuctureEntity.setHeater_workingStatus(heater_workingStatus);
-                infrastuctureEntity.setTotal_toilets(totalToilets);
-                infrastuctureEntity.setTotal_bathrooms(totalBathrooms);
-                infrastuctureEntity.setFunctioning_toilets(functioningToilets);
-                infrastuctureEntity.setFunctioning_bathrooms(functioningBathrooms);
-                infrastuctureEntity.setRepairs_req_toilets(repairsReqToilets);
-                infrastuctureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
-                infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
-                infrastuctureEntity.setPainting(painting);
-                infrastuctureEntity.setColor(color);
+                    infrastuctureEntity = new InfraStructureEntity();
+                    infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
+                    infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
+                    infrastuctureEntity.setRo_plant_woking(roPlant);
+                    infrastuctureEntity.setRo_plant_reason(roplant_reason);
+                    infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
+                    infrastuctureEntity.setInverter_available(inverter_available);
+                    infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
+                    infrastuctureEntity.setLighting_facility(lighting_facility);
+                    infrastuctureEntity.setElectricity_wiring(electricity_wiring);
+                    infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
+                    infrastuctureEntity.setEnough_fans(enough_fans);
+                    infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
+                    infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
+                    infrastuctureEntity.setMountedfans_working(mountedFansWorking);
+                    infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
+                    infrastuctureEntity.setDininghall_available(dining_hall);
+                    infrastuctureEntity.setDininghall_used(dining_hall_used);
+                    infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
+                    infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
+                    infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
+                    infrastuctureEntity.setRepair_required(repair_required);
+                    infrastuctureEntity.setHow_many_buildings(how_many_buildings);
+                    infrastuctureEntity.setTransformer_available(transformer_available);
+                    infrastuctureEntity.setPowerConnection_type(powerConnectionType);
+                    infrastuctureEntity.setIndividual_connection(individual_connection);
+                    infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
+                    infrastuctureEntity.setRoad_required(road_required);
+                    infrastuctureEntity.setCompWall_required(compWall_required);
+                    infrastuctureEntity.setGate_required(gate_required);
+                    infrastuctureEntity.setPathway_required(pathway_required);
+                    infrastuctureEntity.setSump_required(sump_required);
+                    infrastuctureEntity.setSewage_allowed(sewage_allowed);
+                    infrastuctureEntity.setDrainage_functioning(drainage_functioning);
+                    infrastuctureEntity.setHeater_available(heater_available);
+                    infrastuctureEntity.setHeater_workingStatus(heater_workingStatus);
+                    infrastuctureEntity.setTotal_toilets(totalToilets);
+                    infrastuctureEntity.setTotal_bathrooms(totalBathrooms);
+                    infrastuctureEntity.setFunctioning_toilets(functioningToilets);
+                    infrastuctureEntity.setFunctioning_bathrooms(functioningBathrooms);
+                    infrastuctureEntity.setRepairs_req_toilets(repairsReqToilets);
+                    infrastuctureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
+                    infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
+                    infrastuctureEntity.setPainting(painting);
+                    infrastuctureEntity.setColor(color);
 
-                long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
+                    long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
 //                Toast.makeText(InfraActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
+                    startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
+                }
             }
         });
     }
+
+    private boolean validateData() {
+        if (TextUtils.isEmpty(drinkingWaterFacility)) {
+            showSnackBar(getResources().getString(R.string.select_water));
+            return false;
+        }
+        if (TextUtils.isEmpty(bigSchoolNameBoard)) {
+            showSnackBar(getResources().getString(R.string.select_school));
+            return false;
+        }
+        if (TextUtils.isEmpty(roPlant)) {
+            showSnackBar(getResources().getString(R.string.select_roPlant));
+            return false;
+        }
+        if (roPlant.equals(AppConstants.No) && TextUtils.isEmpty(roplant_reason)) {
+            showSnackBar(getResources().getString(R.string.select_roPlant_reason));
+            return false;
+        }
+        if (TextUtils.isEmpty(sourceOfDrinkingWater)) {
+            showSnackBar(getResources().getString(R.string.select_src_drinking_water));
+            return false;
+        }
+        if (TextUtils.isEmpty(inverter_available)) {
+            showSnackBar(getResources().getString(R.string.select_inverter));
+            return false;
+        }
+        if (inverter_available.equals(AppConstants.Yes) && TextUtils.isEmpty(inverterWorkingStatus)) {
+            showSnackBar(getResources().getString(R.string.select_inverter_working));
+            return false;
+        }
+        if (TextUtils.isEmpty(lighting_facility)) {
+            showSnackBar(getResources().getString(R.string.select_lighting_facility));
+            return false;
+        }
+        if (TextUtils.isEmpty(electricity_wiring)) {
+            showSnackBar(getResources().getString(R.string.select_electricity));
+            return false;
+        }
+        if (electricity_wiring.equals(AppConstants.No) && TextUtils.isEmpty(electricity_wiring_repairs_req)) {
+            showSnackBar(getResources().getString(R.string.select_electricity_repairs));
+            return false;
+        }
+        if (TextUtils.isEmpty(enough_fans)) {
+            showSnackBar(getResources().getString(R.string.select_fans));
+            return false;
+        }
+        if (TextUtils.isEmpty(ceilingFansWorking)) {
+            showSnackBar(getResources().getString(R.string.select_ceilingFansWorking));
+            return false;
+        }
+        if (TextUtils.isEmpty(ceilingFansNonWorking)) {
+            showSnackBar(getResources().getString(R.string.select_ceilingFansNonWorking));
+            return false;
+        }
+        if (TextUtils.isEmpty(mountedFansWorking)) {
+            showSnackBar(getResources().getString(R.string.select_mountedFansWorking));
+            return false;
+        }
+        if (TextUtils.isEmpty(mountedFansNonWorking)) {
+            showSnackBar(getResources().getString(R.string.select_mountedFansNonWorking));
+            return false;
+        }
+       /* if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && TextUtils.isEmpty(capturetype)) {
+            showSnackBar(getResources().getString(R.string.sel_od_type));
+            return false;
+        }
+        if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && !TextUtils.isEmpty(capturetype)
+                && capturetype.equalsIgnoreCase("Out of station") && TextUtils.isEmpty(movementRegisterEntry)) {
+            showSnackBar(getResources().getString(R.string.sel_mov_reg));
+            return false;
+        }
+        if (TextUtils.isEmpty(headQuarters)) {
+            showSnackBar(getResources().getString(R.string.sel_head_qua));
+            return false;
+        }
+        if (TextUtils.isEmpty(staffQuarters)) {
+            showSnackBar(getResources().getString(R.string.sel_staff_qua));
+            return false;
+        }
+
+        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(stayingFacilitiesType)) {
+            showSnackBar(getResources().getString(R.string.sel_stay_facility));
+            return false;
+        }
+        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(captureDistance)) {
+            showSnackBar(getResources().getString(R.string.sel_distance));
+            return false;
+        }*/
+        return true;
+    }
+
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
+
 }

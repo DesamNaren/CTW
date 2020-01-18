@@ -54,10 +54,16 @@ public class InfraStructureEntity {
     private String enough_fans;
 
     @ColumnInfo()
+    private String ceilingfans_count;
+
+    @ColumnInfo()
     private String ceilingfans_working;
 
     @ColumnInfo()
     private String ceilingfans_nonworking;
+
+    @ColumnInfo()
+    private String mountedfans_count;
 
     @ColumnInfo()
     private String mountedfans_working;
@@ -157,6 +163,22 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String color;
+
+    public String getCeilingfans_count() {
+        return ceilingfans_count;
+    }
+
+    public void setCeilingfans_count(String ceilingfans_count) {
+        this.ceilingfans_count = ceilingfans_count;
+    }
+
+    public String getMountedfans_count() {
+        return mountedfans_count;
+    }
+
+    public void setMountedfans_count(String mountedfans_count) {
+        this.mountedfans_count = mountedfans_count;
+    }
 
     public String getDininghall_used() {
         return dininghall_used;
