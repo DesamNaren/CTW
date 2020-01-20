@@ -23,8 +23,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     private List<MedicalDetailsBean> list;
     private int selectedPos = 0;
     MedicalDetailsAdapter adapter;
-    ClickCallback callback;
-    private int lastPosition = -1;
+    private ClickCallback callback;
 
     public MedicalDetailsAdapter(Context context, List<MedicalDetailsBean> list, ClickCallback callback) {
         this.context = context;
@@ -35,7 +34,6 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
         AdapterMedicalDetailsBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_medical_details, parent, false);
@@ -45,8 +43,6 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int position) {
-
-        holder.binding.etClass.setText("Class " + (position + 1));
 
         if (position == 0)
             holder.binding.btnLayout.btnPrevious.setVisibility(View.GONE);
@@ -61,17 +57,17 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
             @Override
             public void onClick(View view) {
 
-               /* if (holder.binding.etStudentName.getText().toString().trim().isEmpty()) {
-                    holder.binding.etStudentName.setError("Please enter student name");
+                if (holder.binding.etStudentName.getText().toString().trim().isEmpty()) {
+                    holder.binding.etStudentName.setError(context.getString(R.string.enter_stu_name));
                     holder.binding.etStudentName.requestFocus();
                 } else if (holder.binding.etClass.getText().toString().trim().isEmpty()) {
-                    holder.binding.etClass.setError("Please enter class name");
+                    holder.binding.etClass.setError(context.getString(R.string.enter_cls_name));
                     holder.binding.etClass.requestFocus();
                 } else if (holder.binding.etReason.getText().toString().trim().isEmpty()) {
-                    holder.binding.etReason.setError("Please enter reason");
+                    holder.binding.etReason.setError(context.getString(R.string.enter_reason));
                     holder.binding.etReason.requestFocus();
                 } else if (holder.binding.etHospital.getText().toString().trim().isEmpty()) {
-                    holder.binding.etHospital.setError("Please enter hospital name");
+                    holder.binding.etHospital.setError(context.getString(R.string.enter_hos_name));
                     holder.binding.etHospital.requestFocus();
                 } else if (holder.binding.etAdmittedDate.getText().toString().trim().isEmpty()) {
                     holder.binding.etAdmittedDate.setError("Please enter class name");
@@ -82,12 +78,12 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                 } else if (holder.binding.etAccDes.getText().toString().trim().isEmpty()) {
                     holder.binding.etAccDes.setError("Please enter Accompanied Designation");
                     holder.binding.etAccDes.requestFocus();
-                } else {*/
+                } else {
                     if (position < list.size()) {
                         selectedPos = position + 1;
                         callback.onItemClick(position + 1);
                     }
-//                }
+                }
             }
         });
 

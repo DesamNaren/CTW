@@ -1,14 +1,18 @@
 package com.example.twdinspection.inspection.Room.repository;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -26,7 +30,7 @@ public class MedicalInfoRepository {
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
-    public MedicalInfoRepository(Application application) {
+    public MedicalInfoRepository(Context application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         medicalInfoDao = db.medicalInfoDao();
 
@@ -123,5 +127,52 @@ public class MedicalInfoRepository {
 
     public LiveData<Integer> getCallCnt() {
         return medicalInfoDao.callCnt();
+    }
+
+    public long deleteCallInfo(CallHealthInfoEntity callHealthInfoEntity) {
+
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                medicalInfoDao.deleteCallInfo(callHealthInfoEntity);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag+"onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag+"onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag+"onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag+"onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
+
+    public LiveData<List<CallHealthInfoEntity>> getCallListLiveData() {
+        return medicalInfoDao.getCallListLiveData();
     }
 }

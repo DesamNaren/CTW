@@ -82,6 +82,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
                 if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
+
                     adapter = new StudentsAttAdapter(StudentsAttendance_2.this, studAttendInfoEntityList);
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendance_2.this));
                     binding.recyclerView.setAdapter(adapter);

@@ -367,7 +367,8 @@
     <string name="count_in_register">Please enter students count in register</string>
     <string name="count_dur_insp">Please enter students count during inspection</string>
     <string name="stud_greater_than_roll">Students present cannot be greater than students on roll</string>
-    <string name="medical_health"><![CDATA[Medical & Health Issues]]></string>
+    <string name="medical_health">Medical &amp; Health Issues</string>
+    <string name="call_health">Call Health</string>
     <string name="sl_no">Sl.No</string>
     <string name="stu_name">Student Name</string>
     <string name="disease">Disease</string>
@@ -394,5 +395,9 @@
     <string name="title_registers">Registers Up to date</string>
     <string name="title_general_comments">General Comments</string>
     <string name="title_uploaded_photo">Uploaded Photographs</string>
+    <string name="record_deleted">Record deleted successfully!</string>
+    <string name="enter_suffering_count">Enter number of suffering students</string>
+    <string name="enter_cls_name">Enter class name</string>
+    <string name="enter_hos_name">Enter hospital name</string>
 
 </resources>

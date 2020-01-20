@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.custom.CustomFontTextView;
+import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -33,8 +35,7 @@ public class MedicalActivity extends BaseActivity {
     ActivityMedicalBinding binding;
     MedicalViewModel medicalViewModel;
     MedicalInfoEntity medicalInfoEntity;
-    String recorderedInRegister = "", medicalCheckUpDoneByWhom = "", anmWeeklyUpdated = "", callHealth100 = "";
-    private CoordinatorLayout rootLayout;
+    String recorderedInRegister, medicalCheckUpDoneByWhom, anmWeeklyUpdated, callHealth100;
     private int slNoCnt = 0;
 
     @Override
@@ -57,10 +58,16 @@ public class MedicalActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgMedicalCheckupDetails.getCheckedRadioButtonId();
-                if (selctedItem == R.id.medical_checkup_details_yes)
+                if (selctedItem == R.id.medical_checkup_details_yes) {
+                    binding.btnAddStud.setVisibility(View.VISIBLE);
                     recorderedInRegister = "YES";
-                else
+                } else if (selctedItem == R.id.medical_checkup_details_no) {
+                    binding.btnAddStud.setVisibility(View.GONE);
                     recorderedInRegister = "NO";
+                } else {
+                    binding.btnAddStud.setVisibility(View.GONE);
+                    recorderedInRegister = null;
+                }
             }
         });
 
@@ -70,8 +77,9 @@ public class MedicalActivity extends BaseActivity {
                 int selctedItem = binding.rgMedicalCheckUpDoneByWhom.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_medical_officer)
                     medicalCheckUpDoneByWhom = "MEDICAL OFFICER";
-                else
+                else if (selctedItem == R.id.rb_anm)
                     medicalCheckUpDoneByWhom = "ANM";
+                else medicalCheckUpDoneByWhom = null;
             }
         });
 
@@ -81,8 +89,9 @@ public class MedicalActivity extends BaseActivity {
                 int selctedItem = binding.rgAnmWeeklyUpdated.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_anm_weekly_updated)
                     anmWeeklyUpdated = "YES";
-                else
+                else if (selctedItem == R.id.rb_no_anm_weekly_updated)
                     anmWeeklyUpdated = "NO";
+                else anmWeeklyUpdated = null;
             }
         });
 
@@ -92,8 +101,9 @@ public class MedicalActivity extends BaseActivity {
                 int selctedItem = binding.rgCallHealth100.getCheckedRadioButtonId();
                 if (selctedItem == R.id.yes_call_health_100)
                     callHealth100 = "YES";
-                else
+                else if (selctedItem == R.id.no_call_health_100)
                     callHealth100 = "NO";
+                else callHealth100 = null;
             }
         });
 
@@ -136,18 +146,9 @@ public class MedicalActivity extends BaseActivity {
                 medicalInfoEntity.setAnmWeeklyUpdated(anmWeeklyUpdated);
                 medicalInfoEntity.setCallHealth100(callHealth100);
 
-                long x = medicalViewModel.insertMedicalInfo(medicalInfoEntity);
-//                Toast.makeText(MedicalActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+                medicalViewModel.insertMedicalInfo(medicalInfoEntity);
 
-//                Utils.customAlert(MedicalActivity.this, "Data submitted successfully", AppConstants.SUCCESS, false);
-
-//                if (binding.medicalCheckupDetailsYes.isChecked()) {
-//                    startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class));
-//                } else {
-//                    startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
-//                }
-                startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
-
+                Utils.customAlert(MedicalActivity.this, "Data submitted successfully", AppConstants.SUCCESS, false);
             }
         });
 
@@ -157,11 +158,51 @@ public class MedicalActivity extends BaseActivity {
                 showCallHeathDetails();
             }
         });
+        binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int feverCount=0, coldCount=0, diarrheaCount=0, headacheCount=0,malariaCount=0,othersCount=0;
+
+                if (!TextUtils.isEmpty(binding.etFever.getText().toString())) {
+                    feverCount = Integer.valueOf(binding.etFever.getText().toString());
+                }
+                if (!TextUtils.isEmpty(binding.etCold.getText().toString())) {
+                    coldCount = Integer.valueOf(binding.etCold.getText().toString());
+                }
+                if (!TextUtils.isEmpty(binding.etDiarrhea.getText().toString())) {
+                    diarrheaCount = Integer.valueOf(binding.etDiarrhea.getText().toString());
+                }
+                if (!TextUtils.isEmpty(binding.etHeadache.getText().toString())) {
+                    headacheCount = Integer.valueOf(binding.etHeadache.getText().toString());
+                }
+                if (!TextUtils.isEmpty(binding.etMalaria.getText().toString())) {
+                    malariaCount = Integer.valueOf(binding.etMalaria.getText().toString());
+                }
+                if (!TextUtils.isEmpty(binding.etOthers.getText().toString())) {
+                    othersCount = Integer.valueOf(binding.etOthers.getText().toString());
+                }
+
+
+                if (feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount > 0) {
+
+                    startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class)
+                            .putExtra("f_cnt", feverCount)
+                            .putExtra("c_cnt", coldCount)
+                            .putExtra("d_cnt", diarrheaCount)
+                            .putExtra("h_cnt", headacheCount)
+                            .putExtra("m_cnt", malariaCount)
+                            .putExtra("o_cnt", othersCount)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                }else {
+                    showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
+                }
+            }
+        });
 
         binding.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                viewCallData();
+                viewCallData();
             }
         });
 
@@ -169,16 +210,24 @@ public class MedicalActivity extends BaseActivity {
         liveData.observe(MedicalActivity.this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer cnt) {
-                if (cnt != null) {
+                if (cnt != null && cnt > 0) {
+                    binding.btnView.setVisibility(View.VISIBLE);
                     slNoCnt = cnt;
+                } else {
+                    slNoCnt = 0;
+                    binding.btnView.setVisibility(View.GONE);
                 }
             }
         });
     }
 
+    private void viewCallData() {
+        startActivity(new Intent(this, CallHealthActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+
     public void showCallHeathDetails() {
         View view = getLayoutInflater().inflate(R.layout.call_health_bottom_sheet, null);
-        rootLayout = view.findViewById(R.id.root_layout);
         BottomSheetDialog dialog = new BottomSheetDialog(MedicalActivity.this);
         dialog.setContentView(view);
         dialog.setCancelable(false);
@@ -188,7 +237,7 @@ public class MedicalActivity extends BaseActivity {
         dialog.show();
 
         CustomFontTextView slNo = view.findViewById(R.id.tv_slCount);
-        slNo.setText(String.valueOf(slNoCnt));
+        slNo.setText(String.valueOf(slNoCnt + 1));
         CustomFontEditText stuName = view.findViewById(R.id.et_studName);
         CustomFontEditText disease = view.findViewById(R.id.et_disease);
         CustomFontEditText date = view.findViewById(R.id.et_call_checkup_date);
@@ -215,7 +264,7 @@ public class MedicalActivity extends BaseActivity {
 
 
                         CallHealthInfoEntity callHealthInfoEntity = new CallHealthInfoEntity();
-                        callHealthInfoEntity.setSlNo(slNoCnt+1);
+                        callHealthInfoEntity.setSlNo(slNoCnt + 1);
                         callHealthInfoEntity.setStu_name(stuNameStr);
                         callHealthInfoEntity.setDisease(diseaseStr);
                         callHealthInfoEntity.setPlanDate(dateStr);
@@ -243,7 +292,7 @@ public class MedicalActivity extends BaseActivity {
 
 
     private void showBottomSheetSnackBar(String str) {
-        Snackbar.make(rootLayout, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     private boolean validate(String stuNameStr, String dStr, String dateStr) {
@@ -301,5 +350,6 @@ public class MedicalActivity extends BaseActivity {
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
+
 
 }

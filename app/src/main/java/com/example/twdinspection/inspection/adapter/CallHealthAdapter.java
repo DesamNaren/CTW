@@ -2,6 +2,7 @@ package com.example.twdinspection.inspection.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.CallHealthRowBinding;
+import com.example.twdinspection.inspection.interfaces.MedicalInterface;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import java.util.List;
@@ -18,12 +20,12 @@ import java.util.List;
 public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.ItemHolder>{
     private Context context;
     private List<CallHealthInfoEntity> callHealthInfoEntities;
-    private StudAttendInterface studAttendInterface;
+    private MedicalInterface medicalInterface;
     public CallHealthAdapter(Context context, List<CallHealthInfoEntity> callHealthInfoEntities) {
         this.context = context;
         this.callHealthInfoEntities = callHealthInfoEntities;
         try {
-            studAttendInterface=(StudAttendInterface)context;
+            medicalInterface=(MedicalInterface)context;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -44,13 +46,16 @@ public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.It
         final CallHealthInfoEntity dataModel = callHealthInfoEntities.get(i);
         holder.listItemBinding.setCallModel(dataModel);
 
-//        holder.listItemBinding.tvClass.setText(list.get(i).getClass_type());
-//        holder.listItemBinding.tvExpand.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                studAttendInterface.openBottomSheet(dataModel);
-//            }
-//        });
+        holder.listItemBinding.tvSlNo.setText(String.valueOf(i+1));
+        holder.listItemBinding.tvStuName.setText(String.valueOf(callHealthInfoEntities.get(i).getStu_name()));
+        holder.listItemBinding.tvDisease.setText(String.valueOf(callHealthInfoEntities.get(i).getDisease()));
+        holder.listItemBinding.tvDate.setText(String.valueOf(callHealthInfoEntities.get(i).getPlanDate()));
+        holder.listItemBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                medicalInterface.deleteCallRecord(dataModel);
+            }
+        });
 
 
         holder.bind(dataModel);

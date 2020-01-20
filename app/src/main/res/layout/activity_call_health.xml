@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".inspection.ui.CallHealthActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.CallHealthViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:background="@color/light_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/call_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_10dp" />
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:visibility="gone"
+            android:id="@+id/no_data_tv"
+            android:layout_centerInParent="true"
+            android:text="@string/no_records_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/call_rv"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+</layout>
