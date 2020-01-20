@@ -69,7 +69,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(true);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(false);
-
+                    employeeResponse.setEmp_presence(AppConstants.PRESENT);
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
 
@@ -86,6 +86,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(true);
                     employeeResponse.setOndepFlag(false);
+                    employeeResponse.setEmp_presence(AppConstants.ABSENT);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -102,6 +103,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(true);
+                    employeeResponse.setEmp_presence(AppConstants.ONDEPUTATION);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);

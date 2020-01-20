@@ -8,9 +8,12 @@ import androidx.lifecycle.LiveData;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -34,9 +37,60 @@ public class StaffInfoRepository {
 
     }
 
+
+    public LiveData<MasterInstituteInfo> getMasterStaffIdsList(String inst_id) {
+        return staffInfoDao.getMasterStaffIdList(inst_id);
+    }
+
     public LiveData<List<StaffAttendanceEntity>> getStaffInfoList(String inst_id) {
         LiveData<List<StaffAttendanceEntity>> classIdList= staffInfoDao.getStaffInfoList(inst_id);
         return classIdList;
+    }
+
+    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
+
+        Observable.fromCallable(new Callable<List<StaffAttendanceEntity>>() {
+            @Override
+            public List<StaffAttendanceEntity> call() throws Exception {
+                staffInfoDao.deleteStaffInfo();
+                staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
+                return null;
+            }
+        });
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                staffInfoDao.deleteStaffInfo();
+                staffInfoDao.insertStaffAttendInfo(staffAttendanceEntities);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
     }
 
     long x;

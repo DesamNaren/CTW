@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import com.example.twdinspection.inspection.adapter.StaffAdapter;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterStaffInfo;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -23,17 +26,19 @@ import com.example.twdinspection.inspection.viewmodel.StaffAttendCustomViewModel
 import com.example.twdinspection.inspection.viewmodel.StaffViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StaffAttendActivity extends BaseActivity implements SaveListener {
 
     ActivityStaffAttBinding binding;
-    List<StaffAttendanceEntity> staffAttendanceEntities;
+    List<StaffAttendanceEntity> staffAttendanceEntitiesmain;
     StaffAdapter staffAdapter;
     StaffViewModel staffViewModel;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
-    String instId;
+    String instName,instId,officerId;
+    MasterInstituteInfo masterInstituteInfos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +48,12 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         staffViewModel = ViewModelProviders.of(
                 this, new StaffAttendCustomViewModel(binding, this)).get(StaffViewModel.class);
         binding.setViewmodel(staffViewModel);
+        staffAttendanceEntitiesmain=new ArrayList<>();
         instMainViewModel = new InstMainViewModel(getApplication());
         sharedPreferences = TWDApplication.get(this).getPreferences();
+        officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
+        instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,12 +66,39 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         staffViewModel.getStaffInfo(instId).observe(this, new Observer<List<StaffAttendanceEntity>>() {
             @Override
             public void onChanged(List<StaffAttendanceEntity> staffAttendanceEntities) {
-                StaffAttendActivity.this.staffAttendanceEntities=staffAttendanceEntities;
-                staffAdapter = new StaffAdapter(StaffAttendActivity.this, staffAttendanceEntities);
-                binding.staffRv.setAdapter(staffAdapter);
-                binding.staffRv.setHasFixedSize(true);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-                binding.staffRv.setLayoutManager(layoutManager);
+                if (staffAttendanceEntities != null && staffAttendanceEntities.size() > 0) {
+                    staffAttendanceEntitiesmain=staffAttendanceEntities;
+                    staffAdapter = new StaffAdapter(StaffAttendActivity.this, staffAttendanceEntitiesmain);
+                    binding.staffRv.setAdapter(staffAdapter);
+                    binding.staffRv.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
+                    binding.staffRv.setLayoutManager(layoutManager);
+                }else{
+
+                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = staffViewModel.getMasterStaffInfo(TWDApplication.get(StaffAttendActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
+                    masterInstituteInfoLiveData.observe(StaffAttendActivity.this, new Observer<MasterInstituteInfo>() {
+                        @Override
+                        public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                            masterInstituteInfoLiveData.removeObservers(StaffAttendActivity.this);
+                            StaffAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
+                            List<MasterStaffInfo> masterStaffInfos = masterInstituteInfos.getStaffInfo();
+                            if (masterStaffInfos != null && masterStaffInfos.size() > 0) {
+                                for (int i = 0; i < masterStaffInfos.size(); i++) {
+                                    StaffAttendanceEntity staffAttendanceEntity = new StaffAttendanceEntity(officerId,String.valueOf(masterStaffInfos.get(i).getHostelId()),instName,String.valueOf(masterStaffInfos.get(i).getEmpId()),masterStaffInfos.get(i).getEmpName(),masterStaffInfos.get(i).getDesignation());
+                                    staffAttendanceEntitiesmain.add(staffAttendanceEntity);
+                                }
+                            }
+
+                            if (staffAttendanceEntitiesmain != null && staffAttendanceEntitiesmain.size() > 0) {
+                                staffViewModel.insertStaffInfo(staffAttendanceEntitiesmain);
+                            }else {
+                                binding.emptyTv.setVisibility(View.VISIBLE);
+                                binding.staffRv.setVisibility(View.GONE);
+                            }
+
+                        }
+                    });
+                }
             }
         });
 
@@ -86,13 +121,13 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
 
     private boolean validate() {
         boolean returnFlag=true;
-        for (int i=0;i<staffAttendanceEntities.size();i++){
-            if(!(staffAttendanceEntities.get(i).isAbsentFlag() || staffAttendanceEntities.get(i).isPresentFlag()
-                    || staffAttendanceEntities.get(i).isOndepFlag())){
+        for (int i=0;i<staffAttendanceEntitiesmain.size();i++){
+            if(!(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
+                    || staffAttendanceEntitiesmain.get(i).isOndepFlag())){
                 returnFlag=false;
                 showSnackBar("Please mark attendance of all employees");
                 break;
-            }else if(TextUtils.isEmpty(staffAttendanceEntities.get(i).getYday_duty_allotted())){
+            }else if(TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getYday_duty_allotted())){
                 returnFlag=false;
                 showSnackBar("Please mark yesterday duty alloted to all employees");
                 break;
@@ -108,7 +143,10 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
 
     @Override
     public void submitData() {
-        long x = staffViewModel.updateStaffInfo(staffAttendanceEntities);
+        for(int i=0;i<staffAttendanceEntitiesmain.size();i++){
+            staffAttendanceEntitiesmain.get(i).setInspection_time(Utils.getCurrentDateTime());
+        }
+        long x = staffViewModel.updateStaffInfo(staffAttendanceEntitiesmain);
         if (x >= 0) {
             long z = 0;
             try {

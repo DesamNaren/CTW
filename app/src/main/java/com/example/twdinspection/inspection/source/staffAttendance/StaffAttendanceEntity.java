@@ -62,6 +62,15 @@ public class StaffAttendanceEntity {
     public StaffAttendanceEntity() {
     }
 
+    public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id, String emp_name, String designation) {
+        this.officer_id = officer_id;
+        this.institute_id = institute_id;
+        this.inst_name = inst_name;
+        this.emp_id = emp_id;
+        this.emp_name = emp_name;
+        this.designation = designation;
+    }
+
     public String getInst_name() {
         return inst_name;
     }

@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.inspection.Room.repository.StaffInfoRepository;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;
 
@@ -33,6 +35,12 @@ public class StaffViewModel extends ViewModel {
         return staffInfoRepository.updateStaffInfo(staffAttendanceEntities);
     }
 
-
+    public LiveData<MasterInstituteInfo> getMasterStaffInfo(String inst_id) {
+        LiveData<MasterInstituteInfo> staffIdsList = staffInfoRepository.getMasterStaffIdsList(inst_id);
+        return staffIdsList;
+    }
+    public void insertStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
+        staffInfoRepository.insertStaffInfo(staffAttendanceEntities);
+    }
 
 }
