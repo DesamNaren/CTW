@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,25 +14,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
-public class InfraActivity extends AppCompatActivity {
+public class InfraActivity extends BaseActivity implements SaveListener {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
+    SharedPreferences sharedPreferences;
     InfraStructureEntity infrastuctureEntity;
     String drinkingWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
     String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req;
     String roplant_reason, ceilingFansWorking, ceilingFansNonWorking, mountedFansWorking, mountedFansNonWorking, repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms, functioningToilets;
     String repairsReqToilets, repairsReqBathrooms, color;
+    InstMainViewModel instMainViewModel;
+    private String officerID, instID, insTime;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
@@ -39,6 +46,12 @@ public class InfraActivity extends AppCompatActivity {
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);
         binding.setViewModel(infraViewModel);
+        instMainViewModel = new InstMainViewModel(getApplication());
+
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
         TextView tv_title = findViewById(R.id.header_title);
         tv_title.setText("Infrastructure & Maintenance");
@@ -73,15 +86,12 @@ public class InfraActivity extends AppCompatActivity {
                 int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
                 if (selctedItem == R.id.ro_plant_yes) {
                     roPlant = "YES";
-                    binding.llTdsMeterReading.setVisibility(View.VISIBLE);
                     binding.llReason.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.ro_plant_no) {
                     roPlant = "NO";
-                    binding.llTdsMeterReading.setVisibility(View.GONE);
                     binding.llReason.setVisibility(View.VISIBLE);
                 } else {
                     roPlant = null;
-                    binding.llTdsMeterReading.setVisibility(View.GONE);
                     binding.llReason.setVisibility(View.GONE);
                 }
             }
@@ -188,12 +198,16 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgDiningHall.getCheckedRadioButtonId();
-                if (selctedItem == R.id.dining_hall_yes)
+                if (selctedItem == R.id.dining_hall_yes) {
                     dining_hall = "YES";
-                else if (selctedItem == R.id.dining_hall_no)
+                    binding.llDininghallUsed.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.dining_hall_no) {
                     dining_hall = "NO";
-                else
+                    binding.llDininghallUsed.setVisibility(View.GONE);
+                } else {
                     dining_hall = null;
+                    binding.llDininghallUsed.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -214,12 +228,19 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgSeparateKitchenRoomAvailable.getCheckedRadioButtonId();
-                if (selctedItem == R.id.separate_kitchen_room_available_yes)
+                if (selctedItem == R.id.separate_kitchen_room_available_yes) {
                     separate_kitchen_room_available = "YES";
-                else if (selctedItem == R.id.separate_kitchen_room_available_no)
+                    binding.llConstructKitchenroom.setVisibility(View.GONE);
+                    binding.llGoodCondition.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.separate_kitchen_room_available_no) {
                     separate_kitchen_room_available = "NO";
-                else
+                    binding.llConstructKitchenroom.setVisibility(View.VISIBLE);
+                    binding.llGoodCondition.setVisibility(View.GONE);
+                } else {
                     separate_kitchen_room_available = null;
+                    binding.llConstructKitchenroom.setVisibility(View.GONE);
+                    binding.llGoodCondition.setVisibility(View.GONE);
+                }
 
             }
         });
@@ -243,12 +264,16 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgIsItInGoodCondition.getCheckedRadioButtonId();
-                if (selctedItem == R.id.is_it_in_good_condition_yes)
+                if (selctedItem == R.id.is_it_in_good_condition_yes) {
                     is_it_in_good_condition = "YES";
-                else if (selctedItem == R.id.is_it_in_good_condition_no)
+                    binding.llKitchenRepairRequired.setVisibility(View.GONE);
+                } else if (selctedItem == R.id.is_it_in_good_condition_no) {
                     is_it_in_good_condition = "NO";
-                else
+                    binding.llKitchenRepairRequired.setVisibility(View.VISIBLE);
+                } else {
                     is_it_in_good_condition = null;
+                    binding.llKitchenRepairRequired.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -404,12 +429,16 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHeaterAvailable.getCheckedRadioButtonId();
-                if (selctedItem == R.id.heater_available_yes)
+                if (selctedItem == R.id.heater_available_yes) {
                     heater_available = "YES";
-                else if (selctedItem == R.id.heater_available_no)
+                    binding.llSolarWorkingStatus.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.heater_available_no) {
                     heater_available = "NO";
-                else
+                    binding.llSolarWorkingStatus.setVisibility(View.GONE);
+                } else {
                     heater_available = null;
+                    binding.llSolarWorkingStatus.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -443,12 +472,16 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPainting.getCheckedRadioButtonId();
-                if (selctedItem == R.id.painting_yes)
+                if (selctedItem == R.id.painting_yes) {
                     painting = "GOOD";
-                else if (selctedItem == R.id.painting_no)
+                    binding.llColor.setVisibility(View.GONE);
+                } else if (selctedItem == R.id.painting_no) {
                     painting = "BAD";
-                else
+                    binding.llColor.setVisibility(View.VISIBLE);
+                } else {
                     painting = null;
+                    binding.llColor.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -457,23 +490,27 @@ public class InfraActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                roplant_reason = binding.etReason.getText().toString().trim();
+                ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
+                ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
+                mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
+                mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
+                repair_required = binding.etRepairRequired.getText().toString().trim();
+                how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
+                totalToilets = binding.etTotalToilets.getText().toString().trim();
+                totalBathrooms = binding.etTotalBathrooms.getText().toString().trim();
+                functioningToilets = binding.etFunctioningToilets.getText().toString().trim();
+                functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
+                repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
+                repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
+                color = binding.etPainting.getText().toString().trim();
+
                 if (validateData()) {
-                    roplant_reason = binding.etReason.getText().toString().trim();
-                    ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
-                    ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
-                    mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
-                    mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
-                    repair_required = binding.etRepairRequired.getText().toString().trim();
-                    how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
-                    totalToilets = binding.etTotalToilets.getText().toString().trim();
-                    totalBathrooms = binding.etTotalBathrooms.getText().toString().trim();
-                    functioningToilets = binding.etFunctioningToilets.getText().toString().trim();
-                    functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
-                    repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
-                    repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
-                    color = binding.etPainting.getText().toString().trim();
 
                     infrastuctureEntity = new InfraStructureEntity();
+                    infrastuctureEntity.setOfficer_id(officerID);
+                    infrastuctureEntity.setInspection_time(insTime);
+                    infrastuctureEntity.setInstitute_id(instID);
                     infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
                     infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
                     infrastuctureEntity.setRo_plant_woking(roPlant);
@@ -518,11 +555,9 @@ public class InfraActivity extends AppCompatActivity {
                     infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
                     infrastuctureEntity.setPainting(painting);
                     infrastuctureEntity.setColor(color);
+                    Utils.customSaveAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
-                    long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
-//                Toast.makeText(InfraActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
-
-                    startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
+//                    startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
                 }
             }
         });
@@ -543,6 +578,7 @@ public class InfraActivity extends AppCompatActivity {
         }
         if (roPlant.equals(AppConstants.No) && TextUtils.isEmpty(roplant_reason)) {
             showSnackBar(getResources().getString(R.string.select_roPlant_reason));
+            binding.etReason.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(sourceOfDrinkingWater)) {
@@ -575,46 +611,150 @@ public class InfraActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(ceilingFansWorking)) {
             showSnackBar(getResources().getString(R.string.select_ceilingFansWorking));
+            binding.etCeilingFansWorking.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(ceilingFansNonWorking)) {
             showSnackBar(getResources().getString(R.string.select_ceilingFansNonWorking));
+            binding.etCeilingFansNonWorking.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(mountedFansWorking)) {
             showSnackBar(getResources().getString(R.string.select_mountedFansWorking));
+            binding.etWallMountedFansWorking.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(mountedFansNonWorking)) {
             showSnackBar(getResources().getString(R.string.select_mountedFansNonWorking));
+            binding.etWallMountedFansNonWorking.requestFocus();
             return false;
         }
-       /* if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && TextUtils.isEmpty(capturetype)) {
-            showSnackBar(getResources().getString(R.string.sel_od_type));
+        if (TextUtils.isEmpty(dining_hall)) {
+            showSnackBar(getResources().getString(R.string.select_dininghall_available));
             return false;
         }
-        if (!TextUtils.isEmpty(leavetype) && leavetype.equalsIgnoreCase("OD") && !TextUtils.isEmpty(capturetype)
-                && capturetype.equalsIgnoreCase("Out of station") && TextUtils.isEmpty(movementRegisterEntry)) {
-            showSnackBar(getResources().getString(R.string.sel_mov_reg));
+        if (dining_hall.equals(AppConstants.Yes) && TextUtils.isEmpty(dining_hall_used)) {
+            showSnackBar(getResources().getString(R.string.select_dininghall_used));
             return false;
         }
-        if (TextUtils.isEmpty(headQuarters)) {
-            showSnackBar(getResources().getString(R.string.sel_head_qua));
+        if (TextUtils.isEmpty(separate_kitchen_room_available)) {
+            showSnackBar(getResources().getString(R.string.select_kitchen_available));
             return false;
         }
-        if (TextUtils.isEmpty(staffQuarters)) {
-            showSnackBar(getResources().getString(R.string.sel_staff_qua));
+        if (separate_kitchen_room_available.equals(AppConstants.No) && TextUtils.isEmpty(construct_kitchen_room)) {
+            showSnackBar(getResources().getString(R.string.select_kitchen_construct));
+            return false;
+        }
+        if (separate_kitchen_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(is_it_in_good_condition)) {
+            showSnackBar(getResources().getString(R.string.select_kitchen_good_condition));
+            return false;
+        }
+        if (separate_kitchen_room_available.equals(AppConstants.Yes) && is_it_in_good_condition.equals(AppConstants.No) && TextUtils.isEmpty(repair_required)) {
+            showSnackBar(getResources().getString(R.string.select_kitchen_repairs));
+            binding.etRepairRequired.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(how_many_buildings)) {
+            showSnackBar(getResources().getString(R.string.select_buildings));
+            binding.etHowManyBuildings.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(transformer_available)) {
+            showSnackBar(getResources().getString(R.string.select_transformer));
+            return false;
+        }
+        if (TextUtils.isEmpty(powerConnectionType)) {
+            showSnackBar(getResources().getString(R.string.select_powerconnection));
+            return false;
+        }
+        if (TextUtils.isEmpty(individual_connection)) {
+            showSnackBar(getResources().getString(R.string.select_individual_connection));
+            return false;
+        }
+        if (TextUtils.isEmpty(sourceOfRunningWater)) {
+            showSnackBar(getResources().getString(R.string.select_src_runnig_water));
+            return false;
+        }
+        if (TextUtils.isEmpty(road_required)) {
+            showSnackBar(getResources().getString(R.string.select_road_req));
+            return false;
+        }
+        if (TextUtils.isEmpty(compWall_required)) {
+            showSnackBar(getResources().getString(R.string.select_compoundwall_req));
+            return false;
+        }
+        if (TextUtils.isEmpty(gate_required)) {
+            showSnackBar(getResources().getString(R.string.select_gate));
+            return false;
+        }
+        if (TextUtils.isEmpty(pathway_required)) {
+            showSnackBar(getResources().getString(R.string.select_pathway));
+            return false;
+        }
+        if (TextUtils.isEmpty(sump_required)) {
+            showSnackBar(getResources().getString(R.string.select_sump_req));
+            return false;
+        }
+        if (TextUtils.isEmpty(sewage_allowed)) {
+            showSnackBar(getResources().getString(R.string.select_sewerage));
+            return false;
+        }
+        if (TextUtils.isEmpty(drainage_functioning)) {
+            showSnackBar(getResources().getString(R.string.select_drainage));
+            return false;
+        }
+        if (TextUtils.isEmpty(heater_available)) {
+            showSnackBar(getResources().getString(R.string.select_solarwater));
+            return false;
+        }
+        if (heater_available.equals(AppConstants.Yes) && TextUtils.isEmpty(heater_workingStatus)) {
+            showSnackBar(getResources().getString(R.string.select_solarwater_working));
+            return false;
+        }
+        if (TextUtils.isEmpty(totalToilets)) {
+            showSnackBar(getResources().getString(R.string.select_toilets));
+            binding.etTotalToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(totalBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_bathrooms));
+            binding.etTotalBathrooms.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(functioningToilets)) {
+            showSnackBar(getResources().getString(R.string.select_functioning_toilets));
+            binding.etFunctioningToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(functioningBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_functioning_bathrooms));
+            binding.etFuntioningBathrooms.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(repairsReqToilets)) {
+            showSnackBar(getResources().getString(R.string.select_repaired_toilets));
+            binding.etRequiredToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(repairsReqBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_repaired_bathrooms));
+            binding.etRequiredBathrooms.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(repairs_to_door)) {
+            showSnackBar(getResources().getString(R.string.select_door));
+            return false;
+        }
+        if (TextUtils.isEmpty(painting)) {
+            showSnackBar(getResources().getString(R.string.select_painting));
+            return false;
+        }
+        if (TextUtils.isEmpty(color)) {
+            showSnackBar(getResources().getString(R.string.select_color));
+            binding.etPainting.requestFocus();
             return false;
         }
 
-        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(stayingFacilitiesType)) {
-            showSnackBar(getResources().getString(R.string.sel_stay_facility));
-            return false;
-        }
-        if (!TextUtils.isEmpty(staffQuarters) && staffQuarters.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(captureDistance)) {
-            showSnackBar(getResources().getString(R.string.sel_distance));
-            return false;
-        }*/
         return true;
     }
 
@@ -622,4 +762,24 @@ public class InfraActivity extends AppCompatActivity {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void submitData() {
+        long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
+        if (x >= 0) {
+            long z = 0;
+            try {
+                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 6, instID);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z >= 0) {
+                showSnackBar(getString(R.string.data_saved));
+                startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
+    }
 }
