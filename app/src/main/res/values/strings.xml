@@ -428,5 +428,9 @@
     <string name="enter_suffering_count">Enter number of suffering students</string>
     <string name="enter_cls_name">Enter class name</string>
     <string name="enter_hos_name">Enter hospital name</string>
-
+    <string name="enter_acc_name">Please enter accompanied name</string>
+    <string name="enter_acc_des">Please enter accompanied designation</string>
+    <string name="enter_adm_date">Please enter admitted date</string>
+    <string name="infra_mai">Infrastructure &amp; Maintenance</string>
+    <string name="rec_su">Records submitted</string>
 </resources>

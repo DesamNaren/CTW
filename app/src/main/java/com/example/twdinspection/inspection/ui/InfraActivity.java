@@ -41,7 +41,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
+        binding =  putContentView(R.layout.activity_infrastructure, getResources().getString(R.string.infra_mai));
 
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);
@@ -52,9 +52,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         instID = sharedPreferences.getString(AppConstants.INST_ID, "");
         insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("Infrastructure & Maintenance");
 
         binding.rgDrinkingWaterFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

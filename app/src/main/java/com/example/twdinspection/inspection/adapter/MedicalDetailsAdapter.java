@@ -1,10 +1,11 @@
 package com.example.twdinspection.inspection.adapter;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +16,7 @@ import com.example.twdinspection.databinding.AdapterMedicalDetailsBinding;
 import com.example.twdinspection.inspection.interfaces.ClickCallback;
 import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAdapter.ItemHolder> {
@@ -22,8 +24,9 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     private Context context;
     private List<MedicalDetailsBean> list;
     private int selectedPos = 0;
-    MedicalDetailsAdapter adapter;
     private ClickCallback callback;
+    private String dateValue;
+    private String sName, cName, reason, adDate, hName, acName, acDes;
 
     public MedicalDetailsAdapter(Context context, List<MedicalDetailsBean> list, ClickCallback callback) {
         this.context = context;
@@ -44,6 +47,15 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int position) {
 
+
+        holder.binding.etStudentName.setText(list.get(position).getStudent_name());
+        holder.binding.etClass.setText(list.get(position).getStudent_class());
+        holder.binding.etReason.setText(list.get(position).getReason());
+        holder.binding.etHospital.setText(list.get(position).getHospitalName());
+        holder.binding.etAccName.setText(list.get(position).getName());
+        holder.binding.etAccDes.setText(list.get(position).getDesignation());
+        holder.binding.etAdmittedDate.setText(list.get(position).getAdmittedDate());
+
         if (position == 0)
             holder.binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         else
@@ -60,6 +72,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                 if (holder.binding.etStudentName.getText().toString().trim().isEmpty()) {
                     holder.binding.etStudentName.setError(context.getString(R.string.enter_stu_name));
                     holder.binding.etStudentName.requestFocus();
+
                 } else if (holder.binding.etClass.getText().toString().trim().isEmpty()) {
                     holder.binding.etClass.setError(context.getString(R.string.enter_cls_name));
                     holder.binding.etClass.requestFocus();
@@ -69,21 +82,43 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                 } else if (holder.binding.etHospital.getText().toString().trim().isEmpty()) {
                     holder.binding.etHospital.setError(context.getString(R.string.enter_hos_name));
                     holder.binding.etHospital.requestFocus();
-                } else if (holder.binding.etAdmittedDate.getText().toString().trim().isEmpty()) {
-                    holder.binding.etAdmittedDate.setError("Please enter class name");
-                    holder.binding.etAdmittedDate.requestFocus();
                 } else if (holder.binding.etAccName.getText().toString().trim().isEmpty()) {
-                    holder.binding.etAccName.setError("Please enter Accompanied Name");
+                    holder.binding.etAccName.setError(context.getString(R.string.enter_acc_name));
                     holder.binding.etAccName.requestFocus();
                 } else if (holder.binding.etAccDes.getText().toString().trim().isEmpty()) {
-                    holder.binding.etAccDes.setError("Please enter Accompanied Designation");
+                    holder.binding.etAccDes.setError(context.getString(R.string.enter_acc_des));
                     holder.binding.etAccDes.requestFocus();
+                } else if (!holder.binding.etAdmittedDate.getText().toString().contains("/")) {
+                    holder.binding.etAdmittedDate.setError(context.getString(R.string.enter_adm_date));
+                    holder.binding.etAdmittedDate.requestFocus();
                 } else {
+
+                    sName = holder.binding.etStudentName.getText().toString();
+                    cName = holder.binding.etClass.getText().toString();
+                    reason = holder.binding.etReason.getText().toString();
+                    hName = holder.binding.etHospital.getText().toString();
+                    acName = holder.binding.etAccName.getText().toString();
+                    acDes = holder.binding.etAccDes.getText().toString();
+                    adDate = holder.binding.etAdmittedDate.getText().toString();
+
+                    MedicalDetailsBean medicalDetailsBean = new MedicalDetailsBean(
+                             sName, cName, reason, adDate, hName, acName, acDes,list.get(position).getType());
+                    list.set(position, medicalDetailsBean);
+
+
+
                     if (position < list.size()) {
                         selectedPos = position + 1;
                         callback.onItemClick(position + 1);
                     }
                 }
+            }
+        });
+
+        holder.binding.etAdmittedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                admDatePicker(holder.binding);
             }
         });
 
@@ -134,5 +169,26 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     public int getItemViewType(int position) {
         return position;
     }
+
+
+    private void admDatePicker(AdapterMedicalDetailsBinding binding) {
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        dateValue = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        binding.etAdmittedDate.setText(dateValue);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
 }
+
+
 

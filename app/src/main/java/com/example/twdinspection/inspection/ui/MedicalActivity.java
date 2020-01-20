@@ -182,8 +182,8 @@ public class MedicalActivity extends BaseActivity {
                     othersCount = Integer.valueOf(binding.etOthers.getText().toString());
                 }
 
-
-                if (feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount > 0) {
+                int tot_cnt = feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount;
+                if (tot_cnt > 0) {
 
                     startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class)
                             .putExtra("f_cnt", feverCount)
@@ -192,6 +192,7 @@ public class MedicalActivity extends BaseActivity {
                             .putExtra("h_cnt", headacheCount)
                             .putExtra("m_cnt", malariaCount)
                             .putExtra("o_cnt", othersCount)
+                            .putExtra("tot_cnt", tot_cnt)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else {
                     showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
