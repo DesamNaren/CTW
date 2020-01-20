@@ -30,6 +30,9 @@ public class AppConstants {
     public static final String INST_NAME = "INST_NAME";
     public static final String BEN_DETAIL = "BEN_DETAIL";
     public static final String MAN_NAME = "MAN_NAME";
+    public static String PRESENT = "Present";
+    public static String ABSENT = "Absent";
+    public static String ONDEPUTATION = "On Deputation";
     public static String Yes="YES";
     public static String No="NO";
 
@@ -38,5 +41,5 @@ public class AppConstants {
     public static final int FAILURE_CODE = 201;
 
     public static final String SUCCESS_STRING_CODE = "200";
-    public static final String FAILURE_STRING_CODE = "200";
+    public static final String FAILURE_STRING_CODE = "201";
 }

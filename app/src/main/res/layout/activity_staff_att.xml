@@ -23,6 +23,13 @@
             android:padding="5dp"
             tools:listitem="@layout/item_staff_attendance"/>
 
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No data found"
+            android:id="@+id/emptyTv"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
         <include layout="@layout/buttons_layout"
             android:id="@+id/btn_layout"/>
     </RelativeLayout>
