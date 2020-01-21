@@ -50,6 +50,8 @@
                         android:padding="@dimen/dimen_10dp"
                         android:text="@string/enter_number"
                         android:textColor="@color/black" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -70,6 +72,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_fever"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -108,6 +111,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_cold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -146,6 +150,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_headache"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -191,6 +196,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_diarrhea"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -229,6 +235,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_malaria"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -267,6 +274,7 @@
                             android:padding="@dimen/dimen_10dp">
 
                             <ImageView
+                                android:id="@+id/iv_others"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -623,6 +631,17 @@
                                 android:layout_gravity="center"
                                 android:background="@drawable/btn_background"
                                 android:text="Add"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:visibility="gone" />
+
+                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:id="@+id/btn_medical_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                android:background="@drawable/btn_background1"
+                                android:text="View"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
                                 android:visibility="gone" />

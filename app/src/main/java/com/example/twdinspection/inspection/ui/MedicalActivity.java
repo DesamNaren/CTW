@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,15 +20,18 @@ import com.example.twdinspection.common.custom.CustomFontTextView;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
+import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.MedicalCustomViewModel;
+import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class MedicalActivity extends BaseActivity {
     ActivityMedicalBinding binding;
@@ -37,12 +39,15 @@ public class MedicalActivity extends BaseActivity {
     MedicalInfoEntity medicalInfoEntity;
     String recorderedInRegister, medicalCheckUpDoneByWhom, anmWeeklyUpdated, callHealth100;
     private int slNoCnt = 0;
+    private int tot_cnt;
+    private MedicalDetailsViewModel medicalDetailsViewModel;
+    private int feverCount, coldCount, headacheCount, diarrheaCount, malariaCount, othersCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_medical, getResources().getString(R.string.medical_health));
-
+        medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         medicalViewModel = ViewModelProviders.of(MedicalActivity.this,
                 new MedicalCustomViewModel(binding, this, getApplication())).get(MedicalViewModel.class);
         binding.setViewModel(medicalViewModel);
@@ -161,7 +166,12 @@ public class MedicalActivity extends BaseActivity {
         binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int feverCount=0, coldCount=0, diarrheaCount=0, headacheCount=0,malariaCount=0,othersCount=0;
+                feverCount = 0;
+                coldCount = 0;
+                diarrheaCount = 0;
+                headacheCount = 0;
+                malariaCount = 0;
+                othersCount = 0;
 
                 if (!TextUtils.isEmpty(binding.etFever.getText().toString())) {
                     feverCount = Integer.valueOf(binding.etFever.getText().toString());
@@ -182,8 +192,9 @@ public class MedicalActivity extends BaseActivity {
                     othersCount = Integer.valueOf(binding.etOthers.getText().toString());
                 }
 
-                int tot_cnt = feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount;
+                tot_cnt = feverCount + coldCount + diarrheaCount + headacheCount + malariaCount + othersCount;
                 if (tot_cnt > 0) {
+
 
                     startActivity(new Intent(MedicalActivity.this, MedicalDetailsActivity.class)
                             .putExtra("f_cnt", feverCount)
@@ -194,7 +205,7 @@ public class MedicalActivity extends BaseActivity {
                             .putExtra("o_cnt", othersCount)
                             .putExtra("tot_cnt", tot_cnt)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                }else {
+                } else {
                     showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
                 }
             }
@@ -204,6 +215,12 @@ public class MedicalActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 viewCallData();
+            }
+        });
+        binding.btnMedicalView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewMedicalData();
             }
         });
 
@@ -226,6 +243,12 @@ public class MedicalActivity extends BaseActivity {
         startActivity(new Intent(this, CallHealthActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
+
+    private void viewMedicalData() {
+        startActivity(new Intent(this, ViewMedicalActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+
 
     public void showCallHeathDetails() {
         View view = getLayoutInflater().inflate(R.layout.call_health_bottom_sheet, null);
@@ -352,5 +375,72 @@ public class MedicalActivity extends BaseActivity {
         datePickerDialog.show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        medicalDetailsViewModel.getMedicalDetails().observe(this, new Observer<List<MedicalDetailsBean>>() {
+            @Override
+            public void onChanged(List<MedicalDetailsBean> medicalDetailsBeans) {
+                if (medicalDetailsBeans != null && medicalDetailsBeans.size() > 0 && tot_cnt > 0) {
+                    int fCnt = 0, cCnt = 0, hCnt = 0, dCnt = 0, mCnt = 0, oCnt = 0;
 
+                    for (int z = 0; z < medicalDetailsBeans.size(); z++) {
+                        if (medicalDetailsBeans.get(z).getType().equals("1")) {
+                            fCnt++;
+                        } else if (medicalDetailsBeans.get(z).getType().equals("2")) {
+                            cCnt++;
+                        } else if (medicalDetailsBeans.get(z).getType().equals("3")) {
+                            hCnt++;
+                        } else if (medicalDetailsBeans.get(z).getType().equals("4")) {
+                            dCnt++;
+                        } else if (medicalDetailsBeans.get(z).getType().equals("5")) {
+                            mCnt++;
+                        } else if (medicalDetailsBeans.get(z).getType().equals("6")) {
+                            oCnt++;
+                        }
+                    }
+
+                    if (feverCount > 0 && feverCount == fCnt) {
+                        binding.ivFever.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etFever.setEnabled(false);
+                    }
+                    if (coldCount > 0 && coldCount == cCnt) {
+                        binding.ivCold.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etCold.setEnabled(false);
+                    }
+
+
+                    if (headacheCount > 0 && headacheCount == hCnt) {
+                        binding.ivHeadache.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etHeadache.setEnabled(false);
+                    }
+                    if (diarrheaCount > 0 && diarrheaCount == dCnt) {
+                        binding.ivDiarrhea.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etDiarrhea.setEnabled(false);
+                    }
+
+
+                    if (malariaCount > 0 && malariaCount == mCnt) {
+                        binding.ivMalaria.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etMalaria.setEnabled(false);
+                    }
+                    if (othersCount > 0 && othersCount == oCnt) {
+                        binding.ivOthers.setBackground(getResources().getDrawable(R.drawable.medical_disable));
+                        binding.etOthers.setEnabled(false);
+                    }
+
+                    if(tot_cnt>0 && tot_cnt==medicalDetailsBeans.size()){
+                        binding.btnMedicalView.setVisibility(View.VISIBLE);
+                    }
+
+
+                }
+
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 }

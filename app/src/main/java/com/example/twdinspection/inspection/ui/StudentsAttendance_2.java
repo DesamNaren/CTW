@@ -350,6 +350,9 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
             showSnackBar(getString(R.string.failed));
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 
 }

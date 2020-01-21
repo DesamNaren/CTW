@@ -1,6 +1,15 @@
 package com.example.twdinspection.inspection.source;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import afu.org.checkerframework.checker.igj.qual.I;
+
+@Entity
 public class MedicalDetailsBean {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String student_name;
     private String student_class;
     private String reason;
@@ -9,8 +18,26 @@ public class MedicalDetailsBean {
     private String name;
     private String designation;
     private String type;
+    @Ignore
+    private boolean is_expand;
+
+    public boolean isIs_expand() {
+        return is_expand;
+    }
+
+    public void setIs_expand(boolean is_expand) {
+        this.is_expand = is_expand;
+    }
 
     public MedicalDetailsBean() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public MedicalDetailsBean(String student_name, String student_class, String reason, String admittedDate, String hospitalName, String name, String designation, String type) {

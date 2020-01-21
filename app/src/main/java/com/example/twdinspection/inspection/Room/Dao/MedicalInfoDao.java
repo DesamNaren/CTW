@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -31,4 +32,14 @@ public interface MedicalInfoDao {
 
     @Query("SELECT * from CallHealthInfoEntity")
     LiveData<List<CallHealthInfoEntity>> getCallListLiveData();
+
+
+    @Query("SELECT * from MedicalDetailsBean")
+    LiveData<List<MedicalDetailsBean>> getMedicalListLiveData();
+
+    @Query("DELETE FROM MedicalDetailsBean")
+    void deleteMedicalInfo();
+
+    @Insert()
+    void insertMedicalDetailsInfo(List<MedicalDetailsBean> medicalDetailsBeans);
 }

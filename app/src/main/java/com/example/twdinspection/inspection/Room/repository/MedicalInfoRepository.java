@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -24,24 +25,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MedicalInfoRepository {
 
-    public MedicalInfoDao medicalInfoDao;
+    private MedicalInfoDao medicalInfoDao;
     private String tag=MedicalInfoRepository.class.getSimpleName();
-    // Note that in order to unit test the WordRepository, you have to remove the Application
-    // dependency. This adds complexity and much more code, and this sample is not about testing.
-    // See the BasicSample in the android-architecture-components repository at
-    // https://github.com/googlesamples
+
     public MedicalInfoRepository(Context application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         medicalInfoDao = db.medicalInfoDao();
-
     }
-
 
     long x;
 
     public long insertMedicalInfo(MedicalInfoEntity medicalIssuesEntity) {
-
-
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
@@ -175,4 +169,46 @@ public class MedicalInfoRepository {
     public LiveData<List<CallHealthInfoEntity>> getCallListLiveData() {
         return medicalInfoDao.getCallListLiveData();
     }
+
+    public LiveData<List<MedicalDetailsBean>> getMedicalListLiveData() {
+        return medicalInfoDao.getMedicalListLiveData();
+    }
+
+    public void insertMedicalDetailsInfo(List<MedicalDetailsBean> medicalDetailsBeans) {
+
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                medicalInfoDao.deleteMedicalInfo();
+                medicalInfoDao.insertMedicalDetailsInfo(medicalDetailsBeans);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag+"onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
+
 }

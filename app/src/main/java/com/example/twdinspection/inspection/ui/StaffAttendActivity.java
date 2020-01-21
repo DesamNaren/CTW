@@ -179,4 +179,9 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
 //
 //        });
 //    }
+
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 }

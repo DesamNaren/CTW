@@ -311,4 +311,9 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.failed));
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 }

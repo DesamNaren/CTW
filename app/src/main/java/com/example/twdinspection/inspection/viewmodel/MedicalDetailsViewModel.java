@@ -1,25 +1,34 @@
 package com.example.twdinspection.inspection.viewmodel;
 
-import android.content.Context;
+import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
-import com.example.twdinspection.inspection.source.StudentsAttendanceBean;
+import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
+import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 
 import java.util.List;
 
-public class MedicalDetailsViewModel extends ViewModel {
+public class MedicalDetailsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<StudentsAttendanceBean>> studentAttndLiveData;
-    private Context context;
-    private ActivityStudentsAttendanceBinding binding;
+    private MutableLiveData<List<MedicalDetailsBean>> medicalMutableLiveData;
+    private MedicalInfoRepository mRepository;
 
-    public MedicalDetailsViewModel(ActivityStudentsAttendanceBinding binding, Context context) {
-        this.binding = binding;
-        this.context = context;
+    public MedicalDetailsViewModel(@NonNull Application application) {
+        super(application);
+        medicalMutableLiveData = new MutableLiveData<>();
+        mRepository= new MedicalInfoRepository(application);
+    }
 
+    public LiveData<List<MedicalDetailsBean>> getMedicalDetails() {
+        return mRepository.getMedicalListLiveData();
+    }
+
+    public void insertMedicalDetailsInfo(List<MedicalDetailsBean> medicalDetailsBeans) {
+        mRepository.insertMedicalDetailsInfo(medicalDetailsBeans);
     }
 
 }
