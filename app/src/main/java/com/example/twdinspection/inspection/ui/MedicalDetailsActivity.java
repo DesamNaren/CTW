@@ -1,11 +1,13 @@
 package com.example.twdinspection.inspection.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,12 +30,13 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
     List<MedicalDetailsBean> list;
     List<MedicalDetailsBean> totalList;
     private int issueType = 1, selectedType = 0;
-    private int f_cnt, c_cnt, h_cnt, d_cnt, m_cnt, o_cnt;
+    private int f_cnt, c_cnt, h_cnt, d_cnt, m_cnt, o_cnt, tot_cnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         totalList = new ArrayList<>();
+        list = new ArrayList<>();
         binding = putContentView(R.layout.activity_medial_details, getResources().getString(R.string.medical_health));
 
         binding.feverLayout.setOnClickListener(this);
@@ -50,6 +53,7 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
             d_cnt = getIntent().getIntExtra("d_cnt", 0);
             m_cnt = getIntent().getIntExtra("m_cnt", 0);
             o_cnt = getIntent().getIntExtra("o_cnt", 0);
+            tot_cnt = getIntent().getIntExtra("tot_cnt", 0);
 
             binding.etFever.setText(getString(R.string.fever) + " -" + f_cnt);
             binding.etCold.setText(getString(R.string.cold_amp_cough) + " -" + c_cnt);
@@ -78,6 +82,8 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
                 issueType = 6;
                 changeLayoutColor(binding.others, binding.ivOthers, R.drawable.others_selected, binding.etOthers, R.string.others, o_cnt);
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +95,7 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
 
         switch (view.getId()) {
             case R.id.fever_layout:
+
                 issueType = 1;
                 changeLayoutColor(view, binding.ivFever, R.drawable.fever_selected, binding.etFever, R.string.fever, f_cnt);
                 break;
@@ -116,7 +123,6 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void changeLayoutColor(View view, ImageView imageView, int drawable, CustomFontTextView textView, int type, int typeCount) {
-
 
         binding.feverLayout.setBackgroundColor(getResources().getColor(R.color.white));
         binding.coldLayout.setBackgroundColor(getResources().getColor(R.color.white));
@@ -157,34 +163,51 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
         binding.tvType.setText(getResources().getString(type));
 
         if (issueType != selectedType) {
-
             selectedType = issueType;
-
-            list = new ArrayList<>();
             if (typeCount > 0) {
-                binding.recyclerView.setVisibility(View.VISIBLE);
-                binding.tvEmpty.setVisibility(View.GONE);
-
-                for (int i = 0; i < typeCount; i++) {
-                    MedicalDetailsBean bean = new MedicalDetailsBean();
-                    list.add(bean);
-                }
-                adapter = new MedicalDetailsAdapter(MedicalDetailsActivity.this, list, this);
-                binding.recyclerView.setLayoutManager(new LinearLayoutManager(MedicalDetailsActivity.this, RecyclerView.HORIZONTAL, false));
-                binding.recyclerView.setAdapter(adapter);
-
-                binding.recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
-                    @Override
-                    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                        // Stop only scrolling.
-                        return rv.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING;
+                boolean flag = false;
+                if (totalList.size() > 0) {
+                    list = new ArrayList<>();
+                    for (int x = 0; x < totalList.size(); x++) {
+                        if (totalList.get(x).getType().equals(String.valueOf(issueType))) {
+                            list.add(totalList.get(x));
+                            flag = true;
+                        }
                     }
-                });
+                }
+                binding.tvEmpty.setVisibility(View.GONE);
+                binding.recyclerView.setVisibility(View.VISIBLE);
+
+                if (flag) {
+                    adapter = new MedicalDetailsAdapter(MedicalDetailsActivity.this, list, this);
+                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(MedicalDetailsActivity.this, RecyclerView.HORIZONTAL, false));
+                    binding.recyclerView.setAdapter(adapter);
+                } else {
+                    list = new ArrayList<>();
+                    for (int i = 0; i < typeCount; i++) {
+                        MedicalDetailsBean bean = new MedicalDetailsBean();
+                        bean.setType(String.valueOf(issueType));
+                        list.add(bean);
+                    }
+                    adapter = new MedicalDetailsAdapter(MedicalDetailsActivity.this, list, this);
+                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(MedicalDetailsActivity.this, RecyclerView.HORIZONTAL, false));
+                    binding.recyclerView.setAdapter(adapter);
+
+                    binding.recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+                        @Override
+                        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                            // Stop only scrolling.
+                            return rv.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING;
+                        }
+                    });
+                }
             } else {
                 binding.tvEmpty.setVisibility(View.VISIBLE);
+                binding.tvEmpty.setText(getString(R.string.no_records_found));
                 binding.recyclerView.setVisibility(View.GONE);
             }
         }
+
     }
 
 
@@ -205,10 +228,31 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
 //                 Start the animation like this
             binding.recyclerView.setAnimation(animSlide);
         } else {
+
+
+            if (totalList.size() > 0) {
+                for (int x = totalList.size()-1; x>=0; x--) {
+                    if (totalList.get(x).getType().equals(String.valueOf(issueType))) {
+                        totalList.remove(totalList.get(x));
+                    }
+                }
+            }
+
             binding.recyclerView.setVisibility(View.GONE);
             binding.tvEmpty.setVisibility(View.VISIBLE);
-            binding.tvEmpty.setText(getString(R.string.completed));
+            binding.tvEmpty.setText("Records submitted");
+
             totalList.addAll(list);
+            Log.i("SSSS", "onItemClick: "+totalList.size()+totalList.get(0).getStudent_name());
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (tot_cnt != totalList.size()) {
+            Toast.makeText(this, "Submit all", Toast.LENGTH_SHORT).show();
+        } else {
+            super.onBackPressed();
         }
     }
 }

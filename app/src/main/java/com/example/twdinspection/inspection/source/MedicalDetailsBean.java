@@ -8,11 +8,12 @@ public class MedicalDetailsBean {
     private String hospitalName;
     private String name;
     private String designation;
+    private String type;
 
     public MedicalDetailsBean() {
     }
 
-    public MedicalDetailsBean(String student_name, String student_class, String reason, String admittedDate, String hospitalName, String name, String designation) {
+    public MedicalDetailsBean(String student_name, String student_class, String reason, String admittedDate, String hospitalName, String name, String designation, String type) {
         this.student_name = student_name;
         this.student_class = student_class;
         this.reason = reason;
@@ -20,33 +21,70 @@ public class MedicalDetailsBean {
         this.hospitalName = hospitalName;
         this.name = name;
         this.designation = designation;
+        this.type = type;
     }
 
     public String getStudent_name() {
         return student_name;
     }
 
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
     public String getStudent_class() {
         return student_class;
+    }
+
+    public void setStudent_class(String student_class) {
+        this.student_class = student_class;
     }
 
     public String getReason() {
         return reason;
     }
 
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     public String getAdmittedDate() {
         return admittedDate;
+    }
+
+    public void setAdmittedDate(String admittedDate) {
+        this.admittedDate = admittedDate;
     }
 
     public String getHospitalName() {
         return hospitalName;
     }
 
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDesignation() {
         return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
