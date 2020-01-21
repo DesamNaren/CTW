@@ -437,4 +437,5 @@
     <string name="enter_adm_date">Please enter admitted date</string>
     <string name="infra_mai">Infrastructure &amp; Maintenance</string>
     <string name="rec_su">Records submitted</string>
+    <string name="diet_issues">Diet Issues</string>
 </resources>

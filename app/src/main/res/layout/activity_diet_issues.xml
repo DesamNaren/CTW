@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -12,10 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <include
-            android:id="@+id/header"
-            layout="@layout/header_layout" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,7 +27,16 @@
                 android:elevation="@dimen/dimen_10dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/btn_layout"
+                    android:layout_below="@+id/header"
+                    android:padding="@dimen/dimen_5dp"
+                    tools:listitem="@layout/adapter_diet_issues" />
+
+              <!--  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -265,7 +270,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"

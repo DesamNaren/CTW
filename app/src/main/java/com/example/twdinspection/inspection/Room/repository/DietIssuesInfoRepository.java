@@ -3,9 +3,17 @@ package com.example.twdinspection.inspection.Room.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.twdinspection.inspection.Room.Dao.DietIssuesInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.DiestIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+
+import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -29,6 +37,13 @@ public class DietIssuesInfoRepository {
 
     }
 
+    public LiveData<MasterInstituteInfo> getMasterDietList(String inst_id) {
+        return dietIssuesInfoDao.getMasterDietList(inst_id);
+    }
+
+    public  LiveData<List<DietListEntity>> getDietList(String inst_id) {
+        return dietIssuesInfoDao.getDietList(inst_id);
+    }
 
     long x;
 
@@ -74,4 +89,51 @@ public class DietIssuesInfoRepository {
                 .subscribe(observer);
         return x;
     }
+
+    public void insertDietInfo(List<DietListEntity> dietListEntities) {
+
+        Observable.fromCallable(new Callable<List<DietListEntity>>() {
+            @Override
+            public List<DietListEntity> call() throws Exception {
+                dietIssuesInfoDao.deleteDietInfo();
+                dietIssuesInfoDao.insertDietInfo(dietListEntities);
+                return null;
+            }
+        });
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                dietIssuesInfoDao.deleteDietInfo();
+                dietIssuesInfoDao.insertDietInfo(dietListEntities);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
+
 }
