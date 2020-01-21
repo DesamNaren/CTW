@@ -20,14 +20,11 @@
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_stu_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/no_records_found"
-            android:layout_marginTop="@dimen/dimen_5dp" />
+            android:layout_height="wrap_content" />
 
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_class"
             android:layout_width="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5dp" />
 
@@ -35,21 +32,18 @@
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_reason"
             android:layout_width="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5dp" />
 
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_hname"
             android:layout_width="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5dp" />
 
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_aName"
             android:layout_width="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5dp" />
 
@@ -57,13 +51,11 @@
             android:id="@+id/tv_aDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_marginTop="@dimen/dimen_5dp" />
 
         <com.example.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
-            android:text="@string/no_records_found"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5dp" />
     </LinearLayout>

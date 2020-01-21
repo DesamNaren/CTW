@@ -55,7 +55,6 @@
 
             <LinearLayout
                 android:id="@+id/show_ll"
-                android:visibility="gone"
                 android:layout_below="@+id/header"
                 android:orientation="vertical"
                 android:layout_width="match_parent"

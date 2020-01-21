@@ -29,8 +29,6 @@ public class MedicalDetailsBean {
         this.is_expand = is_expand;
     }
 
-    public MedicalDetailsBean() {
-    }
 
     public int getId() {
         return id;
@@ -49,6 +47,9 @@ public class MedicalDetailsBean {
         this.name = name;
         this.designation = designation;
         this.type = type;
+    }
+
+    public MedicalDetailsBean() {
     }
 
     public String getStudent_name() {
