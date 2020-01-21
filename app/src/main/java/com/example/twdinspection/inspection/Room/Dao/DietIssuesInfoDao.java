@@ -21,13 +21,13 @@ public interface DietIssuesInfoDao {
     @Query("SELECT * from MasterInstituteInfo where instId LIKE :inst_id")
     LiveData<MasterInstituteInfo> getMasterDietList(String inst_id);
 
-    @Query("SELECT * from DietIssuesInfo where institute_id LIKE :inst_id")
+   /* @Query("SELECT * from DietIssuesInfo where institute_id LIKE :inst_id")
     LiveData<List<DietListEntity>> getDietList(String inst_id);
 
     @Query("UPDATE DietIssuesInfo SET dietList = NULL")
-    void deleteDietInfo();
+    void deleteDietInfo();*/
 
-    @Insert
-    void insertDietInfo(List<DietListEntity> dietListEntities);
+    /*@Insert
+    void insertDietInfo(List<DietListEntity> dietListEntities);*/
 
 }

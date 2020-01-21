@@ -31,7 +31,7 @@ public class DietIsuuesViewModel extends ViewModel {
         return classIdsList;
     }
 
-    public LiveData<List<DietListEntity>> getDietInfo(String inst_id) {
+   /* public LiveData<List<DietListEntity>> getDietInfo(String inst_id) {
         LiveData<List<DietListEntity>> classIdsList = mRepository.getDietList(inst_id);
         return classIdsList;
     }
@@ -39,7 +39,7 @@ public class DietIsuuesViewModel extends ViewModel {
     public void insertDietInfo(List<DietListEntity> dietListEntities) {
         mRepository.insertDietInfo(dietListEntities);
     }
-
+*/
 
     public long insertDietIssuesInfo(DietIssuesEntity dietIssuesEntity) {
        long flag=mRepository.insertDietIssuesInfo(dietIssuesEntity);

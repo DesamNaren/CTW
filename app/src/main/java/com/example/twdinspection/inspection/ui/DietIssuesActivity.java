@@ -1,46 +1,30 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
-import com.example.twdinspection.inspection.adapter.DietIssuesAdapter;
-import com.example.twdinspection.inspection.adapter.StudentsAttAdapter;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.DiestIssues.DietListEntity;
-import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
-import com.example.twdinspection.inspection.source.inst_master.MasterDietInfo;
-import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 
-import java.util.List;
-
-public class DietIssuesActivity extends  BaseActivity implements SaveListener {
+public class DietIssuesActivity extends BaseActivity implements SaveListener {
 
     ActivityDietIssuesBinding binding;
     DietIsuuesViewModel dietIsuuesViewModel;
-    DietIssuesEntity dietIssuesEntity;
+    //    DietIssuesEntity dietIssuesEntity;
     SharedPreferences sharedPreferences;
     private String officerID, instID, insTime;
-    List<DietListEntity> dietInfoEntityListMain;
-    DietIssuesAdapter adapter;
-    MasterInstituteInfo masterInstituteInfos;
+    //    List<DietListEntity> dietInfoEntityListMain;
+//    DietIssuesAdapter adapter;
+//    MasterInstituteInfo masterInstituteInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +36,15 @@ public class DietIssuesActivity extends  BaseActivity implements SaveListener {
         binding.setViewModel(dietIsuuesViewModel);
 
         try {
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
-        instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            instID = sharedPreferences.getString(AppConstants.INST_ID, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        dietIsuuesViewModel.getDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(DietIssuesActivity.this, new Observer<List<DietListEntity>>() {
+     /*   dietIsuuesViewModel.getDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(DietIssuesActivity.this, new Observer<List<DietListEntity>>() {
             @Override
             public void onChanged(List<DietListEntity> dietIssuesEntities) {
                 if (dietIssuesEntities != null && dietIssuesEntities.size() > 0) {
@@ -98,7 +82,7 @@ public class DietIssuesActivity extends  BaseActivity implements SaveListener {
 
             }
         });
-
+*/
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

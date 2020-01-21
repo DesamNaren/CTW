@@ -41,9 +41,9 @@ public class DietIssuesInfoRepository {
         return dietIssuesInfoDao.getMasterDietList(inst_id);
     }
 
-    public  LiveData<List<DietListEntity>> getDietList(String inst_id) {
+  /*  public  LiveData<List<DietListEntity>> getDietList(String inst_id) {
         return dietIssuesInfoDao.getDietList(inst_id);
-    }
+    }*/
 
     long x;
 
@@ -90,6 +90,7 @@ public class DietIssuesInfoRepository {
         return x;
     }
 
+/*
     public void insertDietInfo(List<DietListEntity> dietListEntities) {
 
         Observable.fromCallable(new Callable<List<DietListEntity>>() {
@@ -135,5 +136,6 @@ public class DietIssuesInfoRepository {
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
     }
+*/
 
 }

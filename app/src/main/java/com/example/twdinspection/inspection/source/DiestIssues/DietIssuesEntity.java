@@ -13,8 +13,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-@TypeConverters({DietInfoConverter.class})
-@Entity(tableName = "DietIssuesInfo")
+@Entity
 public class DietIssuesEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -30,8 +29,8 @@ public class DietIssuesEntity {
     @ColumnInfo()
     private String institute_id;
 
-    @ColumnInfo()
-    private List<DietListEntity> dietList;
+  /*  @ColumnInfo()
+    private List<DietListEntity> dietList;*/
 
     public int getId() {
         return id;
@@ -65,11 +64,11 @@ public class DietIssuesEntity {
         this.institute_id = institute_id;
     }
 
-    public List<DietListEntity> getDietList() {
+   /* public List<DietListEntity> getDietList() {
         return dietList;
     }
 
     public void setDietList(List<DietListEntity> dietList) {
         this.dietList = dietList;
-    }
+    }*/
 }
