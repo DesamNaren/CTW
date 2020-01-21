@@ -82,8 +82,8 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
                 if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
-
-                    adapter = new StudentsAttAdapter(StudentsAttendance_2.this, studAttendInfoEntityList);
+                    studAttendInfoEntityListMain=studAttendInfoEntityList;
+                    adapter = new StudentsAttAdapter(StudentsAttendance_2.this, studAttendInfoEntityListMain);
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendance_2.this));
                     binding.recyclerView.setAdapter(adapter);
                 } else {
@@ -300,7 +300,6 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
                         long x = studentsAttndViewModel.updateClassInfo(studAttendInfoEntity);
                         //Toast.makeText(StudentsAttendance_2.this, "Updated " + x, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        Utils.customAlert(StudentsAttendance_2.this, "Data submitted successfully", AppConstants.SUCCESS, false);
                     }
 
 

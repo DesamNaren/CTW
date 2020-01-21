@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.ClassInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.CocurricularDao;
 import com.example.twdinspection.inspection.Room.Dao.DietIssuesInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.DistrictDao;
 import com.example.twdinspection.inspection.Room.Dao.EntitlementsInfoDao;
@@ -22,6 +23,7 @@ import com.example.twdinspection.inspection.Room.Dao.MenuSectionsDao;
 import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
 import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
@@ -29,6 +31,7 @@ import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommen
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -49,12 +52,16 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
         InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class
-        , InstMenuInfoEntity.class}, version = 1, exportSchema = false)
+        , InstMenuInfoEntity.class, StudAchievementEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
 
+    public abstract StudAchDao studAchDao();
+
     public abstract ClassInfoDao classInfoDao();
+
+    public abstract CocurricularDao cocurricularDao();
 
     public abstract MedicalInfoDao medicalInfoDao();
 

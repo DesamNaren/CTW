@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.CocurricularViewModel" />
+
+    </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/root"
         android:orientation="vertical">
 
         <include
@@ -233,11 +241,12 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="4"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Achievement of the student during the year 2019- 2020"
                                 android:textColor="@color/black" />
@@ -246,17 +255,35 @@
                                 android:id="@+id/rv_cocur"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp"/>
-                            <com.example.twdinspection.common.custom.CustomFontButtonView
-                                android:visibility="gone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/dimen_30dp"
-                                android:id="@+id/btn_addStud"
-                                android:text="Add"
-                                android:layout_gravity="center"
-                                android:background="@drawable/btn_background"
-                                android:textColor="@color/white"
-                                android:textAllCaps="false"/>
+                                android:padding="5dp"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_addStud"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/btn_background"
+                                    android:text="Add"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white" />
+
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_viewStud"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/btn_background"
+                                    android:text="View"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>

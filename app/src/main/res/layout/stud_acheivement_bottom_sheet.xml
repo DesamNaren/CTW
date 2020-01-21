@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_cl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_entries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_100dp"
+        android:visibility="visible"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/list_blue"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_8dp"
+            android:paddingRight="@dimen/dimen_8dp">
+
+            <ImageView
+                android:id="@+id/ic_close"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:src="@drawable/ic_cancel"
+                android:tint="@color/white" />
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_toEndOf="@+id/ic_close"
+                android:layout_toRightOf="@+id/ic_close"
+                android:padding="@dimen/dimen_5dp"
+                android:text="Achievement of student"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:src="@drawable/save" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:text="@string/sl_no"
+                android:textSize="@dimen/dimen_15dp" />
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/tv_slCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:textSize="@dimen/dimen_15dp" />
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp">
+
+
+            <com.example.twdinspection.common.custom.CustomFontEditText
+                android:id="@+id/et_studName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_stu_name"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:imeOptions="actionNext">
+
+
+            <com.example.twdinspection.common.custom.CustomFontEditText
+                android:id="@+id/et_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_student_class"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:imeOptions="actionNext">
+
+
+            <com.example.twdinspection.common.custom.CustomFontEditText
+                android:id="@+id/et_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/winning_place_location"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:imeOptions="actionNext">
+
+
+            <com.example.twdinspection.common.custom.CustomFontEditText
+                android:id="@+id/et_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/level"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:imeOptions="actionNext">
+
+
+            <com.example.twdinspection.common.custom.CustomFontEditText
+                android:id="@+id/et_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/event"
+                android:singleLine="true"
+                android:textSize="@dimen/dimen_15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <RadioGroup
+            android:id="@+id/rg_participated"
+            android:layout_margin="@dimen/dimen_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rb_participatedYes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_5dp"
+                android:text="Participated" />
+
+            <RadioButton
+                android:id="@+id/rb_participatedNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_5dp"
+                android:text="Won" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

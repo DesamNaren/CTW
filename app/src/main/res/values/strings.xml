@@ -428,5 +428,8 @@
     <string name="enter_suffering_count">Enter number of suffering students</string>
     <string name="enter_cls_name">Enter class name</string>
     <string name="enter_hos_name">Enter hospital name</string>
-
+    <string name="enter_student_class">Enter student class</string>
+    <string name="winning_place_location">Winning place location</string>
+    <string name="event">Event</string>
+    <string name="level">Level</string>
 </resources>

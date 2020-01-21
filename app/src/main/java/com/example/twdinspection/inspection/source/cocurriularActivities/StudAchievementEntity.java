@@ -2,21 +2,26 @@ package com.example.twdinspection.inspection.source.cocurriularActivities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
-public class CocurricularStudListEntity {
+public class StudAchievementEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo()
+    private int id;
 
     @ColumnInfo()
     private String officer_id;
+
+    @ColumnInfo()
+    private int sl_no;
 
     @ColumnInfo()
     private String inspection_time;
 
     @ColumnInfo()
     private String institute_id;
-
-    @ColumnInfo()
-    private String id;
 
     @ColumnInfo()
     private String name;
@@ -32,7 +37,27 @@ public class CocurricularStudListEntity {
 
 
     @ColumnInfo()
+    private String win_location;
+
+
+    @ColumnInfo()
     private String participated_win;
+
+    public int getSl_no() {
+        return sl_no;
+    }
+
+    public void setSl_no(int sl_no) {
+        this.sl_no = sl_no;
+    }
+
+    public String getWin_location() {
+        return win_location;
+    }
+
+    public void setWin_location(String win_location) {
+        this.win_location = win_location;
+    }
 
     public String getOfficer_id() {
         return officer_id;
@@ -58,11 +83,11 @@ public class CocurricularStudListEntity {
         this.institute_id = institute_id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

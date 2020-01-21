@@ -6,65 +6,102 @@
 
         <variable
             name="cocurricularStud"
-            type="com.example.twdinspection.inspection.source.cocurriularActivities.CocurricularStudListEntity" />
+            type="com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity"/>
 
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cv_profile"
         android:layout_margin="@dimen/dimen_5dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp">
+        android:elevation="@dimen/dimen_5dp">
 
         <LinearLayout
-            android:id="@+id/ll_class_header"
+            android:id="@+id/ll_entries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_behavior="@string/bottom_sheet_behavior">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/class_header"
-                android:orientation="horizontal"
-                android:padding="@dimen/dimen_5dp">
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_completed"
+                <com.example.twdinspection.common.custom.CustomFontTextView
+                    android:id="@+id/tvSlNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:background="@drawable/check"
-                    android:visibility="gone" />
+                    android:padding="5dp"
+                    android:text="1"
+                    android:textSize="@dimen/dimen_15dp" />
 
-                <TextView
-                    android:id="@+id/tv_class"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Class"
-                    android:textSize="@dimen/dimen_20dp" />
+                    android:layout_toRightOf="@id/tvSlNo"
+                    android:orientation="vertical">
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/user_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.name}"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:drawableLeft="@drawable/user_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.studclass}"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:drawableLeft="@drawable/location_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.win_location}"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:drawableLeft="@drawable/level_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.level}"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:drawableLeft="@drawable/event_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.event}"
+                        android:textSize="@dimen/dimen_15dp" />
 
 
-                <TextView
-                    android:id="@+id/tv_expand"
-                    android:layout_width="@dimen/dimen_20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dimen_5dp"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginTop="@dimen/dimen_5dp"
-                    android:layout_marginEnd="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
-                    android:layout_marginBottom="@dimen/dimen_5dp"
-                    android:backgroundTint="@color/light_gray"
-                    android:background="@drawable/ic_edit"
-                    android:gravity="center_vertical" />
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:drawableLeft="@drawable/won_16"
+                        android:drawablePadding="@dimen/dimen_5dp"
+                        android:text="@={cocurricularStud.participated_win}"
+                        android:textSize="@dimen/dimen_15dp" />
+                </LinearLayout>
             </RelativeLayout>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

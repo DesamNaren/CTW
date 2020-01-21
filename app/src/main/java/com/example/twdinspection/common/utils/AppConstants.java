@@ -30,6 +30,8 @@ public class AppConstants {
     public static final String INST_NAME = "INST_NAME";
     public static final String BEN_DETAIL = "BEN_DETAIL";
     public static final String MAN_NAME = "MAN_NAME";
+    public static final String PARTICIPATED = "Participated";
+    public static final String WIN = "Win";
     public static String PRESENT = "Present";
     public static String ABSENT = "Absent";
     public static String ONDEPUTATION = "On Deputation";
