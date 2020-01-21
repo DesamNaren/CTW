@@ -36,4 +36,50 @@ public class StudAchievementsRepository {
     public LiveData<List<StudAchievementEntity>> getCallListLiveData() {
             return studAchDao.getStudAchievements();
     }
+    long x;
+
+    public long deleteAchievementsInfo(StudAchievementEntity studAchievementEntity) {
+
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                studAchDao.deleteAchievementsInfo(studAchievementEntity);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag+"onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag+"onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag+"onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag+"onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
+
+
 }

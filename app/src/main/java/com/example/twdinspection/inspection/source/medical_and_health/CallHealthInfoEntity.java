@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.source.medical_and_health;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -8,6 +9,7 @@ public class CallHealthInfoEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;
     private String officer_id;
+    @Ignore
     private int slNo;
     private String stu_name;
     private String disease;

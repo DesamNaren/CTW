@@ -15,6 +15,7 @@ import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
 import com.example.twdinspection.databinding.CallHealthRowBinding;
 import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
 import com.example.twdinspection.inspection.interfaces.MedicalInterface;
+import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 
@@ -22,15 +23,16 @@ import java.util.List;
 
 public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievementsAdapter.ItemHolder>{
     private Context context;
+    private StudAchievementsInterface studAchievementsInterface;
     private List<StudAchievementEntity> studAchievementEntities;
     public StudAchievementsAdapter(Context context, List<StudAchievementEntity> studAchievementEntities) {
         this.context = context;
         this.studAchievementEntities = studAchievementEntities;
-//        try {
-//            medicalInterface=(MedicalInterface)context;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        try {
+            studAchievementsInterface=(StudAchievementsInterface) context;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @NonNull
@@ -48,12 +50,13 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
         final StudAchievementEntity dataModel = studAchievementEntities.get(i);
         holder.listItemBinding.setCocurricularStud(dataModel);
 
-//        holder.listItemBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                medicalInterface.deleteCallRecord(dataModel);
-//            }
-//        });
+        holder.listItemBinding.tvSlNo.setText(String.valueOf(i+1));
+        holder.listItemBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                studAchievementsInterface.deleteAchievementRecord(dataModel);
+            }
+        });
 
 
         holder.bind(dataModel);

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
 import com.example.twdinspection.inspection.Room.repository.StudAchievementsRepository;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public class StudAchViewModel extends ViewModel {
             studAchievementsLiveData = mRepository.getCallListLiveData();
         }
         return studAchievementsLiveData;
+    }
+
+    public long deleteAchievementsInfo(StudAchievementEntity studAchievementEntity) {
+        return mRepository.deleteAchievementsInfo(studAchievementEntity);
     }
 }

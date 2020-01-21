@@ -3,6 +3,8 @@ package com.example.twdinspection.inspection.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
@@ -33,7 +35,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 
-public class CoCurricularActivity extends AppCompatActivity {
+public class CoCurricularActivity extends BaseActivity {
 
     ActivityCoCurricularBinding binding;
     int slNoCnt = 0;
@@ -42,16 +44,15 @@ public class CoCurricularActivity extends AppCompatActivity {
     CoordinatorLayout rootLayout;
     SharedPreferences sharedPreferences;
     String instId, officerId;
+    BottomSheetDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_co_curricular);
+        binding = putContentView(R.layout.activity_co_curricular," Co Circulator & Extra Curricular Activities");
         cocurricularViewModel = ViewModelProviders.of(CoCurricularActivity.this,
                 new CocurricularCustomViewModel(binding, this, getApplication())).get(CocurricularViewModel.class);
         binding.setViewModel(cocurricularViewModel);
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText(" Co Circulator & Extra Curricular Activities");
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -77,7 +78,14 @@ public class CoCurricularActivity extends AppCompatActivity {
                 startActivity(new Intent(CoCurricularActivity.this, CocurricularStudAchActivity.class));
             }
         });
-        binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
+        binding.btnViewStud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CoCurricularActivity.this, CocurricularStudAchActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+        binding.btnAddplant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -176,25 +184,32 @@ public class CoCurricularActivity extends AppCompatActivity {
                 showStudAcheivementDetails();
             }
         });
-        binding.btnViewStud.setOnClickListener(new View.OnClickListener() {
+
+
+        LiveData<Integer> liveData = cocurricularViewModel.getAchievementsCnt();
+        liveData.observe(CoCurricularActivity.this, new Observer<Integer>() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CoCurricularActivity.this, CocurricularStudAchActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            public void onChanged(Integer cnt) {
+                if (cnt != null && cnt > 0) {
+                    binding.btnViewStud.setVisibility(View.VISIBLE);
+                    slNoCnt = cnt;
+                } else {
+                    slNoCnt = 0;
+                    binding.btnViewStud.setVisibility(View.GONE);
+                }
             }
         });
-
     }
 
     public void showStudAcheivementDetails() {
         View view = getLayoutInflater().inflate(R.layout.stud_acheivement_bottom_sheet, null);
         rootLayout = view.findViewById(R.id.root_cl);
-        BottomSheetDialog dialog = new BottomSheetDialog(CoCurricularActivity.this);
-        dialog.setContentView(view);
-        dialog.setCancelable(false);
+        dialog = new BottomSheetDialog(CoCurricularActivity.this);
         LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
         bottomSheetBehavior.setPeekHeight(1500);
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
         dialog.show();
 
         CustomFontTextView slNo = view.findViewById(R.id.tv_slCount);
@@ -240,7 +255,7 @@ public class CoCurricularActivity extends AppCompatActivity {
                         StudAchievementEntity studAchievementEntity = new StudAchievementEntity();
                         studAchievementEntity.setSl_no(slNoCnt + 1);
                         studAchievementEntity.setStudclass(studClassStr);
-                        studAchievementEntity.setName(stuNameStr);
+                        studAchievementEntity.setStudname(stuNameStr);
                         studAchievementEntity.setParticipated_win(participationStr);
                         studAchievementEntity.setEvent(eventStr);
                         studAchievementEntity.setLevel(levelStr);
@@ -252,7 +267,7 @@ public class CoCurricularActivity extends AppCompatActivity {
                         long x = cocurricularViewModel.insertAchievementInfo(studAchievementEntity);
                         dialog.dismiss();
                         if (x >= 0) {
-                            showBottomSheetSnackBar(getResources().getString(R.string.data_saved));
+                            showSnackBar(getResources().getString(R.string.data_saved));
                         }
                     }
                 }
@@ -264,32 +279,36 @@ public class CoCurricularActivity extends AppCompatActivity {
     private boolean validate() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(stuNameStr)) {
-            returnFlag = false;
             showBottomSheetSnackBar("Please enter student name");
-        } else if (TextUtils.isEmpty(studClassStr)) {
             returnFlag = false;
+        } else if (TextUtils.isEmpty(studClassStr)) {
             showBottomSheetSnackBar("Please enter student class");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(locationStr)) {
-            returnFlag = false;
             showBottomSheetSnackBar("Please enter winning place location");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(levelStr)) {
-            returnFlag = false;
             showBottomSheetSnackBar("Please enter level");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(eventStr)) {
-            returnFlag = false;
             showBottomSheetSnackBar("Please enter event");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(participationStr)) {
-            returnFlag = false;
             showBottomSheetSnackBar("Please enter whether student participated/won");
-        } else if (TextUtils.isEmpty(studClassStr)) {
             returnFlag = false;
+        } else if (TextUtils.isEmpty(studClassStr)) {
             showBottomSheetSnackBar("Please enter student class");
+            returnFlag = false;
         }
         return returnFlag;
     }
 
-    private void showBottomSheetSnackBar(String string) {
-        Snackbar.make(rootLayout, string, Snackbar.LENGTH_SHORT).show();
+
+    private void showBottomSheetSnackBar(String str) {
+        Snackbar.make(rootLayout, str, Snackbar.LENGTH_SHORT).show();
+    }
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }
 
     private void lastMeetingDateSelection() {

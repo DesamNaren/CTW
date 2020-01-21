@@ -80,4 +80,8 @@ public class CocurricularRepository {
                 .subscribe(observer);
         return x;
     }
+
+    public LiveData<Integer> getAchievementsCnt() {
+        return cocurricularDao.getAchievementsCnt();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.twdinspection.inspection.source.cocurriularActivities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -14,6 +15,7 @@ public class StudAchievementEntity {
     @ColumnInfo()
     private String officer_id;
 
+    @Ignore
     @ColumnInfo()
     private int sl_no;
 
@@ -24,7 +26,7 @@ public class StudAchievementEntity {
     private String institute_id;
 
     @ColumnInfo()
-    private String name;
+    private String studname;
 
     @ColumnInfo()
     private String studclass;
@@ -91,12 +93,12 @@ public class StudAchievementEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStudname() {
+        return studname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudname(String studname) {
+        this.studname = studname;
     }
 
     public String getStudclass() {

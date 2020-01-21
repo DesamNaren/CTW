@@ -11,13 +11,15 @@ import android.view.View;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
 import com.example.twdinspection.inspection.adapter.StudAchievementsAdapter;
+import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.viewmodel.StudAchCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class CocurricularStudAchActivity extends BaseActivity {
+public class CocurricularStudAchActivity extends BaseActivity implements StudAchievementsInterface {
 
     private ActivityCocurricularAchDetailsBinding binding;
     private StudAchViewModel viewModel;
@@ -48,5 +50,16 @@ public class CocurricularStudAchActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    public void deleteAchievementRecord(StudAchievementEntity studAchievementEntity) {
+        long x = viewModel.deleteAchievementsInfo(studAchievementEntity);
+        if (x >= 0) {
+            showBottomSheetSnackBar(getResources().getString(R.string.record_deleted));
+        }
+    }
+    private void showBottomSheetSnackBar(String str) {
+        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }
 }

@@ -2,6 +2,7 @@ package com.example.twdinspection.inspection.Room.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -15,4 +16,9 @@ public interface StudAchDao {
 
     @Query("SELECT * from StudAchievementEntity")
     LiveData<List<StudAchievementEntity>> getStudAchievements();
+
+
+    @Delete()
+    void deleteAchievementsInfo(StudAchievementEntity studAchievementEntity);
+
 }

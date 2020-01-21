@@ -34,4 +34,9 @@ public class CocurricularViewModel extends ViewModel {
         return mRepository.insertAchievementInfo(studAchievementEntity);
     }
 
+    public LiveData<Integer> getAchievementsCnt() {
+        return mRepository.getAchievementsCnt();
+    }
+
+
 }

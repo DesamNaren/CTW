@@ -18,4 +18,6 @@ public interface CocurricularDao {
     @Insert()
     void insertAchievementInfo(StudAchievementEntity studAchievementEntity);
 
+    @Query("Select count(*) from StudAchievementEntity")
+    LiveData<Integer> getAchievementsCnt();
 }

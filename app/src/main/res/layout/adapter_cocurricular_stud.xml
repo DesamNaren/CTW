@@ -24,7 +24,7 @@
             android:visibility="visible"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -35,14 +35,24 @@
                     android:id="@+id/tvSlNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
                     android:padding="5dp"
-                    android:text="1"
                     android:textSize="@dimen/dimen_15dp" />
 
+                <View
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:background="@color/light_gray"
+                    android:layout_width="1dp"
+                    android:id="@+id/view"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/dimen_5dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tvSlNo"
+                    android:layout_weight="1"
+                    android:layout_toRightOf="@id/view"
+                    android:layout_toLeftOf="@+id/iv_delete"
                     android:orientation="vertical">
 
                     <com.example.twdinspection.common.custom.CustomFontTextView
@@ -50,8 +60,9 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/user_16"
                         android:drawablePadding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="@={cocurricularStud.name}"
+                        android:text="@={cocurricularStud.studname}"
                         android:textSize="@dimen/dimen_15dp" />
 
                     <com.example.twdinspection.common.custom.CustomFontTextView
@@ -60,6 +71,7 @@
                         android:layout_margin="@dimen/dimen_5dp"
                         android:drawableLeft="@drawable/user_16"
                         android:drawablePadding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
                         android:text="@={cocurricularStud.studclass}"
                         android:textSize="@dimen/dimen_15dp" />
 
@@ -67,6 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
                         android:drawableLeft="@drawable/location_16"
                         android:drawablePadding="@dimen/dimen_5dp"
                         android:text="@={cocurricularStud.win_location}"
@@ -75,6 +88,7 @@
                     <com.example.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:drawableLeft="@drawable/level_16"
                         android:drawablePadding="@dimen/dimen_5dp"
@@ -86,6 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:drawableLeft="@drawable/event_16"
+                        android:textColor="@color/black"
                         android:drawablePadding="@dimen/dimen_5dp"
                         android:text="@={cocurricularStud.event}"
                         android:textSize="@dimen/dimen_15dp" />
@@ -96,11 +111,23 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:drawableLeft="@drawable/won_16"
+                        android:textColor="@color/black"
                         android:drawablePadding="@dimen/dimen_5dp"
                         android:text="@={cocurricularStud.participated_win}"
                         android:textSize="@dimen/dimen_15dp" />
                 </LinearLayout>
-            </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_delete"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:src="@android:drawable/ic_menu_delete" />
+            </LinearLayout>
 
 
         </LinearLayout>
