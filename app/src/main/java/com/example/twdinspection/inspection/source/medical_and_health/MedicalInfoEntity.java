@@ -3,55 +3,55 @@ package com.example.twdinspection.inspection.source.medical_and_health;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-@Entity(tableName = "MedicalInfo")
+import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.converters.CallHealthConverter;
+import com.example.twdinspection.inspection.source.converters.MedicalRecordsConverter;
+
+import java.util.List;
+
+@TypeConverters({CallHealthConverter.class, MedicalRecordsConverter.class})
+@Entity
 public class MedicalInfoEntity {
-
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo()
     private int id;
-
-    @ColumnInfo()
     private String officer_id;
-
-    @ColumnInfo()
     private String inspection_time;
-
-    @ColumnInfo()
     private String institute_id;
-
-    @ColumnInfo()
-    private String feverCount;
-
-    @ColumnInfo()
-    private String coldCount;
-
-    @ColumnInfo()
-    private String headacheCount;
-
-    @ColumnInfo()
-    private String diarrheaCount;
-
-    @ColumnInfo()
-    private String malariaCount;
-
-    @ColumnInfo()
-    private String othersCount;
-
-    @ColumnInfo()
+    private int feverCount;
+    private int coldCount;
+    private int headacheCount;
+    private int diarrheaCount;
+    private int malariaCount;
+    private int othersCount;
     private String last_medical_checkup_date;
-
-    @ColumnInfo()
     private String recorded_in_register;
-
-    @ColumnInfo()
     private String medicalCheckUpDoneByWhom;
-
-    @ColumnInfo()
     private String anmWeeklyUpdated;
-
-    @ColumnInfo()
     private String callHealth100;
+
+    @ColumnInfo(name = "callHealthRecords")
+    private List<CallHealthInfoEntity> callHealthInfoEntities = null;
+
+    @ColumnInfo(name = "medicalRecords")
+    private List<MedicalDetailsBean> medicalDetails = null;
+
+    public List<MedicalDetailsBean> getMedicalDetails() {
+        return medicalDetails;
+    }
+
+    public void setMedicalDetails(List<MedicalDetailsBean> medicalDetails) {
+        this.medicalDetails = medicalDetails;
+    }
+
+    public List<CallHealthInfoEntity> getCallHealthInfoEntities() {
+        return callHealthInfoEntities;
+    }
+
+    public void setCallHealthInfoEntities(List<CallHealthInfoEntity> callHealthInfoEntities) {
+        this.callHealthInfoEntities = callHealthInfoEntities;
+    }
 
     public int getId() {
         return id;
@@ -85,51 +85,51 @@ public class MedicalInfoEntity {
         this.institute_id = institute_id;
     }
 
-    public String getFeverCount() {
+    public int getFeverCount() {
         return feverCount;
     }
 
-    public void setFeverCount(String feverCount) {
+    public void setFeverCount(int feverCount) {
         this.feverCount = feverCount;
     }
 
-    public String getColdCount() {
+    public int getColdCount() {
         return coldCount;
     }
 
-    public void setColdCount(String coldCount) {
+    public void setColdCount(int coldCount) {
         this.coldCount = coldCount;
     }
 
-    public String getHeadacheCount() {
+    public int getHeadacheCount() {
         return headacheCount;
     }
 
-    public void setHeadacheCount(String headacheCount) {
+    public void setHeadacheCount(int headacheCount) {
         this.headacheCount = headacheCount;
     }
 
-    public String getDiarrheaCount() {
+    public int getDiarrheaCount() {
         return diarrheaCount;
     }
 
-    public void setDiarrheaCount(String diarrheaCount) {
+    public void setDiarrheaCount(int diarrheaCount) {
         this.diarrheaCount = diarrheaCount;
     }
 
-    public String getMalariaCount() {
+    public int getMalariaCount() {
         return malariaCount;
     }
 
-    public void setMalariaCount(String malariaCount) {
+    public void setMalariaCount(int malariaCount) {
         this.malariaCount = malariaCount;
     }
 
-    public String getOthersCount() {
+    public int getOthersCount() {
         return othersCount;
     }
 
-    public void setOthersCount(String othersCount) {
+    public void setOthersCount(int othersCount) {
         this.othersCount = othersCount;
     }
 

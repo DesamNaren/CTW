@@ -15,20 +15,9 @@ public class MedicalDetailsBean {
     private String reason;
     private String admittedDate;
     private String hospitalName;
-    private String name;
-    private String designation;
+    private String acc_name;
+    private String acc_designation;
     private String type;
-    @Ignore
-    private boolean is_expand;
-
-    public boolean isIs_expand() {
-        return is_expand;
-    }
-
-    public void setIs_expand(boolean is_expand) {
-        this.is_expand = is_expand;
-    }
-
 
     public int getId() {
         return id;
@@ -38,14 +27,15 @@ public class MedicalDetailsBean {
         this.id = id;
     }
 
-    public MedicalDetailsBean(String student_name, String student_class, String reason, String admittedDate, String hospitalName, String name, String designation, String type) {
+    public MedicalDetailsBean(String student_name, String student_class, String reason,
+                              String admittedDate, String hospitalName, String name, String designation, String type) {
         this.student_name = student_name;
         this.student_class = student_class;
         this.reason = reason;
         this.admittedDate = admittedDate;
         this.hospitalName = hospitalName;
-        this.name = name;
-        this.designation = designation;
+        this.acc_name = name;
+        this.acc_designation = designation;
         this.type = type;
     }
 
@@ -92,20 +82,20 @@ public class MedicalDetailsBean {
         this.hospitalName = hospitalName;
     }
 
-    public String getName() {
-        return name;
+    public String getAcc_name() {
+        return acc_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAcc_name(String acc_name) {
+        this.acc_name = acc_name;
     }
 
-    public String getDesignation() {
-        return designation;
+    public String getAcc_designation() {
+        return acc_designation;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setAcc_designation(String acc_designation) {
+        this.acc_designation = acc_designation;
     }
 
     public String getType() {

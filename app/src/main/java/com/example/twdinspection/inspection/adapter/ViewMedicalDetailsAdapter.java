@@ -41,8 +41,8 @@ public class ViewMedicalDetailsAdapter extends RecyclerView.Adapter<ViewMedicalD
         holder.listItemBinding.tvClass.setText(dataModel.getStudent_class());
         holder.listItemBinding.tvReason.setText(dataModel.getReason());
         holder.listItemBinding.tvHname.setText(dataModel.getHospitalName());
-        holder.listItemBinding.tvAName.setText(dataModel.getName());
-        holder.listItemBinding.tvADes.setText(dataModel.getDesignation());
+        holder.listItemBinding.tvAName.setText(dataModel.getAcc_name());
+        holder.listItemBinding.tvADes.setText(dataModel.getAcc_designation());
         holder.listItemBinding.tvDate.setText(dataModel.getAdmittedDate());
     }
 

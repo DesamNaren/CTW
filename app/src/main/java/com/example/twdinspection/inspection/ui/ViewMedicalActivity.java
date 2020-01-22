@@ -33,7 +33,7 @@ public class ViewMedicalActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_view_medical, getResources().getString(R.string.call_health));
+        binding = putContentView(R.layout.activity_view_medical, getResources().getString(R.string.medical_health));
         MedicalDetailsViewModel viewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(viewModel);
         listDataChild = new HashMap<>();

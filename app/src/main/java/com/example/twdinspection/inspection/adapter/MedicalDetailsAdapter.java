@@ -52,8 +52,8 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
         holder.binding.etClass.setText(list.get(position).getStudent_class());
         holder.binding.etReason.setText(list.get(position).getReason());
         holder.binding.etHospital.setText(list.get(position).getHospitalName());
-        holder.binding.etAccName.setText(list.get(position).getName());
-        holder.binding.etAccDes.setText(list.get(position).getDesignation());
+        holder.binding.etAccName.setText(list.get(position).getAcc_name());
+        holder.binding.etAccDes.setText(list.get(position).getAcc_designation());
         holder.binding.etAdmittedDate.setText(list.get(position).getAdmittedDate());
 
         if (position == 0)

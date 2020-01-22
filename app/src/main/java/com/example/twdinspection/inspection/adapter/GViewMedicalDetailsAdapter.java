@@ -76,7 +76,6 @@ public class GViewMedicalDetailsAdapter extends RecyclerView.Adapter<GViewMedica
         listItemBinding.groupRV.setAdapter(viewMedicalDetailsAdapter);
     }
 
-
     @Override
     public int getItemCount() {
         return medicalDetailsBeans != null && medicalDetailsBeans.size() > 0 ? medicalDetailsBeans.size() : 0;
