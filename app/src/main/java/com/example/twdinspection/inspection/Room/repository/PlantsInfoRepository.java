@@ -5,12 +5,11 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
+import com.example.twdinspection.inspection.Room.Dao.PlantsInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 import java.util.List;
 
@@ -22,29 +21,29 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class StudAchievementsRepository {
+public class PlantsInfoRepository {
 
-    public StudAchDao studAchDao;
-    private String tag= StudAchievementsRepository.class.getSimpleName();
+    public PlantsInfoDao plantsInfoDao;
+    private String tag= PlantsInfoRepository.class.getSimpleName();
 
-    public StudAchievementsRepository(Context application) {
+    public PlantsInfoRepository(Context application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
-        studAchDao = db.studAchDao();
+        plantsInfoDao = db.plantsInfoDao();
 
     }
 
-    public LiveData<List<StudAchievementEntity>> getStudAchvListLiveData() {
-            return studAchDao.getStudAchievements();
+    public LiveData<List<PlantsEntity>> getPlantsListLiveData() {
+            return plantsInfoDao.getPlantsInfo();
     }
     long x;
 
-    public long deleteAchievementsInfo(StudAchievementEntity studAchievementEntity) {
+    public long deletePlantsInfo(PlantsEntity plantsEntity) {
 
 
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                studAchDao.deleteAchievementsInfo(studAchievementEntity);
+                plantsInfoDao.deletePlantInfo(plantsEntity);
             }
         });
 

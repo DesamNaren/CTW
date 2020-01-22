@@ -1056,16 +1056,19 @@
                             <RadioGroup
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/rg_harithaharam"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/rb_harithaharamYes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="yes" />
 
                                 <RadioButton
+                                    android:id="@+id/rb_harithaharamNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1081,6 +1084,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_30dp"
+                    android:id="@+id/ll_plants"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
@@ -1088,7 +1093,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="Plants"
+                        android:text="@string/plants_data"
                         android:textColor="@color/black" />
 
                     <LinearLayout

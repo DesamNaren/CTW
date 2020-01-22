@@ -453,4 +453,6 @@
     <string name="diet_issues">Diet Issues</string>
     <string name="last_medical_date">Select last medical check up date</string>
     <string name="stu_class">Class</string>
+    <string name="title_plant_info">Plants Info</string>
+    <string name="plants_data">Plants Data</string>
 </resources>

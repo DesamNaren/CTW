@@ -12,18 +12,9 @@ public class StudAchievementEntity {
     @ColumnInfo()
     private int id;
 
-    @ColumnInfo()
-    private String officer_id;
-
     @Ignore
     @ColumnInfo()
     private int sl_no;
-
-    @ColumnInfo()
-    private String inspection_time;
-
-    @ColumnInfo()
-    private String institute_id;
 
     @ColumnInfo()
     private String studname;
@@ -59,30 +50,6 @@ public class StudAchievementEntity {
 
     public void setWin_location(String win_location) {
         this.win_location = win_location;
-    }
-
-    public String getOfficer_id() {
-        return officer_id;
-    }
-
-    public void setOfficer_id(String officer_id) {
-        this.officer_id = officer_id;
-    }
-
-    public String getInspection_time() {
-        return inspection_time;
-    }
-
-    public void setInspection_time(String inspection_time) {
-        this.inspection_time = inspection_time;
-    }
-
-    public String getInstitute_id() {
-        return institute_id;
-    }
-
-    public void setInstitute_id(String institute_id) {
-        this.institute_id = institute_id;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root_cl"
     android:layout_width="match_parent"
@@ -10,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/_100dp"
         android:visibility="visible"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -87,14 +89,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5dp">
+            android:layout_marginLeft="@dimen/dimen_8dp">
 
 
             <com.example.twdinspection.common.custom.CustomFontEditText
-                android:id="@+id/et_studName"
+                android:id="@+id/et_plantType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_stu_name"
+                android:hint="Tyoe of plant"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
                 android:textSize="@dimen/dimen_15dp" />
@@ -104,101 +106,21 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5dp"
+            android:layout_marginLeft="@dimen/dimen_8dp"
             android:imeOptions="actionNext">
 
 
             <com.example.twdinspection.common.custom.CustomFontEditText
-                android:id="@+id/et_class"
+                android:id="@+id/et_plantsCnt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_student_class"
+                android:hint="No of plants"
+                android:inputType="number"
                 android:singleLine="true"
                 android:textSize="@dimen/dimen_15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:imeOptions="actionNext">
-
-
-            <com.example.twdinspection.common.custom.CustomFontEditText
-                android:id="@+id/et_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/winning_place_location"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_15dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:imeOptions="actionNext">
-
-
-            <com.example.twdinspection.common.custom.CustomFontEditText
-                android:id="@+id/et_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/level"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_15dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5dp"
-            android:imeOptions="actionNext">
-
-
-            <com.example.twdinspection.common.custom.CustomFontEditText
-                android:id="@+id/et_event"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/event"
-                android:singleLine="true"
-                android:textSize="@dimen/dimen_15dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <RadioGroup
-            android:id="@+id/rg_participated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_8dp"
-            android:orientation="horizontal">
-
-
-            <RadioButton
-                android:id="@+id/rb_participatedYes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_5dp"
-                android:text="Participated" />
-
-            <RadioButton
-                android:id="@+id/rb_participatedNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_5dp"
-                android:text="Won" />
-
-        </RadioGroup>
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bottomll"
-            android:orientation="vertical"
-            android:layout_alignParentBottom="true"/>
 
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
