@@ -7,6 +7,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +26,7 @@ import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalDetailsActivity extends BaseActivity implements View.OnClickListener, ClickCallback {
+public class MedicalDetailsActivity extends AppCompatActivity implements View.OnClickListener, ClickCallback {
 
     private static final String TAG = MedicalDetailsActivity.class.getSimpleName();
     ActivityMedialDetailsBinding binding;
@@ -40,12 +42,15 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        binding = putContentView(R.layout.activity_medial_details, getResources().getString(R.string.medical_health));
+        binding = DataBindingUtil.setContentView(this, (R.layout.activity_medial_details));
+        binding.appBarLayout.backBtn.setVisibility(View.GONE);
+        binding.appBarLayout.ivHome.setVisibility(View.GONE);
+        binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
         medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(medicalDetailsViewModel);
 
-       LiveData<List<MedicalDetailsBean>> listLiveData = medicalDetailsViewModel.getMedicalDetails();
-       listLiveData.observe(this, new Observer<List<MedicalDetailsBean>>() {
+        LiveData<List<MedicalDetailsBean>> listLiveData = medicalDetailsViewModel.getMedicalDetails();
+        listLiveData.observe(this, new Observer<List<MedicalDetailsBean>>() {
             @Override
             public void onChanged(List<MedicalDetailsBean> medicalDetailsBeans) {
                 listLiveData.removeObservers(MedicalDetailsActivity.this);
@@ -102,9 +107,6 @@ public class MedicalDetailsActivity extends BaseActivity implements View.OnClick
                 }
             }
         });
-
-
-
 
 
     }

@@ -3,6 +3,8 @@ package com.example.twdinspection.inspection.ui;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class CallHealthActivity extends BaseActivity implements MedicalInterface {
+public class CallHealthActivity extends AppCompatActivity implements MedicalInterface {
 
     private ActivityCallHealthBinding binding;
     private CallHealthViewModel viewModel;
@@ -31,7 +33,17 @@ public class CallHealthActivity extends BaseActivity implements MedicalInterface
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_call_health, getResources().getString(R.string.call_health));
+        binding = DataBindingUtil.setContentView(this, (R.layout.activity_call_health));
+        binding.appBarLayout.backBtn.setVisibility(View.VISIBLE);
+        binding.appBarLayout.ivHome.setVisibility(View.GONE);
+        binding.appBarLayout.headerTitle.setText(getString(R.string.call_health));
+
+        binding.appBarLayout.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         viewModel = ViewModelProviders.of(CallHealthActivity.this,
                 new CallHealthCustomViewModel( this)).get(CallHealthViewModel.class);
