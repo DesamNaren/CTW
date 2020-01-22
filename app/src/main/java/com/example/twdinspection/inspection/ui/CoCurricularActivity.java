@@ -709,7 +709,7 @@ public class CoCurricularActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(stu_Cou_cap_name)) {
             showSnackBar("Enter student council captain name");
             returnFlag = false;
-        } else if (!TextUtils.isEmpty(stu_Cou_date) && !stu_Cou_date.contains("/")) {
+        } else if (TextUtils.isEmpty(stu_Cou_date)) {
             showSnackBar("Enter student council date");
             returnFlag = false;
         }
