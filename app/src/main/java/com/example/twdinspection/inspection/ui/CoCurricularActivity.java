@@ -335,11 +335,9 @@ public class CoCurricularActivity extends BaseActivity {
             @Override
             public void onChanged(Integer cnt) {
                 if (cnt != null && cnt > 0) {
-                    binding.rbHarithaharamYes.setChecked(true);
                     binding.btnViewplant.setVisibility(View.VISIBLE);
                     slNoCnt = cnt;
                 } else {
-                    binding.rbHarithaharamYes.setChecked(false);
                     slNoCnt = 0;
                     binding.btnViewplant.setVisibility(View.GONE);
                     binding.llPlants.setVisibility(View.GONE);
