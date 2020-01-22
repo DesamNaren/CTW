@@ -26,7 +26,6 @@ import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
-import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
@@ -35,6 +34,8 @@ import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -51,7 +52,8 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
  */
 
 @Database(entities = {StudAttendInfoEntity.class,
-        StaffAttendanceEntity.class, MedicalInfoEntity.class, DietIssuesEntity.class,
+        StaffAttendanceEntity.class, MedicalInfoEntity.class, DietListEntity.class
+        , DietIssuesEntity.class,
         InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class

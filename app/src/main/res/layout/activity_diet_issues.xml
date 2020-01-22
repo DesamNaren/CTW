@@ -34,7 +34,7 @@
                     android:layout_above="@+id/btn_layout"
                     android:layout_below="@+id/header"
                     android:padding="@dimen/dimen_5dp"
-                    />
+                    tools:listitem="@layout/adapter_diet_issues" />
 
               <!--  <LinearLayout
                     android:layout_width="match_parent"

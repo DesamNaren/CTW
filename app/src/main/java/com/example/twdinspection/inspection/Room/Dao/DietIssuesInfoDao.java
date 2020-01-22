@@ -5,29 +5,29 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.DiestIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.DiestIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;
 
 @Dao
 public interface DietIssuesInfoDao {
 
-    @Insert()
+    @Insert
     void insertDietIssuesInfo(DietIssuesEntity dietIssuesEntity);
 
     @Query("SELECT * from MasterInstituteInfo where instId LIKE :inst_id")
     LiveData<MasterInstituteInfo> getMasterDietList(String inst_id);
 
-   /* @Query("SELECT * from DietIssuesInfo where institute_id LIKE :inst_id")
-    LiveData<List<DietListEntity>> getDietList(String inst_id);
 
-    @Query("UPDATE DietIssuesInfo SET dietList = NULL")
-    void deleteDietInfo();*/
+//    @Query("SELECT * from DietIssuesInfo where institute_id LIKE :inst_id")
+//    LiveData<List<DietListEntity>> getDietList(String inst_id);
 
-    /*@Insert
-    void insertDietInfo(List<DietListEntity> dietListEntities);*/
+    @Query("DELETE FROM DietListInfo")
+    void deleteDietInfo();
+
+    @Insert
+    void insertDietInfo(List<DietListEntity> dietListEntities);
 
 }
