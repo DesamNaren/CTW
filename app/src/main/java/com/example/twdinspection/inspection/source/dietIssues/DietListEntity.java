@@ -23,10 +23,35 @@ public class DietListEntity {
     @ColumnInfo()
     private Double book_bal;
 
-    public DietListEntity(String item_name, Double ground_bal, Double book_bal) {
+    @ColumnInfo()
+    private String institute_id;
+
+    @ColumnInfo()
+    private String officerId;
+
+
+    public DietListEntity( String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
         this.item_name = item_name;
         this.ground_bal = ground_bal;
         this.book_bal = book_bal;
+        this.institute_id = institute_id;
+        this.officerId = officerId;
+    }
+
+    public String getInstitute_id() {
+        return institute_id;
+    }
+
+    public void setInstitute_id(String institute_id) {
+        this.institute_id = institute_id;
+    }
+
+    public String getOfficerId() {
+        return officerId;
+    }
+
+    public void setOfficerId(String officerId) {
+        this.officerId = officerId;
     }
 
     public int getId() {

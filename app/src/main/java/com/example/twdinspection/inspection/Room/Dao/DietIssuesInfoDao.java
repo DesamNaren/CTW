@@ -15,14 +15,13 @@ import java.util.List;
 public interface DietIssuesInfoDao {
 
     @Insert
-    void insertDietIssuesInfo(DietIssuesEntity dietIssuesEntity);
+    void updateDietIssuesInfo(DietIssuesEntity dietIssuesEntity);
 
     @Query("SELECT * from MasterInstituteInfo where instId LIKE :inst_id")
     LiveData<MasterInstituteInfo> getMasterDietList(String inst_id);
 
-
-//    @Query("SELECT * from DietIssuesInfo where institute_id LIKE :inst_id")
-//    LiveData<List<DietListEntity>> getDietList(String inst_id);
+    @Query("SELECT * from DietListInfo where institute_id LIKE :inst_id ")
+    LiveData<List<DietListEntity>> getDietList(String inst_id);
 
     @Query("DELETE FROM DietListInfo")
     void deleteDietInfo();

@@ -41,12 +41,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_8dp">
 
-
                 <com.example.twdinspection.common.custom.CustomFontEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/book_bal"
                     android:hint="@string/a_book_balance"
+                    android:focusableInTouchMode="false"
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>

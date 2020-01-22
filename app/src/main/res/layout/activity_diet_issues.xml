@@ -23,7 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_margin="@dimen/dimen_5dp"
                 android:elevation="@dimen/dimen_10dp"
                 android:orientation="vertical">
 
@@ -31,251 +31,23 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/btn_layout"
-                    android:layout_below="@+id/header"
-                    android:padding="@dimen/dimen_5dp"
                     tools:listitem="@layout/adapter_diet_issues" />
 
-              <!--  <LinearLayout
+                <TextView
+                    android:id="@+id/empty_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/list_blue"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="@string/rice"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/a_book_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/b_ground_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="@string/no_records_found"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/list_blue"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="@string/rg_dal_kg"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/a_book_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/b_ground_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/white"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/list_blue"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textStyle="bold"
-                        android:text="@string/palm_oil_number"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/a_book_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/b_ground_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/list_blue"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textStyle="bold"
-                        android:text="@string/eggs_number"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/a_book_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/b_ground_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/list_blue"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textStyle="bold"
-                        android:text="@string/fruits_dozens"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/a_book_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/b_ground_balance"
-                            android:inputType="number" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:background="@color/white"
                     android:elevation="@dimen/dimen_10dp"
                     android:orientation="vertical">
@@ -396,6 +168,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView
@@ -593,7 +366,6 @@
                                     android:text="@string/no" />
                             </RadioGroup>
 
-
                         </LinearLayout>
 
 
@@ -664,6 +436,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:visibility="gone"
+                        android:id="@+id/ll_committee"
                         android:orientation="horizontal">
 
                         <TextView
@@ -753,12 +527,14 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
+                        android:visibility="gone"
                         android:background="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView
@@ -794,8 +570,18 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </LinearLayout>
+
         </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cl"
+            android:layout_above="@+id/btn_layout"
+            android:background="@android:color/transparent">
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <include
             android:id="@+id/btn_layout"

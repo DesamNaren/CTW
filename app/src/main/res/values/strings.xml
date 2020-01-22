@@ -452,6 +452,14 @@
     <string name="go_back">Are you sure you want to go back?</string>
     <string name="diet_issues">Diet Issues</string>
     <string name="last_medical_date">Select last medical check up date</string>
+    <string name="select_menu_chart_served">Select Link to latest approved menu chart to be served</string>
+    <string name="sel_menu_chart_painted">Select Weather menu chart Painted on wall</string>
+    <string name="sel_menu_served">Select Whether Prescribed Menu served</string>
+    <string name="sel_food_provisions">Select Does the supplier provides samples of food provisions</string>
+    <string name="sel_matching_with_samples">Select Does food provisions matching with samples provided</string>
+    <string name="sel_committee_exist">Select Does mess committee exist or not</string>
+    <string name="sel_discussed_with_committee">Select Have you met &amp; discussed with Mess Committee</string>
+    <string name="sel_maintaining_register">Are you maintaining mess register</string>
     <string name="stu_class">Class</string>
     <string name="title_plant_info">Plants Info</string>
     <string name="plants_data">Plants Data</string>

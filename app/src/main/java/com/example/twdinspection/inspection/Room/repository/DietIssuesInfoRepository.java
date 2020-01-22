@@ -41,16 +41,20 @@ public class DietIssuesInfoRepository {
         return dietIssuesInfoDao.getMasterDietList(inst_id);
     }
 
+    public  LiveData<List<DietListEntity>> getDietList(String inst_id) {
+        return dietIssuesInfoDao.getDietList(inst_id);
+    }
+
 
     long x;
 
-    public long insertDietIssuesInfo(DietIssuesEntity dietIssuesEntity) {
+    public long updateDietIssuesInfo(DietIssuesEntity dietIssuesEntity) {
 
 
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                dietIssuesInfoDao.insertDietIssuesInfo(dietIssuesEntity);
+                dietIssuesInfoDao.updateDietIssuesInfo(dietIssuesEntity);
             }
         });
 

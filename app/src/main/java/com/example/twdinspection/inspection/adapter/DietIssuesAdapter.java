@@ -45,6 +45,7 @@ public class DietIssuesAdapter extends RecyclerView.Adapter<DietIssuesAdapter.It
         holder.listItemBinding.setDietIssues(dataModel);
 
         holder.listItemBinding.header.setText(list.get(i).getItem_name());
+        holder.listItemBinding.bookBal.setText(String.valueOf(list.get(i).getBook_bal()));
 
         holder.bind(dataModel);
     }
