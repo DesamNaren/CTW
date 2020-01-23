@@ -18,6 +18,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
 import com.example.twdinspection.inspection.adapter.DietIssuesAdapter;
+import com.example.twdinspection.inspection.interfaces.DietInterface;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
@@ -239,6 +240,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener {
     }
 
     private boolean validateData() {
+
         if (TextUtils.isEmpty(menu_chart_served)) {
             showSnackBar(getResources().getString(R.string.select_menu_chart_served));
             return false;
@@ -306,5 +308,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener {
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
+
 
 }

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterDietIssuesBinding;
+import com.example.twdinspection.inspection.interfaces.DietInterface;
+import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
 
 import java.util.List;
@@ -20,17 +22,18 @@ public class DietIssuesAdapter extends RecyclerView.Adapter<DietIssuesAdapter.It
     Context context;
     List<DietListEntity> list;
     private int selectedPos = -1;
+    DietInterface dietInterface;
 
     public DietIssuesAdapter(Context context, List<DietListEntity> list) {
         this.context = context;
         this.list = list;
+        dietInterface=(DietInterface)context;
 
     }
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
         AdapterDietIssuesBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_diet_issues, parent, false);
