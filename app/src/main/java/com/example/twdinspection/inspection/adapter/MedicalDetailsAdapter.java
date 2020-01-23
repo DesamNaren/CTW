@@ -47,6 +47,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int position) {
 
+        callback.onValueChange(position + 1);
 
         holder.binding.etStudentName.setText(list.get(position).getStudent_name());
         holder.binding.etClass.setText(list.get(position).getStudent_class());
@@ -65,6 +66,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
             holder.binding.btnLayout.btnNext.setText(context.getResources().getString(R.string.completed));
         else
             holder.binding.btnLayout.btnNext.setText(context.getResources().getString(R.string.next));
+
         holder.binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,9 +104,8 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                     adDate = holder.binding.etAdmittedDate.getText().toString();
 
                     MedicalDetailsBean medicalDetailsBean = new MedicalDetailsBean(
-                             sName, cName, reason, adDate, hName, acName, acDes,list.get(position).getType());
+                            sName, cName, reason, adDate, hName, acName, acDes, list.get(position).getType());
                     list.set(position, medicalDetailsBean);
-
 
 
                     if (position < list.size()) {
@@ -135,6 +136,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
         } else {
             holder.binding.btnLayout.btnLayout.setVisibility(View.GONE);
         }
+
     }
 
 

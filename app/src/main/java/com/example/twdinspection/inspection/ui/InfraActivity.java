@@ -1,17 +1,14 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -37,11 +34,13 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     String repairsReqToilets, repairsReqBathrooms, color;
     InstMainViewModel instMainViewModel;
     private String officerID, instID, insTime;
+    private boolean add_class = false, add_din = false, add_dom = false;
+    private String add_cls_cnt, add_din_cnt, add_dom_cnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding =  putContentView(R.layout.activity_infrastructure, getResources().getString(R.string.infra_mai));
+        binding = putContentView(R.layout.activity_infrastructure, getResources().getString(R.string.infra_mai));
 
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);
@@ -483,6 +482,48 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         });
 
 
+        binding.addClassCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    add_class = true;
+                    binding.addClassLayout.setVisibility(View.VISIBLE);
+                } else {
+                    add_class = false;
+                    binding.addClassCnt.setText("");
+                    binding.addClassLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.addDinCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    add_din = true;
+                    binding.addDinLayout.setVisibility(View.VISIBLE);
+                } else {
+                    add_din = false;
+                    binding.addDinCnt.setText("");
+                    binding.addDinLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.addDomCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()) {
+                    add_dom = true;
+                    binding.addDomLayout.setVisibility(View.VISIBLE);
+                } else {
+                    add_dom = false;
+                    binding.addDomCnt.setText("");
+                    binding.addDomLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -501,6 +542,9 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
                 repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
                 color = binding.etPainting.getText().toString().trim();
+                add_cls_cnt = binding.addClassCnt.getText().toString();
+                add_din_cnt = binding.addDinCnt.getText().toString();
+                add_dom_cnt = binding.addDomCnt.getText().toString();
 
                 if (validateData()) {
 
@@ -708,6 +752,30 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_solarwater_working));
             return false;
         }
+
+        if (heater_available.equals(AppConstants.Yes) && TextUtils.isEmpty(heater_workingStatus)) {
+            showSnackBar(getResources().getString(R.string.select_solarwater_working));
+            return false;
+        }
+
+        if (add_class && TextUtils.isEmpty(add_cls_cnt)) {
+            showSnackBar(getResources().getString(R.string.add_enter_number));
+            binding.addClassLayout.requestFocus();
+            return false;
+        }
+
+        if (add_dom && TextUtils.isEmpty(add_dom_cnt)) {
+            showSnackBar(getResources().getString(R.string.add_enter_number));
+            binding.addDomLayout.requestFocus();
+            return false;
+        }
+
+        if (add_din && TextUtils.isEmpty(add_din_cnt)) {
+            showSnackBar(getResources().getString(R.string.add_enter_number));
+            binding.addDinLayout.requestFocus();
+            return false;
+        }
+
         if (TextUtils.isEmpty(totalToilets)) {
             showSnackBar(getResources().getString(R.string.select_toilets));
             binding.etTotalToilets.requestFocus();
@@ -746,7 +814,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_painting));
             return false;
         }
-        if (TextUtils.isEmpty(color)) {
+        if (painting.equals("BAD") && TextUtils.isEmpty(color)) {
             showSnackBar(getResources().getString(R.string.select_color));
             binding.etPainting.requestFocus();
             return false;

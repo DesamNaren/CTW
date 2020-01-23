@@ -8,9 +8,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -32,7 +32,6 @@ import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalViewModel;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -327,15 +326,14 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
+    private CoordinatorLayout callCoordinatorLayout;
 
     public void showCallHeathDetails() {
         View view = getLayoutInflater().inflate(R.layout.call_health_bottom_sheet, null);
         BottomSheetDialog dialog = new BottomSheetDialog(MedicalActivity.this);
         dialog.setContentView(view);
         dialog.setCancelable(false);
-        LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
-        bottomSheetBehavior.setPeekHeight(1500);
+        callCoordinatorLayout = view.findViewById(R.id.bottom_ll);
         dialog.show();
 
         CustomFontTextView slNo = view.findViewById(R.id.tv_slCount);
@@ -397,16 +395,24 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
+    private void showCallHealthBottomSheetSnackBar(String str) {
+        Snackbar.make(callCoordinatorLayout, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void showMediaclBottomSheetSnackBar(String str) {
+        Snackbar.make(callCoordinatorLayout, str, Snackbar.LENGTH_SHORT).show();
+    }
+
     private boolean validate(String stuNameStr, String dStr, String dateStr) {
         boolean flag = true;
         if (TextUtils.isEmpty(stuNameStr)) {
-            showBottomSheetSnackBar(getResources().getString(R.string.enter_stu_name));
+            showCallHealthBottomSheetSnackBar(getResources().getString(R.string.enter_stu_name));
             flag = false;
         } else if (TextUtils.isEmpty(dStr)) {
-            showBottomSheetSnackBar(getResources().getString(R.string.enter_disease));
+            showCallHealthBottomSheetSnackBar(getResources().getString(R.string.enter_disease));
             flag = false;
         } else if (!dateStr.contains("/")) {
-            showBottomSheetSnackBar(getResources().getString(R.string.sel_plan_date));
+            showCallHealthBottomSheetSnackBar(getResources().getString(R.string.sel_plan_date));
             flag = false;
         }
         return flag;

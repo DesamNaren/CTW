@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
@@ -32,7 +33,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietIssuesActivity extends BaseActivity implements SaveListener {
+public class DietIssuesActivity extends BaseActivity implements SaveListener, DietInterface {
 
     ActivityDietIssuesBinding binding;
     DietIsuuesViewModel dietIsuuesViewModel;
@@ -70,7 +71,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener {
                 if (dietIssuesEntities != null && dietIssuesEntities.size() > 0) {
                     dietInfoEntityListMain = dietIssuesEntities;
                     adapter = new DietIssuesAdapter(DietIssuesActivity.this, dietInfoEntityListMain);
-                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(DietIssuesActivity.this));
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this,2));
                     binding.recyclerView.setAdapter(adapter);
                 } else {
                     LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
@@ -310,4 +311,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener {
     }
 
 
+    @Override
+    public void validate() {
+
+    }
 }

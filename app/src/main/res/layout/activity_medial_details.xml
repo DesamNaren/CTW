@@ -20,10 +20,10 @@
             layout="@layout/action_bar_layout" />
 
         <LinearLayout
-            android:layout_below="@+id/app_bar_layout"
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/app_bar_layout"
             android:background="@color/grey_light"
             android:orientation="vertical"
             android:padding="@dimen/dimen_5dp">
@@ -236,7 +236,8 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:layout_gravity="center"
                 android:id="@+id/type_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -247,12 +248,25 @@
                 android:visibility="visible">
 
                 <TextView
+                    android:layout_gravity="center"
+                    android:text="@string/add_enter_number"
+                    android:layout_weight="1"
                     android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/dimen_20dp"
                     android:textStyle="bold" />
-            </RelativeLayout>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:text="@string/add_enter_number"
+                    android:layout_marginLeft="@dimen/dimen_8dp"
+                    android:layout_alignRight="@+id/tv_type"
+                    android:id="@+id/tv_type_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"

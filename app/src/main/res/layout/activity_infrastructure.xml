@@ -1936,6 +1936,7 @@
                         android:textColor="@color/black" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -1944,7 +1945,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@string/is_solar"
+                            android:text="Entitlements"
                             android:textColor="@color/black" />
 
 
@@ -1999,52 +2000,105 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <CheckBox
+                                android:id="@+id/add_class_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/add_class" />
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:visibility="gone"
+                                android:id="@+id/add_class_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/number"
-                                android:visibility="gone" />
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/add_class_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/add_enter_number"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                         <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <CheckBox
+                                android:id="@+id/add_din_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/add_dining" />
 
-                            <EditText
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:visibility="gone"
+                                android:id="@+id/add_din_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/number"
-                                android:visibility="gone" />
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/add_din_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/add_enter_number"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
 
                         <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <CheckBox
+                                android:id="@+id/add_dom_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/add_dorm" />
 
-                            <EditText
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:visibility="gone"
+                                android:id="@+id/add_dom_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/number"
-                                android:visibility="gone" />
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/add_dom_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/add_enter_number"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </LinearLayout>
 

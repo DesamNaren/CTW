@@ -216,6 +216,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
                     });
                 }
             } else {
+                binding.tvTypeCnt.setText("");
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 binding.tvEmpty.setText(getString(R.string.no_records_found));
                 binding.recyclerView.setVisibility(View.GONE);
@@ -227,6 +228,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onItemClick(int position) {
+
         if (position < list.size()) {
             binding.recyclerView.setVisibility(View.VISIBLE);
             binding.tvEmpty.setVisibility(View.GONE);
@@ -249,7 +251,13 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
             totalList.addAll(list);
             medicalDetailsViewModel.insertMedicalDetailsInfo(totalList);
+            binding.tvTypeCnt.setText("");
         }
+    }
+
+    @Override
+    public void onValueChange(int position) {
+        binding.tvTypeCnt.setText("Record: "+ position);
     }
 
     @Override

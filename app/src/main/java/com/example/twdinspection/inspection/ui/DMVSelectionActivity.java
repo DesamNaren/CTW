@@ -89,7 +89,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
                 if (validateFields()) {
                     editor.putInt(AppConstants.DIST_ID, selectedDistId);
                     editor.putInt(AppConstants.MAN_ID, selectedManId);
