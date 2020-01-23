@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -21,21 +20,25 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.custom.CustomFontTextView;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityCoCurricularBinding;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.viewmodel.CocurricularCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.CocurricularViewModel;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
+import java.util.List;
 
-public class CoCurricularActivity extends BaseActivity {
+public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
     ActivityCoCurricularBinding binding;
-    int slNoCnt = 0;
+    int slNoCnt = 0, achSloCnt = 0;
     CocurricularViewModel cocurricularViewModel;
     String participationStr, stuNameStr, studClassStr, locationStr, levelStr, eventStr, plantTypeStr, plantCntStr;
     CoordinatorLayout rootLayout;
@@ -43,14 +46,18 @@ public class CoCurricularActivity extends BaseActivity {
     SharedPreferences sharedPreferences;
     String instId, officerId, insTime;
     BottomSheetDialog dialog;
+    private CoCurricularEntity coCurricularEntity;
+    private InstMainViewModel instMainViewModel;
 
-    String spo_mat_rec, entry_stock, game_sport_room, pd_pft_name, mainMobNum;
+    String spo_mat_rec, entry_stock, game_sport_room, pd_pft_name, pd_pft_num;
     String play_avail, plan_play, land_measure, ground_level_status, scouts_guides_status, scout_guide_name, scut_guide_num;
     String ncc_stu_impl, ncc_teacher_name, ncc_teacher_contact, ncc_teacher_battalion_num;
     String smc_election_status, smc_chai_name, smc_chai_contact, smc_parents_meeting;
     String kitchen_garden_status, kitchen_event_in_charge_name, type_kitchen_garden, kitchen_in_charge_name, kitchen_in_charge_contact;
     String harita_haram_status, student_council_ele_status, stu_com_name_dis_status;
     String stu_com_name_dis_status_reason, stu_Cou_cap_name, stu_Cou_date;
+    private List<StudAchievementEntity> studAchievementEntities;
+    private List<PlantsEntity> plantsEntities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,7 @@ public class CoCurricularActivity extends BaseActivity {
         cocurricularViewModel = ViewModelProviders.of(CoCurricularActivity.this,
                 new CocurricularCustomViewModel(binding, this, getApplication())).get(CocurricularViewModel.class);
         binding.setViewModel(cocurricularViewModel);
+        instMainViewModel = new InstMainViewModel(getApplication());
 
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -71,7 +79,63 @@ public class CoCurricularActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if (submitValidate()) {
-                    startActivity(new Intent(CoCurricularActivity.this, EntitlementsActivity.class));
+
+                    coCurricularEntity = new CoCurricularEntity();
+                    coCurricularEntity.setOfficer_id(officerId);
+                    coCurricularEntity.setInspection_time(Utils.getCurrentDateTime());
+                    coCurricularEntity.setInstitute_id(instId);
+
+                    coCurricularEntity.setSport_mat_received(spo_mat_rec);
+                    coCurricularEntity.setStock_entry_register(entry_stock);
+                    coCurricularEntity.setGame_sport_room_avail(game_sport_room);
+                    coCurricularEntity.setPd_pft_name(pd_pft_name);
+                    coCurricularEntity.setPd_pft_contact(pd_pft_num);
+
+                    if (studAchievementEntities != null && studAchievementEntities.size() > 0) {
+                        coCurricularEntity.setStudAchievementEntities(studAchievementEntities);
+                    }
+
+                    coCurricularEntity.setPlay_ground_avail(play_avail);
+                    coCurricularEntity.setLand_mea_value(land_measure);
+                    coCurricularEntity.setPlan_to_prc_land(plan_play);
+
+                    coCurricularEntity.setGround_level_status(ground_level_status);
+
+                    coCurricularEntity.setScouts_guides_impl_status(scouts_guides_status);
+                    coCurricularEntity.setScout_guide_captain_name(scout_guide_name);
+                    coCurricularEntity.setScout_guide_captain_contact(scut_guide_num);
+
+                    coCurricularEntity.setNcc_impl_status(ncc_stu_impl);
+                    coCurricularEntity.setNcc_teacher_name(ncc_teacher_name);
+                    coCurricularEntity.setNcc_teacher_contact(ncc_teacher_contact);
+                    coCurricularEntity.setNcc_teacher_battalion_num(ncc_teacher_battalion_num);
+
+                    coCurricularEntity.setSmc_ele_status(smc_election_status);
+                    coCurricularEntity.setSmc_ele_chairman_name(smc_chai_name);
+                    coCurricularEntity.setSmc_ele_chairman_contact(smc_chai_contact);
+                    coCurricularEntity.setSmc_ele_con_parent_meeting(smc_parents_meeting);
+
+
+                    coCurricularEntity.setKitchen_garden_status(kitchen_garden_status);
+                    coCurricularEntity.setKitchen_in_charge_event_name(kitchen_event_in_charge_name);
+                    coCurricularEntity.setKitchen_garden_types(type_kitchen_garden);
+                    coCurricularEntity.setKitchen_garden_in_charge_name(kitchen_in_charge_name);
+                    coCurricularEntity.setKitchen_garden_in_charge_contact(kitchen_in_charge_contact);
+
+
+                    coCurricularEntity.setHarita_haram_status(harita_haram_status);
+                    if (plantsEntities != null && plantsEntities.size() > 0) {
+                        coCurricularEntity.setPlantsEntities(plantsEntities);
+                    }
+
+                    coCurricularEntity.setStu_cou_ele_status(student_council_ele_status);
+                    coCurricularEntity.setStu_com_display_status(stu_com_name_dis_status);
+                    coCurricularEntity.setStu_cou_captain_name(stu_Cou_cap_name);
+                    coCurricularEntity.setStu_cou_date(stu_Cou_date);
+                    coCurricularEntity.setReason(stu_com_name_dis_status_reason);
+
+
+                    Utils.customSaveAlert(CoCurricularActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
             }
         });
@@ -86,7 +150,7 @@ public class CoCurricularActivity extends BaseActivity {
                     spo_mat_rec = AppConstants.No;
                     binding.llEnteredStock.setVisibility(View.GONE);
                 } else {
-                    spo_mat_rec = AppConstants.No;
+                    spo_mat_rec = null;
                     binding.llEnteredStock.setVisibility(View.GONE);
                 }
             }
@@ -99,7 +163,7 @@ public class CoCurricularActivity extends BaseActivity {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.entry_register_no) {
                     entry_stock = AppConstants.No;
                 } else {
-                    entry_stock = AppConstants.No;
+                    entry_stock = null;
                 }
             }
         });
@@ -112,7 +176,7 @@ public class CoCurricularActivity extends BaseActivity {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.game_room_no) {
                     game_sport_room = AppConstants.No;
                 } else {
-                    game_sport_room = AppConstants.No;
+                    game_sport_room = null;
                 }
             }
         });
@@ -131,7 +195,7 @@ public class CoCurricularActivity extends BaseActivity {
                 } else {
                     binding.measLandAvail.setVisibility(View.GONE);
                     binding.llPlanToProcure.setVisibility(View.GONE);
-                    play_avail = AppConstants.No;
+                    play_avail = null;
                 }
             }
         });
@@ -144,7 +208,7 @@ public class CoCurricularActivity extends BaseActivity {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_planToProcNo) {
                     plan_play = AppConstants.No;
                 } else {
-                    plan_play = AppConstants.No;
+                    plan_play = null;
                 }
             }
         });
@@ -157,7 +221,7 @@ public class CoCurricularActivity extends BaseActivity {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.ground_lev_no) {
                     ground_level_status = AppConstants.No;
                 } else {
-                    ground_level_status = AppConstants.No;
+                    ground_level_status = null;
                 }
             }
         });
@@ -172,7 +236,7 @@ public class CoCurricularActivity extends BaseActivity {
                     scouts_guides_status = AppConstants.No;
                 } else {
                     binding.llScoutEntries.setVisibility(View.GONE);
-                    scouts_guides_status = AppConstants.No;
+                    scouts_guides_status = null;
                 }
             }
         });
@@ -188,7 +252,7 @@ public class CoCurricularActivity extends BaseActivity {
                     ncc_stu_impl = AppConstants.No;
                 } else {
                     binding.llNccEntries.setVisibility(View.GONE);
-                    ncc_stu_impl = AppConstants.No;
+                    ncc_stu_impl = null;
                 }
             }
         });
@@ -203,7 +267,7 @@ public class CoCurricularActivity extends BaseActivity {
                     smc_election_status = AppConstants.No;
                     binding.llSmcElectionsEnties.setVisibility(View.GONE);
                 } else {
-                    smc_election_status = AppConstants.No;
+                    smc_election_status = null;
                     binding.llSmcElectionsEnties.setVisibility(View.GONE);
                 }
             }
@@ -220,7 +284,7 @@ public class CoCurricularActivity extends BaseActivity {
                     kitchen_garden_status = AppConstants.No;
                 } else {
                     binding.llKitchenEntries.setVisibility(View.GONE);
-                    kitchen_garden_status = AppConstants.No;
+                    kitchen_garden_status = null;
                 }
             }
         });
@@ -228,6 +292,7 @@ public class CoCurricularActivity extends BaseActivity {
         binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
                     harita_haram_status = AppConstants.Yes;
                     binding.llPlants.setVisibility(View.VISIBLE);
@@ -235,8 +300,7 @@ public class CoCurricularActivity extends BaseActivity {
                     harita_haram_status = AppConstants.No;
                     binding.llPlants.setVisibility(View.GONE);
                 } else {
-                    harita_haram_status = AppConstants.No;
-                    binding.llPlants.setVisibility(View.GONE);
+                    harita_haram_status = null;
                 }
             }
         });
@@ -252,7 +316,7 @@ public class CoCurricularActivity extends BaseActivity {
                     binding.llStudCommEntries.setVisibility(View.VISIBLE);
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
                 } else {
-                    student_council_ele_status = AppConstants.No;
+                    student_council_ele_status = null;
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
                 }
@@ -269,7 +333,7 @@ public class CoCurricularActivity extends BaseActivity {
                     stu_com_name_dis_status = AppConstants.No;
                     binding.etReason.setVisibility(View.VISIBLE);
                 } else {
-                    stu_com_name_dis_status = AppConstants.No;
+                    stu_com_name_dis_status = null;
                     binding.etReason.setVisibility(View.GONE);
                 }
             }
@@ -299,7 +363,6 @@ public class CoCurricularActivity extends BaseActivity {
         });
 
 
-
         binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -316,15 +379,28 @@ public class CoCurricularActivity extends BaseActivity {
         });
 
 
+        cocurricularViewModel.getAchievementInfo().observe(CoCurricularActivity.this, new Observer<List<StudAchievementEntity>>() {
+            @Override
+            public void onChanged(List<StudAchievementEntity> studAchievementEntities) {
+                CoCurricularActivity.this.studAchievementEntities = studAchievementEntities;
+            }
+        });
+        cocurricularViewModel.getPlantsInfo().observe(CoCurricularActivity.this, new Observer<List<PlantsEntity>>() {
+            @Override
+            public void onChanged(List<PlantsEntity> plantsEntities) {
+                CoCurricularActivity.this.plantsEntities = plantsEntities;
+            }
+        });
+
         LiveData<Integer> liveData = cocurricularViewModel.getAchievementsCnt();
         liveData.observe(CoCurricularActivity.this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer cnt) {
                 if (cnt != null && cnt > 0) {
                     binding.btnViewStud.setVisibility(View.VISIBLE);
-                    slNoCnt = cnt;
+                    achSloCnt = cnt;
                 } else {
-                    slNoCnt = 0;
+                    achSloCnt = 0;
                     binding.btnViewStud.setVisibility(View.GONE);
                 }
             }
@@ -334,13 +410,14 @@ public class CoCurricularActivity extends BaseActivity {
         liveData1.observe(CoCurricularActivity.this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer cnt) {
+
+                binding.btnAddplant.setVisibility(View.VISIBLE);
                 if (cnt != null && cnt > 0) {
                     binding.btnViewplant.setVisibility(View.VISIBLE);
                     slNoCnt = cnt;
                 } else {
                     slNoCnt = 0;
                     binding.btnViewplant.setVisibility(View.GONE);
-                    binding.llPlants.setVisibility(View.GONE);
                 }
             }
         });
@@ -348,17 +425,14 @@ public class CoCurricularActivity extends BaseActivity {
 
     public void showStudAcheivementDetails() {
         View view = getLayoutInflater().inflate(R.layout.stud_acheivement_bottom_sheet, null);
-        bottomll = view.findViewById(R.id.bottomll);
+        bottomll = view.findViewById(R.id.bottom_ll);
         dialog = new BottomSheetDialog(CoCurricularActivity.this);
-        LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
-        bottomSheetBehavior.setPeekHeight(2500);
         dialog.setContentView(view);
         dialog.setCancelable(false);
         dialog.show();
 
         CustomFontTextView slNo = view.findViewById(R.id.tv_slCount);
-        slNo.setText(String.valueOf(slNoCnt + 1));
+        slNo.setText(String.valueOf(achSloCnt + 1));
         CustomFontEditText stuNameEt = view.findViewById(R.id.et_studName);
         CustomFontEditText classEt = view.findViewById(R.id.et_class);
         CustomFontEditText locationEt = view.findViewById(R.id.et_location);
@@ -398,7 +472,7 @@ public class CoCurricularActivity extends BaseActivity {
                     if (validate()) {
 
                         StudAchievementEntity studAchievementEntity = new StudAchievementEntity();
-                        studAchievementEntity.setSl_no(slNoCnt + 1);
+                        studAchievementEntity.setSl_no(achSloCnt + 1);
                         studAchievementEntity.setStudclass(studClassStr);
                         studAchievementEntity.setStudname(stuNameStr);
                         studAchievementEntity.setParticipated_win(participationStr);
@@ -422,9 +496,6 @@ public class CoCurricularActivity extends BaseActivity {
         View view = getLayoutInflater().inflate(R.layout.plant_details_bottom_sheet, null);
         rootLayout = view.findViewById(R.id.root_cl);
         dialog = new BottomSheetDialog(CoCurricularActivity.this);
-        LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
-        bottomSheetBehavior.setPeekHeight(1500);
         dialog.setContentView(view);
         dialog.setCancelable(false);
         dialog.show();
@@ -478,6 +549,9 @@ public class CoCurricularActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(plantCntStr)) {
             showBottomSheetSnackBar("Please enter no of plants");
             returnFlag = false;
+        } else if (!(Integer.valueOf(plantCntStr) > 0)) {
+            showBottomSheetSnackBar("Count should be greater than zero");
+            returnFlag = false;
         }
         return returnFlag;
     }
@@ -511,7 +585,7 @@ public class CoCurricularActivity extends BaseActivity {
 
     private boolean submitValidate() {
         pd_pft_name = binding.pdPftEt.getText().toString();
-        mainMobNum = binding.pdMobEt.getText().toString();
+        pd_pft_num = binding.pdMobEt.getText().toString();
         land_measure = binding.etLand.getText().toString();
 
         scout_guide_name = binding.etScGuNmae.getText().toString();
@@ -547,16 +621,16 @@ public class CoCurricularActivity extends BaseActivity {
             binding.pdPftEt.requestFocus();
             showSnackBar("Enter name of PD/PFT");
             returnFlag = false;
-        } else if (TextUtils.isEmpty(mainMobNum)) {
+        } else if (TextUtils.isEmpty(pd_pft_num)) {
             binding.pdMobEt.requestFocus();
             showSnackBar("Enter mobile number");
             returnFlag = false;
-        } else if (mainMobNum.length() != 10) {
+        } else if (pd_pft_num.length() != 10) {
             binding.pdMobEt.requestFocus();
             showSnackBar("Enter valid mobile number");
             returnFlag = false;
-        } else if (!(mainMobNum.startsWith("6")
-                || mainMobNum.startsWith("7") || mainMobNum.startsWith("8") || mainMobNum.startsWith("9"))) {
+        } else if (!(pd_pft_num.startsWith("6")
+                || pd_pft_num.startsWith("7") || pd_pft_num.startsWith("8") || pd_pft_num.startsWith("9"))) {
             binding.pdMobEt.requestFocus();
             showSnackBar("Enter valid mobile number");
             returnFlag = false;
@@ -597,11 +671,7 @@ public class CoCurricularActivity extends BaseActivity {
             binding.scoutsMobNo.requestFocus();
             showSnackBar("Enter scout / guide valid mobile number");
             returnFlag = false;
-        }
-
-
-
-        else if (TextUtils.isEmpty(ncc_stu_impl)) {
+        } else if (TextUtils.isEmpty(ncc_stu_impl)) {
             showSnackBar("Select NCC student implementation status");
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
@@ -630,10 +700,7 @@ public class CoCurricularActivity extends BaseActivity {
             binding.nccBatallionNo.requestFocus();
             showSnackBar("Enter NCC battalion number");
             returnFlag = false;
-        }
-
-
-        else if (TextUtils.isEmpty(smc_election_status)) {
+        } else if (TextUtils.isEmpty(smc_election_status)) {
             showSnackBar("Select SMC elections status");
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
@@ -694,6 +761,9 @@ public class CoCurricularActivity extends BaseActivity {
         } else if (TextUtils.isEmpty(harita_haram_status)) {
             showSnackBar("Select harita haram conducted status");
             returnFlag = false;
+        } else if (harita_haram_status.equals(AppConstants.Yes) && !(plantsEntities != null && plantsEntities.size() > 0)) {
+            showSnackBar("Submit haritha haram information by clicking add button");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(student_council_ele_status)) {
             showSnackBar("Select student council election conducted status");
             returnFlag = false;
@@ -747,7 +817,31 @@ public class CoCurricularActivity extends BaseActivity {
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
-        datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
     }
 
+    @Override
+    public void submitData() {
+        long x = cocurricularViewModel.insertCoCurricularInfo(coCurricularEntity);
+        if (x >= 0) {
+            long z = 0;
+            try {
+                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 8, instId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z >= 0) {
+                showSnackBar(getString(R.string.data_saved));
+                startActivity(new Intent(CoCurricularActivity.this, EntitlementsActivity.class));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 }

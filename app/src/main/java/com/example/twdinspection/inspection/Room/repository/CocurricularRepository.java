@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.twdinspection.inspection.Room.Dao.CocurricularDao;
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
@@ -125,9 +126,61 @@ public class CocurricularRepository {
         return x;
     }
 
+    public long insertCoCurricularInfo(CoCurricularEntity coCurricularEntity) {
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                cocurricularDao.insertCoCurricularInfo(coCurricularEntity);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag+"onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag+"onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag+"onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag+"onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
+
+
     public LiveData<Integer> getAchievementsCnt() {
         return cocurricularDao.getAchievementsCnt();
     }
+
+    public LiveData<List<StudAchievementEntity>> getStudentAchLiveData() {
+        return cocurricularDao.getAchLiveData();
+    }
+
+
+    public LiveData<List<PlantsEntity>> getPlantsListLiveData() {
+        return cocurricularDao.getPlantLiveData();
+    }
+
     public LiveData<Integer> getPlantsCnt() {
         return cocurricularDao.getPlantsCnt();
     }

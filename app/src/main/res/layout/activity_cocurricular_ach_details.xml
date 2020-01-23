@@ -15,7 +15,12 @@
         android:id="@+id/root"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/app_bar_layout"
+            layout="@layout/action_bar_layout" />
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/app_bar_layout"
             android:id="@+id/call_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,12 +34,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_alignParentBottom="true"
-            android:id="@+id/cl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/call_rv"
-            android:background="@android:color/transparent" />
     </RelativeLayout>
 </layout>

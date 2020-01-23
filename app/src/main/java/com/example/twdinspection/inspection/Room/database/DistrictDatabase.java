@@ -32,6 +32,7 @@ import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInf
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
@@ -57,7 +58,8 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
         InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
-        , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class}, version = 1, exportSchema = false)
+        , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
+        , CoCurricularEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();

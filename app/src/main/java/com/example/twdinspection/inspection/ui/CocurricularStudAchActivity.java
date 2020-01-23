@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class CocurricularStudAchActivity extends BaseActivity implements StudAchievementsInterface {
+public class CocurricularStudAchActivity extends AppCompatActivity implements StudAchievementsInterface {
 
     private ActivityCocurricularAchDetailsBinding binding;
     private StudAchViewModel viewModel;
@@ -28,7 +29,10 @@ public class CocurricularStudAchActivity extends BaseActivity implements StudAch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_cocurricular_ach_details,"Student Achievements");
+        binding = DataBindingUtil.setContentView(this, (R.layout.activity_cocurricular_ach_details));
+        binding.appBarLayout.backBtn.setVisibility(View.GONE);
+        binding.appBarLayout.ivHome.setVisibility(View.GONE);
+        binding.appBarLayout.headerTitle.setText(getString(R.string.stu_ach));
 
         viewModel = ViewModelProviders.of(this,
                 new StudAchCustomViewModel(binding, this, getApplication())).get(StudAchViewModel.class);

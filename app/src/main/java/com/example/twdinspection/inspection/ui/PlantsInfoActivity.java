@@ -3,6 +3,8 @@ package com.example.twdinspection.inspection.ui;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class PlantsInfoActivity extends BaseActivity implements PlantsInfoInterface {
+public class PlantsInfoActivity extends AppCompatActivity implements PlantsInfoInterface {
 
     private ActivityPlantsInfoBinding binding;
     private PlantsInfoViewModel viewModel;
@@ -32,7 +34,11 @@ public class PlantsInfoActivity extends BaseActivity implements PlantsInfoInterf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_plants_info,getResources().getString(R.string.title_plant_info));
+
+        binding = DataBindingUtil.setContentView(this, (R.layout.activity_plants_info));
+        binding.appBarLayout.backBtn.setVisibility(View.GONE);
+        binding.appBarLayout.ivHome.setVisibility(View.GONE);
+        binding.appBarLayout.headerTitle.setText(getString(R.string.title_plant_info));
 
         viewModel = ViewModelProviders.of(this,
                 new PlantsInfoCustomViewModel(binding, this, getApplication())).get(PlantsInfoViewModel.class);

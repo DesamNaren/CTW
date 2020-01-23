@@ -3,6 +3,8 @@ package com.example.twdinspection.inspection.ui;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -18,7 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ViewMedicalActivity extends BaseActivity {
+public class ViewMedicalActivity extends AppCompatActivity {
 
     private ActivityViewMedicalBinding binding;
     private GViewMedicalDetailsAdapter GViewMedicalDetailsAdapter;
@@ -33,7 +35,11 @@ public class ViewMedicalActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_view_medical, getResources().getString(R.string.medical_health));
+        binding = DataBindingUtil.setContentView(this, (R.layout.activity_view_medical));
+        binding.appBarLayout.backBtn.setVisibility(View.GONE);
+        binding.appBarLayout.ivHome.setVisibility(View.GONE);
+        binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
+
         MedicalDetailsViewModel viewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(viewModel);
         listDataChild = new HashMap<>();
