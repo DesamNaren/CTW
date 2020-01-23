@@ -132,6 +132,7 @@ public class LocBaseActivity extends AppCompatActivity {
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.setContentView(R.layout.custom_alert_information);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setCancelable(false);
                 CustomFontTextView dialogMessage = dialog.findViewById(R.id.dialog_message);
                 dialogMessage.setText(getString(R.string.plz_grant));
