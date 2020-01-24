@@ -93,6 +93,12 @@ public interface TWDService {
     @POST("upload/uploadSchemePhotos")
     Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image2);
 
+    @Multipart
+    @POST("upload/uploadSchemePhotos")
+    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image1,@Part MultipartBody.Part image2,
+                                                          @Part MultipartBody.Part image3,@Part MultipartBody.Part image4,@Part MultipartBody.Part image5,
+                                                          @Part MultipartBody.Part image6,@Part MultipartBody.Part image7,@Part MultipartBody.Part image8);
+
     @GET("CTWServiceDetails/getDMVMasters")
     Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);
 

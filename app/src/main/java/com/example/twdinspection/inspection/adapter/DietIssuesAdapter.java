@@ -22,13 +22,10 @@ public class DietIssuesAdapter extends RecyclerView.Adapter<DietIssuesAdapter.It
     Context context;
     List<DietListEntity> list;
     private int selectedPos = -1;
-    DietInterface dietInterface;
 
     public DietIssuesAdapter(Context context, List<DietListEntity> list) {
         this.context = context;
         this.list = list;
-        dietInterface=(DietInterface)context;
-
     }
 
     @NonNull

@@ -451,7 +451,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             RequestBody requestFile1 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file2);
             MultipartBody.Part body2 =
-                    MultipartBody.Part.createFormData("image", file1.getName(), requestFile1);
+                    MultipartBody.Part.createFormData("image", file2.getName(), requestFile1);
             callUploadPhoto(body,body2);
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();

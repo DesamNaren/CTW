@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel" />
+
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/root"
         android:layout_height="match_parent">
 
-
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
+            android:layout_below="@id/header"
             android:background="@color/light_gray">
 
             <LinearLayout
@@ -49,9 +60,10 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
+                                android:id="@+id/iv_storeRoom"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -79,9 +91,10 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
+                                android:id="@+id/iv_varandah"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -122,9 +135,10 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
+                                android:id="@+id/iv_playgound"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -152,9 +166,10 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
+                                android:id="@+id/iv_diningHall"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -194,10 +209,11 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_dormitory"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/dormitory" />
@@ -224,10 +240,11 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_mainBuilding"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/main_buildings" />
@@ -266,10 +283,11 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_toilet"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/toilet" />
@@ -296,9 +314,10 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
+                                android:id="@+id/iv_kitchen"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -338,10 +357,11 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_classroom"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/classroom" />
@@ -352,7 +372,13 @@
 
             </LinearLayout>
         </ScrollView>
-
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
         <include
             android:id="@+id/btn_layout"
             layout="@layout/buttons_layout" />

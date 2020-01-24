@@ -508,5 +508,6 @@
     <string name="students_are_using_as_per_schedule">Students are using as per schedule</string>
     <string name="name_of_the_tab_lab_in_charge">Name of the tab lab in charge</string>
     <string name="add_enter_number">Enter number</string>
+    <string name="title_academic">Academic Overview</string>
 
 </resources>

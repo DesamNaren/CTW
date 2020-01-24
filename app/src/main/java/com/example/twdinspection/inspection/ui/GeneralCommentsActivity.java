@@ -462,4 +462,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             showSnackBar(getString(R.string.failed));
         }
     }
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 }

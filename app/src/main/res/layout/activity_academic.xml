@@ -17,10 +17,6 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
-        <include
-            android:id="@+id/header"
-            layout="@layout/header_layout" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@+id/header"
             android:background="@color/grey_light"
             android:visibility="visible">
 

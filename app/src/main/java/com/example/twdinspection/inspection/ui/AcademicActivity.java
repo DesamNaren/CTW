@@ -21,7 +21,7 @@ import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
 
-public class AcademicActivity extends AppCompatActivity {
+public class AcademicActivity extends BaseActivity {
     ActivityAcademicBinding binding;
     AcademicViewModel academicViewModel;
     AcademicOveriewEntity academicOveriewEntity;
@@ -30,9 +30,8 @@ public class AcademicActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_academic);
-        TextView tv_title = findViewById(R.id.header_title);
-        tv_title.setText("Academic Overview");
+        binding = putContentView(R.layout.activity_academic,getString(R.string.title_academic));
+
 
         academicViewModel = ViewModelProviders.of(AcademicActivity.this,
                 new AcademicCustomViewModel(binding, this, getApplication())).get(AcademicViewModel.class);
@@ -274,5 +273,9 @@ public class AcademicActivity extends AppCompatActivity {
                 startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.callBack();
     }
 }

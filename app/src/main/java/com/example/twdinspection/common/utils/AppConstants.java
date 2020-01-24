@@ -32,11 +32,12 @@ public class AppConstants {
     public static final String MAN_NAME = "MAN_NAME";
     public static final String PARTICIPATED = "Participated";
     public static final String WIN = "Win";
-    public static String PRESENT = "Present";
-    public static String ABSENT = "Absent";
-    public static String ONDEPUTATION = "On Deputation";
-    public static String Yes="YES";
-    public static String No="NO";
+    public static final String CLASSROOM ="Classroom";
+    public static final String PRESENT = "Present";
+    public static final String ABSENT = "Absent";
+    public static final String ONDEPUTATION = "On Deputation";
+    public static final String Yes="YES";
+    public static final String No="NO";
 
 
     public static final int SUCCESS_CODE = 200;
@@ -44,4 +45,12 @@ public class AppConstants {
 
     public static final String SUCCESS_STRING_CODE = "200";
     public static final String FAILURE_STRING_CODE = "201";
+    public static final String STOREROOM = "StoreRoom";
+    public static final String VARANDAH = "Varandah";
+    public static final String PLAYGROUND = "PlayGround";
+    public static final String DININGHALL = "Dining_Hall";
+    public static final String DORMITORY = "Dormitory";
+    public static final String MAINBUILDING = "Main_Building";
+    public static final String TOILET = "Toilet";
+    public static final String KITCHEN = "Kitchen";
 }

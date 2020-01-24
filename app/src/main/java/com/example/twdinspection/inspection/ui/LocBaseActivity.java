@@ -78,7 +78,7 @@ public class LocBaseActivity extends AppCompatActivity {
     public Location mCurrentLocation;
 
     // boolean flag to toggle the ui
-    private Boolean mRequestingLocationUpdates = false;
+    public Boolean mRequestingLocationUpdates = false;
 
 
     String[] permissions = new String[]{
@@ -125,7 +125,7 @@ public class LocBaseActivity extends AppCompatActivity {
         return flag;
     }
 
-    private void customPerAlert() {
+    public void customPerAlert() {
         try {
             final Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
