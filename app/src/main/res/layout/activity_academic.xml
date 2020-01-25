@@ -12,17 +12,12 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Will be Implemented Soon"
-            android:visibility="gone" />
 
         <ScrollView
             android:id="@+id/scrl"
@@ -742,7 +737,7 @@
                         </RadioGroup>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/punadi_prgm_reason_et"
+                            android:id="@+id/t_punadi_prgm_reason"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -751,6 +746,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_punadi_prgm_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
@@ -819,7 +815,7 @@
                         </RadioGroup>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/punadi2_testmarks_reason_et"
+                            android:id="@+id/t_punadi2_testmarks_reason"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -828,6 +824,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_punadi2_testmarks_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
@@ -896,7 +893,7 @@
                         </RadioGroup>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/kara_dipath_prgm_cond_et"
+                            android:id="@+id/t_kara_dipath_prgm_cond"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -905,6 +902,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_kara_dipath_prgm_cond"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
@@ -1099,7 +1097,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/name_lab_et"
+                                    android:id="@+id/et_lab_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/name_of_the_science_lab"
@@ -1116,7 +1114,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/name_lab_incharge_et"
+                                    android:id="@+id/et_lab_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
@@ -1133,7 +1131,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/lab_mobileNo_et"
+                                    android:id="@+id/et_lab_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/mobile_number"
@@ -1185,7 +1183,7 @@
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/mat_enter_reg_reason_et"
+                            android:id="@+id/t_mat_enter_reg_reason"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1194,6 +1192,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_mat_enter_reg_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
@@ -1282,7 +1281,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/no_of_books_et"
+                                    android:id="@+id/et_no_of_books"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/no_of_books_available"
@@ -1300,7 +1299,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/name_library_incharge_et"
+                                    android:id="@+id/et_name_library_incharge"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/name_of_the_library_in_charge_teacher"
@@ -1317,7 +1316,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/library_mobileNo_et"
+                                    android:id="@+id/et_library_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/mobile_number"
@@ -1419,7 +1418,6 @@
                     android:orientation="horizontal"
                     android:padding="@dimen/dimen_5dp">
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1472,7 +1470,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tv_rot_working_status_et"
+                            android:id="@+id/t_tv_rot_working_status"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1481,6 +1479,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_tv_rot_working_status"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/working_status"
@@ -1570,7 +1569,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/mana_tv_lessons_reason_et"
+                                    android:id="@+id/et_mana_tv_lessons_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/state_the_reason"
@@ -1587,7 +1586,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/mana_tv_incharge_name_et"
+                                    android:id="@+id/et_mana_tv_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/mana_tv_incharge_teacher_name"
@@ -1604,7 +1603,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/mana_tv_mobileNo_et"
+                                    android:id="@+id/et_mana_tv_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/mobile_number"
@@ -1697,7 +1696,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/no_of_computers_available_et"
+                                    android:id="@+id/et_no_of_computers_available"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/number_of_computers_available"
@@ -1715,7 +1714,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/comp_working_status_et"
+                                    android:id="@+id/et_comp_working_status"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/working_status_of_computer"
@@ -1732,7 +1731,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/working_status_projector_et"
+                                    android:id="@+id/et_working_status_projector"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/working_status_of_projector"
@@ -1794,7 +1793,7 @@
 
 
                                     <com.example.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/name_ict_instr_et"
+                                        android:id="@+id/et_name_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/name_of_the_ict_instructor"
@@ -1811,7 +1810,7 @@
 
 
                                     <com.example.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/mob_no_ict_instr_et"
+                                        android:id="@+id/et_mob_no_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/mobile_number"
@@ -2042,334 +2041,357 @@
 
                         </LinearLayout>
 
-
                         <LinearLayout
-                            android:id="@+id/ll_showing_to_stud"
+                            android:id="@+id/ll_elearning"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:visibility="gone">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/showing_to_students_as_per_schedule"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_showing_stud"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_showing_stud_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_showing_stud_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/ll_name_vol_school"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="gone">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:errorEnabled="true">
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/showing_to_students_as_per_schedule"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_showing_stud"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_5dp"
+                                    android:orientation="horizontal">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/name_vol_school_coord_et"
+                                    <RadioButton
+                                        android:id="@+id/rb_showing_stud_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_showing_stud_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_name_vol_school"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_voluntary_school_coordinator"
-                                    android:imeOptions="actionNext"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:errorEnabled="true">
+                                    app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/mob_no_vol_school_coord_et"
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_vol_school_coord_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/name_of_the_voluntary_school_coordinator"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="number"
-                                    android:maxLength="10"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
+                                    app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/name_eLearning_inchrg_et"
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_vol_school_coord_mob_no"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/mobile_number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:maxLength="10"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:orientation="vertical">
 
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/mobileNo_eLearning_inchrg_et"
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_eLearning_inchrg_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_eLearning_inchrg_mobileNo"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/mobile_number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:maxLength="10"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/mobile_number"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:maxLength="10"
-                                android:singleLine="true" />
+                                android:orientation="vertical">
 
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/separate_time_table_displayed"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_separate_timetable_disp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_separate_timetable_disp_yes"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="@string/separate_time_table_displayed"
+                                    android:textColor="@color/black" />
 
-                                <RadioButton
-                                    android:id="@+id/rb_separate_timetable_disp_no"
+                                <RadioGroup
+                                    android:id="@+id/rg_separate_timetable_disp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_5dp"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_separate_timetable_disp_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_separate_timetable_disp_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:text="@string/whether_the_tabs_supplied"
+                                    android:textColor="@color/black" />
 
-                            </RadioGroup>
+                                <RadioGroup
+                                    android:id="@+id/rg_tabs_supplied"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_5dp"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_tabs_supplied_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_tabs_supplied_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_tabs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_no_of_tabs"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/number_of_tabs"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/students_are_using_as_per_schedule"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_stud_using_as_per_sched"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_5dp"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/rb_stud_using_as_per_sched_yes"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_stud_using_as_per_sched_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_tab_incharge_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/name_of_the_tab_lab_in_charge"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_tab_incharge_mblno"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/mobile_number"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:maxLength="10"
+                                        android:singleLine="true" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/separate_time_table_displayed"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_tabs_timetable_disp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_5dp"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/rb_tabs_timetable_disp_yes"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_tabs_timetable_disp_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/whether_the_tabs_supplied"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_tabs_supplied"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_tabs_supplied_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_tabs_supplied_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/no_of_tabs_et"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/number_of_tabs"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/students_are_using_as_per_schedule"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_stud_using_as_per_sched"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_stud_using_as_per_sched_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_stud_using_as_per_sched_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/name_of_tab_inchrg_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/name_of_the_tab_lab_in_charge"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/mobNo_of_tab_inchrg_et"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/mobile_number"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:maxLength="10"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/separate_time_table_displayed"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_tabs_timetable_disp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_tabs_timetable_disp_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_tabs_timetable_disp_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

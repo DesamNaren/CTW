@@ -341,55 +341,55 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
 
-                if (PIC_TYPE == AppConstants.STOREROOM) {
+                if (PIC_TYPE.equals(AppConstants.STOREROOM)) {
                     flag_storeroom = 1;
                     binding.ivStoreRoom.setImageBitmap(bm);
                     binding.ivStoreRoom.setPadding(0, 0, 0, 0);
                     binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_storeroom = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.VARANDAH) {
+                } else if (PIC_TYPE.equals(AppConstants.VARANDAH)) {
                     flag_varandah = 1;
                     binding.ivVarandah.setImageBitmap(bm);
                     binding.ivVarandah.setPadding(0, 0, 0, 0);
                     binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
                     file_varandah = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.PLAYGROUND) {
+                } else if (PIC_TYPE.equals(AppConstants.PLAYGROUND)) {
                     flag_playGround = 1;
                     binding.ivPlaygound.setImageBitmap(bm);
                     binding.ivPlaygound.setPadding(0, 0, 0, 0);
                     binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
                     file_playGround = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.DININGHALL) {
+                } else if (PIC_TYPE.equals(AppConstants.DININGHALL)) {
                     flag_diningHall = 1;
                     binding.ivDiningHall.setImageBitmap(bm);
                     binding.ivDiningHall.setPadding(0, 0, 0, 0);
                     binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
                     file_diningHall = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.DORMITORY) {
+                } else if (PIC_TYPE.equals(AppConstants.DORMITORY)) {
                     flag_dormitory = 1;
                     binding.ivDormitory.setImageBitmap(bm);
                     binding.ivDormitory.setPadding(0, 0, 0, 0);
                     binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
                     file_dormitory = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.MAINBUILDING) {
+                } else if (PIC_TYPE.equals(AppConstants.MAINBUILDING)) {
                     flag_mainBuilding = 1;
                     binding.ivMainBuilding.setImageBitmap(bm);
                     binding.ivMainBuilding.setPadding(0, 0, 0, 0);
                     binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
                     file_mainBulding = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.TOILET) {
+                } else if (PIC_TYPE.equals(AppConstants.TOILET)) {
                     flag_toilet = 1;
                     binding.ivToilet.setImageBitmap(bm);
                     binding.ivToilet.setPadding(0, 0, 0, 0);
                     binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
                     file_toilet = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.KITCHEN) {
+                } else if (PIC_TYPE.equals(AppConstants.KITCHEN)) {
                     flag_kitchen = 1;
                     binding.ivKitchen.setImageBitmap(bm);
                     binding.ivKitchen.setPadding(0, 0, 0, 0);
                     binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
                     file_kitchen = new File(FilePath);
-                } else if (PIC_TYPE == AppConstants.CLASSROOM) {
+                } else if (PIC_TYPE.equals(AppConstants.CLASSROOM)) {
                     flag_classroom = 1;
                     binding.ivClassroom.setImageBitmap(bm);
                     binding.ivClassroom.setPadding(0, 0, 0, 0);

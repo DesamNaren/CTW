@@ -45,7 +45,7 @@ public class UploadPhotoViewModel extends ViewModel {
             errorHandlerInterface = (ErrorHandlerInterface) context;
             schemeSubmitInterface = (SchemeSubmitInterface) context;
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
