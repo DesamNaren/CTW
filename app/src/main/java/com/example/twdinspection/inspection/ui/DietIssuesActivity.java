@@ -71,7 +71,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 if (dietIssuesEntities != null && dietIssuesEntities.size() > 0) {
                     dietInfoEntityListMain = dietIssuesEntities;
                     adapter = new DietIssuesAdapter(DietIssuesActivity.this, dietInfoEntityListMain);
-                    binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this,2));
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
                     binding.recyclerView.setAdapter(adapter);
                 } else {
                     LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
@@ -289,13 +289,21 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
         long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 5, instID);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");;
+                liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(DietIssuesActivity.this, InfraActivity.class));
             } else {
@@ -310,6 +318,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.callBack();
+    }
 
     @Override
     public void validate() {

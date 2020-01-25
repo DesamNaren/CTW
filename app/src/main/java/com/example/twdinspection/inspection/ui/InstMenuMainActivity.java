@@ -36,6 +36,7 @@ public class InstMenuMainActivity extends AppCompatActivity
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String instId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,11 +69,14 @@ public class InstMenuMainActivity extends AppCompatActivity
                     setAdapter(menuInfoEntities);
                 } else {
                     String[] stringArray = getResources().getStringArray(R.array.inst_sections);
-                    ArrayList<String> sections = new ArrayList<String>(Arrays.asList(stringArray));
+                    ArrayList<String> sections = new ArrayList<>(Arrays.asList(stringArray));
+
+                    String[] stringArrayNames = getResources().getStringArray(R.array.inst_sections_names);
+                    ArrayList<String> sectionsNames = new ArrayList<>(Arrays.asList(stringArrayNames));
                     if (sections.size() > 0) {
                         menuInfoEntities = new ArrayList<>();
-                        for (int x=0;x<sections.size();x++) {
-                            menuInfoEntities.add(new InstMenuInfoEntity(instId,x+1, 0, sections.get(x), null));
+                        for (int x = 0; x < sections.size(); x++) {
+                            menuInfoEntities.add(new InstMenuInfoEntity(instId, x + 1, 0, sections.get(x), null, sectionsNames.get(x)));
                         }
                         if (menuInfoEntities.size() > 0) {
                             instMainViewModel.insertMenuSections(menuInfoEntities);

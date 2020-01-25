@@ -14,13 +14,15 @@ public class InstMenuInfoEntity {
     private int flag_completed;
     private String section_name;
     private String section_time;
+    private String section_short_name;
 
-    public InstMenuInfoEntity(String instId, int section_id, int flag_completed, String section_name, String section_time) {
+    public InstMenuInfoEntity(String instId, int section_id, int flag_completed, String section_name, String section_time, String section_short_name) {
         this.instId = instId;
         this.section_id = section_id;
         this.flag_completed = flag_completed;
         this.section_name = section_name;
         this.section_time = section_time;
+        this.section_short_name = section_short_name;
     }
 
     public String getInstId() {
@@ -69,5 +71,13 @@ public class InstMenuInfoEntity {
 
     public void setSection_time(String section_time) {
         this.section_time = section_time;
+    }
+
+    public String getSection_short_name() {
+        return section_short_name;
+    }
+
+    public void setSection_short_name(String section_short_name) {
+        this.section_short_name = section_short_name;
     }
 }

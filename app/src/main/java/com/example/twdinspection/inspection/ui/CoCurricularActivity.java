@@ -823,13 +823,22 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     public void submitData() {
         long x = cocurricularViewModel.insertCoCurricularInfo(coCurricularEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 8, instId);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("CoCurricular");
+                liveData.observe(CoCurricularActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
+
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(CoCurricularActivity.this, EntitlementsActivity.class));
             } else {

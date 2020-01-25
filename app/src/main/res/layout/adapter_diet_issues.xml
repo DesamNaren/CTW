@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/b_ground_balance"
                     android:id="@+id/ground_bal"
+                    android:focusableInTouchMode="false"
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>

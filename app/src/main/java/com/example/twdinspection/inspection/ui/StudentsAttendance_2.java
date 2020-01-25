@@ -82,7 +82,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
                 if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
-                    studAttendInfoEntityListMain=studAttendInfoEntityList;
+                    studAttendInfoEntityListMain = studAttendInfoEntityList;
                     adapter = new StudentsAttAdapter(StudentsAttendance_2.this, studAttendInfoEntityListMain);
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendance_2.this));
                     binding.recyclerView.setAdapter(adapter);
@@ -105,7 +105,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
                             if (studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) {
                                 studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain);
-                            }else {
+                            } else {
                                 binding.emptyView.setVisibility(View.VISIBLE);
                                 binding.recyclerView.setVisibility(View.GONE);
                             }
@@ -342,14 +342,23 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
     @Override
     public void submitData() {
-//        startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
-        long z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 2, instId);
-        if (z >= 0) {
+        final long[] z = {0};
+        LiveData<Integer> liveData = instMainViewModel.getSectionId("StuAtt");
+        liveData.observe(StudentsAttendance_2.this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer id) {
+                if (id != null) {
+                    z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
+                }
+            }
+        });
+        if (z[0] >= 0) {
             startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
         } else {
             showSnackBar(getString(R.string.failed));
         }
     }
+
     @Override
     public void onBackPressed() {
         super.callBack();

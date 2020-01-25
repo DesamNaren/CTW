@@ -2,6 +2,8 @@ package com.example.twdinspection.inspection.ui;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -24,6 +26,8 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomlViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -44,21 +48,22 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubmitInterface, ErrorHandlerInterface {
+public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubmitInterface, SaveListener, ErrorHandlerInterface {
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ActivityUploadedPhotoBinding binding;
     int flag_classroom = 0, flag_storeroom = 0, flag_varandah = 0, flag_playGround = 0, flag_diningHall = 0, flag_dormitory = 0, flag_mainBuilding = 0, flag_toilet = 0, flag_kitchen = 0;
     public Uri fileUri;
     String PIC_NAME, PIC_TYPE;
-    SharedPreferences sharedPreferences;
     UploadPhotoViewModel viewModel;
     String officerId, instId;
     Bitmap bm;
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom;
-
+    InstMainViewModel instMainViewModel;
+    SharedPreferences sharedPreferences;
+    private String officerID, instID, insTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +73,35 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         binding.header.headerTitle.setText(getString(R.string.ben_details));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         viewModel = ViewModelProviders.of(this,
                 new UploadPhotoCustomlViewModel(binding, this)).get(UploadPhotoViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
+
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.customHomeAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.go_home));
+            }
+        });
 
         callPermissions();
 
@@ -101,7 +130,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                 } else {
                     if (Utils.checkInternetConnection(UploadedPhotoActivity.this)) {
                         callPhotoSubmit();
-                    }else {
+                    } else {
                         Utils.customWarningAlert(UploadedPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                     }
                 }
@@ -441,12 +470,48 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     private void CallSuccessAlert(String msg) {
-        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+//        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+        submitData();
     }
 
     @Override
     public void handleError(Throwable e, Context context) {
         String errMsg = ErrorHandler.handleError(e, context);
         showSnackBar(errMsg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        callBack();
+    }
+
+    public void callBack() {
+        Utils.customHomeAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.go_back));
+    }
+
+    @Override
+    public void submitData() {
+
+        final long[] z = {0};
+        try {
+            LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
+            liveData.observe(UploadedPhotoActivity.this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer id) {
+                    if (id != null) {
+                        z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (z[0] >= 0) {
+            showSnackBar(getString(R.string.data_saved));
+            startActivity(new Intent(UploadedPhotoActivity.this, InfraActivity.class));
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
+
     }
 }

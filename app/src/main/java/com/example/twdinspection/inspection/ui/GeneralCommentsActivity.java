@@ -2,6 +2,8 @@ package com.example.twdinspection.inspection.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
@@ -41,6 +43,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -272,8 +275,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate())
-                Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                if (validate())
+                    Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
             }
         });
@@ -295,75 +298,75 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     }
 
     private boolean validate() {
-        boolean returnFlag=true;
-        if(TextUtils.isEmpty(foodTimeFruits)){
-            returnFlag=false;
+        boolean returnFlag = true;
+        if (TextUtils.isEmpty(foodTimeFruits)) {
+            returnFlag = false;
             showSnackBar("Check whether fruits supplied on time");
-        }else if(TextUtils.isEmpty(foodTimeEggs)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodTimeEggs)) {
+            returnFlag = false;
             showSnackBar("Check whether eggs supplied on time");
-        }else if(TextUtils.isEmpty(foodTimeVeg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodTimeVeg)) {
+            returnFlag = false;
             showSnackBar("Check whether vegetables supplied on time");
-        }else if(TextUtils.isEmpty(foodTimeProvisions)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodTimeProvisions)) {
+            returnFlag = false;
             showSnackBar("Check whether food provisions supplied on time");
-        }else if(TextUtils.isEmpty(foodQualityFruits)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodQualityFruits)) {
+            returnFlag = false;
             showSnackBar("Check the quality of fruits supplied");
-        }else if(TextUtils.isEmpty(foodQualityEggs)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodQualityEggs)) {
+            returnFlag = false;
             showSnackBar("Check the quality of eggs supplied");
-        }else if(TextUtils.isEmpty(foodQualityVeg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodQualityVeg)) {
+            returnFlag = false;
             showSnackBar("Check the quality of vegetables supplied");
-        }else if(TextUtils.isEmpty(foodQualityProvisions)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(foodQualityProvisions)) {
+            returnFlag = false;
             showSnackBar("Check the quality of food provisions supplied");
-        }else if((binding.etGccDate.getText().toString().trim().equals(getResources().getString(R.string.select_date)))){
-            returnFlag=false;
+        } else if ((binding.etGccDate.getText().toString().trim().equals(getResources().getString(R.string.select_date)))) {
+            returnFlag = false;
             showSnackBar("Select the date of lasted intent raised by GCC or other supplier");
-        }else if(TextUtils.isEmpty(stocksSupplied)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(stocksSupplied)) {
+            returnFlag = false;
             showSnackBar("Check whether stock is supplied as per the intent");
-        }else if(binding.etSuppliedDate.getText().toString().trim().equals(getResources().getString(R.string.select_date))){
-            returnFlag=false;
+        } else if (binding.etSuppliedDate.getText().toString().trim().equals(getResources().getString(R.string.select_date))) {
+            returnFlag = false;
             showSnackBar("Select the capture supplied date");
-        }else if(TextUtils.isEmpty(haircut)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(haircut)) {
+            returnFlag = false;
             showSnackBar("Check whether haircut is on time");
-        }else if(TextUtils.isEmpty(studentsFoundAnemic)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(studentsFoundAnemic)) {
+            returnFlag = false;
             showSnackBar("Check whether students found anemic");
-        }else if(TextUtils.isEmpty(attireOfStudents)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(attireOfStudents)) {
+            returnFlag = false;
             showSnackBar("Check the attire of students");
-        }else if(TextUtils.isEmpty(cooksWearingCap)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(cooksWearingCap)) {
+            returnFlag = false;
             showSnackBar("Check whether cooks wear cap during cooking and serving");
-        }else if(TextUtils.isEmpty(handsOfCookingStaff)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(handsOfCookingStaff)) {
+            returnFlag = false;
             showSnackBar("Check whether hands of cooking staff is clean");
-        }else if(TextUtils.isEmpty(attireOfStaff)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(attireOfStaff)) {
+            returnFlag = false;
             showSnackBar("Check whether attire of staff is appropriate");
-        }else if(TextUtils.isEmpty(toilets)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(toilets)) {
+            returnFlag = false;
             showSnackBar("Check whether toilets are not clean");
-        }else if(TextUtils.isEmpty(kitchen)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(kitchen)) {
+            returnFlag = false;
             showSnackBar("Check whether kitchen is not clean");
-        }else if(TextUtils.isEmpty(dormitory)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(dormitory)) {
+            returnFlag = false;
             showSnackBar("Check whether dormitory is not clean");
-        }else if(TextUtils.isEmpty(classRooms)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(classRooms)) {
+            returnFlag = false;
             showSnackBar("Check whether classrooms are not clean");
-        }else if(TextUtils.isEmpty(runningWater)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(runningWater)) {
+            returnFlag = false;
             showSnackBar("Check whether running water available to toilets");
-        }else if(TextUtils.isEmpty(storeroom)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(storeroom)) {
+            returnFlag = false;
             showSnackBar("Check whether storerooms are not clean");
         }
         return returnFlag;
@@ -413,8 +416,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
 
     @Override
     public void submitData() {
-        String gccDate=binding.etGccDate.getText().toString().trim();
-        String suppliedDate=binding.etSuppliedDate.getText().toString().trim();
+        String gccDate = binding.etGccDate.getText().toString().trim();
+        String suppliedDate = binding.etSuppliedDate.getText().toString().trim();
 
         generalCommentsEntity = new GeneralCommentsEntity();
         generalCommentsEntity.setOfficer_id(officerID);
@@ -446,13 +449,21 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
 
         long x = genCommentsViewModel.insertGeneralCommentsInfo(generalCommentsEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 11,instID);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("GC");
+                liveData.observe(GeneralCommentsActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(GeneralCommentsActivity.this, UploadedPhotoActivity.class));
             } else {
@@ -462,6 +473,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             showSnackBar(getString(R.string.failed));
         }
     }
+
     @Override
     public void onBackPressed() {
         super.callBack();

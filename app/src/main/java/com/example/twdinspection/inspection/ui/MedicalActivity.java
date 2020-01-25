@@ -539,13 +539,21 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     public void submitData() {
         long x = medicalViewModel.insertMedicalInfo(medicalInfoEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 4, instID);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Medical");
+                liveData.observe(MedicalActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showBottomSheetSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
             } else {

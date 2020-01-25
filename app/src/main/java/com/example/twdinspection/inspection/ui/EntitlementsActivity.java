@@ -2,6 +2,8 @@ package com.example.twdinspection.inspection.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
@@ -315,13 +317,21 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
 
         long x = entitlementsViewModel.insertEntitlementsInfo(entitlementsEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 9,instId);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Entitlements");
+                liveData.observe(EntitlementsActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instId);
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(EntitlementsActivity.this, RegistersActivity.class));
             } else {

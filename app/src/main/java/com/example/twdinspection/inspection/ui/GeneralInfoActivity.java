@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
@@ -294,14 +297,21 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     public void submitData() {
         long x = generalInfoViewModel.insertGeneralInfo(generalInfoEntity);
         if (x >= 0) {
-            long z = 0;
+            final long[] z = {0};
             try {
-//                InstMenuInfoEntity instMenuInfoEntity = new InstMenuInfoEntity(1, 1, "General Information", Utils.getCurrentDateTime());
-                z = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), 1,instID);
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("GI");
+                liveData.observe(GeneralInfoActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instID);
+                        }
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (z >= 0) {
+            if (z[0] >= 0) {
                 showSnackBar(getString(R.string.data_saved));
                 startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
             } else {

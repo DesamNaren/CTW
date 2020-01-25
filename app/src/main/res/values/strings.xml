@@ -329,6 +329,21 @@
         <item>Uploaded Photographs</item>
         <!--        <item>Following escalation matrix was defined </item>-->
     </string-array>
+    <string-array name="inst_sections_names">
+        <item>GI</item>
+        <item>StuAtt</item>
+        <item>StfAtt</item>
+        <item>Medical</item>
+        <item>Diet</item>
+        <item>Infra</item>
+        <item>Academic</item>
+        <item>CoCurricular</item>
+        <item>Entitlements</item>
+        <item>Registers</item>
+        <item>GC</item>
+        <item>Photos</item>
+        <!--        <item>Following escalation matrix was defined </item>-->
+    </string-array>
     <string name="Ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="leaves">Leaves</string>
