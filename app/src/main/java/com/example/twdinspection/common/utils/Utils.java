@@ -69,34 +69,31 @@ public class Utils {
         }
     }
 
-    public static void customAlert(final Activity activity, String msg, String type, final boolean flag) {
+    public static void customSectionSaveAlert(final Activity activity, String msg, String title) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                if (type.equalsIgnoreCase(AppConstants.SUCCESS)) {
-                    dialog.setContentView(R.layout.custom_alert_success);
-                } else if (type.equalsIgnoreCase(AppConstants.FAILURE)) {
-                    dialog.setContentView(R.layout.custom_alert_error);
-                } else if (type.equalsIgnoreCase(AppConstants.WARNING)) {
-                    dialog.setContentView(R.layout.custom_alert_warning);
-                } else {
-                    dialog.setContentView(R.layout.custom_alert_information);
-                }
+                dialog.setContentView(R.layout.custom_alert_success);
                 dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
                 TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
                 dialogMessage.setText(msg);
-                Button yes = dialog.findViewById(R.id.btDialogYes);
-                yes.setOnClickListener(new View.OnClickListener() {
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
-                        if (flag)
-                            activity.finish();
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        activity.startActivity(new Intent(activity, InstMenuMainActivity.class));
+                        activity.finish();
                     }
                 });
+
                 if (!dialog.isShowing())
                     dialog.show();
             }

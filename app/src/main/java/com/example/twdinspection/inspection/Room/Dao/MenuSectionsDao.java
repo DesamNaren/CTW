@@ -24,4 +24,7 @@ public interface MenuSectionsDao {
     @Query("SELECT section_id from InstMenuInfoEntity WHERE section_short_name=:name")
     LiveData<Integer> getSectionId(String name);
 
+    @Query("Select count(*) from InstMenuInfoEntity")
+    LiveData<Integer> getMenuRecordsCount();
+
 }

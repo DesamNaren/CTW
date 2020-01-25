@@ -554,8 +554,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                showBottomSheetSnackBar(getString(R.string.data_saved));
-                startActivity(new Intent(MedicalActivity.this, DietIssuesActivity.class));
+                Utils.customSectionSaveAlert(MedicalActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
             } else {
                 showBottomSheetSnackBar(getString(R.string.failed));
             }

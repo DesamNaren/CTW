@@ -454,8 +454,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                showSnackBar(getString(R.string.data_saved));
-                startActivity(new Intent(RegistersActivity.this, GeneralCommentsActivity.class));
+                Utils.customSectionSaveAlert(RegistersActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

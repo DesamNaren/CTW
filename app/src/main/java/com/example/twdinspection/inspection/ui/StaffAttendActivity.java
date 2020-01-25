@@ -165,8 +165,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                showSnackBar(getString(R.string.data_saved));
-                startActivity(new Intent(StaffAttendActivity.this, MedicalActivity.class));
+                Utils.customSectionSaveAlert(StaffAttendActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

@@ -353,7 +353,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
             }
         });
         if (z[0] >= 0) {
-            startActivity(new Intent(StudentsAttendance_2.this, StaffAttendActivity.class));
+            Utils.customSectionSaveAlert(StudentsAttendance_2.this,getString(R.string.data_saved),getString(R.string.app_name));
         } else {
             showSnackBar(getString(R.string.failed));
         }

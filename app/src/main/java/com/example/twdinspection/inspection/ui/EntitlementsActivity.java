@@ -332,8 +332,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                showSnackBar(getString(R.string.data_saved));
-                startActivity(new Intent(EntitlementsActivity.this, RegistersActivity.class));
+                Utils.customSectionSaveAlert(EntitlementsActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

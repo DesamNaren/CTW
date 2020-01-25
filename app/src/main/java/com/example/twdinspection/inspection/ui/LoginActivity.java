@@ -10,9 +10,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -22,6 +24,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -30,51 +33,65 @@ import com.google.android.material.snackbar.Snackbar;
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
     private SharedPreferences.Editor editor;
-
+    InstMainViewModel instMainViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_cre);
-        LoginViewModel loginViewModel =
-                ViewModelProviders.of(this,
-                        new LoginCustomViewModel(binding, this)).get(LoginViewModel.class);
-        binding.setViewModel(loginViewModel);
+        instMainViewModel=new InstMainViewModel(getApplication());
 
-
-        try {
-            editor = TWDApplication.get(this).getPreferences().edit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        loginViewModel.geListLiveData().observe(this, new Observer<EmployeeResponse>() {
+        LiveData<Integer> liveData1 = instMainViewModel.getMenuRecordsCount();
+        liveData1.observe(LoginActivity.this, new Observer<Integer>() {
             @Override
-            public void onChanged(EmployeeResponse employeeResponses) {
-
-                if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
-                    if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
-                        editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
-                        editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
-                        editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
-                        editor.commit();
-
-                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                        finish();
-                    } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
-                        Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        callSnackBar(getString(R.string.something));
-                    }
+            public void onChanged(Integer cnt) {
+                if (cnt != null && cnt > 0) {
+                    startActivity(new Intent(LoginActivity.this,InstMenuMainActivity.class));
+                    finish();
                 } else {
-                    callSnackBar(getString(R.string.something));
+                    binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.activity_login_cre);
+                    LoginViewModel loginViewModel =
+                            ViewModelProviders.of(LoginActivity.this,
+                                    new LoginCustomViewModel(binding, LoginActivity.this)).get(LoginViewModel.class);
+
+                    binding.setViewModel(loginViewModel);
+
+                    try {
+                        editor = TWDApplication.get(LoginActivity.this).getPreferences().edit();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                    loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<EmployeeResponse>() {
+                        @Override
+                        public void onChanged(EmployeeResponse employeeResponses) {
+
+                            if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
+                                if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                    editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
+                                    editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
+                                    editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
+                                    editor.commit();
+
+                                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                                    finish();
+                                } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                    Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+
+                            }
+                        }
+                    });
+
+                    binding.etName.addTextChangedListener(new GenericTextWatcher(binding.etName));
+                    binding.etPwd.addTextChangedListener(new GenericTextWatcher(binding.etPwd));
 
                 }
             }
         });
-
-        binding.etName.addTextChangedListener(new GenericTextWatcher(binding.etName));
-        binding.etPwd.addTextChangedListener(new GenericTextWatcher(binding.etPwd));
 
     }
 
@@ -84,7 +101,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         callSnackBar(errMsg);
     }
 
-    void callSnackBar(String msg){
+    void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.rlRoot, msg, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("OK", new View.OnClickListener() {

@@ -37,6 +37,9 @@ public class MenuSectionsRepository {
         return menuSectionsDao.getSections();
     }
 
+    public LiveData<Integer> getMenuRecordsCount() {
+        return menuSectionsDao.getMenuRecordsCount();
+    }
 
     long x;
 

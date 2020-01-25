@@ -507,8 +507,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             e.printStackTrace();
         }
         if (z[0] >= 0) {
-            showSnackBar(getString(R.string.data_saved));
-            startActivity(new Intent(UploadedPhotoActivity.this, InfraActivity.class));
+            Utils.customSectionSaveAlert(UploadedPhotoActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
         } else {
             showSnackBar(getString(R.string.failed));
         }
