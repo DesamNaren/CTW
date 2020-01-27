@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".inspection.ui.CocurricularStudAchActivity"></activity>
+        <activity
+            android:name=".inspection.ui.CocurricularStudAchActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.CallHealthActivity"
             android:screenOrientation="portrait" />
@@ -38,8 +40,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.MedicalDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:screenOrientation="portrait">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -112,10 +113,37 @@
         <activity
             android:name=".inspection.ui.BaseActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".inspection.ui.InstMenuMainActivity" />
-        <activity android:name=".schemes.ui.SchemeSyncActivity" />
-        <activity android:name=".inspection.ui.SchoolSyncActivity" />
-        <activity android:name=".inspection.ui.ViewMedicalActivity" />
+        <activity
+            android:name=".inspection.ui.InstMenuMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".schemes.ui.SchemeSyncActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.SchoolSyncActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.ViewMedicalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.GCCDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.DRDepotActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.DRGodownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.MFPGodownActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.PUnitActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".gcc.GCCPhotoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".gcc.GCCOfficerFindingsActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

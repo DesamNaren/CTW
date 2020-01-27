@@ -17,6 +17,7 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.LoginUser;
+import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,11 +39,11 @@ public class LoginViewModel extends ViewModel {
     private Context context;
     private ActivityLoginCreBinding binding;
     private ErrorHandlerInterface errorHandlerInterface;
-
+    CustomProgressDialog customProgressDialog;
     LoginViewModel(ActivityLoginCreBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
-
+        customProgressDialog = new CustomProgressDialog(context);
         username.setValue("maadhavisriram");
         password.setValue("guest");
 
@@ -93,19 +94,19 @@ public class LoginViewModel extends ViewModel {
     private void callLoginAPI(LoginUser loginUser) {
         Utils.hideKeyboard(context, binding.btnLogin);
         binding.btnLogin.setVisibility(View.GONE);
-        binding.progress.setVisibility(View.VISIBLE);
+        customProgressDialog.show();
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<EmployeeResponse>() {
             @Override
             public void onResponse(@NotNull Call<EmployeeResponse> call, @NotNull Response<EmployeeResponse> response) {
-                binding.progress.setVisibility(View.GONE);
+                customProgressDialog.dismiss();
                 binding.btnLogin.setVisibility(View.VISIBLE);
                 responseMutableLiveData.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<EmployeeResponse> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
+                customProgressDialog.dismiss();
                 binding.btnLogin.setVisibility(View.VISIBLE);
                 errorHandlerInterface.handleError(t, context);
             }

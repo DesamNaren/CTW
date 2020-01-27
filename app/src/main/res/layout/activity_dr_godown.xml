@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/cv_profile"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/list_blue" />
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rl_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/_100dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="5dp">
+
+            <include
+                android:id="@+id/include_basic_layout"
+                layout="@layout/godown_details_layout" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_profile"
+            android:padding="@dimen/dimen_15dp" />
+    </RelativeLayout>
+</layout>
