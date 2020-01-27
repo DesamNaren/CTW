@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -9,7 +7,6 @@
             name="viewmodel"
             type="com.example.twdinspection.inspection.viewmodel.InstMainViewModel" />
 
-        <import type="android.view.View" />
     </data>
 
     <RelativeLayout
@@ -30,32 +27,6 @@
             <include
                 android:id="@+id/include_menu_layout"
                 layout="@layout/inst_content_main" />
-
-            <Button
-                android:id="@+id/btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:visibility="gone"
-                app:srcCompat="@android:drawable/ic_dialog_email" />
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="bottom|end"
-                android:background="@drawable/btn_bg"
-                android:drawableEnd="@drawable/right_arrow_16"
-                android:drawableRight="@drawable/right_arrow_16"
-                android:padding="@dimen/dimen_5dp"
-                android:text="@string/proceed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:visibility="gone" />
 
         </LinearLayout>
 

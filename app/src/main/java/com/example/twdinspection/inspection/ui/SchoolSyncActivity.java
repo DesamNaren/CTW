@@ -161,7 +161,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         try {
             if (cnt > 0) {
                 Log.i("V_CNT", "vilCount: " + cnt);
-                binding.progress.setVisibility(View.GONE);
+
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         "District master synced successfully");
                 // Success Alert;
@@ -175,11 +175,11 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void instCount(int cnt) {
-        binding.progress.setVisibility(View.GONE);
+
         try {
             if (cnt > 0) {
                 Log.i("I_CNT", "instCount: " + cnt);
-                binding.progress.setVisibility(View.GONE);
+
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         "Institute master synced successfully");
             } else {

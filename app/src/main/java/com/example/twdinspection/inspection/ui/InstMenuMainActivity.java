@@ -53,7 +53,6 @@ public class InstMenuMainActivity extends AppCompatActivity
         implements ErrorHandlerInterface, InstSubmitInterface {
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     String instId, officer_id, dist_id, mand_id, vill_id;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false, staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false, academicFlag = false, cocurricularFlag = false, entitlementsFlag = false, regFlag = false, generalCommentsFlag = false;
     InstMainViewModel instMainViewModel;
@@ -64,14 +63,11 @@ public class InstMenuMainActivity extends AppCompatActivity
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         binding.appbar.header.syncIv.setVisibility(View.VISIBLE);
         binding.appbar.header.ivHome.setVisibility(View.GONE);
-        binding.appbar.header.headerTitle.setText("Dashboard");
+        binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
 
         instMainViewModel = new InstMainViewModel(binding, getApplication(), InstMenuMainActivity.this);
         binding.setViewmodel(instMainViewModel);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
 
         LiveData<List<InstMenuInfoEntity>> arrayListLiveData = instMainViewModel.getAllSections();
         sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -125,16 +121,8 @@ public class InstMenuMainActivity extends AppCompatActivity
                         Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                     }
                 } else {
-//                    submitCall();
                     Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please inspect all the sections");
                 }
-            }
-        });
-
-        binding.appbar.btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(InstMenuMainActivity.this, GeneralInfoActivity.class));
             }
         });
     }

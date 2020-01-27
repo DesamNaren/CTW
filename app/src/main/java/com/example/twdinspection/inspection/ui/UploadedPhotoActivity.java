@@ -28,6 +28,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomlViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
@@ -39,7 +40,6 @@ import com.example.twdinspection.schemes.ui.BenDetailsActivity;
 import com.example.twdinspection.schemes.viewmodel.BenCustomDetailViewModel;
 import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -66,12 +66,13 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     private String officerID, instID, insTime;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        customProgressDialog  =new CustomProgressDialog(UploadedPhotoActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         binding.header.headerTitle.setText(getString(R.string.ben_details));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
@@ -111,7 +112,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(UploadedPhotoActivity.this, "Completed", Toast.LENGTH_SHORT).show();
                 if (flag_storeroom == 0) {
                     showSnackBar("Please capture storeroom image");
                 } else if (flag_varandah == 0) {
@@ -319,6 +319,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_storeroom);
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
+
+        customProgressDialog.show();
         viewModel.UploadImageServiceCall(body, body1, body2, body3, body4, body5, body6, body7, body8);
     }
 
@@ -464,6 +466,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
 
     @Override
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
+        customProgressDialog.hide();
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             CallSuccessAlert(schemePhotoSubmitResponse.getStatusMessage());
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
