@@ -59,6 +59,7 @@
                     android:layout_marginEnd="@dimen/dimen_10dp" />
 
 
+
                 <ImageView
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dimen_10dp"
@@ -70,6 +71,18 @@
                     android:tint="@color/white"
                     android:visibility="visible"
                     android:layout_marginEnd="@dimen/dimen_10dp" />
+
+                <Button
+                    android:id="@+id/syncBtn"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/dimen_8dp"
+                    android:layout_gravity="right"
+                    android:background="@color/light_gray"
+                    android:textColor="@color/white"
+                    android:text="Sync"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

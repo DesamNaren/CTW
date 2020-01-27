@@ -1,18 +1,12 @@
 package com.example.twdinspection.inspection.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,7 +35,6 @@ import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -61,7 +54,8 @@ public class InstMenuMainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
-        binding.appbar.header.syncIv.setVisibility(View.VISIBLE);
+        binding.appbar.header.syncIv.setVisibility(View.GONE);
+        binding.appbar.header.syncBtn.setVisibility(View.VISIBLE);
         binding.appbar.header.ivHome.setVisibility(View.GONE);
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
@@ -81,6 +75,20 @@ public class InstMenuMainActivity extends AppCompatActivity
             @Override
             public void onChanged(List<InstMenuInfoEntity> menuInfoEntities) {
                 arrayListLiveData.removeObservers(InstMenuMainActivity.this);
+
+                if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                    boolean flag = true;
+                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
+                        if (arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        binding.appbar.header.syncBtn.setBackgroundColor(getResources().getColor(R.color.white));
+                        binding.appbar.header.syncBtn.setTextColor(getResources().getColor(R.color.list_blue));
+                    }
+                }
+
 
                 if (menuInfoEntities != null && menuInfoEntities.size() > 0) {
                     setAdapter(menuInfoEntities);
@@ -105,23 +113,25 @@ public class InstMenuMainActivity extends AppCompatActivity
             }
         });
 
-        binding.appbar.header.syncIv.setOnClickListener(new View.OnClickListener() {
+        binding.appbar.header.syncBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean flag = true;
-                for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                    if (arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
-                        flag = false;
+                if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+                    boolean flag = true;
+                    for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
+                        if (arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                            flag = false;
+                        }
                     }
-                }
-                if (flag) {
-                    if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-                        submitCall();
+                    if (flag) {
+                        if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
+                            submitCall();
+                        } else {
+                            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                        }
                     } else {
-                        Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                        Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please inspect all the sections");
                     }
-                } else {
-                    Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please inspect all the sections");
                 }
             }
         });
@@ -331,7 +341,6 @@ public class InstMenuMainActivity extends AppCompatActivity
         String errMsg = ErrorHandler.handleError(e, context);
         Snackbar.make(binding.appbar.root, errMsg, Snackbar.LENGTH_SHORT).show();
     }
-
 
 
     @Override

@@ -35,14 +35,12 @@ public class SchoolSyncViewModel extends AndroidViewModel {
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivitySchoolSyncBinding binding;
-    CustomProgressDialog customProgressDialog;
     public SchoolSyncViewModel(Context context, Application application, ActivitySchoolSyncBinding binding) {
         super(application);
         this.context=context;
         this.binding=binding;
         schoolDMVResponseMutableLiveData = new MutableLiveData<>();
         instMasterResponseMutableLiveData = new MutableLiveData<>();
-        customProgressDialog = new CustomProgressDialog(context);
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
 
@@ -58,12 +56,10 @@ public class SchoolSyncViewModel extends AndroidViewModel {
     }
 
     private void getSchoolDMVResponseCall(String officerId) {
-        customProgressDialog.show();
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchoolDMV(officerId).enqueue(new Callback<SchoolDMVResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchoolDMVResponse> call, @NotNull Response<SchoolDMVResponse> response) {
-                customProgressDialog.hide();
                 if (response.isSuccessful() && response.body() != null) {
                     schoolDMVResponseMutableLiveData.setValue(response.body());
                 }
@@ -71,7 +67,6 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<SchoolDMVResponse> call, @NotNull Throwable t) {
-                customProgressDialog.hide();
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -89,12 +84,10 @@ public class SchoolSyncViewModel extends AndroidViewModel {
     }
 
     private void getInstMasterResponseCall() {
-        customProgressDialog.show();
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getInstMasterResponse().enqueue(new Callback<InstMasterResponse>() {
             @Override
             public void onResponse(@NotNull Call<InstMasterResponse> call, @NotNull Response<InstMasterResponse> response) {
-                customProgressDialog.hide();
                 if (response.isSuccessful() && response.body() != null) {
                     instMasterResponseMutableLiveData.setValue(response.body());
                 }
@@ -102,7 +95,6 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<InstMasterResponse> call, @NotNull Throwable t) {
-                customProgressDialog.hide();
                 errorHandlerInterface.handleError(t, context);
             }
         });
