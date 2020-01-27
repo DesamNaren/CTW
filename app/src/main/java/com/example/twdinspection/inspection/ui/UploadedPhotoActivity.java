@@ -75,6 +75,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 
+        binding.btnLayout.btnNext.setText(getString(R.string.save));
+
         viewModel = ViewModelProviders.of(this,
                 new UploadPhotoCustomlViewModel(binding, this)).get(UploadPhotoViewModel.class);
         binding.setViewModel(viewModel);
@@ -450,7 +452,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     private void showSnackBar(String str) {
-        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

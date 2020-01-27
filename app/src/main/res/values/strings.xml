@@ -213,7 +213,6 @@
     <string name="plz_grant">Please grant required permissions</string>
     <string name="whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register">Whether the details of medical checkup entered in the visitor\'s register</string>
     <string name="sel_visitor_register">Select whether the details of medical checkup entered in the visitor\'s register</string>
-    <string name="save">Save</string>
     <string name="general_info">GENERAL INFO</string>
     <string name="sync_activity">SYNC DATA</string>
     <string name="sync_school_activity">SYNC SCHOOL DATA</string>
@@ -524,5 +523,6 @@
     <string name="name_of_the_tab_lab_in_charge">Name of the tab lab in charge</string>
     <string name="add_enter_number">Enter number</string>
     <string name="title_academic">Academic Overview</string>
+    <string name="save">Save</string>
 
 </resources>

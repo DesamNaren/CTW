@@ -139,8 +139,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
     }
 
     private void showSnackBar(String str) {
-//        Snackbar.make(findViewById(staffAdapter.getItemViewType(pos)), str, Snackbar.LENGTH_SHORT).show();
-        Snackbar.make(binding.rootLayout, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

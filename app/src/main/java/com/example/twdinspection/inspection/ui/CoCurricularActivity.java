@@ -794,7 +794,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     }
 
     private void showSnackBar(String str) {
-        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     private void lastMeetingDateSelection() {

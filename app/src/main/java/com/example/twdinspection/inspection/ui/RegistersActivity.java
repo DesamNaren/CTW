@@ -401,7 +401,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         return returnFlag;
     }
     private void showSnackBar(String str) {
-        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
