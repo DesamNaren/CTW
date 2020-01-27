@@ -7,7 +7,18 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.MenuSectionsDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
+import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
+import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 
 import java.util.List;
 
@@ -31,6 +42,39 @@ public class MenuSectionsRepository {
     public MenuSectionsRepository(Application application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         menuSectionsDao = db.menuSectionsDao();
+    }
+    public LiveData<GeneralInfoEntity> getGeneralInfo() {
+        return menuSectionsDao.getGeneralInfo();
+    }
+    public LiveData<List<StudAttendInfoEntity>> getStudAttendInfo() {
+        return menuSectionsDao.getStudAttendInfo();
+    }
+    public LiveData<List<StaffAttendanceEntity>> getStaffInfo() {
+        return menuSectionsDao.getStaffAttendInfo();
+    }
+    public LiveData<MedicalInfoEntity> getMedicalInfo() {
+        return menuSectionsDao.getMedicalInfo();
+    }
+    public LiveData<DietIssuesEntity> getDietInfo() {
+        return menuSectionsDao.getDietInfo();
+    }
+    public LiveData<InfraStructureEntity> getInfrastructureInfo() {
+        return menuSectionsDao.getInfraInfo();
+    }
+    public LiveData<AcademicEntity> getAcademicInfo() {
+        return menuSectionsDao.getAcademicInfo();
+    }
+    public LiveData<CoCurricularEntity> getCocurricularInfo() {
+        return menuSectionsDao.getCocurricularInfo();
+    }
+    public LiveData<EntitlementsEntity> getEntitlementInfo() {
+        return menuSectionsDao.getEntitlementInfo();
+    }
+    public LiveData<RegistersEntity> getRegistersInfo() {
+        return menuSectionsDao.getRegisterInfo();
+    }
+    public LiveData<GeneralCommentsEntity> getGeneralCommentsInfo() {
+        return menuSectionsDao.getGeneralCommentsInfo();
     }
 
     public LiveData<List<InstMenuInfoEntity>> getSections() {

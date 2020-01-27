@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.twdinspection.inspection.viewmodel.InstMainViewModel" />
@@ -11,52 +12,60 @@
         <import type="android.view.View" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".inspection.ui.InstMenuMainActivity">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <include
+                android:id="@+id/include_menu_layout"
+                layout="@layout/inst_content_main" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:visibility="gone"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+            <Button
+                android:id="@+id/btn_next"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/btn_bg"
+                android:drawableEnd="@drawable/right_arrow_16"
+                android:drawableRight="@drawable/right_arrow_16"
+                android:padding="@dimen/dimen_5dp"
+                android:text="@string/proceed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+        </LinearLayout>
 
-        <include android:id="@+id/include_menu_layout"
-            layout="@layout/inst_content_main" />
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:visibility="gone"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
-        <Button
-            android:id="@+id/btn_next"
+        <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|end"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/btn_bg"
-            android:drawableRight="@drawable/right_arrow_16"
-            android:padding="@dimen/dimen_5dp"
-            android:text="@string/proceed"
-            android:visibility="gone"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/right_arrow_16" />
+            android:layout_centerInParent="true"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 </layout>

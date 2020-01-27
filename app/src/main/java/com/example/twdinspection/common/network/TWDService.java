@@ -3,6 +3,8 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
+import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
@@ -18,15 +20,12 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -88,6 +87,9 @@ public interface TWDService {
 
     @POST("CTWSubmitDetails/submitSchemeInspectionDetails")
     Call<SchemeSubmitResponse> getSchemeSubmitResponse(@Body SchemeSubmitRequest schemeSubmitRequest);
+
+    @POST("CTWSubmitDetails/submitInspectionDetails")
+    Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);
 
     @Multipart
     @POST("upload/uploadSchemePhotos")

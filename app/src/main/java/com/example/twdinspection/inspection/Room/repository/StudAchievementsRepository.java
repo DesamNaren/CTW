@@ -34,7 +34,7 @@ public class StudAchievementsRepository {
     }
 
     public LiveData<List<StudAchievementEntity>> getStudAchvListLiveData() {
-            return studAchDao.getStudAchievements();
+        return studAchDao.getStudAchievements();
     }
     long x;
 

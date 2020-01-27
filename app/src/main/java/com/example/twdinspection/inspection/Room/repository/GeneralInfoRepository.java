@@ -3,10 +3,15 @@ package com.example.twdinspection.inspection.Room.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.twdinspection.inspection.Room.Dao.GeneralInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -67,5 +72,4 @@ public class GeneralInfoRepository {
                 .subscribe(observer);
         return x;
     }
-
 }
