@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.twdinspection.inspection.viewmodel.InstMainViewModel" />
@@ -26,11 +27,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                app:popupTheme="@style/AppTheme.PopupOverlay"></androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include android:id="@+id/include_menu_layout"
+        <include
+            android:id="@+id/include_menu_layout"
             layout="@layout/inst_content_main" />
 
         <Button
@@ -41,22 +43,23 @@
             android:layout_margin="@dimen/fab_margin"
             android:visibility="gone"
             app:srcCompat="@android:drawable/ic_dialog_email" />
+
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|end"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/btn_bg"
+            android:drawableEnd="@drawable/right_arrow_16"
             android:drawableRight="@drawable/right_arrow_16"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/proceed"
-            android:visibility="gone"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:drawableEnd="@drawable/right_arrow_16" />
+            android:visibility="gone" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -524,5 +524,17 @@
     <string name="add_enter_number">Enter number</string>
     <string name="title_academic">Academic Overview</string>
     <string name="save">Save</string>
-
+    <string name="dr_godown">DR Godown</string>
+    <string name="dr_depot">DR Depot</string>
+    <string name="mfp_godown">MFP Godown</string>
+    <string name="p_unit">Processing Unit</string>
+    <string name="man_unit_name">Manufacturing Unit Name</string>
+    <string name="dr_depo_name">DR Depot Name</string>
+    <string name="mfp_godown_name">MFP Godown Name</string>
+    <string name="entrance_plate">Entrance with name plate / hoarding (Outer View)</string>
+    <string name="floor">Floor </string>
+    <string name="ceil_roof">Ceiling / Roof</string>
+    <string name="stock_arrangement">Stock Arrangement</string>
+    <string name="machinary">Machinery</string>
+    <string name="ins_off_fin">Inspection Officer Findings</string>
 </resources>

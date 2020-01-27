@@ -19,6 +19,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,12 +37,13 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     List<MasterInstituteInfo> institutesEntityList;
-
+    CustomProgressDialog customProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = DMVSelectionActivity.this;
-
+        customProgressDialog = new CustomProgressDialog(context);
+        customProgressDialog.show();
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
@@ -66,6 +68,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
         viewModel.getAllDistricts().observe(this, districts -> {
+            customProgressDialog.dismiss();
             if (districts != null && districts.size() > 0) {
                 ArrayList<String> distNames = new ArrayList<>();
                 distNames.add("-Select-");
@@ -168,6 +171,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
+            customProgressDialog.show();
             if (i != 0) {
                 viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
@@ -179,6 +183,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             viewModel.getInstituteInfo(selectedInstId).observe(DMVSelectionActivity.this, new Observer<MasterInstituteInfo>() {
                                 @Override
                                 public void onChanged(MasterInstituteInfo str) {
+                                    customProgressDialog.dismiss();
+
                                     if (str != null) {
                                         selectedManId = str.getMandalId();
                                         selectedManName = str.getMandalName();
@@ -200,6 +206,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     }
                 });
             }else {
+                customProgressDialog.dismiss();
                 dmvSelectionActivityBinding.mandal.setText("");
                 dmvSelectionActivityBinding.village.setText("");
                 selectedInstId = "";

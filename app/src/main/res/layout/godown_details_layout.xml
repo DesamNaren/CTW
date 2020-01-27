@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10dp">
+
+        <LinearLayout
+            android:id="@+id/divLL"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/divNameTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/user_16"
+            android:drawableTint="@color/list_blue"
+            android:text="Division Name"
+            android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/divName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/socLL"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/socNameTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/user_16"
+                android:drawableTint="@color/list_blue"
+                android:text="Society Name"
+                android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/socName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drGodownLL"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/drGodownNameTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/user_16"
+                android:drawableTint="@color/list_blue"
+                android:text="DR Godown Name"
+                android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/drGodownName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/salesLL"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/salesMan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/user_16"
+                android:drawableTint="@color/list_blue"
+                android:text="Salesman Name"
+                android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/salesManTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inchargeLL"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/inchargeNameTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/user_16"
+                android:drawableTint="@color/list_blue"
+                android:text="Incharge Name"
+                android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/inchargeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dateLL"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/insDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/clock_16"
+                android:drawableTint="@color/list_blue"
+                android:text="Date of Inspection"
+                android:drawablePadding="@dimen/dimen_10dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/dateTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_10dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

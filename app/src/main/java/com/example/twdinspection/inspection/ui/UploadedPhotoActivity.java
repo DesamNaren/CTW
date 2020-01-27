@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -38,6 +39,7 @@ import com.example.twdinspection.schemes.ui.BenDetailsActivity;
 import com.example.twdinspection.schemes.viewmodel.BenCustomDetailViewModel;
 import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -75,13 +77,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 
-        binding.btnLayout.btnNext.setText(getString(R.string.save));
-
         viewModel = ViewModelProviders.of(this,
                 new UploadPhotoCustomlViewModel(binding, this)).get(UploadPhotoViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.save));
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -110,7 +111,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UploadedPhotoActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UploadedPhotoActivity.this, "Completed", Toast.LENGTH_SHORT).show();
                 if (flag_storeroom == 0) {
                     showSnackBar("Please capture storeroom image");
                 } else if (flag_varandah == 0) {
@@ -345,58 +346,59 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
 
                 if (PIC_TYPE.equals(AppConstants.STOREROOM)) {
                     flag_storeroom = 1;
-                    binding.ivStoreRoom.setImageBitmap(bm);
                     binding.ivStoreRoom.setPadding(0, 0, 0, 0);
                     binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_storeroom = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
+
                 } else if (PIC_TYPE.equals(AppConstants.VARANDAH)) {
                     flag_varandah = 1;
-                    binding.ivVarandah.setImageBitmap(bm);
                     binding.ivVarandah.setPadding(0, 0, 0, 0);
                     binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
                     file_varandah = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
                 } else if (PIC_TYPE.equals(AppConstants.PLAYGROUND)) {
                     flag_playGround = 1;
-                    binding.ivPlaygound.setImageBitmap(bm);
                     binding.ivPlaygound.setPadding(0, 0, 0, 0);
                     binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
                     file_playGround = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
                 } else if (PIC_TYPE.equals(AppConstants.DININGHALL)) {
                     flag_diningHall = 1;
-                    binding.ivDiningHall.setImageBitmap(bm);
                     binding.ivDiningHall.setPadding(0, 0, 0, 0);
                     binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
                     file_diningHall = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
                 } else if (PIC_TYPE.equals(AppConstants.DORMITORY)) {
                     flag_dormitory = 1;
-                    binding.ivDormitory.setImageBitmap(bm);
                     binding.ivDormitory.setPadding(0, 0, 0, 0);
                     binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
                     file_dormitory = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
                 } else if (PIC_TYPE.equals(AppConstants.MAINBUILDING)) {
                     flag_mainBuilding = 1;
-                    binding.ivMainBuilding.setImageBitmap(bm);
                     binding.ivMainBuilding.setPadding(0, 0, 0, 0);
                     binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
                     file_mainBulding = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
                 } else if (PIC_TYPE.equals(AppConstants.TOILET)) {
                     flag_toilet = 1;
-                    binding.ivToilet.setImageBitmap(bm);
                     binding.ivToilet.setPadding(0, 0, 0, 0);
                     binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
                     file_toilet = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
                 } else if (PIC_TYPE.equals(AppConstants.KITCHEN)) {
                     flag_kitchen = 1;
-                    binding.ivKitchen.setImageBitmap(bm);
                     binding.ivKitchen.setPadding(0, 0, 0, 0);
                     binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
                     file_kitchen = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
                 } else if (PIC_TYPE.equals(AppConstants.CLASSROOM)) {
                     flag_classroom = 1;
-                    binding.ivClassroom.setImageBitmap(bm);
                     binding.ivClassroom.setPadding(0, 0, 0, 0);
                     binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_classroom = new File(FilePath);
+                    Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
                 }
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -452,7 +454,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     private void showSnackBar(String str) {
-        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -509,7 +511,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             e.printStackTrace();
         }
         if (z[0] >= 0) {
-            Utils.customSectionSaveAlert(UploadedPhotoActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+            Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
         } else {
             showSnackBar(getString(R.string.failed));
         }
