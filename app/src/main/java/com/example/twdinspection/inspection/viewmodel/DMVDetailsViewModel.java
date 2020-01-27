@@ -38,36 +38,20 @@ public class DMVDetailsViewModel extends AndroidViewModel {
     }
 
 
-
-    public LiveData<List<SchoolMandal>> getAllMandals(int distId) {
-        if (mandals != null) {
-            mandals=mRepository.getMandals(distId);
-        }
-        return mandals;
-    }
-
-    public LiveData<List<MasterInstituteInfo>> getInstitutes() {
+    public LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId) {
         if (inst_names != null) {
-            inst_names=mRepository.getInstitutes();
+            inst_names=mRepository.getInstitutes(districtId);
         }
         return inst_names;
     }
 
-    public LiveData<List<SchoolVillage>> getAllVillages(int mandalId,int distId) {
-            villages=mRepository.getVillages(mandalId,distId);
-        return villages;
-    }
 
     public LiveData<String> getDistId(String distName){
         return mRepository.getDistId(distName);
     }
 
-    public LiveData<String> getMandalId(String mandalName,int distId){
-        return mRepository.getMandalId(mandalName,distId);
-    }
-
-    public LiveData<String> getVillageId(String mandalName,int manId, int distId){
-        return mRepository.getVillageId(mandalName,manId,distId);
+    public LiveData<MasterInstituteInfo> getInstituteInfo(String instId){
+        return mRepository.getInstituteInfo(instId);
     }
 
     public LiveData<Integer> getInstId(String instName){

@@ -52,19 +52,15 @@ public class DMVRepository {
 
 
 
-    public LiveData<List<MasterInstituteInfo>> getInstitutes() {
-        LiveData<List<MasterInstituteInfo>> institutes=districtDao.getInstitutes();
+    public LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId) {
+        LiveData<List<MasterInstituteInfo>> institutes=districtDao.getInstitutes(districtId);
         return institutes;
     }
 
 
 
-    public LiveData<String> getMandalId(String mandalName, int distId) {
-        return districtDao.getMandalId(mandalName, distId);
-    }
-
-    public LiveData<String> getVillageId(String mandalName, int manId, int distId) {
-        return districtDao.getVillageId(mandalName, manId, distId);
+    public LiveData<MasterInstituteInfo> getInstituteInfo(String instId) {
+        return districtDao.getInstituteInfo(instId);
     }
 
     public LiveData<Integer> getInstId(String inst_name) {

@@ -57,7 +57,6 @@ public class InstMenuMainActivity extends AppCompatActivity
 
         LiveData<List<InstMenuInfoEntity>> arrayListLiveData = instMainViewModel.getAllSections();
         sharedPreferences = TWDApplication.get(this).getPreferences();
-        editor = sharedPreferences.edit();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
 
         arrayListLiveData.observe(this, new Observer<List<InstMenuInfoEntity>>() {

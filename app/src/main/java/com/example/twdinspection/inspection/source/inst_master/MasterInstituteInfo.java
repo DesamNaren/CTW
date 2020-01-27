@@ -39,6 +39,111 @@ public class MasterInstituteInfo {
     @Expose
     private String instName;
 
+    @SerializedName("mandalName")
+    @Expose
+    private String mandalName;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("districtName")
+    @Expose
+    private String districtName;
+
+    @SerializedName("villageName")
+    @Expose
+    private String villageName;
+
+    @SerializedName("mandalId")
+    @Expose
+    private int mandalId;
+
+    @SerializedName("districtID")
+    @Expose
+    private int districtID;
+
+    @SerializedName("villageId")
+    @Expose
+    private int villageId;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+
+    public String getMandalName() {
+        return mandalName;
+    }
+
+    public void setMandalName(String mandalName) {
+        this.mandalName = mandalName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDistrictName() {
+        return districtName;
+    }
+
+    public void setDistrictName(String districtName) {
+        this.districtName = districtName;
+    }
+
+    public String getVillageName() {
+        return villageName;
+    }
+
+    public void setVillageName(String villageName) {
+        this.villageName = villageName;
+    }
+
+    public int getMandalId() {
+        return mandalId;
+    }
+
+    public void setMandalId(int mandalId) {
+        this.mandalId = mandalId;
+    }
+
+    public int getDistrictID() {
+        return districtID;
+    }
+
+    public void setDistrictID(int districtID) {
+        this.districtID = districtID;
+    }
+
+    public int getVillageId() {
+        return villageId;
+    }
+
+    public void setVillageId(int villageId) {
+        this.villageId = villageId;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
     public int getId() {
         return id;
     }

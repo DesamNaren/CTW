@@ -658,8 +658,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
                     Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
-
-//                    startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
                 }
             }
         });

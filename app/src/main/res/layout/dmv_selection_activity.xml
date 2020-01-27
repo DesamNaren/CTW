@@ -127,6 +127,32 @@
                         android:layout_height="1dp"
                         android:background="@color/black" />
 
+                    <LinearLayout
+                        android:id="@+id/ll_selectInstitute"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.common.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/select_institution"
+                            android:textColor="@color/black" />
+
+                        <Spinner
+                            android:id="@+id/sp_institution"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black" />
+
 
                     <LinearLayout
                         android:id="@+id/ll_selectJunction"
@@ -139,11 +165,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@string/select_mandal"
+                            android:id="@+id/mandal"
+                            android:hint="Mandal"
                             android:textColor="@color/black" />
 
                         <Spinner
                             android:id="@+id/sp_Mandal"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown" />
@@ -165,42 +193,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@string/select_village"
+                            android:hint="Village"
+                            android:id="@+id/village"
                             android:textColor="@color/black" />
 
                         <Spinner
                             android:id="@+id/sp_village"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:spinnerMode="dropdown" />
+                            android:spinnerMode="dropdown"
+                            android:visibility="gone"/>
+
+
                     </LinearLayout>
 
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_selectInstitute"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp">
-
-                        <com.example.twdinspection.common.custom.CustomFontTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/select_institution"
-                            android:textColor="@color/black" />
-
-                        <Spinner
-                            android:id="@+id/sp_institution"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:spinnerMode="dropdown" />
-                    </LinearLayout>
 
 
                 </LinearLayout>
