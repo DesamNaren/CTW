@@ -24,6 +24,7 @@ import com.example.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.example.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.viewmodel.SchoolSyncViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,10 +36,12 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     ActivitySchoolSyncBinding binding;
     SharedPreferences sharedPreferences;
     private String officerId;
+    CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customProgressDialog = new CustomProgressDialog(SchoolSyncActivity.this);
 
         binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
 
@@ -70,6 +73,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.btnDmv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                customProgressDialog.show();
                 LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse("maadhavisriram");
                 schoolDMVResponseLiveData.observe(SchoolSyncActivity.this, new Observer<SchoolDMVResponse>() {
                     @Override
@@ -87,6 +91,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.syncInstitutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                customProgressDialog.show();
                 LiveData<InstMasterResponse> instMasterResponseLiveData = viewModel.getInstMasterResponse();
                 instMasterResponseLiveData.observe(SchoolSyncActivity.this, new Observer<InstMasterResponse>() {
                     @Override
@@ -161,7 +166,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         try {
             if (cnt > 0) {
                 Log.i("V_CNT", "vilCount: " + cnt);
-
+                customProgressDialog.hide();
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         "District master synced successfully");
                 // Success Alert;
@@ -175,11 +180,10 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void instCount(int cnt) {
-
+        customProgressDialog.hide();
         try {
             if (cnt > 0) {
                 Log.i("I_CNT", "instCount: " + cnt);
-
                 Utils.customSyncSuccessAlert(SchoolSyncActivity.this, getResources().getString(R.string.app_name),
                         "Institute master synced successfully");
             } else {
