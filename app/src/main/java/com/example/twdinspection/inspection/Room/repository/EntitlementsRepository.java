@@ -3,10 +3,8 @@ package com.example.twdinspection.inspection.Room.repository;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.EntitlementsInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 
 import io.reactivex.Observable;

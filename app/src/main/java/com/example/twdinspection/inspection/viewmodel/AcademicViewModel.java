@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.Room.repository.AcademicRepository;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
 
 public class AcademicViewModel extends ViewModel {
 
@@ -21,8 +21,8 @@ public class AcademicViewModel extends ViewModel {
 
     }
 
-    public long insertAcademicInfo(AcademicOveriewEntity academicOveriewEntity) {
-        long flag = mRepository.insertAcademicInfo(academicOveriewEntity);
+    public long insertAcademicInfo(AcademicEntity AcademicEntity) {
+        long flag = mRepository.insertAcademicInfo(AcademicEntity);
         return flag;
     }
 }

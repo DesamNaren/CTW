@@ -4,11 +4,8 @@ import android.app.Application;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.databinding.ActivityEntitlementsBinding;
-import com.example.twdinspection.inspection.Room.repository.AcademicRepository;
 import com.example.twdinspection.inspection.Room.repository.EntitlementsRepository;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 
 public class EntitlementsViewModel extends ViewModel {

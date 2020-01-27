@@ -25,7 +25,7 @@ import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
@@ -55,7 +55,7 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
 @Database(entities = {StudAttendInfoEntity.class,
         StaffAttendanceEntity.class, MedicalInfoEntity.class, DietListEntity.class
         , DietIssuesEntity.class,
-        InfraStructureEntity.class, AcademicOveriewEntity.class, EntitlementsEntity.class,
+        InfraStructureEntity.class, AcademicEntity.class, EntitlementsEntity.class,
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class

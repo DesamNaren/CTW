@@ -2,13 +2,10 @@ package com.example.twdinspection.inspection.Room.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
-import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
 

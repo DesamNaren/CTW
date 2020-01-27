@@ -1,48 +1,62 @@
 package com.example.twdinspection.inspection.ui;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
+import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
 import com.example.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
-public class AcademicActivity extends BaseActivity {
+public class AcademicActivity extends BaseActivity implements SaveListener {
     ActivityAcademicBinding binding;
     AcademicViewModel academicViewModel;
-    AcademicOveriewEntity academicOveriewEntity;
+    AcademicEntity AcademicEntity;
     String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength,
             plan_prepared, textbooks_rec, assessment_test_conducted, punadiPrgmConducted, punadi2_testmarks_entered,
             kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg, library_room_available,
             big_tv_rot_avail, mana_tv_lessons_shown, comp_lab_avail, ict_instr_avail, eLearning_avail, showing_stud, tabs_supplied,
             punadi_books_supplied, properly_using_manuals, plan_syll_comp_prepared, sufficient_books_supplied;
     String highestClassGradeA, highestClassGradeB, highestClassGradeC, highestClassGradeTotal, last_yr_ssc_percent,
-            punadiPrgmReason, punadi2TestmarksReason, karaDipathPrgmCond, labName, labInchargeName, labMobileNo,
+            punadiPrgmReason, punadi2TestmarksReason, karaDipathPrgmCondReason, labName, labInchargeName, labMobileNo,
             noOfBooks, nameLibraryIncharge, libraryMobileNo, matEnterRegReason, TvRotWorkingStatus,
             maint_accession_reg, proper_light_fan, manaTvLessonsReason, manaTvInchargeName, manaTvMobileNo,
             noOfComputersAvailable, compWorkingStatus, workingStatusProjector, nameIctInstr, mobNoIctInstr,
             timetable_disp, comp_syll_completed, comp_lab_cond, digital_content_used, noOfTabs, tabInchargeName, tabInchargeMblno,
             stud_using_as_per_sched, tabs_timetable_disp, volSchoolCoordName, volSchoolCoordMobNo, eLearningInchrgName,
             eLearningInchrgMobileNo, separate_timetable_disp;
+    private InstMainViewModel instMainViewModel;
+    private SharedPreferences sharedPreferences;
+    private String instId, officerId, insTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_academic, getString(R.string.title_academic));
-
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         academicViewModel = ViewModelProviders.of(AcademicActivity.this,
                 new AcademicCustomViewModel(binding, this, getApplication())).get(AcademicViewModel.class);
         binding.setViewModel(academicViewModel);
+
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
+        officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
 
         binding.rgHighestClassSyllabusCompleted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -528,7 +542,7 @@ public class AcademicActivity extends BaseActivity {
                 last_yr_ssc_percent = binding.lastYrSscPercentEt.getText().toString().trim();
                 punadiPrgmReason = binding.etPunadiPrgmReason.getText().toString().trim();
                 punadi2TestmarksReason = binding.etPunadi2TestmarksReason.getText().toString().trim();
-                karaDipathPrgmCond = binding.etKaraDipathPrgmCond.getText().toString().trim();
+                karaDipathPrgmCondReason = binding.etKaraDipathPrgmCond.getText().toString().trim();
 
                 labName = binding.etLabName.getText().toString().trim();
                 labInchargeName = binding.etLabInchargeName.getText().toString().trim();
@@ -562,22 +576,90 @@ public class AcademicActivity extends BaseActivity {
                 tabInchargeMblno = binding.etTabInchargeMblno.getText().toString().trim();
 
                 if (validate()) {
-                    academicOveriewEntity = new AcademicOveriewEntity();
-                    academicOveriewEntity.setHighest_class_syllabus_completed(highest_class_syllabus_completed);
-                    academicOveriewEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);
-                    academicOveriewEntity.setStaff_accomodated_asper_stud_strength(staff_accomodated_asper_stud_strength);
-                    academicOveriewEntity.setPlan_prepared(plan_prepared);
-                    academicOveriewEntity.setHighest_class_gradeA(highestClassGradeA);
-                    academicOveriewEntity.setHighest_class_gradeB(highestClassGradeB);
-                    academicOveriewEntity.setHighest_class_gradeC(highestClassGradeC);
-                    academicOveriewEntity.setHighest_class_total(highestClassGradeTotal);
-                    academicOveriewEntity.setAssessment_test_conducted(assessment_test_conducted);
+                    AcademicEntity = new AcademicEntity();
+                    AcademicEntity.setOfficer_id(officerId);
+                    AcademicEntity.setInstitute_id(instId);
+                    AcademicEntity.setInspection_time(insTime);
+                    AcademicEntity.setHighest_class_syllabus_completed(highest_class_syllabus_completed);
+                    AcademicEntity.setPlan_syll_comp_prepared(plan_syll_comp_prepared);
+                    AcademicEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);
+                    AcademicEntity.setStaff_accomodated_asper_stud_strength(staff_accomodated_asper_stud_strength);
+                    AcademicEntity.setPlan_prepared(plan_prepared);
+                    AcademicEntity.setTextbooks_rec(textbooks_rec);
+                    AcademicEntity.setAssessment_test_conducted(assessment_test_conducted);
 
-                    long x = academicViewModel.insertAcademicInfo(academicOveriewEntity);
-//                Toast.makeText(AcademicActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
+                    AcademicEntity.setHighest_class_gradeA(highestClassGradeA);
+                    AcademicEntity.setHighest_class_gradeB(highestClassGradeB);
+                    AcademicEntity.setHighest_class_gradeC(highestClassGradeC);
+                    AcademicEntity.setHighest_class_total(highestClassGradeTotal);
+
+                    AcademicEntity.setLast_yr_ssc_percent(last_yr_ssc_percent);
+                    AcademicEntity.setPunadi_books_supplied(punadi_books_supplied);
+                    AcademicEntity.setSufficient_books_supplied(sufficient_books_supplied);
+                    AcademicEntity.setPunadiPrgmConducted(punadiPrgmConducted);
+                    AcademicEntity.setPunadiPrgmReason(punadiPrgmReason);
+                    AcademicEntity.setPunadi2_testmarks_entered(punadi2_testmarks_entered);
+                    AcademicEntity.setPunadi2TestmarksReason(punadi2TestmarksReason);
+                    AcademicEntity.setPunadi2_testmarks_entered(kara_dipath_prgm_cond);
+                    AcademicEntity.setKaraDipathPrgmCondReason(karaDipathPrgmCondReason);
+                    AcademicEntity.setLabManuals_received(labManuals_received);
+                    AcademicEntity.setProperly_using_manuals(properly_using_manuals);
+                    AcademicEntity.setLabroom_available(labroom_available);
+                    AcademicEntity.setLabName(labName);
+                    AcademicEntity.setLabInchargeName(labInchargeName);
+                    AcademicEntity.setLabMobileNo(labMobileNo);
+                    AcademicEntity.setLab_mat_entered_reg(lab_mat_entered_reg);
+
+                    AcademicEntity.setLibrary_room_available(library_room_available);
+                    AcademicEntity.setNoOfBooks(noOfBooks);
+                    AcademicEntity.setNameLibraryIncharge(nameLibraryIncharge);
+                    AcademicEntity.setLibraryMobileNo(libraryMobileNo);
+                    AcademicEntity.setMaint_accession_reg(maint_accession_reg);
+                    AcademicEntity.setProper_light_fan(proper_light_fan);
+
+                    AcademicEntity.setBig_tv_rot_avail(big_tv_rot_avail);
+                    AcademicEntity.setTvRotWorkingStatus(TvRotWorkingStatus);
+
+                    AcademicEntity.setMana_tv_lessons_shown(mana_tv_lessons_shown);
+                    AcademicEntity.setManaTvLessonsReason(manaTvLessonsReason);
+                    AcademicEntity.setManaTvInchargeName(manaTvInchargeName);
+                    AcademicEntity.setManaTvMobileNo(manaTvMobileNo);
 
 
-                    startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
+                    AcademicEntity.setComp_lab_avail(comp_lab_avail);
+                    AcademicEntity.setNoOfComputersAvailable(noOfComputersAvailable);
+                    AcademicEntity.setCompWorkingStatus(compWorkingStatus);
+                    AcademicEntity.setWorkingStatusProjector(workingStatusProjector);
+
+
+                    AcademicEntity.setIct_instr_avail(ict_instr_avail);
+                    AcademicEntity.setNameIctInstr(nameIctInstr);
+                    AcademicEntity.setMobNoIctInstr(mobNoIctInstr);
+
+
+                    AcademicEntity.setTimetable_disp(timetable_disp);
+                    AcademicEntity.setComp_syll_completed(comp_syll_completed);
+                    AcademicEntity.setComp_lab_cond(comp_lab_cond);
+                    AcademicEntity.setDigital_content_used(digital_content_used);
+
+
+                    AcademicEntity.setLea_avail(eLearning_avail);
+                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.setVolSchoolCoordName(volSchoolCoordName);
+                    AcademicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
+                    AcademicEntity.setLeaInchargeName(eLearningInchrgName);
+                    AcademicEntity.setLeaMobNum(eLearningInchrgMobileNo);
+                    AcademicEntity.setSeparate_timetable_disp(separate_timetable_disp);
+                    AcademicEntity.setTabs_supplied(tabs_supplied);
+                    AcademicEntity.setNoOfTabs(noOfTabs);
+                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.setTabInchargeName(tabInchargeName);
+                    AcademicEntity.setTabInchargeMblno(tabInchargeMblno);
+
+                    Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+
+
+//                    startActivity(new Intent(AcademicActivity.this, CoCurricularActivity.class));
                 }
             }
         });
@@ -855,6 +937,35 @@ public class AcademicActivity extends BaseActivity {
 
     private void showSnackBar(String str) {
         Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void submitData() {
+        long x = academicViewModel.insertAcademicInfo(AcademicEntity);
+        if (x >= 0) {
+            final long[] z = {0};
+            try {
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Academic");
+                liveData.observe(AcademicActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
+
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z[0] >= 0) {
+                Utils.customSectionSaveAlert(AcademicActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
+        } else {
+            showSnackBar(getString(R.string.failed));
+        }
     }
 
     @Override

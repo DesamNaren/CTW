@@ -57,7 +57,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
     LinearLayout ll_stud_pres;
     InstMainViewModel instMainViewModel;
-    CoordinatorLayout rootLayout;
+    CoordinatorLayout bottom_ll;
     SharedPreferences sharedPreferences;
     String instId, officerId;
 
@@ -148,7 +148,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
     }
 
     private void showBottomSheetSnackBar(String str) {
-        Snackbar.make(rootLayout, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(bottom_ll, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -158,11 +158,8 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
 
     public void showContactDetails(StudAttendInfoEntity studAttendInfoEntity) {
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
-        rootLayout = view.findViewById(R.id.root_layout);
+        bottom_ll = view.findViewById(R.id.bottom_ll);
         dialog = new BottomSheetDialog(StudentsAttendance_2.this);
-        LinearLayout ll_entries = view.findViewById(R.id.ll_entries);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(ll_entries);
-        bottomSheetBehavior.setPeekHeight(1500);
         dialog.setContentView(view);
         dialog.setCancelable(false);
 

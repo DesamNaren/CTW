@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicOveriewEntity;
+import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -32,13 +32,13 @@ public class AcademicRepository {
 
     long x;
 
-    public long insertAcademicInfo(AcademicOveriewEntity academicOveriewEntity) {
+    public long insertAcademicInfo(AcademicEntity AcademicEntity) {
 
 
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                academicInfoDao.insertAcademicInfo(academicOveriewEntity);
+                academicInfoDao.insertAcademicInfo(AcademicEntity);
             }
         });
 
