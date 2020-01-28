@@ -61,7 +61,7 @@ public class LocBaseActivity extends AppCompatActivity {
 
     // location updates interval - 10sec
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 0;
-    boolean flag= false;
+    boolean flag = false;
     // fastest updates interval - 5 sec
     // location updates will be received if another app is requesting the locations
     // than your app can handle
@@ -88,7 +88,6 @@ public class LocBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         callPermissions();
     }
 
@@ -100,18 +99,18 @@ public class LocBaseActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            flag= true;
+                            flag = true;
                             mRequestingLocationUpdates = true;
                             init();
                             startLocationUpdates();
                         } else if (report.isAnyPermissionPermanentlyDenied()) {
 
-                            flag= false;
+                            flag = false;
                             Utils.openSettings(LocBaseActivity.this);
                             Toast.makeText(LocBaseActivity.this, getString(R.string.all_per), Toast.LENGTH_SHORT).show();
 
                         } else if (report.getDeniedPermissionResponses().size() > 0) {
-                            flag= false;
+                            flag = false;
                             customPerAlert();
                         }
 
@@ -125,9 +124,10 @@ public class LocBaseActivity extends AppCompatActivity {
         return flag;
     }
 
+
     public void customPerAlert() {
         try {
-            final Dialog dialog = new Dialog(this);
+            Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
@@ -141,19 +141,25 @@ public class LocBaseActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                         callPermissions();
                     }
                 });
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                         finish();
                     }
                 });
-                if (!dialog.isShowing())
+                if (!dialog.isShowing()) {
                     dialog.show();
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,8 +252,6 @@ public class LocBaseActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CHECK_SETTINGS) {
             switch (resultCode) {
                 case Activity.RESULT_OK:
@@ -260,7 +264,11 @@ public class LocBaseActivity extends AppCompatActivity {
                     customPerAlert();
                     break;
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+
         }
+
     }
 
     @Override

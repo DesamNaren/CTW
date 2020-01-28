@@ -10,25 +10,18 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.LoginUser;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.HttpException;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {

@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -25,7 +26,6 @@ public class UploadPhotoViewModel extends ViewModel {
     private ActivityUploadedPhotoBinding uploadedPhotoBinding;
     private ErrorHandlerInterface errorHandlerInterface;
     private SchemeSubmitInterface schemeSubmitInterface;
-    CustomProgressDialog customProgressDialog;
 
 
     UploadPhotoViewModel(ActivityUploadedPhotoBinding uploadedPhotoBinding,
@@ -33,7 +33,6 @@ public class UploadPhotoViewModel extends ViewModel {
 
         this.context = context;
         this.uploadedPhotoBinding = uploadedPhotoBinding;
-        customProgressDialog = new CustomProgressDialog(context);
         schemePhotoSubmitResponseMutableLiveData = new MutableLiveData<>();
         try {
             errorHandlerInterface = (ErrorHandlerInterface) context;
@@ -44,26 +43,24 @@ public class UploadPhotoViewModel extends ViewModel {
 
     }
 
-    public void UploadImageServiceCall(final MultipartBody.Part body, final MultipartBody.Part body1, final MultipartBody.Part body2,
-                                       final MultipartBody.Part body3, final MultipartBody.Part body4, final MultipartBody.Part body5,
-                                       final MultipartBody.Part body6, final MultipartBody.Part body7, final MultipartBody.Part body8,
-                                       final MultipartBody.Part body9, final MultipartBody.Part body10, final MultipartBody.Part body11) {
-        customProgressDialog.show();
+    public void UploadImageServiceCall(final List<MultipartBody.Part> partList) {
+        try {
+            TWDService twdService = TWDService.Factory.create("school");
+            twdService.uploadSchoolImageCall(partList).enqueue(new Callback<SchemePhotoSubmitResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
+                    schemeSubmitInterface.getPhotoData(response.body());
+                }
 
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.uploadSchemeImageCall(body, body1, body2, body3, body4, body5, body6, body7, body8, body9, body10, body11).enqueue(new Callback<SchemePhotoSubmitResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
-                customProgressDialog.dismiss();
-                schemeSubmitInterface.getPhotoData(response.body());
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Throwable t) {
-                customProgressDialog.dismiss();
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
+                @Override
+                public void onFailure(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Throwable t) {
+                    errorHandlerInterface.handleError(t, context);
+                }
+            });
+        } catch (Exception e) {
+            errorHandlerInterface.handleError(e, context);
+            e.printStackTrace();
+        }
     }
 
 }

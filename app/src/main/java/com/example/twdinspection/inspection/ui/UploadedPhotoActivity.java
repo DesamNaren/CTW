@@ -25,10 +25,10 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomlViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
@@ -43,6 +43,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -342,7 +344,20 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                 MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
 
         customProgressDialog.show();
-        viewModel.UploadImageServiceCall(body, body1, body2, body3, body4, body5, body6, body7, body8,body9,body10,body11);
+
+
+        List<MultipartBody.Part> partList = new ArrayList<>();
+        partList.add(body);
+        partList.add(body1);
+        partList.add(body2);
+        partList.add(body3);
+        partList.add(body4);
+        partList.add(body5);
+        partList.add(body6);
+        partList.add(body7);
+        partList.add(body8);
+
+        viewModel.UploadImageServiceCall(partList);
     }
 
 
@@ -498,12 +513,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     private void CallSuccessAlert(String msg) {
-//        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
         submitData();
     }
 
     @Override
     public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
         showSnackBar(errMsg);
     }

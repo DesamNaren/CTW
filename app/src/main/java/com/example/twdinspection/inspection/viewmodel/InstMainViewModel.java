@@ -20,7 +20,6 @@ import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInf
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -29,14 +28,10 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
-import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
-import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -73,19 +68,20 @@ public class InstMainViewModel extends AndroidViewModel {
         this.binding = binding;
         errorHandlerInterface = (ErrorHandlerInterface) context;
         instSubmitInterface = (InstSubmitInterface) context;
-        generalInfoEntityLiveData=new MutableLiveData<>();
-        studAttendInfo=new MutableLiveData<>();
-        staffAttendInfo=new MutableLiveData<>();
-        medicalInfoEntityLiveData=new MutableLiveData<>();
-        dietIssuesEntityLiveData=new MutableLiveData<>();
-        infraStructureEntityLiveData=new MutableLiveData<>();
-        academicEntityLiveData=new MutableLiveData<>();
-        coCurricularEntityLiveData=new MutableLiveData<>();
-        entitlementsEntityLiveData=new MutableLiveData<>();
-        registersEntityLiveData=new MutableLiveData<>();
-        generalCommentsEntityLiveData=new MutableLiveData<>();
+        generalInfoEntityLiveData = new MutableLiveData<>();
+        studAttendInfo = new MutableLiveData<>();
+        staffAttendInfo = new MutableLiveData<>();
+        medicalInfoEntityLiveData = new MutableLiveData<>();
+        dietIssuesEntityLiveData = new MutableLiveData<>();
+        infraStructureEntityLiveData = new MutableLiveData<>();
+        academicEntityLiveData = new MutableLiveData<>();
+        coCurricularEntityLiveData = new MutableLiveData<>();
+        entitlementsEntityLiveData = new MutableLiveData<>();
+        registersEntityLiveData = new MutableLiveData<>();
+        generalCommentsEntityLiveData = new MutableLiveData<>();
         mRepository = new MenuSectionsRepository(application);
-        instMenuInfoEntities = new MutableLiveData<>(); instMenuInfoEntities = new MutableLiveData<>();
+        instMenuInfoEntities = new MutableLiveData<>();
+        instMenuInfoEntities = new MutableLiveData<>();
     }
 
     public void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities) {
@@ -101,11 +97,10 @@ public class InstMainViewModel extends AndroidViewModel {
 
     public void submitInstDetails(InstSubmitRequest instSubmitRequest) {
         try {
-            binding.appbar.progress.setVisibility(View.VISIBLE);
             TWDService twdService = TWDService.Factory.create("school");
-            Gson gson=new Gson();
-           String request= gson.toJson(instSubmitRequest);
-            Log.i("request",""+request);
+//            Gson gson = new Gson();
+//            String request = gson.toJson(instSubmitRequest);
+//            Log.i("request", "" + request);
             twdService.getInstSubmitResponse(instSubmitRequest).enqueue(new Callback<InstSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {
@@ -115,12 +110,11 @@ public class InstMainViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(@NotNull Call<InstSubmitResponse> call, @NotNull Throwable t) {
-                    binding.appbar.progress.setVisibility(View.GONE);
                     errorHandlerInterface.handleError(t, context);
                 }
             });
-        }catch (Exception e){
-            binding.appbar.progress.setVisibility(View.GONE);
+        } catch (Exception e) {
+            errorHandlerInterface.handleError(e, context);
             e.printStackTrace();
         }
 
@@ -202,6 +196,7 @@ public class InstMainViewModel extends AndroidViewModel {
         }
         return generalCommentsEntityLiveData;
     }
+
     public long updateSectionInfo(String time, int id, String instId) {
         return mRepository.updateSectionInfo(time, id, instId);
     }

@@ -24,7 +24,7 @@ import com.example.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.example.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.viewmodel.SchoolSyncViewModel;
 import com.google.android.material.snackbar.Snackbar;

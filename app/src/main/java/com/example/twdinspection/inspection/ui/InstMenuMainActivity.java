@@ -1,11 +1,16 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -15,6 +20,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.InstMainActivityBinding;
 import com.example.twdinspection.inspection.adapter.MenuSectionsAdapter;
@@ -35,6 +41,8 @@ import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -42,17 +50,19 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class InstMenuMainActivity extends AppCompatActivity
-        implements ErrorHandlerInterface, InstSubmitInterface {
+public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandlerInterface, InstSubmitInterface {
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officer_id, dist_id, mand_id, vill_id;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false, staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false, academicFlag = false, cocurricularFlag = false, entitlementsFlag = false, regFlag = false, generalCommentsFlag = false;
     InstMainViewModel instMainViewModel;
+    private String desLat, desLng;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customProgressDialog = new CustomProgressDialog(InstMenuMainActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         binding.appbar.header.syncIv.setVisibility(View.GONE);
         binding.appbar.header.syncBtn.setVisibility(View.VISIBLE);
@@ -70,6 +80,8 @@ public class InstMenuMainActivity extends AppCompatActivity
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
         mand_id = String.valueOf(sharedPreferences.getInt(AppConstants.MAN_ID, 0));
         vill_id = String.valueOf(sharedPreferences.getInt(AppConstants.VILL_ID, 0));
+        desLat = sharedPreferences.getString(AppConstants.LAT, "");
+        desLng = sharedPreferences.getString(AppConstants.LNG, "");
 
         arrayListLiveData.observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
@@ -81,6 +93,7 @@ public class InstMenuMainActivity extends AppCompatActivity
                     for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
                         if (arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
+                            break;
                         }
                     }
                     if (flag) {
@@ -121,11 +134,15 @@ public class InstMenuMainActivity extends AppCompatActivity
                     for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
                         if (arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
+                            break;
                         }
                     }
                     if (flag) {
                         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-                            submitCall();
+
+                            getLocationData();
+
+
                         } else {
                             Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                         }
@@ -135,6 +152,33 @@ public class InstMenuMainActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    private void getLocationData() {
+        Location cLocation = null, dLocation = null;
+
+        if (!TextUtils.isEmpty(desLat) && !TextUtils.isEmpty(desLng)) {
+            dLocation = new Location("dLoc");
+            dLocation.setLatitude(Double.valueOf(desLat));
+            dLocation.setLongitude(Double.valueOf(desLng));
+        }
+
+        if (mCurrentLocation != null && mCurrentLocation.getLatitude() != 0 && mCurrentLocation.getLongitude() != 0) {
+            cLocation = new Location("cLoc");
+            cLocation.setLatitude(mCurrentLocation.getLatitude());
+            cLocation.setLongitude(mCurrentLocation.getLongitude());
+        }
+
+        if (cLocation != null && dLocation != null) {
+            float distance = Utils.calcDistance(cLocation, dLocation);
+            if (distance <= AppConstants.DISTANCE) {
+                submitCall();
+            } else {
+                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the 100 meter radius of selected institute");
+            }
+        } else {
+            submitCall();
+        }
     }
 
     private void setAdapter(List<InstMenuInfoEntity> menuInfoEntities) {
@@ -314,13 +358,17 @@ public class InstMenuMainActivity extends AppCompatActivity
             instSubmitRequest.setDist_id(dist_id);
             instSubmitRequest.setMandal_id(mand_id);
             instSubmitRequest.setVillage_id(vill_id);
-            instMainViewModel.submitInstDetails(instSubmitRequest);
             submitFlag = true;
+
+            customProgressDialog.show();
+            instMainViewModel.submitInstDetails(instSubmitRequest);
+
         }
     }
 
     @Override
     public void getData(InstSubmitResponse schemeSubmitResponse) {
+        customProgressDialog.dismiss();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
@@ -338,6 +386,7 @@ public class InstMenuMainActivity extends AppCompatActivity
 
     @Override
     public void handleError(Throwable e, Context context) {
+        customProgressDialog.dismiss();
         String errMsg = ErrorHandler.handleError(e, context);
         Snackbar.make(binding.appbar.root, errMsg, Snackbar.LENGTH_SHORT).show();
     }
@@ -345,12 +394,43 @@ public class InstMenuMainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        try {
-
-        } catch (Exception e) {
-            InstMenuMainActivity.this.finish();
-        }
+        Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                mCurrentLocation = locationResult.getLastLocation();
+            }
+        };
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mGpsSwitchStateReceiver);
+    }
+
+    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (intent != null && intent.getAction() != null && intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                    callPermissions();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 
 }
 

@@ -19,7 +19,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 

@@ -16,6 +16,7 @@ import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
@@ -97,10 +98,7 @@ public interface TWDService {
 
     @Multipart
     @POST("upload/uploadPhotos")
-    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image1,@Part MultipartBody.Part image2,
-                                                          @Part MultipartBody.Part image3,@Part MultipartBody.Part image4,@Part MultipartBody.Part image5,
-                                                          @Part MultipartBody.Part image6,@Part MultipartBody.Part image7,@Part MultipartBody.Part image8,
-                                                          @Part MultipartBody.Part image9,@Part MultipartBody.Part image10,@Part MultipartBody.Part image11);
+    Call<SchemePhotoSubmitResponse> uploadSchoolImageCall(@Part List<MultipartBody.Part> partList);
 
     @GET("CTWServiceDetails/getDMVMasters")
     Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);

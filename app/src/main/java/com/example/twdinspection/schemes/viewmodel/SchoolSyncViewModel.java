@@ -2,8 +2,6 @@ package com.example.twdinspection.schemes.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -12,16 +10,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivitySchemeSyncBinding;
 import com.example.twdinspection.databinding.ActivitySchoolSyncBinding;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
-import com.example.twdinspection.inspection.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
-import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
-import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.InstMainRowBinding;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
@@ -21,6 +22,7 @@ import com.example.twdinspection.inspection.ui.EntitlementsActivity;
 import com.example.twdinspection.inspection.ui.GeneralCommentsActivity;
 import com.example.twdinspection.inspection.ui.GeneralInfoActivity;
 import com.example.twdinspection.inspection.ui.InfraActivity;
+import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.ui.MedicalActivity;
 import com.example.twdinspection.inspection.ui.RegistersActivity;
 import com.example.twdinspection.inspection.ui.StaffAttendActivity;
@@ -99,7 +101,18 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                             callActivity(GeneralCommentsActivity.class);
                             break;
                         case 12:
-                            callActivity(UploadedPhotoActivity.class);
+                            boolean flag = true;
+                            for (int i = 0; i < list.size()-1; i++) {
+                                if (list.get(i).getFlag_completed() == 0) {
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                            if (flag) {
+                                callActivity(UploadedPhotoActivity.class);
+                            } else {
+                                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
+                            }
                             break;
                     }
                 }
