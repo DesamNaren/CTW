@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Query;
 
 import com.example.twdinspection.inspection.Room.Dao.MenuSectionsDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
@@ -201,6 +202,27 @@ public class MenuSectionsRepository {
 
     public LiveData<Integer> getSectionId(String name) {
         return menuSectionsDao.getSectionId(name);
+    }
+
+
+    public void deleteAllInspectionData() {
+        menuSectionsDao.deleteAcademicEntity();
+        menuSectionsDao.deleteCallHealthInfoEntity();
+        menuSectionsDao.deleteClassInfo();
+        menuSectionsDao.deleteCoCurricularEntity();
+        menuSectionsDao.deleteDietIssuesInfo();
+        menuSectionsDao.deleteDietListInfo();
+        menuSectionsDao.deleteEntitlementsInfo();
+        menuSectionsDao.deleteGeneralCommentsInfo();
+        menuSectionsDao.deleteGeneralInfo();
+        menuSectionsDao.deleteInfraStructureInfo();
+        menuSectionsDao.deleteInstMenuInfoEntity();
+        menuSectionsDao.deleteMedicalDetailsBean();
+        menuSectionsDao.deleteMedicalInfoEntity();
+        menuSectionsDao.deletePlantsEntity();
+        menuSectionsDao.deleteRegistersInfo();
+        menuSectionsDao.deleteStaff_Info();
+        menuSectionsDao.deleteStudAchievementEntity();
     }
 
 

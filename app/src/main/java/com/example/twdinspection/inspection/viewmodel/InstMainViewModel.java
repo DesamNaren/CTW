@@ -28,12 +28,18 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +66,7 @@ public class InstMainViewModel extends AndroidViewModel {
     public InstMainViewModel(Application application) {
         super(application);
         mRepository = new MenuSectionsRepository(application);
+        instMenuInfoEntities = new MutableLiveData<>();
     }
 
     public InstMainViewModel(InstMainActivityBinding binding, Application application, Context context) {
@@ -80,7 +87,6 @@ public class InstMainViewModel extends AndroidViewModel {
         registersEntityLiveData = new MutableLiveData<>();
         generalCommentsEntityLiveData = new MutableLiveData<>();
         mRepository = new MenuSectionsRepository(application);
-        instMenuInfoEntities = new MutableLiveData<>();
         instMenuInfoEntities = new MutableLiveData<>();
     }
 
@@ -205,10 +211,43 @@ public class InstMainViewModel extends AndroidViewModel {
         return mRepository.getMenuRecordsCount();
     }
 
-    /* public int getSectionId(String name) {
-         return mRepository.getSectionId(name);
-     }*/
+
     public LiveData<Integer> getSectionId(String name) {
         return mRepository.getSectionId(name);
     }
+
+
+    public void deleteAllInspectionData() {
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                mRepository.deleteAllInspectionData();
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+    }
+
 }

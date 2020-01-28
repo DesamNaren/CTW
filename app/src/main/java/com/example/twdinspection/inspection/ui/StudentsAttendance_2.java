@@ -161,7 +161,7 @@ public class StudentsAttendance_2 extends BaseActivity implements StudAttendInte
         bottom_ll = view.findViewById(R.id.bottom_ll);
         dialog = new BottomSheetDialog(StudentsAttendance_2.this);
         dialog.setContentView(view);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
 
         ImageView ic_close = view.findViewById(R.id.ic_close);
         RadioGroup rg_IsAttndMarked_1_2 = view.findViewById(R.id.rg_IsAttndMarked_1_2);

@@ -33,6 +33,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CoCurricularActivity extends BaseActivity implements SaveListener {
@@ -816,6 +817,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 

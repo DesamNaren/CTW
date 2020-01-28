@@ -70,4 +70,61 @@ public interface MenuSectionsDao {
 
     @Query("SELECT * from GeneralCommentsInfo")
     LiveData<GeneralCommentsEntity> getGeneralCommentsInfo();
+
+
+    @Query("Delete from AcademicEntity")
+    void deleteAcademicEntity();
+    @Query("Delete from CallHealthInfoEntity")
+    void deleteCallHealthInfoEntity();
+
+    @Query("Delete from ClassInfo")
+    void deleteClassInfo();
+    @Query("Delete from CoCurricularEntity")
+    void deleteCoCurricularEntity();
+
+
+    @Query("Delete from DietIssuesInfo")
+    void deleteDietIssuesInfo();
+    @Query("Delete from DietListInfo")
+    void deleteDietListInfo();
+
+
+
+    @Query("Delete from EntitlementsInfo")
+    void deleteEntitlementsInfo();
+    @Query("Delete from GeneralCommentsInfo")
+    void deleteGeneralCommentsInfo();
+
+
+    @Query("Delete from GeneralInfo")
+    void deleteGeneralInfo();
+    @Query("Delete from InfraStructureInfo")
+    void deleteInfraStructureInfo();
+
+
+
+    @Query("Delete from InstMenuInfoEntity")
+    void deleteInstMenuInfoEntity();
+    @Query("Delete from MedicalDetailsBean")
+    void deleteMedicalDetailsBean();
+
+
+    @Query("Delete from MedicalInfoEntity")
+    void deleteMedicalInfoEntity();
+    @Query("Delete from PlantsEntity")
+    void deletePlantsEntity();
+
+
+
+    @Query("Delete from RegistersInfo")
+    void deleteRegistersInfo();
+    @Query("Delete from Staff_Info")
+    void deleteStaff_Info();
+
+
+    @Query("Delete from StudAchievementEntity")
+    void deleteStudAchievementEntity();
+
+
+
 }

@@ -767,10 +767,27 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar("Enter Name of the science lab incharge teacher");
             return false;
         }
+
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labMobileNo)) {
             showSnackBar("Enter lab mobile number");
             return false;
         }
+
+
+        if (labroom_available.equals(AppConstants.Yes) && labMobileNo.length() != 10) {
+            showSnackBar("Enter valid lab mobile number");
+            return false;
+        }
+
+
+        if (labroom_available.equals(AppConstants.Yes)
+                && !(labMobileNo.startsWith("9") || labMobileNo.startsWith("8") || labMobileNo.startsWith("7") ||
+                labMobileNo.startsWith("6"))) {
+            showSnackBar("Enter valid lab mobile number");
+            return false;
+        }
+
+
         if (TextUtils.isEmpty(lab_mat_entered_reg)) {
             showSnackBar("Select Lab material entered in the stock entry register");
             return false;
@@ -794,7 +811,20 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(libraryMobileNo)) {
-            showSnackBar("Enter mobile number");
+            showSnackBar("Enter library mobile number");
+            return false;
+        }
+
+        if (labroom_available.equals(AppConstants.Yes) && libraryMobileNo.length() != 10) {
+            showSnackBar("Enter valid library mobile number");
+            return false;
+        }
+
+
+        if (labroom_available.equals(AppConstants.Yes) && !TextUtils.isEmpty(libraryMobileNo)
+                && !(libraryMobileNo.startsWith("9") || libraryMobileNo.startsWith("8") || libraryMobileNo.startsWith("7") ||
+                libraryMobileNo.startsWith("6"))) {
+            showSnackBar("Enter valid library mobile number");
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(maint_accession_reg)) {
@@ -828,10 +858,22 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvMobileNo)) {
-            showSnackBar("Select  MANA TV mobile number");
+            showSnackBar("Enter MANA TV mobile number");
             return false;
         }
 
+        if (mana_tv_lessons_shown.equals(AppConstants.No)
+                && manaTvMobileNo.length() != 10) {
+            showSnackBar("Enter valid MANA TV mobile number");
+            return false;
+        }
+
+        if (mana_tv_lessons_shown.equals(AppConstants.No)
+                && !(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
+                manaTvMobileNo.startsWith("6"))) {
+            showSnackBar("Enter valid MANA TV mobile number");
+            return false;
+        }
 
         if (TextUtils.isEmpty(comp_lab_avail)) {
             showSnackBar("Select computer lab is available");
@@ -861,6 +903,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar("Enter ICT instructor Mobile No");
             return false;
         }
+
+        if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && mobNoIctInstr.length()!=10) {
+            showSnackBar("Enter valid ICT instructor Mobile No");
+            return false;
+        }
+
+        if (comp_lab_avail.equals(AppConstants.Yes) &&  ict_instr_avail.equals(AppConstants.Yes)
+                && !(mobNoIctInstr.startsWith("9") || mobNoIctInstr.startsWith("8") || mobNoIctInstr.startsWith("7") ||
+                mobNoIctInstr.startsWith("6"))) {
+            showSnackBar("Enter valid ICT instructor Mobile No");
+            return false;
+        }
+
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(timetable_disp)) {
             showSnackBar("Select Timetable");
             return false;
@@ -891,10 +946,24 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar("Enter School Coordinator Name");
             return false;
         }
-        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes) && TextUtils.isEmpty(volSchoolCoordMobNo)) {
+        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
+                && TextUtils.isEmpty(volSchoolCoordMobNo)) {
             showSnackBar("Enter School Coordinator Mobile Number");
             return false;
         }
+
+        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)  && volSchoolCoordMobNo.length()!=10) {
+            showSnackBar("Enter valid School Coordinator Mobile Number");
+            return false;
+        }
+
+        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
+                && !(volSchoolCoordMobNo.startsWith("9") || volSchoolCoordMobNo.startsWith("8") || volSchoolCoordMobNo.startsWith("7") ||
+                volSchoolCoordMobNo.startsWith("6"))) {
+            showSnackBar("Enter valid School Coordinator Mobile Number");
+            return false;
+        }
+
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(eLearningInchrgName)) {
             showSnackBar("Enter eLearning incharge Name");
             return false;
@@ -903,6 +972,20 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar("Enter eLearning incharge Mobile Number");
             return false;
         }
+
+        if (eLearning_avail.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
+            showSnackBar("Enter eLearning incharge Mobile Number");
+            return false;
+        }
+
+        if (eLearning_avail.equals(AppConstants.Yes)
+                && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
+                eLearningInchrgMobileNo.startsWith("6"))) {
+            showSnackBar("Enter valid eLearning incharge Mobile Number");
+            return false;
+        }
+
+
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(separate_timetable_disp)) {
             showSnackBar("Select Separate time table displayed");
             return false;
@@ -927,6 +1010,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(tabInchargeMblno)) {
             showSnackBar("Enter tab lab incharge Mobile number");
+            return false;
+        }
+
+
+        if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
+            showSnackBar("Enter valid tab lab incharge Mobile number");
+            return false;
+        }
+
+        if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes)
+                && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
+                eLearningInchrgMobileNo.startsWith("6"))) {
+            showSnackBar("Enter valid tab lab incharge Mobile number");
             return false;
         }
 

@@ -146,6 +146,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".inspection.ui.LocBaseActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".inspection.ui.QuitAppActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

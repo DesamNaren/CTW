@@ -17,6 +17,7 @@ import com.example.twdinspection.inspection.interfaces.ClickCallback;
 import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAdapter.ItemHolder> {
@@ -187,6 +188,8 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
                         binding.etAdmittedDate.setText(dateValue);
                     }
                 }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+
         datePickerDialog.show();
     }
 

@@ -371,6 +371,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     public void getData(InstSubmitResponse schemeSubmitResponse) {
         customProgressDialog.dismiss();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            instMainViewModel.deleteAllInspectionData();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             submitFlag = false;

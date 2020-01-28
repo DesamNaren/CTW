@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
@@ -24,75 +22,92 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
     private SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
-        LiveData<Integer> liveData1 = instMainViewModel.getMenuRecordsCount();
-        liveData1.observe(LoginActivity.this, new Observer<Integer>() {
+        instMainViewModel.getAllSections().observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
-            public void onChanged(Integer cnt) {
-                if (cnt != null && cnt > 0) {
-                    startActivity(new Intent(LoginActivity.this,InstMenuMainActivity.class));
-                    finish();
-                } else {
-                    binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.activity_login_cre);
-                    LoginViewModel loginViewModel =
-                            ViewModelProviders.of(LoginActivity.this,
-                                    new LoginCustomViewModel(binding, LoginActivity.this)).get(LoginViewModel.class);
+            public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
+                if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
 
-                    binding.setViewModel(loginViewModel);
-
-                    try {
-                        editor = TWDApplication.get(LoginActivity.this).getPreferences().edit();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-
-                    loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<EmployeeResponse>() {
-                        @Override
-                        public void onChanged(EmployeeResponse employeeResponses) {
-
-                            if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
-                                if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
-                                    editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
-                                    editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
-                                    editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
-                                    editor.commit();
-
-                                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                                    finish();
-                                } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
-                                    Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                                } else {
-                                    callSnackBar(getString(R.string.something));
-                                }
-                            } else {
-                                callSnackBar(getString(R.string.something));
-
-                            }
+                    boolean flag = false;
+                    for (int i = 0; i < instMenuInfoEntities.size(); i++) {
+                        if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
+                            flag = true;
+                            break;
                         }
-                    });
+                    }
+                    if (flag) {
+                        startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
+                        finish();
+                    } else {
+                        callLoginProcess();
+                    }
+                } else {
+                    callLoginProcess();
+                }
+            }
+        });
+    }
 
-                    binding.etName.addTextChangedListener(new GenericTextWatcher(binding.etName));
-                    binding.etPwd.addTextChangedListener(new GenericTextWatcher(binding.etPwd));
+    private void callLoginProcess() {
+        binding = DataBindingUtil.setContentView(LoginActivity.this, R.layout.activity_login_cre);
+        LoginViewModel loginViewModel =
+                ViewModelProviders.of(LoginActivity.this,
+                        new LoginCustomViewModel(binding, LoginActivity.this)).get(LoginViewModel.class);
+
+        binding.setViewModel(loginViewModel);
+
+        try {
+            editor = TWDApplication.get(LoginActivity.this).getPreferences().edit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<EmployeeResponse>() {
+            @Override
+            public void onChanged(EmployeeResponse employeeResponses) {
+
+                if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
+                    if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                        editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
+                        editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
+                        editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
+                        editor.commit();
+
+                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                        finish();
+                    } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                        Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        callSnackBar(getString(R.string.something));
+                    }
+                } else {
+                    callSnackBar(getString(R.string.something));
 
                 }
             }
         });
 
+        binding.etName.addTextChangedListener(new GenericTextWatcher(binding.etName));
+        binding.etPwd.addTextChangedListener(new GenericTextWatcher(binding.etPwd));
     }
 
     @Override

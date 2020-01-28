@@ -24,6 +24,7 @@ import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.ui.LoginActivity;
+import com.example.twdinspection.inspection.ui.QuitAppActivity;
 
 import org.json.JSONObject;
 
@@ -183,8 +184,10 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
+                        Intent newIntent = new Intent(activity, QuitAppActivity.class);
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(newIntent);
                         activity.finish();
-                        System.exit(0);
                     }
                 });
 
@@ -228,7 +231,7 @@ public class Utils {
                             dialog.dismiss();
                         }
                         activity.startActivity(new Intent(activity, InstMenuMainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });
@@ -344,7 +347,7 @@ public class Utils {
                             dialog.dismiss();
                         }
                         activity.startActivity(new Intent(activity, DashboardActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });
