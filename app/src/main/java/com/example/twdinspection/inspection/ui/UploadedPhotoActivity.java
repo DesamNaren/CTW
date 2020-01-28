@@ -60,9 +60,9 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     UploadPhotoViewModel viewModel;
     String officerId, instId;
     Bitmap bm;
-    String FilePath;
+    String FilePath, tdsPath, menuPath, officerPath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
-    File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom;
+    File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     private String officerID, instID, insTime;
@@ -72,7 +72,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        customProgressDialog  =new CustomProgressDialog(UploadedPhotoActivity.this);
+        customProgressDialog = new CustomProgressDialog(UploadedPhotoActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         binding.header.headerTitle.setText(getString(R.string.ben_details));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
@@ -89,6 +89,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+            tdsPath = sharedPreferences.getString(AppConstants.TDS, "");
+            menuPath = sharedPreferences.getString(AppConstants.MENU, "");
+            officerPath = sharedPreferences.getString(AppConstants.OFFICER, "");
+            file_tds = new File(tdsPath);
+            file_menu = new File(menuPath);
+            file_officer = new File(officerPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -320,8 +326,23 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
 
+        RequestBody requestFile9 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
+        MultipartBody.Part body9 =
+                MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
+
+        RequestBody requestFile10 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
+        MultipartBody.Part body10 =
+                MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
+
+        RequestBody requestFile11 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_officer);
+        MultipartBody.Part body11 =
+                MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
+
         customProgressDialog.show();
-        viewModel.UploadImageServiceCall(body, body1, body2, body3, body4, body5, body6, body7, body8);
+        viewModel.UploadImageServiceCall(body, body1, body2, body3, body4, body5, body6, body7, body8,body9,body10,body11);
     }
 
 

@@ -13,6 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -168,7 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:orientation="horizontal">
 
                         <TextView
@@ -191,7 +195,7 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:id="@+id/img_menu"
+                                android:id="@+id/iv_menu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -534,7 +538,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:orientation="horizontal">
 
                         <TextView
@@ -557,7 +561,7 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:id="@+id/img_inspOfficer"
+                                android:id="@+id/iv_inspOfficer"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

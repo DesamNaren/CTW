@@ -46,11 +46,12 @@ public class UploadPhotoViewModel extends ViewModel {
 
     public void UploadImageServiceCall(final MultipartBody.Part body, final MultipartBody.Part body1, final MultipartBody.Part body2,
                                        final MultipartBody.Part body3, final MultipartBody.Part body4, final MultipartBody.Part body5,
-                                       final MultipartBody.Part body6, final MultipartBody.Part body7, final MultipartBody.Part body8) {
+                                       final MultipartBody.Part body6, final MultipartBody.Part body7, final MultipartBody.Part body8,
+                                       final MultipartBody.Part body9, final MultipartBody.Part body10, final MultipartBody.Part body11) {
         customProgressDialog.show();
 
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.uploadSchemeImageCall(body, body1, body2, body3, body4, body5, body6, body7, body8).enqueue(new Callback<SchemePhotoSubmitResponse>() {
+        twdService.uploadSchemeImageCall(body, body1, body2, body3, body4, body5, body6, body7, body8, body9, body10, body11).enqueue(new Callback<SchemePhotoSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
                 customProgressDialog.dismiss();

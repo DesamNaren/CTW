@@ -17,6 +17,9 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
 
         <ScrollView
             android:id="@+id/scrl"
@@ -224,7 +227,7 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:id="@+id/img_tds"
+                                android:id="@+id/iv_tds"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

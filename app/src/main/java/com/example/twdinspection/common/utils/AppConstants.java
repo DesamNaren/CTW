@@ -6,7 +6,9 @@ public class AppConstants {
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String ADDRESS = "ADDRESS";
-    public static final String INFO = "INFO";
+    public static final String TDS = "TDS";
+    public static final String MENU = "MENU";
+    public static final String OFFICER = "OFFICER";
 
     public static final String LOGIN_FLAG = "LOGIN_FLAG";
     public static final String OFFICER_ID = "OFFICER_ID";

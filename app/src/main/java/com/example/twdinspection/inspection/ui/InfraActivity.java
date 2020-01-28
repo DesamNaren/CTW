@@ -2,16 +2,26 @@ package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
@@ -23,8 +33,22 @@ import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
-public class InfraActivity extends BaseActivity implements SaveListener {
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.List;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
+public class InfraActivity extends LocBaseActivity implements SaveListener {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     SharedPreferences sharedPreferences;
@@ -39,21 +63,35 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     private boolean add_class = false, add_din = false, add_dom = false;
     private String add_cls_cnt, add_din_cnt, add_dom_cnt;
 
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
+    String PIC_NAME, PIC_TYPE;
+    public Uri fileUri;
+    String FilePath;
+    File file_tds;
+    int flag_tds = 0;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_infrastructure, getResources().getString(R.string.infra_mai));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
+        binding.header.headerTitle.setText(getResources().getString(R.string.infra_mai));
 
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);
         binding.setViewModel(infraViewModel);
         instMainViewModel = new InstMainViewModel(getApplication());
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
-        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-
+            instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         binding.rgDrinkingWaterFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -85,15 +123,35 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.ro_plant_yes) {
                     roPlant = "YES";
                     binding.llReason.setVisibility(View.GONE);
+                    binding.llTdsMeterReading.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.ro_plant_no) {
                     roPlant = "NO";
                     binding.llReason.setVisibility(View.VISIBLE);
+                    binding.llTdsMeterReading.setVisibility(View.GONE);
                 } else {
                     roPlant = null;
                     binding.llReason.setVisibility(View.GONE);
+                    binding.llTdsMeterReading.setVisibility(View.GONE);
                 }
             }
         });
+
+        binding.ivTds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
+
+                    PIC_TYPE = AppConstants.TDS;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
+
 
         binding.rgSourceOfDrinkingWater.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -550,6 +608,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
                 if (validateData()) {
 
+                    if (roPlant.equalsIgnoreCase("yes")) {
+                        editor.putString(AppConstants.TDS, String.valueOf(file_tds));
+                        editor.commit();
+                    }
+
                     infrastuctureEntity = new InfraStructureEntity();
                     infrastuctureEntity.setOfficer_id(officerID);
                     infrastuctureEntity.setInspection_time(insTime);
@@ -617,6 +680,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         if (TextUtils.isEmpty(roPlant)) {
             showSnackBar(getResources().getString(R.string.select_roPlant));
+            return false;
+        }
+        if (roPlant.equals(AppConstants.Yes) && flag_tds == 0) {
+            showSnackBar("Please capture TDS image");
             return false;
         }
         if (roPlant.equals(AppConstants.No) && TextUtils.isEmpty(roplant_reason)) {
@@ -848,7 +915,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(InfraActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(InfraActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }
@@ -856,8 +923,77 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.failed));
         }
     }
+
+    public Uri getOutputMediaFileUri(int type) {
+        File imageFile = getOutputMediaFile(type);
+        Uri imageUri = null;
+        if (imageFile != null) {
+            imageUri = FileProvider.getUriForFile(
+                    InfraActivity.this,
+                    "com.example.twdinspection.provider", //(use your app signature + ".provider" )
+                    imageFile);
+        }
+        return imageUri;
+    }
+
+    private File getOutputMediaFile(int type) {
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                        + " directory");
+                return null;
+            }
+        }
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + PIC_NAME);
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                FilePath = getExternalFilesDir(null)
+                        + "/" + IMAGE_DIRECTORY_NAME;
+
+                String Image_name = PIC_NAME;
+                FilePath = FilePath + "/" + Image_name;
+
+                flag_tds = 1;
+                binding.ivTds.setPadding(0, 0, 0, 0);
+                binding.ivTds.setBackgroundColor(getResources().getColor(R.color.white));
+                file_tds = new File(FilePath);
+                Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getApplicationContext(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        super.callBack();
+        callBack();
+    }
+
+    public void callBack() {
+        Utils.customHomeAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.go_back));
     }
 }

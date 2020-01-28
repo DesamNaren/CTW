@@ -2,17 +2,23 @@ package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
@@ -30,10 +36,13 @@ import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietIssuesActivity extends BaseActivity implements SaveListener, DietInterface {
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
+public class DietIssuesActivity extends LocBaseActivity implements SaveListener, DietInterface {
 
     ActivityDietIssuesBinding binding;
     DietIsuuesViewModel dietIsuuesViewModel;
@@ -46,10 +55,20 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     MasterInstituteInfo masterInstituteInfos;
     String menu_chart_served, menu_chart_painted, menu_served, food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
 
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
+    String PIC_NAME, PIC_TYPE;
+    public Uri fileUri;
+    String FilePath;
+    File file_menu, file_officer;
+    int flag_menu = 0, flag_officer = 0;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_diet_issues, getResources().getString(R.string.diet_issues));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
+        binding.header.headerTitle.setText(getResources().getString(R.string.diet_issues));
 
         dietIsuuesViewModel = ViewModelProviders.of(DietIssuesActivity.this,
                 new DietIssuesCustomViewModel(binding, this, getApplication())).get(DietIsuuesViewModel.class);
@@ -58,6 +77,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         dietInfoEntityListMain = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
+
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
@@ -112,6 +133,37 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     menu_chart_served = AppConstants.No;
                 else
                     menu_chart_served = null;
+            }
+        });
+
+        binding.ivMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
+
+                    PIC_TYPE = AppConstants.MENU;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
+        binding.ivInspOfficer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
+
+                    PIC_TYPE = AppConstants.OFFICER;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
             }
         });
 
@@ -219,6 +271,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             public void onClick(View view) {
 
                 if (validateData()) {
+
+                    editor.putString(AppConstants.MENU, String.valueOf(file_menu));
+                    editor.putString(AppConstants.OFFICER, String.valueOf(file_officer));
+                    editor.commit();
+
+
                     dietIssuesEntity = new DietIssuesEntity();
 
                     dietIssuesEntity.setInstitute_id(instID);
@@ -251,6 +309,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             showSnackBar(getResources().getString(R.string.sel_menu_chart_painted));
             return false;
         }
+        if (flag_menu == 0) {
+            showSnackBar("Please capture Menu image");
+            return false;
+        }
         if (TextUtils.isEmpty(menu_served)) {
             showSnackBar(getResources().getString(R.string.sel_menu_served));
             return false;
@@ -280,6 +342,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             showSnackBar(getResources().getString(R.string.sel_maintaining_register));
             return false;
         }
+        if (flag_officer == 0) {
+            showSnackBar("Please capture Inspector Officer image");
+            return false;
+        }
+
         return true;
     }
 
@@ -291,7 +358,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         if (x >= 0) {
             final long[] z = {0};
             try {
-                LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");;
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
+                ;
                 liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
@@ -304,7 +372,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(DietIssuesActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }
@@ -317,9 +385,84 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
+    public Uri getOutputMediaFileUri(int type) {
+        File imageFile = getOutputMediaFile(type);
+        Uri imageUri = null;
+        if (imageFile != null) {
+            imageUri = FileProvider.getUriForFile(
+                    DietIssuesActivity.this,
+                    "com.example.twdinspection.provider", //(use your app signature + ".provider" )
+                    imageFile);
+        }
+        return imageUri;
+    }
+
+    private File getOutputMediaFile(int type) {
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                        + " directory");
+                return null;
+            }
+        }
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + PIC_NAME);
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                FilePath = getExternalFilesDir(null)
+                        + "/" + IMAGE_DIRECTORY_NAME;
+
+                String Image_name = PIC_NAME;
+                FilePath = FilePath + "/" + Image_name;
+                if (PIC_TYPE.equals(AppConstants.MENU)) {
+                    flag_menu = 1;
+                    binding.ivMenu.setPadding(0, 0, 0, 0);
+                    binding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_menu = new File(FilePath);
+                    Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                } else if (PIC_TYPE.equals(AppConstants.OFFICER)) {
+                    flag_officer = 1;
+                    binding.ivInspOfficer.setPadding(0, 0, 0, 0);
+                    binding.ivInspOfficer.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_officer = new File(FilePath);
+                    Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                }
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getApplicationContext(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        super.callBack();
+        callBack();
+    }
+
+    public void callBack() {
+        Utils.customHomeAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.go_back));
     }
 
     @Override
