@@ -280,7 +280,7 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
                     dietIssuesEntity = new DietIssuesEntity();
 
                     dietIssuesEntity.setInstitute_id(instID);
-                    dietIssuesEntity.setInspection_time(insTime);
+                    dietIssuesEntity.setInspection_time(Utils.getCurrentDateTime());
                     dietIssuesEntity.setOfficer_id(officerID);
                     dietIssuesEntity.setMenu_chart_served(menu_chart_served);
                     dietIssuesEntity.setMenu_chart_painted(menu_chart_painted);

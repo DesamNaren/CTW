@@ -144,6 +144,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".gcc.GCCOfficerFindingsActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".inspection.ui.LocBaseActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

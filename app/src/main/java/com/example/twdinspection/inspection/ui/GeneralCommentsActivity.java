@@ -421,7 +421,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
 
         generalCommentsEntity = new GeneralCommentsEntity();
         generalCommentsEntity.setOfficer_id(officerID);
-        generalCommentsEntity.setInspection_time(insTime);
+        generalCommentsEntity.setInspection_time(Utils.getCurrentDateTime());
         generalCommentsEntity.setInstitute_id(instID);
         generalCommentsEntity.setSupplied_on_time_fruits(foodTimeFruits);
         generalCommentsEntity.setSupplied_on_time_eggs(foodTimeFruits);

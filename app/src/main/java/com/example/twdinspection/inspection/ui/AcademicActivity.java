@@ -579,7 +579,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity = new AcademicEntity();
                     AcademicEntity.setOfficer_id(officerId);
                     AcademicEntity.setInstitute_id(instId);
-                    AcademicEntity.setInspection_time(insTime);
+                    AcademicEntity.setInspection_time(Utils.getCurrentDateTime());
                     AcademicEntity.setHighest_class_syllabus_completed(highest_class_syllabus_completed);
                     AcademicEntity.setPlan_syll_comp_prepared(plan_syll_comp_prepared);
                     AcademicEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);

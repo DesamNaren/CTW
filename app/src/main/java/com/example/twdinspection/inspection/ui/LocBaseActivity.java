@@ -156,7 +156,7 @@ public class LocBaseActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                if (dialog != null && !dialog.isShowing()) {
+                if (!dialog.isShowing()) {
                     dialog.show();
                 }
 

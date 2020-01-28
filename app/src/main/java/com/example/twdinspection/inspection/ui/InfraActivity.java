@@ -615,7 +615,7 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
 
                     infrastuctureEntity = new InfraStructureEntity();
                     infrastuctureEntity.setOfficer_id(officerID);
-                    infrastuctureEntity.setInspection_time(insTime);
+                    infrastuctureEntity.setInspection_time(Utils.getCurrentDateTime());
                     infrastuctureEntity.setInstitute_id(instID);
                     infrastuctureEntity.setDrinking_water_facility(drinkingWaterFacility);
                     infrastuctureEntity.setBigSchoolNameBoard(bigSchoolNameBoard);
