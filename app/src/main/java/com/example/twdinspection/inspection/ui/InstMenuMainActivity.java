@@ -62,10 +62,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         customProgressDialog = new CustomProgressDialog(InstMenuMainActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         binding.appbar.header.syncIv.setVisibility(View.GONE);
-        binding.appbar.header.syncBtn.setVisibility(View.VISIBLE);
         binding.appbar.header.ivHome.setVisibility(View.GONE);
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
@@ -97,8 +97,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                         }
                     }
                     if (flag) {
-                        binding.appbar.header.syncBtn.setBackgroundColor(getResources().getColor(R.color.white));
-                        binding.appbar.header.syncBtn.setTextColor(getResources().getColor(R.color.list_blue));
+                        binding.appbar.includeMenuLayout.btnSubmit.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -126,7 +125,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             }
         });
 
-        binding.appbar.header.syncBtn.setOnClickListener(new View.OnClickListener() {
+        binding.appbar.includeMenuLayout.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
@@ -139,10 +138,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                     }
                     if (flag) {
                         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
-
                             getLocationData();
-
-
                         } else {
                             Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                         }
@@ -169,7 +165,12 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             cLocation.setLongitude(mCurrentLocation.getLongitude());
         }
 
-        if (cLocation != null && dLocation != null) {
+        if (cLocation == null) {
+            Snackbar.make(binding.appbar.root, getString(R.string.loc_not_ava), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (dLocation != null) {
             float distance = Utils.calcDistance(cLocation, dLocation);
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
@@ -398,8 +399,15 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mGpsSwitchStateReceiver);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
+
         registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         mLocationCallback = new LocationCallback() {
@@ -412,17 +420,12 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         };
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mGpsSwitchStateReceiver);
-    }
-
     private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if (intent != null && intent.getAction() != null && intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                if (intent != null && intent.getAction() != null &&
+                        intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
                     callPermissions();
                 }
             } catch (Exception e) {

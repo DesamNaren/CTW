@@ -23,16 +23,13 @@ import retrofit2.Response;
 public class UploadPhotoViewModel extends ViewModel {
     private MutableLiveData<SchemePhotoSubmitResponse> schemePhotoSubmitResponseMutableLiveData;
     private Context context;
-    private ActivityUploadedPhotoBinding uploadedPhotoBinding;
     private ErrorHandlerInterface errorHandlerInterface;
     private SchemeSubmitInterface schemeSubmitInterface;
 
 
-    UploadPhotoViewModel(ActivityUploadedPhotoBinding uploadedPhotoBinding,
-                         Context context) {
+    UploadPhotoViewModel(Context context) {
 
         this.context = context;
-        this.uploadedPhotoBinding = uploadedPhotoBinding;
         schemePhotoSubmitResponseMutableLiveData = new MutableLiveData<>();
         try {
             errorHandlerInterface = (ErrorHandlerInterface) context;

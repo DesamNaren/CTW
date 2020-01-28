@@ -11,11 +11,10 @@ import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
 
-public class UploadPhotoCustomlViewModel implements ViewModelProvider.Factory {
+public class UploadPhotoCustomViewModel implements ViewModelProvider.Factory {
     private Context context;
 
-    public UploadPhotoCustomlViewModel(ActivityUploadedPhotoBinding benDetailsActivtyBinding,
-                                       Context context) {
+    public UploadPhotoCustomViewModel(Context context) {
         this.context = context;
     }
 

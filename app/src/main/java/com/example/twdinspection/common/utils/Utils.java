@@ -343,7 +343,8 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        activity.startActivity(new Intent(activity, DashboardActivity.class));
+                        activity.startActivity(new Intent(activity, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });

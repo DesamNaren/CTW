@@ -156,7 +156,7 @@ public class LocBaseActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-                if (!dialog.isShowing()) {
+                if (dialog != null && !dialog.isShowing()) {
                     dialog.show();
                 }
 
@@ -260,7 +260,6 @@ public class LocBaseActivity extends AppCompatActivity {
 
                 case Activity.RESULT_CANCELED:
                     mRequestingLocationUpdates = false;
-
                     customPerAlert();
                     break;
             }

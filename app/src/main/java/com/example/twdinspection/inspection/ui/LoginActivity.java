@@ -148,7 +148,6 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     protected void onStart() {
         super.onStart();
         registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-
     }
 
     @Override
@@ -161,7 +160,8 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         @Override
         public void onReceive(Context context, Intent intent) {
             try {
-                if (intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                if (intent != null && intent.getAction() != null &&
+                        intent.getAction().matches(LocationManager.MODE_CHANGED_ACTION)) {
                     callPermissions();
                 }
             } catch (Exception e) {

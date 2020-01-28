@@ -195,6 +195,7 @@
     <string name="completed">COMPLETED</string>
     <string name="all_per">Allow permission from settings</string>
     <string name="loc_sett">Location settings are inadequate, and cannot be fixed here. Fix in Settings.</string>
+    <string name="loc_not_ava">Unable to get location, Please try again!</string>
     <string name="loc_stopped">Location updates stopped!</string>
     <string name="permissionText">As you use this app, Paddy Procurement System would like to serve you better. For this, we would like to read and use the following. </string>
     <string name="runtimePermsiions">Runtime Permissions</string>
@@ -313,6 +314,7 @@
     <string name="whether_online">Whether online status and field status match?</string>
     <string name="ben_report">BENEFICIARY REPORT</string>
     <string name="ben_details">BENEFICIARY DETAILS</string>
+    <string name="upload_photos">UPLOAD PHOTOS</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>

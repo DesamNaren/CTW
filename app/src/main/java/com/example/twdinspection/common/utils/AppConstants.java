@@ -55,4 +55,6 @@ public class AppConstants {
     public static final String MAINBUILDING = "Main_Building";
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
+
+    public static final float DISTANCE = 100;
 }

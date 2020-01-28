@@ -1,24 +1,26 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Base64;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
@@ -30,15 +32,14 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
-import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomlViewModel;
+import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
-import com.example.twdinspection.schemes.ui.BenDetailsActivity;
-import com.example.twdinspection.schemes.viewmodel.BenCustomDetailViewModel;
-import com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
@@ -76,12 +77,12 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         super.onCreate(savedInstanceState);
         customProgressDialog = new CustomProgressDialog(UploadedPhotoActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
-        binding.header.headerTitle.setText(getString(R.string.ben_details));
+        binding.header.headerTitle.setText(getString(R.string.upload_photos));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 
         viewModel = ViewModelProviders.of(this,
-                new UploadPhotoCustomlViewModel(binding, this)).get(UploadPhotoViewModel.class);
+                new UploadPhotoCustomViewModel(this)).get(UploadPhotoViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -327,11 +328,13 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_storeroom);
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
+        MultipartBody.Part body9 = null;
+        if (file_tds != null) {
+            RequestBody requestFile9 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
 
-        RequestBody requestFile9 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
-        MultipartBody.Part body9 =
-                MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
+            body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
+        }
 
         RequestBody requestFile10 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
@@ -356,6 +359,11 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         partList.add(body6);
         partList.add(body7);
         partList.add(body8);
+        if (body9 != null) {
+            partList.add(body9);
+        }
+        partList.add(body10);
+        partList.add(body11);
 
         viewModel.UploadImageServiceCall(partList);
     }
@@ -534,7 +542,11 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
 
     @Override
     public void submitData() {
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.TDS, "");
+        editor.putString(AppConstants.MENU, "");
+        editor.putString(AppConstants.OFFICER, "");
+        editor.commit();
         final long[] z = {0};
         try {
             LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
@@ -556,4 +568,41 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver
+                (mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                mCurrentLocation = locationResult.getLastLocation();
+            }
+        };
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mGpsSwitchStateReceiver);
+    }
+
+    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (intent != null && intent.getAction() != null &&
+                        intent.getAction().matches(LocationManager.PROVIDERS_CHANGED_ACTION)) {
+                    callPermissions();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 }
