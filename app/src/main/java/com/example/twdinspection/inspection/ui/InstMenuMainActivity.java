@@ -170,7 +170,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             return;
         }
 
-        if (dLocation != null) {
+        if (dLocation != null && dLocation.getLatitude()>0 && dLocation.getLongitude()>0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
@@ -178,7 +178,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                 Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the 100 meter radius of selected institute");
             }
         } else {
-            submitCall();
+            Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, institute location details are not found");
         }
     }
 
@@ -296,10 +296,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                     coCurricularEntityLiveData.removeObservers(InstMenuMainActivity.this);
                     if (coCurricularEntity != null) {
                         cocurricularFlag = true;
-                        instSubmitRequest.setCoCurricularEntity(coCurricularEntity);
+                        instSubmitRequest.setCoCurricular_info(coCurricularEntity);
                         submitFinalCall(instSubmitRequest);
                     } else {
-                        instSubmitRequest.setCoCurricularEntity(null);
+                        instSubmitRequest.setCoCurricular_info(null);
                     }
                 }
             });
@@ -369,7 +369,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
     @Override
     public void getData(InstSubmitResponse schemeSubmitResponse) {
-        customProgressDialog.dismiss();
+        customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             instMainViewModel.deleteAllInspectionData();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
@@ -388,7 +388,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
     @Override
     public void handleError(Throwable e, Context context) {
-        customProgressDialog.dismiss();
+        customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
         Snackbar.make(binding.appbar.root, errMsg, Snackbar.LENGTH_SHORT).show();
     }

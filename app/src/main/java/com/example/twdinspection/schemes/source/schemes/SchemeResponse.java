@@ -12,6 +12,7 @@ public class SchemeResponse {
     @SerializedName("status_Code")
     @Expose
     private String statusCode;
+
     @SerializedName("status_Message")
     @Expose
     private String statusMessage;

@@ -312,6 +312,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
+
                Utils.customSectionSaveAlert(GeneralInfoActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
 //                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendance_2.class));
             } else {

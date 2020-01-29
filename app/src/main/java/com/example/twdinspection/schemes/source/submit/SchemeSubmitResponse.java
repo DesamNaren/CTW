@@ -10,7 +10,9 @@ public class SchemeSubmitResponse {
     @SerializedName("Status_Message")
     @Expose
     private String statusMessage;
-
+    @SerializedName("inspection_id")
+    @Expose
+    private String inspection_id;
     public Integer getStatusCode() {
         return statusCode;
     }
@@ -27,4 +29,11 @@ public class SchemeSubmitResponse {
         this.statusMessage = statusMessage;
     }
 
+    public String getInspection_id() {
+        return inspection_id;
+    }
+
+    public void setInspection_id(String inspection_id) {
+        this.inspection_id = inspection_id;
+    }
 }

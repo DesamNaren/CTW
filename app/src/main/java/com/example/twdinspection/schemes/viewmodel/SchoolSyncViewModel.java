@@ -38,58 +38,59 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
     public LiveData<SchoolDMVResponse> getSchoolDMVReposnse(String officerID) {
         if (schoolDMVResponseMutableLiveData != null) {
-            if (Utils.checkInternetConnection(context)) {
                 getSchoolDMVResponseCall(officerID);
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
         }
         return schoolDMVResponseMutableLiveData;
     }
 
     private void getSchoolDMVResponseCall(String officerId) {
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getSchoolDMV(officerId).enqueue(new Callback<SchoolDMVResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<SchoolDMVResponse> call, @NotNull Response<SchoolDMVResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    schoolDMVResponseMutableLiveData.setValue(response.body());
+        try {
+            TWDService twdService = TWDService.Factory.create("school");
+            twdService.getSchoolDMV(officerId).enqueue(new Callback<SchoolDMVResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<SchoolDMVResponse> call, @NotNull Response<SchoolDMVResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        schoolDMVResponseMutableLiveData.setValue(response.body());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(@NotNull Call<SchoolDMVResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
+                @Override
+                public void onFailure(@NotNull Call<SchoolDMVResponse> call, @NotNull Throwable t) {
+                    errorHandlerInterface.handleError(t, context);
+                }
+            });
+        } catch (Exception e) {
+            errorHandlerInterface.handleError(e, context);
+            e.printStackTrace();
+        }
     }
 
     public LiveData<InstMasterResponse> getInstMasterResponse() {
         if (instMasterResponseMutableLiveData != null) {
-            if (Utils.checkInternetConnection(context)) {
                 getInstMasterResponseCall();
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
         }
         return instMasterResponseMutableLiveData;
     }
 
     private void getInstMasterResponseCall() {
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getInstMasterResponse().enqueue(new Callback<InstMasterResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<InstMasterResponse> call, @NotNull Response<InstMasterResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    instMasterResponseMutableLiveData.setValue(response.body());
+        try {
+            TWDService twdService = TWDService.Factory.create("school");
+            twdService.getInstMasterResponse().enqueue(new Callback<InstMasterResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<InstMasterResponse> call, @NotNull Response<InstMasterResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        instMasterResponseMutableLiveData.setValue(response.body());
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(@NotNull Call<InstMasterResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
+                @Override
+                public void onFailure(@NotNull Call<InstMasterResponse> call, @NotNull Throwable t) {
+                    errorHandlerInterface.handleError(t, context);
+                }
+            });
+        } catch (Exception e) {
+            errorHandlerInterface.handleError(e, context);
+        }
     }
 
 

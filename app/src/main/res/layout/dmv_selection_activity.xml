@@ -208,6 +208,29 @@
                     </LinearLayout>
 
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_selectAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.example.twdinspection.common.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:hint="Address"
+                            android:id="@+id/address"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+
 
 
 

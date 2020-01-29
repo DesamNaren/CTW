@@ -50,22 +50,17 @@ public class SchemeSyncViewModel extends AndroidViewModel {
     public LiveData<SchemeDMVResponse> getSchemeDMVReposnse() {
         if (schemeDMVResponseMutableLiveData != null) {
 
-            if (Utils.checkInternetConnection(context)) {
                 getSchemeDMVReposnseCall();
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
+
         }
         return schemeDMVResponseMutableLiveData;
     }
 
     private void getSchemeDMVReposnseCall() {
-        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeDMV().enqueue(new Callback<SchemeDMVResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeDMVResponse> call, @NotNull Response<SchemeDMVResponse> response) {
-                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                     schemeDMVResponseMutableLiveData.setValue(response.body());
                 }
@@ -73,7 +68,6 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<SchemeDMVResponse> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -81,30 +75,22 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public LiveData<FinancialYearResponse> getFinYearResponse() {
         if (financialYearResponseMutableLiveData != null) {
-
-            if (Utils.checkInternetConnection(context)) {
-                getFinYearReposnseCall();
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
+            getFinYearReposnseCall();
         }
         return financialYearResponseMutableLiveData;
     }
 
     private void getFinYearReposnseCall() {
-        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getFinancialYears().enqueue(new Callback<FinancialYearResponse>() {
             @Override
             public void onResponse(@NotNull Call<FinancialYearResponse> call, @NotNull Response<FinancialYearResponse> response) {
-                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         financialYearResponseMutableLiveData.setValue(response.body());
                 }
             }
             @Override
             public void onFailure(@NotNull Call<FinancialYearResponse> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -112,23 +98,17 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public LiveData<InspectionRemarkResponse> getInspectionRemarks() {
         if (inspectionRemarkResponseMutableLiveData != null) {
-
-            if (Utils.checkInternetConnection(context)) {
                 getInspectionRemarksCall();
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
+
         }
         return inspectionRemarkResponseMutableLiveData;
     }
 
     private void getInspectionRemarksCall() {
-        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getInspectionRemarks().enqueue(new Callback<InspectionRemarkResponse>() {
             @Override
             public void onResponse(@NotNull Call<InspectionRemarkResponse> call, @NotNull Response<InspectionRemarkResponse> response) {
-                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         inspectionRemarkResponseMutableLiveData.setValue(response.body());
                 }
@@ -136,7 +116,6 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<InspectionRemarkResponse> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -144,23 +123,16 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public LiveData<SchemeResponse> getSchemeResponse() {
         if (schemeResponseMutableLiveData != null) {
-
-            if (Utils.checkInternetConnection(context)) {
                 getSchemeResponseCall();
-            }else{
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
-            }
         }
         return schemeResponseMutableLiveData;
     }
 
     private void getSchemeResponseCall() {
-        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeResponse().enqueue(new Callback<SchemeResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeResponse> call, @NotNull Response<SchemeResponse> response) {
-                binding.progress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                         schemeResponseMutableLiveData.setValue(response.body());
                 }
@@ -168,7 +140,6 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<SchemeResponse> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });

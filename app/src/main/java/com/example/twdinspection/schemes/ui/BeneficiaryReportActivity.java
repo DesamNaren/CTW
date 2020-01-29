@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
 import com.example.twdinspection.schemes.adapter.BenReportAdapter;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
@@ -43,10 +44,13 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private List<SchemeEntity> schemesInfoEntitiesMain;
     private BottomSheetDialog dialog;
     ArrayList<String> schemeValues;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        customProgressDialog = new CustomProgressDialog(this);
 
         beneficiaryDetailsMain = new ArrayList<>();
         tempBeneficiaryDetails = new ArrayList<>();
@@ -89,8 +93,10 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         str.append("'");
         beneficiaryRequest.setFinYearId(str + "2017-18" + str);
 
+        customProgressDialog.show();
         viewModel.getBeneficiaryInfo(beneficiaryRequest).observe(this, beneficiaryDetails -> {
 
+            customProgressDialog.hide();
             if (beneficiaryDetails != null && beneficiaryDetails.getStatusCode() != null) {
                 if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
                     beneficiaryDetailsMain = beneficiaryDetails.getBeneficiaryDetails();
@@ -188,6 +194,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
     @Override
     public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
         callSnackBar(errMsg);
     }

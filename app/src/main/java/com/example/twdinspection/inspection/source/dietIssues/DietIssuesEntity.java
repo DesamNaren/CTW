@@ -10,7 +10,7 @@ import com.example.twdinspection.inspection.source.converters.DietInfoConverter;
 import java.util.List;
 
 //@TypeConverters({DietInfoConverter.class})
-@Entity(tableName = "DietIssuesInfo")
+@Entity(tableName = "diet_issues_info")
 public class DietIssuesEntity {
 
     @PrimaryKey(autoGenerate = true)

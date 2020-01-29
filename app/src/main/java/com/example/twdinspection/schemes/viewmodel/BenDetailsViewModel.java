@@ -65,36 +65,30 @@ public class BenDetailsViewModel extends ViewModel {
     }
 
     public void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
-        benDetailsActivtyBinding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchemeSubmitResponse(schemeSubmitRequest).enqueue(new Callback<SchemeSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemeSubmitResponse> call, @NotNull Response<SchemeSubmitResponse> response) {
-                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
                 schemeSubmitInterface.getData(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<SchemeSubmitResponse> call, @NotNull Throwable t) {
-                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });
     }
 
     public void UploadImageServiceCall(final MultipartBody.Part body,final MultipartBody.Part body2) {
-        benDetailsActivtyBinding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.uploadSchemeImageCall(body,body2).enqueue(new Callback<SchemePhotoSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
-                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
                 schemeSubmitInterface.getPhotoData(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Throwable t) {
-                benDetailsActivtyBinding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });

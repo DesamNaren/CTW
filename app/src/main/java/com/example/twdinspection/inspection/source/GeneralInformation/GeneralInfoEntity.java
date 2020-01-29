@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "GeneralInfo")
+@Entity(tableName = "general_info")
 public class GeneralInfoEntity {
 
     @PrimaryKey(autoGenerate = true)

@@ -27,17 +27,17 @@ public interface MedicalInfoDao {
     @Delete()
     void deleteCallInfo(CallHealthInfoEntity callHealthInfoEntity);
 
-    @Query("Select count(*) from CallHealthInfoEntity")
+    @Query("Select count(*) from call_health_info")
     LiveData<Integer> callCnt();
 
-    @Query("SELECT * from CallHealthInfoEntity")
+    @Query("SELECT * from call_health_info")
     LiveData<List<CallHealthInfoEntity>> getCallListLiveData();
 
 
-    @Query("SELECT * from MedicalDetailsBean")
+    @Query("SELECT * from medical_details_info")
     LiveData<List<MedicalDetailsBean>> getMedicalListLiveData();
 
-    @Query("DELETE FROM MedicalDetailsBean")
+    @Query("DELETE FROM medical_details_info")
     void deleteMedicalInfo();
 
     @Insert()

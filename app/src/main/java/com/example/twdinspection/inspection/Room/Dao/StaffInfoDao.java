@@ -21,7 +21,7 @@ public interface StaffInfoDao {
     @Update()
     void updateStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntity);
 
-    @Query("SELECT * from MasterInstituteInfo where instId LIKE :inst_id")
+    @Query("SELECT * from master_inst_info where instId LIKE :inst_id")
     LiveData<MasterInstituteInfo> getMasterStaffIdList(String inst_id);
 
 

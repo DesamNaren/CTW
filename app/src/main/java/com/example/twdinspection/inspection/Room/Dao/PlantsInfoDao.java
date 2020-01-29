@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface PlantsInfoDao {
 
-    @Query("SELECT * from PlantsEntity")
+    @Query("SELECT * from plants_info")
     LiveData<List<PlantsEntity>> getPlantsInfo();
 
 

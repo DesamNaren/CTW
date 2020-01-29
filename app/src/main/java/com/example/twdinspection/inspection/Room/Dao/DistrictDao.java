@@ -22,27 +22,27 @@ import java.util.List;
 
 @Dao
 public interface DistrictDao {
-    @Query("SELECT * from SchoolDistrict")
+    @Query("SELECT * from districts_info")
     LiveData<List<SchoolDistrict>> getDistricts();
 
-    @Query("SELECT * from SchoolMandal where distId LIKE :dist_id")
+    @Query("SELECT * from mandal_info where distId LIKE :dist_id")
     LiveData<List<SchoolMandal>> getMandals(int dist_id);
 
-    @Query("SELECT * from SchoolVillage where mandalID LIKE :mandalId AND distId LIKE :distId")
+    @Query("SELECT * from village_info where mandalID LIKE :mandalId AND distId LIKE :distId")
     LiveData<List<SchoolVillage>> getVillages(int mandalId, int distId);
 
-    @Query("SELECT distId from SchoolDistrict where distName LIKE :dist_name")
+    @Query("SELECT distId from districts_info where distName LIKE :dist_name")
     LiveData<String> getDistId(String dist_name);
 
-    @Query("SELECT * from MasterInstituteInfo where instId LIKE :instId")
+    @Query("SELECT * from master_inst_info where instId LIKE :instId")
     LiveData<MasterInstituteInfo> getInstituteInfo(String instId);
 
-    @Query("SELECT instId from MasterInstituteInfo where instName LIKE :inst_name")
+    @Query("SELECT instId from master_inst_info where instName LIKE :inst_name")
     LiveData<Integer> getInstId(String inst_name);
 
-    @Query("SELECT * from MasterInstituteInfo where districtID LIKE :districtId")
+    @Query("SELECT * from master_inst_info where districtID LIKE :districtId")
     LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId);
 
-    @Query("SELECT count(*) from SchoolDistrict")
+    @Query("SELECT count(*) from districts_info")
     int getCount();
 }

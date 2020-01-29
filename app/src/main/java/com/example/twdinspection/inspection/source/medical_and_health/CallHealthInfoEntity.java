@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "call_health_info")
 public class CallHealthInfoEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;

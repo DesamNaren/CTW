@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -95,7 +96,10 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             tdsPath = sharedPreferences.getString(AppConstants.TDS, "");
             menuPath = sharedPreferences.getString(AppConstants.MENU, "");
             officerPath = sharedPreferences.getString(AppConstants.OFFICER, "");
-            file_tds = new File(tdsPath);
+            if(!TextUtils.isEmpty(tdsPath)){
+                file_tds = new File(tdsPath);
+            }
+
             file_menu = new File(menuPath);
             file_officer = new File(officerPath);
         } catch (Exception e) {
@@ -329,7 +333,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
         MultipartBody.Part body9 = null;
-        if (file_tds != null) {
+        if (file_tds!=null) {
             RequestBody requestFile9 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
 

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "ClassInfo")
+@Entity(tableName = "class_info")
 public class StudAttendInfoEntity {
     @PrimaryKey(autoGenerate = true)
     public int r_id;

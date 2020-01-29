@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface StudAchDao {
 
-    @Query("SELECT * from StudAchievementEntity")
+    @Query("SELECT * from stud_achievements_info")
     LiveData<List<StudAchievementEntity>> getStudAchievements();
 
 

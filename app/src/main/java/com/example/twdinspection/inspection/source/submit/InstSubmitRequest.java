@@ -40,7 +40,7 @@ public class InstSubmitRequest {
     DietIssuesEntity diet_issues;
     InfraStructureEntity infra_maintenance;
     AcademicEntity academic_overview;
-    CoCurricularEntity coCurricularEntity;
+    CoCurricularEntity coCurricular_info;
     EntitlementsEntity entitlements;
     RegistersEntity registers;
     GeneralCommentsEntity general_comments;
@@ -150,12 +150,12 @@ public class InstSubmitRequest {
         this.academic_overview = academic_overview;
     }
 
-    public CoCurricularEntity getCoCurricularEntity() {
-        return coCurricularEntity;
+    public CoCurricularEntity getCoCurricular_info() {
+        return coCurricular_info;
     }
 
-    public void setCoCurricularEntity(CoCurricularEntity coCurricularEntity) {
-        this.coCurricularEntity = coCurricularEntity;
+    public void setCoCurricular_info(CoCurricularEntity coCurricular_info) {
+        this.coCurricular_info = coCurricular_info;
     }
 
     public EntitlementsEntity getEntitlements() {

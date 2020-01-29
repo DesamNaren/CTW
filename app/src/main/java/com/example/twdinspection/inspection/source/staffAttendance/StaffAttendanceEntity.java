@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "Staff_Info")
+@Entity(tableName = "staff_info")
 public class StaffAttendanceEntity {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo()

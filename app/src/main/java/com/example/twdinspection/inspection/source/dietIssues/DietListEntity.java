@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import javax.annotation.Nullable;
 
-@Entity(tableName = "DietListInfo")
+@Entity(tableName = "diet_list_info")
 public class DietListEntity {
 
     @Nullable

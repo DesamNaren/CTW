@@ -75,7 +75,6 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-            insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,6 +180,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
                 if (validateData(tot_cnt)) {
                     medicalInfoEntity = new MedicalInfoEntity();
+                    medicalInfoEntity.setInspection_time(Utils.getCurrentDateTime());
+                    medicalInfoEntity.setOfficer_id(officerID);
+                    medicalInfoEntity.setInstitute_id(instID);
                     medicalInfoEntity.setFeverCount(f_cnt);
                     medicalInfoEntity.setColdCount(c_cnt);
                     medicalInfoEntity.setHeadacheCount(h_cnt);

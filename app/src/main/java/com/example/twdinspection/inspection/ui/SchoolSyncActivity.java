@@ -73,36 +73,45 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.btnDmv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customProgressDialog.show();
-                LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse("maadhavisriram");
-                schoolDMVResponseLiveData.observe(SchoolSyncActivity.this, new Observer<SchoolDMVResponse>() {
-                    @Override
-                    public void onChanged(SchoolDMVResponse schoolDMVResponse) {
-                        schoolDMVResponseLiveData.removeObservers(SchoolSyncActivity.this);
-                        SchoolSyncActivity.this.schoolDMVResponse = schoolDMVResponse;
-                        if (schoolDMVResponse.getDistricts() != null && schoolDMVResponse.getDistricts().size() > 0) {
-                            schoolSyncRepository.insertSchoolDistricts(SchoolSyncActivity.this, schoolDMVResponse.getDistricts());
+                if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {
+                    customProgressDialog.show();
+
+                    LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse("maadhavisriram");
+                    schoolDMVResponseLiveData.observe(SchoolSyncActivity.this, new Observer<SchoolDMVResponse>() {
+                        @Override
+                        public void onChanged(SchoolDMVResponse schoolDMVResponse) {
+                            schoolDMVResponseLiveData.removeObservers(SchoolSyncActivity.this);
+                            SchoolSyncActivity.this.schoolDMVResponse = schoolDMVResponse;
+                            if (schoolDMVResponse.getDistricts() != null && schoolDMVResponse.getDistricts().size() > 0) {
+                                schoolSyncRepository.insertSchoolDistricts(SchoolSyncActivity.this, schoolDMVResponse.getDistricts());
+                            }
                         }
-                    }
-                });
+                    });
+                } else{
+                    Utils.customWarningAlert(SchoolSyncActivity.this,getResources().getString(R.string.app_name),"Please check internet");
+                }
             }
         });
 
         binding.syncInstitutes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customProgressDialog.show();
-                LiveData<InstMasterResponse> instMasterResponseLiveData = viewModel.getInstMasterResponse();
-                instMasterResponseLiveData.observe(SchoolSyncActivity.this, new Observer<InstMasterResponse>() {
-                    @Override
-                    public void onChanged(InstMasterResponse instMasterResponse) {
-                        instMasterResponseLiveData.removeObservers(SchoolSyncActivity.this);
-                        SchoolSyncActivity.this.instMasterResponse = instMasterResponse;
-                        if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
-                            schoolSyncRepository.insertMasterInstitutes(SchoolSyncActivity.this, instMasterResponse.getInstituteInfo());
+                if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<InstMasterResponse> instMasterResponseLiveData = viewModel.getInstMasterResponse();
+                    instMasterResponseLiveData.observe(SchoolSyncActivity.this, new Observer<InstMasterResponse>() {
+                        @Override
+                        public void onChanged(InstMasterResponse instMasterResponse) {
+                            instMasterResponseLiveData.removeObservers(SchoolSyncActivity.this);
+                            SchoolSyncActivity.this.instMasterResponse = instMasterResponse;
+                            if (instMasterResponse.getInstituteInfo() != null && instMasterResponse.getInstituteInfo().size() > 0) {
+                                schoolSyncRepository.insertMasterInstitutes(SchoolSyncActivity.this, instMasterResponse.getInstituteInfo());
+                            }
                         }
-                    }
-                });
+                    });
+                } else{
+                    Utils.customWarningAlert(SchoolSyncActivity.this,getResources().getString(R.string.app_name),"Please check internet");
+                }
             }
         });
     }
@@ -128,8 +137,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
-        Log.i("MSG", "handleError: "+errMsg);
+        Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
     }
 

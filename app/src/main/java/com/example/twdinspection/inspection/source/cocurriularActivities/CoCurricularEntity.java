@@ -13,7 +13,7 @@ import com.example.twdinspection.inspection.source.converters.StudentAchConverte
 import java.util.List;
 
 @TypeConverters({StudentAchConverter.class, PlantInfoConverter.class})
-@Entity
+@Entity(tableName = "cocurricular_info")
 public class CoCurricularEntity {
 
     @PrimaryKey(autoGenerate = true)

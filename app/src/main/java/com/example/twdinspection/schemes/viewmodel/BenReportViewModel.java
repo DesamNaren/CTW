@@ -71,18 +71,15 @@ public class BenReportViewModel extends ViewModel {
     }
 
     private void getBeneficiaryDetails(BeneficiaryRequest beneficiaryRequest) {
-        binding.progress.setVisibility(View.VISIBLE);
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getBeneficiaryDetails(beneficiaryRequest.getDistId(), beneficiaryRequest.getMandalId(), beneficiaryRequest.getVillageId(), beneficiaryRequest.getFinYearId()).enqueue(new Callback<BeneficiaryReport>() {
             @Override
             public void onResponse(@NotNull Call<BeneficiaryReport> call, @NotNull Response<BeneficiaryReport> response) {
-                binding.progress.setVisibility(View.GONE);
                 beneficiaryLiveData.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NotNull Call<BeneficiaryReport> call, @NotNull Throwable t) {
-                binding.progress.setVisibility(View.GONE);
                 errorHandlerInterface.handleError(t, context);
             }
         });

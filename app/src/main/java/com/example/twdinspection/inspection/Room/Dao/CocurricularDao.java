@@ -25,15 +25,15 @@ public interface CocurricularDao {
     @Insert()
     void insertPlantInfo(PlantsEntity plantsEntity);
 
-    @Query("Select count(*) from StudAchievementEntity")
+    @Query("Select count(*) from stud_achievements_info")
     LiveData<Integer> getAchievementsCnt();
 
-    @Query("Select count(*) from PlantsEntity")
+    @Query("Select count(*) from plants_info")
     LiveData<Integer> getPlantsCnt();
 
-    @Query("SELECT * from StudAchievementEntity")
+    @Query("SELECT * from stud_achievements_info")
     LiveData<List<StudAchievementEntity>> getAchLiveData();
 
-    @Query("SELECT * from PlantsEntity")
+    @Query("SELECT * from plants_info")
     LiveData<List<PlantsEntity>> getPlantLiveData();
 }

@@ -14,10 +14,10 @@ import java.util.List;
 @Dao
 public interface ClassInfoDao {
 
-    @Query("SELECT * from MasterInstituteInfo where instId LIKE :inst_id")
+    @Query("SELECT * from master_inst_info where instId LIKE :inst_id")
     LiveData<MasterInstituteInfo> getMasterClassIdList(String inst_id);
 
-    @Query("SELECT * from ClassInfo where institute_id LIKE :inst_id")
+    @Query("SELECT * from class_info where institute_id LIKE :inst_id")
     LiveData<List<StudAttendInfoEntity>> getClassIdList(String inst_id);
 
     @Insert
@@ -26,7 +26,7 @@ public interface ClassInfoDao {
     @Update()
     void updateClassInfo(StudAttendInfoEntity studAttendInfoEntity);
 
-    @Query("DELETE FROM ClassInfo")
+    @Query("DELETE FROM class_info")
     void deleteClassInfo();
 
 

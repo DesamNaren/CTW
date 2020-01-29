@@ -12,7 +12,7 @@ import com.example.twdinspection.inspection.source.converters.MedicalRecordsConv
 import java.util.List;
 
 @TypeConverters({CallHealthConverter.class, MedicalRecordsConverter.class})
-@Entity
+@Entity(tableName = "medical_info")
 public class MedicalInfoEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;

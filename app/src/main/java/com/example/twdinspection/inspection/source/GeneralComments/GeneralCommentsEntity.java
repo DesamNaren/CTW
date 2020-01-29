@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "GeneralCommentsInfo")
+@Entity(tableName = "general_comments_info")
 public class GeneralCommentsEntity {
 
     @PrimaryKey(autoGenerate = true)

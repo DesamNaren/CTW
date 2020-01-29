@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 @TypeConverters({ClassInfoConverter.class, DietInfoConverter.class, StaffInfoConverter.class})
-@Entity
+@Entity(tableName = "master_inst_info")
 public class MasterInstituteInfo {
     @PrimaryKey(autoGenerate = true)
     private int id;

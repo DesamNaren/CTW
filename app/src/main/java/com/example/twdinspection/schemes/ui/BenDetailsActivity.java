@@ -26,8 +26,10 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
+import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
@@ -70,12 +72,14 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     int imgflag1 = 0;
     int imgflag2 = 0;
     private String officerId;
+    private CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         callPermissions();
+        customProgressDialog = new CustomProgressDialog(BenDetailsActivity.this);
 
         benDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_ben_details_activty);
         benDetailsBinding.header.headerTitle.setText(getString(R.string.ben_details));
@@ -226,6 +230,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
                     if (Utils.checkInternetConnection(BenDetailsActivity.this)) {
+                        customProgressDialog.show();
                         submitCall(beneficiaryDetail);
                     }else{
                         Utils.customWarningAlert(BenDetailsActivity.this,getResources().getString(R.string.app_name),"Please check internet");
@@ -432,6 +437,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     @Override
     public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
         callSnackBar(errMsg);
     }
@@ -439,6 +445,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     @Override
     public void getData(SchemeSubmitResponse schemeSubmitResponse) {
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+
+            String inspection_id=schemeSubmitResponse.getInspection_id();
             FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
             File file1 = new File(FilePath);
 
@@ -453,16 +461,19 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             MultipartBody.Part body2 =
                     MultipartBody.Part.createFormData("image", file2.getName(), requestFile1);
             callUploadPhoto(body,body2);
-        } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
-            Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
 
+        } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            benDetailsBinding.progress.setVisibility(View.GONE);
+            Snackbar.make(benDetailsBinding.cl, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
         } else {
+            benDetailsBinding.progress.setVisibility(View.GONE);
             Snackbar.make(benDetailsBinding.cl, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
+        customProgressDialog.hide();
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             CallSuccessAlert(schemePhotoSubmitResponse.getStatusMessage());
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {

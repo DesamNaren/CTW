@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "InfraStructureInfo")
+@Entity(tableName = "infrastructure_info")
 public class InfraStructureEntity {
 
     @PrimaryKey(autoGenerate = true)

@@ -31,40 +31,40 @@ import java.util.List;
 @Dao
 public interface SchoolSyncDao {
 
-    @Query("DELETE FROM SchoolDistrict")
+    @Query("DELETE FROM districts_info")
     void deleteSchoolDistricts();
 
     @Insert
     void insertSchoolDistricts(List<SchoolDistrict> districtEntities);
 
-    @Query("SELECT COUNT(*) FROM SchoolDistrict")
+    @Query("SELECT COUNT(*) FROM districts_info")
     int districtCount();
 
-    @Query("DELETE FROM SchoolMandal")
+    @Query("DELETE FROM mandal_info")
     void deleteSchoolMandals();
 
     @Insert
     void insertSchoolMandals(List<SchoolMandal> mandalEntities);
 
-    @Query("SELECT COUNT(*) FROM SchoolMandal")
+    @Query("SELECT COUNT(*) FROM mandal_info")
     int mandalCount();
 
-    @Query("DELETE FROM SchoolVillage")
+    @Query("DELETE FROM village_info")
     void deleteSchoolVillage();
 
     @Insert
     void insertSchoolVillages(List<SchoolVillage> villageEntities);
 
-    @Query("SELECT COUNT(*) FROM SchoolVillage")
+    @Query("SELECT COUNT(*) FROM village_info")
     int villageCount();
 
-    @Query("DELETE FROM MasterInstituteInfo")
+    @Query("DELETE FROM master_inst_info")
     void deleteMasterInst();
 
     @Insert
     void insertMasterInst(List<MasterInstituteInfo> masterInstituteInfos);
 
-    @Query("SELECT COUNT(*) FROM MasterInstituteInfo")
+    @Query("SELECT COUNT(*) FROM master_inst_info")
     int instCount();
 
 }

@@ -31,13 +31,14 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
     int selectedDistId, selectedManId, selectedVilId;
-    String selectedInstId, selectedManName, selInstName,selectedVilName;
+    String selectedInstId, selectedManName, selInstName, selectedVilName, selectedAddress;
     String lat, lng, address;
     ArrayList<String> instNames;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     List<MasterInstituteInfo> institutesEntityList;
     CustomProgressDialog customProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +121,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         if (selectedDistId == 0) {
             showSnackBar("Please select district");
             return false;
-        }  else if (TextUtils.isEmpty(selectedInstId)) {
+        } else if (TextUtils.isEmpty(selectedInstId)) {
             showSnackBar("Please select institute");
             return false;
         }
@@ -168,6 +169,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 selInstName = "";
                 dmvSelectionActivityBinding.mandal.setText("");
                 dmvSelectionActivityBinding.village.setText("");
+                dmvSelectionActivityBinding.address.setText("");
                 dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
@@ -189,12 +191,16 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         selectedManId = str.getMandalId();
                                         selectedManName = str.getMandalName();
                                         if (selectedManName != null)
-                                            dmvSelectionActivityBinding.mandal.setText("Mandal : "+selectedManName);
+                                            dmvSelectionActivityBinding.mandal.setText("Mandal : " + selectedManName);
 
                                         selectedVilId = str.getVillageId();
                                         selectedVilName = str.getVillageName();
                                         if (selectedVilName != null)
-                                            dmvSelectionActivityBinding.village.setText("Village : "+selectedVilName);
+                                            dmvSelectionActivityBinding.village.setText("Village : " + selectedVilName);
+
+                                        selectedAddress = str.getAddress();
+                                        if (selectedAddress != null)
+                                            dmvSelectionActivityBinding.address.setText("Address : " + selectedAddress);
                                         lat = str.getLatitude();
                                         lng = str.getLongitude();
                                         address = str.getAddress();
@@ -205,10 +211,11 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         }
                     }
                 });
-            }else {
+            } else {
                 customProgressDialog.dismiss();
                 dmvSelectionActivityBinding.mandal.setText("");
                 dmvSelectionActivityBinding.village.setText("");
+                dmvSelectionActivityBinding.address.setText("");
                 selectedInstId = "";
                 selInstName = "";
             }

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-@Entity
+@Entity(tableName = "inst_menu_info")
 public class InstMenuInfoEntity {
     @PrimaryKey(autoGenerate = true)
     public int id;

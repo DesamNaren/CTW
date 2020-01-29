@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import afu.org.checkerframework.checker.igj.qual.I;
 
-@Entity
+@Entity(tableName = "medical_details_info")
 public class MedicalDetailsBean {
     @PrimaryKey(autoGenerate = true)
     private int id;

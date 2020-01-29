@@ -26,103 +26,104 @@ public interface MenuSectionsDao {
     @Insert()
     void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities);
 
-    @Query("SELECT * from InstMenuInfoEntity")
+    @Query("SELECT * from inst_menu_info")
     LiveData<List<InstMenuInfoEntity>> getSections();
 
-    @Query("Update InstMenuInfoEntity set flag_completed=1, section_time=:time where section_id=:id and instId=:instId")
+    @Query("Update inst_menu_info set flag_completed=1, section_time=:time where section_id=:id and instId=:instId")
     void updateSectionInfo(String time, int id, String instId);
 
-    @Query("SELECT section_id from InstMenuInfoEntity WHERE section_short_name=:name")
+    @Query("SELECT section_id from inst_menu_info WHERE section_short_name=:name")
     LiveData<Integer> getSectionId(String name);
 
-    @Query("Select count(*) from InstMenuInfoEntity")
+    @Query("Select count(*) from inst_menu_info")
     LiveData<Integer> getMenuRecordsCount();
 
-    @Query("SELECT * from GeneralInfo")
+    @Query("SELECT * from general_info")
     LiveData<GeneralInfoEntity> getGeneralInfo();
 
-    @Query("SELECT * from ClassInfo")
+    @Query("SELECT * from class_info")
     LiveData<List<StudAttendInfoEntity>> getStudAttendInfo();
 
-    @Query("SELECT * from Staff_Info")
+    @Query("SELECT * from staff_info")
     LiveData<List<StaffAttendanceEntity>> getStaffAttendInfo();
 
-    @Query("SELECT * from medicalinfoentity")
+    @Query("SELECT * from medical_info")
     LiveData<MedicalInfoEntity> getMedicalInfo();
 
-    @Query("SELECT * from DietIssuesInfo")
+    @Query("SELECT * from diet_issues_info")
     LiveData<DietIssuesEntity> getDietInfo();
 
-    @Query("SELECT * from InfraStructureInfo")
+    @Query("SELECT * from infrastructure_info")
     LiveData<InfraStructureEntity> getInfraInfo();
 
-    @Query("SELECT * from AcademicEntity")
+    @Query("SELECT * from academic_info")
     LiveData<AcademicEntity> getAcademicInfo();
 
-    @Query("SELECT * from cocurricularentity")
+    @Query("SELECT * from cocurricular_info")
     LiveData<CoCurricularEntity> getCocurricularInfo();
 
-    @Query("SELECT * from EntitlementsInfo")
+    @Query("SELECT * from entitlements_info")
     LiveData<EntitlementsEntity> getEntitlementInfo();
 
-    @Query("SELECT * from RegistersInfo")
+    @Query("SELECT * from registers_info")
     LiveData<RegistersEntity> getRegisterInfo();
 
-    @Query("SELECT * from GeneralCommentsInfo")
+    @Query("SELECT * from general_comments_info")
     LiveData<GeneralCommentsEntity> getGeneralCommentsInfo();
 
 
-    @Query("Delete from AcademicEntity")
+    @Query("Delete from academic_info")
     void deleteAcademicEntity();
-    @Query("Delete from CallHealthInfoEntity")
+    @Query("Delete from call_health_info")
     void deleteCallHealthInfoEntity();
 
-    @Query("Delete from ClassInfo")
+    @Query("Delete from class_info")
     void deleteClassInfo();
-    @Query("Delete from CoCurricularEntity")
+    @Query("Delete from cocurricular_info")
     void deleteCoCurricularEntity();
 
 
-    @Query("Delete from DietIssuesInfo")
+    @Query("Delete from diet_issues_info")
     void deleteDietIssuesInfo();
-    @Query("Delete from DietListInfo")
+    @Query("Delete from diet_list_info")
     void deleteDietListInfo();
 
 
 
-    @Query("Delete from EntitlementsInfo")
+    @Query("Delete from entitlements_info")
     void deleteEntitlementsInfo();
-    @Query("Delete from GeneralCommentsInfo")
+    @Query("Delete from general_comments_info")
     void deleteGeneralCommentsInfo();
 
 
-    @Query("Delete from GeneralInfo")
+    @Query("Delete from general_info")
     void deleteGeneralInfo();
-    @Query("Delete from InfraStructureInfo")
+    @Query("Delete from infrastructure_info")
     void deleteInfraStructureInfo();
 
 
 
-    @Query("Delete from InstMenuInfoEntity")
+    @Query("Delete from inst_menu_info")
     void deleteInstMenuInfoEntity();
-    @Query("Delete from MedicalDetailsBean")
+    @Query("Delete from medical_details_info")
     void deleteMedicalDetailsBean();
 
 
-    @Query("Delete from MedicalInfoEntity")
+    @Query("Delete from medical_info")
     void deleteMedicalInfoEntity();
-    @Query("Delete from PlantsEntity")
+    @Query("Delete from plants_info")
     void deletePlantsEntity();
 
 
 
-    @Query("Delete from RegistersInfo")
+    @Query("Delete from registers_info")
     void deleteRegistersInfo();
-    @Query("Delete from Staff_Info")
+
+    @Query("Delete from staff_info")
     void deleteStaff_Info();
 
 
-    @Query("Delete from StudAchievementEntity")
+    @Query("Delete from stud_achievements_info")
     void deleteStudAchievementEntity();
 
 
