@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc;
+package com.example.twdinspection.gcc.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,10 +12,8 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityDashboardBinding;
 import com.example.twdinspection.databinding.ActivityGccDashboardBinding;
 import com.example.twdinspection.inspection.ui.DMVSelectionActivity;
-import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
@@ -52,28 +50,28 @@ public class GCCDashboardActivity extends AppCompatActivity {
         binding.btnDrGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, DMVSelectionActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, DRGodownActivity.class));
             }
         });
 
         binding.btnDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, SchemesDMVActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, DRDepotActivity.class));
             }
         });
 
         binding.btnMfpGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, SchemesDMVActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, MFPGodownActivity.class));
             }
         });
 
         binding.btnPUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, SchemesDMVActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, PUnitActivity.class));
             }
         });
     }

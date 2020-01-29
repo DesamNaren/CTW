@@ -126,23 +126,23 @@
             android:name=".inspection.ui.ViewMedicalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.GCCDashboardActivity"
+            android:name=".gcc.ui.GCCDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.DRDepotActivity"
+            android:name=".gcc.ui.DRDepotActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.DRGodownActivity"
+            android:name=".gcc.ui.DRGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.MFPGodownActivity"
+            android:name=".gcc.ui.MFPGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.PUnitActivity"
+            android:name=".gcc.ui.PUnitActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.GCCPhotoActivity"
+        <activity android:name=".gcc.ui.GCCPhotoActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".gcc.GCCOfficerFindingsActivity"
+        <activity android:name=".gcc.ui.GCCOfficerFindingsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".inspection.ui.LocBaseActivity"
             android:screenOrientation="portrait"/>
