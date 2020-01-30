@@ -40,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-            String curTime = Utils.getCurrentDateTime();
+            String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
             binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));

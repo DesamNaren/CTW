@@ -103,6 +103,10 @@ public class Utils {
 
 
     public static String getCurrentDateTime() {
+        return new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
+    public static String getCurrentDateTimeDisplay() {
         return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
     }
 

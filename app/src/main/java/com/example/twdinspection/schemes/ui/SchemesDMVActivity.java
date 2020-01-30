@@ -76,7 +76,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
             editor = sharedPreferences.edit();
             schemesDMVActivityBinding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             schemesDMVActivityBinding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-            String curTime = Utils.getCurrentDateTime();
+            String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();
             schemesDMVActivityBinding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));

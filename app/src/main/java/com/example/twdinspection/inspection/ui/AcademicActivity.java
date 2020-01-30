@@ -815,13 +815,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-        if (labroom_available.equals(AppConstants.Yes) && libraryMobileNo.length() != 10) {
+        if (library_room_available.equals(AppConstants.Yes) && libraryMobileNo.length() != 10) {
             showSnackBar("Enter valid library mobile number");
             return false;
         }
 
 
-        if (labroom_available.equals(AppConstants.Yes) && !TextUtils.isEmpty(libraryMobileNo)
+        if (library_room_available.equals(AppConstants.Yes) && !TextUtils.isEmpty(libraryMobileNo)
                 && !(libraryMobileNo.startsWith("9") || libraryMobileNo.startsWith("8") || libraryMobileNo.startsWith("7") ||
                 libraryMobileNo.startsWith("6"))) {
             showSnackBar("Enter valid library mobile number");
