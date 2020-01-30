@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc;
+package com.example.twdinspection.gcc.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
