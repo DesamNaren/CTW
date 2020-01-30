@@ -35,141 +35,7 @@
                     android:layout_margin="@dimen/dimen_10dp"
                     android:background="@color/white"
                     android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="Stock Details / Position"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Stock Value as per System"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="100"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Stock Value as per Physical Verification"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="100"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Deficit / Surplus (1-2)"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="100"
-                                android:textColor="@color/black" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Reason mentioned by In charge regarding Deficit / Surplus"
-                                android:textColor="@color/black" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:errorEnabled="true">
-
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/et_reason"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/reason"
-                                    android:imeOptions="actionNext"
-                                    android:singleLine="true" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -206,7 +72,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Stock Register"
+                                android:text="MFP Stock Register"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -234,116 +100,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Purchase Register"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_purchase"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/purchase_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/purchase_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Sale Price Fixation Register"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_sale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/sale_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/sale_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Godown Liability Register"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_godown"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/godown_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/godown_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -397,7 +153,7 @@
                                         android:id="@+id/et_com_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/reason"
+                                        android:hint="@string/com_name"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
 
@@ -427,6 +183,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -583,7 +340,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the Stock Register entries were made as per Sales Bills (Dr Depot and Hostels)"
+                                android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -620,7 +377,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the values mentioned in bills are as per sale price fixation register"
+                                android:text="Whether stack cards have been prominently displayed in each stack or not"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -657,7 +414,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                android:text="Whether the godown  is maintained in hygienic condition or not"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -694,7 +451,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether stack cards have been prominently displayed in each stack or not"
+                                android:text="Whether there are any driage proposals submitted for deficit "
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -731,7 +488,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether godown has been computerized and receipt and delivery are being effected through computerized system"
+                                android:text="Availability of generator in Godown"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -768,7 +525,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the godown is maintained in hygienic condition or not"
+                                android:text="Availability of Tray Dryer"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -806,7 +563,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Availability of fire safety equipment"
+                                android:text="Last Inspection Date - Division Manager"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -843,7 +600,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Last inspection date - society manager"
+                                android:text="Any Repairs required for MFP Godown"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -870,153 +627,20 @@
                             </RadioGroup>
 
 
-                            <LinearLayout
-                                android:id="@+id/last_ins_soc_ll"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="gone">
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/last_ins_soc_date"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    app:errorEnabled="true">
-
-
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_soc_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Last Inspection Date"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
-
-                                </com.google.android.material.textfield.TextInputLayout>
-
-                            </LinearLayout>
-
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Last inspection date - division manager"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_insp_date_div_manager"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/insp_date_div_manager_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/insp_date_div_manager_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <LinearLayout
-                                android:id="@+id/last_ins_div_ll"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="gone">
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/last_ins_div_date"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    app:errorEnabled="true">
-
-
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_div_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Last Inspection Date"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
-
-                                </com.google.android.material.textfield.TextInputLayout>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:id="@+id/repairs_ll"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Any repairs required for Dr Godown"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_repairs_req"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <LinearLayout
-                                android:visibility="gone"
-                                android:id="@+id/repairs_ll"
-                                android:orientation="vertical"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:layout_marginTop="@dimen/dimen_5dp"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
@@ -1028,7 +652,6 @@
                                     android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
-
 
 
                             <ImageView
@@ -1045,10 +668,10 @@
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_marginTop="@dimen/dimen_5dp"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_5dp"
                             app:errorEnabled="true">
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
@@ -1061,7 +684,6 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        </LinearLayout>
 
                     </LinearLayout>
 

@@ -368,6 +368,7 @@
     <string name="no_scheme">No schemes found</string>
     <string name="no_records_found">No records found</string>
     <string name="no_remarks">No remarks found</string>
+    <string name="remarks">Remarks</string>
     <string name="exit_msg">Do you want to exit?</string>
     <string name="districs_mandals_villages">District Master</string>
     <string name="stu_att">Students Attendance</string>
@@ -539,4 +540,6 @@
     <string name="stock_arrangement">Stock Arrangement</string>
     <string name="machinary">Machinery</string>
     <string name="ins_off_fin">Inspection Officer Findings</string>
+    <string name="repair_type">Repair type</string>
+    <string name="com_name">Company Name</string>
 </resources>

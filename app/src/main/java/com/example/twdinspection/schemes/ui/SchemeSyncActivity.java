@@ -20,9 +20,6 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemeSyncBinding;
-import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.inspection.ui.DashboardActivity;
-import com.example.twdinspection.inspection.ui.LoginActivity;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeDMVInterface;
 import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
@@ -53,6 +50,8 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         binding.executePendingBindings();
         schemeSyncRepository = new SchemeSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
+
+        binding.header.ivHome.setVisibility(View.GONE);
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -154,10 +153,10 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
 
                         }
                     });
-                }else{
+                } else {
                     Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
-                }
+            }
 
         });
 
@@ -188,7 +187,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                             }
                         }
                     });
-                }else{
+                } else {
                     Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
@@ -210,7 +209,10 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class));
+        startActivity(new Intent(SchemeSyncActivity.this, SchemesDMVActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        finish();
     }
 
     @Override

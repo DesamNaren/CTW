@@ -59,6 +59,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
         beneficiaryReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_beneficiary_report);
         beneficiaryReportBinding.header.headerTitle.setText(getResources().getString(R.string.ben_report));
+        beneficiaryReportBinding.header.ivHome.setVisibility(View.GONE);
         beneficiaryReportBinding.header.filetIv.setVisibility(View.VISIBLE);
         beneficiaryReportBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

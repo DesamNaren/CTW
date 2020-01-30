@@ -49,6 +49,14 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
 
+        dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        dmvSelectionActivityBinding.header.ivHome.setVisibility(View.GONE);
+
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
         dmvSelectionActivityBinding.executePendingBindings();

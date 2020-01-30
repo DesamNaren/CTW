@@ -51,6 +51,8 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         schoolSyncRepository = new SchoolSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_school_activity));
 
+        binding.header.ivHome.setVisibility(View.GONE);
+
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -132,7 +134,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(SchoolSyncActivity.this, DMVSelectionActivity.class));
+        startActivity(new Intent(SchoolSyncActivity.this, DMVSelectionActivity.class)
+        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
     }
 
     @Override

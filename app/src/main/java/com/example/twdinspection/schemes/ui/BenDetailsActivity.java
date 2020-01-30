@@ -83,6 +83,13 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
         benDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_ben_details_activty);
         benDetailsBinding.header.headerTitle.setText(getString(R.string.ben_details));
+        benDetailsBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        benDetailsBinding.header.ivHome.setVisibility(View.GONE);
 
         try {
             beneficiaryDetail = getIntent().getParcelableExtra(AppConstants.BEN_DETAIL);
