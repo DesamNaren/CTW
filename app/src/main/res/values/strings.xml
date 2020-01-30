@@ -542,4 +542,22 @@
     <string name="ins_off_fin">Inspection Officer Findings</string>
     <string name="repair_type">Repair type</string>
     <string name="com_name">Company Name</string>
+    <string name="cash_balance_as_per_cash_book">Cash balance as per cash book</string>
+    <string name="b_adjustment_vouchers_bills">B.Adjustment vouchers / bills</string>
+    <string name="difference">Difference</string>
+    <string name="ecs_stock_register">Ecs stock register</string>
+    <string name="empties_stock_register">Empties stock register</string>
+    <string name="liability_register">Liability register</string>
+    <string name="weights_and_measurements_certificate_issued_by_legal_metrology">Weights and measurements certificate issued by legal metrology</string>
+    <string name="depot_authorisation_certificate_issued_by_revenue_authorities">Depot authorisation certificate issued by revenue authorities</string>
+    <string name="bill_abstract_book">Bill abstract book</string>
+    <string name="mfp_liability_register">MFP liability register</string>
+    <string name="drs_stock_register">DRs stock register</string>
+    <string name="depot_name_board">Depot name board</string>
+    <string name="gcc_objectives_principles_board">GCC objectives / principles board</string>
+    <string name="mfp_commodities_rate_board">MFP commodities rate board</string>
+    <string name="ec_commodities_rate_board">EC commodities rate board</string>
+    <string name="whether_the_values_mentioned_in_sale_bills_are_as_per_sale_price_fixed_in_rate_card">Whether the values mentioned in Sale Bills are as per sale price fixed in rate card</string>
+    <string name="whether_the_values_mentioned_in_mfp_purchase_bills_are_as_per_purchase_price_fixed_in_rate_card">Whether the values mentioned in MFP purchase bills are as per purchase price fixed in rate card</string>
+
 </resources>
