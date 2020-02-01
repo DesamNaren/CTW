@@ -58,7 +58,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
     private CustomProgressDialog customProgressDialog;
-
+    LiveData<List<InstMenuInfoEntity>> arrayListLiveData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         instMainViewModel = new InstMainViewModel(binding, getApplication(), InstMenuMainActivity.this);
         binding.setViewmodel(instMainViewModel);
 
-        LiveData<List<InstMenuInfoEntity>> arrayListLiveData = instMainViewModel.getAllSections();
+        arrayListLiveData = instMainViewModel.getAllSections();
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officer_id = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -396,6 +396,20 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
     @Override
     public void onBackPressed() {
+
+        if (arrayListLiveData!=null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+            boolean flag = false;
+            for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
+                if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                instMainViewModel.deleteMenuData();
+            }
+        }
+
         Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
     }
 

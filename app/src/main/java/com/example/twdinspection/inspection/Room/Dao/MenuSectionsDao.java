@@ -105,6 +105,7 @@ public interface MenuSectionsDao {
 
     @Query("Delete from inst_menu_info")
     void deleteInstMenuInfoEntity();
+
     @Query("Delete from medical_details_info")
     void deleteMedicalDetailsBean();
 

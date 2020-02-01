@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,15 +17,19 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize">
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:actionViewClass="androidx.appcompat.widget.SearchView"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
 
                 <ImageView
                     android:id="@+id/back_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:visibility="visible"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_back"
+                    android:visibility="visible" />
 
                 <TextView
                     android:id="@+id/header_title"
@@ -34,43 +39,43 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/white" />
 
+
                 <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:layout_gravity="right"
                     android:id="@+id/filet_iv"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/filter"
                     android:tint="@color/white"
-                    android:visibility="gone"
-                    android:layout_marginEnd="@dimen/dimen_10dp" />
+                    android:visibility="gone" />
 
                 <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:layout_gravity="right"
                     android:id="@+id/sync_iv"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/sync"
                     android:tint="@color/white"
-                    android:visibility="gone"
-                    android:layout_marginEnd="@dimen/dimen_10dp" />
-
+                    android:visibility="gone" />
 
 
                 <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:layout_gravity="right"
                     android:id="@+id/iv_home"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
                     android:src="@drawable/home"
                     android:tint="@color/white"
-                    android:visibility="visible"
-                    android:layout_marginEnd="@dimen/dimen_10dp" />
+                    android:visibility="visible" />
 
 
             </androidx.appcompat.widget.Toolbar>

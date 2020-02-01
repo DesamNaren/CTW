@@ -226,4 +226,8 @@ public class MenuSectionsRepository {
     }
 
 
+    public void deleteMenuData(){
+        menuSectionsDao.deleteInstMenuInfoEntity();
+    }
+
 }
