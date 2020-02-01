@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -50,7 +51,8 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private BottomSheetDialog dialog;
     ArrayList<String> schemeValues;
     private CustomProgressDialog customProgressDialog;
-
+    SearchView mSearchView;
+    Menu mMenu=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +102,16 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                     beneficiaryDetailsMain = beneficiaryDetails.getBeneficiaryDetails();
                     tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
                     if (tempBeneficiaryDetails.size() > 0) {
+                        mMenu.findItem(R.id.action_search).setVisible(true);
+                        mMenu.findItem(R.id.mi_filter).setVisible(true);
                         beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
                         beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
                         adapter = new BenReportAdapter(this, tempBeneficiaryDetails);
                         beneficiaryReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
                         beneficiaryReportBinding.recyclerView.setAdapter(adapter);
                     } else {
+                       mMenu.findItem(R.id.action_search).setVisible(false);
+                       mMenu.findItem(R.id.mi_filter).setVisible(false);
                         beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                         beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                     }
@@ -160,7 +166,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
             if (tempBeneficiaryDetails.size() > 0) {
                 beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
                 beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
-                adapter.notifyDataSetChanged();
+                adapter.setData(tempBeneficiaryDetails);
             } else {
                 beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                 beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
@@ -200,9 +206,10 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        MenuItem mSearch = menu.findItem(R.id.action_search);
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
+        mMenu=menu;
+        getMenuInflater().inflate(R.menu.search_menu, mMenu);
+        MenuItem mSearch = mMenu.findItem(R.id.action_search);
+        mSearchView= (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));
 
         mSearchView.setQueryHint("Search");
@@ -213,10 +220,25 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-//                adapter.getFilter().filter(newText);
+                adapter.getFilter().filter(newText);
+
                 return true;
             }
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mi_filter:
+                if (!mSearchView.isIconified()) {
+                    mSearchView.onActionViewCollapsed();
+                }
+                showSchemeDetails(schemesInfoEntitiesMain);
+                break;
+        }
+        return true;
+    }
+
 }

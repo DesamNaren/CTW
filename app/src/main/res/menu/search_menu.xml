@@ -5,6 +5,7 @@
     tools:context="codes4.com.simplelistview.MainActivity">
 
     <item
+        android:visible="true"
         android:id="@+id/mi_filter"
         android:title="Filter"
         app:showAsAction="always"
@@ -12,8 +13,11 @@
 
 
     <item
+        android:visible="true"
         android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@android:drawable/ic_search_category_default"
+        style="@style/SearchViewStyle"
+        android:iconTint="@color/white"
         android:orderInCategory="200"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
