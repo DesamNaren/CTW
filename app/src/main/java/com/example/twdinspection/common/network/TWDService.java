@@ -86,10 +86,10 @@ public interface TWDService {
     @GET("getSchemes")
     Call<SchemeResponse> getSchemeResponse();
 
-    @POST("CTWSubmitDetails/submitSchemeInspectionDetails")
+    @POST("submitSchemeInspectionDetails")
     Call<SchemeSubmitResponse> getSchemeSubmitResponse(@Body SchemeSubmitRequest schemeSubmitRequest);
 
-    @POST("CTWSubmitDetails/submitInspectionDetails")
+    @POST("submitSchoolInspectionDetails")
     Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);
 
     @Multipart

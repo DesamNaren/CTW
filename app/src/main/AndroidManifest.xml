@@ -146,6 +146,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".inspection.ui.LocBaseActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".gcc.ui.DRDepotFindingsActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".inspection.ui.QuitAppActivity" />
 
         <provider
