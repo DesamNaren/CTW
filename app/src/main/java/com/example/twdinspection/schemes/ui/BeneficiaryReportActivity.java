@@ -2,14 +2,17 @@ package com.example.twdinspection.schemes.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -209,10 +212,14 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         mMenu=menu;
         getMenuInflater().inflate(R.menu.search_menu, mMenu);
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
-        mSearchView= (SearchView) mSearch.getActionView();
-        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));
+        SearchView mSearchView = (SearchView) mSearch.getActionView();
 
-        mSearchView.setQueryHint("Search");
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));
+        int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = mSearchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
+        mSearchView.setGravity(Gravity.CENTER);
+
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

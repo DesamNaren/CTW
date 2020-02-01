@@ -7,6 +7,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="pinViewStyle">@style/PinWidget.PinView</item>
+
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Light_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="pinViewStyle">@style/PinWidget.PinView</item>
+
     </style>
 
     <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
@@ -17,12 +28,7 @@
         <item name="android:windowEnterAnimation">@anim/exitdialog_anim1</item>
         <item name="android:windowExitAnimation">@anim/exitdialog_anim2</item>
     </style>
-    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <!-- Gets rid of the "underline" in the text -->
-        <item name="queryBackground">@color/white</item>
-        <!-- The hint text that appears when the user has not typed anything -->
-        <item name="queryHint">@string/search_hint</item>
-    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -77,6 +83,5 @@
     <style name="circleBackground_yellow">
         <item name="android:background">@drawable/dialog_circle_yellow</item>
     </style>
-
 
 </resources>
