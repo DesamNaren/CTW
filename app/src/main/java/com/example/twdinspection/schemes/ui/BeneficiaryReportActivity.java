@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.InputType;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -55,7 +59,8 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     ArrayList<String> schemeValues;
     private CustomProgressDialog customProgressDialog;
     SearchView mSearchView;
-    Menu mMenu=null;
+    Menu mMenu = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +76,20 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
         try {
             if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
+//                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
+                TextView tv = new TextView(getApplicationContext());
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+                tv.setLayoutParams(lp);
+                tv.setText(getResources().getString(R.string.ben_report));
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                getSupportActionBar().setCustomView(tv);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_arrow);
-                getSupportActionBar().setTitle(Html.fromHtml("<font color='#FFFFFF'>BENEFICIARY REPORT</font>"));
                 getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_btn_rounded));
             }
         } catch (Exception e) {
@@ -209,12 +224,12 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mMenu=menu;
-        getMenuInflater().inflate(R.menu.search_menu, mMenu);
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        mMenu = menu;
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
-        SearchView mSearchView = (SearchView) mSearch.getActionView();
-
+        mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint) + "</font>"));
+        mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);
         textView.setTextColor(Color.WHITE);
@@ -225,6 +240,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
@@ -237,7 +253,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.mi_filter:
                 if (!mSearchView.isIconified()) {
                     mSearchView.onActionViewCollapsed();

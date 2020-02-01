@@ -6,20 +6,23 @@
 
     <item
         android:visible="true"
-        android:id="@+id/mi_filter"
-        android:title="Filter"
-        app:showAsAction="always"
-        android:icon="@drawable/filter" />
-
-
-    <item
-        android:visible="true"
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_search_category_default"
         android:iconTint="@color/white"
         android:orderInCategory="200"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:visible="true"
+        android:orderInCategory="100"
+        android:id="@+id/mi_filter"
+        android:title="Filter"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/filter" />
+
+
+
 
 </menu>
