@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
@@ -71,6 +72,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     SharedPreferences sharedPreferences;
     private String officerID, instID, insTime;
     private CustomProgressDialog customProgressDialog;
+    private String cacheDate, currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -574,22 +576,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver
-                (mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-
-                mCurrentLocation = locationResult.getLastLocation();
-            }
-        };
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mGpsSwitchStateReceiver);
@@ -608,5 +594,51 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             }
         }
     };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver
+                (mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                mCurrentLocation = locationResult.getLastLocation();
+            }
+        };
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
 }

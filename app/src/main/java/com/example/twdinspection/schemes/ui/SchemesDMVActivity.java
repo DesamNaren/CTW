@@ -3,6 +3,7 @@ package com.example.twdinspection.schemes.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivitySchemesDmvBinding;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,6 +43,8 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     List<FinancialYearsEntity> finYearList;
+    private String cacheDate, currentDate;
+    InstMainViewModel instMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
         schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
         schemesDMVActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
         schemesDMVActivityBinding.header.ivHome.setVisibility(View.GONE);
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         schemesDMVActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         schemesDMVActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -293,6 +298,44 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                 selFinValue = "";
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
     }
 
     @Override

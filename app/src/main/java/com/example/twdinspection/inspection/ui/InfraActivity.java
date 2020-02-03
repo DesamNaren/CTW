@@ -2,6 +2,7 @@ package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -71,6 +72,7 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
     File file_tds;
     int flag_tds = 0;
     SharedPreferences.Editor editor;
+    private String cacheDate, currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -995,5 +997,43 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
 
     public void callBack() {
         Utils.customHomeAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.go_back));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
     }
 }

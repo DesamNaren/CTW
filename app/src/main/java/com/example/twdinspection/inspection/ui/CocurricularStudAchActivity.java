@@ -6,14 +6,21 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
 import com.example.twdinspection.inspection.adapter.StudAchievementsAdapter;
 import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +32,9 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
     private ActivityCocurricularAchDetailsBinding binding;
     private StudAchViewModel viewModel;
     private StudAchievementsAdapter studAchievementsAdapter;
+    private String cacheDate, currentDate;
+    SharedPreferences sharedPreferences;
+    InstMainViewModel instMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +43,11 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
         binding.appBarLayout.backBtn.setVisibility(View.GONE);
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.stu_ach));
-
+        sharedPreferences = TWDApplication.get(this).getPreferences();
         viewModel = ViewModelProviders.of(this,
                 new StudAchCustomViewModel(binding, this, getApplication())).get(StudAchViewModel.class);
         binding.setViewModel(viewModel);
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         viewModel.getStudAchievementsData().observe(CocurricularStudAchActivity.this, new Observer<List<StudAchievementEntity>>() {
             @Override
@@ -57,12 +68,51 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
+
+    @Override
     public void deleteAchievementRecord(StudAchievementEntity studAchievementEntity) {
         long x = viewModel.deleteAchievementsInfo(studAchievementEntity);
         if (x >= 0) {
             showBottomSheetSnackBar(getResources().getString(R.string.record_deleted));
         }
     }
+
     private void showBottomSheetSnackBar(String str) {
         Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }

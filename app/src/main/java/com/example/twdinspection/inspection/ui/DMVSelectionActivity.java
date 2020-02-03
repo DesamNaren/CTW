@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SharedPreferences.Editor editor;
     List<MasterInstituteInfo> institutesEntityList;
     CustomProgressDialog customProgressDialog;
+    private String cacheDate, currentDate;
+    InstMainViewModel instMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +233,45 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 selInstName = "";
             }
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
     }
 
     @Override

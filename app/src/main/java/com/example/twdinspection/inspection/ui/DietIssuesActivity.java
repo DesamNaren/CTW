@@ -2,6 +2,7 @@ package com.example.twdinspection.inspection.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -54,6 +55,7 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     DietIssuesAdapter adapter;
     MasterInstituteInfo masterInstituteInfos;
     String menu_chart_served, menu_chart_painted, menu_served, food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
+    private String cacheDate, currentDate;
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
@@ -63,7 +65,6 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     File file_menu, file_officer;
     int flag_menu = 0, flag_officer = 0;
     SharedPreferences.Editor editor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -459,6 +460,45 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     @Override
     public void onBackPressed() {
         callBack();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
     }
 
     public void callBack() {

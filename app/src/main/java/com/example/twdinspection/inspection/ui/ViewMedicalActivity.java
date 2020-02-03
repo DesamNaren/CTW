@@ -1,6 +1,9 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +12,13 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityViewMedicalBinding;
 import com.example.twdinspection.inspection.adapter.GViewMedicalDetailsAdapter;
 import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 
 import java.util.ArrayList;
@@ -31,6 +38,9 @@ public class ViewMedicalActivity extends AppCompatActivity {
     private List<MedicalDetailsBean> dMedicalDetailsBeans;
     private List<MedicalDetailsBean> mMedicalDetailsBeans;
     private List<MedicalDetailsBean> oMedicalDetailsBeans;
+    private String cacheDate, currentDate;
+    SharedPreferences sharedPreferences;
+    InstMainViewModel instMainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +49,7 @@ public class ViewMedicalActivity extends AppCompatActivity {
         binding.appBarLayout.backBtn.setVisibility(View.GONE);
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
-
+        sharedPreferences = TWDApplication.get(this).getPreferences();
         MedicalDetailsViewModel viewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(viewModel);
         listDataChild = new HashMap<>();
@@ -49,6 +59,7 @@ public class ViewMedicalActivity extends AppCompatActivity {
         dMedicalDetailsBeans = new ArrayList<>();
         mMedicalDetailsBeans = new ArrayList<>();
         oMedicalDetailsBeans = new ArrayList<>();
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         viewModel.getMedicalDetails().observe(ViewMedicalActivity.this, new Observer<List<MedicalDetailsBean>>() {
             @Override
@@ -106,4 +117,41 @@ public class ViewMedicalActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
 }

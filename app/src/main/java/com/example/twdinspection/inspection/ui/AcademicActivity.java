@@ -666,6 +666,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private boolean validate() {
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
             showSnackBar("Select Highest Calss Syllabus completed");
+            ScrollToView(binding.rgHighestClassSyllabusCompleted);
             return false;
         }
         if (highest_class_syllabus_completed.equals(AppConstants.No) && TextUtils.isEmpty(plan_syll_comp_prepared)) {
@@ -1027,6 +1028,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         }
 
         return true;
+    }
+
+    private void ScrollToView(View rgHighestClassSyllabusCompleted) {
+        binding.scrl.scrollTo(0, (int)binding.rgHighestClassSyllabusCompleted.getY());
+
     }
 
     private void showSnackBar(String str) {

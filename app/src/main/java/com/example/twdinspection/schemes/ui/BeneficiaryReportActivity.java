@@ -2,10 +2,13 @@ package com.example.twdinspection.schemes.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -27,9 +30,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.adapter.BenReportAdapter;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.interfaces.BenClickCallback;
@@ -60,17 +66,20 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private CustomProgressDialog customProgressDialog;
     SearchView mSearchView;
     Menu mMenu = null;
-
+    private String cacheDate, currentDate;
+    InstMainViewModel instMainViewModel;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         customProgressDialog = new CustomProgressDialog(this);
-
+        sharedPreferences= TWDApplication.get(this).getPreferences();
         beneficiaryDetailsMain = new ArrayList<>();
         tempBeneficiaryDetails = new ArrayList<>();
         schemesInfoEntitiesMain = new ArrayList<>();
         schemeValues = new ArrayList<>();
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         beneficiaryReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_beneficiary_report);
 
@@ -264,4 +273,41 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
 }

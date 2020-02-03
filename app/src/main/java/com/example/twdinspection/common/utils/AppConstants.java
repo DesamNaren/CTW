@@ -57,4 +57,5 @@ public class AppConstants {
     public static final String KITCHEN = "Kitchen";
 
     public static final float DISTANCE = 1000000;
+    public static final String CACHE_DATE = "";
 }

@@ -560,5 +560,7 @@
     <string name="whether_the_values_mentioned_in_sale_bills_are_as_per_sale_price_fixed_in_rate_card">Whether the values mentioned in Sale Bills are as per sale price fixed in rate card</string>
     <string name="whether_the_values_mentioned_in_mfp_purchase_bills_are_as_per_purchase_price_fixed_in_rate_card">Whether the values mentioned in MFP purchase bills are as per purchase price fixed in rate card</string>
     <string name="search_hint">Search by Ben ID</string>
+    <string name="ses_expire_re">Session Expired</string>
+    <string name="date_time">Please enable automatic date time feature</string>
 
 </resources>

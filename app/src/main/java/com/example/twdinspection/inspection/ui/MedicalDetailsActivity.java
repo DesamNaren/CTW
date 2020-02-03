@@ -1,6 +1,9 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,12 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontTextView;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedialDetailsBinding;
 import com.example.twdinspection.inspection.adapter.MedicalDetailsAdapter;
 import com.example.twdinspection.inspection.interfaces.ClickCallback;
 import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 
 import java.util.ArrayList;
@@ -36,7 +42,9 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
     private int issueType = 1, selectedType = 0;
     private int f_cnt, c_cnt, h_cnt, d_cnt, m_cnt, o_cnt, tot_cnt;
     private MedicalDetailsViewModel medicalDetailsViewModel;
-
+    private String cacheDate, currentDate;
+    InstMainViewModel instMainViewModel;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,8 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
         binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
         medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(medicalDetailsViewModel);
+        sharedPreferences= TWDApplication.get(this).getPreferences();
+        instMainViewModel=new InstMainViewModel(getApplication());
 
         LiveData<List<MedicalDetailsBean>> listLiveData = medicalDetailsViewModel.getMedicalDetails();
         listLiveData.observe(this, new Observer<List<MedicalDetailsBean>>() {
@@ -260,6 +270,43 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
         binding.tvTypeCnt.setText("Record: "+ position);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
     @Override
     public void onBackPressed() {
         if (tot_cnt != totalList.size()) {

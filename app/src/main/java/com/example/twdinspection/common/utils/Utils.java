@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
@@ -67,7 +70,13 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
+    public static boolean isTimeAutomatic(Context c) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return Settings.Global.getInt(c.getContentResolver(), Settings.Global.AUTO_TIME, 0) == 1;
+        } else {
+            return Settings.System.getInt(c.getContentResolver(), Settings.System.AUTO_TIME, 0) == 1;
+        }
+    }
     public static void customSectionSaveAlert(final Activity activity, String msg, String title) {
         try {
             final Dialog dialog = new Dialog(activity);
@@ -398,6 +407,73 @@ public class Utils {
         }
     }
 
+    public static void ShowDeviceSessionAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_error);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (dialog.isShowing())
+                            dialog.dismiss();
+
+                        SharedPreferences.Editor editor = TWDApplication.get(activity).getPreferencesEditor();
+                        editor.clear();
+                        editor.commit();
+                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                        activity.finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void customTimeAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_information);
+
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                no.setVisibility(View.GONE);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        activity.startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public static void customWarningAlert(Context context, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(context);

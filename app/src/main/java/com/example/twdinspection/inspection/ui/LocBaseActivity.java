@@ -6,12 +6,15 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -22,8 +25,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontTextView;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -76,7 +82,8 @@ public class LocBaseActivity extends AppCompatActivity {
     private LocationSettingsRequest mLocationSettingsRequest;
     public LocationCallback mLocationCallback;
     public Location mCurrentLocation;
-
+    SharedPreferences sharedPreferences;
+    InstMainViewModel instMainViewModel;
     // boolean flag to toggle the ui
     public Boolean mRequestingLocationUpdates = false;
 
@@ -88,6 +95,8 @@ public class LocBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= TWDApplication.get(this).getPreferences();
+        instMainViewModel=new InstMainViewModel(getApplication());
         callPermissions();
     }
 
@@ -270,23 +279,6 @@ public class LocBaseActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mRequestingLocationUpdates && checkPermissions()) {
-            startLocationUpdates();
-        }
-        updateLocationUI();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mRequestingLocationUpdates) {
-            stopLocationUpdates();
-        }
-    }
 
     public void updateLocationUI() {
 
@@ -318,5 +310,24 @@ public class LocBaseActivity extends AppCompatActivity {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
         return listPermissionsNeeded.isEmpty();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mRequestingLocationUpdates && checkPermissions()) {
+            startLocationUpdates();
+        }
+        updateLocationUI();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mRequestingLocationUpdates) {
+            stopLocationUpdates();
+        }
     }
 }

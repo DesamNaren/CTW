@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -58,6 +59,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
     private CustomProgressDialog customProgressDialog;
+    private String cacheDate, currentDate;
     LiveData<List<InstMenuInfoEntity>> arrayListLiveData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -422,7 +424,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     @Override
     protected void onResume() {
         super.onResume();
-
         registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         mLocationCallback = new LocationCallback() {
@@ -433,8 +434,39 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                 mCurrentLocation = locationResult.getLastLocation();
             }
         };
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
+
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+    }
     private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

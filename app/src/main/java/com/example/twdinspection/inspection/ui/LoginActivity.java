@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -20,6 +22,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
@@ -35,6 +38,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     ActivityLoginCreBinding binding;
     private SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
+    private String cacheDate, currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,5 +188,44 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
             }
         }
     };
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            boolean isAutomatic = Utils.isTimeAutomatic(this);
+            if (!isAutomatic) {
+                Utils.customTimeAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.date_time));
+                return;
+            }
 
+            currentDate = Utils.getCurrentDate();
+            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+            if (!TextUtils.isEmpty(cacheDate)) {
+                if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    instMainViewModel.deleteAllInspectionData();
+                    Utils.ShowDeviceSessionAlert(this,
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re));
+
+                }
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        if (mRequestingLocationUpdates) {
+            stopLocationUpdates();
+        }
+        cacheDate = currentDate;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(AppConstants.CACHE_DATE, cacheDate);
+        editor.commit();
+        super.onPause();
+    }
 }
