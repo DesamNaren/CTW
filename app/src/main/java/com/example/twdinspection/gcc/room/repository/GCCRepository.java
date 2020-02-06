@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.twdinspection.gcc.room.dao.GCCDao;
 import com.example.twdinspection.gcc.room.database.GCCDatabase;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRGodowns;
+import com.example.twdinspection.gcc.source.suppliers.DRDepots;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class GCCRepository {
 
     private GCCDao gccDao;
     public LiveData<List<DivisionsInfo>> divisions = new MutableLiveData<>();
-    public LiveData<List<DRGodowns>> drGodowns = new MutableLiveData<>();
+    public LiveData<List<DRDepots>> drGodowns = new MutableLiveData<>();
     public int count;
 
     public GCCRepository(Application application) {
@@ -32,7 +32,7 @@ public class GCCRepository {
         return gccDao.getSocietyInfo(divId);
     }
 
-    public LiveData<List<DRGodowns>> getDRGodowns() {
+    public LiveData<List<DRDepots>> getDRGodowns() {
         return gccDao.getDRDepots();
     }
 

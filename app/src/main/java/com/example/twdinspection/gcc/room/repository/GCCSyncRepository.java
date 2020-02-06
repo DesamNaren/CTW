@@ -8,7 +8,7 @@ import com.example.twdinspection.gcc.interfaces.GCCDivisionInterface;
 import com.example.twdinspection.gcc.room.dao.GCCSyncDao;
 import com.example.twdinspection.gcc.room.database.GCCDatabase;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRGodowns;
+import com.example.twdinspection.gcc.source.suppliers.DRDepots;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class GCCSyncRepository {
         new InsertDivisionAsyncTask(dmvInterface, divisionsInfos).execute();
     }
 
-    public void insertDRDepots(final GCCDivisionInterface dmvInterface, final List<DRGodowns> DRGodowns) {
-        new InsertDRDepotAsyncTask(dmvInterface, DRGodowns).execute();
+    public void insertDRDepots(final GCCDivisionInterface dmvInterface, final List<DRDepots> DRDepots) {
+        new InsertDRDepotAsyncTask(dmvInterface, DRDepots).execute();
     }
 
 
@@ -56,19 +56,19 @@ public class GCCSyncRepository {
 
     @SuppressLint("StaticFieldLeak")
     private class InsertDRDepotAsyncTask extends AsyncTask<Void, Void, Integer> {
-        List<DRGodowns> DRGodowns;
+        List<DRDepots> DRDepots;
         GCCDivisionInterface dmvInterface;
 
         InsertDRDepotAsyncTask(GCCDivisionInterface dmvInterface,
-                                List<DRGodowns> DRGodowns) {
-            this.DRGodowns = DRGodowns;
+                                List<DRDepots> DRDepots) {
+            this.DRDepots = DRDepots;
             this.dmvInterface = dmvInterface;
         }
 
         @Override
         protected Integer doInBackground(Void... voids) {
             syncDao.deleteDRDepots();
-            syncDao.insertDRDepots(DRGodowns);
+            syncDao.insertDRDepots(DRDepots);
             return syncDao.drDepotCount();
         }
 

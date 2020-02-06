@@ -8,7 +8,7 @@ public class DRDepotMasterResponse {
 
     @SerializedName("supplier_info")
     @Expose
-    private List<DRGodowns> DRGodowns = null;
+    private List<DRDepots> DRDepots = null;
     @SerializedName("statusMessage")
     @Expose
     private String statusMessage;
@@ -16,12 +16,12 @@ public class DRDepotMasterResponse {
     @Expose
     private String statusCode;
 
-    public List<DRGodowns> getDRGodowns() {
-        return DRGodowns;
+    public List<DRDepots> getDRDepots() {
+        return DRDepots;
     }
 
-    public void setDRGodowns(List<DRGodowns> DRGodowns) {
-        this.DRGodowns = DRGodowns;
+    public void setDRDepots(List<DRDepots> DRDepots) {
+        this.DRDepots = DRDepots;
     }
 
     public String getStatusMessage() {

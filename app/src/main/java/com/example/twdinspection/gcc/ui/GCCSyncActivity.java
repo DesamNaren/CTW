@@ -120,8 +120,8 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                             drDepotMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
                             if (suppliersResponse != null && suppliersResponse.getStatusCode() != null) {
                                 if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                    if (suppliersResponse.getDRGodowns() != null && suppliersResponse.getDRGodowns().size() > 0) {
-                                        gccSyncRepository.insertDRDepots(GCCSyncActivity.this, suppliersResponse.getDRGodowns());
+                                    if (suppliersResponse.getDRDepots() != null && suppliersResponse.getDRDepots().size() > 0) {
+                                        gccSyncRepository.insertDRDepots(GCCSyncActivity.this, suppliersResponse.getDRDepots());
                                     } else {
                                         Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
                                     }

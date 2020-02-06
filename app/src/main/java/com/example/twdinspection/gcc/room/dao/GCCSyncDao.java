@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRGodowns;
+import com.example.twdinspection.gcc.source.suppliers.DRDepots;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public interface GCCSyncDao {
     void deleteDRDepots();
 
     @Insert
-    void insertDRDepots(List<DRGodowns> DRGodowns);
+    void insertDRDepots(List<DRDepots> DRDepots);
 
     @Query("SELECT COUNT(*) FROM DR_Depot")
     int drDepotCount();

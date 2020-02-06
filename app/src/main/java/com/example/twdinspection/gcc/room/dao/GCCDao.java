@@ -5,11 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRGodowns;
-import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
-import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
-import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
-import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.gcc.source.suppliers.DRDepots;
 
 import java.util.List;
 
@@ -31,7 +27,7 @@ public interface GCCDao {
     LiveData<List<DivisionsInfo>> getSocietyInfo(String divID);
 
     @Query("SELECT * from DR_Depot")
-    LiveData<List<DRGodowns>> getDRDepots();
+    LiveData<List<DRDepots>> getDRDepots();
 
     @Query("SELECT divisionId from Divisions where divisionName LIKE :divisionName")
     LiveData<String> getDivisionID(String divisionName);

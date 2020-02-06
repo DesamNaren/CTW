@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 @Entity (tableName = "DR_Depot")
-public class DRGodowns {
+public class DRDepots {
     @PrimaryKey(autoGenerate = true)
     private int id;
 

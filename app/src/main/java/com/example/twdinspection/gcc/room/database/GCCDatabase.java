@@ -12,14 +12,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.twdinspection.gcc.room.dao.GCCDao;
 import com.example.twdinspection.gcc.room.dao.GCCSyncDao;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRGodowns;
+import com.example.twdinspection.gcc.source.suppliers.DRDepots;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {DivisionsInfo.class, DRGodowns.class,},
+@Database(entities = {DivisionsInfo.class, DRDepots.class,},
         version = 1, exportSchema = false)
 public abstract class GCCDatabase extends RoomDatabase {
     public abstract GCCDao gccDao();
