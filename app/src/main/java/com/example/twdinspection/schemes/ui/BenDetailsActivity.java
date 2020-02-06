@@ -29,7 +29,6 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
-import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
@@ -65,9 +64,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     SharedPreferences sharedPreferences;
     public Uri fileUri;
     public static final String IMAGE_DIRECTORY_NAME = "SCHEME_IMAGES";
-    String FilePath,FilePath2;
+    String FilePath, FilePath2;
     Bitmap bm;
-    String PIC_NAME,PIC_NAME2;
+    String PIC_NAME, PIC_NAME2;
     ;
     int imgflag1 = 0;
     int imgflag2 = 0;
@@ -233,14 +232,14 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     Snackbar.make(benDetailsBinding.cl, "Please select online status value", Snackbar.LENGTH_SHORT).show();
                 } else if (fieldSelVal.equals(AppConstants.No) && TextUtils.isEmpty(selectedRemId)) {
                     Snackbar.make(benDetailsBinding.cl, "Please select remark type", Snackbar.LENGTH_SHORT).show();
-                } else if (imgflag1 == 0 && imgflag2==0) {
+                } else if (imgflag1 == 0 && imgflag2 == 0) {
                     Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
                     if (Utils.checkInternetConnection(BenDetailsActivity.this)) {
                         customProgressDialog.show();
                         submitCall(beneficiaryDetail);
-                    }else{
-                        Utils.customWarningAlert(BenDetailsActivity.this,getResources().getString(R.string.app_name),"Please check internet");
+                    } else {
+                        Utils.customWarningAlert(BenDetailsActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                     }
                 }
             }
@@ -278,8 +277,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     }
 
-    void callUploadPhoto(final MultipartBody.Part body,final MultipartBody.Part body2) {
-        viewModel.UploadImageServiceCall(body,body2);
+    void callUploadPhoto(final MultipartBody.Part body, final MultipartBody.Part body2) {
+        customProgressDialog.show();
+        viewModel.UploadImageServiceCall(body, body2);
     }
 
     private void CallSuccessAlert(String msg) {
@@ -297,6 +297,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         return imageUri;
     }
+
     public Uri getOutputMediaFileUri2(int type) {
         File imageFile = getOutputMediaFile2(type);
         Uri imageUri = null;
@@ -320,7 +321,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() +"~"+Utils.getCurrentDateTime()+ ".png";
+            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -329,6 +330,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
         return mediaFile;
     }
+
     private File getOutputMediaFile2(int type) {
         File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
@@ -340,7 +342,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() +"~"+Utils.getCurrentDateTime()+ ".png";
+            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME2);
         } else {
@@ -451,13 +453,14 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     @Override
     public void getData(SchemeSubmitResponse schemeSubmitResponse) {
+        customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
 
-            String inspection_id=schemeSubmitResponse.getInspection_id();
+            String inspection_id = schemeSubmitResponse.getInspection_id();
             FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
             File file1 = new File(FilePath);
 
-            FilePath2= getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME2;
+            FilePath2 = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME2;
             File file2 = new File(FilePath2);
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file1);
@@ -467,7 +470,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     RequestBody.create(MediaType.parse("multipart/form-data"), file2);
             MultipartBody.Part body2 =
                     MultipartBody.Part.createFormData("image", file2.getName(), requestFile1);
-            callUploadPhoto(body,body2);
+            callUploadPhoto(body, body2);
 
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             benDetailsBinding.progress.setVisibility(View.GONE);

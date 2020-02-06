@@ -14,12 +14,12 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityGccDashboardBinding;
 import com.example.twdinspection.inspection.ui.DMVSelectionActivity;
+import com.example.twdinspection.schemes.ui.SchemeSyncActivity;
 import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-
     ActivityGccDashboardBinding binding;
 
     @Override
@@ -31,6 +31,14 @@ public class GCCDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        binding.header.syncIv.setVisibility(View.VISIBLE);
+        binding.header.syncIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GCCDashboardActivity.this, GCCSyncActivity.class));
             }
         });
 
@@ -50,7 +58,7 @@ public class GCCDashboardActivity extends AppCompatActivity {
         binding.btnDrGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, DRGodownActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, DivisionSelectionActivity.class));
             }
         });
 

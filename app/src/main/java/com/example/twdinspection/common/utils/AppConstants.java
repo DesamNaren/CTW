@@ -58,4 +58,8 @@ public class AppConstants {
 
     public static final float DISTANCE = 1000000;
     public static final String CACHE_DATE = "";
+    public static final String GCC_AUTH_USER = "gccinventory";
+    public static final String GCC_AUTH_PWD = "gcc@wsdata";
+
+
 }

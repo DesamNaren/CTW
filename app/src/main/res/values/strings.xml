@@ -371,6 +371,8 @@
     <string name="remarks">Remarks</string>
     <string name="exit_msg">Do you want to exit?</string>
     <string name="districs_mandals_villages">District Master</string>
+    <string name="division_master">Division Master</string>
+    <string name="supplier_master">Supplier Master</string>
     <string name="stu_att">Students Attendance</string>
     <string name="sta_att">Staff Attendance</string>
     <string name="failed">Failed to insert data, Please try again!</string>
@@ -562,5 +564,10 @@
     <string name="search_hint">Search by Ben ID</string>
     <string name="ses_expire_re">Session Expired</string>
     <string name="date_time">Please enable automatic date time feature</string>
+    <string name="financial_years">Financial Years</string>
+    <string name="inspection_remarks">Inspection Remarks</string>
+    <string name="schemes">Schemes</string>
+    <string name="select_division">Select Division</string>
+    <string name="select_society">Select Society</string>
 
 </resources>

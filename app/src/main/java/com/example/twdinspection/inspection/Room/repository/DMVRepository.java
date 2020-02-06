@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DMVRepository {
 
-    public DistrictDao districtDao;
+    private DistrictDao districtDao;
     public LiveData<List<SchoolDistrict>> districts = new MutableLiveData<>();
     public LiveData<List<SchoolMandal>> mandals = new MutableLiveData<>();
     public LiveData<List<String>> institute_names = new MutableLiveData<>();

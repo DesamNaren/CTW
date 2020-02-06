@@ -159,6 +159,8 @@
         <activity android:name=".gcc.ui.DRDepotFindingsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".inspection.ui.QuitAppActivity" />
+        <activity android:name=".gcc.ui.GCCSyncActivity" />
+        <activity android:name=".gcc.ui.DivisionSelectionActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

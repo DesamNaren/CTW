@@ -43,6 +43,7 @@ android {
         release {
             buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -51,18 +52,21 @@ android {
         debug {
             buildConfigField("String", "SERVER_URL", "\"http://dev2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
             signingConfig signingConfigs.release
         }
 
         qa {
             buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
             signingConfig signingConfigs.release
             debuggable true
         }
         uat {
             buildConfigField("String", "SERVER_URL", "\"http://uat2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            buildConfigField("String", "GCC_SERVER_URL", "\"dev7.cgg.gov.in/gccfms/ws/gcc/\"")
             signingConfig signingConfigs.release
             debuggable true
         }

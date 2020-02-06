@@ -1,15 +1,17 @@
 package com.example.twdinspection.common.network;
 
 
-import com.example.twdinspection.BuildConfig;
+import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
+import com.example.twdinspection.gcc.source.suppliers.DRDepotMasterResponse;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
-import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
+import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
-import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
+import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
@@ -21,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,27 +36,20 @@ import retrofit2.http.Query;
 public interface TWDService {
     class Factory {
         public static TWDService create(String type) {
-            String BASEURL="";
-            if(type.equals("school")){
-                BASEURL = TWDURL.TWD_BASE_URL;
-            }else {
-                BASEURL = TWDURL.SCHEME_BASE_URL;
-            }
-
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            if (BuildConfig.DEBUG) {
-                // development build
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            } else {
-                // production build
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-            }
-
-            httpClient.addInterceptor(interceptor);
             httpClient.readTimeout(60, TimeUnit.SECONDS);
             httpClient.connectTimeout(60, TimeUnit.SECONDS);
             httpClient.writeTimeout(60, TimeUnit.SECONDS);
+
+            String BASEURL = "";
+            if (type.equals("school")) {
+                BASEURL = TWDURL.TWD_BASE_URL;
+            } else if (type.equals("gcc")) {
+                httpClient.addInterceptor(new BasicAuthInterceptor(AppConstants.GCC_AUTH_USER, AppConstants.GCC_AUTH_PWD));
+                BASEURL = TWDURL.GCC_BASE_URL;
+            } else {
+                BASEURL = TWDURL.SCHEME_BASE_URL;
+            }
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASEURL)
@@ -94,7 +88,7 @@ public interface TWDService {
 
     @Multipart
     @POST("upload/uploadSchemePhotos")
-    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image,@Part MultipartBody.Part image2);
+    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image, @Part MultipartBody.Part image2);
 
     @Multipart
     @POST("upload/uploadPhotos")
@@ -106,6 +100,16 @@ public interface TWDService {
     @GET("CTWServiceDetails/getInstInfo")
     Call<InstMasterResponse> getInstMasterResponse();
     //------------------- Login & Logout ----------------------------------------
+
+
+    //------------------- GCC ----------------------------------------
+
+    @POST("getOffices")
+    Call<GetOfficesResponse> getDivisionMasterResponse();
+
+
+    @POST("getGodowns/DR Depot")
+    Call<DRDepotMasterResponse> getDRDepotMasterResponse();
 
 //    @POST("MasterData/ValidateUser")
 //    Observable<ValidateUserResponse> getValidateUserResponse(@Body ValidateUserRequest validateUserRequest);

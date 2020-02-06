@@ -129,8 +129,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     }
 
     private boolean validateFields() {
-
-
         if (selectedDistId == 0) {
             showSnackBar("Please select district");
             return false;
