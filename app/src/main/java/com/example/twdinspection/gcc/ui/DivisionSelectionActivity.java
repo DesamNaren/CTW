@@ -20,7 +20,6 @@ import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDivisionSelectoionBinding;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -92,7 +91,7 @@ public class DivisionSelectionActivity extends AppCompatActivity implements Adap
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                     startActivity(new Intent(DivisionSelectionActivity.this, DRGodownActivity.class));
+                    startActivity(new Intent(DivisionSelectionActivity.this, DRGodownActivity.class));
                     finish();
                 }
             }
@@ -144,7 +143,8 @@ public class DivisionSelectionActivity extends AppCompatActivity implements Adap
                                     divisionsInfos.addAll(divisionsInfoList);
                                     if (divisionsInfos != null && divisionsInfos.size() > 0) {
                                         for (int i = 0; i < divisionsInfos.size(); i++) {
-                                            societies.add(divisionsInfos.get(i).getSocietyName());
+                                            if (!TextUtils.isEmpty(divisionsInfos.get(i).getSocietyName()))
+                                                societies.add(divisionsInfos.get(i).getSocietyName());
                                         }
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
