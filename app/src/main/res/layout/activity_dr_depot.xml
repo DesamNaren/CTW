@@ -42,5 +42,8 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_profile"
             android:padding="@dimen/dimen_15dp" />
+        <include
+            layout="@layout/buttons_layout"
+            android:id="@+id/bottom_ll"/>
     </RelativeLayout>
 </layout>

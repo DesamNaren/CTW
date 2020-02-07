@@ -572,5 +572,7 @@
     <string name="comm_name">Commodity Name</string>
     <string name="units_of">Units of Measure</string>
     <string name="qty_sys">Quantity as per System</string>
+    <string name="physical_available_quantity">Physical available quantity</string>
+    <string name="select_godown">Select godown</string>
 
 </resources>

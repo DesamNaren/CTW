@@ -69,12 +69,18 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
+    int distId,mandId,villId;
+    String finYr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         customProgressDialog = new CustomProgressDialog(this);
         sharedPreferences= TWDApplication.get(this).getPreferences();
+        distId=Integer.parseInt(sharedPreferences.getString(AppConstants.SCHEME_DIST_ID,""));
+        mandId=Integer.parseInt(sharedPreferences.getString(AppConstants.SCHEME_MAN_ID,""));
+        villId=Integer.parseInt(sharedPreferences.getString(AppConstants.SCHEME_VIL_ID,""));
+        finYr=sharedPreferences.getString(AppConstants.SCHEME_FIN_YEAR,"");
         beneficiaryDetailsMain = new ArrayList<>();
         tempBeneficiaryDetails = new ArrayList<>();
         schemesInfoEntitiesMain = new ArrayList<>();
@@ -113,12 +119,12 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         beneficiaryReportBinding.executePendingBindings();
 
         BeneficiaryRequest beneficiaryRequest = new BeneficiaryRequest();
-        beneficiaryRequest.setDistId(1);
-        beneficiaryRequest.setMandalId(3);
-        beneficiaryRequest.setVillageId(2);
+        beneficiaryRequest.setDistId(distId);
+        beneficiaryRequest.setMandalId(mandId);
+        beneficiaryRequest.setVillageId(villId);
         StringBuilder str = new StringBuilder();
         str.append("'");
-        beneficiaryRequest.setFinYearId(str + "2017-18" + str);
+        beneficiaryRequest.setFinYearId(str + finYr + str);
 
         customProgressDialog.show();
         viewModel.getBeneficiaryInfo(beneficiaryRequest).observe(this, beneficiaryDetails -> {
@@ -129,6 +135,8 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                     beneficiaryDetailsMain = beneficiaryDetails.getBeneficiaryDetails();
                     tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
                     if (tempBeneficiaryDetails.size() > 0) {
+                        beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
+                        beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
                         mMenu.findItem(R.id.action_search).setVisible(true);
                         mMenu.findItem(R.id.mi_filter).setVisible(true);
                         beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
@@ -143,12 +151,17 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                         beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                     }
                 } else if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-
+                    beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                    beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                     Snackbar.make(beneficiaryReportBinding.root, beneficiaryDetails.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                 } else {
+                    beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                    beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                     callSnackBar(getString(R.string.something));
                 }
             } else {
+                beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                 callSnackBar(getString(R.string.something));
 
             }
