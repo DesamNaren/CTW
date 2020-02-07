@@ -569,5 +569,8 @@
     <string name="schemes">Schemes</string>
     <string name="select_division">Select Division</string>
     <string name="select_society">Select Society</string>
+    <string name="comm_name">Commodity Name</string>
+    <string name="units_of">Units of Measure</string>
+    <string name="qty_sys">Quantity as per System</string>
 
 </resources>

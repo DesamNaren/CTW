@@ -46,8 +46,6 @@ public class DRDepotActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.customExitAlert(this,
-                getResources().getString(R.string.app_name),
-                getString(R.string.exit_msg));
+       finish();
     }
 }
