@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.StockViewModel" />
+    </data>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,14 +44,27 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.google.android.material.tabs.TabLayout
+            android:background="@color/white"
             android:layout_marginTop="@dimen/dimen_8dp"
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/colorPrimary"
             android:layout_below="@+id/rl_profile"
-            android:padding="@dimen/dimen_15dp" />
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_below="@id/tabs"
+            android:layout_above="@+id/bottom_ll"
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll"/>
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>

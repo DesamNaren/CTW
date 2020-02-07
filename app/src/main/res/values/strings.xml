@@ -571,8 +571,13 @@
     <string name="select_society">Select Society</string>
     <string name="comm_name">Commodity Name</string>
     <string name="units_of">Units of Measure</string>
-    <string name="qty_sys">Quantity as per System</string>
+    <string name="qty_sys">System Quantity</string>
     <string name="physical_available_quantity">Physical available quantity</string>
     <string name="select_godown">Select godown</string>
+    <string name="sys_rate">System Rate</string>
+    <string name="sys_val">System Value</string>
+    <string name="phy_rate">Physical Rate</string>
+    <string name="phy_val">Physical Value</string>
+    <string name="phy_ava_qty">Physical Available Quantity</string>
 
 </resources>

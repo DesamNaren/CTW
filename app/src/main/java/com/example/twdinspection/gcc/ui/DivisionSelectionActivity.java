@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
@@ -71,7 +72,9 @@ public class DivisionSelectionActivity extends AppCompatActivity implements Adap
         }
 
 
-        viewModel.getAllDivisions().observe(this, divisions -> {
+        LiveData<List<String>> divisionLiveData= viewModel.getAllDivisions();
+        divisionLiveData.observe(this, divisions -> {
+            divisionLiveData.removeObservers(DivisionSelectionActivity.this);
             customProgressDialog.dismiss();
             if (divisions != null && divisions.size() > 0) {
                 ArrayList<String> divisionNames = new ArrayList<>();
@@ -109,11 +112,10 @@ public class DivisionSelectionActivity extends AppCompatActivity implements Adap
             showSnackBar("Please select division");
             return false;
         }
-
-//        else if (TextUtils.isEmpty(selectedSocietyId)) {
-//            showSnackBar("Please select society");
-//            return false;
-//        }
+        else if (TextUtils.isEmpty(selectedSocietyId)) {
+            showSnackBar("Please select society");
+            return false;
+        }
         return true;
     }
 

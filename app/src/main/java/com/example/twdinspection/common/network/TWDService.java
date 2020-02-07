@@ -3,6 +3,7 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
+import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.DRDepotMasterResponse;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
@@ -31,6 +32,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface TWDService {
@@ -110,6 +112,10 @@ public interface TWDService {
 
     @POST("getGodowns/DR Depot")
     Call<DRDepotMasterResponse> getDRDepotMasterResponse();
+
+
+    @POST("getStockDetails/{id}")
+    Call<StockDetailsResponse> getDRDepotMasterResponse(@Path("id") String id);
 
 //    @POST("MasterData/ValidateUser")
 //    Observable<ValidateUserResponse> getValidateUserResponse(@Body ValidateUserRequest validateUserRequest);

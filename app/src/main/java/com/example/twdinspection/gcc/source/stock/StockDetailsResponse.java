@@ -9,47 +9,47 @@ public class StockDetailsResponse {
 
     @SerializedName("ap_commodities")
     @Expose
-    private List<Object> apCommodities = null;
+    private List<CommonCommodity> apCommodities = null;
     @SerializedName("ecs_commodities")
     @Expose
-    private List<EcsCommodity> ecsCommodities = null;
+    private List<CommonCommodity> ecsCommodities = null;
     @SerializedName("drs_commodities")
     @Expose
-    private List<Object> drsCommodities = null;
+    private List<CommonCommodity> drsCommodities = null;
     @SerializedName("statusMessage")
     @Expose
     private String statusMessage;
     @SerializedName("empties_commodities")
     @Expose
-    private List<Object> emptiesCommodities = null;
+    private List<CommonCommodity> emptiesCommodities = null;
     @SerializedName("statusCode")
     @Expose
     private String statusCode;
     @SerializedName("mfp_commodities")
     @Expose
-    private List<MfpCommodity> mfpCommodities = null;
+    private List<CommonCommodity> mfpCommodities = null;
 
-    public List<Object> getApCommodities() {
+    public List<CommonCommodity> getApCommodities() {
         return apCommodities;
     }
 
-    public void setApCommodities(List<Object> apCommodities) {
+    public void setApCommodities(List<CommonCommodity> apCommodities) {
         this.apCommodities = apCommodities;
     }
 
-    public List<EcsCommodity> getEcsCommodities() {
+    public List<CommonCommodity> getEcsCommodities() {
         return ecsCommodities;
     }
 
-    public void setEcsCommodities(List<EcsCommodity> ecsCommodities) {
+    public void setEcsCommodities(List<CommonCommodity> ecsCommodities) {
         this.ecsCommodities = ecsCommodities;
     }
 
-    public List<Object> getDrsCommodities() {
+    public List<CommonCommodity> getDrsCommodities() {
         return drsCommodities;
     }
 
-    public void setDrsCommodities(List<Object> drsCommodities) {
+    public void setDrsCommodities(List<CommonCommodity> drsCommodities) {
         this.drsCommodities = drsCommodities;
     }
 
@@ -61,11 +61,11 @@ public class StockDetailsResponse {
         this.statusMessage = statusMessage;
     }
 
-    public List<Object> getEmptiesCommodities() {
+    public List<CommonCommodity> getEmptiesCommodities() {
         return emptiesCommodities;
     }
 
-    public void setEmptiesCommodities(List<Object> emptiesCommodities) {
+    public void setEmptiesCommodities(List<CommonCommodity> emptiesCommodities) {
         this.emptiesCommodities = emptiesCommodities;
     }
 
@@ -77,12 +77,11 @@ public class StockDetailsResponse {
         this.statusCode = statusCode;
     }
 
-    public List<MfpCommodity> getMfpCommodities() {
+    public List<CommonCommodity> getMfpCommodities() {
         return mfpCommodities;
     }
 
-    public void setMfpCommodities(List<MfpCommodity> mfpCommodities) {
+    public void setMfpCommodities(List<CommonCommodity> mfpCommodities) {
         this.mfpCommodities = mfpCommodities;
     }
-
 }
