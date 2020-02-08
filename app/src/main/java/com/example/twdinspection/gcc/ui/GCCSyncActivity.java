@@ -106,7 +106,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             }
         });
 
-        binding.syncSupplier.setOnClickListener(new View.OnClickListener() {
+        binding.llDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -50,8 +51,16 @@ public class StockSubAdapter extends RecyclerView.Adapter<StockSubAdapter.ItemHo
 
         final CommonCommodity dataModel = commonCommodities.get(i);
         holder.stockChildRowBinding.tvComName.setText(dataModel.getCommName());
-        holder.stockChildRowBinding.sysQty.setText(dataModel.getQty() + " " + dataModel.getUnits());
-        holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity (" + dataModel.getUnits() + ")");
+        if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
+            holder.stockChildRowBinding.sysQty.setText(dataModel.getQty() + " " + dataModel.getUnits());
+        }else {
+            holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getQty()));
+        }
+        if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
+            holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity (" + dataModel.getUnits() + ")");
+        }else {
+            holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
+        }
         holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getRate()));
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
         holder.stockChildRowBinding.tvPhyRate.setText(String.valueOf(dataModel.getRate()));
@@ -61,7 +70,6 @@ public class StockSubAdapter extends RecyclerView.Adapter<StockSubAdapter.ItemHo
         RxTextView
                 .textChangeEvents(holder.stockChildRowBinding.phyAvaQty)
                 .debounce(300, TimeUnit.MILLISECONDS)
-                .filter(event -> !TextUtils.isEmpty(String.valueOf(event.text())))
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TextViewTextChangeEvent>() {
@@ -74,9 +82,12 @@ public class StockSubAdapter extends RecyclerView.Adapter<StockSubAdapter.ItemHo
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         String str = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(str)) {
+                        if (!TextUtils.isEmpty(str) && !str.equals(".")) {
                             holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(Double.valueOf(str) * dataModel.getRate()));
                             dataModel.setPhyQuant(String.valueOf(Double.valueOf(str)));
+                        }else{
+                            holder.stockChildRowBinding.tvPhyVal.setText("");
+                            dataModel.setPhyQuant(null);
                         }
                     }
 
@@ -123,6 +134,8 @@ public class StockSubAdapter extends RecyclerView.Adapter<StockSubAdapter.ItemHo
     public int getItemViewType(int position) {
         return position;
     }
+
+
 
 
 }

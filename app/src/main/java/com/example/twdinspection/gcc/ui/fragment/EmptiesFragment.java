@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,14 +18,15 @@ import com.example.twdinspection.gcc.source.stock.CommonCommodity;
 
 import java.util.ArrayList;
 
-public class DailyFragment extends Fragment {
-    ArrayList<CommonCommodity> parameter;
+public class EmptiesFragment extends Fragment {
+    private ArrayList<CommonCommodity> parameter;
+    private StockMainRowBinding binding;
 
-    public static DailyFragment newInstance(ArrayList<CommonCommodity> parameter) {
+    public static EmptiesFragment newInstance(ArrayList<CommonCommodity> parameter) {
 
         Bundle args = new Bundle();
         args.putParcelableArrayList("ecs", parameter);
-        DailyFragment fragment = new DailyFragment();
+        EmptiesFragment fragment = new EmptiesFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,7 +43,7 @@ public class DailyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        StockMainRowBinding binding = DataBindingUtil.inflate(
+         binding = DataBindingUtil.inflate(
                 inflater, R.layout.stock_main_row, container, false);
         View view = binding.getRoot();
         StockSubAdapter stockSubAdapter = new StockSubAdapter(getActivity(), parameter);
@@ -52,4 +53,7 @@ public class DailyFragment extends Fragment {
         return view;
     }
 
+    public void setPos(int pos){
+        binding.groupRV.smoothScrollToPosition(pos);
+    }
 }

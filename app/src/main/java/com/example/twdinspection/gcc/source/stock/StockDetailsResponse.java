@@ -9,48 +9,48 @@ public class StockDetailsResponse {
 
     @SerializedName("ap_commodities")
     @Expose
-    private List<CommonCommodity> apCommodities = null;
+    private List<CommonCommodity> processing_units = null;
     @SerializedName("ecs_commodities")
     @Expose
-    private List<CommonCommodity> ecsCommodities = null;
+    private List<CommonCommodity> essential_commodities = null;
     @SerializedName("drs_commodities")
     @Expose
-    private List<CommonCommodity> drsCommodities = null;
+    private List<CommonCommodity> dialy_requirements = null;
     @SerializedName("statusMessage")
     @Expose
     private String statusMessage;
     @SerializedName("empties_commodities")
     @Expose
-    private List<CommonCommodity> emptiesCommodities = null;
+    private List<CommonCommodity> empties = null;
     @SerializedName("statusCode")
     @Expose
     private String statusCode;
     @SerializedName("mfp_commodities")
     @Expose
-    private List<CommonCommodity> mfpCommodities = null;
+    private List<CommonCommodity> mfp_commodities = null;
 
-    public List<CommonCommodity> getApCommodities() {
-        return apCommodities;
+    public List<CommonCommodity> getProcessing_units() {
+        return processing_units;
     }
 
-    public void setApCommodities(List<CommonCommodity> apCommodities) {
-        this.apCommodities = apCommodities;
+    public void setProcessing_units(List<CommonCommodity> processing_units) {
+        this.processing_units = processing_units;
     }
 
-    public List<CommonCommodity> getEcsCommodities() {
-        return ecsCommodities;
+    public List<CommonCommodity> getEssential_commodities() {
+        return essential_commodities;
     }
 
-    public void setEcsCommodities(List<CommonCommodity> ecsCommodities) {
-        this.ecsCommodities = ecsCommodities;
+    public void setEssential_commodities(List<CommonCommodity> essential_commodities) {
+        this.essential_commodities = essential_commodities;
     }
 
-    public List<CommonCommodity> getDrsCommodities() {
-        return drsCommodities;
+    public List<CommonCommodity> getDialy_requirements() {
+        return dialy_requirements;
     }
 
-    public void setDrsCommodities(List<CommonCommodity> drsCommodities) {
-        this.drsCommodities = drsCommodities;
+    public void setDialy_requirements(List<CommonCommodity> dialy_requirements) {
+        this.dialy_requirements = dialy_requirements;
     }
 
     public String getStatusMessage() {
@@ -61,12 +61,12 @@ public class StockDetailsResponse {
         this.statusMessage = statusMessage;
     }
 
-    public List<CommonCommodity> getEmptiesCommodities() {
-        return emptiesCommodities;
+    public List<CommonCommodity> getEmpties() {
+        return empties;
     }
 
-    public void setEmptiesCommodities(List<CommonCommodity> emptiesCommodities) {
-        this.emptiesCommodities = emptiesCommodities;
+    public void setEmpties(List<CommonCommodity> empties) {
+        this.empties = empties;
     }
 
     public String getStatusCode() {
@@ -77,11 +77,11 @@ public class StockDetailsResponse {
         this.statusCode = statusCode;
     }
 
-    public List<CommonCommodity> getMfpCommodities() {
-        return mfpCommodities;
+    public List<CommonCommodity> getMfp_commodities() {
+        return mfp_commodities;
     }
 
-    public void setMfpCommodities(List<CommonCommodity> mfpCommodities) {
-        this.mfpCommodities = mfpCommodities;
+    public void setMfp_commodities(List<CommonCommodity> mfp_commodities) {
+        this.mfp_commodities = mfp_commodities;
     }
 }

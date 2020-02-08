@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class GCCSyncViewModel extends AndroidViewModel {
     private MutableLiveData<GetOfficesResponse> divisionsInfoMutableLiveData;
-    private MutableLiveData<DRDepotMasterResponse> supplierInfoMutableLiveData;
+    private MutableLiveData<DRDepotMasterResponse> drDepotMasterResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivityGccSyncBinding binding;
@@ -31,7 +31,7 @@ public class GCCSyncViewModel extends AndroidViewModel {
         this.context=context;
         this.binding=binding;
         divisionsInfoMutableLiveData = new MutableLiveData<>();
-        supplierInfoMutableLiveData = new MutableLiveData<>();
+        drDepotMasterResponseMutableLiveData = new MutableLiveData<>();
         errorHandlerInterface = (ErrorHandlerInterface) context;
 
     }
@@ -61,19 +61,19 @@ public class GCCSyncViewModel extends AndroidViewModel {
     }
 
     public LiveData<DRDepotMasterResponse> getSupplierResponse() {
-        if (supplierInfoMutableLiveData != null) {
-            getSupplierResponseCall();
+        if (drDepotMasterResponseMutableLiveData != null) {
+            getDRDepotMasterCall();
         }
-        return supplierInfoMutableLiveData;
+        return drDepotMasterResponseMutableLiveData;
     }
 
-    private void getSupplierResponseCall() {
+    private void getDRDepotMasterCall() {
         TWDService twdService = TWDService.Factory.create("gcc");
         twdService.getDRDepotMasterResponse().enqueue(new Callback<DRDepotMasterResponse>() {
             @Override
             public void onResponse(@NotNull Call<DRDepotMasterResponse> call, @NotNull Response<DRDepotMasterResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                        supplierInfoMutableLiveData.setValue(response.body());
+                    drDepotMasterResponseMutableLiveData.setValue(response.body());
                 }
             }
             @Override
