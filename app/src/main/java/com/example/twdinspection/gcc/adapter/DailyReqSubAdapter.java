@@ -23,29 +23,29 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class PUnitAdapter extends RecyclerView.Adapter<PUnitAdapter.ItemHolder> {
+public class DailyReqSubAdapter extends RecyclerView.Adapter<DailyReqSubAdapter.ItemHolder> {
     private Context context;
     private List<CommonCommodity> commonCommodities;
     private StockChildRowBinding stockChildRowBinding;
 
-    public PUnitAdapter(Context context, List<CommonCommodity> commonCommodities) {
+    public DailyReqSubAdapter(Context context, List<CommonCommodity> commonCommodities) {
         this.context = context;
         this.commonCommodities = commonCommodities;
     }
 
     @NonNull
     @Override
-    public PUnitAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DailyReqSubAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         stockChildRowBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.stock_child_row, parent, false);
 
-        return new PUnitAdapter.ItemHolder(stockChildRowBinding);
+        return new DailyReqSubAdapter.ItemHolder(stockChildRowBinding);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull final PUnitAdapter.ItemHolder holder, final int i) {
+    public void onBindViewHolder(@NonNull final DailyReqSubAdapter.ItemHolder holder, final int i) {
 
         final CommonCommodity dataModel = commonCommodities.get(i);
         holder.stockChildRowBinding.tvComName.setText(dataModel.getCommName());

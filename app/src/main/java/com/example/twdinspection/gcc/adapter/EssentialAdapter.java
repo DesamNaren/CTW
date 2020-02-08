@@ -3,9 +3,7 @@ package com.example.twdinspection.gcc.adapter;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -25,29 +23,29 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-public class StockSubAdapter extends RecyclerView.Adapter<StockSubAdapter.ItemHolder> {
+public class EssentialAdapter extends RecyclerView.Adapter<EssentialAdapter.ItemHolder> {
     private Context context;
     private List<CommonCommodity> commonCommodities;
     private StockChildRowBinding stockChildRowBinding;
 
-    public StockSubAdapter(Context context, List<CommonCommodity> commonCommodities) {
+    public EssentialAdapter(Context context, List<CommonCommodity> commonCommodities) {
         this.context = context;
         this.commonCommodities = commonCommodities;
     }
 
     @NonNull
     @Override
-    public StockSubAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EssentialAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         stockChildRowBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.stock_child_row, parent, false);
 
-        return new StockSubAdapter.ItemHolder(stockChildRowBinding);
+        return new EssentialAdapter.ItemHolder(stockChildRowBinding);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull final StockSubAdapter.ItemHolder holder, final int i) {
+    public void onBindViewHolder(@NonNull final EssentialAdapter.ItemHolder holder, final int i) {
 
         final CommonCommodity dataModel = commonCommodities.get(i);
         holder.stockChildRowBinding.tvComName.setText(dataModel.getCommName());

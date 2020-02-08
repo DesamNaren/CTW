@@ -62,4 +62,10 @@ public class AppConstants {
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
 
 
+    public static String stockData="STOCK_DATA";
+    public static String essComm="";
+    public static String dailyReq="";
+    public static String empties="";
+    public static String mfp="";
+    public static String punit="";
 }

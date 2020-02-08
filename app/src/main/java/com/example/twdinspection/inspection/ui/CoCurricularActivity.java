@@ -290,21 +290,21 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
-                    harita_haram_status = AppConstants.Yes;
-                    binding.llPlants.setVisibility(View.VISIBLE);
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamNo) {
-                    harita_haram_status = AppConstants.No;
-                    binding.llPlants.setVisibility(View.GONE);
-                } else {
-                    harita_haram_status = null;
+                    if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
+                        harita_haram_status = AppConstants.Yes;
+                        binding.llPlants.setVisibility(View.VISIBLE);
+                    } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamNo) {
+                        harita_haram_status = AppConstants.No;
+                        binding.llPlants.setVisibility(View.GONE);
+                    } else {
+                        harita_haram_status = null;
+                    }
                 }
-            }
-        });
+            });
         binding.rgStudCounElect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

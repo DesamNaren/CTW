@@ -22,6 +22,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
             <LinearLayout
@@ -78,6 +79,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_sys_val"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="100"
                                 android:textColor="@color/black" />
@@ -99,6 +101,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_phys_val"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="100"
                                 android:textColor="@color/black" />
@@ -120,6 +123,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:id="@+id/tv_diff_val"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="100"
                                 android:textColor="@color/black" />
@@ -292,14 +296,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/empties_stock_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -403,14 +407,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/liability_reg_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -564,21 +568,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_auth_cert"
+                                android:id="@+id/rg_depot_auth_cert"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/auth_cert_rb_yes"
+                                    android:id="@+id/depot_auth_cert_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/auth_cert_rb_no"
+                                    android:id="@+id/depot_auth_cert_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -728,14 +732,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/bill_abstract_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -839,14 +843,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/mfp_liability_reg_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -990,14 +994,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/depot_timimg_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -1101,14 +1105,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/dr_comm_rate_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -1138,14 +1142,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/stock_bal_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -1276,7 +1280,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                android:text="Whether the quality of the stocks stored in godown was verified and found in yes condition"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -1291,14 +1295,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/qual_verified_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -1395,7 +1399,6 @@
                                         android:id="@+id/et_repairs_type"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
                                         android:hint="Repairs type"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
@@ -1459,5 +1462,8 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+        <include
+            layout="@layout/buttons_layout"
+            android:id="@+id/bottom_ll" />
     </RelativeLayout>
 </layout>

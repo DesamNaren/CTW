@@ -12,31 +12,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.StockMainRowBinding;
-import com.example.twdinspection.gcc.adapter.StockSubAdapter;
+import com.example.twdinspection.gcc.adapter.EssentialAdapter;
+import com.example.twdinspection.gcc.adapter.PUnitAdapter;
 import com.example.twdinspection.gcc.source.stock.CommonCommodity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class PUnitFragment extends Fragment {
-    private ArrayList<CommonCommodity> parameter;
+    public static ArrayList<CommonCommodity> commonCommodities;
     private StockMainRowBinding binding;
-
-    public static PUnitFragment newInstance(ArrayList<CommonCommodity> parameter) {
-
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("ecs", parameter);
-        PUnitFragment fragment = new PUnitFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            parameter = getArguments().getParcelableArrayList("ecs");
+            String esComm = getArguments().getString(AppConstants.punit);
+            Type listType = new TypeToken<ArrayList<CommonCommodity>>(){}.getType();
+            commonCommodities = new Gson().fromJson(esComm, listType);
         }
     }
 
@@ -46,9 +44,9 @@ public class PUnitFragment extends Fragment {
          binding = DataBindingUtil.inflate(
                 inflater, R.layout.stock_main_row, container, false);
         View view = binding.getRoot();
-        StockSubAdapter stockSubAdapter = new StockSubAdapter(getActivity(), parameter);
+        PUnitAdapter essentialAdapter = new PUnitAdapter(getActivity(), commonCommodities);
         binding.groupRV.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.groupRV.setAdapter(stockSubAdapter);
+        binding.groupRV.setAdapter(essentialAdapter);
 
         return view;
     }
