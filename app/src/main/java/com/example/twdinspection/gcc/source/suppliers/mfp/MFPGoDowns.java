@@ -1,15 +1,14 @@
-package com.example.twdinspection.gcc.source.suppliers;
+package com.example.twdinspection.gcc.source.suppliers.mfp;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-@Entity (tableName = "DR_Depot")
-public class DRDepots {
+@Entity(tableName = "MFP_GoDown")
+public class MFPGoDowns {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     @SerializedName("godownName")
     @Expose
     private String godownName;
@@ -25,7 +24,6 @@ public class DRDepots {
     @SerializedName("societyName")
     @Expose
     private String societyName;
-
     @SerializedName("divisionId")
     @Expose
     private String divisionId;
@@ -33,21 +31,6 @@ public class DRDepots {
     @Expose
     private String societyId;
 
-    public String getDivisionId() {
-        return divisionId;
-    }
-
-    public void setDivisionId(String divisionId) {
-        this.divisionId = divisionId;
-    }
-
-    public String getSocietyId() {
-        return societyId;
-    }
-
-    public void setSocietyId(String societyId) {
-        this.societyId = societyId;
-    }
 
     public int getId() {
         return id;
@@ -95,6 +78,22 @@ public class DRDepots {
 
     public void setSocietyName(String societyName) {
         this.societyName = societyName;
+    }
+
+    public String getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(String divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public String getSocietyId() {
+        return societyId;
+    }
+
+    public void setSocietyId(String societyId) {
+        this.societyId = societyId;
     }
 
 }

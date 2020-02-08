@@ -573,7 +573,10 @@
     <string name="units_of">Units of Measure</string>
     <string name="qty_sys">System Quantity</string>
     <string name="physical_available_quantity">Physical available quantity</string>
-    <string name="select_godown">Select godown</string>
+    <string name="select_godown">Select DR Godown</string>
+    <string name="select_depot">Select DR Depot</string>
+    <string name="select_mfp_godown">Select MFP Godown</string>
+    <string name="select_p_unit">Select Processing Unit</string>
     <string name="sys_rate">System Rate</string>
     <string name="sys_val">System Value</string>
     <string name="phy_rate">Physical Rate</string>

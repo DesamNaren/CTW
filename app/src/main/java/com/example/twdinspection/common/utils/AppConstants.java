@@ -68,4 +68,7 @@ public class AppConstants {
     public static String empties="";
     public static String mfp="";
     public static String punit="";
+
+    public static final String DR_GODOWN_DATA = "";
+    public static final String DR_DEPOT_DATA = "";
 }

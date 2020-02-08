@@ -1,14 +1,14 @@
-package com.example.twdinspection.gcc.source.suppliers;
+package com.example.twdinspection.gcc.source.suppliers.mfp;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DRDepotMasterResponse {
+public class MFPGoDownMasterResponse {
 
     @SerializedName("supplier_info")
     @Expose
-    private List<DRDepots> DRDepots = null;
+    private List<MFPGoDowns> mfpGoDowns = null;
     @SerializedName("statusMessage")
     @Expose
     private String statusMessage;
@@ -16,12 +16,12 @@ public class DRDepotMasterResponse {
     @Expose
     private String statusCode;
 
-    public List<DRDepots> getDRDepots() {
-        return DRDepots;
+    public List<MFPGoDowns> getMfpGoDowns() {
+        return mfpGoDowns;
     }
 
-    public void setDRDepots(List<DRDepots> DRDepots) {
-        this.DRDepots = DRDepots;
+    public void setMfpGoDowns(List<MFPGoDowns> mfpGoDowns) {
+        this.mfpGoDowns = mfpGoDowns;
     }
 
     public String getStatusMessage() {

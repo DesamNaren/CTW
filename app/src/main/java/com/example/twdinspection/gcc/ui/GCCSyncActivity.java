@@ -25,7 +25,10 @@ import com.example.twdinspection.databinding.ActivityGccSyncBinding;
 import com.example.twdinspection.gcc.interfaces.GCCDivisionInterface;
 import com.example.twdinspection.gcc.room.repository.GCCSyncRepository;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
-import com.example.twdinspection.gcc.source.suppliers.DRDepotMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.example.twdinspection.gcc.viewmodel.GCCSyncViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -72,7 +75,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 onBackPressed();
             }
         });
-        binding.syncDivision.setOnClickListener(new View.OnClickListener() {
+        binding.llDivision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
@@ -106,12 +109,48 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             }
         });
 
+        binding.llDrGodown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<DRGoDownMasterResponse> drDepotMasterResponseLiveData = viewModel.getDRGoDownsResponse();
+
+                    drDepotMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<DRGoDownMasterResponse>() {
+                        @Override
+                        public void onChanged(DRGoDownMasterResponse suppliersResponse) {
+                            customProgressDialog.hide();
+                            drDepotMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
+                            if (suppliersResponse != null && suppliersResponse.getStatusCode() != null) {
+                                if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                    if (suppliersResponse.getGodowns() != null && suppliersResponse.getGodowns().size() > 0) {
+                                        gccSyncRepository.insertDRGoDowns(GCCSyncActivity.this, suppliersResponse.getGodowns());
+                                    } else {
+                                        Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } else if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                    Snackbar.make(binding.root, suppliersResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                }
+            }
+
+        });
+
         binding.llDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
                     customProgressDialog.show();
-                    LiveData<DRDepotMasterResponse> drDepotMasterResponseLiveData = viewModel.getSupplierResponse();
+                    LiveData<DRDepotMasterResponse> drDepotMasterResponseLiveData = viewModel.getDRDepotsResponse();
 
                     drDepotMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<DRDepotMasterResponse>() {
                         @Override
@@ -142,6 +181,78 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
 
         });
 
+        binding.llMfpGodown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<MFPGoDownMasterResponse> mfpGoDownMasterResponseLiveData = viewModel.getMFPGodownsResponse();
+
+                    mfpGoDownMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<MFPGoDownMasterResponse>() {
+                        @Override
+                        public void onChanged(MFPGoDownMasterResponse suppliersResponse) {
+                            customProgressDialog.hide();
+                            mfpGoDownMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
+                            if (suppliersResponse != null && suppliersResponse.getStatusCode() != null) {
+                                if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                    if (suppliersResponse.getMfpGoDowns() != null && suppliersResponse.getMfpGoDowns().size() > 0) {
+                                        gccSyncRepository.insertMFPGoDowns(GCCSyncActivity.this, suppliersResponse.getMfpGoDowns());
+                                    } else {
+                                        Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } else if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                    Snackbar.make(binding.root, suppliersResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                }
+            }
+
+        });
+
+
+        binding.llPUnit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<PUnitMasterResponse> pUnitMasterResponseLiveData = viewModel.getPUnitMasterResponse();
+
+                    pUnitMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<PUnitMasterResponse>() {
+                        @Override
+                        public void onChanged(PUnitMasterResponse suppliersResponse) {
+                            customProgressDialog.hide();
+                            pUnitMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
+                            if (suppliersResponse != null && suppliersResponse.getStatusCode() != null) {
+                                if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                    if (suppliersResponse.getpUnits() != null && suppliersResponse.getpUnits().size() > 0) {
+                                        gccSyncRepository.insertPUnits(GCCSyncActivity.this, suppliersResponse.getpUnits());
+                                    } else {
+                                        Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } else if (suppliersResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                    Snackbar.make(binding.root, suppliersResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                }
+            }
+
+        });
     }
 
     void callSnackBar(String msg) {
@@ -227,15 +338,63 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
     }
 
     @Override
-    public void supplierCount(int cnt) {
+    public void drDepotCount(int cnt) {
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
                 Log.i("SUP_CNT", "supCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Supplier master synced successfully");
+                        "DR Depot master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No suppliers found");
+                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No No DR Depots found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void drGoDownCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SUP_CNT", "drGodCount: " + cnt);
+                Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
+                        "DR GoDown master synced successfully");
+            } else {
+                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No DR GoDowns found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void mfpGoDownCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SUP_CNT", "mfpGodCount: " + cnt);
+                Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
+                        "MFP GoDown master synced successfully");
+            } else {
+                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No MFP GoDowns found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void pUNitCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SUP_CNT", "pUnitCount: " + cnt);
+                Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Processing Unit master synced successfully");
+            } else {
+                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Processing Units found");
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,7 +8,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.twdinspection.gcc.room.dao.GCCDao;
 import com.example.twdinspection.gcc.room.database.GCCDatabase;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.DRDepots;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 import java.util.List;
 
@@ -32,8 +35,21 @@ public class GCCRepository {
         return gccDao.getSocietyInfo(divId);
     }
 
-    public LiveData<List<DRDepots>> getDRGodowns() {
-        return gccDao.getDRDepots();
+
+    public LiveData<List<DrGodowns>> getGoDowns(String divId, String socId) {
+        return gccDao.getDrGoDowns(divId, socId);
+    }
+
+    public LiveData<List<DRDepots>> getDRDepots(String divId, String socId) {
+        return gccDao.getDRDepots(divId, socId);
+    }
+
+    public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId, String socId) {
+        return gccDao.getMFPDepots(divId, socId);
+    }
+
+    public LiveData<List<PUnits>> getPUnits(String divId, String socId) {
+        return gccDao.getPUnits(divId, socId);
     }
 
 
@@ -45,4 +61,19 @@ public class GCCRepository {
         return gccDao.getSocietyID(divisionID, societyName);
     }
 
+    public LiveData<DrGodowns> getGoDownID(String divisionID, String societyID, String goDownName) {
+        return gccDao.getGoDownID(divisionID, societyID, goDownName);
+    }
+
+    public LiveData<DRDepots> getDRDepotID(String divisionID, String societyID, String depotName) {
+        return gccDao.getDRDepotID(divisionID, societyID, depotName);
+    }
+
+    public LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String societyID, String mfpName) {
+        return gccDao.getMFPGoDownID(divisionID, societyID, mfpName);
+    }
+
+    public LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitName) {
+        return gccDao.getPUnitID(divisionID, societyID, pUnitName);
+    }
 }

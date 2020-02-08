@@ -4,7 +4,10 @@ package com.example.twdinspection.common.network;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.gcc.source.suppliers.DRDepotMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.example.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
@@ -112,6 +115,15 @@ public interface TWDService {
 
     @POST("getGodowns/DR Depot")
     Call<DRDepotMasterResponse> getDRDepotMasterResponse();
+
+    @POST("getGodowns/DR Godown")
+    Call<DRGoDownMasterResponse> getDRGoDownMasterResponse();
+
+    @POST("getGodowns/MFP Godown")
+    Call<MFPGoDownMasterResponse> getMFPDownMasterResponse();
+
+    @POST("getGodowns/Processing unit")
+    Call<PUnitMasterResponse> getPUnitMasterResponse();
 
 
     @POST("getStockDetails/{id}")

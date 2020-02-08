@@ -13,9 +13,6 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityGccDashboardBinding;
-import com.example.twdinspection.inspection.ui.DMVSelectionActivity;
-import com.example.twdinspection.schemes.ui.SchemeSyncActivity;
-import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -58,28 +55,28 @@ public class GCCDashboardActivity extends AppCompatActivity {
         binding.btnDrGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, DivisionSelectionActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, DRGODownSelActivity.class));
             }
         });
 
         binding.btnDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, DRDepotActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, DRDepotSelActivity.class));
             }
         });
 
         binding.btnMfpGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, MFPGodownActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, MFPGoDownSelActivity.class));
             }
         });
 
         binding.btnPUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, PUnitActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, PUnitSelActivity.class));
             }
         });
     }
