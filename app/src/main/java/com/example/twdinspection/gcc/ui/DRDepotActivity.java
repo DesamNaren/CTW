@@ -45,6 +45,8 @@ public class DRDepotActivity extends AppCompatActivity {
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
     private DRDepots drDepots;
+    private List<String> mFragmentTitleList = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,20 +263,20 @@ public class DRDepotActivity extends AppCompatActivity {
 
 
     void setFragPos(String header, int pos) {
-        for (int x = 0; x < ViewPagerAdapter.mFragmentTitleList.size(); x++) {
-            if (header.equalsIgnoreCase(ViewPagerAdapter.mFragmentTitleList.get(x))) {
+        for (int x = 0; x < mFragmentTitleList.size(); x++) {
+            if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
                 binding.viewpager.setCurrentItem(x);
                 if (header.contains("Essential Commodities")) {
-                    ((EssentialFragment) ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
+                    ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
+                    ((DailyFragment)  mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
+                    ((EmptiesFragment)  mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
+                    ((MFPFragment)  mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
+                    ((PUnitFragment)  mFragmentList.get(x)).setPos(pos);
                 }
                 break;
             }
@@ -292,6 +294,35 @@ public class DRDepotActivity extends AppCompatActivity {
         finish();
     }
 
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+
+
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @NotNull
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
 
 
 }
