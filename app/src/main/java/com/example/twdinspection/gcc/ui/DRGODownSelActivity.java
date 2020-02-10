@@ -104,7 +104,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                     editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
                     editor.commit();
 
-                    startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
+//                    startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
                 }
             }
         });

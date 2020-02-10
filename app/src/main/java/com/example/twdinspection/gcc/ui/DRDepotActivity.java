@@ -42,12 +42,11 @@ public class DRDepotActivity extends AppCompatActivity {
     ActivityDrDepotBinding binding;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
-    private List<String> mFragmentTitleList = new ArrayList<>();
-    private final List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
         customProgressDialog = new CustomProgressDialog(this);
@@ -149,12 +148,6 @@ public class DRDepotActivity extends AppCompatActivity {
 
         });
 
-        try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
             customProgressDialog.show();
             LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("2054");
@@ -239,7 +232,8 @@ public class DRDepotActivity extends AppCompatActivity {
                     }
                 }
             });
-        } else {
+        }
+        else {
             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
@@ -247,20 +241,20 @@ public class DRDepotActivity extends AppCompatActivity {
 
 
     void setFragPos(String header, int pos) {
-        for (int x = 0; x < mFragmentTitleList.size(); x++) {
-            if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
+        for (int x = 0; x < ViewPagerAdapter.mFragmentTitleList.size(); x++) {
+            if (header.equalsIgnoreCase(ViewPagerAdapter.mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
                 binding.viewpager.setCurrentItem(x);
                 if (header.contains("Essential Commodities")) {
-                    ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
+                    ((EssentialFragment) ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
+                    ((DailyFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
+                    ((EmptiesFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
+                    ((MFPFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
+                    ((PUnitFragment)  ViewPagerAdapter.mFragmentList.get(x)).setPos(pos);
                 }
                 break;
             }
@@ -279,32 +273,5 @@ public class DRDepotActivity extends AppCompatActivity {
     }
 
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
 
-
-        ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @NotNull
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
 }
