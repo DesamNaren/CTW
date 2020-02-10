@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +27,11 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotFindingsBinding;
 import com.example.twdinspection.databinding.ActivityGccFindingsBinding;
+import com.example.twdinspection.gcc.source.inspections.DrDepotInspection;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -48,11 +51,13 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     String FilePath, checkUpDate;
     Bitmap bm;
+    File file;
     double physVal = 0, sysVal = 0;
     private StockDetailsResponse stockDetailsResponse;
-    private String ecsStock,drStock,emptyStock,abstractSales,depotCashBook,liabilityReg,visitorsBook,saleBook,weightsMeasurements;
+    private String ecsStock,drStock,emptyStock,abstractSales,depotCashBook,liabilityReg,visitorsBook,saleBook,weightsMeasurements,certIssueDate;
     private String depotAuthCert,mfpStock,mfpPurchase,billAbstract,abstractAccnt,advanceAccnt,mfpLiability,depotNameBoard,gccObjPrinc;
-    private String depotTimimg,mfpComm,ecComm,drComm,stockBal;
+    private String depotTimimg,mfpComm,ecComm,drComm,stockBal,valuesAsPerSale,valuesAsPerPurchasePrice,qualVerified,depotMaintHygeine,repairsReq,repairsType;
+    private int repairsFlag=0;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -70,38 +75,38 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (stockDetailsResponse != null) {
-            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
-                }
-            }
-        }
+//        if (stockDetailsResponse != null) {
+//            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
+//                }
+//            }
+//        }
 
         binding.tvSysVal.setText(String.format("%.2f",sysVal));
         binding.tvPhysVal.setText(String.format("%.2f",physVal));
@@ -131,8 +136,10 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.repairs_req_yes_rb) {
+                    repairsReq = AppConstants.Yes;
                     binding.insLl.setVisibility(View.VISIBLE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.repairs_req_no_rb) {
+                    repairsReq = AppConstants.No;
                     binding.insLl.setVisibility(View.GONE);
                 }
             }
@@ -395,21 +402,92 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             }
         });
 
-        binding.rgStockBal.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.rgValuesAsPerSalePrice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgStockBal.getCheckedRadioButtonId();
-                if (selctedItem == R.id.stock_bal_rb_yes)
-                    stockBal = AppConstants.Yes;
+                int selctedItem = binding.rgValuesAsPerSalePrice.getCheckedRadioButtonId();
+                if (selctedItem == R.id.values_as_per_sale_price_yes_rb)
+                    valuesAsPerSale = AppConstants.Yes;
                 else
-                    stockBal = AppConstants.No;
+                    valuesAsPerSale = AppConstants.No;
+            }
+        });
+
+        binding.rgValuesAsPerPurchasePrice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgValuesAsPerPurchasePrice.getCheckedRadioButtonId();
+                if (selctedItem == R.id.values_as_per_purchase_price_rb_yes)
+                    valuesAsPerPurchasePrice = AppConstants.Yes;
+                else
+                    valuesAsPerPurchasePrice = AppConstants.No;
+            }
+        });
+
+        binding.rgQualVerified.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgQualVerified.getCheckedRadioButtonId();
+                if (selctedItem == R.id.qual_verified_rb_yes)
+                    qualVerified = AppConstants.Yes;
+                else
+                    qualVerified = AppConstants.No;
+            }
+        });
+
+        binding.rgDepotMaintHygeine.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgDepotMaintHygeine.getCheckedRadioButtonId();
+                if (selctedItem == R.id.depot_maint_hygeine_rb_yes)
+                    depotMaintHygeine = AppConstants.Yes;
+                else
+                    depotMaintHygeine = AppConstants.No;
             }
         });
        binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                if(validate()){
+                   repairsType=binding.etRepairsType.getText().toString().trim();
 
+                   DrDepotInspection inspection=new DrDepotInspection();
+                   inspection.setEcsStock(ecsStock);
+                   inspection.setDrStock(drStock);
+                   inspection.setEmptyStock(emptyStock);
+                   inspection.setAbstractSales(abstractSales);
+                   inspection.setDepotCashBook(depotCashBook);
+                   inspection.setLiabilityReg(liabilityReg);
+                   inspection.setVisitorsBook(visitorsBook);
+                   inspection.setSaleBook(saleBook);
+                   inspection.setWeightsMeasurements(weightsMeasurements);
+                   inspection.setDepotAuthCert(depotAuthCert);
+                   inspection.setMfpStock(mfpStock);
+                   inspection.setMfpPurchase(mfpPurchase);
+                   inspection.setBillAbstract(billAbstract);
+                   inspection.setAbstractAccnt(abstractAccnt);
+                   inspection.setAdvanceAccnt(advanceAccnt);
+                   inspection.setMfpLiability(mfpLiability);
+                   inspection.setDepotNameBoard(depotNameBoard);
+                   inspection.setGccObjPrinc(gccObjPrinc);
+                   inspection.setDepotTimimg(depotTimimg);
+                   inspection.setMfpComm(mfpComm);
+                   inspection.setEcComm(ecComm);
+                   inspection.setDrComm(drComm);
+                   inspection.setStockBal(stockBal);
+                   inspection.setValuesAsPerSale(valuesAsPerSale);
+                   inspection.setValuesAsPerPurchasePrice(valuesAsPerPurchasePrice);
+                   inspection.setQualVerified(qualVerified);
+                   inspection.setDepotMaintHygeine(depotMaintHygeine);
+                   inspection.setRepairsReq(repairsReq);
+                   inspection.setRepairsType(repairsType);
+                   inspection.setRemarks(binding.etRemarks.getText().toString());
+                   inspection.setFeedback(binding.etFeedback.getText().toString());
+                   inspection.setRepairsPath(FilePath);
+
+                   String DepotInspection=gson.toJson(inspection);
+                   editor.putString(AppConstants.DepotInspection,DepotInspection);
+                   editor.commit();
                }
            }
        });
@@ -417,9 +495,147 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
     private boolean validate() {
         boolean returnFlag=true;
+        if(TextUtils.isEmpty(ecsStock)){
+            returnFlag=false;
+            showSnackBar("Please check Ecs stock register");
+            ScrollToView(binding.rgEcsStock);
+        }else if(TextUtils.isEmpty(drStock)){
+            returnFlag=false;
+            showSnackBar("Please check DRs stock register");
+            ScrollToView(binding.rgDrStock);
+        }else if(TextUtils.isEmpty(emptyStock)){
+            returnFlag=false;
+            showSnackBar("Please check empties stock register");
+            ScrollToView(binding.rgEmptiesStock);
+        }else if(TextUtils.isEmpty(abstractSales)){
+            returnFlag=false;
+            showSnackBar("Please check abstract sales register");
+            ScrollToView(binding.rgAbstractSales);
+        }else if(TextUtils.isEmpty(depotCashBook)){
+            returnFlag=false;
+            showSnackBar("Please check Cash book");
+            ScrollToView(binding.rgDepotCashBook);
+        }else if(TextUtils.isEmpty(liabilityReg)){
+            returnFlag=false;
+            showSnackBar("Please check liability register");
+            ScrollToView(binding.rgDepotCashBook);
+        }else if(TextUtils.isEmpty(visitorsBook)){
+            returnFlag=false;
+            showSnackBar("Please check visitors note book");
+            ScrollToView(binding.rgVisitBookDepot);
+        }else if(TextUtils.isEmpty(saleBook)){
+            returnFlag=false;
+            showSnackBar("Please check sale bill book");
+            ScrollToView(binding.rgSaleBillBook);
+        }else if(TextUtils.isEmpty(weightsMeasurements)){
+            returnFlag=false;
+            showSnackBar("Please check weights and measurements certificate issued by legal metrology");
+            ScrollToView(binding.rgWeightMeasCert);
+        }else if(!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && certIssueDate.equals(getResources().getString(R.string.select_date)) ){
+            returnFlag=false;
+            showSnackBar("Please select certificate issue date");
+            ScrollToView(binding.etWeightCertIssue);
+        }else if(TextUtils.isEmpty(depotAuthCert)){
+            returnFlag=false;
+            showSnackBar("Please check depot authorisation certificate issued by revenue authorities");
+            ScrollToView(binding.rgWeightMeasCert);
+        }else if(TextUtils.isEmpty(mfpStock)){
+            returnFlag=false;
+            showSnackBar("Please check MFP stock register");
+            ScrollToView(binding.rgMfpStock);
+        }else if(TextUtils.isEmpty(mfpPurchase)){
+            returnFlag=false;
+            showSnackBar("Please check MFP purchase bill book");
+            ScrollToView(binding.rgMfpPurchase);
+        }else if(TextUtils.isEmpty(billAbstract)){
+            returnFlag=false;
+            showSnackBar("Please check bill abstract book");
+            ScrollToView(binding.rgBillAbstract);
+        }else if(TextUtils.isEmpty(abstractAccnt)){
+            returnFlag=false;
+            showSnackBar("Please check abstract account book");
+            ScrollToView(binding.rgAbstractAccntBook);
+        }else if(TextUtils.isEmpty(advanceAccnt)){
+            showSnackBar("Please check advance  account book");
+            ScrollToView(binding.rgAdvanceAccntBook);
+        }else if(TextUtils.isEmpty(mfpLiability)){
+            returnFlag=false;
+            showSnackBar("Please check MFP liability register");
+            ScrollToView(binding.rgMfpLiabilityReg);
+        }else if(TextUtils.isEmpty(depotNameBoard)){
+            returnFlag=false;
+            showSnackBar("Please check depot name board");
+            ScrollToView(binding.rgDepotNameBoard);
+        }else if(TextUtils.isEmpty(gccObjPrinc)){
+            returnFlag=false;
+            showSnackBar("Please check GCC objectives/principles board");
+            ScrollToView(binding.rgObjPrinc);
+        }else if(TextUtils.isEmpty(depotTimimg)){
+            returnFlag=false;
+            showSnackBar("Please check depot timing board");
+            ScrollToView(binding.rgDepotTimimg);
+        }else if(TextUtils.isEmpty(mfpComm)){
+            returnFlag=false;
+            showSnackBar("Please check MFP commodities rate board");
+            ScrollToView(binding.rgCommRate);
+        }else if(TextUtils.isEmpty(ecComm)){
+            returnFlag=false;
+            showSnackBar("Please check EC commodities rate board");
+            ScrollToView(binding.rgEcCommRate);
+        }else if(TextUtils.isEmpty(drComm)){
+            returnFlag=false;
+            showSnackBar("Please check DR commodities rate board");
+            ScrollToView(binding.rgDrCommRate);
+        }else if(TextUtils.isEmpty(stockBal)){
+            returnFlag=false;
+            showSnackBar("Please check stock balance board");
+            ScrollToView(binding.rgStockBal);
+        }else if(TextUtils.isEmpty(valuesAsPerSale)){
+            returnFlag=false;
+            showSnackBar("Please check whether the values are as per sale price");
+            ScrollToView(binding.rgValuesAsPerSalePrice);
+        }else if(TextUtils.isEmpty(valuesAsPerPurchasePrice)){
+            returnFlag=false;
+            showSnackBar("Please check whether the values are as per purchase price");
+            ScrollToView(binding.rgValuesAsPerPurchasePrice);
+        }else if(TextUtils.isEmpty(qualVerified)){
+            returnFlag=false;
+            showSnackBar("Please check the quality of the stocks was verified");
+            ScrollToView(binding.rgQualVerified);
+        }else if(TextUtils.isEmpty(depotMaintHygeine)){
+            returnFlag=false;
+            showSnackBar("Please check whether the depot is maintained in hygienic condition");
+            ScrollToView(binding.rgDepotMaintHygeine);
+        }else if(TextUtils.isEmpty(repairsReq)){
+            returnFlag=false;
+            showSnackBar("Please check any repairs required for Dr Godown");
+            ScrollToView(binding.rgRepairsReq);
+        }else if(!(TextUtils.isEmpty(repairsReq))&& repairsReq.equals(AppConstants.Yes)&& TextUtils.isEmpty(binding.etRepairsType.getText().toString().trim())){
+            returnFlag=false;
+            showSnackBar("Please enter repair type");
+            ScrollToView(binding.etRepairsType);
+        }else if(!TextUtils.isEmpty(repairsReq) &&repairsReq.equals(AppConstants.Yes)&&  !TextUtils.isEmpty(binding.etRepairsType.getText().toString()) && repairsFlag==0 ){
+            returnFlag=false;
+            showSnackBar("Please capture repair");
+            ScrollToView(binding.ivRepairsCam);
+        }else if(TextUtils.isEmpty(binding.etFeedback.getText().toString().trim())){
+            returnFlag=false;
+            showSnackBar("Please enter feedback of card holders");
+            ScrollToView(binding.etFeedback);
+        }else if(TextUtils.isEmpty(binding.etRemarks.getText().toString().trim())){
+            returnFlag=false;
+            showSnackBar("Please enter remarks");
+            ScrollToView(binding.etFeedback);
+        }
         return returnFlag;
     }
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
 
+    private void ScrollToView(View view) {
+//        binding.scroll.smoothScrollTo(0, view.getBottom());
+    }
     private void certIssueDateSelection() {
         // Get Current Date
         final Calendar c = Calendar.getInstance();
@@ -463,9 +679,9 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
-                File file = new File(FilePath);
+                file = new File(FilePath);
                 Glide.with(DRDepotFindingsActivity.this).load(file).into(binding.ivRepairsCam);
-
+                repairsFlag=1;
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),

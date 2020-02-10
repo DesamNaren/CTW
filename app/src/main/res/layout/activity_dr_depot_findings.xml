@@ -165,6 +165,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/scroll"
             android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/ll_header">
 
@@ -1437,7 +1438,6 @@
                                 android:id="@+id/et_feedback"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
                                 android:hint="Feedback of Card Holders"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
@@ -1455,7 +1455,6 @@
                                 android:id="@+id/et_remarks"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
                                 android:hint="Remarks of Inspection officer"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"/>
@@ -1470,6 +1469,12 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent"/>
         <include
             layout="@layout/buttons_layout"
             android:id="@+id/bottom_ll" />
