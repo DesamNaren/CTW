@@ -44,26 +44,43 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/view_pager_ll"
+            android:layout_above="@id/bottom_ll"
+            android:orientation="vertical"
             android:layout_below="@+id/rl_profile"
-            android:layout_marginTop="@dimen/dimen_8dp"
-            android:background="@color/white"
-            app:tabBackground="@drawable/tab_color_selector"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/list_blue"
-            app:tabGravity="fill"
-            app:tabMode="fixed" />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:background="@color/white"
+                app:tabBackground="@drawable/tab_color_selector"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/list_blue"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/white" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </LinearLayout>
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/no_data_tv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/bottom_ll"
-            android:layout_below="@id/tabs"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_centerInParent="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
@@ -73,6 +90,7 @@
             android:background="@android:color/transparent"/>
 
         <include
+            android:visibility="gone"
             android:id="@+id/bottom_ll"
             layout="@layout/buttons_layout" />
     </RelativeLayout>

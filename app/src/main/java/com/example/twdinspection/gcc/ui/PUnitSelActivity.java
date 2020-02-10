@@ -51,7 +51,8 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         societies = new ArrayList<>();
         pUnits = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
+        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,11 +101,11 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View v) {
                 if (validateFields()) {
                     Gson gson = new Gson();
-                    String depotData = gson.toJson(selectedPUnits);
-                    editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
+                    String pUnitData = gson.toJson(selectedPUnits);
+                    editor.putString(AppConstants.P_UNIT_DATA, pUnitData);
                     editor.commit();
 
-                    startActivity(new Intent(PUnitSelActivity.this, DRDepotActivity.class));
+                    startActivity(new Intent(PUnitSelActivity.this, PUnitActivity.class));
                 }
             }
         });
@@ -124,7 +125,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             showSnackBar("Please select society");
             return false;
         } else if (TextUtils.isEmpty(selectedPUnitID)) {
-            showSnackBar("Please select depot");
+            showSnackBar("Please select processing unit");
             return false;
         }
         return true;

@@ -36,8 +36,8 @@ public interface GCCDao {
     @Query("SELECT * from DR_Depot where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DRDepots>> getDRDepots(String divId, String socId);
 
-    @Query("SELECT * from MFP_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
-    LiveData<List<MFPGoDowns>> getMFPDepots(String divId, String socId);
+    @Query("SELECT * from MFP_GoDown where divisionId LIKE :divId")
+    LiveData<List<MFPGoDowns>> getMFPDepots(String divId);
 
     @Query("SELECT * from P_Unit where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<PUnits>> getPUnits(String divId, String socId);
@@ -56,8 +56,8 @@ public interface GCCDao {
     @Query("SELECT * from DR_Depot where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :depotName")
     LiveData<DRDepots> getDRDepotID(String divisionID, String societyID, String depotName);
 
-    @Query("SELECT * from MFP_GoDown where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :mfpName")
-    LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String societyID, String mfpName);
+    @Query("SELECT * from MFP_GoDown where  divisionId LIKE :divisionID AND godownName LIKE :mfpName")
+    LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String mfpName);
 
     @Query("SELECT * from P_Unit where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :pUnitNmae")
     LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitNmae);

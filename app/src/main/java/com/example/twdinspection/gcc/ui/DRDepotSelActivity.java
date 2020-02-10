@@ -53,7 +53,8 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         societies = new ArrayList<>();
         drDepots = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
+        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -57,18 +57,20 @@ public class AppConstants {
     public static final String KITCHEN = "Kitchen";
 
     public static final float DISTANCE = 1000000;
-    public static final String CACHE_DATE = "";
+    public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
 
 
     public static String stockData="STOCK_DATA";
-    public static String essComm="";
-    public static String dailyReq="";
-    public static String empties="";
-    public static String mfp="";
-    public static String punit="";
+    public static String essComm="essComm";
+    public static String dailyReq="dailyReq";
+    public static String empties="empties";
+    public static String mfp="mfp";
+    public static String punit="punit";
 
-    public static final String DR_GODOWN_DATA = "";
-    public static final String DR_DEPOT_DATA = "";
+    public static final String DR_GODOWN_DATA = "DR_GODOWN_DATA";
+    public static final String DR_DEPOT_DATA = "DR_DEPOT_DATA";
+    public static final String MFP_DEPOT_DATA = "MFP_DEPOT_DATA";
+    public static final String P_UNIT_DATA = "P_UNIT_DATA";
 }

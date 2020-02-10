@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.inspection.viewmodel.StockViewModel" />
+    </data>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,14 +44,54 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/dimen_8dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/view_pager_ll"
+            android:layout_above="@id/bottom_ll"
+            android:orientation="vertical"
             android:layout_below="@+id/rl_profile"
-            android:padding="@dimen/dimen_15dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:background="@color/white"
+                app:tabBackground="@drawable/tab_color_selector"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/list_blue"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/white" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </LinearLayout>
+
+        <com.example.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/no_data_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent"/>
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll"/>
+            android:visibility="gone"
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>

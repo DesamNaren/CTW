@@ -44,8 +44,8 @@ public class GCCRepository {
         return gccDao.getDRDepots(divId, socId);
     }
 
-    public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId, String socId) {
-        return gccDao.getMFPDepots(divId, socId);
+    public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId) {
+        return gccDao.getMFPDepots(divId);
     }
 
     public LiveData<List<PUnits>> getPUnits(String divId, String socId) {
@@ -69,8 +69,8 @@ public class GCCRepository {
         return gccDao.getDRDepotID(divisionID, societyID, depotName);
     }
 
-    public LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String societyID, String mfpName) {
-        return gccDao.getMFPGoDownID(divisionID, societyID, mfpName);
+    public LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String mfpName) {
+        return gccDao.getMFPGoDownID(divisionID, mfpName);
     }
 
     public LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitName) {

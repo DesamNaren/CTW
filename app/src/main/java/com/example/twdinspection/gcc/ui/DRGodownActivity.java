@@ -53,10 +53,15 @@ public class DRGodownActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
         customProgressDialog = new CustomProgressDialog(this);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
-
+        binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new StockViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
+
+        binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.inchargeLL.setVisibility(View.VISIBLE);
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +183,8 @@ public class DRGodownActivity extends AppCompatActivity {
 
                     if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                         if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                            binding.viewPagerLl.setVisibility(View.VISIBLE);
+                            binding.noDataTv.setVisibility(View.GONE);
                             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -240,6 +247,9 @@ public class DRGodownActivity extends AppCompatActivity {
                             binding.viewpager.setAdapter(adapter);
 
                         } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                            binding.viewPagerLl.setVisibility(View.GONE);
+                            binding.noDataTv.setVisibility(View.VISIBLE);
+                            binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
                             callSnackBar(stockDetailsResponse.getStatusMessage());
                         } else {
                             callSnackBar(getString(R.string.something));

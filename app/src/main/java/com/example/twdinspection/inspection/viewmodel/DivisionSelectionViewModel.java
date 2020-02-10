@@ -64,9 +64,9 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         return drDepots;
     }
 
-    public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId, String socId) {
+    public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId) {
         if (mfpGoDowns != null) {
-            mfpGoDowns = mRepository.getMFPGoDowns(divId, socId);
+            mfpGoDowns = mRepository.getMFPGoDowns(divId);
         }
         return mfpGoDowns;
     }
@@ -96,8 +96,8 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         return mRepository.getDRDepotID(divId, socID, depotName);
     }
 
-    public LiveData<MFPGoDowns> getMFPGoDownID(String divId, String socID, String mfpName) {
-        return mRepository.getMFPGoDownID(divId, socID, mfpName);
+    public LiveData<MFPGoDowns> getMFPGoDownID(String divId, String mfpName) {
+        return mRepository.getMFPGoDownID(divId, mfpName);
     }
 
     public LiveData<PUnits> getPUnitID(String divId, String socID, String pUnitName) {

@@ -58,10 +58,10 @@ public class DRDepotActivity extends AppCompatActivity {
         viewModel = new StockViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
-
+        binding.header.ivHome.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
-        binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.dr_depo_name));
-        binding.includeBasicLayout.salesLL.setVisibility(View.VISIBLE);
+
+
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,16 +70,23 @@ public class DRDepotActivity extends AppCompatActivity {
         });
 
 
+        binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.dr_depo_name));
+        binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.salesLL.setVisibility(View.VISIBLE);
+
+
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
-            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA,"");
+            String str = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA,"");
             drDepots = gson.fromJson(str, DRDepots.class);
             if(drDepots!=null) {
                 binding.includeBasicLayout.divName.setText(drDepots.getDivisionName());
                 binding.includeBasicLayout.socName.setText(drDepots.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(drDepots.getGodownName());
-                binding.includeBasicLayout.inchargeName.setText(drDepots.getIncharge());
+                binding.includeBasicLayout.salesManTV.setText(drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge()+drDepots.getIncharge());
                 binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
             }
         } catch (Exception e) {
@@ -172,7 +179,7 @@ public class DRDepotActivity extends AppCompatActivity {
 
         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
             customProgressDialog.show();
-            LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("2054");
+            LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("20542");
             officesResponseLiveData.observe(DRDepotActivity.this, new Observer<StockDetailsResponse>() {
                 @Override
                 public void onChanged(StockDetailsResponse stockDetailsResponse) {
@@ -183,6 +190,10 @@ public class DRDepotActivity extends AppCompatActivity {
 
                     if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                         if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                            binding.viewPagerLl.setVisibility(View.VISIBLE);
+                            binding.noDataTv.setVisibility(View.GONE);
+                            binding.bottomLl.btnNext.setVisibility(View.VISIBLE);
+
                             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -245,6 +256,10 @@ public class DRDepotActivity extends AppCompatActivity {
                             binding.viewpager.setAdapter(adapter);
 
                         } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                            binding.viewPagerLl.setVisibility(View.GONE);
+                            binding.noDataTv.setVisibility(View.VISIBLE);
+                            binding.bottomLl.btnNext.setVisibility(View.GONE);
+                            binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
                             callSnackBar(stockDetailsResponse.getStatusMessage());
                         } else {
                             callSnackBar(getString(R.string.something));

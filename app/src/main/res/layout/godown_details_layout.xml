@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,6 +11,7 @@
         android:padding="@dimen/dimen_10dp">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/divLL"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/socLL"
             android:layout_marginTop="@dimen/dimen_5dp"
             android:orientation="horizontal"
@@ -62,6 +64,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/drGodownLL"
             android:layout_marginTop="@dimen/dimen_5dp"
             android:orientation="horizontal"
@@ -96,7 +99,7 @@
             android:layout_height="wrap_content">
 
             <com.example.twdinspection.common.custom.CustomFontTextView
-                android:id="@+id/salesMan"
+                android:id="@+id/gone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,6 +110,8 @@
 
 
             <com.example.twdinspection.common.custom.CustomFontTextView
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:id="@+id/salesManTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -115,6 +120,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/inchargeLL"
             android:layout_marginTop="@dimen/dimen_5dp"
             android:orientation="horizontal"
@@ -133,6 +139,8 @@
 
 
             <com.example.twdinspection.common.custom.CustomFontTextView
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:id="@+id/inchargeName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
