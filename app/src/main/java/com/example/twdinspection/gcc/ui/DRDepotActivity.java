@@ -21,6 +21,8 @@ import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotBinding;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -42,6 +44,7 @@ public class DRDepotActivity extends AppCompatActivity {
     ActivityDrDepotBinding binding;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
+    private DRDepots drDepots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,23 @@ public class DRDepotActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            Gson gson = new Gson();
+            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA,"");
+            drDepots = gson.fromJson(str, DRDepots.class);
+            if(drDepots!=null) {
+                binding.includeBasicLayout.divName.setText(drDepots.getDivisionName());
+                binding.includeBasicLayout.socName.setText(drDepots.getSocietyName());
+                binding.includeBasicLayout.drGodownName.setText(drDepots.getGodownName());
+                binding.includeBasicLayout.inchargeName.setText(drDepots.getIncharge());
+                binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

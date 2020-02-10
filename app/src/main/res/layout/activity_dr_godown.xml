@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.StockViewModel" />
     </data>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,11 +44,36 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/dimen_8dp"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/rl_profile"
-            android:padding="@dimen/dimen_15dp" />
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:background="@color/white"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/list_blue"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:layout_below="@id/tabs"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent"/>
+
+        <include
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>
