@@ -54,7 +54,7 @@ public class PUnitActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_p_unit);
         binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication());
+        viewModel = new StockViewModel(getApplication(),this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);

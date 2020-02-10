@@ -54,7 +54,7 @@ public class DRGodownActivity extends AppCompatActivity {
         customProgressDialog = new CustomProgressDialog(this);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new StockViewModel(getApplication());
+        viewModel = new StockViewModel(getApplication(),this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 

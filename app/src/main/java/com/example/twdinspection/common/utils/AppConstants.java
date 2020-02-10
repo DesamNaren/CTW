@@ -60,6 +60,13 @@ public class AppConstants {
     public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
+    public static final String ENTRANCE = "ENTRANCE";
+    public static final String FLOOR = "FLOOR";
+    public static final String CEILING = "CEILING";
+    public static final String STOCK_ARRANG1 = "STOCK_ARRANG1";
+    public static final String STOCK_ARRANG2 = "STOCK_ARRANG2";
+    public static final String MACHINARY = "MACHINARY";
+    public static final String REPAIR = "REPAIR";
 
 
     public static String stockData="STOCK_DATA";
@@ -73,6 +80,6 @@ public class AppConstants {
     public static final String DR_DEPOT_DATA = "DR_DEPOT_DATA";
     public static final String MFP_DEPOT_DATA = "MFP_DEPOT_DATA";
     public static final String P_UNIT_DATA = "P_UNIT_DATA";
-    public static String DepotInspection="Depot_Inspection";
-    public static String FromActivity="From_activity";
+    public static String InspectionDetails ="Depot_Inspection";
+    public static String repairsPath="Repair_path";
 }

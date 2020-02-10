@@ -54,7 +54,7 @@ public class MFPGodownActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown);
         binding.header.headerTitle.setText(getResources().getString(R.string.mfp_godown));
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication());
+        viewModel = new StockViewModel(getApplication(),this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);

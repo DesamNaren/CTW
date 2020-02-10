@@ -26,11 +26,15 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotFindingsBinding;
-import com.example.twdinspection.databinding.ActivityGccFindingsBinding;
-import com.example.twdinspection.gcc.source.inspections.DrDepotInspection;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.DrDepotInsp;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.GeneralFindings;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.HoardingsBoards;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.MFPRegisters;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.RegisterBookCertificates;
+import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
-import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -52,6 +56,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     String FilePath, checkUpDate;
     Bitmap bm;
     File file;
+    private String officerID,divId,suppId;
     double physVal = 0, sysVal = 0;
     private StockDetailsResponse stockDetailsResponse;
     private String ecsStock,drStock,emptyStock,abstractSales,depotCashBook,liabilityReg,visitorsBook,saleBook,weightsMeasurements,certIssueDate;
@@ -66,15 +71,20 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_findings);
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
 
-        sharedPreferences = TWDApplication.get(DRDepotFindingsActivity.this).getPreferences();
-        String stockData = sharedPreferences.getString(AppConstants.stockData, "");
-        Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String stockData = sharedPreferences.getString(AppConstants.stockData, "");
+        officerID=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+        Gson gson = new Gson();
+        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
+        String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
+        DRDepots drDepot=gson.fromJson(depotData, DRDepots.class);
+        divId=drDepot.getDivisionId();
+        suppId=drDepot.getGodownId();
+
 //        if (stockDetailsResponse != null) {
 //            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
 //                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
@@ -149,7 +159,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             public void onClick(View v) {
                 if (callPermissions()) {
 
-                    PIC_TYPE = AppConstants.STOREROOM;
+                    PIC_TYPE = AppConstants.REPAIR;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -451,43 +461,65 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                if(validate()){
                    repairsType=binding.etRepairsType.getText().toString().trim();
 
-                   DrDepotInspection inspection=new DrDepotInspection();
-                   inspection.setEcsStock(ecsStock);
-                   inspection.setDrStock(drStock);
-                   inspection.setEmptyStock(emptyStock);
-                   inspection.setAbstractSales(abstractSales);
-                   inspection.setDepotCashBook(depotCashBook);
-                   inspection.setLiabilityReg(liabilityReg);
-                   inspection.setVisitorsBook(visitorsBook);
-                   inspection.setSaleBook(saleBook);
-                   inspection.setWeightsMeasurements(weightsMeasurements);
-                   inspection.setDepotAuthCert(depotAuthCert);
-                   inspection.setMfpStock(mfpStock);
-                   inspection.setMfpPurchase(mfpPurchase);
-                   inspection.setBillAbstract(billAbstract);
-                   inspection.setAbstractAccnt(abstractAccnt);
-                   inspection.setAdvanceAccnt(advanceAccnt);
-                   inspection.setMfpLiability(mfpLiability);
-                   inspection.setDepotNameBoard(depotNameBoard);
-                   inspection.setGccObjPrinc(gccObjPrinc);
-                   inspection.setDepotTimimg(depotTimimg);
-                   inspection.setMfpComm(mfpComm);
-                   inspection.setEcComm(ecComm);
-                   inspection.setDrComm(drComm);
-                   inspection.setStockBal(stockBal);
-                   inspection.setValuesAsPerSale(valuesAsPerSale);
-                   inspection.setValuesAsPerPurchasePrice(valuesAsPerPurchasePrice);
-                   inspection.setQualVerified(qualVerified);
-                   inspection.setDepotMaintHygeine(depotMaintHygeine);
-                   inspection.setRepairsReq(repairsReq);
-                   inspection.setRepairsType(repairsType);
-                   inspection.setRemarks(binding.etRemarks.getText().toString());
-                   inspection.setFeedback(binding.etFeedback.getText().toString());
-                   inspection.setRepairsPath(FilePath);
+                   DrDepotInsp drDepotInspection=new DrDepotInsp();
 
-                   String DepotInspection=gson.toJson(inspection);
-                   editor.putString(AppConstants.DepotInspection,DepotInspection);
+                   RegisterBookCertificates registerBookCertificates=new RegisterBookCertificates();
+                   registerBookCertificates.setEcsStockRegister(ecsStock);
+                   registerBookCertificates.setDrsStockRegister(drStock);
+                   registerBookCertificates.setEmptiesRegister(emptyStock);
+                   registerBookCertificates.setAbstractSalesRegister(abstractSales);
+                   registerBookCertificates.setLiabilityRegister(liabilityReg);
+                   registerBookCertificates.setVisitorsNoteBook(visitorsBook);
+                   registerBookCertificates.setSaleBillBook(saleBook);
+                   registerBookCertificates.setCashBook(depotCashBook);
+                   registerBookCertificates.setWeightMeasureCertificate(weightsMeasurements);
+                   registerBookCertificates.setWeightMeasureValidity(binding.etWeightCertIssue.getText().toString().trim());
+                   registerBookCertificates.setDepotAuthCertificate(depotAuthCert);
+                   drDepotInspection.setRegisterBookCertificates(registerBookCertificates);
+
+                   MFPRegisters mfpRegisters=new MFPRegisters();
+                   mfpRegisters.setMfpStock(mfpStock);
+                   mfpRegisters.setMfpPurchase(mfpPurchase);
+                   mfpRegisters.setBillAbstract(billAbstract);
+                   mfpRegisters.setAbstractAccnt(abstractAccnt);
+                   mfpRegisters.setAdvanceAccnt(advanceAccnt);
+                   mfpRegisters.setMfpLiability(mfpLiability);
+                   drDepotInspection.setMfpRegisters(mfpRegisters);
+
+                   HoardingsBoards hoardingsBoards=new HoardingsBoards();
+                   hoardingsBoards.setDepotNameBoard(depotNameBoard);
+                   hoardingsBoards.setGccObjPrinciples(gccObjPrinc);
+                   hoardingsBoards.setDepotTiming(depotTimimg);
+                   hoardingsBoards.setMfpCommodities(mfpComm);
+                   hoardingsBoards.setEcCommodities(ecComm);
+                   hoardingsBoards.setDrCommodities(drComm);
+                   hoardingsBoards.setStockBal(stockBal);
+                   drDepotInspection.setHoardingsBoards(hoardingsBoards);
+
+                   GeneralFindings generalFindings=new GeneralFindings();
+                   generalFindings.setValuesAsPerSalePrice(valuesAsPerSale);
+                   generalFindings.setValuesAsPerPurchasePrice(valuesAsPerPurchasePrice);
+                   generalFindings.setStockQualityVerified(qualVerified);
+                   generalFindings.setHygienicCondition(depotMaintHygeine);
+                   generalFindings.setRepairsRequired(repairsReq);
+                   generalFindings.setRepairType(repairsType);
+                   generalFindings.setRemarks(binding.etRemarks.getText().toString());
+                   generalFindings.setFeedback(binding.etFeedback.getText().toString());
+                   drDepotInspection.setGeneralFindings(generalFindings);
+
+                   InspectionSubmitResponse inspectionSubmitResponse=new InspectionSubmitResponse();
+                   inspectionSubmitResponse.setDrDepot(drDepotInspection);
+                   try {
+                       editor=TWDApplication.get(DRDepotFindingsActivity.this).getPreferencesEditor();
+                   }catch (Exception e){
+                        e.printStackTrace();
+                   }
+                   editor.putString(AppConstants.repairsPath,FilePath);
+                   String inspectionDetails=gson.toJson(inspectionSubmitResponse);
+                   editor.putString(AppConstants.InspectionDetails,inspectionDetails);
                    editor.commit();
+
+                   startActivity(new Intent(DRDepotFindingsActivity.this,GCCPhotoActivity.class));
                }
            }
        });
@@ -531,7 +563,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             returnFlag=false;
             showSnackBar("Please check weights and measurements certificate issued by legal metrology");
             ScrollToView(binding.rgWeightMeasCert);
-        }else if(!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && certIssueDate.equals(getResources().getString(R.string.select_date)) ){
+        }else if(!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().equals(getResources().getString(R.string.select_date)) ){
             returnFlag=false;
             showSnackBar("Please select certificate issue date");
             ScrollToView(binding.etWeightCertIssue);
@@ -556,6 +588,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             showSnackBar("Please check abstract account book");
             ScrollToView(binding.rgAbstractAccntBook);
         }else if(TextUtils.isEmpty(advanceAccnt)){
+            returnFlag=false;
             showSnackBar("Please check advance  account book");
             ScrollToView(binding.rgAdvanceAccntBook);
         }else if(TextUtils.isEmpty(mfpLiability)){
@@ -718,7 +751,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-//            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = officerID + "~" + divId + "~" +  suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

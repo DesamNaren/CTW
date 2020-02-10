@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.viewmodel;
 
 import android.app.Application;
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -35,12 +36,12 @@ public class StockViewModel extends AndroidViewModel {
     private Application application;
     private ErrorHandlerInterface errorHandlerInterface;
 
-    public StockViewModel(@NonNull Application application) {
+    public StockViewModel(@NonNull Application application, Context context) {
         super(application);
         this.application=application;
         commodities = new MutableLiveData<>();
         try {
-            errorHandlerInterface = (ErrorHandlerInterface) application;
+            errorHandlerInterface = (ErrorHandlerInterface) context;
         } catch (Exception e) {
             e.printStackTrace();
         }

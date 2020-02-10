@@ -540,6 +540,7 @@
 
                             </RadioGroup>
 
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/weight_cert_issue_date"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

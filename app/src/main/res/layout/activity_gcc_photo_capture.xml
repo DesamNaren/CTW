@@ -63,7 +63,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
-                                android:id="@+id/iv_storeRoom"
+                                android:id="@+id/iv_entrance"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -105,7 +105,7 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
-                                android:id="@+id/iv_playgound"
+                                android:id="@+id/iv_floor"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
@@ -139,7 +139,7 @@
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
-                                android:id="@+id/iv_diningHall"
+                                android:id="@+id/iv_ceiling"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
@@ -183,7 +183,7 @@
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:id="@+id/iv_dormitory"
+                                android:id="@+id/iv_stock_arrng1"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/godown_storage" />
@@ -214,7 +214,7 @@
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:id="@+id/iv_mainBuilding"
+                                android:id="@+id/iv_stock_arrng2"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/godown_storage" />
@@ -260,7 +260,7 @@
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:id="@+id/iv_classroom"
+                                android:id="@+id/ivMachinary"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/machinery" />
