@@ -272,13 +272,17 @@ public class DRGodownActivity extends AppCompatActivity {
                 binding.viewpager.setCurrentItem(x);
                 if (header.contains("Essential Commodities")) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
-                } else if (header.equalsIgnoreCase("Daily Requirements")) {
+                }
+                if (header.equalsIgnoreCase("Daily Requirements")) {
                     ((DailyFragment)  mFragmentList.get(x)).setPos(pos);
-                } else if (header.equalsIgnoreCase("Empties")) {
+                }
+                if (header.equalsIgnoreCase("Empties")) {
                     ((EmptiesFragment)  mFragmentList.get(x)).setPos(pos);
-                } else if (header.equalsIgnoreCase("MFP Commodities")) {
+                }
+                if (header.equalsIgnoreCase("MFP Commodities")) {
                     ((MFPFragment)  mFragmentList.get(x)).setPos(pos);
-                } else if (header.equalsIgnoreCase("Processing Units")) {
+                }
+                if (header.equalsIgnoreCase("Processing Units")) {
                     ((PUnitFragment)  mFragmentList.get(x)).setPos(pos);
                 }
                 break;

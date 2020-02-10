@@ -45,13 +45,14 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:visibility="gone"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:id="@+id/view_pager_ll"
-            android:layout_above="@id/bottom_ll"
-            android:orientation="vertical"
-            android:layout_below="@+id/rl_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
+            android:layout_below="@+id/rl_profile"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
@@ -87,11 +88,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <include
-            android:visibility="gone"
             android:id="@+id/bottom_ll"
-            layout="@layout/buttons_layout" />
+            layout="@layout/buttons_layout"
+            android:visibility="gone" />
     </RelativeLayout>
 </layout>
