@@ -158,97 +158,102 @@ public class PUnitActivity extends AppCompatActivity {
         });
 
         if (Utils.checkInternetConnection(PUnitActivity.this)) {
-            customProgressDialog.show();
-            LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("20542");
-            officesResponseLiveData.observe(PUnitActivity.this, new Observer<StockDetailsResponse>() {
-                @Override
-                public void onChanged(StockDetailsResponse stockDetailsResponse) {
+            if (pUnits != null && pUnits.getGodownId() != null) {
 
-                    customProgressDialog.hide();
-                    officesResponseLiveData.removeObservers(PUnitActivity.this);
-                    stockDetailsResponsemain = stockDetailsResponse;
+                customProgressDialog.show();
+                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(pUnits.getGodownId());
+                officesResponseLiveData.observe(PUnitActivity.this, new Observer<StockDetailsResponse>() {
+                    @Override
+                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
 
-                    if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
-                        if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                            binding.viewPagerLl.setVisibility(View.VISIBLE);
-                            binding.noDataTv.setVisibility(View.GONE);
-                            binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(PUnitActivity.this);
+                        stockDetailsResponsemain = stockDetailsResponse;
 
-                            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                binding.viewPagerLl.setVisibility(View.VISIBLE);
+                                binding.noDataTv.setVisibility(View.GONE);
+                                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
 
-                            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                                stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
-                                EssentialFragment essentialFragment = new EssentialFragment();
-                                Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
-                                Bundle bundle = new Bundle();
-                                bundle.putString(AppConstants.essComm, essentialComm);
-                                essentialFragment.setArguments(bundle);
-                                adapter.addFrag(essentialFragment, "Essential Commodities");
+                                ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
+                                    EssentialFragment essentialFragment = new EssentialFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.essComm, essentialComm);
+                                    essentialFragment.setArguments(bundle);
+                                    adapter.addFrag(essentialFragment, "Essential Commodities");
+                                }
+
+                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
+                                    DailyFragment dailyFragment = new DailyFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.dailyReq, essentialComm);
+                                    dailyFragment.setArguments(bundle);
+                                    adapter.addFrag(dailyFragment, "Daily Requirements");
+                                }
+
+                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
+                                    EmptiesFragment emptiesFragment = new EmptiesFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.empties, essentialComm);
+                                    emptiesFragment.setArguments(bundle);
+                                    adapter.addFrag(emptiesFragment, "Empties");
+                                }
+
+
+                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                                    stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
+                                    MFPFragment mfpFragment = new MFPFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.mfp, essentialComm);
+                                    mfpFragment.setArguments(bundle);
+                                    adapter.addFrag(mfpFragment, "MFP Commodities");
+                                }
+
+                                if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+                                    stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
+                                    PUnitFragment pUnitFragment = new PUnitFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.punit, essentialComm);
+                                    pUnitFragment.setArguments(bundle);
+                                    adapter.addFrag(pUnitFragment, "Processing Units");
+                                }
+
+                                binding.tabs.setupWithViewPager(binding.viewpager);
+                                binding.viewpager.setAdapter(adapter);
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                binding.viewPagerLl.setVisibility(View.GONE);
+                                binding.noDataTv.setVisibility(View.VISIBLE);
+                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                                callSnackBar(stockDetailsResponse.getStatusMessage());
+                            } else {
+                                callSnackBar(getString(R.string.something));
                             }
-
-                            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                                stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
-                                DailyFragment dailyFragment = new DailyFragment();
-                                Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
-                                Bundle bundle = new Bundle();
-                                bundle.putString(AppConstants.dailyReq, essentialComm);
-                                dailyFragment.setArguments(bundle);
-                                adapter.addFrag(dailyFragment, "Daily Requirements");
-                            }
-
-                            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                                stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
-                                EmptiesFragment emptiesFragment = new EmptiesFragment();
-                                Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
-                                Bundle bundle = new Bundle();
-                                bundle.putString(AppConstants.empties, essentialComm);
-                                emptiesFragment.setArguments(bundle);
-                                adapter.addFrag(emptiesFragment, "Empties");
-                            }
-
-
-                            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                                stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
-                                MFPFragment mfpFragment = new MFPFragment();
-                                Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
-                                Bundle bundle = new Bundle();
-                                bundle.putString(AppConstants.mfp, essentialComm);
-                                mfpFragment.setArguments(bundle);
-                                adapter.addFrag(mfpFragment, "MFP Commodities");
-                            }
-
-                            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                                stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
-                                PUnitFragment pUnitFragment = new PUnitFragment();
-                                Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
-                                Bundle bundle = new Bundle();
-                                bundle.putString(AppConstants.punit, essentialComm);
-                                pUnitFragment.setArguments(bundle);
-                                adapter.addFrag(pUnitFragment, "Processing Units");
-                            }
-
-                            binding.tabs.setupWithViewPager(binding.viewpager);
-                            binding.viewpager.setAdapter(adapter);
-
-                        } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                            binding.viewPagerLl.setVisibility(View.GONE);
-                            binding.noDataTv.setVisibility(View.VISIBLE);
-                            binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                            binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                            callSnackBar(stockDetailsResponse.getStatusMessage());
                         } else {
                             callSnackBar(getString(R.string.something));
                         }
-                    } else {
-                        callSnackBar(getString(R.string.something));
                     }
-                }
-            });
+                });
+            } else {
+                Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
+            }
         } else {
             Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
@@ -289,7 +294,7 @@ public class PUnitActivity extends AppCompatActivity {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));
-        }else {
+        } else {
             finish();
         }
     }
