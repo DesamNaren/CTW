@@ -128,17 +128,6 @@ public class MFPGodownActivity extends AppCompatActivity {
                     }
                 }
 
-                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
 
                 if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
                     stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
@@ -152,7 +141,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                 }
 
                 if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(MFPFragment.commonCommodities);
+                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
                         if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
                             String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
@@ -179,7 +168,7 @@ public class MFPGodownActivity extends AppCompatActivity {
 
         if (Utils.checkInternetConnection(MFPGodownActivity.this)) {
             customProgressDialog.show();
-            LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("20542");
+            LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData("2340");
             officesResponseLiveData.observe(MFPGodownActivity.this, new Observer<StockDetailsResponse>() {
                 @Override
                 public void onChanged(StockDetailsResponse stockDetailsResponse) {
@@ -192,7 +181,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                         if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             binding.viewPagerLl.setVisibility(View.VISIBLE);
                             binding.noDataTv.setVisibility(View.GONE);
-                            binding.bottomLl.btnNext.setVisibility(View.VISIBLE);
+                            binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
 
                             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -234,7 +223,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                                 stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                 MFPFragment mfpFragment = new MFPFragment();
                                 Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AppConstants.mfp, essentialComm);
                                 mfpFragment.setArguments(bundle);
@@ -245,7 +234,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                                 stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
                                 PUnitFragment pUnitFragment = new PUnitFragment();
                                 Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AppConstants.punit, essentialComm);
                                 pUnitFragment.setArguments(bundle);
@@ -258,7 +247,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                         } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                             binding.viewPagerLl.setVisibility(View.GONE);
                             binding.noDataTv.setVisibility(View.VISIBLE);
-                            binding.bottomLl.btnNext.setVisibility(View.GONE);
+                            binding.bottomLl.btnLayout.setVisibility(View.GONE);
                             binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
                             callSnackBar(stockDetailsResponse.getStatusMessage());
                         } else {
@@ -306,7 +295,13 @@ public class MFPGodownActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+            Utils.customDiscardAlert(this,
+                    getResources().getString(R.string.app_name),
+                    getString(R.string.are_go_back));
+        }else {
+            finish();
+        }
     }
 
 
@@ -338,6 +333,7 @@ public class MFPGodownActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
 
 
 }

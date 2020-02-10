@@ -19,10 +19,8 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityMfpGodownBinding;
 import com.example.twdinspection.databinding.ActivityPUnitBinding;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
@@ -76,9 +74,9 @@ public class PUnitActivity extends AppCompatActivity {
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
-            String str = sharedPreferences.getString(AppConstants.P_UNIT_DATA,"");
+            String str = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
             pUnits = gson.fromJson(str, PUnits.class);
-            if(pUnits!=null) {
+            if (pUnits != null) {
                 binding.includeBasicLayout.drGodownName.setText(pUnits.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(pUnits.getIncharge());
                 binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
@@ -122,18 +120,6 @@ public class PUnitActivity extends AppCompatActivity {
                     }
                 }
 
-                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-
                 if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
                     stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
@@ -146,7 +132,7 @@ public class PUnitActivity extends AppCompatActivity {
                 }
 
                 if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(MFPFragment.commonCommodities);
+                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
                         if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
                             String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
@@ -186,7 +172,7 @@ public class PUnitActivity extends AppCompatActivity {
                         if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             binding.viewPagerLl.setVisibility(View.VISIBLE);
                             binding.noDataTv.setVisibility(View.GONE);
-                            binding.bottomLl.btnNext.setVisibility(View.VISIBLE);
+                            binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
 
                             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -228,7 +214,7 @@ public class PUnitActivity extends AppCompatActivity {
                                 stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                 MFPFragment mfpFragment = new MFPFragment();
                                 Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AppConstants.mfp, essentialComm);
                                 mfpFragment.setArguments(bundle);
@@ -239,7 +225,7 @@ public class PUnitActivity extends AppCompatActivity {
                                 stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
                                 PUnitFragment pUnitFragment = new PUnitFragment();
                                 Gson gson = new Gson();
-                                String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
                                 Bundle bundle = new Bundle();
                                 bundle.putString(AppConstants.punit, essentialComm);
                                 pUnitFragment.setArguments(bundle);
@@ -252,7 +238,7 @@ public class PUnitActivity extends AppCompatActivity {
                         } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                             binding.viewPagerLl.setVisibility(View.GONE);
                             binding.noDataTv.setVisibility(View.VISIBLE);
-                            binding.bottomLl.btnNext.setVisibility(View.GONE);
+                            binding.bottomLl.btnLayout.setVisibility(View.GONE);
                             binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
                             callSnackBar(stockDetailsResponse.getStatusMessage());
                         } else {
@@ -263,8 +249,7 @@ public class PUnitActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
-        else {
+        } else {
             Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
@@ -279,13 +264,13 @@ public class PUnitActivity extends AppCompatActivity {
                 if (header.contains("Essential Commodities")) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
                 } else if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 break;
             }
@@ -300,7 +285,13 @@ public class PUnitActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+            Utils.customDiscardAlert(this,
+                    getResources().getString(R.string.app_name),
+                    getString(R.string.are_go_back));
+        }else {
+            finish();
+        }
     }
 
 
