@@ -41,7 +41,7 @@ public class GCCPhotoViewModel extends ViewModel {
 
     public void UploadImageServiceCall(final List<MultipartBody.Part> partList) {
         try {
-            TWDService twdService = TWDService.Factory.create("gcc");
+            TWDService twdService = TWDService.Factory.create("school");
             twdService.uploadGCCImageCall(partList).enqueue(new Callback<GCCPhotoSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<GCCPhotoSubmitResponse> call, @NotNull Response<GCCPhotoSubmitResponse> response) {
@@ -59,7 +59,7 @@ public class GCCPhotoViewModel extends ViewModel {
         }
     }
     public void submitGCCDetails(GCCSubmitRequest gccSubmitRequest) {
-        TWDService twdService = TWDService.Factory.create("gcc");
+        TWDService twdService = TWDService.Factory.create("school");
         twdService.getGCCSubmitResponse(gccSubmitRequest).enqueue(new Callback<GCCSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<GCCSubmitResponse> call, @NotNull Response<GCCSubmitResponse> response) {

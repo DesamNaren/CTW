@@ -103,60 +103,60 @@ public class DRDepotActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-//                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-//
-//                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-//
-//
-//                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-//
-//                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
+                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
+                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
+                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
+                            setFragPos(header, z);
+                            return;
+                        }
+                    }
+                }
+                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
+                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
+                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
+                            setFragPos(header, z);
+                            return;
+                        }
+                    }
+                }
+
+                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
+                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
+                            setFragPos(header, z);
+                            return;
+                        }
+                    }
+                }
+
+
+                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
+                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
+                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
+                            setFragPos(header, z);
+                            return;
+                        }
+                    }
+                }
+
+                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
+                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
+                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
+                            setFragPos(header, z);
+                            return;
+                        }
+                    }
+                }
 
                 Gson gson = new Gson();
                 String stockData = gson.toJson(stockDetailsResponsemain);

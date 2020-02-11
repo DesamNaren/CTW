@@ -85,38 +85,38 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         divId=drDepot.getDivisionId();
         suppId=drDepot.getGodownId();
 
-//        if (stockDetailsResponse != null) {
-//            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-//                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-//                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-//                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
-//                }
-//            }
-//            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-//                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-//                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-//                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
-//                }
-//            }
-//            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-//                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-//                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-//                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
-//                }
-//            }
-//            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-//                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-//                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-//                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
-//                }
-//            }
-//            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-//                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-//                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
-//                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
-//                }
-//            }
-//        }
+        if (stockDetailsResponse != null) {
+            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
+                }
+            }
+            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
+                }
+            }
+            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
+                }
+            }
+            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
+                }
+            }
+            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
+                }
+            }
+        }
 
         binding.tvSysVal.setText(String.format("%.2f",sysVal));
         binding.tvPhysVal.setText(String.format("%.2f",physVal));
