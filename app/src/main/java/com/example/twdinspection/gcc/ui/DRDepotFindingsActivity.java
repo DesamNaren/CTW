@@ -515,6 +515,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                    }
                    editor.putString(AppConstants.repairsPath,FilePath);
+                   editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
+                   editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
                    String inspectionDetails=gson.toJson(inspectionSubmitResponse);
                    editor.putString(AppConstants.InspectionDetails,inspectionDetails);
                    editor.commit();

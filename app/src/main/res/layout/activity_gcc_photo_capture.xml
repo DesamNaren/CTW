@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel" />
+            type="com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel" />
 
     </data>
 

@@ -67,6 +67,8 @@ public class AppConstants {
     public static final String STOCK_ARRANG2 = "STOCK_ARRANG2";
     public static final String MACHINARY = "MACHINARY";
     public static final String REPAIR = "REPAIR";
+    public static final String TOTAL_SYSVAL = "TOTAL_SYSVAL";
+    public static final String TOTAL_PHYVAL = "TOTAL_PHYVAL";
 
 
     public static String stockData="STOCK_DATA";

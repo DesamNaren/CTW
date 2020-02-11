@@ -11,6 +11,7 @@ public class CommonCommodity implements Parcelable {
     private boolean flag;
     private String comHeader;
     private String phyQuant;
+    private String comType;
 
     public String getPhyQuant() {
         return phyQuant;
