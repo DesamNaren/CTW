@@ -180,6 +180,7 @@
         <activity
             android:name=".gcc.ui.PUnitSelActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".gcc.ui.DRGodownFindingsActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

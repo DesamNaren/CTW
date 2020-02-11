@@ -53,6 +53,13 @@ public class MFPGodownActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown);
         binding.header.headerTitle.setText(getResources().getString(R.string.mfp_godown));
+        stockDetailsResponsemain = null;
+        EssentialFragment.commonCommodities = null;
+        DailyFragment.commonCommodities = null;
+        EmptiesFragment.commonCommodities = null;
+        MFPFragment.commonCommodities = null;
+        PUnitFragment.commonCommodities = null;
+
         customProgressDialog = new CustomProgressDialog(this);
         viewModel = new StockViewModel(getApplication(),this);
         binding.setViewModel(viewModel);

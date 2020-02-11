@@ -667,7 +667,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-//        binding.scroll.smoothScrollTo(0, view.getBottom());
+        binding.scroll.smoothScrollTo(0, view.getBottom());
     }
     private void certIssueDateSelection() {
         // Get Current Date

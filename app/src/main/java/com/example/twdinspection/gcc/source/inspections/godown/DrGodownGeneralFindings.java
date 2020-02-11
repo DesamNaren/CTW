@@ -3,8 +3,7 @@ package com.example.twdinspection.gcc.source.inspections.godown;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GodownGeneralFindings {
-
+public class DrGodownGeneralFindings {
 
     @SerializedName("stock_register_entries")
     @Expose

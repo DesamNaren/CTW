@@ -78,6 +78,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         }
 
 
+
+
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, divisions -> {
             divisionLiveData.removeObservers(DRGODownSelActivity.this);

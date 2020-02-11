@@ -53,6 +53,14 @@ public class DRDepotActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
+
+        stockDetailsResponsemain = null;
+        EssentialFragment.commonCommodities = null;
+        DailyFragment.commonCommodities = null;
+        EmptiesFragment.commonCommodities = null;
+        MFPFragment.commonCommodities = null;
+        PUnitFragment.commonCommodities = null;
+
         customProgressDialog = new CustomProgressDialog(this);
         viewModel = new StockViewModel(getApplication(),this);
         binding.setViewModel(viewModel);

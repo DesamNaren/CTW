@@ -24,6 +24,7 @@ public class GCCDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_dashboard);
         binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
+        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +84,6 @@ public class GCCDashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       finish();
+        finish();
     }
 }

@@ -52,9 +52,16 @@ public class DRGodownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
         customProgressDialog = new CustomProgressDialog(this);
+        stockDetailsResponsemain = null;
+        EssentialFragment.commonCommodities = null;
+        DailyFragment.commonCommodities = null;
+        EmptiesFragment.commonCommodities = null;
+        MFPFragment.commonCommodities = null;
+        PUnitFragment.commonCommodities = null;
+
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new StockViewModel(getApplication(),this);
+        viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -73,9 +80,9 @@ public class DRGodownActivity extends AppCompatActivity {
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
-            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA,"");
+            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
             drGodowns = gson.fromJson(str, DrGodowns.class);
-            if(drGodowns!=null) {
+            if (drGodowns != null) {
                 binding.includeBasicLayout.divName.setText(drGodowns.getDivisionName());
                 binding.includeBasicLayout.socName.setText(drGodowns.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(drGodowns.getGodownName());
@@ -154,7 +161,7 @@ public class DRGodownActivity extends AppCompatActivity {
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(DRGodownActivity.this, DRDepotFindingsActivity.class);
+                Intent intent = new Intent(DRGodownActivity.this, DRGodownFindingsActivity.class);
                 startActivity(intent);
             }
 
@@ -254,17 +261,16 @@ public class DRGodownActivity extends AppCompatActivity {
                     }
 
                 });
-            }else{
+            } else {
                 Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
-        }
-        else {
+        } else {
             Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
 
     }
-    
+
     void setFragPos(String header, int pos) {
         for (int x = 0; x < mFragmentTitleList.size(); x++) {
             if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
@@ -274,22 +280,21 @@ public class DRGodownActivity extends AppCompatActivity {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment)  mFragmentList.get(x)).setPos(pos);
+                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 break;
             }
         }
     }
-    
 
 
     void callSnackBar(String msg) {
@@ -305,7 +310,7 @@ public class DRGodownActivity extends AppCompatActivity {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));
-        }else {
+        } else {
             finish();
         }
     }
