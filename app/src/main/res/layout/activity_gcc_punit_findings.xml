@@ -20,6 +20,7 @@
 
 
         <ScrollView
+            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header">
@@ -826,18 +827,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_stock_qua"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/rb_stock_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/rb_stock_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -861,18 +865,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_godown_hyg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/rb_hyg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/rb_hyg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -895,18 +902,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_repairs_req"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/repairs_req_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:id="@+id/repairs_req_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -947,5 +957,15 @@
 
 
         </ScrollView>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent"/>
+        <include
+            layout="@layout/buttons_layout"
+            android:id="@+id/bottom_ll" />
+
     </RelativeLayout>
 </layout>

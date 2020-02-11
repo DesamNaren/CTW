@@ -182,6 +182,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".gcc.ui.DRGodownFindingsActivity" />
         <activity android:name=".gcc.ui.MFPGodownFindingsActivity" />
+        <activity android:name=".gcc.ui.PUnitsFindingsActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

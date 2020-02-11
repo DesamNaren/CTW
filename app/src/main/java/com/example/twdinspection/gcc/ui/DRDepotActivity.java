@@ -103,6 +103,8 @@ public class DRDepotActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
                     stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
@@ -172,6 +174,7 @@ public class DRDepotActivity extends AppCompatActivity {
             }
 
         });
+
 
         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
             if (drDepots != null && drDepots.getGodownId() != null) {

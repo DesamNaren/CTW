@@ -159,7 +159,7 @@ public class PUnitActivity extends AppCompatActivity {
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(PUnitActivity.this, DRDepotFindingsActivity.class);
+                Intent intent = new Intent(PUnitActivity.this, PUnitsFindingsActivity.class);
                 startActivity(intent);
             }
 

@@ -3,7 +3,7 @@ package com.example.twdinspection.gcc.source.inspections;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.DrDepotInsp;
 import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.example.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
-import com.example.twdinspection.gcc.source.inspections.processingUnit.ProcessingUnitInsp;
+import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -20,7 +20,7 @@ public class InspectionSubmitResponse {
     private MfpGodownsInsp mfpGodowns;
     @SerializedName("processing_unit")
     @Expose
-    private ProcessingUnitInsp processingUnit;
+    private PUnitInsp processingUnit;
 
     public DrGodownInsp getDrGodown() {
         return drGodown;
@@ -46,11 +46,11 @@ public class InspectionSubmitResponse {
         this.mfpGodowns = mfpGodowns;
     }
 
-    public ProcessingUnitInsp getProcessingUnit() {
+    public PUnitInsp getProcessingUnit() {
         return processingUnit;
     }
 
-    public void setProcessingUnit(ProcessingUnitInsp processingUnit) {
+    public void setProcessingUnit(PUnitInsp processingUnit) {
         this.processingUnit = processingUnit;
     }
 

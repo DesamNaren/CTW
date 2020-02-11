@@ -62,7 +62,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0, difference = 0;
+    double physVal = 0, sysVal = 0;
     private StockDetailsResponse stockDetailsResponse;
     private String stockReg, insCer, fireNOC, weightMea;
     private String qualityStock, stockCards, godownHyg, driage, trayAvail, repairsReq;

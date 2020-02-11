@@ -3,7 +3,8 @@ package com.example.twdinspection.gcc.source.inspections.processingUnit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProcessingUnitGeneralFinding {
+public class PUnitGeneralFindings {
+
     @SerializedName("stock_quality_verified")
     @Expose
     private String stockQualityVerified;
@@ -48,4 +49,5 @@ public class ProcessingUnitGeneralFinding {
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
+
 }
