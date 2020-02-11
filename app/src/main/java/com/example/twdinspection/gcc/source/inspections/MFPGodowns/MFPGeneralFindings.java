@@ -3,7 +3,8 @@ package com.example.twdinspection.gcc.source.inspections.MFPGodowns;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MFPGodownsGeneralFindings {
+public class MFPGeneralFindings {
+
     @SerializedName("stock_quality_verified")
     @Expose
     private String stockQualityVerified;

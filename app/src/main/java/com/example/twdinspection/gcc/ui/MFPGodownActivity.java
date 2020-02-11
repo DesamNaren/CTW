@@ -164,7 +164,7 @@ public class MFPGodownActivity extends AppCompatActivity {
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(MFPGodownActivity.this, DRDepotFindingsActivity.class);
+                Intent intent = new Intent(MFPGodownActivity.this, MFPGodownFindingsActivity.class);
                 startActivity(intent);
             }
 

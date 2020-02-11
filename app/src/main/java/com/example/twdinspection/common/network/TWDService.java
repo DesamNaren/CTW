@@ -106,7 +106,7 @@ public interface TWDService {
     Call<SchemePhotoSubmitResponse> uploadSchoolImageCall(@Part List<MultipartBody.Part> partList);
 
     @Multipart
-    @POST("upload/uploadGCCPhotos ")
+    @POST("upload/uploadGCCPhotos")
     Call<GCCPhotoSubmitResponse> uploadGCCImageCall(@Part List<MultipartBody.Part> partList);
 
     @GET("CTWServiceDetails/getDMVMasters")

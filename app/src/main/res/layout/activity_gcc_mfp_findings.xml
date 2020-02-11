@@ -20,6 +20,7 @@
 
 
         <ScrollView
+            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header">
@@ -344,21 +345,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_stock_reg_entries_made"
+                                android:id="@+id/rg_quality_stock"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/stock_reg_entries_made_yes_rb"
+                                    android:id="@+id/qual_stock_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/stock_reg_entries_made_no_rb"
+                                    android:id="@+id/qual_stock_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -378,80 +379,6 @@
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Whether stack cards have been prominently displayed in each stack or not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_values_as_per_sale_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/values_as_per_sale_price_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/values_as_per_sale_price_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the godown  is maintained in hygienic condition or not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_quality_verified"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/quality_verified_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/quality_verified_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether there are any driage proposals submitted for deficit "
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -488,25 +415,99 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Availability of generator in Godown"
+                                android:text="Whether the godown  is maintained in hygienic condition or not"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_godown_computerized"
+                                android:id="@+id/rg_godown_hyg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/godown_computerized_yes_rb"
+                                    android:id="@+id/godown_hyg_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/godown_computerized_no_rb"
+                                    android:id="@+id/godown_hyg_rb_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Whether there are any driage proposals submitted for deficit "
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_draige"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/draige_rb_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/draige_rb_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Availability of generator in Godown"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_godown_gen_avail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/gen_avail_yes_rb"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/gen_avail_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -529,21 +530,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_godown_maintained"
+                                android:id="@+id/rg_tray"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/godown_maintained_rb_yes"
+                                    android:id="@+id/tray_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/godown_maintained_rb_no"
+                                    android:id="@+id/tray_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -567,21 +568,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_avail_equipment"
+                                android:id="@+id/rg_insp_date_div_manager"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/avail_equipment_rb_yes"
+                                    android:id="@+id/insp_date_div_manager_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/avail_equipment_rb_no"
+                                    android:id="@+id/insp_date_div_manager_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -604,21 +605,21 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_insp_date_soc_manager"
+                                android:id="@+id/rg_repairs_req"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:id="@+id/insp_date_soc_manager_rb_yes"
+                                    android:id="@+id/repairs_req_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:id="@+id/insp_date_soc_manager_rb_no"
+                                    android:id="@+id/repairs_req_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -655,14 +656,14 @@
 
 
                             <ImageView
-                                android:id="@+id/iv_storeRoom"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:id="@+id/iv_repairs"
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/list_blue"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/main_buildings" />
+                                android:src="@drawable/repair" />
 
 
                         </LinearLayout>
@@ -691,5 +692,15 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent"/>
+        <include
+            layout="@layout/buttons_layout"
+            android:id="@+id/bottom_ll" />
+
     </RelativeLayout>
 </layout>

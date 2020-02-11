@@ -1,30 +1,33 @@
 package com.example.twdinspection.gcc.source.inspections.MFPGodowns;
 
+import com.example.twdinspection.gcc.source.inspections.DrDepot.GeneralFindings;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.RegisterBookCertificates;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MfpGodownsInsp {
 
-//    @SerializedName("register_book_certificates")
-//    @Expose
-//    private RegisterBookCertificates__ registerBookCertificates;
-//    @SerializedName("general_findings")
-//    @Expose
-//    private MFPGodownsGeneralFindings generalFindings;
-//
-//    public RegisterBookCertificates__ getRegisterBookCertificates() {
-//        return registerBookCertificates;
-//    }
-//
-//    public void setRegisterBookCertificates(RegisterBookCertificates__ registerBookCertificates) {
-//        this.registerBookCertificates = registerBookCertificates;
-//    }
-//
-//    public GeneralFindings__ getGeneralFindings() {
-//        return generalFindings;
-//    }
-//
-//    public void setGeneralFindings(GeneralFindings__ generalFindings) {
-//        this.generalFindings = generalFindings;
-//    }
+    @SerializedName("register_book_certificates")
+    @Expose
+    private MFPRegisterBookCertificates registerBookCertificates;
+    @SerializedName("general_findings")
+    @Expose
+    private MFPGeneralFindings generalFindings;
+
+    public MFPRegisterBookCertificates getRegisterBookCertificates() {
+        return registerBookCertificates;
+    }
+
+    public void setRegisterBookCertificates(MFPRegisterBookCertificates registerBookCertificates) {
+        this.registerBookCertificates = registerBookCertificates;
+    }
+
+    public MFPGeneralFindings getGeneralFindings() {
+        return generalFindings;
+    }
+
+    public void setGeneralFindings(MFPGeneralFindings generalFindings) {
+        this.generalFindings = generalFindings;
+    }
+
 }
