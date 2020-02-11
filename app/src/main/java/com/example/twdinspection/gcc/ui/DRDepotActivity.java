@@ -2,11 +2,19 @@ package com.example.twdinspection.gcc.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,29 +22,44 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotBinding;
+import com.example.twdinspection.gcc.interfaces.GCCSubmitInterface;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
+import com.example.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
+import com.example.twdinspection.gcc.source.submit.GCCSubmitRequest;
+import com.example.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
+import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DRDepotActivity extends AppCompatActivity {
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
+
+public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
@@ -46,6 +69,17 @@ public class DRDepotActivity extends AppCompatActivity {
     private DRDepots drDepots;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private String shopAvail, divId, suppId;
+    String PIC_NAME, PIC_TYPE, officerID;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public Uri fileUri;
+    public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    String FilePath, checkUpDate;
+    Bitmap bm;
+    File file;
+    StockDetailsResponse stockDetailsResponse;
+    private int shopFlag = 0;
+    GCCPhotoViewModel gccPhotoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +95,14 @@ public class DRDepotActivity extends AppCompatActivity {
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
+        gccPhotoViewModel = new GCCPhotoViewModel(this);
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(),this);
+        viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
-
+        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +120,15 @@ public class DRDepotActivity extends AppCompatActivity {
 
 
         try {
+
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
+            String stockData = sharedPreferences.getString(AppConstants.stockData, "");
+            stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
+            String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
+            DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
+            divId = drDepot.getDivisionId();
+            suppId = drDepot.getGodownId();
             String str = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
             drDepots = gson.fromJson(str, DRDepots.class);
             if (drDepots != null) {
@@ -103,82 +145,90 @@ public class DRDepotActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (shopAvail.equals(AppConstants.open)) {
+
+                    if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
+                        stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+                        for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
+                            if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
+                                String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
+                                setFragPos(header, z);
+                                return;
+                            }
+                        }
+                    }
+                    if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
+                        stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+                        for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
+                            if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
+                                String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
+                                setFragPos(header, z);
+                                return;
+                            }
+                        }
+                    }
+
+                    if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                        stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+                        for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
+                            if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+                                String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
+                                setFragPos(header, z);
+                                return;
+                            }
+                        }
+                    }
 
 
-                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
+                    if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
+                        stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+                        for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
+                            if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
+                                String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
+                                setFragPos(header, z);
+                                return;
+                            }
+                        }
+                    }
+
+                    if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
+                        stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+                        for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
+                            if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
+                                String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
+                                setFragPos(header, z);
+                                return;
+                            }
+                        }
+                    }
+
+                    Gson gson = new Gson();
+                    String stockData = gson.toJson(stockDetailsResponsemain);
+                    try {
+                        editor = TWDApplication.get(DRDepotActivity.this).getPreferences().edit();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    editor.putString(AppConstants.stockData, stockData);
+                    editor.commit();
+                    Intent intent = new Intent(DRDepotActivity.this, DRDepotFindingsActivity.class);
+                    startActivity(intent);
+                } else {
+                    if (shopFlag == 0) {
+                        showSnackBar("Please capture shop image");
+                    } else {
+                        if (Utils.checkInternetConnection(DRDepotActivity.this)) {
+                            GCCSubmitRequest request = new GCCSubmitRequest();
+                            gccPhotoViewModel.submitGCCDetails(request);
                         }
                     }
                 }
-                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-
-                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                Gson gson = new Gson();
-                String stockData = gson.toJson(stockDetailsResponsemain);
-                try {
-                    editor = TWDApplication.get(DRDepotActivity.this).getPreferences().edit();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                editor.putString(AppConstants.stockData, stockData);
-                editor.commit();
-                Intent intent = new Intent(DRDepotActivity.this, DRDepotFindingsActivity.class);
-                startActivity(intent);
             }
 
         });
 
-
         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
             if (drDepots != null && drDepots.getGodownId() != null) {
-
                 customProgressDialog.show();
                 LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(drDepots.getGodownId());
                 officesResponseLiveData.observe(DRDepotActivity.this, new Observer<StockDetailsResponse>() {
@@ -191,10 +241,6 @@ public class DRDepotActivity extends AppCompatActivity {
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                binding.viewPagerLl.setVisibility(View.VISIBLE);
-                                binding.noDataTv.setVisibility(View.GONE);
-                                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
-
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -257,10 +303,7 @@ public class DRDepotActivity extends AppCompatActivity {
                                 binding.viewpager.setAdapter(adapter);
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                                binding.viewPagerLl.setVisibility(View.GONE);
-                                binding.noDataTv.setVisibility(View.VISIBLE);
-                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+
                                 callSnackBar(stockDetailsResponse.getStatusMessage());
                             } else {
                                 callSnackBar(getString(R.string.something));
@@ -273,12 +316,77 @@ public class DRDepotActivity extends AppCompatActivity {
             } else {
                 Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
-        } else {
+        }
+        else {
             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
+        binding.rgShopAvail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_open) {
+                    binding.ivShopCam.setVisibility(View.GONE);
+                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+
+                    if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                        binding.viewPagerLl.setVisibility(View.VISIBLE);
+                        binding.noDataTv.setVisibility(View.GONE);
+                        binding.bottomLl.btnNext.setText("Next");
+                        binding.ivShopCam.setVisibility(View.GONE);
+                        shopAvail = AppConstants.open;
+                    }else {
+                        binding.viewPagerLl.setVisibility(View.GONE);
+                        binding.noDataTv.setVisibility(View.VISIBLE);
+                        binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                        binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                    }
+
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_close) {
+                    binding.viewPagerLl.setVisibility(View.GONE);
+                    binding.ivShopCam.setVisibility(View.VISIBLE);
+                    shopAvail = AppConstants.close;
+                    binding.bottomLl.btnNext.setText("Submit");
+                    binding.viewPagerLl.setVisibility(View.GONE);
+
+                }
+            }
+        });
+        binding.ivShopCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
+                    PIC_TYPE = AppConstants.REPAIR;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
+
+
     }
 
+    private void callPhotoSubmit() {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+
+        customProgressDialog.show();
+
+
+        List<MultipartBody.Part> partList = new ArrayList<>();
+        partList.add(body);
+        gccPhotoViewModel.UploadImageServiceCall(partList);
+    }
+
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
 
     void setFragPos(String header, int pos) {
         for (int x = 0; x < mFragmentTitleList.size(); x++) {
@@ -322,6 +430,29 @@ public class DRDepotActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void getData(GCCSubmitResponse gccSubmitResponse) {
+        customProgressDialog.hide();
+        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            callPhotoSubmit();
+        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            showSnackBar(gccSubmitResponse.getStatusMessage());
+        } else {
+            showSnackBar(getString(R.string.something));
+        }
+    }
+
+    @Override
+    public void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse) {
+        customProgressDialog.hide();
+        if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+
+        } else if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            showSnackBar(gccPhotoSubmitResponse.getStatusMessage());
+        } else {
+            showSnackBar(getString(R.string.something));
+        }
+    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -352,5 +483,70 @@ public class DRDepotActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                FilePath = getExternalFilesDir(null)
+                        + "/" + IMAGE_DIRECTORY_NAME;
+
+                String Image_name = PIC_NAME;
+                FilePath = FilePath + "/" + Image_name;
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 8;
+                bm = BitmapFactory.decodeFile(FilePath, options);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                file = new File(FilePath);
+                Glide.with(DRDepotActivity.this).load(file).into(binding.ivShopCam);
+                shopFlag = 1;
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(getApplicationContext(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    public Uri getOutputMediaFileUri(int type) {
+        File imageFile = getOutputMediaFile(type);
+        Uri imageUri = null;
+        if (imageFile != null) {
+            imageUri = FileProvider.getUriForFile(
+                    DRDepotActivity.this,
+                    "com.example.twdinspection.provider", //(use your app signature + ".provider" )
+                    imageFile);
+        }
+        return imageUri;
+    }
+
+    private File getOutputMediaFile(int type) {
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                        + " directory");
+                return null;
+            }
+        }
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + PIC_NAME);
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
 }

@@ -28,7 +28,7 @@ public class GCCPhotoViewModel extends ViewModel {
     private ErrorHandlerInterface errorHandlerInterface;
     private GCCSubmitInterface gccSubmitInterface;
 
-    GCCPhotoViewModel(Context context) {
+    public GCCPhotoViewModel(Context context) {
         this.context = context;
         try {
             errorHandlerInterface = (ErrorHandlerInterface) context;

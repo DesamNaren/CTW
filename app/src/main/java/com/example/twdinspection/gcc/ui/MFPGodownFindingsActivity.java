@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -39,6 +40,7 @@ import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -62,7 +64,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0;
+    double physVal = 0, sysVal = 0, difference = 0;
     private StockDetailsResponse stockDetailsResponse;
     private String stockReg, insCer, fireNOC, weightMea;
     private String qualityStock, stockCards, godownHyg, driage, trayAvail, repairsReq;
@@ -123,7 +125,21 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 }
             }
         }
+        binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
 
+                    PIC_TYPE = AppConstants.REPAIR;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -373,6 +389,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
+                    editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
@@ -535,6 +553,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
+                binding.ivRepairs.setPadding(0, 0, 0, 0);
+                binding.ivRepairs.setBackgroundColor(getResources().getColor(R.color.white));
                 file = new File(FilePath);
                 Glide.with(MFPGodownFindingsActivity.this).load(file).into(binding.ivRepairs);
                 repairsFlag = 1;

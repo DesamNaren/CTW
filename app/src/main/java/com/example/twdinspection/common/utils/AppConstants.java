@@ -84,4 +84,6 @@ public class AppConstants {
     public static final String P_UNIT_DATA = "P_UNIT_DATA";
     public static String InspectionDetails ="Depot_Inspection";
     public static String repairsPath="Repair_path";
+    public static String open="open";
+    public static String close="close";
 }

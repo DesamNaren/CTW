@@ -272,6 +272,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         viewModel.submitGCCDetails(request);
     }
     private void setStockDetailsSubmitRequest() {
+
         List<SubmitReqCommodities> essentialCommodityList = new ArrayList<>();
         List<SubmitReqCommodities> dailyReqList = new ArrayList<>();
         List<SubmitReqCommodities> mfp_commodities = new ArrayList<>();

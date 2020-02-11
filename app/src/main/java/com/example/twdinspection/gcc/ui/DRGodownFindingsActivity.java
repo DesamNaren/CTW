@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -85,38 +86,38 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         divId = drGodown.getDivisionId();
         suppId = drGodown.getGodownId();
 
-        if (stockDetailsResponse != null) {
-            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
-                }
-            }
-        }
+//        if (stockDetailsResponse != null) {
+//            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
+//                }
+//            }
+//            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+//                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
+//                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
+//                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
+//                }
+//            }
+//        }
 
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
@@ -382,7 +383,21 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                 lastInsDivDateSelection();
             }
         });
+        binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callPermissions()) {
 
+                    PIC_TYPE = AppConstants.REPAIR;
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    if (fileUri != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    }
+                }
+            }
+        });
         binding.rgRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -488,7 +503,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
-                    String inspectionDetails = gson.toJson(inspectionSubmitResponse);
+                    editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
 
@@ -737,6 +753,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                 String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
                         100);
+                binding.ivRepairs.setPadding(0, 0, 0, 0);
+                binding.ivRepairs.setBackgroundColor(getResources().getColor(R.color.white));
                 file = new File(FilePath);
                 Glide.with(DRGodownFindingsActivity.this).load(file).into(binding.ivRepairs);
                 repairsFlag = 1;

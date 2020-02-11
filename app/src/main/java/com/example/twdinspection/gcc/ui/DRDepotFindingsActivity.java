@@ -135,7 +135,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 }
             }
         });
-        binding.weightCertIssueDate.setOnClickListener(new View.OnClickListener() {
+        binding.etWeightCertIssue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 certIssueDateSelection();
@@ -712,8 +712,6 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
                 file = new File(FilePath);
                 Glide.with(DRDepotFindingsActivity.this).load(file).into(binding.ivRepairsCam);
                 repairsFlag=1;
@@ -762,12 +760,5 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
         return mediaFile;
     }
-
-    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
-    }
-
 
 }

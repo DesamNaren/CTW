@@ -582,5 +582,8 @@
     <string name="phy_rate">Physical Rate</string>
     <string name="phy_val">Physical Value</string>
     <string name="phy_ava_qty">Physical Available Quantity</string>
+    <string name="shop_availability">Shop availability</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 
 </resources>
