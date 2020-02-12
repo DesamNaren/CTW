@@ -523,23 +523,18 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(stockReg)) {
             returnFlag = false;
             showSnackBar("Please check stock register");
-            ScrollToView(binding.rgStock);
         } else if (TextUtils.isEmpty(purchaseReg)) {
             returnFlag = false;
             showSnackBar("Please check purchase register");
-            ScrollToView(binding.rgPurchase);
         } else if (TextUtils.isEmpty(salePriceFix)) {
             returnFlag = false;
             showSnackBar("Please check sale price fixation register");
-            ScrollToView(binding.rgSale);
         } else if (TextUtils.isEmpty(godownLiaReg)) {
             returnFlag = false;
             showSnackBar("Please check godown liability register");
-            ScrollToView(binding.rgGodown);
         } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
             showSnackBar("Please check insurance certificate");
-            ScrollToView(binding.rgInsurance);
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etComName, "Enter insurance company name");

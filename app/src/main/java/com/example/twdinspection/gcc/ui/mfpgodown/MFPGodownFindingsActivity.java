@@ -451,7 +451,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
             ScrollToView(binding.ivRepairs);
-        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 1) {
+        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
             ScrollToView(binding.ivRepairs);
