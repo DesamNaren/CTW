@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.drdepot;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -34,6 +33,7 @@ import com.example.twdinspection.gcc.source.inspections.DrDepot.RegisterBookCert
 import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -521,7 +521,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                    editor.putString(AppConstants.InspectionDetails,inspectionDetails);
                    editor.commit();
 
-                   startActivity(new Intent(DRDepotFindingsActivity.this,GCCPhotoActivity.class));
+                   startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class));
                }
            }
        });

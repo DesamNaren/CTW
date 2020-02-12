@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.punit;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -15,18 +15,14 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.databinding.ActivityGccFindingsBinding;
 import com.example.twdinspection.databinding.ActivityGccPunitFindingsBinding;
 import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
-import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MFPGeneralFindings;
-import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCertificates;
-import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
 import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
 import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitRegisterBookCertificates;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;

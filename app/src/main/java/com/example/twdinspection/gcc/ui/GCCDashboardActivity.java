@@ -13,6 +13,10 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityGccDashboardBinding;
+import com.example.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
+import com.example.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
+import com.example.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
+import com.example.twdinspection.gcc.ui.punit.PUnitSelActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;

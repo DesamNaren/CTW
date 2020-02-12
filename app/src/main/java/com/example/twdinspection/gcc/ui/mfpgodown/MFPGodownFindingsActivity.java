@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.mfpgodown;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -26,19 +26,12 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityGccFindingsBinding;
 import com.example.twdinspection.databinding.ActivityGccMfpFindingsBinding;
 import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MFPGeneralFindings;
 import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCertificates;
 import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
-import com.example.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindings;
-import com.example.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
-import com.example.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
-import com.example.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;

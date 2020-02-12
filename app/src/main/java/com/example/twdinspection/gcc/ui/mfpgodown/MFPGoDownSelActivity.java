@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.mfpgodown;
 
 import android.content.Context;
 import android.content.Intent;

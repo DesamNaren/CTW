@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.drgodown;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -34,6 +34,7 @@ import com.example.twdinspection.gcc.source.inspections.godown.DrGodownRegisterB
 import com.example.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -608,7 +609,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
             ScrollToView(binding.ivRepairs);
-        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 1) {
+        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
             ScrollToView(binding.ivRepairs);

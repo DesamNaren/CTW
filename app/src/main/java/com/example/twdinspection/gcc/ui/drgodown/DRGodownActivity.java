@@ -1,9 +1,8 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.drgodown;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,9 +18,9 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityPUnitBinding;
+import com.example.twdinspection.databinding.ActivityDrGodownBinding;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -36,24 +35,22 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PUnitActivity extends AppCompatActivity {
+public class DRGodownActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
-    ActivityPUnitBinding binding;
+    ActivityDrGodownBinding binding;
+    private DrGodowns drGodowns;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
-    private PUnits pUnits;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_p_unit);
-        binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
+        customProgressDialog = new CustomProgressDialog(this);
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -61,13 +58,17 @@ public class PUnitActivity extends AppCompatActivity {
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(),this);
+        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.ivHome.setVisibility(View.GONE);
+        viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
-        binding.header.ivHome.setVisibility(View.GONE);
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.man_unit_name));
+
+        binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.inchargeLL.setVisibility(View.VISIBLE);
+
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,18 +76,16 @@ public class PUnitActivity extends AppCompatActivity {
             }
         });
 
-        binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.man_unit_name));
-        binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
-        binding.includeBasicLayout.inchargeLL.setVisibility(View.VISIBLE);
-
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
-            String str = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
-            pUnits = gson.fromJson(str, PUnits.class);
-            if (pUnits != null) {
-                binding.includeBasicLayout.drGodownName.setText(pUnits.getGodownName());
-                binding.includeBasicLayout.inchargeName.setText(pUnits.getIncharge());
+            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
+            drGodowns = gson.fromJson(str, DrGodowns.class);
+            if (drGodowns != null) {
+                binding.includeBasicLayout.divName.setText(drGodowns.getDivisionName());
+                binding.includeBasicLayout.socName.setText(drGodowns.getSocietyName());
+                binding.includeBasicLayout.drGodownName.setText(drGodowns.getGodownName());
+                binding.includeBasicLayout.inchargeName.setText(drGodowns.getIncharge());
                 binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
             }
         } catch (Exception e) {
@@ -96,86 +95,87 @@ public class PUnitActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
+//                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
+//                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+//                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
+//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
+//                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
+//                            setFragPos(header, z);
+//                            return;
+//                        }
+//                    }
+//                }
+//                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
+//                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+//                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
+//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
+//                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
+//                            setFragPos(header, z);
+//                            return;
+//                        }
+//                    }
+//                }
+//
+//
+//                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+//                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+//                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
+//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+//                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
+//                            setFragPos(header, z);
+//                            return;
+//                        }
+//                    }
+//                }
+//
+//
+//                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
+//                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+//                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
+//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
+//                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
+//                            setFragPos(header, z);
+//                            return;
+//                        }
+//                    }
+//                }
+//
+//                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
+//                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+//                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
+//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
+//                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
+//                            setFragPos(header, z);
+//                            return;
+//                        }
+//                    }
+//                }
 
                 Gson gson = new Gson();
                 String stockData = gson.toJson(stockDetailsResponsemain);
                 try {
-                    editor = TWDApplication.get(PUnitActivity.this).getPreferences().edit();
+                    editor = TWDApplication.get(DRGodownActivity.this).getPreferences().edit();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(PUnitActivity.this, PUnitsFindingsActivity.class);
+                Intent intent = new Intent(DRGodownActivity.this, DRGodownFindingsActivity.class);
                 startActivity(intent);
             }
 
         });
 
-        if (Utils.checkInternetConnection(PUnitActivity.this)) {
-            if (pUnits != null && pUnits.getGodownId() != null) {
-
+        if (Utils.checkInternetConnection(DRGodownActivity.this)) {
+            if (drGodowns != null && drGodowns.getGodownId() != null) {
                 customProgressDialog.show();
-                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(pUnits.getGodownId());
-                officesResponseLiveData.observe(PUnitActivity.this, new Observer<StockDetailsResponse>() {
+                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(drGodowns.getGodownId());
+                officesResponseLiveData.observe(DRGodownActivity.this, new Observer<StockDetailsResponse>() {
                     @Override
                     public void onChanged(StockDetailsResponse stockDetailsResponse) {
 
                         customProgressDialog.hide();
-                        officesResponseLiveData.removeObservers(PUnitActivity.this);
+                        officesResponseLiveData.removeObservers(DRGodownActivity.this);
                         stockDetailsResponsemain = stockDetailsResponse;
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
@@ -183,7 +183,6 @@ public class PUnitActivity extends AppCompatActivity {
                                 binding.viewPagerLl.setVisibility(View.VISIBLE);
                                 binding.noDataTv.setVisibility(View.GONE);
                                 binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
-
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -257,17 +256,19 @@ public class PUnitActivity extends AppCompatActivity {
                         } else {
                             callSnackBar(getString(R.string.something));
                         }
+
                     }
+
                 });
             } else {
-                Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
+                Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customWarningAlert(PUnitActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
-    }
 
+    }
 
     void setFragPos(String header, int pos) {
         for (int x = 0; x < mFragmentTitleList.size(); x++) {
@@ -277,19 +278,15 @@ public class PUnitActivity extends AppCompatActivity {
                 if (header.contains("Essential Commodities")) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 }
-
                 if (header.equalsIgnoreCase("Daily Requirements")) {
                     ((DailyFragment) mFragmentList.get(x)).setPos(pos);
                 }
-
                 if (header.equalsIgnoreCase("Empties")) {
                     ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
                 }
-
                 if (header.equalsIgnoreCase("MFP Commodities")) {
                     ((MFPFragment) mFragmentList.get(x)).setPos(pos);
                 }
-
                 if (header.equalsIgnoreCase("Processing Units")) {
                     ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
                 }
@@ -298,11 +295,13 @@ public class PUnitActivity extends AppCompatActivity {
         }
     }
 
+
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.show();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -344,6 +343,5 @@ public class PUnitActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
-
 
 }

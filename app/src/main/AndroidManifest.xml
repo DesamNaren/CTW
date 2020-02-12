@@ -139,28 +139,25 @@
             android:name=".gcc.ui.GCCDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.DRDepotActivity"
+            android:name=".gcc.ui.drdepot.DRDepotActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.DRGodownActivity"
+            android:name=".gcc.ui.drgodown.DRGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.MFPGodownActivity"
+            android:name=".gcc.ui.mfpgodown.MFPGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.PUnitActivity"
+            android:name=".gcc.ui.punit.PUnitActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.ui.GCCPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.GCCOfficerFindingsActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".inspection.ui.LocBaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.DRDepotFindingsActivity"
+            android:name=".gcc.ui.drdepot.DRDepotFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.QuitAppActivity"
@@ -169,20 +166,20 @@
             android:name=".gcc.ui.GCCSyncActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.DRGODownSelActivity"
+            android:name=".gcc.ui.drgodown.DRGODownSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.DRDepotSelActivity"
+            android:name=".gcc.ui.drdepot.DRDepotSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.MFPGoDownSelActivity"
+            android:name=".gcc.ui.mfpgodown.MFPGoDownSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.PUnitSelActivity"
+            android:name=".gcc.ui.punit.PUnitSelActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.DRGodownFindingsActivity" />
-        <activity android:name=".gcc.ui.MFPGodownFindingsActivity" />
-        <activity android:name=".gcc.ui.PUnitsFindingsActivity" />
+        <activity android:name=".gcc.ui.drgodown.DRGodownFindingsActivity" />
+        <activity android:name=".gcc.ui.mfpgodown.MFPGodownFindingsActivity" />
+        <activity android:name=".gcc.ui.punit.PUnitsFindingsActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

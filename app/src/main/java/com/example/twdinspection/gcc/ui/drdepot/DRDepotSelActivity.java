@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.drdepot;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,9 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityDrGodownSelBinding;
+import com.example.twdinspection.databinding.ActivityDrDepotSelBinding;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -29,29 +29,29 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DRGODownSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DRDepotSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
-    ActivityDrGodownSelBinding binding;
+    ActivityDrDepotSelBinding binding;
     private Context context;
     private DivisionSelectionViewModel viewModel;
-    private String selectedDivId, selectedSocietyId, selectedGoDownId;
+    private String selectedDivId, selectedSocietyId, selectedDepotID;
     private List<DivisionsInfo> divisionsInfos;
     private List<String> societies;
-    private List<String> drGodowns;
-    private DrGodowns selectedDrGodowns;
+    private List<String> drDepots;
+    private DRDepots selectedDRDepots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown_sel);
-        context = DRGODownSelActivity.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_sel);
+        context = DRDepotSelActivity.this;
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
-        drGodowns = new ArrayList<>();
+        drDepots = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +78,9 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         }
 
 
-
-
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, divisions -> {
-            divisionLiveData.removeObservers(DRGODownSelActivity.this);
+            divisionLiveData.removeObservers(DRDepotSelActivity.this);
             customProgressDialog.dismiss();
             if (divisions != null && divisions.size() > 0) {
                 ArrayList<String> divisionNames = new ArrayList<>();
@@ -97,17 +95,17 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
-        binding.spGodown.setOnItemSelectedListener(this);
+        binding.spDepot.setOnItemSelectedListener(this);
         binding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
                     Gson gson = new Gson();
-                    String goDownData = gson.toJson(selectedDrGodowns);
-                    editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
+                    String depotData = gson.toJson(selectedDRDepots);
+                    editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
                     editor.commit();
 
-                    startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
+                    startActivity(new Intent(DRDepotSelActivity.this, DRDepotActivity.class));
                 }
             }
         });
@@ -126,8 +124,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
             showSnackBar("Please select society");
             return false;
-        }else if (TextUtils.isEmpty(selectedGoDownId)) {
-            showSnackBar("Please select godown");
+        }else if (TextUtils.isEmpty(selectedDepotID)) {
+            showSnackBar("Please select depot");
             return false;
         }
         return true;
@@ -142,26 +140,26 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
-            selectedDrGodowns=null;
+            selectedDRDepots=null;
             selectedSocietyId = "";
             selectedDivId = "";
-            selectedGoDownId = "";
+            selectedDepotID = "";
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
             if (position != 0) {
-                LiveData<String> liveData = viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());
-                liveData.observe(DRGODownSelActivity.this, new Observer<String>() {
+                LiveData<String> liveData =  viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());
+                liveData.observe(DRDepotSelActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String str) {
-                        liveData.removeObservers(DRGODownSelActivity.this);
+                        liveData.removeObservers(DRDepotSelActivity.this);
                         if (str != null) {
                             selectedDivId = str;
-                           LiveData<List<DivisionsInfo>> listLiveData = viewModel.getSocieties(selectedDivId);
-                           listLiveData.observe(DRGODownSelActivity.this, new Observer<List<DivisionsInfo>>() {
+                            LiveData<List<DivisionsInfo>> listLiveData = viewModel.getSocieties(selectedDivId);
+                            listLiveData.observe(DRDepotSelActivity.this, new Observer<List<DivisionsInfo>>() {
                                 @Override
                                 public void onChanged(List<DivisionsInfo> divisionsInfoList) {
-                                    listLiveData.removeObservers(DRGODownSelActivity.this);
+                                    listLiveData.removeObservers(DRDepotSelActivity.this);
                                     divisionsInfos.addAll(divisionsInfoList);
                                     if (divisionsInfos != null && divisionsInfos.size() > 0) {
                                         for (int i = 0; i < divisionsInfos.size(); i++) {
@@ -180,41 +178,41 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                     }
                 });
             } else {
-                selectedDrGodowns=null;
+                selectedDRDepots=null;
                 selectedDivId = "";
                 selectedSocietyId = "";
                 binding.spSociety.setAdapter(null);
-                selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                selectedDepotID = "";
+                binding.spDepot.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
-                selectedDrGodowns=null;
+                selectedDRDepots=null;
                 selectedSocietyId = "";
-                selectedGoDownId = "";
-                drGodowns = new ArrayList<>();
-               LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
-               liveData.observe(DRGODownSelActivity.this, new Observer<String>() {
+                selectedDepotID = "";
+                drDepots = new ArrayList<>();
+                LiveData<String> liveData= viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
+                liveData.observe(DRDepotSelActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String str) {
-                        liveData.removeObservers(DRGODownSelActivity.this);
+                        liveData.removeObservers(DRDepotSelActivity.this);
                         if (str != null) {
                             selectedSocietyId = str;
-                           LiveData<List<DrGodowns>>listLiveData = viewModel.getDRGoDowns(selectedDivId, selectedSocietyId);
-                            listLiveData.observe(DRGODownSelActivity.this, new Observer<List<DrGodowns>>() {
+                           LiveData<List<DRDepots>> listLiveData = viewModel.getDRDepots(selectedDivId, selectedSocietyId);
+                           listLiveData.observe(DRDepotSelActivity.this, new Observer<List<DRDepots>>() {
                                 @Override
-                                public void onChanged(List<DrGodowns> godownsList) {
-                                    listLiveData.removeObservers(DRGODownSelActivity.this);
-                                    if (godownsList != null && godownsList.size() > 0) {
-                                        drGodowns.add("-Select-");
-                                        for (int i = 0; i < godownsList.size(); i++) {
-                                            drGodowns.add(godownsList.get(i).getGodownName());
+                                public void onChanged(List<DRDepots> depotsList) {
+                                    listLiveData.removeObservers(DRDepotSelActivity.this);
+                                    if (depotsList != null && depotsList.size() > 0) {
+                                        drDepots.add("-Select-");
+                                        for (int i = 0; i < depotsList.size(); i++) {
+                                            drDepots.add(depotsList.get(i).getGodownName());
                                         }
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                                android.R.layout.simple_spinner_dropdown_item, drGodowns);
-                                        binding.spGodown.setAdapter(adapter);
+                                                android.R.layout.simple_spinner_dropdown_item, drDepots);
+                                        binding.spDepot.setAdapter(adapter);
                                     }else {
-                                        showSnackBar("No godowns found");
+                                        showSnackBar("No depots found");
                                     }
                                 }
                             });
@@ -222,28 +220,29 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                     }
                 });
             } else {
-                selectedDrGodowns=null;
+                selectedDRDepots=null;
                 selectedSocietyId = "";
-                selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                selectedDepotID = "";
+                binding.spDepot.setAdapter(null);
             }
-        } else if (adapterView.getId() == R.id.sp_godown) {
+        } else if (adapterView.getId() == R.id.sp_depot) {
             if (position != 0) {
-                selectedDrGodowns=null;
-                selectedGoDownId = "";
-                LiveData<DrGodowns> drGodownsLiveData = viewModel.getGODownID(selectedDivId, selectedSocietyId, binding.spGodown.getSelectedItem().toString());
-                drGodownsLiveData.observe(DRGODownSelActivity.this, new Observer<DrGodowns>() {
+                selectedDRDepots=null;
+                selectedDepotID = "";
+               LiveData<DRDepots> liveData= viewModel.getDRDepotID(selectedDivId, selectedSocietyId, binding.spDepot.getSelectedItem().toString());
+               liveData.observe(DRDepotSelActivity.this, new Observer<DRDepots>() {
                     @Override
-                    public void onChanged(DrGodowns drGodowns) {
-                        if (drGodowns != null) {
-                            selectedGoDownId = drGodowns.getGodownId();
-                            selectedDrGodowns = drGodowns;
+                    public void onChanged(DRDepots drDepots) {
+                        liveData.removeObservers(DRDepotSelActivity.this);
+                        if (drDepots != null) {
+                            selectedDepotID = drDepots.getGodownId();
+                            selectedDRDepots = drDepots;
                         }
                     }
                 });
             } else {
-                selectedDrGodowns=null;
-                selectedGoDownId = "";
+                selectedDRDepots=null;
+                selectedDepotID = "";
             }
         }
     }
