@@ -180,7 +180,8 @@ public class PUnitActivity extends AppCompatActivity {
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                binding.viewPagerLl.setVisibility(View.VISIBLE);
+                                binding.viewPager.setVisibility(View.VISIBLE);
+                                binding.tabs.setVisibility(View.VISIBLE);
                                 binding.noDataTv.setVisibility(View.GONE);
                                 binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
 
@@ -242,11 +243,12 @@ public class PUnitActivity extends AppCompatActivity {
                                     adapter.addFrag(pUnitFragment, "Processing Units");
                                 }
 
-                                binding.tabs.setupWithViewPager(binding.viewpager);
-                                binding.viewpager.setAdapter(adapter);
+                                binding.tabs.setupWithViewPager(binding.viewPager);
+                                binding.viewPager.setAdapter(adapter);
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                                binding.viewPagerLl.setVisibility(View.GONE);
+                                binding.viewPager.setVisibility(View.GONE);
+                                binding.tabs.setVisibility(View.GONE);
                                 binding.noDataTv.setVisibility(View.VISIBLE);
                                 binding.bottomLl.btnLayout.setVisibility(View.GONE);
                                 binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
@@ -273,7 +275,7 @@ public class PUnitActivity extends AppCompatActivity {
         for (int x = 0; x < mFragmentTitleList.size(); x++) {
             if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
-                binding.viewpager.setCurrentItem(x);
+                binding.viewPager.setCurrentItem(x);
                 if (header.contains("Essential Commodities")) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 }

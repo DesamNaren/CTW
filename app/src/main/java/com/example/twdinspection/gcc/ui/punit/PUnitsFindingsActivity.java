@@ -95,7 +95,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             @Override
             public void onClick(View view) {
 
-                remarks = binding.etRemarks.getText().toString().trim();
+                remarks = binding.remarks.etRemarks.getText().toString().trim();
                 insComName = binding.etComName.getText().toString().trim();
                 insComDate = binding.etInsDate.getText().toString().trim();
                 weightDate = binding.etLegalMetDate.getText().toString().trim();
@@ -155,7 +155,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.stock_yes_rb) {
                     rawStock = AppConstants.Yes;
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.stock_yes_rb) {
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.stock_no_rb) {
                     rawStock = AppConstants.No;
                 }
             }
@@ -559,7 +559,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         }else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
             showSnackBar("Please enter remarks");
-            ScrollToViewEditText(binding.etRemarks, "Enter remarks");
+            ScrollToViewEditText(binding.remarks.etRemarks, "Enter remarks");
         }
         return returnFlag;
     }

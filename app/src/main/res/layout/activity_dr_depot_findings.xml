@@ -20,9 +20,9 @@
 
         <LinearLayout
             android:id="@+id/ll_header"
-            android:layout_below="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
             android:layout_margin="@dimen/dimen_10dp"
             android:background="@color/white"
             android:elevation="@dimen/dimen_10dp"
@@ -67,13 +67,13 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:id="@+id/tv_sys_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_sys_val"
                         android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -90,13 +90,13 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:id="@+id/tv_phys_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_phys_val"
                         android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -113,46 +113,98 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="18sp"
+                        android:id="@+id/tv_diff_val"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_diff_val"
                         android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    app:errorEnabled="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="Reason mentioned by In charge regarding Deficit / Surplus"
-                        android:textColor="@color/black" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <com.example.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_cash_bal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:errorEnabled="true">
+                        android:hint="@string/cash_balance_as_per_cash_book"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_reason"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/reason"
-                            android:imeOptions="actionNext"
-                            android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.example.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_phys_cash"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/a_physical_cash"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
 
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
+
+                    <com.example.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_adj_vouch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/b_adjustment_vouchers_bills"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
+
+                    <com.example.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_liab_bal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/liability_balance_as_per_liability_register"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_def_exc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_5dp"
+                    android:text="@string/deficit_excess"
+                    android:textColor="@color/black" />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
+
+                    <com.example.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Reason mentioned by incharge regarding deficit / surplus "
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -160,9 +212,9 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/scroll"
             android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/ll_header">
 
@@ -193,10 +245,12 @@
                             android:text="Registers, Books and Certificates"
                             android:textColor="@color/black" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/black" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -389,6 +443,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -464,6 +519,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -500,8 +556,8 @@
                             </RadioGroup>
 
 
-
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -542,9 +598,9 @@
                                 android:id="@+id/weight_cert_issue_date"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
-                                android:visibility="gone"
                                 android:layout_height="wrap_content"
                                 android:textColorHint="@color/colorAccent"
+                                android:visibility="gone"
                                 app:errorEnabled="true">
 
 
@@ -562,6 +618,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -598,17 +655,14 @@
                             </RadioGroup>
 
 
-
                         </LinearLayout>
-
 
 
                     </LinearLayout>
 
 
-
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -630,10 +684,12 @@
                             android:text="MFP Procurement Registers"
                             android:textColor="@color/black" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/black" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -826,6 +882,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -867,10 +924,8 @@
                     </LinearLayout>
 
 
-
-
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -892,10 +947,12 @@
                             android:text="Availability of hoardings / boards"
                             android:textColor="@color/black" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/black" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1088,6 +1145,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1125,6 +1183,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1166,10 +1225,8 @@
                     </LinearLayout>
 
 
-
-
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1388,11 +1445,11 @@
                             </RadioGroup>
 
                             <LinearLayout
-                                android:visibility="gone"
                                 android:id="@+id/ins_ll"
-                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/repairs_type"
@@ -1424,6 +1481,7 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/feedback"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1441,6 +1499,7 @@
                                 android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/remarks"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1455,10 +1514,9 @@
                                 android:layout_height="wrap_content"
                                 android:hint="Remarks of Inspection officer"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"/>
+                                android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
-
 
 
                     </LinearLayout>
@@ -1467,14 +1525,16 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll" />
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>

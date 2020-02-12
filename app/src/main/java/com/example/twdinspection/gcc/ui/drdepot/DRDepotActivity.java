@@ -1,5 +1,6 @@
 package com.example.twdinspection.gcc.ui.drdepot;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
@@ -44,6 +46,7 @@ import com.example.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.inspection.viewmodel.StockViewModel;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -60,7 +63,7 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface {
+public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
@@ -98,6 +101,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
         gccPhotoViewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
+
         customProgressDialog = new CustomProgressDialog(this);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
@@ -221,8 +225,20 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     } else {
                         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
                             GCCSubmitRequest request = new GCCSubmitRequest();
-
+                            request.setOfficerId(officerID);
+                            request.setDivisionId(divId);
+                            request.setDivisionName(drDepots.getDivisionName());
+                            request.setSocietyId(drDepots.getSocietyId());
+                            request.setSocietyName(drDepots.getSocietyName());
+                            request.setInchargeName(drDepots.getIncharge());
+                            request.setSupplierType(getString(R.string.dr_depot));
+                            request.setInspectionTime(Utils.getCurrentDateTime());
+                            request.setGodown_name(drDepots.getGodownName());
+                            request.setGodownId(drDepots.getGodownId());
+//        request.setShopAvail(shopAvail);
                             gccPhotoViewModel.submitGCCDetails(request);
+                        }else {
+                            Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                         }
                     }
                 }
@@ -302,8 +318,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                     adapter.addFrag(pUnitFragment, "Processing Units");
                                 }
 
-                                binding.tabs.setupWithViewPager(binding.viewpager);
-                                binding.viewpager.setAdapter(adapter);
+                                binding.tabs.setupWithViewPager(binding.viewPager);
+                                binding.viewPager.setAdapter(adapter);
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
 
@@ -319,8 +335,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             } else {
                 Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
-        }
-        else {
+        } else {
             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
@@ -334,18 +349,21 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     shopAvail = AppConstants.open;
 
                     if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                        binding.viewPagerLl.setVisibility(View.VISIBLE);
+                        binding.viewPager.setVisibility(View.VISIBLE);
+                        binding.tabs.setVisibility(View.VISIBLE);
                         binding.noDataTv.setVisibility(View.GONE);
                         binding.bottomLl.btnNext.setText("Next");
-                    }else {
-                        binding.viewPagerLl.setVisibility(View.GONE);
+                    } else {
+                        binding.tabs.setVisibility(View.GONE);
+                        binding.viewPager.setVisibility(View.GONE);
                         binding.noDataTv.setVisibility(View.VISIBLE);
                         binding.bottomLl.btnLayout.setVisibility(View.GONE);
                         binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
                     }
 
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_close) {
-                    binding.viewPagerLl.setVisibility(View.GONE);
+                    binding.viewPager.setVisibility(View.GONE);
+                    binding.tabs.setVisibility(View.GONE);
                     binding.ivShopCam.setVisibility(View.VISIBLE);
                     shopAvail = AppConstants.close;
                     binding.bottomLl.btnNext.setText("Submit");
@@ -392,7 +410,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         for (int x = 0; x < mFragmentTitleList.size(); x++) {
             if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
-                binding.viewpager.setCurrentItem(x);
+                binding.viewPager.setCurrentItem(x);
                 if (header.contains("Essential Commodities")) {
                     ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
                 }
@@ -452,6 +470,14 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         } else {
             showSnackBar(getString(R.string.something));
         }
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        callSnackBar(errMsg);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -585,5 +585,9 @@
     <string name="shop_availability">Shop availability</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="a_physical_cash">A. Physical cash</string>
+    <string name="b_adjustment_vouchers_bills">B.Adjustment vouchers / bills</string>
+    <string name="liability_balance_as_per_liability_register">Liability balance as per liability register</string>
+    <string name="deficit_excess">Deficit/Excess</string>
 
 </resources>

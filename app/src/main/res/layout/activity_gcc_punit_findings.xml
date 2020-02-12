@@ -99,7 +99,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_stock"/>
                         </LinearLayout>
 
 
@@ -137,7 +139,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_processing"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -174,7 +178,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_inward"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -211,7 +217,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_outward"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -248,7 +256,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_sale_inv"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -285,7 +295,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_lab_att"/>
                         </LinearLayout>
 
 
@@ -407,7 +419,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_fire_noc"/>
 
                         </LinearLayout>
 
@@ -511,7 +525,9 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
-
+                                <include
+                                    layout="@layout/reamrks_layout"
+                                    android:id="@+id/remarks_amc"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -548,7 +564,9 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
-
+                                <include
+                                    layout="@layout/reamrks_layout"
+                                    android:id="@+id/remarks_agmark"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -585,7 +603,9 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
-
+                                <include
+                                    layout="@layout/reamrks_layout"
+                                    android:id="@+id/remarks_fsaai"/>
                             </LinearLayout>
 
 
@@ -625,7 +645,9 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
+                            <include
+                                layout="@layout/reamrks_layout"
+                                android:id="@+id/remarks_empties"/>
                         </LinearLayout>
 
 
@@ -665,7 +687,9 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
-
+                        <include
+                            layout="@layout/reamrks_layout"
+                            android:id="@+id/remarks_barrels"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -701,7 +725,9 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
-
+                        <include
+                            layout="@layout/reamrks_layout"
+                            android:id="@+id/remarks_processing"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -738,7 +764,9 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
-
+                        <include
+                            layout="@layout/reamrks_layout"
+                            android:id="@+id/remarks_cash_bank"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -775,7 +803,9 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
-
+                        <include
+                            layout="@layout/reamrks_layout"
+                            android:id="@+id/remarks_veh_log"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -925,24 +955,9 @@
                             </RadioGroup>
 
                         </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_5dp"
-                            app:errorEnabled="true">
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_remarks"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/remarks"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
+                        <include
+                            layout="@layout/reamrks_layout"
+                            android:id="@+id/remarks"/>
                     </LinearLayout>
 
 

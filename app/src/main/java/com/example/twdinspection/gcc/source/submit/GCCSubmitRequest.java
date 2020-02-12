@@ -9,9 +9,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class GCCSubmitRequest {
 
+
+//    @SerializedName("shop_avail")
+//    @Expose
+//    private String shopAvail;
+
     @SerializedName("officer_id")
     @Expose
     private String officerId;
+    @SerializedName("godown_id")
+    @Expose
+    private String godownId;
+    @SerializedName("godown_name")
+    @Expose
+    private String godown_name;
     @SerializedName("division_id")
     @Expose
     private String divisionId;
@@ -39,6 +50,31 @@ public class GCCSubmitRequest {
     @SerializedName("stock_details")
     @Expose
     private StockSubmitRequest stockDetails;
+//
+//    public String getShopAvail() {
+//        return shopAvail;
+//    }
+//
+//    public void setShopAvail(String shopAvail) {
+//        this.shopAvail = shopAvail;
+//    }
+
+
+    public String getGodownId() {
+        return godownId;
+    }
+
+    public void setGodownId(String godownId) {
+        this.godownId = godownId;
+    }
+
+    public String getGodown_name() {
+        return godown_name;
+    }
+
+    public void setGodown_name(String godown_name) {
+        this.godown_name = godown_name;
+    }
 
     public StockSubmitRequest getStockDetails() {
         return stockDetails;

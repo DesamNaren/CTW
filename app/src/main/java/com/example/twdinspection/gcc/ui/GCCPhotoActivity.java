@@ -72,7 +72,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_stock_arrang1 = 0, flag_stock_arrang2 = 0, flag_machinary = 0, flag_repair =0,flag_pUnits=0;
     File file_repair,file_entrance, file_ceiling, file_floor, file_stock_arrang1, file_stock_arrang2, file_machinary;
     String FilePath, repairPath;
-    private String officerID,divId,divName,socId,socName,inchName,suppType,suppId;
+    private String officerID,divId,divName,socId,socName,inchName,suppType,suppId,godId,godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -123,6 +123,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             inchName=pUnits.getIncharge();
             suppType=getString(R.string.p_unit);
             suppId=pUnits.getGodownId();
+            godName=pUnits.getGodownName();
         }
         if(inspectionSubmitResponse.getDrDepot()!=null){
             String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
@@ -134,6 +135,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             inchName=drDepot.getIncharge();
             suppType=getString(R.string.dr_depot);
             suppId=drDepot.getGodownId();
+            godName=drDepot.getGodownName();
         }
         if(inspectionSubmitResponse.getDrGodown()!=null){
             String godownData = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
@@ -145,6 +147,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             inchName=drGodowns.getIncharge();
             suppType=getString(R.string.dr_godown);
             suppId=drGodowns.getGodownId();
+            godName=drGodowns.getGodownName();
         }
         if(inspectionSubmitResponse.getMfpGodowns()!=null){
             String mfpGodown = sharedPreferences.getString(AppConstants.MFP_DEPOT_DATA, "");
@@ -156,6 +159,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             inchName=mfpGoDowns.getIncharge();
             suppType=getString(R.string.mfp_godown);
             suppId=mfpGoDowns.getGodownId();
+            godName=mfpGoDowns.getGodownName();
         }
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,6 +270,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         request.setInchargeName(inchName);
         request.setSupplierType(suppType);
         request.setInspectionTime(Utils.getCurrentDateTime());
+        request.setGodownId(suppId);
+        request.setGodown_name(godName);
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 
@@ -565,9 +571,9 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     @Override
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
-        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             callPhotoSubmit();
-        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
@@ -578,11 +584,14 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse) {
         customProgressDialog.hide();
         if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-
+            CallSuccessAlert(gccPhotoSubmitResponse.getStatusMessage());
         } else if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(binding.root, gccPhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
         }
+    }
+    private void CallSuccessAlert(String msg) {
+        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 }
