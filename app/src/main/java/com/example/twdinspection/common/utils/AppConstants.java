@@ -86,4 +86,5 @@ public class AppConstants {
     public static String repairsPath="Repair_path";
     public static String open="open";
     public static String close="close";
+    public static String SHOP_CLOSED ="SHOP_CLOSED";
 }

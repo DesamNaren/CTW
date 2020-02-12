@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
@@ -39,6 +40,7 @@ import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.example.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.example.twdinspection.inspection.viewmodel.StockViewModel;
@@ -94,7 +96,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        gccPhotoViewModel = new GCCPhotoViewModel(this);
+        gccPhotoViewModel = ViewModelProviders.of(this,
+                new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
         customProgressDialog = new CustomProgressDialog(this);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
@@ -218,6 +221,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     } else {
                         if (Utils.checkInternetConnection(DRDepotActivity.this)) {
                             GCCSubmitRequest request = new GCCSubmitRequest();
+
                             gccPhotoViewModel.submitGCCDetails(request);
                         }
                     }
@@ -323,22 +327,21 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         binding.rgShopAvail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_open) {
                     binding.ivShopCam.setVisibility(View.GONE);
-                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                    shopAvail = AppConstants.open;
 
-                    if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                    if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                         binding.viewPagerLl.setVisibility(View.VISIBLE);
                         binding.noDataTv.setVisibility(View.GONE);
                         binding.bottomLl.btnNext.setText("Next");
-                        binding.ivShopCam.setVisibility(View.GONE);
-                        shopAvail = AppConstants.open;
                     }else {
                         binding.viewPagerLl.setVisibility(View.GONE);
                         binding.noDataTv.setVisibility(View.VISIBLE);
                         binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                        binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                        binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
                     }
 
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_close) {
@@ -346,8 +349,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     binding.ivShopCam.setVisibility(View.VISIBLE);
                     shopAvail = AppConstants.close;
                     binding.bottomLl.btnNext.setText("Submit");
-                    binding.viewPagerLl.setVisibility(View.GONE);
-
                 }
             }
         });
@@ -355,7 +356,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             @Override
             public void onClick(View v) {
                 if (callPermissions()) {
-                    PIC_TYPE = AppConstants.REPAIR;
+                    PIC_TYPE = AppConstants.SHOP_CLOSED;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {

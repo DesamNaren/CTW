@@ -1,6 +1,7 @@
 package com.example.twdinspection.gcc.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -13,6 +14,7 @@ import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +30,7 @@ public class GCCPhotoViewModel extends ViewModel {
     private ErrorHandlerInterface errorHandlerInterface;
     private GCCSubmitInterface gccSubmitInterface;
 
-    public GCCPhotoViewModel(Context context) {
+    GCCPhotoViewModel(Context context) {
         this.context = context;
         try {
             errorHandlerInterface = (ErrorHandlerInterface) context;
@@ -59,6 +61,9 @@ public class GCCPhotoViewModel extends ViewModel {
         }
     }
     public void submitGCCDetails(GCCSubmitRequest gccSubmitRequest) {
+        Gson gson=new Gson();
+        String request=gson.toJson(gccSubmitRequest);
+        Log.i("Request",request);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getGCCSubmitResponse(gccSubmitRequest).enqueue(new Callback<GCCSubmitResponse>() {
             @Override
