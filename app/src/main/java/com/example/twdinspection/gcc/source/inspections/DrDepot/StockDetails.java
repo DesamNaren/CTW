@@ -13,22 +13,22 @@ public class StockDetails {
     private Double stockValueAsPerPhysical;
     @SerializedName("difference")
     @Expose
-    private Integer difference;
+    private Double difference;
     @SerializedName("cash_bal_as_per_cash_book")
     @Expose
-    private Integer cashBalAsPerCashBook;
+    private Double cashBalAsPerCashBook;
     @SerializedName("physical_cash")
     @Expose
-    private Integer physicalCash;
+    private Double physicalCash;
     @SerializedName("vouchers")
     @Expose
-    private Integer vouchers;
+    private Double vouchers;
     @SerializedName("liability_balance")
     @Expose
-    private Integer liabilityBalance;
+    private Double liabilityBalance;
     @SerializedName("deficit")
     @Expose
-    private Integer deficit;
+    private Double deficit;
     @SerializedName("reason")
     @Expose
     private String reason;
@@ -49,51 +49,51 @@ public class StockDetails {
         this.stockValueAsPerPhysical = stockValueAsPerPhysical;
     }
 
-    public Integer getDifference() {
+    public Double getDifference() {
         return difference;
     }
 
-    public void setDifference(Integer difference) {
+    public void setDifference(Double difference) {
         this.difference = difference;
     }
 
-    public Integer getCashBalAsPerCashBook() {
+    public Double getCashBalAsPerCashBook() {
         return cashBalAsPerCashBook;
     }
 
-    public void setCashBalAsPerCashBook(Integer cashBalAsPerCashBook) {
+    public void setCashBalAsPerCashBook(Double cashBalAsPerCashBook) {
         this.cashBalAsPerCashBook = cashBalAsPerCashBook;
     }
 
-    public Integer getPhysicalCash() {
+    public Double getPhysicalCash() {
         return physicalCash;
     }
 
-    public void setPhysicalCash(Integer physicalCash) {
+    public void setPhysicalCash(Double physicalCash) {
         this.physicalCash = physicalCash;
     }
 
-    public Integer getVouchers() {
+    public Double getVouchers() {
         return vouchers;
     }
 
-    public void setVouchers(Integer vouchers) {
+    public void setVouchers(Double vouchers) {
         this.vouchers = vouchers;
     }
 
-    public Integer getLiabilityBalance() {
+    public Double getLiabilityBalance() {
         return liabilityBalance;
     }
 
-    public void setLiabilityBalance(Integer liabilityBalance) {
+    public void setLiabilityBalance(Double liabilityBalance) {
         this.liabilityBalance = liabilityBalance;
     }
 
-    public Integer getDeficit() {
+    public Double getDeficit() {
         return deficit;
     }
 
-    public void setDeficit(Integer deficit) {
+    public void setDeficit(Double deficit) {
         this.deficit = deficit;
     }
 
@@ -104,5 +104,4 @@ public class StockDetails {
     public void setReason(String reason) {
         this.reason = reason;
     }
-
 }

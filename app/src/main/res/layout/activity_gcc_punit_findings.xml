@@ -727,7 +727,7 @@
                         </RadioGroup>
                         <include
                             layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_processing"/>
+                            android:id="@+id/remarks_cash_book"/>
                     </LinearLayout>
 
                     <LinearLayout

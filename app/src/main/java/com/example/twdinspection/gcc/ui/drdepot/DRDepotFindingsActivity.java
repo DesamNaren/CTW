@@ -22,6 +22,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.custom.CustomFontEditText;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotFindingsBinding;
@@ -30,6 +31,7 @@ import com.example.twdinspection.gcc.source.inspections.DrDepot.GeneralFindings;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.HoardingsBoards;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.MFPRegisters;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.RegisterBookCertificates;
+import com.example.twdinspection.gcc.source.inspections.DrDepot.StockDetails;
 import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
@@ -37,11 +39,18 @@ import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -56,13 +65,14 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     String FilePath, checkUpDate;
     Bitmap bm;
     File file;
-    private String officerID,divId,suppId;
+    private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0;
     private StockDetailsResponse stockDetailsResponse;
-    private String ecsStock,drStock,emptyStock,abstractSales,depotCashBook,liabilityReg,visitorsBook,saleBook,weightsMeasurements,certIssueDate;
-    private String depotAuthCert,mfpStock,mfpPurchase,billAbstract,abstractAccnt,advanceAccnt,mfpLiability,depotNameBoard,gccObjPrinc;
-    private String depotTimimg,mfpComm,ecComm,drComm,stockBal,valuesAsPerSale,valuesAsPerPurchasePrice,qualVerified,depotMaintHygeine,repairsReq,repairsType;
-    private int repairsFlag=0;
+    private String ecsStock, drStock, emptyStock, abstractSales, depotCashBook, liabilityReg, visitorsBook, saleBook, weightsMeasurements, certIssueDate;
+    private String depotAuthCert, mfpStock, mfpPurchase, billAbstract, abstractAccnt, advanceAccnt, mfpLiability, depotNameBoard, gccObjPrinc;
+    private String depotTimimg, mfpComm, ecComm, drComm, stockBal, valuesAsPerSale, valuesAsPerPurchasePrice, qualVerified, depotMaintHygeine, repairsReq, repairsType;
+    private String cashBal, phyCash, vocBills, liaBal, deficitBal, reason, remarks, feedback;
+    private int repairsFlag = 0;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -77,13 +87,13 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             e.printStackTrace();
         }
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
-        officerID=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+        officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
-        DRDepots drDepot=gson.fromJson(depotData, DRDepots.class);
-        divId=drDepot.getDivisionId();
-        suppId=drDepot.getGodownId();
+        DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
+        divId = drDepot.getDivisionId();
+        suppId = drDepot.getGodownId();
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -118,8 +128,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             }
         }
 
-        binding.tvSysVal.setText(String.format("%.2f",sysVal));
-        binding.tvPhysVal.setText(String.format("%.2f",physVal));
+        binding.tvSysVal.setText(String.format("%.2f", sysVal));
+        binding.tvPhysVal.setText(String.format("%.2f", physVal));
         binding.tvDiffVal.setText(String.format("%.2f", sysVal - physVal));
 
         binding.rgWeightMeasCert.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -128,9 +138,9 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.weight_meas_cert_rb_yes) {
                     binding.weightCertIssueDate.setVisibility(View.VISIBLE);
-                    weightsMeasurements=AppConstants.Yes;
+                    weightsMeasurements = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.weight_meas_cert_rb_no) {
-                    weightsMeasurements=AppConstants.No;
+                    weightsMeasurements = AppConstants.No;
                     binding.weightCertIssueDate.setVisibility(View.GONE);
                 }
             }
@@ -455,215 +465,380 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     depotMaintHygeine = AppConstants.No;
             }
         });
-       binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               if(validate()){
-                   repairsType=binding.etRepairsType.getText().toString().trim();
+        binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                   DrDepotInsp drDepotInspection=new DrDepotInsp();
+                repairsType = binding.etRepairsType.getText().toString().trim();
+                remarks = binding.etRemarks.getText().toString().trim();
+                cashBal = binding.etCashBal.getText().toString().trim();
+                phyCash = binding.etPhysCash.getText().toString().trim();
+                vocBills = binding.etAdjVouch.getText().toString().trim();
+                liaBal = binding.etLiabBal.getText().toString().trim();
+                deficitBal = binding.tvDefExc.getText().toString().trim();
+                reason = binding.etReason.getText().toString().trim();
+                feedback = binding.etFeedback.getText().toString().trim();
 
-                   RegisterBookCertificates registerBookCertificates=new RegisterBookCertificates();
-                   registerBookCertificates.setEcsStockRegister(ecsStock);
-                   registerBookCertificates.setDrsStockRegister(drStock);
-                   registerBookCertificates.setEmptiesRegister(emptyStock);
-                   registerBookCertificates.setAbstractSalesRegister(abstractSales);
-                   registerBookCertificates.setLiabilityRegister(liabilityReg);
-                   registerBookCertificates.setVisitorsNoteBook(visitorsBook);
-                   registerBookCertificates.setSaleBillBook(saleBook);
-                   registerBookCertificates.setCashBook(depotCashBook);
-                   registerBookCertificates.setWeightMeasureCertificate(weightsMeasurements);
-                   registerBookCertificates.setWeightMeasureValidity(binding.etWeightCertIssue.getText().toString().trim());
-                   registerBookCertificates.setDepotAuthCertificate(depotAuthCert);
-                   drDepotInspection.setRegisterBookCertificates(registerBookCertificates);
+                if (validate()) {
 
-                   MFPRegisters mfpRegisters=new MFPRegisters();
-                   mfpRegisters.setMfpStock(mfpStock);
-                   mfpRegisters.setMfpPurchase(mfpPurchase);
-                   mfpRegisters.setBillAbstract(billAbstract);
-                   mfpRegisters.setAbstractAccnt(abstractAccnt);
-                   mfpRegisters.setAdvanceAccnt(advanceAccnt);
-                   mfpRegisters.setMfpLiability(mfpLiability);
-                   drDepotInspection.setMfpRegisters(mfpRegisters);
+                    DrDepotInsp drDepotInspection = new DrDepotInsp();
 
-                   HoardingsBoards hoardingsBoards=new HoardingsBoards();
-                   hoardingsBoards.setDepotNameBoard(depotNameBoard);
-                   hoardingsBoards.setGccObjPrinciples(gccObjPrinc);
-                   hoardingsBoards.setDepotTiming(depotTimimg);
-                   hoardingsBoards.setMfpCommodities(mfpComm);
-                   hoardingsBoards.setEcCommodities(ecComm);
-                   hoardingsBoards.setDrCommodities(drComm);
-                   hoardingsBoards.setStockBal(stockBal);
-                   drDepotInspection.setHoardingsBoards(hoardingsBoards);
+                    StockDetails stockDetails = new StockDetails();
+                    stockDetails.setStockValueAsPerSystem(sysVal);
+                    stockDetails.setStockValueAsPerPhysical(physVal);
+                    stockDetails.setDifference(sysVal - physVal);
+                    stockDetails.setCashBalAsPerCashBook(Double.valueOf(cashBal));
+                    stockDetails.setPhysicalCash(Double.valueOf(phyCash));
+                    stockDetails.setVouchers(Double.valueOf(vocBills));
+                    stockDetails.setPhysicalCash(Double.valueOf(phyCash));
+                    stockDetails.setLiabilityBalance(Double.valueOf(liaBal));
+                    stockDetails.setDeficit(Double.valueOf(deficitBal));
+                    stockDetails.setReason(reason);
+                    drDepotInspection.setStockDetails(stockDetails);
 
-                   GeneralFindings generalFindings=new GeneralFindings();
-                   generalFindings.setValuesAsPerSalePrice(valuesAsPerSale);
-                   generalFindings.setValuesAsPerPurchasePrice(valuesAsPerPurchasePrice);
-                   generalFindings.setStockQualityVerified(qualVerified);
-                   generalFindings.setHygienicCondition(depotMaintHygeine);
-                   generalFindings.setRepairsRequired(repairsReq);
-                   generalFindings.setRepairType(repairsType);
-                   generalFindings.setRemarks(binding.etRemarks.getText().toString());
-                   generalFindings.setFeedback(binding.etFeedback.getText().toString());
-                   drDepotInspection.setGeneralFindings(generalFindings);
+                    RegisterBookCertificates registerBookCertificates = new RegisterBookCertificates();
+                    registerBookCertificates.setEcsStockRegister(ecsStock);
+                    registerBookCertificates.setDrsStockRegister(drStock);
+                    registerBookCertificates.setEmptiesRegister(emptyStock);
+                    registerBookCertificates.setAbstractSalesRegister(abstractSales);
+                    registerBookCertificates.setLiabilityRegister(liabilityReg);
+                    registerBookCertificates.setVisitorsNoteBook(visitorsBook);
+                    registerBookCertificates.setSaleBillBook(saleBook);
+                    registerBookCertificates.setCashBook(depotCashBook);
+                    registerBookCertificates.setWeightMeasureCertificate(weightsMeasurements);
+                    registerBookCertificates.setWeightMeasureValidity(binding.etWeightCertIssue.getText().toString().trim());
+                    registerBookCertificates.setDepotAuthCertificate(depotAuthCert);
+                    drDepotInspection.setRegisterBookCertificates(registerBookCertificates);
 
-                   InspectionSubmitResponse inspectionSubmitResponse=new InspectionSubmitResponse();
-                   inspectionSubmitResponse.setDrDepot(drDepotInspection);
-                   try {
-                       editor=TWDApplication.get(DRDepotFindingsActivity.this).getPreferencesEditor();
-                   }catch (Exception e){
+                    MFPRegisters mfpRegisters = new MFPRegisters();
+                    mfpRegisters.setMfpStock(mfpStock);
+                    mfpRegisters.setMfpPurchase(mfpPurchase);
+                    mfpRegisters.setBillAbstract(billAbstract);
+                    mfpRegisters.setAbstractAccnt(abstractAccnt);
+                    mfpRegisters.setAdvanceAccnt(advanceAccnt);
+                    mfpRegisters.setMfpLiability(mfpLiability);
+                    drDepotInspection.setMfpRegisters(mfpRegisters);
+
+                    HoardingsBoards hoardingsBoards = new HoardingsBoards();
+                    hoardingsBoards.setDepotNameBoard(depotNameBoard);
+                    hoardingsBoards.setGccObjPrinciples(gccObjPrinc);
+                    hoardingsBoards.setDepotTiming(depotTimimg);
+                    hoardingsBoards.setMfpCommodities(mfpComm);
+                    hoardingsBoards.setEcCommodities(ecComm);
+                    hoardingsBoards.setDrCommodities(drComm);
+                    hoardingsBoards.setStockBal(stockBal);
+                    drDepotInspection.setHoardingsBoards(hoardingsBoards);
+
+                    GeneralFindings generalFindings = new GeneralFindings();
+                    generalFindings.setValuesAsPerSalePrice(valuesAsPerSale);
+                    generalFindings.setValuesAsPerPurchasePrice(valuesAsPerPurchasePrice);
+                    generalFindings.setStockQualityVerified(qualVerified);
+                    generalFindings.setHygienicCondition(depotMaintHygeine);
+                    generalFindings.setRepairsRequired(repairsReq);
+                    generalFindings.setRepairType(repairsType);
+                    generalFindings.setRemarks(remarks);
+                    generalFindings.setFeedback(feedback);
+                    drDepotInspection.setGeneralFindings(generalFindings);
+
+                    InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
+                    inspectionSubmitResponse.setDrDepot(drDepotInspection);
+                    try {
+                        editor = TWDApplication.get(DRDepotFindingsActivity.this).getPreferencesEditor();
+                    } catch (Exception e) {
                         e.printStackTrace();
-                   }
-                   editor.putString(AppConstants.repairsPath,FilePath);
-                   editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
-                   editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
-                   String inspectionDetails=gson.toJson(inspectionSubmitResponse);
-                   editor.putString(AppConstants.InspectionDetails,inspectionDetails);
-                   editor.commit();
+                    }
+                    editor.putString(AppConstants.repairsPath, FilePath);
+                    editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
+                    String inspectionDetails = gson.toJson(inspectionSubmitResponse);
+                    editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.commit();
 
-                   startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class));
-               }
-           }
-       });
+                    startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class));
+                }
+            }
+        });
+
+        RxTextView
+                .textChangeEvents(binding.etPhysCash)
+                .debounce(100, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+
+                        String cashBal = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
+                            if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
+                                if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
+                                    double defBal = calcDef(cashBal, vocBills, liaBal);
+                                    binding.tvDefExc.setText(String.valueOf(defBal));
+                                }
+                            }
+                        } else {
+                            binding.tvDefExc.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        RxTextView
+                .textChangeEvents(binding.etAdjVouch)
+                .debounce(100, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+
+                        String vocBills = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
+                            if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
+                                if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
+                                    double defBal = calcDef(cashBal, vocBills, liaBal);
+                                    binding.tvDefExc.setText(String.valueOf(defBal));
+                                }
+                            }
+                        } else {
+                            binding.tvDefExc.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        RxTextView
+                .textChangeEvents(binding.etLiabBal)
+                .debounce(100, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+
+                        String liaBal = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
+                            if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
+                                if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
+                                    double defBal = calcDef(cashBal, vocBills, liaBal);
+                                    binding.tvDefExc.setText(String.valueOf(defBal));
+                                }
+                            }
+                        } else {
+                            binding.tvDefExc.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private double calcDef(String cashBal, String vocBills, String liaBal) {
+        double cashBalDbl = Double.valueOf(cashBal);
+        double adjBalDbl = Double.valueOf(vocBills);
+        double liaBalDbl = Double.valueOf(liaBal);
+        return cashBalDbl + adjBalDbl + physVal - liaBalDbl;
     }
 
     private boolean validate() {
-        boolean returnFlag=true;
-        if(TextUtils.isEmpty(ecsStock)){
-            returnFlag=false;
+        boolean returnFlag = true;
+        if (TextUtils.isEmpty(cashBal)) {
+            returnFlag = false;
+            showSnackBar("Enter cash balance as per cash book");
+            ScrollToViewEditText(binding.etCashBal, "Enter cash balance as per cash book");
+        } else if (TextUtils.isEmpty(phyCash)) {
+            returnFlag = false;
+            showSnackBar("Enter physical cash");
+            ScrollToViewEditText(binding.etPhysCash, "Enter physical cash");
+        } else if (TextUtils.isEmpty(vocBills)) {
+            returnFlag = false;
+            showSnackBar("Enter adjustment vouchers / bills");
+            ScrollToViewEditText(binding.etAdjVouch, "Enter adjustment vouchers / bills");
+        } else if (TextUtils.isEmpty(liaBal)) {
+            returnFlag = false;
+            showSnackBar("Enter liability balance as per liability register");
+            ScrollToViewEditText(binding.etLiabBal, "Enter liability balance as per liability register");
+        } else if (TextUtils.isEmpty(reason)) {
+            returnFlag = false;
+            showSnackBar("Enter reason");
+            ScrollToViewEditText(binding.etReason, "Enter reason");
+        } else if (TextUtils.isEmpty(ecsStock)) {
+            returnFlag = false;
             showSnackBar("Please check Ecs stock register");
             ScrollToView(binding.rgEcsStock);
-        }else if(TextUtils.isEmpty(drStock)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(drStock)) {
+            returnFlag = false;
             showSnackBar("Please check DRs stock register");
             ScrollToView(binding.rgDrStock);
-        }else if(TextUtils.isEmpty(emptyStock)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(emptyStock)) {
+            returnFlag = false;
             showSnackBar("Please check empties stock register");
             ScrollToView(binding.rgEmptiesStock);
-        }else if(TextUtils.isEmpty(abstractSales)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(abstractSales)) {
+            returnFlag = false;
             showSnackBar("Please check abstract sales register");
             ScrollToView(binding.rgAbstractSales);
-        }else if(TextUtils.isEmpty(depotCashBook)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(depotCashBook)) {
+            returnFlag = false;
             showSnackBar("Please check Cash book");
             ScrollToView(binding.rgDepotCashBook);
-        }else if(TextUtils.isEmpty(liabilityReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(liabilityReg)) {
+            returnFlag = false;
             showSnackBar("Please check liability register");
             ScrollToView(binding.rgDepotCashBook);
-        }else if(TextUtils.isEmpty(visitorsBook)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(visitorsBook)) {
+            returnFlag = false;
             showSnackBar("Please check visitors note book");
             ScrollToView(binding.rgVisitBookDepot);
-        }else if(TextUtils.isEmpty(saleBook)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(saleBook)) {
+            returnFlag = false;
             showSnackBar("Please check sale bill book");
             ScrollToView(binding.rgSaleBillBook);
-        }else if(TextUtils.isEmpty(weightsMeasurements)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(weightsMeasurements)) {
+            returnFlag = false;
             showSnackBar("Please check weights and measurements certificate issued by legal metrology");
             ScrollToView(binding.rgWeightMeasCert);
-        }else if(!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().equals(getResources().getString(R.string.select_date)) ){
-            returnFlag=false;
+        } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().equals(getResources().getString(R.string.select_date))) {
+            returnFlag = false;
             showSnackBar("Please select certificate issue date");
             ScrollToView(binding.etWeightCertIssue);
-        }else if(TextUtils.isEmpty(depotAuthCert)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(depotAuthCert)) {
+            returnFlag = false;
             showSnackBar("Please check depot authorisation certificate issued by revenue authorities");
             ScrollToView(binding.rgWeightMeasCert);
-        }else if(TextUtils.isEmpty(mfpStock)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(mfpStock)) {
+            returnFlag = false;
             showSnackBar("Please check MFP stock register");
             ScrollToView(binding.rgMfpStock);
-        }else if(TextUtils.isEmpty(mfpPurchase)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(mfpPurchase)) {
+            returnFlag = false;
             showSnackBar("Please check MFP purchase bill book");
             ScrollToView(binding.rgMfpPurchase);
-        }else if(TextUtils.isEmpty(billAbstract)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(billAbstract)) {
+            returnFlag = false;
             showSnackBar("Please check bill abstract book");
             ScrollToView(binding.rgBillAbstract);
-        }else if(TextUtils.isEmpty(abstractAccnt)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(abstractAccnt)) {
+            returnFlag = false;
             showSnackBar("Please check abstract account book");
             ScrollToView(binding.rgAbstractAccntBook);
-        }else if(TextUtils.isEmpty(advanceAccnt)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(advanceAccnt)) {
+            returnFlag = false;
             showSnackBar("Please check advance  account book");
             ScrollToView(binding.rgAdvanceAccntBook);
-        }else if(TextUtils.isEmpty(mfpLiability)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(mfpLiability)) {
+            returnFlag = false;
             showSnackBar("Please check MFP liability register");
             ScrollToView(binding.rgMfpLiabilityReg);
-        }else if(TextUtils.isEmpty(depotNameBoard)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(depotNameBoard)) {
+            returnFlag = false;
             showSnackBar("Please check depot name board");
             ScrollToView(binding.rgDepotNameBoard);
-        }else if(TextUtils.isEmpty(gccObjPrinc)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(gccObjPrinc)) {
+            returnFlag = false;
             showSnackBar("Please check GCC objectives/principles board");
             ScrollToView(binding.rgObjPrinc);
-        }else if(TextUtils.isEmpty(depotTimimg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(depotTimimg)) {
+            returnFlag = false;
             showSnackBar("Please check depot timing board");
             ScrollToView(binding.rgDepotTimimg);
-        }else if(TextUtils.isEmpty(mfpComm)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(mfpComm)) {
+            returnFlag = false;
             showSnackBar("Please check MFP commodities rate board");
             ScrollToView(binding.rgCommRate);
-        }else if(TextUtils.isEmpty(ecComm)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(ecComm)) {
+            returnFlag = false;
             showSnackBar("Please check EC commodities rate board");
             ScrollToView(binding.rgEcCommRate);
-        }else if(TextUtils.isEmpty(drComm)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(drComm)) {
+            returnFlag = false;
             showSnackBar("Please check DR commodities rate board");
             ScrollToView(binding.rgDrCommRate);
-        }else if(TextUtils.isEmpty(stockBal)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(stockBal)) {
+            returnFlag = false;
             showSnackBar("Please check stock balance board");
             ScrollToView(binding.rgStockBal);
-        }else if(TextUtils.isEmpty(valuesAsPerSale)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(valuesAsPerSale)) {
+            returnFlag = false;
             showSnackBar("Please check whether the values are as per sale price");
             ScrollToView(binding.rgValuesAsPerSalePrice);
-        }else if(TextUtils.isEmpty(valuesAsPerPurchasePrice)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(valuesAsPerPurchasePrice)) {
+            returnFlag = false;
             showSnackBar("Please check whether the values are as per purchase price");
             ScrollToView(binding.rgValuesAsPerPurchasePrice);
-        }else if(TextUtils.isEmpty(qualVerified)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(qualVerified)) {
+            returnFlag = false;
             showSnackBar("Please check the quality of the stocks was verified");
             ScrollToView(binding.rgQualVerified);
-        }else if(TextUtils.isEmpty(depotMaintHygeine)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(depotMaintHygeine)) {
+            returnFlag = false;
             showSnackBar("Please check whether the depot is maintained in hygienic condition");
             ScrollToView(binding.rgDepotMaintHygeine);
-        }else if(TextUtils.isEmpty(repairsReq)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(repairsReq)) {
+            returnFlag = false;
             showSnackBar("Please check any repairs required for Dr Godown");
             ScrollToView(binding.rgRepairsReq);
-        }else if(!(TextUtils.isEmpty(repairsReq))&& repairsReq.equals(AppConstants.Yes)&& TextUtils.isEmpty(binding.etRepairsType.getText().toString().trim())){
-            returnFlag=false;
+        } else if (!(TextUtils.isEmpty(repairsReq)) && repairsReq.equals(AppConstants.Yes) && TextUtils.isEmpty(binding.etRepairsType.getText().toString().trim())) {
+            returnFlag = false;
             showSnackBar("Please enter repair type");
             ScrollToView(binding.etRepairsType);
-        }else if(!TextUtils.isEmpty(repairsReq) &&repairsReq.equals(AppConstants.Yes)&&  !TextUtils.isEmpty(binding.etRepairsType.getText().toString()) && repairsFlag==0 ){
-            returnFlag=false;
+        } else if (!TextUtils.isEmpty(repairsReq) && repairsReq.equals(AppConstants.Yes) && !TextUtils.isEmpty(binding.etRepairsType.getText().toString()) && repairsFlag == 0) {
+            returnFlag = false;
             showSnackBar("Please capture repair");
             ScrollToView(binding.ivRepairsCam);
-        }else if(TextUtils.isEmpty(binding.etFeedback.getText().toString().trim())){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(binding.etFeedback.getText().toString().trim())) {
+            returnFlag = false;
             showSnackBar("Please enter feedback of card holders");
-            ScrollToView(binding.etFeedback);
-        }else if(TextUtils.isEmpty(binding.etRemarks.getText().toString().trim())){
-            returnFlag=false;
+            ScrollToViewEditText(binding.etRemarks, "Enter feedback");
+        } else if (TextUtils.isEmpty(binding.etRemarks.getText().toString().trim())) {
+            returnFlag = false;
             showSnackBar("Please enter remarks");
-            ScrollToView(binding.etFeedback);
+            ScrollToViewEditText(binding.etRemarks, "Enter remarks");
         }
         return returnFlag;
     }
+
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
@@ -671,6 +846,14 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     private void ScrollToView(View view) {
 //        binding.scroll.smoothScrollTo(0, view.getBottom());
     }
+
+
+    private void ScrollToViewEditText(View view, String reason) {
+        CustomFontEditText editText = (CustomFontEditText) view;
+        editText.setError(reason);
+        editText.requestFocus();
+    }
+
     private void certIssueDateSelection() {
         // Get Current Date
         final Calendar c = Calendar.getInstance();
@@ -714,7 +897,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                 file = new File(FilePath);
                 Glide.with(DRDepotFindingsActivity.this).load(file).into(binding.ivRepairsCam);
-                repairsFlag=1;
+                repairsFlag = 1;
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
@@ -751,7 +934,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" +  suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -760,5 +943,6 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
         return mediaFile;
     }
+
 
 }

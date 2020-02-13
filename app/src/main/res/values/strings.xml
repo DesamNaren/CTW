@@ -545,7 +545,6 @@
     <string name="repair_type">Repair type</string>
     <string name="com_name">Company Name</string>
     <string name="cash_balance_as_per_cash_book">Cash balance as per cash book</string>
-    <string name="b_adjustment_vouchers_bills">B.Adjustment vouchers / bills</string>
     <string name="difference">Difference</string>
     <string name="ecs_stock_register">Ecs stock register</string>
     <string name="empties_stock_register">Empties stock register</string>
