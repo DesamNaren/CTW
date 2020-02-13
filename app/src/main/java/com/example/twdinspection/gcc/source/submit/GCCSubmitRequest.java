@@ -9,11 +9,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class GCCSubmitRequest {
 
-
-//    @SerializedName("shop_avail")
-//    @Expose
-//    private String shopAvail;
-
     @SerializedName("officer_id")
     @Expose
     private String officerId;
@@ -26,6 +21,9 @@ public class GCCSubmitRequest {
     @SerializedName("division_id")
     @Expose
     private String divisionId;
+    @SerializedName("shop_avail")
+    @Expose
+    private String shop_avail;
     @SerializedName("division_name")
     @Expose
     private String divisionName;
@@ -50,15 +48,14 @@ public class GCCSubmitRequest {
     @SerializedName("stock_details")
     @Expose
     private StockSubmitRequest stockDetails;
-//
-//    public String getShopAvail() {
-//        return shopAvail;
-//    }
-//
-//    public void setShopAvail(String shopAvail) {
-//        this.shopAvail = shopAvail;
-//    }
 
+    public String getShop_avail() {
+        return shop_avail;
+    }
+
+    public void setShop_avail(String shop_avail) {
+        this.shop_avail = shop_avail;
+    }
 
     public String getGodownId() {
         return godownId;

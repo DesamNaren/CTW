@@ -235,7 +235,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                             request.setInspectionTime(Utils.getCurrentDateTime());
                             request.setGodown_name(drDepots.getGodownName());
                             request.setGodownId(drDepots.getGodownId());
-//        request.setShopAvail(shopAvail);
+                            request.setShop_avail(shopAvail);
                             gccPhotoViewModel.submitGCCDetails(request);
                         }else {
                             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
@@ -451,9 +451,9 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     @Override
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
-        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             callPhotoSubmit();
-        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             showSnackBar(gccSubmitResponse.getStatusMessage());
         } else {
             showSnackBar(getString(R.string.something));
@@ -464,14 +464,16 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     public void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse) {
         customProgressDialog.hide();
         if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-
+            CallSuccessAlert(gccPhotoSubmitResponse.getStatusMessage());
         } else if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             showSnackBar(gccPhotoSubmitResponse.getStatusMessage());
         } else {
             showSnackBar(getString(R.string.something));
         }
     }
-
+    private void CallSuccessAlert(String msg) {
+        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+    }
     @Override
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();

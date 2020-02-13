@@ -6,11 +6,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -61,6 +68,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     LiveData<List<InstMenuInfoEntity>> arrayListLiveData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

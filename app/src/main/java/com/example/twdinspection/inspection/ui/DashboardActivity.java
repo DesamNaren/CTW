@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -32,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
         binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
         binding.header.ivHome.setVisibility(View.GONE);
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,30 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.inst_main_menu_drawer, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.inst_main_menu_drawer, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mi_filter:
+                break;
+        }
+        return true;
+    }
+
     @Override
     protected void onResume() {
 
@@ -113,6 +140,7 @@ public class DashboardActivity extends AppCompatActivity {
         editor.commit();
         super.onPause();
     }
+
     @Override
     public void onBackPressed() {
         Utils.customExitAlert(this,
