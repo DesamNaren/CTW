@@ -31,7 +31,7 @@ public class StockDetails {
     private Double deficit;
     @SerializedName("reason")
     @Expose
-    private String reason;
+    private String deficit_reason;
 
     public Double getStockValueAsPerSystem() {
         return stockValueAsPerSystem;
@@ -97,11 +97,11 @@ public class StockDetails {
         this.deficit = deficit;
     }
 
-    public String getReason() {
-        return reason;
+    public String getDeficit_reason() {
+        return deficit_reason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setDeficit_reason(String deficit_reason) {
+        this.deficit_reason = deficit_reason;
     }
 }

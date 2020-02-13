@@ -38,9 +38,11 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private StockDetailsResponse stockDetailsResponse;
     double physVal = 0, sysVal = 0;
     private String remarks, insComName, insComDate, insCer, weightDate, weightMea;
-    private String fireNOC, qualityStock,  godownHyg, repairsReq;
+    private String fireNOC, qualityStock, godownHyg, repairsReq;
     private String rawStock, proReg, inwardReg, outwardReg, saleReg, labAttReg, amcMac, agmarkCer, fsaaiCer;
     private String empReg, barrelCans, cashBook, cashBankBal, vehLogBook;
+    private String stockRemarks, proRemarks, inwardRemarks, outwardRemarks, saleRemarks, labRemarks, fireRemarks, amcRemarks, agmarkRemarks,
+            fsaaiRemarks, emptyRemarks, barralesRemarks, cahBookRemarks, cashBankRemarks, vehlogRemarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,23 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 insComDate = binding.etInsDate.getText().toString().trim();
                 weightDate = binding.etLegalMetDate.getText().toString().trim();
 
+
+                stockRemarks = binding.remarksStock.etRemarks.getText().toString().trim();
+                proRemarks = binding.remarksProcessing.etRemarks.getText().toString().trim();
+                inwardRemarks = binding.remarksInward.etRemarks.getText().toString().trim();
+                outwardRemarks = binding.remarksOutward.etRemarks.getText().toString().trim();
+                saleRemarks = binding.remarksSaleInv.etRemarks.getText().toString().trim();
+                labRemarks = binding.remarksLabAtt.etRemarks.getText().toString().trim();
+                fireRemarks = binding.remarksFireNoc.etRemarks.getText().toString().trim();
+                amcRemarks = binding.remarksAmc.etRemarks.getText().toString().trim();
+                agmarkRemarks = binding.remarksAgmark.etRemarks.getText().toString().trim();
+                fsaaiRemarks = binding.remarksFsaai.etRemarks.getText().toString().trim();
+                emptyRemarks = binding.remarksEmpties.etRemarks.getText().toString().trim();
+                barralesRemarks = binding.remarksBarrels.etRemarks.getText().toString().trim();
+                cahBookRemarks = binding.remarksCashBook.etRemarks.getText().toString().trim();
+                cashBankRemarks = binding.remarksCashBank.etRemarks.getText().toString().trim();
+                vehlogRemarks = binding.remarksVehLog.etRemarks.getText().toString().trim();
+
                 if (validate()) {
                     PUnitInsp pUnitInsp = new PUnitInsp();
                     PUnitRegisterBookCertificates registerBookCertificates = new PUnitRegisterBookCertificates();
@@ -123,6 +142,24 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     registerBookCertificates.setCashBookType(cashBook);
                     registerBookCertificates.setCashBankBalType(cashBankBal);
                     registerBookCertificates.setVehLogBookType(vehLogBook);
+
+                    registerBookCertificates.setRawMatStockRegisterRemarks(stockRemarks);
+                    registerBookCertificates.setProcessingRegisterRemarks(proRemarks);
+                    registerBookCertificates.setInwardRegisterRemarks(inwardRemarks);
+                    registerBookCertificates.setOutwardRegisterRemarks(outwardRemarks);
+                    registerBookCertificates.setSaleInvoiceBookRemarks(saleRemarks);
+                    registerBookCertificates.setLabourAttendRegisterRemarks(labRemarks);
+                    registerBookCertificates.setFireDeptRemarks(fireRemarks);
+                    registerBookCertificates.setAmcMachinaryRemarks(amcRemarks);
+                    registerBookCertificates.setAgmarkCertRemarks(agmarkRemarks);
+                    registerBookCertificates.setFsaaiCertRemarks(fsaaiRemarks);
+                    registerBookCertificates.setEmptiesRegisterRemarks(emptyRemarks);
+                    registerBookCertificates.setBarrelsAlumnCansRemarks(barralesRemarks);
+                    registerBookCertificates.setCashBookRemarks(cahBookRemarks);
+                    registerBookCertificates.setCashBankBalRemarks(cashBankRemarks);
+                    registerBookCertificates.setVehLogBookRemarks(vehlogRemarks);
+
+
                     pUnitInsp.setRegisterBookCertificates(registerBookCertificates);
 
                     PUnitGeneralFindings generalFindings = new PUnitGeneralFindings();
@@ -209,7 +246,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         });
 
 
-
         binding.rgLabAtt.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -264,7 +300,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 }
             }
         });
-
 
 
         binding.rgAmc.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -383,19 +418,17 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         });
 
 
-
         binding.rgGodownHyg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_hyg_yes) {
-                    godownHyg= AppConstants.Yes;
+                    godownHyg = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_hyg_no) {
                     godownHyg = AppConstants.No;
                 }
             }
         });
-
 
 
         binding.rgRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -493,19 +526,19 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(proReg)) {
             returnFlag = false;
             showSnackBar("Please check processing register");
-        }else if (TextUtils.isEmpty(inwardReg)) {
+        } else if (TextUtils.isEmpty(inwardReg)) {
             returnFlag = false;
             showSnackBar("Please check inward register");
         } else if (TextUtils.isEmpty(outwardReg)) {
             returnFlag = false;
             showSnackBar("Please check outward register");
-        }  else if (TextUtils.isEmpty(saleReg)) {
+        } else if (TextUtils.isEmpty(saleReg)) {
             returnFlag = false;
             showSnackBar("Please check sale/invoice register");
-        }else if (TextUtils.isEmpty(labAttReg)) {
+        } else if (TextUtils.isEmpty(labAttReg)) {
             returnFlag = false;
             showSnackBar("Please check labour attendance register");
-        }else if (TextUtils.isEmpty(insCer)) {
+        } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
             showSnackBar("Please check insurance certificate");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
@@ -514,7 +547,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
             ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
-        }else if (TextUtils.isEmpty(fireNOC)) {
+        } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
             showSnackBar("Please check fire department NOC");
         } else if (TextUtils.isEmpty(weightMea)) {
@@ -535,7 +568,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(empReg)) {
             returnFlag = false;
             showSnackBar("Please check empties register");
-        }else if (TextUtils.isEmpty(barrelCans)) {
+        } else if (TextUtils.isEmpty(barrelCans)) {
             returnFlag = false;
             showSnackBar("Please check Barrels / Aluminium cans");
         } else if (TextUtils.isEmpty(cashBook)) {
@@ -550,13 +583,13 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
             showSnackBar("Please check quality of stock");
-        }else if (TextUtils.isEmpty(godownHyg)) {
+        } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
             showSnackBar("Please check godown is hygienic");
-        }else if (TextUtils.isEmpty(repairsReq)) {
+        } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
             showSnackBar("Please check repairs required");
-        }else if (TextUtils.isEmpty(remarks)) {
+        } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
             showSnackBar("Please enter remarks");
             ScrollToViewEditText(binding.remarks.etRemarks, "Enter remarks");
