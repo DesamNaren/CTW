@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
@@ -565,7 +566,10 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
     @Override
     public void handleError(Throwable e, Context context) {
-
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        showSnackBar(errMsg);
     }
 
     @Override

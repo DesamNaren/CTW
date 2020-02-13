@@ -1,9 +1,11 @@
 package com.example.twdinspection.gcc.ui.drgodown;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
@@ -28,6 +31,7 @@ import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
 import com.example.twdinspection.inspection.viewmodel.StockViewModel;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -36,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DRGodownActivity extends AppCompatActivity {
+public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
@@ -315,6 +319,14 @@ public class DRGodownActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        callSnackBar(errMsg);
     }
 
 
