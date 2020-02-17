@@ -72,12 +72,20 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_findings);
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();

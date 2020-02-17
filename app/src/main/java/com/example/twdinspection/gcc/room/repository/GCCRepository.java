@@ -53,6 +53,10 @@ public class GCCRepository {
     }
 
 
+    public LiveData<List<PUnits>> getPUnits(String divId) {
+        return gccDao.getPUnitsDiv(divId);
+    }
+
     public LiveData<String> getDivisionID(String divisionName) {
         return gccDao.getDivisionID(divisionName);
     }
@@ -75,5 +79,8 @@ public class GCCRepository {
 
     public LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitName) {
         return gccDao.getPUnitID(divisionID, societyID, pUnitName);
+    }
+    public LiveData<PUnits> getPUnitID(String divisionID, String pUnitName) {
+        return gccDao.getPUnitID(divisionID,  pUnitName);
     }
 }

@@ -3,9 +3,9 @@
 
 
     <group android:id="@+id/group_menu">
-        <item android:id="@+id/nav_item_four"
+        <item android:id="@+id/item_report"
             android:title="Reports" />
-        <item android:id="@+id/nav_item_five"
+        <item android:id="@+id/item_inst"
             android:title="Change Institute" />
     </group>
 

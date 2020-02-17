@@ -23,6 +23,7 @@ import java.util.List;
 
 @Dao
 public interface MenuSectionsDao {
+
     @Insert()
     void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities);
 

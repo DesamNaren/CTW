@@ -74,6 +74,7 @@ public class SchemeSubmitRequest {
     @SerializedName("scheme_Id")
     @Expose
     private String schemeId;
+
     @SerializedName("scheme_type")
     @Expose
     private String schemeType;

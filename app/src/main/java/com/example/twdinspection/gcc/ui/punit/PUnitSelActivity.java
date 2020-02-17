@@ -121,10 +121,13 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         if (TextUtils.isEmpty(selectedDivId)) {
             showSnackBar("Please select division");
             return false;
-        } else if (TextUtils.isEmpty(selectedSocietyId)) {
-            showSnackBar("Please select society");
-            return false;
-        } else if (TextUtils.isEmpty(selectedPUnitID)) {
+        }
+//        else if (TextUtils.isEmpty(selectedSocietyId)) {
+//            showSnackBar("Please select society");
+//            return false;
+//        }
+
+        else if (TextUtils.isEmpty(selectedPUnitID)) {
             showSnackBar("Please select processing unit");
             return false;
         }
@@ -145,6 +148,9 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             selectedDivId = "";
             selectedPUnitID = "";
             divisionsInfos = new ArrayList<>();
+            binding.spSociety.setAdapter(null);
+            pUnits = new ArrayList<>();
+            binding.spPUnit.setAdapter(null);
             societies = new ArrayList<>();
             societies.add("--Select--");
             if (position != 0) {
@@ -174,6 +180,25 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                     }
                                 }
                             });
+
+                            LiveData<List<PUnits>> godownslistLiveData = viewModel.getPUnits(selectedDivId);
+                            godownslistLiveData.observe(PUnitSelActivity.this, new Observer<List<PUnits>>() {
+                                @Override
+                                public void onChanged(List<PUnits> godownsList) {
+                                    godownslistLiveData.removeObservers(PUnitSelActivity.this);
+                                    if (godownsList != null && godownsList.size() > 0) {
+                                        pUnits.add("-Select-");
+                                        for (int i = 0; i < godownsList.size(); i++) {
+                                            pUnits.add(godownsList.get(i).getGodownName());
+                                        }
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                                android.R.layout.simple_spinner_dropdown_item, pUnits);
+                                        binding.spPUnit.setAdapter(adapter);
+                                    } else {
+                                        showSnackBar("No processing units found");
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -186,10 +211,12 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 binding.spPUnit.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
+
             if (position != 0) {
                 selectedPUnits = null;
                 selectedSocietyId = "";
                 selectedPUnitID = "";
+
                 pUnits = new ArrayList<>();
                 LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(PUnitSelActivity.this, new Observer<String>() {
@@ -202,6 +229,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                             listLiveData.observe(PUnitSelActivity.this, new Observer<List<PUnits>>() {
                                 @Override
                                 public void onChanged(List<PUnits> godownsList) {
+                                    binding.spPUnit.setAdapter(null);
                                     listLiveData.removeObservers(PUnitSelActivity.this);
                                     if (godownsList != null && godownsList.size() > 0) {
                                         pUnits.add("-Select-");
@@ -223,7 +251,6 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 selectedPUnits = null;
                 selectedSocietyId = "";
                 selectedPUnitID = "";
-                binding.spPUnit.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_p_unit) {
             if (position != 0) {
@@ -234,6 +261,17 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                     @Override
                     public void onChanged(PUnits pUnits) {
                         liveData.removeObservers(PUnitSelActivity.this);
+                        if (pUnits != null) {
+                            selectedPUnitID = pUnits.getGodownId();
+                            selectedPUnits = pUnits;
+                        }
+                    }
+                });
+                LiveData<PUnits> liveDataPUnit = viewModel.getPUnitID(selectedDivId, binding.spPUnit.getSelectedItem().toString());
+                liveDataPUnit.observe(PUnitSelActivity.this, new Observer<PUnits>() {
+                    @Override
+                    public void onChanged(PUnits pUnits) {
+                        liveDataPUnit.removeObservers(PUnitSelActivity.this);
                         if (pUnits != null) {
                             selectedPUnitID = pUnits.getGodownId();
                             selectedPUnits = pUnits;

@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".inspection.ui.ReportActivity"></activity>
         <activity
             android:name=".inspection.ui.CocurricularStudAchActivity"
             android:screenOrientation="portrait" />
@@ -36,7 +37,6 @@
             android:name=".schemes.ui.BeneficiaryReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -61,7 +61,8 @@
         </activity>
         <activity
             android:name=".inspection.ui.DashboardActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme"/>
         <activity
             android:name=".inspection.ui.SplashActivity"
             android:screenOrientation="portrait">

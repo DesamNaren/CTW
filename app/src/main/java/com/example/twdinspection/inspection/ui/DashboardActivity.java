@@ -3,13 +3,19 @@ package com.example.twdinspection.inspection.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -26,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String cacheDate, currentDate;
-    ActivityDashboardBinding binding;
+        ActivityDashboardBinding binding;
     InstMainViewModel instMainViewModel;
 
     @Override
@@ -43,7 +49,26 @@ public class DashboardActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        try {
+            if (getSupportActionBar() != null) {
+//                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
+                TextView tv = new TextView(getApplicationContext());
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+                tv.setLayoutParams(lp);
+                tv.setText(getResources().getString(R.string.dashboard));
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                getSupportActionBar().setCustomView(tv);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
@@ -79,14 +104,6 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.inst_main_menu_drawer, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.inst_main_menu_drawer, menu);
@@ -96,7 +113,8 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mi_filter:
+            case R.id.item_report:
+                startActivity(new Intent(DashboardActivity.this,ReportActivity.class));
                 break;
         }
         return true;

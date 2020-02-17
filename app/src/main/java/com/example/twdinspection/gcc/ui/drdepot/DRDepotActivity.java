@@ -347,7 +347,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                 if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_open) {
                     binding.ivShopCam.setVisibility(View.GONE);
                     shopAvail = AppConstants.open;
-
+                    binding.noDataTv.setVisibility(View.GONE);
                     if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                         binding.viewPager.setVisibility(View.VISIBLE);
                         binding.tabs.setVisibility(View.VISIBLE);

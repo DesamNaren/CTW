@@ -14,6 +14,7 @@ import com.example.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
@@ -53,12 +54,11 @@ public interface TWDService {
             if (type.equals("school")) {
                 BASEURL = TWDURL.TWD_BASE_URL;
             } else if (type.equals("gcc")) {
-                httpClient.addInterceptor(new BasicAuthInterceptor(AppConstants.GCC_AUTH_USER, AppConstants.GCC_AUTH_PWD));
+//                httpClient.addInterceptor(new BasicAuthInterceptor(AppConstants.GCC_AUTH_USER, AppConstants.GCC_AUTH_PWD));
                 BASEURL = TWDURL.GCC_BASE_URL;
             } else {
                 BASEURL = TWDURL.SCHEME_BASE_URL;
             }
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASEURL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -72,6 +72,9 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/validateLogin")
     Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
+
+    @GET("CTWServiceDetails/getSummaryInfo")
+    Call<ReportCountsResponse> getReportCounts(@Query("username") String username);
 
     @GET("getBenificiaryDetails")
     Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);

@@ -17,6 +17,7 @@ import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,6 +66,9 @@ public class BenDetailsViewModel extends ViewModel {
     }
 
     public void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
+        Gson gson=new Gson();
+        String req=gson.toJson(schemeSubmitRequest);
+
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchemeSubmitResponse(schemeSubmitRequest).enqueue(new Callback<SchemeSubmitResponse>() {
             @Override

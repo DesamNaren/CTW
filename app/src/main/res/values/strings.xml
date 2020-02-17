@@ -588,5 +588,6 @@
     <string name="b_adjustment_vouchers_bills">B.Adjustment vouchers / bills</string>
     <string name="liability_balance_as_per_liability_register">Liability balance as per liability register</string>
     <string name="deficit_excess">Deficit/Excess</string>
+    <string name="report">Reports</string>
 
 </resources>

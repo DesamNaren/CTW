@@ -87,6 +87,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_photo_capture);
         binding.header.headerTitle.setText(getString(R.string.upload_photos));
+        binding.header.ivHome.setVisibility(View.GONE);
+        binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(GCCPhotoActivity.this);
 
 
@@ -94,6 +96,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
+
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         try {
             sharedPreferences= TWDApplication.get(this).getPreferences();
             repairPath=sharedPreferences.getString(AppConstants.repairsPath,"");

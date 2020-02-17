@@ -53,12 +53,21 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         sharedPreferences = TWDApplication.get(this).getPreferences();
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
+
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
         String pUnitData = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
         PUnits pUnits = gson.fromJson(pUnitData, PUnits.class);
         divId = pUnits.getDivisionId();
         suppId = pUnits.getGodownId();
+
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {

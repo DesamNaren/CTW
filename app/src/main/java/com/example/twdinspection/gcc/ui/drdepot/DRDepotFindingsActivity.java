@@ -80,12 +80,22 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_findings);
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
+        binding.header.ivHome.setVisibility(View.GONE);
+        binding.bottomLl.btnNext.setText(getString(R.string.next));
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
@@ -573,7 +583,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     @Override
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
-                        String cashBal = textViewTextChangeEvent.text().toString();
+                        cashBal = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
                             if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
                                 if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
@@ -611,7 +621,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     @Override
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
-                        String vocBills = textViewTextChangeEvent.text().toString();
+                        vocBills = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {
                             if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
                                 if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
@@ -649,7 +659,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     @Override
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
-                        String liaBal = textViewTextChangeEvent.text().toString();
+                        liaBal = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(liaBal) && !liaBal.equals(".")) {
                             if (!TextUtils.isEmpty(cashBal) && !cashBal.equals(".")) {
                                 if (!TextUtils.isEmpty(vocBills) && !vocBills.equals(".")) {

@@ -79,6 +79,12 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         return pUnits;
     }
 
+    public LiveData<List<PUnits>> getPUnits(String divId) {
+        if (pUnits != null) {
+            pUnits = mRepository.getPUnits(divId);
+        }
+        return pUnits;
+    }
     public LiveData<String> getDivisionId(String divName) {
         return mRepository.getDivisionID(divName);
     }
@@ -102,5 +108,8 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
 
     public LiveData<PUnits> getPUnitID(String divId, String socID, String pUnitName) {
         return mRepository.getPUnitID(divId, socID, pUnitName);
+    }
+    public LiveData<PUnits> getPUnitID(String divId, String pUnitName) {
+        return mRepository.getPUnitID(divId, pUnitName);
     }
 }
