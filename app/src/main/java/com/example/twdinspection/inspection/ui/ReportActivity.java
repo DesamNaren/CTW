@@ -30,6 +30,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
     ActivityReportBinding binding;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    String officerId;
     ReportsViewModel viewModel;
 
     @Override
@@ -53,15 +54,13 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-            String curTime = Utils.getCurrentDateTimeDisplay();
-            editor.putString(AppConstants.INSP_TIME, curTime);
-            editor.commit();
             binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+            officerId=sharedPreferences.getString(AppConstants.INSP_TIME, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        viewModel.getReportCounts().observe(this, reportCountsResponse -> {
+        viewModel.getReportCounts(officerId).observe(this, reportCountsResponse -> {
 
             if (reportCountsResponse != null && reportCountsResponse.getStatusCode() != null) {
                 if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {

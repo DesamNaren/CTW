@@ -36,17 +36,17 @@ public class ReportsViewModel extends ViewModel {
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
 
-    public LiveData<ReportCountsResponse> getReportCounts() {
+    public LiveData<ReportCountsResponse> getReportCounts(String username) {
         responseMutableLiveData = new MutableLiveData<>();
-        callReportCounts();
+        callReportCounts(username);
         return responseMutableLiveData;
     }
 
-    private void callReportCounts() {
+    private void callReportCounts(String username) {
 
         customProgressDialog.show();
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.getReportCounts().enqueue(new Callback<ReportCountsResponse>() {
+        twdService.getReportCounts(username).enqueue(new Callback<ReportCountsResponse>() {
             @Override
             public void onResponse(@NotNull Call<ReportCountsResponse> call, @NotNull Response<ReportCountsResponse> response) {
                 customProgressDialog.dismiss();
