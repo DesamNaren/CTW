@@ -8,6 +8,7 @@ import java.util.List;
 
 public class StockSubmitRequest {
 
+
     @SerializedName("total_system_value")
     @Expose
     private Double totalSystemValue;

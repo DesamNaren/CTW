@@ -69,6 +69,11 @@ public class AppConstants {
     public static final String REPAIR = "REPAIR";
     public static final String TOTAL_SYSVAL = "TOTAL_SYSVAL";
     public static final String TOTAL_PHYVAL = "TOTAL_PHYVAL";
+    public static final String REPORT_GODOWN = "dr_godown";
+    public static final String REPORT_DEPOT = "DR Depot";
+    public static final String REPORT_MFP_GODOWN = "MFP Godown";
+    public static final String REPORT_PUNIT = "Processing Unit";
+    public static final String REP_DATA = "REP_DATA";
 
 
     public static String stockData="STOCK_DATA";
@@ -87,4 +92,9 @@ public class AppConstants {
     public static String open="open";
     public static String close="close";
     public static String SHOP_CLOSED ="SHOP_CLOSED";
+    public static String DR_Depot_Report="DR_DEPOT_REPORTS";
+    public static String DR_Godown_Report="DR_GODOWN_REPORT";
+    public static String MFP_Godown_Report="MFP_GODOWN_REPORT";
+    public static String PUnit_Report="PUNIT_REPORT";
+    public static String Selected_Supp_Report="Selected_Supp_Report";
 }

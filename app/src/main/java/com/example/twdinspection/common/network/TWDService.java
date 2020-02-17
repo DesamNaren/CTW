@@ -3,6 +3,7 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
+import com.example.twdinspection.gcc.source.reports.GCCReportResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.example.twdinspection.gcc.source.submit.GCCSubmitRequest;
@@ -74,7 +75,10 @@ public interface TWDService {
     Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
 
     @GET("CTWServiceDetails/getSummaryInfo")
-    Call<ReportCountsResponse> getReportCounts(@Query("username") String username);
+    Call<ReportCountsResponse> getReportCounts(@Query("officerId") String username);
+
+    @GET("CTWServiceDetails/getGCCDetails")
+    Call<GCCReportResponse> getGCCReports(@Query("officerId") String username);
 
     @GET("getBenificiaryDetails")
     Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);
