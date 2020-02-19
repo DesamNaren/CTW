@@ -146,6 +146,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             selectedSocietyId = "";
             selectedDivId = "";
             selectedGoDownId = "";
+            binding.spSociety.setAdapter(null);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
@@ -192,6 +193,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 selectedDrGodowns=null;
                 selectedSocietyId = "";
                 selectedGoDownId = "";
+                binding.spGodown.setAdapter(null);
                 drGodowns = new ArrayList<>();
                LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                liveData.observe(DRGODownSelActivity.this, new Observer<String>() {

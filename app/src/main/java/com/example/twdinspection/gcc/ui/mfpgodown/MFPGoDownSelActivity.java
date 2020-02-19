@@ -134,6 +134,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
             selectedMfpGoDowns = null;
             selectedDivId = "";
             selectedMfpID = "";
+            binding.spMfp.setAdapter(null);
             mfpGoDowns = new ArrayList<>();
             if (position != 0) {
                 LiveData<String> liveData = viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());

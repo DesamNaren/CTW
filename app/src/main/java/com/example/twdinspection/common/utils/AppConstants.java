@@ -97,4 +97,9 @@ public class AppConstants {
     public static String MFP_Godown_Report="MFP_GODOWN_REPORT";
     public static String PUnit_Report="PUNIT_REPORT";
     public static String Selected_Supp_Report="Selected_Supp_Report";
+    public static String essRepComm="essRepComm";
+    public static String dailyRepReq="dailyRepReq";
+    public static String emptiesRep="emptiesRep";
+    public static String mfpRep="mfpRep";
+    public static String punitRep="punitRep";
 }

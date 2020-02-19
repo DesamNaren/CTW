@@ -590,5 +590,21 @@
     <string name="deficit_excess">Deficit/Excess</string>
     <string name="report">Reports</string>
     <string name="gcc_reports">GCC Reports</string>
+    <string name="reason_mentioned_by_incharge_regarding_deficit_surplus">Reason mentioned by incharge regarding deficit / surplus</string>
+    <string name="abstract_sales_register">Abstract sales register</string>
+    <string name="sale_bill_book">Sale bill book</string>
+    <string name="certificate_issue_date">Certificate issue date</string>
+    <string name="mfp_stock_register">MFP stock register</string>
+    <string name="mfp_purchase_bill_book">MFP Purchase bill Book</string>
+    <string name="abstract_account_book">Abstract account book</string>
+    <string name="advance_account_book">Advance account book</string>
+    <string name="depot_timing_board">Depot timing board</string>
+    <string name="dr_commodities_rate_board">DR commodities rate board</string>
+    <string name="stock_balance_board">Stock balance board</string>
+    <string name="whether_the_quality_of_the_stocks_stored_in_godown_was_verified_and_found_in_yes_condition">Whether the quality of the stocks stored in godown was verified and found in yes condition</string>
+    <string name="whether_the_depot_is_maintained_in_hygienic_condition_or_not">Whether the depot is maintained in hygienic condition or not</string>
+    <string name="any_repairs_required_for_dr_godown">Any repairs required for Dr Godown</string>
+    <string name="feedback_of_card_holders">Feedback of Card Holders</string>
+    <string name="remarks_of_inspection_officer">Remarks of Inspection officer</string>
 
 </resources>

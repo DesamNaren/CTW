@@ -144,6 +144,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             selectedSocietyId = "";
             selectedDivId = "";
             selectedDepotID = "";
+            binding.spSociety.setAdapter(null);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
@@ -190,6 +191,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 selectedDRDepots=null;
                 selectedSocietyId = "";
                 selectedDepotID = "";
+                binding.spDepot.setAdapter(null);
                 drDepots = new ArrayList<>();
                 LiveData<String> liveData= viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(DRDepotSelActivity.this, new Observer<String>() {

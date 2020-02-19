@@ -60,7 +60,7 @@ public class EssentialAdapter extends RecyclerView.Adapter<EssentialAdapter.Item
             holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
         }
         holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getRate()));
-//        holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
+        holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
         holder.stockChildRowBinding.tvPhyRate.setText(String.valueOf(dataModel.getRate()));
         if (!TextUtils.isEmpty(dataModel.getPhyQuant()))
             holder.stockChildRowBinding.phyAvaQty.setText(String.valueOf(dataModel.getPhyQuant()));
