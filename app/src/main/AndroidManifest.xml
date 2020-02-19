@@ -217,6 +217,7 @@
         <activity
             android:name=".schemes.reports.ui.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".inspection.reports.ui.ReportStudentsAttendActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
