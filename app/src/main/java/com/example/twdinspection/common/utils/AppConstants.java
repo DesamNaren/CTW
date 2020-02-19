@@ -74,7 +74,7 @@ public class AppConstants {
     public static final String REPORT_MFP_GODOWN = "MFP Godown";
     public static final String REPORT_PUNIT = "Processing Unit";
     public static final String REP_DATA = "REP_DATA";
-
+    public static final String INSP_REP_DATA = "INSP_REP_DATA";
 
     public static String stockData="STOCK_DATA";
     public static String essComm="essComm";

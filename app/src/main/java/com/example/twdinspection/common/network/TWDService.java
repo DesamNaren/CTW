@@ -1,7 +1,6 @@
 package com.example.twdinspection.common.network;
 
 
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.example.twdinspection.gcc.source.reports.GCCReportResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
@@ -15,6 +14,7 @@ import com.example.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.example.twdinspection.inspection.source.EmployeeResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.example.twdinspection.inspection.source.reports.InspReportResponse;
 import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
@@ -79,6 +79,9 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/getGCCDetails")
     Call<GCCReportResponse> getGCCReports(@Query("officerId") String username);
+
+   @GET("CTWServiceDetails/getSchoolDetails")
+    Call<InspReportResponse> getInspectionReports(@Query("officerId") String username);
 
     @GET("getBenificiaryDetails")
     Call<BeneficiaryReport> getBeneficiaryDetails(@Query("distId") int distId, @Query("mandalId") int mandalId, @Query("villageId") int villageId, @Query("finYearId") String finYearId);

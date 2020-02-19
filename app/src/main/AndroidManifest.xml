@@ -198,6 +198,18 @@
         <activity
             android:name=".gcc.ui.reports.ReportStockDetailsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.ReportAcademicDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InspectionReportsDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InspectionReportDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InstReportsMenuActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

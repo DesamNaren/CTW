@@ -606,5 +606,6 @@
     <string name="any_repairs_required_for_dr_godown">Any repairs required for Dr Godown</string>
     <string name="feedback_of_card_holders">Feedback of Card Holders</string>
     <string name="remarks_of_inspection_officer">Remarks of Inspection officer</string>
+    <string name="insp_reports">Inspection Reports</string>
 
 </resources>
