@@ -157,7 +157,7 @@
             android:name=".gcc.ui.punit.PUnitActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.GCCPhotoActivity"
+            android:name=".gcc.ui.gcc.GCCPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.LocBaseActivity"
@@ -169,7 +169,7 @@
             android:name=".inspection.ui.QuitAppActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.GCCSyncActivity"
+            android:name=".gcc.ui.gcc.GCCSyncActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.ui.drgodown.DRGODownSelActivity"
@@ -197,6 +197,23 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.ui.reports.gcc.ReportStockDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.ReportAcademicDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InspectionReportsDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InspectionReportDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.reports.InstReportsMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".gcc.ui.reports.schemes.SchemesReportActivity"
+            android:theme="@style/Light_AppTheme"
+            android:screenOrientation="portrait" />
+        <activity android:name=".gcc.ui.reports.schemes.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
 
         <provider

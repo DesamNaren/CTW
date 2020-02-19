@@ -11,7 +11,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityDrGodownInspRepBinding;
-import com.example.twdinspection.gcc.source.reports.ReportData;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportData;
 import com.google.gson.Gson;
 
 public class DrGodownInspRepActivity extends AppCompatActivity {

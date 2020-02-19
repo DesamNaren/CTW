@@ -608,4 +608,6 @@
     <string name="remarks_of_inspection_officer">Remarks of Inspection officer</string>
     <string name="scheme_report_details">SCHEME REPORT DETAILS</string>
     <string name="scheme_report">SCHEME REPORTS</string>
+    <string name="insp_reports">Inspection Reports</string>
+
 </resources>

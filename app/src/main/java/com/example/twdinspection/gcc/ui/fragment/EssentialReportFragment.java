@@ -15,7 +15,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.StockMainRowBinding;
 import com.example.twdinspection.gcc.adapter.CommCommodityAdapter;
-import com.example.twdinspection.gcc.source.reports.ReportSubmitReqCommodities;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportSubmitReqCommodities;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

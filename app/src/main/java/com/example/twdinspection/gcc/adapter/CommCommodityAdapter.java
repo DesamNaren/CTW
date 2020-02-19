@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.StockChildRowBinding;
-import com.example.twdinspection.gcc.source.reports.ReportSubmitReqCommodities;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportSubmitReqCommodities;
 
 import java.util.List;
 

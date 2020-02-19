@@ -1,11 +1,22 @@
 package com.example.twdinspection.inspection.ui;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +28,7 @@ import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportBinding;
+import com.example.twdinspection.inspection.ui.reports.InspectionReportsDashboard;
 import com.example.twdinspection.gcc.ui.reports.gcc.GCCReportsDashboard;
 import com.example.twdinspection.gcc.ui.reports.schemes.SchemesReportActivity;
 import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
@@ -101,11 +113,20 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             @Override
             public void onClick(View view) {
                 if (gccCnt > 0) {
-//                    startActivity(new Intent(ReportActivity.this, GCCReportsDashboard.class));
+                    startActivity(new Intent(ReportActivity.this, GCCReportsDashboard.class));
                 } else {
                     callSnackBar("No data found");
                 }
-                startActivity(new Intent(ReportActivity.this, GCCReportsDashboard.class));
+            }
+        });
+        binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (instCnt > 0) {
+                    startActivity(new Intent(ReportActivity.this, InspectionReportsDashboard.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
