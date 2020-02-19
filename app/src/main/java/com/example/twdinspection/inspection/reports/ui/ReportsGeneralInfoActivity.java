@@ -23,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class ReportsGeneralInfoActivity extends BaseActivity implements SaveListener {
     private static final String TAG = ReportsGeneralInfoActivity.class.getSimpleName();
-        SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
     GeneralInfoViewModel generalInfoViewModel;
@@ -36,7 +36,7 @@ public class ReportsGeneralInfoActivity extends BaseActivity implements SaveList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
+        binding = putContentView(R.layout.activity_reports_general_info, getResources().getString(R.string.general_info));
 
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
@@ -303,7 +303,7 @@ public class ReportsGeneralInfoActivity extends BaseActivity implements SaveList
                     @Override
                     public void onChanged(Integer id) {
                         if (id != null) {
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instID);
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }
                     }
                 });
@@ -312,7 +312,7 @@ public class ReportsGeneralInfoActivity extends BaseActivity implements SaveList
             }
             if (z[0] >= 0) {
 
-               Utils.customSectionSaveAlert(ReportsGeneralInfoActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(ReportsGeneralInfoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
 //                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendActivity.class));
             } else {
                 showSnackBar(getString(R.string.failed));

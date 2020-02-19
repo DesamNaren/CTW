@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
         <import type="android.view.View"/>
@@ -21,6 +22,8 @@
     </data>
 
     <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_gray"
@@ -266,7 +269,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.stockRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.stockRegister.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/stock_no_rb"
                                         android:layout_width="wrap_content"
@@ -350,7 +353,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/sale_rb_no"
                                         android:layout_width="wrap_content"
@@ -393,7 +396,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.godownLiabilityRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.godownLiabilityRegister.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/godown_rb_no"
                                         android:layout_width="wrap_content"
@@ -435,7 +438,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/insurance_no_rb"
                                         android:layout_width="wrap_content"
@@ -526,7 +529,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/fire_noc_rb_no"
                                         android:layout_width="wrap_content"
@@ -570,7 +573,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/weight_rb_no"
                                         android:layout_width="wrap_content"
@@ -608,7 +611,7 @@
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
                                             android:singleLine="true"
-                                          android:text="@{inspData.registerBookCertificates.weightMeasureValidity" />
+                                          android:text="@{inspData.registerBookCertificates.weightMeasureValidity}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -686,7 +689,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.stockRegisterEntries.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.stockRegisterEntries.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/stock_reg_entries_made_no_rb"
                                         android:layout_width="wrap_content"
@@ -729,7 +732,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.valuesAsPerSalePrice.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.valuesAsPerSalePrice.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/values_as_per_sale_price_rb_no"
                                         android:layout_width="wrap_content"
@@ -772,7 +775,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/quality_verified_rb_no"
                                         android:layout_width="wrap_content"
@@ -815,7 +818,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.stockCardDisplay.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.stockCardDisplay.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/stack_cards_displayed_rb_no"
                                         android:layout_width="wrap_content"
@@ -858,7 +861,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.computerizedSystem.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.computerizedSystem.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/godown_computerized_no_rb"
                                         android:layout_width="wrap_content"
@@ -901,7 +904,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/godown_maintained_rb_no"
                                         android:layout_width="wrap_content"
@@ -945,7 +948,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.fireSafteyAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.fireSafteyAvail.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/avail_equipment_rb_no"
                                         android:layout_width="wrap_content"
@@ -988,7 +991,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.societyManagerInspection.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.societyManagerInspection.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/insp_date_soc_manager_rb_no"
                                         android:layout_width="wrap_content"
@@ -1026,7 +1029,7 @@
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
                                             android:singleLine="true"
-                                            android:text="@{inspData.generalFindings.societyManagerInspectionDate" />
+                                            android:text="@{inspData.generalFindings.societyManagerInspectionDate}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1064,7 +1067,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.divisionManagerInspection.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.divisionManagerInspection.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/insp_date_div_manager_rb_no"
                                         android:layout_width="wrap_content"
@@ -1101,7 +1104,7 @@
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
                                             android:singleLine="true"
-                                            android:text="@{inspData.generalFindings.divisionManagerInspectionDate" />
+                                            android:text="@{inspData.generalFindings.divisionManagerInspectionDate}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1140,7 +1143,7 @@
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`No`)}"
 
                                         android:id="@+id/repairs_req_rb_no"
                                         android:layout_width="wrap_content"
@@ -1156,7 +1159,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.generalFindings.repairType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                                    android:visibility="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1172,7 +1176,7 @@
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
-                                            android:text="@{inspData.generalFindings.repairType" />
+                                            android:text="@{inspData.generalFindings.repairType}" />
 
 
                                     </com.google.android.material.textfield.TextInputLayout>
