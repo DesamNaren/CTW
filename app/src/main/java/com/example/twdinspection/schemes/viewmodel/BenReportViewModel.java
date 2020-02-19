@@ -14,6 +14,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
+import com.example.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.room.repository.SchemesInfoRepository;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
@@ -35,6 +36,7 @@ public class BenReportViewModel extends ViewModel {
     private ErrorHandlerInterface errorHandlerInterface;
     private Activity context;
     private ActivityBeneficiaryReportBinding binding;
+    private ActivitySchemeReportBinding schemeReportBinding;
 
 
     BenReportViewModel(ActivityBeneficiaryReportBinding binding, Activity context) {
@@ -49,6 +51,21 @@ public class BenReportViewModel extends ViewModel {
             e.printStackTrace();
         }
     }
+
+    BenReportViewModel(ActivitySchemeReportBinding schemeReportBinding, Activity context) {
+        this.schemeReportBinding = schemeReportBinding;
+        this.context= context;
+        beneficiaryLiveData = new MutableLiveData<>();
+        schemesMutableLiveData = new MutableLiveData<>();
+        schemesInfoRepository = new SchemesInfoRepository(context);
+        try {
+            errorHandlerInterface = (ErrorHandlerInterface) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public LiveData<BeneficiaryReport> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
         if (beneficiaryLiveData != null) {

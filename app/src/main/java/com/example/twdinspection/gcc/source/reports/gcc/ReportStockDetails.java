@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.source.reports;
+package com.example.twdinspection.gcc.source.reports.gcc;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

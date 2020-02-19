@@ -14,25 +14,25 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.databinding.AdapterGccReportBinding;
+import com.example.twdinspection.databinding.AdapterSchemeReportBinding;
 import com.example.twdinspection.gcc.interfaces.ReportClickCallback;
-import com.example.twdinspection.gcc.source.reports.gcc.ReportData;
+import com.example.twdinspection.gcc.source.reports.scheme.SchemeReportData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.ItemHolder> implements Filterable {
+public class SchemeReportAdapter extends RecyclerView.Adapter<SchemeReportAdapter.ItemHolder> implements Filterable {
 
     private Context context;
-    private List<ReportData> list;
-    private List<ReportData> filterList;
+    private List<SchemeReportData> list;
+    private List<SchemeReportData> filterList;
     private ReportClickCallback reportClickCallback;
 
-    public GCCReportAdapter(Context context, List<ReportData> list) {
+    public SchemeReportAdapter(Context context, List<SchemeReportData> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             reportClickCallback = (ReportClickCallback) context;
@@ -40,22 +40,23 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AdapterGccReportBinding listItemBinding = DataBindingUtil.inflate(
+        AdapterSchemeReportBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.adapter_gcc_report, parent, false);
+                R.layout.adapter_scheme_report, parent, false);
 
         return new ItemHolder(listItemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
-        final ReportData dataModel = filterList.get(i);
-        holder.listItemBinding.setGccReport(dataModel);
+        final SchemeReportData dataModel = filterList.get(i);
+        holder.listItemBinding.setSchemeReport(dataModel);
         setAnimation(holder.itemView, i);
 
         holder.listItemBinding.cvGccReport.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -92,10 +94,15 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
                 if (charString.isEmpty()) {
                     filterList.addAll(list);
                 } else {
-                    for (ReportData otData : list) {
-//                        if (otData.getBenID().toLowerCase().contains(charString.toLowerCase())) {
-//                            filterList.add(otData);
-//                        }
+                    for (SchemeReportData schemeReportData : list) {
+                        if (schemeReportData.getDistrictName().toLowerCase().contains(charString.toLowerCase()) ||
+                                schemeReportData.getMandalName().toLowerCase().contains(charString.toLowerCase()) ||
+                                schemeReportData.getVillageName().toLowerCase().contains(charString.toLowerCase()) ||
+                                schemeReportData.getFinYear().toLowerCase().contains(charString.toLowerCase()) ||
+                                schemeReportData.getBenId().toLowerCase().contains(charString.toLowerCase()) ||
+                                schemeReportData.getBenName().toLowerCase().contains(charString.toLowerCase())) {
+                            filterList.add(schemeReportData);
+                        }
                     }
                 }
                 FilterResults filterResults = new FilterResults();
@@ -105,7 +112,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filterList = (ArrayList<ReportData>) filterResults.values;
+                filterList = (ArrayList<SchemeReportData>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
@@ -114,9 +121,9 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
     class ItemHolder extends RecyclerView.ViewHolder {
 
 
-        AdapterGccReportBinding listItemBinding;
+        AdapterSchemeReportBinding listItemBinding;
 
-        ItemHolder(AdapterGccReportBinding listItemBinding) {
+        ItemHolder(AdapterSchemeReportBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }
@@ -138,9 +145,9 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         return position;
     }
 
-    public  void setData(List<ReportData> beneficiaryDetailArrayList){
+    public void setData(List<SchemeReportData> schemeReportData) {
         filterList.clear();
-        filterList.addAll(beneficiaryDetailArrayList);
+        filterList.addAll(schemeReportData);
         notifyDataSetChanged();
     }
 

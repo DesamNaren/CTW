@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="gccReport"
-            type="com.example.twdinspection.gcc.source.reports.gcc.ReportData" />
+            name="schemeReport"
+            type="com.example.twdinspection.gcc.source.reports.scheme.SchemeReportData" />
 
     </data>
 
@@ -36,14 +36,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:textColor="@color/black"
-                    android:text="Division name"/>
+                    android:text="District"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="@{gccReport.divisionName}" />
+                    android:text="@{schemeReport.districtName}" />
 
 
             </LinearLayout>
@@ -61,14 +61,14 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Society name"/>
+                    android:text="Mandal"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="@{gccReport.societyName}" />
+                    android:text="@{schemeReport.mandalName}" />
 
 
             </LinearLayout>
@@ -86,14 +86,14 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Incharge name"/>
+                    android:text="Village"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="@{gccReport.inchargeName}" />
+                    android:text="@{schemeReport.villageName}" />
 
 
             </LinearLayout>
@@ -111,18 +111,66 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Godown name"/>
+                    android:text="Financial Year"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="@{gccReport.godownName}" />
+                    android:text="@{schemeReport.finYear}" />
 
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:text="Beneficiary ID"/>
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:text="@{schemeReport.benId}" />
+
+
+            </LinearLayout> <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:text="Beneficiary Name"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:text="@{schemeReport.benName}" />
+
+
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

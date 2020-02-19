@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.gcc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,14 +41,8 @@ import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.example.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
-import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
-import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
-import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomViewModel;
-import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
-import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

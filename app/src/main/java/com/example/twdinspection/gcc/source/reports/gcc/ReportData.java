@@ -1,8 +1,6 @@
-package com.example.twdinspection.gcc.source.reports;
+package com.example.twdinspection.gcc.source.reports.gcc;
 
 import com.example.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
-import com.example.twdinspection.gcc.source.reports.ReportPhoto;
-import com.example.twdinspection.gcc.source.stock.StockSubmitRequest;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

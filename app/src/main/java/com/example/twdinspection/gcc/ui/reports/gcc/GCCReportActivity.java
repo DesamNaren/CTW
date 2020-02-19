@@ -1,6 +1,5 @@
-package com.example.twdinspection.gcc.ui.reports;
+package com.example.twdinspection.gcc.ui.reports.gcc;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,19 +11,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.databinding.ActivityGccReportBinding;
 import com.example.twdinspection.gcc.adapter.GCCReportAdapter;
 import com.example.twdinspection.gcc.interfaces.ReportClickCallback;
-import com.example.twdinspection.gcc.source.reports.ReportData;
-import com.example.twdinspection.schemes.interfaces.BenClickCallback;
-import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
-import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
-import com.example.twdinspection.schemes.ui.BenDetailsActivity;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportData;
+import com.example.twdinspection.gcc.source.reports.scheme.SchemeReportData;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -148,5 +142,10 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         editor.putString(AppConstants.REP_DATA,data);
         editor.apply();
         startActivity(new Intent(this, ReportStockDetailsActivity.class));
+    }
+
+    @Override
+    public void onItemClick(SchemeReportData schemeReportData) {
+
     }
 }

@@ -33,7 +33,7 @@ import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBo
 import com.example.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
-import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
+import com.example.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;

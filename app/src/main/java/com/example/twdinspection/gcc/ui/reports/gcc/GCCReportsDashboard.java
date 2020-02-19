@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui.reports;
+package com.example.twdinspection.gcc.ui.reports.gcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -19,8 +19,8 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityReportDashboardBinding;
-import com.example.twdinspection.gcc.source.reports.GCCReportResponse;
-import com.example.twdinspection.gcc.source.reports.ReportData;
+import com.example.twdinspection.gcc.source.reports.gcc.GCCReportResponse;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportData;
 import com.example.twdinspection.gcc.viewmodel.GCCReportsViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -148,10 +148,10 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                                         break;
                                 }
                             }
-                            binding.tvDepotCnt.setText("DR Depot " +drDepot.size());
-                            binding.tvGodownCnt.setText("DR Godown " +drGodown.size());
-                            binding.tvMfpGodownCnt.setText("MFP Godown " +mfpGodown.size());
-                            binding.tvPunitCnt.setText("Processing Units " +processingUnit.size());
+                            binding.tvDepotCnt.setText("DR Depot: " +drDepot.size());
+                            binding.tvGodownCnt.setText("DR Godown: " +drGodown.size());
+                            binding.tvMfpGodownCnt.setText("MFP Godown: " +mfpGodown.size());
+                            binding.tvPunitCnt.setText("Processing Units: " +processingUnit.size());
 
                             Gson gson=new Gson();
                             String drDepotData=gson.toJson(drDepot);

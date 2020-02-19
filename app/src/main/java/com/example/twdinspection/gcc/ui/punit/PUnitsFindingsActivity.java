@@ -22,7 +22,7 @@ import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp
 import com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitRegisterBookCertificates;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
-import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
+import com.example.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;

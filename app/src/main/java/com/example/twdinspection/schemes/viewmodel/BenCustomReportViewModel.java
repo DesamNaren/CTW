@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.databinding.ActivityBeneficiaryReportBinding;
+import com.example.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.room.repository.SchemesInfoRepository;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
@@ -30,12 +31,19 @@ import retrofit2.Response;
 
 public class BenCustomReportViewModel implements ViewModelProvider.Factory {
     private ActivityBeneficiaryReportBinding binding;
+    private ActivitySchemeReportBinding schemeReportBinding;
     private Activity context;
 
     public BenCustomReportViewModel(ActivityBeneficiaryReportBinding binding, Activity context) {
         this.binding = binding;
         this.context = context;
     }
+
+    public BenCustomReportViewModel(ActivitySchemeReportBinding schemeReportBinding, Activity context) {
+        this.schemeReportBinding = schemeReportBinding;
+        this.context = context;
+    }
+
 
     @NonNull
     @Override

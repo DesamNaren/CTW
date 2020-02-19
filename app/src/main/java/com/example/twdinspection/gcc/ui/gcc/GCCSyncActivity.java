@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui;
+package com.example.twdinspection.gcc.ui.gcc;
 
 import android.content.Context;
 import android.content.Intent;

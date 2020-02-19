@@ -34,7 +34,7 @@ import com.example.twdinspection.gcc.source.inspections.godown.DrGodownRegisterB
 import com.example.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.example.twdinspection.gcc.ui.GCCPhotoActivity;
+import com.example.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;

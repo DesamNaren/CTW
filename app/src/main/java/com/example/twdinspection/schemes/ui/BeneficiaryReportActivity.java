@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -91,7 +92,6 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
         try {
             if (getSupportActionBar() != null) {
-//                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
                 TextView tv = new TextView(getApplicationContext());
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
@@ -281,6 +281,10 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                     mSearchView.onActionViewCollapsed();
                 }
                 showSchemeDetails(schemesInfoEntitiesMain);
+                break;
+
+            case android.R.id.home:
+                finish();
                 break;
         }
         return true;

@@ -1,11 +1,8 @@
-package com.example.twdinspection.gcc.ui.reports;
+package com.example.twdinspection.gcc.ui.reports.gcc;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,18 +10,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityDrGodownBinding;
 import com.example.twdinspection.databinding.ActivityReportStockDetailsBinding;
-import com.example.twdinspection.gcc.source.reports.ReportData;
+import com.example.twdinspection.gcc.source.reports.gcc.ReportData;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
@@ -32,15 +24,11 @@ import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
-import com.example.twdinspection.inspection.viewmodel.StockViewModel;
-import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
