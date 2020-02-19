@@ -175,10 +175,35 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/ll_phys_avail_qty"
+                    android:layout_marginTop="@dimen/dimen_5dp">
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/phy_ava_qty"
+                        android:textSize="18sp" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:id="@+id/tv_phy_avail_qnty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/ll_phy_entry"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -190,7 +215,6 @@
 
                         <com.example.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/phy_ava_qty"
-
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"

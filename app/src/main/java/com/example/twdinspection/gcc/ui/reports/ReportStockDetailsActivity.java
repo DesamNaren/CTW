@@ -28,10 +28,15 @@ import com.example.twdinspection.gcc.source.reports.ReportData;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
+import com.example.twdinspection.gcc.ui.fragment.DailyReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
+import com.example.twdinspection.gcc.ui.fragment.EmptiesReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
+import com.example.twdinspection.gcc.ui.fragment.EssentialReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
+import com.example.twdinspection.gcc.ui.fragment.MFPReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.example.twdinspection.gcc.ui.fragment.PUnitReportFragment;
 import com.example.twdinspection.inspection.viewmodel.StockViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -100,9 +105,21 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
-                startActivity(intent);
+                if(reportData.getInspectionFindings().getDrGodown()!=null){
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DrGodownInspRepActivity.class);
+                    startActivity(intent);
+                }else if(reportData.getInspectionFindings().getDrDepot()!=null){
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                    startActivity(intent);
+                }else if(reportData.getInspectionFindings().getMfpGodowns()!=null){
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                    startActivity(intent);
+                }else if(reportData.getInspectionFindings().getProcessingUnit()!=null){
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                    startActivity(intent);
+                }else{
+                    callSnackBar("No Inspection data found");
+                }
             }
 
         });
@@ -115,47 +132,47 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
             if (reportData.getStockDetails().getEssentialCommodities() != null && reportData.getStockDetails().getEssentialCommodities().size() > 0) {
-                EssentialFragment essentialFragment = new EssentialFragment();
+                EssentialReportFragment essentialFragment = new EssentialReportFragment();
                 String essentialComm = gson.toJson(reportData.getStockDetails().getEssentialCommodities());
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.essComm, essentialComm);
+                bundle.putString(AppConstants.essRepComm, essentialComm);
                 essentialFragment.setArguments(bundle);
                 adapter.addFrag(essentialFragment, "Essential Commodities");
             }
 
             if (reportData.getStockDetails().getDailyRequirements() != null && reportData.getStockDetails().getDailyRequirements().size() > 0) {
-                DailyFragment dailyFragment = new DailyFragment();
+                DailyReportFragment dailyFragment = new DailyReportFragment();
                 String essentialComm = gson.toJson(reportData.getStockDetails().getDailyRequirements());
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.dailyReq, essentialComm);
+                bundle.putString(AppConstants.dailyRepReq, essentialComm);
                 dailyFragment.setArguments(bundle);
                 adapter.addFrag(dailyFragment, "Daily Requirements");
             }
 
             if (reportData.getStockDetails().getEmpties() != null && reportData.getStockDetails().getEmpties().size() > 0) {
-                EmptiesFragment emptiesFragment = new EmptiesFragment();
+                EmptiesReportFragment emptiesFragment = new EmptiesReportFragment();
                 String essentialComm = gson.toJson(reportData.getStockDetails().getEmpties());
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.empties, essentialComm);
+                bundle.putString(AppConstants.emptiesRep, essentialComm);
                 emptiesFragment.setArguments(bundle);
                 adapter.addFrag(emptiesFragment, "Empties");
             }
 
 
             if (reportData.getStockDetails().getMfpCommodities() != null && reportData.getStockDetails().getMfpCommodities().size() > 0) {
-                MFPFragment mfpFragment = new MFPFragment();
+                MFPReportFragment mfpFragment = new MFPReportFragment();
                 String essentialComm = gson.toJson(reportData.getStockDetails().getMfpCommodities());
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.mfp, essentialComm);
+                bundle.putString(AppConstants.mfpRep, essentialComm);
                 mfpFragment.setArguments(bundle);
                 adapter.addFrag(mfpFragment, "MFP Commodities");
             }
 
             if (reportData.getStockDetails().getProcessingUnits() != null && reportData.getStockDetails().getProcessingUnits().size() > 0) {
-                PUnitFragment pUnitFragment = new PUnitFragment();
+                PUnitReportFragment pUnitFragment = new PUnitReportFragment();
                 String essentialComm = gson.toJson(reportData.getStockDetails().getProcessingUnits());
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.punit, essentialComm);
+                bundle.putString(AppConstants.punitRep, essentialComm);
                 pUnitFragment.setArguments(bundle);
                 adapter.addFrag(pUnitFragment, "Processing Units");
             }

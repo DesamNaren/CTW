@@ -48,7 +48,7 @@ public class ReportData {
     private ReportStockDetails stockDetails;
     @SerializedName("inspection_findings")
     @Expose
-    private InspectionSubmitResponse inspectionFindings;
+    private InspectionReportResponse inspectionFindings;
     @SerializedName("photos")
     @Expose
     private List<ReportPhoto> photos = null;
@@ -149,11 +149,11 @@ public class ReportData {
         this.stockDetails = stockDetails;
     }
 
-    public InspectionSubmitResponse getInspectionFindings() {
+    public InspectionReportResponse getInspectionFindings() {
         return inspectionFindings;
     }
 
-    public void setInspectionFindings(InspectionSubmitResponse inspectionFindings) {
+    public void setInspectionFindings(InspectionReportResponse inspectionFindings) {
         this.inspectionFindings = inspectionFindings;
     }
 

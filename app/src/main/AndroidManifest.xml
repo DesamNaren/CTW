@@ -19,7 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".gcc.ui.reports.GCCReportsDashboard"></activity>
+        <activity android:name=".gcc.ui.reports.PUnitInspRepActivity"></activity>
+        <activity android:name=".gcc.ui.reports.MfpGodownInspRepActivity" />
+        <activity android:name=".gcc.ui.reports.DrDepotInspRepActivity" />
+        <activity android:name=".gcc.ui.reports.DrGodownInspRepActivity" />
+        <activity android:name=".gcc.ui.reports.GCCReportsDashboard" />
         <activity android:name=".inspection.ui.ReportActivity" />
         <activity
             android:name=".inspection.ui.CocurricularStudAchActivity"
@@ -179,16 +183,21 @@
         <activity
             android:name=".gcc.ui.punit.PUnitSelActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.drgodown.DRGodownFindingsActivity"
+        <activity
+            android:name=".gcc.ui.drgodown.DRGodownFindingsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.mfpgodown.MFPGodownFindingsActivity"
+        <activity
+            android:name=".gcc.ui.mfpgodown.MFPGodownFindingsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.punit.PUnitsFindingsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".gcc.ui.reports.GCCReportActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".gcc.ui.reports.ReportStockDetailsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".gcc.ui.punit.PUnitsFindingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.ui.reports.GCCReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.ui.reports.ReportStockDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
