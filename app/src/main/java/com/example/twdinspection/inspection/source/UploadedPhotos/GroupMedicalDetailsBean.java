@@ -1,8 +1,6 @@
 package com.example.twdinspection.inspection.source.UploadedPhotos;
 
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
-
-import java.util.List;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 public class GroupMedicalDetailsBean {
     private String type;

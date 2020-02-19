@@ -3,9 +3,7 @@ package com.example.twdinspection.inspection.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,24 +12,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProviders;
-
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportBinding;
-import com.example.twdinspection.inspection.ui.reports.InspectionReportsDashboard;
-import com.example.twdinspection.gcc.ui.reports.gcc.GCCReportsDashboard;
-import com.example.twdinspection.gcc.ui.reports.schemes.SchemesReportActivity;
-import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
+import com.example.twdinspection.inspection.reports.ui.InspectionReportsDashboard;
+import com.example.twdinspection.gcc.reports.ui.GCCReportsDashboard;
+import com.example.twdinspection.schemes.reports.ui.SchemesReportActivity;
+import com.example.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.example.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.ReportsViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;

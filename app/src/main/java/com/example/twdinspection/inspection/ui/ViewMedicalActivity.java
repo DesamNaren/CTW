@@ -17,15 +17,13 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityViewMedicalBinding;
 import com.example.twdinspection.inspection.adapter.GViewMedicalDetailsAdapter;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ViewMedicalActivity extends AppCompatActivity {
 

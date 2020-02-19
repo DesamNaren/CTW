@@ -30,7 +30,7 @@ import com.example.twdinspection.inspection.source.EntitlementsDistribution.Enti
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;

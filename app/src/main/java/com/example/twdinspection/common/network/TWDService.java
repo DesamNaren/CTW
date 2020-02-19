@@ -1,10 +1,9 @@
 package com.example.twdinspection.common.network;
 
 
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
-import com.example.twdinspection.gcc.source.reports.gcc.GCCReportResponse;
-import com.example.twdinspection.gcc.source.reports.scheme.SchemeReportResponse;
+import com.example.twdinspection.gcc.reports.source.GCCReportResponse;
+import com.example.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.example.twdinspection.gcc.source.submit.GCCSubmitRequest;
@@ -13,11 +12,11 @@ import com.example.twdinspection.gcc.source.suppliers.depot.DRDepotMasterRespons
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
-import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.source.login.LoginResponse;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
-import com.example.twdinspection.inspection.source.reports.InspReportResponse;
-import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
+import com.example.twdinspection.inspection.reports.source.InspReportResponse;
+import com.example.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
@@ -74,7 +73,7 @@ public interface TWDService {
     }
 
     @GET("CTWServiceDetails/validateLogin")
-    Call<EmployeeResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
+    Call<LoginResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
 
     @GET("CTWServiceDetails/getSummaryInfo")
     Call<ReportCountsResponse> getReportCounts(@Query("officerId") String username);

@@ -14,7 +14,6 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,7 +23,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
-import com.example.twdinspection.inspection.source.EmployeeResponse;
+import com.example.twdinspection.inspection.source.login.LoginResponse;
 import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
@@ -85,9 +84,9 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         }
 
 
-        loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<EmployeeResponse>() {
+        loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<LoginResponse>() {
             @Override
-            public void onChanged(EmployeeResponse employeeResponses) {
+            public void onChanged(LoginResponse employeeResponses) {
 
                 if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
                     if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {

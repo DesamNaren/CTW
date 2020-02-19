@@ -5,7 +5,6 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.converters.CallHealthConverter;
 import com.example.twdinspection.inspection.source.converters.MedicalRecordsConverter;
 

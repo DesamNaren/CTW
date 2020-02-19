@@ -6,7 +6,7 @@
 
         <variable
             name="schemeData"
-            type="com.example.twdinspection.gcc.source.reports.scheme.SchemeReportData" />
+            type="com.example.twdinspection.schemes.reports.source.SchemeReportData" />
 
     </data>
 

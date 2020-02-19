@@ -25,7 +25,7 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedialDetailsBinding;
 import com.example.twdinspection.inspection.adapter.MedicalDetailsAdapter;
 import com.example.twdinspection.inspection.interfaces.ClickCallback;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="inspData"
-            type="com.example.twdinspection.gcc.source.reports.InspectionReportResponse" />
+            type="com.example.twdinspection.gcc.reports.source.InspectionReportResponse" />
     </data>
 
     <RelativeLayout

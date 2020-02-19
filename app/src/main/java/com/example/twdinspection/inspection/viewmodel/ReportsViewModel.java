@@ -1,7 +1,6 @@
 package com.example.twdinspection.inspection.viewmodel;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,10 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
-import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.databinding.ActivityLoginCreBinding;
-import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.inspection.source.reports.ReportCountsResponse;
+import com.example.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;

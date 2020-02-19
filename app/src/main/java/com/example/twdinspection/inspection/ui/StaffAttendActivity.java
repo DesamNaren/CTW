@@ -174,9 +174,9 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
     }
 
 //    private void setAdapter() {
-//        authViewModel.getAllEmployees().observe(this, new Observer<List<EmployeeResponse>>() {
+//        authViewModel.getAllEmployees().observe(this, new Observer<List<LoginResponse>>() {
 //            @Override
-//            public void onChanged(List<EmployeeResponse> employeeResponses) {
+//            public void onChanged(List<LoginResponse> employeeResponses) {
 //                if (employeeResponses != null && employeeResponses.size() > 0) {
 //                    adapter.setEmployeeList(employeeResponses);
 ////                            binding.rv.scrollToPosition(employeeResponses.size()-1);

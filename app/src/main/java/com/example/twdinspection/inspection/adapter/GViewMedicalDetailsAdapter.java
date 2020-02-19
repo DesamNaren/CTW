@@ -2,7 +2,6 @@ package com.example.twdinspection.inspection.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.GroupViewMedicalRowBinding;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 import java.util.HashMap;
 import java.util.List;

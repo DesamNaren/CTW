@@ -1,22 +1,16 @@
 package com.example.twdinspection.inspection.source.submit;
 
-import androidx.room.ColumnInfo;
-
 import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
 import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
-import com.example.twdinspection.inspection.source.StudentsAttendanceBean;
 import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-import com.example.twdinspection.inspection.ui.AcademicActivity;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 

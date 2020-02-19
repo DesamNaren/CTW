@@ -13,8 +13,8 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
-import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.inspection.source.LoginUser;
+import com.example.twdinspection.inspection.source.login.LoginResponse;
+import com.example.twdinspection.inspection.source.login.LoginUser;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
@@ -26,7 +26,7 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
-    private MutableLiveData<EmployeeResponse> responseMutableLiveData;
+    private MutableLiveData<LoginResponse> responseMutableLiveData;
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
     private Context context;
@@ -43,7 +43,7 @@ public class LoginViewModel extends ViewModel {
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
 
-    public LiveData<EmployeeResponse> geListLiveData() {
+    public LiveData<LoginResponse> geListLiveData() {
         responseMutableLiveData = new MutableLiveData<>();
         return responseMutableLiveData;
     }
@@ -89,16 +89,16 @@ public class LoginViewModel extends ViewModel {
         binding.btnLogin.setVisibility(View.GONE);
         customProgressDialog.show();
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<EmployeeResponse>() {
+        twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NotNull Call<EmployeeResponse> call, @NotNull Response<EmployeeResponse> response) {
+            public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
                 customProgressDialog.dismiss();
                 binding.btnLogin.setVisibility(View.VISIBLE);
                 responseMutableLiveData.setValue(response.body());
             }
 
             @Override
-            public void onFailure(@NotNull Call<EmployeeResponse> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
                 customProgressDialog.dismiss();
                 binding.btnLogin.setVisibility(View.VISIBLE);
                 errorHandlerInterface.handleError(t, context);

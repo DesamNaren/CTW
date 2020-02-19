@@ -19,11 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".gcc.ui.reports.gcc.PUnitInspRepActivity"></activity>
-        <activity android:name=".gcc.ui.reports.gcc.MfpGodownInspRepActivity" />
-        <activity android:name=".gcc.ui.reports.gcc.DrDepotInspRepActivity" />
-        <activity android:name=".gcc.ui.reports.gcc.DrGodownInspRepActivity" />
-        <activity android:name=".gcc.ui.reports.gcc.GCCReportsDashboard" />
+        <activity android:name=".gcc.reports.ui.PUnitInspRepActivity" />
+        <activity android:name=".gcc.reports.ui.MfpGodownInspRepActivity" />
+        <activity android:name=".gcc.reports.ui.DrDepotInspRepActivity" />
+        <activity android:name=".gcc.reports.ui.DrGodownInspRepActivity" />
+        <activity android:name=".gcc.reports.ui.GCCReportsDashboard" />
         <activity android:name=".inspection.ui.ReportActivity" />
         <activity
             android:name=".inspection.ui.CocurricularStudAchActivity"
@@ -121,7 +121,7 @@
             android:name=".inspection.ui.StaffAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.StudentsAttendance_2"
+            android:name=".inspection.ui.StudentsAttendActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.GeneralInfoActivity"
@@ -193,27 +193,29 @@
             android:name=".gcc.ui.punit.PUnitsFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.reports.gcc.GCCReportActivity"
+            android:name=".gcc.reports.ui.GCCReportActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.reports.gcc.ReportStockDetailsActivity"
+            android:name=".gcc.reports.ui.ReportStockDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.reports.ReportAcademicDetailsActivity"
+            android:name=".inspection.reports.ui.ReportAcademicDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.reports.InspectionReportsDashboard"
+            android:name=".inspection.reports.ui.InspectionReportsDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.reports.InspectionReportDetailsActivity"
+            android:name=".inspection.reports.ui.InspectionReportDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.reports.InstReportsMenuActivity"
+            android:name=".inspection.reports.ui.InstReportsMenuActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.reports.schemes.SchemesReportActivity"
-            android:theme="@style/Light_AppTheme"
-            android:screenOrientation="portrait" />
-        <activity android:name=".gcc.ui.reports.schemes.SchemeReportDetailsActivity"
+        <activity
+            android:name=".schemes.reports.ui.SchemesReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme" />
+        <activity
+            android:name=".schemes.reports.ui.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
 
         <provider

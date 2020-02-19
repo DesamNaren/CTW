@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterSchemeReportBinding;
-import com.example.twdinspection.gcc.interfaces.ReportClickCallback;
-import com.example.twdinspection.gcc.source.reports.scheme.SchemeReportData;
+import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
+import com.example.twdinspection.schemes.reports.source.SchemeReportData;
 
 import java.util.ArrayList;
 import java.util.List;

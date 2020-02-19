@@ -4,7 +4,7 @@
     <data>
         <variable
             name="drDepot"
-            type="com.example.twdinspection.gcc.source.reports.DrDepotInspReport" />
+            type="com.example.twdinspection.gcc.reports.source.DrDepotInspReport" />
     </data>
 
     <RelativeLayout

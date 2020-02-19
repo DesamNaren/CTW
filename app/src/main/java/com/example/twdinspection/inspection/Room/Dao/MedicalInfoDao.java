@@ -6,14 +6,11 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 import java.util.List;
-
-import retrofit2.http.DELETE;
 
 @Dao
 public interface MedicalInfoDao {

@@ -1,6 +1,5 @@
 package com.example.twdinspection.inspection.Room.repository;
 
-import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -8,8 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 

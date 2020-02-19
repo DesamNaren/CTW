@@ -2,7 +2,6 @@ package com.example.twdinspection.inspection.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -10,22 +9,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.gcc.room.repository.GCCRepository;
-import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
-import com.example.twdinspection.gcc.source.stock.CommonCommodity;
 import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
-import com.example.twdinspection.inspection.source.EmployeeResponse;
-import com.example.twdinspection.inspection.source.LoginUser;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -22,11 +22,10 @@ import com.example.twdinspection.inspection.ui.EntitlementsActivity;
 import com.example.twdinspection.inspection.ui.GeneralCommentsActivity;
 import com.example.twdinspection.inspection.ui.GeneralInfoActivity;
 import com.example.twdinspection.inspection.ui.InfraActivity;
-import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.example.twdinspection.inspection.ui.MedicalActivity;
 import com.example.twdinspection.inspection.ui.RegistersActivity;
 import com.example.twdinspection.inspection.ui.StaffAttendActivity;
-import com.example.twdinspection.inspection.ui.StudentsAttendance_2;
+import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
 
 import java.util.List;
@@ -71,7 +70,7 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                             callActivity(GeneralInfoActivity.class);
                             break;
                         case 2:
-                            callActivity(StudentsAttendance_2.class);
+                            callActivity(StudentsAttendActivity.class);
                             break;
                         case 3:
                             callActivity(StaffAttendActivity.class);

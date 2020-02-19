@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.ViewMedicalRowBinding;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 import java.util.List;
 

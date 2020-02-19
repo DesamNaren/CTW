@@ -23,7 +23,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.CallHealthCustomViewModel;

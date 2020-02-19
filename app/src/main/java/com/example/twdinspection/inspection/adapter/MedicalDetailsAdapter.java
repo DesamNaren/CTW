@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterMedicalDetailsBinding;
 import com.example.twdinspection.inspection.interfaces.ClickCallback;
-import com.example.twdinspection.inspection.source.MedicalDetailsBean;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -6,7 +6,7 @@
 
         <variable
             name="inspReport"
-            type="com.example.twdinspection.inspection.source.reports.InspReportData" />
+            type="com.example.twdinspection.inspection.reports.source.InspReportData" />
 
     </data>
 
