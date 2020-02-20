@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.adapter;
+package com.example.twdinspection.gcc.reports.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -48,12 +48,8 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
         }else {
             holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getSystemQty()));
         }
-        if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
-            holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity (" + dataModel.getUnits() + ")");
-        }else {
-            holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
-        }
-        holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getPhysicalRate()));
+
+        holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getSystemRate()));
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getSystemValue()));
         holder.stockChildRowBinding.tvPhyRate.setText(String.valueOf(dataModel.getPhysicalRate()));
         holder.stockChildRowBinding.tvPhyAvailQnty.setText(String.valueOf(dataModel.getPhysiacalQty()));

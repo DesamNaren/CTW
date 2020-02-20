@@ -74,6 +74,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
+
         divisionLiveData.observe(this, divisions -> {
             divisionLiveData.removeObservers(MFPGoDownSelActivity.this);
             customProgressDialog.dismiss();

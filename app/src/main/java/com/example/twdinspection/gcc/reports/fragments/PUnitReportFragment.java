@@ -1,4 +1,4 @@
-package com.example.twdinspection.gcc.ui.fragment;
+package com.example.twdinspection.gcc.reports.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.StockMainRowBinding;
-import com.example.twdinspection.gcc.adapter.CommCommodityAdapter;
+import com.example.twdinspection.gcc.reports.adapter.CommCommodityAdapter;
 import com.example.twdinspection.gcc.reports.source.ReportSubmitReqCommodities;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

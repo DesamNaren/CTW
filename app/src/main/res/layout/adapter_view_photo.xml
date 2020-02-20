@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="photo"
+            type="com.example.twdinspection.gcc.reports.source.ReportPhoto" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_gccReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_5dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:padding="@dimen/dimen_10dp">
+            <ImageView
+                android:id="@+id/iv_repairs"
+                android:layout_width="@dimen/_100dp"
+                android:layout_height="@dimen/_100dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:scaleType="fitXY"
+                app:profileImage="@{imageUrl}" />
+                <ProgressBar
+                    android:visibility=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{photo.fileName}"
+            android:gravity="center"
+                android:textColor="@color/black"
+                android:padding="@dimen/dimen_5dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

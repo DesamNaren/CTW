@@ -58,6 +58,10 @@
     <string name="variance_rep">Variance</string>
     <string name="how_is_infra">How is the drinking water facility</string>
     <string name="yes">Yes</string>
+    <string name="dr_godown_req">dr_godown</string>
+    <string name="dr_depot_req">dr_depot</string>
+    <string name="mfp_godown_req">mfp_commodities</string>
+    <string name="p_unit_req">processing_unit</string>
     <string name="no">No</string>
     <string name="good">Good</string>
     <string name="bad">Bad</string>

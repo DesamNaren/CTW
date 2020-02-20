@@ -2,6 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="mfp"
+            type="com.example.twdinspection.gcc.reports.source.MfpGodownsInspRep" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,15 +31,16 @@
 
 
         <ScrollView
-            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -87,6 +99,8 @@
                                     android:id="@+id/stock_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -94,6 +108,8 @@
                                     android:id="@+id/stock_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -125,6 +141,8 @@
                                     android:id="@+id/insurance_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -132,6 +150,8 @@
                                     android:id="@+id/insurance_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -142,11 +162,12 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
+                                    android:textColorHint="@color/colorAccent"
                                     android:layout_height="wrap_content"
                                     app:errorEnabled="true">
 
@@ -155,6 +176,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/com_name"
+                                        android:focusableInTouchMode="false"
+                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
 
@@ -175,9 +198,9 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
                                         android:hint="Insurance validity"
+                                        android:text="@{mfp.registerBookCertificates.insuranceValidity}"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:singleLine="true" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,6 +232,8 @@
                                     android:id="@+id/fire_noc_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -216,6 +241,8 @@
                                     android:id="@+id/fire_noc_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -247,6 +274,8 @@
                                     android:id="@+id/weight_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -254,6 +283,8 @@
                                     android:id="@+id/weight_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -265,7 +296,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/legal_met_val"
@@ -282,9 +313,9 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
                                         android:hint="Certificate validity"
+                                        android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:singleLine="true" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -355,6 +386,8 @@
                                     android:id="@+id/qual_stock_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -362,6 +395,8 @@
                                     android:id="@+id/qual_stock_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -392,6 +427,8 @@
                                     android:id="@+id/stack_cards_displayed_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -399,6 +436,8 @@
                                     android:id="@+id/stack_cards_displayed_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -429,6 +468,8 @@
                                     android:id="@+id/godown_hyg_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -436,6 +477,8 @@
                                     android:id="@+id/godown_hyg_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -466,6 +509,8 @@
                                     android:id="@+id/draige_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -473,6 +518,8 @@
                                     android:id="@+id/draige_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -503,6 +550,8 @@
                                     android:id="@+id/gen_avail_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -510,6 +559,8 @@
                                     android:id="@+id/gen_avail_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -540,6 +591,8 @@
                                     android:id="@+id/tray_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -547,6 +600,8 @@
                                     android:id="@+id/tray_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -578,6 +633,8 @@
                                     android:id="@+id/insp_date_div_manager_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -585,6 +642,8 @@
                                     android:id="@+id/insp_date_div_manager_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -615,6 +674,8 @@
                                     android:id="@+id/repairs_req_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -622,6 +683,8 @@
                                     android:id="@+id/repairs_req_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -635,12 +698,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 android:layout_marginTop="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
@@ -648,7 +712,9 @@
                                     android:id="@+id/et_repair_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/repair_type"
+                                    android:text="@{mfp.generalFindings.repairType}"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true" />
 
@@ -657,12 +723,12 @@
 
                             <ImageView
                                 android:id="@+id/iv_repairs"
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
+                                android:visibility="gone"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@color/list_blue"
-                                android:padding="@dimen/dimen_10dp"
+                                app:profileImage="@{imageUrl}"
                                 android:src="@drawable/repair" />
 
 
@@ -672,6 +738,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:layout_marginTop="@dimen/dimen_5dp"
                             app:errorEnabled="true">
 
@@ -680,6 +747,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/remarks"
+                                android:focusableInTouchMode="false"
+                                android:text="@{mfp.generalFindings.remarks}"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
 
@@ -692,15 +761,17 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll" />
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>

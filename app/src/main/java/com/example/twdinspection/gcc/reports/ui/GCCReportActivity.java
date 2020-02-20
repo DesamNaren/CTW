@@ -42,28 +42,46 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         super.onCreate(savedInstanceState);
 
         customProgressDialog = new CustomProgressDialog(this);
-        sharedPreferences= TWDApplication.get(this).getPreferences();
-        editor=sharedPreferences.edit();
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
 
         gccReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_report);
         gccReportBinding.executePendingBindings();
         gccReportBinding.header.headerTitle.setText(getString(R.string.gcc_reports));
         gccReportBinding.header.ivHome.setVisibility(View.GONE);
 
-        reportData =new ArrayList<>();
+        reportData = new ArrayList<>();
 
-        Gson gson=new Gson();
-        String data=sharedPreferences.getString(AppConstants.Selected_Supp_Report,"");
+        gccReportBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        Gson gson = new Gson();
+        String data = sharedPreferences.getString(AppConstants.Selected_Supp_Report, "");
         Type type = new TypeToken<List<ReportData>>() {}.getType();
         reportData = gson.fromJson(data, type);
 
-        if(reportData!=null && reportData.size()>0){
+        if (reportData != null && reportData.size() > 0) {
             gccReportBinding.recyclerView.setVisibility(View.VISIBLE);
             gccReportBinding.tvEmpty.setVisibility(View.GONE);
-            adapter = new GCCReportAdapter(this,reportData );
+            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+                gccReportBinding.header.headerTitle.setText("Godown Reports");
+            }
+            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+                gccReportBinding.header.headerTitle.setText("Depot Reports");
+            }
+            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+                gccReportBinding.header.headerTitle.setText("MFP Godown Reports");
+            }
+            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+                gccReportBinding.header.headerTitle.setText("Processing Unit Reports");
+            }
+            adapter = new GCCReportAdapter(this, reportData);
             gccReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             gccReportBinding.recyclerView.setAdapter(adapter);
-        }else{
+        } else {
             gccReportBinding.recyclerView.setVisibility(View.GONE);
             gccReportBinding.tvEmpty.setVisibility(View.VISIBLE);
             callSnackBar("No data available");
@@ -137,9 +155,9 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     @Override
     public void onItemClick(ReportData reportData) {
-        Gson gson=new Gson();
-        String data=gson.toJson(reportData);
-        editor.putString(AppConstants.REP_DATA,data);
+        Gson gson = new Gson();
+        String data = gson.toJson(reportData);
+        editor.putString(AppConstants.REP_DATA, data);
         editor.apply();
         startActivity(new Intent(this, ReportStockDetailsActivity.class));
     }

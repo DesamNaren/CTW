@@ -204,7 +204,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.qual_stock_rb_yes) {
                     qualityStock = AppConstants.Yes;
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.qual_stock_rb_yes) {
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.qual_stock_rb_no) {
                     qualityStock = AppConstants.No;
                 }
             }
@@ -281,9 +281,9 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_soc_manager_rb_yes) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_div_manager_rb_yes) {
                     lastInsDiv= AppConstants.Yes;
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_soc_manager_rb_no) {
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_div_manager_rb_no) {
                     lastInsDiv = AppConstants.No;
                 }
             }
@@ -449,7 +449,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(trayAvail)) {
             returnFlag = false;
             showSnackBar("Please check tray dryer available");
-        } else if (TextUtils.isEmpty(checkUpDate)) {
+        } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
             showSnackBar("Please check last inspection date");
         }else if (TextUtils.isEmpty(repairsReq)) {

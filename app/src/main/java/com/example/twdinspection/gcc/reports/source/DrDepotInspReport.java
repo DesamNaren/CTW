@@ -1,5 +1,10 @@
 package com.example.twdinspection.gcc.reports.source;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.GeneralFindings;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.HoardingsBoards;
 import com.example.twdinspection.gcc.source.inspections.DrDepot.MFPRegisters;
@@ -65,4 +70,10 @@ public class DrDepotInspReport {
         this.generalFindings = generalFindings;
     }
 
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .into(view);
+    }
 }

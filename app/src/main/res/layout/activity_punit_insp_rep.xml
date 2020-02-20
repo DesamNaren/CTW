@@ -2,6 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="pUnit"
+            type="com.example.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,9 +31,9 @@
 
 
         <ScrollView
-            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
             <LinearLayout
@@ -31,13 +42,13 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
                     android:background="@color/white"
                     android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -88,6 +99,8 @@
                                     android:id="@+id/stock_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -95,13 +108,17 @@
                                     android:id="@+id/stock_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
+                                android:id="@+id/remarks_stock"
                                 layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_stock"/>
+                                android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks!=null? View.VISIBLE : View.GONE}" />
                         </LinearLayout>
 
 
@@ -128,20 +145,26 @@
                                     android:id="@+id/pro_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/pro_no_rb"
                                     android:layout_width="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`No`)}"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_processing"/>
+                                android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks!=null? View.VISIBLE : View.GONE}"
+                                android:id="@+id/remarks_processing"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -167,20 +190,26 @@
                                     android:id="@+id/inward_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/inward_no_rb"
                                     android:layout_width="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`No`)}"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_inward"/>
+                                android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks!=null? View.VISIBLE : View.GONE}"
+                                android:id="@+id/remarks_inward"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -206,6 +235,8 @@
                                     android:id="@+id/outward_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -213,13 +244,16 @@
                                     android:id="@+id/outward_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_outward"/>
+                                android:id="@+id/remarks_outward"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -245,6 +279,8 @@
                                     android:id="@+id/sale_inv_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -252,13 +288,16 @@
                                     android:id="@+id/sale_inv_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_sale_inv"/>
+                                android:id="@+id/remarks_sale_inv"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -284,6 +323,8 @@
                                     android:id="@+id/lab_att_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -291,13 +332,16 @@
                                     android:id="@+id/lab_att_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_lab_att"/>
+                                android:id="@+id/remarks_lab_att"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
 
@@ -324,6 +368,8 @@
                                     android:id="@+id/insurance_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -331,6 +377,8 @@
                                     android:id="@+id/insurance_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -341,7 +389,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -354,7 +402,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/com_name"
-                                        android:imeOptions="actionNext"
+                                        android:text="@{pUnit.registerBookCertificates.insCompName}"
+                                    android:imeOptions="actionNext"
                                         android:singleLine="true" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -375,8 +424,8 @@
                                         android:focusableInTouchMode="false"
                                         android:hint="Insurance validity"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@{pUnit.registerBookCertificates.insValidity}"
+                                        android:singleLine="true"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -408,6 +457,8 @@
                                     android:id="@+id/fire_noc_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -415,13 +466,16 @@
                                     android:id="@+id/fire_noc_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_fire_noc"/>
+                                android:id="@+id/remarks_fire_noc"
+                                layout="@layout/reamrks_layout" />
 
                         </LinearLayout>
 
@@ -448,6 +502,8 @@
                                     android:id="@+id/weight_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -455,6 +511,8 @@
                                     android:id="@+id/weight_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -466,7 +524,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/legal_met_val"
@@ -483,9 +541,9 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
                                         android:hint="Certificate validity"
+                                        android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:singleLine="true" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -514,6 +572,8 @@
                                         android:id="@+id/amc_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -521,13 +581,16 @@
                                         android:id="@+id/amc_no_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_amc"/>
+                                    android:id="@+id/remarks_amc"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -553,6 +616,8 @@
                                         android:id="@+id/agmark_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -560,13 +625,16 @@
                                         android:id="@+id/agmark_no_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`No`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_agmark"/>
+                                    android:id="@+id/remarks_agmark"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -592,6 +660,8 @@
                                         android:id="@+id/fsaai_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -599,13 +669,16 @@
                                         android:id="@+id/fsaai_no_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`No`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_fsaai"/>
+                                    android:id="@+id/remarks_fsaai"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
 
@@ -634,6 +707,8 @@
                                     android:id="@+id/empties_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -641,13 +716,16 @@
                                     android:id="@+id/empties_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_empties"/>
+                                android:id="@+id/remarks_empties"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
 
@@ -676,6 +754,8 @@
                                 android:id="@+id/barrels_yes_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -683,14 +763,18 @@
                                 android:id="@+id/barrels_no_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_barrels"/>
+                            android:id="@+id/remarks_barrels"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -714,6 +798,8 @@
                                 android:id="@+id/cash_book_yes_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -721,13 +807,16 @@
                                 android:id="@+id/cash_book_no_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_cash_book"/>
+                            android:id="@+id/remarks_cash_book"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -753,6 +842,8 @@
                                 android:id="@+id/cash_bank_yes_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -760,13 +851,16 @@
                                 android:id="@+id/cash_bank_no_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_cash_bank"/>
+                            android:id="@+id/remarks_cash_bank"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -792,20 +886,25 @@
                                 android:id="@+id/veh_log_yes_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
+                                android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`Yes`)}"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/veh_log_no_rb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_veh_log"/>
+                            android:id="@+id/remarks_veh_log"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -867,6 +966,8 @@
                                     android:id="@+id/rb_stock_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -874,6 +975,8 @@
                                     android:id="@+id/rb_stock_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -905,6 +1008,8 @@
                                     android:id="@+id/rb_hyg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -912,6 +1017,8 @@
                                     android:id="@+id/rb_hyg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -942,6 +1049,8 @@
                                     android:id="@+id/repairs_req_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -949,39 +1058,38 @@
                                     android:id="@+id/repairs_req_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
 
                         </LinearLayout>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks"/>
+                            android:id="@+id/remarks"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
-
-
-
-
         </ScrollView>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
-            android:visibility="gone"
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll" />
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>

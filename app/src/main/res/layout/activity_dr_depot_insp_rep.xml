@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="drDepot"
             type="com.example.twdinspection.gcc.reports.source.DrDepotInspReport" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
     </data>
 
     <RelativeLayout
@@ -134,8 +142,8 @@
                                 android:id="@+id/tv_diff_val"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{drDepot.stockDetails.deficit}"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@{drDepot.stockDetails.deficit}"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -150,22 +158,24 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/cash_balance_as_per_cash_book"
-                                android:layout_weight="1"
                                 android:textColor="@color/black" />
 
                             <TextView
+                                android:id="@+id/tv_stock"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_stock"
                                 android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.cashBalAsPerCashBook}"
                                 android:padding="@dimen/dimen_5dp"
+                                android:textStyle="bold"
+                                android:text="@{drDepot.stockDetails.cashBalAsPerCashBook}"
                                 android:textColor="@color/black" />
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -174,17 +184,18 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/a_physical_cash"
-                                android:layout_weight="1"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.physicalCash}"
+                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@{drDepot.stockDetails.physicalCash}"
                                 android:textColor="@color/black" />
 
 
@@ -199,17 +210,18 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/b_adjustment_vouchers_bills"
-                                android:layout_weight="1"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.vouchers}"
+                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@{drDepot.stockDetails.vouchers}"
                                 android:textColor="@color/black" />
 
 
@@ -224,17 +236,18 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/liability_balance_as_per_liability_register"
-                                android:layout_weight="1"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.liabilityBalance}"
+                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@{drDepot.stockDetails.liabilityBalance}"
                                 android:textColor="@color/black" />
 
 
@@ -248,41 +261,40 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/deficit_excess"
-                                android:layout_weight="1"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.deficit}"
                                 android:padding="@dimen/dimen_5dp"
+                                android:textStyle="bold"
+                                android:text="@{drDepot.stockDetails.deficit}"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 
-                        <LinearLayout
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:textColorHint="@color/colorAccent"
+                            app:errorEnabled="true">
 
-                            <TextView
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/reason_mentioned_by_incharge_regarding_deficit_surplus"
-                                android:layout_weight="1"
-                                android:textColor="@color/black" />
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="Reason mentioned by incharge regarding deficit / surplus "
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:text="@{drDepot.stockDetails.deficit_reason}" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
-                                android:text="@{drDepot.stockDetails.deficit_reason}"
-                                android:padding="@dimen/dimen_5dp"
-                                android:textColor="@color/black" />
-                        </LinearLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                     </LinearLayout>
@@ -329,246 +341,445 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="vertical">
 
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/ecs_stock_register"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_ecs_stock"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.ecsStockRegister}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/ecs_stock_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.ecsStockRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/ecs_stock_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.ecsStockRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/drs_stock_register"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_dr_stock"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.drsStockRegister}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/dr_stock_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.drsStockRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/dr_stock_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.drsStockRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
-                           <LinearLayout
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/empties_stock_register"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_empties_stock"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.emptiesRegister}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/empties_stock_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.emptiesRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/empties_stock_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.emptiesRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-                           <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/abstract_sales_register"
-                                    android:layout_weight="1"
+                                    android:text="Abstract sales register"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_abstract_sales"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.abstractSalesRegister}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/abstract_sales_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.abstractSalesRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/abstract_sales_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.abstractSalesRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-                           <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/cash_book"
-                                    android:layout_weight="1"
+                                    android:text="Cash Book"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_depot_cash_book"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.cashBook}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/depot_cash_book_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.cashBook.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/depot_cashbook_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.cashBook.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-                           <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/liability_register"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_liability_reg"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.liabilityRegister}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/liability_reg_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.liabilityRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/liability_reg_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.liabilityRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-                             <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/visit_book"
-                                    android:layout_weight="1"
+                                    android:text="Visitors notebook"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_visit_book_depot"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.visitorsNoteBook}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/visit_book_depot_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.visitorsNoteBook.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/visit_book_depot_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.visitorsNoteBook.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-                             <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/sale_bill_book"
-                                    android:layout_weight="1"
+                                    android:text="Sale bill book"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_sale_bill_book"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.saleBillBook}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/sale_bill_book_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.saleBillBook.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/sale_bill_book_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.saleBillBook.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-
-                             <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/weights_and_measurements_certificate_issued_by_legal_metrology"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_weight_meas_cert"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.weightMeasureCertificate}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/weight_meas_cert_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/weight_meas_cert_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/weight_cert_issue_date"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
+                                    android:visibility="@{drDepot.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_weight_cert_issue"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
+                                        android:hint="Cerificate issue date"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true"
+                                        android:text="@{drDepot.registerBookCertificates.weightMeasureValidity}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
                             </LinearLayout>
 
-                             <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/certificate_issue_date"
-                                    android:layout_weight="1"
-                                    android:textColor="@color/black" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.weightMeasureValidity}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
-
-                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/depot_authorisation_certificate_issued_by_revenue_authorities"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_depot_auth_cert"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.registerBookCertificates.depotAuthCertificate}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/depot_auth_cert_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.depotAuthCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/depot_auth_cert_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.registerBookCertificates.depotAuthCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
 
@@ -610,139 +821,253 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/mfp_stock_register"
-                                    android:layout_weight="1"
-                                    android:textColor="@color/black" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.mfpStock}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/mfp_purchase_bill_book"
-                                    android:layout_weight="1"
+                                    android:text="MFP stock register"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_mfp_stock"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.mfpPurchase}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_stock_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpStock.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_stock_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpStock.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-                             <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="MFP Purchase bill Book"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_mfp_purchase"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_purchase_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpPurchase.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_purchase_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpPurchase.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/bill_abstract_book"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_bill_abstract"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.billAbstract}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/bill_abstract_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.billAbstract.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/bill_abstract_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.billAbstract.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-                             <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/abstract_account_book"
-                                    android:layout_weight="1"
+                                    android:text="Abstract account book"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_abstract_accnt_book"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.abstractAccnt}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/abstract_accnt_book_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.abstractAccnt.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/abstract_accnt_book_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.abstractAccnt.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-
-                             <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/advance_account_book"
-                                    android:layout_weight="1"
+                                    android:text="Advance account book"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_advance_accnt_book"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.advanceAccnt}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/advance_accnt_book_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.advanceAccnt.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/advance_accnt_book_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.advanceAccnt.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-
-                             <LinearLayout
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/mfp_liability_register"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_mfp_liability_reg"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.mfpRegisters.mfpLiability}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_liability_reg_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpLiability.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/mfp_liability_reg_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.mfpRegisters.mfpLiability.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
                         </LinearLayout>
@@ -783,159 +1108,295 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="vertical">
 
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/depot_name_board"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_depot_name_board"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.depotNameBoard}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/depot_name_board_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.depotNameBoard.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/depot_name_board_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.depotNameBoard.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/gcc_objectives_principles_board"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_obj_princ"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.gccObjPrinciples}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
+                                    android:orientation="horizontal">
 
+
+                                    <RadioButton
+                                        android:id="@+id/obj_princ_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.gccObjPrinciples.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/obj_princ_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.gccObjPrinciples.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/depot_timing_board"
-                                    android:layout_weight="1"
+                                    android:text="Depot timing board"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_depot_timimg"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.depotTiming}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/depot_timimg_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.depotTiming.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/depot_timimg_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.depotTiming.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
-                           <LinearLayout
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/mfp_commodities_rate_board"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_comm_rate"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.mfpCommodities}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/comm_rate_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.mfpCommodities.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/comm_rate_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.mfpCommodities.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
-                           <LinearLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/ec_commodities_rate_board"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_ec_comm_rate"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.ecCommodities}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/ec_comm_rate_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.ecCommodities.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/ec_comm_rate_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.ecCommodities.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/dr_commodities_rate_board"
-                                    android:layout_weight="1"
+                                    android:text="DR commodities rate board"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_dr_comm_rate"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.drCommodities}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/dr_comm_rate_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.drCommodities.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/dr_comm_rate_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.drCommodities.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
-
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/stock_balance_board"
-                                    android:layout_weight="1"
+                                    android:text="Stock balance board"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_stock_bal"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.hoardingsBoards.stockBal}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/stock_bal_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.stockBal.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/stock_bal_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.hoardingsBoards.stockBal.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
                             </LinearLayout>
 
                         </LinearLayout>
@@ -976,160 +1437,294 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="vertical">
 
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/whether_the_values_mentioned_in_sale_bills_are_as_per_sale_price_fixed_in_rate_card"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_values_as_per_sale_price"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.valuesAsPerSalePrice}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/values_as_per_sale_price_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.valuesAsPerSalePrice.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/values_as_per_sale_price_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.valuesAsPerSalePrice.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/whether_the_values_mentioned_in_mfp_purchase_bills_are_as_per_purchase_price_fixed_in_rate_card"
-                                    android:layout_weight="1"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_values_as_per_purchase_price"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.valuesAsPerPurchasePrice}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/values_as_per_purchase_price_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.valuesAsPerPurchasePrice.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/values_as_per_purchase_price_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.valuesAsPerPurchasePrice.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/whether_the_quality_of_the_stocks_stored_in_godown_was_verified_and_found_in_yes_condition"
-                                    android:layout_weight="1"
+                                    android:text="Whether the quality of the stocks stored in godown was verified and found in yes condition"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_qual_verified"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.stockQualityVerified}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/qual_verified_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/qual_verified_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/whether_the_depot_is_maintained_in_hygienic_condition_or_not"
-                                    android:layout_weight="1"
+                                    android:text="Whether the depot is maintained in hygienic condition or not"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_depot_maint_hygeine"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.hygienicCondition}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
+                                    android:orientation="horizontal">
 
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                    <RadioButton
+                                        android:id="@+id/depot_maint_hygeine_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
 
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/any_repairs_required_for_dr_godown"
-                                    android:layout_weight="1"
-                                    android:textColor="@color/black" />
+                                    <RadioButton
+                                        android:id="@+id/depot_maint_hygeine_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
 
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.repairsRequired}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                </RadioGroup>
+
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="0dp"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/feedback_of_card_holders"
-                                    android:layout_weight="1"
+                                    android:text="Any repairs required for Dr Godown"
                                     android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <RadioGroup
+                                    android:id="@+id/rg_repairs_req"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.feedback}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:clickable="false"
+                                        android:id="@+id/repairs_req_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{drDepot.generalFindings.repairsRequired.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/ins_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{drDepot.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/repairs_type"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                        android:layout_width="match_parent"
+                                        android:textColorHint="@color/colorAccent"
+                                        android:layout_height="wrap_content"
+                                        app:errorEnabled="true">
+
+
+                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_repairs_type"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="Repairs type"
+                                            android:imeOptions="actionNext"
+                                            android:singleLine="true"
+                                            android:text="@{drDepot.generalFindings.repairType}" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <ImageView
+                                        android:id="@+id/iv_repairs_cam"
+                                        android:layout_width="80dp"
+                                        android:layout_height="80dp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginTop="@dimen/dimen_8dp"
+                                        android:layout_marginBottom="@dimen/dimen_10dp"
+                                        app:profileImage="@{imageUrl}" />
+                                </LinearLayout>
+
                             </LinearLayout>
 
-                            <LinearLayout
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/feedback"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
 
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/remarks_of_inspection_officer"
-                                    android:layout_weight="1"
-                                    android:textColor="@color/black" />
 
-                                <TextView
-                                    android:layout_width="0dp"
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_feedback"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="0.5"
-                                    android:text="@{drDepot.generalFindings.remarks}"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="Feedback of Card Holders"
+                                    android:imeOptions="actionNext"
+                                    android:singleLine="true"
+                                    android:text="@{drDepot.generalFindings.feedback}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/remarks"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:textColorHint="@color/colorAccent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_remarks"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="Remarks of Inspection officer"
+                                    android:imeOptions="actionNext"
+                                    android:singleLine="true"
+                                    android:text="@{drDepot.generalFindings.remarks}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
 
                         </LinearLayout>

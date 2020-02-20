@@ -125,7 +125,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             socId=pUnits.getSocietyId();
             socName=pUnits.getSocietyName();
             inchName=pUnits.getIncharge();
-            suppType=getString(R.string.p_unit);
+            suppType=getString(R.string.p_unit_req);
             suppId=pUnits.getGodownId();
             godName=pUnits.getGodownName();
         }
@@ -137,7 +137,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             socId=drDepot.getSocietyId();
             socName=drDepot.getSocietyName();
             inchName=drDepot.getIncharge();
-            suppType=getString(R.string.dr_depot);
+            suppType=getString(R.string.dr_depot_req);
             suppId=drDepot.getGodownId();
             godName=drDepot.getGodownName();
         }
@@ -149,7 +149,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             socId=drGodowns.getSocietyId();
             socName=drGodowns.getSocietyName();
             inchName=drGodowns.getIncharge();
-            suppType=getString(R.string.dr_godown);
+            suppType=getString(R.string.dr_godown_req);
             suppId=drGodowns.getGodownId();
             godName=drGodowns.getGodownName();
         }
@@ -161,7 +161,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             socId=mfpGoDowns.getSocietyId();
             socName=mfpGoDowns.getSocietyName();
             inchName=mfpGoDowns.getIncharge();
-            suppType=getString(R.string.mfp_godown);
+            suppType=getString(R.string.mfp_godown_req);
             suppId=mfpGoDowns.getGodownId();
             godName=mfpGoDowns.getGodownName();
         }

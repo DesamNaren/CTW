@@ -15,7 +15,7 @@ public class InspectionSubmitResponse {
     @SerializedName("dr_depot")
     @Expose
     private DrDepotInsp drDepot;
-    @SerializedName("mfp_godowns")
+    @SerializedName("mfp_commodities")
     @Expose
     private MfpGodownsInsp mfpGodowns;
     @SerializedName("processing_unit")

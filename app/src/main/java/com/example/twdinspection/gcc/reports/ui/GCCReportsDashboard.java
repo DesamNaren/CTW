@@ -134,16 +134,16 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                         if (gccReportResponse.getData()!=null &&  gccReportResponse.getData().size()>0) {
                             for(int i=0;i<gccReportResponse.getData().size();i++){
                                 switch (gccReportResponse.getData().get(i).getSupplierType()) {
-                                    case AppConstants.REPORT_GODOWN:
+                                    case AppConstants.REPORT_GODOWN_REP:
                                         drGodown.add(gccReportResponse.getData().get(i));
                                         break;
-                                    case AppConstants.REPORT_DEPOT:
+                                    case AppConstants.REPORT_DEPOT_REP:
                                         drDepot.add(gccReportResponse.getData().get(i));
                                         break;
-                                    case AppConstants.REPORT_MFP_GODOWN:
+                                    case AppConstants.REPORT_MFP_GODOWN_REP:
                                         mfpGodown.add(gccReportResponse.getData().get(i));
                                         break;
-                                    case AppConstants.REPORT_PUNIT:
+                                    case AppConstants.REPORT_PUNIT_REP:
                                         processingUnit.add(gccReportResponse.getData().get(i));
                                         break;
                                 }

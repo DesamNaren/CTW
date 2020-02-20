@@ -14,21 +14,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.example.twdinspection.gcc.reports.source.ReportData;
-import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.example.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.example.twdinspection.gcc.ui.fragment.DailyFragment;
-import com.example.twdinspection.gcc.ui.fragment.DailyReportFragment;
+import com.example.twdinspection.gcc.reports.fragments.DailyReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.EmptiesFragment;
-import com.example.twdinspection.gcc.ui.fragment.EmptiesReportFragment;
+import com.example.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.EssentialFragment;
-import com.example.twdinspection.gcc.ui.fragment.EssentialReportFragment;
+import com.example.twdinspection.gcc.reports.fragments.EssentialReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.MFPFragment;
-import com.example.twdinspection.gcc.ui.fragment.MFPReportFragment;
+import com.example.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.example.twdinspection.gcc.ui.fragment.PUnitFragment;
-import com.example.twdinspection.gcc.ui.fragment.PUnitReportFragment;
+import com.example.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -41,7 +39,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityReportStockDetailsBinding binding;
-    private DrGodowns drGodowns;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
     ReportData reportData;
@@ -56,12 +53,23 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        sharedPreferences=TWDApplication.get(ReportStockDetailsActivity.this).getPreferences();
+        sharedPreferences = TWDApplication.get(ReportStockDetailsActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
 
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+            binding.header.headerTitle.setText("Godown Reports");
+        }
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+            binding.header.headerTitle.setText("Depot Reports");
+        }
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+            binding.header.headerTitle.setText("MFP Godown Reports");
+        }
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+            binding.header.headerTitle.setText("Processing Unit Reports");
+        }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
@@ -76,15 +84,12 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         });
 
         try {
-            sharedPreferences = TWDApplication.get(this).getPreferences();
-            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-            drGodowns = gson.fromJson(str, DrGodowns.class);
-            if (drGodowns != null) {
-                binding.includeBasicLayout.divName.setText(drGodowns.getDivisionName());
-                binding.includeBasicLayout.socName.setText(drGodowns.getSocietyName());
-                binding.includeBasicLayout.drGodownName.setText(drGodowns.getGodownName());
-                binding.includeBasicLayout.inchargeName.setText(drGodowns.getIncharge());
-                binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
+            if (reportData != null) {
+                binding.includeBasicLayout.divName.setText(reportData.getDivisionName());
+                binding.includeBasicLayout.socName.setText(reportData.getSocietyName());
+                binding.includeBasicLayout.drGodownName.setText(reportData.getGodownName());
+                binding.includeBasicLayout.inchargeName.setText(reportData.getInchargeName());
+                binding.includeBasicLayout.dateTv.setText(reportData.getInspectionTime());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,19 +98,19 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(reportData.getInspectionFindings().getDrGodown()!=null){
+                if (reportData.getInspectionFindings().getDrGodown() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, DrGodownInspRepActivity.class);
                     startActivity(intent);
-                }else if(reportData.getInspectionFindings().getDrDepot()!=null){
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                } else if (reportData.getInspectionFindings().getDrDepot() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DrDepotInspRepActivity.class);
                     startActivity(intent);
-                }else if(reportData.getInspectionFindings().getMfpGodowns()!=null){
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                } else if (reportData.getInspectionFindings().getMfpGodowns() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, MfpGodownInspRepActivity.class);
                     startActivity(intent);
-                }else if(reportData.getInspectionFindings().getProcessingUnit()!=null){
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, DRGodownFindingsActivity.class);
+                } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     callSnackBar("No Inspection data found");
                 }
             }
@@ -168,7 +173,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.tabs.setupWithViewPager(binding.viewPager);
             binding.viewPager.setAdapter(adapter);
 
-        } else if (reportData != null ) {
+        } else if (reportData != null) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);
@@ -179,7 +184,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             callSnackBar(getString(R.string.something));
         }
 
-}
+    }
 
 
     void callSnackBar(String msg) {
@@ -188,33 +193,33 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         snackbar.show();
     }
 
-class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentPagerAdapter {
 
 
-    ViewPagerAdapter(FragmentManager manager) {
-        super(manager);
+        ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @NotNull
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
-
-    @NotNull
-    @Override
-    public Fragment getItem(int position) {
-        return mFragmentList.get(position);
-    }
-
-    @Override
-    public int getCount() {
-        return mFragmentList.size();
-    }
-
-    void addFrag(Fragment fragment, String title) {
-        mFragmentList.add(fragment);
-        mFragmentTitleList.add(title);
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
-    }
-}
 
 }

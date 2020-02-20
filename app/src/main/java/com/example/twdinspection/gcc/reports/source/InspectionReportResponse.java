@@ -13,9 +13,9 @@ public class InspectionReportResponse {
     @SerializedName("dr_depot")
     @Expose
     private DrDepotInspReport drDepot;
-    @SerializedName("mfp_godowns")
+    @SerializedName("mfp_commodities")
     @Expose
-    private MfpGodownsInsp mfpGodowns;
+    private MfpGodownsInspRep mfpGodowns;
     @SerializedName("processing_unit")
     @Expose
     private PUnitInsp processingUnit;
@@ -36,11 +36,11 @@ public class InspectionReportResponse {
         this.drDepot = drDepot;
     }
 
-    public MfpGodownsInsp getMfpGodowns() {
+    public MfpGodownsInspRep getMfpGodowns() {
         return mfpGodowns;
     }
 
-    public void setMfpGodowns(MfpGodownsInsp mfpGodowns) {
+    public void setMfpGodowns(MfpGodownsInspRep mfpGodowns) {
         this.mfpGodowns = mfpGodowns;
     }
 

@@ -231,7 +231,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                             request.setSocietyId(drDepots.getSocietyId());
                             request.setSocietyName(drDepots.getSocietyName());
                             request.setInchargeName(drDepots.getIncharge());
-                            request.setSupplierType(getString(R.string.dr_depot));
+                            request.setSupplierType(getString(R.string.dr_depot_req));
                             request.setInspectionTime(Utils.getCurrentDateTime());
                             request.setGodown_name(drDepots.getGodownName());
                             request.setGodownId(drDepots.getGodownId());
