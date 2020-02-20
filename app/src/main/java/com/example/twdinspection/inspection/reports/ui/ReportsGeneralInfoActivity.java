@@ -22,7 +22,6 @@ import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ReportsGeneralInfoActivity extends BaseActivity implements SaveListener {
-    private static final String TAG = ReportsGeneralInfoActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
@@ -311,9 +310,7 @@ public class ReportsGeneralInfoActivity extends BaseActivity implements SaveList
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-
                 Utils.customSectionSaveAlert(ReportsGeneralInfoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
-//                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendActivity.class));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

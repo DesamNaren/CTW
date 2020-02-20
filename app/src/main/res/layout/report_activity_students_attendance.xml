@@ -13,19 +13,18 @@
 
 
     <RelativeLayout
+        android:background="@color/grey_light"
         android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_gray">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/materialGrey300"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@+id/header"
-            android:padding="@dimen/dimen_5dp"
-            tools:listitem="@layout/adapter_stud_attnd" />
+            tools:listitem="@layout/adapter_stu_att_reoprt" />
 
         <TextView
             android:id="@+id/empty_view"

@@ -8,6 +8,15 @@
             name="schemeData"
             type="com.example.twdinspection.schemes.reports.source.SchemeReportData" />
 
+        <variable
+            name="imageUrl"
+            type="String" />
+
+
+        <variable
+            name="imageUrl2"
+            type="String" />
+
     </data>
 
     <RelativeLayout
@@ -339,12 +348,31 @@
                                 android:textColor="@color/black" />
 
 
-                            <TextView
-                                android:id="@+id/online_tv"
+                            <RadioGroup
+                                android:id="@+id/rg_entitlements_provided_to_students"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:textColor="@color/black" />
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{schemeData.statusFieldMatch.equalsIgnoreCase(`Yes`)}"
+                                    android:id="@+id/rb_yes_entitlements_provided_to_students"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{schemeData.statusFieldMatch.equalsIgnoreCase(`No`)}"
+                                    android:id="@+id/rb_no_entitlements_provided_to_students"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
                         </LinearLayout>
 
                         <Spinner
@@ -368,7 +396,7 @@
                                 android:layout_marginTop="@dimen/dimen_8dp"
                                 android:layout_marginBottom="@dimen/dimen_10dp"
                                 android:padding="@dimen/dimen_8dp"
-                                android:src="@drawable/ic_menu_camera" />
+                                app:profileImage="@{imageUrl}" />
 
                             <ImageView
                                 android:id="@+id/iv_cam2"
@@ -378,7 +406,7 @@
                                 android:layout_marginTop="@dimen/dimen_8dp"
                                 android:layout_marginBottom="@dimen/dimen_10dp"
                                 android:padding="@dimen/dimen_8dp"
-                                android:src="@drawable/ic_menu_camera" />
+                                app:profileImage="@{imageUrl2}" />
 
                         </LinearLayout>
                     </LinearLayout>

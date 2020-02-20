@@ -67,7 +67,6 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     String FilePath, FilePath2;
     Bitmap bm;
     String PIC_NAME, PIC_NAME2;
-    ;
     int imgflag1 = 0;
     int imgflag2 = 0;
     private String officerId;

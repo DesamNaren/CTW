@@ -40,6 +40,5 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
 
         binding.setInspData(reportData.getInspectionFindings().getDrGodown());
         binding.setImageUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
-
     }
 }

@@ -46,6 +46,13 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
             }
         });
 
+        binding.submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
 
         try {
@@ -53,20 +60,18 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
             Gson gson = new Gson();
             String data = sharedPreferences.getString(AppConstants.SCHEME_REP_DATA, "");
             schemeReportData = gson.fromJson(data, SchemeReportData.class);
+            binding.setSchemeData(schemeReportData);
+            binding.executePendingBindings();
 
-            if (schemeReportData != null && schemeReportData.getStatusFieldMatch() != null && schemeReportData.getStatusFieldMatch().equals("0")) {
-                binding.onlineTv.setText(AppConstants.Yes);
-            } else if (schemeReportData != null && schemeReportData.getStatusFieldMatch() != null && schemeReportData.getStatusFieldMatch().equals("1")) {
-                binding.onlineTv.setText(AppConstants.No);
-            }
+            binding.setImageUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
+
+            binding.setImageUrl2("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
 
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
-        binding.setSchemeData(schemeReportData);
-        binding.executePendingBindings();
 
     }
 

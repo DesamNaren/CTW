@@ -1,5 +1,10 @@
 package com.example.twdinspection.schemes.reports.source;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -280,4 +285,10 @@ public class SchemeReportData {
         this.remarksType = remarksType;
     }
 
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .into(view);
+    }
 }

@@ -10,9 +10,6 @@
             name="inspData"
             type="com.example.twdinspection.gcc.reports.source.DrGodownInspReport" />
 
-        <variable
-            name="appcnsts"
-            type="com.example.twdinspection.common.utils.AppConstants" />
 
         <variable
             name="imageUrl"
@@ -467,6 +464,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:hint="Company Name"
+                                            android:enabled="false"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true" />
 
@@ -483,13 +481,13 @@
 
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
-
                                             android:id="@+id/et_ins_date"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:focusableInTouchMode="false"
                                             android:hint="Insurance Validity"
                                             android:imeOptions="actionNext"
+                                            android:enabled="false"
                                             android:paddingLeft="@dimen/dimen_30dp"
                                             android:singleLine="true"
                                             android:text="@{inspData.registerBookCertificates.insuranceValidity}" />
@@ -607,6 +605,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:focusableInTouchMode="false"
+                                            android:enabled="false"
                                             android:hint="Certificate Validity"
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
@@ -1028,6 +1027,7 @@
                                             android:hint="Last Inspection Date"
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
+                                            android:enabled="false"
                                             android:singleLine="true"
                                             android:text="@{inspData.generalFindings.societyManagerInspectionDate}" />
 
@@ -1104,6 +1104,7 @@
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
                                             android:singleLine="true"
+                                            android:enabled="false"
                                             android:text="@{inspData.generalFindings.divisionManagerInspectionDate}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -1176,6 +1177,7 @@
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
+                                            android:enabled="false"
                                             android:text="@{inspData.generalFindings.repairType}" />
 
 
@@ -1209,6 +1211,7 @@
                                         android:hint="@string/remarks"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
+                                        android:enabled="false"
                                         android:text="@{inspData.generalFindings.remarks}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>

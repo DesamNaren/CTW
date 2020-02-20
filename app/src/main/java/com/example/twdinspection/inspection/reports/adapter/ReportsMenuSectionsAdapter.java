@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.InstMainRowBinding;
+import com.example.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
 import com.example.twdinspection.inspection.ui.CoCurricularActivity;
 import com.example.twdinspection.inspection.ui.DietIssuesActivity;
@@ -60,7 +61,7 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
                             callActivity(GeneralInfoActivity.class);
                             break;
                         case 2:
-                            callActivity(StudentsAttendActivity.class);
+                            callActivity(ReportStudentsAttendActivity.class);
                             break;
                         case 3:
                             callActivity(StaffAttendActivity.class);
