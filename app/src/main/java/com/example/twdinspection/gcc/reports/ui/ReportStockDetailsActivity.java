@@ -47,6 +47,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_stock_details);
+        binding.bottomLl.btnNext.setText("Next");
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
         EmptiesFragment.commonCommodities = null;
@@ -59,16 +60,16 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         reportData = gson.fromJson(data, ReportData.class);
 
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            binding.header.headerTitle.setText("Godown Reports");
+            binding.header.headerTitle.setText("Dr Godown");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            binding.header.headerTitle.setText("Depot Reports");
+            binding.header.headerTitle.setText("Dr Depot");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            binding.header.headerTitle.setText("MFP Godown Reports");
+            binding.header.headerTitle.setText("MFP Godown");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            binding.header.headerTitle.setText("Processing Unit Reports");
+            binding.header.headerTitle.setText("Processing Unit");
         }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
@@ -173,7 +174,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.tabs.setupWithViewPager(binding.viewPager);
             binding.viewPager.setAdapter(adapter);
 
-        } else if (reportData != null) {
+        } else if (reportData != null && (reportData.getStockDetails().getProcessingUnits()!=null)&& reportData.getStockDetails().getDailyRequirements()!=null
+         && reportData.getStockDetails().getEmpties()!=null&& reportData.getStockDetails().getEssentialCommodities()!=null && reportData.getStockDetails().getMfpCommodities()!=null) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);

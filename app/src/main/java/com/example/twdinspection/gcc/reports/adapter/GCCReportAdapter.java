@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.AdapterGccReportBinding;
 import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.example.twdinspection.gcc.reports.source.ReportData;
@@ -58,6 +59,21 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         holder.listItemBinding.setGccReport(dataModel);
         setAnimation(holder.itemView, i);
 
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+            holder.listItemBinding.tvSuppType.setText("Dr Godown Name");
+        }
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+            holder.listItemBinding.tvSuppType.setText("Depot Name");
+        }
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+            holder.listItemBinding.tvSuppType.setText("MFP Godown Name");
+            holder.listItemBinding.llSoc.setVisibility(View.GONE);
+            holder.listItemBinding.vSoc.setVisibility(View.GONE);
+        }
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+            holder.listItemBinding.tvSuppType.setText("Unit Name");
+        }
+
         holder.listItemBinding.cvGccReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,9 +109,11 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
                     filterList.addAll(list);
                 } else {
                     for (ReportData otData : list) {
-//                        if (otData.getBenID().toLowerCase().contains(charString.toLowerCase())) {
-//                            filterList.add(otData);
-//                        }
+                        if (otData.getDivisionName().toLowerCase().contains(charString.toLowerCase()) ||
+                                otData.getSocietyName().toLowerCase().contains(charString.toLowerCase())||
+                                otData.getGodownName().toLowerCase().contains(charString.toLowerCase())) {
+                            filterList.add(otData);
+                        }
                     }
                 }
                 FilterResults filterResults = new FilterResults();

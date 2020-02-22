@@ -117,9 +117,8 @@
 
                             <include
                                 android:id="@+id/remarks_stock"
-                                layout="@layout/reamrks_layout"
-                                android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks!=null? View.VISIBLE : View.GONE}" />
-                        </LinearLayout>
+                                layout="@layout/reamrks_layout_reports"
+                                android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"/>
 
 
                         <LinearLayout
@@ -162,9 +161,9 @@
                             </RadioGroup>
 
                             <include
-                                android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks!=null? View.VISIBLE : View.GONE}"
                                 android:id="@+id/remarks_processing"
-                                layout="@layout/reamrks_layout" />
+                                android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
+                            layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -207,9 +206,9 @@
                             </RadioGroup>
 
                             <include
-                                android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks!=null? View.VISIBLE : View.GONE}"
+                                android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                 android:id="@+id/remarks_inward"
-                                layout="@layout/reamrks_layout" />
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -253,7 +252,8 @@
 
                             <include
                                 android:id="@+id/remarks_outward"
-                                layout="@layout/reamrks_layout" />
+                                android:visibility="@{pUnit.registerBookCertificates.outwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -297,7 +297,8 @@
 
                             <include
                                 android:id="@+id/remarks_sale_inv"
-                                layout="@layout/reamrks_layout" />
+                                android:visibility="@{pUnit.registerBookCertificates.saleInvoiceBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -341,7 +342,8 @@
 
                             <include
                                 android:id="@+id/remarks_lab_att"
-                                layout="@layout/reamrks_layout" />
+                                android:visibility="@{pUnit.registerBookCertificates.labourAttendRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
 
@@ -474,8 +476,9 @@
                             </RadioGroup>
 
                             <include
+                                android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                 android:id="@+id/remarks_fire_noc"
-                                layout="@layout/reamrks_layout" />
+                                layout="@layout/reamrks_layout_reports" />
 
                         </LinearLayout>
 
@@ -589,8 +592,9 @@
                                 </RadioGroup>
 
                                 <include
+                                    android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                     android:id="@+id/remarks_amc"
-                                    layout="@layout/reamrks_layout" />
+                                    layout="@layout/reamrks_layout_reports" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -633,8 +637,9 @@
                                 </RadioGroup>
 
                                 <include
+                                    android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                     android:id="@+id/remarks_agmark"
-                                    layout="@layout/reamrks_layout" />
+                                    layout="@layout/reamrks_layout_reports" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -677,8 +682,9 @@
                                 </RadioGroup>
 
                                 <include
+                                    android:visibility="@{pUnit.registerBookCertificates.fsaaiCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                     android:id="@+id/remarks_fsaai"
-                                    layout="@layout/reamrks_layout" />
+                                    layout="@layout/reamrks_layout_reports" />
                             </LinearLayout>
 
 
@@ -724,8 +730,9 @@
                             </RadioGroup>
 
                             <include
+                                android:visibility="@{pUnit.registerBookCertificates.emptiesRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                                 android:id="@+id/remarks_empties"
-                                layout="@layout/reamrks_layout" />
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
 
@@ -771,8 +778,9 @@
                         </RadioGroup>
 
                         <include
+                            android:visibility="@{pUnit.registerBookCertificates.barrelsAlumnCansRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                             android:id="@+id/remarks_barrels"
-                            layout="@layout/reamrks_layout" />
+                            layout="@layout/reamrks_layout_reports" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -815,8 +823,9 @@
                         </RadioGroup>
 
                         <include
+                            android:visibility="@{pUnit.registerBookCertificates.cashBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                             android:id="@+id/remarks_cash_book"
-                            layout="@layout/reamrks_layout" />
+                            layout="@layout/reamrks_layout_reports" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -860,7 +869,8 @@
 
                         <include
                             android:id="@+id/remarks_cash_bank"
-                            layout="@layout/reamrks_layout" />
+                            android:visibility="gone"
+                            layout="@layout/reamrks_layout_reports" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -903,8 +913,9 @@
                         </RadioGroup>
 
                         <include
+                            android:visibility="@{pUnit.registerBookCertificates.vehLogBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}"
                             android:id="@+id/remarks_veh_log"
-                            layout="@layout/reamrks_layout" />
+                            layout="@layout/reamrks_layout_reports" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1069,7 +1080,7 @@
 
                         <include
                             android:id="@+id/remarks"
-                            layout="@layout/reamrks_layout" />
+                            layout="@layout/reamrks_layout_reports" />
                     </LinearLayout>
 
 
@@ -1077,7 +1088,7 @@
 
 
             </LinearLayout>
-
+            </LinearLayout>
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

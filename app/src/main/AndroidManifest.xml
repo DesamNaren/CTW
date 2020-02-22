@@ -97,6 +97,9 @@
             android:name=".inspection.ui.AcademicActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".gcc.reports.ui.ViewPhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".inspection.ui.RegistersActivity"
             android:screenOrientation="portrait" />
         <activity

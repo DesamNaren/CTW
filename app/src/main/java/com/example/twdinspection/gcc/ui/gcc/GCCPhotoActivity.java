@@ -369,8 +369,10 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         stockSubmitRequest.setMfpCommodities(mfp_commodities);
         stockSubmitRequest.setEmpties(emptiesList);
         stockSubmitRequest.setProcessingUnits(processing_units);
-        stockSubmitRequest.setTotalSystemValue(Double.parseDouble(sharedPreferences.getString(AppConstants.TOTAL_SYSVAL,"")));
-        stockSubmitRequest.setTotalPhysicalValue(Double.parseDouble(sharedPreferences.getString(AppConstants.TOTAL_PHYVAL,"")));
+        String sysVal=sharedPreferences.getString(AppConstants.TOTAL_SYSVAL,"");
+        String phyVal=sharedPreferences.getString(AppConstants.TOTAL_PHYVAL,"");
+        stockSubmitRequest.setTotalSystemValue(Double.parseDouble(sysVal));
+        stockSubmitRequest.setTotalPhysicalValue(Double.parseDouble(phyVal));
     }
 
     private void callPhotoSubmit() {

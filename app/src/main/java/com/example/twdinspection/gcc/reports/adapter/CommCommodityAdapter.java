@@ -42,7 +42,7 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
     public void onBindViewHolder(@NonNull final CommCommodityAdapter.ItemHolder holder, final int i) {
 
         final ReportSubmitReqCommodities dataModel = commonCommodities.get(i);
-        holder.stockChildRowBinding.tvComName.setText(dataModel.getComCode());
+        holder.stockChildRowBinding.tvComName.setText(dataModel.getComType());
         if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
             holder.stockChildRowBinding.sysQty.setText(dataModel.getSystemQty() + " " + dataModel.getUnits());
         }else {

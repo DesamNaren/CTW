@@ -148,7 +148,6 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             selectedDivId = "";
             selectedPUnitID = "";
             divisionsInfos = new ArrayList<>();
-            binding.spSociety.setAdapter(null);
             pUnits = new ArrayList<>();
             binding.spPUnit.setAdapter(null);
             societies = new ArrayList<>();
@@ -249,7 +248,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 });
             } else {
                 selectedPUnits = null;
-                selectedSocietyId = "";
+//                selectedSocietyId = "";
                 selectedPUnitID = "";
             }
         } else if (adapterView.getId() == R.id.sp_p_unit) {

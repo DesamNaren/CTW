@@ -27,7 +27,7 @@ public class StockSubmitRequest {
     @SerializedName("mfp_commodities")
     @Expose
     private List<SubmitReqCommodities> mfpCommodities = null;
-    @SerializedName("processing_units")
+    @SerializedName("processing_unit")
     @Expose
     private List<SubmitReqCommodities> processingUnits = null;
 
