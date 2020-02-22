@@ -25,6 +25,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        binding.bottomLl.btnNext.setText("Next");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_insp_rep);
         binding.header.headerTitle.setText("Depot Inspection Report");
         binding.header.ivHome.setVisibility(View.GONE);

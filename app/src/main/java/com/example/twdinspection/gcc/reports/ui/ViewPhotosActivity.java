@@ -36,6 +36,12 @@ public class ViewPhotosActivity extends AppCompatActivity {
         binding.executePendingBindings();
         binding.header.headerTitle.setText(getString(R.string.gcc_reports));
         binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         sharedPreferences= TWDApplication.get(ViewPhotosActivity.this).getPreferences();
         Gson gson = new Gson();

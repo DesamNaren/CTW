@@ -26,6 +26,8 @@ public class PUnitInspRepActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_punit_insp_rep);
+
+        binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("Processing Unit Inspection Report");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

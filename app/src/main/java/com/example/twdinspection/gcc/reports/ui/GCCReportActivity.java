@@ -107,7 +107,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
                 getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                 getSupportActionBar().setCustomView(tv);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_arrow);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
                 getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_btn_rounded));
             }
         } catch (Exception e) {

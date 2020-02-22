@@ -174,8 +174,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.tabs.setupWithViewPager(binding.viewPager);
             binding.viewPager.setAdapter(adapter);
 
-        } else if (reportData != null && (reportData.getStockDetails().getProcessingUnits()==null)&& reportData.getStockDetails().getDailyRequirements()==null
-         && reportData.getStockDetails().getEmpties()==null&& reportData.getStockDetails().getEssentialCommodities()==null && reportData.getStockDetails().getMfpCommodities()==null) {
+        }
+        if (reportData != null || ((reportData.getStockDetails().getProcessingUnits() == null) && reportData.getStockDetails().getDailyRequirements() == null
+                && reportData.getStockDetails().getEmpties() == null && reportData.getStockDetails().getEssentialCommodities() == null && reportData.getStockDetails().getMfpCommodities() == null)) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);

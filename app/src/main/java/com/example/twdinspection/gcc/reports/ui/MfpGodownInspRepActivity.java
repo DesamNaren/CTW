@@ -27,6 +27,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown_insp_rep);
 
+        binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("MFPGodown Inspection Report");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
