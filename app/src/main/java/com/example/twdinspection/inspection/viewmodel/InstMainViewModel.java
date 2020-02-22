@@ -28,6 +28,7 @@ import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAtt
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -104,9 +105,9 @@ public class InstMainViewModel extends AndroidViewModel {
     public void submitInstDetails(InstSubmitRequest instSubmitRequest) {
         try {
             TWDService twdService = TWDService.Factory.create("school");
-//            Gson gson = new Gson();
-//            String request = gson.toJson(instSubmitRequest);
-//            Log.i("request", "" + request);
+            Gson gson = new Gson();
+            String request = gson.toJson(instSubmitRequest);
+            Log.i("request", "" + request);
             twdService.getInstSubmitResponse(instSubmitRequest).enqueue(new Callback<InstSubmitResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {

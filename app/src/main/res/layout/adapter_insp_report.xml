@@ -12,10 +12,10 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_gccReport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_5dp"
-        android:id="@+id/cv_gccReport"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
@@ -23,103 +23,140 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:textColor="@color/black"
-                    android:text="Institute name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Institute name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@{inspReport.instituteId}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/light_gray"/>
+                android:background="@color/light_gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="District name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="District name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@{inspReport.distId}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/light_gray"/>
+                android:background="@color/light_gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Mandal name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Mandal name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@{inspReport.mandalId}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/light_gray"/>
+                android:background="@color/light_gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Village name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Village name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
                     android:text="@{inspReport.villageId}" />
 
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/light_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Inspection Time"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="@{inspReport.inspectionTime}" />
 
             </LinearLayout>
 

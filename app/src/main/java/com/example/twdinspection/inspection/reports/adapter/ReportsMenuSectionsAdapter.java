@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.InstMainRowBinding;
 import com.example.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsInfraActivity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
 import com.example.twdinspection.inspection.ui.CoCurricularActivity;
 import com.example.twdinspection.inspection.ui.DietIssuesActivity;
@@ -56,44 +59,44 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
         holder.listItemBinding.llClassHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    switch (position+1) {
-                        case 1:
-                            callActivity(GeneralInfoActivity.class);
-                            break;
-                        case 2:
-                            callActivity(ReportStudentsAttendActivity.class);
-                            break;
-                        case 3:
-                            callActivity(StaffAttendActivity.class);
-                            break;
-                        case 4:
-                            callActivity(MedicalActivity.class);
-                            break;
-                        case 5:
-                            callActivity(DietIssuesActivity.class);
-                            break;
-                        case 6:
-                            callActivity(InfraActivity.class);
-                            break;
-                        case 7:
-                            callActivity(AcademicActivity.class);
-                            break;
-                        case 8:
-                            callActivity(CoCurricularActivity.class);
-                            break;
-                        case 9:
-                            callActivity(EntitlementsActivity.class);
-                            break;
-                        case 10:
-                            callActivity(RegistersActivity.class);
-                            break;
-                        case 11:
-                            callActivity(GeneralCommentsActivity.class);
-                            break;
-                        case 12:
-                            callActivity(UploadedPhotoActivity.class);
-                            break;
-                    }
+                switch (position + 1) {
+                    case 1:
+                        callActivity(ReportsGeneralInfoActivity.class);
+                        break;
+                    case 2:
+                        callActivity(ReportStudentsAttendActivity.class);
+                        break;
+                    case 3:
+                        callActivity(StaffAttendActivity.class);
+                        break;
+                    case 4:
+                        callActivity(MedicalActivity.class);
+                        break;
+                    case 5:
+                        callActivity(ReportsDietIssuesActivity.class);
+                        break;
+                    case 6:
+                        callActivity(ReportsInfraActivity.class);
+                        break;
+                    case 7:
+                        callActivity(AcademicActivity.class);
+                        break;
+                    case 8:
+                        callActivity(CoCurricularActivity.class);
+                        break;
+                    case 9:
+                        callActivity(EntitlementsActivity.class);
+                        break;
+                    case 10:
+                        callActivity(RegistersActivity.class);
+                        break;
+                    case 11:
+                        callActivity(GeneralCommentsActivity.class);
+                        break;
+                    case 12:
+                        callActivity(UploadedPhotoActivity.class);
+                        break;
+                }
 //                }
             }
         });

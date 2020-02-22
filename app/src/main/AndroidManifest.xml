@@ -205,9 +205,6 @@
             android:name=".inspection.reports.ui.InspectionReportsDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.InspectionReportDetailsActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".inspection.reports.ui.InstReportsMenuActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -217,8 +214,19 @@
         <activity
             android:name=".schemes.reports.ui.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".inspection.reports.ui.ReportStudentsAttendActivity" />
-        <activity android:name=".inspection.reports.ui.ReportsGeneralInfoActivity" />
+        <activity
+            android:name=".inspection.reports.ui.ReportStudentsAttendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsGeneralInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsDietIssuesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsInfraActivity"
+            android:screenOrientation="portrait" />
+
 
         <provider
             android:name="androidx.core.content.FileProvider"

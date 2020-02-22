@@ -40,12 +40,6 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String officerId;
-//    AcademicOverview academicOverview;
-//    CoCurricularInfo coCurricularInfo;
-//    DietIssues dietIssues;
-//    Entitlements entitlements;
-//    List<Object> staffAttendenceInfo;
-//    List<Object> studentAttendenceInfo;
     List<InspReportData> inspReportDataList;
     InspectionReportAdapter adapter;
 
@@ -58,8 +52,6 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
         viewModel = new InspectionReportsViewModel(InspectionReportsDashboard.this, getApplication());
         customProgressDialog = new CustomProgressDialog(this);
 
-//        staffAttendenceInfo = new ArrayList<>();
-//        studentAttendenceInfo = new ArrayList<>();
         inspReportDataList = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

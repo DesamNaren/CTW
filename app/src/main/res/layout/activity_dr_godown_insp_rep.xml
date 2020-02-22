@@ -10,7 +10,6 @@
             name="inspData"
             type="com.example.twdinspection.gcc.reports.source.DrGodownInspReport" />
 
-
         <variable
             name="imageUrl"
             type="String" />
@@ -466,7 +465,8 @@
                                             android:hint="Company Name"
                                             android:enabled="false"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true" />
+                                            android:singleLine="true"
+                                            android:text="@{inspData.registerBookCertificates.insuranceCompany}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 

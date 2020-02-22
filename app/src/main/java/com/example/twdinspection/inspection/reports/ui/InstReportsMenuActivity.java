@@ -19,9 +19,9 @@ import java.util.Arrays;
 
 public class InstReportsMenuActivity extends LocBaseActivity {
     ReportsInstMenuActivityBinding binding;
-    SharedPreferences sharedPreferences;
-    String instId, officer_id, dist_id, mand_id, vill_id;
-    private String desLat, desLng;
+//    SharedPreferences sharedPreferences;
+//    String instId, officer_id, dist_id, mand_id, vill_id;
+//    private String desLat, desLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,14 @@ public class InstReportsMenuActivity extends LocBaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+      /*  sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officer_id = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
         mand_id = String.valueOf(sharedPreferences.getInt(AppConstants.MAN_ID, 0));
         vill_id = String.valueOf(sharedPreferences.getInt(AppConstants.VILL_ID, 0));
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
-        desLng = sharedPreferences.getString(AppConstants.LNG, "");
+        desLng = sharedPreferences.getString(AppConstants.LNG, "");*/
 
         String[] stringArray = getResources().getStringArray(R.array.inst_sections);
         ArrayList<String> sections = new ArrayList<>(Arrays.asList(stringArray));
