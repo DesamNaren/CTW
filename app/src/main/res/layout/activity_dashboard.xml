@@ -16,7 +16,7 @@
         android:background="@color/list_blue" />
 
     <include
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/header"
         layout="@layout/action_bar_layout" />
 
@@ -211,37 +211,37 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_10dp"
                         android:gravity="center"
+                        android:id="@+id/btn_reports"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dimen_70dp"
                             android:layout_height="@dimen/dimen_70dp"
                             android:layout_margin="@dimen/dimen_10dp"
-                            android:background="@drawable/disabled"
+                            android:background="@drawable/medical"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
-                            android:src="@drawable/engineering" />
+                            android:src="@drawable/report" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Engineering Works"
+                            android:text="Reports"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
-           <!-- <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_20dp"
                 android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
                     android:layout_weight="1"
                     android:padding="@dimen/dimen_10dp"
                     app:cardCornerRadius="6dp"
@@ -271,7 +271,7 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>-->
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

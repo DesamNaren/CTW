@@ -32,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String cacheDate, currentDate;
-        ActivityDashboardBinding binding;
+    ActivityDashboardBinding binding;
     InstMainViewModel instMainViewModel;
 
     @Override
@@ -101,10 +101,16 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, GCCDashboardActivity.class));
             }
         });
+        binding.btnReports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, ReportActivity.class));
+            }
+        });
     }
 
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.inst_main_menu_drawer, menu);
         return super.onCreateOptionsMenu(menu);
@@ -114,11 +120,11 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_report:
-                startActivity(new Intent(DashboardActivity.this,ReportActivity.class));
+                startActivity(new Intent(DashboardActivity.this, ReportActivity.class));
                 break;
         }
         return true;
-    }
+    }*/
 
     @Override
     protected void onResume() {
