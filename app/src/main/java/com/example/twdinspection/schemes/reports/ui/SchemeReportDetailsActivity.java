@@ -63,13 +63,31 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
             binding.setSchemeData(schemeReportData);
             binding.executePendingBindings();
 
-            binding.setImageUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
-
-            binding.setImageUrl2("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
-
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+        try {
+            if(schemeReportData.getPhotos()!=null  && schemeReportData.getPhotos().size()>0) {
+
+                if (schemeReportData.getPhotos().size()>=1 && schemeReportData.getPhotos().get(0) != null && schemeReportData.getPhotos().get(0) != null) {
+                    binding.setImageUrl(schemeReportData.getPhotos().get(0).getFilePath());
+                } else {
+                    binding.ivCam1.setVisibility(View.GONE);
+                }
+
+                if (schemeReportData.getPhotos().size()>=2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
+                    binding.setImageUrl2(schemeReportData.getPhotos().get(1).getFilePath());
+                } else {
+                    binding.ivCam2.setVisibility(View.GONE);
+                }
+            }else{
+                binding.llPhotos.setVisibility(View.GONE);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+
         }
 
 

@@ -51,17 +51,26 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         viewModel = new GCCReportsViewModel(GCCReportsDashboard.this, getApplication());
         customProgressDialog = new CustomProgressDialog(this);
 
-        drDepot=new ArrayList<>();
-        drGodown=new ArrayList<>();
-        mfpGodown=new ArrayList<>();
-        processingUnit=new ArrayList<>();
+        drDepot = new ArrayList<>();
+        drGodown = new ArrayList<>();
+        mfpGodown = new ArrayList<>();
+        processingUnit = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
-            editor=sharedPreferences.edit();
+            editor = sharedPreferences.edit();
+
+            editor.putString(AppConstants.DR_Depot_Report, "");
+            editor.putString(AppConstants.DR_Godown_Report, "");
+            editor.putString(AppConstants.MFP_Godown_Report, "");
+            editor.putString(AppConstants.PUnit_Report, "");
+            editor.putString(AppConstants.Selected_Supp_Report, "");
+            editor.apply();
+
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
-            officerId=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+            officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -78,11 +87,11 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             @Override
             public void onClick(View view) {
 
-                Gson gson=new Gson();
-                String drDepotData=gson.toJson(drDepot);
-                editor.putString(AppConstants.Selected_Supp_Report,drDepotData);
+                Gson gson = new Gson();
+                String drDepotData = gson.toJson(drDepot);
+                editor.putString(AppConstants.Selected_Supp_Report, drDepotData);
                 editor.apply();
-                startActivity(new Intent(GCCReportsDashboard.this,GCCReportActivity.class));
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
 
@@ -90,11 +99,11 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             @Override
             public void onClick(View view) {
 
-                Gson gson=new Gson();
-                String drGodownData=gson.toJson(drGodown);
-                editor.putString(AppConstants.Selected_Supp_Report,drGodownData);
+                Gson gson = new Gson();
+                String drGodownData = gson.toJson(drGodown);
+                editor.putString(AppConstants.Selected_Supp_Report, drGodownData);
                 editor.apply();
-                startActivity(new Intent(GCCReportsDashboard.this,GCCReportActivity.class));
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
 
@@ -102,11 +111,11 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             @Override
             public void onClick(View view) {
 
-                Gson gson=new Gson();
-                String data=gson.toJson(mfpGodown);
-                editor.putString(AppConstants.Selected_Supp_Report,data);
+                Gson gson = new Gson();
+                String data = gson.toJson(mfpGodown);
+                editor.putString(AppConstants.Selected_Supp_Report, data);
                 editor.apply();
-                startActivity(new Intent(GCCReportsDashboard.this,GCCReportActivity.class));
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
 
@@ -114,11 +123,11 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             @Override
             public void onClick(View view) {
 
-                Gson gson=new Gson();
-                String data=gson.toJson(processingUnit);
-                editor.putString(AppConstants.Selected_Supp_Report,data);
+                Gson gson = new Gson();
+                String data = gson.toJson(processingUnit);
+                editor.putString(AppConstants.Selected_Supp_Report, data);
                 editor.apply();
-                startActivity(new Intent(GCCReportsDashboard.this,GCCReportActivity.class));
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
 
@@ -131,8 +140,8 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                     customProgressDialog.hide();
                     gccReports.removeObservers(GCCReportsDashboard.this);
                     if (gccReportResponse != null) {
-                        if (gccReportResponse.getData()!=null &&  gccReportResponse.getData().size()>0) {
-                            for(int i=0;i<gccReportResponse.getData().size();i++){
+                        if (gccReportResponse.getData() != null && gccReportResponse.getData().size() > 0) {
+                            for (int i = 0; i < gccReportResponse.getData().size(); i++) {
                                 switch (gccReportResponse.getData().get(i).getSupplierType()) {
                                     case AppConstants.REPORT_GODOWN_REP:
                                         drGodown.add(gccReportResponse.getData().get(i));
@@ -153,21 +162,21 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                             binding.tvMfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
                             binding.tvPunitCnt.setText(String.valueOf(processingUnit.size()));
 
-                            Gson gson=new Gson();
-                            String drDepotData=gson.toJson(drDepot);
-                            editor.putString(AppConstants.DR_Depot_Report,drDepotData);
+                            Gson gson = new Gson();
+                            String drDepotData = gson.toJson(drDepot);
+                            editor.putString(AppConstants.DR_Depot_Report, drDepotData);
 
-                            String drGodownData=gson.toJson(drGodown);
-                            editor.putString(AppConstants.DR_Godown_Report,drGodownData);
+                            String drGodownData = gson.toJson(drGodown);
+                            editor.putString(AppConstants.DR_Godown_Report, drGodownData);
 
-                            String mfpGodownData=gson.toJson(mfpGodown);
-                            editor.putString(AppConstants.MFP_Godown_Report,mfpGodownData);
+                            String mfpGodownData = gson.toJson(mfpGodown);
+                            editor.putString(AppConstants.MFP_Godown_Report, mfpGodownData);
 
-                            String pUnitData=gson.toJson(processingUnit);
-                            editor.putString(AppConstants.PUnit_Report,pUnitData);
+                            String pUnitData = gson.toJson(processingUnit);
+                            editor.putString(AppConstants.PUnit_Report, pUnitData);
                             editor.apply();
 
-                        } else if (gccReportResponse.getData()!=null && gccReportResponse.getData().size()==0) {
+                        } else if (gccReportResponse.getData() != null && gccReportResponse.getData().size() == 0) {
                             callSnackBar("No data available");
                         } else {
                             callSnackBar(getString(R.string.something));

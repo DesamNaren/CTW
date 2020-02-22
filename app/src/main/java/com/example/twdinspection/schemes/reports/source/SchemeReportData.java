@@ -5,8 +5,11 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.twdinspection.gcc.reports.source.ReportPhoto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class SchemeReportData {
 
@@ -82,6 +85,17 @@ public class SchemeReportData {
     @SerializedName("scheme_type")
     @Expose
     private String schemeType;
+    @SerializedName("photos")
+    @Expose
+    private List<ReportPhoto> photos = null;
+
+    public List<ReportPhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<ReportPhoto> photos) {
+        this.photos = photos;
+    }
 
     public String getSchemeID() {
         return schemeID;

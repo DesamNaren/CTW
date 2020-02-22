@@ -26,7 +26,8 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown_insp_rep);
 
-        binding.header.headerTitle.setText("Godown Inspection Report");
+        binding.bottomLl.btnNext.setText("Next");
+        binding.header.headerTitle.setText("Dr Godown Inspection Report");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
