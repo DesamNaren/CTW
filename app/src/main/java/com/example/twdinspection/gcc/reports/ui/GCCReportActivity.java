@@ -2,13 +2,26 @@ package com.example.twdinspection.gcc.reports.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.InputType;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -18,7 +31,12 @@ import com.example.twdinspection.databinding.ActivityGccReportBinding;
 import com.example.twdinspection.gcc.reports.adapter.GCCReportAdapter;
 import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.example.twdinspection.gcc.reports.source.ReportData;
+import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.reports.source.SchemeReportData;
+import com.example.twdinspection.schemes.reports.ui.SchemesReportActivity;
+import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +54,8 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     SharedPreferences sharedPreferences;
     List<ReportData> reportData;
     SharedPreferences.Editor editor;
+    private List<ReportData> tempReportData;
+    private Menu mMenu=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +71,50 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         gccReportBinding.header.ivHome.setVisibility(View.GONE);
 
         reportData = new ArrayList<>();
+        tempReportData = new ArrayList<>();
+
+        Gson gson = new Gson();
+        String data = sharedPreferences.getString(AppConstants.Selected_Supp_Report, "");
+        Type type = new TypeToken<List<ReportData>>() {}.getType();
+        reportData = gson.fromJson(data, type);
+
+
+        try {
+            if (getSupportActionBar() != null) {
+                TextView tv = new TextView(getApplicationContext());
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+                tv.setLayoutParams(lp);
+
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+                    tv.setText(getResources().getString(R.string.godown_title));
+                }
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+                    tv.setText(getResources().getString(R.string.depot_title));
+                }
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+                    tv.setText(getResources().getString(R.string.mfp_godown_title));
+                }
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+                    tv.setText(getResources().getString(R.string.processing_unit_title));
+                }
+
+//                tv.setText(getResources().getString(R.string.godown_title));
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                getSupportActionBar().setCustomView(tv);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_arrow);
+                getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_btn_rounded));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
         gccReportBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,58 +122,87 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
                 onBackPressed();
             }
         });
-        Gson gson = new Gson();
-        String data = sharedPreferences.getString(AppConstants.Selected_Supp_Report, "");
-        Type type = new TypeToken<List<ReportData>>() {}.getType();
-        reportData = gson.fromJson(data, type);
+
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        mMenu = menu;
 
         if (reportData != null && reportData.size() > 0) {
+
+            tempReportData.addAll(reportData);
+            mMenu.findItem(R.id.action_search).setVisible(true);
+            mMenu.findItem(R.id.mi_filter).setVisible(false);
+
             gccReportBinding.recyclerView.setVisibility(View.VISIBLE);
             gccReportBinding.tvEmpty.setVisibility(View.GONE);
-            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                gccReportBinding.header.headerTitle.setText("Godown Reports");
-            }
-            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                gccReportBinding.header.headerTitle.setText("Depot Reports");
-            }
-            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                gccReportBinding.header.headerTitle.setText("MFP Godown Reports");
-            }
-            if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                gccReportBinding.header.headerTitle.setText("Processing Unit Reports");
-            }
+
             adapter = new GCCReportAdapter(this, reportData);
             gccReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
             gccReportBinding.recyclerView.setAdapter(adapter);
         } else {
+            mMenu.findItem(R.id.action_search).setVisible(false);
+            mMenu.findItem(R.id.mi_filter).setVisible(false);
+
             gccReportBinding.recyclerView.setVisibility(View.GONE);
             gccReportBinding.tvEmpty.setVisibility(View.VISIBLE);
             callSnackBar("No data available");
         }
 
-//        try {
-//            if (getSupportActionBar() != null) {
-////                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
-//                TextView tv = new TextView(getApplicationContext());
-//                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-//                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
-//                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
-//                tv.setLayoutParams(lp);
-//                tv.setText(getResources().getString(R.string.ben_report));
-//                tv.setGravity(Gravity.CENTER);
-//                tv.setTextColor(Color.WHITE);
-//                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-//                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//                getSupportActionBar().setCustomView(tv);
-//                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//                getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_arrow);
-//                getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_btn_rounded));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        MenuItem mSearch = mMenu.findItem(R.id.action_search);
+        mSearchView = (SearchView) mSearch.getActionView();
+        String hint = null;
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+            hint=getResources().getString(R.string.godown_search_hint);
+        }
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+            hint=getResources().getString(R.string.depot_search_hint);
+        }
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+            hint=getResources().getString(R.string.mfp_search_hint);
+        }
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+            hint=getResources().getString(R.string.unit_search_hint);
+        }
 
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" +hint + "</font>"));
+        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = mSearchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
+        mSearchView.setGravity(Gravity.CENTER);
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
+
+
+   /* public void showSchemeDetails(List<SchemeEntity> schemesInfoEntitiesMain) {
+        View view = getLayoutInflater().inflate(R.layout.scheme_bottom_sheet, null);
+        RecyclerView filterRecyclerView = view.findViewById(R.id.schemeRV);
+        dialog = new BottomSheetDialog(SchemesReportActivity.this);
+        LinearLayout scheme_entries = view.findViewById(R.id.scheme_entries);
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(scheme_entries);
+        bottomSheetBehavior.setPeekHeight(1500);
+        dialog.setContentView(view);
+        dialog.show();
+
+    }*/
 
 //    @Override
 //    public void onItemClick(String schemeID) {

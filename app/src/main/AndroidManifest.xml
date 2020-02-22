@@ -197,7 +197,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.reports.ui.GCCReportActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme"/>
         <activity
             android:name=".gcc.reports.ui.ReportStockDetailsActivity"
             android:screenOrientation="portrait" />

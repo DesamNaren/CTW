@@ -60,7 +60,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         setAnimation(holder.itemView, i);
 
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            holder.listItemBinding.tvSuppType.setText("Dr Godown Name");
+            holder.listItemBinding.tvSuppType.setText("Godown Name");
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
             holder.listItemBinding.tvSuppType.setText("Depot Name");

@@ -618,5 +618,13 @@
     <string name="scheme_report_details">SCHEME REPORT DETAILS</string>
     <string name="scheme_report">SCHEME REPORTS</string>
     <string name="insp_reports">Inspection Reports</string>
+    <string name="godown_title">Dr Godown</string>
+    <string name="depot_title">Dr Depot</string>
+    <string name="mfp_godown_title">MFP Godown</string>
+    <string name="processing_unit_title">Processing Unit</string>
+    <string name="godown_search_hint">Search by Division/Society/Godown Name</string>
+    <string name="depot_search_hint">Search by Division/Society/Depot Name</string>
+    <string name="mfp_search_hint">Search by Division/MFP Godown Name</string>
+    <string name="unit_search_hint">Search by Division/Society/Unit Name</string>
 
 </resources>
