@@ -84,9 +84,9 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                     schemesCnt = reportCountsResponse.getSchemes();
                     instCnt = reportCountsResponse.getSchools();
 
-                    binding.gccCnt.setText("GCC: " + gccCnt);
-                    binding.schemeCnt.setText("Schemes: " + schemesCnt);
-                    binding.instCnt.setText("Institute Inspection: " + instCnt);
+                    binding.gccCnt.setText(String.valueOf(gccCnt));
+                    binding.schemeCnt.setText(String.valueOf(schemesCnt));
+                    binding.instCnt.setText(String.valueOf(instCnt));
 
                 } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
                     callSnackBar(getString(R.string.something));
@@ -112,7 +112,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             @Override
             public void onClick(View view) {
                 if (instCnt > 0) {
-                    startActivity(new Intent(ReportActivity.this, InspectionReportsDashboard.class));
+//                    startActivity(new Intent(ReportActivity.this, InspectionReportsDashboard.class));
                 } else {
                     callSnackBar("No data found");
                 }

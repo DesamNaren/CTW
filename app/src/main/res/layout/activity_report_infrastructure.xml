@@ -415,6 +415,8 @@
 
 
                                 <RadioButton
+                                    android:checked="@{inspData.inverterAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:id="@+id/is_inverter_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -422,6 +424,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:checked="@{inspData.inverterAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:id="@+id/is_inverter_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -436,7 +440,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.inverterAvailable.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -469,6 +473,7 @@
 
                             </RadioGroup>
                         </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 

@@ -148,10 +148,10 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                                         break;
                                 }
                             }
-                            binding.tvDepotCnt.setText("DR Depot: " +drDepot.size());
-                            binding.tvGodownCnt.setText("DR Godown: " +drGodown.size());
-                            binding.tvMfpGodownCnt.setText("MFP Godown: " +mfpGodown.size());
-                            binding.tvPunitCnt.setText("Processing Units: " +processingUnit.size());
+                            binding.tvDepotCnt.setText(String.valueOf(drDepot.size()));
+                            binding.tvGodownCnt.setText(String.valueOf(drGodown.size()));
+                            binding.tvMfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
+                            binding.tvPunitCnt.setText(String.valueOf(processingUnit.size()));
 
                             Gson gson=new Gson();
                             String drDepotData=gson.toJson(drDepot);
@@ -165,7 +165,6 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
 
                             String pUnitData=gson.toJson(processingUnit);
                             editor.putString(AppConstants.PUnit_Report,pUnitData);
-
                             editor.apply();
 
                         } else if (gccReportResponse.getData()!=null && gccReportResponse.getData().size()==0) {

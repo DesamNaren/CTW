@@ -102,26 +102,36 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
+                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/dr_godown" />
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:background="@drawable/medical" />
+
+                                <TextView
+                                    android:id="@+id/tv_godown_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="25sp"
+                                    android:text="0"/>
+                            </RelativeLayout>
 
                             <com.example.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="DR Godown"
-                                android:id="@+id/tv_godown_cnt"
                                 android:textColor="@color/black" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
-
-
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
@@ -140,19 +150,31 @@
                             android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
+                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/dr_depot" />
+                                android:gravity="center">
 
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:background="@drawable/medical" />
+
+                                <TextView
+                                    android:id="@+id/tv_depot_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="25sp"
+                                    android:text="0"/>
+                            </RelativeLayout>
                             <com.example.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_depot_cnt"
                                 android:text="DR Depot"
                                 android:textColor="@color/black" />
                         </LinearLayout>
@@ -182,19 +204,32 @@
                             android:id="@+id/btn_mfp_godown"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
+                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/mfp_godown" />
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:background="@drawable/medical" />
+
+                                <TextView
+                                    android:id="@+id/tv_mfp_godown_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="25sp"
+                                    android:text="0"/>
+                            </RelativeLayout>
 
                             <com.example.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_mfp_godown_cnt"
                                 android:text="MFP Godown"
                                 android:textColor="@color/black" />
                         </LinearLayout>
@@ -216,21 +251,33 @@
                             android:layout_margin="@dimen/dimen_10dp"
                             android:gravity="center"
                             android:orientation="vertical">
-
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
+                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/p_unit" />
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:background="@drawable/medical" />
+
+                                <TextView
+                                    android:id="@+id/tv_punit_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="25sp"
+                                    android:text="0"/>
+                            </RelativeLayout>
 
                             <com.example.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_punit_cnt"
-                                android:text="Processing Units"
+                                android:text="Processing Unit"
                                 android:textColor="@color/black" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
