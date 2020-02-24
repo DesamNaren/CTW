@@ -58,6 +58,12 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                 finish();
             }
         });
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 //        binding.btnGcc.setBackgroundResource(R.drawable.disabled);
 //        binding.btnSchemes.setBackgroundResource(R.drawable.disabled);
@@ -143,6 +149,12 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
 
         snackbar.show();
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ReportActivity.this, DashboardActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();    }
 
     @Override
     public void handleError(Throwable e, Context context) {

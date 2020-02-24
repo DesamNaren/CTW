@@ -45,6 +45,7 @@ public class ReportPhoto {
 
         Glide.with(view.getContext())
                 .load(imageUrl)
+                .placeholder(R.drawable.loader_black1)
                 .into(view);
     }
 }

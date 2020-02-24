@@ -31,6 +31,8 @@ import com.example.twdinspection.databinding.ActivityGccReportBinding;
 import com.example.twdinspection.gcc.reports.adapter.GCCReportAdapter;
 import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.example.twdinspection.gcc.reports.source.ReportData;
+import com.example.twdinspection.inspection.ui.DashboardActivity;
+import com.example.twdinspection.inspection.ui.ReportActivity;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.reports.source.SchemeReportData;
 import com.example.twdinspection.schemes.reports.ui.SchemesReportActivity;
@@ -126,6 +128,15 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+               onBackPressed();
+                break;
+        }
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -258,5 +269,12 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     @Override
     public void onItemClick(SchemeReportData schemeReportData) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(GCCReportActivity.this, GCCReportsDashboard.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
     }
 }
