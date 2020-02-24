@@ -108,8 +108,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                     }
                     if (flag) {
                         binding.appbar.includeMenuLayout.btnSubmit.setVisibility(View.VISIBLE);
-                    } else {  //remove else
-                        binding.appbar.includeMenuLayout.btnSubmit.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -148,7 +146,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                             break;
                         }
                     }
-                    if (!flag) {  //flag
+                    if (flag) {
                         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
                             getLocationData();
                         } else {
@@ -182,9 +180,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             return;
         }
 
-        if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
+        if (dLocation != null && dLocation.getLatitude()>0 && dLocation.getLongitude()>0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
-            if (!(distance <= AppConstants.DISTANCE)) {  //!
+            if (distance <= AppConstants.DISTANCE) {
                 submitCall();
             } else {
                 Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the 100 meter radius of selected institute");
@@ -409,7 +407,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     @Override
     public void onBackPressed() {
 
-        if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+        if (arrayListLiveData!=null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
             boolean flag = false;
             for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
                 if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
@@ -420,14 +418,14 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             if (!flag) {
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
-            } else {
+            }else {
                 Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
             }
-        } else {
+        }else{
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
     }
@@ -484,7 +482,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         editor.putString(AppConstants.CACHE_DATE, cacheDate);
         editor.commit();
     }
-
     private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -501,4 +498,3 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
 
 }
-
