@@ -170,7 +170,7 @@
                                 <RadioButton
                                     android:id="@+id/rb_yes_present_time"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:checked="@{inspData.hMHWOPresence.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"

@@ -118,7 +118,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             @Override
             public void onClick(View view) {
                 if (instCnt > 0) {
-//                    startActivity(new Intent(ReportActivity.this, InspectionReportsDashboard.class));
+                    startActivity(new Intent(ReportActivity.this, InspectionReportsDashboard.class));
                 } else {
                     callSnackBar("No data found");
                 }
