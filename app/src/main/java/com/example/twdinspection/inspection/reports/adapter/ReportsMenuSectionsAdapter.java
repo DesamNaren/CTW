@@ -23,6 +23,7 @@ import com.example.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity
 import com.example.twdinspection.inspection.reports.ui.ReportsEntitlementsActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsInfraActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsRegistersActivity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
 import com.example.twdinspection.inspection.ui.CoCurricularActivity;
 import com.example.twdinspection.inspection.ui.DietIssuesActivity;
@@ -94,7 +95,7 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
                         callActivity(ReportsEntitlementsActivity.class);
                         break;
                     case 10:
-                        callActivity(RegistersActivity.class);
+                        callActivity(ReportsRegistersActivity.class);
                         break;
                     case 11:
                         callActivity(ReportGeneralCommentsActivity.class);

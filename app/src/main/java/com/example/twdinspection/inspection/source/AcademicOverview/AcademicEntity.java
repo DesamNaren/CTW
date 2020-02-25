@@ -149,10 +149,10 @@ public class AcademicEntity {
     private String digital_content_used;
 
     @ColumnInfo
-    private String eLearning_avail;
+    private String lea_avail;
 
     @ColumnInfo
-    private String eLearning_stud_using_as_per_sched;
+    private String stud_using_as_per_sched;
 
     @ColumnInfo
     private String volSchoolCoordName;
@@ -161,10 +161,10 @@ public class AcademicEntity {
     private String volSchoolCoordMobNo;
 
     @ColumnInfo
-    private String eLearningInchargeName;
+    private String leaInchargeName;
 
     @ColumnInfo
-    private String eLearningMobNum;
+    private String leaMobNum;
     @ColumnInfo
     private String separate_timetable_disp;
     @ColumnInfo
@@ -175,7 +175,6 @@ public class AcademicEntity {
     private String tabInchargeName;
     @ColumnInfo
     private String tabInchargeMblno;
-
 
     @ColumnInfo
     private String tabs_stud_using_as_per_sched;
@@ -621,20 +620,20 @@ public class AcademicEntity {
         this.digital_content_used = digital_content_used;
     }
 
-    public String geteLearning_avail() {
-        return eLearning_avail;
+    public String getLea_avail() {
+        return lea_avail;
     }
 
-    public void seteLearning_avail(String eLearning_avail) {
-        this.eLearning_avail = eLearning_avail;
+    public void setLea_avail(String lea_avail) {
+        this.lea_avail = lea_avail;
     }
 
-    public String geteLearning_stud_using_as_per_sched() {
-        return eLearning_stud_using_as_per_sched;
+    public String getStud_using_as_per_sched() {
+        return stud_using_as_per_sched;
     }
 
-    public void seteLearning_stud_using_as_per_sched(String eLearning_stud_using_as_per_sched) {
-        this.eLearning_stud_using_as_per_sched = eLearning_stud_using_as_per_sched;
+    public void setStud_using_as_per_sched(String stud_using_as_per_sched) {
+        this.stud_using_as_per_sched = stud_using_as_per_sched;
     }
 
     public String getVolSchoolCoordName() {
@@ -653,20 +652,20 @@ public class AcademicEntity {
         this.volSchoolCoordMobNo = volSchoolCoordMobNo;
     }
 
-    public String geteLearningInchargeName() {
-        return eLearningInchargeName;
+    public String getLeaInchargeName() {
+        return leaInchargeName;
     }
 
-    public void seteLearningInchargeName(String eLearningInchargeName) {
-        this.eLearningInchargeName = eLearningInchargeName;
+    public void setLeaInchargeName(String leaInchargeName) {
+        this.leaInchargeName = leaInchargeName;
     }
 
-    public String geteLearningMobNum() {
-        return eLearningMobNum;
+    public String getLeaMobNum() {
+        return leaMobNum;
     }
 
-    public void seteLearningMobNum(String eLearningMobNum) {
-        this.eLearningMobNum = eLearningMobNum;
+    public void setLeaMobNum(String leaMobNum) {
+        this.leaMobNum = leaMobNum;
     }
 
     public String getSeparate_timetable_disp() {

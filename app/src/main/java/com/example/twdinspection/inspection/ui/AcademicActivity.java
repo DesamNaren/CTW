@@ -561,7 +561,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 labInchargeName = binding.etLabInchargeName.getText().toString().trim();
                 labMobileNo = binding.etLabMobileNo.getText().toString().trim();
 
-
                 noOfBooks = binding.etNoOfBooks.getText().toString().trim();
                 nameLibraryIncharge = binding.etNameLibraryIncharge.getText().toString().trim();
                 libraryMobileNo = binding.etLibraryMobileNo.getText().toString().trim();
@@ -659,19 +658,18 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity.setDigital_content_used(digital_content_used);
 
 
-                    AcademicEntity.seteLearning_avail(eLearning_avail);
-                    AcademicEntity.seteLearning_stud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.setLea_avail(eLearning_avail);
+                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
                     AcademicEntity.setVolSchoolCoordName(volSchoolCoordName);
                     AcademicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
-                    AcademicEntity.seteLearningInchargeName(eLearningInchrgName);
-                    AcademicEntity.seteLearningMobNum(eLearningInchrgMobileNo);
+                    AcademicEntity.setLeaInchargeName(eLearningInchrgName);
+                    AcademicEntity.setLeaMobNum(eLearningInchrgMobileNo);
                     AcademicEntity.setSeparate_timetable_disp(separate_timetable_disp);
                     AcademicEntity.setTabs_supplied(tabs_supplied);
                     AcademicEntity.setNoOfTabs(noOfTabs);
                     AcademicEntity.setTabs_stud_using_as_per_sched(tabs_supplied);
                     AcademicEntity.setTabInchargeName(tabInchargeName);
                     AcademicEntity.setTabInchargeMblno(tabInchargeMblno);
-
 
                     Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 

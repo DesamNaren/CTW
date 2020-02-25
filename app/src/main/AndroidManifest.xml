@@ -229,15 +229,24 @@
         <activity
             android:name=".inspection.reports.ui.ReportsAcademicActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".inspection.reports.ui.ReportsCoCircurricularActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inspection.reports.ui.ReportsEntitlementsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inspection.reports.ui.ReportMedicalActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inspection.reports.ui.ReportStaffAttendActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".inspection.reports.ui.ReportGeneralCommentsActivity" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsCoCircurricularActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsEntitlementsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportMedicalActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportStaffAttendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportGeneralCommentsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.reports.ui.ReportsRegistersActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider
