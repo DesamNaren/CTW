@@ -488,13 +488,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
-        binding.rgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.tabsRgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgStudUsingAsPerSched.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_stud_using_as_per_sched_yes) {
+                int selctedItem = binding.tabsRgStudUsingAsPerSched.getCheckedRadioButtonId();
+                if (selctedItem == R.id.tabs_rb_stud_using_as_per_sched_yes) {
                     stud_using_as_per_sched = AppConstants.Yes;
-                } else if (selctedItem == R.id.rb_stud_using_as_per_sched_no) {
+                } else if (selctedItem == R.id.tabs_rb_stud_using_as_per_sched_no) {
                     stud_using_as_per_sched = AppConstants.No;
                 } else {
                     stud_using_as_per_sched = null;
@@ -517,19 +517,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
-        binding.rgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgStudUsingAsPerSched.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_stud_using_as_per_sched_yes) {
-                    stud_using_as_per_sched = AppConstants.Yes;
-                } else if (selctedItem == R.id.rb_stud_using_as_per_sched_no) {
-                    stud_using_as_per_sched = AppConstants.No;
-                } else {
-                    stud_using_as_per_sched = null;
-                }
-            }
-        });
+
         binding.rgTabsTimetableDisp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -658,18 +646,18 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity.setDigital_content_used(digital_content_used);
 
 
-                    AcademicEntity.setLea_avail(eLearning_avail);
-                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.seteLearning_avail(eLearning_avail);
                     AcademicEntity.setVolSchoolCoordName(volSchoolCoordName);
                     AcademicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
-                    AcademicEntity.setLeaInchargeName(eLearningInchrgName);
-                    AcademicEntity.setLeaMobNum(eLearningInchrgMobileNo);
+                    AcademicEntity.seteLearningInchargeName(eLearningInchrgName);
+                    AcademicEntity.seteLearningMobNum(eLearningInchrgMobileNo);
                     AcademicEntity.setSeparate_timetable_disp(separate_timetable_disp);
                     AcademicEntity.setTabs_supplied(tabs_supplied);
                     AcademicEntity.setNoOfTabs(noOfTabs);
-                    AcademicEntity.setTabs_stud_using_as_per_sched(tabs_supplied);
+                    AcademicEntity.setTabs_stud_using_as_per_sched(stud_using_as_per_sched);
                     AcademicEntity.setTabInchargeName(tabInchargeName);
                     AcademicEntity.setTabInchargeMblno(tabInchargeMblno);
+                    AcademicEntity.seteLearning_stud_using_as_per_sched(showing_stud);
 
                     Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -680,118 +668,118 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
     private boolean validate() {
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
-            showSnackBar("Select Highest Calss Syllabus completed");
+            showSnackBar(getString(R.string.high_class_syl));
             ScrollToView(binding.rgHighestClassSyllabusCompleted);
             return false;
         }
         if (highest_class_syllabus_completed.equals(AppConstants.No) && TextUtils.isEmpty(plan_syll_comp_prepared)) {
-            showSnackBar("Select Plan for completing the syllabus prepared");
+            showSnackBar(getString(R.string.sel_plan));
             return false;
         }
         if (TextUtils.isEmpty(strength_accomodated_asper_infrastructure)) {
-            showSnackBar("Select Is the strength accommodated");
+            showSnackBar(getString(R.string.sel_is_strength));
             return false;
         }
         if (TextUtils.isEmpty(staff_accomodated_asper_stud_strength)) {
-            showSnackBar("Select does staff strength accommodate");
+            showSnackBar(getString(R.string.select_does_staff));
             return false;
         }
         if (TextUtils.isEmpty(plan_prepared)) {
-            showSnackBar("Select school plan for next academic year is prepared");
+            showSnackBar(getString(R.string.select_school_plan));
             return false;
         }
         if (TextUtils.isEmpty(textbooks_rec)) {
-            showSnackBar("Select sufficient text books received");
+            showSnackBar(getString(R.string.sel_suff_books));
             return false;
         }
         if (TextUtils.isEmpty(assessment_test_conducted)) {
-            showSnackBar("Select assessment tests conducted");
+            showSnackBar(getString(R.string.sel_assessments));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeA)) {
-            showSnackBar("Enter GradeA");
+            showSnackBar(getString(R.string.enter_gradea));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeB)) {
-            showSnackBar("Enter GradeB");
+            showSnackBar(getString(R.string.enter_gradeb));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeC)) {
-            showSnackBar("Enter GradeC");
+            showSnackBar(getString(R.string.enter_gradec));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeTotal)) {
-            showSnackBar("Enter Total");
+            showSnackBar(getString(R.string.enter_total));
             return false;
         }
         if (TextUtils.isEmpty(last_yr_ssc_percent)) {
-            showSnackBar("Enter Last year SSC results Percentage");
+            showSnackBar(getString(R.string.last_year_ssc));
             return false;
         }
         if (TextUtils.isEmpty(punadi_books_supplied)) {
-            showSnackBar("Select Punadi-2 books supplied");
+            showSnackBar(getString(R.string.sel_pun_books));
             return false;
         }
         if (punadi_books_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(sufficient_books_supplied)) {
-            showSnackBar("Select Sufficient books supplied");
+            showSnackBar(getString(R.string.sel_suff_books_suplied));
             return false;
         }
         if (TextUtils.isEmpty(punadiPrgmConducted)) {
-            showSnackBar("Select Punadi program is conducted");
+            showSnackBar(getString(R.string.sel_pun2_con));
             return false;
         }
         if (punadiPrgmConducted.equals(AppConstants.No) && TextUtils.isEmpty(punadiPrgmReason)) {
-            showSnackBar("Enter Punadi program Reason");
+            showSnackBar("Enter Punadi-2 program Reason");
             return false;
         }
 
         if (TextUtils.isEmpty(punadi2_testmarks_entered)) {
-            showSnackBar("Select Punadi-2 test marks entered");
+            showSnackBar(getString(R.string.sel_punadi2_test_marks));
             return false;
         }
 
         if (punadi2_testmarks_entered.equals(AppConstants.No) && TextUtils.isEmpty(punadi2TestmarksReason)) {
-            showSnackBar("Enter Punadi-2 test marks Reason");
+            showSnackBar(getString(R.string.enter_punadi2_reason));
             return false;
         }
 
         if (TextUtils.isEmpty(kara_dipath_prgm_cond)) {
-            showSnackBar("Select Kara dipath program is conducted");
+            showSnackBar(getString(R.string.sel_kara));
             return false;
         }
         if (kara_dipath_prgm_cond.equals(AppConstants.No) && TextUtils.isEmpty(kara_dipath_prgm_cond)) {
-            showSnackBar("Enter Kara dipath program Reason");
+            showSnackBar(getString(R.string.enter_kara_reason));
             return false;
         }
         if (TextUtils.isEmpty(labManuals_received)) {
-            showSnackBar("Enter science lab manuals received");
+            showSnackBar(getString(R.string.enter_ssci_lab));
             return false;
         }
         if (labManuals_received.equals(AppConstants.Yes) && TextUtils.isEmpty(properly_using_manuals)) {
-            showSnackBar("Select properly using the science lab manuals");
+            showSnackBar(getString(R.string.sel_pro_using_sci_lab));
             return false;
         }
         if (TextUtils.isEmpty(labroom_available)) {
-            showSnackBar("Select science lab room is available");
+            showSnackBar(getString(R.string.sel_sci_lab_avail));
             return false;
         }
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labName)) {
-            showSnackBar("Enter Name of the science lab");
+            showSnackBar(getString(R.string.name_sci_lab));
             return false;
         }
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labInchargeName)) {
-            showSnackBar("Enter Name of the science lab incharge teacher");
+            showSnackBar(getString(R.string.name_sci_lab_incharge));
             return false;
         }
 
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labMobileNo)) {
-            showSnackBar("Enter lab mobile number");
+            showSnackBar(getString(R.string.lab_mob_num));
             return false;
         }
 
 
         if (labroom_available.equals(AppConstants.Yes) && labMobileNo.length() != 10) {
-            showSnackBar("Enter valid lab mobile number");
+            showSnackBar(getString(R.string.enter_valid_sci_lab_number));
             return false;
         }
 
@@ -799,40 +787,40 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (labroom_available.equals(AppConstants.Yes)
                 && !(labMobileNo.startsWith("9") || labMobileNo.startsWith("8") || labMobileNo.startsWith("7") ||
                 labMobileNo.startsWith("6"))) {
-            showSnackBar("Enter valid lab mobile number");
+            showSnackBar(getString(R.string.enter_valid_sci_lab_number));
             return false;
         }
 
 
         if (TextUtils.isEmpty(lab_mat_entered_reg)) {
-            showSnackBar("Select Lab material entered in the stock entry register");
+            showSnackBar(getString(R.string.sel_lab_mat_entered));
             return false;
         }
         if (lab_mat_entered_reg.equals(AppConstants.No) && TextUtils.isEmpty(labMatEnteredReason)) {
-            showSnackBar("Enter Lab material Reason");
+            showSnackBar(getString(R.string.lab_mat_reason));
             return false;
         }
 
 
         if (TextUtils.isEmpty(library_room_available)) {
-            showSnackBar("Select library room is available");
+            showSnackBar(getString(R.string.library_room_avail));
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfBooks)) {
-            showSnackBar("Enter no of books");
+            showSnackBar(getString(R.string.enter_num_of_books));
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(nameLibraryIncharge)) {
-            showSnackBar("Enter name of the library incharge teacher");
+            showSnackBar(getString(R.string.library_incharge));
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(libraryMobileNo)) {
-            showSnackBar("Enter library mobile number");
+            showSnackBar(getString(R.string.library_mob_num));
             return false;
         }
 
         if (library_room_available.equals(AppConstants.Yes) && libraryMobileNo.length() != 10) {
-            showSnackBar("Enter valid library mobile number");
+            showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
 
@@ -840,67 +828,67 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (library_room_available.equals(AppConstants.Yes) && !TextUtils.isEmpty(libraryMobileNo)
                 && !(libraryMobileNo.startsWith("9") || libraryMobileNo.startsWith("8") || libraryMobileNo.startsWith("7") ||
                 libraryMobileNo.startsWith("6"))) {
-            showSnackBar("Enter valid library mobile number");
+            showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
         if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(maint_accession_reg)) {
-            showSnackBar("Select Maintaining the accession register");
+            showSnackBar(getString(R.string.mai_ass_reg));
             return false;
         }
         if (TextUtils.isEmpty(proper_light_fan)) {
-            showSnackBar("Select proper lighting & Fans available");
+            showSnackBar(getString(R.string.light_fan_avail));
             return false;
         }
 
         if (TextUtils.isEmpty(big_tv_rot_avail)) {
-            showSnackBar("Select Big TV & ROT available");
+            showSnackBar(getString(R.string.big_tv_avail));
             return false;
         }
         if (big_tv_rot_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(TvRotWorkingStatus)) {
-            showSnackBar("Select Big TV & ROT Working Status");
+            showSnackBar(getString(R.string.big_tv_status));
             return false;
         }
 
         if (TextUtils.isEmpty(mana_tv_lessons_shown)) {
-            showSnackBar("Select  MANA TV lessons are shown to students");
+            showSnackBar(getString(R.string.mana_tv_lessions));
             return false;
         }
         if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvLessonsReason)) {
-            showSnackBar("Enter MANA TV Reason");
+            showSnackBar(getString(R.string.mana_tv_reason));
             return false;
         }
         if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvInchargeName)) {
-            showSnackBar("Select  MANA TV incharge teacher name");
+            showSnackBar(getString(R.string.mana_tv_incharge));
             return false;
         }
         if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvMobileNo)) {
-            showSnackBar("Enter MANA TV mobile number");
+            showSnackBar(getString(R.string.mana_tv_mob_num));
             return false;
         }
 
         if (mana_tv_lessons_shown.equals(AppConstants.No)
                 && manaTvMobileNo.length() != 10) {
-            showSnackBar("Enter valid MANA TV mobile number");
+            showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
         if (mana_tv_lessons_shown.equals(AppConstants.No)
                 && !(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
                 manaTvMobileNo.startsWith("6"))) {
-            showSnackBar("Enter valid MANA TV mobile number");
+            showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
         if (TextUtils.isEmpty(comp_lab_avail)) {
-            showSnackBar("Select computer lab is available");
+            showSnackBar(getString(R.string.com_lab_avail));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfComputersAvailable)) {
-            showSnackBar("Enter No of Computers");
+            showSnackBar(getString(R.string.num_of_com));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(compWorkingStatus)) {
-            showSnackBar("Enter Working Status of Computers");
+            showSnackBar(getString(R.string.com_status));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(workingStatusProjector)) {
@@ -908,137 +896,137 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(ict_instr_avail)) {
-            showSnackBar("Select ICT instructor available");
+            showSnackBar(getString(R.string.ict_avail));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(nameIctInstr)) {
-            showSnackBar("Enter Name of the ICT instructor");
+            showSnackBar(getString(R.string.ict_name));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(mobNoIctInstr)) {
-            showSnackBar("Enter ICT instructor Mobile No");
+            showSnackBar(getString(R.string.ict_mob));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && mobNoIctInstr.length()!=10) {
-            showSnackBar("Enter valid ICT instructor Mobile No");
+            showSnackBar(getString(R.string.valid_ict_mob));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) &&  ict_instr_avail.equals(AppConstants.Yes)
                 && !(mobNoIctInstr.startsWith("9") || mobNoIctInstr.startsWith("8") || mobNoIctInstr.startsWith("7") ||
                 mobNoIctInstr.startsWith("6"))) {
-            showSnackBar("Enter valid ICT instructor Mobile No");
+            showSnackBar(getString(R.string.valid_ict_mob));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(timetable_disp)) {
-            showSnackBar("Select Timetable");
+            showSnackBar(getString(R.string.sel_timetable));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(comp_syll_completed)) {
-            showSnackBar("Select computer syllabus completed");
+            showSnackBar(getString(R.string.com_syll_com));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(comp_lab_cond)) {
-            showSnackBar("Select computer lab test conducted");
+            showSnackBar(getString(R.string.com_lab_status));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(digital_content_used)) {
-            showSnackBar("Select digital content used by students");
+            showSnackBar(getString(R.string.sel_digital_content));
             return false;
         }
 
 
         if (TextUtils.isEmpty(eLearning_avail)) {
-            showSnackBar("Select e-Learning classes available");
+            showSnackBar(getString(R.string.eLe_avail));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(showing_stud)) {
-            showSnackBar("Select Showing to students");
+            showSnackBar(getString(R.string.sel_sho_stu));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes) && TextUtils.isEmpty(volSchoolCoordName)) {
-            showSnackBar("Enter School Coordinator Name");
+            showSnackBar(getString(R.string.sch_cor_name));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(volSchoolCoordMobNo)) {
-            showSnackBar("Enter School Coordinator Mobile Number");
+            showSnackBar(getString(R.string.sch_cor_mob));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)  && volSchoolCoordMobNo.length()!=10) {
-            showSnackBar("Enter valid School Coordinator Mobile Number");
+            showSnackBar(getString(R.string.valid_sch_cor_mob_num));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
                 && !(volSchoolCoordMobNo.startsWith("9") || volSchoolCoordMobNo.startsWith("8") || volSchoolCoordMobNo.startsWith("7") ||
                 volSchoolCoordMobNo.startsWith("6"))) {
-            showSnackBar("Enter valid School Coordinator Mobile Number");
+            showSnackBar(getString(R.string.valid_sch_cor_mob_num));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(eLearningInchrgName)) {
-            showSnackBar("Enter eLearning incharge Name");
+            showSnackBar(getString(R.string.eLe_incha_name));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(eLearningInchrgMobileNo)) {
-            showSnackBar("Enter eLearning incharge Mobile Number");
+            showSnackBar(getString(R.string.eLe_inch_mob));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
-            showSnackBar("Enter eLearning incharge Mobile Number");
+            showSnackBar(getString(R.string.valid_eLe_inch_mob));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes)
                 && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
                 eLearningInchrgMobileNo.startsWith("6"))) {
-            showSnackBar("Enter valid eLearning incharge Mobile Number");
+            showSnackBar(getString(R.string.valid_eLe_inch_mob));
             return false;
         }
 
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(separate_timetable_disp)) {
-            showSnackBar("Select Separate time table displayed");
+            showSnackBar(getString(R.string.sel_sep_timetable));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(tabs_supplied)) {
-            showSnackBar("Select tabs supplied");
+            showSnackBar(getString(R.string.sel_tabs_supplied));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfTabs)) {
-            showSnackBar("Enter No of tabs");
+            showSnackBar(getString(R.string.num_of_tabs));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(stud_using_as_per_sched)) {
-            showSnackBar("Select Students are using");
+            showSnackBar(getString(R.string.sel_stu_using));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(tabInchargeName)) {
-            showSnackBar("Enter Name of the tab lab incharge");
+            showSnackBar(getString(R.string.tab_incharge));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(tabInchargeMblno)) {
-            showSnackBar("Enter tab lab incharge Mobile number");
+            showSnackBar(getString(R.string.tab_mob_num));
             return false;
         }
 
 
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
-            showSnackBar("Enter valid tab lab incharge Mobile number");
+            showSnackBar(getString(R.string.valid_incharge_mob_num));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes)
                 && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
                 eLearningInchrgMobileNo.startsWith("6"))) {
-            showSnackBar("Enter valid tab lab incharge Mobile number");
+            showSnackBar(getString(R.string.valid_incharge_mob_num));
             return false;
         }
 

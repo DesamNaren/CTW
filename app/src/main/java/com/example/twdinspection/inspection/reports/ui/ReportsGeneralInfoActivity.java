@@ -42,6 +42,10 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         reportData = gson.fromJson(data, InspReportData.class);
 
         binding.setInspData(reportData.getGeneralInfo());
+
+        binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
+        binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
+        binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
         binding.executePendingBindings();
 
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
