@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.twdinspection.R;
@@ -15,7 +16,7 @@ import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.google.gson.Gson;
 
-public class ReportsGeneralInfoActivity extends BaseActivity {
+public class ReportsGeneralInfoActivity extends AppCompatActivity {
     private static final String TAG = ReportsGeneralInfoActivity.class.getSimpleName();
     SharedPreferences sharedPreferences;
     ActivityReportGeneralInfoBinding binding;
@@ -25,6 +26,15 @@ public class ReportsGeneralInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_general_info);
+        binding.actionBar.headerTitle.setText(getString(R.string.general_info));
+        binding.actionBar.ivHome.setVisibility(View.GONE);
+        binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();

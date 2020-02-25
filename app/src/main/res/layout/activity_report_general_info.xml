@@ -19,7 +19,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            layout="@layout/action_bar_layout"
+            android:id="@+id/action_bar"/>
+
         <LinearLayout
+            android:layout_below="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_next"

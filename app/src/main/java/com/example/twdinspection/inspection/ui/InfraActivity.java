@@ -3,13 +3,10 @@ package com.example.twdinspection.inspection.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -34,19 +31,9 @@ import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.List;
 
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class InfraActivity extends LocBaseActivity implements SaveListener {
@@ -639,7 +626,7 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
                     infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
                     infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
                     infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
-                    infrastuctureEntity.setRepair_required(repair_required);
+                    infrastuctureEntity.setKitchen_repair_required(repair_required);
                     infrastuctureEntity.setHow_many_buildings(how_many_buildings);
                     infrastuctureEntity.setTransformer_available(transformer_available);
                     infrastuctureEntity.setPowerConnection_type(powerConnectionType);
@@ -663,6 +650,31 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
                     infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
                     infrastuctureEntity.setPainting(painting);
                     infrastuctureEntity.setColor(color);
+
+
+                    if(binding.addClassCb.isChecked()) {
+                        infrastuctureEntity.setAdd_class_required(AppConstants.Yes);
+                        infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
+                    }else {
+                        infrastuctureEntity.setAdd_class_required(AppConstants.No);
+                        infrastuctureEntity.setAdd_class_required_cnt("");
+                    }
+                    if(binding.addDinCb.isChecked()) {
+                        infrastuctureEntity.setAdd_dining_required(AppConstants.Yes);
+                        infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
+                    }else {
+                        infrastuctureEntity.setAdd_dining_required(AppConstants.No);
+                        infrastuctureEntity.setAdd_dining_required_cnt("");
+                    }
+                    if(binding.addDomCb.isChecked()) {
+                        infrastuctureEntity.setAdd_dormitory_required(AppConstants.Yes);
+                        infrastuctureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
+                    }else {
+                        infrastuctureEntity.setAdd_dormitory_required(AppConstants.No);
+                        infrastuctureEntity.setAdd_dormitory_required_cnt("");
+                    }
+
+
                     Utils.customSaveAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
 //                    startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
@@ -830,19 +842,19 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
         }
 
         if (add_class && TextUtils.isEmpty(add_cls_cnt)) {
-            showSnackBar(getResources().getString(R.string.add_enter_number));
+            showSnackBar(getResources().getString(R.string.cls_count));
             binding.addClassLayout.requestFocus();
             return false;
         }
 
         if (add_dom && TextUtils.isEmpty(add_dom_cnt)) {
-            showSnackBar(getResources().getString(R.string.add_enter_number));
+            showSnackBar(getResources().getString(R.string.din_count));
             binding.addDomLayout.requestFocus();
             return false;
         }
 
         if (add_din && TextUtils.isEmpty(add_din_cnt)) {
-            showSnackBar(getResources().getString(R.string.add_enter_number));
+            showSnackBar(getResources().getString(R.string.dor_count));
             binding.addDinLayout.requestFocus();
             return false;
         }

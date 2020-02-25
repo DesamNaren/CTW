@@ -611,7 +611,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/repair_required"
+                                android:text="@string/kitchen_repair_required"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -1121,7 +1121,7 @@
                                     android:id="@+id/et_repair_required"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/repair_required"
+                                    android:hint="@string/kitchen_repair_required"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:singleLine="true" />
@@ -2134,7 +2134,7 @@
                                     android:id="@+id/add_class_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/add_enter_number"
+                                    android:hint="@string/cls_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -2168,7 +2168,7 @@
                                     android:id="@+id/add_din_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/add_enter_number"
+                                    android:hint="@string/din_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -2203,7 +2203,7 @@
                                     android:id="@+id/add_dom_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/add_enter_number"
+                                    android:hint="@string/dor_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true" />

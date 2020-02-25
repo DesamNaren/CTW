@@ -2324,7 +2324,7 @@
                                         android:id="@+id/et_tab_incharge_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_tab_lab_in_charge"
+                                        android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
 

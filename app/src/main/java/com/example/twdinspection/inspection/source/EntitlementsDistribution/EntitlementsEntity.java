@@ -57,7 +57,7 @@ public class EntitlementsEntity {
     private String cosmetic_distributed;
 
     @ColumnInfo()
-    private String entitlementsUniforms;
+    private String uniforms_provided_quality;
 
     @ColumnInfo()
     private String hair_cut_complted;
@@ -185,12 +185,12 @@ public class EntitlementsEntity {
         this.entitlements_provided = entitlements_provided;
     }
 
-    public String getEntitlementsUniforms() {
-        return entitlementsUniforms;
+    public String getUniforms_provided_quality() {
+        return uniforms_provided_quality;
     }
 
-    public void setEntitlementsUniforms(String entitlementsUniforms) {
-        this.entitlementsUniforms = entitlementsUniforms;
+    public void setUniforms_provided_quality(String uniforms_provided_quality) {
+        this.uniforms_provided_quality = uniforms_provided_quality;
     }
 
     public String getHair_cut_complted() {

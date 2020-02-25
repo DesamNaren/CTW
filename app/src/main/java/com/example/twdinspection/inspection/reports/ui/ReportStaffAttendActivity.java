@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,10 +12,10 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ReportActivityStudentsAttendanceBinding;
-import com.example.twdinspection.gcc.adapter.DailyReqSubAdapter;
-import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
+import com.example.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
 import com.example.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
+import com.example.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.example.twdinspection.inspection.reports.source.StudentAttendenceInfo;
 import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
@@ -25,18 +24,18 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-public class ReportStudentsAttendActivity extends AppCompatActivity {
+public class ReportStaffAttendActivity extends BaseActivity {
     ReportActivityStudentsAttendanceBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officerId;
     private InspReportData inspReportData;
-    private List<StudentAttendenceInfo> studentAttendInfoList;
+    private List<StaffAttendenceInfo> staffAttendenceInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.report_activity_students_attendance);
-        binding.actionBar.headerTitle.setText(getString(R.string.stu_att));
+        binding.actionBar.headerTitle.setText(getString(R.string.sta_att));
         binding.actionBar.ivHome.setVisibility(View.GONE);
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +43,6 @@ public class ReportStudentsAttendActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -54,9 +52,9 @@ public class ReportStudentsAttendActivity extends AppCompatActivity {
         inspReportData=gson.fromJson(data, InspReportData.class);
 
         if(inspReportData!=null) {
-            studentAttendInfoList = inspReportData.getStudentAttendenceInfo();
-            if(studentAttendInfoList!=null && studentAttendInfoList.size()>0){
-                setAdapter(studentAttendInfoList);
+            staffAttendenceInfos = inspReportData.getStaffAttendenceInfo();
+            if(staffAttendenceInfos!=null && staffAttendenceInfos.size()>0){
+                setAdapter(staffAttendenceInfos);
             }
         }
 
@@ -68,19 +66,14 @@ public class ReportStudentsAttendActivity extends AppCompatActivity {
         });
     }
 
-    private void setAdapter(List<StudentAttendenceInfo> studentAttendInfoList) {
-        StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
+    private void setAdapter(List<StaffAttendenceInfo> staffAttendenceInfos) {
+        StaffAttReportAdapter staffAttReportAdapter = new StaffAttReportAdapter(this, staffAttendenceInfos);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerView.setAdapter(stockSubAdapter);
+        binding.recyclerView.setAdapter(staffAttReportAdapter);
     }
 
     private void showSnackBar(String str) {
         Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
-    }
-
-    public void onHomeClick(View view) {
-        startActivity(new Intent(this, InstMenuMainActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override

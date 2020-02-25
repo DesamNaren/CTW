@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.source.GeneralInformation;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "general_info")
@@ -20,22 +21,6 @@ public class GeneralInfoEntity {
 
     @ColumnInfo()
     private String officer_id;
-
-/*
-    @ColumnInfo()
-    private String officer_designation;
-
-    @ColumnInfo()
-    private String inst_name;
-
-    @ColumnInfo()
-    private String mandal_id;
-
-    @ColumnInfo()
-    private String dist_id;
-
-    @ColumnInfo()
-    private String village_id;*/
 
     @ColumnInfo()
     private String HM_HWO_presence;
@@ -61,45 +46,27 @@ public class GeneralInfoEntity {
     @ColumnInfo()
     private String stayingFacilitiesType;
 
-  /*  public String getOfficer_designation() {
-        return officer_designation;
+    @Ignore
+    private String mandalName;
+    @Ignore
+    private String instName;
+
+
+    public String getMandalName() {
+        return mandalName;
     }
 
-    public void setOfficer_designation(String officer_designation) {
-        this.officer_designation = officer_designation;
+    public void setMandalName(String mandalName) {
+        this.mandalName = mandalName;
     }
 
-    public String getInst_name() {
-        return inst_name;
+    public String getInstName() {
+        return instName;
     }
 
-    public void setInst_name(String inst_name) {
-        this.inst_name = inst_name;
+    public void setInstName(String instName) {
+        this.instName = instName;
     }
-
-    public String getMandal_id() {
-        return mandal_id;
-    }
-
-    public void setMandal_id(String mandal_id) {
-        this.mandal_id = mandal_id;
-    }
-
-    public String getDist_id() {
-        return dist_id;
-    }
-
-    public void setDist_id(String dist_id) {
-        this.dist_id = dist_id;
-    }
-
-    public String getVillage_id() {
-        return village_id;
-    }
-
-    public void setVillage_id(String village_id) {
-        this.village_id = village_id;
-    }*/
 
     public int getId() {
         return id;

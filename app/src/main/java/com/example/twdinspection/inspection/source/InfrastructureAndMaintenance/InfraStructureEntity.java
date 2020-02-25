@@ -84,10 +84,10 @@ public class InfraStructureEntity {
     private String construct_kitchen_room;
 
     @ColumnInfo()
-    private String is_it_in_good_condition;
+    private String kitchen_good_condition;
 
     @ColumnInfo()
-    private String repair_required;
+    private String kitchen_repair_required;
 
     @ColumnInfo()
     private String how_many_buildings;
@@ -163,6 +163,82 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String color;
+
+
+    @ColumnInfo()
+    private String add_class_required;
+
+    @ColumnInfo()
+    private String add_class_required_cnt;
+
+    @ColumnInfo()
+    private String add_dining_required;
+
+    @ColumnInfo()
+    private String add_dining_required_cnt;
+
+    @ColumnInfo()
+    private String add_dormitory_required;
+
+    @ColumnInfo()
+    private String add_dormitory_required_cnt;
+
+
+    public String getKitchen_good_condition() {
+        return kitchen_good_condition;
+    }
+
+    public void setKitchen_good_condition(String kitchen_good_condition) {
+        this.kitchen_good_condition = kitchen_good_condition;
+    }
+
+    public String getAdd_class_required() {
+        return add_class_required;
+    }
+
+    public void setAdd_class_required(String add_class_required) {
+        this.add_class_required = add_class_required;
+    }
+
+    public String getAdd_class_required_cnt() {
+        return add_class_required_cnt;
+    }
+
+    public void setAdd_class_required_cnt(String add_class_required_cnt) {
+        this.add_class_required_cnt = add_class_required_cnt;
+    }
+
+    public String getAdd_dining_required() {
+        return add_dining_required;
+    }
+
+    public void setAdd_dining_required(String add_dining_required) {
+        this.add_dining_required = add_dining_required;
+    }
+
+    public String getAdd_dining_required_cnt() {
+        return add_dining_required_cnt;
+    }
+
+    public void setAdd_dining_required_cnt(String add_dining_required_cnt) {
+        this.add_dining_required_cnt = add_dining_required_cnt;
+    }
+
+    public String getAdd_dormitory_required() {
+        return add_dormitory_required;
+    }
+
+    public void setAdd_dormitory_required(String add_dormitory_required) {
+        this.add_dormitory_required = add_dormitory_required;
+    }
+
+    public String getAdd_dormitory_required_cnt() {
+        return add_dormitory_required_cnt;
+    }
+
+    public void setAdd_dormitory_required_cnt(String add_dormitory_required_cnt) {
+        this.add_dormitory_required_cnt = add_dormitory_required_cnt;
+    }
 
     public String getCeilingfans_count() {
         return ceilingfans_count;
@@ -541,19 +617,19 @@ public class InfraStructureEntity {
     }
 
     public String getIs_it_in_good_condition() {
-        return is_it_in_good_condition;
+        return kitchen_good_condition;
     }
 
-    public void setIs_it_in_good_condition(String is_it_in_good_condition) {
-        this.is_it_in_good_condition = is_it_in_good_condition;
+    public void setIs_it_in_good_condition(String kitchen_good_condition) {
+        this.kitchen_good_condition = kitchen_good_condition;
     }
 
-    public String getRepair_required() {
-        return repair_required;
+    public String getKitchen_repair_required() {
+        return kitchen_repair_required;
     }
 
-    public void setRepair_required(String repair_required) {
-        this.repair_required = repair_required;
+    public void setKitchen_repair_required(String kitchen_repair_required) {
+        this.kitchen_repair_required = kitchen_repair_required;
     }
 
     public String getHow_many_buildings() {

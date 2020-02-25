@@ -303,7 +303,7 @@
     <string name="separate_kitchen_room_available">Separate kitchen room available</string>
     <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for construct kitchen room</string>
     <string name="is_it_in_good_condition">Is it in good condition</string>
-    <string name="repair_required">repair required</string>
+    <string name="kitchen_repair_required">repair required</string>
     <string name="no_of_bath_rooms">No of Bath rooms</string>
     <string name="no_of_functioning_toilets">No of functioning Toilets</string>
     <string name="no_of_functioning_bathrooms">No of functioning Bathrooms</string>
@@ -534,8 +534,11 @@
     <string name="whether_the_tabs_supplied">Whether the tabs supplied</string>
     <string name="number_of_tabs">Number of tabs</string>
     <string name="students_are_using_as_per_schedule">Students are using as per schedule</string>
-    <string name="name_of_the_tab_lab_in_charge">Name of the tab lab in charge</string>
+    <string name="name_of_the_tab_in_charge">Name of the tab in charge</string>
     <string name="add_enter_number">Enter number</string>
+    <string name="cls_count">Classroom count</string>
+    <string name="din_count">Dining hall count</string>
+    <string name="dor_count">Dormitories count</string>
     <string name="title_academic">Academic Overview</string>
     <string name="save">Save</string>
     <string name="dr_godown">DR Godown</string>

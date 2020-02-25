@@ -1,21 +1,16 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -310,7 +305,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         entitlementsEntity.setSanitaryNapkins(sanitaryNapkins);
         entitlementsEntity.setNotesSupplied(notesSupplied);
         entitlementsEntity.setPairOfDressDistributedCount(pair_of_dress_distributed);
-        entitlementsEntity.setEntitlementsUniforms(entitlementsUniforms);
+        entitlementsEntity.setUniforms_provided_quality(entitlementsUniforms);
         entitlementsEntity.setHair_cut_complted(hair_cut_complted);
         entitlementsEntity.setLast_haircut_date(haircutDate);
         entitlementsEntity.setCosmetic_distributed(cosmetics);

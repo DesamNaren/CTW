@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="medical"
+            type="com.example.twdinspection.inspection.reports.source.MedicalIssues" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".inspection.ui.MedicalActivity">
+        <include
+            layout="@layout/action_bar_layout"
+            android:id="@+id/action_bar"/>
+
+
+        <ScrollView
+            android:layout_below="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
+            android:background="@color/light_gray">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="17."
+                        android:textColor="@color/black" />
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_10dp"
+                        android:text="@string/enter_number"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_fever"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/fever" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_fever"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_fever"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/fever"
+                                    android:enabled="false"
+                                    android:text="@{medical.feverCount}"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_cold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/cough" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_cold"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_cold"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/cold_amp_cough"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:enabled="false"
+                                    android:text="@{medical.coldCount}"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_headache"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/headache" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_headache"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_headache"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/headache"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:enabled="false"
+                                    android:text="@{medical.headacheCount}"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_diarrhea"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/diarrhea" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_diarrhea"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_diarrhea"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/diarrhea"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:enabled="false"
+                                    android:text="@{medical.diarrheaCount}"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_malaria"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/mosquito" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_malaria"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_malaria"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/malaria"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:enabled="false"
+                                    android:text="@{medical.malariaCount}"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:id="@+id/iv_others"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/medical"
+                                android:padding="@dimen/dimen_5dp"
+                                android:src="@drawable/heartbeat" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_others"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_others"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/others"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:enabled="false"
+                                    android:text="@{medical.othersCount}"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="18."
+                        android:textColor="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_cal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:background="@android:drawable/ic_menu_my_calendar"
+                            android:backgroundTint="@color/list_blue" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_medical_checkup_date"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:textColorHint="@color/colorAccent"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_medical_checkup_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/medical_checkup"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_30dp"
+                                android:enabled="false"
+                                android:text="@{medical.lastMedicalCheckupDate}"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="18.1."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/medical_check_up_done_by_whom"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_medical_check_up_done_by_whom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`MEDICAL OFFICER`) ? true : false}"
+                                    android:id="@+id/rb_medical_officer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/medical_officer" />
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`ANM`) ? true : false}"
+                                    android:id="@+id/rb_anm"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/anm" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/tabs_of_anm_weekly_updated"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_anm_weekly_updated"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:id="@+id/rb_yes_anm_weekly_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:id="@+id/rb_no_anm_weekly_updated"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="18.2."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_health_100"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/rg_call_health_100"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.callHealth100.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:id="@+id/yes_call_health_100"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.callHealth100.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:id="@+id/no_call_health_100"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_addCall"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:background="@drawable/btn_background"
+                                    android:text="Add"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:visibility="visible" />
+
+                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_view"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:layout_marginTop="@dimen/dimen_5dp"
+                                    android:background="@drawable/btn_background1"
+                                    android:text="View"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="19."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register"
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/rg_medicalCheckup_details"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.recordedInRegister.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:id="@+id/medical_checkup_details_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{medical.recordedInRegister.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:id="@+id/medical_checkup_details_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:id="@+id/btn_addStud"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/btn_background"
+                                android:text="Add"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:visibility="gone" />
+
+                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                                android:id="@+id/btn_medical_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                android:background="@drawable/btn_background1"
+                                android:text="View"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_layout"
+            android:background="@android:color/transparent" />
+
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
+
+    </RelativeLayout>
+</layout>

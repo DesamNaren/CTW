@@ -33,12 +33,12 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             punadi_books_supplied, properly_using_manuals, plan_syll_comp_prepared, sufficient_books_supplied;
     String highestClassGradeA, highestClassGradeB, highestClassGradeC, highestClassGradeTotal, last_yr_ssc_percent,
             punadiPrgmReason, punadi2TestmarksReason, karaDipathPrgmCondReason, labName, labInchargeName, labMobileNo,
-            noOfBooks, nameLibraryIncharge, libraryMobileNo, matEnterRegReason, TvRotWorkingStatus,
+            noOfBooks, nameLibraryIncharge, libraryMobileNo, TvRotWorkingStatus,
             maint_accession_reg, proper_light_fan, manaTvLessonsReason, manaTvInchargeName, manaTvMobileNo,
             noOfComputersAvailable, compWorkingStatus, workingStatusProjector, nameIctInstr, mobNoIctInstr,
             timetable_disp, comp_syll_completed, comp_lab_cond, digital_content_used, noOfTabs, tabInchargeName, tabInchargeMblno,
             stud_using_as_per_sched, tabs_timetable_disp, volSchoolCoordName, volSchoolCoordMobNo, eLearningInchrgName,
-            eLearningInchrgMobileNo, separate_timetable_disp;
+            eLearningInchrgMobileNo, separate_timetable_disp, labMatEnteredReason;
     private InstMainViewModel instMainViewModel;
     private SharedPreferences sharedPreferences;
     private String instId, officerId, insTime;
@@ -488,6 +488,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+        binding.rgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgStudUsingAsPerSched.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_stud_using_as_per_sched_yes) {
+                    stud_using_as_per_sched = AppConstants.Yes;
+                } else if (selctedItem == R.id.rb_stud_using_as_per_sched_no) {
+                    stud_using_as_per_sched = AppConstants.No;
+                } else {
+                    stud_using_as_per_sched = null;
+                }
+            }
+        });
         binding.rgTabsSupplied.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -547,12 +560,14 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 labName = binding.etLabName.getText().toString().trim();
                 labInchargeName = binding.etLabInchargeName.getText().toString().trim();
                 labMobileNo = binding.etLabMobileNo.getText().toString().trim();
-                matEnterRegReason = binding.etMatEnterRegReason.getText().toString().trim();
+
 
                 noOfBooks = binding.etNoOfBooks.getText().toString().trim();
                 nameLibraryIncharge = binding.etNameLibraryIncharge.getText().toString().trim();
                 libraryMobileNo = binding.etLibraryMobileNo.getText().toString().trim();
                 TvRotWorkingStatus = binding.etTvRotWorkingStatus.getText().toString().trim();
+
+                labMatEnteredReason = binding.etMatEnterRegReason.getText().toString().trim();
 
                 manaTvLessonsReason = binding.etManaTvLessonsReason.getText().toString().trim();
                 manaTvInchargeName = binding.etManaTvInchargeName.getText().toString().trim();
@@ -600,7 +615,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity.setPunadiPrgmReason(punadiPrgmReason);
                     AcademicEntity.setPunadi2_testmarks_entered(punadi2_testmarks_entered);
                     AcademicEntity.setPunadi2TestmarksReason(punadi2TestmarksReason);
-                    AcademicEntity.setPunadi2_testmarks_entered(kara_dipath_prgm_cond);
+                    AcademicEntity.setKara_dipath_prgm_cond(kara_dipath_prgm_cond);
                     AcademicEntity.setKaraDipathPrgmCondReason(karaDipathPrgmCondReason);
                     AcademicEntity.setLabManuals_received(labManuals_received);
                     AcademicEntity.setProperly_using_manuals(properly_using_manuals);
@@ -609,6 +624,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity.setLabInchargeName(labInchargeName);
                     AcademicEntity.setLabMobileNo(labMobileNo);
                     AcademicEntity.setLab_mat_entered_reg(lab_mat_entered_reg);
+                    AcademicEntity.setLab_mat_entered_reg_reason(labMatEnteredReason);
 
                     AcademicEntity.setLibrary_room_available(library_room_available);
                     AcademicEntity.setNoOfBooks(noOfBooks);
@@ -643,18 +659,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     AcademicEntity.setDigital_content_used(digital_content_used);
 
 
-                    AcademicEntity.setLea_avail(eLearning_avail);
-                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.seteLearning_avail(eLearning_avail);
+                    AcademicEntity.seteLearning_stud_using_as_per_sched(stud_using_as_per_sched);
                     AcademicEntity.setVolSchoolCoordName(volSchoolCoordName);
                     AcademicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
-                    AcademicEntity.setLeaInchargeName(eLearningInchrgName);
-                    AcademicEntity.setLeaMobNum(eLearningInchrgMobileNo);
+                    AcademicEntity.seteLearningInchargeName(eLearningInchrgName);
+                    AcademicEntity.seteLearningMobNum(eLearningInchrgMobileNo);
                     AcademicEntity.setSeparate_timetable_disp(separate_timetable_disp);
                     AcademicEntity.setTabs_supplied(tabs_supplied);
                     AcademicEntity.setNoOfTabs(noOfTabs);
-                    AcademicEntity.setStud_using_as_per_sched(stud_using_as_per_sched);
+                    AcademicEntity.setTabs_stud_using_as_per_sched(tabs_supplied);
                     AcademicEntity.setTabInchargeName(tabInchargeName);
                     AcademicEntity.setTabInchargeMblno(tabInchargeMblno);
+
 
                     Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -793,7 +810,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar("Select Lab material entered in the stock entry register");
             return false;
         }
-        if (lab_mat_entered_reg.equals(AppConstants.No) && TextUtils.isEmpty(matEnterRegReason)) {
+        if (lab_mat_entered_reg.equals(AppConstants.No) && TextUtils.isEmpty(labMatEnteredReason)) {
             showSnackBar("Enter Lab material Reason");
             return false;
         }
