@@ -2248,7 +2248,7 @@
                                         android:layout_height="wrap_content"
                                         android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.eLearningInchargeName}"
+                                        android:text="@={inspData.leaInchargeName}"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
 
@@ -2267,7 +2267,7 @@
                                         android:layout_height="wrap_content"
                                         android:hint="@string/mobile_number"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.eLearningMobNum}"
+                                        android:text="@={inspData.leaMobNum}"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
@@ -2430,7 +2430,7 @@
                                         android:id="@+id/et_tab_incharge_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_tab_lab_in_charge"
+                                        android:hint="@string/name_of_the_tab_in_charge"
                                         android:focusableInTouchMode="false"
                                         android:text="@={inspData.tabInchargeName}"
                                         android:imeOptions="actionNext"

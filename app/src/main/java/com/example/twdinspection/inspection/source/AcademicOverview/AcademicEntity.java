@@ -176,6 +176,7 @@ public class AcademicEntity {
     @ColumnInfo
     private String tabInchargeMblno;
 
+
     @ColumnInfo
     private String tabs_stud_using_as_per_sched;
 

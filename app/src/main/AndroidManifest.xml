@@ -237,6 +237,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".inspection.reports.ui.ReportStaffAttendActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".inspection.reports.ui.ReportGeneralCommentsActivity" />
 
 
         <provider
