@@ -229,6 +229,8 @@
         <activity
             android:name=".inspection.reports.ui.ReportsAcademicActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".inspection.reports.ui.ReportsCoCircurricularActivity" />
+        <activity android:name=".inspection.reports.ui.ReportsEntitlementsActivity" />
 
 
         <provider

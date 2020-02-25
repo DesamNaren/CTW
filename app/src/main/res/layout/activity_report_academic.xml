@@ -1519,6 +1519,8 @@
 
 
                                 <RadioButton
+                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:id="@+id/rb_big_tv_rot_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1526,6 +1528,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:id="@+id/rb_big_tv_rot_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1536,13 +1540,12 @@
 
                         </LinearLayout>
 
-
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_tv_rot_working_status"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
@@ -1551,6 +1554,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/working_status"
+                                android:focusableInTouchMode="false"
+                                android:text="@={inspData.tvRotWorkingStatus}"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
 
@@ -2368,6 +2373,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/number_of_tabs"
+                                        android:focusableInTouchMode="false"
+                                        android:text="@={inspData.noOfTabs}"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true" />
@@ -2424,6 +2431,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/name_of_the_tab_lab_in_charge"
+                                        android:focusableInTouchMode="false"
+                                        android:text="@={inspData.tabInchargeName}"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
 
@@ -2441,6 +2450,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/mobile_number"
+                                        android:focusableInTouchMode="false"
+                                        android:text="@={inspData.tabInchargeMblno}"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"

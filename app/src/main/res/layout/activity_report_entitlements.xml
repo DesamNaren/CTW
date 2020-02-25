@@ -1,0 +1,1216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="inspData"
+            type="com.example.twdinspection.inspection.reports.source.Entitlements" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".inspection.ui.MedicalActivity">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
+            android:background="@color/light_gray">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="84."
+                        android:textColor="@color/black" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/entitlements_provided_to_students"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_entitlements_provided_to_students"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:checked="@{inspData.entitlementsProvided.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:id="@+id/rb_yes_entitlements_provided_to_students"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:checked="@{inspData.entitlementsProvided.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:id="@+id/rb_no_entitlements_provided_to_students"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <!-- <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/bedsheets"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_bedsheets"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_bedsheets"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_bedsheets"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/carpets"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_carpets"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_carpets"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_carpets"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/uniforms"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_uniforms"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_uniforms"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_uniforms"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/sports_dress"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_sports_dress"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_sports_dress"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_sports_dress"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/slippers"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_slippers"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_slippers"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_slippers"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/night_dress"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_night_dress"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_night_dress"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_night_dress"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/school_bags"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_school_bags"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_school_bags"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_school_bags"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/sanitary_napkins_supplied"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_sanitary_napkins"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_sanitary_napkins"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_sanitary_napkins"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical">
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:padding="@dimen/dimen_5dp"
+                                 android:text="@string/notes_supplied"
+                                 android:textColor="@color/black" />
+
+                             <RadioGroup
+                                 android:id="@+id/rg_notes_supplied"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal">
+
+                                 <RadioButton
+                                     android:id="@+id/rb_yes_notes_supplied"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/yes" />
+
+                                 <RadioButton
+                                     android:id="@+id/rb_no_notes_supplied"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:padding="@dimen/dimen_5dp"
+                                     android:text="@string/no" />
+
+                             </RadioGroup>
+                         </LinearLayout>-->
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/bed" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/bedsheets"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_bedsheets"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.bedSheets.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_bedsheets"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.bedSheets.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_bedsheets"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/carpet" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/carpets"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_carpets"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.carpets.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_carpets"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.carpets.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_carpets"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/student_attire" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/uniforms"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_uniforms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.uniforms.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_uniforms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.uniforms.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_uniforms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/sports_dress" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/sports_dress"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_sports_dress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.sportsDress.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_sports_dress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.sportsDress.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_sports_dress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/slippers" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/slippers"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_slippers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.slippers.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_slippers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:id="@+id/rb_no_slippers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.slippers.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/nightdress" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/night_dress"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_night_dress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.nightDress.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_night_dress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.nightDress.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_night_dress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/school_bags" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/school_bags"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_school_bags"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.schoolBags.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_school_bags"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.schoolBags.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_school_bags"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/sanitary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/sanitary_napkins_supplied"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_sanitary_napkins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_sanitary_napkins"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_sanitary_napkins"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/medical"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/notebook" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/notes_supplied"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_notes_supplied"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:checked="@{inspData.notesSupplied.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_notes_supplied"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.notesSupplied.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_notes_supplied"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="85."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/entitlements_cosmetics"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_cosmetics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:checked="@{inspData.cosmeticDistributed.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_cosmetics"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.cosmeticDistributed.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_cosmetics"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="86."
+                        android:textColor="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_pair_of_dress_distributed"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/entitlements_dress_distributed"
+                                android:focusableInTouchMode="false"
+                                android:text="@={inspData.pairOfDressDistributedCount}"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="87."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/entitlements_uniforms"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_entitlements_uniforms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:checked="@{inspData.entitlementsUniforms.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_entitlements_uniforms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.entitlementsUniforms.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_entitlements_uniforms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="88."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/entitlements_haircut"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_haircut"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:checked="@{inspData.hairCutComplted.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_yes_haircut"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:checked="@{inspData.hairCutComplted.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:id="@+id/rb_no_haircut"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="89."
+                        android:textColor="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_cal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:background="@android:drawable/ic_menu_my_calendar"
+                            android:backgroundTint="@color/list_blue" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:textColorHint="@color/colorAccent"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_entitlements_haircut_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/entitlements_haircut_date"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_30dp"
+                                android:singleLine="true"
+                                android:text="@={inspData.lastHaircutDate}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_layout"
+            android:background="@android:color/transparent" />
+
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
+
+    </RelativeLayout>
+</layout>

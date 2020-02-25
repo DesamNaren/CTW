@@ -15,7 +15,9 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.InstMainRowBinding;
 import com.example.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsAcademicActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsCoCircurricularActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportsEntitlementsActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsInfraActivity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
@@ -83,10 +85,10 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
                         callActivity(ReportsAcademicActivity.class);
                         break;
                     case 8:
-                        callActivity(CoCurricularActivity.class);
+                        callActivity(ReportsCoCircurricularActivity.class);
                         break;
                     case 9:
-                        callActivity(EntitlementsActivity.class);
+                        callActivity(ReportsEntitlementsActivity.class);
                         break;
                     case 10:
                         callActivity(RegistersActivity.class);
