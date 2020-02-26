@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".common.application.TWDApplication"
@@ -19,12 +20,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".gcc.reports.ui.PUnitInspRepActivity" />
-        <activity android:name=".gcc.reports.ui.MfpGodownInspRepActivity" />
-        <activity android:name=".gcc.reports.ui.DrDepotInspRepActivity" />
-        <activity android:name=".gcc.reports.ui.DrGodownInspRepActivity" />
-        <activity android:name=".gcc.reports.ui.GCCReportsDashboard" />
-        <activity android:name=".inspection.ui.ReportActivity" />
+        <activity
+            android:name=".gcc.reports.ui.PUnitInspRepActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.reports.ui.MfpGodownInspRepActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.reports.ui.DrDepotInspRepActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.reports.ui.DrGodownInspRepActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.reports.ui.GCCReportsDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inspection.ui.ReportActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.CocurricularStudAchActivity"
             android:screenOrientation="portrait" />
@@ -56,13 +69,6 @@
         <activity
             android:name=".inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".inspection.ui.DashboardActivity"
@@ -112,12 +118,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".inspection.ui.MPINActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".inspection.ui.GenerateMPINActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.StaffAttendActivity"

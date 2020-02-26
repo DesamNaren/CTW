@@ -85,7 +85,6 @@ dependencies {
     implementation dependencies.recyclerView
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverterGson
-    implementation dependencies.retrofitAdapterRxJava
     implementation dependencies.rxAndroid
     implementation dependencies.rxJava2
     implementation dependencies.constraint
@@ -93,32 +92,16 @@ dependencies {
     implementation dependencies.dexter
     implementation dependencies.multidex
     implementation dependencies.inetrceptor
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dependencies.glide
     implementation dependencies.room
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    implementation dependencies.material
     annotationProcessor dependencies.roomCompiler
     implementation dependencies.roomCompiler
     implementation dependencies.roomRxJava2
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation dependencies.logging
-    implementation dependencies.picasso
-    implementation dependencies.glide
-    implementation dependencies.crashlytics
-    implementation dependencies.core
-    implementation dependencies.itext
+//    implementation dependencies.itext
     implementation dependencies.lifecycle_version
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-    implementation 'com.chaos.view:pinview:1.4.3'
-    implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
-    implementation "com.jakewharton.rxbinding2:rxbinding:2.0.0"
-
+    implementation dependencies.rxBinding
 }

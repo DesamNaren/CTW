@@ -4,10 +4,5 @@
         <attr name="textFont" format="string" />
         <attr name="textStyle" format="integer" />
     </declare-styleable>
-    <integer name="regular">0</integer>
-    <integer name="semibold">1</integer>
-    <integer name="medium">2</integer>
-    <integer name="light">3</integer>
-    <integer name="bold">4</integer>
 
 </resources>
