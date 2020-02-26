@@ -27,14 +27,14 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/header"
+            android:id="@+id/action_bar"
             layout="@layout/action_bar_layout" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@+id/header"
+            android:layout_below="@+id/action_bar"
             android:background="@color/light_gray">
 
             <LinearLayout

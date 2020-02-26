@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.reports.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -30,28 +31,36 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_general_comments_report);
         binding.actionBar.headerTitle.setText(getString(R.string.title_general_comments));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportGeneralCommentsActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-        inspReportData=gson.fromJson(data, InspReportData.class);
+        inspReportData = gson.fromJson(data, InspReportData.class);
 
         binding.setComments(inspReportData.getGeneralComments());
         binding.executePendingBindings();
 
-
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(ReportGeneralCommentsActivity.this, ReportPhotosActivity.class));
 
             }
         });

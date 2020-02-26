@@ -66,7 +66,7 @@ public class MedicalDetailsAdapter extends RecyclerView.Adapter<MedicalDetailsAd
         if (position == list.size() - 1)
             holder.binding.btnLayout.btnNext.setText(context.getResources().getString(R.string.completed));
         else
-            holder.binding.btnLayout.btnNext.setText(context.getResources().getString(R.string.next));
+            holder.binding.btnLayout.btnNext.setText(context.getResources().getString(R.string.saveandnext));
 
         holder.binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

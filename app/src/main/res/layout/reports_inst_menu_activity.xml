@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/header"
+            android:id="@+id/action_bar"
             layout="@layout/action_bar_layout" />
 
         <androidx.recyclerview.widget.RecyclerView

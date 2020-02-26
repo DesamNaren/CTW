@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.reports.source;
 
+import com.example.twdinspection.gcc.reports.source.ReportPhoto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -59,7 +60,7 @@ public class InspReportData {
     private List<StudentAttendenceInfo> studentAttendenceInfo = null;
     @SerializedName("photos")
     @Expose
-    private List<Photo> photos = null;
+    private List<ReportPhoto> photos = null;
 
     public String getOfficerId() {
         return officerId;
@@ -197,11 +198,11 @@ public class InspReportData {
         this.studentAttendenceInfo = studentAttendenceInfo;
     }
 
-    public List<Photo> getPhotos() {
+    public List<ReportPhoto> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Photo> photos) {
+    public void setPhotos(List<ReportPhoto> photos) {
         this.photos = photos;
     }
 }

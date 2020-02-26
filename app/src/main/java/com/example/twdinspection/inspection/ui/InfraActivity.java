@@ -65,7 +65,7 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
-        binding.header.headerTitle.setText(getResources().getString(R.string.infra_mai));
+        binding.header.headerTitle.setText(getResources().getString(R.string.title_infra));
 
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);

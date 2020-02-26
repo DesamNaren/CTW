@@ -142,7 +142,8 @@
     <string name="visit_book">Visit Book (Remarks) for Officials &amp; Non-Officials</string>
 
     <string name="previous">PREVIOUS</string>
-    <string name="next">SAVE &amp; NEXT</string>
+    <string name="saveandnext">SAVE &amp; NEXT</string>
+    <string name="next">NEXT</string>
     <string name="entitlements_provided_to_students">All Entitlements provided to students</string>
     <string name="entitlements_cosmetics">Cosmetics distributed up to month</string>
     <string name="entitlements_uniforms">Uniforms Provided are in good quality, properly stitched as per student size</string>
@@ -455,6 +456,7 @@
     <string name="title_entitlements">Entitlements Distributions</string>
     <string name="title_registers">Registers Up to date</string>
     <string name="title_general_comments">General Comments</string>
+    <string name="title_view_photos">View Photos</string>
     <string name="title_uploaded_photo">Uploaded Photographs</string>
     <string name="record_deleted">Record deleted successfully!</string>
     <string name="enter_suffering_count">Number of suffering students count should not be zero</string>
@@ -472,7 +474,7 @@
     <string name="adm_date">Admitted Date</string>
     <string name="enter_acc_des">Please enter accompanied designation</string>
     <string name="enter_adm_date">Please enter admitted date</string>
-    <string name="infra_mai">Infrastructure &amp; Maintenance</string>
+    <string name="title_infra">Infrastructure &amp; Maintenance</string>
     <string name="rec_su">Records submitted</string>
     <string name="are_go_back">You have not submitted all records, Do you want to go back?</string>
     <string name="edit">Edit</string>
@@ -491,7 +493,7 @@
     <string name="stu_class">Class</string>
     <string name="title_plant_info">Plants Info</string>
     <string name="plants_data">Plants Data</string>
-    <string name="co_cir">Co Curricular &amp; Extra Curricular Activities</string>
+    <string name="title_co_cir">Co Curricular &amp; Extra Curricular Activities</string>
     <string name="stu_ach">Student Achievements</string>
     <string name="plan_for_completing_the_syllabus_prepared">Plan for completing the syllabus prepared</string>
     <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MTO</string>

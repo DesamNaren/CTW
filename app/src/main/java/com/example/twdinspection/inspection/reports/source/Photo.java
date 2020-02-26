@@ -4,15 +4,26 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Photo {
-    @SerializedName("photo")
+
+    @SerializedName("file_path")
     @Expose
-    private String photo;
+    private String filePath;
+    @SerializedName("file_name")
+    @Expose
+    private String fileName;
 
-    public String getPhoto() {
-        return photo;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
-}
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }}

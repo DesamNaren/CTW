@@ -53,7 +53,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         sharedPreferences = TWDApplication.get(this).getPreferences();
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        binding.bottomLl.btnNext.setText(getString(R.string.next));
+        binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
 
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);

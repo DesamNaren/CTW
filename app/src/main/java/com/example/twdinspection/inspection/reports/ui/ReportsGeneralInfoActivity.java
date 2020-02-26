@@ -13,7 +13,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportGeneralInfoBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
-import com.example.twdinspection.inspection.ui.BaseActivity;
+import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.google.gson.Gson;
 
 public class ReportsGeneralInfoActivity extends AppCompatActivity {
@@ -27,11 +27,17 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_general_info);
         binding.actionBar.headerTitle.setText(getString(R.string.general_info));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportsGeneralInfoActivity.this, InstReportsMenuActivity.class));
             }
         });
 
@@ -48,10 +54,11 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
         binding.executePendingBindings();
 
+        binding.btnNext.setText(getResources().getString(R.string.next));
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(ReportsGeneralInfoActivity.this, StudentsAttendActivity.class));
+                startActivity(new Intent(ReportsGeneralInfoActivity.this, ReportStudentsAttendActivity.class));
             }
         });
     }

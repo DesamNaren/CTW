@@ -36,7 +36,13 @@ public class ReportStaffAttendActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.report_activity_students_attendance);
         binding.actionBar.headerTitle.setText(getString(R.string.sta_att));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportStaffAttendActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,11 +63,11 @@ public class ReportStaffAttendActivity extends BaseActivity {
                 setAdapter(staffAttendenceInfos);
             }
         }
-
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(ReportStaffAttendActivity.this, ReportMedicalActivity.class));
             }
         });
     }

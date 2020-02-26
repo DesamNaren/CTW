@@ -20,11 +20,15 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout" />
 
         <ScrollView
             android:id="@+id/scrl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/action_bar"
             android:layout_above="@+id/btn_layout"
             android:background="@color/grey_light"
             android:visibility="visible">
@@ -1519,20 +1523,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_big_tv_rot_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_big_tv_rot_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1553,11 +1557,11 @@
                                 android:id="@+id/et_tv_rot_working_status"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/working_status"
                                 android:focusableInTouchMode="false"
-                                android:text="@={inspData.tvRotWorkingStatus}"
+                                android:hint="@string/working_status"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.tvRotWorkingStatus}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1610,20 +1614,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_mana_tv_lessons_shown_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_mana_tv_lessons_shown_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1649,11 +1653,11 @@
                                     android:id="@+id/et_mana_tv_lessons_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/state_the_reason"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.manaTvLessonsReason}"
+                                    android:hint="@string/state_the_reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.manaTvLessonsReason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1668,11 +1672,11 @@
                                     android:id="@+id/et_mana_tv_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mana_tv_incharge_teacher_name"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.manaTvInchargeName}"
+                                    android:hint="@string/mana_tv_incharge_teacher_name"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.manaTvInchargeName}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1687,13 +1691,13 @@
                                     android:id="@+id/et_mana_tv_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.manaTvMobileNo}"
+                                    android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.manaTvMobileNo}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1746,20 +1750,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_comp_lab_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_comp_lab_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1803,11 +1807,11 @@
                                     android:id="@+id/et_comp_working_status"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/working_status_of_computer"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.compWorkingStatus}"
+                                    android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.compWorkingStatus}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1884,11 +1888,11 @@
                                         android:id="@+id/et_name_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_ict_instructor"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.nameIctInstr}"
+                                        android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.nameIctInstr}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1903,13 +1907,13 @@
                                         android:id="@+id/et_mob_no_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/mobile_number"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.mobNoIctInstr}"
+                                        android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.mobNoIctInstr}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
@@ -1935,7 +1939,7 @@
 
 
                                     <RadioButton
-                                       android:id="@+id/rb_timetable_disp_yes"
+                                        android:id="@+id/rb_timetable_disp_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:padding="@dimen/dimen_5dp"
@@ -2011,7 +2015,7 @@
 
 
                                     <RadioButton
-                                       android:id="@+id/rb_comp_lab_cond_yes"
+                                        android:id="@+id/rb_comp_lab_cond_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:padding="@dimen/dimen_5dp"
@@ -2116,20 +2120,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.leaAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_eLearning_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.leaAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.leaAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_eLearning_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.leaAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2200,11 +2204,11 @@
                                         android:id="@+id/et_vol_school_coord_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.volSchoolCoordName}"
+                                        android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.volSchoolCoordName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2219,13 +2223,13 @@
                                         android:id="@+id/et_vol_school_coord_mob_no"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/mobile_number"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.volSchoolCoordMobNo}"
+                                        android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.volSchoolCoordMobNo}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
@@ -2246,11 +2250,11 @@
                                         android:id="@+id/et_eLearning_inchrg_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.leaInchargeName}"
+                                        android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.leaInchargeName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2265,13 +2269,13 @@
                                         android:id="@+id/et_eLearning_inchrg_mobileNo"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/mobile_number"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.leaMobNum}"
+                                        android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.leaMobNum}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2372,12 +2376,12 @@
                                         android:id="@+id/et_no_of_tabs"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/number_of_tabs"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.noOfTabs}"
+                                        android:hint="@string/number_of_tabs"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.noOfTabs}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2430,11 +2434,11 @@
                                         android:id="@+id/et_tab_incharge_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_tab_in_charge"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.tabInchargeName}"
+                                        android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.tabInchargeName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2449,13 +2453,13 @@
                                         android:id="@+id/et_tab_incharge_mblno"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/mobile_number"
                                         android:focusableInTouchMode="false"
-                                        android:text="@={inspData.tabInchargeMblno}"
+                                        android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.tabInchargeMblno}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 

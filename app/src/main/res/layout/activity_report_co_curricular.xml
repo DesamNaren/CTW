@@ -6,21 +6,28 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="inspData"
             type="com.example.twdinspection.inspection.reports.source.CoCurricularInfo" />
 
     </data>
+
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/root"
         android:orientation="vertical">
+
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/cl"
+            android:layout_below="@+id/action_bar"
             android:background="@color/light_gray">
 
             <LinearLayout
@@ -68,20 +75,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_sportRecYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_sportRecNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -160,20 +167,20 @@
 
 
                                     <RadioButton
-                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
                                         android:id="@+id/game_room_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="Yes" />
 
                                     <RadioButton
-                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
                                         android:id="@+id/game_room_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="No" />
 
@@ -204,13 +211,13 @@
                                     android:id="@+id/pd_pft_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_pd_pft"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.pdPftName}"
+                                    android:hint="@string/name_of_the_pd_pft"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.pdPftName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -239,14 +246,14 @@
                                     android:id="@+id/pd_mob_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.pdPftContact}"
+                                    android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.pdPftContact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -296,9 +303,9 @@
                                     android:layout_gravity="center"
                                     android:background="@drawable/btn_background1"
                                     android:text="View"
-                                    android:visibility="gone"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -349,20 +356,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_playGrAvailYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_playGrAvailNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -391,20 +398,20 @@
                                 android:orientation="horizontal">
 
                                 <RadioButton
-                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_planToProcYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_planToProcNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -425,13 +432,13 @@
                                 android:id="@+id/et_land"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
-                                android:focusableInTouchMode="false"
-                                android:text="@={inspData.landMeaValue}"
                                 android:inputType="numberDecimal"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
+                                android:text="@={inspData.landMeaValue}"
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -477,20 +484,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/ground_lev_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Yes" />
 
                             <RadioButton
                                 android:id="@+id/ground_lev_no"
-                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="No" />
 
@@ -543,20 +550,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_scoutsYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_scoutsNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -583,13 +590,13 @@
                                     android:id="@+id/et_sc_gu_nmae"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/scout_master_guide_captain_name"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.scoutGuideCaptainName}"
+                                    android:hint="@string/scout_master_guide_captain_name"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.scoutGuideCaptainName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -606,14 +613,14 @@
                                     android:id="@+id/et_sc_gu_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
-                                    android:text="@={inspData.scoutGuideCaptainContact}"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.scoutGuideCaptainContact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -665,20 +672,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_nccStudImpYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_nccStudImpNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -705,13 +712,13 @@
                                     android:id="@+id/ncc_tea_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_ncc_teacher"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.nccTeacherName}"
+                                    android:hint="@string/name_of_the_ncc_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.nccTeacherName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -728,14 +735,14 @@
                                     android:id="@+id/ncc_tea_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.nccTeacherContact}"
+                                    android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.nccTeacherContact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -752,13 +759,13 @@
                                     android:id="@+id/ncc_bat_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/battalion_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.nccTeacherBattalionNum}"
+                                    android:hint="@string/battalion_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.nccTeacherBattalionNum}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -810,20 +817,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_smcElectionsYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_smcElectionsNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -850,13 +857,13 @@
                                     android:id="@+id/smc_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_smc_chairman"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.smcEleChairmanName}"
+                                    android:hint="@string/name_of_the_smc_chairman"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.smcEleChairmanName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -873,14 +880,14 @@
                                     android:id="@+id/smc_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.smcEleChairmanContact}"
+                                    android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.smcEleChairmanContact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -931,13 +938,13 @@
                                     android:id="@+id/smc_con"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/conducting_of_parents_meeting_resolution_noted"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.smcEleConParentMeeting}"
+                                    android:hint="@string/conducting_of_parents_meeting_resolution_noted"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.smcEleConParentMeeting}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -988,20 +995,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_kitchenAvailYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_kitchenAvailNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1028,13 +1035,13 @@
                                     android:id="@+id/kit_eve_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/event_of_kitchen_in_charge"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.kitchenInChargeEventName}"
+                                    android:hint="@string/event_of_kitchen_in_charge"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.kitchenInChargeEventName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1051,13 +1058,13 @@
                                     android:id="@+id/kit_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/types_of_kitchen_garden"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.kitchenGardenTypes}"
+                                    android:hint="@string/types_of_kitchen_garden"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.kitchenGardenTypes}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1074,13 +1081,13 @@
                                     android:id="@+id/kit_in_charge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.kitchenGardenInChargeName}"
+                                    android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.kitchenGardenInChargeName}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1097,14 +1104,14 @@
                                     android:id="@+id/kit_in_cha_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
                                     android:focusableInTouchMode="false"
-                                    android:text="@={inspData.kitchenGardenInChargeContact}"
+                                    android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.kitchenGardenInChargeContact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1148,27 +1155,27 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_harithaharam"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/rg_harithaharam"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.haritaHaramStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
+                                    android:id="@+id/rb_harithaharamYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/rb_harithaharamYes"
+                                    android:checked="@{inspData.haritaHaramStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.haritaHaramStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_harithaharamNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.haritaHaramStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1180,12 +1187,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_plants"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_30dp"
-                    android:id="@+id/ll_plants"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -1200,9 +1207,9 @@
                             android:layout_gravity="center"
                             android:background="@drawable/btn_background"
                             android:text="Add"
-                            android:visibility="gone"
                             android:textAllCaps="false"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
 
                         <com.example.twdinspection.common.custom.CustomFontButtonView
                             android:id="@+id/btn_viewplant"
@@ -1211,9 +1218,9 @@
                             android:layout_gravity="center"
                             android:background="@drawable/btn_background1"
                             android:text="View"
-                            android:visibility="visible"
                             android:textAllCaps="false"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:visibility="visible" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1260,20 +1267,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_studCounElecYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_studCounElecNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1289,7 +1296,7 @@
                             android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
 
-                        <TextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
@@ -1304,20 +1311,20 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_nameOfCommYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
                                     android:id="@+id/rb_nameOfCommNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1367,13 +1374,13 @@
                                 android:id="@+id/cou_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/name_of_the_student_s_council_captain"
                                 android:focusableInTouchMode="false"
-                                android:text="@={inspData.stuCouCaptainName}"
+                                android:hint="@string/name_of_the_student_s_council_captain"
                                 android:imeOptions="actionNext"
                                 android:inputType="textPersonName"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
+                                android:text="@={inspData.stuCouCaptainName}"
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1393,8 +1400,8 @@
                                 android:drawableLeft="@android:drawable/ic_menu_my_calendar"
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/last_meeting_conducted_with_students_council_date"
-                                android:text="@={inspData.stuCouDate}"
                                 android:imeOptions="actionNext"
+                                android:text="@={inspData.stuCouDate}"
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1412,7 +1419,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_next"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_next"
@@ -1423,7 +1430,7 @@
             android:background="@drawable/btn_bg"
             android:drawableRight="@drawable/right_arrow_16"
             android:padding="@dimen/dimen_5dp"
-            android:text="@string/next"
+            android:text="@string/saveandnext"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold" />

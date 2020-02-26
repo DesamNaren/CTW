@@ -37,33 +37,40 @@ public class ReportStudentsAttendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.report_activity_students_attendance);
         binding.actionBar.headerTitle.setText(getString(R.string.stu_att));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
+
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportStudentsAttendActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-        inspReportData=gson.fromJson(data, InspReportData.class);
+        inspReportData = gson.fromJson(data, InspReportData.class);
 
-        if(inspReportData!=null) {
+        if (inspReportData != null) {
             studentAttendInfoList = inspReportData.getStudentAttendenceInfo();
-            if(studentAttendInfoList!=null && studentAttendInfoList.size()>0){
+            if (studentAttendInfoList != null && studentAttendInfoList.size() > 0) {
                 setAdapter(studentAttendInfoList);
             }
         }
-
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(ReportStudentsAttendActivity.this, ReportStaffAttendActivity.class));
             }
         });
     }

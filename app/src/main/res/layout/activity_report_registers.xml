@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -12,27 +13,27 @@
 
     </data>
 
+
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_light"
         android:orientation="vertical"
-        android:id="@+id/root"
-        android:background="@color/white"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
-        <View
-            android:id="@+id/base_view"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/light_gray"
-            android:padding="@dimen/dimen_10dp" />
+        <include
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout" />
 
         <TextView
             android:id="@+id/base_que_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/base_view"
+            android:layout_below="@+id/action_bar"
+            android:layout_marginTop="@dimen/dimen_5dp"
             android:padding="@dimen/dimen_10dp"
+            android:background="@color/white"
             android:text="@string/are_the"
             android:textColor="@color/black" />
 
@@ -46,7 +47,6 @@
             android:background="@color/grey_light">
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
@@ -89,20 +89,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.admissionReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/adm_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.admissionReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.admissionReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/adm_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.admissionReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -151,20 +151,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.attendanceReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/att_boa_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.attendanceReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.attendanceReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/att_boa_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.attendanceReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -216,22 +216,22 @@
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:checked="@{inspData.boarderSignReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/boa_sign_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:checked="@{inspData.boarderSignReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.boarderSignReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/boa_sign_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:checked="@{inspData.boarderSignReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -280,20 +280,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.boarderMovementReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/boa_mov_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.boarderMovementReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.boarderMovementReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/boa_mov_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.boarderMovementReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -341,20 +341,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.dailyPurchaseReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_pur_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyPurchaseReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.dailyPurchaseReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_pur_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyPurchaseReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -402,20 +402,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.cashBookReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/cash_book_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.cashBookReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.cashBookReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/cash_book_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.cashBookReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -463,20 +463,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.dailyMenuReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_menu_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyMenuReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.dailyMenuReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_menu_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyMenuReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -524,20 +524,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.attendStaffReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/att_staff_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.attendStaffReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.attendStaffReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/att_staff_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.attendStaffReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -585,20 +585,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.staffOrderBook.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/staff_order_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.staffOrderBook.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.staffOrderBook.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/staff_order_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.staffOrderBook.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -646,20 +646,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.stockIssueProv.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/stock_issue_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.stockIssueProv.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.stockIssueProv.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/stock_issue_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.stockIssueProv.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -708,20 +708,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.permanentArticle.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/per_article_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.permanentArticle.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.permanentArticle.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/per_article_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.permanentArticle.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -770,20 +770,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.budgetWatch.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/bud_watch_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.budgetWatch.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.budgetWatch.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/bud_watch_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.budgetWatch.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -831,20 +831,20 @@
                             android:orientation="horizontal">
 
                             <RadioButton
-                                android:checked="@{inspData.acquaintanceReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquaintanceReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.acquaintanceReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquaintanceReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -893,20 +893,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.acquaintanceDress.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_dress_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquaintanceDress.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.acquaintanceDress.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_dress_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquaintanceDress.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -955,20 +955,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.acquiantanceCosmetic.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_cos_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquiantanceCosmetic.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.acquiantanceCosmetic.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/acq_cos_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.acquiantanceCosmetic.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1017,20 +1017,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.paybillReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/pay_bill_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.paybillReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.paybillReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/pay_bill_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.paybillReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1078,20 +1078,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.treasuryBill.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/tre_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.treasuryBill.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.treasuryBill.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/tre_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.treasuryBill.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1139,20 +1139,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.contingentBill.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/con_bill_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.contingentBill.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.contingentBill.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/con_bill_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.contingentBill.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1200,20 +1200,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.tABill.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/ta_bill_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.tABill.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.tABill.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/ta_bill_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.tABill.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1261,20 +1261,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.dailyMovement.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_move_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyMovement.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.dailyMovement.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/daily_move_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.dailyMovement.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1322,20 +1322,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.teacherMovement.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/tea_move_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.teacherMovement.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.teacherMovement.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/tea_move_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.teacherMovement.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1383,20 +1383,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.cLAccount.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/cl_acc_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.cLAccount.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.cLAccount.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/cl_acc_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.cLAccount.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1444,20 +1444,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.parentsMeeting.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/par_meet_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.parentsMeeting.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.parentsMeeting.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/par_meet_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.parentsMeeting.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1505,20 +1505,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.inspectionReg.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/ins_reg_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.inspectionReg.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.inspectionReg.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/ins_reg_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.inspectionReg.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1567,20 +1567,20 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.visitBook.equalsIgnoreCase(`Yes`)}"
-                                android:clickable="false"
                                 android:id="@+id/visit_book_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.visitBook.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.visitBook.equalsIgnoreCase(`No`)}"
-                                android:clickable="false"
                                 android:id="@+id/visit_book_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.visitBook.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1599,7 +1599,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_layout"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <include
             android:id="@+id/btn_layout"

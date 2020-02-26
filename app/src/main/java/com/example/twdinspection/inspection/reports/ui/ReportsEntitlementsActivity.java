@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.reports.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.twdinspection.databinding.ActivityReportCoCurricularBinding;
 import com.example.twdinspection.databinding.ActivityReportEntitlementsBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.BaseActivity;
+import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.google.gson.Gson;
 
 public class ReportsEntitlementsActivity extends BaseActivity {
@@ -25,6 +27,21 @@ public class ReportsEntitlementsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_entitlements);
+        binding.actionBar.headerTitle.setText(getString(R.string.title_entitlements));
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportsEntitlementsActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
+
+        binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
@@ -34,10 +51,11 @@ public class ReportsEntitlementsActivity extends BaseActivity {
         binding.setInspData(reportData.getEntitlements());
         binding.executePendingBindings();
 
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(ReportsGeneralInfoActivity.this, StudentsAttendActivity.class));
+                startActivity(new Intent(ReportsEntitlementsActivity.this, ReportsRegistersActivity.class));
             }
         });
     }

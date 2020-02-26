@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.reports.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +10,6 @@ import androidx.databinding.DataBindingUtil;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.databinding.ActivityReportAcademicBinding;
 import com.example.twdinspection.databinding.ActivityReportCoCurricularBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.BaseActivity;
@@ -25,7 +25,21 @@ public class ReportsCoCircurricularActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_co_curricular);
+        binding.actionBar.headerTitle.setText(getString(R.string.title_co_cir));
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportsCoCircurricularActivity.this, InstReportsMenuActivity.class));
+            }
+        });
 
+
+        binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
@@ -34,10 +48,11 @@ public class ReportsCoCircurricularActivity extends BaseActivity {
         binding.setInspData(reportData.getCoCurricularInfo());
         binding.executePendingBindings();
 
+        binding.btnNext.setText(getResources().getString(R.string.next));
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(ReportsGeneralInfoActivity.this, StudentsAttendActivity.class));
+                startActivity(new Intent(ReportsCoCircurricularActivity.this, ReportsEntitlementsActivity.class));
             }
         });
     }

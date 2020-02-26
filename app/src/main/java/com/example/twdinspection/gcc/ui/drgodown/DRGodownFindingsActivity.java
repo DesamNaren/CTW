@@ -72,7 +72,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_findings);
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
-        binding.bottomLl.btnNext.setText(getString(R.string.next));
+        binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

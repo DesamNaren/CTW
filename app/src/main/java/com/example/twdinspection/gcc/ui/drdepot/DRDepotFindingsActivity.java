@@ -81,7 +81,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_findings);
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
-        binding.bottomLl.btnNext.setText(getString(R.string.next));
+        binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

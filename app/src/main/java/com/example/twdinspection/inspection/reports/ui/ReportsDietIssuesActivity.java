@@ -26,6 +26,21 @@ public class ReportsDietIssuesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_diet_issues);
+        binding.actionBar.headerTitle.setText(getString(R.string.diet_issues));
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportsDietIssuesActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
+        binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
@@ -37,10 +52,11 @@ public class ReportsDietIssuesActivity extends BaseActivity {
         binding.setOfficerImgUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
         binding.executePendingBindings();
 
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(ReportsDietIssuesActivity.this, StudentsAttendActivity.class));
+                startActivity(new Intent(ReportsDietIssuesActivity.this, ReportsInfraActivity.class));
             }
         });
     }

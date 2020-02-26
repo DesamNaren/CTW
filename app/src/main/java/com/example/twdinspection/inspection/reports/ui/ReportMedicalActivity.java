@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.reports.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +35,13 @@ public class ReportMedicalActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_medical_report);
         binding.actionBar.headerTitle.setText(getString(R.string.medical_health));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportMedicalActivity.this, InstReportsMenuActivity.class));
+            }
+        });
+
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,11 +59,11 @@ public class ReportMedicalActivity extends BaseActivity {
         binding.setMedical(inspReportData.getMedicalIssues());
         binding.executePendingBindings();
 
-
+        binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(ReportMedicalActivity.this, ReportsDietIssuesActivity.class));
             }
         });
     }

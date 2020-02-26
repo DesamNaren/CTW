@@ -15,6 +15,7 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.InstMainRowBinding;
 import com.example.twdinspection.inspection.reports.ui.ReportGeneralCommentsActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportMedicalActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportPhotosActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportStaffAttendActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsAcademicActivity;
@@ -101,10 +102,9 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
                         callActivity(ReportGeneralCommentsActivity.class);
                         break;
                     case 12:
-                        callActivity(UploadedPhotoActivity.class);
+                        callActivity(ReportPhotosActivity.class);
                         break;
                 }
-//                }
             }
         });
     }

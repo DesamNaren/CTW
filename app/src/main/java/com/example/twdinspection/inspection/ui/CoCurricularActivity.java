@@ -63,7 +63,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_co_curricular, getString(R.string.co_cir));
+        binding = putContentView(R.layout.activity_co_curricular, getString(R.string.title_co_cir));
         cocurricularViewModel = ViewModelProviders.of(CoCurricularActivity.this,
                 new CocurricularCustomViewModel(binding, this, getApplication())).get(CocurricularViewModel.class);
         binding.setViewModel(cocurricularViewModel);
