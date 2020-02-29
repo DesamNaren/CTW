@@ -45,7 +45,7 @@ public class ReportsCoCircurricularActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         reportData = gson.fromJson(data, InspReportData.class);
 
-        binding.setInspData(reportData.getCoCurricularInfo());
+//        binding.setInspData(reportData.getCoCurricularInfo());
         binding.executePendingBindings();
 
         binding.btnNext.setText(getResources().getString(R.string.next));

@@ -1056,7 +1056,7 @@
 
 
                             <RadioButton
-                                android:checked="@{inspData.entitlementsUniforms.equalsIgnoreCase(`Yes`)}"
+                                android:checked="@{inspData.uniformsProvidedQuality.equalsIgnoreCase(`Yes`)}"
                                 android:clickable="false"
                                 android:id="@+id/rb_yes_entitlements_uniforms"
                                 android:layout_width="wrap_content"
@@ -1065,7 +1065,7 @@
                                 android:text="@string/yes" />
 
                             <RadioButton
-                                android:checked="@{inspData.entitlementsUniforms.equalsIgnoreCase(`No`)}"
+                                android:checked="@{inspData.uniformsProvidedQuality.equalsIgnoreCase(`No`)}"
                                 android:clickable="false"
                                 android:id="@+id/rb_no_entitlements_uniforms"
                                 android:layout_width="wrap_content"

@@ -148,7 +148,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int f_cnt = 0, c_cnt = 0, h_cnt = 0, d_cnt = 0, m_cnt = 0, o_cnt = 0;
+                int f_cnt = 0;
+                int c_cnt = 0;
+                int h_cnt = 0;
+                int d_cnt = 0;
+                int m_cnt = 0;
+                int o_cnt = 0;
                 int tot_cnt = 0;
 
 
@@ -183,12 +188,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     medicalInfoEntity.setInspection_time(Utils.getCurrentDateTime());
                     medicalInfoEntity.setOfficer_id(officerID);
                     medicalInfoEntity.setInstitute_id(instID);
-                    medicalInfoEntity.setFeverCount(f_cnt);
-                    medicalInfoEntity.setColdCount(c_cnt);
-                    medicalInfoEntity.setHeadacheCount(h_cnt);
-                    medicalInfoEntity.setDiarrheaCount(d_cnt);
-                    medicalInfoEntity.setMalariaCount(m_cnt);
-                    medicalInfoEntity.setOthersCount(o_cnt);
+                    medicalInfoEntity.setFeverCount(String.valueOf(f_cnt));
+                    medicalInfoEntity.setColdCount(String.valueOf(c_cnt));
+                    medicalInfoEntity.setHeadacheCount(String.valueOf(h_cnt));
+                    medicalInfoEntity.setDiarrheaCount(String.valueOf(d_cnt));
+                    medicalInfoEntity.setMalariaCount(String.valueOf(m_cnt));
+                    medicalInfoEntity.setOthersCount(String.valueOf(o_cnt));
                     medicalInfoEntity.setLast_medical_checkup_date(checkUpDate);
                     medicalInfoEntity.setMedicalCheckUpDoneByWhom(medicalCheckUpDoneByWhom);
                     medicalInfoEntity.setAnmWeeklyUpdated(anmWeeklyUpdated);

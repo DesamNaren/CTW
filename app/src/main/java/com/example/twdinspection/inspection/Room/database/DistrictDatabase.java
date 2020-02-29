@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.twdinspection.R;
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.CocurricularDao;
@@ -46,6 +47,9 @@ import com.example.twdinspection.inspection.source.medical_and_health.CallHealth
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
@@ -104,7 +108,7 @@ public abstract class DistrictDatabase extends RoomDatabase {
                             DistrictDatabase.class, "TWD_NEW.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
-//                            .createFromFile(new File("database/districts.json"))
+//                            .createFromFile(f)
                             .createFromAsset("database/TWD_NEW.db")
                             .build();
                 }

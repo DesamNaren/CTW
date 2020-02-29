@@ -70,6 +70,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private String officerID, instID, insTime;
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
@@ -92,18 +93,97 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.save));
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
             tdsPath = sharedPreferences.getString(AppConstants.TDS, "");
             menuPath = sharedPreferences.getString(AppConstants.MENU, "");
             officerPath = sharedPreferences.getString(AppConstants.OFFICER, "");
-            if(!TextUtils.isEmpty(tdsPath)){
+            if (!TextUtils.isEmpty(tdsPath)) {
                 file_tds = new File(tdsPath);
             }
 
             file_menu = new File(menuPath);
             file_officer = new File(officerPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String f_s = sharedPreferences.getString(AppConstants.IMAGE_STOREROOM, "");
+            String f_v = sharedPreferences.getString(AppConstants.IMAGE_VARANDAH, "");
+            String f_d = sharedPreferences.getString(AppConstants.IMAGE_DINING, "");
+            String f_do = sharedPreferences.getString(AppConstants.IMAGE_DORMITORY, "");
+            String f_m = sharedPreferences.getString(AppConstants.IMAGE_MAIN_BUILDNG, "");
+            String f_t = sharedPreferences.getString(AppConstants.IMAGE_TOILET, "");
+            String f_k = sharedPreferences.getString(AppConstants.IMAGE_KITCHEN, "");
+            String f_c = sharedPreferences.getString(AppConstants.IMAGE_CLASSROOM, "");
+            String f_p = sharedPreferences.getString(AppConstants.IMAGE_PLAY_GROUND, "");
+
+            if (!TextUtils.isEmpty(f_s)) {
+                flag_storeroom = 1;
+                file_storeroom = new File(f_s);
+                binding.ivStoreRoom.setPadding(0, 0, 0, 0);
+                binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
+            }
+            if (!TextUtils.isEmpty(f_v)) {
+                flag_varandah = 1;
+                file_varandah = new File(f_v);
+                binding.ivVarandah.setPadding(0, 0, 0, 0);
+                binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
+            }
+            if (!TextUtils.isEmpty(f_p)) {
+                flag_playGround = 1;
+                file_playGround = new File(f_p);
+                binding.ivPlaygound.setPadding(0, 0, 0, 0);
+                binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
+            }
+            if (!TextUtils.isEmpty(f_d)) {
+                flag_diningHall = 1;
+                file_diningHall = new File(f_d);
+                binding.ivDiningHall.setPadding(0, 0, 0, 0);
+                binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
+            }
+            if (!TextUtils.isEmpty(f_do)) {
+                flag_dormitory = 1;
+                file_dormitory = new File(f_d);
+                binding.ivDormitory.setPadding(0, 0, 0, 0);
+                binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
+            }
+            if (!TextUtils.isEmpty(f_m)) {
+                flag_mainBuilding = 1;
+                file_mainBulding = new File(f_m);
+                binding.ivMainBuilding.setPadding(0, 0, 0, 0);
+                binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
+            }
+            if (!TextUtils.isEmpty(f_t)) {
+                flag_toilet = 1;
+                file_toilet = new File(f_t);
+                binding.ivToilet.setPadding(0, 0, 0, 0);
+                binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
+            }
+            if (!TextUtils.isEmpty(f_k)) {
+                flag_kitchen = 1;
+                file_kitchen = new File(f_k);
+                binding.ivKitchen.setPadding(0, 0, 0, 0);
+                binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
+            }
+            if (!TextUtils.isEmpty(f_c)) {
+                flag_classroom = 1;
+                file_classroom = new File(f_c);
+                binding.ivClassroom.setPadding(0, 0, 0, 0);
+                binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
+                Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -335,7 +415,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
         MultipartBody.Part body9 = null;
-        if (file_tds!=null) {
+        if (file_tds != null) {
             RequestBody requestFile9 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
 
@@ -401,6 +481,8 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                     binding.ivStoreRoom.setPadding(0, 0, 0, 0);
                     binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_storeroom = new File(FilePath);
+                    editor.putString(AppConstants.IMAGE_STOREROOM, String.valueOf(file_storeroom));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
 
                 } else if (PIC_TYPE.equals(AppConstants.VARANDAH)) {
@@ -408,50 +490,76 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                     binding.ivVarandah.setPadding(0, 0, 0, 0);
                     binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
                     file_varandah = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_VARANDAH, String.valueOf(file_varandah));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
                 } else if (PIC_TYPE.equals(AppConstants.PLAYGROUND)) {
                     flag_playGround = 1;
                     binding.ivPlaygound.setPadding(0, 0, 0, 0);
                     binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
                     file_playGround = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_PLAY_GROUND, String.valueOf(file_playGround));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
                 } else if (PIC_TYPE.equals(AppConstants.DININGHALL)) {
                     flag_diningHall = 1;
                     binding.ivDiningHall.setPadding(0, 0, 0, 0);
                     binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
                     file_diningHall = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_DINING, String.valueOf(file_diningHall));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
                 } else if (PIC_TYPE.equals(AppConstants.DORMITORY)) {
                     flag_dormitory = 1;
                     binding.ivDormitory.setPadding(0, 0, 0, 0);
                     binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
                     file_dormitory = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_DORMITORY, String.valueOf(file_dormitory));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
                 } else if (PIC_TYPE.equals(AppConstants.MAINBUILDING)) {
                     flag_mainBuilding = 1;
                     binding.ivMainBuilding.setPadding(0, 0, 0, 0);
                     binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
                     file_mainBulding = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, String.valueOf(file_mainBulding));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
                 } else if (PIC_TYPE.equals(AppConstants.TOILET)) {
                     flag_toilet = 1;
                     binding.ivToilet.setPadding(0, 0, 0, 0);
                     binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
                     file_toilet = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_TOILET, String.valueOf(file_toilet));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
                 } else if (PIC_TYPE.equals(AppConstants.KITCHEN)) {
                     flag_kitchen = 1;
                     binding.ivKitchen.setPadding(0, 0, 0, 0);
                     binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
                     file_kitchen = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_KITCHEN, String.valueOf(file_kitchen));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
                 } else if (PIC_TYPE.equals(AppConstants.CLASSROOM)) {
                     flag_classroom = 1;
                     binding.ivClassroom.setPadding(0, 0, 0, 0);
                     binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_classroom = new File(FilePath);
+
+                    editor.putString(AppConstants.IMAGE_CLASSROOM, String.valueOf(file_classroom));
+
                     Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
                 }
+
+                editor.commit();
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
@@ -518,6 +626,16 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
         customProgressDialog.hide();
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            editor.putString(AppConstants.IMAGE_STOREROOM, "");
+            editor.putString(AppConstants.IMAGE_VARANDAH, "");
+            editor.putString(AppConstants.IMAGE_DINING, "");
+            editor.putString(AppConstants.IMAGE_DORMITORY, "");
+            editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, "");
+            editor.putString(AppConstants.IMAGE_PLAY_GROUND, "");
+            editor.putString(AppConstants.IMAGE_TOILET, "");
+            editor.putString(AppConstants.IMAGE_KITCHEN, "");
+            editor.putString(AppConstants.IMAGE_CLASSROOM, "");
+            editor.commit();
             CallSuccessAlert(schemePhotoSubmitResponse.getStatusMessage());
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(binding.root, schemePhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -594,6 +712,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
             }
         }
     };
+
     @Override
     protected void onResume() {
         super.onResume();

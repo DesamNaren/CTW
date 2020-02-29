@@ -511,12 +511,16 @@
                                     android:orientation="horizontal">
 
                                     <RadioButton
+                                        android:clickable="false"
+                                        android:checked="@{inspData.discussedWithCommittee.equalsIgnoreCase(`Yes`)}"
                                         android:id="@+id/rb_discussed_with_committee_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/yes" />
 
                                     <RadioButton
+                                        android:clickable="false"
+                                        android:checked="@{inspData.discussedWithCommittee.equalsIgnoreCase(`No`)}"
                                         android:id="@+id/rb_discussed_with_committee_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -544,12 +548,16 @@
                                     android:orientation="horizontal">
 
                                     <RadioButton
+                                        android:clickable="false"
+                                        android:checked="@{inspData.maintainingRegister.equalsIgnoreCase(`Yes`)}"
                                         android:id="@+id/rb_maintaining_register_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/yes" />
 
                                     <RadioButton
+                                        android:clickable="false"
+                                        android:checked="@{inspData.maintainingRegister.equalsIgnoreCase(`No`)}"
                                         android:id="@+id/rb_maintaining_register_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"

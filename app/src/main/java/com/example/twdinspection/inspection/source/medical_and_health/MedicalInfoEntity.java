@@ -18,12 +18,12 @@ public class MedicalInfoEntity {
     private String officer_id;
     private String inspection_time;
     private String institute_id;
-    private int feverCount;
-    private int coldCount;
-    private int headacheCount;
-    private int diarrheaCount;
-    private int malariaCount;
-    private int othersCount;
+    private String feverCount;
+    private String coldCount;
+    private String headacheCount;
+    private String diarrheaCount;
+    private String malariaCount;
+    private String othersCount;
     private String last_medical_checkup_date;
     private String recorded_in_register;
     private String medicalCheckUpDoneByWhom;
@@ -84,51 +84,51 @@ public class MedicalInfoEntity {
         this.institute_id = institute_id;
     }
 
-    public int getFeverCount() {
+    public String getFeverCount() {
         return feverCount;
     }
 
-    public void setFeverCount(int feverCount) {
+    public void setFeverCount(String feverCount) {
         this.feverCount = feverCount;
     }
 
-    public int getColdCount() {
+    public String getColdCount() {
         return coldCount;
     }
 
-    public void setColdCount(int coldCount) {
+    public void setColdCount(String coldCount) {
         this.coldCount = coldCount;
     }
 
-    public int getHeadacheCount() {
+    public String getHeadacheCount() {
         return headacheCount;
     }
 
-    public void setHeadacheCount(int headacheCount) {
+    public void setHeadacheCount(String headacheCount) {
         this.headacheCount = headacheCount;
     }
 
-    public int getDiarrheaCount() {
+    public String getDiarrheaCount() {
         return diarrheaCount;
     }
 
-    public void setDiarrheaCount(int diarrheaCount) {
+    public void setDiarrheaCount(String diarrheaCount) {
         this.diarrheaCount = diarrheaCount;
     }
 
-    public int getMalariaCount() {
+    public String getMalariaCount() {
         return malariaCount;
     }
 
-    public void setMalariaCount(int malariaCount) {
+    public void setMalariaCount(String malariaCount) {
         this.malariaCount = malariaCount;
     }
 
-    public int getOthersCount() {
+    public String getOthersCount() {
         return othersCount;
     }
 
-    public void setOthersCount(int othersCount) {
+    public void setOthersCount(String othersCount) {
         this.othersCount = othersCount;
     }
 

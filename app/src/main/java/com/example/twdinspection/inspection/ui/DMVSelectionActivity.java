@@ -33,7 +33,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
     int selectedDistId, selectedManId, selectedVilId;
-    String selectedInstId, selectedManName, selInstName, selectedVilName, selectedAddress;
+    String selectedInstId, selectedManName, selInstName, selectedVilName,selectedDistName, selectedAddress;
     String lat, lng, address;
     ArrayList<String> instNames;
     SharedPreferences sharedPreferences;
@@ -109,7 +109,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     editor.putInt(AppConstants.VILL_ID, selectedVilId);
                     editor.putString(AppConstants.INST_ID, selectedInstId);
                     editor.putString(AppConstants.INST_NAME, selInstName);
+                    editor.putString(AppConstants.DIST_NAME, selectedDistName);
                     editor.putString(AppConstants.MAN_NAME, selectedManName);
+                    editor.putString(AppConstants.VIL_NAME, selectedVilName);
                     editor.putString(AppConstants.LAT, lat);
                     editor.putString(AppConstants.LNG, lng);
                     editor.putString(AppConstants.ADDRESS, address);
@@ -155,6 +157,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                     @Override
                     public void onChanged(String str) {
                         if (str != null) {
+                            selectedDistName = dmvSelectionActivityBinding.spDist.getSelectedItem().toString();
                             selectedDistId = Integer.valueOf(str);
 
                             viewModel.getInstitutes(selectedDistId).observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {

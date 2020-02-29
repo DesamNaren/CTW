@@ -455,6 +455,8 @@
 
 
                                 <RadioButton
+                                    android:checked="@{inspData.inverterWorkingStatus.equalsIgnoreCase(`Good`)}"
+                                    android:clickable="false"
                                     android:id="@+id/inverter_working_status_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -462,6 +464,8 @@
                                     android:text="@string/good" />
 
                                 <RadioButton
+                                    android:checked="@{inspData.inverterWorkingStatus.equalsIgnoreCase(`Bad`)}"
+                                    android:clickable="false"
                                     android:id="@+id/inverter_working_status_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -2032,6 +2036,7 @@
                     android:background="@color/black" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -2115,6 +2120,8 @@
                             android:orientation="vertical">
 
                             <CheckBox
+                                android:clickable="false"
+                                android:checked="@{inspData.addClassRequired.equalsIgnoreCase(`Yes`)}"
                                 android:id="@+id/add_class_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -2126,11 +2133,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="gone"
+                                android:visibility="@{inspData.addClassRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:focusableInTouchMode="false"
+                                    android:text="@{inspData.addClassRequiredCnt}"
                                     android:id="@+id/add_class_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -2148,6 +2157,8 @@
                             android:orientation="vertical">
 
                             <CheckBox
+                                android:clickable="false"
+                                android:checked="@{inspData.addDiningRequired.equalsIgnoreCase(`Yes`)}"
                                 android:id="@+id/add_din_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -2160,11 +2171,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="gone"
+                                android:visibility="@{inspData.addDiningRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:focusableInTouchMode="false"
+                                    android:text="@{inspData.addDiningRequiredCnt}"
                                     android:id="@+id/add_din_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -2183,6 +2196,8 @@
                             android:orientation="vertical">
 
                             <CheckBox
+                                android:clickable="false"
+                                android:checked="@{inspData.addDormitoryRequired.equalsIgnoreCase(`Yes`)}"
                                 android:id="@+id/add_dom_cb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -2195,11 +2210,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="gone"
+                                android:visibility="@{inspData.addDormitoryRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:focusableInTouchMode="false"
+                                    android:text="@{inspData.addDormitoryRequiredCnt}"
                                     android:id="@+id/add_dom_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

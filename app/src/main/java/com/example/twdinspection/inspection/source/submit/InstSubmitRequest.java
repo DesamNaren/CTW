@@ -27,6 +27,46 @@ public class InstSubmitRequest {
 
     private String village_id;
 
+    private String institute_name;
+
+    private String dist_name;
+
+    private String mandal_name;
+
+    private String village_name;
+
+    public String getInstitute_name() {
+        return institute_name;
+    }
+
+    public void setInstitute_name(String institute_name) {
+        this.institute_name = institute_name;
+    }
+
+    public String getDist_name() {
+        return dist_name;
+    }
+
+    public void setDist_name(String dist_name) {
+        this.dist_name = dist_name;
+    }
+
+    public String getMandal_name() {
+        return mandal_name;
+    }
+
+    public void setMandal_name(String mandal_name) {
+        this.mandal_name = mandal_name;
+    }
+
+    public String getVillage_name() {
+        return village_name;
+    }
+
+    public void setVillage_name(String village_name) {
+        this.village_name = village_name;
+    }
+
     GeneralInfoEntity general_info;
     List<StudAttendInfoEntity> student_attendence_info;
     List<StaffAttendanceEntity> staff_attendence_info;

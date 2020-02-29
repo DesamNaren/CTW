@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -20,14 +18,14 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/action_bar_layout"
-            android:id="@+id/action_bar"/>
+            android:id="@+id/action_bar"
+            layout="@layout/action_bar_layout" />
 
         <LinearLayout
-            android:layout_below="@+id/action_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_next"
+            android:layout_below="@+id/action_bar"
             android:background="@color/grey_light"
             android:orientation="vertical">
 
@@ -87,7 +85,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp" />
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.mandalName}" />
 
 
                         </LinearLayout>
@@ -128,7 +127,8 @@
                                 android:id="@+id/inst_name_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp" />
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.instName}" />
                         </LinearLayout>
 
 
@@ -292,44 +292,57 @@
                                     android:orientation="vertical">
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Out of station`)}"
                                         android:id="@+id/rb_out_of_station"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/out_of_station" />
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within campus`)}"
                                         android:id="@+id/rb_within_campus"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/within_campus" />
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within Mandal`)}"
                                         android:id="@+id/rb_within_mandal"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/within_mandal" />
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within District`)}"
                                         android:id="@+id/rb_within_district"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/within_district" />
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`ITDA level`)}"
                                         android:id="@+id/rb_itda_level"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/itda_level" />
 
                                     <RadioButton
+                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`State Level`)}"
+
                                         android:id="@+id/rb_state_level"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/state_level" />
 
@@ -342,7 +355,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.capturetype.equalsIgnoreCase(`Out of station`)? View.VISIBLE : View.GONE}">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -362,6 +375,8 @@
                                         android:id="@+id/rb_yes_movement_register_entry"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.movementRegisterEntry.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -369,6 +384,8 @@
                                         android:id="@+id/rb_no_movement_register_entry"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.movementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -511,9 +528,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/dimen_5dp"
-                        android:visibility="visible">
-
+                        android:padding="@dimen/dimen_5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -606,7 +621,7 @@
                                         android:id="@+id/rb_in_staff_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_staff_quarters" />
@@ -614,18 +629,18 @@
                                     <RadioButton
                                         android:id="@+id/rb_in_school_building"
                                         android:layout_width="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`in School Building`)}"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_school_building" />
 
                                     <RadioButton
                                         android:id="@+id/rb_pvt_building"
                                         android:layout_width="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`Pvt. Building`)}"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/pvt_building" />
 

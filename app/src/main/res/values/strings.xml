@@ -699,5 +699,6 @@
     <string name="tab_incharge">Enter name of the tab incharge</string>
     <string name="tab_mob_num">Enter tab incharge mobile no</string>
     <string name="valid_incharge_mob_num">Enter valid tab incharge mobile no</string>
+    <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
 
 </resources>

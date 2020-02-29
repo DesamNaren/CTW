@@ -25,7 +25,7 @@ public class StudAttendInfoEntity {
     private String class_type;
 
     @ColumnInfo()
-    private int class_id;
+    private String class_id;
 
     @ColumnInfo()
     private String total_students;
@@ -43,7 +43,7 @@ public class StudAttendInfoEntity {
     @ColumnInfo()
     private String variance;
 
-    public StudAttendInfoEntity(String officer_id, int flag_completed, String institute_id, String class_type, int class_id, String total_students) {
+    public StudAttendInfoEntity(String officer_id, int flag_completed, String institute_id, String class_type, String class_id, String total_students) {
         this.officer_id = officer_id;
         this.flag_completed = flag_completed;
         this.institute_id = institute_id;
@@ -141,11 +141,11 @@ public class StudAttendInfoEntity {
         this.r_id = r_id;
     }
 
-    public int getClass_id() {
+    public String getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(int class_id) {
+    public void setClass_id(String class_id) {
         this.class_id = class_id;
     }
 }

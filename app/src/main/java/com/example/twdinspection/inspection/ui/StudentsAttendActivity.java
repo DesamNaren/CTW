@@ -93,7 +93,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                             List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
                             if (masterClassInfos != null && masterClassInfos.size() > 0) {
                                 for (int i = 0; i < masterClassInfos.size(); i++) {
-                                    StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0, instId, masterClassInfos.get(i).getType(), masterClassInfos.get(i).getClassId(), String.valueOf(masterClassInfos.get(i).getStudentCount()));
+                                    StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0, instId, masterClassInfos.get(i).getType(), String.valueOf(masterClassInfos.get(i).getClassId()), String.valueOf(masterClassInfos.get(i).getStudentCount()));
                                     studAttendInfoEntityListMain.add(studAttendInfoEntity);
                                 }
                             }

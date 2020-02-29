@@ -32,6 +32,8 @@ public class AppConstants {
     public static final String INST_NAME = "INST_NAME";
     public static final String BEN_DETAIL = "BEN_DETAIL";
     public static final String MAN_NAME = "MAN_NAME";
+    public static final String DIST_NAME = "DIST_NAME";
+    public static final String VIL_NAME = "VIL_NAME";
     public static final String PARTICIPATED = "Participated";
     public static final String WIN = "Win";
     public static final String CLASSROOM ="Classroom";
@@ -82,6 +84,15 @@ public class AppConstants {
 
 
     public static final String SCHEME_REP_DATA = "SCHEME_REP_DATA";
+    public static final String IMAGE_STOREROOM = "IMAGE_STOREROOM";
+    public static final String IMAGE_VARANDAH = "IMAGE_VARANDAH";
+    public static final String IMAGE_DINING = "IMAGE_DINING";
+    public static final String IMAGE_DORMITORY = "IMAGE_DORMITORY";
+    public static final String IMAGE_MAIN_BUILDNG = "IMAGE_MAIN_BUILDNG";
+    public static final String IMAGE_TOILET = "IMAGE_TOILET";
+    public static final String IMAGE_PLAY_GROUND = "IMAGE_PLAY_GROUND";
+    public static final String IMAGE_KITCHEN = "IMAGE_KITCHEN";
+    public static final String IMAGE_CLASSROOM = "IMAGE_CLASSROOM";
     public static String stockData="STOCK_DATA";
     public static String essComm="essComm";
     public static String dailyReq="dailyReq";

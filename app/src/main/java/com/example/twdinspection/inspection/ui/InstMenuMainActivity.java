@@ -15,10 +15,12 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -62,6 +64,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officer_id, dist_id, mand_id, vill_id;
+    String instName,distName, mandalName, villageName;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false, staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false, academicFlag = false, cocurricularFlag = false, entitlementsFlag = false, regFlag = false, generalCommentsFlag = false;
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
@@ -80,11 +83,25 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
 
+
+        binding.appbar.header.ivChange.setVisibility(View.VISIBLE);
+        binding.appbar.header.ivChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.customChangeAppAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.change_insp), instMainViewModel);
+            }
+        });
+
         instMainViewModel = new InstMainViewModel(binding, getApplication(), InstMenuMainActivity.this);
         binding.setViewmodel(instMainViewModel);
 
         arrayListLiveData = instMainViewModel.getAllSections();
         sharedPreferences = TWDApplication.get(this).getPreferences();
+        instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
+        distName = sharedPreferences.getString(AppConstants.DIST_NAME, "");
+        mandalName = sharedPreferences.getString(AppConstants.MAN_NAME, "");
+        villageName = sharedPreferences.getString(AppConstants.VIL_NAME, "");
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officer_id = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
@@ -369,6 +386,11 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             instSubmitRequest.setDist_id(dist_id);
             instSubmitRequest.setMandal_id(mand_id);
             instSubmitRequest.setVillage_id(vill_id);
+
+            instSubmitRequest.setInstitute_name(instName);
+            instSubmitRequest.setDist_name(distName);
+            instSubmitRequest.setMandal_name(mandalName);
+            instSubmitRequest.setVillage_name(villageName);
             submitFlag = true;
 
             customProgressDialog.show();
@@ -495,6 +517,5 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             }
         }
     };
-
 
 }

@@ -231,6 +231,7 @@
                         android:layout_height="wrap_content">
 
                         <com.example.twdinspection.common.custom.CustomFontEditText
+                            android:text="@{staff.lastWeekTeacherAttended}"
                             android:enabled="false"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

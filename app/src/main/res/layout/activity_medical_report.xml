@@ -93,11 +93,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:focusableInTouchMode="false"
                                     android:id="@+id/et_fever"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/fever"
-                                    android:enabled="false"
                                     android:text="@{medical.feverCount}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -141,7 +141,7 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
                                     android:text="@{medical.coldCount}"
                                     android:singleLine="true" />
 
@@ -181,7 +181,7 @@
                                     android:hint="@string/headache"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
                                     android:text="@{medical.headacheCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
@@ -230,7 +230,7 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
                                     android:text="@{medical.diarrheaCount}"
                                     android:singleLine="true" />
 
@@ -270,7 +270,7 @@
                                     android:hint="@string/malaria"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
                                     android:text="@{medical.malariaCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
@@ -311,7 +311,7 @@
                                     android:hint="@string/others"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:enabled="false"
+                                    android:focusableInTouchMode="false"
                                     android:text="@{medical.othersCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />

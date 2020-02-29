@@ -5,100 +5,116 @@ import com.google.gson.annotations.SerializedName;
 
 public class Registers {
 
-    @SerializedName("CL_account")
+    @SerializedName("visit_book")
     @Expose
-    private String cLAccount;
+    private String visitBook;
+    @SerializedName("paybill_reg")
+    @Expose
+    private String paybillReg;
+    @SerializedName("teacher_movement")
+    @Expose
+    private String teacherMovement;
     @SerializedName("TA_bill")
     @Expose
     private String tABill;
-    @SerializedName("acquaintance_dress")
+    @SerializedName("institute_id")
     @Expose
-    private String acquaintanceDress;
-    @SerializedName("id")
+    private String instituteId;
+    @SerializedName("budget_watch")
     @Expose
-    private String id;
+    private String budgetWatch;
+    @SerializedName("permanent_article")
+    @Expose
+    private String permanentArticle;
+    @SerializedName("boarder_sign_reg")
+    @Expose
+    private String boarderSignReg;
     @SerializedName("acquaintance_reg")
     @Expose
     private String acquaintanceReg;
+    @SerializedName("treasury_bill")
+    @Expose
+    private String treasuryBill;
+    @SerializedName("daily_movement")
+    @Expose
+    private String dailyMovement;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("staff_order_book")
+    @Expose
+    private String staffOrderBook;
+    @SerializedName("daily_menu_reg")
+    @Expose
+    private String dailyMenuReg;
     @SerializedName("acquiantance_cosmetic")
     @Expose
     private String acquiantanceCosmetic;
     @SerializedName("admission_reg")
     @Expose
     private String admissionReg;
-    @SerializedName("attend_staff_reg")
-    @Expose
-    private String attendStaffReg;
-    @SerializedName("attendance_reg")
-    @Expose
-    private String attendanceReg;
-    @SerializedName("boarder_movement_reg")
-    @Expose
-    private String boarderMovementReg;
-    @SerializedName("boarder_sign_reg")
-    @Expose
-    private String boarderSignReg;
-    @SerializedName("budget_watch")
-    @Expose
-    private String budgetWatch;
-    @SerializedName("cash_book_reg")
-    @Expose
-    private String cashBookReg;
     @SerializedName("contingent_bill")
     @Expose
     private String contingentBill;
-    @SerializedName("daily_menu_reg")
-    @Expose
-    private String dailyMenuReg;
-    @SerializedName("daily_movement")
-    @Expose
-    private String dailyMovement;
-    @SerializedName("daily_purchase_reg")
-    @Expose
-    private String dailyPurchaseReg;
-    @SerializedName("inspection_reg")
-    @Expose
-    private String inspectionReg;
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
-    @SerializedName("institute_id")
+    @SerializedName("inspection_reg")
     @Expose
-    private String instituteId;
+    private String inspectionReg;
+    @SerializedName("attendance_reg")
+    @Expose
+    private String attendanceReg;
+    @SerializedName("acquaintance_dress")
+    @Expose
+    private String acquaintanceDress;
     @SerializedName("officer_id")
     @Expose
     private String officerId;
     @SerializedName("parents_meeting")
     @Expose
     private String parentsMeeting;
-    @SerializedName("paybill_reg")
-    @Expose
-    private String paybillReg;
-    @SerializedName("permanent_article")
-    @Expose
-    private String permanentArticle;
-    @SerializedName("staff_order_book")
-    @Expose
-    private String staffOrderBook;
     @SerializedName("stock_issue_prov")
     @Expose
     private String stockIssueProv;
-    @SerializedName("teacher_movement")
+    @SerializedName("daily_purchase_reg")
     @Expose
-    private String teacherMovement;
-    @SerializedName("treasury_bill")
+    private String dailyPurchaseReg;
+    @SerializedName("attend_staff_reg")
     @Expose
-    private String treasuryBill;
-    @SerializedName("visit_book")
+    private String attendStaffReg;
+    @SerializedName("CL_account")
     @Expose
-    private String visitBook;
+    private String cLAccount;
+    @SerializedName("cash_book_reg")
+    @Expose
+    private String cashBookReg;
+    @SerializedName("boarder_movement_reg")
+    @Expose
+    private String boarderMovementReg;
 
-    public String getCLAccount() {
-        return cLAccount;
+    public String getVisitBook() {
+        return visitBook;
     }
 
-    public void setCLAccount(String cLAccount) {
-        this.cLAccount = cLAccount;
+    public void setVisitBook(String visitBook) {
+        this.visitBook = visitBook;
+    }
+
+    public String getPaybillReg() {
+        return paybillReg;
+    }
+
+    public void setPaybillReg(String paybillReg) {
+        this.paybillReg = paybillReg;
+    }
+
+    public String getTeacherMovement() {
+        return teacherMovement;
+    }
+
+    public void setTeacherMovement(String teacherMovement) {
+        this.teacherMovement = teacherMovement;
     }
 
     public String getTABill() {
@@ -109,12 +125,60 @@ public class Registers {
         this.tABill = tABill;
     }
 
-    public String getAcquaintanceDress() {
-        return acquaintanceDress;
+    public String getInstituteId() {
+        return instituteId;
     }
 
-    public void setAcquaintanceDress(String acquaintanceDress) {
-        this.acquaintanceDress = acquaintanceDress;
+    public void setInstituteId(String instituteId) {
+        this.instituteId = instituteId;
+    }
+
+    public String getBudgetWatch() {
+        return budgetWatch;
+    }
+
+    public void setBudgetWatch(String budgetWatch) {
+        this.budgetWatch = budgetWatch;
+    }
+
+    public String getPermanentArticle() {
+        return permanentArticle;
+    }
+
+    public void setPermanentArticle(String permanentArticle) {
+        this.permanentArticle = permanentArticle;
+    }
+
+    public String getBoarderSignReg() {
+        return boarderSignReg;
+    }
+
+    public void setBoarderSignReg(String boarderSignReg) {
+        this.boarderSignReg = boarderSignReg;
+    }
+
+    public String getAcquaintanceReg() {
+        return acquaintanceReg;
+    }
+
+    public void setAcquaintanceReg(String acquaintanceReg) {
+        this.acquaintanceReg = acquaintanceReg;
+    }
+
+    public String getTreasuryBill() {
+        return treasuryBill;
+    }
+
+    public void setTreasuryBill(String treasuryBill) {
+        this.treasuryBill = treasuryBill;
+    }
+
+    public String getDailyMovement() {
+        return dailyMovement;
+    }
+
+    public void setDailyMovement(String dailyMovement) {
+        this.dailyMovement = dailyMovement;
     }
 
     public String getId() {
@@ -125,12 +189,20 @@ public class Registers {
         this.id = id;
     }
 
-    public String getAcquaintanceReg() {
-        return acquaintanceReg;
+    public String getStaffOrderBook() {
+        return staffOrderBook;
     }
 
-    public void setAcquaintanceReg(String acquaintanceReg) {
-        this.acquaintanceReg = acquaintanceReg;
+    public void setStaffOrderBook(String staffOrderBook) {
+        this.staffOrderBook = staffOrderBook;
+    }
+
+    public String getDailyMenuReg() {
+        return dailyMenuReg;
+    }
+
+    public void setDailyMenuReg(String dailyMenuReg) {
+        this.dailyMenuReg = dailyMenuReg;
     }
 
     public String getAcquiantanceCosmetic() {
@@ -149,92 +221,12 @@ public class Registers {
         this.admissionReg = admissionReg;
     }
 
-    public String getAttendStaffReg() {
-        return attendStaffReg;
-    }
-
-    public void setAttendStaffReg(String attendStaffReg) {
-        this.attendStaffReg = attendStaffReg;
-    }
-
-    public String getAttendanceReg() {
-        return attendanceReg;
-    }
-
-    public void setAttendanceReg(String attendanceReg) {
-        this.attendanceReg = attendanceReg;
-    }
-
-    public String getBoarderMovementReg() {
-        return boarderMovementReg;
-    }
-
-    public void setBoarderMovementReg(String boarderMovementReg) {
-        this.boarderMovementReg = boarderMovementReg;
-    }
-
-    public String getBoarderSignReg() {
-        return boarderSignReg;
-    }
-
-    public void setBoarderSignReg(String boarderSignReg) {
-        this.boarderSignReg = boarderSignReg;
-    }
-
-    public String getBudgetWatch() {
-        return budgetWatch;
-    }
-
-    public void setBudgetWatch(String budgetWatch) {
-        this.budgetWatch = budgetWatch;
-    }
-
-    public String getCashBookReg() {
-        return cashBookReg;
-    }
-
-    public void setCashBookReg(String cashBookReg) {
-        this.cashBookReg = cashBookReg;
-    }
-
     public String getContingentBill() {
         return contingentBill;
     }
 
     public void setContingentBill(String contingentBill) {
         this.contingentBill = contingentBill;
-    }
-
-    public String getDailyMenuReg() {
-        return dailyMenuReg;
-    }
-
-    public void setDailyMenuReg(String dailyMenuReg) {
-        this.dailyMenuReg = dailyMenuReg;
-    }
-
-    public String getDailyMovement() {
-        return dailyMovement;
-    }
-
-    public void setDailyMovement(String dailyMovement) {
-        this.dailyMovement = dailyMovement;
-    }
-
-    public String getDailyPurchaseReg() {
-        return dailyPurchaseReg;
-    }
-
-    public void setDailyPurchaseReg(String dailyPurchaseReg) {
-        this.dailyPurchaseReg = dailyPurchaseReg;
-    }
-
-    public String getInspectionReg() {
-        return inspectionReg;
-    }
-
-    public void setInspectionReg(String inspectionReg) {
-        this.inspectionReg = inspectionReg;
     }
 
     public String getInspectionTime() {
@@ -245,12 +237,28 @@ public class Registers {
         this.inspectionTime = inspectionTime;
     }
 
-    public String getInstituteId() {
-        return instituteId;
+    public String getInspectionReg() {
+        return inspectionReg;
     }
 
-    public void setInstituteId(String instituteId) {
-        this.instituteId = instituteId;
+    public void setInspectionReg(String inspectionReg) {
+        this.inspectionReg = inspectionReg;
+    }
+
+    public String getAttendanceReg() {
+        return attendanceReg;
+    }
+
+    public void setAttendanceReg(String attendanceReg) {
+        this.attendanceReg = attendanceReg;
+    }
+
+    public String getAcquaintanceDress() {
+        return acquaintanceDress;
+    }
+
+    public void setAcquaintanceDress(String acquaintanceDress) {
+        this.acquaintanceDress = acquaintanceDress;
     }
 
     public String getOfficerId() {
@@ -269,30 +277,6 @@ public class Registers {
         this.parentsMeeting = parentsMeeting;
     }
 
-    public String getPaybillReg() {
-        return paybillReg;
-    }
-
-    public void setPaybillReg(String paybillReg) {
-        this.paybillReg = paybillReg;
-    }
-
-    public String getPermanentArticle() {
-        return permanentArticle;
-    }
-
-    public void setPermanentArticle(String permanentArticle) {
-        this.permanentArticle = permanentArticle;
-    }
-
-    public String getStaffOrderBook() {
-        return staffOrderBook;
-    }
-
-    public void setStaffOrderBook(String staffOrderBook) {
-        this.staffOrderBook = staffOrderBook;
-    }
-
     public String getStockIssueProv() {
         return stockIssueProv;
     }
@@ -301,27 +285,43 @@ public class Registers {
         this.stockIssueProv = stockIssueProv;
     }
 
-    public String getTeacherMovement() {
-        return teacherMovement;
+    public String getDailyPurchaseReg() {
+        return dailyPurchaseReg;
     }
 
-    public void setTeacherMovement(String teacherMovement) {
-        this.teacherMovement = teacherMovement;
+    public void setDailyPurchaseReg(String dailyPurchaseReg) {
+        this.dailyPurchaseReg = dailyPurchaseReg;
     }
 
-    public String getTreasuryBill() {
-        return treasuryBill;
+    public String getAttendStaffReg() {
+        return attendStaffReg;
     }
 
-    public void setTreasuryBill(String treasuryBill) {
-        this.treasuryBill = treasuryBill;
+    public void setAttendStaffReg(String attendStaffReg) {
+        this.attendStaffReg = attendStaffReg;
     }
 
-    public String getVisitBook() {
-        return visitBook;
+    public String getCLAccount() {
+        return cLAccount;
     }
 
-    public void setVisitBook(String visitBook) {
-        this.visitBook = visitBook;
+    public void setCLAccount(String cLAccount) {
+        this.cLAccount = cLAccount;
+    }
+
+    public String getCashBookReg() {
+        return cashBookReg;
+    }
+
+    public void setCashBookReg(String cashBookReg) {
+        this.cashBookReg = cashBookReg;
+    }
+
+    public String getBoarderMovementReg() {
+        return boarderMovementReg;
+    }
+
+    public void setBoarderMovementReg(String boarderMovementReg) {
+        this.boarderMovementReg = boarderMovementReg;
     }
 }
