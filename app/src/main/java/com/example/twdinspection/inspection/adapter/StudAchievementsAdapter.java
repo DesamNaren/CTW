@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
 import com.example.twdinspection.databinding.CallHealthRowBinding;
 import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
@@ -25,9 +26,11 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
     private Context context;
     private StudAchievementsInterface studAchievementsInterface;
     private List<StudAchievementEntity> studAchievementEntities;
-    public StudAchievementsAdapter(Context context, List<StudAchievementEntity> studAchievementEntities) {
+    private String fromClass;
+    public StudAchievementsAdapter(Context context, List<StudAchievementEntity> studAchievementEntities, String fromClass) {
         this.context = context;
         this.studAchievementEntities = studAchievementEntities;
+        this.fromClass = fromClass;
         try {
             studAchievementsInterface=(StudAchievementsInterface) context;
         }catch (Exception e){
@@ -41,6 +44,11 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
         AdapterCocurricularStudBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_cocurricular_stud, parent, false);
+        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+            listItemBinding.ivDelete.setVisibility(View.GONE);
+        }else {
+            listItemBinding.ivDelete.setVisibility(View.VISIBLE);
+        }
 
         return new StudAchievementsAdapter.ItemHolder(listItemBinding);
     }

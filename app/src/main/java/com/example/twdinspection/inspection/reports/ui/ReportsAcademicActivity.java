@@ -11,11 +11,8 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportAcademicBinding;
-import com.example.twdinspection.databinding.ActivityReportGeneralInfoBinding;
-import com.example.twdinspection.databinding.ActivityReportInfrastructureBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.google.gson.Gson;
 
 public class ReportsAcademicActivity extends BaseActivity {
@@ -56,7 +53,7 @@ public class ReportsAcademicActivity extends BaseActivity {
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReportsAcademicActivity.this, ReportsCoCircurricularActivity.class));
+                startActivity(new Intent(ReportsAcademicActivity.this, ReportCoCarricularActivity.class));
             }
         });
     }

@@ -17,13 +17,17 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
+import com.example.twdinspection.inspection.adapter.PlantsInfoAdapter;
 import com.example.twdinspection.inspection.adapter.StudAchievementsAdapter;
 import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
+import com.example.twdinspection.inspection.reports.source.InspReportData;
+import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+    private String fromClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +54,45 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
         binding.setViewModel(viewModel);
         instMainViewModel=new InstMainViewModel(getApplication());
 
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        Gson gson = new Gson();
+
+        fromClass = getIntent().getStringExtra(AppConstants.FROM_CLASS);
+        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.COCAR)){
+            calCoCir();
+        }else if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+            String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
+            InspReportData reportData = gson.fromJson(data, InspReportData.class);
+            if(reportData!=null && reportData.getCoCurricularInfo()!=null) {
+                List<StudAchievementEntity> studAchievementEntities = reportData.getCoCurricularInfo().getStudAchievementEntities();
+                if (studAchievementEntities != null && studAchievementEntities.size() > 0) {
+                    binding.noDataTv.setVisibility(View.GONE);
+                    binding.callRv.setVisibility(View.VISIBLE);
+                    studAchievementsAdapter = new StudAchievementsAdapter(CocurricularStudAchActivity.this, studAchievementEntities, fromClass);
+                    binding.callRv.setLayoutManager(new LinearLayoutManager(CocurricularStudAchActivity.this));
+                    binding.callRv.setAdapter(studAchievementsAdapter);
+                } else {
+                    binding.noDataTv.setVisibility(View.VISIBLE);
+                    binding.callRv.setVisibility(View.GONE);
+                }
+            } else {
+                binding.noDataTv.setVisibility(View.VISIBLE);
+                binding.callRv.setVisibility(View.GONE);
+            }
+        }
+
+
+
+    }
+
+    private void calCoCir() {
         viewModel.getStudAchievementsData().observe(CocurricularStudAchActivity.this, new Observer<List<StudAchievementEntity>>() {
             @Override
             public void onChanged(List<StudAchievementEntity> studAchievementEntities) {
                 if (studAchievementEntities != null && studAchievementEntities.size() > 0) {
                     binding.noDataTv.setVisibility(View.GONE);
                     binding.callRv.setVisibility(View.VISIBLE);
-                    studAchievementsAdapter = new StudAchievementsAdapter(CocurricularStudAchActivity.this, studAchievementEntities);
+                    studAchievementsAdapter = new StudAchievementsAdapter(CocurricularStudAchActivity.this, studAchievementEntities, fromClass);
                     binding.callRv.setLayoutManager(new LinearLayoutManager(CocurricularStudAchActivity.this));
                     binding.callRv.setAdapter(studAchievementsAdapter);
                 } else {
@@ -64,7 +101,6 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
                 }
             }
         });
-
     }
 
     @Override

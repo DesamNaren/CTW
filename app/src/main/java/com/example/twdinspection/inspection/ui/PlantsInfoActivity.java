@@ -21,6 +21,8 @@ import com.example.twdinspection.inspection.adapter.PlantsInfoAdapter;
 import com.example.twdinspection.inspection.adapter.StudAchievementsAdapter;
 import com.example.twdinspection.inspection.interfaces.PlantsInfoInterface;
 import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
+import com.example.twdinspection.inspection.reports.source.CoCirPlantsInfo;
+import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -29,6 +31,7 @@ import com.example.twdinspection.inspection.viewmodel.PlantsInfoViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAchViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -40,6 +43,8 @@ public class PlantsInfoActivity extends AppCompatActivity implements PlantsInfoI
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+    private String fromClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +60,35 @@ public class PlantsInfoActivity extends AppCompatActivity implements PlantsInfoI
                 new PlantsInfoCustomViewModel(binding, this, getApplication())).get(PlantsInfoViewModel.class);
         binding.setViewModel(viewModel);
 
-        viewModel.getPlantsData().observe(PlantsInfoActivity.this, new Observer<List<PlantsEntity>>() {
-            @Override
-            public void onChanged(List<PlantsEntity> plantsEntities) {
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        Gson gson = new Gson();
+
+
+         fromClass = getIntent().getStringExtra(AppConstants.FROM_CLASS);
+        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.COCAR)){
+            calCoCir();
+        }else if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+            String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
+            InspReportData reportData = gson.fromJson(data, InspReportData.class);
+            if(reportData!=null && reportData.getCoCurricularInfo()!=null) {
+                List<PlantsEntity> plantsEntities = reportData.getCoCurricularInfo().getPlantsEntities();
                 if (plantsEntities != null && plantsEntities.size() > 0) {
                     binding.noDataTv.setVisibility(View.GONE);
                     binding.callRv.setVisibility(View.VISIBLE);
-                    plantsInfoAdapter = new PlantsInfoAdapter(PlantsInfoActivity.this, plantsEntities);
+                    plantsInfoAdapter = new PlantsInfoAdapter(PlantsInfoActivity.this, plantsEntities, fromClass);
                     binding.callRv.setLayoutManager(new LinearLayoutManager(PlantsInfoActivity.this));
                     binding.callRv.setAdapter(plantsInfoAdapter);
                 } else {
                     binding.noDataTv.setVisibility(View.VISIBLE);
                     binding.callRv.setVisibility(View.GONE);
                 }
+            } else {
+                binding.noDataTv.setVisibility(View.VISIBLE);
+                binding.callRv.setVisibility(View.GONE);
             }
-        });
+        }
+
+
 
     }
     private void showBottomSheetSnackBar(String str) {
@@ -121,5 +140,23 @@ public class PlantsInfoActivity extends AppCompatActivity implements PlantsInfoI
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(AppConstants.CACHE_DATE, cacheDate);
         editor.commit();
+    }
+
+    private void calCoCir(){
+        viewModel.getPlantsData().observe(PlantsInfoActivity.this, new Observer<List<PlantsEntity>>() {
+            @Override
+            public void onChanged(List<PlantsEntity> plantsEntities) {
+                if (plantsEntities != null && plantsEntities.size() > 0) {
+                    binding.noDataTv.setVisibility(View.GONE);
+                    binding.callRv.setVisibility(View.VISIBLE);
+                    plantsInfoAdapter = new PlantsInfoAdapter(PlantsInfoActivity.this, plantsEntities, fromClass);
+                    binding.callRv.setLayoutManager(new LinearLayoutManager(PlantsInfoActivity.this));
+                    binding.callRv.setAdapter(plantsInfoAdapter);
+                } else {
+                    binding.noDataTv.setVisibility(View.VISIBLE);
+                    binding.callRv.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

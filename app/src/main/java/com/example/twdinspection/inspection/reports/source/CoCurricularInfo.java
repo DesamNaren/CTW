@@ -1,5 +1,7 @@
 package com.example.twdinspection.inspection.reports.source;
 
+import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
+import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,177 +9,154 @@ import java.util.List;
 
 public class CoCurricularInfo {
 
-    @SerializedName("game_sport_room_avail")
+    @SerializedName("smc_ele_status")
     @Expose
-    private String gameSportRoomAvail;
-    @SerializedName("ground_level_status")
+    private String smcEleStatus;
+    @SerializedName("stock_entry_register")
     @Expose
-    private String groundLevelStatus;
-    @SerializedName("harita_haram_status")
-    @Expose
-    private String haritaHaramStatus;
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("inspection_time")
-    @Expose
-    private String inspectionTime;
-    @SerializedName("institute_id")
-    @Expose
-    private String instituteId;
-    @SerializedName("kitchen_garden_in_charge_contact")
-    @Expose
-    private String kitchenGardenInChargeContact;
-    @SerializedName("kitchen_garden_in_charge_name")
-    @Expose
-    private String kitchenGardenInChargeName;
+    private String stockEntryRegister;
     @SerializedName("kitchen_garden_status")
     @Expose
     private String kitchenGardenStatus;
-    @SerializedName("kitchen_garden_types")
+    @SerializedName("reason")
     @Expose
-    private String kitchenGardenTypes;
-    @SerializedName("kitchen_in_charge_event_name")
-    @Expose
-    private String kitchenInChargeEventName;
+    private String reason;
     @SerializedName("land_mea_value")
     @Expose
     private String landMeaValue;
-    @SerializedName("ncc_impl_status")
+    @SerializedName("stu_com_display_status")
     @Expose
-    private String nccImplStatus;
-    @SerializedName("ncc_teacher_battalion_num")
+    private String stuComDisplayStatus;
+    @SerializedName("kitchen_garden_in_charge_contact")
     @Expose
-    private String nccTeacherBattalionNum;
+    private String kitchenGardenInChargeContact;
+    @SerializedName("kitchen_in_charge_event_name")
+    @Expose
+    private String kitchenInChargeEventName;
     @SerializedName("ncc_teacher_contact")
     @Expose
     private String nccTeacherContact;
-    @SerializedName("ncc_teacher_name")
+    @SerializedName("kitchen_garden_in_charge_name")
     @Expose
-    private String nccTeacherName;
-    @SerializedName("officer_id")
+    private String kitchenGardenInChargeName;
+    @SerializedName("institute_id")
     @Expose
-    private String officerId;
-    @SerializedName("pd_pft_contact")
+    private String instituteId;
+    @SerializedName("harita_haram_status")
     @Expose
-    private String pdPftContact;
+    private String haritaHaramStatus;
+    @SerializedName("stu_cou_date")
+    @Expose
+    private String stuCouDate;
     @SerializedName("pd_pft_name")
     @Expose
     private String pdPftName;
+    @SerializedName("smc_ele_chairman_name")
+    @Expose
+    private String smcEleChairmanName;
+    @SerializedName("id")
+    @Expose
+    private String id;
     @SerializedName("plan_to_prc_land")
     @Expose
     private String planToPrcLand;
     @SerializedName("play_ground_avail")
     @Expose
     private String playGroundAvail;
-    @SerializedName("reason")
+    @SerializedName("inspection_time")
     @Expose
-    private String reason;
-    @SerializedName("scout_guide_captain_contact")
-    @Expose
-    private String scoutGuideCaptainContact;
-    @SerializedName("scout_guide_captain_name")
-    @Expose
-    private String scoutGuideCaptainName;
-    @SerializedName("scouts_guides_impl_status")
-    @Expose
-    private String scoutsGuidesImplStatus;
-    @SerializedName("smc_ele_chairman_contact")
-    @Expose
-    private String smcEleChairmanContact;
-    @SerializedName("smc_ele_chairman_name")
-    @Expose
-    private String smcEleChairmanName;
-    @SerializedName("smc_ele_con_parent_meeting")
-    @Expose
-    private String smcEleConParentMeeting;
-    @SerializedName("smc_ele_status")
-    @Expose
-    private String smcEleStatus;
-    @SerializedName("sport_mat_received")
-    @Expose
-    private String sportMatReceived;
-    @SerializedName("stu_com_display_status")
-    @Expose
-    private String stuComDisplayStatus;
+    private String inspectionTime;
     @SerializedName("stu_cou_captain_name")
     @Expose
     private String stuCouCaptainName;
-    @SerializedName("stu_cou_date")
+    @SerializedName("smc_ele_chairman_contact")
     @Expose
-    private String stuCouDate;
+    private String smcEleChairmanContact;
+    @SerializedName("ncc_impl_status")
+    @Expose
+    private String nccImplStatus;
+    @SerializedName("ground_level_status")
+    @Expose
+    private String groundLevelStatus;
+    @SerializedName("ncc_teacher_battalion_num")
+    @Expose
+    private String nccTeacherBattalionNum;
+    @SerializedName("pd_pft_contact")
+    @Expose
+    private String pdPftContact;
+    @SerializedName("scout_guide_captain_contact")
+    @Expose
+    private String scoutGuideCaptainContact;
+    @SerializedName("ncc_teacher_name")
+    @Expose
+    private String nccTeacherName;
+    @SerializedName("officer_id")
+    @Expose
+    private String officerId;
+    @SerializedName("kitchen_garden_types")
+    @Expose
+    private String kitchenGardenTypes;
+    @SerializedName("game_sport_room_avail")
+    @Expose
+    private String gameSportRoomAvail;
+    @SerializedName("sport_mat_received")
+    @Expose
+    private String sportMatReceived;
+    @SerializedName("scouts_guides_impl_status")
+    @Expose
+    private String scoutsGuidesImplStatus;
     @SerializedName("stu_cou_ele_status")
     @Expose
     private String stuCouEleStatus;
-    @SerializedName("studAchievementEntities")
+    @SerializedName("smc_ele_con_parent_meeting")
     @Expose
-    private List<Object> studAchievementEntities = null;
+    private String smcEleConParentMeeting;
+    @SerializedName("scout_guide_captain_name")
+    @Expose
+    private String scoutGuideCaptainName;
+
     @SerializedName("plantsEntities")
     @Expose
-    private List<Object> plantsEntities = null;
+    private List<PlantsEntity> plantsEntities;
+    @SerializedName("studAchievementEntities")
+    @Expose
+    private List<StudAchievementEntity> studAchievementEntities;
 
-    public String getGameSportRoomAvail() {
-        return gameSportRoomAvail;
+    public List<PlantsEntity> getPlantsEntities() {
+        return plantsEntities;
     }
 
-    public void setGameSportRoomAvail(String gameSportRoomAvail) {
-        this.gameSportRoomAvail = gameSportRoomAvail;
+    public void setPlantsEntities(List<PlantsEntity> plantsEntities) {
+        this.plantsEntities = plantsEntities;
     }
 
-    public String getGroundLevelStatus() {
-        return groundLevelStatus;
+    public List<StudAchievementEntity> getStudAchievementEntities() {
+        return studAchievementEntities;
     }
 
-    public void setGroundLevelStatus(String groundLevelStatus) {
-        this.groundLevelStatus = groundLevelStatus;
+    public void setStudAchievementEntities(List<StudAchievementEntity> studAchievementEntities) {
+        this.studAchievementEntities = studAchievementEntities;
     }
 
-    public String getHaritaHaramStatus() {
-        return haritaHaramStatus;
+    @SerializedName("studAchievementEntities")
+
+
+
+
+    public String getSmcEleStatus() {
+        return smcEleStatus;
     }
 
-    public void setHaritaHaramStatus(String haritaHaramStatus) {
-        this.haritaHaramStatus = haritaHaramStatus;
+    public void setSmcEleStatus(String smcEleStatus) {
+        this.smcEleStatus = smcEleStatus;
     }
 
-    public String getId() {
-        return id;
+    public String getStockEntryRegister() {
+        return stockEntryRegister;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getInspectionTime() {
-        return inspectionTime;
-    }
-
-    public void setInspectionTime(String inspectionTime) {
-        this.inspectionTime = inspectionTime;
-    }
-
-    public String getInstituteId() {
-        return instituteId;
-    }
-
-    public void setInstituteId(String instituteId) {
-        this.instituteId = instituteId;
-    }
-
-    public String getKitchenGardenInChargeContact() {
-        return kitchenGardenInChargeContact;
-    }
-
-    public void setKitchenGardenInChargeContact(String kitchenGardenInChargeContact) {
-        this.kitchenGardenInChargeContact = kitchenGardenInChargeContact;
-    }
-
-    public String getKitchenGardenInChargeName() {
-        return kitchenGardenInChargeName;
-    }
-
-    public void setKitchenGardenInChargeName(String kitchenGardenInChargeName) {
-        this.kitchenGardenInChargeName = kitchenGardenInChargeName;
+    public void setStockEntryRegister(String stockEntryRegister) {
+        this.stockEntryRegister = stockEntryRegister;
     }
 
     public String getKitchenGardenStatus() {
@@ -188,20 +167,12 @@ public class CoCurricularInfo {
         this.kitchenGardenStatus = kitchenGardenStatus;
     }
 
-    public String getKitchenGardenTypes() {
-        return kitchenGardenTypes;
+    public String getReason() {
+        return reason;
     }
 
-    public void setKitchenGardenTypes(String kitchenGardenTypes) {
-        this.kitchenGardenTypes = kitchenGardenTypes;
-    }
-
-    public String getKitchenInChargeEventName() {
-        return kitchenInChargeEventName;
-    }
-
-    public void setKitchenInChargeEventName(String kitchenInChargeEventName) {
-        this.kitchenInChargeEventName = kitchenInChargeEventName;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
     public String getLandMeaValue() {
@@ -212,20 +183,28 @@ public class CoCurricularInfo {
         this.landMeaValue = landMeaValue;
     }
 
-    public String getNccImplStatus() {
-        return nccImplStatus;
+    public String getStuComDisplayStatus() {
+        return stuComDisplayStatus;
     }
 
-    public void setNccImplStatus(String nccImplStatus) {
-        this.nccImplStatus = nccImplStatus;
+    public void setStuComDisplayStatus(String stuComDisplayStatus) {
+        this.stuComDisplayStatus = stuComDisplayStatus;
     }
 
-    public String getNccTeacherBattalionNum() {
-        return nccTeacherBattalionNum;
+    public String getKitchenGardenInChargeContact() {
+        return kitchenGardenInChargeContact;
     }
 
-    public void setNccTeacherBattalionNum(String nccTeacherBattalionNum) {
-        this.nccTeacherBattalionNum = nccTeacherBattalionNum;
+    public void setKitchenGardenInChargeContact(String kitchenGardenInChargeContact) {
+        this.kitchenGardenInChargeContact = kitchenGardenInChargeContact;
+    }
+
+    public String getKitchenInChargeEventName() {
+        return kitchenInChargeEventName;
+    }
+
+    public void setKitchenInChargeEventName(String kitchenInChargeEventName) {
+        this.kitchenInChargeEventName = kitchenInChargeEventName;
     }
 
     public String getNccTeacherContact() {
@@ -236,28 +215,36 @@ public class CoCurricularInfo {
         this.nccTeacherContact = nccTeacherContact;
     }
 
-    public String getNccTeacherName() {
-        return nccTeacherName;
+    public String getKitchenGardenInChargeName() {
+        return kitchenGardenInChargeName;
     }
 
-    public void setNccTeacherName(String nccTeacherName) {
-        this.nccTeacherName = nccTeacherName;
+    public void setKitchenGardenInChargeName(String kitchenGardenInChargeName) {
+        this.kitchenGardenInChargeName = kitchenGardenInChargeName;
     }
 
-    public String getOfficerId() {
-        return officerId;
+    public String getInstituteId() {
+        return instituteId;
     }
 
-    public void setOfficerId(String officerId) {
-        this.officerId = officerId;
+    public void setInstituteId(String instituteId) {
+        this.instituteId = instituteId;
     }
 
-    public String getPdPftContact() {
-        return pdPftContact;
+    public String getHaritaHaramStatus() {
+        return haritaHaramStatus;
     }
 
-    public void setPdPftContact(String pdPftContact) {
-        this.pdPftContact = pdPftContact;
+    public void setHaritaHaramStatus(String haritaHaramStatus) {
+        this.haritaHaramStatus = haritaHaramStatus;
+    }
+
+    public String getStuCouDate() {
+        return stuCouDate;
+    }
+
+    public void setStuCouDate(String stuCouDate) {
+        this.stuCouDate = stuCouDate;
     }
 
     public String getPdPftName() {
@@ -266,6 +253,22 @@ public class CoCurricularInfo {
 
     public void setPdPftName(String pdPftName) {
         this.pdPftName = pdPftName;
+    }
+
+    public String getSmcEleChairmanName() {
+        return smcEleChairmanName;
+    }
+
+    public void setSmcEleChairmanName(String smcEleChairmanName) {
+        this.smcEleChairmanName = smcEleChairmanName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPlanToPrcLand() {
@@ -284,84 +287,12 @@ public class CoCurricularInfo {
         this.playGroundAvail = playGroundAvail;
     }
 
-    public String getReason() {
-        return reason;
+    public String getInspectionTime() {
+        return inspectionTime;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
-    public String getScoutGuideCaptainContact() {
-        return scoutGuideCaptainContact;
-    }
-
-    public void setScoutGuideCaptainContact(String scoutGuideCaptainContact) {
-        this.scoutGuideCaptainContact = scoutGuideCaptainContact;
-    }
-
-    public String getScoutGuideCaptainName() {
-        return scoutGuideCaptainName;
-    }
-
-    public void setScoutGuideCaptainName(String scoutGuideCaptainName) {
-        this.scoutGuideCaptainName = scoutGuideCaptainName;
-    }
-
-    public String getScoutsGuidesImplStatus() {
-        return scoutsGuidesImplStatus;
-    }
-
-    public void setScoutsGuidesImplStatus(String scoutsGuidesImplStatus) {
-        this.scoutsGuidesImplStatus = scoutsGuidesImplStatus;
-    }
-
-    public String getSmcEleChairmanContact() {
-        return smcEleChairmanContact;
-    }
-
-    public void setSmcEleChairmanContact(String smcEleChairmanContact) {
-        this.smcEleChairmanContact = smcEleChairmanContact;
-    }
-
-    public String getSmcEleChairmanName() {
-        return smcEleChairmanName;
-    }
-
-    public void setSmcEleChairmanName(String smcEleChairmanName) {
-        this.smcEleChairmanName = smcEleChairmanName;
-    }
-
-    public String getSmcEleConParentMeeting() {
-        return smcEleConParentMeeting;
-    }
-
-    public void setSmcEleConParentMeeting(String smcEleConParentMeeting) {
-        this.smcEleConParentMeeting = smcEleConParentMeeting;
-    }
-
-    public String getSmcEleStatus() {
-        return smcEleStatus;
-    }
-
-    public void setSmcEleStatus(String smcEleStatus) {
-        this.smcEleStatus = smcEleStatus;
-    }
-
-    public String getSportMatReceived() {
-        return sportMatReceived;
-    }
-
-    public void setSportMatReceived(String sportMatReceived) {
-        this.sportMatReceived = sportMatReceived;
-    }
-
-    public String getStuComDisplayStatus() {
-        return stuComDisplayStatus;
-    }
-
-    public void setStuComDisplayStatus(String stuComDisplayStatus) {
-        this.stuComDisplayStatus = stuComDisplayStatus;
+    public void setInspectionTime(String inspectionTime) {
+        this.inspectionTime = inspectionTime;
     }
 
     public String getStuCouCaptainName() {
@@ -372,12 +303,100 @@ public class CoCurricularInfo {
         this.stuCouCaptainName = stuCouCaptainName;
     }
 
-    public String getStuCouDate() {
-        return stuCouDate;
+    public String getSmcEleChairmanContact() {
+        return smcEleChairmanContact;
     }
 
-    public void setStuCouDate(String stuCouDate) {
-        this.stuCouDate = stuCouDate;
+    public void setSmcEleChairmanContact(String smcEleChairmanContact) {
+        this.smcEleChairmanContact = smcEleChairmanContact;
+    }
+
+    public String getNccImplStatus() {
+        return nccImplStatus;
+    }
+
+    public void setNccImplStatus(String nccImplStatus) {
+        this.nccImplStatus = nccImplStatus;
+    }
+
+    public String getGroundLevelStatus() {
+        return groundLevelStatus;
+    }
+
+    public void setGroundLevelStatus(String groundLevelStatus) {
+        this.groundLevelStatus = groundLevelStatus;
+    }
+
+    public String getNccTeacherBattalionNum() {
+        return nccTeacherBattalionNum;
+    }
+
+    public void setNccTeacherBattalionNum(String nccTeacherBattalionNum) {
+        this.nccTeacherBattalionNum = nccTeacherBattalionNum;
+    }
+
+    public String getPdPftContact() {
+        return pdPftContact;
+    }
+
+    public void setPdPftContact(String pdPftContact) {
+        this.pdPftContact = pdPftContact;
+    }
+
+    public String getScoutGuideCaptainContact() {
+        return scoutGuideCaptainContact;
+    }
+
+    public void setScoutGuideCaptainContact(String scoutGuideCaptainContact) {
+        this.scoutGuideCaptainContact = scoutGuideCaptainContact;
+    }
+
+    public String getNccTeacherName() {
+        return nccTeacherName;
+    }
+
+    public void setNccTeacherName(String nccTeacherName) {
+        this.nccTeacherName = nccTeacherName;
+    }
+
+    public String getOfficerId() {
+        return officerId;
+    }
+
+    public void setOfficerId(String officerId) {
+        this.officerId = officerId;
+    }
+
+    public String getKitchenGardenTypes() {
+        return kitchenGardenTypes;
+    }
+
+    public void setKitchenGardenTypes(String kitchenGardenTypes) {
+        this.kitchenGardenTypes = kitchenGardenTypes;
+    }
+
+    public String getGameSportRoomAvail() {
+        return gameSportRoomAvail;
+    }
+
+    public void setGameSportRoomAvail(String gameSportRoomAvail) {
+        this.gameSportRoomAvail = gameSportRoomAvail;
+    }
+
+    public String getSportMatReceived() {
+        return sportMatReceived;
+    }
+
+    public void setSportMatReceived(String sportMatReceived) {
+        this.sportMatReceived = sportMatReceived;
+    }
+
+    public String getScoutsGuidesImplStatus() {
+        return scoutsGuidesImplStatus;
+    }
+
+    public void setScoutsGuidesImplStatus(String scoutsGuidesImplStatus) {
+        this.scoutsGuidesImplStatus = scoutsGuidesImplStatus;
     }
 
     public String getStuCouEleStatus() {
@@ -388,21 +407,20 @@ public class CoCurricularInfo {
         this.stuCouEleStatus = stuCouEleStatus;
     }
 
-    public List<Object> getStudAchievementEntities() {
-        return studAchievementEntities;
+    public String getSmcEleConParentMeeting() {
+        return smcEleConParentMeeting;
     }
 
-    public void setStudAchievementEntities(List<Object> studAchievementEntities) {
-        this.studAchievementEntities = studAchievementEntities;
+    public void setSmcEleConParentMeeting(String smcEleConParentMeeting) {
+        this.smcEleConParentMeeting = smcEleConParentMeeting;
     }
 
-    public List<Object> getPlantsEntities() {
-        return plantsEntities;
+    public String getScoutGuideCaptainName() {
+        return scoutGuideCaptainName;
     }
 
-    public void setPlantsEntities(List<Object> plantsEntities) {
-        this.plantsEntities = plantsEntities;
+    public void setScoutGuideCaptainName(String scoutGuideCaptainName) {
+        this.scoutGuideCaptainName = scoutGuideCaptainName;
     }
-
 
 }

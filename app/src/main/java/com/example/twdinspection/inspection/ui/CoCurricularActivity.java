@@ -345,7 +345,8 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CoCurricularActivity.this, CocurricularStudAchActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.COCAR));
             }
         });
 
@@ -353,7 +354,8 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(CoCurricularActivity.this, PlantsInfoActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(AppConstants.FROM_CLASS, AppConstants.COCAR));
             }
         });
         binding.btnAddplant.setOnClickListener(new View.OnClickListener() {

@@ -93,6 +93,9 @@ public class AppConstants {
     public static final String IMAGE_PLAY_GROUND = "IMAGE_PLAY_GROUND";
     public static final String IMAGE_KITCHEN = "IMAGE_KITCHEN";
     public static final String IMAGE_CLASSROOM = "IMAGE_CLASSROOM";
+    public static final String FROM_CLASS = "FROM_CLASS";
+    public static final String COCAR = "COCAR";
+    public static final String REPORT_COCAR = "REPORT_COCAR";
     public static String stockData="STOCK_DATA";
     public static String essComm="essComm";
     public static String dailyReq="dailyReq";

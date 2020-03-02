@@ -19,24 +19,12 @@ import com.example.twdinspection.inspection.reports.ui.ReportPhotosActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportStaffAttendActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsAcademicActivity;
-import com.example.twdinspection.inspection.reports.ui.ReportsCoCircurricularActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportCoCarricularActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsEntitlementsActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsInfraActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportsRegistersActivity;
-import com.example.twdinspection.inspection.ui.AcademicActivity;
-import com.example.twdinspection.inspection.ui.CoCurricularActivity;
-import com.example.twdinspection.inspection.ui.DietIssuesActivity;
-import com.example.twdinspection.inspection.ui.EntitlementsActivity;
-import com.example.twdinspection.inspection.ui.GeneralCommentsActivity;
-import com.example.twdinspection.inspection.ui.GeneralInfoActivity;
-import com.example.twdinspection.inspection.ui.InfraActivity;
-import com.example.twdinspection.inspection.ui.MedicalActivity;
-import com.example.twdinspection.inspection.ui.RegistersActivity;
-import com.example.twdinspection.inspection.ui.StaffAttendActivity;
-import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
-import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
 
 import java.util.List;
 
@@ -90,7 +78,7 @@ public class ReportsMenuSectionsAdapter extends RecyclerView.Adapter<ReportsMenu
                         callActivity(ReportsAcademicActivity.class);
                         break;
                     case 8:
-                        callActivity(ReportsCoCircurricularActivity.class);
+                        callActivity(ReportCoCarricularActivity.class);
                         break;
                     case 9:
                         callActivity(ReportsEntitlementsActivity.class);

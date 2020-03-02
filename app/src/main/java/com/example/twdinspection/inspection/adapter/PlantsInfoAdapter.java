@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
 import com.example.twdinspection.databinding.AdapterPlantsInfoBinding;
 import com.example.twdinspection.inspection.interfaces.PlantsInfoInterface;
@@ -25,9 +26,12 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
     private Context context;
     private PlantsInfoInterface plantsInfoInterface;
     private List<PlantsEntity> plantsEntities;
-    public PlantsInfoAdapter(Context context, List<PlantsEntity> plantsEntities) {
+    private String fromClass;
+
+    public PlantsInfoAdapter(Context context, List<PlantsEntity> plantsEntities, String fromClass) {
         this.context = context;
         this.plantsEntities = plantsEntities;
+        this.fromClass = fromClass;
         try {
             plantsInfoInterface=(PlantsInfoInterface) context;
         }catch (Exception e){
@@ -35,12 +39,19 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
         }
     }
 
+
     @NonNull
     @Override
     public PlantsInfoAdapter.ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AdapterPlantsInfoBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_plants_info, parent, false);
+
+        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+            listItemBinding.ivDelete.setVisibility(View.GONE);
+        }else {
+            listItemBinding.ivDelete.setVisibility(View.VISIBLE);
+        }
 
         return new PlantsInfoAdapter.ItemHolder(listItemBinding);
     }

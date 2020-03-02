@@ -64,9 +64,9 @@ public class InspReportData {
     @SerializedName("general_comments")
     @Expose
     private GeneralComments generalComments;
-//    @SerializedName("coCurricular_info")
-//    @Expose
-//    private List<CoCurricularInfo> coCurricularInfo = null;
+    @SerializedName("coCurricular_info")
+    @Expose
+    private CoCurricularInfo coCurricularInfo = null;
     @SerializedName("registers")
     @Expose
     private Registers registers;
@@ -226,13 +226,13 @@ public class InspReportData {
         this.generalComments = generalComments;
     }
 
-//    public List<CoCurricularInfo> getCoCurricularInfo() {
-//        return coCurricularInfo;
-//    }
-//
-//    public void setCoCurricularInfo(List<CoCurricularInfo> coCurricularInfo) {
-//        this.coCurricularInfo = coCurricularInfo;
-//    }
+    public CoCurricularInfo getCoCurricularInfo() {
+        return coCurricularInfo;
+    }
+
+    public void setCoCurricularInfo(CoCurricularInfo coCurricularInfo) {
+        this.coCurricularInfo = coCurricularInfo;
+    }
 
     public Registers getRegisters() {
         return registers;

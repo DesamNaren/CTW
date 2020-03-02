@@ -230,7 +230,7 @@
             android:name=".inspection.reports.ui.ReportsAcademicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsCoCircurricularActivity"
+            android:name=".inspection.reports.ui.ReportCoCarricularActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.reports.ui.ReportsEntitlementsActivity"
