@@ -93,9 +93,15 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
                     filterList.addAll(list);
                 } else {
                     for (InspReportData otData : list) {
-//                        if (otData.getBenID().toLowerCase().contains(charString.toLowerCase())) {
-//                            filterList.add(otData);
-//                        }
+                        if (otData.getInstituteName().toLowerCase().contains(charString.toLowerCase())
+                        ||
+                                otData.getDistName().toLowerCase().contains(charString.toLowerCase())
+                        ||
+                                otData.getMandalName().toLowerCase().contains(charString.toLowerCase())
+                        ||
+                                otData.getVillageName().toLowerCase().contains(charString.toLowerCase())) {
+                            filterList.add(otData);
+                        }
                     }
                 }
                 FilterResults filterResults = new FilterResults();

@@ -15,9 +15,9 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -64,7 +64,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officer_id, dist_id, mand_id, vill_id;
-    String instName,distName, mandalName, villageName;
+    String instName, distName, mandalName, villageName;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false, staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false, academicFlag = false, cocurricularFlag = false, entitlementsFlag = false, regFlag = false, generalCommentsFlag = false;
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
@@ -197,7 +197,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             return;
         }
 
-        if (dLocation != null && dLocation.getLatitude()>0 && dLocation.getLongitude()>0) {
+        if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
@@ -406,12 +406,27 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             instMainViewModel.deleteAllInspectionData();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-            submitFlag = false;
+            revertFlags();
             Snackbar.make(binding.appbar.root, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
         } else {
-            submitFlag = false;
+            revertFlags();
             Snackbar.make(binding.appbar.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    private void revertFlags(){
+        submitFlag = false;
+        generalInfoFlag = false;
+        studAttendFlag = false;
+        staffAttendFlag = false;
+        medicalFlag = false;
+        dietFlag = false;
+        infraFlag = false;
+        cocurricularFlag = false;
+        academicFlag = false;
+        entitlementsFlag = false;
+        regFlag = false;
+        generalCommentsFlag = false;
     }
 
     private void CallSuccessAlert(String msg) {
@@ -420,6 +435,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
     @Override
     public void handleError(Throwable e, Context context) {
+        revertFlags();
         customProgressDialog.hide();
         String errMsg = ErrorHandler.handleError(e, context);
         Snackbar.make(binding.appbar.root, errMsg, Snackbar.LENGTH_SHORT).show();
@@ -429,7 +445,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     @Override
     public void onBackPressed() {
 
-        if (arrayListLiveData!=null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+        if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
             boolean flag = false;
             for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
                 if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
@@ -440,14 +456,14 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             if (!flag) {
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
-            }else {
+            } else {
                 Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
             }
-        }else{
+        } else {
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
     }
@@ -463,12 +479,14 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         super.onResume();
         registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
 
+
         mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-
-                mCurrentLocation = locationResult.getLastLocation();
+                if (mCurrentLocation == null) {
+                    mCurrentLocation = locationResult.getLastLocation();
+                }
             }
         };
         try {
@@ -504,6 +522,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         editor.putString(AppConstants.CACHE_DATE, cacheDate);
         editor.commit();
     }
+
     private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

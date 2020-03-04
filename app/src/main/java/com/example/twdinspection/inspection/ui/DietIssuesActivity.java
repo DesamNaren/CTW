@@ -1,17 +1,27 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -22,6 +32,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.custom.CustomFontTextView;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
@@ -43,7 +54,7 @@ import java.util.List;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class DietIssuesActivity extends LocBaseActivity implements SaveListener, DietInterface {
+public class DietIssuesActivity extends BaseActivity implements SaveListener, DietInterface {
 
     ActivityDietIssuesBinding binding;
     DietIsuuesViewModel dietIsuuesViewModel;
@@ -57,7 +68,7 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     String menu_chart_served, menu_chart_painted, menu_served, food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
     private String cacheDate, currentDate;
 
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     String PIC_NAME, PIC_TYPE;
     public Uri fileUri;
@@ -65,12 +76,19 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     File file_menu, file_officer;
     int flag_menu = 0, flag_officer = 0;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
         binding.header.headerTitle.setText(getResources().getString(R.string.diet_issues));
-
+        binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         dietIsuuesViewModel = ViewModelProviders.of(DietIssuesActivity.this,
                 new DietIssuesCustomViewModel(binding, this, getApplication())).get(DietIsuuesViewModel.class);
         binding.setViewModel(dietIsuuesViewModel);
@@ -137,17 +155,32 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
             }
         });
 
+
         binding.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.MENU;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, MY_CAMERA_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.MENU;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        startActivityForResult(intent, MY_CAMERA_REQUEST_CODE);
                     }
                 }
             }
@@ -155,14 +188,28 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
         binding.ivInspOfficer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.OFFICER;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, MY_CAMERA_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.OFFICER;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        startActivityForResult(intent, MY_CAMERA_REQUEST_CODE);
                     }
                 }
             }
@@ -299,6 +346,35 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
         });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            }else if (ActivityCompat.shouldShowRequestPermissionRationale(DietIssuesActivity.this,
+                    Manifest.permission.CAMERA)) {
+                customPerAlert();
+            } else {
+                callSettings();
+            }
+        }
+    }
+
+    private void callSettings(){
+        Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("Settings", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+                Utils.openSettings(DietIssuesActivity.this);
+            }
+        });
+
+        snackbar.show();
+    }
+
     private boolean validateData() {
 
         if (TextUtils.isEmpty(menu_chart_served)) {
@@ -423,7 +499,7 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
                 FilePath = getExternalFilesDir(null)
@@ -508,5 +584,47 @@ public class DietIssuesActivity extends LocBaseActivity implements SaveListener,
     @Override
     public void validate() {
 
+    }
+
+    public void customPerAlert() {
+        try {
+            Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(getString(R.string.plz_grant));
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                        }
+                    }
+                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                if (!dialog.isShowing()) {
+                    dialog.show();
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

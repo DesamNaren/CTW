@@ -3,10 +3,22 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.InputType;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -42,16 +54,37 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
     String officerId;
     List<InspReportData> inspReportDataList;
     InspectionReportAdapter adapter;
+    private Menu mMenu = null;
+    SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_insp_report);
-        binding.header.headerTitle.setText(getString(R.string.insp_reports));
-        binding.header.ivHome.setVisibility(View.GONE);
+
+        try {
+            if (getSupportActionBar() != null) {
+                TextView tv = new TextView(getApplicationContext());
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+                tv.setLayoutParams(lp);
+                tv.setText(getResources().getString(R.string.insp_reports));
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                getSupportActionBar().setCustomView(tv);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
+                getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_btn_rounded));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         viewModel = new InspectionReportsViewModel(InspectionReportsDashboard.this, getApplication());
         customProgressDialog = new CustomProgressDialog(this);
-
         inspReportDataList = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -61,13 +94,6 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-
-        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
 
         if (Utils.checkInternetConnection(InspectionReportsDashboard.this)) {
@@ -80,25 +106,21 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
                     inspectionReports.removeObservers(InspectionReportsDashboard.this);
                     if (inspReportResponse != null) {
                         if (inspReportResponse.getData() != null && inspReportResponse.getData().size() > 0) {
-                            for (int i = 0; i < inspReportResponse.getData().size(); i++) {
-                                InspReportData inspReportData = inspReportResponse.getData().get(i);
-                                inspReportDataList.add(inspReportData);
-//                                Gson gson = new Gson();
-//                                String data = gson.toJson(inspReportData);
-//                                editor.putString(AppConstants.REP_DATA, data);
-//                                editor.apply();
-                            }
+                            inspReportDataList.addAll(inspReportResponse.getData());
 
-                            if(inspReportDataList!=null && inspReportDataList.size()>0){
+                            if (inspReportDataList != null && inspReportDataList.size() > 0) {
                                 binding.recyclerView.setVisibility(View.VISIBLE);
                                 binding.tvEmpty.setVisibility(View.GONE);
-                                adapter = new InspectionReportAdapter(InspectionReportsDashboard.this,inspReportDataList );
+                                adapter = new InspectionReportAdapter(InspectionReportsDashboard.this, inspReportDataList);
                                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(InspectionReportsDashboard.this));
                                 binding.recyclerView.setAdapter(adapter);
-                            }else{
+                                mMenu.findItem(R.id.action_search).setVisible(true);
+
+                            } else {
                                 binding.recyclerView.setVisibility(View.GONE);
                                 binding.tvEmpty.setVisibility(View.VISIBLE);
                                 callSnackBar("No data available");
+                                mMenu.findItem(R.id.action_search).setVisible(false);
                             }
 
                         } else if (inspReportResponse.getData() != null && inspReportResponse.getData().size() == 0) {
@@ -136,13 +158,51 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
 
         snackbar.show();
     }
+
     @Override
     public void onItemClick(InspReportData reportData) {
-        Gson gson=new Gson();
-        String data=gson.toJson(reportData);
-        editor.putString(AppConstants.INSP_REP_DATA,data);
+        Gson gson = new Gson();
+        String data = gson.toJson(reportData);
+        editor.putString(AppConstants.INSP_REP_DATA, data);
         editor.apply();
         startActivity(new Intent(this, InstReportsMenuActivity.class));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        mMenu = menu;
+        mMenu.findItem(R.id.mi_filter).setVisible(false);
+        MenuItem mSearch = mMenu.findItem(R.id.action_search);
+        mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_inst) + "</font>"));
+        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = mSearchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
+        mSearchView.setGravity(Gravity.CENTER);
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
 }

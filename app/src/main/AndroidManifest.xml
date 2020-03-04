@@ -203,7 +203,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.reports.ui.InspectionReportsDashboard"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme"/>
         <activity
             android:name=".inspection.reports.ui.InstReportsMenuActivity"
             android:screenOrientation="portrait" />

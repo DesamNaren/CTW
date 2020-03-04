@@ -1,18 +1,28 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -22,6 +32,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.custom.CustomFontTextView;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
@@ -36,7 +47,7 @@ import java.io.File;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class InfraActivity extends LocBaseActivity implements SaveListener {
+public class InfraActivity extends BaseActivity implements SaveListener {
     ActivityInfrastructureBinding binding;
     InfraViewModel infraViewModel;
     SharedPreferences sharedPreferences;
@@ -66,6 +77,13 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
         binding.header.headerTitle.setText(getResources().getString(R.string.title_infra));
+        binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         infraViewModel = ViewModelProviders.of(InfraActivity.this,
                 new InfraCustomViewModel(binding, this, getApplication())).get(InfraViewModel.class);
@@ -128,8 +146,23 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
         binding.ivTds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.TDS;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.TDS;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -674,13 +707,81 @@ public class InfraActivity extends LocBaseActivity implements SaveListener {
                         infrastuctureEntity.setAdd_dormitory_required_cnt("");
                     }
 
-
                     Utils.customSaveAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
-
-//                    startActivity(new Intent(InfraActivity.this, AcademicActivity.class));
                 }
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            }else if (ActivityCompat.shouldShowRequestPermissionRationale(InfraActivity.this,
+                    Manifest.permission.CAMERA)) {
+                customPerAlert();
+            } else {
+                callSettings();
+            }
+        }
+    }
+
+    public void customPerAlert() {
+        try {
+            Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setCancelable(false);
+                CustomFontTextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(getString(R.string.plz_grant));
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                });
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                if (!dialog.isShowing()) {
+                    dialog.show();
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void callSettings(){
+        Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("Settings", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+                Utils.openSettings(InfraActivity.this);
+            }
+        });
+
+        snackbar.show();
     }
 
     private boolean validateData() {
