@@ -85,8 +85,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@{inspData.mandalName}" />
+                                android:padding="@dimen/dimen_5dp" />
 
 
                         </LinearLayout>
@@ -127,8 +126,7 @@
                                 android:id="@+id/inst_name_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@{inspData.instName}" />
+                                android:padding="@dimen/dimen_5dp" />
                         </LinearLayout>
 
 

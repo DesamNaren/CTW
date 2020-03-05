@@ -103,6 +103,7 @@ public class AcademicEntity {
     private String proper_light_fan;
     @ColumnInfo
     private String big_tv_rot_avail;
+
     @ColumnInfo
     private String TvRotWorkingStatus;
     @ColumnInfo

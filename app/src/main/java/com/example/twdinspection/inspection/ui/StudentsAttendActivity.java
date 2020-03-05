@@ -82,8 +82,6 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendActivity.this));
                     binding.recyclerView.setAdapter(adapter);
                 } else {
-
-
                     LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(TWDApplication.get(StudentsAttendActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
                     masterInstituteInfoLiveData.observe(StudentsAttendActivity.this, new Observer<MasterInstituteInfo>() {
                         @Override
@@ -93,8 +91,13 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                             List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
                             if (masterClassInfos != null && masterClassInfos.size() > 0) {
                                 for (int i = 0; i < masterClassInfos.size(); i++) {
-                                    StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0, instId, masterClassInfos.get(i).getType(), String.valueOf(masterClassInfos.get(i).getClassId()), String.valueOf(masterClassInfos.get(i).getStudentCount()));
-                                    studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                                    if (masterClassInfos.get(i).getStudentCount() > 0) {
+                                        StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0,
+                                                instId, masterClassInfos.get(i).getType(),
+                                                String.valueOf(masterClassInfos.get(i).getClassId()),
+                                                String.valueOf(masterClassInfos.get(i).getStudentCount()));
+                                        studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                                    }
                                 }
                             }
 
@@ -345,7 +348,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             }
         });
         if (z[0] >= 0) {
-            Utils.customSectionSaveAlert(StudentsAttendActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+            Utils.customSectionSaveAlert(StudentsAttendActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
         } else {
             showSnackBar(getString(R.string.failed));
         }

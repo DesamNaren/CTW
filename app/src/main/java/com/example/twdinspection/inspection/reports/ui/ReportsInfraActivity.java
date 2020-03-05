@@ -48,7 +48,15 @@ public class ReportsInfraActivity extends BaseActivity {
         reportData = gson.fromJson(data, InspReportData.class);
 
         binding.setInspData(reportData.getInfraMaintenance());
-        binding.setTdsImgUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
+
+        if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
+                if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
+                    binding.setTdsImgUrl(reportData.getPhotos().get(z).getFilePath());
+                    break;
+                }
+            }
+        }
         binding.executePendingBindings();
 
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));

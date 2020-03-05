@@ -49,10 +49,14 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
 
         binding.setInspData(reportData.getGeneralInfo());
 
+        binding.manNameTv.setText(reportData.getMandalName());
+        binding.instNameTv.setText(reportData.getInstituteName());
+
         binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
         binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
         binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
         binding.executePendingBindings();
+
 
         binding.btnNext.setText(getResources().getString(R.string.next));
         binding.btnNext.setOnClickListener(new View.OnClickListener() {

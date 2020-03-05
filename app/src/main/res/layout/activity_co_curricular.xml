@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,10 +9,11 @@
             type="com.example.twdinspection.inspection.viewmodel.CocurricularViewModel" />
 
     </data>
+
     <RelativeLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/root"
         android:orientation="vertical">
 
         <ScrollView
@@ -81,7 +81,6 @@
                                     android:text="No" />
 
                             </RadioGroup>
-
 
 
                         </LinearLayout>
@@ -241,6 +240,7 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -284,9 +284,9 @@
                                     android:layout_gravity="center"
                                     android:background="@drawable/btn_background1"
                                     android:text="View"
-                                    android:visibility="gone"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -1084,16 +1084,16 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
+                                android:id="@+id/rg_harithaharam"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/rg_harithaharam"
                                 android:orientation="horizontal">
 
 
                                 <RadioButton
+                                    android:id="@+id/rb_harithaharamYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/rb_harithaharamYes"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1110,13 +1110,14 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
+                    android:id="@+id/ll_plants"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_30dp"
-                    android:id="@+id/ll_plants"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
 
                     <LinearLayout
@@ -1142,9 +1143,9 @@
                             android:layout_gravity="center"
                             android:background="@drawable/btn_background1"
                             android:text="View"
-                            android:visibility="gone"
                             android:textAllCaps="false"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1209,11 +1210,11 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:id="@+id/ll_nameOfCommDisplayed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1244,6 +1245,50 @@
                                     android:text="No" />
 
                             </RadioGroup>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/cou_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/name_of_the_student_s_council_captain"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_medical_checkup_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/last_meeting_conducted_with_students_council_date"
+                                    android:imeOptions="actionNext"
+                                    android:text="@string/select_date"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
@@ -1278,48 +1323,6 @@
 
                         </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/cou_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/name_of_the_student_s_council_captain"
-                                android:imeOptions="actionNext"
-                                android:inputType="textPersonName"
-                                android:paddingLeft="@dimen/dimen_10dp"
-                                android:singleLine="true"
-                                android:textSize="@dimen/dimen_15dp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorAccent"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_medical_checkup_date"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/last_meeting_conducted_with_students_council_date"
-                                android:imeOptions="actionNext"
-                                android:text="@string/select_date"
-                                android:textSize="@dimen/dimen_15dp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1333,7 +1336,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_next"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_next"

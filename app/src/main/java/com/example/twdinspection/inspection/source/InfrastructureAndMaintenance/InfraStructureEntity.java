@@ -51,6 +51,9 @@ public class InfraStructureEntity {
     private String electricity_wiring_repairs_req;
 
     @ColumnInfo()
+    private String electricity_wiring_remarks;
+
+    @ColumnInfo()
     private String enough_fans;
 
     @ColumnInfo()
@@ -183,6 +186,14 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String add_dormitory_required_cnt;
 
+
+    public String getElectricity_wiring_remarks() {
+        return electricity_wiring_remarks;
+    }
+
+    public void setElectricity_wiring_remarks(String electricity_wiring_remarks) {
+        this.electricity_wiring_remarks = electricity_wiring_remarks;
+    }
 
     public String getKitchen_good_condition() {
         return kitchen_good_condition;

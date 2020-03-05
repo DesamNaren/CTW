@@ -352,22 +352,22 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             showSnackBar("Check whether attire of staff is appropriate");
         } else if (TextUtils.isEmpty(toilets)) {
             returnFlag = false;
-            showSnackBar("Check whether toilets are not clean");
+            showSnackBar("Select toilets are clean");
         } else if (TextUtils.isEmpty(kitchen)) {
             returnFlag = false;
-            showSnackBar("Check whether kitchen is not clean");
+            showSnackBar("Select kitchen is clean");
         } else if (TextUtils.isEmpty(dormitory)) {
             returnFlag = false;
-            showSnackBar("Check whether dormitory is not clean");
+            showSnackBar("Select dormitory is clean");
         } else if (TextUtils.isEmpty(classRooms)) {
             returnFlag = false;
-            showSnackBar("Check whether classrooms are not clean");
+            showSnackBar("Select classrooms are clean");
         } else if (TextUtils.isEmpty(runningWater)) {
             returnFlag = false;
             showSnackBar("Check whether running water available to toilets");
         } else if (TextUtils.isEmpty(storeroom)) {
             returnFlag = false;
-            showSnackBar("Check whether storerooms are not clean");
+            showSnackBar("Select storerooms are clean");
         }
         return returnFlag;
     }

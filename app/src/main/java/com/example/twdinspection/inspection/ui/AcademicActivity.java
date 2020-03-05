@@ -331,14 +331,28 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgBigTvRotAvail.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_big_tv_rot_avail_yes) {
-                    binding.tTvRotWorkingStatus.setVisibility(View.VISIBLE);
+                    binding.bigTvLl.setVisibility(View.VISIBLE);
                     big_tv_rot_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_big_tv_rot_avail_no) {
-                    binding.tTvRotWorkingStatus.setVisibility(View.GONE);
+                    binding.bigTvLl.setVisibility(View.GONE);
                     big_tv_rot_avail = AppConstants.No;
                 } else {
-                    binding.tTvRotWorkingStatus.setVisibility(View.GONE);
+                    binding.bigTvLl.setVisibility(View.GONE);
                     big_tv_rot_avail = null;
+                }
+            }
+        });
+
+        binding.rgBigTvRotAvailCon.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgBigTvRotAvailCon.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_big_tv_rot_avail_con_yes) {
+                    TvRotWorkingStatus = AppConstants.Yes;
+                } else if (selctedItem == R.id.rb_big_tv_rot_avail_con_no) {
+                    TvRotWorkingStatus = AppConstants.No;
+                } else {
+                    TvRotWorkingStatus = null;
                 }
             }
         });
@@ -552,7 +566,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 noOfBooks = binding.etNoOfBooks.getText().toString().trim();
                 nameLibraryIncharge = binding.etNameLibraryIncharge.getText().toString().trim();
                 libraryMobileNo = binding.etLibraryMobileNo.getText().toString().trim();
-                TvRotWorkingStatus = binding.etTvRotWorkingStatus.getText().toString().trim();
 
                 labMatEnteredReason = binding.etMatEnterRegReason.getText().toString().trim();
 

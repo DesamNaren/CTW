@@ -27,10 +27,15 @@ import com.example.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.example.twdinspection.inspection.source.dmv.SchoolDMVResponse;
 import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
+import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.viewmodel.SchoolSyncViewModel;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, ErrorHandlerInterface {
     private SchoolSyncRepository schoolSyncRepository;

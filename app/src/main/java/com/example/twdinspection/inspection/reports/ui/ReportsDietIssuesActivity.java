@@ -13,7 +13,6 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportDietIssuesBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.BaseActivity;
-import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.google.gson.Gson;
 
 public class ReportsDietIssuesActivity extends BaseActivity {
@@ -48,10 +47,24 @@ public class ReportsDietIssuesActivity extends BaseActivity {
         reportData = gson.fromJson(data, InspReportData.class);
 
         binding.setInspData(reportData.getDietIssues());
-        binding.setMenuImgUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
-        binding.setOfficerImgUrl("https://androidwave.com/wp-content/uploads/2019/01/profile_pic.jpg");
-        binding.executePendingBindings();
+        if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            boolean menuFlag =false, officerFlag =false;
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
+                if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("MENU.png")) {
+                    binding.setMenuImgUrl(reportData.getPhotos().get(z).getFilePath());
+                    menuFlag=true;
+                }
+                if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("OFFICER.png")) {
+                    binding.setOfficerImgUrl(reportData.getPhotos().get(z).getFilePath());
+                    officerFlag=true;
+                }
 
+                if(menuFlag && officerFlag){
+                    break;
+                }
+            }
+        }
+        binding.executePendingBindings();
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

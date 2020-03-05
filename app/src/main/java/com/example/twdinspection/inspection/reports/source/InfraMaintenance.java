@@ -1,5 +1,11 @@
 package com.example.twdinspection.inspection.reports.source;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.example.twdinspection.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -166,6 +172,17 @@ public class InfraMaintenance {
     @SerializedName("functioning_toilets")
     @Expose
     private String functioningToilets;
+
+
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.loader_black1)
+                .into(view);
+    }
+
 
     public String getBigSchoolNameBoard() {
         return bigSchoolNameBoard;

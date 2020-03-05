@@ -74,7 +74,7 @@
     <string name="capture_tds_meter_reading">Capture TDS meter reading</string>
     <string name="enter_reason">Enter Reason</string>
     <string name="how_is_light">How is lighting facility</string>
-    <string name="does_this_institute">Does the institute have enough fans or Fans available for all inmates</string>
+    <string name="does_this_institute">Does the institute have enough wall mounts or Wall mounts available for all inmates</string>
     <string name="ceiling_fans">Ceiling fans count</string>
     <string name="working">Working</string>
     <string name="non_working">Non Working</string>
@@ -193,12 +193,12 @@
     <string name="hands_of_cooking_staff">Hands of cooking staff are clean</string>
     <string name="attire_of_staff_is_appropriate">Attire of staff is appropriate</string>
     <string name="sanitation_at_this_institution">How is the sanitation at this institution</string>
-    <string name="toilets_not_clean">Toilets not clean</string>
-    <string name="kitchen_not_clean">Kitchen not clean</string>
-    <string name="dormitory_not_clean">Dormitory not clean</string>
-    <string name="class_rooms_not_clean">Class rooms not clean</string>
+    <string name="toilets_not_clean">Toilets clean</string>
+    <string name="kitchen_not_clean">Kitchen clean</string>
+    <string name="dormitory_not_clean">Dormitory clean</string>
+    <string name="class_rooms_not_clean">Class rooms clean</string>
     <string name="running_water_available_to_toilets">Running water available to toilets</string>
-    <string name="store_room_not_clean">Store room not clean</string>
+    <string name="store_room_not_clean">Store room clean</string>
     <string name="gcc_date">Date of lasted intent raised by GCC or other supplier</string>
     <string name="stocks_supplied">whether the stock is supplied as per the intent or not</string>
     <string name="supplied_date">capture supplied date</string>
@@ -420,6 +420,7 @@
     <string name="select_inverter_working">Select Inverter working status</string>
     <string name="select_lighting_facility">Select lighting facility</string>
     <string name="select_electricity">Select electricity wiring, switch board are good</string>
+    <string name="enter_electricity">Enter remarks about electricity wiring, switch board</string>
     <string name="select_electricity_repairs">Select repair required</string>
     <string name="select_fans">Select Does the institute have enough fans</string>
     <string name="select_ceilingFansWorking">Enter Ceiling fans Working</string>
@@ -504,7 +505,7 @@
     <string name="sufficient_books_supplied_as_per_strength">Sufficient books supplied as per strength</string>
     <string name="whether_punadi_program_is_conducted_as_per_schedule">Whether Punadi program is conducted as per schedule</string>
     <string name="whether_the_punadi_2_test_marks_entered_in_cgg_portal">Whether the Punadi-2 test marks entered in CGG Portal</string>
-    <string name="whether_the_kara_dipath_program_is_conducted_as_per_schedule">Whether the Kara dipath program is conducted as per Schedule.</string>
+    <string name="whether_the_kara_dipath_program_is_conducted_as_per_schedule">Whether the Karadi Path program is conducted as per Schedule.</string>
     <string name="whether_science_lab_manuals_received_for_8th_9th_10th">Whether science lab manuals received for 8th, 9th, 10th</string>
     <string name="whether_properly_using_the_science_lab_manuals">Whether properly using the science lab manuals</string>
     <string name="whether_science_lab_room_is_available">Whether science lab room is available</string>
@@ -515,8 +516,8 @@
     <string name="no_of_books_available">No of books available</string>
     <string name="name_of_the_library_in_charge_teacher">Name of the library in charge Teacher</string>
     <string name="maintaining_the_accession_register">Maintaining the accession register</string>
-    <string name="whether_proper_lighting_fans_available_in_library"><![CDATA[Whether proper lighting & Fans available in library]]></string>
-    <string name="whether_big_tv_rot_available"><![CDATA[Whether Big TV & ROT available]]></string>
+    <string name="whether_proper_lighting_fans_available_in_library">Whether proper lighting &amp; Fans available in library</string>
+    <string name="whether_big_tv_rot_available">"Whether Big TV &amp; ROT (Receive Only Terminals) available</string>
     <string name="whether_mana_tv_lessons_are_shown_to_students_daily_as_per_schedule">Whether MANA TV lessons are shown to students daily as per schedule</string>
     <string name="mana_tv_incharge_teacher_name">MANA TV incharge teacher name</string>
     <string name="state_the_reason">State the reason</string>
@@ -651,8 +652,8 @@
     <string name="sel_pun2_con">Select punadi-2 program is conducted</string>
     <string name="sel_punadi2_test_marks">Select punadi-2 test marks entered</string>
     <string name="enter_punadi2_reason">Enter punadi-2 test marks Reason</string>
-    <string name="sel_kara">Select kara dipath program is conducted</string>
-    <string name="enter_kara_reason">Enter kara dipath program Reason</string>
+    <string name="sel_kara">Select karadi path program is conducted</string>
+    <string name="enter_kara_reason">Enter karadi path program Reason</string>
     <string name="enter_ssci_lab">Enter science lab manuals received</string>
     <string name="sel_pro_using_sci_lab">Select properly using the science lab manuals</string>
     <string name="sel_sci_lab_avail">Select science lab room is available</string>
@@ -669,8 +670,8 @@
     <string name="valid_lib_mob_num">Enter valid library mobile number</string>
     <string name="mai_ass_reg">Select maintaining the accession register</string>
     <string name="light_fan_avail"><![CDATA[Select proper lighting & fans available]]></string>
-    <string name="big_tv_avail"><![CDATA[Select Big TV & ROT available]]></string>
-    <string name="big_tv_status"><![CDATA[Select Big TV & ROT Working Status]]></string>
+    <string name="big_tv_avail"><![CDATA[Select Big TV & ROT (Receive Only Terminals) available]]></string>
+    <string name="big_tv_status"><![CDATA[Select Big TV & ROT (Receive Only Terminals) Working Status]]></string>
     <string name="mana_tv_lessions">Select MANA TV lessons are shown to students</string>
     <string name="mana_tv_reason">Enter MANA TV reason</string>
     <string name="mana_tv_incharge">Select MANA TV incharge teacher name</string>

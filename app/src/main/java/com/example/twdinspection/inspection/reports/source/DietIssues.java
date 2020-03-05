@@ -1,5 +1,11 @@
 package com.example.twdinspection.inspection.reports.source;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.example.twdinspection.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -41,6 +47,15 @@ public class DietIssues {
     @SerializedName("committee_exist")
     @Expose
     private String committeeExist;
+
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.loader_black1)
+                .into(view);
+    }
 
     public String getInspectionTime() {
         return inspectionTime;

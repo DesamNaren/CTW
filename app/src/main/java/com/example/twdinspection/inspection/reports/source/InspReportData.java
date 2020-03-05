@@ -54,7 +54,7 @@ public class InspReportData {
     private MedicalIssues medicalIssues;
     @SerializedName("photos")
     @Expose
-    private List<Object> photos = null;
+    private List<Photo> photos = null;
     @SerializedName("infra_maintenance")
     @Expose
     private InfraMaintenance infraMaintenance;
@@ -194,11 +194,11 @@ public class InspReportData {
         this.medicalIssues = medicalIssues;
     }
 
-    public List<Object> getPhotos() {
+    public List<Photo> getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<Object> photos) {
+    public void setPhotos(List<Photo> photos) {
         this.photos = photos;
     }
 

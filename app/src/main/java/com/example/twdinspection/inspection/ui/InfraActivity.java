@@ -54,7 +54,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     InfraStructureEntity infrastuctureEntity;
     String drinkingWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
-    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req;
+    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req, electricity_wiring_reason;
     String roplant_reason, ceilingFansWorking, ceilingFansNonWorking, mountedFansWorking, mountedFansNonWorking, repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms, functioningToilets;
     String repairsReqToilets, repairsReqBathrooms, color;
     InstMainViewModel instMainViewModel;
@@ -627,6 +627,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 add_cls_cnt = binding.addClassCnt.getText().toString();
                 add_din_cnt = binding.addDinCnt.getText().toString();
                 add_dom_cnt = binding.addDomCnt.getText().toString();
+                electricity_wiring_reason = binding.etElectric.getText().toString();
 
                 if (validateData()) {
 
@@ -649,6 +650,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setLighting_facility(lighting_facility);
                     infrastuctureEntity.setElectricity_wiring(electricity_wiring);
                     infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
+                    infrastuctureEntity.setElectricity_wiring_remarks(electricity_wiring_reason);
                     infrastuctureEntity.setEnough_fans(enough_fans);
                     infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
                     infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
@@ -830,7 +832,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_electricity_repairs));
             return false;
         }
-        if (TextUtils.isEmpty(enough_fans)) {
+        if (TextUtils.isEmpty(electricity_wiring_reason)) {
+            showSnackBar(getResources().getString(R.string.enter_electricity));
+            return false;
+        } if (TextUtils.isEmpty(enough_fans)) {
             showSnackBar(getResources().getString(R.string.select_fans));
             return false;
         }

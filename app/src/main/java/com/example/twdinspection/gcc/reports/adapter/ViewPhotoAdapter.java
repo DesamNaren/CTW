@@ -55,22 +55,10 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
         final ReportPhoto dataModel = list.get(i);
         holder.listItemBinding.setPhoto(dataModel);
-        setAnimation(holder.itemView, i);
-
         holder.listItemBinding.setImageUrl(dataModel.getFilePath());
-
         holder.bind(dataModel);
     }
 
-
-    private void setAnimation(View viewToAnimate, int position) {
-        if (position > lastPosition) {
-            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(new Random().nextInt(501));//to make duration random number between [0,501)
-            viewToAnimate.startAnimation(anim);
-            lastPosition = position;
-        }
-    }
     @Override
     public int getItemCount() {
         return list != null && list.size() > 0 ? list.size() : 0;
@@ -78,15 +66,11 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
 
 
     class ItemHolder extends RecyclerView.ViewHolder {
-
-
         AdapterViewPhotoBinding listItemBinding;
-
         ItemHolder(AdapterViewPhotoBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }
-
         void bind(Object obj) {
             listItemBinding.executePendingBindings();
         }

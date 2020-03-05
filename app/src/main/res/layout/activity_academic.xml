@@ -1469,24 +1469,43 @@
                         </LinearLayout>
 
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/t_tv_rot_working_status"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/big_tv_ll"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            app:errorEnabled="true">
+                            android:orientation="vertical">
 
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_tv_rot_working_status"
-                                android:layout_width="match_parent"
+                            <com.example.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/working_status"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:text="@string/working_status"
+                                android:textColor="@color/black" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <RadioGroup
+                                android:id="@+id/rg_big_tv_rot_avail_con"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_big_tv_rot_avail_con_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_big_tv_rot_avail_con_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+                        </LinearLayout>
 
 
                     </LinearLayout>
@@ -2401,12 +2420,11 @@
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cl"
             android:layout_above="@+id/btn_layout"
-            android:background="@android:color/transparent">
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:background="@android:color/transparent"></androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <include
             android:id="@+id/btn_layout"
