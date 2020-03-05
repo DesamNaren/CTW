@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,6 +104,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
         mandalName = sharedPreferences.getString(AppConstants.MAN_NAME, "");
         villageName = sharedPreferences.getString(AppConstants.VIL_NAME, "");
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
+        Log.i(":INST_ID", "onCreate: "+instId);
         officer_id = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         dist_id = String.valueOf(sharedPreferences.getInt(AppConstants.DIST_ID, 0));
         mand_id = String.valueOf(sharedPreferences.getInt(AppConstants.MAN_ID, 0));
