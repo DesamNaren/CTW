@@ -74,7 +74,7 @@
     <string name="capture_tds_meter_reading">Capture TDS meter reading</string>
     <string name="enter_reason">Enter Reason</string>
     <string name="how_is_light">How is lighting facility</string>
-    <string name="does_this_institute">Does the institute have enough wall mounts or Wall mounts available for all inmates</string>
+    <string name="does_this_institute">Does the institute have enough Fans or Wall mounts available for all inmates</string>
     <string name="ceiling_fans">Ceiling fans count</string>
     <string name="working">Working</string>
     <string name="non_working">Non Working</string>
@@ -306,7 +306,7 @@
     <string name="separate_kitchen_room_available">Separate kitchen room available</string>
     <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for construct kitchen room</string>
     <string name="is_it_in_good_condition">Is it in good condition</string>
-    <string name="kitchen_repair_required">repair required</string>
+    <string name="kitchen_repair_required">Repairs required</string>
     <string name="no_of_bath_rooms">No of Bath rooms</string>
     <string name="no_of_functioning_toilets">No of functioning Toilets</string>
     <string name="no_of_functioning_bathrooms">No of functioning Bathrooms</string>

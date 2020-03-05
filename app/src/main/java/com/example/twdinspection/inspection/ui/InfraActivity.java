@@ -627,7 +627,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 add_cls_cnt = binding.addClassCnt.getText().toString();
                 add_din_cnt = binding.addDinCnt.getText().toString();
                 add_dom_cnt = binding.addDomCnt.getText().toString();
-                electricity_wiring_reason = binding.etElectric.getText().toString();
+//                electricity_wiring_reason = binding.etElectric.getText().toString();
 
                 if (validateData()) {
 
@@ -650,7 +650,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setLighting_facility(lighting_facility);
                     infrastuctureEntity.setElectricity_wiring(electricity_wiring);
                     infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
-                    infrastuctureEntity.setElectricity_wiring_remarks(electricity_wiring_reason);
+//                    infrastuctureEntity.setElectricity_wiring_remarks(electricity_wiring_reason);
                     infrastuctureEntity.setEnough_fans(enough_fans);
                     infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
                     infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
@@ -832,10 +832,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_electricity_repairs));
             return false;
         }
-        if (TextUtils.isEmpty(electricity_wiring_reason)) {
-            showSnackBar(getResources().getString(R.string.enter_electricity));
-            return false;
-        } if (TextUtils.isEmpty(enough_fans)) {
+//        if (TextUtils.isEmpty(electricity_wiring_reason)) {
+//            showSnackBar(getResources().getString(R.string.enter_electricity));
+//            return false;
+//        }
+        if (TextUtils.isEmpty(enough_fans)) {
             showSnackBar(getResources().getString(R.string.select_fans));
             return false;
         }
