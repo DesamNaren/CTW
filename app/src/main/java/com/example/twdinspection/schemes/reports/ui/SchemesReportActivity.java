@@ -38,12 +38,12 @@ import com.example.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.example.twdinspection.gcc.adapter.SchemeReportAdapter;
 import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.example.twdinspection.gcc.reports.source.ReportData;
-import com.example.twdinspection.schemes.reports.source.SchemeReportData;
-import com.example.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.example.twdinspection.gcc.viewmodel.SchemeReportsViewModel;
 import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
+import com.example.twdinspection.schemes.reports.source.SchemeReportData;
+import com.example.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.example.twdinspection.schemes.viewmodel.BenCustomReportViewModel;
 import com.example.twdinspection.schemes.viewmodel.BenReportViewModel;
@@ -68,7 +68,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
     BenReportViewModel viewModel;
     private List<SchemeEntity> schemesInfoEntitiesMain;
     private BottomSheetDialog dialog;
-    private Menu mMenu=null;
+    private Menu mMenu = null;
     private List<SchemeReportData> tempBeneficiaryDetails;
     private List<SchemeReportData> beneficiaryDetailsMain;
 
@@ -119,8 +119,11 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
             e.printStackTrace();
         }
 
-        viewModel.getSchemeInfo().observe(this, schemesInfoEntities -> {
-            schemesInfoEntitiesMain = schemesInfoEntities;
+        viewModel.getSchemeInfo().observe(this, new Observer<List<SchemeEntity>>() {
+            @Override
+            public void onChanged(List<SchemeEntity> schemeEntities) {
+                schemesInfoEntitiesMain = schemeEntities;
+            }
         });
 
         if (Utils.checkInternetConnection(SchemesReportActivity.this)) {
@@ -163,7 +166,6 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
@@ -204,7 +206,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
             }
         }
 
-        if(item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return true;

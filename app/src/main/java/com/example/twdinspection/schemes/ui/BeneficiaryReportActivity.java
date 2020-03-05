@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +44,7 @@ import com.example.twdinspection.schemes.interfaces.BenClickCallback;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeClickCallback;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
+import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
 import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.example.twdinspection.schemes.viewmodel.BenCustomReportViewModel;
@@ -127,49 +129,53 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
         beneficiaryRequest.setFinYearId(str + finYr + str);
 
         customProgressDialog.show();
-        viewModel.getBeneficiaryInfo(beneficiaryRequest).observe(this, beneficiaryDetails -> {
+        viewModel.getBeneficiaryInfo(beneficiaryRequest).observe(this, new Observer<BeneficiaryReport>() {
+                    @Override
+                    public void onChanged(BeneficiaryReport beneficiaryDetails) {
+                        customProgressDialog.hide();
+                        if (beneficiaryDetails != null && beneficiaryDetails.getStatusCode() != null) {
+                            if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+                                beneficiaryDetailsMain = beneficiaryDetails.getBeneficiaryDetails();
+                                tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
+                                if (tempBeneficiaryDetails.size() > 0) {
+                                    beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
+                                    beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
+                                    mMenu.findItem(R.id.action_search).setVisible(true);
+                                    mMenu.findItem(R.id.mi_filter).setVisible(true);
+                                    beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
+                                    beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
+                                    adapter = new BenReportAdapter(BeneficiaryReportActivity.this, tempBeneficiaryDetails);
+                                    beneficiaryReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(BeneficiaryReportActivity.this));
+                                    beneficiaryReportBinding.recyclerView.setAdapter(adapter);
+                                } else {
+                                    mMenu.findItem(R.id.action_search).setVisible(false);
+                                    mMenu.findItem(R.id.mi_filter).setVisible(false);
+                                    beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                                    beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
+                                }
+                            } else if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+                                beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                                beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
+                                Snackbar.make(beneficiaryReportBinding.root, beneficiaryDetails.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                            } else {
+                                beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                                beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
+                                callSnackBar(getString(R.string.something));
+                            }
+                        } else {
+                            beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                            beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
+                            callSnackBar(getString(R.string.something));
 
-            customProgressDialog.hide();
-            if (beneficiaryDetails != null && beneficiaryDetails.getStatusCode() != null) {
-                if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                    beneficiaryDetailsMain = beneficiaryDetails.getBeneficiaryDetails();
-                    tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
-                    if (tempBeneficiaryDetails.size() > 0) {
-                        beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
-                        beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
-                        mMenu.findItem(R.id.action_search).setVisible(true);
-                        mMenu.findItem(R.id.mi_filter).setVisible(true);
-                        beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
-                        beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
-                        adapter = new BenReportAdapter(this, tempBeneficiaryDetails);
-                        beneficiaryReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        beneficiaryReportBinding.recyclerView.setAdapter(adapter);
-                    } else {
-                       mMenu.findItem(R.id.action_search).setVisible(false);
-                       mMenu.findItem(R.id.mi_filter).setVisible(false);
-                        beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-                        beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
+                        }
                     }
-                } else if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-                    beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-                    beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
-                    Snackbar.make(beneficiaryReportBinding.root, beneficiaryDetails.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-                    beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
-                    callSnackBar(getString(R.string.something));
-                }
-            } else {
-                beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-                beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
-                callSnackBar(getString(R.string.something));
-
-            }
-        });
-
-        viewModel.getSchemeInfo().observe(this, schemesInfoEntities -> {
-            schemesInfoEntitiesMain = schemesInfoEntities;
-        });
+                });
+        viewModel.getSchemeInfo().observe(this, new Observer<List<SchemeEntity>>() {
+                    @Override
+                    public void onChanged(List<SchemeEntity> schemesInfoEntities) {
+                        schemesInfoEntitiesMain = schemesInfoEntities;
+                    }
+                });
     }
 
     public void showSchemeDetails(List<SchemeEntity> schemesInfoEntitiesMain) {

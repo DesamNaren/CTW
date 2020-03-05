@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
@@ -82,25 +83,28 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         }
 
         LiveData<ReportCountsResponse> liveData = viewModel.getReportCounts(officerId);
-        liveData.observe(this, reportCountsResponse -> {
-            liveData.removeObservers(this);
-            if (reportCountsResponse != null && reportCountsResponse.getStatusCode() != null) {
-                if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                    gccCnt = reportCountsResponse.getGcc();
-                    schemesCnt = reportCountsResponse.getSchemes();
-                    instCnt = reportCountsResponse.getSchools();
+        liveData.observe(this, new Observer<ReportCountsResponse>() {
+            @Override
+            public void onChanged(ReportCountsResponse reportCountsResponse) {
+                liveData.removeObservers(ReportActivity.this);
+                if (reportCountsResponse != null && reportCountsResponse.getStatusCode() != null) {
+                    if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+                        gccCnt = reportCountsResponse.getGcc();
+                        schemesCnt = reportCountsResponse.getSchemes();
+                        instCnt = reportCountsResponse.getSchools();
 
-                    binding.gccCnt.setText(String.valueOf(gccCnt));
-                    binding.schemeCnt.setText(String.valueOf(schemesCnt));
-                    binding.instCnt.setText(String.valueOf(instCnt));
+                        binding.gccCnt.setText(String.valueOf(gccCnt));
+                        binding.schemeCnt.setText(String.valueOf(schemesCnt));
+                        binding.instCnt.setText(String.valueOf(instCnt));
 
-                } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-                    callSnackBar(getString(R.string.something));
+                    } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+                        callSnackBar(getString(R.string.something));
+                    } else {
+                        callSnackBar(getString(R.string.something));
+                    }
                 } else {
                     callSnackBar(getString(R.string.something));
                 }
-            } else {
-                callSnackBar(getString(R.string.something));
             }
         });
 

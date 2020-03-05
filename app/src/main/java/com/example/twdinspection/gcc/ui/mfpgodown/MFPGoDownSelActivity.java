@@ -74,20 +74,22 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
 
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
-
-        divisionLiveData.observe(this, divisions -> {
-            divisionLiveData.removeObservers(MFPGoDownSelActivity.this);
-            customProgressDialog.dismiss();
-            if (divisions != null && divisions.size() > 0) {
-                ArrayList<String> divisionNames = new ArrayList<>();
-                divisionNames.add("-Select-");
-                divisionNames.addAll(divisions);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item, divisionNames
-                );
-                binding.spDivision.setAdapter(adapter);
-            }
-        });
+        divisionLiveData.observe(this, new Observer<List<String>>() {
+                    @Override
+                    public void onChanged(List<String> divisions) {
+                        divisionLiveData.removeObservers(MFPGoDownSelActivity.this);
+                        customProgressDialog.dismiss();
+                        if (divisions != null && divisions.size() > 0) {
+                            ArrayList<String> divisionNames = new ArrayList<>();
+                            divisionNames.add("-Select-");
+                            divisionNames.addAll(divisions);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                    android.R.layout.simple_spinner_dropdown_item, divisionNames
+                            );
+                            binding.spDivision.setAdapter(adapter);
+                        }
+                    }
+                });
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spMfp.setOnItemSelectedListener(this);

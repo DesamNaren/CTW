@@ -17,10 +17,11 @@ import androidx.lifecycle.Observer;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
+import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,7 +34,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
     int selectedDistId, selectedManId, selectedVilId;
-    String selectedInstId, selectedManName, selInstName, selectedVilName,selectedDistName, selectedAddress;
+    String selectedInstId, selectedManName, selInstName, selectedVilName, selectedDistName, selectedAddress;
     String lat, lng, address;
     ArrayList<String> instNames;
     SharedPreferences sharedPreferences;
@@ -52,7 +53,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,18 +82,21 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
-        viewModel.getAllDistricts().observe(this, districts -> {
-            customProgressDialog.dismiss();
-            if (districts != null && districts.size() > 0) {
-                ArrayList<String> distNames = new ArrayList<>();
-                distNames.add("-Select-");
-                for (int i = 0; i < districts.size(); i++) {
-                    distNames.add(districts.get(i).getDistName());
+        viewModel.getAllDistricts().observe(this, new Observer<List<SchoolDistrict>>() {
+            @Override
+            public void onChanged(List<SchoolDistrict> schoolDistricts) {
+                customProgressDialog.dismiss();
+                if (schoolDistricts != null && schoolDistricts.size() > 0) {
+                    ArrayList<String> distNames = new ArrayList<>();
+                    distNames.add("-Select-");
+                    for (int i = 0; i < schoolDistricts.size(); i++) {
+                        distNames.add(schoolDistricts.get(i).getDistName());
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, distNames
+                    );
+                    dmvSelectionActivityBinding.spDist.setAdapter(adapter);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_spinner_dropdown_item, distNames
-                );
-                dmvSelectionActivityBinding.spDist.setAdapter(adapter);
             }
         });
 
