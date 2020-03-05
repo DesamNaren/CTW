@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.ui;
+package com.example.twdinspection.inspection.reports.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -18,8 +18,8 @@ import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ActivityReportBinding;
-import com.example.twdinspection.inspection.reports.ui.InspectionReportsDashboard;
 import com.example.twdinspection.gcc.reports.ui.GCCReportsDashboard;
+import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.schemes.reports.ui.SchemesReportActivity;
 import com.example.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.example.twdinspection.inspection.viewmodel.ReportsCustomViewModel;

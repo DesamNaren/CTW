@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
@@ -53,8 +54,11 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         inspReportData = gson.fromJson(data, InspReportData.class);
 
-        binding.setComments(inspReportData.getGeneralComments());
-        binding.executePendingBindings();
+        String jsonObject  = gson.toJson(inspReportData.getGeneralComments());
+        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            binding.setComments(inspReportData.getGeneralComments());
+            binding.executePendingBindings();
+        }
 
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {

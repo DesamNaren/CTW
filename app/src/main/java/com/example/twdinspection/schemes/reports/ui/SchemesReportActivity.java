@@ -249,7 +249,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
         Gson gson = new Gson();
         String data = gson.toJson(schemeReportData);
         editor.putString(AppConstants.SCHEME_REP_DATA, data);
-        editor.apply();
+        editor.commit();
         startActivity(new Intent(this, SchemeReportDetailsActivity.class));
     }
 

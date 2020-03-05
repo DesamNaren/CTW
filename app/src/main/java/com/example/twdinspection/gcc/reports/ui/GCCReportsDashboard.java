@@ -64,7 +64,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             editor.putString(AppConstants.MFP_Godown_Report, "");
             editor.putString(AppConstants.PUnit_Report, "");
             editor.putString(AppConstants.Selected_Supp_Report, "");
-            editor.apply();
+            editor.commit();
 
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -90,7 +90,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 Gson gson = new Gson();
                 String drDepotData = gson.toJson(drDepot);
                 editor.putString(AppConstants.Selected_Supp_Report, drDepotData);
-                editor.apply();
+                editor.commit();
                 startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
@@ -102,7 +102,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 Gson gson = new Gson();
                 String drGodownData = gson.toJson(drGodown);
                 editor.putString(AppConstants.Selected_Supp_Report, drGodownData);
-                editor.apply();
+                editor.commit();
                 startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
@@ -114,7 +114,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 Gson gson = new Gson();
                 String data = gson.toJson(mfpGodown);
                 editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.apply();
+                editor.commit();
                 startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
@@ -126,7 +126,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 Gson gson = new Gson();
                 String data = gson.toJson(processingUnit);
                 editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.apply();
+                editor.commit();
                 startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
             }
         });
@@ -174,7 +174,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
 
                             String pUnitData = gson.toJson(processingUnit);
                             editor.putString(AppConstants.PUnit_Report, pUnitData);
-                            editor.apply();
+                            editor.commit();
 
                         } else if (gccReportResponse.getData() != null && gccReportResponse.getData().size() == 0) {
                             callSnackBar("No data available");

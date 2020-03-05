@@ -8,13 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -25,6 +22,7 @@ import com.example.twdinspection.databinding.ActivityDashboardBinding;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
+import com.example.twdinspection.inspection.reports.ui.ReportActivity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.ui.SchemesDMVActivity;
 

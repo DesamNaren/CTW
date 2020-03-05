@@ -164,7 +164,7 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
         Gson gson = new Gson();
         String data = gson.toJson(reportData);
         editor.putString(AppConstants.INSP_REP_DATA, data);
-        editor.apply();
+        editor.commit();
         startActivity(new Intent(this, InstReportsMenuActivity.class));
     }
 

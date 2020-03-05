@@ -216,7 +216,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/dimen_70dp"
                                     android:layout_height="@dimen/dimen_70dp"
-                                    android:background="@drawable/disabled" />
+                                    android:background="@drawable/medical" />
 
                                 <TextView
                                     android:id="@+id/inst_cnt"

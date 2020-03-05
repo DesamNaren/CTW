@@ -36,7 +36,7 @@
             android:name=".gcc.reports.ui.GCCReportsDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.ReportActivity"
+            android:name=".inspection.reports.ui.ReportActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.CocurricularStudAchActivity"

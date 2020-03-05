@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +14,9 @@ import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ReportActivityStudentsAttendanceBinding;
-import com.example.twdinspection.gcc.adapter.DailyReqSubAdapter;
-import com.example.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.example.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.reports.source.StudentAttendenceInfo;
-import com.example.twdinspection.inspection.ui.BaseActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -60,12 +58,15 @@ public class ReportStudentsAttendActivity extends AppCompatActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         inspReportData = gson.fromJson(data, InspReportData.class);
 
-        if (inspReportData != null) {
+        String jsonObject = gson.toJson(inspReportData.getStudentAttendenceInfo());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             studentAttendInfoList = inspReportData.getStudentAttendenceInfo();
             if (studentAttendInfoList != null && studentAttendInfoList.size() > 0) {
                 setAdapter(studentAttendInfoList);
             }
         }
+
+
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
@@ -45,8 +46,6 @@ public class ReportCoCarricularActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         InspReportData reportData = gson.fromJson(data, InspReportData.class);
 
-        binding.setInspData(reportData.getCoCurricularInfo());
-        binding.executePendingBindings();
 
         binding.btnNext.setText(getResources().getString(R.string.next));
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
@@ -55,31 +54,41 @@ public class ReportCoCarricularActivity extends BaseActivity {
                 startActivity(new Intent(ReportCoCarricularActivity.this, ReportsEntitlementsActivity.class));
             }
         });
-        if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getPlantsEntities() != null
-                && reportData.getCoCurricularInfo().getPlantsEntities().size() > 0) {
-            binding.btnViewplant.setVisibility(View.VISIBLE);
-            binding.btnViewplant.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(ReportCoCarricularActivity.this, PlantsInfoActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra(AppConstants.FROM_CLASS, AppConstants.REPORT_COCAR));
-                }
-            });
+
+        String jsonObject  = gson.toJson(reportData.getCoCurricularInfo());
+        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            binding.setInspData(reportData.getCoCurricularInfo());
+
+            if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getPlantsEntities() != null
+                    && reportData.getCoCurricularInfo().getPlantsEntities().size() > 0) {
+                binding.btnViewplant.setVisibility(View.VISIBLE);
+                binding.btnViewplant.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(ReportCoCarricularActivity.this, PlantsInfoActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra(AppConstants.FROM_CLASS, AppConstants.REPORT_COCAR));
+                    }
+                });
+            }
+
+            if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getStudAchievementEntities() != null
+                    && reportData.getCoCurricularInfo().getStudAchievementEntities().size() > 0) {
+                binding.btnViewStud.setVisibility(View.VISIBLE);
+                binding.btnViewStud.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(ReportCoCarricularActivity.this, CocurricularStudAchActivity.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .putExtra(AppConstants.FROM_CLASS, AppConstants.REPORT_COCAR));
+                    }
+                });
+            }
+
+            binding.executePendingBindings();
         }
 
-        if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getStudAchievementEntities() != null
-                && reportData.getCoCurricularInfo().getStudAchievementEntities().size() > 0) {
-            binding.btnViewStud.setVisibility(View.VISIBLE);
-            binding.btnViewStud.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(ReportCoCarricularActivity.this, CocurricularStudAchActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                            .putExtra(AppConstants.FROM_CLASS, AppConstants.REPORT_COCAR));
-                }
-            });
-        }
+
 
     }
 

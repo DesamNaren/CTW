@@ -3,7 +3,9 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +17,8 @@ import com.example.twdinspection.databinding.ActivityReportGeneralInfoBinding;
 import com.example.twdinspection.inspection.reports.source.InspReportData;
 import com.example.twdinspection.inspection.ui.StudentsAttendActivity;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 public class ReportsGeneralInfoActivity extends AppCompatActivity {
     private static final String TAG = ReportsGeneralInfoActivity.class.getSimpleName();
@@ -40,22 +44,32 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
                 startActivity(new Intent(ReportsGeneralInfoActivity.this, InstReportsMenuActivity.class));
             }
         });
-
-
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         reportData = gson.fromJson(data, InspReportData.class);
 
-        binding.setInspData(reportData.getGeneralInfo());
+        String jsonObject  = gson.toJson(reportData.getGeneralInfo());
+        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            binding.setInspData(reportData.getGeneralInfo());
+            binding.manNameTv.setText(reportData.getMandalName());
+            binding.instNameTv.setText(reportData.getInstituteName());
 
-        binding.manNameTv.setText(reportData.getMandalName());
-        binding.instNameTv.setText(reportData.getInstituteName());
+            binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
+            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
+            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+            binding.executePendingBindings();
+        }
 
-        binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
-        binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
-        binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-        binding.executePendingBindings();
+//        if(reportData!=null && reportData.getGeneralInfo()!=null) {
+//            binding.manNameTv.setText(reportData.getMandalName());
+//            binding.instNameTv.setText(reportData.getInstituteName());
+//
+//            binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
+//            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_ID, ""));
+//            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+//            binding.executePendingBindings();
+//        }
 
 
         binding.btnNext.setText(getResources().getString(R.string.next));

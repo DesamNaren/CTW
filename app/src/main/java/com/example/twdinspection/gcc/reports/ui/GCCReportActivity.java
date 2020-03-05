@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -31,14 +29,7 @@ import com.example.twdinspection.databinding.ActivityGccReportBinding;
 import com.example.twdinspection.gcc.reports.adapter.GCCReportAdapter;
 import com.example.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.example.twdinspection.gcc.reports.source.ReportData;
-import com.example.twdinspection.inspection.ui.DashboardActivity;
-import com.example.twdinspection.inspection.ui.ReportActivity;
-import com.example.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.example.twdinspection.schemes.reports.source.SchemeReportData;
-import com.example.twdinspection.schemes.reports.ui.SchemesReportActivity;
-import com.example.twdinspection.schemes.source.schemes.SchemeEntity;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -262,7 +253,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         Gson gson = new Gson();
         String data = gson.toJson(reportData);
         editor.putString(AppConstants.REP_DATA, data);
-        editor.apply();
+        editor.commit();
         startActivity(new Intent(this, ReportStockDetailsActivity.class));
     }
 

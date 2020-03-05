@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
@@ -57,12 +58,16 @@ public class ReportStaffAttendActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         inspReportData=gson.fromJson(data, InspReportData.class);
 
-        if(inspReportData!=null) {
+
+        String jsonObject = gson.toJson(inspReportData.getStaffAttendenceInfo());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             staffAttendenceInfos = inspReportData.getStaffAttendenceInfo();
             if(staffAttendenceInfos!=null && staffAttendenceInfos.size()>0){
                 setAdapter(staffAttendenceInfos);
             }
         }
+
+
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

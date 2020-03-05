@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.twdinspection.R;
@@ -49,8 +50,13 @@ public class ViewPhotosActivity extends AppCompatActivity {
         reportData = gson.fromJson(data, ReportData.class);
 
 
-        adapter = new ViewPhotoAdapter(this, reportData.getPhotos());
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        binding.recyclerView.setAdapter(adapter);
+        String jsonObject  = gson.toJson(reportData.getPhotos());
+        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            adapter = new ViewPhotoAdapter(this, reportData.getPhotos());
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+            binding.recyclerView.setAdapter(adapter);
+        }
+
+
     }
 }
