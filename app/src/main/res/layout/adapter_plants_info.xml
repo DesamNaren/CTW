@@ -6,7 +6,7 @@
 
         <variable
             name="plantInfo"
-            type="com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity"/>
+            type="com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity"/>
 
     </data>
 

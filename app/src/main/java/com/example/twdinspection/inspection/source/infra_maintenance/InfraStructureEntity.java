@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.InfrastructureAndMaintenance;
+package com.example.twdinspection.inspection.source.infra_maintenance;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

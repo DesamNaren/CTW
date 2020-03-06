@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.GeneralComments;
+package com.example.twdinspection.inspection.source.general_comments;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

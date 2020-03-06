@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.staffAttendance;
+package com.example.twdinspection.inspection.source.staff_attendance;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

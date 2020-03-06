@@ -1,49 +1,49 @@
-package com.example.twdinspection.inspection.source.GeneralInformation;
+package com.example.twdinspection.inspection.source.general_information;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "general_info")
 public class GeneralInfoEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo()
+
     private int id;
 
-    @ColumnInfo()
+    @NotNull
+    @PrimaryKey
     private String institute_id;
 
-    @ColumnInfo()
     private String inspection_time;
 
-    @ColumnInfo()
+    
     private String officer_id;
 
-    @ColumnInfo()
+    
     private String HM_HWO_presence;
 
-    @ColumnInfo()
+    
     private String having_headquarters;
 
-    @ColumnInfo()
+    
     private String leaveType;
 
-    @ColumnInfo()
+    
     private String capturetype;
 
-    @ColumnInfo()
+    
     private String movementRegisterEntry;
 
-    @ColumnInfo()
+    
     private String captureDistance;
 
-    @ColumnInfo()
+    
     private String staffQuarters;
 
-    @ColumnInfo()
+    
     private String stayingFacilitiesType;
 
     @Ignore

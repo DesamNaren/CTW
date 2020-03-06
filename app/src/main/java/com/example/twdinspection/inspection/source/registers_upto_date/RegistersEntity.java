@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.RegistersUptoDate;
+package com.example.twdinspection.inspection.source.registers_upto_date;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

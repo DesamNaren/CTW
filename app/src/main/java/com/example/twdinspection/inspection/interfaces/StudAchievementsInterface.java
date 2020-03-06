@@ -1,7 +1,6 @@
 package com.example.twdinspection.inspection.interfaces;
 
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 public interface StudAchievementsInterface {
     void deleteAchievementRecord(StudAchievementEntity studAchievementEntity);

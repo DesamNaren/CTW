@@ -3,11 +3,9 @@ package com.example.twdinspection.inspection.Room.repository;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.twdinspection.inspection.Room.Dao.EntitlementsInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
-import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

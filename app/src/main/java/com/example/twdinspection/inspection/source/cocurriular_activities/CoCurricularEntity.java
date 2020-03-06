@@ -1,12 +1,9 @@
-package com.example.twdinspection.inspection.source.cocurriularActivities;
+package com.example.twdinspection.inspection.source.cocurriular_activities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.twdinspection.inspection.source.converters.CallHealthConverter;
-import com.example.twdinspection.inspection.source.converters.MedicalRecordsConverter;
 import com.example.twdinspection.inspection.source.converters.PlantInfoConverter;
 import com.example.twdinspection.inspection.source.converters.StudentAchConverter;
 

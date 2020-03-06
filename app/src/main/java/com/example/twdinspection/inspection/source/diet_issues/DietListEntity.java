@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.dietIssues;
+package com.example.twdinspection.inspection.source.diet_issues;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

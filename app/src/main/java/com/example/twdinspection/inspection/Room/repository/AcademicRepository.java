@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

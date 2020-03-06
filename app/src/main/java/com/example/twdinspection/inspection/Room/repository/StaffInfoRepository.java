@@ -7,10 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
 import java.util.List;
 import java.util.concurrent.Callable;

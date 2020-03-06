@@ -31,7 +31,7 @@ import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
 import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudAttndCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel;

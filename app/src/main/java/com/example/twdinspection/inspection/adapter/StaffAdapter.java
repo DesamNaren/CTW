@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.ItemStaffAttendanceBinding;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
 import java.util.List;
 import java.util.Random;

@@ -5,8 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -15,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterStudAttndBinding;
 import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
-import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 import java.util.List;
-import java.util.Random;
 
 public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.ItemHolder> {
 

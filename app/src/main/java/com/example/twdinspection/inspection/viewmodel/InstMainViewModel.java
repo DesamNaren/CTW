@@ -13,18 +13,18 @@ import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.databinding.InstMainActivityBinding;
 import com.example.twdinspection.inspection.Room.repository.MenuSectionsRepository;
 import com.example.twdinspection.inspection.interfaces.InstSubmitInterface;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
-import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
-import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -50,32 +50,28 @@ public class InstMainViewModel extends AndroidViewModel {
     private LiveData<List<InstMenuInfoEntity>> instMenuInfoEntities;
     private InstSubmitInterface instSubmitInterface;
     InstMainActivityBinding binding;
-    LiveData<GeneralInfoEntity> generalInfoEntityLiveData;
-    LiveData<List<StudAttendInfoEntity>> studAttendInfo;
-    LiveData<List<StaffAttendanceEntity>> staffAttendInfo;
-    LiveData<MedicalInfoEntity> medicalInfoEntityLiveData;
-    LiveData<DietIssuesEntity> dietIssuesEntityLiveData;
-    LiveData<InfraStructureEntity> infraStructureEntityLiveData;
-    LiveData<AcademicEntity> academicEntityLiveData;
-    LiveData<CoCurricularEntity> coCurricularEntityLiveData;
-    LiveData<EntitlementsEntity> entitlementsEntityLiveData;
-    LiveData<RegistersEntity> registersEntityLiveData;
-    LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData;
+    private LiveData<GeneralInfoEntity> generalInfoEntityLiveData;
+    private LiveData<List<StudAttendInfoEntity>> studAttendInfo;
+    private LiveData<List<StaffAttendanceEntity>> staffAttendInfo;
+    private LiveData<MedicalInfoEntity> medicalInfoEntityLiveData;
+    private LiveData<DietIssuesEntity> dietIssuesEntityLiveData;
+    private LiveData<InfraStructureEntity> infraStructureEntityLiveData;
+    private LiveData<AcademicEntity> academicEntityLiveData;
+    private LiveData<CoCurricularEntity> coCurricularEntityLiveData;
+    private LiveData<EntitlementsEntity> entitlementsEntityLiveData;
+    private LiveData<RegistersEntity> registersEntityLiveData;
+    private LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData;
     private ErrorHandlerInterface errorHandlerInterface;
     Context context;
 
     public InstMainViewModel(Application application) {
         super(application);
         mRepository = new MenuSectionsRepository(application);
+        setDefaults();
         instMenuInfoEntities = new MutableLiveData<>();
     }
 
-    public InstMainViewModel(InstMainActivityBinding binding, Application application, Context context) {
-        super(application);
-        this.context = context;
-        this.binding = binding;
-        errorHandlerInterface = (ErrorHandlerInterface) context;
-        instSubmitInterface = (InstSubmitInterface) context;
+    private void setDefaults() {
         generalInfoEntityLiveData = new MutableLiveData<>();
         studAttendInfo = new MutableLiveData<>();
         staffAttendInfo = new MutableLiveData<>();
@@ -87,8 +83,15 @@ public class InstMainViewModel extends AndroidViewModel {
         entitlementsEntityLiveData = new MutableLiveData<>();
         registersEntityLiveData = new MutableLiveData<>();
         generalCommentsEntityLiveData = new MutableLiveData<>();
-        mRepository = new MenuSectionsRepository(application);
         instMenuInfoEntities = new MutableLiveData<>();
+    }
+
+    public InstMainViewModel(InstMainActivityBinding binding, Application application, Context context) {
+        super(application);
+        this.context = context;
+        this.binding = binding;
+        setDefaults();
+        mRepository = new MenuSectionsRepository(application);
     }
 
     public void insertMenuSections(List<InstMenuInfoEntity> menuInfoEntities) {

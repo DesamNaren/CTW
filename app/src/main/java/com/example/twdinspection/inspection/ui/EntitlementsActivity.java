@@ -18,7 +18,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityEntitlementsBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.viewmodel.EntitilementsCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.EntitlementsViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;

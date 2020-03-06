@@ -6,13 +6,10 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.CocurricularDao;
-import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 import java.util.List;
 

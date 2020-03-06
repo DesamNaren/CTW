@@ -4,10 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.GenCommentsInfoDao;
-import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
-import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
+import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

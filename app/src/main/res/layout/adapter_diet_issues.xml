@@ -6,7 +6,7 @@
 
         <variable
             name="dietIssues"
-            type="com.example.twdinspection.inspection.source.dietIssues.DietListEntity" />
+            type="com.example.twdinspection.inspection.source.diet_issues.DietListEntity" />
 
     </data>
 

@@ -7,14 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityCoCurricularBinding;
-import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.Room.repository.CocurricularRepository;
-import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
-import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 import java.util.List;
 

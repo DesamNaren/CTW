@@ -1,13 +1,8 @@
-package com.example.twdinspection.inspection.source.dietIssues;
+package com.example.twdinspection.inspection.source.diet_issues;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.example.twdinspection.inspection.source.converters.DietInfoConverter;
-
-import java.util.List;
 
 //@TypeConverters({DietInfoConverter.class})
 @Entity(tableName = "diet_issues_info")

@@ -7,10 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.inspection.Room.repository.ClassInfoRepository;
-import com.example.twdinspection.inspection.source.inst_master.InstMasterResponse;
-import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
 import java.util.List;

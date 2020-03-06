@@ -4,16 +4,9 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.inspection.Room.repository.GeneralInfoRepository;
-import com.example.twdinspection.inspection.Room.repository.MenuSectionsRepository;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
-
-import java.util.List;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 
 public class GeneralInfoViewModel extends AndroidViewModel {
     private GeneralInfoRepository mRepository;

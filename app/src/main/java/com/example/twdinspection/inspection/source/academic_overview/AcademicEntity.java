@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.AcademicOverview;
+package com.example.twdinspection.inspection.source.academic_overview;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

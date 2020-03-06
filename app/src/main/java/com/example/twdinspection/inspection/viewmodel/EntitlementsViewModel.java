@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityEntitlementsBinding;
 import com.example.twdinspection.inspection.Room.repository.EntitlementsRepository;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 
 public class EntitlementsViewModel extends ViewModel {
 

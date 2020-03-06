@@ -37,7 +37,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;

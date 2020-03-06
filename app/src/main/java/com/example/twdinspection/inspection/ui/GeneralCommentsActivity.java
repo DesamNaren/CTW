@@ -1,21 +1,16 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -23,7 +18,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityGeneralCommentsBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
+import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.viewmodel.GenCommentsCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.GenCommentsViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;

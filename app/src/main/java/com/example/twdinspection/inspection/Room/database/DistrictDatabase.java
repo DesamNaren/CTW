@@ -9,7 +9,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.twdinspection.R;
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.ClassInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.CocurricularDao;
@@ -26,30 +25,27 @@ import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
-import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
-import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
-
-import java.io.File;
-import java.io.InputStream;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.

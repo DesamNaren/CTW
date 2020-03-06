@@ -16,7 +16,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.example.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;

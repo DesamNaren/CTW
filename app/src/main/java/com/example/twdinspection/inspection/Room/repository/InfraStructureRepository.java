@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.InfraStructureInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

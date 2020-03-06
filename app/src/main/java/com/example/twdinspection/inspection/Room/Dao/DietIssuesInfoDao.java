@@ -5,8 +5,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;

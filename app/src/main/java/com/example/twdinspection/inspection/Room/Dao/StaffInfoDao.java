@@ -7,8 +7,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.example.twdinspection.inspection.ui;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,15 +15,14 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityGeneralInfoBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.GeneralInfoViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     private static final String TAG = GeneralInfoActivity.class.getSimpleName();
-        SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ActivityGeneralInfoBinding binding;
     GeneralInfoViewModel generalInfoViewModel;
@@ -33,6 +31,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     String headQuarters;
     String presentTime, leavetype, capturetype, movementRegisterEntry, staffQuarters, stayingFacilitiesType, captureDistance;
     private String officerID, instID, insTime;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
         binding.setViewModel(generalInfoViewModel);
-        binding.executePendingBindings();
-
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -60,6 +57,22 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+        if(localFlag==1){
+            //get local record & set to data binding
+            LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();
+            generalInfoEntityLiveData.observe(GeneralInfoActivity.this, new Observer<GeneralInfoEntity>() {
+                @Override
+                public void onChanged(GeneralInfoEntity generalInfoEntity) {
+                    generalInfoEntityLiveData.removeObservers(GeneralInfoActivity.this);
+                    if (generalInfoEntity != null) {
+                        binding.setInspDataGeneral(generalInfoEntity);
+                        binding.executePendingBindings();
+                    }
+                }
+            });
         }
 
         binding.rgHeadQuarters.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -250,6 +263,8 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
+
     }
 
     private boolean validateData() {
@@ -306,7 +321,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     @Override
                     public void onChanged(Integer id) {
                         if (id != null) {
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instID);
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }
                     }
                 });
@@ -315,7 +330,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             }
             if (z[0] >= 0) {
 
-               Utils.customSectionSaveAlert(GeneralInfoActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(GeneralInfoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
 //                startActivity(new Intent(GeneralInfoActivity.this, StudentsAttendActivity.class));
             } else {
                 showSnackBar(getString(R.string.failed));

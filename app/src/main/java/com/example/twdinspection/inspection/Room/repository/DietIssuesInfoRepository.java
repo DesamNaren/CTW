@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.DietIssuesInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.twdinspection.inspection.reports.source;
 
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

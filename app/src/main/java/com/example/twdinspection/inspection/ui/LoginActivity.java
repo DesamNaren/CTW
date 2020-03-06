@@ -24,7 +24,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
 import com.example.twdinspection.inspection.source.login.LoginResponse;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginViewModel;

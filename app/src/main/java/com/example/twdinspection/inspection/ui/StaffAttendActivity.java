@@ -1,6 +1,5 @@
 package com.example.twdinspection.inspection.ui;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,7 +18,7 @@ import com.example.twdinspection.databinding.ActivityStaffAttBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterStaffInfo;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StaffAttendCustomViewModel;

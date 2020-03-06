@@ -12,9 +12,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.InstMainRowBinding;
-import com.example.twdinspection.inspection.source.instMenuInfo.InstMenuInfoEntity;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.ui.AcademicActivity;
 import com.example.twdinspection.inspection.ui.CoCurricularActivity;
 import com.example.twdinspection.inspection.ui.DietIssuesActivity;
@@ -64,40 +65,40 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
         holder.listItemBinding.llClassHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dataModel.getFlag_completed()==0) {
+//                if (dataModel.getFlag_completed()==0) {
                     switch (dataModel.getSection_id()) {
                         case 1:
-                            callActivity(GeneralInfoActivity.class);
+                            callActivity(GeneralInfoActivity.class, dataModel.getFlag_completed());
                             break;
                         case 2:
-                            callActivity(StudentsAttendActivity.class);
+                            callActivity(StudentsAttendActivity.class, dataModel.getFlag_completed());
                             break;
                         case 3:
-                            callActivity(StaffAttendActivity.class);
+                            callActivity(StaffAttendActivity.class, dataModel.getFlag_completed());
                             break;
                         case 4:
-                            callActivity(MedicalActivity.class);
+                            callActivity(MedicalActivity.class, dataModel.getFlag_completed());
                             break;
                         case 5:
-                            callActivity(DietIssuesActivity.class);
+                            callActivity(DietIssuesActivity.class, dataModel.getFlag_completed());
                             break;
                         case 6:
-                            callActivity(InfraActivity.class);
+                            callActivity(InfraActivity.class, dataModel.getFlag_completed());
                             break;
                         case 7:
-                            callActivity(AcademicActivity.class);
+                            callActivity(AcademicActivity.class, dataModel.getFlag_completed());
                             break;
                         case 8:
-                            callActivity(CoCurricularActivity.class);
+                            callActivity(CoCurricularActivity.class, dataModel.getFlag_completed());
                             break;
                         case 9:
-                            callActivity(EntitlementsActivity.class);
+                            callActivity(EntitlementsActivity.class, dataModel.getFlag_completed());
                             break;
                         case 10:
-                            callActivity(RegistersActivity.class);
+                            callActivity(RegistersActivity.class, dataModel.getFlag_completed());
                             break;
                         case 11:
-                            callActivity(GeneralCommentsActivity.class);
+                            callActivity(GeneralCommentsActivity.class, dataModel.getFlag_completed());
                             break;
                         case 12:
                             boolean flag = true;
@@ -108,7 +109,7 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                                 }
                             }
                             if (flag) {
-                                callActivity(UploadedPhotoActivity.class);
+                                callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
                             } else {
                                 Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
                             }
@@ -116,13 +117,14 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                     }
                 }
 
-            }
+//            }
         });
         holder.bind(dataModel);
     }
 
-    private void callActivity(Class<?> calledActivity) {
+    private void callActivity(Class<?> calledActivity, int flag) {
         Intent myIntent = new Intent(context, calledActivity);
+        myIntent.putExtra(AppConstants.LOCAL_FLAG, flag);
         context.startActivity(myIntent);
     }
 

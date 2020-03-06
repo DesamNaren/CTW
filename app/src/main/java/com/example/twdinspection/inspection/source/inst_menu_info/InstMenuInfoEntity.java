@@ -1,9 +1,7 @@
-package com.example.twdinspection.inspection.source.instMenuInfo;
+package com.example.twdinspection.inspection.source.inst_menu_info;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "inst_menu_info")
 public class InstMenuInfoEntity {

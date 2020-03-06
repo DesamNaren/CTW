@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.EntitlementsDistribution;
+package com.example.twdinspection.inspection.source.entitlements_distribution;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

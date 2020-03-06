@@ -36,12 +36,12 @@ public class AppConstants {
     public static final String VIL_NAME = "VIL_NAME";
     public static final String PARTICIPATED = "Participated";
     public static final String WIN = "Win";
-    public static final String CLASSROOM ="Classroom";
+    public static final String CLASSROOM = "Classroom";
     public static final String PRESENT = "Present";
     public static final String ABSENT = "Absent";
     public static final String ONDEPUTATION = "On Deputation";
-    public static final String Yes="YES";
-    public static final String No="NO";
+    public static final String Yes = "YES";
+    public static final String No = "NO";
 
 
     public static final int SUCCESS_CODE = 200;
@@ -96,30 +96,32 @@ public class AppConstants {
     public static final String FROM_CLASS = "FROM_CLASS";
     public static final String COCAR = "COCAR";
     public static final String REPORT_COCAR = "REPORT_COCAR";
-    public static String stockData="STOCK_DATA";
-    public static String essComm="essComm";
-    public static String dailyReq="dailyReq";
-    public static String empties="empties";
-    public static String mfp="mfp";
-    public static String punit="punit";
+    public static String stockData = "STOCK_DATA";
+    public static String essComm = "essComm";
+    public static String dailyReq = "dailyReq";
+    public static String empties = "empties";
+    public static String mfp = "mfp";
+    public static String punit = "punit";
 
     public static final String DR_GODOWN_DATA = "DR_GODOWN_DATA";
     public static final String DR_DEPOT_DATA = "DR_DEPOT_DATA";
     public static final String MFP_DEPOT_DATA = "MFP_DEPOT_DATA";
     public static final String P_UNIT_DATA = "P_UNIT_DATA";
-    public static String InspectionDetails ="Depot_Inspection";
-    public static String repairsPath="Repair_path";
-    public static String open="open";
-    public static String close="close";
-    public static String SHOP_CLOSED ="SHOP_CLOSED";
-    public static String DR_Depot_Report="DR_DEPOT_REPORTS";
-    public static String DR_Godown_Report="DR_GODOWN_REPORT";
-    public static String MFP_Godown_Report="MFP_GODOWN_REPORT";
-    public static String PUnit_Report="PUNIT_REPORT";
-    public static String Selected_Supp_Report="Selected_Supp_Report";
-    public static String essRepComm="essRepComm";
-    public static String dailyRepReq="dailyRepReq";
-    public static String emptiesRep="emptiesRep";
-    public static String mfpRep="mfpRep";
-    public static String punitRep="punitRep";
+    public static String InspectionDetails = "Depot_Inspection";
+    public static String repairsPath = "Repair_path";
+    public static String open = "open";
+    public static String close = "close";
+    public static String SHOP_CLOSED = "SHOP_CLOSED";
+    public static String DR_Depot_Report = "DR_DEPOT_REPORTS";
+    public static String DR_Godown_Report = "DR_GODOWN_REPORT";
+    public static String MFP_Godown_Report = "MFP_GODOWN_REPORT";
+    public static String PUnit_Report = "PUNIT_REPORT";
+    public static String Selected_Supp_Report = "Selected_Supp_Report";
+    public static String essRepComm = "essRepComm";
+    public static String dailyRepReq = "dailyRepReq";
+    public static String emptiesRep = "emptiesRep";
+    public static String mfpRep = "mfpRep";
+    public static String punitRep = "punitRep";
+
+    public static String LOCAL_FLAG = "LOCAL_FLAG";
 }

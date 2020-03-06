@@ -6,10 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.PlantsInfoDao;
-import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 
 import java.util.List;
 

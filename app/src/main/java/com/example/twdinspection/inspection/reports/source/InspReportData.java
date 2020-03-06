@@ -1,6 +1,5 @@
 package com.example.twdinspection.inspection.reports.source;
 
-import com.example.twdinspection.gcc.reports.source.ReportPhoto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

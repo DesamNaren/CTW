@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.databinding.AdapterDietIssuesBinding;
-import com.example.twdinspection.inspection.interfaces.DietInterface;
-import com.example.twdinspection.inspection.interfaces.StudAttendInterface;
-import com.example.twdinspection.inspection.source.dietIssues.DietListEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 
 import java.util.List;
 

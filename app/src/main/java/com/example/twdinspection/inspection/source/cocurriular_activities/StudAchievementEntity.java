@@ -1,4 +1,4 @@
-package com.example.twdinspection.inspection.source.cocurriularActivities;
+package com.example.twdinspection.inspection.source.cocurriular_activities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

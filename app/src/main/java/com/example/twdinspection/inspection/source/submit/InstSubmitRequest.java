@@ -1,16 +1,16 @@
 package com.example.twdinspection.inspection.source.submit;
 
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
-import com.example.twdinspection.inspection.source.GeneralComments.GeneralCommentsEntity;
-import com.example.twdinspection.inspection.source.GeneralInformation.GeneralInfoEntity;
-import com.example.twdinspection.inspection.source.InfrastructureAndMaintenance.InfraStructureEntity;
-import com.example.twdinspection.inspection.source.RegistersUptoDate.RegistersEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.CoCurricularEntity;
-import com.example.twdinspection.inspection.source.dietIssues.DietIssuesEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
+import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 import java.util.List;
 

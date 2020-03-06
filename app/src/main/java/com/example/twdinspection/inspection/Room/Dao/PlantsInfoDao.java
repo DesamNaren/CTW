@@ -5,8 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Query;
 
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 
 import java.util.List;
 

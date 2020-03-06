@@ -2,8 +2,7 @@ package com.example.twdinspection.inspection.source.converters;
 
 import androidx.room.TypeConverter;
 
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

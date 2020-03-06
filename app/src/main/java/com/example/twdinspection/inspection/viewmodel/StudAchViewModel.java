@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
 import com.example.twdinspection.inspection.Room.repository.StudAchievementsRepository;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 import java.util.List;
 

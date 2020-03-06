@@ -12,13 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
-import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
 import com.example.twdinspection.databinding.AdapterPlantsInfoBinding;
 import com.example.twdinspection.inspection.interfaces.PlantsInfoInterface;
-import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
-import com.example.twdinspection.inspection.source.cocurriularActivities.PlantsEntity;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.viewmodel.PlantsInfoViewModel;
+import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 
 import java.util.List;
 

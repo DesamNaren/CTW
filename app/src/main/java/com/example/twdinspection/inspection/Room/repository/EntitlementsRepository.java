@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.example.twdinspection.inspection.Room.Dao.EntitlementsInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
-import com.example.twdinspection.inspection.source.EntitlementsDistribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

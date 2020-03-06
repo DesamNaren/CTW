@@ -1,8 +1,6 @@
 package com.example.twdinspection.inspection.interfaces;
 
-import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 public interface StudAttendInterface {
     void openBottomSheet(StudAttendInfoEntity masterClassInfo);

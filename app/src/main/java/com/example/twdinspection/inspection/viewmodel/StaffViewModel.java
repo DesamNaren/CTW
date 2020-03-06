@@ -9,8 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.twdinspection.inspection.Room.repository.StaffInfoRepository;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
-import com.example.twdinspection.inspection.source.studentAttendenceInfo.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
 import java.util.List;
 

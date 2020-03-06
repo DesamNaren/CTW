@@ -11,13 +11,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.databinding.AdapterStuAttReoprtBinding;
 import com.example.twdinspection.databinding.ItemStaffAttReportBinding;
-import com.example.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.example.twdinspection.inspection.reports.interfaces.InspReportClickCallback;
 import com.example.twdinspection.inspection.reports.source.StaffAttendenceInfo;
-import com.example.twdinspection.inspection.reports.source.StudentAttendenceInfo;
-import com.example.twdinspection.inspection.source.staffAttendance.StaffAttendanceEntity;
 
 import java.util.ArrayList;
 import java.util.List;

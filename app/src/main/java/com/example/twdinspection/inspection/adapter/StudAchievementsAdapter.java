@@ -13,12 +13,8 @@ import com.example.twdinspection.BR;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
-import com.example.twdinspection.databinding.CallHealthRowBinding;
-import com.example.twdinspection.databinding.AdapterCocurricularStudBinding;
-import com.example.twdinspection.inspection.interfaces.MedicalInterface;
 import com.example.twdinspection.inspection.interfaces.StudAchievementsInterface;
-import com.example.twdinspection.inspection.source.cocurriularActivities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.Room.repository.AcademicRepository;
-import com.example.twdinspection.inspection.source.AcademicOverview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
 
 public class AcademicViewModel extends ViewModel {
 
