@@ -59,20 +59,24 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             e.printStackTrace();
         }
 
-        localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
-        if(localFlag==1){
-            //get local record & set to data binding
-            LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();
-            generalInfoEntityLiveData.observe(GeneralInfoActivity.this, new Observer<GeneralInfoEntity>() {
-                @Override
-                public void onChanged(GeneralInfoEntity generalInfoEntity) {
-                    generalInfoEntityLiveData.removeObservers(GeneralInfoActivity.this);
-                    if (generalInfoEntity != null) {
-                        binding.setInspDataGeneral(generalInfoEntity);
-                        binding.executePendingBindings();
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<GeneralInfoEntity> generalInfoEntityLiveData = instMainViewModel.getGeneralInfoData();
+                generalInfoEntityLiveData.observe(GeneralInfoActivity.this, new Observer<GeneralInfoEntity>() {
+                    @Override
+                    public void onChanged(GeneralInfoEntity generalInfoEntity) {
+                        generalInfoEntityLiveData.removeObservers(GeneralInfoActivity.this);
+                        if (generalInfoEntity != null) {
+                            binding.setInspDataGeneral(generalInfoEntity);
+                            binding.executePendingBindings();
+                        }
                     }
-                }
-            });
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         binding.rgHeadQuarters.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -142,23 +146,30 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgLeavetype.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_absent) {
                     leavetype = "Unauthorized Absent";
-
-                    binding.llOdCaptureType.setVisibility(View.GONE);
                     binding.rgCapturetype.clearCheck();
                     binding.rgMovementRegisterEntry.clearCheck();
+
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+
                 } else if (selctedItem == R.id.rb_leaves) {
                     leavetype = "Leaves";
-
-                    binding.llOdCaptureType.setVisibility(View.GONE);
                     binding.rgCapturetype.clearCheck();
                     binding.rgMovementRegisterEntry.clearCheck();
+
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+
                 } else if (selctedItem == R.id.rb_od) {
                     leavetype = "OD";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
                     binding.llOdCaptureType.setVisibility(View.VISIBLE);
 
                 } else {
                     leavetype = null;
                 }
+
+
             }
         });
 

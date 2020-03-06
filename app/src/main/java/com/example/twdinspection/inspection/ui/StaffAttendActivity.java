@@ -11,15 +11,15 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.twdinspection.R;
-import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.inspection.adapter.StaffAdapter;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityStaffAttBinding;
+import com.example.twdinspection.inspection.adapter.StaffAdapter;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterStaffInfo;
 import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
-import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.StaffAttendCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.StaffViewModel;
@@ -117,12 +117,15 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
 //
 //        setAdapter();
 
+        localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
     }
+
+    private int localFlag;
 
     private boolean validate() {
         boolean returnFlag = true;
         for (int i = 0; i < staffAttendanceEntitiesmain.size(); i++) {
-            if (!(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
+            if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
                     || staffAttendanceEntitiesmain.get(i).isOndepFlag())) {
                 returnFlag = false;
                 showSnackBar("Please mark attendance of all employees");
@@ -163,7 +166,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(StaffAttendActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(StaffAttendActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

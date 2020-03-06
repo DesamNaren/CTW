@@ -286,6 +286,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                         studAttendInfoEntity.setStudent_count_in_register(count_reg);
                         studAttendInfoEntity.setStudent_count_during_inspection(count_during_insp);
                         studAttendInfoEntity.setVariance(variance);
+                        studAttendInfoEntity.setInspection_time(Utils.getCurrentDateTime());
                         studAttendInfoEntity.setFlag_completed(1);
 
 //                    long x=studentsAttndViewModel.updateClassInfo(IsattenMarked,count_reg,count_during_insp,variance,

@@ -23,6 +23,8 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMedicalBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.reports.source.MedicalIssues;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.example.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -56,6 +58,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     private String instID, officerID, insTime;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private int localFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +96,10 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgMedicalCheckupDetails.getCheckedRadioButtonId();
                 if (selctedItem == R.id.medical_checkup_details_yes) {
                     if (tot_cnt > 0 && tot_cnt == medicalDetailsBeans.size()) {
-                        binding.btnMedicalView.setVisibility(View.VISIBLE);
+                        binding.btnMedicalView.setVisibility(View.GONE);
                     }
 
-                    binding.btnAddStud.setVisibility(View.VISIBLE);
+                    binding.btnAddStud.setVisibility(View.GONE);
                     recorderedInRegister = "YES";
                 } else if (selctedItem == R.id.medical_checkup_details_no) {
                     binding.btnAddStud.setVisibility(View.GONE);
@@ -286,7 +289,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onChanged(Integer cnt) {
                 if (cnt != null && cnt > 0) {
-                    binding.btnView.setVisibility(View.VISIBLE);
+                    binding.btnView.setVisibility(View.GONE);
                     slNoCnt = cnt;
                 } else {
                     slNoCnt = 0;
@@ -294,6 +297,27 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<MedicalInfoEntity> medicalInfo = instMainViewModel.getMedicalInfo();
+                medicalInfo.observe(MedicalActivity.this, new Observer<MedicalInfoEntity>() {
+                    @Override
+                    public void onChanged(MedicalInfoEntity medicalInfoEntity) {
+                        medicalInfo.removeObservers(MedicalActivity.this);
+                        if (medicalInfoEntity != null) {
+                            binding.setMedical(medicalInfoEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean validateData(int tot_cnt) {
@@ -315,12 +339,14 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         } else if (recorderedInRegister.equals(AppConstants.Yes) && tot_cnt == 0) {
             showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
             return false;
-        } else if (recorderedInRegister.equals(AppConstants.Yes) &&
-                tot_cnt > 0 && medicalDetailsBeans != null &&
-                tot_cnt != medicalDetailsBeans.size()) {
-            showBottomSheetSnackBar(getResources().getString(R.string.not_match));
-            return false;
         }
+
+//        else if (recorderedInRegister.equals(AppConstants.Yes) &&
+//                tot_cnt > 0 && medicalDetailsBeans != null &&
+//                tot_cnt != medicalDetailsBeans.size()) {
+//            showBottomSheetSnackBar(getResources().getString(R.string.not_match));
+//            return false;
+//        }
         return true;
     }
 
@@ -525,7 +551,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     }
 
                     if (tot_cnt > 0 && tot_cnt == medicalDetailsBeans.size()) {
-                        binding.btnMedicalView.setVisibility(View.VISIBLE);
+                        binding.btnMedicalView.setVisibility(View.GONE);
                     }
 
 

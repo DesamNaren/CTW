@@ -54,15 +54,17 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             lastPosition = position;
         }
 
-
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
         StaffAttendanceEntity employeeResponse = staffAttendanceEntities.get(position);
+        holder.binding.setStaff(employeeResponse);
+
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
+
 
         holder.binding.llPresent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,22 +137,22 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         });
 
 
-     holder.binding.lastWeek.addTextChangedListener(new TextWatcher() {
-         @Override
-         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        holder.binding.lastWeek.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-         }
+            }
 
-         @Override
-         public void onTextChanged(CharSequence s, int start, int before, int count) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-         }
+            }
 
-         @Override
-         public void afterTextChanged(Editable s) {
-             employeeResponse.setLast_week_turn_duties_attended(s.toString());
-         }
-     });
+            @Override
+            public void afterTextChanged(Editable s) {
+                employeeResponse.setLast_week_turn_duties_attended(s.toString());
+            }
+        });
     }
 
     private void changeIcon(ItemStaffAttendanceBinding binding, ImageView imageView, int img, TextView textView) {

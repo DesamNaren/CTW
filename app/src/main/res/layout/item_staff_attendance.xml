@@ -51,19 +51,19 @@
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@={staff.emp_id}" />
+                            android:text="@{staff.emp_id}" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
-                            android:text="@={staff.emp_name}" />
+                            android:text="@{staff.emp_name}" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
-                            android:text="@={staff.designation}" />
+                            android:text="@{staff.designation}" />
 
                     </LinearLayout>
 
@@ -90,7 +90,7 @@
                             android:id="@+id/iv_present"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/present_init" />
+                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Present`)? @drawable/present: @drawable/present_init}"/>
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_present"
@@ -112,7 +112,7 @@
                             android:id="@+id/iv_absent"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/absent_init" />
+                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Absent`)? @drawable/absent: @drawable/absent_init}"/>
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_absent"
@@ -134,7 +134,7 @@
                             android:id="@+id/iv_ondep"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ondep_init" />
+                            android:src="@{staff.emp_presence.equalsIgnoreCase(`On Deputation`)? @drawable/ondep: @drawable/ondep_init}" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_ondep"
@@ -175,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_weight="1"
-                            android:background="@color/light_gray"
+                            android:background="@{staff.yday_duty_allotted.equalsIgnoreCase(`Yes`)? @color/list_blue: @color/light_gray}"
                             android:gravity="center"
                             android:padding="@dimen/dimen_5dp"
                             android:text="Yes"
@@ -190,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_no_dutyAlloted"
                             android:layout_weight="1"
-                            android:background="@color/light_gray"
+                            android:background="@{staff.yday_duty_allotted.equalsIgnoreCase(`No`)?  @color/list_blue:  @color/light_gray}"
                             android:gravity="center"
                             android:padding="@dimen/dimen_5dp"
                             android:text="No"
@@ -236,6 +236,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/last_week"
                             android:inputType="number"
+                            android:text="@{staff.last_week_turn_duties_attended}"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true" />
 

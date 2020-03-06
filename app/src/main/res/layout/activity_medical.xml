@@ -8,7 +8,9 @@
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.MedicalViewModel" />
-
+        <variable
+            name="medical"
+            type="com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity" />
     </data>
 
     <RelativeLayout
@@ -16,7 +18,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".inspection.ui.MedicalActivity">
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -90,10 +91,12 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    
                                     android:id="@+id/et_fever"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/fever"
+                                    android:text="@{medical.feverCount}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
@@ -136,6 +139,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
+                                    
+                                    android:text="@{medical.coldCount}"
                                     android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -174,6 +179,8 @@
                                     android:hint="@string/headache"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    
+                                    android:text="@{medical.headacheCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -221,6 +228,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
+                                    
+                                    android:text="@{medical.diarrheaCount}"
                                     android:singleLine="true" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -259,6 +268,8 @@
                                     android:hint="@string/malaria"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    
+                                    android:text="@{medical.malariaCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -298,6 +309,8 @@
                                     android:hint="@string/others"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    
+                                    android:text="@{medical.othersCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true" />
 
@@ -355,12 +368,12 @@
                                 android:id="@+id/et_medical_checkup_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
                                 android:hint="@string/medical_checkup"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_30dp"
-                                android:singleLine="true"
-                                android:text="@string/select_date" />
+                                android:focusableInTouchMode="false"
+                                android:text="@{medical.last_medical_checkup_date}"
+                                android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -413,6 +426,8 @@
 
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`MEDICAL OFFICER`) ? true : false}"
                                     android:id="@+id/rb_medical_officer"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -420,6 +435,8 @@
                                     android:text="@string/medical_officer" />
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`ANM`) ? true : false}"
                                     android:id="@+id/rb_anm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -449,6 +466,7 @@
 
 
                                 <RadioButton
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:id="@+id/rb_yes_anm_weekly_updated"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -456,6 +474,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`No`) ? true : false}"
                                     android:id="@+id/rb_no_anm_weekly_updated"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -516,6 +536,8 @@
 
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.callHealth100.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:id="@+id/yes_call_health_100"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -523,6 +545,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.callHealth100.equalsIgnoreCase(`No`) ? true : false}"
                                     android:id="@+id/no_call_health_100"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -532,6 +556,7 @@
                             </RadioGroup>
 
                             <LinearLayout
+                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -608,6 +633,8 @@
 
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:id="@+id/medical_checkup_details_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -615,6 +642,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                   
+                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`No`) ? true : false}"
                                     android:id="@+id/medical_checkup_details_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -664,4 +693,5 @@
             layout="@layout/buttons_layout" />
 
     </RelativeLayout>
+
 </layout>
