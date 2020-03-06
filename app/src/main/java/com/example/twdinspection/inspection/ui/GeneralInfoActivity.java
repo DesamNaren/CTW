@@ -85,6 +85,82 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     headQuarters = AppConstants.No;
             }
         });
+        binding.rgMovementRegisterEntry.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgMovementRegisterEntry.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_yes_movement_register_entry)
+                    movementRegisterEntry = AppConstants.Yes;
+                else if (selctedItem == R.id.rb_no_movement_register_entry)
+                    movementRegisterEntry = AppConstants.No;
+                else
+                    movementRegisterEntry = null;
+            }
+        });
+        binding.rgCapturetype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgCapturetype.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_out_of_station) {
+                    capturetype = "Out of station";
+                    binding.llMovementRegisterEntry.setVisibility(View.VISIBLE);
+
+                } else if (selctedItem == R.id.rb_within_campus) {
+                    capturetype = "Within campus";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                } else if (selctedItem == R.id.rb_within_mandal) {
+                    capturetype = "Within Mandal";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                } else if (selctedItem == R.id.rb_within_district) {
+                    capturetype = "Within District";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                } else if (selctedItem == R.id.rb_itda_level) {
+                    capturetype = "ITDA level";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                } else if (selctedItem == R.id.rb_state_level) {
+                    capturetype = "State Level";
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
+                    binding.rgMovementRegisterEntry.clearCheck();
+
+                } else {
+                    capturetype = null;
+                }
+            }
+        });
+
+        binding.rgLeavetype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgLeavetype.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_absent) {
+                    leavetype = "Unauthorized Absent";
+
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+                    binding.rgCapturetype.clearCheck();
+                    binding.rgMovementRegisterEntry.clearCheck();
+                } else if (selctedItem == R.id.rb_leaves) {
+                    leavetype = "Leaves";
+
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+                    binding.rgCapturetype.clearCheck();
+                    binding.rgMovementRegisterEntry.clearCheck();
+                } else if (selctedItem == R.id.rb_od) {
+                    leavetype = "OD";
+                    binding.llOdCaptureType.setVisibility(View.VISIBLE);
+
+                } else {
+                    leavetype = null;
+                }
+            }
+        });
 
         binding.rgPresentTime.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -95,79 +171,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     binding.llLeavetype.setVisibility(View.VISIBLE);
                     binding.viewLeaveType.setVisibility(View.VISIBLE);
 
-                    binding.rgLeavetype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                            int selctedItem = binding.rgLeavetype.getCheckedRadioButtonId();
-                            if (selctedItem == R.id.rb_absent) {
-                                leavetype = "Unauthorized Absent";
-
-                                binding.llOdCaptureType.setVisibility(View.GONE);
-                                binding.rgCapturetype.clearCheck();
-                                binding.rgMovementRegisterEntry.clearCheck();
-                            } else if (selctedItem == R.id.rb_leaves) {
-                                leavetype = "Leaves";
-
-                                binding.llOdCaptureType.setVisibility(View.GONE);
-                                binding.rgCapturetype.clearCheck();
-                                binding.rgMovementRegisterEntry.clearCheck();
-                            } else if (selctedItem == R.id.rb_od) {
-                                leavetype = "OD";
-                                binding.llOdCaptureType.setVisibility(View.VISIBLE);
-                                binding.rgCapturetype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                    @Override
-                                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                                        int selctedItem = binding.rgCapturetype.getCheckedRadioButtonId();
-                                        if (selctedItem == R.id.rb_out_of_station) {
-                                            capturetype = "Out of station";
-                                            binding.llMovementRegisterEntry.setVisibility(View.VISIBLE);
-                                            binding.rgMovementRegisterEntry.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                                @Override
-                                                public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                                                    int selctedItem = binding.rgMovementRegisterEntry.getCheckedRadioButtonId();
-                                                    if (selctedItem == R.id.rb_yes_movement_register_entry)
-                                                        movementRegisterEntry = AppConstants.Yes;
-                                                    else if (selctedItem == R.id.rb_no_movement_register_entry)
-                                                        movementRegisterEntry = AppConstants.No;
-                                                    else
-                                                        movementRegisterEntry = null;
-                                                }
-                                            });
-                                        } else if (selctedItem == R.id.rb_within_campus) {
-                                            capturetype = "Within campus";
-                                            binding.llMovementRegisterEntry.setVisibility(View.GONE);
-                                            binding.rgMovementRegisterEntry.clearCheck();
-
-                                        } else if (selctedItem == R.id.rb_within_mandal) {
-                                            capturetype = "Within Mandal";
-                                            binding.llMovementRegisterEntry.setVisibility(View.GONE);
-                                            binding.rgMovementRegisterEntry.clearCheck();
-
-                                        } else if (selctedItem == R.id.rb_within_district) {
-                                            capturetype = "Within District";
-                                            binding.llMovementRegisterEntry.setVisibility(View.GONE);
-                                            binding.rgMovementRegisterEntry.clearCheck();
-
-                                        } else if (selctedItem == R.id.rb_itda_level) {
-                                            capturetype = "ITDA level";
-                                            binding.llMovementRegisterEntry.setVisibility(View.GONE);
-                                            binding.rgMovementRegisterEntry.clearCheck();
-
-                                        } else if (selctedItem == R.id.rb_state_level) {
-                                            capturetype = "State Level";
-                                            binding.llMovementRegisterEntry.setVisibility(View.GONE);
-                                            binding.rgMovementRegisterEntry.clearCheck();
-
-                                        } else {
-                                            capturetype = null;
-                                        }
-                                    }
-                                });
-                            } else {
-                                leavetype = null;
-                            }
-                        }
-                    });
                 } else if (selctedItem == R.id.rb_yes_present_time) {
                     presentTime = AppConstants.Yes;
 
@@ -180,6 +183,21 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 } else {
                     presentTime = null;
                 }
+
+            }
+        });
+        binding.rgCaptureDistance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgCaptureDistance.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_below_30)
+                    captureDistance = "BELOW 30";
+                else if (selctedItem == R.id.rb_31_50)
+                    captureDistance = "31-50";
+                else if (selctedItem == R.id.rb_above_50)
+                    captureDistance = "ABOVE 50";
+                else
+                    captureDistance = null;
 
             }
         });
@@ -196,21 +214,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     binding.llCaptureStayingFacilitiesType.setVisibility(View.GONE);
                     binding.rgCaptureStayingFacilitiesType.clearCheck();
 
-                    binding.rgCaptureDistance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                            int selctedItem = binding.rgCaptureDistance.getCheckedRadioButtonId();
-                            if (selctedItem == R.id.rb_below_30)
-                                captureDistance = "BELOW 30";
-                            else if (selctedItem == R.id.rb_31_50)
-                                captureDistance = "31-50";
-                            else if (selctedItem == R.id.rb_above_50)
-                                captureDistance = "ABOVE 50";
-                            else
-                                captureDistance = null;
-
-                        }
-                    });
                 } else if (selctedItem == R.id.rb_yes_staff_quarters) {
                     staffQuarters = AppConstants.Yes;
                     binding.llCapture.setVisibility(View.VISIBLE);
@@ -219,26 +222,26 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
 
                     binding.llCaptureStayingFacilitiesType.setVisibility(View.VISIBLE);
 
-                    binding.rgCaptureStayingFacilitiesType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                            int selctedItem = binding.rgCaptureStayingFacilitiesType.getCheckedRadioButtonId();
-                            if (selctedItem == R.id.rb_in_staff_quarters)
-                                stayingFacilitiesType = "in Staff Quarters";
-                            else if (selctedItem == R.id.rb_in_school_building)
-                                stayingFacilitiesType = "in School Building";
-                            else if (selctedItem == R.id.rb_pvt_building)
-                                stayingFacilitiesType = "Pvt. Building";
-                            else
-                                stayingFacilitiesType = null;
-                        }
-                    });
+
                 } else {
                     staffQuarters = null;
                 }
             }
         });
-
+        binding.rgCaptureStayingFacilitiesType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgCaptureStayingFacilitiesType.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_in_staff_quarters)
+                    stayingFacilitiesType = "in Staff Quarters";
+                else if (selctedItem == R.id.rb_in_school_building)
+                    stayingFacilitiesType = "in School Building";
+                else if (selctedItem == R.id.rb_pvt_building)
+                    stayingFacilitiesType = "Pvt. Building";
+                else
+                    stayingFacilitiesType = null;
+            }
+        });
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

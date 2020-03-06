@@ -21,6 +21,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityDashboardBinding;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
+import com.example.twdinspection.engineeringWorks.ui.EngineeringDashboardActivity;
 import com.example.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportActivity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -93,12 +94,21 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this, SchemesDMVActivity.class));
             }
         });
+
+        binding.btnEngWorks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this, EngineeringDashboardActivity.class));
+            }
+        });
+
         binding.btnGcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this, GCCDashboardActivity.class));
             }
         });
+
         binding.btnReports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

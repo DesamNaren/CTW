@@ -21,6 +21,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".engineeringWorks.ui.UploadEngPhotosActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".engineeringWorks.ui.InspectionDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".engineeringWorks.ui.EngineeringDashboardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".gcc.reports.ui.PUnitInspRepActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -68,8 +78,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.MedicalDetailsActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".inspection.ui.DashboardActivity"
             android:screenOrientation="portrait" />
@@ -204,7 +213,7 @@
         <activity
             android:name=".inspection.reports.ui.InspectionReportsDashboard"
             android:screenOrientation="portrait"
-            android:theme="@style/Light_AppTheme"/>
+            android:theme="@style/Light_AppTheme" />
         <activity
             android:name=".inspection.reports.ui.InstReportsMenuActivity"
             android:screenOrientation="portrait" />
@@ -248,8 +257,9 @@
         <activity
             android:name=".inspection.reports.ui.ReportsRegistersActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".inspection.reports.ui.ReportPhotosActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".inspection.reports.ui.ReportPhotosActivity"
+            android:screenOrientation="portrait" />
 
 
         <provider

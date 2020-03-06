@@ -42,6 +42,11 @@ public class AppConstants {
     public static final String ONDEPUTATION = "On Deputation";
     public static final String Yes = "YES";
     public static final String No = "NO";
+    public static final String ENG_WORK_ID = "ENG_WORK_ID";
+    public static final String ELEVATION = "ELEVATION";
+    public static final String SIDEVIEW = "SIDEVIEW";
+    public static final String REARVIEW = "REARVIEW";
+    public static final String THREE_D_VIEW = "3DVIEW";
 
 
     public static final int SUCCESS_CODE = 200;

@@ -705,4 +705,99 @@
     <string name="valid_incharge_mob_num">Enter valid tab incharge mobile no</string>
     <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
 
+    <string-array name="sectors">
+        <item>Select</item>
+        <item>Buildings</item>
+        <item>Roads</item>
+        <item>Drinking Water</item>
+        <item>Minor Irrigation</item>
+        <item>Repairs to Buildings</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="stages">
+        <item>Select</item>
+        <item>Not Started</item>
+        <item>Tender stage</item>
+        <item>Grounded</item>
+        <item>In progress</item>
+        <item>Work Stopped</item>
+        <item>Completed</item>
+    </string-array>
+    <string-array name="buildings">
+        <item>Select</item>
+        <item>Foundation Level</item>
+        <item>Basement Level</item>
+        <item>Lintel Level</item>
+        <item>Slab Level</item>
+        <item>Finishings Level</item>
+    </string-array>
+    <string-array name="satis_level">
+        <item>Select</item>
+        <item>Satisfactory</item>
+        <item>Poor</item>
+    </string-array>
+    <string-array name="roads">
+        <item>Select</item>
+        <item>Earthwork</item>
+        <item>Gravel work</item>
+        <item>Metal work</item>
+        <item>BT work</item>
+        <item>Culvert works</item>
+    </string-array>
+    <string-array name="drinking_water">
+        <item>Select</item>
+        <item>Borewell source</item>
+        <item>Main line work</item>
+        <item>Distribution line work</item>
+        <item>Storage tank work</item>
+        <item>Motors work</item>
+    </string-array>
+    <string-array name="minor_irrigation">
+        <item>Select</item>
+        <item>Checkdam work</item>
+        <item>Channel works</item>
+        <item>Earthen bund work</item>
+        <item>Guide bunds etc</item>
+        <item>CMCD works</item>
+    </string-array>
+    <string-array name="repair_buildings">
+        <item>Select</item>
+        <item>Roof leakages</item>
+        <item>Wall repairs</item>
+        <item>Flooring repairs</item>
+        <item>WC Bath Doors repairs</item>
+        <item>Electrical repairs</item>
+    </string-array>
+
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="engineering_work_id">Engineering work ID</string>
+    <string name="area_of_operation">Area of operation</string>
+    <string name="district">District</string>
+    <string name="assembly_constituency">Assembly Constituency</string>
+    <string name="sector">Sector</string>
+    <string name="name_of_the_work">Name of the work</string>
+    <string name="estimate_cost">Estimate Cost</string>
+    <string name="scheme">Scheme</string>
+    <string name="executing_agency">Executing Agency</string>
+    <string name="sanction_date">Sanction date</string>
+    <string name="technical_sanction_date">Technical Sanction date</string>
+    <string name="commencement_date">Commencement date</string>
+    <string name="target_date_of_completion">Target date of completion</string>
+    <string name="extension_time_given">Extension time given</string>
+    <string name="stage_of_work">Stage of work</string>
+    <string name="stage_of_work_for_in_progress_works">Stage of work for In-progress works</string>
+    <string name="overall_appearance">Overall appearance</string>
+    <string name="workmen_s_skills">Workmen’s skills</string>
+    <string name="quality_care_curing_polishing_etc">Quality care (Curing, Polishing etc)</string>
+    <string name="satisfactory">Satisfactory</string>
+    <string name="poor">Poor</string>
+    <string name="observations">Observations</string>
+    <string name="_3d_view">3D View</string>
+    <string name="rear_view">Rear View</string>
+    <string name="side_view">Side View</string>
+    <string name="elevation">Elevation</string>
+    <string name="specify">Specify sector</string>
+    <string name="engineering_works">Engineering Works</string>
+
 </resources>
