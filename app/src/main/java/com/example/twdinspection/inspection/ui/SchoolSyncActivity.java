@@ -43,6 +43,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     private InstMasterResponse instMasterResponse;
     ActivitySchoolSyncBinding binding;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private String officerId;
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
@@ -66,6 +67,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
             officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -236,6 +238,8 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

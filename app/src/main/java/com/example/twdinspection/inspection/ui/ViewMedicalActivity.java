@@ -38,6 +38,7 @@ public class ViewMedicalActivity extends AppCompatActivity {
     private List<MedicalDetailsBean> oMedicalDetailsBeans;
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
 
     @Override
@@ -48,6 +49,7 @@ public class ViewMedicalActivity extends AppCompatActivity {
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
         sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
         MedicalDetailsViewModel viewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(viewModel);
         listDataChild = new HashMap<>();
@@ -133,6 +135,8 @@ public class ViewMedicalActivity extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

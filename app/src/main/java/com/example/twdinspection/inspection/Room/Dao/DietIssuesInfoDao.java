@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.Room.Dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 @Dao
 public interface DietIssuesInfoDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void updateDietIssuesInfo(DietIssuesEntity dietIssuesEntity);
 
     @Query("SELECT * from master_inst_info where instId LIKE :inst_id")

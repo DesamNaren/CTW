@@ -55,6 +55,7 @@ import java.util.List;
 public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandlerInterface, InstSubmitInterface {
     InstMainActivityBinding binding;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     String instId, officer_id, dist_id, mand_id, vill_id;
     String instName, distName, mandalName, villageName;
     boolean submitFlag = false, generalInfoFlag = false, studAttendFlag = false, staffAttendFlag = false, medicalFlag = false, dietFlag = false, infraFlag = false, academicFlag = false, cocurricularFlag = false, entitlementsFlag = false, regFlag = false, generalCommentsFlag = false;
@@ -81,7 +82,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
             @Override
             public void onClick(View v) {
                 Utils.customChangeAppAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.change_insp), instMainViewModel);
+                        getString(R.string.change_insp), instMainViewModel, editor);
             }
         });
 
@@ -90,6 +91,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
         arrayListLiveData = instMainViewModel.getAllSections();
         sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
         instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
         distName = sharedPreferences.getString(AppConstants.DIST_NAME, "");
         mandalName = sharedPreferences.getString(AppConstants.MAN_NAME, "");
@@ -396,7 +398,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
     public void getData(InstSubmitResponse schemeSubmitResponse) {
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-            instMainViewModel.deleteAllInspectionData();
+             editor.clear();
+                    editor.commit();
+                    instMainViewModel.deleteAllInspectionData();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             revertFlags();
@@ -496,6 +500,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

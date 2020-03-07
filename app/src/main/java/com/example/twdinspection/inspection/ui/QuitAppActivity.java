@@ -17,11 +17,21 @@ public class QuitAppActivity extends AppCompatActivity {
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences= TWDApplication.get(this).getPreferences();
         instMainViewModel=new InstMainViewModel(getApplication());
+
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         finish();
     }
 
@@ -43,6 +53,8 @@ public class QuitAppActivity extends AppCompatActivity {
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

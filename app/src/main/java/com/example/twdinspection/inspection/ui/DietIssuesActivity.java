@@ -76,6 +76,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     File file_menu, file_officer;
     int flag_menu = 0, flag_officer = 0;
     SharedPreferences.Editor editor;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -344,6 +345,48 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 }
             }
         });
+
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<DietIssuesEntity> dietInfoData = instMainViewModel.getDietInfoData();
+                dietInfoData.observe(DietIssuesActivity.this, new Observer<DietIssuesEntity>() {
+                    @Override
+                    public void onChanged(DietIssuesEntity dietIssuesEntity) {
+                        dietInfoData.removeObservers(DietIssuesActivity.this);
+                        if (dietIssuesEntity != null) {
+                            binding.setInspData(dietIssuesEntity);
+                            binding.executePendingBindings();
+                            file_menu = new File(sharedPreferences.getString(AppConstants.MENU, ""));
+                            file_officer = new File(sharedPreferences.getString(AppConstants.OFFICER, ""));
+
+                            if (file_menu==null) {
+                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
+                                flag_menu = 0;
+                            } else {
+                                Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                                flag_menu = 1;
+                            }
+
+                            if (file_officer==null) {
+                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
+                                flag_officer = 0;
+                            } else {
+                                Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                                flag_officer = 1;
+                            }
+                        }
+                    }
+                });
+            } else {
+                flag_menu = 0;
+                flag_officer = 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -352,7 +395,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-            }else if (ActivityCompat.shouldShowRequestPermissionRationale(DietIssuesActivity.this,
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(DietIssuesActivity.this,
                     Manifest.permission.CAMERA)) {
                 customPerAlert();
             } else {
@@ -361,7 +404,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
     }
 
-    private void callSettings(){
+    private void callSettings() {
         Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("Settings", new View.OnClickListener() {
@@ -557,6 +600,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

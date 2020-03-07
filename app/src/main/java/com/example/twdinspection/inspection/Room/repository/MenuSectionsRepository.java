@@ -222,6 +222,7 @@ public class MenuSectionsRepository {
         menuSectionsDao.deleteRegistersInfo();
         menuSectionsDao.deleteStaff_Info();
         menuSectionsDao.deleteStudAchievementEntity();
+
     }
 
 

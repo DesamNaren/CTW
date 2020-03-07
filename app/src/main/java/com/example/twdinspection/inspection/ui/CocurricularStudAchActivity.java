@@ -36,6 +36,7 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
     private StudAchievementsAdapter studAchievementsAdapter;
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
     private String fromClass;
 
@@ -53,6 +54,7 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
         instMainViewModel=new InstMainViewModel(getApplication());
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
         fromClass = getIntent().getStringExtra(AppConstants.FROM_CLASS);
@@ -119,6 +121,8 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

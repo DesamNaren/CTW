@@ -71,6 +71,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
     public static boolean isTimeAutomatic(Context c) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return Settings.Global.getInt(c.getContentResolver(), Settings.Global.AUTO_TIME, 0) == 1;
@@ -78,6 +79,7 @@ public class Utils {
             return Settings.System.getInt(c.getContentResolver(), Settings.System.AUTO_TIME, 0) == 1;
         }
     }
+
     public static void customSectionSaveAlert(final Activity activity, String msg, String title) {
         try {
             final Dialog dialog = new Dialog(activity);
@@ -225,7 +227,7 @@ public class Utils {
     }
 
 
-    public static void customChangeAppAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel) {
+    public static void customChangeAppAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel, SharedPreferences.Editor editor) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -245,6 +247,32 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
+                        editor.putString(AppConstants.INST_ID, "");
+                        editor.putString(AppConstants.INST_NAME, "");
+                        editor.putString(AppConstants.MENU, "");
+                        editor.putString(AppConstants.OFFICER, "");
+                        editor.putString(AppConstants.TDS, "");
+                        editor.putString(AppConstants.IMAGE_STOREROOM, "");
+                        editor.putString(AppConstants.IMAGE_VARANDAH, "");
+                        editor.putString(AppConstants.IMAGE_DINING, "");
+                        editor.putString(AppConstants.IMAGE_DORMITORY, "");
+                        editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, "");
+                        editor.putString(AppConstants.IMAGE_TOILET, "");
+                        editor.putString(AppConstants.IMAGE_PLAY_GROUND, "");
+                        editor.putString(AppConstants.IMAGE_KITCHEN, "");
+                        editor.putString(AppConstants.IMAGE_CLASSROOM, "");
+
+                        editor.putInt(AppConstants.DIST_ID, -1);
+                        editor.putInt(AppConstants.MAN_ID, -1);
+                        editor.putInt(AppConstants.VILL_ID, -1);
+                        editor.putString(AppConstants.DIST_NAME, "");
+                        editor.putString(AppConstants.MAN_NAME, "");
+                        editor.putString(AppConstants.VIL_NAME, "");
+                        editor.putString(AppConstants.LAT, "");
+                        editor.putString(AppConstants.LNG, "");
+                        editor.putString(AppConstants.ADDRESS, "");
+
+                        editor.commit();
                         instMainViewModel.deleteAllInspectionData();
 
                         Intent newIntent = new Intent(activity, DashboardActivity.class);
@@ -524,6 +552,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
     public static void customWarningAlert(Context context, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(context);

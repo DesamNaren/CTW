@@ -38,6 +38,7 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
     private CallHealthAdapter callHealthAdapter;
     private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
 
     @Override
@@ -50,6 +51,7 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
         instMainViewModel=new InstMainViewModel(getApplication());
 
         sharedPreferences= TWDApplication.get(this).getPreferences();
+        editor= sharedPreferences.edit();
         binding.appBarLayout.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +110,8 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

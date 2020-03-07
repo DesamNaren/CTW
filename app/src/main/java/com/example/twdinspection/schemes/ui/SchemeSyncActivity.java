@@ -39,6 +39,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     private SchemeDMVResponse schemeDMVResponse;
     ActivitySchemeSyncBinding binding;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
@@ -61,6 +62,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
             binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
@@ -342,6 +344,8 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                     editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),

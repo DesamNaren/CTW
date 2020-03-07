@@ -8,15 +8,19 @@ import androidx.room.TypeConverters;
 import com.example.twdinspection.inspection.source.converters.CallHealthConverter;
 import com.example.twdinspection.inspection.source.converters.MedicalRecordsConverter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 @TypeConverters({CallHealthConverter.class, MedicalRecordsConverter.class})
 @Entity(tableName = "medical_info")
 public class MedicalInfoEntity {
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
     private String officer_id;
     private String inspection_time;
+    @NotNull
+    @PrimaryKey
     private String institute_id;
     private String feverCount;
     private String coldCount;
@@ -76,11 +80,12 @@ public class MedicalInfoEntity {
         this.inspection_time = inspection_time;
     }
 
+    @NotNull
     public String getInstitute_id() {
         return institute_id;
     }
 
-    public void setInstitute_id(String institute_id) {
+    public void setInstitute_id(@NotNull String institute_id) {
         this.institute_id = institute_id;
     }
 

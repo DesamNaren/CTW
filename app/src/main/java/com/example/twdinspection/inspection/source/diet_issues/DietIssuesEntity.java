@@ -4,11 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 //@TypeConverters({DietInfoConverter.class})
 @Entity(tableName = "diet_issues_info")
 public class DietIssuesEntity {
 
-    @PrimaryKey(autoGenerate = true)
     @ColumnInfo()
     private int id;
 
@@ -18,6 +19,8 @@ public class DietIssuesEntity {
     @ColumnInfo()
     private String inspection_time;
 
+    @NotNull
+    @PrimaryKey
     @ColumnInfo()
     private String institute_id;
 
@@ -73,11 +76,12 @@ public class DietIssuesEntity {
         this.inspection_time = inspection_time;
     }
 
+    @NotNull
     public String getInstitute_id() {
         return institute_id;
     }
 
-    public void setInstitute_id(String institute_id) {
+    public void setInstitute_id(@NotNull String institute_id) {
         this.institute_id = institute_id;
     }
 

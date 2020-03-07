@@ -45,6 +45,8 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +58,10 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
         binding.appBarLayout.headerTitle.setText(getString(R.string.medical_health));
         medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         binding.setViewModel(medicalDetailsViewModel);
-        sharedPreferences= TWDApplication.get(this).getPreferences();
-        instMainViewModel=new InstMainViewModel(getApplication());
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+
+        editor = sharedPreferences.edit();
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         LiveData<List<MedicalDetailsBean>> listLiveData = medicalDetailsViewModel.getMedicalDetails();
         listLiveData.observe(this, new Observer<List<MedicalDetailsBean>>() {
@@ -267,7 +271,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onValueChange(int position) {
-        binding.tvTypeCnt.setText("Record: "+ position);
+        binding.tvTypeCnt.setText("Record: " + position);
     }
 
     @Override
@@ -288,6 +292,8 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                    editor.clear();
+                    editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),
@@ -307,6 +313,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
         editor.putString(AppConstants.CACHE_DATE, cacheDate);
         editor.commit();
     }
+
     @Override
     public void onBackPressed() {
         if (tot_cnt != totalList.size()) {

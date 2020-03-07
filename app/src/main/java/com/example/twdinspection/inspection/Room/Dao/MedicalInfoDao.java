@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
@@ -15,7 +16,7 @@ import java.util.List;
 @Dao
 public interface MedicalInfoDao {
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMedicalInfo(MedicalInfoEntity medicalInfoEntity);
 
     @Insert()

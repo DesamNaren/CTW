@@ -311,6 +311,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                         if (medicalInfoEntity != null) {
                             binding.setMedical(medicalInfoEntity);
                             binding.executePendingBindings();
+                            checkUpDate = binding.etMedicalCheckupDate.getText().toString();
                         }
                     }
                 });
@@ -581,6 +582,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 liveData.observe(MedicalActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
+                        liveData.removeObservers(MedicalActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }

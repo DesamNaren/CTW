@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_4dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:src="@mipmap/ic_launcher_round" />
 
             <com.example.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
