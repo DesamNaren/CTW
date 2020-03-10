@@ -129,4 +129,8 @@ public class AppConstants {
     public static String punitRep = "punitRep";
 
     public static String LOCAL_FLAG = "LOCAL_FLAG";
+
+
+    public static final String GOOD = "GOOD";
+    public static final String INFERIOR = "INFERIOR";
 }

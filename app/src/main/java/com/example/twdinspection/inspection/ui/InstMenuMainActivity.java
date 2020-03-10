@@ -460,6 +460,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                 Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
             }
         } else {
+            clearSharedPref();
+            instMainViewModel.deleteMenuData();
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();

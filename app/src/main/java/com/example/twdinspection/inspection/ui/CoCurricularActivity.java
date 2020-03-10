@@ -634,6 +634,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
         stu_com_name_dis_status_reason = binding.reasonEt.getText().toString();
         stu_Cou_cap_name = binding.couName.getText().toString();
+        stu_Cou_date = binding.etMedicalCheckupDate.getText().toString();
 
         boolean returnFlag = true;
         if (TextUtils.isEmpty(spo_mat_rec)) {
