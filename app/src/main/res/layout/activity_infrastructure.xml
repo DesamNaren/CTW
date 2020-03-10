@@ -15,10 +15,6 @@
             name="inspData"
             type="com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity" />
 
-        <variable
-            name="tdsImgUrl"
-            type="String" />
-
     </data>
 
     <RelativeLayout
@@ -238,7 +234,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="@{inspData.roPlantWoking.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                            android:visibility="@{inspData.ro_plant_woking.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -252,7 +248,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
-                                app:profileImage="@{tdsImgUrl}" />
+                                android:src="@drawable/ic_menu_camera" />
 
                         </LinearLayout>
 
@@ -261,7 +257,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="@{inspData.roPlantWoking.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+                            android:visibility="@{inspData.ro_plant_woking.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -325,7 +321,7 @@
                             android:layout_height="wrap_content">
 
                             <RadioButton
-                                android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Open well`)}"
+                                android:checked="@{inspData.drinking_water_source.equalsIgnoreCase(`Open well`)}"
                                 
                                 android:id="@+id/drinking_water_source_open_well"
                                 android:layout_width="wrap_content"

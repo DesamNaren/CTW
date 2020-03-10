@@ -553,7 +553,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
                     inspectionSubmitResponse.setDrDepot(drDepotInspection);
                     try {
-                        editor = TWDApplication.get(DRDepotFindingsActivity.this).getPreferencesEditor();
+                        editor = sharedPreferences.edit();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

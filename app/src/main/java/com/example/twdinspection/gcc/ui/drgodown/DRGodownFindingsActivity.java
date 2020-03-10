@@ -507,7 +507,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
                     inspectionSubmitResponse.setDrGodown(drGodownInsp);
                     try {
-                        editor = TWDApplication.get(DRGodownFindingsActivity.this).getPreferencesEditor();
+                        editor = sharedPreferences.edit();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

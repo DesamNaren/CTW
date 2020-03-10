@@ -181,7 +181,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
                     inspectionSubmitResponse.setProcessingUnit(pUnitInsp);
                     try {
-                        editor = TWDApplication.get(PUnitsFindingsActivity.this).getPreferencesEditor();
+                        editor = sharedPreferences.edit();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

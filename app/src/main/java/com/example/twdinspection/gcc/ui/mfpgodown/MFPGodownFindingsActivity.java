@@ -385,7 +385,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
                     inspectionSubmitResponse.setMfpGodowns(mfpGodownsInsp);
                     try {
-                        editor = TWDApplication.get(MFPGodownFindingsActivity.this).getPreferencesEditor();
+                        editor = sharedPreferences.edit();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -35,6 +35,7 @@ import java.util.List;
 
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
+    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
     private String cacheDate, currentDate;
@@ -42,6 +43,8 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences= TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
         instMainViewModel = new InstMainViewModel(getApplication());
 
         instMainViewModel.getAllSections().observe(this, new Observer<List<InstMenuInfoEntity>>() {
@@ -76,13 +79,6 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                         new LoginCustomViewModel(binding, LoginActivity.this)).get(LoginViewModel.class);
 
         binding.setViewModel(loginViewModel);
-
-        try {
-            editor = TWDApplication.get(LoginActivity.this).getPreferences().edit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         loginViewModel.geListLiveData().observe(LoginActivity.this, new Observer<LoginResponse>() {
             @Override
