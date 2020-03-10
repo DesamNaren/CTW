@@ -3,6 +3,7 @@ package com.example.twdinspection.inspection.Room.Dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
@@ -13,13 +14,14 @@ import java.util.List;
 
 @Dao
 public interface CocurricularDao {
-    @Insert()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCoCurricularInfo(CoCurricularEntity coCurricularEntity);
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAchievementInfo(StudAchievementEntity studAchievementEntity);
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPlantInfo(PlantsEntity plantsEntity);
 
     @Query("Select count(*) from stud_achievements_info")

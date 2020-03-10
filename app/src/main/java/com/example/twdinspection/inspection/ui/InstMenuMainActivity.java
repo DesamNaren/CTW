@@ -451,6 +451,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                 }
             }
             if (!flag) {
+                clearSharedPref();
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -463,6 +464,35 @@ public class InstMenuMainActivity extends LocBaseActivity implements ErrorHandle
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             finish();
         }
+    }
+
+    private void clearSharedPref() {
+        editor.putString(AppConstants.INST_ID, "");
+        editor.putString(AppConstants.INST_NAME, "");
+        editor.putString(AppConstants.MENU, "");
+        editor.putString(AppConstants.OFFICER, "");
+        editor.putString(AppConstants.TDS, "");
+        editor.putString(AppConstants.IMAGE_STOREROOM, "");
+        editor.putString(AppConstants.IMAGE_VARANDAH, "");
+        editor.putString(AppConstants.IMAGE_DINING, "");
+        editor.putString(AppConstants.IMAGE_DORMITORY, "");
+        editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, "");
+        editor.putString(AppConstants.IMAGE_TOILET, "");
+        editor.putString(AppConstants.IMAGE_PLAY_GROUND, "");
+        editor.putString(AppConstants.IMAGE_KITCHEN, "");
+        editor.putString(AppConstants.IMAGE_CLASSROOM, "");
+
+        editor.putInt(AppConstants.DIST_ID, -1);
+        editor.putInt(AppConstants.MAN_ID, -1);
+        editor.putInt(AppConstants.VILL_ID, -1);
+        editor.putString(AppConstants.DIST_NAME, "");
+        editor.putString(AppConstants.MAN_NAME, "");
+        editor.putString(AppConstants.VIL_NAME, "");
+        editor.putString(AppConstants.LAT, "");
+        editor.putString(AppConstants.LNG, "");
+        editor.putString(AppConstants.ADDRESS, "");
+
+        editor.commit();
     }
 
     @Override

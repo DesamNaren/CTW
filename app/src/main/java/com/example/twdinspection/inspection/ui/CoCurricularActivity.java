@@ -26,6 +26,7 @@ import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.CocurricularCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.CocurricularViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -59,6 +60,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     String stu_com_name_dis_status_reason, stu_Cou_cap_name, stu_Cou_date;
     private List<StudAchievementEntity> studAchievementEntities;
     private List<PlantsEntity> plantsEntities;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -312,14 +314,17 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     student_council_ele_status = AppConstants.Yes;
                     binding.llNameOfCommDisplayed.setVisibility(View.VISIBLE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
+                    binding.stuNameLl.setVisibility(View.VISIBLE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_studCounElecNo) {
                     student_council_ele_status = AppConstants.No;
                     binding.llStudCommEntries.setVisibility(View.VISIBLE);
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
+                    binding.stuNameLl.setVisibility(View.GONE);
                 } else {
                     student_council_ele_status = null;
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
+                    binding.stuNameLl.setVisibility(View.GONE);
                 }
             }
         });
@@ -424,6 +429,26 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<CoCurricularEntity> coCurricularEntityLiveData = instMainViewModel.getCocurricularInfoData();
+                coCurricularEntityLiveData.observe(CoCurricularActivity.this, new Observer<CoCurricularEntity>() {
+                    @Override
+                    public void onChanged(CoCurricularEntity coCurricularEntity) {
+                        coCurricularEntityLiveData.removeObservers(CoCurricularActivity.this);
+                        if (coCurricularEntity != null) {
+                            binding.setInspData(coCurricularEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void showStudAcheivementDetails() {

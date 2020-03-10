@@ -922,8 +922,8 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/dining_hall_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -931,8 +931,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/dining_hall_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -947,7 +947,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.dininghallAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -965,6 +965,8 @@
 
 
                                 <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{inspData.dininghallUsed.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/dininghall_used_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -972,6 +974,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{inspData.dininghallUsed.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/dininghall_used_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1004,8 +1008,8 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/separate_kitchen_room_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1013,8 +1017,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/separate_kitchen_room_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1029,7 +1033,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1047,8 +1051,8 @@
 
 
                                 <RadioButton
-                                    android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/construct_kitchen_room_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1056,8 +1060,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
-                                    android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/construct_kitchen_room_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1072,7 +1076,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1090,6 +1094,8 @@
 
 
                                 <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{inspData.kitchenGoodCondition.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/is_it_in_good_condition_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1097,6 +1103,8 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:clickable="false"
+                                    android:checked="@{inspData.kitchenGoodCondition.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/is_it_in_good_condition_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1111,7 +1119,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.kitchenGoodCondition.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1122,6 +1130,8 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:focusableInTouchMode="false"
+                                    android:text="@{inspData.kitchenRepairRequired}"
                                     android:id="@+id/et_repair_required"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

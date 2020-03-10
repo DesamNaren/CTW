@@ -14,7 +14,6 @@
         <variable
             name="inspData"
             type="com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity" />
-
     </data>
 
     <RelativeLayout
@@ -91,7 +90,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.drinking_water_facility.equalsIgnoreCase(`Bad`)}"
-                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/bad" />
 
@@ -143,7 +141,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.bigSchoolNameBoard.equalsIgnoreCase(`Yes`)}"
-                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -152,7 +149,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.bigSchoolNameBoard.equalsIgnoreCase(`No`)}"
-                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -212,7 +208,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.ro_plant_woking.equalsIgnoreCase(`Yes`)}"
-                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -221,7 +216,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.ro_plant_woking.equalsIgnoreCase(`No`)}"
-                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -271,7 +265,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/enter_reason"
-                                    android:text="@={inspData.ro_plant_reason}"
+                                    android:text="@{inspData.ro_plant_reason}"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true" />
 
@@ -322,7 +316,6 @@
 
                             <RadioButton
                                 android:checked="@{inspData.drinking_water_source.equalsIgnoreCase(`Open well`)}"
-                                
                                 android:id="@+id/drinking_water_source_open_well"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -745,7 +738,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/working"
-                                    android:text="@={inspData.ceilingfans_working}"
+                                    android:text="@{inspData.ceilingfans_working}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -766,7 +759,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/non_working"
-                                    android:text="@={inspData.ceilingfans_nonworking}"
+                                    android:text="@{inspData.ceilingfans_nonworking}"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true" />
@@ -823,7 +816,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:text="@={inspData.mountedfans_working}"
+                                    android:text="@{inspData.mountedfans_working}"
                                     android:id="@+id/et_wall_mounted_fans_working"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -844,7 +837,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:text="@={inspData.mountedfans_nonworking}"
+                                    android:text="@{inspData.mountedfans_nonworking}"
                                     android:id="@+id/et_wall_mounted_fans_non_working"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -925,7 +918,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.dininghall_available.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -943,6 +936,7 @@
 
 
                                 <RadioButton
+                                    android:checked="@{inspData.dininghall_used.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/dininghall_used_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -950,6 +944,7 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:checked="@{inspData.dininghall_used.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/dininghall_used_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1005,7 +1000,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.separate_kitchen_room_available.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1046,7 +1041,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.separate_kitchen_room_available.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1064,6 +1059,7 @@
 
 
                                 <RadioButton
+                                    android:checked="@{inspData.is_it_in_good_condition.equalsIgnoreCase(`Yes`)}"
                                     android:id="@+id/is_it_in_good_condition_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1071,6 +1067,7 @@
                                     android:text="@string/yes" />
 
                                 <RadioButton
+                                    android:checked="@{inspData.is_it_in_good_condition.equalsIgnoreCase(`No`)}"
                                     android:id="@+id/is_it_in_good_condition_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1085,7 +1082,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.is_it_in_good_condition.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1096,6 +1093,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:text="@{inspData.kitchen_repair_required}"
                                     android:id="@+id/et_repair_required"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1141,7 +1139,7 @@
 
 
                         <com.example.twdinspection.common.custom.CustomFontEditText
-                            android:text="@={inspData.how_many_buildings}"
+                            android:text="@{inspData.how_many_buildings}"
                             android:id="@+id/et_how_many_buildings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -2067,7 +2065,6 @@
                             android:orientation="vertical">
 
                             <CheckBox
-                                
                                 android:checked="@{inspData.add_class_required.equalsIgnoreCase(`Yes`)}"
                                 android:id="@+id/add_class_cb"
                                 android:layout_width="wrap_content"
@@ -2085,7 +2082,6 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    
                                     android:text="@{inspData.add_class_required_cnt}"
                                     android:id="@+id/add_class_cnt"
                                     android:layout_width="match_parent"
@@ -2211,7 +2207,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.total_toilets}"
+                                android:text="@{inspData.total_toilets}"
                                 android:id="@+id/et_total_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2231,7 +2227,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.total_bathrooms}"
+                                android:text="@{inspData.total_bathrooms}"
                                 android:id="@+id/et_total_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2281,7 +2277,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.functioning_toilets}"
+                                android:text="@{inspData.functioning_toilets}"
                                 android:id="@+id/et_functioning_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2301,7 +2297,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.functioning_bathrooms}"
+                                android:text="@{inspData.functioning_bathrooms}"
                                 android:id="@+id/et_funtioning_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2321,7 +2317,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.repairs_req_toilets}"
+                                android:text="@{inspData.repairs_req_toilets}"
                                 android:id="@+id/et_required_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2341,7 +2337,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.repairs_req_bathrooms}"
+                                android:text="@{inspData.repairs_req_bathrooms}"
                                 android:id="@+id/et_required_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -2487,7 +2483,7 @@
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
                                 
-                                android:text="@={inspData.color}"
+                                android:text="@{inspData.color}"
                                 android:id="@+id/et_painting"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

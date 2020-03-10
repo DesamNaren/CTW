@@ -37,6 +37,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
@@ -71,6 +72,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     int flag_tds = 0;
     SharedPreferences.Editor editor;
     private String cacheDate, currentDate;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +128,17 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         binding.rgRoPlant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
                 int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
                 if (selctedItem == R.id.ro_plant_yes) {
+                    flag_tds=0;
+                    file_tds=null;
                     roPlant = "YES";
                     binding.llReason.setVisibility(View.GONE);
                     binding.llTdsMeterReading.setVisibility(View.VISIBLE);
+
+                    binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
+
                 } else if (selctedItem == R.id.ro_plant_no) {
                     roPlant = "NO";
                     binding.llReason.setVisibility(View.VISIBLE);
@@ -341,6 +349,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         binding.rgIsItInGoodCondition.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
                 int selctedItem = binding.rgIsItInGoodCondition.getCheckedRadioButtonId();
                 if (selctedItem == R.id.is_it_in_good_condition_yes) {
                     is_it_in_good_condition = "YES";
@@ -713,6 +722,37 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<InfraStructureEntity> dietInfoData = instMainViewModel.getInfrastructureInfoData();
+                dietInfoData.observe(InfraActivity.this, new Observer<InfraStructureEntity>() {
+                    @Override
+                    public void onChanged(InfraStructureEntity infraStructureEntity) {
+                        dietInfoData.removeObservers(InfraActivity.this);
+                        if (infraStructureEntity != null) {
+                            binding.setInspData(infraStructureEntity);
+                            binding.executePendingBindings();
+                            file_tds = new File(sharedPreferences.getString(AppConstants.TDS, ""));
+
+                            if (TextUtils.isEmpty(file_tds.getPath())) {
+                                Glide.with(InfraActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivTds);
+                                flag_tds = 0;
+                            } else {
+                                Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
+                                flag_tds = 1;
+                            }
+                        }
+                    }
+                });
+            } else {
+                flag_tds = 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -1027,6 +1067,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 liveData.observe(InfraActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
+                        liveData.removeObservers(InfraActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }
@@ -1098,10 +1139,12 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
 
             } else if (resultCode == RESULT_CANCELED) {
+                binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
             } else {
+                binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();

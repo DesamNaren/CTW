@@ -4,9 +4,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.CocurricularViewModel" />
+
+        <variable
+            name="inspData"
+            type="com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity" />
 
     </data>
 
@@ -20,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/cl"
+            android:layout_below="@+id/action_bar"
             android:background="@color/light_gray">
 
             <LinearLayout
@@ -63,6 +70,7 @@
                                 android:id="@+id/rg_sportMatRec"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
                                 android:orientation="horizontal">
 
 
@@ -70,6 +78,8 @@
                                     android:id="@+id/rb_sportRecYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sport_mat_received.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -77,11 +87,12 @@
                                     android:id="@+id/rb_sportRecNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sport_mat_received.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
                             </RadioGroup>
-
 
                         </LinearLayout>
 
@@ -90,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.sport_mat_received.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -110,6 +121,7 @@
                                     android:id="@+id/entry_register_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stock_entry_register.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -117,13 +129,13 @@
                                     android:id="@+id/entry_register_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stock_entry_register.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
                             </RadioGroup>
 
                         </LinearLayout>
-
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -160,6 +172,8 @@
                                         android:id="@+id/game_room_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.game_sport_room_avail.equalsIgnoreCase(`Yes`)}"
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="Yes" />
 
@@ -167,6 +181,8 @@
                                         android:id="@+id/game_room_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.game_sport_room_avail.equalsIgnoreCase(`No`)}"
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="No" />
 
@@ -197,11 +213,13 @@
                                     android:id="@+id/pd_pft_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/name_of_the_pd_pft"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.pd_pft_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -230,12 +248,14 @@
                                     android:id="@+id/pd_mob_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.pd_pft_contact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -258,8 +278,7 @@
                                 android:id="@+id/rv_cocur"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:visibility="gone" />
+                                android:padding="5dp" />
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -286,7 +305,7 @@
                                     android:text="View"
                                     android:textAllCaps="false"
                                     android:textColor="@color/white"
-                                    android:visibility="gone" />
+                                    android:visibility="@{inspData.studAchievementEntities.size()>0 ? View.VISIBLE: View.GONE}" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -340,6 +359,8 @@
                                     android:id="@+id/rb_playGrAvailYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.play_ground_avail.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -347,6 +368,8 @@
                                     android:id="@+id/rb_playGrAvailNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.play_ground_avail.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -359,7 +382,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.play_ground_avail.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -374,11 +397,12 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-
                                 <RadioButton
                                     android:id="@+id/rb_planToProcYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_to_prc_land.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -386,6 +410,8 @@
                                     android:id="@+id/rb_planToProcNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_to_prc_land.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -398,7 +424,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.play_ground_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
@@ -406,11 +432,13 @@
                                 android:id="@+id/et_land"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
+                                android:text="@{inspData.land_mea_value}"
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -459,14 +487,17 @@
                                 android:id="@+id/ground_lev_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.ground_level_status.equalsIgnoreCase(`Yes`)}"
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Yes" />
 
                             <RadioButton
                                 android:id="@+id/ground_lev_no"
-
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.ground_level_status.equalsIgnoreCase(`No`)}"
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="No" />
 
@@ -522,6 +553,8 @@
                                     android:id="@+id/rb_scoutsYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scouts_guides_impl_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -529,6 +562,8 @@
                                     android:id="@+id/rb_scoutsNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scouts_guides_impl_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -541,7 +576,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.scouts_guides_impl_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/scoutCapName"
@@ -555,11 +590,13 @@
                                     android:id="@+id/et_sc_gu_nmae"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/scout_master_guide_captain_name"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.scout_guide_captain_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -576,12 +613,14 @@
                                     android:id="@+id/et_sc_gu_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.scout_guide_captain_contact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -636,6 +675,8 @@
                                     android:id="@+id/rb_nccStudImpYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.ncc_impl_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -643,6 +684,8 @@
                                     android:id="@+id/rb_nccStudImpNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.ncc_impl_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -655,7 +698,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.ncc_impl_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/nccTeachName"
@@ -669,11 +712,13 @@
                                     android:id="@+id/ncc_tea_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/name_of_the_ncc_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.ncc_teacher_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -690,12 +735,14 @@
                                     android:id="@+id/ncc_tea_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.ncc_teacher_contact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -712,11 +759,13 @@
                                     android:id="@+id/ncc_bat_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/battalion_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.ncc_teacher_battalion_num}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -771,6 +820,8 @@
                                     android:id="@+id/rb_smcElectionsYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.smc_ele_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -778,6 +829,8 @@
                                     android:id="@+id/rb_smcElectionsNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.smc_ele_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -790,7 +843,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.smc_ele_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/smc_chi_name"
@@ -804,11 +857,13 @@
                                     android:id="@+id/smc_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/name_of_the_smc_chairman"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.smc_ele_chairman_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -825,50 +880,17 @@
                                     android:id="@+id/smc_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.smc_ele_chairman_contact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="gone">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/conducting_of_parents_meeting_resolution_noted"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="Yes" />
-
-                                    <RadioButton
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="No" />
-
-                                </RadioGroup>
-
-                            </LinearLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -881,11 +903,13 @@
                                     android:id="@+id/smc_con"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/conducting_of_parents_meeting_resolution_noted"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@={inspData.smc_ele_con_parent_meeting}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -939,6 +963,8 @@
                                     android:id="@+id/rb_kitchenAvailYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.kitchen_garden_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -946,6 +972,8 @@
                                     android:id="@+id/rb_kitchenAvailNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.kitchen_garden_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -958,7 +986,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.kitchen_garden_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/event_kitchen"
@@ -972,11 +1000,13 @@
                                     android:id="@+id/kit_eve_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/event_of_kitchen_in_charge"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.kitchen_in_charge_event_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -993,11 +1023,13 @@
                                     android:id="@+id/kit_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/types_of_kitchen_garden"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.kitchen_garden_types}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1014,11 +1046,13 @@
                                     android:id="@+id/kit_in_charge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.kitchen_garden_in_charge_name}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1035,12 +1069,14 @@
                                     android:id="@+id/kit_in_cha_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.kitchen_garden_in_charge_contact}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1094,6 +1130,8 @@
                                     android:id="@+id/rb_harithaharamYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.harita_haram_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1101,6 +1139,8 @@
                                     android:id="@+id/rb_harithaharamNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.harita_haram_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1116,9 +1156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_30dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -1134,7 +1172,8 @@
                             android:background="@drawable/btn_background"
                             android:text="Add"
                             android:textAllCaps="false"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
 
                         <com.example.twdinspection.common.custom.CustomFontButtonView
                             android:id="@+id/btn_viewplant"
@@ -1195,6 +1234,8 @@
                                     android:id="@+id/rb_studCounElecYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1202,6 +1243,8 @@
                                     android:id="@+id/rb_studCounElecNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1214,7 +1257,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1234,6 +1278,8 @@
                                     android:id="@+id/rb_nameOfCommYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stu_com_display_status.equalsIgnoreCase(`Yes`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1241,54 +1287,12 @@
                                     android:id="@+id/rb_nameOfCommNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stu_com_display_status.equalsIgnoreCase(`No`)}"
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
                             </RadioGroup>
-
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:errorEnabled="true">
-
-
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/cou_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_student_s_council_captain"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="textPersonName"
-                                    android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true"
-                                    android:textSize="@dimen/dimen_15dp" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textColorHint="@color/colorAccent"
-                                app:errorEnabled="true">
-
-
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/et_medical_checkup_date"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                                    android:focusableInTouchMode="false"
-                                    android:hint="@string/last_meeting_conducted_with_students_council_date"
-                                    android:imeOptions="actionNext"
-                                    android:text="@string/select_date"
-                                    android:textSize="@dimen/dimen_15dp" />
-
-
-                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
@@ -1297,7 +1301,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.stu_com_display_status.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/et_reason"
@@ -1308,6 +1312,7 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
+
                                     android:id="@+id/reason_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1316,6 +1321,7 @@
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
+                                    android:text="@{inspData.reason}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1323,9 +1329,59 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
-                </LinearLayout>
+                        <LinearLayout
+                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
+                            android:id="@+id/stu_name_ll"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/cou_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/name_of_the_student_s_council_captain"
+                                android:imeOptions="actionNext"
+                                android:inputType="textPersonName"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true"
+                                android:text="@{inspData.stu_cou_captain_name}"
+                                android:textSize="@dimen/dimen_15dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_medical_checkup_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+
+                                android:hint="@string/last_meeting_conducted_with_students_council_date"
+                                android:imeOptions="actionNext"
+                                android:text="@{inspData.stu_cou_date}"
+                                android:textSize="@dimen/dimen_15dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
