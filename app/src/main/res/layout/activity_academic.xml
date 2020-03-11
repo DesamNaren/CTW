@@ -5,9 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.twdinspection.inspection.viewmodel.AcademicViewModel" />
+
+        <variable
+            name="inspData"
+            type="com.example.twdinspection.inspection.source.academic_overview.AcademicEntity" />
 
     </data>
 
@@ -18,17 +24,16 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.GeneralInfoActivity">
 
-
         <ScrollView
             android:id="@+id/scrl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
+            android:layout_below="@+id/action_bar"
             android:background="@color/grey_light"
             android:visibility="visible">
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
@@ -79,6 +84,7 @@
                                     android:id="@+id/highest_class_syllabus_completed_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.highest_class_syllabus_completed.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -86,6 +92,8 @@
                                     android:id="@+id/highest_class_syllabus_completed_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.highest_class_syllabus_completed.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -99,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.highest_class_syllabus_completed.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -120,6 +128,8 @@
                                     android:id="@+id/rb_plan_syll_comp_prepared_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_syll_comp_prepared.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -127,12 +137,12 @@
                                     android:id="@+id/rb_plan_syll_comp_prepared_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_syll_comp_prepared.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
-
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -179,6 +189,8 @@
                                 android:id="@+id/strength_accomodated_asper_infrastructure_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.strength_accomodated_asper_infrastructure.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -186,6 +198,8 @@
                                 android:id="@+id/strength_accomodated_asper_infrastructure_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.strength_accomodated_asper_infrastructure.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -220,7 +234,7 @@
                             android:layout_width="@dimen/_100dp"
                             android:layout_height="@dimen/_100dp"
                             android:padding="@dimen/dimen_5dp"
-                            android:src="@mipmap/ic_launcher_round" />
+                            android:src="@drawable/ic_launcher_background" />
 
                     </LinearLayout>
 
@@ -290,6 +304,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:checked="@{inspData.staff_accomodated_asper_stud_strength.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -298,10 +314,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:checked="@{inspData.staff_accomodated_asper_stud_strength.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
-
-
                         </RadioGroup>
                     </LinearLayout>
                 </LinearLayout>
@@ -354,6 +370,8 @@
                                     android:id="@+id/plan_prepared_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_prepared.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -361,6 +379,8 @@
                                     android:id="@+id/plan_prepared_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.plan_prepared.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -391,6 +411,8 @@
                                     android:id="@+id/rb_textbooks_rec_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.textbooks_rec.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -398,11 +420,14 @@
                                     android:id="@+id/rb_textbooks_rec_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.textbooks_rec.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
                         </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -449,6 +474,8 @@
                                 android:id="@+id/assessment_test_conducted_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.assessment_test_conducted.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -456,6 +483,8 @@
                                 android:id="@+id/assessment_test_conducted_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.assessment_test_conducted.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -512,11 +541,13 @@
                                     android:id="@+id/highest_class_gradeA"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:gravity="center"
                                     android:hint="@string/a"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.highest_class_gradeA}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -533,11 +564,13 @@
                                     android:id="@+id/highest_class_gradeB"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:gravity="center"
                                     android:hint="@string/b"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.highest_class_gradeB}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -553,11 +586,13 @@
                                     android:id="@+id/highest_class_gradeC"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:gravity="center"
                                     android:hint="@string/c"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.highest_class_gradeC}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -574,11 +609,13 @@
                                     android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:gravity="center"
                                     android:hint="@string/total"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.highest_class_total}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -595,10 +632,12 @@
                                 android:id="@+id/last_yr_ssc_percent_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                               
                                 android:hint="@string/last_year_ssc_results_percentage"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.last_yr_ssc_percent}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -626,6 +665,8 @@
                                     android:id="@+id/punadi_books_supplied_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.punadi_books_supplied.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -633,6 +674,8 @@
                                     android:id="@+id/punadi_books_supplied_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.punadi_books_supplied.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -645,7 +688,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:padding="@dimen/dimen_5dp"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.punadi_books_supplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -665,6 +708,8 @@
                                     android:id="@+id/sufficient_books_supplied_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -672,6 +717,8 @@
                                     android:id="@+id/sufficient_books_supplied_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -724,6 +771,8 @@
                                 android:id="@+id/rb_punadi_prgm_conducted_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -731,6 +780,8 @@
                                 android:id="@+id/rb_punadi_prgm_conducted_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -741,7 +792,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
@@ -749,9 +800,11 @@
                                 android:id="@+id/et_punadi_prgm_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                               
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.punadiPrgmReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -802,6 +855,8 @@
                                 android:id="@+id/rb_punadi2_testmarks_entered_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -809,6 +864,8 @@
                                 android:id="@+id/rb_punadi2_testmarks_entered_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -819,7 +876,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
@@ -827,9 +884,11 @@
                                 android:id="@+id/et_punadi2_testmarks_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                               
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.punadi2TestmarksReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -847,7 +906,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="@dimen/dimen_5dp">
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -875,11 +933,12 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="horizontal">
 
-
                             <RadioButton
                                 android:id="@+id/rb_kara_dipath_prgm_cond_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.kara_dipath_prgm_cond.equalsIgnoreCase(`Yes`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -887,6 +946,8 @@
                                 android:id="@+id/rb_kara_dipath_prgm_cond_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.kara_dipath_prgm_cond.equalsIgnoreCase(`No`)}"
+                                
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -906,6 +967,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
+                                android:text="@={inspData.karaDipathPrgmCondReason}"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
 
@@ -925,7 +987,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="@dimen/dimen_5dp">
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -963,6 +1024,8 @@
                                     android:id="@+id/rb_labManuals_received_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.labManuals_received.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -970,6 +1033,8 @@
                                     android:id="@+id/rb_labManuals_received_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.labManuals_received.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -982,7 +1047,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.labManuals_received.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -1003,6 +1068,7 @@
                                     android:id="@+id/rb_properly_using_manuals_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.properly_using_manuals.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1010,6 +1076,7 @@
                                     android:id="@+id/rb_properly_using_manuals_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.properly_using_manuals.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1068,6 +1135,8 @@
                                     android:id="@+id/rb_labroom_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.labroom_available.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1075,6 +1144,8 @@
                                     android:id="@+id/rb_labroom_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.labroom_available.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1087,7 +1158,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.labroom_available.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1100,9 +1171,11 @@
                                     android:id="@+id/et_lab_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/name_of_the_science_lab"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.labName}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1117,9 +1190,11 @@
                                     android:id="@+id/et_lab_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.labInchargeName}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1134,11 +1209,13 @@
                                     android:id="@+id/et_lab_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.labMobileNo}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1169,6 +1246,8 @@
                                     android:id="@+id/rb_lab_mat_entered_reg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1176,6 +1255,8 @@
                                     android:id="@+id/rb_lab_mat_entered_reg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1187,7 +1268,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
@@ -1196,6 +1277,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
+                                android:text="@={inspData.lab_mat_entered_reg_reason}"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
 
@@ -1252,6 +1334,8 @@
                                     android:id="@+id/rb_library_room_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.library_room_available.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1259,6 +1343,8 @@
                                     android:id="@+id/rb_library_room_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.library_room_available.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1271,7 +1357,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.library_room_available.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1284,10 +1370,12 @@
                                     android:id="@+id/et_no_of_books"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/no_of_books_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.noOfBooks}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1302,9 +1390,11 @@
                                     android:id="@+id/et_name_library_incharge"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/name_of_the_library_in_charge_teacher"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.nameLibraryIncharge}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1319,11 +1409,13 @@
                                     android:id="@+id/et_library_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.libraryMobileNo}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1351,6 +1443,8 @@
                                         android:id="@+id/rb_maint_accession_reg_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.maint_accession_reg.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1358,6 +1452,8 @@
                                         android:id="@+id/rb_maint_accession_reg_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.maint_accession_reg.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1391,6 +1487,8 @@
                                     android:id="@+id/rb_proper_light_fan_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.proper_light_fan.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1398,6 +1496,8 @@
                                     android:id="@+id/rb_proper_light_fan_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.proper_light_fan.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1454,6 +1554,8 @@
                                     android:id="@+id/rb_big_tv_rot_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1461,6 +1563,8 @@
                                     android:id="@+id/rb_big_tv_rot_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1468,13 +1572,32 @@
 
                         </LinearLayout>
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/t_tv_rot_working_status"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:errorEnabled="true">
+
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_tv_rot_working_status"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/working_status"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:text="@={inspData.tvRotWorkingStatus}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <LinearLayout
-                            android:visibility="gone"
                             android:id="@+id/big_tv_ll"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <com.example.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
@@ -1559,6 +1682,8 @@
                                     android:id="@+id/rb_mana_tv_lessons_shown_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.mana_tv_lessons_shown.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1566,6 +1691,8 @@
                                     android:id="@+id/rb_mana_tv_lessons_shown_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.mana_tv_lessons_shown.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1578,7 +1705,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.mana_tv_lessons_shown.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1593,7 +1720,8 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/state_the_reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.manaTvLessonsReason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1610,7 +1738,8 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/mana_tv_incharge_teacher_name"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.manaTvInchargeName}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1625,11 +1754,13 @@
                                     android:id="@+id/et_mana_tv_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.manaTvMobileNo}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1648,7 +1779,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="@dimen/dimen_5dp">
-
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1686,6 +1816,8 @@
                                     android:id="@+id/rb_comp_lab_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.comp_lab_avail.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1693,6 +1825,8 @@
                                     android:id="@+id/rb_comp_lab_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.comp_lab_avail.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1705,7 +1839,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.comp_lab_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1718,10 +1852,13 @@
                                     android:id="@+id/et_no_of_computers_available"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    
+                                   
                                     android:hint="@string/number_of_computers_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.noOfComputersAvailable}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1736,9 +1873,11 @@
                                     android:id="@+id/et_comp_working_status"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@={inspData.compWorkingStatus}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1753,9 +1892,11 @@
                                     android:id="@+id/et_working_status_projector"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                   
                                     android:hint="@string/working_status_of_projector"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{inspData.workingStatusProjector}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1783,6 +1924,8 @@
                                         android:id="@+id/rb_ict_instr_avail_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.ict_instr_avail.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1790,6 +1933,8 @@
                                         android:id="@+id/rb_ict_instr_avail_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.ict_instr_avail.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1815,9 +1960,11 @@
                                         android:id="@+id/et_name_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.nameIctInstr}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1832,11 +1979,13 @@
                                         android:id="@+id/et_mob_no_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.mobNoIctInstr}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
@@ -1865,6 +2014,8 @@
                                         android:id="@+id/rb_timetable_disp_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.timetable_disp.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1872,6 +2023,8 @@
                                         android:id="@+id/rb_timetable_disp_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.timetable_disp.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1903,6 +2056,8 @@
                                         android:id="@+id/rb_comp_syll_completed_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.comp_syll_completed.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1910,6 +2065,8 @@
                                         android:id="@+id/rb_comp_syll_completed_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.comp_syll_completed.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1941,6 +2098,8 @@
                                         android:id="@+id/rb_comp_lab_cond_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.comp_lab_cond.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1948,6 +2107,8 @@
                                         android:id="@+id/rb_comp_lab_cond_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.comp_lab_cond.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1979,6 +2140,7 @@
                                         android:id="@+id/rb_digital_content_used_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.digital_content_used.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1986,6 +2148,7 @@
                                         android:id="@+id/rb_digital_content_used_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.digital_content_used.equalsIgnoreCase(`No`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2046,6 +2209,8 @@
                                     android:id="@+id/rb_eLearning_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.eLearning_avail.equalsIgnoreCase(`Yes`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -2053,6 +2218,8 @@
                                     android:id="@+id/rb_eLearning_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{inspData.eLearning_avail.equalsIgnoreCase(`No`)}"
+                                    
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2065,7 +2232,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.eLearning_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -2091,6 +2258,8 @@
                                         android:id="@+id/rb_showing_stud_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2098,6 +2267,8 @@
                                         android:id="@+id/rb_showing_stud_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2109,8 +2280,8 @@
                                 android:id="@+id/ll_name_vol_school"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
+                            android:orientation="vertical">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -2123,9 +2294,11 @@
                                         android:id="@+id/et_vol_school_coord_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{inspData.volSchoolCoordName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2140,11 +2313,13 @@
                                         android:id="@+id/et_vol_school_coord_mob_no"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{inspData.volSchoolCoordMobNo}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
                             </LinearLayout>
@@ -2165,9 +2340,11 @@
                                         android:id="@+id/et_eLearning_inchrg_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{inspData.eLearningInchargeName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2182,11 +2359,13 @@
                                         android:id="@+id/et_eLearning_inchrg_mobileNo"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{inspData.eLearningMobNum}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2216,6 +2395,8 @@
                                         android:id="@+id/rb_separate_timetable_disp_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2223,6 +2404,8 @@
                                         android:id="@+id/rb_separate_timetable_disp_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2255,6 +2438,8 @@
                                         android:id="@+id/rb_tabs_supplied_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.tabs_supplied.equalsIgnoreCase(`Yes`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2262,6 +2447,8 @@
                                         android:id="@+id/rb_tabs_supplied_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.tabs_supplied.equalsIgnoreCase(`No`)}"
+                                        
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2287,10 +2474,12 @@
                                         android:id="@+id/et_no_of_tabs"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/number_of_tabs"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.noOfTabs}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2307,7 +2496,7 @@
                                         android:textColor="@color/black" />
 
                                     <RadioGroup
-                                        android:id="@+id/tabs_rg_stud_using_as_per_sched"
+                                        android:id="@+id/rg_stud_using_as_per_sched"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_5dp"
@@ -2315,16 +2504,20 @@
 
 
                                         <RadioButton
-                                            android:id="@+id/tabs_rb_stud_using_as_per_sched_yes"
+                                            android:id="@+id/rb_stud_using_as_per_sched_yes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.tabs_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)}"
+                                            
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
                                         <RadioButton
-                                            android:id="@+id/tabs_rb_stud_using_as_per_sched_no"
+                                            android:id="@+id/rb_stud_using_as_per_sched_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.tabs_stud_using_as_per_sched.equalsIgnoreCase(`No`)}"
+                                            
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -2343,9 +2536,11 @@
                                         android:id="@+id/et_tab_incharge_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                       
                                         android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.tabInchargeName}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2364,7 +2559,8 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@={inspData.tabInchargeMblno}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -2393,6 +2589,8 @@
                                             android:id="@+id/rb_tabs_timetable_disp_yes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`Yes`)}"
+                                            
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
@@ -2400,6 +2598,8 @@
                                             android:id="@+id/rb_tabs_timetable_disp_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`No`)}"
+                                            
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -2424,7 +2624,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_layout"
-            android:background="@android:color/transparent"></androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:background="@android:color/transparent" />
 
         <include
             android:id="@+id/btn_layout"

@@ -59,7 +59,7 @@ import com.example.twdinspection.inspection.source.student_attendence_info.StudA
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
-        , CoCurricularEntity.class}, version = 1, exportSchema = false)
+        , CoCurricularEntity.class}, version =1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();

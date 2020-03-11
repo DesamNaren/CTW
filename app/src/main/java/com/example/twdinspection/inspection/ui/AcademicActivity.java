@@ -17,6 +17,7 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -42,6 +43,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private InstMainViewModel instMainViewModel;
     private SharedPreferences sharedPreferences;
     private String instId, officerId, insTime;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +59,32 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
+                academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
+                    @Override
+                    public void onChanged(AcademicEntity generalInfoEntity) {
+                        academicInfoData.removeObservers(AcademicActivity.this);
+                        if (generalInfoEntity != null) {
+                            binding.setInspData(generalInfoEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         binding.rgHighestClassSyllabusCompleted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHighestClassSyllabusCompleted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.highest_class_syllabus_completed_yes) {
+                   binding.rgPlanSyllCompPrepared.clearCheck();
                     highest_class_syllabus_completed = AppConstants.Yes;
                     binding.llPlanCompSyll.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.highest_class_syllabus_completed_no) {
@@ -95,6 +117,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llSufficientBooksSupplied.setVisibility(View.VISIBLE);
                     punadi_books_supplied = AppConstants.Yes;
                 } else if (selctedItem == R.id.punadi_books_supplied_no) {
+                    binding.rgSufficientBooksSupplied.clearCheck();
                     binding.llSufficientBooksSupplied.setVisibility(View.GONE);
                     punadi_books_supplied = AppConstants.No;
                 } else {
@@ -121,6 +144,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPunadiPrgmConducted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_punadi_prgm_conducted_yes) {
+                    binding.etPunadiPrgmReason.setText("");
                     binding.tPunadiPrgmReason.setVisibility(View.GONE);
                     punadiPrgmConducted = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_punadi_prgm_conducted_no) {
@@ -137,6 +161,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPunadi2TestmarksEntered.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_punadi2_testmarks_entered_yes) {
+                    binding.etPunadi2TestmarksReason.setText("");
                     binding.tPunadi2TestmarksReason.setVisibility(View.GONE);
                     punadi2_testmarks_entered = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_punadi2_testmarks_entered_no) {
@@ -153,6 +178,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgKaraDipathPrgmCond.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_kara_dipath_prgm_cond_yes) {
+                    binding.etKaraDipathPrgmCond.setText("");
                     binding.tKaraDipathPrgmCond.setVisibility(View.GONE);
                     kara_dipath_prgm_cond = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_kara_dipath_prgm_cond_no) {
@@ -229,6 +255,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llProperlyUsingManuals.setVisibility(View.VISIBLE);
                     labManuals_received = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_labManuals_received_no) {
+                    binding.rgProperlyUsingLabManuals.clearCheck();
                     binding.llProperlyUsingManuals.setVisibility(View.GONE);
                     labManuals_received = AppConstants.No;
                 } else {
@@ -258,6 +285,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llNameScienceLab.setVisibility(View.VISIBLE);
                     labroom_available = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_labroom_available_no) {
+                    binding.etLabName.setText("");
+                    binding.etLabInchargeName.setText("");
+                    binding.etLabMobileNo.setText("");
                     binding.llNameScienceLab.setVisibility(View.GONE);
                     labroom_available = AppConstants.No;
                 } else {
@@ -297,6 +327,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgLabMatEnteredReg.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_lab_mat_entered_reg_yes) {
+                    binding.etMatEnterRegReason.setText("");
                     binding.tMatEnterRegReason.setVisibility(View.GONE);
                     lab_mat_entered_reg = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_lab_mat_entered_reg_no) {
@@ -317,7 +348,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llNoBooksAvailable.setVisibility(View.VISIBLE);
                     library_room_available = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_library_room_available_no) {
+                    binding.etNoOfBooks.setText("");
+                    binding.etNameLibraryIncharge.setText("");
+                    binding.etLibraryMobileNo.setText("");
                     binding.llNoBooksAvailable.setVisibility(View.GONE);
+                    binding.rgMaintAccessionReg.clearCheck();
                     library_room_available = AppConstants.No;
                 } else {
                     binding.llNoBooksAvailable.setVisibility(View.GONE);
@@ -334,6 +369,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.bigTvLl.setVisibility(View.VISIBLE);
                     big_tv_rot_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_big_tv_rot_avail_no) {
+                    binding.rgBigTvRotAvailCon.clearCheck();
                     binding.bigTvLl.setVisibility(View.GONE);
                     big_tv_rot_avail = AppConstants.No;
                 } else {
@@ -364,6 +400,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llManaTvLessonsReason.setVisibility(View.GONE);
                     mana_tv_lessons_shown = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_mana_tv_lessons_shown_no) {
+                    binding.etManaTvLessonsReason.setText("");
+                    binding.etManaTvInchargeName.setText("");
+                    binding.etManaTvMobileNo.setText("");
                     binding.llManaTvLessonsReason.setVisibility(View.VISIBLE);
                     mana_tv_lessons_shown = AppConstants.No;
                 } else {
@@ -380,6 +419,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llComputerLab.setVisibility(View.VISIBLE);
                     comp_lab_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_comp_lab_avail_no) {
+                    binding.etNoOfComputersAvailable.setText("");
+                    binding.etCompWorkingStatus.setText("");
+                    binding.etWorkingStatusProjector.setText("");
+                    binding.rgIctInstrAvail.clearCheck();
+                    binding.rgTimetableDisp.clearCheck();
+                    binding.etNameIctInstr.setText("");
+                    binding.etMobNoIctInstr.setText("");
+                    binding.rgCompSyllCompleted.clearCheck();
+                    binding.rgCompLabCond.clearCheck();
+                    binding.rgDigitalContentUsed.clearCheck();
                     binding.llComputerLab.setVisibility(View.GONE);
                     comp_lab_avail = AppConstants.No;
                 } else {
@@ -396,6 +445,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llIctInstr.setVisibility(View.VISIBLE);
                     ict_instr_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_ict_instr_avail_no) {
+                    binding.etNameIctInstr.setText("");
+                    binding.etMobNoIctInstr.setText("");
                     binding.llIctInstr.setVisibility(View.GONE);
                     ict_instr_avail = AppConstants.No;
                 } else {
@@ -465,6 +516,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llElearning.setVisibility(View.VISIBLE);
                     eLearning_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_eLearning_avail_no) {
+                    binding.rgShowingStud.clearCheck();
+                    binding.rgSeparateTimetableDisp.clearCheck();
+                    binding.rgTabsSupplied.clearCheck();
+                    binding.etELearningInchrgName.setText("");
+                    binding.etELearningInchrgMobileNo.setText("");
+                    binding.etVolSchoolCoordName.setText("");
+                    binding.etVolSchoolCoordMobNo.setText("");
                     binding.llElearning.setVisibility(View.GONE);
                     eLearning_avail = AppConstants.No;
                 } else {
@@ -481,6 +539,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llNameVolSchool.setVisibility(View.VISIBLE);
                     showing_stud = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_showing_stud_no) {
+                    binding.etVolSchoolCoordName.setText("");
+                    binding.etVolSchoolCoordMobNo.setText("");
                     binding.llNameVolSchool.setVisibility(View.GONE);
                     showing_stud = AppConstants.No;
                 } else {
@@ -502,13 +562,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
-        binding.tabsRgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.rgStudUsingAsPerSched.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.tabsRgStudUsingAsPerSched.getCheckedRadioButtonId();
-                if (selctedItem == R.id.tabs_rb_stud_using_as_per_sched_yes) {
+                int selctedItem = binding.rgStudUsingAsPerSched.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_stud_using_as_per_sched_yes) {
                     stud_using_as_per_sched = AppConstants.Yes;
-                } else if (selctedItem == R.id.tabs_rb_stud_using_as_per_sched_no) {
+                } else if (selctedItem == R.id.rb_stud_using_as_per_sched_no) {
                     stud_using_as_per_sched = AppConstants.No;
                 } else {
                     stud_using_as_per_sched = null;
