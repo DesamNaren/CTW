@@ -397,12 +397,12 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgManaTvLessonsShown.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_mana_tv_lessons_shown_yes) {
-                    binding.llManaTvLessonsReason.setVisibility(View.GONE);
-                    mana_tv_lessons_shown = AppConstants.Yes;
-                } else if (selctedItem == R.id.rb_mana_tv_lessons_shown_no) {
                     binding.etManaTvLessonsReason.setText("");
                     binding.etManaTvInchargeName.setText("");
                     binding.etManaTvMobileNo.setText("");
+                    binding.llManaTvLessonsReason.setVisibility(View.GONE);
+                    mana_tv_lessons_shown = AppConstants.Yes;
+                } else if (selctedItem == R.id.rb_mana_tv_lessons_shown_no) {
                     binding.llManaTvLessonsReason.setVisibility(View.VISIBLE);
                     mana_tv_lessons_shown = AppConstants.No;
                 } else {
