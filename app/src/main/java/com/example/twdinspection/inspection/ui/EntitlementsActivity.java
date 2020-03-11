@@ -18,7 +18,9 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityEntitlementsBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.reports.source.Entitlements;
 import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.EntitilementsCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.EntitlementsViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -35,6 +37,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     String instId,officerID;
+    private int localFlag = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +208,27 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<EntitlementsEntity> entitlementInfoData = instMainViewModel.getEntitlementInfoData();
+                entitlementInfoData.observe(EntitlementsActivity.this, new Observer<EntitlementsEntity>() {
+                    @Override
+                    public void onChanged(EntitlementsEntity entitlementsEntity) {
+                        entitlementInfoData.removeObservers(EntitlementsActivity.this);
+                        if (entitlementsEntity != null) {
+                            binding.setInspData(entitlementsEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean validate() {
@@ -318,6 +342,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 liveData.observe(EntitlementsActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
+                        liveData.removeObservers(EntitlementsActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instId);
                         }

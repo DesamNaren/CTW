@@ -31,7 +31,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -389,7 +389,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodFruits.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodFruits.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:id="@+id/food_quality_fruits_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -398,7 +398,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodFruits.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodFruits.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:id="@+id/food_quality_fruits_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -451,7 +451,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodEggs.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodEggs.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:id="@+id/food_quality_eggs_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -460,7 +460,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodEggs.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodEggs.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:id="@+id/food_quality_eggs_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -514,7 +514,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodVegetables.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodVegetables.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:id="@+id/food_quality_veg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -523,7 +523,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodVegetables.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodVegetables.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:id="@+id/food_quality_veg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -578,7 +578,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodFoodProvisions.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodFoodProvisions.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:id="@+id/food_quality_provisions_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -587,7 +587,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.qualityOfFoodFoodProvisions.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.qualityOfFoodFoodProvisions.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:id="@+id/food_quality_provisions_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -818,7 +818,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.hairCutOnTime.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.hairCutOnTime.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -827,7 +827,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.hairCutOnTime.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.hairCutOnTime.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -880,7 +880,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.studFoundAnemic.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.studFoundAnemic.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/students_found_anemic_yes"
@@ -889,7 +889,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.studFoundAnemic.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.studFoundAnemic.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -944,7 +944,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.studAttire.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.studAttire.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/attire_of_students_yes"
@@ -953,7 +953,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.studAttire.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.studAttire.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1039,7 +1039,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.cookWearingCap.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.cookWearingCap.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1048,7 +1048,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.cookWearingCap.equalsIgnoreCase(`No`) ? true : false}"
+                                    android:checked="@{comments.cookWearingCap.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1101,7 +1101,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.staffHandsClean.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.staffHandsClean.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1110,7 +1110,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.staffHandsClean.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.staffHandsClean.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1165,7 +1165,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.staffAttire.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.staffAttire.equalsIgnoreCase(`Good`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -1174,7 +1174,7 @@
 
                                 <RadioButton
                                     android:clickable="false"
-                                    android:checked="@{comments.staffAttire.equalsIgnoreCase(`Yes`) ? true : false}"
+                                    android:checked="@{comments.staffAttire.equalsIgnoreCase(`Inferior`) ? true : false}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"

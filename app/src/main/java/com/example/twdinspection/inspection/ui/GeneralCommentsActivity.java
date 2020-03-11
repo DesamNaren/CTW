@@ -1,9 +1,5 @@
 package com.example.twdinspection.inspection.ui;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +7,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -38,6 +38,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+    private int localFlag = -1;
+    private String gccDate, suppliedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +103,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgFoodQualityFruits.getCheckedRadioButtonId();
                 if (selctedItem == R.id.food_quality_fruits_yes)
-                    foodQualityFruits = AppConstants.Yes;
+                    foodQualityFruits = AppConstants.GOOD;
                 else
-                    foodQualityFruits = AppConstants.No;
+                    foodQualityFruits = AppConstants.INFERIOR;
             }
         });
         binding.rgFoodQualityEggs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -111,9 +113,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgFoodQualityEggs.getCheckedRadioButtonId();
                 if (selctedItem == R.id.food_quality_eggs_yes)
-                    foodQualityEggs = AppConstants.Yes;
+                    foodQualityEggs = AppConstants.GOOD;
                 else
-                    foodQualityEggs = AppConstants.No;
+                    foodQualityEggs = AppConstants.INFERIOR;
             }
         });
         binding.rgFoodQualityVeg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -121,9 +123,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgFoodQualityVeg.getCheckedRadioButtonId();
                 if (selctedItem == R.id.food_quality_veg_yes)
-                    foodQualityVeg = AppConstants.Yes;
+                    foodQualityVeg = AppConstants.GOOD;
                 else
-                    foodQualityVeg = AppConstants.No;
+                    foodQualityVeg = AppConstants.INFERIOR;
             }
         });
         binding.rgFoodQualityProvisions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -131,9 +133,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgFoodQualityProvisions.getCheckedRadioButtonId();
                 if (selctedItem == R.id.food_quality_provisions_yes)
-                    foodQualityProvisions = AppConstants.Yes;
+                    foodQualityProvisions = AppConstants.GOOD;
                 else
-                    foodQualityProvisions = AppConstants.No;
+                    foodQualityProvisions = AppConstants.INFERIOR;
             }
         });
         binding.rgStocksSupplied.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -151,9 +153,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHaircut.getCheckedRadioButtonId();
                 if (selctedItem == R.id.haircut_yes)
-                    haircut = AppConstants.Yes;
+                    haircut = AppConstants.GOOD;
                 else
-                    haircut = AppConstants.No;
+                    haircut = AppConstants.INFERIOR;
             }
         });
         binding.rgStudentsFoundAnemic.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -161,9 +163,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgStudentsFoundAnemic.getCheckedRadioButtonId();
                 if (selctedItem == R.id.students_found_anemic_yes)
-                    studentsFoundAnemic = AppConstants.Yes;
+                    studentsFoundAnemic = AppConstants.GOOD;
                 else
-                    studentsFoundAnemic = AppConstants.No;
+                    studentsFoundAnemic = AppConstants.INFERIOR;
             }
         });
         binding.rgAttireOfStudents.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -171,9 +173,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgAttireOfStudents.getCheckedRadioButtonId();
                 if (selctedItem == R.id.attire_of_students_yes)
-                    attireOfStudents = AppConstants.Yes;
+                    attireOfStudents = AppConstants.GOOD;
                 else
-                    attireOfStudents = AppConstants.No;
+                    attireOfStudents = AppConstants.INFERIOR;
             }
         });
         binding.rgCooksWearingCap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -181,9 +183,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgCooksWearingCap.getCheckedRadioButtonId();
                 if (selctedItem == R.id.cooks_wearing_cap_yes)
-                    cooksWearingCap = AppConstants.Yes;
+                    cooksWearingCap = AppConstants.GOOD;
                 else
-                    cooksWearingCap = AppConstants.No;
+                    cooksWearingCap = AppConstants.INFERIOR;
             }
         });
         binding.rgHandsOfCookingStaff.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -191,9 +193,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHandsOfCookingStaff.getCheckedRadioButtonId();
                 if (selctedItem == R.id.hands_of_cooking_staff_yes)
-                    handsOfCookingStaff = AppConstants.Yes;
+                    handsOfCookingStaff = AppConstants.GOOD;
                 else
-                    handsOfCookingStaff = AppConstants.No;
+                    handsOfCookingStaff = AppConstants.INFERIOR;
             }
         });
         binding.rgAttireOfStaff.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -201,9 +203,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgAttireOfStaff.getCheckedRadioButtonId();
                 if (selctedItem == R.id.attire_of_staff_yes)
-                    attireOfStaff = AppConstants.Yes;
+                    attireOfStaff = AppConstants.GOOD;
                 else
-                    attireOfStaff = AppConstants.No;
+                    attireOfStaff = AppConstants.INFERIOR;
             }
         });
         binding.rgToilets.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -288,6 +290,25 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 suppliedDateSelection();
             }
         });
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<GeneralCommentsEntity> generalCommentsEntityLiveData = instMainViewModel.getGeneralCommentsInfoData();
+                generalCommentsEntityLiveData.observe(GeneralCommentsActivity.this, new Observer<GeneralCommentsEntity>() {
+                    @Override
+                    public void onChanged(GeneralCommentsEntity generalCommentsEntity) {
+                        generalCommentsEntityLiveData.removeObservers(GeneralCommentsActivity.this);
+                        if (generalCommentsEntity != null) {
+                            binding.setComments(generalCommentsEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -383,7 +404,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        binding.etGccDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        gccDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        binding.etGccDate.setText(gccDate);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -402,17 +424,20 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        binding.etSuppliedDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        suppliedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        binding.etSuppliedDate.setText(suppliedDate);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
+
+
     @Override
     public void submitData() {
-        String gccDate = binding.etGccDate.getText().toString().trim();
-        String suppliedDate = binding.etSuppliedDate.getText().toString().trim();
+        gccDate = binding.etGccDate.getText().toString().trim();
+        suppliedDate = binding.etSuppliedDate.getText().toString().trim();
 
         generalCommentsEntity = new GeneralCommentsEntity();
         generalCommentsEntity.setOfficer_id(officerID);
@@ -422,10 +447,10 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         generalCommentsEntity.setSupplied_on_time_eggs(foodTimeFruits);
         generalCommentsEntity.setSupplied_on_time_vegetables(foodTimeFruits);
         generalCommentsEntity.setSupplied_on_time_food_provisions(foodTimeFruits);
-        generalCommentsEntity.setQuality_of_food_fruits(foodTimeFruits);
-        generalCommentsEntity.setQuality_of_food_eggs(foodTimeFruits);
-        generalCommentsEntity.setQuality_of_food_vegetables(foodTimeFruits);
-        generalCommentsEntity.setQuality_of_food_food_provisions(foodTimeFruits);
+        generalCommentsEntity.setQuality_of_food_fruits(foodQualityFruits);
+        generalCommentsEntity.setQuality_of_food_eggs(foodQualityEggs);
+        generalCommentsEntity.setQuality_of_food_vegetables(foodQualityVeg);
+        generalCommentsEntity.setQuality_of_food_food_provisions(foodQualityProvisions);
         generalCommentsEntity.setGcc_date(gccDate);
         generalCommentsEntity.setSupplied_date(suppliedDate);
         generalCommentsEntity.setStocksSupplied(stocksSupplied);
@@ -450,6 +475,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 liveData.observe(GeneralCommentsActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
+                        liveData.removeObservers(GeneralCommentsActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }
@@ -459,7 +485,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(GeneralCommentsActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(GeneralCommentsActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

@@ -16,6 +16,8 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityRegistersBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.reports.ui.ReportActivity;
+import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.RegistersCustomViewModel;
@@ -32,6 +34,8 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     String instId,officerId;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
+    private int localFlag = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -313,6 +317,27 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
 
             }
         });
+
+        try {
+            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+            if (localFlag == 1) {
+                //get local record & set to data binding
+                LiveData<RegistersEntity> registersEntityLiveData = instMainViewModel.getRegistersInfoData();
+                registersEntityLiveData.observe(RegistersActivity.this, new Observer<RegistersEntity>() {
+                    @Override
+                    public void onChanged(RegistersEntity generalInfoEntity) {
+                        registersEntityLiveData.removeObservers(RegistersActivity.this);
+                        if (generalInfoEntity != null) {
+                            binding.setInspData(generalInfoEntity);
+                            binding.executePendingBindings();
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private boolean validate() {

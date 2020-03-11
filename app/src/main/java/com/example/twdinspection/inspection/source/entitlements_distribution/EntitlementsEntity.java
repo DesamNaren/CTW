@@ -4,10 +4,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 @Entity(tableName = "entitlements_info")
 public class EntitlementsEntity {
 
-    @PrimaryKey(autoGenerate = true)
+
     @ColumnInfo()
     private int id;
 
@@ -17,6 +19,8 @@ public class EntitlementsEntity {
     @ColumnInfo()
     private String inspection_time;
 
+    @NotNull
+    @PrimaryKey
     @ColumnInfo()
     private String institute_id;
 
@@ -89,11 +93,12 @@ public class EntitlementsEntity {
         this.inspection_time = inspection_time;
     }
 
+    @NotNull
     public String getInstitute_id() {
         return institute_id;
     }
 
-    public void setInstitute_id(String institute_id) {
+    public void setInstitute_id(@NotNull String institute_id) {
         this.institute_id = institute_id;
     }
 
