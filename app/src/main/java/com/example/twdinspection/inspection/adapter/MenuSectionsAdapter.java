@@ -101,18 +101,20 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
                             callActivity(GeneralCommentsActivity.class, dataModel.getFlag_completed());
                             break;
                         case 12:
-                            boolean flag = true;
-                            for (int i = 0; i < list.size()-1; i++) {
-                                if (list.get(i).getFlag_completed() == 0) {
-                                    flag = false;
-                                    break;
-                                }
-                            }
-                            if (flag) {
-                                callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
-                            } else {
-                                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
-                            }
+                            callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
+
+//                            boolean flag = true;
+//                            for (int i = 0; i < list.size()-1; i++) {
+//                                if (list.get(i).getFlag_completed() == 0) {
+//                                    flag = false;
+//                                    break;
+//                                }
+//                            }
+//                            if (flag) {
+//                                callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
+//                            } else {
+//                                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
+//                            }
                             break;
                     }
                 }

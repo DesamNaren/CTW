@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.inspection.interfaces.FinalSubmitListener;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
@@ -249,19 +250,6 @@ public class Utils {
                         }
                         editor.putString(AppConstants.INST_ID, "");
                         editor.putString(AppConstants.INST_NAME, "");
-                        editor.putString(AppConstants.MENU, "");
-                        editor.putString(AppConstants.OFFICER, "");
-                        editor.putString(AppConstants.TDS, "");
-                        editor.putString(AppConstants.IMAGE_STOREROOM, "");
-                        editor.putString(AppConstants.IMAGE_VARANDAH, "");
-                        editor.putString(AppConstants.IMAGE_DINING, "");
-                        editor.putString(AppConstants.IMAGE_DORMITORY, "");
-                        editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, "");
-                        editor.putString(AppConstants.IMAGE_TOILET, "");
-                        editor.putString(AppConstants.IMAGE_PLAY_GROUND, "");
-                        editor.putString(AppConstants.IMAGE_KITCHEN, "");
-                        editor.putString(AppConstants.IMAGE_CLASSROOM, "");
-
                         editor.putInt(AppConstants.DIST_ID, -1);
                         editor.putInt(AppConstants.MAN_ID, -1);
                         editor.putInt(AppConstants.VILL_ID, -1);
@@ -662,6 +650,10 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+
+
+
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

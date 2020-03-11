@@ -458,7 +458,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
 
         long x = registersViewModel.insertRegistersInfo(registersEntity);
 //                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
-        if (x >= 0) {
+            if (x >= 0) {
             final long[] z = {0};
             try {
                 LiveData<Integer> liveData = instMainViewModel.getSectionId("Registers");

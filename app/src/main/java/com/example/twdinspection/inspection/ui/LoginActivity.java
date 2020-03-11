@@ -47,6 +47,8 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         editor = sharedPreferences.edit();
         instMainViewModel = new InstMainViewModel(getApplication());
 
+        clearSession();
+
         instMainViewModel.getAllSections().observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
             public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
@@ -195,22 +197,27 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+            clearSession();
 
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                     editor.clear();
-                    editor.commit();
-                    instMainViewModel.deleteAllInspectionData();
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re));
-
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void clearSession(){
+        currentDate = Utils.getCurrentDate();
+        cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
+
+        if (!TextUtils.isEmpty(cacheDate)) {
+            if (!cacheDate.equalsIgnoreCase(currentDate)) {
+                editor.clear();
+                editor.commit();
+                instMainViewModel.deleteAllInspectionData();
+                Utils.ShowDeviceSessionAlert(this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.ses_expire_re));
+
+            }
         }
     }
 

@@ -127,6 +127,7 @@ public interface MenuSectionsDao {
     @Query("Delete from stud_achievements_info")
     void deleteStudAchievementEntity();
 
-
+    @Query("Delete from photos")
+    void deletePhotos();
 
 }

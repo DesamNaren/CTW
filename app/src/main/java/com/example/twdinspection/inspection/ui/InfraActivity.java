@@ -37,14 +37,17 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
+import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.inspection.viewmodel.InfraCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.InfraViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -80,6 +83,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
         binding.header.headerTitle.setText(getResources().getString(R.string.title_infra));
         binding.header.ivHome.setVisibility(View.GONE);
+        viewModel = new UploadPhotoViewModel(InfraActivity.this);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +135,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
                 int selctedItem = binding.rgRoPlant.getCheckedRadioButtonId();
                 if (selctedItem == R.id.ro_plant_yes) {
-                    flag_tds=0;
-                    file_tds=null;
+                    flag_tds = 0;
+                    file_tds = null;
                     roPlant = "YES";
                     binding.llReason.setVisibility(View.GONE);
                     binding.llTdsMeterReading.setVisibility(View.VISIBLE);
@@ -140,6 +144,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
 
                 } else if (selctedItem == R.id.ro_plant_no) {
+                    file_tds = null;
                     roPlant = "NO";
                     binding.llReason.setVisibility(View.VISIBLE);
                     binding.llTdsMeterReading.setVisibility(View.GONE);
@@ -636,15 +641,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 add_cls_cnt = binding.addClassCnt.getText().toString();
                 add_din_cnt = binding.addDinCnt.getText().toString();
                 add_dom_cnt = binding.addDomCnt.getText().toString();
-//                electricity_wiring_reason = binding.etElectric.getText().toString();
 
                 if (validateData()) {
-
-                    if (roPlant.equalsIgnoreCase("yes")) {
-                        editor.putString(AppConstants.TDS, String.valueOf(file_tds));
-                        editor.commit();
-                    }
-
                     infrastuctureEntity = new InfraStructureEntity();
                     infrastuctureEntity.setOfficer_id(officerID);
                     infrastuctureEntity.setInspection_time(Utils.getCurrentDateTime());
@@ -659,7 +657,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setLighting_facility(lighting_facility);
                     infrastuctureEntity.setElectricity_wiring(electricity_wiring);
                     infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
-//                    infrastuctureEntity.setElectricity_wiring_remarks(electricity_wiring_reason);
                     infrastuctureEntity.setEnough_fans(enough_fans);
                     infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
                     infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
@@ -696,24 +693,24 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setColor(color);
 
 
-                    if(binding.addClassCb.isChecked()) {
+                    if (binding.addClassCb.isChecked()) {
                         infrastuctureEntity.setAdd_class_required(AppConstants.Yes);
                         infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
-                    }else {
+                    } else {
                         infrastuctureEntity.setAdd_class_required(AppConstants.No);
                         infrastuctureEntity.setAdd_class_required_cnt("");
                     }
-                    if(binding.addDinCb.isChecked()) {
+                    if (binding.addDinCb.isChecked()) {
                         infrastuctureEntity.setAdd_dining_required(AppConstants.Yes);
                         infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
-                    }else {
+                    } else {
                         infrastuctureEntity.setAdd_dining_required(AppConstants.No);
                         infrastuctureEntity.setAdd_dining_required_cnt("");
                     }
-                    if(binding.addDomCb.isChecked()) {
+                    if (binding.addDomCb.isChecked()) {
                         infrastuctureEntity.setAdd_dormitory_required(AppConstants.Yes);
                         infrastuctureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
-                    }else {
+                    } else {
                         infrastuctureEntity.setAdd_dormitory_required(AppConstants.No);
                         infrastuctureEntity.setAdd_dormitory_required_cnt("");
                     }
@@ -735,15 +732,22 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                         if (infraStructureEntity != null) {
                             binding.setInspData(infraStructureEntity);
                             binding.executePendingBindings();
-                            file_tds = new File(sharedPreferences.getString(AppConstants.TDS, ""));
 
-                            if (TextUtils.isEmpty(file_tds.getPath())) {
-                                Glide.with(InfraActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivTds);
-                                flag_tds = 0;
-                            } else {
-                                Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
-                                flag_tds = 1;
-                            }
+                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.TDS);
+                            uploadPhotoLiveData.observe(InfraActivity.this, new Observer<UploadPhoto>() {
+                                @Override
+                                public void onChanged(UploadPhoto uploadPhoto) {
+                                    uploadPhotoLiveData.removeObservers(InfraActivity.this);
+                                    if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
+                                        file_tds = new File(uploadPhoto.getPhoto_path());
+                                        Glide.with(InfraActivity.this).load(file_tds).into(binding.ivTds);
+                                        flag_tds = 1;
+                                    } else {
+                                        Glide.with(InfraActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivTds);
+                                        flag_tds = 0;
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -755,13 +759,14 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-            }else if (ActivityCompat.shouldShowRequestPermissionRationale(InfraActivity.this,
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(InfraActivity.this,
                     Manifest.permission.CAMERA)) {
                 customPerAlert();
             } else {
@@ -812,7 +817,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
     }
 
-    private void callSettings(){
+    private void callSettings() {
         Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("Settings", new View.OnClickListener() {
@@ -1057,8 +1062,35 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
+    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+        uploadPhotos = new ArrayList<>();
+        UploadPhoto uploadPhoto = new UploadPhoto();
+        uploadPhoto.setInstitute_id(instID);
+        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setTimeStamp(currentDateTime);
+        uploadPhoto.setPhoto_name(typeOfImage);
+        uploadPhoto.setPhoto_path(valueOfImage);
+        uploadPhotos.add(uploadPhoto);
+    }
+
+    UploadPhotoViewModel viewModel;
+    private List<UploadPhoto> uploadPhotos;
+
     @Override
     public void submitData() {
+        if (roPlant.equalsIgnoreCase("yes")) {
+            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TDS, String.valueOf(file_tds));
+        } else {
+            file_tds = null;
+            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TDS, String.valueOf(file_tds));
+        }
+        long y = viewModel.insertPhotos(uploadPhotos);
+        if (y >= 0) {
+            insertSectionData();
+        }
+    }
+
+    private void insertSectionData() {
         long x = infraViewModel.insertInfraStructureInfo(infrastuctureEntity);
         if (x >= 0) {
             final long[] z = {0};
@@ -1179,7 +1211,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                     editor.clear();
+                    editor.clear();
                     editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,

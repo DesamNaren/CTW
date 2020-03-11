@@ -2,11 +2,14 @@ package com.example.twdinspection.inspection.viewmodel;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
+import com.example.twdinspection.inspection.Room.repository.PhotoRepository;
+import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
+import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
@@ -21,16 +24,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UploadPhotoViewModel extends ViewModel {
-    private MutableLiveData<SchemePhotoSubmitResponse> schemePhotoSubmitResponseMutableLiveData;
+    private LiveData<List<UploadPhoto>> uploadLiveData;
+    private LiveData<UploadPhoto> uploadPhotoLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private SchemeSubmitInterface schemeSubmitInterface;
+    private PhotoRepository repository;
 
 
-    UploadPhotoViewModel(Context context) {
+    public UploadPhotoViewModel(Context context) {
 
         this.context = context;
-        schemePhotoSubmitResponseMutableLiveData = new MutableLiveData<>();
+        repository = new PhotoRepository(context);
+        uploadLiveData = new MutableLiveData<>();
+        uploadPhotoLiveData = new MutableLiveData<>();
         try {
             errorHandlerInterface = (ErrorHandlerInterface) context;
             schemeSubmitInterface = (SchemeSubmitInterface) context;
@@ -40,7 +47,21 @@ public class UploadPhotoViewModel extends ViewModel {
 
     }
 
-    public void UploadImageServiceCall(final List<MultipartBody.Part> partList) {
+    public long insertPhotos(List<UploadPhoto> photos) {
+        return repository.insertPhotos(photos);
+    }
+
+    public LiveData<List<UploadPhoto>> getPhotos() {
+        uploadLiveData = repository.getPhotos();
+        return uploadLiveData;
+    }
+
+    public LiveData<UploadPhoto> getPhotoData(String fileName) {
+        uploadPhotoLiveData = repository.getPhotoData(fileName);
+        return uploadPhotoLiveData;
+    }
+
+    public void UploadImageServiceCall(final List<MultipartBody.Part> partList, InstSubmitRequest instSubmitRequest) {
         try {
             TWDService twdService = TWDService.Factory.create("school");
             twdService.uploadSchoolImageCall(partList).enqueue(new Callback<SchemePhotoSubmitResponse>() {

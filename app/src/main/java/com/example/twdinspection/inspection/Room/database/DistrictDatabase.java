@@ -20,6 +20,7 @@ import com.example.twdinspection.inspection.Room.Dao.GeneralInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.InfraStructureInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.MedicalInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.MenuSectionsDao;
+import com.example.twdinspection.inspection.Room.Dao.PhotoDao;
 import com.example.twdinspection.inspection.Room.Dao.PlantsInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.RegistersInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
@@ -46,6 +47,7 @@ import com.example.twdinspection.inspection.source.medical_and_health.CallHealth
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.example.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
+import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
@@ -59,7 +61,7 @@ import com.example.twdinspection.inspection.source.student_attendence_info.StudA
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
-        , CoCurricularEntity.class}, version =1, exportSchema = false)
+        , CoCurricularEntity.class, UploadPhoto.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
@@ -93,6 +95,8 @@ public abstract class DistrictDatabase extends RoomDatabase {
     public abstract MenuSectionsDao menuSectionsDao();
 
     public abstract SchoolSyncDao schoolSyncDao();
+
+    public abstract PhotoDao photoDao();
 
     private static DistrictDatabase INSTANCE1;
 

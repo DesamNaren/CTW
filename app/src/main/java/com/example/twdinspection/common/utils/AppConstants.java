@@ -89,15 +89,6 @@ public class AppConstants {
 
 
     public static final String SCHEME_REP_DATA = "SCHEME_REP_DATA";
-    public static final String IMAGE_STOREROOM = "IMAGE_STOREROOM";
-    public static final String IMAGE_VARANDAH = "IMAGE_VARANDAH";
-    public static final String IMAGE_DINING = "IMAGE_DINING";
-    public static final String IMAGE_DORMITORY = "IMAGE_DORMITORY";
-    public static final String IMAGE_MAIN_BUILDNG = "IMAGE_MAIN_BUILDNG";
-    public static final String IMAGE_TOILET = "IMAGE_TOILET";
-    public static final String IMAGE_PLAY_GROUND = "IMAGE_PLAY_GROUND";
-    public static final String IMAGE_KITCHEN = "IMAGE_KITCHEN";
-    public static final String IMAGE_CLASSROOM = "IMAGE_CLASSROOM";
     public static final String FROM_CLASS = "FROM_CLASS";
     public static final String COCAR = "COCAR";
     public static final String REPORT_COCAR = "REPORT_COCAR";

@@ -1,15 +1,18 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -18,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
@@ -26,20 +31,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.R;
-import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadedPhotoBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
+import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
-import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
-import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
-import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,14 +50,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubmitInterface, SaveListener, ErrorHandlerInterface {
+public class UploadedPhotoActivity extends LocBaseActivity implements SaveListener {
 
+    private List<UploadPhoto> uploadPhotos;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ActivityUploadedPhotoBinding binding;
     int flag_classroom = 0, flag_storeroom = 0, flag_varandah = 0, flag_playGround = 0, flag_diningHall = 0, flag_dormitory = 0, flag_mainBuilding = 0, flag_toilet = 0, flag_kitchen = 0;
@@ -65,7 +63,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     UploadPhotoViewModel viewModel;
     String officerId, instId;
     Bitmap bm;
-    String FilePath, tdsPath, menuPath, officerPath;
+    String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     File file_storeroom, file_varandah, file_playGround, file_diningHall, file_dormitory, file_mainBulding, file_toilet, file_kitchen, file_classroom, file_tds, file_menu, file_officer;
     InstMainViewModel instMainViewModel;
@@ -91,99 +89,108 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.executePendingBindings();
 
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.save));
+
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-            tdsPath = sharedPreferences.getString(AppConstants.TDS, "");
-            menuPath = sharedPreferences.getString(AppConstants.MENU, "");
-            officerPath = sharedPreferences.getString(AppConstants.OFFICER, "");
-            if (!TextUtils.isEmpty(tdsPath)) {
-                file_tds = new File(tdsPath);
-            }
 
-            file_menu = new File(menuPath);
-            file_officer = new File(officerPath);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            String f_s = sharedPreferences.getString(AppConstants.IMAGE_STOREROOM, "");
-            String f_v = sharedPreferences.getString(AppConstants.IMAGE_VARANDAH, "");
-            String f_d = sharedPreferences.getString(AppConstants.IMAGE_DINING, "");
-            String f_do = sharedPreferences.getString(AppConstants.IMAGE_DORMITORY, "");
-            String f_m = sharedPreferences.getString(AppConstants.IMAGE_MAIN_BUILDNG, "");
-            String f_t = sharedPreferences.getString(AppConstants.IMAGE_TOILET, "");
-            String f_k = sharedPreferences.getString(AppConstants.IMAGE_KITCHEN, "");
-            String f_c = sharedPreferences.getString(AppConstants.IMAGE_CLASSROOM, "");
-            String f_p = sharedPreferences.getString(AppConstants.IMAGE_PLAY_GROUND, "");
+            LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
+            listLiveData.observe(UploadedPhotoActivity.this, new Observer<List<UploadPhoto>>() {
+                @Override
+                public void onChanged(List<UploadPhoto> uploadPhotos) {
+                    listLiveData.removeObservers(UploadedPhotoActivity.this);
+                    UploadedPhotoActivity.this.uploadPhotos = uploadPhotos;
+                    if (uploadPhotos != null && uploadPhotos.size() > 0) {
+                        for (int z = 0; z < uploadPhotos.size(); z++) {
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.STOREROOM)) {
+                                flag_storeroom = 1;
+                                file_storeroom = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivStoreRoom.setPadding(0, 0, 0, 0);
+                                binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
+                            }
 
-            if (!TextUtils.isEmpty(f_s)) {
-                flag_storeroom = 1;
-                file_storeroom = new File(f_s);
-                binding.ivStoreRoom.setPadding(0, 0, 0, 0);
-                binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
-            }
-            if (!TextUtils.isEmpty(f_v)) {
-                flag_varandah = 1;
-                file_varandah = new File(f_v);
-                binding.ivVarandah.setPadding(0, 0, 0, 0);
-                binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
-            }
-            if (!TextUtils.isEmpty(f_p)) {
-                flag_playGround = 1;
-                file_playGround = new File(f_p);
-                binding.ivPlaygound.setPadding(0, 0, 0, 0);
-                binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
-            }
-            if (!TextUtils.isEmpty(f_d)) {
-                flag_diningHall = 1;
-                file_diningHall = new File(f_d);
-                binding.ivDiningHall.setPadding(0, 0, 0, 0);
-                binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
-            }
-            if (!TextUtils.isEmpty(f_do)) {
-                flag_dormitory = 1;
-                file_dormitory = new File(f_d);
-                binding.ivDormitory.setPadding(0, 0, 0, 0);
-                binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
-            }
-            if (!TextUtils.isEmpty(f_m)) {
-                flag_mainBuilding = 1;
-                file_mainBulding = new File(f_m);
-                binding.ivMainBuilding.setPadding(0, 0, 0, 0);
-                binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
-            }
-            if (!TextUtils.isEmpty(f_t)) {
-                flag_toilet = 1;
-                file_toilet = new File(f_t);
-                binding.ivToilet.setPadding(0, 0, 0, 0);
-                binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
-            }
-            if (!TextUtils.isEmpty(f_k)) {
-                flag_kitchen = 1;
-                file_kitchen = new File(f_k);
-                binding.ivKitchen.setPadding(0, 0, 0, 0);
-                binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
-            }
-            if (!TextUtils.isEmpty(f_c)) {
-                flag_classroom = 1;
-                file_classroom = new File(f_c);
-                binding.ivClassroom.setPadding(0, 0, 0, 0);
-                binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
-                Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
-            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.VARANDAH)) {
+                                flag_varandah = 1;
+                                file_varandah = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivVarandah.setPadding(0, 0, 0, 0);
+                                binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DININGHALL)) {
+                                flag_diningHall = 1;
+                                file_diningHall = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivDiningHall.setPadding(0, 0, 0, 0);
+                                binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.DORMITORY)) {
+                                flag_dormitory = 1;
+                                file_dormitory = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivDormitory.setPadding(0, 0, 0, 0);
+                                binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
+                            }
+
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MAINBUILDING)) {
+                                flag_mainBuilding = 1;
+                                file_mainBulding = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivMainBuilding.setPadding(0, 0, 0, 0);
+                                binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
+
+                                Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TOILET)) {
+                                flag_toilet = 1;
+                                file_toilet = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivToilet.setPadding(0, 0, 0, 0);
+                                binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.KITCHEN)) {
+                                flag_kitchen = 1;
+                                file_kitchen = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivKitchen.setPadding(0, 0, 0, 0);
+                                binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.CLASSROOM)) {
+                                flag_classroom = 1;
+                                file_classroom = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivClassroom.setPadding(0, 0, 0, 0);
+                                binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.PLAYGROUND)) {
+                                flag_playGround = 1;
+                                file_playGround = new File(uploadPhotos.get(z).getPhoto_path());
+                                binding.ivPlaygound.setPadding(0, 0, 0, 0);
+                                binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
+                                Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
+                            }
+
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.TDS)) {
+                                file_tds = new File(uploadPhotos.get(z).getPhoto_path());
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.MENU)) {
+                                file_menu = new File(uploadPhotos.get(z).getPhoto_path());
+                            }
+                            if (uploadPhotos.get(z).getPhoto_name().equalsIgnoreCase(AppConstants.OFFICER)) {
+                                file_officer = new File(uploadPhotos.get(z).getPhoto_path());
+                            }
+                        }
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -207,31 +214,65 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                uploadPhotos = new ArrayList<>();
+
                 if (flag_storeroom == 0) {
                     showSnackBar("Please capture storeroom image");
-                } else if (flag_varandah == 0) {
-                    showSnackBar("Please capture varandah image");
-                } else if (flag_playGround == 0) {
-                    showSnackBar("Please capture playground image");
-                } else if (flag_diningHall == 0) {
-                    showSnackBar("Please capture dining hall image");
-                } else if (flag_dormitory == 0) {
-                    showSnackBar("Please capture dormitory image");
-                } else if (flag_mainBuilding == 0) {
-                    showSnackBar("Please capture main building image");
-                } else if (flag_toilet == 0) {
-                    showSnackBar("Please capture toilet image");
-                } else if (flag_kitchen == 0) {
-                    showSnackBar("Please capture kitchen image");
-                } else if (flag_classroom == 0) {
-                    showSnackBar("Please capture classroom image");
+                    return;
                 } else {
-                    if (Utils.checkInternetConnection(UploadedPhotoActivity.this)) {
-                        callPhotoSubmit();
-                    } else {
-                        Utils.customWarningAlert(UploadedPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
-                    }
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
                 }
+                if (flag_varandah == 0) {
+                    showSnackBar("Please capture varandah image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
+                }
+                if (flag_playGround == 0) {
+                    showSnackBar("Please capture playground image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
+                }
+                if (flag_diningHall == 0) {
+                    showSnackBar("Please capture dining hall image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
+                }
+                if (flag_dormitory == 0) {
+                    showSnackBar("Please capture dormitory image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
+                }
+                if (flag_mainBuilding == 0) {
+                    showSnackBar("Please capture main building image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
+                }
+                if (flag_toilet == 0) {
+                    showSnackBar("Please capture toilet image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
+                }
+                if (flag_kitchen == 0) {
+                    showSnackBar("Please capture kitchen image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
+                }
+                if (flag_classroom == 0) {
+                    showSnackBar("Please capture classroom image");
+                    return;
+                } else {
+                    addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
+                }
+
+                Utils.customSaveAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+
             }
         });
 
@@ -242,8 +283,23 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.ivStoreRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.STOREROOM;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.STOREROOM;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -257,8 +313,22 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.ivVarandah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.VARANDAH;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.VARANDAH;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -266,14 +336,29 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
                     }
+
                 }
             }
         });
         binding.ivPlaygound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.PLAYGROUND;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.PLAYGROUND;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -281,14 +366,30 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
                     }
+
                 }
             }
         });
         binding.ivDiningHall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.DININGHALL;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.DININGHALL;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -296,14 +397,29 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
                     }
+
                 }
             }
         });
         binding.ivDormitory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.DORMITORY;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.DORMITORY;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -311,14 +427,30 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
                     }
+
                 }
             }
         });
         binding.ivMainBuilding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.MAINBUILDING;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.MAINBUILDING;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -326,14 +458,31 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
                     }
+
                 }
+
             }
         });
         binding.ivToilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.TOILET;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.TOILET;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -347,8 +496,23 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.ivKitchen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.KITCHEN;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.KITCHEN;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -362,8 +526,22 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         binding.ivClassroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (callPermissions()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
+                    if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                    } else if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
+                        callSettings();
+                    } else {
+                        PIC_TYPE = AppConstants.CLASSROOM;
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                        if (fileUri != null) {
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                            startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+                        }
+                    }
+                } else {
                     PIC_TYPE = AppConstants.CLASSROOM;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -376,82 +554,43 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
         });
     }
 
-    private void callPhotoSubmit() {
-
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_classroom);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file_classroom.getName(), requestFile);
-        RequestBody requestFile1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_diningHall);
-        MultipartBody.Part body1 =
-                MultipartBody.Part.createFormData("image", file_diningHall.getName(), requestFile1);
-        RequestBody requestFile2 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_kitchen);
-        MultipartBody.Part body2 =
-                MultipartBody.Part.createFormData("image", file_kitchen.getName(), requestFile2);
-        RequestBody requestFile3 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_mainBulding);
-        MultipartBody.Part body3 =
-                MultipartBody.Part.createFormData("image", file_mainBulding.getName(), requestFile3);
-        RequestBody requestFile4 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_playGround);
-        MultipartBody.Part body4 =
-                MultipartBody.Part.createFormData("image", file_playGround.getName(), requestFile4);
-        RequestBody requestFile5 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_toilet);
-        MultipartBody.Part body5 =
-                MultipartBody.Part.createFormData("image", file_toilet.getName(), requestFile5);
-        RequestBody requestFile6 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_varandah);
-        MultipartBody.Part body6 =
-                MultipartBody.Part.createFormData("image", file_varandah.getName(), requestFile6);
-        RequestBody requestFile7 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_dormitory);
-        MultipartBody.Part body7 =
-                MultipartBody.Part.createFormData("image", file_dormitory.getName(), requestFile7);
-        RequestBody requestFile8 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_storeroom);
-        MultipartBody.Part body8 =
-                MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
-        MultipartBody.Part body9 = null;
-        if (file_tds != null) {
-            RequestBody requestFile9 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
-
-            body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(UploadedPhotoActivity.this,
+                    Manifest.permission.CAMERA)) {
+                customPerAlert();
+            } else {
+                callSettings();
+            }
         }
+    }
 
-        RequestBody requestFile10 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
-        MultipartBody.Part body10 =
-                MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
+    private void callSettings() {
+        Snackbar snackbar = Snackbar.make(binding.cl, getString(R.string.all_cam_per_setting), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("Settings", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+                Utils.openSettings(UploadedPhotoActivity.this);
+            }
+        });
 
-        RequestBody requestFile11 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_officer);
-        MultipartBody.Part body11 =
-                MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
+        snackbar.show();
+    }
 
-        customProgressDialog.show();
-
-
-        List<MultipartBody.Part> partList = new ArrayList<>();
-        partList.add(body);
-        partList.add(body1);
-        partList.add(body2);
-        partList.add(body3);
-        partList.add(body4);
-        partList.add(body5);
-        partList.add(body6);
-        partList.add(body7);
-        partList.add(body8);
-        if (body9 != null) {
-            partList.add(body9);
-        }
-        partList.add(body10);
-        partList.add(body11);
-
-        viewModel.UploadImageServiceCall(partList);
+    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+        UploadPhoto uploadPhoto = new UploadPhoto();
+        uploadPhoto.setInstitute_id(instID);
+        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setTimeStamp(currentDateTime);
+        uploadPhoto.setPhoto_name(typeOfImage);
+        uploadPhoto.setPhoto_path(valueOfImage);
+        uploadPhotos.add(uploadPhoto);
     }
 
 
@@ -481,8 +620,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                     binding.ivStoreRoom.setPadding(0, 0, 0, 0);
                     binding.ivStoreRoom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_storeroom = new File(FilePath);
-                    editor.putString(AppConstants.IMAGE_STOREROOM, String.valueOf(file_storeroom));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_storeroom).into(binding.ivStoreRoom);
 
                 } else if (PIC_TYPE.equals(AppConstants.VARANDAH)) {
@@ -490,72 +627,48 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
                     binding.ivVarandah.setPadding(0, 0, 0, 0);
                     binding.ivVarandah.setBackgroundColor(getResources().getColor(R.color.white));
                     file_varandah = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_VARANDAH, String.valueOf(file_varandah));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_varandah).into(binding.ivVarandah);
                 } else if (PIC_TYPE.equals(AppConstants.PLAYGROUND)) {
                     flag_playGround = 1;
                     binding.ivPlaygound.setPadding(0, 0, 0, 0);
                     binding.ivPlaygound.setBackgroundColor(getResources().getColor(R.color.white));
                     file_playGround = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_PLAY_GROUND, String.valueOf(file_playGround));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_playGround).into(binding.ivPlaygound);
                 } else if (PIC_TYPE.equals(AppConstants.DININGHALL)) {
                     flag_diningHall = 1;
                     binding.ivDiningHall.setPadding(0, 0, 0, 0);
                     binding.ivDiningHall.setBackgroundColor(getResources().getColor(R.color.white));
                     file_diningHall = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_DINING, String.valueOf(file_diningHall));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_diningHall).into(binding.ivDiningHall);
                 } else if (PIC_TYPE.equals(AppConstants.DORMITORY)) {
                     flag_dormitory = 1;
                     binding.ivDormitory.setPadding(0, 0, 0, 0);
                     binding.ivDormitory.setBackgroundColor(getResources().getColor(R.color.white));
                     file_dormitory = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_DORMITORY, String.valueOf(file_dormitory));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_dormitory).into(binding.ivDormitory);
                 } else if (PIC_TYPE.equals(AppConstants.MAINBUILDING)) {
                     flag_mainBuilding = 1;
                     binding.ivMainBuilding.setPadding(0, 0, 0, 0);
                     binding.ivMainBuilding.setBackgroundColor(getResources().getColor(R.color.white));
                     file_mainBulding = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, String.valueOf(file_mainBulding));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_mainBulding).into(binding.ivMainBuilding);
                 } else if (PIC_TYPE.equals(AppConstants.TOILET)) {
                     flag_toilet = 1;
                     binding.ivToilet.setPadding(0, 0, 0, 0);
                     binding.ivToilet.setBackgroundColor(getResources().getColor(R.color.white));
                     file_toilet = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_TOILET, String.valueOf(file_toilet));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_toilet).into(binding.ivToilet);
                 } else if (PIC_TYPE.equals(AppConstants.KITCHEN)) {
                     flag_kitchen = 1;
                     binding.ivKitchen.setPadding(0, 0, 0, 0);
                     binding.ivKitchen.setBackgroundColor(getResources().getColor(R.color.white));
                     file_kitchen = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_KITCHEN, String.valueOf(file_kitchen));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_kitchen).into(binding.ivKitchen);
                 } else if (PIC_TYPE.equals(AppConstants.CLASSROOM)) {
                     flag_classroom = 1;
                     binding.ivClassroom.setPadding(0, 0, 0, 0);
                     binding.ivClassroom.setBackgroundColor(getResources().getColor(R.color.white));
                     file_classroom = new File(FilePath);
-
-                    editor.putString(AppConstants.IMAGE_CLASSROOM, String.valueOf(file_classroom));
-
                     Glide.with(UploadedPhotoActivity.this).load(file_classroom).into(binding.ivClassroom);
                 }
 
@@ -618,44 +731,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
     }
 
     @Override
-    public void getData(SchemeSubmitResponse schemeSubmitResponse) {
-
-    }
-
-    @Override
-    public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
-        customProgressDialog.hide();
-        if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-            editor.putString(AppConstants.IMAGE_STOREROOM, "");
-            editor.putString(AppConstants.IMAGE_VARANDAH, "");
-            editor.putString(AppConstants.IMAGE_DINING, "");
-            editor.putString(AppConstants.IMAGE_DORMITORY, "");
-            editor.putString(AppConstants.IMAGE_MAIN_BUILDNG, "");
-            editor.putString(AppConstants.IMAGE_PLAY_GROUND, "");
-            editor.putString(AppConstants.IMAGE_TOILET, "");
-            editor.putString(AppConstants.IMAGE_KITCHEN, "");
-            editor.putString(AppConstants.IMAGE_CLASSROOM, "");
-            editor.commit();
-            CallSuccessAlert(schemePhotoSubmitResponse.getStatusMessage());
-        } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
-            Snackbar.make(binding.root, schemePhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-        } else {
-            Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
-        }
-    }
-
-    private void CallSuccessAlert(String msg) {
-        submitData();
-    }
-
-    @Override
-    public void handleError(Throwable e, Context context) {
-        customProgressDialog.hide();
-        String errMsg = ErrorHandler.handleError(e, context);
-        showSnackBar(errMsg);
-    }
-
-    @Override
     public void onBackPressed() {
         callBack();
     }
@@ -666,31 +741,31 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
 
     @Override
     public void submitData() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.TDS, "");
-        editor.putString(AppConstants.MENU, "");
-        editor.putString(AppConstants.OFFICER, "");
-        editor.commit();
-        final long[] z = {0};
-        try {
-            LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
-            liveData.observe(UploadedPhotoActivity.this, new Observer<Integer>() {
-                @Override
-                public void onChanged(Integer id) {
-                    if (id != null) {
-                        z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+        long x = viewModel.insertPhotos(uploadPhotos);
+        if (x >= 0) {
+            final long[] z = {0};
+            try {
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
+                liveData.observe(UploadedPhotoActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                        }
                     }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (z[0] >= 0) {
-            Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z[0] >= 0) {
+                Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
+
         } else {
             showSnackBar(getString(R.string.failed));
         }
-
     }
 
     @Override
@@ -741,7 +816,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SchemeSubm
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                     editor.clear();
+                    editor.clear();
                     editor.commit();
                     instMainViewModel.deleteAllInspectionData();
                     Utils.ShowDeviceSessionAlert(this,

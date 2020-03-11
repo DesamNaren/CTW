@@ -28,6 +28,7 @@ import com.example.twdinspection.inspection.source.student_attendence_info.StudA
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +69,6 @@ public class InstMainViewModel extends AndroidViewModel {
         super(application);
         mRepository = new MenuSectionsRepository(application);
         setDefaults();
-        instMenuInfoEntities = new MutableLiveData<>();
     }
 
     private void setDefaults() {
@@ -84,6 +84,13 @@ public class InstMainViewModel extends AndroidViewModel {
         registersEntityLiveData = new MutableLiveData<>();
         generalCommentsEntityLiveData = new MutableLiveData<>();
         instMenuInfoEntities = new MutableLiveData<>();
+
+        try {
+            errorHandlerInterface = (ErrorHandlerInterface) context;
+            instSubmitInterface = (InstSubmitInterface) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public InstMainViewModel(InstMainActivityBinding binding, Application application, Context context) {
