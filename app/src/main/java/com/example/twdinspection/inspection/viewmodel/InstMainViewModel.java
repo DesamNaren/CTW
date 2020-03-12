@@ -123,7 +123,7 @@ public class InstMainViewModel extends AndroidViewModel {
                 @Override
                 public void onResponse(@NotNull Call<InstSubmitResponse> call, @NotNull Response<InstSubmitResponse> response) {
                     binding.appbar.progress.setVisibility(View.GONE);
-                    instSubmitInterface.getData(response.body());
+                    instSubmitInterface.getSubmitData(response.body());
                 }
 
                 @Override

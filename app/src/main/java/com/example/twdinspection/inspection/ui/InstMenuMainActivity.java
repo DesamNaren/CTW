@@ -545,8 +545,18 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     }
 
     @Override
-    public void getData(InstSubmitResponse schemeSubmitResponse) {
-
+    public void getSubmitData(InstSubmitResponse schemeSubmitResponse) {
+        customProgressDialog.hide();
+        if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            instMainViewModel.deleteAllInspectionData();
+            CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
+        } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+            revertFlags();
+            Snackbar.make(binding.appbar.root, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+        } else {
+            revertFlags();
+            Snackbar.make(binding.appbar.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     private void revertFlags() {
@@ -699,17 +709,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
     @Override
     public void getData(SchemeSubmitResponse schemeSubmitResponse) {
-        customProgressDialog.hide();
-        if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-            instMainViewModel.deleteAllInspectionData();
-            CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
-        } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-            revertFlags();
-            Snackbar.make(binding.appbar.root, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
-        } else {
-            revertFlags();
-            Snackbar.make(binding.appbar.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
-        }
+
     }
 
     @Override

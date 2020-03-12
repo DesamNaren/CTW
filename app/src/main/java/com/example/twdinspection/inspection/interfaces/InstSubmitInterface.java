@@ -5,5 +5,5 @@ import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 
 public interface InstSubmitInterface {
-    void getData(InstSubmitResponse schemeSubmitResponse);
+    void getSubmitData(InstSubmitResponse schemeSubmitResponse);
 }
