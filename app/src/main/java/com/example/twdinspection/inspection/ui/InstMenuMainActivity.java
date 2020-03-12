@@ -135,6 +135,12 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
         desLng = sharedPreferences.getString(AppConstants.LNG, "");
 
+        if(TextUtils.isEmpty(instId)){
+            Utils.ShowDeviceSessionAlert(this,
+                    getResources().getString(R.string.app_name),
+                    getString(R.string.ses_expire_re));
+        }
+
         LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
         listLiveData.observe(InstMenuMainActivity.this, new Observer<List<UploadPhoto>>() {
             @Override

@@ -39,16 +39,13 @@ import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
 import com.example.twdinspection.inspection.adapter.DietIssuesAdapter;
 import com.example.twdinspection.inspection.interfaces.DietInterface;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
-import com.example.twdinspection.inspection.reports.source.DietIssues;
 import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterDietInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
-import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -87,7 +84,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
         binding.header.headerTitle.setText(getResources().getString(R.string.diet_issues));
         binding.header.ivHome.setVisibility(View.GONE);
-        viewModel = new UploadPhotoViewModel(DietIssuesActivity.this);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -325,6 +321,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
                 if (validateData()) {
 
+                    editor.putString(AppConstants.MENU, String.valueOf(file_menu));
+                    editor.putString(AppConstants.OFFICER, String.valueOf(file_officer));
+                    editor.commit();
+
+
                     dietIssuesEntity = new DietIssuesEntity();
 
                     dietIssuesEntity.setInstitute_id(instID);
@@ -358,38 +359,24 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                         if (dietIssuesEntity != null) {
                             binding.setInspData(dietIssuesEntity);
                             binding.executePendingBindings();
+                            file_menu = new File(sharedPreferences.getString(AppConstants.MENU, ""));
+                            file_officer = new File(sharedPreferences.getString(AppConstants.OFFICER, ""));
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.MENU);
-                            uploadPhotoLiveData.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
-                                @Override
-                                public void onChanged(UploadPhoto uploadPhoto) {
-                                    uploadPhotoLiveData.removeObservers(DietIssuesActivity.this);
-                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
-                                        file_menu = new File(uploadPhoto.getPhoto_path());
-                                        Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
-                                        flag_menu = 1;
-                                    }else {
-                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
-                                        flag_menu = 0;
-                                    }
-                                }
-                            });
+                            if (file_menu==null) {
+                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
+                                flag_menu = 0;
+                            } else {
+                                Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                                flag_menu = 1;
+                            }
 
-                            LiveData<UploadPhoto> uploadPhotoLiveData1 = viewModel.getPhotoData(AppConstants.OFFICER);
-                            uploadPhotoLiveData1.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
-                                @Override
-                                public void onChanged(UploadPhoto uploadPhoto) {
-                                    uploadPhotoLiveData1.removeObservers(DietIssuesActivity.this);
-                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
-                                        file_officer = new File(uploadPhoto.getPhoto_path());
-                                        Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
-                                        flag_officer = 1;
-                                    }else {
-                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
-                                        flag_officer = 0;
-                                    }
-                                }
-                            });
+                            if (file_officer==null) {
+                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
+                                flag_officer = 0;
+                            } else {
+                                Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                                flag_officer = 1;
+                            }
                         }
                     }
                 });
@@ -400,16 +387,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
-        UploadPhoto uploadPhoto = new UploadPhoto();
-        uploadPhoto.setInstitute_id(instID);
-        uploadPhoto.setSection_id(secId);
-        uploadPhoto.setTimeStamp(currentDateTime);
-        uploadPhoto.setPhoto_name(typeOfImage);
-        uploadPhoto.setPhoto_path(valueOfImage);
-        uploadPhotos.add(uploadPhoto);
     }
 
     @Override
@@ -493,38 +470,29 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         return true;
     }
 
-    UploadPhotoViewModel viewModel;
-    private List<UploadPhoto> uploadPhotos = new ArrayList<>();
 
     @Override
     public void submitData() {
-        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
-        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
 
-        long y = viewModel.insertPhotos(uploadPhotos);
-        if (y >= 0) {
-            long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
-            if (x >= 0) {
-                final long[] z = {0};
-                try {
-                    LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
-                    ;
-                    liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
-                        @Override
-                        public void onChanged(Integer id) {
-                            if (id != null) {
-                                z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
-                            }
+        long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
+        if (x >= 0) {
+            final long[] z = {0};
+            try {
+                LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
+                ;
+                liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer id) {
+                        if (id != null) {
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (z[0] >= 0) {
-                    Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
-                } else {
-                    showSnackBar(getString(R.string.failed));
-                }
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (z[0] >= 0) {
+                Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }

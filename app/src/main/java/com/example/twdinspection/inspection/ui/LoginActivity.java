@@ -49,6 +49,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
 
         clearSession();
 
+        String instId=sharedPreferences.getString(AppConstants.INST_ID,"");
         instMainViewModel.getAllSections().observe(this, new Observer<List<InstMenuInfoEntity>>() {
             @Override
             public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
@@ -61,7 +62,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                             break;
                         }
                     }
-                    if (flag) {
+                    if (flag && TextUtils.isEmpty(instId)) {
                         startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
                         finish();
                     } else {
