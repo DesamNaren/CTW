@@ -105,6 +105,7 @@
     <string name="repairs_to_toilets">No of Toilets</string>
     <string name="repairs_to_door">Door and window repairs</string>
     <string name="whether_highest">Whether (Highest class) syllabus completed as per schedule in all subjects?</string>
+    <string name="capture_highest">Capture classes performance</string>
     <string name="is_strength">Is the strength accommodated as per infrastructure availability</string>
     <string name="does_staff">Does staff strength accommodate as per student strength</string>
     <string name="is_school">Is school plan for next academic year is prepared</string>
@@ -799,5 +800,6 @@
     <string name="elevation">Elevation</string>
     <string name="specify">Specify sector</string>
     <string name="engineering_works">Engineering Works</string>
+    <string name="d">D</string>
 
 </resources>

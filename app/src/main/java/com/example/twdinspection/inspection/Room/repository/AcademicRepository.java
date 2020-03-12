@@ -1,11 +1,16 @@
 package com.example.twdinspection.inspection.Room.repository;
 
-import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 
 import com.example.twdinspection.inspection.Room.Dao.AcademicInfoDao;
 import com.example.twdinspection.inspection.Room.database.DistrictDatabase;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -23,10 +28,15 @@ public class AcademicRepository {
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
-    public AcademicRepository(Application application) {
+    public AcademicRepository(Context application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         academicInfoDao = db.academicInfoDao();
 
+    }
+
+
+    public LiveData<List<AcademicGradeEntity>> getAcademicGradeInfo(String inst_id) {
+        return academicInfoDao.getAcademicGradeInfo(inst_id);
     }
 
 
@@ -73,5 +83,42 @@ public class AcademicRepository {
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
         return x;
+    }
+
+
+    public void insertAcademicGradeInfo(List<AcademicGradeEntity> academicGradeEntities) {
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                academicInfoDao.insertAcademicGradeInfo(academicGradeEntities);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
     }
 }

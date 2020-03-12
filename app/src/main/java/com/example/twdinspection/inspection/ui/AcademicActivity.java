@@ -1,5 +1,6 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,7 +18,6 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
-import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -603,6 +603,14 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 } else {
                     tabs_timetable_disp = null;
                 }
+            }
+        });
+
+        binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AcademicActivity.this, AcademicGradeActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 

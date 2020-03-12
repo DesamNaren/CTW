@@ -1,48 +1,50 @@
 package com.example.twdinspection.inspection.viewmodel;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 import com.example.twdinspection.inspection.Room.repository.ClassInfoRepository;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
-import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
 import java.util.List;
 
 public class StudentsAttndViewModel extends ViewModel {
 
     private MutableLiveData<List<StudAttendInfoEntity>> studentAttndLiveData;
-    private Application application;
+    private Context application;
     private ActivityStudentsAttendanceBinding binding;
     private ClassInfoRepository mRepository;
 
-    public StudentsAttndViewModel(ActivityStudentsAttendanceBinding binding, Application application) {
+    StudentsAttndViewModel(ActivityStudentsAttendanceBinding binding, Context application) {
         this.binding = binding;
         this.application = application;
         mRepository = new ClassInfoRepository(application);
+    }
 
+    public StudentsAttndViewModel(Context application) {
+        this.application = application;
+        mRepository = new ClassInfoRepository(application);
     }
 
     public LiveData<MasterInstituteInfo> getMasterClassInfo(String inst_id) {
-        LiveData<MasterInstituteInfo> classIdsList = mRepository.getMasterClassIdsList(inst_id);
-        return classIdsList;
+        return mRepository.getMasterClassIdsList(inst_id);
     }
 
      public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
-         LiveData<List<StudAttendInfoEntity>> classIdsList = mRepository.getClassIdsList(inst_id);
-        return classIdsList;
+         return mRepository.getClassIdsList(inst_id);
     }
 
     public long updateClassInfo(StudAttendInfoEntity studAttendInfoEntity) {
-        long flag = mRepository.updateClassInfo(studAttendInfoEntity);
-        return flag;
+        return mRepository.updateClassInfo(studAttendInfoEntity);
     }
 
     public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
         mRepository.insertClassInfo(studAttendInfoEntityList);
     }
+
 }

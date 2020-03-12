@@ -260,6 +260,7 @@
         <activity
             android:name=".inspection.reports.ui.ReportPhotosActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".inspection.ui.AcademicGradeActivity" />
 
 
         <provider

@@ -73,7 +73,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
 
-        studentsAttndViewModel.getClassInfo(TWDApplication.get(StudentsAttendActivity.this).getPreferences().getString(AppConstants.INST_ID, "")).observe(StudentsAttendActivity.this, new Observer<List<StudAttendInfoEntity>>() {
+        studentsAttndViewModel.getClassInfo(instId).observe(StudentsAttendActivity.this, new Observer<List<StudAttendInfoEntity>>() {
             @Override
             public void onChanged(List<StudAttendInfoEntity> studAttendInfoEntityList) {
                 if (studAttendInfoEntityList != null && studAttendInfoEntityList.size() > 0) {
@@ -82,7 +82,8 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(StudentsAttendActivity.this));
                     binding.recyclerView.setAdapter(adapter);
                 } else {
-                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(TWDApplication.get(StudentsAttendActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
+                    LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
+                            instId);
                     masterInstituteInfoLiveData.observe(StudentsAttendActivity.this, new Observer<MasterInstituteInfo>() {
                         @Override
                         public void onChanged(MasterInstituteInfo masterInstituteInfos) {

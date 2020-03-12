@@ -1,6 +1,6 @@
 package com.example.twdinspection.inspection.Room.repository;
 
-import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -11,7 +11,6 @@ import com.example.twdinspection.inspection.source.inst_master.MasterInstituteIn
 import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -26,7 +25,7 @@ public class ClassInfoRepository {
     private ClassInfoDao classInfoDao;
     public String tag = ClassInfoRepository.class.getSimpleName();
 
-    public ClassInfoRepository(Application application) {
+    public ClassInfoRepository(Context application) {
         DistrictDatabase db = DistrictDatabase.getDatabase(application);
         classInfoDao = db.classInfoDao();
     }
@@ -81,15 +80,6 @@ public class ClassInfoRepository {
 
 
     public void insertClassInfo(List<StudAttendInfoEntity> studAttendInfoEntityList) {
-
-        Observable.fromCallable(new Callable<List<StudAttendInfoEntity>>() {
-            @Override
-            public List<StudAttendInfoEntity> call() throws Exception {
-                classInfoDao.deleteClassInfo();
-                classInfoDao.insertStudAttendInfo(studAttendInfoEntityList);
-                return null;
-            }
-        });
 
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override

@@ -27,6 +27,7 @@ import com.example.twdinspection.inspection.Room.Dao.SchoolSyncDao;
 import com.example.twdinspection.inspection.Room.Dao.StaffInfoDao;
 import com.example.twdinspection.inspection.Room.Dao.StudAchDao;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
@@ -61,7 +62,7 @@ import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
         RegistersEntity.class, GeneralCommentsEntity.class, GeneralInfoEntity.class, CallHealthInfoEntity.class
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
-        , CoCurricularEntity.class, UploadPhoto.class}, version = 1, exportSchema = false)
+        , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class}, version = 1, exportSchema = false)
 public abstract class DistrictDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();
