@@ -1,6 +1,7 @@
 package com.example.twdinspection.inspection.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,11 +54,12 @@ import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterDietInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,6 +97,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
 
+        viewModel = new UploadPhotoViewModel(DietIssuesActivity.this);
 
         try {
             if (getSupportActionBar() != null) {
@@ -346,14 +349,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             public void onClick(View view) {
 
                 if (validateData()) {
-
-                    editor.putString(AppConstants.MENU, String.valueOf(file_menu));
-                    editor.putString(AppConstants.OFFICER, String.valueOf(file_officer));
-                    editor.commit();
-
-
                     dietIssuesEntity = new DietIssuesEntity();
-
                     dietIssuesEntity.setInstitute_id(instID);
                     dietIssuesEntity.setInspection_time(Utils.getCurrentDateTime());
                     dietIssuesEntity.setOfficer_id(officerID);
@@ -372,13 +368,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                             selectedList.add(dietInfoEntityListMain.get(i));
                         }
                     }
-                    Gson gson=new Gson();
-                    String selDiets=gson.toJson(selectedList);
-                    dietIssuesEntity.setSelected_dietIssues(selDiets);
                     dietIssuesEntity.setDietListEntities(selectedList);
                     dietIsuuesViewModel.insertDietInfo(dietInfoEntityListMain);
                     Utils.customSaveAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
-
                 }
             }
         });
@@ -396,24 +388,38 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                         if (dietIssuesEntity != null) {
                             binding.setInspData(dietIssuesEntity);
                             binding.executePendingBindings();
-                            file_menu = new File(sharedPreferences.getString(AppConstants.MENU, ""));
-                            file_officer = new File(sharedPreferences.getString(AppConstants.OFFICER, ""));
 
-                            if (file_menu==null) {
-                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
-                                flag_menu = 0;
-                            } else {
-                                Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
-                                flag_menu = 1;
-                            }
+                            LiveData<UploadPhoto> uploadPhotoLiveData = viewModel.getPhotoData(AppConstants.MENU);
+                            uploadPhotoLiveData.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
+                                @Override
+                                public void onChanged(UploadPhoto uploadPhoto) {
+                                    uploadPhotoLiveData.removeObservers(DietIssuesActivity.this);
+                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
+                                        file_menu = new File(uploadPhoto.getPhoto_path());
+                                        Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
+                                        flag_menu = 1;
+                                    }else {
+                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
+                                        flag_menu = 0;
+                                    }
+                                }
+                            });
 
-                            if (file_officer==null) {
-                                Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
-                                flag_officer = 0;
-                            } else {
-                                Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
-                                flag_officer = 1;
-                            }
+                            LiveData<UploadPhoto> uploadPhotoLiveData1 = viewModel.getPhotoData(AppConstants.OFFICER);
+                            uploadPhotoLiveData1.observe(DietIssuesActivity.this, new Observer<UploadPhoto>() {
+                                @Override
+                                public void onChanged(UploadPhoto uploadPhoto) {
+                                    uploadPhotoLiveData1.removeObservers(DietIssuesActivity.this);
+                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
+                                        file_officer = new File(uploadPhoto.getPhoto_path());
+                                        Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
+                                        flag_officer = 1;
+                                    }else {
+                                        Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
+                                        flag_officer = 0;
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -424,6 +430,17 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
+        UploadPhoto uploadPhoto = new UploadPhoto();
+        uploadPhoto.setInstitute_id(instID);
+        uploadPhoto.setSection_id(secId);
+        uploadPhoto.setTimeStamp(currentDateTime);
+        uploadPhoto.setPhoto_name(typeOfImage);
+        uploadPhoto.setPhoto_path(valueOfImage);
+        uploadPhotos.add(uploadPhoto);
     }
 
     @Override
@@ -555,29 +572,38 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         return true;
     }
 
+    UploadPhotoViewModel viewModel;
+    private List<UploadPhoto> uploadPhotos = new ArrayList<>();
 
     @Override
     public void submitData() {
+        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
+        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
 
-        long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
-        if (x >= 0) {
-            final long[] z = {0};
-            try {
-                LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
-                ;
-                liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer id) {
-                        if (id != null) {
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+        long y = viewModel.insertPhotos(uploadPhotos);
+        if (y >= 0) {
+            long x = dietIsuuesViewModel.updateDietIssuesInfo(dietIssuesEntity);
+            if (x >= 0) {
+                final long[] z = {0};
+                try {
+                    LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
+                    ;
+                    liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer id) {
+                            if (id != null) {
+                                z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
+                            }
                         }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (z[0] >= 0) {
+                    Utils.customSectionSaveAlert(DietIssuesActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+                } else {
+                    showSnackBar(getString(R.string.failed));
+                }
             } else {
                 showSnackBar(getString(R.string.failed));
             }
@@ -663,7 +689,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     @Override
     public void onBackPressed() {
-        callBack();
+        if(dietInfoEntityListMain!=null && dietInfoEntityListMain.size()>0 && !(localFlag==1)){
+            customExitAlert(DietIssuesActivity.this,  getString(R.string.app_name),getString(R.string.data_lost));
+        }else {
+            super.callBack();
+        }
     }
 
 
@@ -685,12 +715,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                    editor.clear();
-                    editor.commit();
-                    instMainViewModel.deleteAllInspectionData();
+
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re));
+                            getString(R.string.ses_expire_re), instMainViewModel);
                 }
             }
         } catch (Resources.NotFoundException e) {
@@ -707,13 +735,55 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         editor.commit();
     }
 
-    public void callBack() {
-        Utils.customHomeAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.go_back));
-    }
 
     @Override
     public void validate() {
 
+    }
+
+
+    private void customExitAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+                        dietIsuuesViewModel.deleteDietListInfo();
+                        finish();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void customPerAlert() {

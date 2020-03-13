@@ -303,12 +303,10 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
 
             if (!TextUtils.isEmpty(cacheDate)) {
                 if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                     editor.clear();
-                    editor.commit();
-                    instMainViewModel.deleteAllInspectionData();
+
                     Utils.ShowDeviceSessionAlert(this,
                             getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re));
+                            getString(R.string.ses_expire_re), instMainViewModel);
                 }
             }
         } catch (Resources.NotFoundException e) {

@@ -35,4 +35,11 @@ public interface CocurricularDao {
 
     @Query("SELECT * from plants_info")
     LiveData<List<PlantsEntity>> getPlantLiveData();
+
+
+    @Query("delete from plants_info")
+    void deletePlantsInfo();
+
+    @Query("delete from stud_achievements_info")
+    void deleteStuAchInfo();
 }

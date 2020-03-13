@@ -705,6 +705,7 @@
     <string name="tab_mob_num">Enter tab incharge mobile no</string>
     <string name="valid_incharge_mob_num">Enter valid tab incharge mobile no</string>
     <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
+    <string name="data_lost">Do you want to go back? On click of Yes entered data will be lost</string>
 
     <string-array name="sectors">
         <item>Select</item>
@@ -815,5 +816,10 @@
     <string name="no_of_leaves_taken">Leaves taken</string>
     <string name="leave_balance">Leave Balance</string>
     <string name="teacher_s_last_year_academic_panel_grade">Teacher\'s last year academic panel grade</string>
+    <string name="not_submitted_records">You have not submitted any records, Still do you want to submit data?</string>
+    <string name="on_roll_count_validation">Count cannot exceed the class on-roll count</string>
+    <string name="claer_errors">Clear the errors to submit records</string>
+    <string name="capture">Capture</string>
+    <string name="capture_view">Capture/View</string>
 
 </resources>

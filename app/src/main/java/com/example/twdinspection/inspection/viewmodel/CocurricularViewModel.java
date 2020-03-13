@@ -66,4 +66,9 @@ public class CocurricularViewModel extends ViewModel {
         }
         return pListLiveData;
     }
+
+
+    public long deletePlantsInfo() {
+        return mRepository.deletePlantsInfo();
+    }
 }

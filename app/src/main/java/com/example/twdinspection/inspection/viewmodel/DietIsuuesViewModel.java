@@ -44,4 +44,8 @@ public class DietIsuuesViewModel extends ViewModel {
         long flag = mRepository.updateDietIssuesInfo(dietIssuesEntity);
         return flag;
     }
+
+    public long deleteDietListInfo() {
+        return mRepository.deleteDietListInfo();
+    }
 }

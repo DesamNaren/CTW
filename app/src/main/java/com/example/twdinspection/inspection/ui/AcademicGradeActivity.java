@@ -16,6 +16,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicGradeBinding;
 import com.example.twdinspection.inspection.adapter.AcademicGradeAdapter;
+import com.example.twdinspection.inspection.interfaces.AcademicGradeInterface;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
@@ -25,7 +26,7 @@ import com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AcademicGradeActivity extends AppCompatActivity {
+public class AcademicGradeActivity extends AppCompatActivity implements AcademicGradeInterface {
     ActivityAcademicGradeBinding binding;
     StudentsAttndViewModel studentsAttndViewModel;
     private String instId, officerId;
@@ -42,6 +43,8 @@ public class AcademicGradeActivity extends AppCompatActivity {
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.btnLayout.btnNext.setText("Submit");
+        binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.headerTitle.setText(getString(R.string.title_academic));
 
         academicGradeActivitiesMain = new ArrayList<>();
 
@@ -95,6 +98,17 @@ public class AcademicGradeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       finish();
+       Utils.customDiscardAlert(AcademicGradeActivity.this, getString(R.string.app_name), getString(R.string.go_back));
+    }
+
+    @Override
+    public void submitData(List<AcademicGradeEntity> academicGradeEntities) {
+        if (academicGradeEntities != null && academicGradeEntities.size() > 0) {
+            academicViewModel.insertAcademicGradeInfo(academicGradeEntities);
+            Utils.customAcademicSectionSaveAlert(AcademicGradeActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+        } else {
+            binding.emptyView.setVisibility(View.VISIBLE);
+            binding.gradeRV.setVisibility(View.GONE);
+        }
     }
 }

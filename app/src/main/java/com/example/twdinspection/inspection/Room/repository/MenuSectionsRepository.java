@@ -162,43 +162,6 @@ public class MenuSectionsRepository {
         return x;
     }
 
-   /* public int getSectionId(String name) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                menuSectionsDao.getSectionId(name);
-            }
-        });
-
-        Observer<Long> observer = new Observer<Long>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag + "onSubscribe: ");
-            }
-
-            @Override
-            public void onNext(Long aLong) {
-                x = aLong;
-            }
-
-
-            @Override
-            public void onError(Throwable e) {
-                Log.i("Tag", tag + "onError: " + x);
-            }
-
-            @Override
-            public void onComplete() {
-                Log.i("Tag", tag + "onComplete: " + x);
-            }
-        };
-
-        observable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(observer);
-        return x;
-    }*/
-
     public LiveData<Integer> getSectionId(String name) {
         return menuSectionsDao.getSectionId(name);
     }
@@ -206,6 +169,7 @@ public class MenuSectionsRepository {
 
     public void deleteAllInspectionData() {
         menuSectionsDao.deleteAcademicEntity();
+        menuSectionsDao.deleteAcademicGradeEntity();
         menuSectionsDao.deleteCallHealthInfoEntity();
         menuSectionsDao.deleteClassInfo();
         menuSectionsDao.deleteCoCurricularEntity();
@@ -223,7 +187,6 @@ public class MenuSectionsRepository {
         menuSectionsDao.deleteStaff_Info();
         menuSectionsDao.deleteStudAchievementEntity();
         menuSectionsDao.deletePhotos();
-
     }
 
 

@@ -54,47 +54,28 @@
                         android:text="56."
                         android:textColor="@color/black" />
 
-                        <LinearLayout
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/capture_highest"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/capture_highest"
-                                android:textColor="@color/black" />
-
-                            <LinearLayout
-                                android:layout_marginTop="@dimen/dimen_8dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:orientation="horizontal">
-
-                                <com.example.twdinspection.common.custom.CustomFontButtonView
-                                    android:id="@+id/btn_addStud"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/dimen_30dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/btn_background"
-                                    android:text="Capture"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white" />
-
-                                <com.example.twdinspection.common.custom.CustomFontButtonView
-                                    android:id="@+id/btn_viewStud"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/dimen_30dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/btn_background1"
-                                    android:text="View"
-                                    android:layout_marginLeft="12dp"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:visibility="gone" />
-                            </LinearLayout>
+                        <com.example.twdinspection.common.custom.CustomFontButtonView
+                            android:padding="@dimen/dimen_8dp"
+                            android:id="@+id/btn_addStud"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/btn_background"
+                            android:text="@string/capture"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
 
 
                     </LinearLayout>
@@ -156,7 +137,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.highest_class_syllabus_completed.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -192,7 +173,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.plan_syll_comp_prepared.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -201,7 +182,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.plan_syll_comp_prepared.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -253,7 +234,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.strength_accomodated_asper_infrastructure.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -262,7 +243,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.strength_accomodated_asper_infrastructure.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -368,7 +349,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.staff_accomodated_asper_stud_strength.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -378,7 +359,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.staff_accomodated_asper_stud_strength.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
                         </RadioGroup>
@@ -434,7 +415,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.plan_prepared.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -443,7 +424,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.plan_prepared.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -475,7 +456,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.textbooks_rec.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -484,7 +465,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.textbooks_rec.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -538,7 +519,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.assessment_test_conducted.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -547,7 +528,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.assessment_test_conducted.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -604,7 +585,7 @@
                                     android:id="@+id/highest_class_gradeA"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:gravity="center"
                                     android:hint="@string/a"
                                     android:imeOptions="actionNext"
@@ -626,7 +607,7 @@
                                     android:id="@+id/highest_class_gradeB"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:gravity="center"
                                     android:hint="@string/b"
                                     android:imeOptions="actionDone"
@@ -648,7 +629,7 @@
                                     android:id="@+id/highest_class_gradeC"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:gravity="center"
                                     android:hint="@string/c"
                                     android:imeOptions="actionNext"
@@ -671,7 +652,7 @@
                                     android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:gravity="center"
                                     android:hint="@string/total"
                                     android:imeOptions="actionNext"
@@ -694,7 +675,7 @@
                                 android:id="@+id/last_yr_ssc_percent_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                               
+
                                 android:hint="@string/last_year_ssc_results_percentage"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
@@ -728,7 +709,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.punadi_books_supplied.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -737,7 +718,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.punadi_books_supplied.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -771,7 +752,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -780,7 +761,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -834,7 +815,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -843,7 +824,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -862,7 +843,7 @@
                                 android:id="@+id/et_punadi_prgm_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                               
+
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
@@ -918,7 +899,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -927,7 +908,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -946,7 +927,7 @@
                                 android:id="@+id/et_punadi2_testmarks_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                               
+
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
@@ -1000,7 +981,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.kara_dipath_prgm_cond.equalsIgnoreCase(`Yes`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1009,7 +990,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.kara_dipath_prgm_cond.equalsIgnoreCase(`No`)}"
-                                
+
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1029,9 +1010,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
-                                android:text="@={inspData.karaDipathPrgmCondReason}"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.karaDipathPrgmCondReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1087,7 +1068,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labManuals_received.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1096,7 +1077,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labManuals_received.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1198,7 +1179,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labroom_available.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1207,7 +1188,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labroom_available.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1233,7 +1214,7 @@
                                     android:id="@+id/et_lab_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/name_of_the_science_lab"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
@@ -1252,7 +1233,7 @@
                                     android:id="@+id/et_lab_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
@@ -1271,7 +1252,7 @@
                                     android:id="@+id/et_lab_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1309,7 +1290,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1318,7 +1299,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1339,9 +1320,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
-                                android:text="@={inspData.lab_mat_entered_reg_reason}"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@={inspData.lab_mat_entered_reg_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1397,7 +1378,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.library_room_available.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1406,7 +1387,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.library_room_available.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1432,7 +1413,7 @@
                                     android:id="@+id/et_no_of_books"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/no_of_books_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1452,7 +1433,7 @@
                                     android:id="@+id/et_name_library_incharge"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/name_of_the_library_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
@@ -1471,7 +1452,7 @@
                                     android:id="@+id/et_library_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1506,7 +1487,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.maint_accession_reg.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1515,7 +1496,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.maint_accession_reg.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1550,7 +1531,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.proper_light_fan.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1559,7 +1540,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.proper_light_fan.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1617,7 +1598,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1626,7 +1607,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1745,7 +1726,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.mana_tv_lessons_shown.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1754,7 +1735,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.mana_tv_lessons_shown.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1816,7 +1797,7 @@
                                     android:id="@+id/et_mana_tv_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1879,7 +1860,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.comp_lab_avail.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1888,7 +1869,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.comp_lab_avail.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1914,8 +1895,8 @@
                                     android:id="@+id/et_no_of_computers_available"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    
-                                   
+
+
                                     android:hint="@string/number_of_computers_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1935,7 +1916,7 @@
                                     android:id="@+id/et_comp_working_status"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
@@ -1954,7 +1935,7 @@
                                     android:id="@+id/et_working_status_projector"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                   
+
                                     android:hint="@string/working_status_of_projector"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
@@ -1987,7 +1968,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.ict_instr_avail.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1996,7 +1977,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.ict_instr_avail.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2022,7 +2003,7 @@
                                         android:id="@+id/et_name_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
@@ -2041,7 +2022,7 @@
                                         android:id="@+id/et_mob_no_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
@@ -2077,7 +2058,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.timetable_disp.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2086,7 +2067,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.timetable_disp.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2119,7 +2100,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.comp_syll_completed.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2128,7 +2109,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.comp_syll_completed.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2161,7 +2142,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.comp_lab_cond.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2170,7 +2151,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.comp_lab_cond.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2272,7 +2253,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.eLearning_avail.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -2281,7 +2262,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.eLearning_avail.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2321,7 +2302,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2330,7 +2311,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2342,8 +2323,8 @@
                                 android:id="@+id/ll_name_vol_school"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:visibility="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
-                            android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.eLearning_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -2356,7 +2337,7 @@
                                         android:id="@+id/et_vol_school_coord_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
@@ -2375,7 +2356,7 @@
                                         android:id="@+id/et_vol_school_coord_mob_no"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
@@ -2402,7 +2383,7 @@
                                         android:id="@+id/et_eLearning_inchrg_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
@@ -2421,7 +2402,7 @@
                                         android:id="@+id/et_eLearning_inchrg_mobileNo"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
@@ -2458,7 +2439,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2467,7 +2448,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2501,7 +2482,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.tabs_supplied.equalsIgnoreCase(`Yes`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -2510,7 +2491,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.tabs_supplied.equalsIgnoreCase(`No`)}"
-                                        
+
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2536,7 +2517,7 @@
                                         android:id="@+id/et_no_of_tabs"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/number_of_tabs"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
@@ -2570,7 +2551,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.tabs_stud_using_as_per_sched.equalsIgnoreCase(`Yes`)}"
-                                            
+
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
@@ -2579,7 +2560,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.tabs_stud_using_as_per_sched.equalsIgnoreCase(`No`)}"
-                                            
+
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -2598,7 +2579,7 @@
                                         android:id="@+id/et_tab_incharge_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                       
+
                                         android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
@@ -2652,7 +2633,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`Yes`)}"
-                                            
+
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
@@ -2661,7 +2642,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.separate_timetable_disp.equalsIgnoreCase(`No`)}"
-                                            
+
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 

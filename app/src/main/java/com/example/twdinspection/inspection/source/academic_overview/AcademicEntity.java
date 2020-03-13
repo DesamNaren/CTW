@@ -4,9 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.twdinspection.inspection.source.converters.AcademicGradeConverter;
+import com.example.twdinspection.inspection.source.converters.CallHealthConverter;
+import com.example.twdinspection.inspection.source.converters.MedicalRecordsConverter;
+import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
+@TypeConverters({AcademicGradeConverter.class})
 @Entity(tableName = "academic_info")
 public class AcademicEntity {
 
@@ -112,6 +121,17 @@ public class AcademicEntity {
     private String TvRotWorkingStatus;
     @ColumnInfo
     private String tabs_stud_using_as_per_sched;
+
+    @ColumnInfo(name = "grade_info")
+    private List<AcademicGradeEntity> academicGradeEntities = null;
+
+    public List<AcademicGradeEntity> getAcademicGradeEntities() {
+        return academicGradeEntities;
+    }
+
+    public void setAcademicGradeEntities(List<AcademicGradeEntity> academicGradeEntities) {
+        this.academicGradeEntities = academicGradeEntities;
+    }
 
     public String getTabs_stud_using_as_per_sched() {
         return tabs_stud_using_as_per_sched;

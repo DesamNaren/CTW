@@ -1,14 +1,22 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.LiveData;
@@ -26,7 +34,6 @@ import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
-import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.CocurricularCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.CocurricularViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -292,21 +299,21 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             }
         });
 
-            binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
-                    if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
-                        harita_haram_status = AppConstants.Yes;
-                        binding.llPlants.setVisibility(View.VISIBLE);
-                    } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamNo) {
-                        harita_haram_status = AppConstants.No;
-                        binding.llPlants.setVisibility(View.GONE);
-                    } else {
-                        harita_haram_status = null;
-                    }
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
+                    harita_haram_status = AppConstants.Yes;
+                    binding.llPlants.setVisibility(View.VISIBLE);
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamNo) {
+                    harita_haram_status = AppConstants.No;
+                    binding.llPlants.setVisibility(View.GONE);
+                } else {
+                    harita_haram_status = null;
                 }
-            });
+            }
+        });
         binding.rgStudCounElect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -360,7 +367,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             public void onClick(View view) {
                 startActivity(new Intent(CoCurricularActivity.this, PlantsInfoActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(AppConstants.FROM_CLASS, AppConstants.COCAR));
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.COCAR));
             }
         });
         binding.btnAddplant.setOnClickListener(new View.OnClickListener() {
@@ -869,7 +876,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(CoCurricularActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(CoCurricularActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }
@@ -880,6 +887,53 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
     @Override
     public void onBackPressed() {
-        super.callBack();
+        if (((plantsEntities != null && plantsEntities.size() > 0) || (studAchievementEntities != null && studAchievementEntities.size() > 0)) && !(localFlag == 1)) {
+            customExitAlert(CoCurricularActivity.this, getString(R.string.app_name), getString(R.string.data_lost));
+        } else {
+            super.callBack();
+        }
+    }
+
+    private void customExitAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        cocurricularViewModel.deletePlantsInfo();
+                        finish();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

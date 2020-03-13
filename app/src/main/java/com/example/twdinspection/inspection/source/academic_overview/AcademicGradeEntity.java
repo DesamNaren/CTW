@@ -51,11 +51,11 @@ public class AcademicGradeEntity {
 
 
     @ColumnInfo()
-    private String grade_ap_stu_count;
+    private String grade_aplus_stu_count;
 
 
     @ColumnInfo()
-    private String grade_bp_stu_count;
+    private String grade_bplus_stu_count;
 
     public AcademicGradeEntity(String officer_id, String institute_id, String inspection_time, String class_type, @NotNull String class_id, String total_students) {
         this.officer_id = officer_id;
@@ -171,19 +171,19 @@ public class AcademicGradeEntity {
         this.grade_e_stu_count = grade_e_stu_count;
     }
 
-    public String getGrade_ap_stu_count() {
-        return grade_ap_stu_count;
+    public String getGrade_aplus_stu_count() {
+        return grade_aplus_stu_count;
     }
 
-    public void setGrade_ap_stu_count(String grade_ap_stu_count) {
-        this.grade_ap_stu_count = grade_ap_stu_count;
+    public void setGrade_aplus_stu_count(String grade_aplus_stu_count) {
+        this.grade_aplus_stu_count = grade_aplus_stu_count;
     }
 
-    public String getGrade_bp_stu_count() {
-        return grade_bp_stu_count;
+    public String getGrade_bplus_stu_count() {
+        return grade_bplus_stu_count;
     }
 
-    public void setGrade_bp_stu_count(String grade_bp_stu_count) {
-        this.grade_bp_stu_count = grade_bp_stu_count;
+    public void setGrade_bplus_stu_count(String grade_bplus_stu_count) {
+        this.grade_bplus_stu_count = grade_bplus_stu_count;
     }
 }

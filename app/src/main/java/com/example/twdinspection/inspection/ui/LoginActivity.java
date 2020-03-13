@@ -211,12 +211,10 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
 
         if (!TextUtils.isEmpty(cacheDate)) {
             if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                editor.clear();
-                editor.commit();
-                instMainViewModel.deleteAllInspectionData();
+
                 Utils.ShowDeviceSessionAlert(this,
-                        getResources().getString(R.string.app_name),
-                        getString(R.string.ses_expire_re));
+                            getResources().getString(R.string.app_name),
+                            getString(R.string.ses_expire_re), instMainViewModel);
 
             }
         }

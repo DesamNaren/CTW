@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
-import com.example.twdinspection.inspection.interfaces.FinalSubmitListener;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
@@ -102,6 +101,38 @@ public class Utils {
                             dialog.dismiss();
                         }
                         activity.startActivity(new Intent(activity, InstMenuMainActivity.class));
+                        activity.finish();
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void customAcademicSectionSaveAlert(final Activity activity, String msg, String title) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_success);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
                         activity.finish();
                     }
                 });
@@ -473,7 +504,7 @@ public class Utils {
         }
     }
 
-    public static void ShowDeviceSessionAlert(Activity activity, String title, String msg) {
+    public static void ShowDeviceSessionAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel) {
         try {
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -493,10 +524,13 @@ public class Utils {
 
                         if (dialog.isShowing())
                             dialog.dismiss();
+                        instMainViewModel.deleteAllInspectionData();
 
-                        SharedPreferences.Editor editor = TWDApplication.get(activity).getPreferencesEditor();
+                        SharedPreferences sharedPreferences = TWDApplication.get(activity).getPreferences();
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.clear();
                         editor.commit();
+
                         activity.startActivity(new Intent(activity, LoginActivity.class));
                         activity.finish();
                     }
@@ -650,9 +684,6 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
-
-
 
 
     public static void showToast(Context context, String msg) {

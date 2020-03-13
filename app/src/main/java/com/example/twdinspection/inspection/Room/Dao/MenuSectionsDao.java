@@ -74,6 +74,10 @@ public interface MenuSectionsDao {
 
     @Query("Delete from academic_info")
     void deleteAcademicEntity();
+
+    @Query("Delete from academic_grade")
+    void deleteAcademicGradeEntity();
+
     @Query("Delete from call_health_info")
     void deleteCallHealthInfoEntity();
 

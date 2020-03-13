@@ -16,13 +16,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+        android:layout_marginRight="@dimen/dimen_5dp"
         tools:context=".inspection.ui.MedicalActivity">
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_marginLeft="@dimen/dimen_8dp"
+            android:layout_marginRight="@dimen/dimen_8dp"
+            android:padding="@dimen/dimen_8dp"
             android:elevation="@dimen/dimen_5dp">
 
             <LinearLayout
@@ -77,7 +83,8 @@
                         android:scrollbars="none">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:id="@+id/ll_header"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
@@ -260,12 +267,13 @@
 
 
                                     <com.google.android.material.textfield.TextInputLayout
-
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_a_stu_count}"
+                                            android:id="@+id/grade_a_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
@@ -273,9 +281,7 @@
                                             android:maxLength="3"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
-
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -310,6 +316,8 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_b_stu_count}"
+                                            android:id="@+id/grade_b_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
@@ -317,9 +325,7 @@
                                             android:maxLength="3"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
-
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -353,6 +359,8 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_c_stu_count}"
+                                            android:id="@+id/grade_c_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
@@ -360,9 +368,7 @@
                                             android:maxLength="3"
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
-
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -396,16 +402,16 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_d_stu_count}"
+                                            android:id="@+id/grade_d_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
                                             android:gravity="center"
-
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -439,16 +445,16 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_e_stu_count}"
+                                            android:id="@+id/grade_e_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
                                             android:gravity="center"
-
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -482,16 +488,16 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_aplus_stu_count}"
+                                            android:id="@+id/grade_ap_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
                                             android:gravity="center"
-
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -525,16 +531,16 @@
                                         app:errorEnabled="false">
 
                                         <com.example.twdinspection.common.custom.CustomFontEditText
+                                            android:text="@{academicGrade.grade_bplus_stu_count}"
+                                            android:id="@+id/grade_bp_count"
                                             android:layout_width="@dimen/dimen_60dp"
                                             android:layout_height="@dimen/dimen_60dp"
                                             android:background="@drawable/grade_oval"
                                             android:gravity="center"
-
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-
                                             android:textColorHint="@color/list_blue" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -553,17 +559,58 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/cl"
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:id="@+id/tooltip_ll"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_below="@id/cv"
+            android:background="@drawable/tooltip"
+            android:layout_width="@dimen/dimen_300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_8dp"
+            android:layout_marginStart="@dimen/dimen_10dp">
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:layout_marginTop="@dimen/dimen_5dp"
+                android:paddingLeft="@dimen/dimen_8dp"
+                android:layout_weight="1"
+                android:id="@+id/tooltip_msg"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:text="@string/on_roll_count_validation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:paddingStart="@dimen/dimen_8dp" />
+
+
+            <com.example.twdinspection.common.custom.CustomFontTextView
+                android:padding="@dimen/dimen_8dp"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:id="@+id/onClick"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/Ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_8dp" />
+        </LinearLayout>
+
+        <Button
+            android:layout_below="@+id/tooltip_ll"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/btn_layout"
-            android:background="@android:color/transparent" />
-
-        <include
-            android:id="@+id/btn_layout"
-            layout="@layout/buttons_layout"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:background="@drawable/btn_bg"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

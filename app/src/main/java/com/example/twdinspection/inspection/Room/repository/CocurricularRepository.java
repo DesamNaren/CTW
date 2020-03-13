@@ -181,4 +181,47 @@ public class CocurricularRepository {
     public LiveData<Integer> getPlantsCnt() {
         return cocurricularDao.getPlantsCnt();
     }
+
+    public long deletePlantsInfo() {
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                cocurricularDao.deletePlantsInfo();
+                cocurricularDao.deleteStuAchInfo();
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag+"onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag+"onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag+"onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag+"onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
 }

@@ -43,7 +43,7 @@ public class DietListEntity {
         this.flag_selected = flag_selected;
     }
 
-    public DietListEntity(String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
+    public DietListEntity(@NotNull String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
         this.item_name = item_name;
         this.ground_bal = ground_bal;
         this.book_bal = book_bal;

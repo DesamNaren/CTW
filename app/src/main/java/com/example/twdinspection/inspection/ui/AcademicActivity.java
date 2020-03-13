@@ -1,11 +1,19 @@
 package com.example.twdinspection.inspection.ui;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -18,15 +26,18 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 import com.example.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
 public class AcademicActivity extends BaseActivity implements SaveListener {
     ActivityAcademicBinding binding;
     AcademicViewModel academicViewModel;
-    AcademicEntity AcademicEntity;
+    AcademicEntity academicEntity;
     String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength,
             plan_prepared, textbooks_rec, assessment_test_conducted, punadiPrgmConducted, punadi2_testmarks_entered,
             kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg, library_room_available,
@@ -44,6 +55,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private SharedPreferences sharedPreferences;
     private String instId, officerId, insTime;
     private int localFlag = -1;
+    private List<AcademicGradeEntity> academicGradeEntities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +91,26 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             e.printStackTrace();
         }
 
+        academicViewModel.getAcademicGradeInfo(instId).observe(AcademicActivity.this, new Observer<List<AcademicGradeEntity>>() {
+            @Override
+            public void onChanged(List<AcademicGradeEntity> academicGradeEntities) {
+                AcademicActivity.this.academicGradeEntities = academicGradeEntities;
+                if (academicGradeEntities != null && academicGradeEntities.size() > 0) {
+                    binding.btnAddStud.setBackground(getResources().getDrawable(R.drawable.btn_background1));
+                    binding.btnAddStud.setText(getString(R.string.capture_view));
+                } else {
+                    binding.btnAddStud.setBackground(getResources().getDrawable(R.drawable.btn_background));
+                    binding.btnAddStud.setText(getString(R.string.capture));
+                }
+            }
+        });
+
         binding.rgHighestClassSyllabusCompleted.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHighestClassSyllabusCompleted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.highest_class_syllabus_completed_yes) {
-                   binding.rgPlanSyllCompPrepared.clearCheck();
+                    binding.rgPlanSyllCompPrepared.clearCheck();
                     highest_class_syllabus_completed = AppConstants.Yes;
                     binding.llPlanCompSyll.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.highest_class_syllabus_completed_no) {
@@ -610,7 +636,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AcademicActivity.this, AcademicGradeActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 
@@ -659,86 +685,87 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 tabInchargeMblno = binding.etTabInchargeMblno.getText().toString().trim();
 
                 if (validate()) {
-                    AcademicEntity = new AcademicEntity();
-                    AcademicEntity.setOfficer_id(officerId);
-                    AcademicEntity.setInstitute_id(instId);
-                    AcademicEntity.setInspection_time(Utils.getCurrentDateTime());
-                    AcademicEntity.setHighest_class_syllabus_completed(highest_class_syllabus_completed);
-                    AcademicEntity.setPlan_syll_comp_prepared(plan_syll_comp_prepared);
-                    AcademicEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);
-                    AcademicEntity.setStaff_accomodated_asper_stud_strength(staff_accomodated_asper_stud_strength);
-                    AcademicEntity.setPlan_prepared(plan_prepared);
-                    AcademicEntity.setTextbooks_rec(textbooks_rec);
-                    AcademicEntity.setAssessment_test_conducted(assessment_test_conducted);
+                    academicEntity = new AcademicEntity();
+                    academicEntity.setOfficer_id(officerId);
+                    academicEntity.setInstitute_id(instId);
+                    academicEntity.setInspection_time(Utils.getCurrentDateTime());
+                    academicEntity.setHighest_class_syllabus_completed(highest_class_syllabus_completed);
+                    academicEntity.setPlan_syll_comp_prepared(plan_syll_comp_prepared);
+                    academicEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);
+                    academicEntity.setStaff_accomodated_asper_stud_strength(staff_accomodated_asper_stud_strength);
+                    academicEntity.setPlan_prepared(plan_prepared);
+                    academicEntity.setTextbooks_rec(textbooks_rec);
+                    academicEntity.setAssessment_test_conducted(assessment_test_conducted);
 
-                    AcademicEntity.setHighest_class_gradeA(highestClassGradeA);
-                    AcademicEntity.setHighest_class_gradeB(highestClassGradeB);
-                    AcademicEntity.setHighest_class_gradeC(highestClassGradeC);
-                    AcademicEntity.setHighest_class_total(highestClassGradeTotal);
+                    academicEntity.setHighest_class_gradeA(highestClassGradeA);
+                    academicEntity.setHighest_class_gradeB(highestClassGradeB);
+                    academicEntity.setHighest_class_gradeC(highestClassGradeC);
+                    academicEntity.setHighest_class_total(highestClassGradeTotal);
 
-                    AcademicEntity.setLast_yr_ssc_percent(last_yr_ssc_percent);
-                    AcademicEntity.setPunadi_books_supplied(punadi_books_supplied);
-                    AcademicEntity.setSufficient_books_supplied(sufficient_books_supplied);
-                    AcademicEntity.setPunadiPrgmConducted(punadiPrgmConducted);
-                    AcademicEntity.setPunadiPrgmReason(punadiPrgmReason);
-                    AcademicEntity.setPunadi2_testmarks_entered(punadi2_testmarks_entered);
-                    AcademicEntity.setPunadi2TestmarksReason(punadi2TestmarksReason);
-                    AcademicEntity.setKara_dipath_prgm_cond(kara_dipath_prgm_cond);
-                    AcademicEntity.setKaraDipathPrgmCondReason(karaDipathPrgmCondReason);
-                    AcademicEntity.setLabManuals_received(labManuals_received);
-                    AcademicEntity.setProperly_using_manuals(properly_using_manuals);
-                    AcademicEntity.setLabroom_available(labroom_available);
-                    AcademicEntity.setLabName(labName);
-                    AcademicEntity.setLabInchargeName(labInchargeName);
-                    AcademicEntity.setLabMobileNo(labMobileNo);
-                    AcademicEntity.setLab_mat_entered_reg(lab_mat_entered_reg);
-                    AcademicEntity.setLab_mat_entered_reg_reason(labMatEnteredReason);
+                    academicEntity.setLast_yr_ssc_percent(last_yr_ssc_percent);
+                    academicEntity.setPunadi_books_supplied(punadi_books_supplied);
+                    academicEntity.setSufficient_books_supplied(sufficient_books_supplied);
+                    academicEntity.setPunadiPrgmConducted(punadiPrgmConducted);
+                    academicEntity.setPunadiPrgmReason(punadiPrgmReason);
+                    academicEntity.setPunadi2_testmarks_entered(punadi2_testmarks_entered);
+                    academicEntity.setPunadi2TestmarksReason(punadi2TestmarksReason);
+                    academicEntity.setKara_dipath_prgm_cond(kara_dipath_prgm_cond);
+                    academicEntity.setKaraDipathPrgmCondReason(karaDipathPrgmCondReason);
+                    academicEntity.setLabManuals_received(labManuals_received);
+                    academicEntity.setProperly_using_manuals(properly_using_manuals);
+                    academicEntity.setLabroom_available(labroom_available);
+                    academicEntity.setLabName(labName);
+                    academicEntity.setLabInchargeName(labInchargeName);
+                    academicEntity.setLabMobileNo(labMobileNo);
+                    academicEntity.setLab_mat_entered_reg(lab_mat_entered_reg);
+                    academicEntity.setLab_mat_entered_reg_reason(labMatEnteredReason);
 
-                    AcademicEntity.setLibrary_room_available(library_room_available);
-                    AcademicEntity.setNoOfBooks(noOfBooks);
-                    AcademicEntity.setNameLibraryIncharge(nameLibraryIncharge);
-                    AcademicEntity.setLibraryMobileNo(libraryMobileNo);
-                    AcademicEntity.setMaint_accession_reg(maint_accession_reg);
-                    AcademicEntity.setProper_light_fan(proper_light_fan);
+                    academicEntity.setLibrary_room_available(library_room_available);
+                    academicEntity.setNoOfBooks(noOfBooks);
+                    academicEntity.setNameLibraryIncharge(nameLibraryIncharge);
+                    academicEntity.setLibraryMobileNo(libraryMobileNo);
+                    academicEntity.setMaint_accession_reg(maint_accession_reg);
+                    academicEntity.setProper_light_fan(proper_light_fan);
 
-                    AcademicEntity.setBig_tv_rot_avail(big_tv_rot_avail);
-                    AcademicEntity.setTvRotWorkingStatus(TvRotWorkingStatus);
+                    academicEntity.setBig_tv_rot_avail(big_tv_rot_avail);
+                    academicEntity.setTvRotWorkingStatus(TvRotWorkingStatus);
 
-                    AcademicEntity.setMana_tv_lessons_shown(mana_tv_lessons_shown);
-                    AcademicEntity.setManaTvLessonsReason(manaTvLessonsReason);
-                    AcademicEntity.setManaTvInchargeName(manaTvInchargeName);
-                    AcademicEntity.setManaTvMobileNo(manaTvMobileNo);
-
-
-                    AcademicEntity.setComp_lab_avail(comp_lab_avail);
-                    AcademicEntity.setNoOfComputersAvailable(noOfComputersAvailable);
-                    AcademicEntity.setCompWorkingStatus(compWorkingStatus);
-                    AcademicEntity.setWorkingStatusProjector(workingStatusProjector);
+                    academicEntity.setMana_tv_lessons_shown(mana_tv_lessons_shown);
+                    academicEntity.setManaTvLessonsReason(manaTvLessonsReason);
+                    academicEntity.setManaTvInchargeName(manaTvInchargeName);
+                    academicEntity.setManaTvMobileNo(manaTvMobileNo);
 
 
-                    AcademicEntity.setIct_instr_avail(ict_instr_avail);
-                    AcademicEntity.setNameIctInstr(nameIctInstr);
-                    AcademicEntity.setMobNoIctInstr(mobNoIctInstr);
+                    academicEntity.setComp_lab_avail(comp_lab_avail);
+                    academicEntity.setNoOfComputersAvailable(noOfComputersAvailable);
+                    academicEntity.setCompWorkingStatus(compWorkingStatus);
+                    academicEntity.setWorkingStatusProjector(workingStatusProjector);
 
 
-                    AcademicEntity.setTimetable_disp(timetable_disp);
-                    AcademicEntity.setComp_syll_completed(comp_syll_completed);
-                    AcademicEntity.setComp_lab_cond(comp_lab_cond);
-                    AcademicEntity.setDigital_content_used(digital_content_used);
+                    academicEntity.setIct_instr_avail(ict_instr_avail);
+                    academicEntity.setNameIctInstr(nameIctInstr);
+                    academicEntity.setMobNoIctInstr(mobNoIctInstr);
 
 
-                    AcademicEntity.seteLearning_avail(eLearning_avail);
-                    AcademicEntity.setVolSchoolCoordName(volSchoolCoordName);
-                    AcademicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
-                    AcademicEntity.seteLearningInchargeName(eLearningInchrgName);
-                    AcademicEntity.seteLearningMobNum(eLearningInchrgMobileNo);
-                    AcademicEntity.setSeparate_timetable_disp(separate_timetable_disp);
-                    AcademicEntity.setTabs_supplied(tabs_supplied);
-                    AcademicEntity.setNoOfTabs(noOfTabs);
-                    AcademicEntity.setTabs_stud_using_as_per_sched(stud_using_as_per_sched);
-                    AcademicEntity.setTabInchargeName(tabInchargeName);
-                    AcademicEntity.setTabInchargeMblno(tabInchargeMblno);
-                    AcademicEntity.seteLearning_stud_using_as_per_sched(showing_stud);
+                    academicEntity.setTimetable_disp(timetable_disp);
+                    academicEntity.setComp_syll_completed(comp_syll_completed);
+                    academicEntity.setComp_lab_cond(comp_lab_cond);
+                    academicEntity.setDigital_content_used(digital_content_used);
+
+
+                    academicEntity.seteLearning_avail(eLearning_avail);
+                    academicEntity.setVolSchoolCoordName(volSchoolCoordName);
+                    academicEntity.setVolSchoolCoordMobNo(volSchoolCoordMobNo);
+                    academicEntity.seteLearningInchargeName(eLearningInchrgName);
+                    academicEntity.seteLearningMobNum(eLearningInchrgMobileNo);
+                    academicEntity.setSeparate_timetable_disp(separate_timetable_disp);
+                    academicEntity.setTabs_supplied(tabs_supplied);
+                    academicEntity.setNoOfTabs(noOfTabs);
+                    academicEntity.setTabs_stud_using_as_per_sched(stud_using_as_per_sched);
+                    academicEntity.setTabInchargeName(tabInchargeName);
+                    academicEntity.setTabInchargeMblno(tabInchargeMblno);
+                    academicEntity.seteLearning_stud_using_as_per_sched(showing_stud);
+                    academicEntity.setAcademicGradeEntities(academicGradeEntities);
 
                     Utils.customSaveAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -746,6 +773,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             }
         });
     }
+
+
+
 
     private boolean validate() {
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
@@ -989,12 +1019,12 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-        if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && mobNoIctInstr.length()!=10) {
+        if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && mobNoIctInstr.length() != 10) {
             showSnackBar(getString(R.string.valid_ict_mob));
             return false;
         }
 
-        if (comp_lab_avail.equals(AppConstants.Yes) &&  ict_instr_avail.equals(AppConstants.Yes)
+        if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes)
                 && !(mobNoIctInstr.startsWith("9") || mobNoIctInstr.startsWith("8") || mobNoIctInstr.startsWith("7") ||
                 mobNoIctInstr.startsWith("6"))) {
             showSnackBar(getString(R.string.valid_ict_mob));
@@ -1037,7 +1067,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)  && volSchoolCoordMobNo.length()!=10) {
+        if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes) && volSchoolCoordMobNo.length() != 10) {
             showSnackBar(getString(R.string.valid_sch_cor_mob_num));
             return false;
         }
@@ -1058,7 +1088,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-        if (eLearning_avail.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
+        if (eLearning_avail.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length() != 10) {
             showSnackBar(getString(R.string.valid_eLe_inch_mob));
             return false;
         }
@@ -1099,7 +1129,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         }
 
 
-        if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length()!=10) {
+        if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length() != 10) {
             showSnackBar(getString(R.string.valid_incharge_mob_num));
             return false;
         }
@@ -1115,7 +1145,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     }
 
     private void ScrollToView(View rgHighestClassSyllabusCompleted) {
-        binding.scrl.scrollTo(0, (int)binding.rgHighestClassSyllabusCompleted.getY());
+        binding.scrl.scrollTo(0, (int) binding.rgHighestClassSyllabusCompleted.getY());
 
     }
 
@@ -1125,7 +1155,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
     @Override
     public void submitData() {
-        long x = academicViewModel.insertAcademicInfo(AcademicEntity);
+        long x = academicViewModel.insertAcademicInfo(academicEntity);
         if (x >= 0) {
             final long[] z = {0};
             try {
@@ -1154,6 +1184,54 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
     @Override
     public void onBackPressed() {
-        super.callBack();
+        if(academicGradeEntities!=null && academicGradeEntities.size()>0 && !(localFlag==1)){
+            customExitAlert(AcademicActivity.this,  getString(R.string.app_name),getString(R.string.data_lost));
+        }else {
+            super.callBack();
+        }
+    }
+
+    private void customExitAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+                        academicViewModel.deleteGradeInfo();
+                        finish();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
