@@ -103,7 +103,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".inspection.ui.DietIssuesActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme" />
         <activity
             android:name=".inspection.ui.InfraActivity"
             android:screenOrientation="portrait" />

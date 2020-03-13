@@ -1,5 +1,8 @@
 package com.example.twdinspection.inspection.source.staff_attendance;
 
+import android.view.View;
+import android.widget.AdapterView;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -51,6 +54,72 @@ public class StaffAttendanceEntity {
 
     @ColumnInfo()
     private String last_week_turn_duties_attended;
+
+    @ColumnInfo()
+    private String category;
+
+    @ColumnInfo()
+    private String leaves_availed;
+
+    @ColumnInfo()
+    private String leaves_taken;
+
+    @ColumnInfo()
+    private String leaves_bal;
+
+    @ColumnInfo()
+    private String acad_panel_grade;
+
+    @ColumnInfo()
+    private int categ_pos;
+
+    public int getCateg_pos() {
+        return categ_pos;
+    }
+
+    public void setCateg_pos(int categ_pos) {
+        this.categ_pos = categ_pos;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getLeaves_availed() {
+        return leaves_availed;
+    }
+
+    public void setLeaves_availed(String leaves_availed) {
+        this.leaves_availed = leaves_availed;
+    }
+
+    public String getLeaves_taken() {
+        return leaves_taken;
+    }
+
+    public void setLeaves_taken(String leaves_taken) {
+        this.leaves_taken = leaves_taken;
+    }
+
+    public String getLeaves_bal() {
+        return leaves_bal;
+    }
+
+    public void setLeaves_bal(String leaves_bal) {
+        this.leaves_bal = leaves_bal;
+    }
+
+    public String getAcad_panel_grade() {
+        return acad_panel_grade;
+    }
+
+    public void setAcad_panel_grade(String acad_panel_grade) {
+        this.acad_panel_grade = acad_panel_grade;
+    }
 
     @Ignore
     private boolean presentFlag;
@@ -180,4 +249,5 @@ public class StaffAttendanceEntity {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
+
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -48,6 +49,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_10dp">
+
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -90,7 +92,7 @@
                             android:id="@+id/iv_present"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Present`)? @drawable/present: @drawable/present_init}"/>
+                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Present`)? @drawable/present: @drawable/present_init}" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_present"
@@ -112,7 +114,7 @@
                             android:id="@+id/iv_absent"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Absent`)? @drawable/absent: @drawable/absent_init}"/>
+                            android:src="@{staff.emp_presence.equalsIgnoreCase(`Absent`)? @drawable/absent: @drawable/absent_init}" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_absent"
@@ -148,6 +150,7 @@
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -155,6 +158,31 @@
                     android:paddingLeft="@dimen/dimen_5dp"
                     android:paddingRight="@dimen/dimen_5dp"
                     android:paddingBottom="@dimen/dimen_5dp"
+                    android:visibility="visible">
+
+                    <com.example.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/category" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/sp_category"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:entries="@array/category"
+                        android:selectedItemPosition="@={staff.categ_pos}"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingRight="@dimen/dimen_5dp"
                     android:visibility="visible">
 
                     <com.example.twdinspection.common.custom.CustomFontTextView
@@ -171,9 +199,9 @@
                         android:layout_marginLeft="@dimen/dimen_10dp">
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@{staff.yday_duty_allotted.equalsIgnoreCase(`Yes`)? @color/list_blue: @color/light_gray}"
                             android:gravity="center"
@@ -186,9 +214,9 @@
                             android:layout_height="wrap_content" />
 
                         <com.example.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_no_dutyAlloted"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_no_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@{staff.yday_duty_allotted.equalsIgnoreCase(`No`)?  @color/list_blue:  @color/light_gray}"
                             android:gravity="center"
@@ -219,7 +247,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
                     android:layout_marginRight="@dimen/dimen_10dp"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
                     android:paddingLeft="2dp"
                     android:paddingTop="2dp"
                     android:paddingRight="2dp"
@@ -236,9 +263,105 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/last_week"
                             android:inputType="number"
-                            android:text="@{staff.last_week_turn_duties_attended}"
                             android:paddingLeft="@dimen/dimen_10dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="@{staff.last_week_turn_duties_attended}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:visibility="visible">
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/dimen_5dp"
+                        android:layout_height="wrap_content">
+
+                        <com.example.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leaves_availed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/no_of_leaves_availed"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.leaves_availed}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+
+                        <com.example.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leaves_taken"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/no_of_leaves_taken"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:text="@{staff.leaves_taken}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+
+                        <com.example.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leave_bal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/leave_balance"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.leaves_bal}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_10dp"
+                    android:paddingLeft="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="2dp"
+                    android:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.example.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_acad_grade_panel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/teacher_s_last_year_academic_panel_grade"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.acad_panel_grade}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

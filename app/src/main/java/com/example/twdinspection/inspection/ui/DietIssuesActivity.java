@@ -12,15 +12,25 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
@@ -47,6 +57,7 @@ import com.example.twdinspection.inspection.viewmodel.DietIssuesCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -77,19 +88,34 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     int flag_menu = 0, flag_officer = 0;
     SharedPreferences.Editor editor;
     private int localFlag = -1;
-
+    SearchView mSearchView;
+    Menu mMenu = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
-        binding.header.headerTitle.setText(getResources().getString(R.string.diet_issues));
-        binding.header.ivHome.setVisibility(View.GONE);
-        binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+
+
+        try {
+            if (getSupportActionBar() != null) {
+                TextView tv = new TextView(getApplicationContext());
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
+                        RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
+                tv.setLayoutParams(lp);
+                tv.setText(getResources().getString(R.string.diet_issues));
+                tv.setGravity(Gravity.CENTER);
+                tv.setTextColor(Color.WHITE);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                getSupportActionBar().setCustomView(tv);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         dietIsuuesViewModel = ViewModelProviders.of(DietIssuesActivity.this,
                 new DietIssuesCustomViewModel(binding, this, getApplication())).get(DietIsuuesViewModel.class);
         binding.setViewModel(dietIsuuesViewModel);
@@ -339,7 +365,18 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     dietIssuesEntity.setCommittee_exist(committee_exist);
                     dietIssuesEntity.setDiscussed_with_committee(discussed_with_committee);
                     dietIssuesEntity.setMaintaining_register(maintaining_register);
-
+                    List<DietListEntity> selectedList=new ArrayList<>();
+                    for(int i=0;i<dietInfoEntityListMain.size();i++)
+                    {
+                        if(dietInfoEntityListMain.get(i).isFlag_selected()){
+                            selectedList.add(dietInfoEntityListMain.get(i));
+                        }
+                    }
+                    Gson gson=new Gson();
+                    String selDiets=gson.toJson(selectedList);
+                    dietIssuesEntity.setSelected_dietIssues(selDiets);
+                    dietIssuesEntity.setDietListEntities(selectedList);
+                    dietIsuuesViewModel.insertDietInfo(dietInfoEntityListMain);
                     Utils.customSaveAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
                 }
@@ -387,6 +424,54 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        mMenu = menu;
+        MenuItem item=mMenu.findItem(R.id.mi_filter);
+        item.setVisible(false);
+        MenuItem mSearch = mMenu.findItem(R.id.action_search);
+        mSearchView = (SearchView) mSearch.getActionView();
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_hint_diet) + "</font>"));
+        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = mSearchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
+        mSearchView.setGravity(Gravity.CENTER);
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mi_filter:
+                if (!mSearchView.isIconified()) {
+                    mSearchView.onActionViewCollapsed();
+                }
+
+                break;
+
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     @Override

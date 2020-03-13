@@ -84,7 +84,10 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                             List<MasterStaffInfo> masterStaffInfos = masterInstituteInfos.getStaffInfo();
                             if (masterStaffInfos != null && masterStaffInfos.size() > 0) {
                                 for (int i = 0; i < masterStaffInfos.size(); i++) {
-                                    StaffAttendanceEntity staffAttendanceEntity = new StaffAttendanceEntity(officerId, String.valueOf(masterStaffInfos.get(i).getHostelId()), instName, String.valueOf(masterStaffInfos.get(i).getEmpId()), masterStaffInfos.get(i).getEmpName(), masterStaffInfos.get(i).getDesignation());
+                                    StaffAttendanceEntity staffAttendanceEntity = new StaffAttendanceEntity(officerId,
+                                            String.valueOf(masterStaffInfos.get(i).getHostelId()),
+                                            instName, String.valueOf(masterStaffInfos.get(i).getEmpId()),
+                                            masterStaffInfos.get(i).getEmpName(), masterStaffInfos.get(i).getDesignation());
                                     staffAttendanceEntitiesmain.add(staffAttendanceEntity);
                                 }
                             }

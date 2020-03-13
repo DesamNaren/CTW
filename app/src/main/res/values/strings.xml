@@ -801,5 +801,19 @@
     <string name="specify">Specify sector</string>
     <string name="engineering_works">Engineering Works</string>
     <string name="d">D</string>
+    <string name="search_hint_diet">Search by diet name</string>
+    <string-array name="category">
+        <item>Select</item>
+        <item>Regular</item>
+        <item>CRT(contract Residential Teacher)</item>
+        <item>PT (Part Time)</item>
+        <item>AI (Academic -Instructor)</item>
+        <item>Daily Wages</item>
+    </string-array>
+    <string name="category">Category</string>
+    <string name="no_of_leaves_availed">Leaves availed</string>
+    <string name="no_of_leaves_taken">Leaves taken</string>
+    <string name="leave_balance">Leave Balance</string>
+    <string name="teacher_s_last_year_academic_panel_grade">Teacher\'s last year academic panel grade</string>
 
 </resources>

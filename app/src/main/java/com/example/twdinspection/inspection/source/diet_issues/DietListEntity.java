@@ -1,19 +1,22 @@
 package com.example.twdinspection.inspection.source.diet_issues;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 @Entity(tableName = "diet_list_info")
 public class DietListEntity {
 
-    @Nullable
-    @PrimaryKey(autoGenerate = true)
     @ColumnInfo()
     private int id;
 
+    @NonNull
+    @PrimaryKey
     @ColumnInfo()
     private String item_name;
 
@@ -29,8 +32,18 @@ public class DietListEntity {
     @ColumnInfo()
     private String officerId;
 
+    @ColumnInfo()
+    private boolean flag_selected;
 
-    public DietListEntity( String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
+    public boolean isFlag_selected() {
+        return flag_selected;
+    }
+
+    public void setFlag_selected(boolean flag_selected) {
+        this.flag_selected = flag_selected;
+    }
+
+    public DietListEntity(String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
         this.item_name = item_name;
         this.ground_bal = ground_bal;
         this.book_bal = book_bal;
@@ -62,11 +75,12 @@ public class DietListEntity {
         this.id = id;
     }
 
+    @NotNull
     public String getItem_name() {
         return item_name;
     }
 
-    public void setItem_name(String item_name) {
+    public void setItem_name(@NotNull String item_name) {
         this.item_name = item_name;
     }
 

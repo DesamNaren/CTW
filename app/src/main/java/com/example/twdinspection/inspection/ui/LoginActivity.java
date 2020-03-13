@@ -62,7 +62,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                             break;
                         }
                     }
-                    if (flag && TextUtils.isEmpty(instId)) {
+                    if (flag && !TextUtils.isEmpty(instId)) {
                         startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
                         finish();
                     } else {

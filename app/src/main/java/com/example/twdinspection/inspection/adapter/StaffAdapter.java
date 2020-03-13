@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -137,6 +138,19 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         });
 
 
+        holder.binding.spCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                employeeResponse.setCateg_pos(i);
+                employeeResponse.setCategory(holder.binding.spCategory.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         holder.binding.lastWeek.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -151,6 +165,70 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             @Override
             public void afterTextChanged(Editable s) {
                 employeeResponse.setLast_week_turn_duties_attended(s.toString());
+            }
+        });
+        holder.binding.etLeavesAvailed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                employeeResponse.setLeaves_availed(s.toString());
+            }
+        });
+        holder.binding.etLeaveBal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                employeeResponse.setLeaves_bal(s.toString());
+            }
+        });
+        holder.binding.etLeavesTaken.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                employeeResponse.setLeaves_taken(s.toString());
+            }
+        });
+        holder.binding.etAcadGradePanel.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                employeeResponse.setAcad_panel_grade(s.toString());
             }
         });
     }

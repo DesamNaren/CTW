@@ -27,7 +27,7 @@ public interface DietIssuesInfoDao {
     @Query("DELETE FROM diet_list_info")
     void deleteDietInfo();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDietInfo(List<DietListEntity> dietListEntities);
 
 }

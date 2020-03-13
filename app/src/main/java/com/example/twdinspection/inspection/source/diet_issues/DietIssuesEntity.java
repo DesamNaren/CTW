@@ -2,9 +2,12 @@ package com.example.twdinspection.inspection.source.diet_issues;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 //@TypeConverters({DietInfoConverter.class})
 @Entity(tableName = "diet_issues_info")
@@ -24,14 +27,17 @@ public class DietIssuesEntity {
     @ColumnInfo()
     private String institute_id;
 
-//    @ColumnInfo()
-//    private List<DietListEntity> dietList;
+    @Ignore
+    private List<DietListEntity> dietList;
 
     @ColumnInfo()
     private String menu_chart_served;
 
     @ColumnInfo()
     private String menu_chart_painted;
+
+    @ColumnInfo()
+    private String selected_dietIssues;
 
     @ColumnInfo()
     private String menu_served;
@@ -51,6 +57,32 @@ public class DietIssuesEntity {
     @ColumnInfo()
     private String maintaining_register;
 
+    @Ignore
+    private List<DietListEntity> dietListEntities;
+
+    public List<DietListEntity> getDietListEntities() {
+        return dietListEntities;
+    }
+
+    public void setDietListEntities(List<DietListEntity> dietListEntities) {
+        this.dietListEntities = dietListEntities;
+    }
+
+    public List<DietListEntity> getDietList() {
+        return dietList;
+    }
+
+    public void setDietList(List<DietListEntity> dietList) {
+        this.dietList = dietList;
+    }
+
+    public String getSelected_dietIssues() {
+        return selected_dietIssues;
+    }
+
+    public void setSelected_dietIssues(String selected_dietIssues) {
+        this.selected_dietIssues = selected_dietIssues;
+    }
 
     public int getId() {
         return id;
