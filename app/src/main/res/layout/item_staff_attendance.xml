@@ -216,6 +216,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="@dimen/dimen_5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -225,14 +226,14 @@
                     android:visibility="visible">
 
                     <com.example.twdinspection.common.custom.CustomFontTextView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/dimen_10dp"
-                        android:layout_weight="1"
                         android:text="@string/category" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
+                        android:layout_marginLeft="@dimen/dimen_8dp"
                         android:id="@+id/sp_category"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -242,6 +243,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="@dimen/dimen_5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
@@ -312,6 +314,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:padding="@dimen/dimen_5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_10dp"
@@ -331,7 +334,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_week"
-                            android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.last_week_turn_duties_attended}" />
@@ -360,7 +362,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.acad_panel_grade}" />

@@ -311,6 +311,7 @@ public class AcademicGradeAdapter extends RecyclerView.Adapter<AcademicGradeAdap
     }
 
     private void clearUI(ItemHolder holder) {
+        holder.listItemBinding.gradeACount.requestFocus();
         holder.listItemBinding.gradeACount.setText("");
         holder.listItemBinding.gradeBCount.setText("");
         holder.listItemBinding.gradeCCount.setText("");

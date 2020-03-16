@@ -145,9 +145,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             }
                         }
                     });
-
-
-
                 }
             }
         });
