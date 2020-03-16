@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.twdinspection.R;
@@ -20,10 +21,12 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -43,6 +46,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
+    private InstSelectionViewModel selectionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
         instMainViewModel = new InstMainViewModel(getApplication());
+        selectionViewModel = new InstSelectionViewModel(getApplication());
 
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,20 +113,41 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    editor.putInt(AppConstants.DIST_ID, selectedDistId);
-                    editor.putInt(AppConstants.MAN_ID, selectedManId);
-                    editor.putInt(AppConstants.VILL_ID, selectedVilId);
-                    editor.putString(AppConstants.INST_ID, selectedInstId);
-                    editor.putString(AppConstants.INST_NAME, selInstName);
-                    editor.putString(AppConstants.DIST_NAME, selectedDistName);
-                    editor.putString(AppConstants.MAN_NAME, selectedManName);
-                    editor.putString(AppConstants.VIL_NAME, selectedVilName);
-                    editor.putString(AppConstants.LAT, lat);
-                    editor.putString(AppConstants.LNG, lng);
-                    editor.putString(AppConstants.ADDRESS, address);
-                    editor.commit();
-                    startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
-                    finish();
+
+                    InstSelectionInfo instSelectionInfo = new InstSelectionInfo(selectedInstId,
+                            selInstName,
+                            String.valueOf(selectedDistId),  String.valueOf(selectedManId),  String.valueOf(selectedVilId),
+                            selectedDistName, selectedManName, selectedVilName, lat, lng, address);
+
+                    selectionViewModel.insertSelectedInst(instSelectionInfo);
+
+                   LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
+                   liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
+                        @Override
+                        public void onChanged(InstSelectionInfo instSelectionInfo) {
+                            liveData.removeObservers(DMVSelectionActivity.this);
+                            if(instSelectionInfo!=null){
+                                editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
+                                editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
+                                editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
+                                editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
+                                editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
+                                editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());
+                                editor.putString(AppConstants.MAN_NAME, instSelectionInfo.getMan_name());
+                                editor.putString(AppConstants.VIL_NAME, instSelectionInfo.getVil_name());
+                                editor.putString(AppConstants.LAT, instSelectionInfo.getInst_lat());
+                                editor.putString(AppConstants.LNG, instSelectionInfo.getInst_lng());
+                                editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
+                                editor.commit();
+
+                                startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                                finish();
+                            }
+                        }
+                    });
+
+
+
                 }
             }
         });
@@ -193,7 +219,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         } else if (adapterView.getId() == R.id.sp_institution) {
             customProgressDialog.show();
             if (i != 0) {
-                viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<Integer>() {
+                viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()
+                        , selectedDistId).observe(DMVSelectionActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer inst_id) {
                         if (inst_id != null) {

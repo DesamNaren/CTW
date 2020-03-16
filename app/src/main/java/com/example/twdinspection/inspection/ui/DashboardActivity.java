@@ -21,7 +21,7 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.databinding.ActivityDashboardBinding;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
-import com.example.twdinspection.engineeringWorks.ui.EngineeringDashboardActivity;
+import com.example.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
 import com.example.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.example.twdinspection.inspection.reports.ui.ReportActivity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;

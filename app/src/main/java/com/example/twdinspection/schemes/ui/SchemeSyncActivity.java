@@ -26,7 +26,7 @@ import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.example.twdinspection.schemes.interfaces.SchemeDMVInterface;
 import com.example.twdinspection.schemes.room.repository.SchemeSyncRepository;
-import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
+import com.example.twdinspection.schemes.source.dmv.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.example.twdinspection.schemes.source.schemes.SchemeEntity;

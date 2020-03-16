@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-import com.example.twdinspection.inspection.Room.repository.GeneralInfoRepository;
+import com.example.twdinspection.inspection.room.repository.GeneralInfoRepository;
 import com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 
 public class GeneralInfoViewModel extends AndroidViewModel {

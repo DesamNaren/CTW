@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityStudentsAttendanceBinding;
-import com.example.twdinspection.inspection.Room.repository.ClassInfoRepository;
+import com.example.twdinspection.inspection.room.repository.ClassInfoRepository;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 

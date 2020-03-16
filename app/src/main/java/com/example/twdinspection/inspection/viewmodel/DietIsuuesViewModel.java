@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityDietIssuesBinding;
-import com.example.twdinspection.inspection.Room.repository.DietIssuesInfoRepository;
+import com.example.twdinspection.inspection.room.repository.DietIssuesInfoRepository;
 import com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.example.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;

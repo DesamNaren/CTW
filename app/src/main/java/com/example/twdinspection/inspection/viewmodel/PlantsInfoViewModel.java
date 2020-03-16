@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityPlantsInfoBinding;
-import com.example.twdinspection.inspection.Room.repository.PlantsInfoRepository;
+import com.example.twdinspection.inspection.room.repository.PlantsInfoRepository;
 import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 
 import java.util.List;

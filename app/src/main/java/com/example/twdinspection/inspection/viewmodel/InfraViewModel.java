@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityInfrastructureBinding;
-import com.example.twdinspection.inspection.Room.repository.InfraStructureRepository;
+import com.example.twdinspection.inspection.room.repository.InfraStructureRepository;
 import com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 
 public class InfraViewModel extends ViewModel {

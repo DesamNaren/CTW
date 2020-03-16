@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityAcademicBinding;
-import com.example.twdinspection.inspection.Room.repository.AcademicRepository;
+import com.example.twdinspection.inspection.room.repository.AcademicRepository;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 

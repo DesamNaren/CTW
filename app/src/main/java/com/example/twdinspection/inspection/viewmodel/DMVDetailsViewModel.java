@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.inspection.Room.repository.DMVRepository;
+import com.example.twdinspection.inspection.room.repository.DMVRepository;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.example.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -54,7 +54,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         return mRepository.getInstituteInfo(instId);
     }
 
-    public LiveData<Integer> getInstId(String instName){
-        return mRepository.getInstId(instName);
+    public LiveData<Integer> getInstId(String instName, int districtId){
+        return mRepository.getInstId(instName, districtId);
     }
 }

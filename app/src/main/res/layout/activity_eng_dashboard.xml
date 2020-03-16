@@ -5,7 +5,7 @@
     <data>
    <variable
        name="viewModel"
-       type="com.example.twdinspection.engineeringWorks.viewmodels.EngDashboardViewModel" />
+       type="com.example.twdinspection.engineering_works.viewmodels.EngDashboardViewModel" />
 
     </data>
     <RelativeLayout

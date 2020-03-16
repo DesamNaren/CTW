@@ -23,9 +23,11 @@ import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityLoginCreBinding;
+import com.example.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.example.twdinspection.inspection.source.login.LoginResponse;
 import com.example.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.example.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.example.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.example.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -38,7 +40,9 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
+    InstSelectionViewModel instSelectionViewModel;
     private String cacheDate, currentDate;
+    private String instId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,33 +50,50 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         sharedPreferences= TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         instMainViewModel = new InstMainViewModel(getApplication());
+        instSelectionViewModel = new InstSelectionViewModel(getApplication());
 
         clearSession();
 
-        String instId=sharedPreferences.getString(AppConstants.INST_ID,"");
-        instMainViewModel.getAllSections().observe(this, new Observer<List<InstMenuInfoEntity>>() {
+        instSelectionViewModel.getSelectedInst().observe(this, new Observer<InstSelectionInfo>() {
             @Override
-            public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
-                if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
+            public void onChanged(InstSelectionInfo instSelectionInfo) {
+                if(instSelectionInfo!=null){
+                    instId = instSelectionInfo.getInst_id();
+                    if(!TextUtils.isEmpty(instId)) {
+                        instMainViewModel.getAllSections().observe(LoginActivity.this, new Observer<List<InstMenuInfoEntity>>() {
+                            @Override
+                            public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
+                                if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
 
-                    boolean flag = false;
-                    for (int i = 0; i < instMenuInfoEntities.size(); i++) {
-                        if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag && !TextUtils.isEmpty(instId)) {
-                        startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
-                        finish();
-                    } else {
+                                    boolean flag = false;
+                                    for (int i = 0; i < instMenuInfoEntities.size(); i++) {
+                                        if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
+                                            flag = true;
+                                            break;
+                                        }
+                                    }
+                                    if (flag) {
+                                        startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
+                                        finish();
+                                    } else {
+                                        callLoginProcess();
+                                    }
+                                } else {
+                                    callLoginProcess();
+                                }
+                            }
+
+                        });
+                    }else {
                         callLoginProcess();
                     }
-                } else {
+                }else {
                     callLoginProcess();
                 }
             }
         });
+
+
     }
 
     private void callLoginProcess() {

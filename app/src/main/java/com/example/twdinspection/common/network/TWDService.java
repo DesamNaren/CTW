@@ -19,7 +19,7 @@ import com.example.twdinspection.inspection.reports.source.InspReportResponse;
 import com.example.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
-import com.example.twdinspection.schemes.source.DMV.SchemeDMVResponse;
+import com.example.twdinspection.schemes.source.dmv.SchemeDMVResponse;
 import com.example.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarkResponse;

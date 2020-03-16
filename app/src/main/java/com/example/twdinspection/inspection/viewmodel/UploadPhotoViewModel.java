@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.common.network.TWDService;
-import com.example.twdinspection.inspection.Room.repository.PhotoRepository;
+import com.example.twdinspection.inspection.room.repository.PhotoRepository;
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.upload_photo.UploadPhoto;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;

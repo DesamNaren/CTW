@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.twdinspection.inspection.Room.repository.MedicalInfoRepository;
+import com.example.twdinspection.inspection.room.repository.MedicalInfoRepository;
 import com.example.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 
 import java.util.List;

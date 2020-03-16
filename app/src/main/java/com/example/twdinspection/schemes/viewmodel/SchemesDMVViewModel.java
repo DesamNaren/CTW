@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.schemes.room.repository.SchemesDMVRepository;
-import com.example.twdinspection.schemes.source.DMV.SchemeDistrict;
-import com.example.twdinspection.schemes.source.DMV.SchemeMandal;
-import com.example.twdinspection.schemes.source.DMV.SchemeVillage;
+import com.example.twdinspection.schemes.source.dmv.SchemeDistrict;
+import com.example.twdinspection.schemes.source.dmv.SchemeMandal;
+import com.example.twdinspection.schemes.source.dmv.SchemeVillage;
 import com.example.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.example.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 

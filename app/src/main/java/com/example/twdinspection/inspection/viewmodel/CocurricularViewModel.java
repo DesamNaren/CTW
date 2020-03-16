@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityCoCurricularBinding;
-import com.example.twdinspection.inspection.Room.repository.CocurricularRepository;
+import com.example.twdinspection.inspection.room.repository.CocurricularRepository;
 import com.example.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;

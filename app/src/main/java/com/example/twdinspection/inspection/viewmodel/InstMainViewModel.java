@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.twdinspection.common.network.TWDService;
 import com.example.twdinspection.databinding.InstMainActivityBinding;
-import com.example.twdinspection.inspection.Room.repository.MenuSectionsRepository;
+import com.example.twdinspection.inspection.room.repository.MenuSectionsRepository;
 import com.example.twdinspection.inspection.interfaces.InstSubmitInterface;
 import com.example.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
@@ -28,7 +28,6 @@ import com.example.twdinspection.inspection.source.student_attendence_info.StudA
 import com.example.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.example.twdinspection.inspection.source.submit.InstSubmitResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;

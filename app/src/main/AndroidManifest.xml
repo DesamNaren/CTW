@@ -21,13 +21,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".engineeringWorks.ui.UploadEngPhotosActivity"
+            android:name=".engineering_works.ui.UploadEngPhotosActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".engineeringWorks.ui.InspectionDetailsActivity"
+            android:name=".engineering_works.ui.InspectionDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".engineeringWorks.ui.EngineeringDashboardActivity"
+            android:name=".engineering_works.ui.EngineeringDashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity

@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.ViewModel;
 
 import com.example.twdinspection.databinding.ActivityGeneralCommentsBinding;
-import com.example.twdinspection.inspection.Room.repository.GenCommentsRepository;
+import com.example.twdinspection.inspection.room.repository.GenCommentsRepository;
 import com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 
 public class GenCommentsViewModel extends ViewModel {
