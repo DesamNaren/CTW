@@ -137,6 +137,34 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar("Please mark yesterday duty alloted to all employees");
                 break;
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory())) {
+                returnFlag = false;
+                showSnackBar("Please select category");
+                break;
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos()==0) {
+                returnFlag = false;
+                showSnackBar("Please select category");
+                break;
+            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
+                returnFlag = false;
+                showSnackBar("Please enter leaves availed");
+                break;
+            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
+                returnFlag = false;
+                showSnackBar("Please enter leaves taken");
+                break;
+            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
+                returnFlag = false;
+                showSnackBar("Please enter leaves balance");
+                break;
+            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+                returnFlag = false;
+                showSnackBar("Please enter last week turn duties teacher attended");
+                break;
+            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade())) {
+                returnFlag = false;
+                showSnackBar("Please enter teacher's last year academic panel grade");
+                break;
             }
 
         }
