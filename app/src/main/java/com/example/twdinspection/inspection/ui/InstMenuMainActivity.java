@@ -333,11 +333,13 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
             body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
         }
+        MultipartBody.Part body10 =null;
+        if (file_menu != null) {
+            RequestBody requestFile10 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
 
-        RequestBody requestFile10 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
-        MultipartBody.Part body10 =
-                MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
+            body10=   MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
+        }
 
         RequestBody requestFile11 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_officer);
@@ -360,7 +362,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         if (body9 != null) {
             partList.add(body9);
         }
-        partList.add(body10);
+        if (body10 != null) {
+            partList.add(body10);
+        }
         partList.add(body11);
 
         viewModel.UploadImageServiceCall(partList, instSubmitRequest);

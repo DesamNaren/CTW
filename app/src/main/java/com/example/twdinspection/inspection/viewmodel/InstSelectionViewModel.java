@@ -26,7 +26,7 @@ public class InstSelectionViewModel extends AndroidViewModel {
         return infoLiveData;
     }
 
-    public void insertSelectedInst(InstSelectionInfo instSelectionInfo) {
-        mRepository.insertInstSelection(instSelectionInfo);
+    public LiveData<Long> insertSelectedInst(InstSelectionInfo instSelectionInfo) {
+        return mRepository.insertInstSelection(instSelectionInfo);
     }
 }

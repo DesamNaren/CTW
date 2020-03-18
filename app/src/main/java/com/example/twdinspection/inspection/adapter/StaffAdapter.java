@@ -74,6 +74,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(true);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(false);
+                    employeeResponse.setOdFlag(false);
+                    employeeResponse.setUnauthLeaveFlag(false);
                     employeeResponse.setEmp_presence(AppConstants.PRESENT);
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -91,6 +93,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(true);
                     employeeResponse.setOndepFlag(false);
+                    employeeResponse.setOdFlag(false);
+                    employeeResponse.setUnauthLeaveFlag(false);
                     employeeResponse.setEmp_presence(AppConstants.ABSENT);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
@@ -108,6 +112,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(true);
+                    employeeResponse.setOdFlag(false);
+                    employeeResponse.setUnauthLeaveFlag(false);
                     employeeResponse.setEmp_presence(AppConstants.ONDEPUTATION);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
@@ -115,6 +121,44 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
                     holder.binding.llOndep.setAnimation(animSlide);
                     changeIcon(holder.binding, holder.binding.ivOndep, R.drawable.ondep, holder.binding.tvOndep);
+                }
+            }
+        });
+        holder.binding.llOd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!employeeResponse.isOdFlag()) {
+                    employeeResponse.setPresentFlag(false);
+                    employeeResponse.setAbsentFlag(false);
+                    employeeResponse.setOndepFlag(false);
+                    employeeResponse.setOdFlag(true);
+                    employeeResponse.setUnauthLeaveFlag(false);
+                    employeeResponse.setEmp_presence(AppConstants.OD);
+
+                    Animation animSlide = AnimationUtils.loadAnimation(context,
+                            R.anim.item_animation_fall_down);
+
+                    holder.binding.llOd.setAnimation(animSlide);
+                    changeIcon(holder.binding, holder.binding.ivOd, R.drawable.ondep, holder.binding.tvOd);
+                }
+            }
+        });
+        holder.binding.llUnauthAbsent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!employeeResponse.isUnauthLeaveFlag()) {
+                    employeeResponse.setPresentFlag(false);
+                    employeeResponse.setAbsentFlag(false);
+                    employeeResponse.setOndepFlag(false);
+                    employeeResponse.setOdFlag(false);
+                    employeeResponse.setUnauthLeaveFlag(true);
+                    employeeResponse.setEmp_presence(AppConstants.UNAUTHABSENT);
+
+                    Animation animSlide = AnimationUtils.loadAnimation(context,
+                            R.anim.item_animation_fall_down);
+
+                    holder.binding.llUnauthAbsent.setAnimation(animSlide);
+                    changeIcon(holder.binding, holder.binding.ivUnauthAbsent, R.drawable.ondep, holder.binding.tvUnauthAbsent);
                 }
             }
         });

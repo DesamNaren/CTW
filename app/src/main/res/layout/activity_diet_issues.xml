@@ -24,8 +24,8 @@
 
         <include
             android:id="@+id/header"
-            android:visibility="gone"
-            layout="@layout/action_bar_layout" />
+            layout="@layout/action_bar_layout"
+            android:visibility="gone" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -44,8 +44,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:listitem="@layout/adapter_diet_issues" />
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/empty_view"
@@ -76,67 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="22."
-                            android:textColor="@color/black" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/link_to_latest_approved_menu_chart_to_be_served"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_menu_chart_served"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rb_yes_menu_chart_served"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.menu_chart_served.equalsIgnoreCase(`Yes`)}"
-                                    
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_no_menu_chart_served"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.menu_chart_served.equalsIgnoreCase(`No`)}"
-                                    
-                                    android:text="@string/no" />
-                            </RadioGroup>
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="23."
+                            android:text="26."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -163,7 +102,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menu_chart_painted.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:text="@string/yes" />
 
                                 <RadioButton
@@ -171,7 +110,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menu_chart_painted.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:text="@string/no" />
                             </RadioGroup>
 
@@ -181,23 +120,19 @@
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
                     <LinearLayout
+                        android:id="@+id/ll_menu_chart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="24."
+                            android:text="  "
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -239,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="25."
+                            android:text="27."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -266,7 +201,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menu_served.equalsIgnoreCase(`Yes`)}"
-                                    
+
                                     android:text="@string/yes" />
 
                                 <RadioButton
@@ -274,7 +209,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menu_served.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:text="@string/no" />
                             </RadioGroup>
 
@@ -289,6 +224,7 @@
                         android:layout_height="1dip"
                         android:background="@color/black" />
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -299,8 +235,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="26."
+                            android:text="28."
                             android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -326,7 +267,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.food_provisions.equalsIgnoreCase(`Yes`)}"
-                                    
                                     android:text="@string/yes" />
 
                                 <RadioButton
@@ -334,15 +274,57 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.food_provisions.equalsIgnoreCase(`No`)}"
-                                    
+
                                     android:text="@string/no" />
                             </RadioGroup>
 
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_matching_with_samples"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.food_provisions.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/_27_does_food_provisions_matching_with_samples_provided"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_matching_with_samples"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_matching_with_samples_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.matching_with_samples.equalsIgnoreCase(`Yes`)}"
+
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_matching_with_samples_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.matching_with_samples.equalsIgnoreCase(`No`)}"
+
+                                        android:text="@string/no" />
+                                </RadioGroup>
+
+                        </LinearLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
+
+
 
                     <View
                         android:layout_width="match_parent"
@@ -354,127 +336,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="27."
-                            android:textColor="@color/black" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/_27_does_food_provisions_matching_with_samples_provided"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_matching_with_samples"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rb_matching_with_samples_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.matching_with_samples.equalsIgnoreCase(`Yes`)}"
-                                    
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_matching_with_samples_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.matching_with_samples.equalsIgnoreCase(`No`)}"
-                                    
-                                    android:text="@string/no" />
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="28."
-                            android:textColor="@color/black" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/_28_does_mess_committee_exist_or_not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_committee_exist"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rb_committee_exist_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.committee_exist.equalsIgnoreCase(`Yes`)}"
-                                    
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_committee_exist_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.committee_exist.equalsIgnoreCase(`No`)}"
-                                    
-                                    android:text="@string/no" />
-                            </RadioGroup>
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_committee"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal"
-                        android:visibility="@{inspData.committee_exist.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -484,14 +345,56 @@
                             android:textColor="@color/black" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/_28_does_mess_committee_exist_or_not"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_committee_exist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/rb_committee_exist_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.committee_exist.equalsIgnoreCase(`Yes`)}"
+
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_committee_exist_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.committee_exist.equalsIgnoreCase(`No`)}"
+
+                                        android:text="@string/no" />
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_discuss_with_comm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.committee_exist.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -508,22 +411,50 @@
                                     android:orientation="horizontal">
 
                                     <RadioButton
-                                        
-                                        android:checked="@{inspData.discussed_with_committee.equalsIgnoreCase(`Yes`)}"
+
                                         android:id="@+id/rb_discussed_with_committee_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.discussed_with_committee.equalsIgnoreCase(`Yes`)}"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        
-                                        android:checked="@{inspData.discussed_with_committee.equalsIgnoreCase(`No`)}"
+
                                         android:id="@+id/rb_discussed_with_committee_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.discussed_with_committee.equalsIgnoreCase(`No`)}"
                                         android:text="@string/no" />
                                 </RadioGroup>
                             </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_committee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="30."
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -545,19 +476,19 @@
                                     android:orientation="horizontal">
 
                                     <RadioButton
-                                        
-                                        android:checked="@{inspData.maintaining_register.equalsIgnoreCase(`Yes`)}"
+
                                         android:id="@+id/rb_maintaining_register_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.maintaining_register.equalsIgnoreCase(`Yes`)}"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        
-                                        android:checked="@{inspData.maintaining_register.equalsIgnoreCase(`No`)}"
+
                                         android:id="@+id/rb_maintaining_register_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.maintaining_register.equalsIgnoreCase(`No`)}"
                                         android:text="@string/no" />
                                 </RadioGroup>
                             </LinearLayout>
@@ -571,8 +502,67 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/black"
-                        android:visibility="gone" />
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="32."
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/link_to_latest_approved_menu_chart_to_be_served"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_menu_chart_served"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb_yes_menu_chart_served"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.menu_chart_served.equalsIgnoreCase(`Yes`)}"
+
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_no_menu_chart_served"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.menu_chart_served.equalsIgnoreCase(`No`)}"
+
+                                    android:text="@string/no" />
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -585,7 +575,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="30."
+                            android:text="33."
                             android:textColor="@color/black" />
 
                         <LinearLayout

@@ -1,8 +1,5 @@
 package com.example.twdinspection.inspection.source.staff_attendance;
 
-import android.view.View;
-import android.widget.AdapterView;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -73,6 +70,7 @@ public class StaffAttendanceEntity {
     @ColumnInfo()
     private int categ_pos;
 
+
     public int getCateg_pos() {
         return categ_pos;
     }
@@ -128,6 +126,11 @@ public class StaffAttendanceEntity {
     @Ignore
     private boolean ondepFlag;
 
+    @Ignore
+    private boolean odFlag;
+    @Ignore
+    private boolean unauthLeaveFlag;
+
 
     public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id, String emp_name, String designation) {
         this.officer_id = officer_id;
@@ -136,6 +139,22 @@ public class StaffAttendanceEntity {
         this.emp_id = emp_id;
         this.emp_name = emp_name;
         this.designation = designation;
+    }
+
+    public boolean isOdFlag() {
+        return odFlag;
+    }
+
+    public void setOdFlag(boolean odFlag) {
+        this.odFlag = odFlag;
+    }
+
+    public boolean isUnauthLeaveFlag() {
+        return unauthLeaveFlag;
+    }
+
+    public void setUnauthLeaveFlag(boolean unauthLeaveFlag) {
+        this.unauthLeaveFlag = unauthLeaveFlag;
     }
 
     public String getInst_name() {

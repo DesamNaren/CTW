@@ -34,24 +34,24 @@ public class InstSelectionRepository {
         return infoLiveData;
     }
 
-    long x;
+    LiveData<Long> x;
 
-    public long insertInstSelection(InstSelectionInfo instSelectionInfo) {
-        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+    public LiveData<Long> insertInstSelection(InstSelectionInfo instSelectionInfo) {
+        Observable observable = Observable.create(new ObservableOnSubscribe<LiveData<Long> >() {
             @Override
-            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+            public void subscribe(ObservableEmitter<LiveData<Long> > emitter) throws Exception {
                 instSelectionDao.deleteInstSelection();
                 instSelectionDao.insertInstSelection(instSelectionInfo);
             }
         });
 
-        Observer<Long> observer = new Observer<Long>() {
+        Observer<LiveData<Long> > observer = new Observer<LiveData<Long> >() {
             @Override
             public void onSubscribe(Disposable d) {
             }
 
             @Override
-            public void onNext(Long aLong) {
+            public void onNext(LiveData<Long>  aLong) {
                 x = aLong;
             }
 

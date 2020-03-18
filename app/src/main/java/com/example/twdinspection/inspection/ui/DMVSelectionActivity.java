@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -119,29 +120,36 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             String.valueOf(selectedDistId),  String.valueOf(selectedManId),  String.valueOf(selectedVilId),
                             selectedDistName, selectedManName, selectedVilName, lat, lng, address);
 
-                    selectionViewModel.insertSelectedInst(instSelectionInfo);
-
-                   LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
-                   liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
+                    selectionViewModel.insertSelectedInst(instSelectionInfo).observe(DMVSelectionActivity.this, new Observer<Long>() {
                         @Override
-                        public void onChanged(InstSelectionInfo instSelectionInfo) {
-                            liveData.removeObservers(DMVSelectionActivity.this);
-                            if(instSelectionInfo!=null){
-                                editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
-                                editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
-                                editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
-                                editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
-                                editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
-                                editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());
-                                editor.putString(AppConstants.MAN_NAME, instSelectionInfo.getMan_name());
-                                editor.putString(AppConstants.VIL_NAME, instSelectionInfo.getVil_name());
-                                editor.putString(AppConstants.LAT, instSelectionInfo.getInst_lat());
-                                editor.putString(AppConstants.LNG, instSelectionInfo.getInst_lng());
-                                editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
-                                editor.commit();
+                        public void onChanged(Long aLong) {
+                            if(aLong!=-1){
+                                LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
+                                liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
+                                    @Override
+                                    public void onChanged(InstSelectionInfo instSelectionInfo) {
+                                        liveData.removeObservers(DMVSelectionActivity.this);
+                                        if(instSelectionInfo!=null){
+                                            editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
+                                            editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
+                                            editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
+                                            editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
+                                            editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
+                                            editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());
+                                            editor.putString(AppConstants.MAN_NAME, instSelectionInfo.getMan_name());
+                                            editor.putString(AppConstants.VIL_NAME, instSelectionInfo.getVil_name());
+                                            editor.putString(AppConstants.LAT, instSelectionInfo.getInst_lat());
+                                            editor.putString(AppConstants.LNG, instSelectionInfo.getInst_lng());
+                                            editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
+                                            editor.commit();
 
-                                startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
-                                finish();
+                                            startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                                            finish();
+                                        }
+                                    }
+                                });
+                            }else{
+                                Toast.makeText(context, "Something went wrong..Please try again", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

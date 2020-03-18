@@ -129,7 +129,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         boolean returnFlag = true;
         for (int i = 0; i < staffAttendanceEntitiesmain.size(); i++) {
             if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
-                    || staffAttendanceEntitiesmain.get(i).isOndepFlag())) {
+                    || staffAttendanceEntitiesmain.get(i).isOndepFlag()|| staffAttendanceEntitiesmain.get(i).isOdFlag()|| staffAttendanceEntitiesmain.get(i).isUnauthLeaveFlag())) {
                 returnFlag = false;
                 showSnackBar("Please mark attendance of all employees");
                 break;

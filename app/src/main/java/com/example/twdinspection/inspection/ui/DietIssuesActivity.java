@@ -92,6 +92,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     private int localFlag = -1;
     SearchView mSearchView;
     Menu mMenu = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -249,12 +250,24 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgMenuChartPainted.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_menu_chart_painted)
+                if (selctedItem == R.id.rb_yes_menu_chart_painted) {
                     menu_chart_painted = AppConstants.Yes;
-                else if (selctedItem == R.id.rb_no_menu_chart_painted)
+                    binding.llMenuChart.setVisibility(View.VISIBLE);
+                }
+                else if (selctedItem == R.id.rb_no_menu_chart_painted) {
+                    file_menu=null;
+                    flag_menu = 0;
+                    binding.ivMenu.setPadding(0, 0, 0, 0);
+                    binding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
+                    Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
+                    binding.ivMenu.setBackground(getResources().getDrawable(R.drawable.ic_menu_camera));
                     menu_chart_painted = AppConstants.No;
-                else
+                    binding.llMenuChart.setVisibility(View.GONE);
+                }
+                else {
                     menu_chart_painted = null;
+                    binding.llMenuChart.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -275,12 +288,19 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgFoodProvisions.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_food_provisions_yes)
+                if (selctedItem == R.id.rb_food_provisions_yes) {
                     food_provisions = AppConstants.Yes;
-                else if (selctedItem == R.id.rb_food_provisions_no)
+                    binding.llMatchingWithSamples.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.rb_food_provisions_no) {
+                    matching_with_samples="";
+                    binding.rgMatchingWithSamples.clearCheck();
                     food_provisions = AppConstants.No;
-                else
+                    binding.llMatchingWithSamples.setVisibility(View.GONE);
+                } else {
+                    binding.rgMatchingWithSamples.clearCheck();
+                    binding.llMatchingWithSamples.setVisibility(View.GONE);
                     food_provisions = null;
+                }
             }
         });
 
@@ -303,15 +323,19 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 int selctedItem = binding.rgCommitteeExist.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_committee_exist_yes) {
                     committee_exist = AppConstants.Yes;
-                    binding.llCommittee.setVisibility(View.VISIBLE);
+                    binding.llDiscussWithComm.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_committee_exist_no) {
+                    binding.rgDiscussedWithCommittee.clearCheck();
+                    discussed_with_committee="";
                     committee_exist = AppConstants.No;
-                    binding.llCommittee.setVisibility(View.GONE);
+                    binding.llDiscussWithComm.setVisibility(View.GONE);
                     discussed_with_committee = null;
                     maintaining_register = null;
                 } else {
+                    binding.rgDiscussedWithCommittee.clearCheck();
+                    discussed_with_committee="";
                     committee_exist = null;
-                    binding.llCommittee.setVisibility(View.GONE);
+                    binding.llDiscussWithComm.setVisibility(View.GONE);
                 }
             }
         });
@@ -361,10 +385,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     dietIssuesEntity.setCommittee_exist(committee_exist);
                     dietIssuesEntity.setDiscussed_with_committee(discussed_with_committee);
                     dietIssuesEntity.setMaintaining_register(maintaining_register);
-                    List<DietListEntity> selectedList=new ArrayList<>();
-                    for(int i=0;i<dietInfoEntityListMain.size();i++)
-                    {
-                        if(dietInfoEntityListMain.get(i).isFlag_selected()){
+                    List<DietListEntity> selectedList = new ArrayList<>();
+                    for (int i = 0; i < dietInfoEntityListMain.size(); i++) {
+                        if (dietInfoEntityListMain.get(i).isFlag_selected()) {
                             selectedList.add(dietInfoEntityListMain.get(i));
                         }
                     }
@@ -394,11 +417,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
                                     uploadPhotoLiveData.removeObservers(DietIssuesActivity.this);
-                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
+                                    if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
                                         file_menu = new File(uploadPhoto.getPhoto_path());
                                         Glide.with(DietIssuesActivity.this).load(file_menu).into(binding.ivMenu);
                                         flag_menu = 1;
-                                    }else {
+                                    } else {
                                         Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivMenu);
                                         flag_menu = 0;
                                     }
@@ -410,11 +433,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                                 @Override
                                 public void onChanged(UploadPhoto uploadPhoto) {
                                     uploadPhotoLiveData1.removeObservers(DietIssuesActivity.this);
-                                    if(uploadPhoto!=null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())){
+                                    if (uploadPhoto != null && !TextUtils.isEmpty(uploadPhoto.getPhoto_path())) {
                                         file_officer = new File(uploadPhoto.getPhoto_path());
                                         Glide.with(DietIssuesActivity.this).load(file_officer).into(binding.ivInspOfficer);
                                         flag_officer = 1;
-                                    }else {
+                                    } else {
                                         Glide.with(DietIssuesActivity.this).load(R.drawable.ic_menu_camera).into(binding.ivInspOfficer);
                                         flag_officer = 0;
                                     }
@@ -447,7 +470,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
         mMenu = menu;
-        MenuItem item=mMenu.findItem(R.id.mi_filter);
+        MenuItem item = mMenu.findItem(R.id.mi_filter);
         item.setVisible(false);
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
@@ -522,16 +545,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     private boolean validateData() {
 
-        if (TextUtils.isEmpty(menu_chart_served)) {
-            showSnackBar(getResources().getString(R.string.select_menu_chart_served));
-            return false;
-        }
-
         if (TextUtils.isEmpty(menu_chart_painted)) {
             showSnackBar(getResources().getString(R.string.sel_menu_chart_painted));
             return false;
         }
-        if (flag_menu == 0) {
+        if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes) && flag_menu == 0) {
             showSnackBar("Please capture Menu image");
             return false;
         }
@@ -544,12 +562,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             showSnackBar(getResources().getString(R.string.sel_food_provisions));
             return false;
         }
-
-        if (TextUtils.isEmpty(matching_with_samples)) {
+        if (food_provisions.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(matching_with_samples)) {
             showSnackBar(getResources().getString(R.string.sel_matching_with_samples));
             return false;
         }
-
         if (TextUtils.isEmpty(committee_exist)) {
             showSnackBar(getResources().getString(R.string.sel_committee_exist));
             return false;
@@ -560,8 +576,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             return false;
         }
 
-        if (committee_exist.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(maintaining_register)) {
+        if (TextUtils.isEmpty(maintaining_register)) {
             showSnackBar(getResources().getString(R.string.sel_maintaining_register));
+            return false;
+        }
+        if (TextUtils.isEmpty(menu_chart_served)) {
+            showSnackBar(getResources().getString(R.string.select_menu_chart_served));
             return false;
         }
         if (flag_officer == 0) {
@@ -577,8 +597,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     @Override
     public void submitData() {
-        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
-        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
+            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
+            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
 
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {
@@ -689,9 +709,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     @Override
     public void onBackPressed() {
-        if(dietInfoEntityListMain!=null && dietInfoEntityListMain.size()>0 && !(localFlag==1)){
-            customExitAlert(DietIssuesActivity.this,  getString(R.string.app_name),getString(R.string.data_lost));
-        }else {
+        if (dietInfoEntityListMain != null && dietInfoEntityListMain.size() > 0 && !(localFlag == 1)) {
+            customExitAlert(DietIssuesActivity.this, getString(R.string.app_name), getString(R.string.data_lost));
+        } else {
             super.callBack();
         }
     }

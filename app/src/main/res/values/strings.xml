@@ -161,14 +161,11 @@
 
     <string name="a_book_balance">Book Balance</string>
     <string name="b_ground_balance">Ground Balance</string>
-    <string name="weather_menu_chart_painted_on_wall">Weather menu chart Painted on wall</string>
     <string name="_24_image_capture_option_to_take_photograph_of_menu">Image capture option to take Photograph of menu</string>
     <string name="_25_whether_prescribed_menu_served">Whether Prescribed Menu served?</string>
     <string name="_26_does_the_supplier_provides_samples_of_food_provisions">Does the supplier provides samples of food provisions</string>
     <string name="_27_does_food_provisions_matching_with_samples_provided">Does food provisions matching with samples provided</string>
     <string name="_28_does_mess_committee_exist_or_not">Does mess committee exist or not</string>
-    <string name="have_you_met_discussed_with_mess_committee"><![CDATA[A.Have you met & discussed with Mess Committee]]></string>
-    <string name="are_you_maintaining_mess_register">B.Are you maintaining mess register?</string>
     <string name="_30_weather_prescribed_menu_served">Weather Prescribed menu Served?</string>
     <string name="_31_picture_of_the_inspecting_officer">Picture of the Inspecting officer</string>
     <string name="_79_store_room">98.Store Room</string>
@@ -837,5 +834,8 @@
     <string name="sel_no_of_sick_boarders_area">Enter No. of Sick boarders referred to Area/District Hospital</string>
     <string name="screened_by_call_health">No. of Students Screened by Call Health</string>
     <string name="left_for_screening">No. of Students left for Screening</string>
-
+    <string name="weather_menu_chart_painted_on_wall">Weather latest menu chart Painted on wall</string>
+    <string name="have_you_met_discussed_with_mess_committee"><![CDATA[Have you met & discussed with Mess Committee]]></string>
+    <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
+    <string name="unauthorised_absent">Unauthorised Absent</string>
 </resources>
