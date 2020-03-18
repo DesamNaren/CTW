@@ -22,6 +22,8 @@ public class MedicalInfoEntity {
     @NotNull
     @PrimaryKey
     private String institute_id;
+    private String sickBoarders;
+    private String sickBoarders_area;
     private String feverCount;
     private String coldCount;
     private String headacheCount;
@@ -33,6 +35,40 @@ public class MedicalInfoEntity {
     private String medicalCheckUpDoneByWhom;
     private String anmWeeklyUpdated;
     private String callHealth100;
+    private String screenedByCallHealth;
+    private String leftForscreening;
+
+    public String getScreenedByCallHealth() {
+        return screenedByCallHealth;
+    }
+
+    public void setScreenedByCallHealth(String screenedByCallHealth) {
+        this.screenedByCallHealth = screenedByCallHealth;
+    }
+
+    public String getLeftForscreening() {
+        return leftForscreening;
+    }
+
+    public void setLeftForscreening(String leftForscreening) {
+        this.leftForscreening = leftForscreening;
+    }
+
+    public String getSickBoarders() {
+        return sickBoarders;
+    }
+
+    public void setSickBoarders(String sickBoarders) {
+        this.sickBoarders = sickBoarders;
+    }
+
+    public String getSickBoarders_area() {
+        return sickBoarders_area;
+    }
+
+    public void setSickBoarders_area(String sickBoarders_area) {
+        this.sickBoarders_area = sickBoarders_area;
+    }
 
     @ColumnInfo(name = "callHealthRecords")
     private List<CallHealthInfoEntity> callHealthInfoEntities = null;

@@ -59,6 +59,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private int localFlag;
+    String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,17 +141,27 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgCallHealth100.getCheckedRadioButtonId();
-                if (selctedItem == R.id.yes_call_health_100)
+                if (selctedItem == R.id.yes_call_health_100) {
                     callHealth100 = "YES";
-                else if (selctedItem == R.id.no_call_health_100)
+                    binding.llScreenedByCallHealth.setVisibility(View.VISIBLE);
+                    binding.llLeftForScreening.setVisibility(View.GONE);
+                } else if (selctedItem == R.id.no_call_health_100) {
                     callHealth100 = "NO";
-                else callHealth100 = null;
+                    binding.llScreenedByCallHealth.setVisibility(View.GONE);
+                    binding.llLeftForScreening.setVisibility(View.VISIBLE);
+                } else callHealth100 = null;
             }
         });
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                sickboarders = binding.etSickboarders.getText().toString().trim();
+                sickboardersArea = binding.etSickboardersArea.getText().toString().trim();
+                screened_by_call_health = binding.etScreenedByCallHealth.getText().toString().trim();
+                left_for_screening = binding.etLeftForScreening.getText().toString().trim();
+
                 int f_cnt = 0;
                 int c_cnt = 0;
                 int h_cnt = 0;
@@ -187,6 +198,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
 
                 if (validateData(tot_cnt)) {
+
                     medicalInfoEntity = new MedicalInfoEntity();
                     medicalInfoEntity.setInspection_time(Utils.getCurrentDateTime());
                     medicalInfoEntity.setOfficer_id(officerID);
@@ -201,14 +213,16 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     medicalInfoEntity.setMedicalCheckUpDoneByWhom(medicalCheckUpDoneByWhom);
                     medicalInfoEntity.setAnmWeeklyUpdated(anmWeeklyUpdated);
                     medicalInfoEntity.setCallHealth100(callHealth100);
+                    medicalInfoEntity.setScreenedByCallHealth(screened_by_call_health);
+                    medicalInfoEntity.setLeftForscreening(left_for_screening);
                     medicalInfoEntity.setRecorded_in_register(recorderedInRegister);
+
                     if (callHealthInfoEntities != null && callHealthInfoEntities.size() > 0) {
                         medicalInfoEntity.setCallHealthInfoEntities(callHealthInfoEntities);
                     }
                     if (recorderedInRegister.equals(AppConstants.Yes)) {
                         medicalInfoEntity.setMedicalDetails(medicalDetailsBeans);
                     }
-
 
                     Utils.customSaveAlert(MedicalActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
@@ -322,7 +336,16 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     }
 
     private boolean validateData(int tot_cnt) {
-        if (TextUtils.isEmpty(checkUpDate)) {
+
+        if (TextUtils.isEmpty(sickboarders)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders));
+            binding.etSickboarders.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(sickboardersArea)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders_area));
+            binding.etSickboardersArea.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(checkUpDate)) {
             showBottomSheetSnackBar(getResources().getString(R.string.last_medical_date));
             return false;
         } else if (TextUtils.isEmpty(medicalCheckUpDoneByWhom)) {
@@ -333,6 +356,14 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             return false;
         } else if (TextUtils.isEmpty(callHealth100)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_call_health_100));
+            return false;
+        } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health));
+            binding.etScreenedByCallHealth.requestFocus();
+            return false;
+        } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening)) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening));
+            binding.etLeftForScreening.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(recorderedInRegister)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_visitor_register));
@@ -592,7 +623,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(MedicalActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(MedicalActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showBottomSheetSnackBar(getString(R.string.failed));
             }

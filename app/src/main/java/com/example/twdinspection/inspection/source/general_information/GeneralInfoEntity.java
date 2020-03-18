@@ -2,7 +2,6 @@ package com.example.twdinspection.inspection.source.general_information;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,38 +18,133 @@ public class GeneralInfoEntity {
 
     private String inspection_time;
 
-    
     private String officer_id;
-
-    
-    private String HM_HWO_presence;
-
-    
-    private String having_headquarters;
-
-    
-    private String leaveType;
-
-    
-    private String capturetype;
-
-    
-    private String movementRegisterEntry;
-
-    
-    private String captureDistance;
-
-    
-    private String staffQuarters;
-
-    
-    private String stayingFacilitiesType;
 
     @Ignore
     private String mandalName;
     @Ignore
     private String instName;
 
+
+    private String hmPresence;
+
+    private String hmReasonType;
+
+    private String hmcaptureleavetype;
+
+    private String hmCaptureodtype;
+
+    private String hmMovementRegisterEntry;
+
+
+    private String hwoPresence;
+
+    private String hwoReasonType;
+
+    private String hwocaptureodtype;
+
+    private String hwocaptureleavetype;
+
+    private String hwomovementRegisterEntry;
+
+
+
+    private String hmheadquarters;
+
+    private String hmcaptureDistance;
+
+    private String hmstayingFacilitiesType;
+
+
+    private String hwoheadquarters;
+
+    private String hwocaptureDistance;
+
+    private String hwostayingFacilitiesType;
+
+
+    private String staffQuarters;
+
+
+    public String getHmheadquarters() {
+        return hmheadquarters;
+    }
+
+    public void setHmheadquarters(String hmheadquarters) {
+        this.hmheadquarters = hmheadquarters;
+    }
+
+    public String getHmcaptureDistance() {
+        return hmcaptureDistance;
+    }
+
+    public void setHmcaptureDistance(String hmcaptureDistance) {
+        this.hmcaptureDistance = hmcaptureDistance;
+    }
+
+    public String getHmstayingFacilitiesType() {
+        return hmstayingFacilitiesType;
+    }
+
+    public void setHmstayingFacilitiesType(String hmstayingFacilitiesType) {
+        this.hmstayingFacilitiesType = hmstayingFacilitiesType;
+    }
+
+    public String getHmReasonType() {
+        return hmReasonType;
+    }
+
+    public void setHmReasonType(String hmReasonType) {
+        this.hmReasonType = hmReasonType;
+    }
+
+    public String getHwocaptureleavetype() {
+        return hwocaptureleavetype;
+    }
+
+    public void setHwocaptureleavetype(String hwocaptureleavetype) {
+        this.hwocaptureleavetype = hwocaptureleavetype;
+    }
+
+    public String getHmcaptureleavetype() {
+        return hmcaptureleavetype;
+    }
+
+    public void setHmcaptureleavetype(String hmcaptureleavetype) {
+        this.hmcaptureleavetype = hmcaptureleavetype;
+    }
+
+    public String getHmCaptureodtype() {
+        return hmCaptureodtype;
+    }
+
+    public void setHmCaptureodtype(String hmCaptureodtype) {
+        this.hmCaptureodtype = hmCaptureodtype;
+    }
+
+    public String getHmMovementRegisterEntry() {
+        return hmMovementRegisterEntry;
+    }
+
+    public void setHmMovementRegisterEntry(String hmMovementRegisterEntry) {
+        this.hmMovementRegisterEntry = hmMovementRegisterEntry;
+    }
+
+    public String getHmPresence() {
+        return hmPresence;
+    }
+
+    public void setHmPresence(String hmPresence) {
+        this.hmPresence = hmPresence;
+    }
+
+    public String getHwoPresence() {
+        return hwoPresence;
+    }
+
+    public void setHwoPresence(String hwoPresence) {
+        this.hwoPresence = hwoPresence;
+    }
 
     public String getMandalName() {
         return mandalName;
@@ -76,36 +170,36 @@ public class GeneralInfoEntity {
         this.id = id;
     }
 
-    public String getLeaveType() {
-        return leaveType;
+    public String getHwoReasonType() {
+        return hwoReasonType;
     }
 
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+    public void setHwoReasonType(String hwoReasonType) {
+        this.hwoReasonType = hwoReasonType;
     }
 
-    public String getCapturetype() {
-        return capturetype;
+    public String getHwocaptureodtype() {
+        return hwocaptureodtype;
     }
 
-    public void setCapturetype(String capturetype) {
-        this.capturetype = capturetype;
+    public void setHwocaptureodtype(String hwocaptureodtype) {
+        this.hwocaptureodtype = hwocaptureodtype;
     }
 
-    public String getMovementRegisterEntry() {
-        return movementRegisterEntry;
+    public String getHwomovementRegisterEntry() {
+        return hwomovementRegisterEntry;
     }
 
-    public void setMovementRegisterEntry(String movementRegisterEntry) {
-        this.movementRegisterEntry = movementRegisterEntry;
+    public void setHwomovementRegisterEntry(String hwomovementRegisterEntry) {
+        this.hwomovementRegisterEntry = hwomovementRegisterEntry;
     }
 
-    public String getCaptureDistance() {
-        return captureDistance;
+    public String getHwocaptureDistance() {
+        return hwocaptureDistance;
     }
 
-    public void setCaptureDistance(String captureDistance) {
-        this.captureDistance = captureDistance;
+    public void setHwocaptureDistance(String hwocaptureDistance) {
+        this.hwocaptureDistance = hwocaptureDistance;
     }
 
     public String getStaffQuarters() {
@@ -116,28 +210,21 @@ public class GeneralInfoEntity {
         this.staffQuarters = staffQuarters;
     }
 
-    public String getStayingFacilitiesType() {
-        return stayingFacilitiesType;
+    public String getHwostayingFacilitiesType() {
+        return hwostayingFacilitiesType;
     }
 
-    public void setStayingFacilitiesType(String stayingFacilitiesType) {
-        this.stayingFacilitiesType = stayingFacilitiesType;
+    public void setHwostayingFacilitiesType(String hwostayingFacilitiesType) {
+        this.hwostayingFacilitiesType = hwostayingFacilitiesType;
     }
 
-    public String getHM_HWO_presence() {
-        return HM_HWO_presence;
+
+    public String getHwoheadquarters() {
+        return hwoheadquarters;
     }
 
-    public void setHM_HWO_presence(String HM_HWO_presence) {
-        this.HM_HWO_presence = HM_HWO_presence;
-    }
-
-    public String getHaving_headquarters() {
-        return having_headquarters;
-    }
-
-    public void setHaving_headquarters(String having_headquarters) {
-        this.having_headquarters = having_headquarters;
+    public void setHwoheadquarters(String hwoheadquarters) {
+        this.hwoheadquarters = hwoheadquarters;
     }
 
     public String getOfficer_id() {

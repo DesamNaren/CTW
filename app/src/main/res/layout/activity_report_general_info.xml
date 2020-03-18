@@ -160,7 +160,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/info_present_time"
+                                android:text="@string/hm_present_time"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -425,7 +425,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/info_head_quarters"
+                                android:text="@string/hwo_head_quarters"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
