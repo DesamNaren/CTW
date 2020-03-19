@@ -56,7 +56,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     InfraViewModel infraViewModel;
     SharedPreferences sharedPreferences;
     InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
+    String drinkingWaterFacility, runningWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
     String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
     String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req, electricity_wiring_reason;
     String roplant_reason, ceilingFansWorking, ceilingFansNonWorking, mountedFansWorking, mountedFansNonWorking, repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms, functioningToilets;
@@ -105,18 +105,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        binding.rgDrinkingWaterFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgDrinkingWaterFacility.getCheckedRadioButtonId();
-                if (selctedItem == R.id.drinking_water_facility_yes)
-                    drinkingWaterFacility = "GOOD";
-                else if (selctedItem == R.id.drinking_water_facility_no)
-                    drinkingWaterFacility = "BAD";
-                else
-                    drinkingWaterFacility = null;
-            }
-        });
+
         binding.rgBigSchoolNameBoard.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -129,6 +118,41 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     bigSchoolNameBoard = null;
             }
         });
+
+        binding.rgDrinkingWaterFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgDrinkingWaterFacility.getCheckedRadioButtonId();
+                if (selctedItem == R.id.drinking_water_facility_yes) {
+                    drinkingWaterFacility = "YES";
+                    binding.llDrinkingWater.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.drinking_water_facility_no) {
+                    drinkingWaterFacility = "NO";
+                    binding.llDrinkingWater.setVisibility(View.GONE);
+                } else
+                    drinkingWaterFacility = null;
+            }
+        });
+
+        binding.rgSourceOfDrinkingWater.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgSourceOfDrinkingWater.getCheckedRadioButtonId();
+                if (selctedItem == R.id.drinking_water_ro_plant)
+                    sourceOfDrinkingWater = getResources().getString(R.string.ro_plant);
+                else if (selctedItem == R.id.drinking_water_source_open_well)
+                    sourceOfDrinkingWater = getResources().getString(R.string.open_well);
+                else if (selctedItem == R.id.drinking_water_source_bore_well)
+                    sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
+                else if (selctedItem == R.id.drinking_water_source_municipal)
+                    sourceOfDrinkingWater = getResources().getString(R.string.municipal);
+                else if (selctedItem == R.id.drinking_water_source_hand_pump)
+                    sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
+                else
+                    sourceOfDrinkingWater = null;
+            }
+        });
+
         binding.rgRoPlant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -153,6 +177,38 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     binding.llReason.setVisibility(View.GONE);
                     binding.llTdsMeterReading.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        binding.rgRunningWaterFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgRunningWaterFacility.getCheckedRadioButtonId();
+                if (selctedItem == R.id.running_water_facility_yes) {
+                    runningWaterFacility = "YES";
+                    binding.llRunningwater.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.running_water_facility_no) {
+                    runningWaterFacility = "NO";
+                    binding.llRunningwater.setVisibility(View.GONE);
+                } else
+                    runningWaterFacility = null;
+            }
+        });
+
+        binding.rgRunningWaterSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgRunningWaterSource.getCheckedRadioButtonId();
+                if (selctedItem == R.id.runningWater_source_open_well)
+                    sourceOfRunningWater = getResources().getString(R.string.open_well);
+                else if (selctedItem == R.id.runningWater_source_bore_well)
+                    sourceOfRunningWater = getResources().getString(R.string.bore_well);
+                else if (selctedItem == R.id.runningWater_source_municipal)
+                    sourceOfRunningWater = getResources().getString(R.string.municipal);
+                else if (selctedItem == R.id.runningWater_source_hand_pump)
+                    sourceOfRunningWater = getResources().getString(R.string.hand_pump);
+                else
+                    sourceOfRunningWater = null;
             }
         });
 
@@ -188,22 +244,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         });
 
 
-        binding.rgSourceOfDrinkingWater.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgSourceOfDrinkingWater.getCheckedRadioButtonId();
-                if (selctedItem == R.id.drinking_water_source_open_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.open_well);
-                else if (selctedItem == R.id.drinking_water_source_bore_well)
-                    sourceOfDrinkingWater = getResources().getString(R.string.bore_well);
-                else if (selctedItem == R.id.drinking_water_source_municipal)
-                    sourceOfDrinkingWater = getResources().getString(R.string.municipal);
-                else if (selctedItem == R.id.drinking_water_source_hand_pump)
-                    sourceOfDrinkingWater = getResources().getString(R.string.hand_pump);
-                else
-                    sourceOfDrinkingWater = null;
-            }
-        });
         binding.rgIsInverterAvailable.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -220,6 +260,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
         binding.rgInverterWorkingStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -251,16 +292,17 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgElectricityWiring.getCheckedRadioButtonId();
                 if (selctedItem == R.id.electricity_wiring_yes) {
                     electricity_wiring = "YES";
-                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
+//                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.electricity_wiring_no) {
                     electricity_wiring = "NO";
-                    binding.llElectricityWiringRepairsReq.setVisibility(View.VISIBLE);
+//                    binding.llElectricityWiringRepairsReq.setVisibility(View.VISIBLE);
                 } else {
                     electricity_wiring = null;
-                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
+//                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
                 }
             }
         });
+
         binding.rgElectricityWiringRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -406,23 +448,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     individual_connection = "NO";
                 else
                     individual_connection = null;
-            }
-        });
-
-        binding.rgRunningWaterSource.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgRunningWaterSource.getCheckedRadioButtonId();
-                if (selctedItem == R.id.runningWater_source_open_well)
-                    sourceOfRunningWater = getResources().getString(R.string.open_well);
-                else if (selctedItem == R.id.runningWater_source_bore_well)
-                    sourceOfRunningWater = getResources().getString(R.string.bore_well);
-                else if (selctedItem == R.id.runningWater_source_municipal)
-                    sourceOfRunningWater = getResources().getString(R.string.municipal);
-                else if (selctedItem == R.id.runningWater_source_hand_pump)
-                    sourceOfRunningWater = getResources().getString(R.string.hand_pump);
-                else
-                    sourceOfRunningWater = null;
             }
         });
 

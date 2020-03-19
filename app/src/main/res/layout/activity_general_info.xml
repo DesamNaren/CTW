@@ -196,17 +196,18 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/ll_hm_leavetype"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="@dimen/dimen_5dp"
-                                android:visibility="@{inspDataGeneral.hmPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+                                android:padding="@dimen/dimen_5dp">
 
                                 <LinearLayout
+                                    android:id="@+id/ll_hm_leavetype"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspDataGeneral.hmPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -582,7 +583,7 @@
                                             android:id="@+id/rb_cl"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspDataGeneral.hwocaptureodtype.equalsIgnoreCase(`CL`)}"
+                                            android:checked="@{inspDataGeneral.hwocaptureleavetype.equalsIgnoreCase(`CL`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="CL" />
 
@@ -590,7 +591,7 @@
                                             android:id="@+id/rb_medical"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspDataGeneral.hwocaptureodtype.equalsIgnoreCase(`Medical`)}"
+                                            android:checked="@{inspDataGeneral.hwocaptureleavetype.equalsIgnoreCase(`Medical`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Medical" />
 
@@ -598,7 +599,7 @@
                                             android:id="@+id/rb_maternity"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspDataGeneral.hwocaptureodtype.equalsIgnoreCase(`Maternity`)}"
+                                            android:checked="@{inspDataGeneral.hwocaptureleavetype.equalsIgnoreCase(`Maternity`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Maternity" />
 
@@ -606,7 +607,7 @@
                                             android:id="@+id/rb_paternity"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspDataGeneral.hwocaptureodtype.equalsIgnoreCase(`Paternity`)}"
+                                            android:checked="@{inspDataGeneral.hwocaptureleavetype.equalsIgnoreCase(`Paternity`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Paternity" />
 
@@ -780,7 +781,7 @@
                                         android:id="@+id/rb_yes_hm_head_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwoheadquarters.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspDataGeneral.hmheadquarters.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -788,7 +789,7 @@
                                         android:id="@+id/rb_no_hm_head_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwoheadquarters.equalsIgnoreCase(`No`)}"
+                                        android:checked="@{inspDataGeneral.hmheadquarters.equalsIgnoreCase(`No`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -820,7 +821,7 @@
                                         android:id="@+id/rb_hm_below_30"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwocaptureDistance.equalsIgnoreCase(`below 30`)}"
+                                        android:checked="@{inspDataGeneral.hmcaptureDistance.equalsIgnoreCase(`below 30`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/below_30" />
 
@@ -828,7 +829,7 @@
                                         android:id="@+id/rb_hm_31_50"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwocaptureDistance.equalsIgnoreCase(`31-50`)}"
+                                        android:checked="@{inspDataGeneral.hmcaptureDistance.equalsIgnoreCase(`31-50`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/_31_50" />
 
@@ -836,7 +837,7 @@
                                         android:id="@+id/rb_hm_above_50"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwocaptureDistance.equalsIgnoreCase(`above 50`)}"
+                                        android:checked="@{inspDataGeneral.hmcaptureDistance.equalsIgnoreCase(`above 50`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/above_50" />
 
@@ -869,7 +870,7 @@
                                         android:id="@+id/rb_hm_in_staff_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwostayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:checked="@{inspDataGeneral.hmstayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_staff_quarters" />
 
@@ -877,7 +878,7 @@
                                         android:id="@+id/rb_hm_in_school_building"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwostayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:checked="@{inspDataGeneral.hmstayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_school_building" />
 
@@ -885,7 +886,7 @@
                                         android:id="@+id/rb_hm_pvt_building"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspDataGeneral.hwostayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:checked="@{inspDataGeneral.hmstayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/pvt_building" />
 

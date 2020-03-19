@@ -24,19 +24,26 @@ public class InfraStructureEntity {
     private String institute_id;
 
     @ColumnInfo()
-    private String drinking_water_facility;
-
-    @ColumnInfo()
     private String bigSchoolNameBoard;
 
     @ColumnInfo()
+    private String drinking_water_facility;
+
+    @ColumnInfo()
+    private String drinking_water_source;
+
+     @ColumnInfo()
     private String ro_plant_woking;
 
     @ColumnInfo()
     private String ro_plant_reason;
 
     @ColumnInfo()
-    private String drinking_water_source;
+    private String running_water_facility;
+
+    @ColumnInfo()
+    private String runningWater_source;
+
 
     @ColumnInfo()
     private String inverter_available;
@@ -103,9 +110,6 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String individual_connection;
-
-    @ColumnInfo()
-    private String runningWater_source;
 
     @ColumnInfo()
     private String road_required;
@@ -185,6 +189,15 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String add_dormitory_required_cnt;
+
+
+    public String getRunning_water_facility() {
+        return running_water_facility;
+    }
+
+    public void setRunning_water_facility(String running_water_facility) {
+        this.running_water_facility = running_water_facility;
+    }
 
     public String getKitchen_good_condition() {
         return kitchen_good_condition;

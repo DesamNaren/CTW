@@ -58,7 +58,8 @@
     <string name="students_present_during_inspection_rep">Students present during Inspection</string>
     <string name="variance">15.Variance</string>
     <string name="variance_rep">Variance</string>
-    <string name="how_is_infra">How is the drinking water facility</string>
+    <string name="drinking_water_facility">Whether Drinking Water Facility is Available</string>
+    <string name="running_water_facility">Whether running Water Facility is Available</string>
     <string name="yes">Yes</string>
     <string name="dr_godown_req">dr_godown</string>
     <string name="dr_depot_req">dr_depot</string>
@@ -67,8 +68,8 @@
     <string name="no">No</string>
     <string name="good">Good</string>
     <string name="bad">Bad</string>
-    <string name="ro_plant">RO plant is working</string>
-    <string name="source_of">Source of drinking water?</string>
+    <string name="ro_plant_working">Whether RO plant is working</string>
+    <string name="source_of_drinking_water">Capture the Source of drinking water</string>
     <string name="open_well">Open well</string>
     <string name="bore_well">Bore well</string>
     <string name="municipal">Municipal / GP Tap</string>
@@ -89,7 +90,7 @@
     <string name="single_phase">Single Phase</string>
     <string name="three_phase">3 Phase</string>
     <string name="is_ind_conn">Is individual connection available for each block</string>
-    <string name="source_of_running">Source of running water</string>
+    <string name="source_of_running">Capture the Source of running water</string>
     <string name="is_approach">Is approach road required</string>
     <string name="is_compound">Is compound wall required</string>
     <string name="is_compound_gate">Is gate to compound wall required</string>
@@ -302,10 +303,10 @@
     <string name="sel_screened_by_call_health">Enter No. of Students Screened by Call Health</string>
     <string name="sel_left_for_screening">Enter No. of Students left for Screening</string>
     <string name="link_to_latest_approved_menu_chart_to_be_served">Link to latest approved menu chart to be served</string>
-    <string name="big_school_name_board">Whether big School name board is available</string>
+    <string name="big_school_name_board">Whether big size latest School name board is available</string>
     <string name="is_inverter_available">Is Inverter available</string>
     <string name="inverter_working_status">Inverter working status</string>
-    <string name="whether_electricity_wiring_switch_board_are_good">Whether electricity wiring, switch board are good.</string>
+    <string name="whether_electricity_wiring_switch_board_are_good">Whether electricity wiring, switch boards, tube lights repaired required</string>
     <string name="repairs_required">repairs required</string>
     <string name="separate_kitchen_room_available">Separate kitchen room available</string>
     <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for construct kitchen room</string>
@@ -838,4 +839,6 @@
     <string name="have_you_met_discussed_with_mess_committee"><![CDATA[Have you met & discussed with Mess Committee]]></string>
     <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
+    <string name="ro_plant">RO Plant</string>
+
 </resources>

@@ -89,23 +89,21 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.rb_no_hm_present_time) {
                     hmPresentTime = AppConstants.No;
 
-                    binding.rgHmCapturetype.clearCheck();
-                    binding.rgHmLeavecapturetype.clearCheck();
-                    binding.rgHmMovementRegisterEntry.clearCheck();
-
                     binding.llHmLeavetype.setVisibility(View.VISIBLE);
-                    binding.llHmOdCaptureType.setVisibility(View.GONE);
-                    binding.llHmLeaveCaptureType.setVisibility(View.GONE);
-                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
+
 
                 } else if (selctedItem == R.id.rb_yes_hm_present_time) {
                     hmPresentTime = AppConstants.Yes;
+
                     binding.rgHmLeavetype.clearCheck();
                     binding.rgHmCapturetype.clearCheck();
                     binding.rgHmLeavecapturetype.clearCheck();
                     binding.rgHmMovementRegisterEntry.clearCheck();
 
                     binding.llHmLeavetype.setVisibility(View.GONE);
+                    binding.llHmOdCaptureType.setVisibility(View.GONE);
+                    binding.llHmLeaveCaptureType.setVisibility(View.GONE);
+                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
                 } else {
                     hmPresentTime = null;
                 }
@@ -187,32 +185,22 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgHmCapturetype.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_hm_out_of_station) {
                     hmCaptureodtype = "Out of station";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.VISIBLE);
 
                 } else if (selctedItem == R.id.rb_hm_within_campus) {
                     hmCaptureodtype = "Within campus";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgHmMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_hm_within_mandal) {
                     hmCaptureodtype = "Within Mandal";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgHmMovementRegisterEntry.clearCheck();
+
 
                 } else if (selctedItem == R.id.rb_hm_within_district) {
                     hmCaptureodtype = "Within District";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgHmMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_hm_itda_level) {
                     hmCaptureodtype = "ITDA level";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgHmMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_hm_state_level) {
                     hmCaptureodtype = "State Level";
-//                    binding.llHmMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgHmMovementRegisterEntry.clearCheck();
 
                 } else {
                     hmCaptureodtype = null;
@@ -241,23 +229,20 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.rb_no_present_time) {
                     hwopresentTime = AppConstants.No;
 
-                    binding.rgCapturetype.clearCheck();
-                    binding.rgLeavecapturetype.clearCheck();
-                    binding.rgMovementRegisterEntry.clearCheck();
-
                     binding.llLeavetype.setVisibility(View.VISIBLE);
-                    binding.llOdCaptureType.setVisibility(View.GONE);
-                    binding.llLeaveCaptureType.setVisibility(View.GONE);
-                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
 
                 } else if (selctedItem == R.id.rb_yes_present_time) {
                     hwopresentTime = AppConstants.Yes;
+
                     binding.rgLeavetype.clearCheck();
                     binding.rgCapturetype.clearCheck();
                     binding.rgLeavecapturetype.clearCheck();
                     binding.rgMovementRegisterEntry.clearCheck();
 
                     binding.llLeavetype.setVisibility(View.GONE);
+                    binding.llOdCaptureType.setVisibility(View.GONE);
+                    binding.llLeaveCaptureType.setVisibility(View.GONE);
+                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
 
                 } else {
                     hwopresentTime = null;
@@ -333,32 +318,21 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgCapturetype.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_out_of_station) {
                     hwocaptureodtype = "Out of station";
-//                    binding.llMovementRegisterEntry.setVisibility(View.VISIBLE);
 
                 } else if (selctedItem == R.id.rb_within_campus) {
                     hwocaptureodtype = "Within campus";
-//                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_within_mandal) {
                     hwocaptureodtype = "Within Mandal";
-//                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_within_district) {
                     hwocaptureodtype = "Within District";
-//                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_itda_level) {
                     hwocaptureodtype = "ITDA level";
-//                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgMovementRegisterEntry.clearCheck();
 
                 } else if (selctedItem == R.id.rb_state_level) {
                     hwocaptureodtype = "State Level";
-//                    binding.llMovementRegisterEntry.setVisibility(View.GONE);
-//                    binding.rgMovementRegisterEntry.clearCheck();
 
                 } else {
                     hwocaptureodtype = null;
@@ -391,7 +365,6 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
 
                     binding.llCaptureDistance.setVisibility(View.GONE);
                     binding.llCaptureStayingFacilitiesType.setVisibility(View.VISIBLE);
-
 
 
                 } else if (selctedItem == R.id.rb_no_head_quarters) {
