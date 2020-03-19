@@ -22,6 +22,7 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.DmvSelectionActivityBinding;
+import com.example.twdinspection.inspection.interfaces.InstSelInterface;
 import com.example.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.example.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.example.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
@@ -33,7 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DMVSelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DMVSelectionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InstSelInterface {
     DMVDetailsViewModel viewModel;
     DmvSelectionActivityBinding dmvSelectionActivityBinding;
     private Context context;
@@ -120,39 +121,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             String.valueOf(selectedDistId),  String.valueOf(selectedManId),  String.valueOf(selectedVilId),
                             selectedDistName, selectedManName, selectedVilName, lat, lng, address);
 
-                    selectionViewModel.insertSelectedInst(instSelectionInfo).observe(DMVSelectionActivity.this, new Observer<Long>() {
-                        @Override
-                        public void onChanged(Long aLong) {
-                            if(aLong!=-1){
-                                LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
-                                liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
-                                    @Override
-                                    public void onChanged(InstSelectionInfo instSelectionInfo) {
-                                        liveData.removeObservers(DMVSelectionActivity.this);
-                                        if(instSelectionInfo!=null){
-                                            editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
-                                            editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
-                                            editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
-                                            editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
-                                            editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
-                                            editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());
-                                            editor.putString(AppConstants.MAN_NAME, instSelectionInfo.getMan_name());
-                                            editor.putString(AppConstants.VIL_NAME, instSelectionInfo.getVil_name());
-                                            editor.putString(AppConstants.LAT, instSelectionInfo.getInst_lat());
-                                            editor.putString(AppConstants.LNG, instSelectionInfo.getInst_lng());
-                                            editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
-                                            editor.commit();
-
-                                            startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
-                                            finish();
-                                        }
-                                    }
-                                });
-                            }else{
-                                Toast.makeText(context, "Something went wrong..Please try again", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    selectionViewModel.insertInstitutes(DMVSelectionActivity.this,instSelectionInfo);
                 }
             }
         });
@@ -314,5 +283,37 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void getCount(int cnt) {
+        if(cnt!=-1){
+            LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
+            liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
+                @Override
+                public void onChanged(InstSelectionInfo instSelectionInfo) {
+                    liveData.removeObservers(DMVSelectionActivity.this);
+                    if(instSelectionInfo!=null){
+                        editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
+                        editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
+                        editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
+                        editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
+                        editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
+                        editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());
+                        editor.putString(AppConstants.MAN_NAME, instSelectionInfo.getMan_name());
+                        editor.putString(AppConstants.VIL_NAME, instSelectionInfo.getVil_name());
+                        editor.putString(AppConstants.LAT, instSelectionInfo.getInst_lat());
+                        editor.putString(AppConstants.LNG, instSelectionInfo.getInst_lng());
+                        editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
+                        editor.commit();
+
+                        startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                        finish();
+                    }
+                }
+            });
+        }else{
+            Toast.makeText(context, "Something went wrong..Please try again", Toast.LENGTH_SHORT).show();
+        }
     }
 }

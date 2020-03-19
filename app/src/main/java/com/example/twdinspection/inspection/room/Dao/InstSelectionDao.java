@@ -28,4 +28,7 @@ public interface InstSelectionDao {
 
     @Query("SELECT * from inst_selection_info")
     LiveData<InstSelectionInfo> getInstSelection();
+
+    @Query("SELECT COUNT(*) FROM inst_selection_info")
+    int instSelCount();
 }

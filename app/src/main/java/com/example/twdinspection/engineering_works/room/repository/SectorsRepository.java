@@ -5,7 +5,6 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.example.twdinspection.engineering_works.room.dao.SectorsDao;
-import com.example.twdinspection.engineering_works.room.database.EngWorksDatabase;
 import com.example.twdinspection.engineering_works.source.SectorsEntity;
 import com.example.twdinspection.gcc.interfaces.GCCDivisionInterface;
 
@@ -15,8 +14,8 @@ public class SectorsRepository {
 
     SectorsDao sectorsDao;
     public SectorsRepository(Application application) {
-        EngWorksDatabase database=EngWorksDatabase.getDatabase(application);
-        sectorsDao=database.sectorsDao();
+//        EngWorksDatabase database=EngWorksDatabase.getDatabase(application);
+//        sectorsDao=database.sectorsDao();
     }
 
     public void insertSectors(List<SectorsEntity> sectorsEntities){
