@@ -77,13 +77,14 @@
     <string name="capture_tds_meter_reading">Capture TDS meter reading</string>
     <string name="enter_reason">Enter Reason</string>
     <string name="how_is_light">How is lighting facility</string>
-    <string name="does_this_institute">Does the institute have enough Fans or Wall mounts available for all inmates</string>
-    <string name="ceiling_fans">Ceiling fans count</string>
+    <string name="enough_fans">Does the institute have enough fans or Fans available for all inmates</string>
+    <string name="ceiling_fans">Details of Ceiling Fans</string>
     <string name="working">Working</string>
     <string name="non_working">Non Working</string>
-    <string name="wall_mounted_fans">Wall mounted fans</string>
+    <string name="required">Required</string>
+    <string name="wall_mounted_fans">Details of Wall mounted fans</string>
     <string name="dining_hall">Dining hall available</string>
-    <string name="being_used">Being used or not</string>
+    <string name="being_used">Is it being used</string>
     <string name="how_many_buildings">How many buildings are dilapidated state</string>
     <string name="trans_avail">Transformers available</string>
     <string name="type_of_power">Type of power connection</string>
@@ -96,8 +97,8 @@
     <string name="is_compound_gate">Is gate to compound wall required</string>
     <string name="is_path">Is path way required</string>
     <string name="is_sump">Is sump required</string>
-    <string name="is_sewerage">Is sewerage exist is allowed outside or not</string>
-    <string name="raise_request">Raise request to construct septic tank</string>
+    <string name="is_sewerage">Is sewerage connected to Drainage system</string>
+    <string name="raise_request">Raise request to construct Soak Pit</string>
     <string name="is_drainage">Is drainage line functioning</string>
     <string name="is_solar">Is solar water heater available</string>
     <string name="working_status">Working Status</string>
@@ -106,7 +107,7 @@
     <string name="add_dorm">Additional dormitories required?</string>
     <string name="number">Enter number</string>
     <string name="repairs_to_toilets">No of Toilets</string>
-    <string name="repairs_to_door">Door and window repairs</string>
+    <string name="repairs_to_door">Whether Door and windows repairs required</string>
     <string name="whether_highest">Whether (Highest class) syllabus completed as per schedule in all subjects?</string>
     <string name="capture_highest">Capture classes performance</string>
     <string name="is_strength">Is the strength accommodated as per infrastructure availability</string>
@@ -309,7 +310,7 @@
     <string name="whether_electricity_wiring_switch_board_are_good">Whether electricity wiring, switch boards, tube lights repaired required</string>
     <string name="repairs_required">repairs required</string>
     <string name="separate_kitchen_room_available">Separate kitchen room available</string>
-    <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for construct kitchen room</string>
+    <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for constructing kitchen room</string>
     <string name="is_it_in_good_condition">Is it in good condition</string>
     <string name="kitchen_repair_required">Repairs required</string>
     <string name="no_of_bath_rooms">No of Bath rooms</string>
@@ -317,7 +318,7 @@
     <string name="no_of_functioning_bathrooms">No of functioning Bathrooms</string>
     <string name="repairs_required_to_toilets">Repairs required to Toilets</string>
     <string name="repairs_required_to_bathrooms">Repairs required to Bathrooms</string>
-    <string name="painting_coloring_of_the_building">Painting, coloring of the building</string>
+    <string name="painting_coloring_of_the_building">How is Painting / Coloring of the building</string>
     <string name="suggest_for_coloring">suggest for coloring</string>
     <string name="bedsheets">Bedsheets</string>
     <string name="carpets">Carpets</string>
@@ -421,10 +422,12 @@
     <string name="enter_disease">Enter disease</string>
     <string name="sel_plan_date">Select date</string>
     <string name="select_water">Select Drinking water facility</string>
-    <string name="select_school">Select Big School name board is available</string>
+    <string name="select_running_water">Select Running water facility</string>
+    <string name="select_school">Select Big size latest School name board is available</string>
     <string name="select_roPlant">Select RO plant working</string>
     <string name="select_roPlant_reason">Enter RO plant Reason</string>
     <string name="select_src_drinking_water">Select Source of drinking water</string>
+    <string name="select_src_running_water">Select Source of running water</string>
     <string name="select_inverter">Select Is Inverter available</string>
     <string name="select_inverter_working">Select Inverter working status</string>
     <string name="select_lighting_facility">Select lighting facility</string>
@@ -434,8 +437,10 @@
     <string name="select_fans">Select Does the institute have enough fans</string>
     <string name="select_ceilingFansWorking">Enter Ceiling fans Working</string>
     <string name="select_ceilingFansNonWorking">Enter Ceiling fans Non Working</string>
-    <string name="select_mountedFansWorking">Enter Mounted fans Working</string>
-    <string name="select_mountedFansNonWorking">Enter Mounted fans Non Working</string>
+    <string name="select_ceilingFansReq">Enter Ceiling fans Required</string>
+    <string name="select_mountedFansWorking">Enter Wall Mounted fans Working</string>
+    <string name="select_mountedFansNonWorking">Enter Wall Mounted fans Non Working</string>
+    <string name="select_mountedFansReq">Enter Wall Mounted fans Required</string>
     <string name="select_dininghall_available">Select Dining hall available</string>
     <string name="select_dininghall_used">Select Dining hall being used or not</string>
     <string name="select_kitchen_available">Select Separate kitchen room available</string>
@@ -452,7 +457,8 @@
     <string name="select_gate">Select is gate to compound wall required</string>
     <string name="select_pathway">Select is path way required</string>
     <string name="select_sump_req">Select is sump required</string>
-    <string name="select_sewerage">Select is sewerage exist is allowed outside or not</string>
+    <string name="select_sewerage">Select Is sewerage connected to Drainage system</string>
+    <string name="select_raise_req">Select raise request to construct Soak Pit</string>
     <string name="select_drainage">Select is drainage line functioning</string>
     <string name="select_solarwater">Select is solar water heater available</string>
     <string name="select_solarwater_working">Select solar water working Status</string>
@@ -462,7 +468,7 @@
     <string name="select_functioning_bathrooms">Enter No of functioning Bathrooms</string>
     <string name="select_repaired_toilets">Enter Repairs required to Toilets</string>
     <string name="select_repaired_bathrooms">Enter Repairs required to Toilets</string>
-    <string name="select_door">Select door and window repairs</string>
+    <string name="select_door">Select Door and Window repairs</string>
     <string name="select_painting">Select Painting, coloring of the building</string>
     <string name="select_color">Enter suggest for coloring</string>
     <string name="title_entitlements">Entitlements Distributions</string>
@@ -550,9 +556,12 @@
     <string name="students_are_using_as_per_schedule">Students are using as per schedule</string>
     <string name="name_of_the_tab_in_charge">Name of the tab in charge</string>
     <string name="add_enter_number">Enter number</string>
+    <string name="sel_add_req">Select Any additional Requirements Needed</string>
     <string name="cls_count">Classroom count</string>
     <string name="din_count">Dining hall count</string>
     <string name="dor_count">Dormitories count</string>
+    <string name="toilets_count">Toilets count</string>
+    <string name="bathrooms_count">Bathrooms count</string>
     <string name="title_academic">Academic Overview</string>
     <string name="save">Save</string>
     <string name="dr_godown">DR Godown</string>
@@ -840,5 +849,14 @@
     <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
     <string name="ro_plant">RO Plant</string>
+    <string name="ceiling_fans_required">No. of Ceiling Fans Required</string>
+    <string name="wall_mounted_req">No. of Wall mounted Required</string>
+    <string name="cc_cameras">Whether CC Cameras are working</string>
+    <string name="steam_cooking">Is Steam cooking available</string>
+    <string name="bunker_beds">Are Bunker beds available</string>
+    <string name="any_additional_requirements_needed">Any additional Requirements Needed</string>
+    <string name="select_cc_cameras">Select CC Cameras are working</string>
+    <string name="select_steam_cooking">Select Is Steam cooking available</string>
+    <string name="select_bunker_beds">Select Are Bunker beds available</string>
 
 </resources>

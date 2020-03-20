@@ -56,16 +56,22 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     InfraViewModel infraViewModel;
     SharedPreferences sharedPreferences;
     InfraStructureEntity infrastuctureEntity;
-    String drinkingWaterFacility, runningWaterFacility, bigSchoolNameBoard, roPlant, sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus, lighting_facility, electricity_wiring, enough_fans, dining_hall, dining_hall_used;
-    String separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition, transformer_available, powerConnectionType, individual_connection, road_required, compWall_required, gate_required;
-    String pathway_required, sump_required, sewage_allowed, drainage_functioning, heater_available, heater_workingStatus, repairs_to_door, painting, electricity_wiring_repairs_req, electricity_wiring_reason;
-    String roplant_reason, ceilingFansWorking, ceilingFansNonWorking, mountedFansWorking, mountedFansNonWorking, repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms, functioningToilets;
-    String repairsReqToilets, repairsReqBathrooms, color;
+    String drinkingWaterFacility, runningWaterFacility, bigSchoolNameBoard, roPlant,
+            sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus,
+            electricity_wiring, enough_fans, dining_hall, dining_hall_used,
+            separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition,
+            transformer_available, powerConnectionType, individual_connection, road_required,
+            compWall_required, cc_cameras, steam_cooking, bunker_beds, gate_required, pathway_required,
+            sump_required, sewage_allowed, sewage_raise_req, drainage_functioning, heater_available, heater_workingStatus,
+            repairs_to_door, painting, electricity_wiring_reason,
+            roplant_reason, ceilingFansWorking, ceilingFansNonWorking, ceilingFansReq,
+            mountedFansWorking, mountedFansNonWorking, mountedFansReq,
+            repair_required, how_many_buildings, totalToilets, totalBathrooms, functioningBathrooms,
+            functioningToilets, repairsReqToilets, repairsReqBathrooms, add_req;
+
     InstMainViewModel instMainViewModel;
     private String officerID, instID, insTime;
-    private boolean add_class = false, add_din = false, add_dom = false;
-    private String add_cls_cnt, add_din_cnt, add_dom_cnt;
-
+    private String add_cls_cnt, add_din_cnt, add_dom_cnt, add_toilets_cnt, add_bathrooms_cnt;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     String PIC_NAME, PIC_TYPE;
@@ -129,6 +135,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 } else if (selctedItem == R.id.drinking_water_facility_no) {
                     drinkingWaterFacility = "NO";
                     binding.llDrinkingWater.setVisibility(View.GONE);
+                    binding.rgSourceOfDrinkingWater.clearCheck();
                 } else
                     drinkingWaterFacility = null;
             }
@@ -164,6 +171,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     roPlant = "YES";
                     binding.llReason.setVisibility(View.GONE);
                     binding.llTdsMeterReading.setVisibility(View.VISIBLE);
+                    binding.etReason.setText("");
 
                     binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
 
@@ -190,6 +198,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 } else if (selctedItem == R.id.running_water_facility_no) {
                     runningWaterFacility = "NO";
                     binding.llRunningwater.setVisibility(View.GONE);
+                    binding.rgRunningWaterSource.clearCheck();
                 } else
                     runningWaterFacility = null;
             }
@@ -254,9 +263,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 } else if (selctedItem == R.id.is_inverter_available_no) {
                     inverter_available = "NO";
                     binding.llInverterWorkingStatus.setVisibility(View.GONE);
+                    binding.rgInverterWorkingStatus.clearCheck();
                 } else {
                     inverter_available = null;
                     binding.llInverterWorkingStatus.setVisibility(View.GONE);
+                    binding.rgInverterWorkingStatus.clearCheck();
                 }
             }
         });
@@ -274,59 +285,49 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.rgLightingFacility.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgLightingFacility.getCheckedRadioButtonId();
-                if (selctedItem == R.id.lighting_facility_yes)
-                    lighting_facility = "GOOD";
-                else if (selctedItem == R.id.lighting_facility_no)
-                    lighting_facility = "BAD";
-                else
-                    lighting_facility = null;
-            }
-        });
         binding.rgElectricityWiring.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgElectricityWiring.getCheckedRadioButtonId();
                 if (selctedItem == R.id.electricity_wiring_yes) {
                     electricity_wiring = "YES";
-//                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.electricity_wiring_no) {
                     electricity_wiring = "NO";
-//                    binding.llElectricityWiringRepairsReq.setVisibility(View.VISIBLE);
                 } else {
                     electricity_wiring = null;
-//                    binding.llElectricityWiringRepairsReq.setVisibility(View.GONE);
                 }
             }
         });
 
-        binding.rgElectricityWiringRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgElectricityWiringRepairsReq.getCheckedRadioButtonId();
-                if (selctedItem == R.id.electricity_wiring_repairs_req_yes)
-                    electricity_wiring_repairs_req = "YES";
-                else if (selctedItem == R.id.electricity_wiring_repairs_req_no)
-                    electricity_wiring_repairs_req = "NO";
-                else
-                    electricity_wiring_repairs_req = null;
-            }
-        });
+
         binding.rgEnoughFans.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgEnoughFans.getCheckedRadioButtonId();
-                if (selctedItem == R.id.enough_fans_yes)
+                if (selctedItem == R.id.enough_fans_yes) {
+
                     enough_fans = "YES";
-                else if (selctedItem == R.id.enough_fans_no)
+                    binding.llCeilingFans.setVisibility(View.GONE);
+                    binding.llWallMountedFans.setVisibility(View.GONE);
+
+                    binding.etCeilingFansWorking.setText("");
+                    binding.etCeilingFansNonWorking.setText("");
+                    binding.etCeilingFansRequired.setText("");
+
+                    binding.etWallMountedFansWorking.setText("");
+                    binding.etWallMountedFansNonWorking.setText("");
+                    binding.etWallMountedFansRequired.setText("");
+
+                } else if (selctedItem == R.id.enough_fans_no) {
                     enough_fans = "NO";
-                else
+
+                    binding.llCeilingFans.setVisibility(View.VISIBLE);
+                    binding.llWallMountedFans.setVisibility(View.VISIBLE);
+                } else
                     enough_fans = null;
             }
         });
+
         binding.rgDiningHall.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -336,9 +337,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     binding.llDininghallUsed.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.dining_hall_no) {
                     dining_hall = "NO";
+                    binding.rgDininghallUsed.clearCheck();
                     binding.llDininghallUsed.setVisibility(View.GONE);
                 } else {
                     dining_hall = null;
+                    binding.rgDininghallUsed.clearCheck();
                     binding.llDininghallUsed.setVisibility(View.GONE);
                 }
             }
@@ -363,14 +366,19 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgSeparateKitchenRoomAvailable.getCheckedRadioButtonId();
                 if (selctedItem == R.id.separate_kitchen_room_available_yes) {
                     separate_kitchen_room_available = "YES";
+                    binding.rgConstructKitchenRoom.clearCheck();
                     binding.llConstructKitchenroom.setVisibility(View.GONE);
                     binding.llGoodCondition.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.separate_kitchen_room_available_no) {
                     separate_kitchen_room_available = "NO";
+                    binding.rgIsItInGoodCondition.clearCheck();
                     binding.llConstructKitchenroom.setVisibility(View.VISIBLE);
                     binding.llGoodCondition.setVisibility(View.GONE);
                 } else {
                     separate_kitchen_room_available = null;
+                    binding.rgConstructKitchenRoom.clearCheck();
+                    binding.rgIsItInGoodCondition.clearCheck();
+
                     binding.llConstructKitchenroom.setVisibility(View.GONE);
                     binding.llGoodCondition.setVisibility(View.GONE);
                 }
@@ -401,12 +409,14 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.is_it_in_good_condition_yes) {
                     is_it_in_good_condition = "YES";
                     binding.llKitchenRepairRequired.setVisibility(View.GONE);
+                    binding.etRepairRequired.setText("");
                 } else if (selctedItem == R.id.is_it_in_good_condition_no) {
                     is_it_in_good_condition = "NO";
                     binding.llKitchenRepairRequired.setVisibility(View.VISIBLE);
                 } else {
                     is_it_in_good_condition = null;
                     binding.llKitchenRepairRequired.setVisibility(View.GONE);
+                    binding.etRepairRequired.setText("");
                 }
             }
         });
@@ -477,6 +487,45 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             }
         });
 
+        binding.rgCcCameras.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgCcCameras.getCheckedRadioButtonId();
+                if (selctedItem == R.id.cc_cameras_yes)
+                    cc_cameras = "YES";
+                else if (selctedItem == R.id.cc_cameras_no)
+                    cc_cameras = "NO";
+                else
+                    cc_cameras = null;
+            }
+        });
+
+        binding.rgSteamCooking.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgSteamCooking.getCheckedRadioButtonId();
+                if (selctedItem == R.id.steam_cooking_yes)
+                    steam_cooking = "YES";
+                else if (selctedItem == R.id.steam_cooking_no)
+                    steam_cooking = "NO";
+                else
+                    steam_cooking = null;
+            }
+        });
+
+        binding.rgBunkerBeds.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgBunkerBeds.getCheckedRadioButtonId();
+                if (selctedItem == R.id.bunker_beds_yes)
+                    bunker_beds = "YES";
+                else if (selctedItem == R.id.bunker_beds_no)
+                    bunker_beds = "NO";
+                else
+                    bunker_beds = null;
+            }
+        });
+
         binding.rgGateRequired.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -520,12 +569,27 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgSewageAllowed.getCheckedRadioButtonId();
-                if (selctedItem == R.id.sewage_allowed_yes)
+                if (selctedItem == R.id.sewage_allowed_yes) {
                     sewage_allowed = "YES";
-                else if (selctedItem == R.id.sewage_allowed_no)
+                    binding.llSewageRaiseReq.setVisibility(View.GONE);
+                    binding.rgSewageRaiseReq.clearCheck();
+                } else if (selctedItem == R.id.sewage_allowed_no) {
                     sewage_allowed = "NO";
-                else
+                    binding.llSewageRaiseReq.setVisibility(View.VISIBLE);
+                } else
                     sewage_allowed = null;
+            }
+        });
+        binding.rgSewageRaiseReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgSewageRaiseReq.getCheckedRadioButtonId();
+                if (selctedItem == R.id.sewage_raise_req_yes) {
+                    sewage_raise_req = "YES";
+                } else if (selctedItem == R.id.sewage_raise_req_no) {
+                    sewage_raise_req = "NO";
+                } else
+                    sewage_raise_req = null;
             }
         });
 
@@ -552,9 +616,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 } else if (selctedItem == R.id.heater_available_no) {
                     heater_available = "NO";
                     binding.llSolarWorkingStatus.setVisibility(View.GONE);
+                    binding.rgHeaterWorkingStatus.clearCheck();
                 } else {
                     heater_available = null;
                     binding.llSolarWorkingStatus.setVisibility(View.GONE);
+                    binding.rgHeaterWorkingStatus.clearCheck();
                 }
             }
         });
@@ -591,59 +657,35 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgPainting.getCheckedRadioButtonId();
                 if (selctedItem == R.id.painting_yes) {
                     painting = "GOOD";
-                    binding.llColor.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.painting_no) {
                     painting = "BAD";
-                    binding.llColor.setVisibility(View.VISIBLE);
                 } else {
                     painting = null;
-                    binding.llColor.setVisibility(View.GONE);
                 }
             }
         });
 
-
-        binding.addClassCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.rgAddReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    add_class = true;
-                    binding.addClassLayout.setVisibility(View.VISIBLE);
-                } else {
-                    add_class = false;
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgAddReq.getCheckedRadioButtonId();
+                if (selctedItem == R.id.add_req_yes) {
+                    add_req = "YES";
+                    binding.llAddReq.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.add_req_no) {
+                    add_req = "NO";
+                    binding.llAddReq.setVisibility(View.GONE);
                     binding.addClassCnt.setText("");
-                    binding.addClassLayout.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        binding.addDinCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    add_din = true;
-                    binding.addDinLayout.setVisibility(View.VISIBLE);
-                } else {
-                    add_din = false;
                     binding.addDinCnt.setText("");
-                    binding.addDinLayout.setVisibility(View.GONE);
+                    binding.addDomCnt.setText("");
+                    binding.addToiletsCnt.setText("");
+                    binding.addBathroomsCnt.setText("");
+                } else {
+                    add_req = null;
                 }
             }
         });
 
-        binding.addDomCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()) {
-                    add_dom = true;
-                    binding.addDomLayout.setVisibility(View.VISIBLE);
-                } else {
-                    add_dom = false;
-                    binding.addDomCnt.setText("");
-                    binding.addDomLayout.setVisibility(View.GONE);
-                }
-            }
-        });
 
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -652,8 +694,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 roplant_reason = binding.etReason.getText().toString().trim();
                 ceilingFansWorking = binding.etCeilingFansWorking.getText().toString().trim();
                 ceilingFansNonWorking = binding.etCeilingFansNonWorking.getText().toString().trim();
+                ceilingFansReq = binding.etCeilingFansRequired.getText().toString().trim();
                 mountedFansWorking = binding.etWallMountedFansWorking.getText().toString().trim();
                 mountedFansNonWorking = binding.etWallMountedFansNonWorking.getText().toString().trim();
+                mountedFansReq = binding.etWallMountedFansRequired.getText().toString().trim();
                 repair_required = binding.etRepairRequired.getText().toString().trim();
                 how_many_buildings = binding.etHowManyBuildings.getText().toString().trim();
                 totalToilets = binding.etTotalToilets.getText().toString().trim();
@@ -662,10 +706,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 functioningBathrooms = binding.etFuntioningBathrooms.getText().toString().trim();
                 repairsReqToilets = binding.etRequiredToilets.getText().toString().trim();
                 repairsReqBathrooms = binding.etRequiredBathrooms.getText().toString().trim();
-                color = binding.etPainting.getText().toString().trim();
-                add_cls_cnt = binding.addClassCnt.getText().toString();
-                add_din_cnt = binding.addDinCnt.getText().toString();
-                add_dom_cnt = binding.addDomCnt.getText().toString();
+                add_cls_cnt = binding.addClassCnt.getText().toString().trim();
+                add_din_cnt = binding.addDinCnt.getText().toString().trim();
+                add_dom_cnt = binding.addDomCnt.getText().toString().trim();
+                add_toilets_cnt = binding.addToiletsCnt.getText().toString().trim();
+                add_bathrooms_cnt = binding.addBathroomsCnt.getText().toString().trim();
 
                 if (validateData()) {
                     infrastuctureEntity = new InfraStructureEntity();
@@ -677,16 +722,18 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setRo_plant_woking(roPlant);
                     infrastuctureEntity.setRo_plant_reason(roplant_reason);
                     infrastuctureEntity.setDrinking_water_source(sourceOfDrinkingWater);
+                    infrastuctureEntity.setRunning_water_facility(runningWaterFacility);
+                    infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
                     infrastuctureEntity.setInverter_available(inverter_available);
                     infrastuctureEntity.setInverterWorkingStatus(inverterWorkingStatus);
-                    infrastuctureEntity.setLighting_facility(lighting_facility);
                     infrastuctureEntity.setElectricity_wiring(electricity_wiring);
-                    infrastuctureEntity.setElectricity_wiring_repairs_req(electricity_wiring_repairs_req);
                     infrastuctureEntity.setEnough_fans(enough_fans);
                     infrastuctureEntity.setCeilingfans_working(ceilingFansWorking);
                     infrastuctureEntity.setCeilingfans_nonworking(ceilingFansNonWorking);
+                    infrastuctureEntity.setCeilingfans_required(ceilingFansReq);
                     infrastuctureEntity.setMountedfans_working(mountedFansWorking);
                     infrastuctureEntity.setMountedfans_nonworking(mountedFansNonWorking);
+                    infrastuctureEntity.setMountedfans_required(mountedFansReq);
                     infrastuctureEntity.setDininghall_available(dining_hall);
                     infrastuctureEntity.setDininghall_used(dining_hall_used);
                     infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
@@ -715,30 +762,16 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setRepairs_req_bathrooms(repairsReqBathrooms);
                     infrastuctureEntity.setDoor_window_repairs(repairs_to_door);
                     infrastuctureEntity.setPainting(painting);
-                    infrastuctureEntity.setColor(color);
-
-
-                    if (binding.addClassCb.isChecked()) {
-                        infrastuctureEntity.setAdd_class_required(AppConstants.Yes);
-                        infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
-                    } else {
-                        infrastuctureEntity.setAdd_class_required(AppConstants.No);
-                        infrastuctureEntity.setAdd_class_required_cnt("");
-                    }
-                    if (binding.addDinCb.isChecked()) {
-                        infrastuctureEntity.setAdd_dining_required(AppConstants.Yes);
-                        infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
-                    } else {
-                        infrastuctureEntity.setAdd_dining_required(AppConstants.No);
-                        infrastuctureEntity.setAdd_dining_required_cnt("");
-                    }
-                    if (binding.addDomCb.isChecked()) {
-                        infrastuctureEntity.setAdd_dormitory_required(AppConstants.Yes);
-                        infrastuctureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
-                    } else {
-                        infrastuctureEntity.setAdd_dormitory_required(AppConstants.No);
-                        infrastuctureEntity.setAdd_dormitory_required_cnt("");
-                    }
+                    infrastuctureEntity.setCc_cameras(cc_cameras);
+                    infrastuctureEntity.setSteam_cooking(steam_cooking);
+                    infrastuctureEntity.setBunker_beds(bunker_beds);
+                    infrastuctureEntity.setAdd_req(add_req);
+                    infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
+                    infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
+                    infrastuctureEntity.setAdd_dormitory_required_cnt(add_dom_cnt);
+                    infrastuctureEntity.setAdd_toilets_required_cnt(add_toilets_cnt);
+                    infrastuctureEntity.setAdd_bathrooms_required_cnt(add_bathrooms_cnt);
+                    infrastuctureEntity.setSewage_raise_request(sewage_raise_req);
 
                     Utils.customSaveAlert(InfraActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
@@ -857,14 +890,22 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     }
 
     private boolean validateData() {
-        if (TextUtils.isEmpty(drinkingWaterFacility)) {
-            showSnackBar(getResources().getString(R.string.select_water));
-            return false;
-        }
+
         if (TextUtils.isEmpty(bigSchoolNameBoard)) {
             showSnackBar(getResources().getString(R.string.select_school));
             return false;
         }
+
+        if (TextUtils.isEmpty(drinkingWaterFacility)) {
+            showSnackBar(getResources().getString(R.string.select_water));
+            return false;
+        }
+
+        if (drinkingWaterFacility.equals(AppConstants.Yes) && TextUtils.isEmpty(sourceOfDrinkingWater)) {
+            showSnackBar(getResources().getString(R.string.select_src_drinking_water));
+            return false;
+        }
+
         if (TextUtils.isEmpty(roPlant)) {
             showSnackBar(getResources().getString(R.string.select_roPlant));
             return false;
@@ -878,56 +919,62 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.etReason.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(sourceOfDrinkingWater)) {
-            showSnackBar(getResources().getString(R.string.select_src_drinking_water));
+
+        if (TextUtils.isEmpty(runningWaterFacility)) {
+            showSnackBar(getResources().getString(R.string.select_running_water));
             return false;
         }
+
+        if (runningWaterFacility.equals(AppConstants.Yes) && TextUtils.isEmpty(sourceOfRunningWater)) {
+            showSnackBar(getResources().getString(R.string.select_src_running_water));
+            return false;
+        }
+
         if (TextUtils.isEmpty(inverter_available)) {
             showSnackBar(getResources().getString(R.string.select_inverter));
             return false;
         }
-        if (inverter_available.equals(AppConstants.Yes) && TextUtils.isEmpty(inverterWorkingStatus)) {
+        if (inverter_available.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(inverterWorkingStatus)) {
             showSnackBar(getResources().getString(R.string.select_inverter_working));
             return false;
         }
-        if (TextUtils.isEmpty(lighting_facility)) {
-            showSnackBar(getResources().getString(R.string.select_lighting_facility));
-            return false;
-        }
+
         if (TextUtils.isEmpty(electricity_wiring)) {
             showSnackBar(getResources().getString(R.string.select_electricity));
             return false;
         }
-        if (electricity_wiring.equals(AppConstants.No) && TextUtils.isEmpty(electricity_wiring_repairs_req)) {
-            showSnackBar(getResources().getString(R.string.select_electricity_repairs));
-            return false;
-        }
-//        if (TextUtils.isEmpty(electricity_wiring_reason)) {
-//            showSnackBar(getResources().getString(R.string.enter_electricity));
-//            return false;
-//        }
         if (TextUtils.isEmpty(enough_fans)) {
             showSnackBar(getResources().getString(R.string.select_fans));
             return false;
         }
-        if (TextUtils.isEmpty(ceilingFansWorking)) {
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(ceilingFansWorking)) {
             showSnackBar(getResources().getString(R.string.select_ceilingFansWorking));
             binding.etCeilingFansWorking.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(ceilingFansNonWorking)) {
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(ceilingFansNonWorking)) {
             showSnackBar(getResources().getString(R.string.select_ceilingFansNonWorking));
             binding.etCeilingFansNonWorking.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(mountedFansWorking)) {
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(ceilingFansReq)) {
+            showSnackBar(getResources().getString(R.string.select_ceilingFansReq));
+            binding.etCeilingFansRequired.requestFocus();
+            return false;
+        }
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(mountedFansWorking)) {
             showSnackBar(getResources().getString(R.string.select_mountedFansWorking));
             binding.etWallMountedFansWorking.requestFocus();
             return false;
         }
-        if (TextUtils.isEmpty(mountedFansNonWorking)) {
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(mountedFansNonWorking)) {
             showSnackBar(getResources().getString(R.string.select_mountedFansNonWorking));
             binding.etWallMountedFansNonWorking.requestFocus();
+            return false;
+        }
+        if (enough_fans.equalsIgnoreCase(AppConstants.No) && TextUtils.isEmpty(mountedFansReq)) {
+            showSnackBar(getResources().getString(R.string.select_mountedFansReq));
+            binding.etWallMountedFansRequired.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(dining_hall)) {
@@ -972,10 +1019,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_individual_connection));
             return false;
         }
-        if (TextUtils.isEmpty(sourceOfRunningWater)) {
-            showSnackBar(getResources().getString(R.string.select_src_runnig_water));
-            return false;
-        }
         if (TextUtils.isEmpty(road_required)) {
             showSnackBar(getResources().getString(R.string.select_road_req));
             return false;
@@ -984,6 +1027,19 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_compoundwall_req));
             return false;
         }
+        if (TextUtils.isEmpty(cc_cameras)) {
+            showSnackBar(getResources().getString(R.string.select_cc_cameras));
+            return false;
+        }
+        if (TextUtils.isEmpty(steam_cooking)) {
+            showSnackBar(getResources().getString(R.string.select_steam_cooking));
+            return false;
+        }
+        if (TextUtils.isEmpty(bunker_beds)) {
+            showSnackBar(getResources().getString(R.string.select_bunker_beds));
+            return false;
+        }
+
         if (TextUtils.isEmpty(gate_required)) {
             showSnackBar(getResources().getString(R.string.select_gate));
             return false;
@@ -1000,6 +1056,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_sewerage));
             return false;
         }
+        if (sewage_allowed.equals(AppConstants.No) && TextUtils.isEmpty(sewage_raise_req)) {
+            showSnackBar(getResources().getString(R.string.select_raise_req));
+            return false;
+        }
         if (TextUtils.isEmpty(drainage_functioning)) {
             showSnackBar(getResources().getString(R.string.select_drainage));
             return false;
@@ -1012,30 +1072,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_solarwater_working));
             return false;
         }
-
-        if (heater_available.equals(AppConstants.Yes) && TextUtils.isEmpty(heater_workingStatus)) {
-            showSnackBar(getResources().getString(R.string.select_solarwater_working));
-            return false;
-        }
-
-        if (add_class && TextUtils.isEmpty(add_cls_cnt)) {
-            showSnackBar(getResources().getString(R.string.cls_count));
-            binding.addClassLayout.requestFocus();
-            return false;
-        }
-
-        if (add_dom && TextUtils.isEmpty(add_dom_cnt)) {
-            showSnackBar(getResources().getString(R.string.din_count));
-            binding.addDomLayout.requestFocus();
-            return false;
-        }
-
-        if (add_din && TextUtils.isEmpty(add_din_cnt)) {
-            showSnackBar(getResources().getString(R.string.dor_count));
-            binding.addDinLayout.requestFocus();
-            return false;
-        }
-
         if (TextUtils.isEmpty(totalToilets)) {
             showSnackBar(getResources().getString(R.string.select_toilets));
             binding.etTotalToilets.requestFocus();
@@ -1066,17 +1102,41 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.etRequiredBathrooms.requestFocus();
             return false;
         }
+        if (TextUtils.isEmpty(add_req)) {
+            showSnackBar(getResources().getString(R.string.sel_add_req));
+            return false;
+        }
+        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_cls_cnt)) {
+            showSnackBar(getResources().getString(R.string.cls_count));
+            binding.addClassLayout.requestFocus();
+            return false;
+        }
+        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_din_cnt)) {
+            showSnackBar(getResources().getString(R.string.din_count));
+            binding.addDinLayout.requestFocus();
+            return false;
+        }
+        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_dom_cnt)) {
+            showSnackBar(getResources().getString(R.string.dor_count));
+            binding.addDomLayout.requestFocus();
+            return false;
+        }
+        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_toilets_cnt)) {
+            showSnackBar(getResources().getString(R.string.toilets_count));
+            binding.addToiletsLayout.requestFocus();
+            return false;
+        }
+        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_bathrooms_cnt)) {
+            showSnackBar(getResources().getString(R.string.bathrooms_count));
+            binding.addBathroomsLayout.requestFocus();
+            return false;
+        }
         if (TextUtils.isEmpty(repairs_to_door)) {
             showSnackBar(getResources().getString(R.string.select_door));
             return false;
         }
         if (TextUtils.isEmpty(painting)) {
             showSnackBar(getResources().getString(R.string.select_painting));
-            return false;
-        }
-        if (painting.equals("BAD") && TextUtils.isEmpty(color)) {
-            showSnackBar(getResources().getString(R.string.select_color));
-            binding.etPainting.requestFocus();
             return false;
         }
 

@@ -145,10 +145,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     callHealth100 = "YES";
                     binding.llScreenedByCallHealth.setVisibility(View.VISIBLE);
                     binding.llLeftForScreening.setVisibility(View.GONE);
+                    left_for_screening=null;
                 } else if (selctedItem == R.id.no_call_health_100) {
                     callHealth100 = "NO";
                     binding.llScreenedByCallHealth.setVisibility(View.GONE);
                     binding.llLeftForScreening.setVisibility(View.VISIBLE);
+                    screened_by_call_health=null;
                 } else callHealth100 = null;
             }
         });
