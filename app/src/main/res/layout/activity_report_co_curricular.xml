@@ -902,11 +902,11 @@
 
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/smc_con"
+                                    android:id="@+id/smc_resolution"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:focusableInTouchMode="false"
-                                    android:hint="@string/conducting_of_parents_meeting_resolution_noted"
+                                    android:hint="@string/resolution_noted"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"

@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -264,18 +263,18 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="4"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Achievement of the student during the year 2019- 2020"
                                 android:textColor="@color/black" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_cocur"
+                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp" />
@@ -284,6 +283,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <com.example.twdinspection.common.custom.CustomFontButtonView
@@ -307,6 +307,67 @@
                                     android:textColor="@color/white"
                                     android:visibility="@{inspData.studAchievementEntities.size()>0 ? View.VISIBLE: View.GONE}" />
                             </LinearLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_district"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/district_level"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.district_level}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                         <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_state"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/state_level"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.state_level}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                         <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_national"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/national_level"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.national_level}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -432,7 +493,6 @@
                                 android:id="@+id/et_land"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
@@ -590,7 +650,6 @@
                                     android:id="@+id/et_sc_gu_nmae"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/scout_master_guide_captain_name"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
@@ -627,7 +686,6 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="match_parent"
@@ -821,7 +879,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.smc_ele_status.equalsIgnoreCase(`Yes`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -830,7 +887,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.smc_ele_status.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -851,7 +907,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
-
 
                                 <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/smc_name"
@@ -880,7 +935,6 @@
                                     android:id="@+id/smc_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -898,21 +952,57 @@
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
 
-
                                 <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/smc_con"
+                                    android:id="@+id/smc_resolution"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
-                                    android:hint="@string/conducting_of_parents_meeting_resolution_noted"
+                                    android:hint="@string/resolution_noted"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
-                                    android:text="@={inspData.smc_ele_con_parent_meeting}"
+                                    android:text="@={inspData.smc_ele_resolution}"
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/parents_meeting_conducted"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_parent_meeting"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/parents_meeting_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.smc_ele_con_parent_meeting.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/parents_meeting_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.smc_ele_con_parent_meeting.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="No" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -973,7 +1063,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.kitchen_garden_status.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -988,28 +1077,6 @@
                             android:orientation="vertical"
                             android:visibility="@{inspData.kitchen_garden_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/event_kitchen"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:errorEnabled="true">
-
-
-                                <com.example.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/kit_eve_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-
-                                    android:hint="@string/event_of_kitchen_in_charge"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="textPersonName"
-                                    android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true"
-                                    android:text="@{inspData.kitchen_in_charge_event_name}"
-                                    android:textSize="@dimen/dimen_15dp" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/type_kitchen"
@@ -1018,12 +1085,10 @@
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
 
-
                                 <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/types_of_kitchen_garden"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
@@ -1041,12 +1106,10 @@
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
 
-
                                 <com.example.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_in_charge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
@@ -1069,7 +1132,6 @@
                                     android:id="@+id/kit_in_cha_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
@@ -1080,112 +1142,28 @@
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="82."
-                        android:textColor="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                          <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_plants_cnt"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/whether_haritha_haram_conducted_2019_2020"
-                                android:textColor="@color/black" />
+                                app:errorEnabled="true">
 
-                            <RadioGroup
-                                android:id="@+id/rg_harithaharam"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_harithaharamYes"
-                                    android:layout_width="wrap_content"
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_plants_cnt"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.harita_haram_status.equalsIgnoreCase(`Yes`)}"
+                                    android:hint="@string/number_of_plants"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.plants_cnt}"
+                                    android:textSize="@dimen/dimen_15dp" />
 
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_harithaharamNo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.harita_haram_status.equalsIgnoreCase(`No`)}"
-
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="No" />
-
-                            </RadioGroup>
-
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="@{inspData.plantsEntities.size()>0 ? View.VISIBLE: View.GONE}"
-                    android:id="@+id/ll_plants"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_30dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <com.example.twdinspection.common.custom.CustomFontButtonView
-                            android:id="@+id/btn_addplant"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dimen_30dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/btn_background"
-                            android:text="Add"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:visibility="gone" />
-
-                        <com.example.twdinspection.common.custom.CustomFontButtonView
-                            android:id="@+id/btn_viewplant"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/dimen_30dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/btn_background1"
-                            android:text="View"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1265,7 +1243,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Name of the students committee displayed"
+                                android:text="@string/is_the_student_council_displayed"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
@@ -1280,7 +1258,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.stu_com_display_status.equalsIgnoreCase(`Yes`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1289,7 +1266,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.stu_com_display_status.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1331,32 +1307,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
-                            android:id="@+id/stu_name_ll"
+                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
+                            android:id="@+id/ll_stu_cou_date"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/cou_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/name_of_the_student_s_council_captain"
-                                android:imeOptions="actionNext"
-                                android:inputType="textPersonName"
-                                android:paddingLeft="@dimen/dimen_10dp"
-                                android:singleLine="true"
-                                android:text="@{inspData.stu_cou_captain_name}"
-                                android:textSize="@dimen/dimen_15dp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1367,7 +1323,7 @@
 
 
                             <com.example.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_medical_checkup_date"
+                                android:id="@+id/et_stu_council_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@android:drawable/ic_menu_my_calendar"

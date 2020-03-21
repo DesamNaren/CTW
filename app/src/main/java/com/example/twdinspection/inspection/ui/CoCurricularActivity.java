@@ -58,13 +58,13 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private CoCurricularEntity coCurricularEntity;
     private InstMainViewModel instMainViewModel;
 
-    String spo_mat_rec, entry_stock, game_sport_room, pd_pft_name, pd_pft_num;
+    String spo_mat_rec, entry_stock, game_sport_room, pd_pft_name, pd_pft_num, district_level, state_level, national_level;
     String play_avail, plan_play, land_measure, ground_level_status, scouts_guides_status, scout_guide_name, scut_guide_num;
     String ncc_stu_impl, ncc_teacher_name, ncc_teacher_contact, ncc_teacher_battalion_num;
-    String smc_election_status, smc_chai_name, smc_chai_contact, smc_parents_meeting;
-    String kitchen_garden_status, kitchen_event_in_charge_name, type_kitchen_garden, kitchen_in_charge_name, kitchen_in_charge_contact;
-    String harita_haram_status, student_council_ele_status, stu_com_name_dis_status;
-    String stu_com_name_dis_status_reason, stu_Cou_cap_name, stu_Cou_date;
+    String smc_election_status, smc_chai_name, smc_chai_contact, smc_resolution, smc_parents_meeting;
+    String kitchen_garden_status, type_kitchen_garden, kitchen_in_charge_name, kitchen_in_charge_contact, plants_count;
+    String  student_council_ele_status, stu_com_name_dis_status;
+    String stu_com_name_dis_status_reason, stu_Cou_date;
     private List<StudAchievementEntity> studAchievementEntities;
     private List<PlantsEntity> plantsEntities;
     private int localFlag = -1;
@@ -100,6 +100,9 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     coCurricularEntity.setGame_sport_room_avail(game_sport_room);
                     coCurricularEntity.setPd_pft_name(pd_pft_name);
                     coCurricularEntity.setPd_pft_contact(pd_pft_num);
+                    coCurricularEntity.setDistrict_level(district_level);
+                    coCurricularEntity.setState_level(state_level);
+                    coCurricularEntity.setNational_level(national_level);
 
                     if (studAchievementEntities != null && studAchievementEntities.size() > 0) {
                         coCurricularEntity.setStudAchievementEntities(studAchievementEntities);
@@ -123,24 +126,18 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     coCurricularEntity.setSmc_ele_status(smc_election_status);
                     coCurricularEntity.setSmc_ele_chairman_name(smc_chai_name);
                     coCurricularEntity.setSmc_ele_chairman_contact(smc_chai_contact);
+                    coCurricularEntity.setSmc_ele_resolution(smc_resolution);
                     coCurricularEntity.setSmc_ele_con_parent_meeting(smc_parents_meeting);
 
 
                     coCurricularEntity.setKitchen_garden_status(kitchen_garden_status);
-                    coCurricularEntity.setKitchen_in_charge_event_name(kitchen_event_in_charge_name);
                     coCurricularEntity.setKitchen_garden_types(type_kitchen_garden);
                     coCurricularEntity.setKitchen_garden_in_charge_name(kitchen_in_charge_name);
                     coCurricularEntity.setKitchen_garden_in_charge_contact(kitchen_in_charge_contact);
 
 
-                    coCurricularEntity.setHarita_haram_status(harita_haram_status);
-                    if (plantsEntities != null && plantsEntities.size() > 0) {
-                        coCurricularEntity.setPlantsEntities(plantsEntities);
-                    }
-
                     coCurricularEntity.setStu_cou_ele_status(student_council_ele_status);
                     coCurricularEntity.setStu_com_display_status(stu_com_name_dis_status);
-                    coCurricularEntity.setStu_cou_captain_name(stu_Cou_cap_name);
                     coCurricularEntity.setStu_cou_date(stu_Cou_date);
                     coCurricularEntity.setReason(stu_com_name_dis_status_reason);
 
@@ -149,6 +146,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
         binding.rgSportMatRec.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -159,12 +157,14 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_sportRecNo) {
                     spo_mat_rec = AppConstants.No;
                     binding.llEnteredStock.setVisibility(View.GONE);
+                    binding.entryRegisterRg.clearCheck();
                 } else {
                     spo_mat_rec = null;
                     binding.llEnteredStock.setVisibility(View.GONE);
                 }
             }
         });
+
         binding.entryRegisterRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -198,13 +198,17 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     play_avail = AppConstants.Yes;
                     binding.measLandAvail.setVisibility(View.VISIBLE);
                     binding.llPlanToProcure.setVisibility(View.GONE);
+                    binding.rgPlanToProc.clearCheck();
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_playGrAvailNo) {
+                    play_avail = AppConstants.No;
                     binding.llPlanToProcure.setVisibility(View.VISIBLE);
                     binding.measLandAvail.setVisibility(View.GONE);
-                    play_avail = AppConstants.No;
+                    binding.etLand.setText("");
                 } else {
                     binding.measLandAvail.setVisibility(View.GONE);
                     binding.llPlanToProcure.setVisibility(View.GONE);
+                    binding.rgPlanToProc.clearCheck();
+                    binding.etLand.setText("");
                     play_avail = null;
                 }
             }
@@ -235,17 +239,23 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
+
         binding.rgScoutsImpl.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_scoutsYes) {
                     scouts_guides_status = AppConstants.Yes;
                     binding.llScoutEntries.setVisibility(View.VISIBLE);
+
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_scoutsNo) {
                     binding.llScoutEntries.setVisibility(View.GONE);
+                    binding.etScGuNmae.setText("");
+                    binding.etScGuCtc.setText("");
                     scouts_guides_status = AppConstants.No;
                 } else {
                     binding.llScoutEntries.setVisibility(View.GONE);
+                    binding.etScGuNmae.setText("");
+                    binding.etScGuCtc.setText("");
                     scouts_guides_status = null;
                 }
             }
@@ -260,12 +270,31 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_nccStudImpNo) {
                     binding.llNccEntries.setVisibility(View.GONE);
                     ncc_stu_impl = AppConstants.No;
+                    binding.nccTeaName.setText("");
+                    binding.nccTeaCtc.setText("");
+                    binding.nccBatNum.setText("");
                 } else {
                     binding.llNccEntries.setVisibility(View.GONE);
                     ncc_stu_impl = null;
+                    binding.nccTeaName.setText("");
+                    binding.nccTeaCtc.setText("");
+                    binding.nccBatNum.setText("");
                 }
             }
         });
+
+      /*  binding.rgParentMeeting.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_yes) {
+                    smc_parents_meeting = AppConstants.Yes;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_no) {
+                    smc_parents_meeting = AppConstants.No;
+                } else {
+                    smc_parents_meeting = null;
+                }
+            }
+        });*/
 
         binding.rgSmcElections.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -276,9 +305,31 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_smcElectionsNo) {
                     smc_election_status = AppConstants.No;
                     binding.llSmcElectionsEnties.setVisibility(View.GONE);
+
+                    binding.smcName.setText("");
+                    binding.smcNum.setText("");
+                    binding.smcResolution.setText("");
+                    binding.rgParentMeeting.clearCheck();
                 } else {
                     smc_election_status = null;
                     binding.llSmcElectionsEnties.setVisibility(View.GONE);
+                    binding.smcName.setText("");
+                    binding.smcNum.setText("");
+                    binding.smcResolution.setText("");
+                    binding.rgParentMeeting.clearCheck();
+                }
+            }
+        });
+
+        binding.rgParentMeeting.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_yes) {
+                    smc_parents_meeting = AppConstants.Yes;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.parents_meeting_no) {
+                    smc_parents_meeting = AppConstants.No;
+                } else {
+                    smc_parents_meeting = null;
                 }
             }
         });
@@ -292,28 +343,24 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_kitchenAvailNo) {
                     binding.llKitchenEntries.setVisibility(View.GONE);
                     kitchen_garden_status = AppConstants.No;
+
+                    binding.kitType.setText("");
+                    binding.kitInChargeName.setText("");
+                    binding.kitInChaCtc.setText("");
+                    binding.etPlantsCnt.setText("");
+
                 } else {
                     binding.llKitchenEntries.setVisibility(View.GONE);
                     kitchen_garden_status = null;
+
+                    binding.kitType.setText("");
+                    binding.kitInChargeName.setText("");
+                    binding.kitInChaCtc.setText("");
+                    binding.etPlantsCnt.setText("");
                 }
             }
         });
 
-        binding.rgHarithaharam.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamYes) {
-                    harita_haram_status = AppConstants.Yes;
-                    binding.llPlants.setVisibility(View.VISIBLE);
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_harithaharamNo) {
-                    harita_haram_status = AppConstants.No;
-                    binding.llPlants.setVisibility(View.GONE);
-                } else {
-                    harita_haram_status = null;
-                }
-            }
-        });
         binding.rgStudCounElect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -321,17 +368,17 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     student_council_ele_status = AppConstants.Yes;
                     binding.llNameOfCommDisplayed.setVisibility(View.VISIBLE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
-                    binding.stuNameLl.setVisibility(View.VISIBLE);
+                    binding.llStuCouDate.setVisibility(View.GONE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_studCounElecNo) {
                     student_council_ele_status = AppConstants.No;
                     binding.llStudCommEntries.setVisibility(View.VISIBLE);
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
-                    binding.stuNameLl.setVisibility(View.GONE);
+                    binding.llStuCouDate.setVisibility(View.VISIBLE);
                 } else {
                     student_council_ele_status = null;
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
-                    binding.stuNameLl.setVisibility(View.GONE);
+                    binding.llStuCouDate.setVisibility(View.GONE);
                 }
             }
         });
@@ -362,23 +409,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.btnViewplant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CoCurricularActivity.this, PlantsInfoActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .putExtra(AppConstants.FROM_CLASS, AppConstants.COCAR));
-            }
-        });
-        binding.btnAddplant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showplantDetails();
-            }
-        });
-
-
-        binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
+        binding.etStuCouncilDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lastMeetingDateSelection();
@@ -421,21 +452,6 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        LiveData<Integer> liveData1 = cocurricularViewModel.getPlantsCnt();
-        liveData1.observe(CoCurricularActivity.this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer cnt) {
-
-                binding.btnAddplant.setVisibility(View.VISIBLE);
-                if (cnt != null && cnt > 0) {
-                    binding.btnViewplant.setVisibility(View.VISIBLE);
-                    slNoCnt = cnt;
-                } else {
-                    slNoCnt = 0;
-                    binding.btnViewplant.setVisibility(View.GONE);
-                }
-            }
-        });
 
         try {
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
@@ -621,6 +637,9 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private boolean submitValidate() {
         pd_pft_name = binding.pdPftEt.getText().toString();
         pd_pft_num = binding.pdMobEt.getText().toString();
+        district_level = binding.etDistrict.getText().toString();
+        state_level = binding.etState.getText().toString();
+        national_level = binding.etNational.getText().toString();
         land_measure = binding.etLand.getText().toString();
 
         scout_guide_name = binding.etScGuNmae.getText().toString();
@@ -632,16 +651,15 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
         smc_chai_name = binding.smcName.getText().toString();
         smc_chai_contact = binding.smcNum.getText().toString();
-        smc_parents_meeting = binding.smcCon.getText().toString();
+        smc_resolution = binding.smcResolution.getText().toString();
 
-        kitchen_event_in_charge_name = binding.kitEveName.getText().toString();
         type_kitchen_garden = binding.kitType.getText().toString();
         kitchen_in_charge_name = binding.kitInChargeName.getText().toString();
         kitchen_in_charge_contact = binding.kitInChaCtc.getText().toString();
+        plants_count = binding.etPlantsCnt.getText().toString();
 
         stu_com_name_dis_status_reason = binding.reasonEt.getText().toString();
-        stu_Cou_cap_name = binding.couName.getText().toString();
-        stu_Cou_date = binding.etMedicalCheckupDate.getText().toString();
+        stu_Cou_date = binding.etStuCouncilDate.getText().toString();
 
         boolean returnFlag = true;
         if (TextUtils.isEmpty(spo_mat_rec)) {
@@ -669,6 +687,18 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                 || pd_pft_num.startsWith("7") || pd_pft_num.startsWith("8") || pd_pft_num.startsWith("9"))) {
             binding.pdMobEt.requestFocus();
             showSnackBar("Enter valid mobile number");
+            returnFlag = false;
+        } else if (TextUtils.isEmpty(district_level)) {
+            binding.etDistrict.requestFocus();
+            showSnackBar("Enter District Level");
+            returnFlag = false;
+        } else if (TextUtils.isEmpty(state_level)) {
+            binding.etState.requestFocus();
+            showSnackBar("Enter State Level");
+            returnFlag = false;
+        } else if (TextUtils.isEmpty(national_level)) {
+            binding.etNational.requestFocus();
+            showSnackBar("Enter National Level");
             returnFlag = false;
         } else if (TextUtils.isEmpty(play_avail)) {
             showSnackBar("Select play ground available");
@@ -760,13 +790,17 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.smcChiCtc.requestFocus();
             showSnackBar("Enter valid SMC chairman mobile number");
             returnFlag = false;
+        } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
+                && TextUtils.isEmpty(smc_resolution)) {
+            binding.smcResolution.requestFocus();
+            showSnackBar("Enter SMC Resolution noted");
+            returnFlag = false;
+        } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
+                && TextUtils.isEmpty(smc_parents_meeting)) {
+            showSnackBar("Select parents meeting conducted");
+            returnFlag = false;
         } else if (TextUtils.isEmpty(kitchen_garden_status)) {
             showSnackBar("Select kitchen garden status");
-            returnFlag = false;
-        } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
-                && TextUtils.isEmpty(kitchen_event_in_charge_name)) {
-            binding.eventKitchen.requestFocus();
-            showSnackBar("Enter event of kitchen in charge");
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(type_kitchen_garden)) {
@@ -794,13 +828,12 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.kitchenInchargeCtc.requestFocus();
             showSnackBar("Enter valid kitchen in charge contact number");
             returnFlag = false;
-        } else if (TextUtils.isEmpty(harita_haram_status)) {
-            showSnackBar("Select harita haram conducted status");
+        } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
+                && TextUtils.isEmpty(plants_count)) {
+            binding.etPlantsCnt.requestFocus();
+            showSnackBar("Enter Number of plants");
             returnFlag = false;
-        } else if (harita_haram_status.equals(AppConstants.Yes) && !(plantsEntities != null && plantsEntities.size() > 0)) {
-            showSnackBar("Submit haritha haram information by clicking add button");
-            returnFlag = false;
-        } else if (TextUtils.isEmpty(student_council_ele_status)) {
+        }  else if (TextUtils.isEmpty(student_council_ele_status)) {
             showSnackBar("Select student council election conducted status");
             returnFlag = false;
         } else if (student_council_ele_status.equals(AppConstants.Yes) && TextUtils.isEmpty(stu_com_name_dis_status)) {
@@ -810,10 +843,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.etReason.requestFocus();
             showSnackBar("Enter reason");
             returnFlag = false;
-        } else if (student_council_ele_status.equals(AppConstants.Yes) && TextUtils.isEmpty(stu_Cou_cap_name)) {
-            showSnackBar("Enter student council captain name");
-            returnFlag = false;
-        } else if (student_council_ele_status.equals(AppConstants.Yes) && TextUtils.isEmpty(stu_Cou_date)) {
+        } else if (student_council_ele_status.equals(AppConstants.No) && TextUtils.isEmpty(stu_Cou_date)) {
             showSnackBar("Enter student council date");
             returnFlag = false;
         }
@@ -848,7 +878,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
                         stu_Cou_date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        binding.etMedicalCheckupDate.setText(stu_Cou_date);
+                        binding.etStuCouncilDate.setText(stu_Cou_date);
 
                     }
                 }, mYear, mMonth, mDay);

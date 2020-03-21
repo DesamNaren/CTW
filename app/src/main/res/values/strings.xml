@@ -255,15 +255,16 @@
     <string name="whether_scouts_guides_implemented_in_school">Whether scouts / guides implemented in school</string>
     <string name="scout_master_guide_captain_name">Scout Master/ Guide captain name</string>
     <string name="mobile_number">Mobile number</string>
-    <string name="whether_ncc_student_implemented_in_school">Whether NCC student implemented in school</string>
+    <string name="whether_ncc_student_implemented_in_school">Whether NCC implemented in school</string>
     <string name="name_of_the_ncc_teacher">Name of the NCC teacher</string>
     <string name="battalion_number">Battalion number</string>
     <string name="whether_smc_elections_conducted">Whether SMC elections conducted.</string>
     <string name="name_of_the_smc_chairman">Name of the SMC chairman</string>
-    <string name="conducting_of_parents_meeting_resolution_noted">Conducting of parents meeting resolution noted</string>
+    <string name="parents_meeting_conducted">Did the parents meeting conducted</string>
+    <string name="resolution_noted">Resolution noted</string>
     <string name="whether_kitchen_garden_available">Whether kitchen garden available</string>
     <string name="event_of_kitchen_in_charge">Event of kitchen in charge</string>
-    <string name="types_of_kitchen_garden">Types of kitchen garden</string>
+    <string name="types_of_kitchen_garden">Varieties of kitchen Garden</string>
     <string name="name_of_the_kitchen_garden_in_charge_teacher">Name of the kitchen garden in charge/ teacher</string>
     <string name="whether_haritha_haram_conducted_2019_2020">Whether Haritha Haram conducted 2019-2020</string>
     <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019- 2020</string>
@@ -841,5 +842,9 @@
     <string name="mai_ass_reg">Select library room is maintaining the library register</string>
     <string name="sel_timetable">Select timetable displayed</string>
     <string name="no_of_classwise_punadi_2_books_required">No of classwise Punadi-2 books required.</string>
+    <string name="district_level">District Level</string>
+    <string name="national_level">National Level</string>
+    <string name="number_of_plants">Number of plants</string>
+    <string name="is_the_student_council_displayed">Is the student council displayed</string>
 
 </resources>

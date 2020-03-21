@@ -29,6 +29,10 @@ public class CoCurricularEntity {
     private String pd_pft_name;
     private String pd_pft_contact;
 
+    private String district_level;
+    private String state_level;
+    private String national_level;
+
     private List<StudAchievementEntity> studAchievementEntities = null;
 
     private String play_ground_avail;
@@ -50,21 +54,58 @@ public class CoCurricularEntity {
     private String smc_ele_chairman_name;
     private String smc_ele_chairman_contact;
     private String smc_ele_con_parent_meeting;
+    private String smc_ele_resolution;
 
     private String kitchen_garden_status;
-    private String kitchen_in_charge_event_name;
     private String kitchen_garden_types;
     private String kitchen_garden_in_charge_name;
     private String kitchen_garden_in_charge_contact;
-
-    private String harita_haram_status;
-    private List<PlantsEntity> plantsEntities = null;
+    private String plants_cnt;
 
     private String stu_cou_ele_status;
     private String stu_com_display_status;
-    private String stu_cou_captain_name;
     private String reason;
     private String stu_cou_date;
+
+    public String getPlants_cnt() {
+        return plants_cnt;
+    }
+
+    public void setPlants_cnt(String plants_cnt) {
+        this.plants_cnt = plants_cnt;
+    }
+
+    public String getSmc_ele_resolution() {
+        return smc_ele_resolution;
+    }
+
+    public void setSmc_ele_resolution(String smc_ele_resolution) {
+        this.smc_ele_resolution = smc_ele_resolution;
+    }
+
+    public String getDistrict_level() {
+        return district_level;
+    }
+
+    public void setDistrict_level(String district_level) {
+        this.district_level = district_level;
+    }
+
+    public String getState_level() {
+        return state_level;
+    }
+
+    public void setState_level(String state_level) {
+        this.state_level = state_level;
+    }
+
+    public String getNational_level() {
+        return national_level;
+    }
+
+    public void setNational_level(String national_level) {
+        this.national_level = national_level;
+    }
 
     public String getReason() {
         return reason;
@@ -283,14 +324,6 @@ public class CoCurricularEntity {
         this.kitchen_garden_status = kitchen_garden_status;
     }
 
-    public String getKitchen_in_charge_event_name() {
-        return kitchen_in_charge_event_name;
-    }
-
-    public void setKitchen_in_charge_event_name(String kitchen_in_charge_event_name) {
-        this.kitchen_in_charge_event_name = kitchen_in_charge_event_name;
-    }
-
     public String getKitchen_garden_types() {
         return kitchen_garden_types;
     }
@@ -315,22 +348,6 @@ public class CoCurricularEntity {
         this.kitchen_garden_in_charge_contact = kitchen_garden_in_charge_contact;
     }
 
-    public String getHarita_haram_status() {
-        return harita_haram_status;
-    }
-
-    public void setHarita_haram_status(String harita_haram_status) {
-        this.harita_haram_status = harita_haram_status;
-    }
-
-    public List<PlantsEntity> getPlantsEntities() {
-        return plantsEntities;
-    }
-
-    public void setPlantsEntities(List<PlantsEntity> plantsEntities) {
-        this.plantsEntities = plantsEntities;
-    }
-
     public String getStu_cou_ele_status() {
         return stu_cou_ele_status;
     }
@@ -347,13 +364,7 @@ public class CoCurricularEntity {
         this.stu_com_display_status = stu_com_display_status;
     }
 
-    public String getStu_cou_captain_name() {
-        return stu_cou_captain_name;
-    }
 
-    public void setStu_cou_captain_name(String stu_cou_captain_name) {
-        this.stu_cou_captain_name = stu_cou_captain_name;
-    }
 
     public String getStu_cou_date() {
         return stu_cou_date;
