@@ -93,8 +93,6 @@ public class AcademicEntity {
     @ColumnInfo
     private String labroom_available;
     @ColumnInfo
-    private String labName;
-    @ColumnInfo
     private String labInchargeName;
     @ColumnInfo
     private String labMobileNo;
@@ -102,8 +100,7 @@ public class AcademicEntity {
     private String lab_mat_entered_reg;
     @ColumnInfo
     private String lab_mat_entered_reg_reason;
-    @ColumnInfo
-    private String library_room_available;
+
     @ColumnInfo
     private String noOfBooks;
     @ColumnInfo
@@ -121,6 +118,16 @@ public class AcademicEntity {
     private String TvRotWorkingStatus;
     @ColumnInfo
     private String tabs_stud_using_as_per_sched;
+    @ColumnInfo
+    private String punadi_books_req;
+
+    public String getPunadi_books_req() {
+        return punadi_books_req;
+    }
+
+    public void setPunadi_books_req(String punadi_books_req) {
+        this.punadi_books_req = punadi_books_req;
+    }
 
     @ColumnInfo(name = "grade_info")
     private List<AcademicGradeEntity> academicGradeEntities = null;
@@ -164,8 +171,6 @@ public class AcademicEntity {
     private String noOfComputersAvailable;
     @ColumnInfo
     private String compWorkingStatus;
-    @ColumnInfo
-    private String workingStatusProjector;
 
     @ColumnInfo
     private String ict_instr_avail;
@@ -430,14 +435,6 @@ public class AcademicEntity {
         this.labroom_available = labroom_available;
     }
 
-    public String getLabName() {
-        return labName;
-    }
-
-    public void setLabName(String labName) {
-        this.labName = labName;
-    }
-
     public String getLabInchargeName() {
         return labInchargeName;
     }
@@ -460,14 +457,6 @@ public class AcademicEntity {
 
     public void setLab_mat_entered_reg(String lab_mat_entered_reg) {
         this.lab_mat_entered_reg = lab_mat_entered_reg;
-    }
-
-    public String getLibrary_room_available() {
-        return library_room_available;
-    }
-
-    public void setLibrary_room_available(String library_room_available) {
-        this.library_room_available = library_room_available;
     }
 
     public String getNoOfBooks() {
@@ -580,14 +569,6 @@ public class AcademicEntity {
 
     public void setCompWorkingStatus(String compWorkingStatus) {
         this.compWorkingStatus = compWorkingStatus;
-    }
-
-    public String getWorkingStatusProjector() {
-        return workingStatusProjector;
-    }
-
-    public void setWorkingStatusProjector(String workingStatusProjector) {
-        this.workingStatusProjector = workingStatusProjector;
     }
 
     public String getIct_instr_avail() {

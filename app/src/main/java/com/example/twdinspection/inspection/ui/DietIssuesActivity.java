@@ -251,6 +251,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgMenuChartPainted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_menu_chart_painted) {
+                    file_menu=null;
+                    flag_menu = 0;
                     menu_chart_painted = AppConstants.Yes;
                     binding.llMenuChart.setVisibility(View.VISIBLE);
                 }
@@ -330,7 +332,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     committee_exist = AppConstants.No;
                     binding.llDiscussWithComm.setVisibility(View.GONE);
                     discussed_with_committee = null;
-                    maintaining_register = null;
                 } else {
                     binding.rgDiscussedWithCommittee.clearCheck();
                     discussed_with_committee="";
@@ -597,8 +598,13 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
     @Override
     public void submitData() {
+        if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes)) {
             addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
-            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
+        } else {
+            file_menu = null;
+            addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MENU, String.valueOf(file_menu));
+        }
+        addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.OFFICER, String.valueOf(file_officer));
 
         long y = viewModel.insertPhotos(uploadPhotos);
         if (y >= 0) {

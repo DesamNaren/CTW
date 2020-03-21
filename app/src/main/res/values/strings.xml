@@ -100,7 +100,6 @@
     <string name="raise_request">Raise request to construct septic tank</string>
     <string name="is_drainage">Is drainage line functioning</string>
     <string name="is_solar">Is solar water heater available</string>
-    <string name="working_status">Working Status</string>
     <string name="add_class">Additional class rooms required?</string>
     <string name="add_dining">Additional dining halls required?</string>
     <string name="add_dorm">Additional dormitories required?</string>
@@ -508,7 +507,6 @@
     <string name="title_co_cir">Co Curricular &amp; Extra Curricular Activities</string>
     <string name="stu_ach">Student Achievements</string>
     <string name="plan_for_completing_the_syllabus_prepared">Plan for completing the syllabus prepared</string>
-    <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MTO</string>
     <string name="whether_punadi_2_books_supplied">Whether Punadi-2 books supplied</string>
     <string name="last_year_ssc_results_percentage">Last year SSC results Percentage</string>
     <string name="sufficient_books_supplied_as_per_strength">Sufficient books supplied as per strength</string>
@@ -521,7 +519,6 @@
     <string name="name_of_the_science_lab">Name of the science lab</string>
     <string name="name_of_the_science_lab_in_charge_teacher">Name of the science lab in charge teacher</string>
     <string name="lab_material_entered_in_the_stock_entry_register">Lab material entered in the stock entry register</string>
-    <string name="whether_library_room_is_available">Whether library room is available</string>
     <string name="no_of_books_available">No of books available</string>
     <string name="name_of_the_library_in_charge_teacher">Name of the library in charge Teacher</string>
     <string name="maintaining_the_accession_register">Maintaining the accession register</string>
@@ -677,7 +674,6 @@
     <string name="library_incharge">Enter name of the library incharge teacher</string>
     <string name="library_mob_num">Enter library mobile number</string>
     <string name="valid_lib_mob_num">Enter valid library mobile number</string>
-    <string name="mai_ass_reg">Select maintaining the accession register</string>
     <string name="light_fan_avail"><![CDATA[Select proper lighting & fans available]]></string>
     <string name="big_tv_avail"><![CDATA[Select Big TV & ROT (Receive Only Terminals) available]]></string>
     <string name="big_tv_status"><![CDATA[Select Big TV & ROT (Receive Only Terminals) Working Status]]></string>
@@ -693,7 +689,6 @@
     <string name="ict_name">Enter name of the ICT instructor</string>
     <string name="ict_mob">Enter ICT instructor mobile no</string>
     <string name="valid_ict_mob">Enter valid ICT instructor mobile no</string>
-    <string name="sel_timetable">Select timetable</string>
     <string name="com_syll_com">Select computer syllabus completed</string>
     <string name="com_lab_status">Select computer lab test conducted</string>
     <string name="sel_digital_content">Select digital content used by students</string>
@@ -840,5 +835,11 @@
     <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
     <string name="ro_plant">RO Plant</string>
+    <string name="working_status">Working condition</string>
+    <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MEO</string>
+    <string name="whether_library_room_is_available">Whether library room is maintaining the library register</string>
+    <string name="mai_ass_reg">Select library room is maintaining the library register</string>
+    <string name="sel_timetable">Select timetable displayed</string>
+    <string name="no_of_classwise_punadi_2_books_required">No of classwise Punadi-2 books required.</string>
 
 </resources>

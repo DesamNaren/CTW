@@ -327,14 +327,14 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         MultipartBody.Part body8 =
                 MultipartBody.Part.createFormData("image", file_storeroom.getName(), requestFile8);
         MultipartBody.Part body9 = null;
-        if (file_tds != null) {
+        if (file_tds != null && !file_tds.getPath().equalsIgnoreCase("null")) {
             RequestBody requestFile9 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_tds);
 
             body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
         }
         MultipartBody.Part body10 =null;
-        if (file_menu != null) {
+        if (file_menu != null && !file_menu.getPath().equalsIgnoreCase("null")) {
             RequestBody requestFile10 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
 
@@ -646,6 +646,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mGpsSwitchStateReceiver);
+        if ( customProgressDialog!=null && customProgressDialog.isShowing() ){
+            customProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -803,4 +806,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             e.printStackTrace();
         }
     }
+
+
 }

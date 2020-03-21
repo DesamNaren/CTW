@@ -40,14 +40,14 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     AcademicEntity academicEntity;
     String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength,
             plan_prepared, textbooks_rec, assessment_test_conducted, punadiPrgmConducted, punadi2_testmarks_entered,
-            kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg, library_room_available,
+            kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg,
             big_tv_rot_avail, mana_tv_lessons_shown, comp_lab_avail, ict_instr_avail, eLearning_avail, showing_stud, tabs_supplied,
             punadi_books_supplied, properly_using_manuals, plan_syll_comp_prepared, sufficient_books_supplied;
     String highestClassGradeA, highestClassGradeB, highestClassGradeC, highestClassGradeTotal, last_yr_ssc_percent,
-            punadiPrgmReason, punadi2TestmarksReason, karaDipathPrgmCondReason, labName, labInchargeName, labMobileNo,
+            punadiPrgmReason, punadiBooksReq, punadi2TestmarksReason, karaDipathPrgmCondReason, labInchargeName, labMobileNo,
             noOfBooks, nameLibraryIncharge, libraryMobileNo, TvRotWorkingStatus,
             maint_accession_reg, proper_light_fan, manaTvLessonsReason, manaTvInchargeName, manaTvMobileNo,
-            noOfComputersAvailable, compWorkingStatus, workingStatusProjector, nameIctInstr, mobNoIctInstr,
+            noOfComputersAvailable, compWorkingStatus, nameIctInstr, mobNoIctInstr,
             timetable_disp, comp_syll_completed, comp_lab_cond, digital_content_used, noOfTabs, tabInchargeName, tabInchargeMblno,
             stud_using_as_per_sched, tabs_timetable_disp, volSchoolCoordName, volSchoolCoordMobNo, eLearningInchrgName,
             eLearningInchrgMobileNo, separate_timetable_disp, labMatEnteredReason;
@@ -68,9 +68,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         binding.setViewModel(academicViewModel);
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
-        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
-        officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
-        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
+        instId = sharedPreferences.getString(AppConstants.INST_ID, null);
+        officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, null);
+        insTime = sharedPreferences.getString(AppConstants.INSP_TIME, null);
         try {
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
@@ -141,10 +141,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 int selctedItem = binding.rgPunadiBooksSupplied.getCheckedRadioButtonId();
                 if (selctedItem == R.id.punadi_books_supplied_yes) {
                     binding.llSufficientBooksSupplied.setVisibility(View.VISIBLE);
+                    binding.tvClasswiseBooksReq.setVisibility(View.GONE);
+                    binding.etClasswiseBooksReq.setText(null);
                     punadi_books_supplied = AppConstants.Yes;
                 } else if (selctedItem == R.id.punadi_books_supplied_no) {
                     binding.rgSufficientBooksSupplied.clearCheck();
                     binding.llSufficientBooksSupplied.setVisibility(View.GONE);
+                    binding.tvClasswiseBooksReq.setVisibility(View.VISIBLE);
                     punadi_books_supplied = AppConstants.No;
                 } else {
                     binding.llSufficientBooksSupplied.setVisibility(View.GONE);
@@ -170,7 +173,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPunadiPrgmConducted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_punadi_prgm_conducted_yes) {
-                    binding.etPunadiPrgmReason.setText("");
+                    binding.etPunadiPrgmReason.setText(null);
                     binding.tPunadiPrgmReason.setVisibility(View.GONE);
                     punadiPrgmConducted = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_punadi_prgm_conducted_no) {
@@ -187,7 +190,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgPunadi2TestmarksEntered.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_punadi2_testmarks_entered_yes) {
-                    binding.etPunadi2TestmarksReason.setText("");
+                    binding.etPunadi2TestmarksReason.setText(null);
                     binding.tPunadi2TestmarksReason.setVisibility(View.GONE);
                     punadi2_testmarks_entered = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_punadi2_testmarks_entered_no) {
@@ -204,7 +207,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgKaraDipathPrgmCond.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_kara_dipath_prgm_cond_yes) {
-                    binding.etKaraDipathPrgmCond.setText("");
+                    binding.etKaraDipathPrgmCond.setText(null);
                     binding.tKaraDipathPrgmCond.setVisibility(View.GONE);
                     kara_dipath_prgm_cond = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_kara_dipath_prgm_cond_no) {
@@ -311,9 +314,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llNameScienceLab.setVisibility(View.VISIBLE);
                     labroom_available = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_labroom_available_no) {
-                    binding.etLabName.setText("");
-                    binding.etLabInchargeName.setText("");
-                    binding.etLabMobileNo.setText("");
+                    binding.etLabInchargeName.setText(null);
+                    binding.etLabMobileNo.setText(null);
                     binding.llNameScienceLab.setVisibility(View.GONE);
                     labroom_available = AppConstants.No;
                 } else {
@@ -322,19 +324,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 }
             }
         });
-        binding.rgMaintAccessionReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgMaintAccessionReg.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_maint_accession_reg_yes) {
-                    maint_accession_reg = AppConstants.Yes;
-                } else if (selctedItem == R.id.rb_maint_accession_reg_no) {
-                    maint_accession_reg = AppConstants.No;
-                } else {
-                    maint_accession_reg = null;
-                }
-            }
-        });
+
         binding.rgProperLightFan.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -353,7 +343,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgLabMatEnteredReg.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_lab_mat_entered_reg_yes) {
-                    binding.etMatEnterRegReason.setText("");
+                    binding.etMatEnterRegReason.setText(null);
                     binding.tMatEnterRegReason.setVisibility(View.GONE);
                     lab_mat_entered_reg = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_lab_mat_entered_reg_no) {
@@ -366,23 +356,20 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.rgLibraryRoomAvailable.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.rgMaintLibReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgLibraryRoomAvailable.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_library_room_available_yes) {
+                int selctedItem = binding.rgMaintLibReg.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_maint_accession_reg_yes) {
                     binding.llNoBooksAvailable.setVisibility(View.VISIBLE);
-                    library_room_available = AppConstants.Yes;
-                } else if (selctedItem == R.id.rb_library_room_available_no) {
-                    binding.etNoOfBooks.setText("");
-                    binding.etNameLibraryIncharge.setText("");
-                    binding.etLibraryMobileNo.setText("");
+                    maint_accession_reg = AppConstants.Yes;
+                } else if (selctedItem == R.id.rb_maint_accession_reg_no) {
+                    binding.etNoOfBooks.setText(null);
                     binding.llNoBooksAvailable.setVisibility(View.GONE);
-                    binding.rgMaintAccessionReg.clearCheck();
-                    library_room_available = AppConstants.No;
+                    maint_accession_reg = AppConstants.No;
                 } else {
                     binding.llNoBooksAvailable.setVisibility(View.GONE);
-                    library_room_available = null;
+                    maint_accession_reg = null;
                 }
             }
         });
@@ -423,15 +410,14 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgManaTvLessonsShown.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_mana_tv_lessons_shown_yes) {
-                    binding.etManaTvLessonsReason.setText("");
-                    binding.etManaTvInchargeName.setText("");
-                    binding.etManaTvMobileNo.setText("");
+                    binding.etManaTvLessonsReason.setText(null);
                     binding.llManaTvLessonsReason.setVisibility(View.GONE);
                     mana_tv_lessons_shown = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_mana_tv_lessons_shown_no) {
                     binding.llManaTvLessonsReason.setVisibility(View.VISIBLE);
                     mana_tv_lessons_shown = AppConstants.No;
                 } else {
+                    binding.etManaTvLessonsReason.setText(null);
                     binding.llManaTvLessonsReason.setVisibility(View.GONE);
                     mana_tv_lessons_shown = null;
                 }
@@ -445,19 +431,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llComputerLab.setVisibility(View.VISIBLE);
                     comp_lab_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_comp_lab_avail_no) {
-                    binding.etNoOfComputersAvailable.setText("");
-                    binding.etCompWorkingStatus.setText("");
-                    binding.etWorkingStatusProjector.setText("");
+                    binding.etNoOfComputersAvailable.setText(null);
+                    binding.etCompWorkingStatus.setText(null);
                     binding.rgIctInstrAvail.clearCheck();
                     binding.rgTimetableDisp.clearCheck();
-                    binding.etNameIctInstr.setText("");
-                    binding.etMobNoIctInstr.setText("");
+                    binding.etNameIctInstr.setText(null);
+                    binding.etMobNoIctInstr.setText(null);
                     binding.rgCompSyllCompleted.clearCheck();
                     binding.rgCompLabCond.clearCheck();
                     binding.rgDigitalContentUsed.clearCheck();
                     binding.llComputerLab.setVisibility(View.GONE);
                     comp_lab_avail = AppConstants.No;
                 } else {
+                    binding.etNoOfComputersAvailable.setText(null);
                     binding.llComputerLab.setVisibility(View.GONE);
                     comp_lab_avail = null;
                 }
@@ -471,11 +457,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llIctInstr.setVisibility(View.VISIBLE);
                     ict_instr_avail = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_ict_instr_avail_no) {
-                    binding.etNameIctInstr.setText("");
-                    binding.etMobNoIctInstr.setText("");
+                    binding.etNameIctInstr.setText(null);
+                    binding.etMobNoIctInstr.setText(null);
                     binding.llIctInstr.setVisibility(View.GONE);
                     ict_instr_avail = AppConstants.No;
                 } else {
+                    binding.etNameIctInstr.setText(null);
+                    binding.etMobNoIctInstr.setText(null);
                     binding.llIctInstr.setVisibility(View.GONE);
                     ict_instr_avail = null;
                 }
@@ -545,10 +533,10 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.rgShowingStud.clearCheck();
                     binding.rgSeparateTimetableDisp.clearCheck();
                     binding.rgTabsSupplied.clearCheck();
-                    binding.etELearningInchrgName.setText("");
-                    binding.etELearningInchrgMobileNo.setText("");
-                    binding.etVolSchoolCoordName.setText("");
-                    binding.etVolSchoolCoordMobNo.setText("");
+                    binding.etELearningInchrgName.setText(null);
+                    binding.etELearningInchrgMobileNo.setText(null);
+                    binding.etVolSchoolCoordName.setText(null);
+                    binding.etVolSchoolCoordMobNo.setText(null);
                     binding.llElearning.setVisibility(View.GONE);
                     eLearning_avail = AppConstants.No;
                 } else {
@@ -565,8 +553,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llNameVolSchool.setVisibility(View.VISIBLE);
                     showing_stud = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_showing_stud_no) {
-                    binding.etVolSchoolCoordName.setText("");
-                    binding.etVolSchoolCoordMobNo.setText("");
+                    binding.etVolSchoolCoordName.setText(null);
+                    binding.etVolSchoolCoordMobNo.setText(null);
                     binding.llNameVolSchool.setVisibility(View.GONE);
                     showing_stud = AppConstants.No;
                 } else {
@@ -609,9 +597,17 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     binding.llTabs.setVisibility(View.VISIBLE);
                     tabs_supplied = AppConstants.Yes;
                 } else if (selctedItem == R.id.rb_tabs_supplied_no) {
+                    binding.etNoOfTabs.setText(null);
+                    binding.etTabInchargeName.setText(null);
+                    binding.etTabInchargeMblno.setText(null);
+                    binding.rgStudUsingAsPerSched.clearCheck();
                     binding.llTabs.setVisibility(View.GONE);
                     tabs_supplied = AppConstants.No;
                 } else {
+                    binding.etNoOfTabs.setText(null);
+                    binding.etTabInchargeName.setText(null);
+                    binding.etTabInchargeMblno.setText(null);
+                    binding.rgStudUsingAsPerSched.clearCheck();
                     binding.llTabs.setVisibility(View.GONE);
                     tabs_supplied = null;
                 }
@@ -650,10 +646,10 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 highestClassGradeTotal = binding.highestClassTotal.getText().toString().trim();
                 last_yr_ssc_percent = binding.lastYrSscPercentEt.getText().toString().trim();
                 punadiPrgmReason = binding.etPunadiPrgmReason.getText().toString().trim();
+                punadiBooksReq = binding.etClasswiseBooksReq.getText().toString().trim();
                 punadi2TestmarksReason = binding.etPunadi2TestmarksReason.getText().toString().trim();
                 karaDipathPrgmCondReason = binding.etKaraDipathPrgmCond.getText().toString().trim();
 
-                labName = binding.etLabName.getText().toString().trim();
                 labInchargeName = binding.etLabInchargeName.getText().toString().trim();
                 labMobileNo = binding.etLabMobileNo.getText().toString().trim();
 
@@ -669,7 +665,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
                 noOfComputersAvailable = binding.etNoOfComputersAvailable.getText().toString().trim();
                 compWorkingStatus = binding.etCompWorkingStatus.getText().toString().trim();
-                workingStatusProjector = binding.etWorkingStatusProjector.getText().toString().trim();
 
                 nameIctInstr = binding.etNameIctInstr.getText().toString().trim();
                 mobNoIctInstr = binding.etMobNoIctInstr.getText().toString().trim();
@@ -706,6 +701,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     academicEntity.setPunadi_books_supplied(punadi_books_supplied);
                     academicEntity.setSufficient_books_supplied(sufficient_books_supplied);
                     academicEntity.setPunadiPrgmConducted(punadiPrgmConducted);
+                    academicEntity.setPunadi_books_req(punadiBooksReq);
                     academicEntity.setPunadiPrgmReason(punadiPrgmReason);
                     academicEntity.setPunadi2_testmarks_entered(punadi2_testmarks_entered);
                     academicEntity.setPunadi2TestmarksReason(punadi2TestmarksReason);
@@ -714,13 +710,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     academicEntity.setLabManuals_received(labManuals_received);
                     academicEntity.setProperly_using_manuals(properly_using_manuals);
                     academicEntity.setLabroom_available(labroom_available);
-                    academicEntity.setLabName(labName);
                     academicEntity.setLabInchargeName(labInchargeName);
                     academicEntity.setLabMobileNo(labMobileNo);
                     academicEntity.setLab_mat_entered_reg(lab_mat_entered_reg);
                     academicEntity.setLab_mat_entered_reg_reason(labMatEnteredReason);
 
-                    academicEntity.setLibrary_room_available(library_room_available);
                     academicEntity.setNoOfBooks(noOfBooks);
                     academicEntity.setNameLibraryIncharge(nameLibraryIncharge);
                     academicEntity.setLibraryMobileNo(libraryMobileNo);
@@ -739,7 +733,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     academicEntity.setComp_lab_avail(comp_lab_avail);
                     academicEntity.setNoOfComputersAvailable(noOfComputersAvailable);
                     academicEntity.setCompWorkingStatus(compWorkingStatus);
-                    academicEntity.setWorkingStatusProjector(workingStatusProjector);
 
 
                     academicEntity.setIct_instr_avail(ict_instr_avail);
@@ -874,10 +867,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.sel_sci_lab_avail));
             return false;
         }
-        if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labName)) {
-            showSnackBar(getString(R.string.name_sci_lab));
-            return false;
-        }
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labInchargeName)) {
             showSnackBar(getString(R.string.name_sci_lab_incharge));
             return false;
@@ -911,41 +900,36 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.lab_mat_reason));
             return false;
         }
-
-
-        if (TextUtils.isEmpty(library_room_available)) {
-            showSnackBar(getString(R.string.library_room_avail));
+        if ( TextUtils.isEmpty(maint_accession_reg)) {
+            showSnackBar(getString(R.string.mai_ass_reg));
             return false;
         }
-        if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfBooks)) {
+        if (maint_accession_reg.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfBooks)) {
             showSnackBar(getString(R.string.enter_num_of_books));
             return false;
         }
-        if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(nameLibraryIncharge)) {
+        if (TextUtils.isEmpty(nameLibraryIncharge)) {
             showSnackBar(getString(R.string.library_incharge));
             return false;
         }
-        if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(libraryMobileNo)) {
+        if (TextUtils.isEmpty(libraryMobileNo)) {
             showSnackBar(getString(R.string.library_mob_num));
             return false;
         }
 
-        if (library_room_available.equals(AppConstants.Yes) && libraryMobileNo.length() != 10) {
+        if (libraryMobileNo.length() != 10) {
             showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
 
 
-        if (library_room_available.equals(AppConstants.Yes) && !TextUtils.isEmpty(libraryMobileNo)
+        if (!TextUtils.isEmpty(libraryMobileNo)
                 && !(libraryMobileNo.startsWith("9") || libraryMobileNo.startsWith("8") || libraryMobileNo.startsWith("7") ||
                 libraryMobileNo.startsWith("6"))) {
             showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
-        if (library_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(maint_accession_reg)) {
-            showSnackBar(getString(R.string.mai_ass_reg));
-            return false;
-        }
+
         if (TextUtils.isEmpty(proper_light_fan)) {
             showSnackBar(getString(R.string.light_fan_avail));
             return false;
@@ -968,23 +952,21 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.mana_tv_reason));
             return false;
         }
-        if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvInchargeName)) {
+        if (TextUtils.isEmpty(manaTvInchargeName)) {
             showSnackBar(getString(R.string.mana_tv_incharge));
             return false;
         }
-        if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvMobileNo)) {
+        if (TextUtils.isEmpty(manaTvMobileNo)) {
             showSnackBar(getString(R.string.mana_tv_mob_num));
             return false;
         }
 
-        if (mana_tv_lessons_shown.equals(AppConstants.No)
-                && manaTvMobileNo.length() != 10) {
+        if ( manaTvMobileNo.length() != 10) {
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
-        if (mana_tv_lessons_shown.equals(AppConstants.No)
-                && !(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
+        if (!(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
                 manaTvMobileNo.startsWith("6"))) {
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
@@ -994,16 +976,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.com_lab_avail));
             return false;
         }
+
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfComputersAvailable)) {
             showSnackBar(getString(R.string.num_of_com));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(compWorkingStatus)) {
             showSnackBar(getString(R.string.com_status));
-            return false;
-        }
-        if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(workingStatusProjector)) {
-            showSnackBar("Enter Working Status of Projector");
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(ict_instr_avail)) {
@@ -1047,7 +1026,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.sel_digital_content));
             return false;
         }
-
 
         if (TextUtils.isEmpty(eLearning_avail)) {
             showSnackBar(getString(R.string.eLe_avail));

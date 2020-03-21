@@ -1429,7 +1429,7 @@
                                     android:textColor="@color/black" />
 
                                 <RadioGroup
-                                    android:id="@+id/rg_maint_accession_reg"
+                                    android:id="@+id/rg_maint_lib_reg"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_5dp"
@@ -2141,7 +2141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="74."
+                        android:text="72."
                         android:textColor="@color/black" />
 
                     <LinearLayout
