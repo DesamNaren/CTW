@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private boolean loginFlag;
     private static final int REQUEST_PERMISSION_CODE = 2000;
     private CustomLayoutForPermissionsBinding customBinding;
     private Context context;
@@ -40,13 +39,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         context = SplashActivity.this;
 
-        try {
-            SharedPreferences sharedPreferences = TWDApplication.get(this).getPreferences();
-            loginFlag = sharedPreferences.getBoolean(AppConstants.LOGIN_FLAG, false);
-        } catch (Exception e) {
-            loginFlag = false;
-            e.printStackTrace();
-        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -67,10 +59,7 @@ public class SplashActivity extends AppCompatActivity {
                                 R.layout.custom_layout_for_permissions);
                         customBinding.accept.setOnClickListener(onBtnClick);
                         customBinding.declined.setOnClickListener(onBtnClick);
-                    } else if (loginFlag) {
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                        finish();
-                    } else {
+                    }  else {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                         finish();
 
@@ -94,13 +83,10 @@ public class SplashActivity extends AppCompatActivity {
                                 REQUEST_PERMISSION_CODE);
                         break;
                     case R.id.declined:
-                        if (loginFlag) {
+
                             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                             finish();
-                        } else {
-                            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                            finish();
-                        }
+
 
                         break;
                 }
@@ -123,13 +109,10 @@ public class SplashActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                if (loginFlag) {
+
                                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                                     finish();
-                                } else {
-                                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                                    finish();
-                                }
+
                             }
                         }, 2000);
                     } else {

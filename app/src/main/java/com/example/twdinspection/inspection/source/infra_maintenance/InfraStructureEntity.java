@@ -32,7 +32,7 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String drinking_water_source;
 
-     @ColumnInfo()
+    @ColumnInfo()
     private String ro_plant_woking;
 
     @ColumnInfo()
@@ -52,13 +52,7 @@ public class InfraStructureEntity {
     private String inverterWorkingStatus;
 
     @ColumnInfo()
-    private String lighting_facility;
-
-    @ColumnInfo()
     private String electricity_wiring;
-
-    @ColumnInfo()
-    private String electricity_wiring_repairs_req;
 
     @ColumnInfo()
     private String enough_fans;
@@ -73,6 +67,9 @@ public class InfraStructureEntity {
     private String ceilingfans_nonworking;
 
     @ColumnInfo()
+    private String ceilingfans_required;
+
+    @ColumnInfo()
     private String mountedfans_count;
 
     @ColumnInfo()
@@ -80,6 +77,9 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String mountedfans_nonworking;
+
+    @ColumnInfo()
+    private String mountedfans_required;
 
     @ColumnInfo()
     private String dininghall_available;
@@ -118,6 +118,15 @@ public class InfraStructureEntity {
     private String compWall_required;
 
     @ColumnInfo()
+    private String cc_cameras;
+
+    @ColumnInfo()
+    private String steam_cooking;
+
+    @ColumnInfo()
+    private String bunker_beds;
+
+    @ColumnInfo()
     private String gate_required;
 
     @ColumnInfo()
@@ -140,9 +149,6 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String heater_workingStatus;
-    //
-    @ColumnInfo()
-    private String additional_infra_required;
 
     @ColumnInfo()
     private String total_toilets;
@@ -168,28 +174,80 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String painting;
 
-    @ColumnInfo()
-    private String color;
-
 
     @ColumnInfo()
-    private String add_class_required;
+    private String add_req;
 
     @ColumnInfo()
     private String add_class_required_cnt;
 
     @ColumnInfo()
-    private String add_dining_required;
-
-    @ColumnInfo()
     private String add_dining_required_cnt;
-
-    @ColumnInfo()
-    private String add_dormitory_required;
 
     @ColumnInfo()
     private String add_dormitory_required_cnt;
 
+    @ColumnInfo()
+    private String add_toilets_required_cnt;
+
+    @ColumnInfo()
+    private String add_bathrooms_required_cnt;
+
+    public String getAdd_toilets_required_cnt() {
+        return add_toilets_required_cnt;
+    }
+
+    public void setAdd_toilets_required_cnt(String add_toilets_required_cnt) {
+        this.add_toilets_required_cnt = add_toilets_required_cnt;
+    }
+
+    public String getAdd_bathrooms_required_cnt() {
+        return add_bathrooms_required_cnt;
+    }
+
+    public void setAdd_bathrooms_required_cnt(String add_bathrooms_required_cnt) {
+        this.add_bathrooms_required_cnt = add_bathrooms_required_cnt;
+    }
+
+    public String getCc_cameras() {
+        return cc_cameras;
+    }
+
+    public void setCc_cameras(String cc_cameras) {
+        this.cc_cameras = cc_cameras;
+    }
+
+    public String getSteam_cooking() {
+        return steam_cooking;
+    }
+
+    public void setSteam_cooking(String steam_cooking) {
+        this.steam_cooking = steam_cooking;
+    }
+
+    public String getBunker_beds() {
+        return bunker_beds;
+    }
+
+    public void setBunker_beds(String bunker_beds) {
+        this.bunker_beds = bunker_beds;
+    }
+
+    public String getCeilingfans_required() {
+        return ceilingfans_required;
+    }
+
+    public void setCeilingfans_required(String ceilingfans_required) {
+        this.ceilingfans_required = ceilingfans_required;
+    }
+
+    public String getMountedfans_required() {
+        return mountedfans_required;
+    }
+
+    public void setMountedfans_required(String mountedfans_required) {
+        this.mountedfans_required = mountedfans_required;
+    }
 
     public String getRunning_water_facility() {
         return running_water_facility;
@@ -207,13 +265,6 @@ public class InfraStructureEntity {
         this.kitchen_good_condition = kitchen_good_condition;
     }
 
-    public String getAdd_class_required() {
-        return add_class_required;
-    }
-
-    public void setAdd_class_required(String add_class_required) {
-        this.add_class_required = add_class_required;
-    }
 
     public String getAdd_class_required_cnt() {
         return add_class_required_cnt;
@@ -221,14 +272,6 @@ public class InfraStructureEntity {
 
     public void setAdd_class_required_cnt(String add_class_required_cnt) {
         this.add_class_required_cnt = add_class_required_cnt;
-    }
-
-    public String getAdd_dining_required() {
-        return add_dining_required;
-    }
-
-    public void setAdd_dining_required(String add_dining_required) {
-        this.add_dining_required = add_dining_required;
     }
 
     public String getAdd_dining_required_cnt() {
@@ -239,13 +282,6 @@ public class InfraStructureEntity {
         this.add_dining_required_cnt = add_dining_required_cnt;
     }
 
-    public String getAdd_dormitory_required() {
-        return add_dormitory_required;
-    }
-
-    public void setAdd_dormitory_required(String add_dormitory_required) {
-        this.add_dormitory_required = add_dormitory_required;
-    }
 
     public String getAdd_dormitory_required_cnt() {
         return add_dormitory_required_cnt;
@@ -285,14 +321,6 @@ public class InfraStructureEntity {
 
     public void setInverterWorkingStatus(String inverterWorkingStatus) {
         this.inverterWorkingStatus = inverterWorkingStatus;
-    }
-
-    public String getElectricity_wiring_repairs_req() {
-        return electricity_wiring_repairs_req;
-    }
-
-    public void setElectricity_wiring_repairs_req(String electricity_wiring_repairs_req) {
-        this.electricity_wiring_repairs_req = electricity_wiring_repairs_req;
     }
 
     public String getRo_plant_reason() {
@@ -424,13 +452,6 @@ public class InfraStructureEntity {
         this.drinking_water_source = drinking_water_source;
     }
 
-    public String getLighting_facility() {
-        return lighting_facility;
-    }
-
-    public void setLighting_facility(String lighting_facility) {
-        this.lighting_facility = lighting_facility;
-    }
 
     public String getEnough_fans() {
         return enough_fans;
@@ -576,12 +597,12 @@ public class InfraStructureEntity {
         this.heater_workingStatus = heater_workingStatus;
     }
 
-    public String getAdditional_infra_required() {
-        return additional_infra_required;
+    public String getAdd_req() {
+        return add_req;
     }
 
-    public void setAdditional_infra_required(String additional_infra_required) {
-        this.additional_infra_required = additional_infra_required;
+    public void setAdd_req(String add_req) {
+        this.add_req = add_req;
     }
 
     public String getInverter_available() {
@@ -664,11 +685,4 @@ public class InfraStructureEntity {
         this.painting = painting;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 }
