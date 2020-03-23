@@ -33,7 +33,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     ActivityEntitlementsBinding binding;
     EntitlementsViewModel entitlementsViewModel;
     EntitlementsEntity entitlementsEntity;
-    String entitlementsProvidedToStudents, bedSheets, carpets, uniforms, sportsDress, slippers, nightDress, sanitaryNapkins, schoolBags, notesSupplied, cosmetics, hair_cut_complted, entitlementsUniforms;
+    String  bedSheets, carpets, uniforms, sportsDress, slippers, nightDress, sanitaryNapkins, schoolBags, notesSupplied, cosmetics, hair_cut_complted, entitlementsUniforms;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     String instId,officerID;
@@ -59,16 +59,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.rgEntitlementsProvidedToStudents.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgEntitlementsProvidedToStudents.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_entitlements_provided_to_students)
-                    entitlementsProvidedToStudents = AppConstants.Yes;
-                else
-                    entitlementsProvidedToStudents = AppConstants.No;
-            }
-        });
         binding.rgBedsheets.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -233,10 +223,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
 
     private boolean validate() {
         boolean returnFlag = true;
-        if (TextUtils.isEmpty(entitlementsProvidedToStudents)) {
-            showSnackBar("Check weather entitlements provided to students");
-            returnFlag=false;
-        } else if (TextUtils.isEmpty(bedSheets)) {
+         if (TextUtils.isEmpty(bedSheets)) {
             returnFlag=false;
             showSnackBar("Check weather bedsheets provided to students");
         } else if(TextUtils.isEmpty(carpets)) {
@@ -318,7 +305,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         entitlementsEntity.setOfficer_id(officerID);
         entitlementsEntity.setInstitute_id(instId);
         entitlementsEntity.setInspection_time(Utils.getCurrentDateTime());
-        entitlementsEntity.setEntitlements_provided(entitlementsProvidedToStudents);
         entitlementsEntity.setBedSheets(bedSheets);
         entitlementsEntity.setCarpets(carpets);
         entitlementsEntity.setUniforms(uniforms);

@@ -29,9 +29,9 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     ActivityRegistersBinding binding;
     RegistersViewModel registersViewModel;
     RegistersEntity registersEntity;
-    String admReg, attBoaReg, boaSignReg, boaMovReg, dailyPurReg, cashBook, dailyMenuReg, attStaffReg, staffOrder, stockIssue, dailyMove;
-    String perArticle, budWatch, payBill, parMeet, acqReg, acqDress, acqCos, taBill, treReg, teaMove, clAcc, conBill, insReg, visitBook;
-    String instId,officerId;
+    String admReg, attBoaReg, boaMovReg, dailyPurReg, cashBook, dailyMenuReg, attStaffReg, staffOrder, stockIssue, dailyMove;
+    String perArticle, budWatch, payBill, parMeet, acqReg, acqDress, acqCos, treReg, teaMove, clAcc, conBill, insReg, visitBook;
+    String instId, officerId;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
     private int localFlag = -1;
@@ -39,15 +39,15 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = putContentView(R.layout.activity_registers,getResources().getString(R.string.title_registers));
+        binding = putContentView(R.layout.activity_registers, getResources().getString(R.string.title_registers));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 
         registersViewModel = ViewModelProviders.of(RegistersActivity.this,
                 new RegistersCustomViewModel(binding, this, getApplication())).get(RegistersViewModel.class);
         binding.setViewModel(registersViewModel);
-        sharedPreferences= TWDApplication.get(this).getPreferences();
-        instId=sharedPreferences.getString(AppConstants.INST_ID, "");
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.rgAdmReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -71,16 +71,6 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             }
         });
 
-        binding.rgBoaSignReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgBoaSignReg.getCheckedRadioButtonId();
-                if (selctedItem == R.id.boa_sign_reg_yes)
-                    boaSignReg = AppConstants.Yes;
-                else
-                    boaSignReg = AppConstants.No;
-            }
-        });
         binding.rgBoaMovReg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -236,16 +226,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
                     conBill = AppConstants.No;
             }
         });
-        binding.rgTaBill.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int selctedItem = binding.rgTaBill.getCheckedRadioButtonId();
-                if (selctedItem == R.id.ta_bill_yes)
-                    taBill = AppConstants.Yes;
-                else
-                    taBill = AppConstants.No;
-            }
-        });
+
         binding.rgDailyMove.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -311,7 +292,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
+                if (validate()) {
                     Utils.customSaveAlert(RegistersActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
 
@@ -341,85 +322,80 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     }
 
     private boolean validate() {
-        boolean returnFlag=true;
-        if(TextUtils.isEmpty(admReg)){
-            returnFlag=false;
+        boolean returnFlag = true;
+        if (TextUtils.isEmpty(admReg)) {
+            returnFlag = false;
             showSnackBar("Check whether admission register is updated");
-        } else if(TextUtils.isEmpty(attBoaReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(attBoaReg)) {
+            returnFlag = false;
             showSnackBar("Check whether attendance boarders register is updated");
-        } else if(TextUtils.isEmpty(boaSignReg)){
-            returnFlag=false;
-            showSnackBar("Check whether boarders signature register is updated");
-        } else if(TextUtils.isEmpty(boaMovReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(boaMovReg)) {
+            returnFlag = false;
             showSnackBar("Check whether boarders movement register is updated");
-        } else if(TextUtils.isEmpty(dailyPurReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(dailyPurReg)) {
+            returnFlag = false;
             showSnackBar("Check whether daily purchase register is updated");
-        } else if(TextUtils.isEmpty(cashBook)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(cashBook)) {
+            returnFlag = false;
             showSnackBar("Check whether cashbook register is updated");
-        } else if(TextUtils.isEmpty(dailyMenuReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(dailyMenuReg)) {
+            returnFlag = false;
             showSnackBar("Check whether daily menu register is updated");
-        } else if(TextUtils.isEmpty(attStaffReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(attStaffReg)) {
+            returnFlag = false;
             showSnackBar("Check whether attendance staff register is updated");
-        } else if(TextUtils.isEmpty(staffOrder)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(staffOrder)) {
+            returnFlag = false;
             showSnackBar("Check whether staff order register is updated");
-        } else if(TextUtils.isEmpty(stockIssue)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(stockIssue)) {
+            returnFlag = false;
             showSnackBar("Check whether stock issue provision register is updated");
-        } else if(TextUtils.isEmpty(perArticle)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(perArticle)) {
+            returnFlag = false;
             showSnackBar("Check whether permanent article register is updated");
-        } else if(TextUtils.isEmpty(budWatch)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(budWatch)) {
+            returnFlag = false;
             showSnackBar("Check whether budget watch register is updated");
-        } else if(TextUtils.isEmpty(acqReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(acqReg)) {
+            returnFlag = false;
             showSnackBar("Check whether acquaintance register is updated");
-        } else if(TextUtils.isEmpty(acqDress)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(acqDress)) {
+            returnFlag = false;
             showSnackBar("Check whether acquaintance dresses notebooks register is updated");
-        } else if(TextUtils.isEmpty(acqCos)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(acqCos)) {
+            returnFlag = false;
             showSnackBar("Check whether acquaintance cosmetics register is updated");
-        } else if(TextUtils.isEmpty(payBill)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(payBill)) {
+            returnFlag = false;
             showSnackBar("Check whether paybill register is updated");
-        } else if(TextUtils.isEmpty(treReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(treReg)) {
+            returnFlag = false;
             showSnackBar("Check whether treasury bill register is updated");
-        } else if(TextUtils.isEmpty(conBill)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(conBill)) {
+            returnFlag = false;
             showSnackBar("Check whether contingent bill register is updated");
-        } else if(TextUtils.isEmpty(taBill)){
-            returnFlag=false;
-            showSnackBar("Check whether TA bill register is updated");
-        } else if(TextUtils.isEmpty(dailyMove)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(dailyMove)) {
+            returnFlag = false;
             showSnackBar("Check whether daily movement register is updated");
-        } else if(TextUtils.isEmpty(teaMove)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(teaMove)) {
+            returnFlag = false;
             showSnackBar("Check whether teacher movement register is updated");
-        } else if(TextUtils.isEmpty(clAcc)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(clAcc)) {
+            returnFlag = false;
             showSnackBar("Check whether CL account register is updated");
-        } else if(TextUtils.isEmpty(parMeet)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(parMeet)) {
+            returnFlag = false;
             showSnackBar("Check whether parent meeting register is updated");
-        } else if(TextUtils.isEmpty(insReg)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(insReg)) {
+            returnFlag = false;
             showSnackBar("Check whether inspection register for departmental officers updated");
-        } else if(TextUtils.isEmpty(visitBook)){
-            returnFlag=false;
+        } else if (TextUtils.isEmpty(visitBook)) {
+            returnFlag = false;
             showSnackBar("Check whether visit book for officials & non officials updated");
         }
         return returnFlag;
     }
+
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
@@ -432,7 +408,6 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         registersEntity.setOfficer_id(officerId);
         registersEntity.setAdmission_reg(admReg);
         registersEntity.setAttendance_reg(attBoaReg);
-        registersEntity.setBoarder_sign_reg(boaSignReg);
         registersEntity.setBoarder_movement_reg(boaMovReg);
         registersEntity.setDaily_purchase_reg(dailyPurReg);
         registersEntity.setCash_book_reg(cashBook);
@@ -448,7 +423,6 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
         registersEntity.setPaybill_reg(payBill);
         registersEntity.setTreasury_bill(treReg);
         registersEntity.setContingent_bill(conBill);
-        registersEntity.setTA_bill(taBill);
         registersEntity.setDaily_movement(dailyMove);
         registersEntity.setTeacher_movement(teaMove);
         registersEntity.setCL_account(clAcc);
@@ -458,7 +432,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
 
         long x = registersViewModel.insertRegistersInfo(registersEntity);
 //                Toast.makeText(RegistersActivity.this, "Inserted " + x, Toast.LENGTH_SHORT).show();
-            if (x >= 0) {
+        if (x >= 0) {
             final long[] z = {0};
             try {
                 LiveData<Integer> liveData = instMainViewModel.getSectionId("Registers");
@@ -466,7 +440,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
                     @Override
                     public void onChanged(Integer id) {
                         if (id != null) {
-                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id,instId);
+                            z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
                         }
                     }
                 });
@@ -474,7 +448,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
                 e.printStackTrace();
             }
             if (z[0] >= 0) {
-                Utils.customSectionSaveAlert(RegistersActivity.this,getString(R.string.data_saved),getString(R.string.app_name));
+                Utils.customSectionSaveAlert(RegistersActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
             } else {
                 showSnackBar(getString(R.string.failed));
             }
@@ -482,6 +456,7 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.failed));
         }
     }
+
     @Override
     public void onBackPressed() {
         super.callBack();

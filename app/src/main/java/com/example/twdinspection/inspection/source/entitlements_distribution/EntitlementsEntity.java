@@ -25,9 +25,6 @@ public class EntitlementsEntity {
     private String institute_id;
 
     @ColumnInfo()
-    private String entitlements_provided;
-
-    @ColumnInfo()
     private String bedSheets;
 
     @ColumnInfo()
@@ -180,14 +177,6 @@ public class EntitlementsEntity {
 
     public void setPairOfDressDistributedCount(String pairOfDressDistributedCount) {
         PairOfDressDistributedCount = pairOfDressDistributedCount;
-    }
-
-    public String getEntitlements_provided() {
-        return entitlements_provided;
-    }
-
-    public void setEntitlements_provided(String entitlements_provided) {
-        this.entitlements_provided = entitlements_provided;
     }
 
     public String getUniforms_provided_quality() {

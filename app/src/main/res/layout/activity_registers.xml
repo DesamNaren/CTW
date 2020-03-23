@@ -176,7 +176,6 @@
 
                 </LinearLayout>
 
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
@@ -194,69 +193,6 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
                         android:text="C."
-                        android:textColor="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/boa_sign_reg"
-                            android:textColor="@color/black" />
-
-
-                        <RadioGroup
-                            android:id="@+id/rg_boa_sign_reg"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/boa_sign_reg_yes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked="@{inspData.boarder_sign_reg.equalsIgnoreCase(`Yes`)}"
-                               
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
-
-                            <RadioButton
-                                android:id="@+id/boa_sign_reg_no"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked="@{inspData.boarder_sign_reg.equalsIgnoreCase(`No`)}"
-                               
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
-
-
-                        </RadioGroup>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_5dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="D."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -317,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="E."
+                        android:text="D."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -354,7 +290,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.daily_purchase_reg.equalsIgnoreCase(`No`)}"
-                               
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -378,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="F."
+                        android:text="E."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -439,7 +374,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="G."
+                        android:text="F."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -467,7 +402,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.daily_menu_reg.equalsIgnoreCase(`Yes`)}"
-                               
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -476,7 +410,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.daily_menu_reg.equalsIgnoreCase(`No`)}"
-                               
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -500,7 +433,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="H."
+                        android:text="G."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -561,7 +494,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="I."
+                        android:text="H."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -622,7 +555,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="J."
+                        android:text="I."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -684,7 +617,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="K."
+                        android:text="J."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -746,7 +679,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="L."
+                        android:text="K."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -808,7 +741,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="M."
+                        android:text="K."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -869,7 +802,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="N."
+                        android:text="M."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -931,7 +864,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="O."
+                        android:text="N."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -993,7 +926,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="P."
+                        android:text="O."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1054,7 +987,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="Q."
+                        android:text="P."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1115,7 +1048,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="R."
+                        android:text="Q."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1176,68 +1109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="S."
-                        android:textColor="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ta_bill"
-                            android:textColor="@color/black" />
-
-                        <RadioGroup
-                            android:id="@+id/rg_ta_bill"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
-
-
-                            <RadioButton
-                                android:id="@+id/ta_bill_yes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="@{inspData.tA_bill.equalsIgnoreCase(`Yes`)}"
-                               
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
-
-                            <RadioButton
-                                android:id="@+id/ta_bill_no"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="@{inspData.tA_bill.equalsIgnoreCase(`No`)}"
-                               
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
-
-                        </RadioGroup>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_5dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="T."
+                        android:text="R."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1298,7 +1170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="U."
+                        android:text="S."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1359,7 +1231,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="V."
+                        android:text="T."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1420,7 +1292,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="W."
+                        android:text="U."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1481,7 +1353,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="X."
+                        android:text="V."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1543,7 +1415,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="Y."
+                        android:text="W."
                         android:textColor="@color/black" />
 
                     <LinearLayout

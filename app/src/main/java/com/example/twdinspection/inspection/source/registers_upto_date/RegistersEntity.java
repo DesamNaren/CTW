@@ -26,8 +26,6 @@ public class RegistersEntity {
     @ColumnInfo()
     private String attendance_reg;
 
-    @ColumnInfo()
-    private String boarder_sign_reg;
 
     @ColumnInfo()
     private String boarder_movement_reg;
@@ -73,9 +71,6 @@ public class RegistersEntity {
 
     @ColumnInfo()
     private String contingent_bill;
-
-    @ColumnInfo()
-    private String TA_bill;
 
     @ColumnInfo()
     private String daily_movement;
@@ -141,14 +136,6 @@ public class RegistersEntity {
 
     public void setAttendance_reg(String attendance_reg) {
         this.attendance_reg = attendance_reg;
-    }
-
-    public String getBoarder_sign_reg() {
-        return boarder_sign_reg;
-    }
-
-    public void setBoarder_sign_reg(String boarder_sign_reg) {
-        this.boarder_sign_reg = boarder_sign_reg;
     }
 
     public String getBoarder_movement_reg() {
@@ -269,14 +256,6 @@ public class RegistersEntity {
 
     public void setContingent_bill(String contingent_bill) {
         this.contingent_bill = contingent_bill;
-    }
-
-    public String getTA_bill() {
-        return TA_bill;
-    }
-
-    public void setTA_bill(String TA_bill) {
-        this.TA_bill = TA_bill;
     }
 
     public String getDaily_movement() {
