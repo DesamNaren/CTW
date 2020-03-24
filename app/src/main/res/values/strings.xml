@@ -332,7 +332,9 @@
     <string name="night_dress">Night Dress</string>
     <string name="school_bags">School Bags</string>
     <string name="sanitary_napkins_supplied">Sanitary Napkins supplied</string>
-    <string name="notes_supplied">Notes supplied</string>
+    <string name="sanitary_napkins">Sanitary Napkins</string>
+    <string name="notes_supplied">Note Books Supplied</string>
+    <string name="notes">Note Books</string>
     <string name="whether_online">Whether online status and field status match?</string>
     <string name="ben_report">BENEFICIARY REPORT</string>
     <string name="ben_details">BENEFICIARY DETAILS</string>

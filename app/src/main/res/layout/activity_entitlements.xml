@@ -482,12 +482,70 @@
                                 android:id="@+id/rb_yes_sanitary_napkins"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:checked="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`Yes`)}"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:id="@+id/rb_no_sanitary_napkins"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`No`)}"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_sanitary_napkins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/sanitary" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_sanitary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:visibility="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/sanitary_napkins"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_sanitary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_yes_sanitary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/good" />
 
                             <RadioButton
-                                android:id="@+id/rb_no_sanitary_napkins"
+                                android:id="@+id/rb_no_sanitary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`No`)}"
@@ -496,6 +554,35 @@
 
                         </RadioGroup>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_sanitary_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:visibility="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            app:errorEnabled="true">
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_sanitary_reason"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/reason"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:text="@{inspData.sanitary_napkins_reason}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -537,7 +624,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.notesSupplied.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_notes_supplied"
@@ -545,10 +632,97 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.notesSupplied.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_notes_supplied"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:padding="@dimen/dimen_5dp"
+                        android:src="@drawable/notebook" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:visibility="@{inspData.notesSupplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/notes"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_notes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_yes_notes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.notes.equalsIgnoreCase(`Yes`)}"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/good" />
+
+                            <RadioButton
+                                android:id="@+id/rb_no_notes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.notes.equalsIgnoreCase(`No`)}"
+                                android:padding="@dimen/dimen_5dp"
                                 android:text="@string/bad" />
 
                         </RadioGroup>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_notes_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:visibility="@{inspData.notesSupplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            app:errorEnabled="true">
+
+                            <com.example.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_notes_reason"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/reason"
+                                android:imeOptions="actionNext"
+                                android:singleLine="true"
+                                android:text="@{inspData.sanitary_napkins_reason}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <View

@@ -46,10 +46,22 @@ public class EntitlementsEntity {
     private String schoolBags;
 
     @ColumnInfo()
+    private String sanitary_napkins_supplied;
+
+    @ColumnInfo()
     private String sanitaryNapkins;
 
     @ColumnInfo()
+    private String sanitary_napkins_reason;
+
+    @ColumnInfo()
     private String notesSupplied;
+
+    @ColumnInfo()
+    private String notes;
+
+    @ColumnInfo()
+    private String notes_reason;
 
     @ColumnInfo()
     private String PairOfDressDistributedCount;
@@ -65,6 +77,39 @@ public class EntitlementsEntity {
 
     @ColumnInfo()
     private String last_haircut_date;
+
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getNotes_reason() {
+        return notes_reason;
+    }
+
+    public void setNotes_reason(String notes_reason) {
+        this.notes_reason = notes_reason;
+    }
+
+    public String getSanitary_napkins_supplied() {
+        return sanitary_napkins_supplied;
+    }
+
+    public void setSanitary_napkins_supplied(String sanitary_napkins_supplied) {
+        this.sanitary_napkins_supplied = sanitary_napkins_supplied;
+    }
+
+    public String getSanitary_napkins_reason() {
+        return sanitary_napkins_reason;
+    }
+
+    public void setSanitary_napkins_reason(String sanitary_napkins_reason) {
+        this.sanitary_napkins_reason = sanitary_napkins_reason;
+    }
 
     public int getId() {
         return id;
