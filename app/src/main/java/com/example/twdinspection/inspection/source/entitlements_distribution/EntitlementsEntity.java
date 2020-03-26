@@ -70,6 +70,12 @@ public class EntitlementsEntity {
     private String cosmetic_distributed;
 
     @ColumnInfo()
+    private String cosmetic_distributed_upto_month;
+
+    @ColumnInfo()
+    private String cosmetic_reason;
+
+    @ColumnInfo()
     private String uniforms_provided_quality;
 
     @ColumnInfo()
@@ -78,6 +84,22 @@ public class EntitlementsEntity {
     @ColumnInfo()
     private String last_haircut_date;
 
+
+    public String getCosmetic_distributed_upto_month() {
+        return cosmetic_distributed_upto_month;
+    }
+
+    public void setCosmetic_distributed_upto_month(String cosmetic_distributed_upto_month) {
+        this.cosmetic_distributed_upto_month = cosmetic_distributed_upto_month;
+    }
+
+    public String getCosmetic_reason() {
+        return cosmetic_reason;
+    }
+
+    public void setCosmetic_reason(String cosmetic_reason) {
+        this.cosmetic_reason = cosmetic_reason;
+    }
 
     public String getNotes() {
         return notes;

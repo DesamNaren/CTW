@@ -39,7 +39,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
     private int localFlag = -1;
-    private String gccDate, suppliedDate;
+    private String gccDate, suppliedDate,hmhwoDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,6 +272,11 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                gccDate = binding.etGccDate.getText().toString().trim();
+                suppliedDate = binding.etSuppliedDate.getText().toString().trim();
+                hmhwoDate = binding.etHmHwoDate.getText().toString().trim();
+
                 if (validate())
                     Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -280,16 +285,25 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         binding.etGccDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gccDateSelection();
+                dateSelection("gccDate");
             }
         });
 
         binding.etSuppliedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                suppliedDateSelection();
+                dateSelection("suppliedDate");
             }
         });
+
+       binding.etHmHwoDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dateSelection("hmhwoDate");
+            }
+        });
+
+
         try {
             localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
             if (localFlag == 1) {
@@ -339,15 +353,18 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         } else if (TextUtils.isEmpty(foodQualityProvisions)) {
             returnFlag = false;
             showSnackBar("Check the quality of food provisions supplied");
-        } else if ((binding.etGccDate.getText().toString().trim().equals(getResources().getString(R.string.select_date)))) {
+        } else if (TextUtils.isEmpty(hmhwoDate)) {
             returnFlag = false;
-            showSnackBar("Select the date of lasted intent raised by GCC or other supplier");
+            showSnackBar("Select date of last indent raised by HM/ HWO");
+        }  else if (TextUtils.isEmpty(gccDate)) {
+            returnFlag = false;
+            showSnackBar("Select date of supply of food provision by GCC and others");
         } else if (TextUtils.isEmpty(stocksSupplied)) {
             returnFlag = false;
             showSnackBar("Check whether stock is supplied as per the intent");
-        } else if (binding.etSuppliedDate.getText().toString().trim().equals(getResources().getString(R.string.select_date))) {
+        } else if (TextUtils.isEmpty(suppliedDate)) {
             returnFlag = false;
-            showSnackBar("Select the capture supplied date");
+            showSnackBar("Select capture supplied date");
         } else if (TextUtils.isEmpty(haircut)) {
             returnFlag = false;
             showSnackBar("Check whether haircut is on time");
@@ -392,7 +409,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
 
-    private void gccDateSelection() {
+    private void dateSelection(String flag) {
         // Get Current Date
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR);
@@ -404,40 +421,21 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        gccDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        binding.etGccDate.setText(gccDate);
+                        String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        if (flag.equalsIgnoreCase("gccDate"))
+                            binding.etGccDate.setText(date);
+                        else if (flag.equalsIgnoreCase("suppliedDate"))
+                            binding.etSuppliedDate.setText(date);
+                       else if (flag.equalsIgnoreCase("hmhwoDate"))
+                            binding.etHmHwoDate.setText(date);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
-
-    private void suppliedDateSelection() {
-        // Get Current Date
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        suppliedDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        binding.etSuppliedDate.setText(suppliedDate);
-                    }
-                }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-        datePickerDialog.show();
-    }
-
-
 
     @Override
     public void submitData() {
-        gccDate = binding.etGccDate.getText().toString().trim();
-        suppliedDate = binding.etSuppliedDate.getText().toString().trim();
 
         generalCommentsEntity = new GeneralCommentsEntity();
         generalCommentsEntity.setOfficer_id(officerID);
@@ -451,6 +449,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         generalCommentsEntity.setQuality_of_food_eggs(foodQualityEggs);
         generalCommentsEntity.setQuality_of_food_vegetables(foodQualityVeg);
         generalCommentsEntity.setQuality_of_food_food_provisions(foodQualityProvisions);
+        generalCommentsEntity.setHm_hwo_date(hmhwoDate);
         generalCommentsEntity.setGcc_date(gccDate);
         generalCommentsEntity.setSupplied_date(suppliedDate);
         generalCommentsEntity.setStocksSupplied(stocksSupplied);

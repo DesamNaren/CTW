@@ -48,6 +48,9 @@ public class GeneralCommentsEntity {
     private String quality_of_food_food_provisions;
 
     @ColumnInfo()
+    private String hm_hwo_date;
+
+    @ColumnInfo()
     private String gcc_date;
 
     @ColumnInfo()
@@ -92,6 +95,13 @@ public class GeneralCommentsEntity {
     @ColumnInfo()
     private String storeroom_not_clean;
 
+    public String getHm_hwo_date() {
+        return hm_hwo_date;
+    }
+
+    public void setHm_hwo_date(String hm_hwo_date) {
+        this.hm_hwo_date = hm_hwo_date;
+    }
 
     public String getGcc_date() {
         return gcc_date;
