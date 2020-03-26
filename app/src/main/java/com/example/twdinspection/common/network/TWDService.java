@@ -1,6 +1,8 @@
 package com.example.twdinspection.common.network;
 
 
+import com.example.twdinspection.engineering_works.source.SectorsResponse;
+import com.example.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.example.twdinspection.gcc.reports.source.GCCReportResponse;
 import com.example.twdinspection.schemes.reports.source.SchemeReportResponse;
@@ -27,6 +29,8 @@ import com.example.twdinspection.schemes.source.schemes.SchemeResponse;
 import com.example.twdinspection.schemes.source.submit.SchemePhotoSubmitResponse;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.example.twdinspection.schemes.source.submit.SchemeSubmitResponse;
+
+import org.checkerframework.common.reflection.qual.GetClass;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -134,6 +138,14 @@ public interface TWDService {
 
     @POST("getOffices")
     Call<GetOfficesResponse> getDivisionMasterResponse();
+
+
+    @GET("CTWWorks/getWorksMaster")
+    Call<WorksMasterResponse> getWorksMaster();
+
+
+    @GET("CTWWorks/getWorksMaster")
+    Call<SectorsResponse> getSectorsMaster();
 
 
     @POST("getGodowns/DR Depot")

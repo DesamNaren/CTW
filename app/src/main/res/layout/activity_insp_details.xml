@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.AcademicViewModel" />
+            type="com.example.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
 
     </data>
 
@@ -223,7 +223,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:entries="@array/sectors"
                         android:padding="@dimen/dimen_5dp"
                         android:textColor="@color/black" />
 

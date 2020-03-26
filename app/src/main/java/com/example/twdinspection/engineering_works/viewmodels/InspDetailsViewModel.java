@@ -23,52 +23,59 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EngDashboardViewModel extends AndroidViewModel {
+public class InspDetailsViewModel extends AndroidViewModel {
 
     private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
-    private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private SectorsRepository sectorsRepository;
     private LiveData<List<SectorsEntity>> sectorsListLiveData;
 
 
-    public EngDashboardViewModel(Context context, Application application) {
+    public InspDetailsViewModel(Context context, Application application) {
         super(application);
         sectorsRepository=new SectorsRepository(application);
         sectorsResponseLiveData = new MutableLiveData<>();
-        worksMasterLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         this.context = context;
         errorHandlerInterface = (ErrorHandlerInterface) context;
 
     }
 
-
-    public LiveData<WorksMasterResponse> getWorksMaster() {
-        if (worksMasterLiveData != null) {
-            getWorksMasterResponse();
+    public LiveData<List<SectorsEntity>> getSectors() {
+        if (sectorsListLiveData != null) {
+            sectorsListLiveData = sectorsRepository.getSectors();
         }
-        return worksMasterLiveData;
+        return sectorsListLiveData;
     }
 
-    private void getWorksMasterResponse() {
+    public LiveData<SectorsResponse> getSectorResponse() {
+        if (sectorsResponseLiveData != null) {
+            getSectorsResponseCall();
+        }
+        return sectorsResponseLiveData;
+    }
+
+    private void getSectorsResponseCall() {
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.getWorksMaster().enqueue(new Callback<WorksMasterResponse>() {
+        twdService.getSectorsMaster().enqueue(new Callback<SectorsResponse>() {
             @Override
-            public void onResponse(@NotNull Call<WorksMasterResponse> call, @NotNull Response<WorksMasterResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    //                    worksMasterLiveData.setValue(response.body());
+            public void onResponse(@NotNull Call<SectorsResponse> call, @NotNull Response<SectorsResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                    sectorsResponseLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<WorksMasterResponse> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<SectorsResponse> call, @NotNull Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
     }
 
+    public int insertSectorsInfo(List<SectorsEntity> sectorsEntities) {
+        return sectorsRepository.insertSectors(sectorsEntities);
+    }
 
 }
 

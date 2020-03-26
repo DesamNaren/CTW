@@ -1,43 +1,42 @@
 package com.example.twdinspection.engineering_works.source;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-//@Entity(tableName = "sectors")
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.jetbrains.annotations.NotNull;
+
+@Entity
 public class SectorsEntity {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo()
-    private int id;
+    @PrimaryKey
+    @NonNull
+    @SerializedName("sector_id")
+    @Expose
+    private Integer sectorId;
+    @SerializedName("sector_name")
+    @Expose
+    private String sectorName;
 
-    @ColumnInfo()
-    private String sector_id;
-
-    @ColumnInfo()
-    private String sector_name;
-
-    public int getId() {
-        return id;
+    @NotNull
+    public Integer getSectorId() {
+        return sectorId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSectorId(@NotNull Integer sectorId) {
+        this.sectorId = sectorId;
     }
 
-    public String getSector_id() {
-        return sector_id;
+    public String getSectorName() {
+        return sectorName;
     }
 
-    public void setSector_id(String sector_id) {
-        this.sector_id = sector_id;
+    public void setSectorName(String sectorName) {
+        this.sectorName = sectorName;
     }
 
-    public String getSector_name() {
-        return sector_name;
-    }
-
-    public void setSector_name(String sector_name) {
-        this.sector_name = sector_name;
-    }
 }
