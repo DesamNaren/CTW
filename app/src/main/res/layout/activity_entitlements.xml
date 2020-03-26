@@ -643,8 +643,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -748,38 +748,122 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/entitlements_cosmetics"
-                            android:textColor="@color/black" />
+                            android:orientation="vertical">
 
-                        <RadioGroup
-                            android:id="@+id/rg_cosmetics"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-
-                            <RadioButton
-                                android:id="@+id/rb_yes_cosmetics"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.cosmetic_distributed.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/entitlements_cosmetics"
+                                android:textColor="@color/black" />
 
-                            <RadioButton
-                                android:id="@+id/rb_no_cosmetics"
+                            <RadioGroup
+                                android:id="@+id/rg_cosmetics"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.cosmetic_distributed.equalsIgnoreCase(`No`)}"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
+                                android:orientation="horizontal">
 
-                        </RadioGroup>
+
+                                <RadioButton
+                                    android:id="@+id/rb_yes_cosmetics"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.cosmetic_distributed.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_no_cosmetics"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.cosmetic_distributed.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_cosmetics_upto_month"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:visibility="@{inspData.cosmetic_distributed.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:background="@android:drawable/ic_menu_my_calendar"
+                                    android:backgroundTint="@color/list_blue" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/t_cosmetics_upto_month"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:layout_marginTop="@dimen/dimen_10dp"
+                                    android:textColorHint="@color/colorAccent"
+                                    app:errorEnabled="true">
+
+
+                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_cosmetics_upto_month"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
+                                        android:paddingLeft="@dimen/dimen_30dp"
+                                        android:hint="@string/entitlements_cosmetics_upto_month"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true"
+                                        android:text="@{inspData.cosmetic_distributed_upto_month}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_cosmetics_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:visibility="@{inspData.cosmetic_distributed.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                app:errorEnabled="true">
+
+                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_cosmetics_reason"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/reason"
+                                    android:imeOptions="actionNext"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.cosmetic_reason}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <View

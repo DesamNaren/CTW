@@ -35,7 +35,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     EntitlementsEntity entitlementsEntity;
     String bedSheets, carpets, uniforms, sportsDress, slippers, nightDress,
             sanitary_napkins_supplied, sanitaryNapkins, sanitary_napkins_reason, schoolBags,
-            notesSupplied, notes, notes_reason, cosmetics, hair_cut_complted, entitlementsUniforms;
+            notesSupplied, notes, notes_reason, cosmetics, cosmetics_upto_month, cosmetics_reason, hair_cut_complted, entitlementsUniforms;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     String instId, officerID;
@@ -54,6 +54,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
+
         binding.etEntitlementsHaircutDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,7 +147,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                     binding.llSanitaryNapkins.setVisibility(View.VISIBLE);
                     binding.llSanitary.setVisibility(View.VISIBLE);
                     binding.llSanitaryReason.setVisibility(View.GONE);
-                    sanitary_napkins_supplied = null;
+                    binding.etSanitaryReason.setText("");
                 } else if (selctedItem == R.id.rb_no_sanitary_napkins) {
                     sanitary_napkins_supplied = AppConstants.No;
 
@@ -155,7 +156,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                     binding.llSanitaryReason.setVisibility(View.VISIBLE);
                     binding.rgSanitary.clearCheck();
                 } else {
-                    sanitary_napkins_supplied = null;
                     binding.llSanitaryNapkins.setVisibility(View.GONE);
                 }
             }
@@ -165,9 +165,9 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgSanitary.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_sanitary_napkins)
+                if (selctedItem == R.id.rb_yes_sanitary)
                     sanitaryNapkins = AppConstants.Yes;
-                else if (selctedItem == R.id.rb_no_sanitary_napkins)
+                else if (selctedItem == R.id.rb_no_sanitary)
                     sanitaryNapkins = AppConstants.No;
                 else
                     sanitaryNapkins = null;
@@ -183,7 +183,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                     binding.llNotesSupplied.setVisibility(View.VISIBLE);
                     binding.llNotes.setVisibility(View.VISIBLE);
                     binding.llNotesReason.setVisibility(View.GONE);
-                    notes_reason = null;
+                    binding.etNotesReason.setText("");
                 } else if (selctedItem == R.id.rb_no_notes_supplied) {
                     notesSupplied = AppConstants.No;
                     binding.llNotesSupplied.setVisibility(View.VISIBLE);
@@ -191,7 +191,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                     binding.llNotesReason.setVisibility(View.VISIBLE);
                     binding.rgNotes.clearCheck();
                 } else {
-                    notesSupplied = null;
                     binding.llNotesSupplied.setVisibility(View.GONE);
                 }
             }
@@ -212,10 +211,26 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgCosmetics.getCheckedRadioButtonId();
-                if (selctedItem == R.id.rb_yes_cosmetics)
+                if (selctedItem == R.id.rb_yes_cosmetics) {
                     cosmetics = AppConstants.Yes;
-                else
+                    binding.llCosmeticsUptoMonth.setVisibility(View.VISIBLE);
+                    binding.llCosmeticsReason.setVisibility(View.GONE);
+                    binding.etCosmeticsReason.setText("");
+                } else if (selctedItem == R.id.rb_no_cosmetics) {
                     cosmetics = AppConstants.No;
+                    binding.llCosmeticsUptoMonth.setVisibility(View.GONE);
+                    binding.llCosmeticsReason.setVisibility(View.VISIBLE);
+                    binding.etCosmeticsUptoMonth.setText("");
+
+                } else {
+                    cosmetics = null;
+                }
+            }
+        });
+        binding.etCosmeticsUptoMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateSelection();
             }
         });
 
@@ -245,6 +260,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             @Override
             public void onClick(View view) {
                 sanitary_napkins_reason = binding.etSanitaryReason.getText().toString().trim();
+                cosmetics_upto_month = binding.etCosmeticsUptoMonth.getText().toString().trim();
+                cosmetics_reason = binding.etCosmeticsReason.getText().toString().trim();
 
                 if (validate()) {
 
@@ -275,6 +292,27 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             e.printStackTrace();
         }
     }
+
+    private void dateSelection() {
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        String checkUpDate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                        binding.etCosmeticsUptoMonth.setText(checkUpDate);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        datePickerDialog.show();
+    }
+
 
     private boolean validate() {
         boolean returnFlag = true;
@@ -312,16 +350,23 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         } else if (TextUtils.isEmpty(notesSupplied)) {
             returnFlag = false;
             showSnackBar("Check weather notes Supplied to students");
-        } else if (notes.equalsIgnoreCase("Yes") && TextUtils.isEmpty(notes)) {
+        } else if (notesSupplied.equalsIgnoreCase("Yes") && TextUtils.isEmpty(notes)) {
             returnFlag = false;
             showSnackBar("Check weather notes are good or bad");
-        } else if (notes.equalsIgnoreCase("No") && TextUtils.isEmpty(notes_reason)) {
+        } else if (notesSupplied.equalsIgnoreCase("No") && TextUtils.isEmpty(notes_reason)) {
             returnFlag = false;
             binding.etNotesReason.requestFocus();
             showSnackBar("Enter reason");
         } else if (TextUtils.isEmpty(cosmetics)) {
             returnFlag = false;
-            showSnackBar("Check weather cosmetics distributed upto month");
+            showSnackBar("Check weather cosmetics distributed");
+        } else if (cosmetics.equalsIgnoreCase("Yes") && TextUtils.isEmpty(cosmetics_upto_month)) {
+            returnFlag = false;
+            showSnackBar("Check weather cosmetics distributed upto which month");
+        } else if (cosmetics.equalsIgnoreCase("No") && TextUtils.isEmpty(cosmetics_reason)) {
+            returnFlag = false;
+            binding.etCosmeticsReason.requestFocus();
+            showSnackBar("Enter Reason");
         } else if (TextUtils.isEmpty(binding.etPairOfDressDistributed.getText().toString())) {
             returnFlag = false;
             showSnackBar("Enter no of pair of dress distributed to each student");
@@ -385,11 +430,15 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
         entitlementsEntity.setSanitaryNapkins(sanitaryNapkins);
         entitlementsEntity.setSanitary_napkins_reason(sanitary_napkins_reason);
         entitlementsEntity.setNotesSupplied(notesSupplied);
+        entitlementsEntity.setNotes(notes);
+        entitlementsEntity.setNotes_reason(notes_reason);
         entitlementsEntity.setPairOfDressDistributedCount(pair_of_dress_distributed);
         entitlementsEntity.setUniforms_provided_quality(entitlementsUniforms);
         entitlementsEntity.setHair_cut_complted(hair_cut_complted);
         entitlementsEntity.setLast_haircut_date(haircutDate);
         entitlementsEntity.setCosmetic_distributed(cosmetics);
+        entitlementsEntity.setCosmetic_distributed_upto_month(cosmetics_upto_month);
+        entitlementsEntity.setCosmetic_reason(cosmetics_reason);
 
         long x = entitlementsViewModel.insertEntitlementsInfo(entitlementsEntity);
         if (x >= 0) {
