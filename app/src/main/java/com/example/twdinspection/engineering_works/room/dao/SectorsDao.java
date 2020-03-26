@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.twdinspection.engineering_works.source.GrantScheme;
 import com.example.twdinspection.engineering_works.source.SectorsEntity;
 import com.example.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 
@@ -20,5 +21,7 @@ public interface SectorsDao {
 
     @Query("SELECT COUNT(*) FROM sectorsentity")
     int sectorCount();
+
+
 
 }

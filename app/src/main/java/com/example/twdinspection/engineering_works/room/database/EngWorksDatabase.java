@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.twdinspection.engineering_works.room.dao.GrantSchemeDao;
 import com.example.twdinspection.engineering_works.room.dao.SectorsDao;
+import com.example.twdinspection.engineering_works.source.GrantScheme;
 import com.example.twdinspection.engineering_works.source.GrantSchemeEntity;
 import com.example.twdinspection.engineering_works.source.SectorsEntity;
 
@@ -19,13 +20,14 @@ import com.example.twdinspection.engineering_works.source.SectorsEntity;
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {SectorsEntity.class},
+@Database(entities = {SectorsEntity.class, GrantScheme.class},
         version = 1, exportSchema = false)
 public abstract class EngWorksDatabase extends RoomDatabase {
 
     private static EngWorksDatabase INSTANCE;
 
     public abstract SectorsDao sectorsDao();
+    public abstract GrantSchemeDao schemeDao();
 
     public static EngWorksDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {

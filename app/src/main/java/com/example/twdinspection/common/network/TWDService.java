@@ -1,6 +1,7 @@
 package com.example.twdinspection.common.network;
 
 
+import com.example.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.example.twdinspection.engineering_works.source.SectorsResponse;
 import com.example.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
@@ -144,9 +145,12 @@ public interface TWDService {
     Call<WorksMasterResponse> getWorksMaster();
 
 
-    @GET("CTWWorks/getWorksMaster")
+    @GET("CTWWorks/getSectors")
     Call<SectorsResponse> getSectorsMaster();
 
+
+    @GET("CTWWorks/getGrantSandSchemes")
+    Call<GrantSchemesResponse> getGrantSandSchemes();
 
     @POST("getGodowns/DR Depot")
     Call<DRDepotMasterResponse> getDRDepotMasterResponse();
