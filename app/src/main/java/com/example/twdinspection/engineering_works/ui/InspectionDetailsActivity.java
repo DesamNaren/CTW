@@ -40,6 +40,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
     SharedPreferences sharedPreferences;
     InspDetailsViewModel viewModel;
     int sectorsCnt, schemesCnt;
+    List<SectorsEntity> sectorsEntities=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +69,10 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             e.printStackTrace();
         }
 
-
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
+                InspectionDetailsActivity.this.sectorsEntities=sectorsEntities;
                 if (sectorsEntities != null && sectorsEntities.size() > 0) {
                     ArrayList<String> sectorsList = new ArrayList<>();
                     sectorsList.add("Select");
@@ -96,6 +97,17 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             }
         });
 
+        binding.spSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
