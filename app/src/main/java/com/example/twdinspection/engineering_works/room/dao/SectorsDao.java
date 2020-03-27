@@ -22,6 +22,8 @@ public interface SectorsDao {
     @Query("SELECT COUNT(*) FROM sectorsentity")
     int sectorCount();
 
+    @Query("SELECT sectorId from sectorsentity where sectorName LIKE :sectorName")
+    LiveData<Integer> getSectorId(String sectorName);
 
 
 }

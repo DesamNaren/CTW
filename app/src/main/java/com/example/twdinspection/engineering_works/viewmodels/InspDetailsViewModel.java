@@ -15,6 +15,7 @@ import com.example.twdinspection.engineering_works.source.GrantScheme;
 import com.example.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.example.twdinspection.engineering_works.source.SectorsEntity;
 import com.example.twdinspection.engineering_works.source.SectorsResponse;
+import com.example.twdinspection.engineering_works.source.StagesResponse;
 import com.example.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
@@ -30,6 +31,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
 
     private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
     private MutableLiveData<GrantSchemesResponse> schemesResponseMutableLiveData;
+    private MutableLiveData<StagesResponse> stagesResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private SectorsRepository sectorsRepository;
@@ -44,6 +46,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
         schemeRepository=new GrantSchemeRepository(application);
         sectorsResponseLiveData = new MutableLiveData<>();
         schemesResponseMutableLiveData = new MutableLiveData<>();
+        stagesResponseMutableLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         schemesListLiveData = new MutableLiveData<>();
         this.context = context;
@@ -117,8 +120,40 @@ public class InspDetailsViewModel extends AndroidViewModel {
         });
     }
 
+    public LiveData<StagesResponse> getStagesResponse(int sectorId) {
+        if (stagesResponseMutableLiveData != null) {
+            getStagesResponseCall(sectorId);
+        }
+        return stagesResponseMutableLiveData;
+    }
+
+    private void getStagesResponseCall(int sectorId) {
+        TWDService twdService = TWDService.Factory.create("school");
+        twdService.getStages(sectorId).enqueue(new Callback<StagesResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<StagesResponse> call, @NotNull Response<StagesResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                    stagesResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<StagesResponse> call, @NotNull Throwable t) {
+                errorHandlerInterface.handleError(t, context);
+            }
+        });
+    }
+
     public int insertGrantSchemesInfo(List<GrantScheme> grantSchemes) {
         return schemeRepository.insertSchemes(grantSchemes);
+    }
+
+    public LiveData<Integer> getSectorId(String sectorName){
+        return sectorsRepository.getSectorId(sectorName);
+    }
+
+    public LiveData<Integer> getgrantSchemeId(String schemeName){
+        return schemeRepository.getSchemeId(schemeName);
     }
 
 }

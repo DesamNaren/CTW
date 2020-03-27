@@ -668,7 +668,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:entries="@array/buildings"
                             android:padding="@dimen/dimen_5dp"
                             android:layout_gravity="center"
                             android:visibility="visible"
@@ -727,14 +726,14 @@
 
 
                                 <RadioButton
-                                    android:id="@+id/highest_class_syllabus_completed_yes"
+                                    android:id="@+id/rb_overall_appear_sat"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/satisfactory" />
 
                                 <RadioButton
-                                    android:id="@+id/highest_class_syllabus_completed_no"
+                                    android:id="@+id/rb_overall_appear_poor"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
@@ -794,7 +793,7 @@
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rb_qual_care"
+                                android:id="@+id/rg_qual_care"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
@@ -840,7 +839,7 @@
 
 
                                 <RadioButton
-                                    android:id="@+id/sp_qual_materials_sat"
+                                    android:id="@+id/rb_qual_materials_sat"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"

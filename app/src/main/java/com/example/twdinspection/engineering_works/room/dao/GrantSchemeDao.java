@@ -20,4 +20,9 @@ public interface GrantSchemeDao {
 
     @Query("SELECT COUNT(*) FROM grantSchemes")
     int schemesCount();
+
+    @Query("SELECT schemeId from grantSchemes where schemeName LIKE :schemeName")
+    LiveData<Integer> getSchemeId(String schemeName);
+
+
 }

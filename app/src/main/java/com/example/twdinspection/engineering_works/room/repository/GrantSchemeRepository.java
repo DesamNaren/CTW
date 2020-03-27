@@ -55,5 +55,7 @@ public class GrantSchemeRepository {
             x=integer;
         }
     }
-
+    public LiveData<Integer> getSchemeId(String schemeName) {
+        return grantSchemeDao.getSchemeId(schemeName);
+    }
 }

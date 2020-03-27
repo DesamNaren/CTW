@@ -56,4 +56,7 @@ public class SectorsRepository {
         }
     }
 
+    public LiveData<Integer> getSectorId(String sectorName) {
+        return sectorsDao.getSectorId(sectorName);
+    }
 }

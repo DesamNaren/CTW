@@ -96,6 +96,8 @@ public class AppConstants {
     public static final String UNAUTHABSENT = "Unauthorised Absent";
     public static final String ENGWORKSMASTER = "ENGWORKSMASTER";
     public static final String ENG_SECTORS_MASTER = "ENG_SECTORS_MASTER";
+    public static final String SATISFACTORY = "Satisfactory";
+    public static final String POOR = "Poor";
     public static String stockData = "STOCK_DATA";
     public static String essComm = "essComm";
     public static String dailyReq = "dailyReq";

@@ -3,6 +3,7 @@ package com.example.twdinspection.common.network;
 
 import com.example.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.example.twdinspection.engineering_works.source.SectorsResponse;
+import com.example.twdinspection.engineering_works.source.StagesResponse;
 import com.example.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.example.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -151,6 +152,9 @@ public interface TWDService {
 
     @GET("CTWWorks/getGrantSandSchemes")
     Call<GrantSchemesResponse> getGrantSandSchemes();
+
+    @GET("CTWWorks/getStages")
+    Call<StagesResponse> getStages(@Query("sector_id")int sectorId);
 
     @POST("getGodowns/DR Depot")
     Call<DRDepotMasterResponse> getDRDepotMasterResponse();

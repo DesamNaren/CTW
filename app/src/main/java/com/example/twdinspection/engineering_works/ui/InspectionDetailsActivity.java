@@ -9,9 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
@@ -21,6 +23,7 @@ import com.example.twdinspection.engineering_works.source.GrantScheme;
 import com.example.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.example.twdinspection.engineering_works.source.SectorsEntity;
 import com.example.twdinspection.engineering_works.source.SectorsResponse;
+import com.example.twdinspection.engineering_works.source.StagesResponse;
 import com.example.twdinspection.engineering_works.viewmodels.EngDashboardCustomViewModel;
 import com.example.twdinspection.engineering_works.viewmodels.EngDashboardViewModel;
 import com.example.twdinspection.engineering_works.viewmodels.InspDetailsCustomViewModel;
@@ -40,7 +43,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
     SharedPreferences sharedPreferences;
     InspDetailsViewModel viewModel;
     int sectorsCnt, schemesCnt;
-    List<SectorsEntity> sectorsEntities=new ArrayList<>();
+    List<SectorsEntity> sectorsEntities = new ArrayList<>();
+    Integer selSectorId = -1, selSchemeId = -1, selWorkProgStageId = -1;
+    String selSectorName, selSchemeName, selStageName, selWorkInProgStageName;
+    private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
+    StagesResponse stagesResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +79,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
-                InspectionDetailsActivity.this.sectorsEntities=sectorsEntities;
+                InspectionDetailsActivity.this.sectorsEntities = sectorsEntities;
                 if (sectorsEntities != null && sectorsEntities.size() > 0) {
                     ArrayList<String> sectorsList = new ArrayList<>();
                     sectorsList.add("Select");
@@ -97,17 +104,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             }
         });
 
-        binding.spSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
@@ -125,7 +121,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                         public void onChanged(GrantSchemesResponse sectorsResponse) {
                             if (sectorsResponse != null && sectorsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                 schemesCnt = viewModel.insertGrantSchemesInfo(sectorsResponse.getSchemes());
-
                             } else {
                                 callSnackBar(sectorsResponse.getStatusMessage());
                             }
@@ -141,13 +136,49 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 spinnerAdapter = null;
-                binding.tvSectorOthers.setVisibility(View.GONE);
-                binding.tvStageOthers.setVisibility(View.GONE);
-                binding.llStageWork.setVisibility(View.VISIBLE);
-                ArrayList<String> stagesList=new ArrayList<>();
-                //getStage service call
-                spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
-                binding.spStageInProgress.setAdapter(spinnerAdapter);
+//                binding.tvSectorOthers.setVisibility(View.GONE);
+//                binding.tvStageOthers.setVisibility(View.GONE);
+//                binding.llStageWork.setVisibility(View.VISIBLE);
+                ArrayList<String> stagesList = new ArrayList<>();
+                if (binding.spSector.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    selSectorId = -1;
+                    selSectorName = "";
+                    selWorkProgStageId = -1;
+                    selWorkInProgStageName = "";
+                    binding.spStageInProgress.setAdapter(null);
+                } else {
+                    viewModel.getSectorId(binding.spSector.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer integer) {
+                            if (integer != null) {
+                                selSectorId = integer;
+                                selSectorName = binding.spSector.getSelectedItem().toString();
+                                viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
+                                    @Override
+                                    public void onChanged(StagesResponse stagesResponse) {
+                                        InspectionDetailsActivity.this.stagesResponse = stagesResponse;
+                                        if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
+                                            stagesList.clear();
+                                            stagesList.add("Select");
+                                            for (int y = 0; y < stagesResponse.getStages().size(); y++) {
+                                                stagesList.add(stagesResponse.getStages().get(y).getStageName());
+                                            }
+                                            ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                                            binding.spStageInProgress.setAdapter(spinnerAdapter);
+                                        } else {
+                                            callSnackBar(getString(R.string.something));
+                                        }
+                                    }
+                                });
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                    spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                    binding.spStageInProgress.setAdapter(spinnerAdapter);
+
+                }
             }
 
             @Override
@@ -155,12 +186,180 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
 
             }
         });
+
+        binding.spScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (binding.spScheme.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    selSchemeId=-1;
+                    selSchemeName="";
+                }else{
+                    viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                        @Override
+                        public void onChanged(Integer integer) {
+                            if (integer != null) {
+                                selSchemeId = integer;
+                                selSchemeName = binding.spScheme.getSelectedItem().toString();
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        binding.spStageInProgress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                   selWorkProgStageId=-1;
+                   selWorkInProgStageName="";
+                }else{
+                    selWorkInProgStageName = binding.spStageInProgress.getSelectedItem().toString();
+                    if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
+                        for (int z = 0; z < stagesResponse.getStages().size(); z++) {
+                            if (stagesResponse.getStages().get(z).getStageName().equalsIgnoreCase(selWorkInProgStageName)) {
+                                selWorkProgStageId = stagesResponse.getStages().get(z).getStageId();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    selStageName="";
+                }else{
+                    selStageName = binding.spStage.getSelectedItem().toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        binding.rgOverallAppear.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_overall_appear_sat) {
+                    overallAppearance = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_overall_appear_poor) {
+                    overallAppearance = AppConstants.POOR;
+                }
+            }
+        });
+        binding.rgWorkmenSkill.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_workmen_skill_sat) {
+                    worksmenSkill = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_workmen_skill_poor) {
+                    worksmenSkill = AppConstants.POOR;
+                }
+            }
+        });
+
+        binding.rgQualCare.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_qual_care_sat) {
+                    qualCare = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_qual_care_poor) {
+                    qualCare = AppConstants.POOR;
+                }
+            }
+        });
+
+        binding.rgQualMaterials.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_qual_materials_sat) {
+                    qualMat = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_qual_materials_poor) {
+                    qualMat = AppConstants.POOR;
+                }
+            }
+        });
+        binding.rgSurfaceFinish.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_surface_finish_sat) {
+                    surfaceFinishing = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_surface_finish_poor) {
+                    surfaceFinishing = AppConstants.POOR;
+                }
+            }
+        });
+        binding.rgSatisLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (radioGroup.getCheckedRadioButtonId() == R.id.rb_satis_level_sat) {
+                    satLevel = AppConstants.SATISFACTORY;
+                } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_satis_level_poor) {
+                    satLevel = AppConstants.POOR;
+                }
+            }
+        });
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
+                observation = binding.etObs.getText().toString().trim();
+                if (validate())
+                    startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
             }
         });
+    }
+
+    private boolean validate() {
+        if (selSectorId == -1) {
+            callSnackBar("Please select sector");
+            return false;
+        } else if (selSchemeId==-1) {
+            callSnackBar("Please select scheme");
+            return false;
+        } else if (TextUtils.isEmpty(selStageName)) {
+            callSnackBar("Please select stage of work");
+            return false;
+        } else if (selWorkProgStageId==-1) {
+            callSnackBar("Please select stage of works for in progress works");
+            return false;
+        } else if (TextUtils.isEmpty(overallAppearance)) {
+            callSnackBar("Please check overall apearance");
+            return false;
+        } else if (TextUtils.isEmpty(worksmenSkill)) {
+            callSnackBar("Please check workmen's skill");
+            return false;
+        } else if (TextUtils.isEmpty(qualCare)) {
+            callSnackBar("Please check quality care");
+            return false;
+        } else if (TextUtils.isEmpty(qualMat)) {
+            callSnackBar("Please check quality of materials");
+            return false;
+        }else if (TextUtils.isEmpty(surfaceFinishing)) {
+            callSnackBar("Please check surface finishes");
+            return false;
+        }else if (TextUtils.isEmpty(observation)) {
+            callSnackBar("Please enter observations");
+            return false;
+        }else if (TextUtils.isEmpty(satLevel)) {
+            callSnackBar("Please check satisfaction level");
+            return false;
+        }
+        return true;
     }
 
     void callSnackBar(String msg) {
