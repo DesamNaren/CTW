@@ -22,6 +22,7 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrGodownSelBinding;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.example.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -92,9 +93,22 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                }else{
+                    Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
                 }
             }
         });
+         LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
+         drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
+                    @Override
+                    public void onChanged(List<DrGodowns> drGodowns) {
+                        drGodownLiveData.removeObservers(DRGODownSelActivity.this);
+                        customProgressDialog.dismiss();
+                        if (drGodowns== null || drGodowns.size() <= 0) {
+                            Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No DR Godowns found...\n Do you want to sync DR Godowns?");
+                        }
+                    }
+                });
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
@@ -217,7 +231,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                                 android.R.layout.simple_spinner_dropdown_item, drGodowns);
                                         binding.spGodown.setAdapter(adapter);
                                     } else {
-                                        showSnackBar("No godowns found");
+                                        showSnackBar("No DR Godowns found");
                                     }
                                 }
                             });

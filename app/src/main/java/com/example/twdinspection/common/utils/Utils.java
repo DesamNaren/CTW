@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
 import com.example.twdinspection.common.application.TWDApplication;
+import com.example.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.example.twdinspection.inspection.interfaces.SaveListener;
 import com.example.twdinspection.inspection.ui.DashboardActivity;
 import com.example.twdinspection.inspection.ui.InstMenuMainActivity;
@@ -565,6 +566,44 @@ public class Utils {
                     public void onClick(View v) {
                         dialog.dismiss();
                         activity.startActivity(new Intent(Settings.ACTION_DATE_SETTINGS));
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void customGCCSyncAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_information);
+
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        activity.finish();
+                        dialog.dismiss();
+                    }
+                });
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        activity.startActivity(new Intent(activity, GCCSyncActivity.class));
+                        activity.finish();
                     }
                 });
                 if (!dialog.isShowing())

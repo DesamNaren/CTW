@@ -2,9 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twdinspection.engineering_works.viewmodels.UploadEngPhotoViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/root"
         android:layout_height="match_parent">
 
         <include
@@ -14,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
+            android:id="@+id/root"
             android:layout_below="@id/header"
             android:background="@color/light_gray">
 

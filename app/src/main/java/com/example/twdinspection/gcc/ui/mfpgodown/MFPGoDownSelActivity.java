@@ -20,7 +20,10 @@ import com.example.twdinspection.common.utils.AppConstants;
 import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityMfpGodownSelBinding;
+import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.example.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
+import com.example.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -87,10 +90,23 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                     android.R.layout.simple_spinner_dropdown_item, divisionNames
                             );
                             binding.spDivision.setAdapter(adapter);
+                        }else{
+                            Utils.customGCCSyncAlert(MFPGoDownSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
                         }
                     }
                 });
 
+        LiveData<List<MFPGoDowns>> drGodownLiveData = viewModel.getAllMFPGoDowns();
+        drGodownLiveData.observe(this, new Observer<List<MFPGoDowns>>() {
+            @Override
+            public void onChanged(List<MFPGoDowns> drGodowns) {
+                drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns== null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this,getString(R.string.app_name),"No MFP Godowns found...\n Do you want to sync MFP Godowns?");
+                }
+            }
+        });
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spMfp.setOnItemSelectedListener(this);
         binding.btnProceed.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +177,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, mfpGoDowns);
                                         binding.spMfp.setAdapter(adapter);
-                                    } else {
+                                    }else {
                                         showSnackBar("No MFP Godowns found");
                                     }
                                 }

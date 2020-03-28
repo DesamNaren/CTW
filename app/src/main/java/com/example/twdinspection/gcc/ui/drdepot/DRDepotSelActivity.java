@@ -22,6 +22,8 @@ import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityDrDepotSelBinding;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.example.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.example.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.example.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -92,10 +94,23 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                     android.R.layout.simple_spinner_dropdown_item, divisionNames
                             );
                             binding.spDivision.setAdapter(adapter);
+                        }else{
+                            Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
                         }
                     }
                 });
 
+        LiveData<List<DRDepots>> drGodownLiveData = viewModel.getAllDRDepots();
+        drGodownLiveData.observe(this, new Observer<List<DRDepots>>() {
+            @Override
+            public void onChanged(List<DRDepots> drGodowns) {
+                drGodownLiveData.removeObservers(DRDepotSelActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns== null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No DR Depots found...\n Do you want to sync DR Depots?");
+                }
+            }
+        });
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
         binding.spDepot.setOnItemSelectedListener(this);
@@ -217,7 +232,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                                 android.R.layout.simple_spinner_dropdown_item, drDepots);
                                         binding.spDepot.setAdapter(adapter);
                                     }else {
-                                        showSnackBar("No depots found");
+                                        showSnackBar("No DR Depots found");
                                     }
                                 }
                             });

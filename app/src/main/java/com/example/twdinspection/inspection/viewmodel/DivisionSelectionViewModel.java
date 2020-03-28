@@ -19,9 +19,13 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
     private LiveData<List<String>> divisions;
     private LiveData<List<DivisionsInfo>> societies;
     private LiveData<List<DrGodowns>> drGodowns;
+    private LiveData<List<DrGodowns>> allDrGodowns;
     private LiveData<List<DRDepots>> drDepots;
+    private LiveData<List<DRDepots>> allDrDepots;
     private LiveData<List<MFPGoDowns>> mfpGoDowns;
+    private LiveData<List<MFPGoDowns>> allMfpGoDowns;
     private LiveData<List<PUnits>> pUnits;
+    private LiveData<List<PUnits>> allpUnits;
     private GCCRepository mRepository;
 
     public DivisionSelectionViewModel(Application application) {
@@ -29,9 +33,13 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         divisions = new MutableLiveData<>();
         societies = new MutableLiveData<>();
         drGodowns = new MutableLiveData<>();
+        allDrGodowns = new MutableLiveData<>();
         drDepots = new MutableLiveData<>();
+        allDrDepots = new MutableLiveData<>();
         mfpGoDowns = new MutableLiveData<>();
+        allMfpGoDowns = new MutableLiveData<>();
         pUnits = new MutableLiveData<>();
+        allpUnits = new MutableLiveData<>();
         mRepository = new GCCRepository(application);
     }
 
@@ -56,12 +64,24 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return drGodowns;
     }
+    public LiveData<List<DrGodowns>> getAllDRGoDowns() {
+        if (allDrGodowns != null) {
+            allDrGodowns = mRepository.getAllGoDowns();
+        }
+        return allDrGodowns;
+    }
 
     public LiveData<List<DRDepots>> getDRDepots(String divId, String socId) {
         if (drDepots != null) {
             drDepots = mRepository.getDRDepots(divId, socId);
         }
         return drDepots;
+    }
+    public LiveData<List<DRDepots>> getAllDRDepots() {
+        if (allDrDepots != null) {
+            allDrDepots = mRepository.getAllDRDepots();
+        }
+        return allDrDepots;
     }
 
     public LiveData<List<MFPGoDowns>> getMFPGoDowns(String divId) {
@@ -71,12 +91,25 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         return mfpGoDowns;
     }
 
+    public LiveData<List<MFPGoDowns>> getAllMFPGoDowns() {
+        if (allMfpGoDowns != null) {
+            allMfpGoDowns = mRepository.getAllMFPGoDowns();
+        }
+        return allMfpGoDowns;
+    }
+
 
     public LiveData<List<PUnits>> getPUnits(String divId, String socId) {
         if (pUnits != null) {
             pUnits = mRepository.getPUnits(divId, socId);
         }
         return pUnits;
+    }
+    public LiveData<List<PUnits>> getAllPUnits() {
+        if (allpUnits != null) {
+            allpUnits = mRepository.getAllPUnits();
+        }
+        return allpUnits;
     }
 
     public LiveData<List<PUnits>> getPUnits(String divId) {
