@@ -2,7 +2,9 @@ package com.example.twdinspection.engineering_works.ui;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -14,21 +16,42 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import okhttp3.MediaType;
 import com.bumptech.glide.Glide;
 import com.example.twdinspection.BuildConfig;
 import com.example.twdinspection.R;
+import com.example.twdinspection.common.ErrorHandler;
 import com.example.twdinspection.common.application.TWDApplication;
 import com.example.twdinspection.common.utils.AppConstants;
+import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityUploadEngPhotosBinding;
+import com.example.twdinspection.engineering_works.interfaces.UploadEngPhotosSubmitInterface;
+import com.example.twdinspection.engineering_works.viewmodels.UploadEngPhotoCustomViewModel;
+import com.example.twdinspection.engineering_works.viewmodels.UploadEngPhotoViewModel;
+import com.example.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
+import com.example.twdinspection.gcc.source.submit.GCCSubmitRequest;
+import com.example.twdinspection.gcc.source.submit.GCCSubmitResponse;
+import com.example.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
+import com.example.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
+import com.example.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
 import com.example.twdinspection.inspection.ui.LocBaseActivity;
+import com.example.twdinspection.inspection.ui.UploadedPhotoActivity;
+import com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel;
+import com.example.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class UploadEngPhotosActivity extends LocBaseActivity {
+public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEngPhotosSubmitInterface, ErrorHandlerInterface {
 
     ActivityUploadEngPhotosBinding binding;
     String PIC_NAME, PIC_TYPE;
@@ -41,6 +64,9 @@ public class UploadEngPhotosActivity extends LocBaseActivity {
     public static final String IMAGE_DIRECTORY_NAME = "ENGINEERING_WORKS_IMAGES";
     String officerID,engWorkId;
     SharedPreferences sharedPreferences;
+    private CustomProgressDialog customProgressDialog;
+    UploadEngPhotoViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +75,13 @@ public class UploadEngPhotosActivity extends LocBaseActivity {
         binding.header.headerTitle.setText("Upload Photos");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
+        customProgressDialog = new CustomProgressDialog(UploadEngPhotosActivity.this);
 
+
+        viewModel = ViewModelProviders.of(this,
+                new UploadEngPhotoCustomViewModel(this)).get(UploadEngPhotoViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.executePendingBindings();
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,8 +152,75 @@ public class UploadEngPhotosActivity extends LocBaseActivity {
                 }
             }
         });
+        binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validate()){
+                    if (Utils.checkInternetConnection(UploadEngPhotosActivity.this)) {
+                        callDataSubmit();
+                    } else {
+                        Utils.customWarningAlert(UploadEngPhotosActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    }
+                }
+            }
+        });
+    }
+    private boolean validate() {
+        boolean returnFlag=true;
+        if(flag_elevation==0){
+            returnFlag=false;
+            showSnackBar("Please capture elevation image");
+        }else if(flag_sideview==0){
+            returnFlag=false;
+            showSnackBar("Please capture side view image");
+        }else if(flag_3dView==0){
+            returnFlag=false;
+            showSnackBar("Please capture 3D view image");
+        }else if(flag_rearView==0) {
+            returnFlag = false;
+            showSnackBar("Please capture rear view image");
+        }
+        return returnFlag;
     }
 
+    private void callDataSubmit() {
+//        viewModel.submitEngWorksDetails(request);
+        callPhotoSubmit();
+    }
+    private void callPhotoSubmit() {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_elevation);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file_elevation.getName(), requestFile);
+        RequestBody requestFile1 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_3DView);
+        MultipartBody.Part body1 =
+                MultipartBody.Part.createFormData("image", file_3DView.getName(), requestFile1);
+        RequestBody requestFile2 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_rearView);
+        MultipartBody.Part body2 =
+                MultipartBody.Part.createFormData("image", file_rearView.getName(), requestFile2);
+        RequestBody requestFile3 =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_sideView);
+        MultipartBody.Part body3 =
+                MultipartBody.Part.createFormData("image", file_sideView.getName(), requestFile3);
+
+
+        customProgressDialog.show();
+
+
+        List<MultipartBody.Part> partList = new ArrayList<>();
+        partList.add(body);
+        partList.add(body1);
+        partList.add(body2);
+        partList.add(body3);
+
+        viewModel.UploadImageServiceCall(partList);
+    }
+
+    private void showSnackBar(String str) {
+        Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -213,4 +312,38 @@ public class UploadEngPhotosActivity extends LocBaseActivity {
         return mediaFile;
     }
 
+    @Override
+    public void getData(GCCSubmitResponse gccSubmitResponse) {
+        customProgressDialog.hide();
+        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            callPhotoSubmit();
+        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+            Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse) {
+        customProgressDialog.hide();
+        if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            CallSuccessAlert(gccPhotoSubmitResponse.getStatusMessage());
+        } else if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
+            Snackbar.make(binding.root, gccPhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+        } else {
+            Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+        }
+    }
+    private void CallSuccessAlert(String msg) {
+        Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        showSnackBar(errMsg);
+    }
 }

@@ -4,6 +4,7 @@ package com.example.twdinspection.common.network;
 import com.example.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.example.twdinspection.engineering_works.source.SectorsResponse;
 import com.example.twdinspection.engineering_works.source.StagesResponse;
+import com.example.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.example.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.example.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.example.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -114,6 +115,9 @@ public interface TWDService {
     @POST("submitGCCInspectionDetails")
     Call<GCCSubmitResponse> getGCCSubmitResponse(@Body GCCSubmitRequest gccSubmitRequest);
 
+    @POST("CTWWorks/submitWorkInspectionDetails")
+    Call<GCCSubmitResponse> getEngWorksSubmitResponse(@Body SubmitEngWorksRequest gccSubmitRequest);
+
     @POST("submitSchoolInspectionDetails")
     Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);
 
@@ -124,9 +128,14 @@ public interface TWDService {
     @Multipart
     @POST("upload/uploadSchoolInspectionPhotos")
     Call<SchemePhotoSubmitResponse> uploadSchoolImageCall(@Part List<MultipartBody.Part> partList);
+
     @Multipart
     @POST("upload/uploadGCCInspectionPhotos")
     Call<GCCPhotoSubmitResponse> uploadGCCImageCall(@Part List<MultipartBody.Part> partList);
+
+    @Multipart
+    @POST("upload/uploadEngineeringWorksPhotos")
+    Call<GCCPhotoSubmitResponse> uploadEngPhotoCall(@Part List<MultipartBody.Part> partList);
 
     @GET("CTWServiceDetails/getDMVMasters")
     Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);

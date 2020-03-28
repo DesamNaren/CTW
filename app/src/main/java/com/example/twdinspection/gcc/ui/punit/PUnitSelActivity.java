@@ -21,7 +21,9 @@ import com.example.twdinspection.common.utils.CustomProgressDialog;
 import com.example.twdinspection.common.utils.Utils;
 import com.example.twdinspection.databinding.ActivityPUnitSelBinding;
 import com.example.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.example.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.example.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.example.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -92,10 +94,23 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                     android.R.layout.simple_spinner_dropdown_item, divisionNames
                             );
                             binding.spDivision.setAdapter(adapter);
+                        }else{
+                            Utils.customGCCSyncAlert(PUnitSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
                         }
                     }
                 });
 
+        LiveData<List<PUnits>> drGodownLiveData = viewModel.getAllPUnits();
+        drGodownLiveData.observe(this, new Observer<List<PUnits>>() {
+            @Override
+            public void onChanged(List<PUnits> drGodowns) {
+                drGodownLiveData.removeObservers(PUnitSelActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns== null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(PUnitSelActivity.this,getString(R.string.app_name),"No processing units found...\n Do you want to sync processing units?");
+                }
+            }
+        });
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
         binding.spPUnit.setOnItemSelectedListener(this);
@@ -196,7 +211,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
-                                    } else {
+                                    }else {
                                         showSnackBar("No processing units found");
                                     }
                                 }

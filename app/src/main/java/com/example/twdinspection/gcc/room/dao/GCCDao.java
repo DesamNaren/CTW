@@ -33,6 +33,9 @@ public interface GCCDao {
     @Query("SELECT * from DR_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DrGodowns>> getDrGoDowns(String divId, String socId);
 
+    @Query("SELECT * from DR_GoDown")
+    LiveData<List<DrGodowns>> getAllDrGoDowns();
+
     @Query("SELECT * from DR_Depot where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DRDepots>> getDRDepots(String divId, String socId);
 
@@ -41,6 +44,15 @@ public interface GCCDao {
 
     @Query("SELECT * from P_Unit where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<PUnits>> getPUnits(String divId, String socId);
+
+    @Query("SELECT * from DR_Depot")
+    LiveData<List<DRDepots>> getAllDRDepots();
+
+    @Query("SELECT * from MFP_GoDown")
+    LiveData<List<MFPGoDowns>> getAllMFPDepots();
+
+    @Query("SELECT * from P_Unit")
+    LiveData<List<PUnits>> getAllPUnits();
 
     @Query("SELECT * from P_Unit where divisionId LIKE :divId")
     LiveData<List<PUnits>> getPUnitsDiv(String divId);
