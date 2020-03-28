@@ -129,7 +129,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         boolean returnFlag = true;
         for (int i = 0; i < staffAttendanceEntitiesmain.size(); i++) {
             if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
-                    || staffAttendanceEntitiesmain.get(i).isOndepFlag()|| staffAttendanceEntitiesmain.get(i).isOdFlag()|| staffAttendanceEntitiesmain.get(i).isUnauthLeaveFlag())) {
+                    || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag() )) {
                 returnFlag = false;
                 showSnackBar("Please mark attendance of all employees");
                 break;
@@ -141,27 +141,27 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar("Please select category");
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos()==0) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos() == 0) {
                 returnFlag = false;
                 showSnackBar("Please select category");
                 break;
-            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
                 returnFlag = false;
                 showSnackBar("Please enter leaves availed");
                 break;
-            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
                 returnFlag = false;
                 showSnackBar("Please enter leaves taken");
                 break;
-            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
                 returnFlag = false;
                 showSnackBar("Please enter leaves balance");
                 break;
-            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
                 returnFlag = false;
                 showSnackBar("Please enter last week turn duties teacher attended");
                 break;
-            }else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade())) {
                 returnFlag = false;
                 showSnackBar("Please enter teacher's last year academic panel grade");
                 break;

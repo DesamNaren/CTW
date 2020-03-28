@@ -74,8 +74,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(true);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(false);
-                    employeeResponse.setOdFlag(false);
-                    employeeResponse.setUnauthLeaveFlag(false);
+                    employeeResponse.setLeavesFlag(false);
+
                     employeeResponse.setEmp_presence(AppConstants.PRESENT);
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
@@ -93,8 +93,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(true);
                     employeeResponse.setOndepFlag(false);
-                    employeeResponse.setOdFlag(false);
-                    employeeResponse.setUnauthLeaveFlag(false);
+                    employeeResponse.setLeavesFlag(false);
+
                     employeeResponse.setEmp_presence(AppConstants.ABSENT);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
@@ -112,8 +112,8 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(true);
-                    employeeResponse.setOdFlag(false);
-                    employeeResponse.setUnauthLeaveFlag(false);
+                    employeeResponse.setLeavesFlag(false);
+
                     employeeResponse.setEmp_presence(AppConstants.ONDEPUTATION);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
@@ -124,41 +124,22 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                 }
             }
         });
-        holder.binding.llOd.setOnClickListener(new View.OnClickListener() {
+        holder.binding.llLeaves.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!employeeResponse.isOdFlag()) {
+                if (!employeeResponse.isLeavesFlag()) {
                     employeeResponse.setPresentFlag(false);
                     employeeResponse.setAbsentFlag(false);
                     employeeResponse.setOndepFlag(false);
-                    employeeResponse.setOdFlag(true);
-                    employeeResponse.setUnauthLeaveFlag(false);
-                    employeeResponse.setEmp_presence(AppConstants.OD);
+                    employeeResponse.setLeavesFlag(true);
+
+                    employeeResponse.setEmp_presence(AppConstants.LEAVES);
 
                     Animation animSlide = AnimationUtils.loadAnimation(context,
                             R.anim.item_animation_fall_down);
 
                     holder.binding.llOd.setAnimation(animSlide);
-                    changeIcon(holder.binding, holder.binding.ivOd, R.drawable.ondep, holder.binding.tvOd);
-                }
-            }
-        });
-        holder.binding.llUnauthAbsent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!employeeResponse.isUnauthLeaveFlag()) {
-                    employeeResponse.setPresentFlag(false);
-                    employeeResponse.setAbsentFlag(false);
-                    employeeResponse.setOndepFlag(false);
-                    employeeResponse.setOdFlag(false);
-                    employeeResponse.setUnauthLeaveFlag(true);
-                    employeeResponse.setEmp_presence(AppConstants.UNAUTHABSENT);
-
-                    Animation animSlide = AnimationUtils.loadAnimation(context,
-                            R.anim.item_animation_fall_down);
-
-                    holder.binding.llUnauthAbsent.setAnimation(animSlide);
-                    changeIcon(holder.binding, holder.binding.ivUnauthAbsent, R.drawable.ondep, holder.binding.tvUnauthAbsent);
+                    changeIcon(holder.binding, holder.binding.ivLeaves, R.drawable.leaves, holder.binding.tvLeaves);
                 }
             }
         });
@@ -281,10 +262,12 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         binding.ivPresent.setImageDrawable(context.getResources().getDrawable(R.drawable.present_init));
         binding.ivAbsent.setImageDrawable(context.getResources().getDrawable(R.drawable.absent_init));
         binding.ivOndep.setImageDrawable(context.getResources().getDrawable(R.drawable.ondep_init));
+        binding.ivLeaves.setImageDrawable(context.getResources().getDrawable(R.drawable.leaves_init));
 
         binding.tvPresent.setTypeface(null, Typeface.NORMAL);
         binding.tvAbsent.setTypeface(null, Typeface.NORMAL);
         binding.tvOndep.setTypeface(null, Typeface.NORMAL);
+        binding.tvLeaves.setTypeface(null, Typeface.NORMAL);
 
         imageView.setImageDrawable(context.getResources().getDrawable(img));
         textView.setTypeface(null, Typeface.BOLD);

@@ -38,8 +38,9 @@ public class AppConstants {
     public static final String WIN = "Win";
     public static final String CLASSROOM = "Classroom";
     public static final String PRESENT = "Present";
-    public static final String ABSENT = "Absent";
+    public static final String ABSENT = "Unauthorised Absent";
     public static final String ONDEPUTATION = "On Deputation";
+    public static final String LEAVES = "Leaves";
     public static final String Yes = "YES";
     public static final String No = "NO";
     public static final String ENG_WORK_ID = "ENG_WORK_ID";
@@ -63,7 +64,7 @@ public class AppConstants {
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
 
-    public static final float DISTANCE = 1000000;
+    public static final float DISTANCE = 100000000;
     public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";

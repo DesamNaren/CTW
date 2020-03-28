@@ -115,7 +115,7 @@ public abstract class DistrictDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
 //                            .createFromFile(f)
-                            .fallbackToDestructiveMigration()
+//                            .fallbackToDestructiveMigration()
                             .createFromAsset("database/TWD_NEW.db")
                             .build();
                 }

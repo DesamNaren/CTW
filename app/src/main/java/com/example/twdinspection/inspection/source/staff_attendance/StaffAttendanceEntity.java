@@ -125,11 +125,9 @@ public class StaffAttendanceEntity {
     private boolean absentFlag;
     @Ignore
     private boolean ondepFlag;
+    @Ignore
+    private boolean leavesFlag;
 
-    @Ignore
-    private boolean odFlag;
-    @Ignore
-    private boolean unauthLeaveFlag;
 
 
     public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id, String emp_name, String designation) {
@@ -141,20 +139,12 @@ public class StaffAttendanceEntity {
         this.designation = designation;
     }
 
-    public boolean isOdFlag() {
-        return odFlag;
+    public boolean isLeavesFlag() {
+        return leavesFlag;
     }
 
-    public void setOdFlag(boolean odFlag) {
-        this.odFlag = odFlag;
-    }
-
-    public boolean isUnauthLeaveFlag() {
-        return unauthLeaveFlag;
-    }
-
-    public void setUnauthLeaveFlag(boolean unauthLeaveFlag) {
-        this.unauthLeaveFlag = unauthLeaveFlag;
+    public void setLeavesFlag(boolean leavesFlag) {
+        this.leavesFlag = leavesFlag;
     }
 
     public String getInst_name() {
