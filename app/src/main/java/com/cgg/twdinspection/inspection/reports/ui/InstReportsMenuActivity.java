@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.example.twdinspection.databinding.ReportsInstMenuActivityBinding;
+import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
 
 import java.util.ArrayList;
 import java.util.Arrays;

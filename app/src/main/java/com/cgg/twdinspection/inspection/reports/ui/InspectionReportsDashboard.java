@@ -37,7 +37,7 @@ import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.InspReportResponse;
 import com.cgg.twdinspection.inspection.viewmodel.InspectionReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.databinding.ActivityInspReportBinding;
+import com.cgg.twdinspection.databinding.ActivityInspReportBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

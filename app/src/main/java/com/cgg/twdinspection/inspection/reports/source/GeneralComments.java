@@ -54,6 +54,9 @@ public class GeneralComments {
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
+    @SerializedName("hm_hwo_date")
+    @Expose
+    private String hmHwoDate;
     @SerializedName("stocksSupplied")
     @Expose
     private String stocksSupplied;
@@ -216,6 +219,14 @@ public class GeneralComments {
         this.inspectionTime = inspectionTime;
     }
 
+    public String getHmHwoDate() {
+        return hmHwoDate;
+    }
+
+    public void setHmHwoDate(String hmHwoDate) {
+        this.hmHwoDate = hmHwoDate;
+    }
+
     public String getStocksSupplied() {
         return stocksSupplied;
     }
@@ -303,5 +314,4 @@ public class GeneralComments {
     public void setStudFoundAnemic(String studFoundAnemic) {
         this.studFoundAnemic = studFoundAnemic;
     }
-
 }

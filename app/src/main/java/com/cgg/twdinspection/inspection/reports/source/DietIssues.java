@@ -6,23 +6,20 @@ import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.R;
+import com.example.twdinspection.inspection.reports.source.DietListEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class DietIssues {
 
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
-    @SerializedName("maintaining_register")
+    @SerializedName("dietListEntities")
     @Expose
-    private String maintainingRegister;
-    @SerializedName("menu_chart_served")
-    @Expose
-    private String menuChartServed;
-    @SerializedName("officer_id")
-    @Expose
-    private String officerId;
+    private List<DietListEntity> dietListEntities = null;
     @SerializedName("discussed_with_committee")
     @Expose
     private String discussedWithCommittee;
@@ -32,30 +29,30 @@ public class DietIssues {
     @SerializedName("food_provisions")
     @Expose
     private String foodProvisions;
-    @SerializedName("menu_chart_painted")
-    @Expose
-    private String menuChartPainted;
     @SerializedName("menu_served")
     @Expose
     private String menuServed;
-    @SerializedName("id")
-    @Expose
-    private String id;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
     @SerializedName("committee_exist")
     @Expose
     private String committeeExist;
-
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.loader_black1)
-                .into(view);
-    }
+    @SerializedName("maintaining_register")
+    @Expose
+    private String maintainingRegister;
+    @SerializedName("menu_chart_served")
+    @Expose
+    private String menuChartServed;
+    @SerializedName("officer_id")
+    @Expose
+    private String officerId;
+    @SerializedName("menu_chart_painted")
+    @Expose
+    private String menuChartPainted;
+    @SerializedName("id")
+    @Expose
+    private String id;
 
     public String getInspectionTime() {
         return inspectionTime;
@@ -65,28 +62,12 @@ public class DietIssues {
         this.inspectionTime = inspectionTime;
     }
 
-    public String getMaintainingRegister() {
-        return maintainingRegister;
+    public List<DietListEntity> getDietListEntities() {
+        return dietListEntities;
     }
 
-    public void setMaintainingRegister(String maintainingRegister) {
-        this.maintainingRegister = maintainingRegister;
-    }
-
-    public String getMenuChartServed() {
-        return menuChartServed;
-    }
-
-    public void setMenuChartServed(String menuChartServed) {
-        this.menuChartServed = menuChartServed;
-    }
-
-    public String getOfficerId() {
-        return officerId;
-    }
-
-    public void setOfficerId(String officerId) {
-        this.officerId = officerId;
+    public void setDietListEntities(List<DietListEntity> dietListEntities) {
+        this.dietListEntities = dietListEntities;
     }
 
     public String getDiscussedWithCommittee() {
@@ -113,28 +94,12 @@ public class DietIssues {
         this.foodProvisions = foodProvisions;
     }
 
-    public String getMenuChartPainted() {
-        return menuChartPainted;
-    }
-
-    public void setMenuChartPainted(String menuChartPainted) {
-        this.menuChartPainted = menuChartPainted;
-    }
-
     public String getMenuServed() {
         return menuServed;
     }
 
     public void setMenuServed(String menuServed) {
         this.menuServed = menuServed;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getInstituteId() {
@@ -151,6 +116,55 @@ public class DietIssues {
 
     public void setCommitteeExist(String committeeExist) {
         this.committeeExist = committeeExist;
+    }
+
+    public String getMaintainingRegister() {
+        return maintainingRegister;
+    }
+
+    public void setMaintainingRegister(String maintainingRegister) {
+        this.maintainingRegister = maintainingRegister;
+    }
+
+    public String getMenuChartServed() {
+        return menuChartServed;
+    }
+
+    public void setMenuChartServed(String menuChartServed) {
+        this.menuChartServed = menuChartServed;
+    }
+
+    public String getOfficerId() {
+        return officerId;
+    }
+
+    public void setOfficerId(String officerId) {
+        this.officerId = officerId;
+    }
+
+    public String getMenuChartPainted() {
+        return menuChartPainted;
+    }
+
+    public void setMenuChartPainted(String menuChartPainted) {
+        this.menuChartPainted = menuChartPainted;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @BindingAdapter("profileImage")
+    public static void loadImage(ImageView view, String imageUrl) {
+
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.loader_black1)
+                .into(view);
     }
 
 }

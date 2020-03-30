@@ -990,28 +990,6 @@
                             android:orientation="vertical"
                             android:visibility="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/event_kitchen"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:errorEnabled="true">
-
-
-                                <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/kit_eve_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:focusableInTouchMode="false"
-                                    android:hint="@string/event_of_kitchen_in_charge"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="textPersonName"
-                                    android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true"
-                                    android:text="@{inspData.kitchenInChargeEventName}"
-                                    android:textSize="@dimen/dimen_15dp" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/type_kitchen"
@@ -1330,6 +1308,7 @@
 
                         </LinearLayout>
 
+<!--
                         <com.google.android.material.textfield.TextInputLayout
                             android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1352,6 +1331,7 @@
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
+-->
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"

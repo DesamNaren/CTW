@@ -14,9 +14,6 @@ public class Registers {
     @SerializedName("teacher_movement")
     @Expose
     private String teacherMovement;
-    @SerializedName("TA_bill")
-    @Expose
-    private String tABill;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
@@ -26,9 +23,6 @@ public class Registers {
     @SerializedName("permanent_article")
     @Expose
     private String permanentArticle;
-    @SerializedName("boarder_sign_reg")
-    @Expose
-    private String boarderSignReg;
     @SerializedName("acquaintance_reg")
     @Expose
     private String acquaintanceReg;
@@ -117,14 +111,6 @@ public class Registers {
         this.teacherMovement = teacherMovement;
     }
 
-    public String getTABill() {
-        return tABill;
-    }
-
-    public void setTABill(String tABill) {
-        this.tABill = tABill;
-    }
-
     public String getInstituteId() {
         return instituteId;
     }
@@ -147,14 +133,6 @@ public class Registers {
 
     public void setPermanentArticle(String permanentArticle) {
         this.permanentArticle = permanentArticle;
-    }
-
-    public String getBoarderSignReg() {
-        return boarderSignReg;
-    }
-
-    public void setBoarderSignReg(String boarderSignReg) {
-        this.boarderSignReg = boarderSignReg;
     }
 
     public String getAcquaintanceReg() {

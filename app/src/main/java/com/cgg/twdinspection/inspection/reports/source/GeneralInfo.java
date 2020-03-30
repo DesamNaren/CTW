@@ -8,45 +8,72 @@ public class GeneralInfo {
     @SerializedName("mandalName")
     @Expose
     private String mandalName;
-    @SerializedName("captureDistance")
-    @Expose
-    private String captureDistance;
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
-    @SerializedName("movementRegisterEntry")
+    @SerializedName("hwoPresence")
     @Expose
-    private String movementRegisterEntry;
+    private String hwoPresence;
     @SerializedName("staffQuarters")
     @Expose
     private String staffQuarters;
-    @SerializedName("HM_HWO_presence")
+    @SerializedName("hmMovementRegisterEntry")
     @Expose
-    private String hMHWOPresence;
-    @SerializedName("capturetype")
+    private String hmMovementRegisterEntry;
+    @SerializedName("hwostayingFacilitiesType")
     @Expose
-    private String capturetype;
+    private String hwostayingFacilitiesType;
+    @SerializedName("hwoheadquarters")
+    @Expose
+    private String hwoheadquarters;
+    @SerializedName("hwoleaveType")
+    @Expose
+    private String hwoleaveType;
+    @SerializedName("hmLeaveType")
+    @Expose
+    private String hmLeaveType;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
-    @SerializedName("stayingFacilitiesType")
+    @SerializedName("hwomovementRegisterEntry")
     @Expose
-    private String stayingFacilitiesType;
+    private String hwomovementRegisterEntry;
+    @SerializedName("hwocapturetype")
+    @Expose
+    private String hwocapturetype;
+    @SerializedName("hmcaptureDistance")
+    @Expose
+    private String hmcaptureDistance;
+    @SerializedName("hwocaptureDistance")
+    @Expose
+    private String hwocaptureDistance;
+    @SerializedName("hmcaptureleavetype")
+    @Expose
+    private String hmcaptureleavetype;
     @SerializedName("officer_id")
     @Expose
     private String officerId;
-    @SerializedName("leaveType")
+    @SerializedName("hmheadquarters")
     @Expose
-    private String leaveType;
-    @SerializedName("having_headquarters")
+    private String hmheadquarters;
+    @SerializedName("hmstayingFacilitiesType")
     @Expose
-    private String havingHeadquarters;
+    private String hmstayingFacilitiesType;
+    @SerializedName("hmCapturetype")
+    @Expose
+    private String hmCapturetype;
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("hmPresence")
+    @Expose
+    private String hmPresence;
     @SerializedName("instName")
     @Expose
     private String instName;
+    @SerializedName("hwocaptureleavetype")
+    @Expose
+    private String hwocaptureleavetype;
 
     public String getMandalName() {
         return mandalName;
@@ -54,14 +81,6 @@ public class GeneralInfo {
 
     public void setMandalName(String mandalName) {
         this.mandalName = mandalName;
-    }
-
-    public String getCaptureDistance() {
-        return captureDistance;
-    }
-
-    public void setCaptureDistance(String captureDistance) {
-        this.captureDistance = captureDistance;
     }
 
     public String getInspectionTime() {
@@ -72,12 +91,12 @@ public class GeneralInfo {
         this.inspectionTime = inspectionTime;
     }
 
-    public String getMovementRegisterEntry() {
-        return movementRegisterEntry;
+    public String getHwoPresence() {
+        return hwoPresence;
     }
 
-    public void setMovementRegisterEntry(String movementRegisterEntry) {
-        this.movementRegisterEntry = movementRegisterEntry;
+    public void setHwoPresence(String hwoPresence) {
+        this.hwoPresence = hwoPresence;
     }
 
     public String getStaffQuarters() {
@@ -88,20 +107,44 @@ public class GeneralInfo {
         this.staffQuarters = staffQuarters;
     }
 
-    public String getHMHWOPresence() {
-        return hMHWOPresence;
+    public String getHmMovementRegisterEntry() {
+        return hmMovementRegisterEntry;
     }
 
-    public void setHMHWOPresence(String hMHWOPresence) {
-        this.hMHWOPresence = hMHWOPresence;
+    public void setHmMovementRegisterEntry(String hmMovementRegisterEntry) {
+        this.hmMovementRegisterEntry = hmMovementRegisterEntry;
     }
 
-    public String getCapturetype() {
-        return capturetype;
+    public String getHwostayingFacilitiesType() {
+        return hwostayingFacilitiesType;
     }
 
-    public void setCapturetype(String capturetype) {
-        this.capturetype = capturetype;
+    public void setHwostayingFacilitiesType(String hwostayingFacilitiesType) {
+        this.hwostayingFacilitiesType = hwostayingFacilitiesType;
+    }
+
+    public String getHwoheadquarters() {
+        return hwoheadquarters;
+    }
+
+    public void setHwoheadquarters(String hwoheadquarters) {
+        this.hwoheadquarters = hwoheadquarters;
+    }
+
+    public String getHwoleaveType() {
+        return hwoleaveType;
+    }
+
+    public void setHwoleaveType(String hwoleaveType) {
+        this.hwoleaveType = hwoleaveType;
+    }
+
+    public String getHmLeaveType() {
+        return hmLeaveType;
+    }
+
+    public void setHmLeaveType(String hmLeaveType) {
+        this.hmLeaveType = hmLeaveType;
     }
 
     public String getInstituteId() {
@@ -112,12 +155,44 @@ public class GeneralInfo {
         this.instituteId = instituteId;
     }
 
-    public String getStayingFacilitiesType() {
-        return stayingFacilitiesType;
+    public String getHwomovementRegisterEntry() {
+        return hwomovementRegisterEntry;
     }
 
-    public void setStayingFacilitiesType(String stayingFacilitiesType) {
-        this.stayingFacilitiesType = stayingFacilitiesType;
+    public void setHwomovementRegisterEntry(String hwomovementRegisterEntry) {
+        this.hwomovementRegisterEntry = hwomovementRegisterEntry;
+    }
+
+    public String getHwocapturetype() {
+        return hwocapturetype;
+    }
+
+    public void setHwocapturetype(String hwocapturetype) {
+        this.hwocapturetype = hwocapturetype;
+    }
+
+    public String getHmcaptureDistance() {
+        return hmcaptureDistance;
+    }
+
+    public void setHmcaptureDistance(String hmcaptureDistance) {
+        this.hmcaptureDistance = hmcaptureDistance;
+    }
+
+    public String getHwocaptureDistance() {
+        return hwocaptureDistance;
+    }
+
+    public void setHwocaptureDistance(String hwocaptureDistance) {
+        this.hwocaptureDistance = hwocaptureDistance;
+    }
+
+    public String getHmcaptureleavetype() {
+        return hmcaptureleavetype;
+    }
+
+    public void setHmcaptureleavetype(String hmcaptureleavetype) {
+        this.hmcaptureleavetype = hmcaptureleavetype;
     }
 
     public String getOfficerId() {
@@ -128,20 +203,28 @@ public class GeneralInfo {
         this.officerId = officerId;
     }
 
-    public String getLeaveType() {
-        return leaveType;
+    public String getHmheadquarters() {
+        return hmheadquarters;
     }
 
-    public void setLeaveType(String leaveType) {
-        this.leaveType = leaveType;
+    public void setHmheadquarters(String hmheadquarters) {
+        this.hmheadquarters = hmheadquarters;
     }
 
-    public String getHavingHeadquarters() {
-        return havingHeadquarters;
+    public String getHmstayingFacilitiesType() {
+        return hmstayingFacilitiesType;
     }
 
-    public void setHavingHeadquarters(String havingHeadquarters) {
-        this.havingHeadquarters = havingHeadquarters;
+    public void setHmstayingFacilitiesType(String hmstayingFacilitiesType) {
+        this.hmstayingFacilitiesType = hmstayingFacilitiesType;
+    }
+
+    public String getHmCapturetype() {
+        return hmCapturetype;
+    }
+
+    public void setHmCapturetype(String hmCapturetype) {
+        this.hmCapturetype = hmCapturetype;
     }
 
     public String getId() {
@@ -152,11 +235,27 @@ public class GeneralInfo {
         this.id = id;
     }
 
+    public String getHmPresence() {
+        return hmPresence;
+    }
+
+    public void setHmPresence(String hmPresence) {
+        this.hmPresence = hmPresence;
+    }
+
     public String getInstName() {
         return instName;
     }
 
     public void setInstName(String instName) {
         this.instName = instName;
+    }
+
+    public String getHwocaptureleavetype() {
+        return hwocaptureleavetype;
+    }
+
+    public void setHwocaptureleavetype(String hwocaptureleavetype) {
+        this.hwocaptureleavetype = hwocaptureleavetype;
     }
 }

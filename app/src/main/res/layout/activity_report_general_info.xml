@@ -148,69 +148,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="6."
-                            android:textColor="@color/black" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/hm_present_time"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_present_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_yes_present_time"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:checked="@{inspData.hMHWOPresence.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_no_present_time"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{inspData.hMHWOPresence.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_leavetype"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/dimen_5dp"
-                        android:visibility="@{inspData.hMHWOPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:text="7."
                             android:textColor="@color/black" />
 
@@ -228,166 +165,294 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/leave_reason_type"
+                                    android:text="@string/hm_present_time"
                                     android:textColor="@color/black" />
 
                                 <RadioGroup
-                                    android:id="@+id/rg_leavetype"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-
-                                    <RadioButton
-                                        android:id="@+id/rb_leaves"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.leaveType.equalsIgnoreCase(`Leaves`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/leaves" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_absent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.leaveType.equalsIgnoreCase(`Unauthorized Absent`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/unauthorized_absent" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_od"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.leaveType.equalsIgnoreCase(`OD`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/od" />
-
-                                </RadioGroup>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_od_capture_type"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{inspData.leaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE}">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/od_capture_type"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_capturetype"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Out of station`)}"
-                                        android:id="@+id/rb_out_of_station"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/out_of_station" />
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within campus`)}"
-                                        android:id="@+id/rb_within_campus"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/within_campus" />
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within Mandal`)}"
-                                        android:id="@+id/rb_within_mandal"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/within_mandal" />
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`Within District`)}"
-                                        android:id="@+id/rb_within_district"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/within_district" />
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`ITDA level`)}"
-                                        android:id="@+id/rb_itda_level"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/itda_level" />
-
-                                    <RadioButton
-                                        android:checked="@{inspData.capturetype.equalsIgnoreCase(`State Level`)}"
-
-                                        android:id="@+id/rb_state_level"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/state_level" />
-
-                                </RadioGroup>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_movement_register_entry"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{inspData.capturetype.equalsIgnoreCase(`Out of station`)? View.VISIBLE : View.GONE}">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/movement_register_entry"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_movement_register_entry"
+                                    android:id="@+id/rg_hm_present_time"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
 
                                     <RadioButton
-                                        android:id="@+id/rb_yes_movement_register_entry"
+                                        android:id="@+id/rb_yes_hm_present_time"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspData.movementRegisterEntry.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
+                                        android:checked="@{inspData.hmPresence.equalsIgnoreCase(`Yes`)}"
                                         android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
+                                        android:text="@string/yes"
+                                        android:clickable="false"/>
 
                                     <RadioButton
-                                        android:id="@+id/rb_no_movement_register_entry"
+                                        android:id="@+id/rb_no_hm_present_time"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspData.movementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                        android:checked="@{inspData.hmPresence.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_5dp">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_hm_leavetype"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hmPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/leave_reason_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_hm_leavetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_leaves"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`Leaves`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/leaves" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_absent"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/unauthorized_absent" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_od"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/od" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_hm_leave_capture_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/leaves_capture_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_hm_leavecapturetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_cl"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`CL`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="CL" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_ccl"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`CCL`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="CCL" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_scl"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`SCL`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="SCL" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_medical"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Medical`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Medical" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_maternity"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Maternity`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Maternity" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_paternity"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Paternity`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Paternity" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_hm_od_capture_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/od_capture_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_hm_capturetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_out_of_station"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Out of station`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/out_of_station" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_within_campus"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within campus`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_campus" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_within_mandal"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_mandal" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_within_district"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within District`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_district" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_itda_level"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/itda_level" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_hm_state_level"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`State Level`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/state_level" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_hm_movement_register_entry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/movement_register_entry"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_hm_movement_register_entry"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/rb_yes_hm_movement_register_entry"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hmMovementRegisterEntry.equalsIgnoreCase(`Yes`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_no_hm_movement_register_entry"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hmMovementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
@@ -395,19 +460,18 @@
 
                     </LinearLayout>
 
+                    
+
                     <View
-                        android:id="@+id/view_leaveType"
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
-                        android:background="@color/black"
-                        android:visibility="gone" />
+                        android:background="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/dimen_5dp">
-
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -421,39 +485,459 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/hwo_present_time"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_present_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_yes_present_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hwoPresence.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_no_present_time"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwoPresence.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_leavetype"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/hwo_head_quarters"
-                                android:textColor="@color/black" />
+                                android:visibility="@{inspData.hwoPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
 
-                            <RadioGroup
-                                android:id="@+id/rg_head_quarters"
-                                android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/leave_reason_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_leavetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <RadioButton
+                                            android:id="@+id/rb_leaves"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`Leaves`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/leaves" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_absent"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/unauthorized_absent" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_od"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/od" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_leave_capture_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/leaves_capture_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_leavecapturetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <RadioButton
+                                            android:id="@+id/rb_cl"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`CL`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="CL" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_medical"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Medical`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Medical" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_maternity"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Maternity`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Maternity" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_paternity"
+                                            android:clickable="false"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Paternity`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Paternity" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_od_capture_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/od_capture_type"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_capturetype"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <RadioButton
+                                            android:id="@+id/rb_out_of_station"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Out of station`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/out_of_station" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_within_campus"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within campus`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_campus" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_within_mandal"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_mandal" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_within_district"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within District`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/within_district" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_itda_level"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/itda_level" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_state_level"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`State Level`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/state_level" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_movement_register_entry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/hwo_movement_register_entry"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_movement_register_entry"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <RadioButton
+                                            android:id="@+id/rb_yes_movement_register_entry"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:checked="@{inspData.hwomovementRegisterEntry.equalsIgnoreCase(`Yes`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/rb_no_movement_register_entry"
+                                            android:layout_width="wrap_content"
+                                            android:clickable="false"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{inspData.hwomovementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dimen_5dp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="9."
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
-
-                                <RadioButton
-                                    android:id="@+id/rb_yes_head_quarters"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.havingHeadquarters.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="@string/hm_head_quarters"
+                                    android:textColor="@color/black" />
 
-                                <RadioButton
-                                    android:id="@+id/rb_no_head_quarters"
+                                <RadioGroup
+                                    android:id="@+id/rg_hm_head_quarters"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.havingHeadquarters.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:orientation="horizontal">
 
-                            </RadioGroup>
+
+                                    <RadioButton
+                                        android:id="@+id/rb_yes_hm_head_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hmheadquarters.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_no_hm_head_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hmheadquarters.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_hm_capture_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.hmheadquarters.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/capture_operating_from_distance"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_hm_capture_distance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_below_30"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`below 30`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/below_30" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_31_50"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`31-50`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/_31_50" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_above_50"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`above 50`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/above_50" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_hm_capture_staying_facilities_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.hmheadquarters.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/capture_staying_facilities_type"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_hm_capture_staying_facilities_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_in_staff_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/in_staff_quarters" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_in_school_building"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/in_school_building" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hm_pvt_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/pvt_building" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
                         </LinearLayout>
                     </LinearLayout>
 
@@ -473,7 +957,186 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="8.1."
+                            android:text="10."
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/hwo_head_quarters"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_head_quarters"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_yes_head_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hwoheadquarters.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_no_head_quarters"
+                                        android:clickable="false"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwoheadquarters.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_capture_distance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.hwoheadquarters.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/capture_operating_from_distance"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_capture_distance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_below_30"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`below 30`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/below_30" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_31_50"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`31-50`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/_31_50" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_above_50"
+                                        android:layout_width="wrap_content"
+                                        android:clickable="false"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`above 50`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/above_50" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_capture_staying_facilities_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="@{inspData.hwoheadquarters.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/capture_staying_facilities_type"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_capture_staying_facilities_type"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_in_staff_quarters"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/in_staff_quarters" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_in_school_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/in_school_building" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_pvt_building"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/pvt_building" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+
+                            <!--<LinearLayout
+                                android:id="@+id/ll_capture"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
+
+                            </LinearLayout>-->
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/dimen_5dp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="11."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -494,12 +1157,13 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
+
                                 <RadioButton
                                     android:id="@+id/rb_yes_staff_quarters"
                                     android:layout_width="wrap_content"
+                                    android:clickable="false"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.staffQuarters.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -507,146 +1171,14 @@
                                     android:id="@+id/rb_no_staff_quarters"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.staffQuarters.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
+                                    android:checked="@{inspData.staffQuarters.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_capture"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/dimen_5dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="9."
-                            android:textColor="@color/black" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:id="@+id/ll_capture_distance"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{inspData.staffQuarters.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/capture_operating_from_distance"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_capture_distance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-
-                                    <RadioButton
-                                        android:id="@+id/rb_below_30"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`below 30`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/below_30" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_31_50"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`31-50`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/_31_50" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_above_50"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.captureDistance.equalsIgnoreCase(`above 50`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/above_50" />
-
-                                </RadioGroup>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/ll_capture_staying_facilities_type"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{inspData.staffQuarters.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/capture_staying_facilities_type"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_capture_staying_facilities_type"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-
-                                    <RadioButton
-                                        android:id="@+id/rb_in_staff_quarters"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/in_staff_quarters" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_in_school_building"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/in_school_building" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_pvt_building"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{inspData.stayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/pvt_building" />
-
-                                </RadioGroup>
-                            </LinearLayout>
 
                         </LinearLayout>
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -675,5 +1207,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
     </RelativeLayout>
 </layout>

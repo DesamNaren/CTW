@@ -4,15 +4,28 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class StaffAttendenceInfo {
+
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
+    @SerializedName("acad_panel_grade")
+    @Expose
+    private String acadPanelGrade;
+    @SerializedName("categ_pos")
+    @Expose
+    private String categPos;
     @SerializedName("emp_name")
     @Expose
     private String empName;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
+    @SerializedName("leaves_bal")
+    @Expose
+    private String leavesBal;
+    @SerializedName("leaves_availed")
+    @Expose
+    private String leavesAvailed;
     @SerializedName("officer_id")
     @Expose
     private String officerId;
@@ -37,6 +50,9 @@ public class StaffAttendenceInfo {
     @SerializedName("inst_name")
     @Expose
     private String instName;
+    @SerializedName("category")
+    @Expose
+    private String category;
     @SerializedName("ondepFlag")
     @Expose
     private String ondepFlag;
@@ -46,6 +62,9 @@ public class StaffAttendenceInfo {
     @SerializedName("presentFlag")
     @Expose
     private String presentFlag;
+    @SerializedName("leaves_taken")
+    @Expose
+    private String leavesTaken;
 
     public String getInspectionTime() {
         return inspectionTime;
@@ -53,6 +72,22 @@ public class StaffAttendenceInfo {
 
     public void setInspectionTime(String inspectionTime) {
         this.inspectionTime = inspectionTime;
+    }
+
+    public String getAcadPanelGrade() {
+        return acadPanelGrade;
+    }
+
+    public void setAcadPanelGrade(String acadPanelGrade) {
+        this.acadPanelGrade = acadPanelGrade;
+    }
+
+    public String getCategPos() {
+        return categPos;
+    }
+
+    public void setCategPos(String categPos) {
+        this.categPos = categPos;
     }
 
     public String getEmpName() {
@@ -69,6 +104,22 @@ public class StaffAttendenceInfo {
 
     public void setInstituteId(String instituteId) {
         this.instituteId = instituteId;
+    }
+
+    public String getLeavesBal() {
+        return leavesBal;
+    }
+
+    public void setLeavesBal(String leavesBal) {
+        this.leavesBal = leavesBal;
+    }
+
+    public String getLeavesAvailed() {
+        return leavesAvailed;
+    }
+
+    public void setLeavesAvailed(String leavesAvailed) {
+        this.leavesAvailed = leavesAvailed;
     }
 
     public String getOfficerId() {
@@ -135,6 +186,14 @@ public class StaffAttendenceInfo {
         this.instName = instName;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getOndepFlag() {
         return ondepFlag;
     }
@@ -157,5 +216,13 @@ public class StaffAttendenceInfo {
 
     public void setPresentFlag(String presentFlag) {
         this.presentFlag = presentFlag;
+    }
+
+    public String getLeavesTaken() {
+        return leavesTaken;
+    }
+
+    public void setLeavesTaken(String leavesTaken) {
+        this.leavesTaken = leavesTaken;
     }
 }

@@ -46,7 +46,7 @@ import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.cgg.twdinspection.schemes.viewmodel.BenCustomReportViewModel;
 import com.cgg.twdinspection.schemes.viewmodel.BenReportViewModel;
-import com.example.twdinspection.databinding.ActivitySchemeReportBinding;
+import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;

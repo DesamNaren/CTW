@@ -16,7 +16,7 @@ import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.cgg.twdinspection.gcc.ui.punit.PUnitSelActivity;
-import com.example.twdinspection.databinding.ActivityGccDashboardBinding;
+import com.cgg.twdinspection.databinding.ActivityGccDashboardBinding;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;

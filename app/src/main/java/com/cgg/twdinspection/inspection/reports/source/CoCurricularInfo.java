@@ -1,5 +1,6 @@
 package com.cgg.twdinspection.inspection.reports.source;
 
+
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 import com.google.gson.annotations.Expose;
@@ -30,9 +31,6 @@ public class CoCurricularInfo {
     @SerializedName("kitchen_garden_in_charge_contact")
     @Expose
     private String kitchenGardenInChargeContact;
-    @SerializedName("kitchen_in_charge_event_name")
-    @Expose
-    private String kitchenInChargeEventName;
     @SerializedName("ncc_teacher_contact")
     @Expose
     private String nccTeacherContact;
@@ -54,9 +52,15 @@ public class CoCurricularInfo {
     @SerializedName("smc_ele_chairman_name")
     @Expose
     private String smcEleChairmanName;
+    @SerializedName("national_level")
+    @Expose
+    private String nationalLevel;
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("state_level")
+    @Expose
+    private String stateLevel;
     @SerializedName("plan_to_prc_land")
     @Expose
     private String planToPrcLand;
@@ -66,9 +70,9 @@ public class CoCurricularInfo {
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
-    @SerializedName("stu_cou_captain_name")
+    @SerializedName("plants_cnt")
     @Expose
-    private String stuCouCaptainName;
+    private String plantsCnt;
     @SerializedName("smc_ele_chairman_contact")
     @Expose
     private String smcEleChairmanContact;
@@ -87,6 +91,12 @@ public class CoCurricularInfo {
     @SerializedName("scout_guide_captain_contact")
     @Expose
     private String scoutGuideCaptainContact;
+    @SerializedName("district_level")
+    @Expose
+    private String districtLevel;
+    @SerializedName("smc_ele_resolution")
+    @Expose
+    private String smcEleResolution;
     @SerializedName("ncc_teacher_name")
     @Expose
     private String nccTeacherName;
@@ -114,34 +124,12 @@ public class CoCurricularInfo {
     @SerializedName("scout_guide_captain_name")
     @Expose
     private String scoutGuideCaptainName;
-
     @SerializedName("plantsEntities")
     @Expose
-    private List<PlantsEntity> plantsEntities;
+    private List<PlantsEntity> plantsEntities = null;
     @SerializedName("studAchievementEntities")
     @Expose
-    private List<StudAchievementEntity> studAchievementEntities;
-
-    public List<PlantsEntity> getPlantsEntities() {
-        return plantsEntities;
-    }
-
-    public void setPlantsEntities(List<PlantsEntity> plantsEntities) {
-        this.plantsEntities = plantsEntities;
-    }
-
-    public List<StudAchievementEntity> getStudAchievementEntities() {
-        return studAchievementEntities;
-    }
-
-    public void setStudAchievementEntities(List<StudAchievementEntity> studAchievementEntities) {
-        this.studAchievementEntities = studAchievementEntities;
-    }
-
-    @SerializedName("studAchievementEntities")
-
-
-
+    private List<StudAchievementEntity> studAchievementEntities = null;
 
     public String getSmcEleStatus() {
         return smcEleStatus;
@@ -197,14 +185,6 @@ public class CoCurricularInfo {
 
     public void setKitchenGardenInChargeContact(String kitchenGardenInChargeContact) {
         this.kitchenGardenInChargeContact = kitchenGardenInChargeContact;
-    }
-
-    public String getKitchenInChargeEventName() {
-        return kitchenInChargeEventName;
-    }
-
-    public void setKitchenInChargeEventName(String kitchenInChargeEventName) {
-        this.kitchenInChargeEventName = kitchenInChargeEventName;
     }
 
     public String getNccTeacherContact() {
@@ -263,12 +243,28 @@ public class CoCurricularInfo {
         this.smcEleChairmanName = smcEleChairmanName;
     }
 
+    public String getNationalLevel() {
+        return nationalLevel;
+    }
+
+    public void setNationalLevel(String nationalLevel) {
+        this.nationalLevel = nationalLevel;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getStateLevel() {
+        return stateLevel;
+    }
+
+    public void setStateLevel(String stateLevel) {
+        this.stateLevel = stateLevel;
     }
 
     public String getPlanToPrcLand() {
@@ -295,12 +291,12 @@ public class CoCurricularInfo {
         this.inspectionTime = inspectionTime;
     }
 
-    public String getStuCouCaptainName() {
-        return stuCouCaptainName;
+    public String getPlantsCnt() {
+        return plantsCnt;
     }
 
-    public void setStuCouCaptainName(String stuCouCaptainName) {
-        this.stuCouCaptainName = stuCouCaptainName;
+    public void setPlantsCnt(String plantsCnt) {
+        this.plantsCnt = plantsCnt;
     }
 
     public String getSmcEleChairmanContact() {
@@ -349,6 +345,22 @@ public class CoCurricularInfo {
 
     public void setScoutGuideCaptainContact(String scoutGuideCaptainContact) {
         this.scoutGuideCaptainContact = scoutGuideCaptainContact;
+    }
+
+    public String getDistrictLevel() {
+        return districtLevel;
+    }
+
+    public void setDistrictLevel(String districtLevel) {
+        this.districtLevel = districtLevel;
+    }
+
+    public String getSmcEleResolution() {
+        return smcEleResolution;
+    }
+
+    public void setSmcEleResolution(String smcEleResolution) {
+        this.smcEleResolution = smcEleResolution;
     }
 
     public String getNccTeacherName() {
@@ -423,4 +435,19 @@ public class CoCurricularInfo {
         this.scoutGuideCaptainName = scoutGuideCaptainName;
     }
 
+    public List<PlantsEntity> getPlantsEntities() {
+        return plantsEntities;
+    }
+
+    public void setPlantsEntities(List<PlantsEntity> plantsEntities) {
+        this.plantsEntities = plantsEntities;
+    }
+
+    public List<StudAchievementEntity> getStudAchievementEntities() {
+        return studAchievementEntities;
+    }
+
+    public void setStudAchievementEntities(List<StudAchievementEntity> studAchievementEntities) {
+        this.studAchievementEntities = studAchievementEntities;
+    }
 }

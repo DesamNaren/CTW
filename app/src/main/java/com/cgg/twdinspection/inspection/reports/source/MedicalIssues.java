@@ -14,12 +14,18 @@ public class MedicalIssues {
     @SerializedName("feverCount")
     @Expose
     private String feverCount;
+    @SerializedName("screenedByCallHealth")
+    @Expose
+    private String screenedByCallHealth;
     @SerializedName("anmWeeklyUpdated")
     @Expose
     private String anmWeeklyUpdated;
     @SerializedName("coldCount")
     @Expose
     private String coldCount;
+    @SerializedName("leftForscreening")
+    @Expose
+    private String leftForscreening;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
@@ -75,6 +81,14 @@ public class MedicalIssues {
         this.feverCount = feverCount;
     }
 
+    public String getScreenedByCallHealth() {
+        return screenedByCallHealth;
+    }
+
+    public void setScreenedByCallHealth(String screenedByCallHealth) {
+        this.screenedByCallHealth = screenedByCallHealth;
+    }
+
     public String getAnmWeeklyUpdated() {
         return anmWeeklyUpdated;
     }
@@ -89,6 +103,14 @@ public class MedicalIssues {
 
     public void setColdCount(String coldCount) {
         this.coldCount = coldCount;
+    }
+
+    public String getLeftForscreening() {
+        return leftForscreening;
+    }
+
+    public void setLeftForscreening(String leftForscreening) {
+        this.leftForscreening = leftForscreening;
     }
 
     public String getInstituteId() {

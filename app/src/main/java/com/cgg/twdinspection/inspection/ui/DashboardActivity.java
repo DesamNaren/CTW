@@ -25,7 +25,7 @@ import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
-import com.example.twdinspection.databinding.ActivityDashboardBinding;
+import com.cgg.twdinspection.databinding.ActivityDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;

@@ -16,7 +16,7 @@ import com.cgg.twdinspection.schemes.room.repository.SchemesInfoRepository;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
-import com.example.twdinspection.databinding.ActivitySchemeReportBinding;
+import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 
 import org.jetbrains.annotations.NotNull;
 

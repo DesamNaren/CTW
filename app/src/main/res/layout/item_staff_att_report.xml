@@ -70,7 +70,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5dp"
@@ -146,6 +146,137 @@
                     </LinearLayout>
 
 
+                </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_10dp"
+                    android:paddingLeft="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_10dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_present"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_present"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@{staff.empPresence.equalsIgnoreCase(`Present`)? @drawable/present: @drawable/present_init}" />
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_present"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/present" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_leaves"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_leaves"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@{staff.empPresence.equalsIgnoreCase(`Leaves`)? @drawable/leaves: @drawable/leaves_init}" />
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_leaves"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/leaves" />
+                    </LinearLayout>
+
+                    <!--
+                                        <LinearLayout
+                                            android:id="@+id/ll_ondep"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1">
+
+                                            <ImageView
+                                                android:id="@+id/iv_ondep"
+                                                android:layout_width="25dp"
+                                                android:layout_height="25dp"
+                                                android:src="@{staff.empPresence.equalsIgnoreCase(`On Deputation`)? @drawable/ondep: @drawable/ondep_init}" />
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                                android:id="@+id/tv_ondep"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:layout_marginLeft="4dp"
+                                                android:text="@string/dep" />
+                                        </LinearLayout>
+                    -->
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    android:layout_marginRight="@dimen/dimen_5dp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_10dp"
+                    android:paddingLeft="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_10dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_absent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_absent"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@{staff.empPresence.equalsIgnoreCase(`Unauthorised Absent`)? @drawable/absent: @drawable/absent_init}" />
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_absent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/unauthorised_absent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_ondep"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/iv_ondep"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@{staff.empPresence.equalsIgnoreCase(`On Deputation`)? @drawable/ondep: @drawable/ondep_init}" />
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_ondep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/dep" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,6 +344,32 @@
                             android:text="No" />
                     </RadioGroup>
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingRight="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_5dp"
+                    android:visibility="visible">
+
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:text="@string/category" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/sp_category"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:entries="@array/category"/>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

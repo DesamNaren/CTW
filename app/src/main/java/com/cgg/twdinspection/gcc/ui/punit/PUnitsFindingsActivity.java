@@ -23,7 +23,7 @@ import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.example.twdinspection.databinding.ActivityGccPunitFindingsBinding;
+import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

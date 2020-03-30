@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
@@ -25,7 +26,6 @@ import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
-import com.example.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

@@ -68,31 +68,6 @@
                                 android:text="@string/entitlements_provided_to_students"
                                 android:textColor="@color/black" />
 
-                            <RadioGroup
-                                android:id="@+id/rg_entitlements_provided_to_students"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:checked="@{inspData.entitlementsProvided.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:id="@+id/rb_yes_entitlements_provided_to_students"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:checked="@{inspData.entitlementsProvided.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:id="@+id/rb_no_entitlements_provided_to_students"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
                         </LinearLayout>
 
                         <!-- <LinearLayout

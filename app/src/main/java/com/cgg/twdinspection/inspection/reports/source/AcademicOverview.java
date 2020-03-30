@@ -1,10 +1,12 @@
 package com.cgg.twdinspection.inspection.reports.source;
 
+import com.example.twdinspection.inspection.reports.source.AcademicGradeEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcademicOverview {
+import java.util.List;
 
+public class AcademicOverview {
     @SerializedName("karaDipathPrgmCondReason")
     @Expose
     private String karaDipathPrgmCondReason;
@@ -17,15 +19,9 @@ public class AcademicOverview {
     @SerializedName("plan_prepared")
     @Expose
     private String planPrepared;
-    @SerializedName("labName")
-    @Expose
-    private String labName;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
-    @SerializedName("highest_class_syllabus_complehighest_class_totalted")
-    @Expose
-    private String highestClassSyllabusComplehighestClassTotalted;
     @SerializedName("compWorkingStatus")
     @Expose
     private String compWorkingStatus;
@@ -41,6 +37,9 @@ public class AcademicOverview {
     @SerializedName("big_tv_rot_avail")
     @Expose
     private String bigTvRotAvail;
+    @SerializedName("highest_class_syllabus_completed")
+    @Expose
+    private String highestClassSyllabusCompleted;
     @SerializedName("mana_tv_lessons_shown")
     @Expose
     private String manaTvLessonsShown;
@@ -50,6 +49,9 @@ public class AcademicOverview {
     @SerializedName("mobNoIctInstr")
     @Expose
     private String mobNoIctInstr;
+    @SerializedName("academicGradeEntities")
+    @Expose
+    private List<AcademicGradeEntity> academicGradeEntities = null;
     @SerializedName("tabs_supplied")
     @Expose
     private String tabsSupplied;
@@ -62,9 +64,6 @@ public class AcademicOverview {
     @SerializedName("assessment_test_conducted")
     @Expose
     private String assessmentTestConducted;
-    @SerializedName("library_room_available")
-    @Expose
-    private String libraryRoomAvailable;
     @SerializedName("lab_mat_entered_reg_reason")
     @Expose
     private String labMatEnteredRegReason;
@@ -140,9 +139,6 @@ public class AcademicOverview {
     @SerializedName("ict_instr_avail")
     @Expose
     private String ictInstrAvail;
-    @SerializedName("workingStatusProjector")
-    @Expose
-    private String workingStatusProjector;
     @SerializedName("labroom_available")
     @Expose
     private String labroomAvailable;
@@ -197,6 +193,9 @@ public class AcademicOverview {
     @SerializedName("tabInchargeName")
     @Expose
     private String tabInchargeName;
+    @SerializedName("punadi_books_req")
+    @Expose
+    private String punadiBooksReq;
     @SerializedName("labManuals_received")
     @Expose
     private String labManualsReceived;
@@ -239,28 +238,12 @@ public class AcademicOverview {
         this.planPrepared = planPrepared;
     }
 
-    public String getLabName() {
-        return labName;
-    }
-
-    public void setLabName(String labName) {
-        this.labName = labName;
-    }
-
     public String getInstituteId() {
         return instituteId;
     }
 
     public void setInstituteId(String instituteId) {
         this.instituteId = instituteId;
-    }
-
-    public String getHighestClassSyllabusComplehighestClassTotalted() {
-        return highestClassSyllabusComplehighestClassTotalted;
-    }
-
-    public void setHighestClassSyllabusComplehighestClassTotalted(String highestClassSyllabusComplehighestClassTotalted) {
-        this.highestClassSyllabusComplehighestClassTotalted = highestClassSyllabusComplehighestClassTotalted;
     }
 
     public String getCompWorkingStatus() {
@@ -303,6 +286,14 @@ public class AcademicOverview {
         this.bigTvRotAvail = bigTvRotAvail;
     }
 
+    public String getHighestClassSyllabusCompleted() {
+        return highestClassSyllabusCompleted;
+    }
+
+    public void setHighestClassSyllabusCompleted(String highestClassSyllabusCompleted) {
+        this.highestClassSyllabusCompleted = highestClassSyllabusCompleted;
+    }
+
     public String getManaTvLessonsShown() {
         return manaTvLessonsShown;
     }
@@ -325,6 +316,14 @@ public class AcademicOverview {
 
     public void setMobNoIctInstr(String mobNoIctInstr) {
         this.mobNoIctInstr = mobNoIctInstr;
+    }
+
+    public List<AcademicGradeEntity> getAcademicGradeEntities() {
+        return academicGradeEntities;
+    }
+
+    public void setAcademicGradeEntities(List<AcademicGradeEntity> academicGradeEntities) {
+        this.academicGradeEntities = academicGradeEntities;
     }
 
     public String getTabsSupplied() {
@@ -357,14 +356,6 @@ public class AcademicOverview {
 
     public void setAssessmentTestConducted(String assessmentTestConducted) {
         this.assessmentTestConducted = assessmentTestConducted;
-    }
-
-    public String getLibraryRoomAvailable() {
-        return libraryRoomAvailable;
-    }
-
-    public void setLibraryRoomAvailable(String libraryRoomAvailable) {
-        this.libraryRoomAvailable = libraryRoomAvailable;
     }
 
     public String getLabMatEnteredRegReason() {
@@ -567,14 +558,6 @@ public class AcademicOverview {
         this.ictInstrAvail = ictInstrAvail;
     }
 
-    public String getWorkingStatusProjector() {
-        return workingStatusProjector;
-    }
-
-    public void setWorkingStatusProjector(String workingStatusProjector) {
-        this.workingStatusProjector = workingStatusProjector;
-    }
-
     public String getLabroomAvailable() {
         return labroomAvailable;
     }
@@ -717,6 +700,14 @@ public class AcademicOverview {
 
     public void setTabInchargeName(String tabInchargeName) {
         this.tabInchargeName = tabInchargeName;
+    }
+
+    public String getPunadiBooksReq() {
+        return punadiBooksReq;
+    }
+
+    public void setPunadiBooksReq(String punadiBooksReq) {
+        this.punadiBooksReq = punadiBooksReq;
     }
 
     public String getLabManualsReceived() {

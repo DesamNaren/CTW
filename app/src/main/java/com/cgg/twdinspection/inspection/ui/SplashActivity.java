@@ -20,7 +20,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
-import com.example.twdinspection.databinding.CustomLayoutForPermissionsBinding;
+import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
 
 import org.jetbrains.annotations.NotNull;
 

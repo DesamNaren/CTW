@@ -35,7 +35,7 @@ import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.example.twdinspection.databinding.ActivityGccMfpFindingsBinding;
+import com.cgg.twdinspection.databinding.ActivityGccMfpFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

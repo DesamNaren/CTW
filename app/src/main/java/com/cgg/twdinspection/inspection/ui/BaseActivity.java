@@ -17,7 +17,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
-import com.example.twdinspection.databinding.ActionBarLayoutBinding;
+import com.cgg.twdinspection.databinding.ActionBarLayoutBinding;
 
 public class BaseActivity extends AppCompatActivity {
     private ActionBarLayoutBinding binding;

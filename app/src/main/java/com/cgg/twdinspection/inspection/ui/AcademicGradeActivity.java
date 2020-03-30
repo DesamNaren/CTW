@@ -21,7 +21,7 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
-import com.example.twdinspection.databinding.ActivityAcademicGradeBinding;
+import com.cgg.twdinspection.databinding.ActivityAcademicGradeBinding;
 
 import java.util.ArrayList;
 import java.util.List;

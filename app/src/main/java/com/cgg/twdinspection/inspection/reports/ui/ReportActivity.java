@@ -24,7 +24,7 @@ import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.databinding.ActivityReportBinding;
+import com.cgg.twdinspection.databinding.ActivityReportBinding;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ReportActivity extends AppCompatActivity implements ErrorHandlerInterface {

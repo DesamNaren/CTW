@@ -5,11 +5,11 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
-import com.cgg.twdinspection.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class InfraMaintenance {
+
     @SerializedName("bigSchoolNameBoard")
     @Expose
     private String bigSchoolNameBoard;
@@ -43,9 +43,9 @@ public class InfraMaintenance {
     @SerializedName("separate_kitchen_room_available")
     @Expose
     private String separateKitchenRoomAvailable;
-    @SerializedName("add_dormitory_required")
+    @SerializedName("add_toilets_required_cnt")
     @Expose
-    private String addDormitoryRequired;
+    private String addToiletsRequiredCnt;
     @SerializedName("functioning_bathrooms")
     @Expose
     private String functioningBathrooms;
@@ -64,9 +64,15 @@ public class InfraMaintenance {
     @SerializedName("door_window_repairs")
     @Expose
     private String doorWindowRepairs;
+    @SerializedName("cc_cameras")
+    @Expose
+    private String ccCameras;
     @SerializedName("dininghall_available")
     @Expose
     private String dininghallAvailable;
+    @SerializedName("add_bathrooms_required_cnt")
+    @Expose
+    private String addBathroomsRequiredCnt;
     @SerializedName("drinking_water_facility")
     @Expose
     private String drinkingWaterFacility;
@@ -82,6 +88,9 @@ public class InfraMaintenance {
     @SerializedName("sewage_allowed")
     @Expose
     private String sewageAllowed;
+    @SerializedName("mountedfans_required")
+    @Expose
+    private String mountedfansRequired;
     @SerializedName("construct_kitchen_room")
     @Expose
     private String constructKitchenRoom;
@@ -100,9 +109,9 @@ public class InfraMaintenance {
     @SerializedName("electricity_wiring")
     @Expose
     private String electricityWiring;
-    @SerializedName("color")
+    @SerializedName("ceilingfans_required")
     @Expose
-    private String color;
+    private String ceilingfansRequired;
     @SerializedName("lighting_facility")
     @Expose
     private String lightingFacility;
@@ -121,6 +130,9 @@ public class InfraMaintenance {
     @SerializedName("how_many_buildings")
     @Expose
     private String howManyBuildings;
+    @SerializedName("running_water_facility")
+    @Expose
+    private String runningWaterFacility;
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
@@ -133,9 +145,6 @@ public class InfraMaintenance {
     @SerializedName("drainage_functioning")
     @Expose
     private String drainageFunctioning;
-    @SerializedName("add_dining_required")
-    @Expose
-    private String addDiningRequired;
     @SerializedName("add_dining_required_cnt")
     @Expose
     private String addDiningRequiredCnt;
@@ -148,21 +157,18 @@ public class InfraMaintenance {
     @SerializedName("mountedfans_nonworking")
     @Expose
     private String mountedfansNonworking;
-    @SerializedName("add_class_required")
-    @Expose
-    private String addClassRequired;
     @SerializedName("road_required")
     @Expose
     private String roadRequired;
     @SerializedName("painting")
     @Expose
     private String painting;
-    @SerializedName("electricity_wiring_repairs_req")
-    @Expose
-    private String electricityWiringRepairsReq;
     @SerializedName("ro_plant_reason")
     @Expose
     private String roPlantReason;
+    @SerializedName("steam_cooking")
+    @Expose
+    private String steamCooking;
     @SerializedName("repairs_req_toilets")
     @Expose
     private String repairsReqToilets;
@@ -172,17 +178,9 @@ public class InfraMaintenance {
     @SerializedName("functioning_toilets")
     @Expose
     private String functioningToilets;
-
-
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.loader_black1)
-                .into(view);
-    }
-
+    @SerializedName("bunker_beds")
+    @Expose
+    private String bunkerBeds;
 
     public String getBigSchoolNameBoard() {
         return bigSchoolNameBoard;
@@ -272,12 +270,12 @@ public class InfraMaintenance {
         this.separateKitchenRoomAvailable = separateKitchenRoomAvailable;
     }
 
-    public String getAddDormitoryRequired() {
-        return addDormitoryRequired;
+    public String getAddToiletsRequiredCnt() {
+        return addToiletsRequiredCnt;
     }
 
-    public void setAddDormitoryRequired(String addDormitoryRequired) {
-        this.addDormitoryRequired = addDormitoryRequired;
+    public void setAddToiletsRequiredCnt(String addToiletsRequiredCnt) {
+        this.addToiletsRequiredCnt = addToiletsRequiredCnt;
     }
 
     public String getFunctioningBathrooms() {
@@ -328,12 +326,28 @@ public class InfraMaintenance {
         this.doorWindowRepairs = doorWindowRepairs;
     }
 
+    public String getCcCameras() {
+        return ccCameras;
+    }
+
+    public void setCcCameras(String ccCameras) {
+        this.ccCameras = ccCameras;
+    }
+
     public String getDininghallAvailable() {
         return dininghallAvailable;
     }
 
     public void setDininghallAvailable(String dininghallAvailable) {
         this.dininghallAvailable = dininghallAvailable;
+    }
+
+    public String getAddBathroomsRequiredCnt() {
+        return addBathroomsRequiredCnt;
+    }
+
+    public void setAddBathroomsRequiredCnt(String addBathroomsRequiredCnt) {
+        this.addBathroomsRequiredCnt = addBathroomsRequiredCnt;
     }
 
     public String getDrinkingWaterFacility() {
@@ -374,6 +388,14 @@ public class InfraMaintenance {
 
     public void setSewageAllowed(String sewageAllowed) {
         this.sewageAllowed = sewageAllowed;
+    }
+
+    public String getMountedfansRequired() {
+        return mountedfansRequired;
+    }
+
+    public void setMountedfansRequired(String mountedfansRequired) {
+        this.mountedfansRequired = mountedfansRequired;
     }
 
     public String getConstructKitchenRoom() {
@@ -424,12 +446,12 @@ public class InfraMaintenance {
         this.electricityWiring = electricityWiring;
     }
 
-    public String getColor() {
-        return color;
+    public String getCeilingfansRequired() {
+        return ceilingfansRequired;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setCeilingfansRequired(String ceilingfansRequired) {
+        this.ceilingfansRequired = ceilingfansRequired;
     }
 
     public String getLightingFacility() {
@@ -480,6 +502,14 @@ public class InfraMaintenance {
         this.howManyBuildings = howManyBuildings;
     }
 
+    public String getRunningWaterFacility() {
+        return runningWaterFacility;
+    }
+
+    public void setRunningWaterFacility(String runningWaterFacility) {
+        this.runningWaterFacility = runningWaterFacility;
+    }
+
     public String getInspectionTime() {
         return inspectionTime;
     }
@@ -510,14 +540,6 @@ public class InfraMaintenance {
 
     public void setDrainageFunctioning(String drainageFunctioning) {
         this.drainageFunctioning = drainageFunctioning;
-    }
-
-    public String getAddDiningRequired() {
-        return addDiningRequired;
-    }
-
-    public void setAddDiningRequired(String addDiningRequired) {
-        this.addDiningRequired = addDiningRequired;
     }
 
     public String getAddDiningRequiredCnt() {
@@ -552,14 +574,6 @@ public class InfraMaintenance {
         this.mountedfansNonworking = mountedfansNonworking;
     }
 
-    public String getAddClassRequired() {
-        return addClassRequired;
-    }
-
-    public void setAddClassRequired(String addClassRequired) {
-        this.addClassRequired = addClassRequired;
-    }
-
     public String getRoadRequired() {
         return roadRequired;
     }
@@ -576,20 +590,20 @@ public class InfraMaintenance {
         this.painting = painting;
     }
 
-    public String getElectricityWiringRepairsReq() {
-        return electricityWiringRepairsReq;
-    }
-
-    public void setElectricityWiringRepairsReq(String electricityWiringRepairsReq) {
-        this.electricityWiringRepairsReq = electricityWiringRepairsReq;
-    }
-
     public String getRoPlantReason() {
         return roPlantReason;
     }
 
     public void setRoPlantReason(String roPlantReason) {
         this.roPlantReason = roPlantReason;
+    }
+
+    public String getSteamCooking() {
+        return steamCooking;
+    }
+
+    public void setSteamCooking(String steamCooking) {
+        this.steamCooking = steamCooking;
     }
 
     public String getRepairsReqToilets() {
@@ -614,5 +628,13 @@ public class InfraMaintenance {
 
     public void setFunctioningToilets(String functioningToilets) {
         this.functioningToilets = functioningToilets;
+    }
+
+    public String getBunkerBeds() {
+        return bunkerBeds;
+    }
+
+    public void setBunkerBeds(String bunkerBeds) {
+        this.bunkerBeds = bunkerBeds;
     }
 }

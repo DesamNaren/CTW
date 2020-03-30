@@ -12,9 +12,9 @@ import android.view.View;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.databinding.ActivityViewPhotosBinding;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapter;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
-import com.example.twdinspection.databinding.ActivityViewPhotosBinding;
 import com.google.gson.Gson;
 
 public class ViewPhotosActivity extends AppCompatActivity {

@@ -18,11 +18,11 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.viewmodel.GCCReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.example.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

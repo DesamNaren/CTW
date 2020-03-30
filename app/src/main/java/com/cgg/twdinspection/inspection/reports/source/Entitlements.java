@@ -10,9 +10,6 @@ public class Entitlements {
     @SerializedName("carpets")
     @Expose
     private String carpets;
-    @SerializedName("entitlements_provided")
-    @Expose
-    private String entitlementsProvided;
     @SerializedName("schoolBags")
     @Expose
     private String schoolBags;
@@ -76,14 +73,6 @@ public class Entitlements {
 
     public void setCarpets(String carpets) {
         this.carpets = carpets;
-    }
-
-    public String getEntitlementsProvided() {
-        return entitlementsProvided;
-    }
-
-    public void setEntitlementsProvided(String entitlementsProvided) {
-        this.entitlementsProvided = entitlementsProvided;
     }
 
     public String getSchoolBags() {

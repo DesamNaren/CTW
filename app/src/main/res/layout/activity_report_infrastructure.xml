@@ -604,7 +604,7 @@
                             </RadioGroup>
                         </LinearLayout>
 
-                        <LinearLayout
+                       <!-- <LinearLayout
                             android:id="@+id/ll_electricity_wiring_repairs_req"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -645,7 +645,7 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
-                        </LinearLayout>
+                        </LinearLayout>-->
 
                     </LinearLayout>
                 </LinearLayout>
@@ -2129,13 +2129,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <CheckBox
-                                android:clickable="false"
-                                android:checked="@{inspData.addClassRequired.equalsIgnoreCase(`Yes`)}"
-                                android:id="@+id/add_class_cb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_class" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/add_class_layout"
@@ -2143,7 +2136,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="@{inspData.addClassRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
@@ -2166,14 +2158,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <CheckBox
-                                android:clickable="false"
-                                android:checked="@{inspData.addDiningRequired.equalsIgnoreCase(`Yes`)}"
-                                android:id="@+id/add_din_cb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_dining" />
-
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/add_din_layout"
@@ -2181,7 +2165,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="@{inspData.addDiningRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
@@ -2205,14 +2188,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <CheckBox
-                                android:clickable="false"
-                                android:checked="@{inspData.addDormitoryRequired.equalsIgnoreCase(`Yes`)}"
-                                android:id="@+id/add_dom_cb"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/add_dorm" />
-
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/add_dom_layout"
@@ -2220,7 +2195,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:visibility="@{inspData.addDormitoryRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                                 app:errorEnabled="true">
 
 
@@ -2538,28 +2512,6 @@
 
                         </RadioGroup>
 
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/ll_color"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="@{inspData.painting.equalsIgnoreCase(`Bad`)? View.VISIBLE : View.GONE}"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:focusableInTouchMode="false"
-                                android:text="@={inspData.color}"
-                                android:id="@+id/et_painting"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/suggest_for_coloring"
-                                android:imeOptions="actionNext"
-                                android:inputType="text"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
