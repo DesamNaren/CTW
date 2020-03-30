@@ -1,6 +1,5 @@
 package com.cgg.twdinspection.inspection.reports.source;
 
-import com.example.twdinspection.inspection.reports.source.AcademicGradeEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
