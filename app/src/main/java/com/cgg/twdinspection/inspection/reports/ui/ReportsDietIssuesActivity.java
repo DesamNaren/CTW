@@ -7,14 +7,20 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityReportDietIssuesBinding;
+import com.cgg.twdinspection.inspection.reports.adapter.DietIssuesReportAdapter;
+import com.cgg.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
+import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 public class ReportsDietIssuesActivity extends BaseActivity {
     private static final String TAG = ReportsDietIssuesActivity.class.getSimpleName();
@@ -50,7 +56,11 @@ public class ReportsDietIssuesActivity extends BaseActivity {
 
         String jsonObject = gson.toJson(reportData.getDietIssues());
         if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+
             binding.setInspData(reportData.getDietIssues());
+            if(reportData.getDietIssues().getDietListEntities()!=null && reportData.getDietIssues().getDietListEntities().size()>0){
+                setAdapter(reportData.getDietIssues().getDietListEntities());
+            }
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 boolean menuFlag = false, officerFlag = false;
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
@@ -80,7 +90,11 @@ public class ReportsDietIssuesActivity extends BaseActivity {
             }
         });
     }
-
+    private void setAdapter(List<DietListEntity > dietListEntities) {
+        DietIssuesReportAdapter dietIssuesReportAdapter = new DietIssuesReportAdapter(this, dietListEntities);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setAdapter(dietIssuesReportAdapter);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
