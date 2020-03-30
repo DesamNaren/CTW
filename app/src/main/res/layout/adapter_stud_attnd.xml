@@ -6,7 +6,7 @@
 
         <variable
             name="studentAttend"
-            type="com.example.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity" />
+            type="com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity" />
 
     </data>
 

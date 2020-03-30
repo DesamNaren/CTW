@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.GenCommentsViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.GenCommentsViewModel" />
         
         <variable
             name="comments"
-            type="com.example.twdinspection.inspection.source.general_comments.GeneralCommentsEntity" />
+            type="com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity" />
 
     </data>
 
@@ -647,7 +647,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_hm_hwo_date"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -686,7 +686,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_gcc_date"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -767,7 +767,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_supplied_date"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

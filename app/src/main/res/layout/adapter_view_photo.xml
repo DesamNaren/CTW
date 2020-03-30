@@ -6,7 +6,7 @@
 
         <variable
             name="photo"
-            type="com.example.twdinspection.gcc.reports.source.ReportPhoto" />
+            type="com.cgg.twdinspection.gcc.reports.source.ReportPhoto" />
 
         <variable
             name="imageUrl"
@@ -49,7 +49,7 @@
                     android:layout_gravity="center"/>
             </FrameLayout>
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{photo.fileName.replace(`.png`, ``)}"

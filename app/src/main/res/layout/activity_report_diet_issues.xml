@@ -9,7 +9,7 @@
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.reports.source.DietIssues" />
+            type="com.cgg.twdinspection.inspection.reports.source.DietIssues" />
 
         <variable
             name="menuImgUrl"

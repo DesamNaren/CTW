@@ -9,7 +9,7 @@
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.reports.source.Entitlements" />
+            type="com.cgg.twdinspection.inspection.reports.source.Entitlements" />
 
     </data>
 
@@ -999,7 +999,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_pair_of_dress_distributed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1182,7 +1182,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_entitlements_haircut_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

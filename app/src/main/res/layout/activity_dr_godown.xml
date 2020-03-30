@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.StockViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.StockViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -96,7 +96,7 @@
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:id="@+id/no_data_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

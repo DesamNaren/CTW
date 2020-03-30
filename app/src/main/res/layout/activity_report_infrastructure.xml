@@ -9,7 +9,7 @@
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.reports.source.InfraMaintenance" />
+            type="com.cgg.twdinspection.inspection.reports.source.InfraMaintenance" />
 
         <variable
             name="tdsImgUrl"
@@ -266,7 +266,7 @@
                                 android:layout_marginTop="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -756,7 +756,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_ceiling_fans_working"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -778,7 +778,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_ceiling_fans_non_working"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -840,7 +840,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@={inspData.mountedfansWorking}"
                                     android:id="@+id/et_wall_mounted_fans_working"
@@ -862,7 +862,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@={inspData.mountedfansNonworking}"
                                     android:id="@+id/et_wall_mounted_fans_non_working"
@@ -1129,7 +1129,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@{inspData.kitchenRepairRequired}"
                                     android:id="@+id/et_repair_required"
@@ -1176,7 +1176,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:focusableInTouchMode="false"
                             android:text="@={inspData.howManyBuildings}"
                             android:id="@+id/et_how_many_buildings"
@@ -2147,7 +2147,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@{inspData.addClassRequiredCnt}"
                                     android:id="@+id/add_class_cnt"
@@ -2185,7 +2185,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@{inspData.addDiningRequiredCnt}"
                                     android:id="@+id/add_din_cnt"
@@ -2224,7 +2224,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@{inspData.addDormitoryRequiredCnt}"
                                     android:id="@+id/add_dom_cnt"
@@ -2272,7 +2272,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.totalToilets}"
                                 android:id="@+id/et_total_toilets"
@@ -2292,7 +2292,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.totalBathrooms}"
                                 android:id="@+id/et_total_bathrooms"
@@ -2342,7 +2342,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.functioningToilets}"
                                 android:id="@+id/et_functioning_toilets"
@@ -2362,7 +2362,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.functioningBathrooms}"
                                 android:id="@+id/et_funtioning_bathrooms"
@@ -2382,7 +2382,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.repairsReqToilets}"
                                 android:id="@+id/et_required_toilets"
@@ -2402,7 +2402,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.repairsReqBathrooms}"
                                 android:id="@+id/et_required_bathrooms"
@@ -2548,7 +2548,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:focusableInTouchMode="false"
                                 android:text="@={inspData.color}"
                                 android:id="@+id/et_painting"

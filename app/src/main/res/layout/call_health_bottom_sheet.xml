@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_cancel"
                 android:tint="@color/white" />
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -71,7 +71,7 @@
             android:layout_margin="5dp"
             android:orientation="horizontal">
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,7 +79,7 @@
                 android:text="@string/sl_no"
                 android:textSize="@dimen/dimen_15dp" />
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:id="@+id/tv_slCount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:layout_marginLeft="@dimen/dimen_8dp">
 
 
-            <com.example.twdinspection.common.custom.CustomFontEditText
+            <com.cgg.twdinspection.common.custom.CustomFontEditText
                 android:id="@+id/et_studName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
             android:imeOptions="actionNext">
 
 
-            <com.example.twdinspection.common.custom.CustomFontEditText
+            <com.cgg.twdinspection.common.custom.CustomFontEditText
                 android:id="@+id/et_disease"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
             app:errorEnabled="true">
 
 
-            <com.example.twdinspection.common.custom.CustomFontEditText
+            <com.cgg.twdinspection.common.custom.CustomFontEditText
                 android:id="@+id/et_call_checkup_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

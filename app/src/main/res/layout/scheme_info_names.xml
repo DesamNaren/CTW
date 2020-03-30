@@ -7,7 +7,7 @@
 
         <variable
             name="schemeInfo"
-            type="com.example.twdinspection.schemes.source.schemes.SchemeEntity" />
+            type="com.cgg.twdinspection.schemes.source.schemes.SchemeEntity" />
 
     </data>
 

@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.InfraViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.InfraViewModel" />
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity" />
+            type="com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity" />
     </data>
 
     <RelativeLayout
@@ -333,7 +333,7 @@
                                 android:layout_marginTop="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -739,7 +739,7 @@
                                     android:layout_weight="1"
                                     app:errorEnabled="true">
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_ceiling_fans_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -760,7 +760,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_ceiling_fans_non_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -781,7 +781,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_ceiling_fans_required"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -826,7 +826,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_wall_mounted_fans_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -847,7 +847,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_wall_mounted_fans_non_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -868,7 +868,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_wall_mounted_fans_required"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -1128,7 +1128,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_repair_required"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1173,7 +1173,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_how_many_buildings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -2172,7 +2172,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_total_toilets"
                                 android:layout_width="match_parent"
@@ -2192,7 +2192,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_total_bathrooms"
                                 android:layout_width="match_parent"
@@ -2242,7 +2242,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_functioning_toilets"
                                 android:layout_width="match_parent"
@@ -2262,7 +2262,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_funtioning_bathrooms"
                                 android:layout_width="match_parent"
@@ -2282,7 +2282,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_required_toilets"
                                 android:layout_width="match_parent"
@@ -2302,7 +2302,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                 android:id="@+id/et_required_bathrooms"
                                 android:layout_width="match_parent"
@@ -2396,7 +2396,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/add_class_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -2417,7 +2417,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/add_din_cnt"
                                     android:layout_width="match_parent"
@@ -2439,7 +2439,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/add_dom_cnt"
                                     android:layout_width="match_parent"
@@ -2461,7 +2461,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/add_toilets_cnt"
                                     android:layout_width="match_parent"
@@ -2483,7 +2483,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/add_bathrooms_cnt"
                                     android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     <data>
    <variable
        name="viewModel"
-       type="com.example.twdinspection.engineering_works.viewmodels.EngDashboardViewModel" />
+       type="com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel" />
 
     </data>
     <RelativeLayout
@@ -111,7 +111,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_eng_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

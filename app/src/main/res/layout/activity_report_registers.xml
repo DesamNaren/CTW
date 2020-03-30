@@ -9,7 +9,7 @@
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.reports.source.Registers" />
+            type="com.cgg.twdinspection.inspection.reports.source.Registers" />
 
     </data>
 

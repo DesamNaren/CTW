@@ -6,7 +6,7 @@
 
         <variable
             name="comViewModel"
-            type="com.example.twdinspection.gcc.source.stock.CommonCommodity" />
+            type="com.cgg.twdinspection.gcc.source.stock.CommonCommodity" />
 
     </data>
 

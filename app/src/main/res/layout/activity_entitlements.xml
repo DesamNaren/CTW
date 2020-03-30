@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.EntitlementsViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.EntitlementsViewModel" />
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity" />
+            type="com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity" />
 
     </data>
 
@@ -570,7 +570,7 @@
                             android:layout_marginTop="@dimen/dimen_5dp"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_sanitary_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -710,7 +710,7 @@
                             android:layout_marginTop="@dimen/dimen_5dp"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_notes_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -818,7 +818,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_cosmetics_upto_month"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -849,7 +849,7 @@
                                 android:layout_marginTop="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_cosmetics_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -895,7 +895,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_pair_of_dress_distributed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1077,7 +1077,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_entitlements_haircut_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

@@ -8,7 +8,7 @@
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.reports.source.CoCurricularInfo" />
+            type="com.cgg.twdinspection.inspection.reports.source.CoCurricularInfo" />
 
     </data>
 
@@ -209,7 +209,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/pd_pft_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -244,7 +244,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/pd_mob_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -287,7 +287,7 @@
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                     android:id="@+id/btn_addStud"
                                     android:layout_width="wrap_content"
                                     android:layout_height="@dimen/dimen_30dp"
@@ -298,7 +298,7 @@
                                     android:textColor="@color/white"
                                     android:visibility="gone" />
 
-                                <com.example.twdinspection.common.custom.CustomFontButtonView
+                                <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                     android:visibility="gone"
                                     android:id="@+id/btn_viewStud"
                                     android:layout_width="wrap_content"
@@ -430,7 +430,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_land"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -588,7 +588,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_sc_gu_nmae"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -611,7 +611,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_sc_gu_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -710,7 +710,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/ncc_tea_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -733,7 +733,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/ncc_tea_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -757,7 +757,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/ncc_bat_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -855,7 +855,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/smc_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -878,7 +878,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/smc_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -901,7 +901,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/smc_resolution"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -998,7 +998,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_eve_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1021,7 +1021,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1044,7 +1044,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_in_charge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1067,7 +1067,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_in_cha_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1165,7 +1165,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <com.example.twdinspection.common.custom.CustomFontButtonView
+                        <com.cgg.twdinspection.common.custom.CustomFontButtonView
                             android:id="@+id/btn_addplant"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/dimen_30dp"
@@ -1176,7 +1176,7 @@
                             android:textColor="@color/white"
                             android:visibility="gone" />
 
-                        <com.example.twdinspection.common.custom.CustomFontButtonView
+                        <com.cgg.twdinspection.common.custom.CustomFontButtonView
                             android:id="@+id/btn_viewplant"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/dimen_30dp"
@@ -1312,7 +1312,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:focusableInTouchMode="false"
                                     android:text="@{inspData.reason}"
                                     android:id="@+id/reason_et"
@@ -1338,7 +1338,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/cou_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1362,7 +1362,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_medical_checkup_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

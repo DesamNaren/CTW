@@ -6,7 +6,7 @@
 
         <variable
             name="staff"
-            type="com.example.twdinspection.inspection.reports.source.StaffAttendenceInfo" />
+            type="com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo" />
     </data>
 
     <LinearLayout
@@ -48,18 +48,18 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_10dp">
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{staff.empId}" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
                             android:text="@{staff.empName}" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
@@ -92,7 +92,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_present"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                             android:layout_height="25dp"
                             android:src="@{staff.empPresence.equalsIgnoreCase(`Absent`) ? @drawable/absent : @drawable/absent_init}"/>
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_absent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                             android:layout_height="25dp"
                             android:src="@{staff.empPresence.equalsIgnoreCase(`On Deputation`) ? @drawable/ondep : @drawable/ondep_init}"/>
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_ondep"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     android:paddingBottom="@dimen/dimen_5dp"
                     android:visibility="visible">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -170,7 +170,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/dimen_10dp">
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_yes_dutyAlloted"
@@ -185,7 +185,7 @@
                             android:layout_width="1dp"
                             android:layout_height="wrap_content" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/tv_no_dutyAlloted"
@@ -230,7 +230,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:focusableInTouchMode="false"
                             android:text="@{staff.lastWeekTeacherAttended}"
                             android:layout_width="match_parent"

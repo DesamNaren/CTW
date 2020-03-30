@@ -18,7 +18,7 @@
             android:background="@color/materialGrey300"
             tools:listitem="@layout/adapter_gcc_report" />
 
-        <com.example.twdinspection.common.custom.CustomFontTextView
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:visibility="gone"
             android:layout_centerInParent="true"
             android:id="@+id/tv_empty"

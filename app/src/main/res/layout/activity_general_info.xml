@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.GeneralInfoViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.GeneralInfoViewModel" />
 
         <variable
             name="inspDataGeneral"
-            type="com.example.twdinspection.inspection.source.general_information.GeneralInfoEntity" />
+            type="com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity" />
     </data>
 
 

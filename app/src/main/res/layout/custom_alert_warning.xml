@@ -14,7 +14,7 @@
         android:layout_marginTop="150dp"
         android:background="@drawable/dialog_round">
 
-        <com.example.twdinspection.common.custom.CustomFontTextView
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
 
             android:id="@+id/dialog_title"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <com.example.twdinspection.common.custom.CustomFontTextView
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
 
             android:id="@+id/dialog_message"
             android:layout_width="wrap_content"

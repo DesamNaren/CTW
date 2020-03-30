@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.DivisionSelectionViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel" />
     </data>
 
 
@@ -108,7 +108,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_5dp">
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
@@ -135,7 +135,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_5dp">
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
@@ -162,7 +162,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_5dp">
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"

@@ -6,7 +6,7 @@
 
         <variable
             name="benReport"
-            type="com.example.twdinspection.schemes.source.bendetails.BeneficiaryDetail" />
+            type="com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryDetail" />
 
     </data>
 

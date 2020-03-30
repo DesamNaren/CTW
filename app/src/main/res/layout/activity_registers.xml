@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.RegistersViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.RegistersViewModel" />
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.source.registers_upto_date.RegistersEntity" />
+            type="com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity" />
 
     </data>
 

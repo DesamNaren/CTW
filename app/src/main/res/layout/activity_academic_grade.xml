@@ -24,7 +24,7 @@
             android:layout_marginBottom="2dp"
             tools:listitem="@layout/academic_grade_item" />
 
-        <com.example.twdinspection.common.custom.CustomFontTextView
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/emptyView"
             android:visibility="gone"
             android:layout_centerInParent="true"

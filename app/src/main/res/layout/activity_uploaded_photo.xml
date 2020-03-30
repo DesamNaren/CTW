@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.UploadPhotoViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.UploadPhotoViewModel" />
 
     </data>
 

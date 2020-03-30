@@ -5,7 +5,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.twdinspection.inspection.viewmodel.InstMainViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel" />
     </data>
 
 

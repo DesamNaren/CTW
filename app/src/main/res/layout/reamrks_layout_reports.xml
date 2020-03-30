@@ -10,7 +10,7 @@
         android:textColorHint="@color/colorAccent"
         app:errorEnabled="true">
 
-        <com.example.twdinspection.common.custom.CustomFontEditText
+        <com.cgg.twdinspection.common.custom.CustomFontEditText
             android:id="@+id/et_remarks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

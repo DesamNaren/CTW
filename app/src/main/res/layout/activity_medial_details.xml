@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.MedicalDetailsViewModel" />
 
     </data>
 
@@ -56,7 +56,7 @@
                         android:src="@drawable/fever" />
 
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_fever"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                         android:src="@drawable/cough" />
 
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_cold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                         android:padding="@dimen/dimen_5dp"
                         android:src="@drawable/headache" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_headache"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                         android:src="@drawable/diarrhea" />
 
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_diarrhea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                         android:padding="@dimen/dimen_5dp"
                         android:src="@drawable/mosquito" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_malaria"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                         android:src="@drawable/heartbeat" />
 
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/et_others"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

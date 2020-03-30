@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.MedicalViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.MedicalViewModel" />
 
         <variable
             name="medical"
-            type="com.example.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity" />
+            type="com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity" />
     </data>
 
     <RelativeLayout
@@ -57,7 +57,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_sickboarders"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_sickboarders_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                         android:text="21."
                         android:textColor="@color/black" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_10dp"
@@ -167,7 +167,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/et_fever"
                                     android:layout_width="match_parent"
@@ -208,7 +208,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_cold"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -249,7 +249,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_headache"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_diarrhea"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_malaria"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -379,7 +379,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_others"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -441,7 +441,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_medical_checkup_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -642,7 +642,7 @@
                                     android:layout_gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                         android:id="@+id/btn_addCall"
                                         android:layout_width="wrap_content"
                                         android:layout_height="@dimen/dimen_30dp"
@@ -652,7 +652,7 @@
                                         android:textColor="@color/white"
                                         android:visibility="visible" />
 
-                                    <com.example.twdinspection.common.custom.CustomFontButtonView
+                                    <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                         android:id="@+id/btn_view"
                                         android:layout_width="wrap_content"
                                         android:layout_height="@dimen/dimen_30dp"
@@ -683,7 +683,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_screened_by_call_health"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -714,7 +714,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_left_for_screening"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -797,7 +797,7 @@
 
                             </RadioGroup>
 
-                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                            <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                 android:id="@+id/btn_addStud"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/dimen_30dp"
@@ -808,7 +808,7 @@
                                 android:textColor="@color/white"
                                 android:visibility="gone" />
 
-                            <com.example.twdinspection.common.custom.CustomFontButtonView
+                            <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                 android:id="@+id/btn_medical_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/dimen_30dp"

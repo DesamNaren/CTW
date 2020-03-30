@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.twdinspection">
+    package="com.cgg.twdinspection">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".common.application.TWDApplication"
+        android:name="com.cgg.twdinspection.common.application.TWDApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,48 +21,48 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".engineering_works.ui.UploadEngPhotosActivity"
+            android:name="com.cgg.twdinspection.engineering_works.ui.UploadEngPhotosActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".engineering_works.ui.InspectionDetailsActivity"
+            android:name="com.cgg.twdinspection.engineering_works.ui.InspectionDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".engineering_works.ui.EngineeringDashboardActivity"
+            android:name="com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".gcc.reports.ui.PUnitInspRepActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.PUnitInspRepActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.MfpGodownInspRepActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.MfpGodownInspRepActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.DrDepotInspRepActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.DrDepotInspRepActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.DrGodownInspRepActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.DrGodownInspRepActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.GCCReportsDashboard"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.CocurricularStudAchActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.CocurricularStudAchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.CallHealthActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.CallHealthActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".schemes.ui.BenDetailsActivity"
+            android:name="com.cgg.twdinspection.schemes.ui.BenDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.CoCurricularActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.CoCurricularActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".schemes.ui.BeneficiaryReportActivity"
+            android:name="com.cgg.twdinspection.schemes.ui.BeneficiaryReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme">
             <intent-filter>
@@ -74,16 +74,16 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".schemes.ui.SchemesDMVActivity"
+            android:name="com.cgg.twdinspection.schemes.ui.SchemesDMVActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.MedicalDetailsActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".inspection.ui.DashboardActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.DashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.SplashActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -92,181 +92,181 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".inspection.ui.PlantsInfoActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.PlantsInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".inspection.ui.GeneralCommentsActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.GeneralCommentsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.EntitlementsActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.EntitlementsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.DietIssuesActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.DietIssuesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme" />
         <activity
-            android:name=".inspection.ui.InfraActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.InfraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.AcademicActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.AcademicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.ViewPhotosActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.ViewPhotosActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.RegistersActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.RegistersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.MedicalActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.MedicalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.DMVSelectionActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.DMVSelectionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.UploadedPhotoActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.UploadedPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.LoginActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.StaffAttendActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.StaffAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.StudentsAttendActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.StudentsAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.GeneralInfoActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.GeneralInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.BaseActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.BaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.InstMenuMainActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.InstMenuMainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".schemes.ui.SchemeSyncActivity"
+            android:name="com.cgg.twdinspection.schemes.ui.SchemeSyncActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.SchoolSyncActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.SchoolSyncActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.ViewMedicalActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.ViewMedicalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.gcc.GCCDashboardActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drdepot.DRDepotActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drdepot.DRDepotActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drgodown.DRGodownActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drgodown.DRGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.mfpgodown.MFPGodownActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGodownActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.punit.PUnitActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.punit.PUnitActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.gcc.GCCPhotoActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.LocBaseActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.LocBaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drdepot.DRDepotFindingsActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drdepot.DRDepotFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.QuitAppActivity"
+            android:name="com.cgg.twdinspection.inspection.ui.QuitAppActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.gcc.GCCSyncActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drgodown.DRGODownSelActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drdepot.DRDepotSelActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.mfpgodown.MFPGoDownSelActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.punit.PUnitSelActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.punit.PUnitSelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.drgodown.DRGodownFindingsActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.mfpgodown.MFPGodownFindingsActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGodownFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.ui.punit.PUnitsFindingsActivity"
+            android:name="com.cgg.twdinspection.gcc.ui.punit.PUnitsFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".gcc.reports.ui.GCCReportActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.GCCReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme" />
         <activity
-            android:name=".gcc.reports.ui.ReportStockDetailsActivity"
+            android:name="com.cgg.twdinspection.gcc.reports.ui.ReportStockDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.InspectionReportsDashboard"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.InspectionReportsDashboard"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme" />
         <activity
-            android:name=".inspection.reports.ui.InstReportsMenuActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.InstReportsMenuActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".schemes.reports.ui.SchemesReportActivity"
+            android:name="com.cgg.twdinspection.schemes.reports.ui.SchemesReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme" />
         <activity
-            android:name=".schemes.reports.ui.SchemeReportDetailsActivity"
+            android:name="com.cgg.twdinspection.schemes.reports.ui.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportStudentsAttendActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsGeneralInfoActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsDietIssuesActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsInfraActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsInfraActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsAcademicActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsAcademicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportCoCarricularActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportCoCarricularActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsEntitlementsActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsEntitlementsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportMedicalActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportMedicalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportStaffAttendActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportStaffAttendActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportGeneralCommentsActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportGeneralCommentsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportsRegistersActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportsRegistersActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.reports.ui.ReportPhotosActivity"
+            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportPhotosActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".inspection.ui.AcademicGradeActivity" />
+        <activity android:name="com.cgg.twdinspection.inspection.ui.AcademicGradeActivity" />
 
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.twdinspection.provider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

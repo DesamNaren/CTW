@@ -6,7 +6,7 @@
 
         <variable
             name="schemeData"
-            type="com.example.twdinspection.schemes.reports.source.SchemeReportData" />
+            type="com.cgg.twdinspection.schemes.reports.source.SchemeReportData" />
 
         <variable
             name="imageUrl"

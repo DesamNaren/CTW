@@ -7,7 +7,7 @@
 
         <variable
             name="academicGrade"
-            type="com.example.twdinspection.inspection.source.academic_overview.AcademicGradeEntity" />
+            type="com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity" />
 
     </data>
 
@@ -101,7 +101,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -126,7 +126,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -150,7 +150,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -174,7 +174,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -198,7 +198,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -222,7 +222,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -246,7 +246,7 @@
                                     android:orientation="vertical">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="@dimen/dimen_60dp"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
@@ -280,7 +280,7 @@
                                         android:layout_height="wrap_content"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_a_stu_count}"
                                             android:id="@+id/grade_a_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -311,7 +311,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -325,7 +325,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_b_stu_count}"
                                             android:id="@+id/grade_b_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -355,7 +355,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -369,7 +369,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_c_stu_count}"
                                             android:id="@+id/grade_c_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -399,7 +399,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -413,7 +413,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_d_stu_count}"
                                             android:id="@+id/grade_d_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -443,7 +443,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -457,7 +457,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_e_stu_count}"
                                             android:id="@+id/grade_e_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -487,7 +487,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -501,7 +501,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_aplus_stu_count}"
                                             android:id="@+id/grade_ap_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -531,7 +531,7 @@
                                     android:gravity="center"
                                     android:orientation="vertical">
 
-                                    <com.example.twdinspection.common.custom.CustomFontTextView
+                                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="B"
@@ -545,7 +545,7 @@
                                         android:textColorHint="@color/list_blue"
                                         app:errorEnabled="false">
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:text="@{academicGrade.grade_bplus_stu_count}"
                                             android:id="@+id/grade_bp_count"
                                             android:layout_width="@dimen/dimen_60dp"
@@ -587,7 +587,7 @@
             android:layout_margin="@dimen/dimen_8dp"
             android:layout_marginStart="@dimen/dimen_10dp">
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:layout_marginTop="@dimen/dimen_5dp"
                 android:paddingLeft="@dimen/dimen_8dp"
                 android:layout_weight="1"
@@ -602,7 +602,7 @@
                 android:paddingStart="@dimen/dimen_8dp" />
 
 
-            <com.example.twdinspection.common.custom.CustomFontTextView
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:padding="@dimen/dimen_8dp"
                 android:layout_marginLeft="@dimen/dimen_8dp"
                 android:id="@+id/onClick"

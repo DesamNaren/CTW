@@ -111,7 +111,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/schemes" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Schemes"
@@ -148,7 +148,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/finance" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="GCC"
@@ -189,7 +189,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/inspection" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Institute Inspection"
@@ -223,7 +223,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/report" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Reports"
@@ -264,7 +264,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/engineering" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Engineering Works"

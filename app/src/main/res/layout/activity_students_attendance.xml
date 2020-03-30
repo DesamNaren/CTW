@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.StudentsAttndViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel" />
 
     </data>
 

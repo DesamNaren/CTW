@@ -6,7 +6,7 @@
 
         <variable
             name="dietIssues"
-            type="com.example.twdinspection.inspection.source.diet_issues.DietListEntity" />
+            type="com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity" />
 
     </data>
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_8dp">
 
-                <com.example.twdinspection.common.custom.CustomFontEditText
+                <com.cgg.twdinspection.common.custom.CustomFontEditText
                     android:id="@+id/book_bal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="@dimen/dimen_8dp">
 
 
-                <com.example.twdinspection.common.custom.CustomFontEditText
+                <com.cgg.twdinspection.common.custom.CustomFontEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/b_ground_balance"

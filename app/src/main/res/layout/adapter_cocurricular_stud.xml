@@ -6,7 +6,7 @@
 
         <variable
             name="cocurricularStud"
-            type="com.example.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity"/>
+            type="com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity"/>
 
     </data>
 
@@ -31,7 +31,7 @@
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <com.example.twdinspection.common.custom.CustomFontTextView
+                <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/tvSlNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:layout_toLeftOf="@+id/iv_delete"
                     android:orientation="vertical">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/user_16"
@@ -65,7 +65,7 @@
                         android:text="@={cocurricularStud.studname}"
                         android:textSize="@dimen/dimen_15dp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
@@ -75,7 +75,7 @@
                         android:text="@={cocurricularStud.studclass}"
                         android:textSize="@dimen/dimen_15dp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
@@ -85,7 +85,7 @@
                         android:text="@={cocurricularStud.win_location}"
                         android:textSize="@dimen/dimen_15dp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -95,7 +95,7 @@
                         android:text="@={cocurricularStud.level}"
                         android:textSize="@dimen/dimen_15dp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
@@ -106,7 +106,7 @@
                         android:textSize="@dimen/dimen_15dp" />
 
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"

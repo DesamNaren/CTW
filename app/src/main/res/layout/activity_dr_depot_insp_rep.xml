@@ -8,7 +8,7 @@
 
         <variable
             name="drDepot"
-            type="com.example.twdinspection.gcc.reports.source.DrDepotInspReport" />
+            type="com.cgg.twdinspection.gcc.reports.source.DrDepotInspReport" />
 
         <variable
             name="imageUrl"
@@ -283,7 +283,7 @@
                             android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -724,7 +724,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_weight_cert_issue"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -1657,7 +1657,7 @@
                                         app:errorEnabled="true">
 
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:id="@+id/et_repairs_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -1691,7 +1691,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_feedback"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1713,7 +1713,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_remarks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

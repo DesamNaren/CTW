@@ -6,7 +6,7 @@
 
         <variable
             name="schemeReport"
-            type="com.example.twdinspection.schemes.reports.source.SchemeReportData" />
+            type="com.cgg.twdinspection.schemes.reports.source.SchemeReportData" />
 
     </data>
 

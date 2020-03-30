@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.DietIsuuesViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.DietIsuuesViewModel" />
 
         <variable
             name="inspData"
-            type="com.example.twdinspection.inspection.source.diet_issues.DietIssuesEntity" />
+            type="com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity" />
 
     </data>
 

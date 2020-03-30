@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
+            type="com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
 
     </data>
 
@@ -239,7 +239,7 @@
                     app:errorEnabled="true">
 
 
-                    <com.example.twdinspection.common.custom.CustomFontEditText
+                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                         android:id="@+id/et_sector_others"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -684,7 +684,7 @@
                         app:errorEnabled="true">
 
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_stage_others"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -915,7 +915,7 @@
                             app:errorEnabled="true">
 
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_obs"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"

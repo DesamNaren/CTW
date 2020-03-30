@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.schemes.viewmodel.SchemeSyncViewModel" />
+            type="com.cgg.twdinspection.schemes.viewmodel.SchemeSyncViewModel" />
     </data>
 
     <RelativeLayout
@@ -122,7 +122,7 @@
                                 android:paddingBottom="@dimen/dimen_10dp"
                                 android:src="@drawable/dmv" />
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/districs_mandals_villages"
@@ -159,7 +159,7 @@
                                 android:src="@drawable/calendar"
                                 android:tint="@color/white" />
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Financial Years"
@@ -201,7 +201,7 @@
                                 android:paddingBottom="@dimen/dimen_10dp"
                                 android:src="@drawable/inspection" />
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Inspection Remarks"
@@ -236,7 +236,7 @@
                                 android:paddingBottom="@dimen/dimen_10dp"
                                 android:src="@drawable/schemes" />
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Schemes"

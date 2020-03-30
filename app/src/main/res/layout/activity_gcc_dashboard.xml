@@ -110,7 +110,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/dr_godown" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="DR Godown"
@@ -147,7 +147,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/dr_depot" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="DR Depot"
@@ -188,7 +188,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/mfp_godown" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="MFP Godown"
@@ -222,7 +222,7 @@
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:src="@drawable/p_unit" />
 
-                        <com.example.twdinspection.common.custom.CustomFontTextView
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Processing Units"

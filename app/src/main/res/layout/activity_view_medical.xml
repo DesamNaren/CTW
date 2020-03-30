@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.inspection.viewmodel.MedicalDetailsViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.MedicalDetailsViewModel" />
 
     </data>
 
@@ -27,7 +27,7 @@
             android:layout_below="@+id/app_bar_layout"
             android:padding="@dimen/dimen_10dp" />
 
-        <com.example.twdinspection.common.custom.CustomFontTextView
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:id="@+id/no_data_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

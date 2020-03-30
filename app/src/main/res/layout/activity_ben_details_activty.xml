@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twdinspection.schemes.viewmodel.BenDetailsViewModel" />
+            type="com.cgg.twdinspection.schemes.viewmodel.BenDetailsViewModel" />
 
     </data>
 

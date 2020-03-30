@@ -140,7 +140,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_cash_bal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_phys_cash"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_adj_vouch"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_liab_bal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -208,14 +208,14 @@
                             android:orientation="horizontal"
                             android:padding="@dimen/dimen_5dp">
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/deficit_excess"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
 
-                            <com.example.twdinspection.common.custom.CustomFontTextView
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:id="@+id/tv_def_exc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true">
 
-                            <com.example.twdinspection.common.custom.CustomFontEditText
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -631,7 +631,7 @@
                                     app:errorEnabled="true">
 
 
-                                    <com.example.twdinspection.common.custom.CustomFontEditText
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_weight_cert_issue"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -1486,7 +1486,7 @@
                                         app:errorEnabled="true">
 
 
-                                        <com.example.twdinspection.common.custom.CustomFontEditText
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                                             android:id="@+id/et_repairs_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -1517,7 +1517,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_feedback"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1535,7 +1535,7 @@
                                 app:errorEnabled="true">
 
 
-                                <com.example.twdinspection.common.custom.CustomFontEditText
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_remarks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

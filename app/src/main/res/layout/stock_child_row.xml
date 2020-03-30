@@ -6,7 +6,7 @@
 
         <variable
             name="comViewModel"
-            type="com.example.twdinspection.gcc.source.stock.CommonCommodity" />
+            type="com.cgg.twdinspection.gcc.source.stock.CommonCommodity" />
 
     </data>
 
@@ -36,14 +36,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/comm_name"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_com_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
 
                         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                         android:text="@string/qty_sys"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/sys_qty"
                         android:layout_width="0dp"
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
 
                         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                         android:text="@string/sys_rate"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_sys_rate"
                         android:layout_width="0dp"
 
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
 
                         android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                         android:text="@string/sys_val"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_sys_val"
                         android:layout_width="0dp"
 
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
 
                         android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                         android:text="@string/phy_rate"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_phy_rate"
                         android:layout_width="0dp"
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
 
                         android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                         android:text="@string/phy_val"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_phy_val"
                         android:layout_width="0dp"
 
@@ -182,14 +182,14 @@
                     android:id="@+id/ll_phys_avail_qty"
                     android:layout_marginTop="@dimen/dimen_5dp">
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/phy_ava_qty"
                         android:textSize="18sp" />
 
-                    <com.example.twdinspection.common.custom.CustomFontTextView
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_phy_avail_qnty"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -213,7 +213,7 @@
                         android:layout_height="wrap_content"
                         app:errorEnabled="true">
 
-                        <com.example.twdinspection.common.custom.CustomFontEditText
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/phy_ava_qty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
