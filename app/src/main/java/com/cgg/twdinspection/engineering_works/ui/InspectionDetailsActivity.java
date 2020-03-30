@@ -24,6 +24,7 @@ import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
+import com.cgg.twdinspection.engineering_works.ui.UploadEngPhotosActivity;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -46,7 +47,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
     String selSectorName, selSchemeName, selStageName, selWorkInProgStageName;
     private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
     StagesResponse stagesResponse;
-
+    ArrayList<String> majorStages,tempMajorStages;
+    ArrayAdapter majorStagesAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,8 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                 new InspDetailsCustomViewModel(this, getApplication())).get(InspDetailsViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
+
+
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +78,18 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             e.printStackTrace();
         }
 
+        majorStages=new ArrayList<>();
+        majorStages.add("Not Started");
+        majorStages.add("Tender stage");
+        majorStages.add("Grounded");
+        majorStages.add("In progress");
+        majorStages.add("Work Stopped");
+        majorStages.add("Completed");
+        tempMajorStages=new ArrayList<>();
+        tempMajorStages.add("Select");
+        tempMajorStages.addAll(majorStages);
+        majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
+        binding.spStage.setAdapter(majorStagesAdapter);
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
@@ -101,7 +117,33 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                 }
             }
         });
+        binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                int selPos=0;
+                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    selStageName = "";
+                } else {
+                    selStageName = binding.spStage.getSelectedItem().toString();
+                    tempMajorStages.clear();
+                    for(int z=0;z<majorStages.size();z++){
+                        if(majorStages.get(z).equalsIgnoreCase(selStageName)){
+                            selPos=z;
+                        }
+                    }
+                    for(int z=0;z<majorStages.size();z++){
+                        if(z>=selPos){
+                            tempMajorStages.add(majorStages.get(z));
+                        }
+                    }
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
@@ -144,6 +186,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                     selWorkProgStageId = -1;
                     selWorkInProgStageName = "";
                     binding.spStageInProgress.setAdapter(null);
+                    binding.tvSectorOthers.setVisibility(View.GONE);
+                    binding.etSectorOthers.setText(null);
+                    binding.llStageWork.setVisibility(View.VISIBLE);
+                    binding.tvStageOthers.setVisibility(View.GONE);
+                    binding.etStageOthers.setText(null);
                 } else {
                     viewModel.getSectorId(binding.spSector.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
@@ -151,23 +198,37 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                             if (integer != null) {
                                 selSectorId = integer;
                                 selSectorName = binding.spSector.getSelectedItem().toString();
-                                viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
-                                    @Override
-                                    public void onChanged(StagesResponse stagesResponse) {
-                                        InspectionDetailsActivity.this.stagesResponse = stagesResponse;
-                                        if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
-                                            stagesList.clear();
-                                            stagesList.add("Select");
-                                            for (int y = 0; y < stagesResponse.getStages().size(); y++) {
-                                                stagesList.add(stagesResponse.getStages().get(y).getStageName());
+                                if (selSectorName.equalsIgnoreCase("Others")) {
+                                    binding.tvSectorOthers.setVisibility(View.VISIBLE);
+                                    binding.llStageWork.setVisibility(View.GONE);
+                                    binding.tvStageOthers.setVisibility(View.VISIBLE);
+                                    selWorkProgStageId = -1;
+                                    selWorkInProgStageName = "";
+                                } else {
+                                    binding.tvSectorOthers.setVisibility(View.GONE);
+                                    binding.llStageWork.setVisibility(View.VISIBLE);
+                                    binding.tvStageOthers.setVisibility(View.GONE);
+                                    binding.etSectorOthers.setText(null);
+                                    binding.etStageOthers.setText(null);
+                                    viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
+                                        @Override
+                                        public void onChanged(StagesResponse stagesResponse) {
+                                            InspectionDetailsActivity.this.stagesResponse = stagesResponse;
+                                            if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
+                                                stagesList.clear();
+                                                stagesList.add("Select");
+                                                for (int y = 0; y < stagesResponse.getStages().size(); y++) {
+                                                    stagesList.add(stagesResponse.getStages().get(y).getStageName());
+                                                }
+                                                ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                                                binding.spStageInProgress.setAdapter(spinnerAdapter);
+                                            } else {
+                                                callSnackBar(getString(R.string.something));
                                             }
-                                            ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
-                                            binding.spStageInProgress.setAdapter(spinnerAdapter);
-                                        } else {
-                                            callSnackBar(getString(R.string.something));
                                         }
-                                    }
-                                });
+                                    });
+
+                                }
                             } else {
                                 callSnackBar(getString(R.string.something));
                             }
@@ -175,7 +236,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                     });
                     spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
                     binding.spStageInProgress.setAdapter(spinnerAdapter);
-
                 }
             }
 
@@ -189,9 +249,9 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (binding.spScheme.getSelectedItem().toString().equalsIgnoreCase("Select")) {
-                    selSchemeId=-1;
-                    selSchemeName="";
-                }else{
+                    selSchemeId = -1;
+                    selSchemeName = "";
+                } else {
                     viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer integer) {
@@ -216,9 +276,9 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase("Select")) {
-                   selWorkProgStageId=-1;
-                   selWorkInProgStageName="";
-                }else{
+                    selWorkProgStageId = -1;
+                    selWorkInProgStageName = "";
+                } else {
                     selWorkInProgStageName = binding.spStageInProgress.getSelectedItem().toString();
                     if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
                         for (int z = 0; z < stagesResponse.getStages().size(); z++) {
@@ -235,21 +295,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
 
             }
         });
-        binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
-                    selStageName="";
-                }else{
-                    selStageName = binding.spStage.getSelectedItem().toString();
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         binding.rgOverallAppear.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -326,13 +372,13 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
         if (selSectorId == -1) {
             callSnackBar("Please select sector");
             return false;
-        } else if (selSchemeId==-1) {
+        } else if (selSchemeId == -1) {
             callSnackBar("Please select scheme");
             return false;
         } else if (TextUtils.isEmpty(selStageName)) {
             callSnackBar("Please select stage of work");
             return false;
-        } else if (selWorkProgStageId==-1) {
+        } else if (selWorkProgStageId == -1) {
             callSnackBar("Please select stage of works for in progress works");
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {
@@ -347,13 +393,13 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
         } else if (TextUtils.isEmpty(qualMat)) {
             callSnackBar("Please check quality of materials");
             return false;
-        }else if (TextUtils.isEmpty(surfaceFinishing)) {
+        } else if (TextUtils.isEmpty(surfaceFinishing)) {
             callSnackBar("Please check surface finishes");
             return false;
-        }else if (TextUtils.isEmpty(observation)) {
+        } else if (TextUtils.isEmpty(observation)) {
             callSnackBar("Please enter observations");
             return false;
-        }else if (TextUtils.isEmpty(satLevel)) {
+        } else if (TextUtils.isEmpty(satLevel)) {
             callSnackBar("Please check satisfaction level");
             return false;
         }

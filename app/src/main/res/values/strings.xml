@@ -726,24 +726,7 @@
     <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
     <string name="data_lost">Do you want to go back? On click of Yes entered data will be lost</string>
 
-    <string-array name="sectors">
-        <item>Select</item>
-        <item>Buildings</item>
-        <item>Roads</item>
-        <item>Drinking Water</item>
-        <item>Minor Irrigation</item>
-        <item>Repairs to Buildings</item>
-        <item>Others</item>
-    </string-array>
-    <string-array name="stages">
-        <item>Select</item>
-        <item>Not Started</item>
-        <item>Tender stage</item>
-        <item>Grounded</item>
-        <item>In progress</item>
-        <item>Work Stopped</item>
-        <item>Completed</item>
-    </string-array>
+
     <string-array name="buildings">
         <item>Select</item>
         <item>Foundation Level</item>

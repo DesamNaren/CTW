@@ -367,9 +367,114 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:entries="@array/category" />
+                        android:entries="@array/category"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/dimen_5dp"
+                        android:layout_weight="1">
+
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leaves_availed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/no_of_leaves_availed"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@={staff.leavesAvailed}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leaves_taken"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/no_of_leaves_taken"
+                            android:imeOptions="actionNext"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.leavesTaken}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
+                        android:layout_weight="1">
+
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/et_leave_bal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/leave_balance"
+                            android:inputType="number"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.leavesBal}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:paddingLeft="2dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="2dp"
+                    android:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:id="@+id/last_week"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_week"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
+                            android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:singleLine="true"
+                            android:text="@{staff.lastWeekTeacherAttended}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -388,14 +493,16 @@
                         android:layout_height="wrap_content">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:focusableInTouchMode="false"
-                            android:text="@{staff.lastWeekTeacherAttended}"
+                            android:id="@+id/et_acad_grade_panel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/last_week"
+                            android:hint="@string/teacher_s_last_year_academic_panel_grade"
+                            android:focusableInTouchMode="false"
+                            android:enabled="false"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="@{staff.acadPanelGrade}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>

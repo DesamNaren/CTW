@@ -326,7 +326,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:entries="@array/sectors"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -635,7 +634,6 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:entries="@array/stages"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -680,6 +678,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
+                        android:layout_margin="@dimen/dimen_10dp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:errorEnabled="true">
 
