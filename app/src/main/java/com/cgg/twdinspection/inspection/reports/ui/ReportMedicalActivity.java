@@ -11,8 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.databinding.ActivityMedicalReportBinding;
-import com.cgg.twdinspection.databinding.ReportActivityStudentsAttendanceBinding;
+import com.cgg.twdinspection.databinding.ActivityReportMedicalBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.MedicalIssues;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
@@ -21,7 +20,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class ReportMedicalActivity extends BaseActivity {
-    ActivityMedicalReportBinding binding;
+    ActivityReportMedicalBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officerId;
     private InspReportData inspReportData;
@@ -30,7 +29,7 @@ public class ReportMedicalActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_medical_report);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_report_medical);
         binding.actionBar.headerTitle.setText(getString(R.string.medical_health));
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override

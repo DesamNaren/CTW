@@ -12,7 +12,6 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityGeneralCommentsReportBinding;
-import com.cgg.twdinspection.databinding.ActivityMedicalReportBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.MedicalIssues;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
