@@ -53,9 +53,15 @@ public class ReportsAcademicActivity extends BaseActivity {
         if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getAcademicOverview());
             binding.executePendingBindings();
+
         }
 
-
+        binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReportsAcademicActivity.this,ReportAcademicGradeActivity.class));
+            }
+        });
 
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
