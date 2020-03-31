@@ -14,7 +14,6 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityReportDietIssuesBinding;
 import com.cgg.twdinspection.inspection.reports.adapter.DietIssuesReportAdapter;
-import com.cgg.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;

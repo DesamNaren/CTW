@@ -1,9 +1,5 @@
 package com.cgg.twdinspection.inspection.ui;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +7,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -258,6 +258,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             @Override
             public void onClick(View view) {
                 sanitary_napkins_reason = binding.etSanitaryReason.getText().toString().trim();
+                notes_reason = binding.etNotesReason.getText().toString().trim();
                 cosmetics_upto_month = binding.etCosmeticsUptoMonth.getText().toString().trim();
                 cosmetics_reason = binding.etCosmeticsReason.getText().toString().trim();
 

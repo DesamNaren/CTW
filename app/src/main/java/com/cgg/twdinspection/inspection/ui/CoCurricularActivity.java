@@ -63,7 +63,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     String ncc_stu_impl, ncc_teacher_name, ncc_teacher_contact, ncc_teacher_battalion_num;
     String smc_election_status, smc_chai_name, smc_chai_contact, smc_resolution, smc_parents_meeting;
     String kitchen_garden_status, type_kitchen_garden, kitchen_in_charge_name, kitchen_in_charge_contact, plants_count;
-    String  student_council_ele_status, stu_com_name_dis_status;
+    String student_council_ele_status, stu_com_name_dis_status;
     String stu_com_name_dis_status_reason, stu_Cou_date;
     private List<StudAchievementEntity> studAchievementEntities;
     private List<PlantsEntity> plantsEntities;
@@ -368,17 +368,19 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     student_council_ele_status = AppConstants.Yes;
                     binding.llNameOfCommDisplayed.setVisibility(View.VISIBLE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
-                    binding.llStuCouDate.setVisibility(View.GONE);
+                    binding.reasonEt.setText("");
+
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_studCounElecNo) {
                     student_council_ele_status = AppConstants.No;
                     binding.llStudCommEntries.setVisibility(View.VISIBLE);
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
-                    binding.llStuCouDate.setVisibility(View.VISIBLE);
+                    binding.rgNameOfCommDisp.clearCheck();
+
                 } else {
                     student_council_ele_status = null;
                     binding.llNameOfCommDisplayed.setVisibility(View.GONE);
                     binding.llStudCommEntries.setVisibility(View.GONE);
-                    binding.llStuCouDate.setVisibility(View.GONE);
+
                 }
             }
         });
@@ -388,13 +390,10 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_nameOfCommYes) {
                     stu_com_name_dis_status = AppConstants.Yes;
-                    binding.etReason.setVisibility(View.GONE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_nameOfCommNo) {
                     stu_com_name_dis_status = AppConstants.No;
-                    binding.etReason.setVisibility(View.VISIBLE);
                 } else {
                     stu_com_name_dis_status = null;
-                    binding.etReason.setVisibility(View.GONE);
                 }
             }
         });
@@ -833,7 +832,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.etPlantsCnt.requestFocus();
             showSnackBar("Enter Number of plants");
             returnFlag = false;
-        }  else if (TextUtils.isEmpty(student_council_ele_status)) {
+        } else if (TextUtils.isEmpty(student_council_ele_status)) {
             showSnackBar("Select student council election conducted status");
             returnFlag = false;
         } else if (student_council_ele_status.equals(AppConstants.Yes) && TextUtils.isEmpty(stu_com_name_dis_status)) {

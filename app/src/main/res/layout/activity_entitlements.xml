@@ -717,7 +717,7 @@
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
-                                android:text="@{inspData.sanitary_napkins_reason}" />
+                                android:text="@{inspData.notes_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

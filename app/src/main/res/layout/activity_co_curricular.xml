@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -274,17 +275,17 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_cocur"
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp" />
+                                android:padding="5dp"
+                                android:visibility="gone" />
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:visibility="gone"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="gone">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                     android:id="@+id/btn_addStud"
@@ -328,7 +329,7 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                         <com.google.android.material.textfield.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -348,7 +349,7 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                         <com.google.android.material.textfield.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1142,7 +1143,8 @@
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
-                          <com.google.android.material.textfield.TextInputLayout
+
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/t_plants_cnt"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
@@ -1278,7 +1280,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="@{inspData.stu_com_display_status.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/et_reason"
@@ -1286,7 +1288,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
-
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
 
@@ -1303,37 +1304,34 @@
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-
                         </LinearLayout>
 
                         <LinearLayout
-                            android:visibility="@{inspData.stu_cou_ele_status.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             android:id="@+id/ll_stu_cou_date"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorAccent"
-                            app:errorEnabled="true">
+                            android:orientation="vertical">
 
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_stu_council_date"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableLeft="@android:drawable/ic_menu_my_calendar"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/last_meeting_conducted_with_students_council_date"
-                                android:imeOptions="actionNext"
-                                android:text="@{inspData.stu_cou_date}"
-                                android:textSize="@dimen/dimen_15dp" />
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_stu_council_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/last_meeting_conducted_with_students_council_date"
+                                    android:imeOptions="actionNext"
+                                    android:text="@{inspData.stu_cou_date}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
                     </LinearLayout>

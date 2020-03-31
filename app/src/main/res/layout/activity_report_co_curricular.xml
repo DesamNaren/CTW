@@ -2630,7 +2630,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+                            android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/et_reason"
@@ -2639,9 +2639,7 @@
                                 android:layout_height="wrap_content"
                                 app:errorEnabled="true">
 
-
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
-
                                     android:id="@+id/reason_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -2660,7 +2658,6 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             android:id="@+id/ll_stu_cou_date"
                             android:orientation="vertical"
                             android:layout_width="match_parent"

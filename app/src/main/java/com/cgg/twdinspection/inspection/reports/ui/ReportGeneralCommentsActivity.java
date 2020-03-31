@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.databinding.ActivityGeneralCommentsReportBinding;
+import com.cgg.twdinspection.databinding.ActivityReportGeneralCommentsBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.MedicalIssues;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
@@ -20,7 +20,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class ReportGeneralCommentsActivity extends BaseActivity {
-    ActivityGeneralCommentsReportBinding binding;
+    ActivityReportGeneralCommentsBinding binding;
     SharedPreferences sharedPreferences;
     String instId, officerId;
     private InspReportData inspReportData;
@@ -29,7 +29,7 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_general_comments_report);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_report_general_comments);
         binding.actionBar.headerTitle.setText(getString(R.string.title_general_comments));
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
