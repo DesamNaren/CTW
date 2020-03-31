@@ -842,7 +842,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             binding.etReason.requestFocus();
             showSnackBar("Enter reason");
             returnFlag = false;
-        } else if (student_council_ele_status.equals(AppConstants.No) && TextUtils.isEmpty(stu_Cou_date)) {
+        } else if (TextUtils.isEmpty(stu_Cou_date)) {
             showSnackBar("Enter student council date");
             returnFlag = false;
         }
