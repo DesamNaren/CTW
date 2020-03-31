@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -159,6 +159,7 @@
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                app:profileImage="@{menuImgUrl}"
                                 android:src="@drawable/ic_menu_camera" />
                         </LinearLayout>
 
@@ -629,6 +630,7 @@
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                app:profileImage="@{officerImgUrl}"
                                 android:src="@drawable/ic_menu_camera" />
 
                         </LinearLayout>
