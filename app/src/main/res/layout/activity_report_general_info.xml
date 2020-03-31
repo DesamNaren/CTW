@@ -229,7 +229,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`Leaves`)}"
+                                            android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`Leaves`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/leaves" />
 
@@ -238,7 +238,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`Unauthorized Absent`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/unauthorized_absent" />
 
@@ -247,7 +247,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)}"
+                                            android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`OD`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/od" />
 
@@ -260,7 +260,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+                                    android:visibility="@{inspData.hmReasonType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -338,7 +338,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+                                    android:visibility="@{inspData.hmReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -357,7 +357,7 @@
                                             android:id="@+id/rb_hm_out_of_station"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Out of station`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Out of station`)}"
                                             android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/out_of_station" />
@@ -367,7 +367,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within campus`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within campus`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_campus" />
 
@@ -376,7 +376,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within Mandal`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_mandal" />
 
@@ -385,7 +385,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`Within District`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within District`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_district" />
 
@@ -394,7 +394,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`ITDA level`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/itda_level" />
 
@@ -403,7 +403,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hmCapturetype.equalsIgnoreCase(`State Level`)}"
+                                            android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`State Level`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/state_level" />
 
@@ -416,7 +416,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hmLeaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+                                    android:visibility="@{inspData.hmReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -558,7 +558,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`Leaves`)}"
+                                            android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`Leaves`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/leaves" />
 
@@ -567,7 +567,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`Unauthorized Absent`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/unauthorized_absent" />
 
@@ -576,7 +576,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)}"
+                                            android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`OD`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/od" />
 
@@ -589,7 +589,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+                                    android:visibility="@{inspData.hwoReasonType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -649,7 +649,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+                                    android:visibility="@{inspData.hwoReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -669,7 +669,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Out of station`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Out of station`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/out_of_station" />
 
@@ -678,7 +678,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within campus`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within campus`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_campus" />
 
@@ -687,7 +687,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within Mandal`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_mandal" />
 
@@ -696,7 +696,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`Within District`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within District`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_district" />
 
@@ -705,7 +705,7 @@
                                             android:layout_width="wrap_content"
                                             android:clickable="false"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`ITDA level`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/itda_level" />
 
@@ -714,7 +714,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:checked="@{inspData.hwocapturetype.equalsIgnoreCase(`State Level`)}"
+                                            android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`State Level`)}"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/state_level" />
 
@@ -727,7 +727,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.hwoleaveType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+                                    android:visibility="@{inspData.hwoReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
 
                                     <TextView
                                         android:layout_width="wrap_content"

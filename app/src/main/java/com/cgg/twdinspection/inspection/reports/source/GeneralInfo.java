@@ -14,6 +14,9 @@ public class GeneralInfo {
     @SerializedName("hwoPresence")
     @Expose
     private String hwoPresence;
+    @SerializedName("hwoReasonType")
+    @Expose
+    private String hwoReasonType;
     @SerializedName("staffQuarters")
     @Expose
     private String staffQuarters;
@@ -26,21 +29,18 @@ public class GeneralInfo {
     @SerializedName("hwoheadquarters")
     @Expose
     private String hwoheadquarters;
-    @SerializedName("hwoleaveType")
+    @SerializedName("hwocaptureodtype")
     @Expose
-    private String hwoleaveType;
-    @SerializedName("hmLeaveType")
-    @Expose
-    private String hmLeaveType;
+    private String hwocaptureodtype;
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
     @SerializedName("hwomovementRegisterEntry")
     @Expose
     private String hwomovementRegisterEntry;
-    @SerializedName("hwocapturetype")
+    @SerializedName("hmReasonType")
     @Expose
-    private String hwocapturetype;
+    private String hmReasonType;
     @SerializedName("hmcaptureDistance")
     @Expose
     private String hmcaptureDistance;
@@ -53,15 +53,15 @@ public class GeneralInfo {
     @SerializedName("officer_id")
     @Expose
     private String officerId;
+    @SerializedName("hmCaptureodtype")
+    @Expose
+    private String hmCaptureodtype;
     @SerializedName("hmheadquarters")
     @Expose
     private String hmheadquarters;
     @SerializedName("hmstayingFacilitiesType")
     @Expose
     private String hmstayingFacilitiesType;
-    @SerializedName("hmCapturetype")
-    @Expose
-    private String hmCapturetype;
     @SerializedName("id")
     @Expose
     private String id;
@@ -99,6 +99,14 @@ public class GeneralInfo {
         this.hwoPresence = hwoPresence;
     }
 
+    public String getHwoReasonType() {
+        return hwoReasonType;
+    }
+
+    public void setHwoReasonType(String hwoReasonType) {
+        this.hwoReasonType = hwoReasonType;
+    }
+
     public String getStaffQuarters() {
         return staffQuarters;
     }
@@ -131,20 +139,12 @@ public class GeneralInfo {
         this.hwoheadquarters = hwoheadquarters;
     }
 
-    public String getHwoleaveType() {
-        return hwoleaveType;
+    public String getHwocaptureodtype() {
+        return hwocaptureodtype;
     }
 
-    public void setHwoleaveType(String hwoleaveType) {
-        this.hwoleaveType = hwoleaveType;
-    }
-
-    public String getHmLeaveType() {
-        return hmLeaveType;
-    }
-
-    public void setHmLeaveType(String hmLeaveType) {
-        this.hmLeaveType = hmLeaveType;
+    public void setHwocaptureodtype(String hwocaptureodtype) {
+        this.hwocaptureodtype = hwocaptureodtype;
     }
 
     public String getInstituteId() {
@@ -163,12 +163,12 @@ public class GeneralInfo {
         this.hwomovementRegisterEntry = hwomovementRegisterEntry;
     }
 
-    public String getHwocapturetype() {
-        return hwocapturetype;
+    public String getHmReasonType() {
+        return hmReasonType;
     }
 
-    public void setHwocapturetype(String hwocapturetype) {
-        this.hwocapturetype = hwocapturetype;
+    public void setHmReasonType(String hmReasonType) {
+        this.hmReasonType = hmReasonType;
     }
 
     public String getHmcaptureDistance() {
@@ -203,6 +203,14 @@ public class GeneralInfo {
         this.officerId = officerId;
     }
 
+    public String getHmCaptureodtype() {
+        return hmCaptureodtype;
+    }
+
+    public void setHmCaptureodtype(String hmCaptureodtype) {
+        this.hmCaptureodtype = hmCaptureodtype;
+    }
+
     public String getHmheadquarters() {
         return hmheadquarters;
     }
@@ -217,14 +225,6 @@ public class GeneralInfo {
 
     public void setHmstayingFacilitiesType(String hmstayingFacilitiesType) {
         this.hmstayingFacilitiesType = hmstayingFacilitiesType;
-    }
-
-    public String getHmCapturetype() {
-        return hmCapturetype;
-    }
-
-    public void setHmCapturetype(String hmCapturetype) {
-        this.hmCapturetype = hmCapturetype;
     }
 
     public String getId() {

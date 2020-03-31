@@ -29,7 +29,7 @@
             android:layout_below="@+id/action_bar"
             android:background="@color/light_gray">
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
@@ -1308,7 +1308,7 @@
 
                         </LinearLayout>
 
-<!--
+&lt;!&ndash;
                         <com.google.android.material.textfield.TextInputLayout
                             android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1331,7 +1331,7 @@
                                 android:textSize="@dimen/dimen_15dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
--->
+&ndash;&gt;
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
@@ -1355,6 +1355,1340 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="75."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_sports_material_received_during_the_year_2019_2020"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_sportMatRec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb_sportRecYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_sportRecNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.sportMatReceived.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_enteredStock"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.sportMatReceived.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/entered_in_stock_entry_register"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/entry_register_rg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/entry_register_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.stockEntryRegister.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/entry_register_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.stockEntryRegister.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="i."
+                                android:textColor="@color/black" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/separate_games_sports_room_available"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/game_sport_room_rg"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/game_room_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/game_room_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="No" />
+
+                                </RadioGroup>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="ii."
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/pd_pft_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/name_of_the_pd_pft"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:focusableInTouchMode="false"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.pdPftName}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="iii."
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/pd_mob_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/mobile_number"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:focusableInTouchMode="false"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.pdPftContact}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Achievement of the student during the year 2019- 2020"
+                                android:textColor="@color/black" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_cocur"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:visibility="gone"
+                                android:orientation="vertical">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_addStud"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/btn_background"
+                                    android:text="Add"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontButtonView
+                                    android:id="@+id/btn_viewStud"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/dimen_30dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/btn_background1"
+                                    android:text="View"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white"
+                                    android:visibility="@{inspData.studAchievementEntities.size()>0 ? View.VISIBLE: View.GONE}" />
+                            </LinearLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_district"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/district_level"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.districtLevel}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_state"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/state_level"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.stateLevel}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_national"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/national_level"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.nationalLevel}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="76."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/play_ground_available"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_playGrAvail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_playGrAvailYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_playGrAvailNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.playGroundAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_planToProcure"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.playGroundAvail.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/plan_to_procure_playground"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_planToProc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/rb_planToProcYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_planToProcNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.planToPrcLand.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/measLandAvail"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{inspData.playGroundAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                android:id="@+id/et_land"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/measurement_of_land_available_for_games"
+                                android:imeOptions="actionNext"
+                                android:focusableInTouchMode="false"
+                                android:inputType="numberDecimal"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:singleLine="true"
+                                android:text="@{inspData.landMeaValue}"
+                                android:textSize="@dimen/dimen_15dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="77."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/ground_leveling_completed"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/groundLeivingRg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/ground_lev_yes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Yes" />
+
+                            <RadioButton
+                                android:id="@+id/ground_lev_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="@{inspData.groundLevelStatus.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="No" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="78."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_scouts_guides_implemented_in_school"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_scoutsImpl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_scoutsYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_scoutsNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_scoutEntries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.scoutsGuidesImplStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/scoutCapName"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_sc_gu_nmae"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/scout_master_guide_captain_name"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.scoutGuideCaptainName}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/scoutsMobNo"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_sc_gu_ctc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/mobile_number"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:focusableInTouchMode="false"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.scoutGuideCaptainContact}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="79."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_ncc_student_implemented_in_school"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_nccStudImpl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_nccStudImpYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_nccStudImpNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.nccImplStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_nccEntries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.nccImplStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/nccTeachName"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/ncc_tea_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/name_of_the_ncc_teacher"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.nccTeacherName}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/nccTeachMobNo"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/ncc_tea_ctc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/mobile_number"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.nccTeacherContact}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/nccBatallionNo"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/ncc_bat_num"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/battalion_number"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.nccTeacherBattalionNum}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="80."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_smc_elections_conducted"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_smcElections"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_smcElectionsYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_smcElectionsNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_smcElectionsEnties"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.smcEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/smc_chi_name"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/smc_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/name_of_the_smc_chairman"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.smcEleChairmanName}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/smc_chi_ctc"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/smc_num"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/mobile_number"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.smcEleChairmanContact}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/smc_resolution"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/resolution_noted"
+                                    android:focusableInTouchMode="false"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@={inspData.smcEleResolution}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/parents_meeting_conducted"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_parent_meeting"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/parents_meeting_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.smcEleConParentMeeting.equalsIgnoreCase(`Yes`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/parents_meeting_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:checked="@{inspData.smcEleConParentMeeting.equalsIgnoreCase(`No`)}"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="No" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="81."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_kitchen_garden_available"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_kitchenGarAvail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_kitchenAvailYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_kitchenAvailNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_kitchenEntries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/type_kitchen"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/kit_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/types_of_kitchen_garden"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.kitchenGardenTypes}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/kitchen_incharge_name"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/kit_in_charge_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
+                                    android:focusableInTouchMode="false"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.kitchenGardenInChargeName}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/kitchen_incharge_ctc"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/kit_in_cha_ctc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/mobile_number"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.kitchenGardenInChargeContact}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_plants_cnt"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_plants_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/number_of_plants"
+                                    android:focusableInTouchMode="false"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.plantsCnt}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="83."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_students_council_elections_conducted_during_2019_2020"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_studCounElect"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_studCounElecYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_studCounElecNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_nameOfCommDisplayed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/is_the_student_council_displayed"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_nameOfCommDisp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/rb_nameOfCommYes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Yes" />
+
+                                <RadioButton
+                                    android:id="@+id/rb_nameOfCommNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="No" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_studCommEntries"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/et_reason"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                    android:id="@+id/reason_et"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/reason"
+                                    android:imeOptions="actionNext"
+                                    android:focusableInTouchMode="false"
+                                    android:inputType="textPersonName"
+                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.reason}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="@{inspData.stuCouEleStatus.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
+                            android:id="@+id/ll_stu_cou_date"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_stu_council_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+                                    android:focusableInTouchMode="false"
+                                    android:hint="@string/last_meeting_conducted_with_students_council_date"
+                                    android:imeOptions="actionNext"
+                                    android:text="@{inspData.stuCouDate}"
+                                    android:textSize="@dimen/dimen_15dp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>

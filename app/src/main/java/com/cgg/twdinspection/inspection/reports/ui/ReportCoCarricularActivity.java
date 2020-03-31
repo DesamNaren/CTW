@@ -15,7 +15,6 @@ import com.cgg.twdinspection.databinding.ActivityReportCoCurricularBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
 import com.cgg.twdinspection.inspection.ui.CocurricularStudAchActivity;
-import com.cgg.twdinspection.inspection.ui.PlantsInfoActivity;
 import com.google.gson.Gson;
 
 public class ReportCoCarricularActivity extends BaseActivity {
@@ -59,7 +58,7 @@ public class ReportCoCarricularActivity extends BaseActivity {
         if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getCoCurricularInfo());
 
-            if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getPlantsEntities() != null
+          /*  if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getPlantsEntities() != null
                     && reportData.getCoCurricularInfo().getPlantsEntities().size() > 0) {
                 binding.btnViewplant.setVisibility(View.VISIBLE);
                 binding.btnViewplant.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +70,7 @@ public class ReportCoCarricularActivity extends BaseActivity {
                     }
                 });
             }
+*/
 
             if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getStudAchievementEntities() != null
                     && reportData.getCoCurricularInfo().getStudAchievementEntities().size() > 0) {

@@ -140,7 +140,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
                     coCurricularEntity.setStu_com_display_status(stu_com_name_dis_status);
                     coCurricularEntity.setStu_cou_date(stu_Cou_date);
                     coCurricularEntity.setReason(stu_com_name_dis_status_reason);
-
+                    coCurricularEntity.setPlants_cnt(plants_count);
 
                     Utils.customSaveAlert(CoCurricularActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
                 }
