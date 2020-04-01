@@ -589,7 +589,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         entitlementsFlag = false;
         regFlag = false;
         generalCommentsFlag = false;
-        
+
         editor.putString(AppConstants.RANDOM_NO, "");
         editor.commit();
     }
