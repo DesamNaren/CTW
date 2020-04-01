@@ -73,7 +73,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     private String officerID, instID, insTime,randomNo;
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
-    private String randomno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -712,7 +711,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomno + ".png";
+            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
