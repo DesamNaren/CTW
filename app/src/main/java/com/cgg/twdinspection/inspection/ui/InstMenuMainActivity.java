@@ -740,7 +740,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             instSubmitRequest.setMandal_name(mandalName);
             instSubmitRequest.setVillage_name(villageName);
             instSubmitRequest.setPhoto_key_id(randomNo);
-            
+
             submitFlag = true;
 
             customProgressDialog.show();
