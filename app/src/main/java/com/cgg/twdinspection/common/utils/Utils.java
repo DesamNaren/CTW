@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,12 +15,15 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
@@ -39,7 +44,44 @@ import java.util.Locale;
 
 import okhttp3.ResponseBody;
 
+import static android.Manifest.permission.READ_PHONE_STATE;
+
 public class Utils {
+    public static String getDeviceID(Context context) {
+        String deviceID   = null;
+        try {
+            ContextCompat.checkSelfPermission(context, READ_PHONE_STATE);
+
+            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.P) {
+                deviceID = android.provider.Settings.Secure.getString(
+                        context.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+            } else {
+                deviceID = null;
+                deviceID = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                if (deviceID == null)
+                    deviceID = Settings.Secure.getString(context.getContentResolver(), "android_id");
+                if (deviceID == null)
+                    deviceID = "NODeviceID";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deviceID;
+    }
+
+    public static String getVersionName(Context context) {
+        String version;
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            version = "";
+            e.printStackTrace();
+        }
+        return version;
+    }
+
     public static void hideKeyboard(Context context, View mView) {
         try {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

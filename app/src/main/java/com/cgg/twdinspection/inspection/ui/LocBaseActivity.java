@@ -55,6 +55,7 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
@@ -86,7 +87,7 @@ public class LocBaseActivity extends AppCompatActivity {
 
 
     String[] permissions = new String[]{
-            ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE};
+            ACCESS_FINE_LOCATION, CAMERA, WRITE_EXTERNAL_STORAGE, READ_PHONE_STATE};
 
 
     @Override
@@ -295,6 +296,9 @@ public class LocBaseActivity extends AppCompatActivity {
         int permissionStorage = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
+        int permissionPhoneState = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE);
+
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (permissionLocation != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -305,6 +309,10 @@ public class LocBaseActivity extends AppCompatActivity {
 
         if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
         }
         return listPermissionsNeeded.isEmpty();
     }
