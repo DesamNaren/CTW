@@ -589,6 +589,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         entitlementsFlag = false;
         regFlag = false;
         generalCommentsFlag = false;
+        
+        editor.putString(AppConstants.RANDOM_NO, "");
+        editor.commit();
     }
 
     private void CallSuccessAlert(String msg) {
@@ -645,6 +648,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         editor.putString(AppConstants.LAT, "");
         editor.putString(AppConstants.LNG, "");
         editor.putString(AppConstants.ADDRESS, "");
+
 
         editor.commit();
     }
