@@ -75,7 +75,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     InstMainViewModel instMainViewModel;
     DietIssuesEntity dietIssuesEntity;
     SharedPreferences sharedPreferences;
-    private String officerID, instID, insTime;
+    private String officerID, instID, insTime, randomNo;
     List<DietListEntity> dietInfoEntityListMain;
     DietIssuesAdapter adapter;
     MasterInstituteInfo masterInstituteInfos;
@@ -133,6 +133,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -252,13 +254,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgMenuChartPainted.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_menu_chart_painted) {
-                    file_menu=null;
+                    file_menu = null;
                     flag_menu = 0;
                     menu_chart_painted = AppConstants.Yes;
                     binding.llMenuChart.setVisibility(View.VISIBLE);
-                }
-                else if (selctedItem == R.id.rb_no_menu_chart_painted) {
-                    file_menu=null;
+                } else if (selctedItem == R.id.rb_no_menu_chart_painted) {
+                    file_menu = null;
                     flag_menu = 0;
                     binding.ivMenu.setPadding(0, 0, 0, 0);
                     binding.ivMenu.setBackgroundColor(getResources().getColor(R.color.white));
@@ -266,8 +267,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     binding.ivMenu.setBackground(getResources().getDrawable(R.drawable.ic_menu_camera));
                     menu_chart_painted = AppConstants.No;
                     binding.llMenuChart.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     menu_chart_painted = null;
                     binding.llMenuChart.setVisibility(View.GONE);
                 }
@@ -295,7 +295,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     food_provisions = AppConstants.Yes;
                     binding.llMatchingWithSamples.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_food_provisions_no) {
-                    matching_with_samples="";
+                    matching_with_samples = "";
                     binding.rgMatchingWithSamples.clearCheck();
                     food_provisions = AppConstants.No;
                     binding.llMatchingWithSamples.setVisibility(View.GONE);
@@ -329,13 +329,13 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     binding.llDiscussWithComm.setVisibility(View.VISIBLE);
                 } else if (selctedItem == R.id.rb_committee_exist_no) {
                     binding.rgDiscussedWithCommittee.clearCheck();
-                    discussed_with_committee="";
+                    discussed_with_committee = "";
                     committee_exist = AppConstants.No;
                     binding.llDiscussWithComm.setVisibility(View.GONE);
                     discussed_with_committee = null;
                 } else {
                     binding.rgDiscussedWithCommittee.clearCheck();
-                    discussed_with_committee="";
+                    discussed_with_committee = "";
                     committee_exist = null;
                     binding.llDiscussWithComm.setVisibility(View.GONE);
                 }
@@ -666,7 +666,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

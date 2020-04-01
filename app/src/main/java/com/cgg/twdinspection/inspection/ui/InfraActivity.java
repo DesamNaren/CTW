@@ -70,7 +70,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             functioningToilets, repairsReqToilets, repairsReqBathrooms, add_req;
 
     InstMainViewModel instMainViewModel;
-    private String officerID, instID, insTime;
+    private String officerID, instID, insTime, randomNo;
     private String add_cls_cnt, add_din_cnt, add_dom_cnt, add_toilets_cnt, add_bathrooms_cnt;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
@@ -108,6 +108,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1226,9 +1228,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + PIC_NAME);
+            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomNo + ".png";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + PIC_NAME);
         } else {
             return null;
         }

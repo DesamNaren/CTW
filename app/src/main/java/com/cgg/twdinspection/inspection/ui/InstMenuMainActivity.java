@@ -64,6 +64,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -92,7 +93,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             file_playGround, file_diningHall, file_dormitory,
             file_mainBulding, file_toilet, file_kitchen, file_classroom,
             file_tds, file_menu, file_officer;
-
+    private String randomNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +134,13 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         vill_id = String.valueOf(sharedPreferences.getInt(AppConstants.VILL_ID, 0));
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
         desLng = sharedPreferences.getString(AppConstants.LNG, "");
+        randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
+
+        if (randomNo.equalsIgnoreCase("")) {
+            String randomno = getRandomNumberString();
+            editor.putString(AppConstants.RANDOM_NO, randomno);
+            editor.commit();
+        }
 
         if (TextUtils.isEmpty(instId)) {
             Utils.ShowDeviceSessionAlert(this,
@@ -725,7 +733,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
         customProgressDialog.hide();
 
-        String randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             instSubmitRequest.setOfficer_id(officer_id);
@@ -764,6 +771,15 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         } else {
             Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
+    }
+
+    public String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 
     public void customFinaSubmitAlert(Activity activity, String title, String msg) {

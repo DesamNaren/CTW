@@ -50,7 +50,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -71,7 +70,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String officerID, instID, insTime;
+    private String officerID, instID, insTime,randomNo;
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     private String randomno;
@@ -99,10 +98,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
-
-            randomno = getRandomNumberString();
-            editor.putString(AppConstants.RANDOM_NO, randomno);
-            editor.commit();
+            randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -833,14 +829,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         }
     }
 
-    public String getRandomNumberString() {
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
-    }
+
 
     @Override
     protected void onPause() {
