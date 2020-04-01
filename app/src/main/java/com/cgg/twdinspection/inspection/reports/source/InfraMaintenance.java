@@ -1,15 +1,9 @@
 package com.cgg.twdinspection.inspection.reports.source;
 
-import android.widget.ImageView;
-
-import androidx.databinding.BindingAdapter;
-
-import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class InfraMaintenance {
-
     @SerializedName("bigSchoolNameBoard")
     @Expose
     private String bigSchoolNameBoard;
@@ -40,6 +34,9 @@ public class InfraMaintenance {
     @SerializedName("add_dormitory_required_cnt")
     @Expose
     private String addDormitoryRequiredCnt;
+    @SerializedName("add_req")
+    @Expose
+    private String addReq;
     @SerializedName("separate_kitchen_room_available")
     @Expose
     private String separateKitchenRoomAvailable;
@@ -118,6 +115,9 @@ public class InfraMaintenance {
     @SerializedName("enough_fans")
     @Expose
     private String enoughFans;
+    @SerializedName("sewage_raise_request")
+    @Expose
+    private String sewageRaiseRequest;
     @SerializedName("dininghall_used")
     @Expose
     private String dininghallUsed;
@@ -260,6 +260,14 @@ public class InfraMaintenance {
 
     public void setAddDormitoryRequiredCnt(String addDormitoryRequiredCnt) {
         this.addDormitoryRequiredCnt = addDormitoryRequiredCnt;
+    }
+
+    public String getAddReq() {
+        return addReq;
+    }
+
+    public void setAddReq(String addReq) {
+        this.addReq = addReq;
     }
 
     public String getSeparateKitchenRoomAvailable() {
@@ -468,6 +476,14 @@ public class InfraMaintenance {
 
     public void setEnoughFans(String enoughFans) {
         this.enoughFans = enoughFans;
+    }
+
+    public String getSewageRaiseRequest() {
+        return sewageRaiseRequest;
+    }
+
+    public void setSewageRaiseRequest(String sewageRaiseRequest) {
+        this.sewageRaiseRequest = sewageRaiseRequest;
     }
 
     public String getDininghallUsed() {

@@ -50,6 +50,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -73,6 +74,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     private String officerID, instID, insTime;
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
+    private String randomno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,9 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
 
+            randomno = getRandomNumberString();
+            editor.putString(AppConstants.RANDOM_NO, randomno);
+            editor.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -711,7 +716,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomno + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -826,6 +831,15 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 
     @Override

@@ -67,7 +67,7 @@
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
-                            android:text="@{medical.lastMedicalCheckupDate}" />
+                            android:text="@{medical.sickBoarders}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/total_no_of_sick_boarders_referred_to_area_district_hospital"
                             android:focusableInTouchMode="false"
-                            android:text="@{medical.lastMedicalCheckupDate}"
+                            android:text="@{medical.sickBoardersArea}"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"

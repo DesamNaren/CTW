@@ -460,7 +460,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--<LinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
@@ -497,7 +497,7 @@
                                 android:id="@+id/rb_yes_sanitary_napkins"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`Yes`)}"
+                                android:checked="@{inspData.sanitaryNapkinsSupplied.equalsIgnoreCase(`Yes`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
@@ -506,7 +506,7 @@
                                 android:id="@+id/rb_no_sanitary_napkins"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`No`)}"
+                                android:checked="@{inspData.sanitaryNapkinsSupplied.equalsIgnoreCase(`No`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -538,7 +538,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dimen_10dp"
-                        android:visibility="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                        android:visibility="@{inspData.sanitaryNapkinsSupplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -580,7 +580,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dimen_10dp"
-                        android:visibility="@{inspData.sanitary_napkins_supplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+                        android:visibility="@{inspData.sanitaryNapkinsSupplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -593,17 +593,17 @@
                                 android:id="@+id/et_sanitary_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/reason"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
-                                android:text="@{inspData.sanitary_napkins_reason}" />
+                                android:text="@{inspData.sanitaryNapkinsReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>-->
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -660,7 +660,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--<LinearLayout
+                <LinearLayout
                     android:id="@+id/ll_notes_supplied"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -702,17 +702,17 @@
                                 android:id="@+id/rb_yes_notes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.notes.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/good" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_notes"
                                 android:layout_width="wrap_content"
-                                android:clickable="false"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.notes.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/bad" />
 
@@ -742,13 +742,13 @@
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
-                                android:text="@{inspData.notes_reason}" />
+                                android:text="@{inspData.notesReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
-                </LinearLayout>-->
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -813,7 +813,7 @@
                             </RadioGroup>
                         </LinearLayout>
 
-                        <!--<LinearLayout
+                        <LinearLayout
                             android:id="@+id/ll_cosmetics_upto_month"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -854,7 +854,7 @@
                                         android:imeOptions="actionNext"
                                         android:paddingLeft="@dimen/dimen_30dp"
                                         android:singleLine="true"
-                                        android:text="@{inspData.cosmetic_distributed_upto_month}" />
+                                        android:text="@{inspData.cosmeticDistributedUptoMonth}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -884,11 +884,11 @@
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@{inspData.cosmetic_reason}" />
+                                    android:text="@{inspData.cosmeticReason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-                        </LinearLayout>-->
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -927,9 +927,9 @@
                                 android:id="@+id/et_pair_of_dress_distributed"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/entitlements_dress_distributed"
                                 android:imeOptions="actionNext"
-                                android:focusableInTouchMode="false"
                                 android:inputType="number"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
@@ -981,19 +981,19 @@
 
                             <RadioButton
                                 android:id="@+id/rb_yes_entitlements_uniforms"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.uniformsProvidedQuality.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_entitlements_uniforms"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.uniformsProvidedQuality.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1042,19 +1042,19 @@
 
                             <RadioButton
                                 android:id="@+id/rb_yes_haircut"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.hairCutComplted.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_haircut"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.hairCutComplted.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 

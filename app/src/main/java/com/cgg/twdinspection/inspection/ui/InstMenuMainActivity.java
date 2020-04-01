@@ -134,10 +134,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         desLat = sharedPreferences.getString(AppConstants.LAT, "");
         desLng = sharedPreferences.getString(AppConstants.LNG, "");
 
-        if(TextUtils.isEmpty(instId)){
+        if (TextUtils.isEmpty(instId)) {
             Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
+                    getResources().getString(R.string.app_name),
+                    getString(R.string.ses_expire_re), instMainViewModel);
         }
 
         LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
@@ -332,12 +332,12 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
             body9 = MultipartBody.Part.createFormData("image", file_tds.getName(), requestFile9);
         }
-        MultipartBody.Part body10 =null;
+        MultipartBody.Part body10 = null;
         if (file_menu != null && !file_menu.getPath().equalsIgnoreCase("null")) {
             RequestBody requestFile10 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_menu);
 
-            body10=   MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
+            body10 = MultipartBody.Part.createFormData("image", file_menu.getName(), requestFile10);
         }
 
         RequestBody requestFile11 =
@@ -645,7 +645,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mGpsSwitchStateReceiver);
-        if ( customProgressDialog!=null && customProgressDialog.isShowing() ){
+        if (customProgressDialog != null && customProgressDialog.isShowing()) {
             customProgressDialog.dismiss();
         }
     }
@@ -724,6 +724,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     @Override
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
         customProgressDialog.hide();
+
+        String randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
+
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             instSubmitRequest.setOfficer_id(officer_id);
             instSubmitRequest.setInstitute_id(instId);
@@ -736,6 +739,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             instSubmitRequest.setDist_name(distName);
             instSubmitRequest.setMandal_name(mandalName);
             instSubmitRequest.setVillage_name(villageName);
+            instSubmitRequest.setPhoto_key_id(randomNo);
+            
             submitFlag = true;
 
             customProgressDialog.show();

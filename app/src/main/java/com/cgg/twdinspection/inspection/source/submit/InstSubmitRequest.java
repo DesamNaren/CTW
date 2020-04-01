@@ -35,6 +35,8 @@ public class InstSubmitRequest {
 
     private String village_name;
 
+    private String photo_key_id;
+
     public String getInstitute_name() {
         return institute_name;
     }
@@ -65,6 +67,14 @@ public class InstSubmitRequest {
 
     public void setVillage_name(String village_name) {
         this.village_name = village_name;
+    }
+
+    public String getPhoto_key_id() {
+        return photo_key_id;
+    }
+
+    public void setPhoto_key_id(String photo_key_id) {
+        this.photo_key_id = photo_key_id;
     }
 
     GeneralInfoEntity general_info;

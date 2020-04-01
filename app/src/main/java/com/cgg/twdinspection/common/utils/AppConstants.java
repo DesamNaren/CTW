@@ -3,6 +3,7 @@ package com.cgg.twdinspection.common.utils;
 public class AppConstants {
     public static final String SHARED_PREF = "TWD_PREFERENCES";
 
+    public static final String RANDOM_NO = "RANDOM_NO";
     public static final String LAT = "LAT";
     public static final String LNG = "LNG";
     public static final String ADDRESS = "ADDRESS";

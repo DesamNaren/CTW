@@ -7,6 +7,9 @@ public class Entitlements {
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
+    @SerializedName("notes_reason")
+    @Expose
+    private String notesReason;
     @SerializedName("carpets")
     @Expose
     private String carpets;
@@ -16,6 +19,9 @@ public class Entitlements {
     @SerializedName("hair_cut_complted")
     @Expose
     private String hairCutComplted;
+    @SerializedName("notes")
+    @Expose
+    private String notes;
     @SerializedName("last_haircut_date")
     @Expose
     private String lastHaircutDate;
@@ -37,9 +43,21 @@ public class Entitlements {
     @SerializedName("institute_id")
     @Expose
     private String instituteId;
+    @SerializedName("sanitary_napkins_supplied")
+    @Expose
+    private String sanitaryNapkinsSupplied;
+    @SerializedName("cosmetic_distributed_upto_month")
+    @Expose
+    private String cosmeticDistributedUptoMonth;
     @SerializedName("officer_id")
     @Expose
     private String officerId;
+    @SerializedName("sanitary_napkins_reason")
+    @Expose
+    private String sanitaryNapkinsReason;
+    @SerializedName("cosmetic_reason")
+    @Expose
+    private String cosmeticReason;
     @SerializedName("bedSheets")
     @Expose
     private String bedSheets;
@@ -67,6 +85,14 @@ public class Entitlements {
         this.inspectionTime = inspectionTime;
     }
 
+    public String getNotesReason() {
+        return notesReason;
+    }
+
+    public void setNotesReason(String notesReason) {
+        this.notesReason = notesReason;
+    }
+
     public String getCarpets() {
         return carpets;
     }
@@ -89,6 +115,14 @@ public class Entitlements {
 
     public void setHairCutComplted(String hairCutComplted) {
         this.hairCutComplted = hairCutComplted;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getLastHaircutDate() {
@@ -147,12 +181,44 @@ public class Entitlements {
         this.instituteId = instituteId;
     }
 
+    public String getSanitaryNapkinsSupplied() {
+        return sanitaryNapkinsSupplied;
+    }
+
+    public void setSanitaryNapkinsSupplied(String sanitaryNapkinsSupplied) {
+        this.sanitaryNapkinsSupplied = sanitaryNapkinsSupplied;
+    }
+
+    public String getCosmeticDistributedUptoMonth() {
+        return cosmeticDistributedUptoMonth;
+    }
+
+    public void setCosmeticDistributedUptoMonth(String cosmeticDistributedUptoMonth) {
+        this.cosmeticDistributedUptoMonth = cosmeticDistributedUptoMonth;
+    }
+
     public String getOfficerId() {
         return officerId;
     }
 
     public void setOfficerId(String officerId) {
         this.officerId = officerId;
+    }
+
+    public String getSanitaryNapkinsReason() {
+        return sanitaryNapkinsReason;
+    }
+
+    public void setSanitaryNapkinsReason(String sanitaryNapkinsReason) {
+        this.sanitaryNapkinsReason = sanitaryNapkinsReason;
+    }
+
+    public String getCosmeticReason() {
+        return cosmeticReason;
+    }
+
+    public void setCosmeticReason(String cosmeticReason) {
+        this.cosmeticReason = cosmeticReason;
     }
 
     public String getBedSheets() {

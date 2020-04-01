@@ -36,7 +36,6 @@
             android:background="@color/grey_light">
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,8 +90,8 @@
                                 android:id="@+id/big_school_name_board_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.bigSchoolNameBoard.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -156,8 +155,8 @@
                                     android:id="@+id/drinking_water_facility_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.drinkingWaterFacility.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -189,8 +188,8 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:clickable="false"
                                         android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`RO Plant`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/ro_plant" />
 
@@ -198,9 +197,9 @@
                                         android:id="@+id/drinking_water_source_open_well"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:layout_weight="1"
                                         android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Open well`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/open_well" />
 
@@ -208,9 +207,9 @@
                                         android:id="@+id/drinking_water_source_bore_well"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:layout_weight="1"
                                         android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Bore well`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/bore_well" />
 
@@ -218,9 +217,9 @@
                                         android:id="@+id/drinking_water_source_municipal"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:layout_weight="1"
                                         android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Municipal / GP Tap`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/municipal" />
 
@@ -229,9 +228,9 @@
                                         android:id="@+id/drinking_water_source_hand_pump"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:layout_weight="1"
                                         android:checked="@{inspData.drinkingWaterSource.equalsIgnoreCase(`Hand pump`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/hand_pump" />
 
@@ -292,8 +291,8 @@
                                     android:id="@+id/ro_plant_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.roPlantWoking.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -301,8 +300,8 @@
                                     android:id="@+id/ro_plant_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.roPlantWoking.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -351,8 +350,8 @@
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/enter_reason"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/enter_reason"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
                                     android:text="@{inspData.roPlantReason}" />
@@ -411,9 +410,9 @@
                                 <RadioButton
                                     android:id="@+id/running_water_facility_yes"
                                     android:layout_width="wrap_content"
-                                    android:clickable="false"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.runningWaterFacility.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -421,8 +420,8 @@
                                     android:id="@+id/running_water_facility_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.runningWaterFacility.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -455,9 +454,9 @@
                                     android:id="@+id/runningWater_source_open_well"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.runningWaterSource.equalsIgnoreCase(`Open well`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/open_well" />
 
@@ -465,9 +464,9 @@
                                     android:id="@+id/runningWater_source_bore_well"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.runningWaterSource.equalsIgnoreCase(`Bore well`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/bore_well" />
 
@@ -475,9 +474,9 @@
                                     android:id="@+id/runningWater_source_municipal"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.runningWaterSource.equalsIgnoreCase(`Municipal / GP Tap`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/municipal" />
 
@@ -486,9 +485,9 @@
                                     android:id="@+id/runningWater_source_hand_pump"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.runningWaterSource.equalsIgnoreCase(`Hand pump`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/hand_pump" />
 
@@ -547,8 +546,8 @@
                                     android:id="@+id/is_inverter_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.inverterAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -556,8 +555,8 @@
                                     android:id="@+id/is_inverter_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.inverterAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -590,8 +589,8 @@
                                     android:id="@+id/inverter_working_status_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.inverterWorkingStatus.equalsIgnoreCase(`Good`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/good" />
 
@@ -599,8 +598,8 @@
                                     android:id="@+id/inverter_working_status_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.inverterWorkingStatus.equalsIgnoreCase(`Bad`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/bad" />
 
@@ -657,8 +656,8 @@
                                     android:id="@+id/electricity_wiring_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.electricityWiring.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -666,8 +665,8 @@
                                     android:id="@+id/electricity_wiring_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.electricityWiring.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -722,8 +721,8 @@
                                     android:id="@+id/enough_fans_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.enoughFans.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -731,8 +730,8 @@
                                     android:id="@+id/enough_fans_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.enoughFans.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -771,8 +770,8 @@
                                         android:id="@+id/et_ceiling_fans_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/working"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/working"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -793,8 +792,8 @@
                                         android:id="@+id/et_ceiling_fans_non_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/non_working"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/non_working"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -815,8 +814,8 @@
                                         android:id="@+id/et_ceiling_fans_required"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/required"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/required"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -861,8 +860,8 @@
                                         android:id="@+id/et_wall_mounted_fans_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/working"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/working"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -883,8 +882,8 @@
                                         android:id="@+id/et_wall_mounted_fans_non_working"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/non_working"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/non_working"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -905,8 +904,8 @@
                                         android:id="@+id/et_wall_mounted_fans_required"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/required"
                                         android:focusableInTouchMode="false"
+                                        android:hint="@string/required"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
                                         android:singleLine="true"
@@ -969,8 +968,8 @@
                                     android:id="@+id/dining_hall_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -978,8 +977,8 @@
                                     android:id="@+id/dining_hall_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.dininghallAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1012,8 +1011,8 @@
                                     android:id="@+id/dininghall_used_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.dininghallUsed.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1021,8 +1020,8 @@
                                     android:id="@+id/dininghall_used_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.dininghallUsed.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1055,8 +1054,8 @@
                                     android:id="@+id/separate_kitchen_room_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1064,8 +1063,8 @@
                                     android:id="@+id/separate_kitchen_room_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1097,8 +1096,8 @@
                                     android:id="@+id/construct_kitchen_room_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1106,8 +1105,8 @@
                                     android:id="@+id/construct_kitchen_room_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.constructKitchenRoom.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1140,8 +1139,8 @@
                                     android:id="@+id/is_it_in_good_condition_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.kitchenGoodCondition.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1149,8 +1148,8 @@
                                     android:id="@+id/is_it_in_good_condition_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.kitchenGoodCondition.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1176,8 +1175,8 @@
                                     android:id="@+id/et_repair_required"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/kitchen_repair_required"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/kitchen_repair_required"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:singleLine="true"
@@ -1222,8 +1221,8 @@
                             android:id="@+id/et_how_many_buildings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/how_many_buildings"
                             android:focusableInTouchMode="false"
+                            android:hint="@string/how_many_buildings"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:singleLine="true"
@@ -1275,8 +1274,8 @@
                                 android:id="@+id/transformer_available_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.transformerAvailable.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1284,8 +1283,8 @@
                                 android:id="@+id/transformer_available_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.transformerAvailable.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1339,8 +1338,8 @@
                                 android:id="@+id/single_phase"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.powerConnectionType.equalsIgnoreCase(`Single Phase`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/single_phase" />
 
@@ -1348,8 +1347,8 @@
                                 android:id="@+id/three_phase"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.powerConnectionType.equalsIgnoreCase(`3 Phase`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/three_phase" />
 
@@ -1403,8 +1402,8 @@
                                 android:id="@+id/individual_connection_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.individualConnection.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1412,8 +1411,8 @@
                                 android:id="@+id/individual_connection_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.individualConnection.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1468,9 +1467,9 @@
                                 android:id="@+id/road_required_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.roadRequired.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1478,9 +1477,9 @@
                                 android:id="@+id/road_required_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.roadRequired.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1533,9 +1532,9 @@
                                 android:id="@+id/compWall_required_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.compWallRequired.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1543,9 +1542,9 @@
                                 android:id="@+id/compWall_required_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.compWallRequired.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
                         </RadioGroup>
@@ -1594,8 +1593,8 @@
                                 android:id="@+id/cc_cameras_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.ccCameras.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1603,8 +1602,8 @@
                                 android:id="@+id/cc_cameras_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.ccCameras.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1654,8 +1653,8 @@
                                 android:id="@+id/steam_cooking_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.steamCooking.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1663,8 +1662,8 @@
                                 android:id="@+id/steam_cooking_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.steamCooking.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1714,8 +1713,8 @@
                                 android:id="@+id/bunker_beds_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.ccCameras.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1723,8 +1722,8 @@
                                 android:id="@+id/bunker_beds_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.ccCameras.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1774,9 +1773,9 @@
                                 android:id="@+id/gate_required_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.gateRequired.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1785,8 +1784,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.gateRequired.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1838,8 +1837,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.pathwayRequired.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1848,8 +1847,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.pathwayRequired.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1903,8 +1902,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.sumpRequired.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -1913,8 +1912,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.sumpRequired.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -1971,8 +1970,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:clickable="false"
                                     android:checked="@{inspData.sewageAllowed.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1981,8 +1980,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:clickable="false"
                                     android:checked="@{inspData.sewageAllowed.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2016,8 +2015,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:checked="@{inspData.sewageRaiseRequest.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
-                                    android:checked="@{inspData.sewageAllowed.equalsIgnoreCase(`Yes`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -2026,8 +2025,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:checked="@{inspData.sewageRaiseRequest.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
-                                    android:checked="@{inspData.sewageAllowed.equalsIgnoreCase(`No`)}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2082,8 +2081,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.drainageFunctioning.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
@@ -2092,8 +2091,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:clickable="false"
                                 android:checked="@{inspData.drainageFunctioning.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -2152,8 +2151,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:clickable="false"
                                     android:checked="@{inspData.heaterAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -2162,8 +2161,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:clickable="false"
                                     android:checked="@{inspData.heaterAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
                             </RadioGroup>
@@ -2194,21 +2193,21 @@
 
                                 <RadioButton
                                     android:id="@+id/heater_workingStatus_yes"
-                                    android:clickable="false"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.heaterWorkingStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/heater_workingStatus_no"
-                                    android:clickable="false"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:checked="@{inspData.heaterWorkingStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -2253,8 +2252,8 @@
                                 android:id="@+id/et_total_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/repairs_to_toilets"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_to_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2274,8 +2273,8 @@
                                 android:id="@+id/et_total_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/no_of_bath_rooms"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_bath_rooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2325,8 +2324,8 @@
                                 android:id="@+id/et_functioning_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/no_of_functioning_toilets"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_functioning_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2346,8 +2345,8 @@
                                 android:id="@+id/et_funtioning_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/no_of_functioning_bathrooms"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_functioning_bathrooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2367,8 +2366,8 @@
                                 android:id="@+id/et_required_toilets"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/repairs_required_to_toilets"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_required_to_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2388,8 +2387,8 @@
                                 android:id="@+id/et_required_bathrooms"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/repairs_required_to_bathrooms"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_required_to_bathrooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:singleLine="true"
@@ -2423,11 +2422,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                      <!--  <LinearLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="@{inspData.add_req.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+                            android:visibility="@{inspData.addReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -2446,29 +2445,29 @@
                                     android:id="@+id/add_req_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                      android:clickable="false"
-                                     android:checked="@{inspData.add_req.equalsIgnoreCase(`Yes`)}"
+                                    android:checked="@{inspData.addReq.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
                                     android:id="@+id/add_req_no"
                                     android:layout_width="wrap_content"
-                                       android:clickable="false"
-                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.add_req.equalsIgnoreCase(`No`)}"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.addReq.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
                             </RadioGroup>
-                        </LinearLayout>-->
+                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/ll_add_req"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.addReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/add_class_layout"
@@ -2478,13 +2477,12 @@
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
-
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/add_class_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/cls_count"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/cls_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true"
@@ -2506,8 +2504,8 @@
                                     android:id="@+id/add_din_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/din_count"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/din_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true"
@@ -2523,14 +2521,13 @@
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 app:errorEnabled="true">
 
-
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
 
                                     android:id="@+id/add_dom_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/dor_count"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/dor_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true"
@@ -2552,9 +2549,9 @@
                                     android:id="@+id/add_toilets_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/toilets_count"
                                     android:imeOptions="actionDone"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.addToiletsRequiredCnt}" />
@@ -2575,8 +2572,8 @@
                                     android:id="@+id/add_bathrooms_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/bathrooms_count"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/bathrooms_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:singleLine="true"
@@ -2633,17 +2630,17 @@
                                 android:id="@+id/repairs_to_door_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.doorWindowRepairs.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/repairs_to_door_no"
-                                android:clickable="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.doorWindowRepairs.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
 
@@ -2694,8 +2691,8 @@
                                 android:id="@+id/painting_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.painting.equalsIgnoreCase(`Good`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/good" />
 
@@ -2703,8 +2700,8 @@
                                 android:id="@+id/painting_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
                                 android:checked="@{inspData.painting.equalsIgnoreCase(`Bad`)}"
+                                android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/bad" />
 
