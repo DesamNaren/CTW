@@ -47,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -235,8 +236,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 } else if (((benDetailsBinding.rgEntitlementsProvidedToStudents.getCheckedRadioButtonId() == R.id.rb_yes_entitlements_provided_to_students
                         && beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded")) ||
                         ((benDetailsBinding.rgEntitlementsProvidedToStudents.getCheckedRadioButtonId() == R.id.rb_no_entitlements_provided_to_students)
-                                && ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded but UC not uploaded"))) ||
-                                ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Unit grounded but defunct")))))
+                                && (((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded but UC not uploaded"))) ||
+                                ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Unit grounded but defunct"))))))
                         && imgflag1 == 0 && imgflag2 == 0) {
                     Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
@@ -327,7 +328,10 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + ".png";
+            String randomNo=getRandomNumberString();
+            String deviceId=Utils.getDeviceID(BenDetailsActivity.this);
+            String versionNo=Utils.getVersionName(BenDetailsActivity.this);
+            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + "~" +deviceId + "~" +versionNo + "~" +randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -335,6 +339,14 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
 
         return mediaFile;
+    }
+    public String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 
     private File getOutputMediaFile2(int type) {
@@ -462,6 +474,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)
         &&imgflag1 == 1 && imgflag2 == 1) {
+
+            callSnackBar("Data inserted sucessfully.Uploading photos...");
 
             String inspection_id = schemeSubmitResponse.getInspection_id();
             FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;

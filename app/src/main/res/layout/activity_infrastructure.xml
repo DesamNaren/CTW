@@ -765,7 +765,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/non_working"
-                                        android:imeOptions="actionDone"
+                                        android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true"
                                         android:text="@{inspData.ceilingfans_nonworking}" />
@@ -786,7 +786,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/required"
-                                        android:imeOptions="actionDone"
+                                        android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true"
                                         android:text="@{inspData.ceilingfans_required}" />
@@ -852,7 +852,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="@string/non_working"
-                                        android:imeOptions="actionDone"
+                                        android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:singleLine="true"
                                         android:text="@{inspData.mountedfans_nonworking}" />
@@ -2401,7 +2401,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/cls_count"
-                                    android:imeOptions="actionDone"
+                                    android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_class_required_cnt}" />
@@ -2423,7 +2423,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/din_count"
-                                    android:imeOptions="actionDone"
+                                    android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_dining_required_cnt}" />
@@ -2445,7 +2445,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/dor_count"
-                                    android:imeOptions="actionDone"
+                                    android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_dormitory_required_cnt}" />
@@ -2467,7 +2467,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/toilets_count"
-                                    android:imeOptions="actionDone"
+                                    android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_toilets_required_cnt}" />

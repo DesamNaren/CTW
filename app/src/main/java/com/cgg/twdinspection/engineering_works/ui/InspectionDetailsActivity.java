@@ -78,18 +78,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             e.printStackTrace();
         }
 
-        majorStages=new ArrayList<>();
-        majorStages.add("Not Started");
-        majorStages.add("Tender stage");
-        majorStages.add("Grounded");
-        majorStages.add("In progress");
-        majorStages.add("Work Stopped");
-        majorStages.add("Completed");
-        tempMajorStages=new ArrayList<>();
-        tempMajorStages.add("Select");
-        tempMajorStages.addAll(majorStages);
-        majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
-        binding.spStage.setAdapter(majorStagesAdapter);
+
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
@@ -117,33 +106,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                 }
             }
         });
-        binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                int selPos=0;
-                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
-                    selStageName = "";
-                } else {
-                    selStageName = binding.spStage.getSelectedItem().toString();
-                    tempMajorStages.clear();
-                    for(int z=0;z<majorStages.size();z++){
-                        if(majorStages.get(z).equalsIgnoreCase(selStageName)){
-                            selPos=z;
-                        }
-                    }
-                    for(int z=0;z<majorStages.size();z++){
-                        if(z>=selPos){
-                            tempMajorStages.add(majorStages.get(z));
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
@@ -168,6 +131,49 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
                         }
                     });
                 }
+            }
+        });
+
+        majorStages=new ArrayList<>();
+        majorStages.add("Not Started");
+        majorStages.add("Tender stage");
+        majorStages.add("Grounded");
+        majorStages.add("In progress");
+        majorStages.add("Work Stopped");
+        majorStages.add("Completed");
+        tempMajorStages=new ArrayList<>();
+        tempMajorStages.add("Select");
+        tempMajorStages.addAll(majorStages);
+        majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
+        binding.spStage.setAdapter(majorStagesAdapter);
+
+        binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                int selPos=0;
+                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                    selStageName = "";
+                } else {
+                    selStageName = binding.spStage.getSelectedItem().toString();
+                    tempMajorStages.clear();
+                    for(int z=0;z<majorStages.size();z++){
+                        if(majorStages.get(z).equalsIgnoreCase(selStageName)){
+                            selPos=z;
+                            break;
+                        }
+                    }
+                    for(int z=0;z<majorStages.size();z++){
+                        if(z>=selPos){
+                            tempMajorStages.add(majorStages.get(z));
+                        }
+                    }
+                    binding.spStage.setAdapter(majorStagesAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
