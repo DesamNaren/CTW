@@ -750,6 +750,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             instSubmitRequest.setMandal_name(mandalName);
             instSubmitRequest.setVillage_name(villageName);
             instSubmitRequest.setPhoto_key_id(randomNo);
+            instSubmitRequest.setDevice_Id(Utils.getDeviceID(this));
+            instSubmitRequest.setVersion_No(Utils.getVersionName(this));
 
             submitFlag = true;
 

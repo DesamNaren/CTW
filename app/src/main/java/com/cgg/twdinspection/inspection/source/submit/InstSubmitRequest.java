@@ -11,6 +11,8 @@ import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -36,6 +38,27 @@ public class InstSubmitRequest {
     private String village_name;
 
     private String photo_key_id;
+
+    private String Device_Id;
+
+    private String Version_No;
+
+
+    public String getDevice_Id() {
+        return Device_Id;
+    }
+
+    public void setDevice_Id(String device_Id) {
+        Device_Id = device_Id;
+    }
+
+    public String getVersion_No() {
+        return Version_No;
+    }
+
+    public void setVersion_No(String version_No) {
+        Version_No = version_No;
+    }
 
     public String getInstitute_name() {
         return institute_name;

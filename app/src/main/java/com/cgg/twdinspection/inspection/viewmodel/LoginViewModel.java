@@ -90,7 +90,8 @@ public class LoginViewModel extends ViewModel {
             binding.btnLogin.setVisibility(View.GONE);
             customProgressDialog.show();
             TWDService twdService = TWDService.Factory.create("school");
-            twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<LoginResponse>() {
+            twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), Utils.getDeviceID(context), Utils.getVersionName(context))
+                    .enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
                     customProgressDialog.dismiss();

@@ -59,7 +59,40 @@ public class SplashActivity extends AppCompatActivity {
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
-                                    //place handler logic here with 0 ms
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                int permissionCheck1 = ContextCompat.checkSelfPermission(
+                                                        SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+                                                int permissionCheck2 = ContextCompat.checkSelfPermission(
+                                                        SplashActivity.this, Manifest.permission.CAMERA);
+                                                int permissionCheck3 = ContextCompat.checkSelfPermission(
+                                                        SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                                                int permissionCheck4 = ContextCompat.checkSelfPermission(
+                                                        SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
+
+
+                                                if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
+                                                        && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
+                                                        && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)
+                                                        && (permissionCheck4 != PackageManager.PERMISSION_GRANTED)) {
+
+                                                    customBinding = DataBindingUtil.setContentView(SplashActivity.this,
+                                                            R.layout.custom_layout_for_permissions);
+                                                    customBinding.accept.setOnClickListener(onBtnClick);
+                                                    customBinding.declined.setOnClickListener(onBtnClick);
+                                                }  else {
+                                                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                                                    finish();
+
+                                                }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }, 1000);
+
                                 }else if (versionResponse.getStatusMessage() != null) {
                                     Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());
                                 }else{
@@ -86,39 +119,6 @@ public class SplashActivity extends AppCompatActivity {
             Utils.customErrorAlert(SplashActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int permissionCheck1 = ContextCompat.checkSelfPermission(
-                            SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
-                    int permissionCheck2 = ContextCompat.checkSelfPermission(
-                            SplashActivity.this, Manifest.permission.CAMERA);
-                    int permissionCheck3 = ContextCompat.checkSelfPermission(
-                            SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    int permissionCheck4 = ContextCompat.checkSelfPermission(
-                            SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
-
-
-                    if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
-                            && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
-                            && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)
-                            && (permissionCheck4 != PackageManager.PERMISSION_GRANTED)) {
-
-                        customBinding = DataBindingUtil.setContentView(SplashActivity.this,
-                                R.layout.custom_layout_for_permissions);
-                        customBinding.accept.setOnClickListener(onBtnClick);
-                        customBinding.declined.setOnClickListener(onBtnClick);
-                    }  else {
-                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                        finish();
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 2000);
     }
 
     View.OnClickListener onBtnClick = new View.OnClickListener() {
@@ -166,7 +166,7 @@ public class SplashActivity extends AppCompatActivity {
                                     finish();
 
                             }
-                        }, 2000);
+                        }, 1000);
                     } else {
                         customAlert();
                     }
