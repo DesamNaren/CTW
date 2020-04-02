@@ -228,9 +228,6 @@
             android:name="com.cgg.twdinspection.schemes.reports.ui.SchemeReportDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cgg.twdinspection.inspection.reports.ui.ReportAcademicGradeActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.cgg.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity"
             android:screenOrientation="portrait" />
         <activity

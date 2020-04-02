@@ -27,6 +27,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -41,8 +48,8 @@ android {
 
     buildTypes {
         release {
-            buildConfigField("String", "SERVER_URL", "\"http://qa2.cgg.gov.in/InspectionAppServices/\"")
-            buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
+            buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
+            buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
             signingConfig signingConfigs.release
             minifyEnabled false

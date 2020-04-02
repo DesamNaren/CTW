@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -24,17 +25,20 @@ import androidx.lifecycle.Observer;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySplashBinding;
+import com.cgg.twdinspection.databinding.ActivitySplashBindingImpl;
 import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.inspection.viewmodel.SplashViewModel;
+import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
     private static final int REQUEST_PERMISSION_CODE = 2000;
     private CustomLayoutForPermissionsBinding customBinding;
@@ -222,6 +226,13 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        Snackbar.make(binding.cl, errMsg, Snackbar.LENGTH_SHORT).show();
+    }
 
 }
 
