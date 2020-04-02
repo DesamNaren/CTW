@@ -234,8 +234,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 } else if (((benDetailsBinding.rgEntitlementsProvidedToStudents.getCheckedRadioButtonId() == R.id.rb_yes_entitlements_provided_to_students
                         && beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded")) ||
                         ((benDetailsBinding.rgEntitlementsProvidedToStudents.getCheckedRadioButtonId() == R.id.rb_no_entitlements_provided_to_students)
-                                && ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded but UC not uploaded"))) ||
-                                ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Unit grounded but defunct")))))
+                                && (((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Grounded but UC not uploaded"))) ||
+                                ((beneficiaryDetail.getStatusValue().equalsIgnoreCase("Unit grounded but defunct"))))))
                         && imgflag1 == 0 && imgflag2 == 0) {
                     Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
@@ -460,6 +460,8 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)
         &&imgflag1 == 1 && imgflag2 == 1) {
+
+            callSnackBar("Data inserted sucessfully.Uploading photos...");
 
             String inspection_id = schemeSubmitResponse.getInspection_id();
             FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME + "/" + PIC_NAME;
