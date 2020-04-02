@@ -9,18 +9,28 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
+import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivitySplashBinding;
 import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
+import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
+import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
+import com.cgg.twdinspection.inspection.viewmodel.SplashViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,12 +39,52 @@ public class SplashActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 2000;
     private CustomLayoutForPermissionsBinding customBinding;
     private Context context;
+    private SplashViewModel splashViewModel;
+    private String appVersion;
+    private ActivitySplashBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         context = SplashActivity.this;
+        appVersion = Utils.getVersionName(this);
+        splashViewModel = new SplashViewModel(this, getApplication());
+
+        if(Utils.checkInternetConnection(this)){
+            splashViewModel.getCurrentVersion().observe(this, new Observer<VersionResponse>() {
+                @Override
+                public void onChanged(VersionResponse versionResponse) {
+                    if(versionResponse!=null) {
+                        if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                            if (appVersion != null) {
+                                if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
+                                    //place handler logic here with 0 ms
+                                }else if (versionResponse.getStatusMessage() != null) {
+                                    Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());
+                                }else{
+                                    Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
+                                }
+                            } else {
+                                Toast.makeText(context, getString(R.string.app_ver), Toast.LENGTH_SHORT).show();
+                            }
+                        } else if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                            if(!TextUtils.isEmpty(versionResponse.getStatusMessage())) {
+                                Utils.customErrorAlert(SplashActivity.this, versionResponse.getStatusMessage(), getString(R.string.plz_check_int));
+                            }else{
+                                Snackbar.make(binding.cl, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Snackbar.make(binding.cl, getString(R.string.server_not), Snackbar.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Snackbar.make(binding.cl, getString(R.string.server_not), Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Utils.customErrorAlert(SplashActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

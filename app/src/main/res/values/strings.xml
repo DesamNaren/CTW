@@ -386,6 +386,7 @@
     <string name="no_districts">No districts found</string>
     <string name="no_mandals">No mandals found</string>
     <string name="no_villages">No villages found</string>
+    <string name="no_insts">No institutes data found</string>
     <string name="no_fin_year">No financial years found</string>
     <string name="plz_sel_dis">Please select district</string>
     <string name="plz_sel_man">Please select mandal</string>
@@ -854,5 +855,12 @@
     <string name="national_level">National Level</string>
     <string name="number_of_plants">Number of plants</string>
     <string name="is_the_student_council_displayed">Is the student council displayed</string>
+    <string name="google_play">You don\\\'t have Google Play installed</string>
+    <string name="app_ver">App version from client end is null</string>
+    <string name="update_msg">You have an update. Please update the latest version!</string>
+    <string name="plz_check_int">No network connectivity found, Please check your internet connection</string>
+    <string name="dist_mas_sync">District master synced successfully</string>
+    <string name="ins_mas_syn">Institute master synced successfully</string>
+    <string name="no_ins_rem">No inspection remarks found</string>
 
 </resources>

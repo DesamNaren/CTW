@@ -78,7 +78,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 onBackPressed();
             }
         });
-        binding.btnSchemes.setOnClickListener(new View.OnClickListener() {
+        binding.btnDmv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchemeSyncActivity.this)) {
@@ -89,13 +89,26 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         public void onChanged(SchemeDMVResponse schemeDMVResponse) {
                             schemeDMVReposnse.removeObservers(SchemeSyncActivity.this);
                             SchemeSyncActivity.this.schemeDMVResponse = schemeDMVResponse;
-                            if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
-                                schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
+
+                            if (schemeDMVResponse != null && schemeDMVResponse.getStatusCode() != null) {
+                                if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                                    if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
+                                        schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
+                                    }else{
+                                        Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
+                                    }
+                                } else if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                                    Snackbar.make(binding.root, schemeDMVResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
                             }
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
         });
@@ -115,6 +128,8 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                 if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (financialYearResponse.getFinYears() != null && financialYearResponse.getFinYears().size() > 0) {
                                         schemeSyncRepository.insertFinYears(SchemeSyncActivity.this, financialYearResponse.getFinYears());
+                                    }else{
+                                        Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
                                     }
                                 } else if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, financialYearResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -128,7 +143,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                     });
 
                 } else {
-                    Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -148,6 +163,8 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                 if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
                                         schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
+                                    }else{
+                                        Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
                                     }
                                 } else if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
                                     Snackbar.make(binding.root, inspectionRemarkResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -162,7 +179,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
                 }
             }
 
@@ -183,6 +200,8 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                     if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
                                         schemeResponse.getSchemes().add(0, new SchemeEntity(false, "ALL", "-1"));
                                         schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
+                                    }else{
+                                        Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
                                     }
 
                                 } else if (Integer.valueOf(schemeResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
@@ -196,8 +215,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
-                }
+                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));                }
             }
         });
     }
@@ -237,7 +255,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 Log.i("D_CNT", "distCount: " + cnt);
                 schemeSyncRepository.insertSchemeMandals(SchemeSyncActivity.this, schemeDMVResponse.getMandals());
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No districts found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,7 +269,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                 Log.i("M_CNT", "manCount: " + cnt);
                 schemeSyncRepository.insertSchemeVillages(SchemeSyncActivity.this, schemeDMVResponse.getVillages());
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No mandals found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_mandals));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -268,7 +286,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         "District master synced successfully");
                 // Success Alert;
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No villages found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_villages));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,7 +303,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         "Financial years synced successfully");
                 // Success Alert;
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No financial years found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -302,7 +320,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         "Inspection remarks synced successfully");
                 // Success Alert;
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No inspection remarks found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -319,7 +337,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         "Schemes synced successfully");
                 // Success Alert;
             } else {
-                Utils.customWarningAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), "No schemes found");
+                Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
             }
         } catch (Exception e) {
             e.printStackTrace();

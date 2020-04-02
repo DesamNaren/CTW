@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.cgg.twdinspection.schemes.viewmodel.SchoolSyncViewModel" />
+            type="com.cgg.twdinspection.inspection.viewmodel.SchoolSyncViewModel" />
     </data>
 
     <RelativeLayout

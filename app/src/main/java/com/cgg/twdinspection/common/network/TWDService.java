@@ -8,6 +8,7 @@ import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
+import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
@@ -79,6 +80,10 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/validateLogin")
     Call<LoginResponse> getLoginResponse(@Query("username") String username, @Query("password") String password, @Query("deviceId") String deviceId);
+
+
+    @GET("CTWServiceDetails/getVersionCheck")
+    Call<VersionResponse> getVersionCheck();
 
     @GET("CTWServiceDetails/getSummaryInfo")
     Call<ReportCountsResponse> getReportCounts(@Query("officerId") String username);

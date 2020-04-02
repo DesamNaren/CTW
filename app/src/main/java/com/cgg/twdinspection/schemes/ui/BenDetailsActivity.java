@@ -31,6 +31,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
+import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
@@ -243,7 +244,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                         customProgressDialog.show();
                         submitCall(beneficiaryDetail);
                     } else {
-                        Utils.customWarningAlert(BenDetailsActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                        Utils.customErrorAlert(BenDetailsActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
                     }
                 }
             }

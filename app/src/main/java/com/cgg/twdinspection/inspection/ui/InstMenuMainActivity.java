@@ -137,7 +137,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         randomNo = sharedPreferences.getString(AppConstants.RANDOM_NO, "");
 
         if (randomNo.equalsIgnoreCase("")) {
-            String randomno = getRandomNumberString();
+            String randomno = Utils.getRandomNumberString();
             editor.putString(AppConstants.RANDOM_NO, randomno);
             editor.commit();
         }
@@ -373,6 +373,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             partList.add(body10);
         }
         partList.add(body11);
+
 
         viewModel.UploadImageServiceCall(partList, instSubmitRequest);
     }
@@ -757,7 +758,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
-                Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
             }
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Snackbar.make(binding.appbar.root, schemePhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -771,18 +772,11 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
             callPhotoSubmit(instSubmitRequest);
         } else {
-            Utils.customWarningAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
         }
     }
 
-    public String getRandomNumberString() {
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
-    }
+
 
     public void customFinaSubmitAlert(Activity activity, String title, String msg) {
         try {

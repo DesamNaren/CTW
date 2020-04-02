@@ -16,6 +16,7 @@ import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
 import com.cgg.twdinspection.inspection.source.login.LoginUser;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.inspection.ui.SplashActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
@@ -68,7 +69,7 @@ public class LoginViewModel extends ViewModel {
         if (Utils.checkInternetConnection(context)) {
             callLoginAPI(loginUser);
         }else{
-            Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet");
+            Utils.customErrorAlert(context,context.getResources().getString(R.string.app_name),context.getString(R.string.plz_check_int));
         }
     }
 
@@ -85,24 +86,24 @@ public class LoginViewModel extends ViewModel {
     }
 
     private void callLoginAPI(LoginUser loginUser) {
-        Utils.hideKeyboard(context, binding.btnLogin);
-        binding.btnLogin.setVisibility(View.GONE);
-        customProgressDialog.show();
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
-                customProgressDialog.dismiss();
-                binding.btnLogin.setVisibility(View.VISIBLE);
-                responseMutableLiveData.setValue(response.body());
-            }
+            Utils.hideKeyboard(context, binding.btnLogin);
+            binding.btnLogin.setVisibility(View.GONE);
+            customProgressDialog.show();
+            TWDService twdService = TWDService.Factory.create("school");
+            twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), "").enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
+                    customProgressDialog.dismiss();
+                    binding.btnLogin.setVisibility(View.VISIBLE);
+                    responseMutableLiveData.setValue(response.body());
+                }
 
-            @Override
-            public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
-                customProgressDialog.dismiss();
-                binding.btnLogin.setVisibility(View.VISIBLE);
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
+                @Override
+                public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
+                    customProgressDialog.dismiss();
+                    binding.btnLogin.setVisibility(View.VISIBLE);
+                    errorHandlerInterface.handleError(t, context);
+                }
+            });
     }
 }

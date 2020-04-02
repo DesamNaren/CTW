@@ -105,7 +105,7 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_schemes"
+                            android:id="@+id/btn_dmv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10dp"
