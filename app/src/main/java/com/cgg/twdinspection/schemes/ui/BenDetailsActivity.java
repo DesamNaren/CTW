@@ -331,7 +331,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-                   PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + "~" +deviceId + "~" +versionNo + "~" +randomNo + ".png";
+                   PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTimeFormat() + "~" +deviceId + "~" +versionNo + "~" +randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -360,7 +360,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime()+ "~" +deviceId + "~" +versionNo + "~" +randomNo  + ".png";
+            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTimeFormat()+ "~" +deviceId + "~" +versionNo + "~" +randomNo  + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME2);
         } else {
