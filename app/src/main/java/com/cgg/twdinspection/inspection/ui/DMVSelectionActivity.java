@@ -176,6 +176,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, instNames);
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(adapter);
+                                    }else{
+                                        dmvSelectionActivityBinding.spInstitution.setAdapter(null);
+                                        showSnackBar("No institutes found");
                                     }
                                 }
                             });
