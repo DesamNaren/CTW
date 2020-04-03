@@ -163,7 +163,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         if (str != null) {
                             selectedDistName = dmvSelectionActivityBinding.spDist.getSelectedItem().toString();
                             selectedDistId = Integer.valueOf(str);
-
+                                dmvSelectionActivityBinding.mandal.setText("");
+                                dmvSelectionActivityBinding.village.setText("");
+                                dmvSelectionActivityBinding.address.setText("");
                             viewModel.getInstitutes(selectedDistId).observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
                                 @Override
                                 public void onChanged(List<MasterInstituteInfo> institutesEntities) {
@@ -179,6 +181,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                     }else{
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(null);
                                         showSnackBar("No institutes found");
+
                                     }
                                 }
                             });
@@ -194,6 +197,10 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 dmvSelectionActivityBinding.spInstitution.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
+
+            dmvSelectionActivityBinding.mandal.setText("");
+            dmvSelectionActivityBinding.village.setText("");
+            dmvSelectionActivityBinding.address.setText("");
             customProgressDialog.show();
             if (i != 0) {
                 viewModel.getInstId(dmvSelectionActivityBinding.spInstitution.getSelectedItem().toString()

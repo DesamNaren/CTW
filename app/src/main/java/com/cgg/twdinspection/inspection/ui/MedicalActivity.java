@@ -216,6 +216,8 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     medicalInfoEntity.setScreenedByCallHealth(screened_by_call_health);
                     medicalInfoEntity.setLeftForscreening(left_for_screening);
                     medicalInfoEntity.setRecorded_in_register(recorderedInRegister);
+                    medicalInfoEntity.setSickBoarders(sickboarders);
+                    medicalInfoEntity.setSickBoarders_area(sickboardersArea);
 
                     if (callHealthInfoEntities != null && callHealthInfoEntities.size() > 0) {
                         medicalInfoEntity.setCallHealthInfoEntities(callHealthInfoEntities);
