@@ -897,7 +897,24 @@
     <string name="ent_num_plant">Enter Number of plants</string>
     <string name="sel_stu_ele">Select student council election conducted status</string>
     <string name="sel_stu_name">Select student council name displayed status</string>
-    <string name="ent_reason">Enter reason</string>
     <string name="ent_stu_ele_date">Enter student council date</string>
+    <string name="chk_bed">Check weather bedsheets provided to students</string>
+    <string name="chk_car">Check weather carpets provided to students</string>
+    <string name="chk_uni">Check weather uniforms provided to students</string>
+    <string name="chk_spo">Check weather sportsDress provided to students</string>
+    <string name="chk_sli">Check weather slippers provided to students</string>
+    <string name="chk_night">Check weather nightDress provided to students</string>
+    <string name="chk_sch_bags">Check weather schoolBags provided to students</string>
+    <string name="chk_san">Check weather sanitary napkins provided to students</string>
+    <string name="san_nap_sta">Check weather sanitary napkins are good or bad</string>
+    <string name="chk_notes">Check weather notes Supplied to students</string>
+    <string name="notes_status">Check weather notes are good or bad</string>
+    <string name="chk_com">Check weather cosmetics distributed</string>
+    <string name="chk_cos_month">Check weather cosmetics distributed upto which month</string>
+    <string name="num_pair">Enter no of pair of dress distributed to each student</string>
+    <string name="chk_uniform">Check weather uniforms provided are in good quality</string>
+    <string name="chk_haircut">Check weather haircut is completed</string>
+    <string name="sel_last_hair_cut">Select date of last haircut</string>
+    <string name="ent_reason">Enter reason</string>
 
 </resources>

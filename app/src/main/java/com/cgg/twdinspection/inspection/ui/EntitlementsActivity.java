@@ -39,6 +39,10 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     String instId, officerID;
     private int localFlag = -1;
 
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -308,7 +312,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                         binding.etCosmeticsUptoMonth.setText(checkUpDate);
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
@@ -316,68 +319,85 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     private boolean validate() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(bedSheets)) {
+            ScrollToView(binding.rgBedsheets);
             returnFlag = false;
-            showSnackBar("Check weather bedsheets provided to students");
+            showSnackBar(getString(R.string.chk_bed));
         } else if (TextUtils.isEmpty(carpets)) {
+            ScrollToView(binding.rgCarpets);
             returnFlag = false;
-            showSnackBar("Check weather carpets provided to students");
+            showSnackBar(getString(R.string.chk_car));
         } else if (TextUtils.isEmpty(uniforms)) {
+            ScrollToView(binding.rgUniforms);
             returnFlag = false;
-            showSnackBar("Check weather uniforms provided to students");
+            showSnackBar(getString(R.string.chk_uni));
         } else if (TextUtils.isEmpty(sportsDress)) {
+            ScrollToView(binding.rgSportsDress);
             returnFlag = false;
-            showSnackBar("Check weather sportsDress provided to students");
+            showSnackBar(getString(R.string.chk_spo));
         } else if (TextUtils.isEmpty(slippers)) {
+            ScrollToView(binding.rgSlippers);
             returnFlag = false;
-            showSnackBar("Check weather slippers provided to students");
+            showSnackBar(getString(R.string.chk_sli));
         } else if (TextUtils.isEmpty(nightDress)) {
+            ScrollToView(binding.rgNightDress);
             returnFlag = false;
-            showSnackBar("Check weather nightDress provided to students");
+            showSnackBar(getString(R.string.chk_night));
         } else if (TextUtils.isEmpty(schoolBags)) {
+            ScrollToView(binding.rgSchoolBags);
             returnFlag = false;
-            showSnackBar("Check weather schoolBags provided to students");
+            showSnackBar(getString(R.string.chk_sch_bags));
         } else if (TextUtils.isEmpty(sanitary_napkins_supplied)) {
+            ScrollToView(binding.rgSanitary);
             returnFlag = false;
-            showSnackBar("Check weather sanitary napkins provided to students");
+            showSnackBar(getString(R.string.chk_san));
         } else if (sanitary_napkins_supplied.equalsIgnoreCase("Yes") && TextUtils.isEmpty(sanitaryNapkins)) {
+            ScrollToView(binding.rgSanitaryNapkins);
             returnFlag = false;
-            showSnackBar("Check weather sanitary napkins are good or bad");
+            showSnackBar(getString(R.string.san_nap_sta));
         } else if (sanitary_napkins_supplied.equalsIgnoreCase("No") && TextUtils.isEmpty(sanitary_napkins_reason)) {
+            ScrollToView(binding.rgSanitaryNapkins);
             returnFlag = false;
             binding.etSanitaryReason.requestFocus();
-            showSnackBar("Enter reason");
+            showSnackBar(getString(R.string.ent_reason));
         } else if (TextUtils.isEmpty(notesSupplied)) {
+            ScrollToView(binding.rgNotes);
             returnFlag = false;
-            showSnackBar("Check weather notes Supplied to students");
+            showSnackBar(getString(R.string.chk_notes));
         } else if (notesSupplied.equalsIgnoreCase("Yes") && TextUtils.isEmpty(notes)) {
+            ScrollToView(binding.rgNotesSupplied);
             returnFlag = false;
-            showSnackBar("Check weather notes are good or bad");
+            showSnackBar(getString(R.string.notes_status));
         } else if (notesSupplied.equalsIgnoreCase("No") && TextUtils.isEmpty(notes_reason)) {
             returnFlag = false;
             binding.etNotesReason.requestFocus();
-            showSnackBar("Enter reason");
+            showSnackBar(getString(R.string.ent_reason));
         } else if (TextUtils.isEmpty(cosmetics)) {
             returnFlag = false;
-            showSnackBar("Check weather cosmetics distributed");
+            showSnackBar(getString(R.string.chk_com));
         } else if (cosmetics.equalsIgnoreCase("Yes") && TextUtils.isEmpty(cosmetics_upto_month)) {
+            ScrollToView(binding.rgCosmetics);
             returnFlag = false;
-            showSnackBar("Check weather cosmetics distributed upto which month");
+            showSnackBar(getString(R.string.chk_cos_month));
         } else if (cosmetics.equalsIgnoreCase("No") && TextUtils.isEmpty(cosmetics_reason)) {
             returnFlag = false;
             binding.etCosmeticsReason.requestFocus();
-            showSnackBar("Enter Reason");
+            showSnackBar(getString(R.string.ent_reason));
         } else if (TextUtils.isEmpty(binding.etPairOfDressDistributed.getText().toString())) {
+            binding.etPairOfDressDistributed.requestFocus();
             returnFlag = false;
-            showSnackBar("Enter no of pair of dress distributed to each student");
+            showSnackBar(getString(R.string.num_pair));
         } else if (TextUtils.isEmpty(entitlementsUniforms)) {
+            ScrollToView(binding.rgEntitlementsUniforms);
             returnFlag = false;
-            showSnackBar("Check weather uniforms provided are in good quality");
+            showSnackBar(getString(R.string.chk_uniform));
         } else if (TextUtils.isEmpty(hair_cut_complted)) {
+            ScrollToView(binding.rgHaircut);
             returnFlag = false;
-            showSnackBar("Check weather haircut is completed");
+            showSnackBar(getString(R.string.chk_haircut));
         } else if ((binding.etEntitlementsHaircutDate.getText().toString().equals(getResources().getString(R.string.select_date)))) {
+            ScrollToView(binding.etEntitlementsHaircutDate);
             returnFlag = false;
-            showSnackBar("Select date of last haircut");
+            showSnackBar(getString(R.string.sel_last_hair_cut));
         }
         return returnFlag;
     }
