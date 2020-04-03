@@ -778,107 +778,132 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         }
         if (highest_class_syllabus_completed.equals(AppConstants.No) && TextUtils.isEmpty(plan_syll_comp_prepared)) {
             showSnackBar(getString(R.string.sel_plan));
+            ScrollToView(binding.rgPlanSyllCompPrepared);
             return false;
         }
         if (TextUtils.isEmpty(strength_accomodated_asper_infrastructure)) {
             showSnackBar(getString(R.string.sel_is_strength));
+            ScrollToView(binding.rgStrengthAccomodatedAsperInfrastructure);
             return false;
         }
         if (TextUtils.isEmpty(staff_accomodated_asper_stud_strength)) {
             showSnackBar(getString(R.string.select_does_staff));
+            ScrollToView(binding.rgStaffAccomodatedAsperStudStrength);
             return false;
         }
         if (TextUtils.isEmpty(plan_prepared)) {
+            ScrollToView(binding.rgPlanPrepared);
             showSnackBar(getString(R.string.select_school_plan));
             return false;
         }
         if (TextUtils.isEmpty(textbooks_rec)) {
+            ScrollToView(binding.rgTextbooksRec);
             showSnackBar(getString(R.string.sel_suff_books));
             return false;
         }
         if (TextUtils.isEmpty(assessment_test_conducted)) {
+            ScrollToView(binding.rgAssessmentTestConducted);
             showSnackBar(getString(R.string.sel_assessments));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeA)) {
+            binding.highestClassGradeA.requestFocus();
             showSnackBar(getString(R.string.enter_gradea));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeB)) {
+            binding.highestClassGradeB.requestFocus();
             showSnackBar(getString(R.string.enter_gradeb));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeC)) {
+            binding.highestClassGradeC.requestFocus();
             showSnackBar(getString(R.string.enter_gradec));
             return false;
         }
         if (TextUtils.isEmpty(highestClassGradeTotal)) {
+            binding.highestClassTotal.requestFocus();
             showSnackBar(getString(R.string.enter_total));
             return false;
         }
         if (TextUtils.isEmpty(last_yr_ssc_percent)) {
+            binding.lastYrSscPercentEt.requestFocus();
             showSnackBar(getString(R.string.last_year_ssc));
             return false;
         }
         if (TextUtils.isEmpty(punadi_books_supplied)) {
+            ScrollToView(binding.rgPunadiBooksSupplied);
             showSnackBar(getString(R.string.sel_pun_books));
             return false;
         }
         if (punadi_books_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(sufficient_books_supplied)) {
+            ScrollToView(binding.rgSufficientBooksSupplied);
             showSnackBar(getString(R.string.sel_suff_books_suplied));
             return false;
         }
         if (TextUtils.isEmpty(punadiPrgmConducted)) {
+            ScrollToView(binding.rgPunadiPrgmConducted);
             showSnackBar(getString(R.string.sel_pun2_con));
             return false;
         }
         if (punadiPrgmConducted.equals(AppConstants.No) && TextUtils.isEmpty(punadiPrgmReason)) {
-            showSnackBar("Enter Punadi-2 program Reason");
+            binding.etPunadiPrgmReason.requestFocus();
+            showSnackBar(getString(R.string.punadi_reason));
             return false;
         }
 
         if (TextUtils.isEmpty(punadi2_testmarks_entered)) {
+            ScrollToView(binding.rgPunadi2TestmarksEntered);
             showSnackBar(getString(R.string.sel_punadi2_test_marks));
             return false;
         }
 
         if (punadi2_testmarks_entered.equals(AppConstants.No) && TextUtils.isEmpty(punadi2TestmarksReason)) {
+            binding.etPunadi2TestmarksReason.requestFocus();
             showSnackBar(getString(R.string.enter_punadi2_reason));
             return false;
         }
 
         if (TextUtils.isEmpty(kara_dipath_prgm_cond)) {
+            ScrollToView(binding.rgKaraDipathPrgmCond);
             showSnackBar(getString(R.string.sel_kara));
             return false;
         }
         if (kara_dipath_prgm_cond.equals(AppConstants.No) && TextUtils.isEmpty(kara_dipath_prgm_cond)) {
+            binding.etKaraDipathPrgmCond.requestFocus();
             showSnackBar(getString(R.string.enter_kara_reason));
             return false;
         }
         if (TextUtils.isEmpty(labManuals_received)) {
+            ScrollToView(binding.rgLabManualsReceived);
             showSnackBar(getString(R.string.enter_ssci_lab));
             return false;
         }
         if (labManuals_received.equals(AppConstants.Yes) && TextUtils.isEmpty(properly_using_manuals)) {
+            ScrollToView(binding.rgProperlyUsingLabManuals);
             showSnackBar(getString(R.string.sel_pro_using_sci_lab));
             return false;
         }
         if (TextUtils.isEmpty(labroom_available)) {
+            ScrollToView(binding.rgLabRoomAvailable);
             showSnackBar(getString(R.string.sel_sci_lab_avail));
             return false;
         }
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labInchargeName)) {
+            binding.etLabInchargeName.requestFocus();
             showSnackBar(getString(R.string.name_sci_lab_incharge));
             return false;
         }
 
         if (labroom_available.equals(AppConstants.Yes) && TextUtils.isEmpty(labMobileNo)) {
+            binding.etLabMobileNo.requestFocus();
             showSnackBar(getString(R.string.lab_mob_num));
             return false;
         }
 
 
         if (labroom_available.equals(AppConstants.Yes) && labMobileNo.length() != 10) {
+            binding.etLabMobileNo.requestFocus();
             showSnackBar(getString(R.string.enter_valid_sci_lab_number));
             return false;
         }
@@ -887,37 +912,45 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (labroom_available.equals(AppConstants.Yes)
                 && !(labMobileNo.startsWith("9") || labMobileNo.startsWith("8") || labMobileNo.startsWith("7") ||
                 labMobileNo.startsWith("6"))) {
+            binding.etLabMobileNo.requestFocus();
             showSnackBar(getString(R.string.enter_valid_sci_lab_number));
             return false;
         }
 
 
         if (TextUtils.isEmpty(lab_mat_entered_reg)) {
+            ScrollToView(binding.rgLabMatEnteredReg);
             showSnackBar(getString(R.string.sel_lab_mat_entered));
             return false;
         }
         if (lab_mat_entered_reg.equals(AppConstants.No) && TextUtils.isEmpty(labMatEnteredReason)) {
+            binding.etMatEnterRegReason.requestFocus();
             showSnackBar(getString(R.string.lab_mat_reason));
             return false;
         }
         if ( TextUtils.isEmpty(maint_accession_reg)) {
+            ScrollToView(binding.rgMaintLibReg);
             showSnackBar(getString(R.string.mai_ass_reg));
             return false;
         }
         if (maint_accession_reg.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfBooks)) {
+            binding.etNoOfBooks.requestFocus();
             showSnackBar(getString(R.string.enter_num_of_books));
             return false;
         }
         if (TextUtils.isEmpty(nameLibraryIncharge)) {
+            binding.etNameLibraryIncharge.requestFocus();
             showSnackBar(getString(R.string.library_incharge));
             return false;
         }
         if (TextUtils.isEmpty(libraryMobileNo)) {
+            binding.etLibraryMobileNo.requestFocus();
             showSnackBar(getString(R.string.library_mob_num));
             return false;
         }
 
         if (libraryMobileNo.length() != 10) {
+            binding.etLibraryMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
@@ -926,79 +959,96 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (!TextUtils.isEmpty(libraryMobileNo)
                 && !(libraryMobileNo.startsWith("9") || libraryMobileNo.startsWith("8") || libraryMobileNo.startsWith("7") ||
                 libraryMobileNo.startsWith("6"))) {
+            binding.etLibraryMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_lib_mob_num));
             return false;
         }
 
         if (TextUtils.isEmpty(proper_light_fan)) {
+            ScrollToView(binding.rgProperLightFan);
             showSnackBar(getString(R.string.light_fan_avail));
             return false;
         }
 
         if (TextUtils.isEmpty(big_tv_rot_avail)) {
+            ScrollToView(binding.rgBigTvRotAvail);
             showSnackBar(getString(R.string.big_tv_avail));
             return false;
         }
         if (big_tv_rot_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(TvRotWorkingStatus)) {
+            ScrollToView(binding.rgBigTvRotAvailCon);
             showSnackBar(getString(R.string.big_tv_status));
             return false;
         }
 
         if (TextUtils.isEmpty(mana_tv_lessons_shown)) {
+            ScrollToView(binding.rgManaTvLessonsShown);
             showSnackBar(getString(R.string.mana_tv_lessions));
             return false;
         }
         if (mana_tv_lessons_shown.equals(AppConstants.No) && TextUtils.isEmpty(manaTvLessonsReason)) {
+            binding.etManaTvLessonsReason.requestFocus();
             showSnackBar(getString(R.string.mana_tv_reason));
             return false;
         }
         if (TextUtils.isEmpty(manaTvInchargeName)) {
+            binding.etManaTvInchargeName.requestFocus();
             showSnackBar(getString(R.string.mana_tv_incharge));
             return false;
         }
         if (TextUtils.isEmpty(manaTvMobileNo)) {
+            binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.mana_tv_mob_num));
             return false;
         }
 
         if ( manaTvMobileNo.length() != 10) {
+            binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
         if (!(manaTvMobileNo.startsWith("9") || manaTvMobileNo.startsWith("8") || manaTvMobileNo.startsWith("7") ||
                 manaTvMobileNo.startsWith("6"))) {
+            binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
         }
 
         if (TextUtils.isEmpty(comp_lab_avail)) {
+            ScrollToView(binding.rgCompLabAvail);
             showSnackBar(getString(R.string.com_lab_avail));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfComputersAvailable)) {
+            binding.etNoOfComputersAvailable.requestFocus();
             showSnackBar(getString(R.string.num_of_com));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(compWorkingStatus)) {
+            binding.etCompWorkingStatus.requestFocus();
             showSnackBar(getString(R.string.com_status));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(ict_instr_avail)) {
+            ScrollToView(binding.rgIctInstrAvail);
             showSnackBar(getString(R.string.ict_avail));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(nameIctInstr)) {
+            binding.etNameIctInstr.requestFocus();
             showSnackBar(getString(R.string.ict_name));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(mobNoIctInstr)) {
+            binding.etMobNoIctInstr.requestFocus();
             showSnackBar(getString(R.string.ict_mob));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes) && mobNoIctInstr.length() != 10) {
+            binding.etMobNoIctInstr.requestFocus();
             showSnackBar(getString(R.string.valid_ict_mob));
             return false;
         }
@@ -1006,46 +1056,56 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (comp_lab_avail.equals(AppConstants.Yes) && ict_instr_avail.equals(AppConstants.Yes)
                 && !(mobNoIctInstr.startsWith("9") || mobNoIctInstr.startsWith("8") || mobNoIctInstr.startsWith("7") ||
                 mobNoIctInstr.startsWith("6"))) {
+            binding.etMobNoIctInstr.requestFocus();
             showSnackBar(getString(R.string.valid_ict_mob));
             return false;
         }
 
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(timetable_disp)) {
+            ScrollToView(binding.rgTimetableDisp);
             showSnackBar(getString(R.string.sel_timetable));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(comp_syll_completed)) {
+            ScrollToView(binding.rgCompSyllCompleted);
             showSnackBar(getString(R.string.com_syll_com));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(comp_lab_cond)) {
+            ScrollToView(binding.rgCompLabCond);
             showSnackBar(getString(R.string.com_lab_status));
             return false;
         }
         if (comp_lab_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(digital_content_used)) {
+            ScrollToView(binding.rgDigitalContentUsed);
             showSnackBar(getString(R.string.sel_digital_content));
             return false;
         }
 
         if (TextUtils.isEmpty(eLearning_avail)) {
+            ScrollToView(binding.rgELearningAvail);
             showSnackBar(getString(R.string.eLe_avail));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(showing_stud)) {
+            ScrollToView(binding.rgShowingStud);
             showSnackBar(getString(R.string.sel_sho_stu));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes) && TextUtils.isEmpty(volSchoolCoordName)) {
+            binding.etVolSchoolCoordName.requestFocus();
             showSnackBar(getString(R.string.sch_cor_name));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(volSchoolCoordMobNo)) {
+            binding.etVolSchoolCoordMobNo.requestFocus();
             showSnackBar(getString(R.string.sch_cor_mob));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes) && volSchoolCoordMobNo.length() != 10) {
+            binding.etVolSchoolCoordMobNo.requestFocus();
             showSnackBar(getString(R.string.valid_sch_cor_mob_num));
             return false;
         }
@@ -1053,20 +1113,24 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (eLearning_avail.equals(AppConstants.Yes) && showing_stud.equals(AppConstants.Yes)
                 && !(volSchoolCoordMobNo.startsWith("9") || volSchoolCoordMobNo.startsWith("8") || volSchoolCoordMobNo.startsWith("7") ||
                 volSchoolCoordMobNo.startsWith("6"))) {
+            binding.etVolSchoolCoordMobNo.requestFocus();
             showSnackBar(getString(R.string.valid_sch_cor_mob_num));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(eLearningInchrgName)) {
+            binding.etELearningInchrgName.requestFocus();
             showSnackBar(getString(R.string.eLe_incha_name));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(eLearningInchrgMobileNo)) {
+            binding.etELearningInchrgMobileNo.requestFocus();
             showSnackBar(getString(R.string.eLe_inch_mob));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length() != 10) {
+            binding.etELearningInchrgMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_eLe_inch_mob));
             return false;
         }
@@ -1074,40 +1138,48 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (eLearning_avail.equals(AppConstants.Yes)
                 && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
                 eLearningInchrgMobileNo.startsWith("6"))) {
+            binding.etELearningInchrgMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_eLe_inch_mob));
             return false;
         }
 
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(separate_timetable_disp)) {
+            ScrollToView(binding.rgSeparateTimetableDisp);
             showSnackBar(getString(R.string.sel_sep_timetable));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(tabs_supplied)) {
+            ScrollToView(binding.rgTabsSupplied);
             showSnackBar(getString(R.string.sel_tabs_supplied));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(noOfTabs)) {
+            binding.etNoOfTabs.requestFocus();
             showSnackBar(getString(R.string.num_of_tabs));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(stud_using_as_per_sched)) {
+            ScrollToView(binding.rgStudUsingAsPerSched);
             showSnackBar(getString(R.string.sel_stu_using));
             return false;
         }
 
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(tabInchargeName)) {
+            binding.etTabInchargeName.requestFocus();
             showSnackBar(getString(R.string.tab_incharge));
             return false;
         }
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(tabInchargeMblno)) {
+            binding.etTabInchargeMblno.requestFocus();
             showSnackBar(getString(R.string.tab_mob_num));
             return false;
         }
 
 
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes) && eLearningInchrgMobileNo.length() != 10) {
+            binding.etTabInchargeMblno.requestFocus();
             showSnackBar(getString(R.string.valid_incharge_mob_num));
             return false;
         }
@@ -1115,6 +1187,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (eLearning_avail.equals(AppConstants.Yes) && tabs_supplied.equals(AppConstants.Yes)
                 && !(eLearningInchrgMobileNo.startsWith("9") || eLearningInchrgMobileNo.startsWith("8") || eLearningInchrgMobileNo.startsWith("7") ||
                 eLearningInchrgMobileNo.startsWith("6"))) {
+            binding.etTabInchargeMblno.requestFocus();
             showSnackBar(getString(R.string.valid_incharge_mob_num));
             return false;
         }
@@ -1122,10 +1195,10 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         return true;
     }
 
-    private void ScrollToView(View rgHighestClassSyllabusCompleted) {
-        binding.scrl.scrollTo(0, (int) binding.rgHighestClassSyllabusCompleted.getY());
-
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
     }
+
 
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();

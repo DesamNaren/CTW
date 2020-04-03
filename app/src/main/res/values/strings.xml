@@ -682,8 +682,8 @@
     <string name="sel_sci_lab_avail">Select science lab room is available</string>
     <string name="name_sci_lab">Enter name of the science lab</string>
     <string name="name_sci_lab_incharge">Enter name of the science lab incharge teacher</string>
-    <string name="lab_mob_num">Enter lab mobile number</string>
-    <string name="enter_valid_sci_lab_number">Enter valid lab mobile number</string>
+    <string name="lab_mob_num">Enter lab incharge mobile number</string>
+    <string name="enter_valid_sci_lab_number">Enter valid lab incharge mobile number</string>
     <string name="sel_lab_mat_entered">Select Lab material entered in the stock entry register</string>
     <string name="lab_mat_reason">Enter lab material Reason</string>
     <string name="library_room_avail">Select library room is available</string>
@@ -696,7 +696,7 @@
     <string name="big_tv_status"><![CDATA[Select Big TV & ROT (Receive Only Terminals) Working Status]]></string>
     <string name="mana_tv_lessions">Select MANA TV lessons are shown to students</string>
     <string name="mana_tv_reason">Enter MANA TV reason</string>
-    <string name="mana_tv_incharge">Select MANA TV incharge teacher name</string>
+    <string name="mana_tv_incharge">Enter MANA TV incharge teacher name</string>
     <string name="mana_tv_mob_num">Enter MANA TV mobile number</string>
     <string name="valid_mana_tv_mob_num">Enter valid MANA TV mobile number</string>
     <string name="com_lab_avail">Select computer lab is available</string>
@@ -862,5 +862,6 @@
     <string name="dist_mas_sync">District master synced successfully</string>
     <string name="ins_mas_syn">Institute master synced successfully</string>
     <string name="no_ins_rem">No inspection remarks found</string>
+    <string name="punadi_reason">Enter Punadi-2 program Reason</string>
 
 </resources>
