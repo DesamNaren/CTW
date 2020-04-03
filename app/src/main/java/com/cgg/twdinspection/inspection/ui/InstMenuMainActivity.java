@@ -738,6 +738,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_SHORT).show();
             instSubmitRequest.setOfficer_id(officer_id);
             instSubmitRequest.setInstitute_id(instId);
             instSubmitRequest.setInspection_time(Utils.getCurrentDateTime());
