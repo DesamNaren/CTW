@@ -34,6 +34,11 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     InstMainViewModel instMainViewModel;
     private int localFlag = -1;
 
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -322,74 +327,97 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     private boolean validate() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(admReg)) {
+            ScrollToView(binding.rgAdmReg);
             returnFlag = false;
-            showSnackBar("Check whether admission register is updated");
+            showSnackBar(getString(R.string.reg_adm));
         } else if (TextUtils.isEmpty(attBoaReg)) {
+            ScrollToView(binding.rgAttBoaReg);
             returnFlag = false;
-            showSnackBar("Check whether attendance boarders register is updated");
+            showSnackBar(getString(R.string.reg_att_boarders));
         } else if (TextUtils.isEmpty(boaMovReg)) {
+            ScrollToView(binding.rgBoaMovReg);
             returnFlag = false;
-            showSnackBar("Check whether boarders movement register is updated");
+            showSnackBar(getString(R.string.reg_boarders));
         } else if (TextUtils.isEmpty(dailyPurReg)) {
+            ScrollToView(binding.rgDailyPurReg);
             returnFlag = false;
-            showSnackBar("Check whether daily purchase register is updated");
+            showSnackBar(getString(R.string.reg_daily_pur));
         } else if (TextUtils.isEmpty(cashBook)) {
+            ScrollToView(binding.rgCashBook);
             returnFlag = false;
-            showSnackBar("Check whether cashbook register is updated");
+            showSnackBar(getString(R.string.reg_cash_book));
         } else if (TextUtils.isEmpty(dailyMenuReg)) {
+            ScrollToView(binding.rgDailyMenuReg);
             returnFlag = false;
-            showSnackBar("Check whether daily menu register is updated");
+            showSnackBar(getString(R.string.reg_daily_menu));
         } else if (TextUtils.isEmpty(attStaffReg)) {
+            ScrollToView(binding.rgAttStaffReg);
             returnFlag = false;
-            showSnackBar("Check whether attendance staff register is updated");
+            showSnackBar(getString(R.string.reg_stt_att));
         } else if (TextUtils.isEmpty(staffOrder)) {
+            ScrollToView(binding.rgStaffOrder);
             returnFlag = false;
-            showSnackBar("Check whether staff order register is updated");
+            showSnackBar(getString(R.string.reg_staff));
         } else if (TextUtils.isEmpty(stockIssue)) {
+            ScrollToView(binding.rgStockIssue);
             returnFlag = false;
-            showSnackBar("Check whether stock issue provision register is updated");
+            showSnackBar(getString(R.string.reg_stock));
         } else if (TextUtils.isEmpty(perArticle)) {
+            ScrollToView(binding.rgPerArticle);
             returnFlag = false;
-            showSnackBar("Check whether permanent article register is updated");
+            showSnackBar(getString(R.string.reg_per_art));
         } else if (TextUtils.isEmpty(budWatch)) {
+            ScrollToView(binding.rgBudWatch);
             returnFlag = false;
-            showSnackBar("Check whether budget watch register is updated");
+            showSnackBar(getString(R.string.reg_budget));
         } else if (TextUtils.isEmpty(acqReg)) {
+            ScrollToView(binding.rgAcqReg);
             returnFlag = false;
-            showSnackBar("Check whether acquaintance register is updated");
+            showSnackBar(getString(R.string.reg_acq));
         } else if (TextUtils.isEmpty(acqDress)) {
+            ScrollToView(binding.rgAcqDress);
             returnFlag = false;
-            showSnackBar("Check whether acquaintance dresses notebooks register is updated");
+            showSnackBar(getString(R.string.reg_dress));
         } else if (TextUtils.isEmpty(acqCos)) {
+            ScrollToView(binding.rgAcqCos);
             returnFlag = false;
-            showSnackBar("Check whether acquaintance cosmetics register is updated");
+            showSnackBar(getString(R.string.reg_cos));
         } else if (TextUtils.isEmpty(payBill)) {
+            ScrollToView(binding.rgPayBill);
             returnFlag = false;
-            showSnackBar("Check whether paybill register is updated");
+            showSnackBar(getString(R.string.reg_pay_bill));
         } else if (TextUtils.isEmpty(treReg)) {
+            ScrollToView(binding.rgTreReg);
             returnFlag = false;
-            showSnackBar("Check whether treasury bill register is updated");
+            showSnackBar(getString(R.string.reg_tre_bill));
         } else if (TextUtils.isEmpty(conBill)) {
+            ScrollToView(binding.rgConBill);
             returnFlag = false;
-            showSnackBar("Check whether contingent bill register is updated");
+            showSnackBar(getString(R.string.reg_contigent));
         } else if (TextUtils.isEmpty(dailyMove)) {
+            ScrollToView(binding.rgDailyMove);
             returnFlag = false;
-            showSnackBar("Check whether daily movement register is updated");
+            showSnackBar(getString(R.string.reg_daily_movement));
         } else if (TextUtils.isEmpty(teaMove)) {
+            ScrollToView(binding.rgTeaMove);
             returnFlag = false;
-            showSnackBar("Check whether teacher movement register is updated");
+            showSnackBar(getString(R.string.reg_tea_movement));
         } else if (TextUtils.isEmpty(clAcc)) {
+            ScrollToView(binding.rgClAcc);
             returnFlag = false;
-            showSnackBar("Check whether CL account register is updated");
+            showSnackBar(getString(R.string.reg_cl_acc));
         } else if (TextUtils.isEmpty(parMeet)) {
+            ScrollToView(binding.rgParMeet);
             returnFlag = false;
-            showSnackBar("Check whether parent meeting register is updated");
+            showSnackBar(getString(R.string.reg_par_meet));
         } else if (TextUtils.isEmpty(insReg)) {
+            ScrollToView(binding.rgInsReg);
             returnFlag = false;
-            showSnackBar("Check whether inspection register for departmental officers updated");
+            showSnackBar(getString(R.string.reg_ins));
         } else if (TextUtils.isEmpty(visitBook)) {
+            ScrollToView(binding.rgVisitBook);
             returnFlag = false;
-            showSnackBar("Check whether visit book for officials & non officials updated");
+            showSnackBar(getString(R.string.reg_visit_book));
         }
         return returnFlag;
     }

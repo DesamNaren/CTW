@@ -916,5 +916,28 @@
     <string name="chk_haircut">Check weather haircut is completed</string>
     <string name="sel_last_hair_cut">Select date of last haircut</string>
     <string name="ent_reason">Enter reason</string>
+    <string name="reg_visit_book"><![CDATA[Check whether visit book for officials & non officials updated]]></string>
+    <string name="reg_ins">Check whether inspection register for departmental officers updated</string>
+    <string name="reg_par_meet">Check whether parent meeting register is updated</string>
+    <string name="reg_cl_acc">Check whether CL account register is updated</string>
+    <string name="reg_tea_movement">Check whether teacher movement register is updated</string>
+    <string name="reg_daily_movement">Check whether daily movement register is updated</string>
+    <string name="reg_contigent">Check whether contingent bill register is updated</string>
+    <string name="reg_tre_bill">Check whether treasury bill register is updated</string>
+    <string name="reg_pay_bill">Check whether pay bill register is updated</string>
+    <string name="reg_cos">Check whether acquaintance cosmetics register is updated</string>
+    <string name="reg_dress">Check whether acquaintance dresses notebooks register is updated</string>
+    <string name="reg_acq">Check whether acquaintance register is updated</string>
+    <string name="reg_budget">Check whether budget watch register is updated</string>
+    <string name="reg_per_art">Check whether permanent article register is updated</string>
+    <string name="reg_stock">Check whether stock issue provision register is updated</string>
+    <string name="reg_staff">Check whether staff order register is updated</string>
+    <string name="reg_stt_att">Check whether attendance staff register is updated</string>
+    <string name="reg_daily_menu">Check whether daily menu register is updated</string>
+    <string name="reg_cash_book">Check whether cashbook register is updated</string>
+    <string name="reg_daily_pur">Check whether daily purchase register is updated</string>
+    <string name="reg_boarders">Check whether boarders movement register is updated</string>
+    <string name="reg_att_boarders">Check whether attendance boarders register is updated</string>
+    <string name="reg_adm">Check whether admission register is updated</string>
 
 </resources>
