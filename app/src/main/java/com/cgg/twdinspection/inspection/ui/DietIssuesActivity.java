@@ -147,6 +147,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                     adapter = new DietIssuesAdapter(DietIssuesActivity.this, dietInfoEntityListMain);
                     binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
                     binding.recyclerView.setAdapter(adapter);
+
                 } else {
                     LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = dietIsuuesViewModel.getMasterDietInfo(TWDApplication.get(DietIssuesActivity.this).getPreferences().getString(AppConstants.INST_ID, ""));
                     masterInstituteInfoLiveData.observe(DietIssuesActivity.this, new Observer<MasterInstituteInfo>() {
@@ -457,6 +458,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
     }
 
+    private void ScrollToView(View view) {
+//        binding.sv.smoothScrollTo(0, view.getBottom());
+    }
 
     private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
         UploadPhoto uploadPhoto = new UploadPhoto();
@@ -549,6 +553,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
         if (TextUtils.isEmpty(menu_chart_painted)) {
             showSnackBar(getResources().getString(R.string.sel_menu_chart_painted));
+            ScrollToView(binding.rgMenuChartPainted);
             return false;
         }
         if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes) && flag_menu == 0) {
@@ -557,33 +562,40 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
         if (TextUtils.isEmpty(menu_served)) {
             showSnackBar(getResources().getString(R.string.sel_menu_served));
+            ScrollToView(binding.rgPrescribedMenuServed);
             return false;
         }
 
         if (TextUtils.isEmpty(food_provisions)) {
             showSnackBar(getResources().getString(R.string.sel_food_provisions));
+            ScrollToView(binding.rgFoodProvisions);
             return false;
         }
         if (food_provisions.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(matching_with_samples)) {
             showSnackBar(getResources().getString(R.string.sel_matching_with_samples));
+            ScrollToView(binding.rgFoodProvisions);
             return false;
         }
         if (TextUtils.isEmpty(committee_exist)) {
             showSnackBar(getResources().getString(R.string.sel_committee_exist));
+            ScrollToView(binding.rgCommitteeExist);
             return false;
         }
 
         if (committee_exist.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(discussed_with_committee)) {
             showSnackBar(getResources().getString(R.string.sel_discussed_with_committee));
+            ScrollToView(binding.rgDiscussedWithCommittee);
             return false;
         }
 
         if (TextUtils.isEmpty(maintaining_register)) {
             showSnackBar(getResources().getString(R.string.sel_maintaining_register));
+            ScrollToView(binding.rgMaintainingRegister);
             return false;
         }
         if (TextUtils.isEmpty(menu_chart_served)) {
             showSnackBar(getResources().getString(R.string.select_menu_chart_served));
+            ScrollToView(binding.rgMenuChartServed);
             return false;
         }
         if (flag_officer == 0) {

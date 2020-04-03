@@ -571,10 +571,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             revertFlags();
-            Snackbar.make(binding.appbar.root, schemeSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),schemeSubmitResponse.getStatusMessage()+" Failed data submit");
         } else {
             revertFlags();
-            Snackbar.make(binding.appbar.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getResources().getString(R.string.something)+" Failed data submit");
         }
     }
 
@@ -738,7 +738,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_LONG).show();
             instSubmitRequest.setOfficer_id(officer_id);
             instSubmitRequest.setInstitute_id(instId);
             instSubmitRequest.setInspection_time(Utils.getCurrentDateTime());
@@ -754,19 +754,19 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             instSubmitRequest.setDevice_Id(Utils.getDeviceID(this));
             instSubmitRequest.setVersion_No(Utils.getVersionName(this));
 
-            submitFlag = true;
-
-            customProgressDialog.show();
 
             if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
+                submitFlag = true;
+                customProgressDialog.show();
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
                 Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
             }
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
-            Snackbar.make(binding.appbar.root, schemePhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),schemePhotoSubmitResponse.getStatusMessage());
         } else {
-            Snackbar.make(binding.appbar.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.something));
+
         }
     }
 
@@ -778,8 +778,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
         }
     }
-
-
 
     public void customFinaSubmitAlert(Activity activity, String title, String msg) {
         try {
