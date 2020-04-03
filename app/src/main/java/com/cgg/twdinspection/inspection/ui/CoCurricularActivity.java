@@ -69,6 +69,10 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private List<PlantsEntity> plantsEntities;
     private int localFlag = -1;
 
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -662,141 +666,150 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
 
         boolean returnFlag = true;
         if (TextUtils.isEmpty(spo_mat_rec)) {
-            showSnackBar("Select sports material received");
+            ScrollToView(binding.rgSportMatRec);
+            showSnackBar(getString(R.string.sel_spo_mat));
             returnFlag = false;
         } else if (spo_mat_rec.equals(AppConstants.Yes) && TextUtils.isEmpty(entry_stock)) {
             showSnackBar("Select stock entry register");
             returnFlag = false;
         } else if (TextUtils.isEmpty(game_sport_room)) {
-            showSnackBar("Select game & sport room available");
+            ScrollToView(binding.gameSportRoomRg);
+            showSnackBar(getString(R.string.game_sport));
             returnFlag = false;
         } else if (TextUtils.isEmpty(pd_pft_name)) {
             binding.pdPftEt.requestFocus();
-            showSnackBar("Enter name of PD/PFT");
+            showSnackBar(getString(R.string.pd_pft_name_enter));
             returnFlag = false;
         } else if (TextUtils.isEmpty(pd_pft_num)) {
             binding.pdMobEt.requestFocus();
-            showSnackBar("Enter mobile number");
+            showSnackBar(getString(R.string.ent_mob_num));
             returnFlag = false;
         } else if (pd_pft_num.length() != 10) {
             binding.pdMobEt.requestFocus();
-            showSnackBar("Enter valid mobile number");
+            showSnackBar(getString(R.string.ent_val_mob_num));
             returnFlag = false;
         } else if (!(pd_pft_num.startsWith("6")
                 || pd_pft_num.startsWith("7") || pd_pft_num.startsWith("8") || pd_pft_num.startsWith("9"))) {
             binding.pdMobEt.requestFocus();
-            showSnackBar("Enter valid mobile number");
+            showSnackBar(getString(R.string.ent_val_mob_num));
             returnFlag = false;
         } else if (TextUtils.isEmpty(district_level)) {
             binding.etDistrict.requestFocus();
-            showSnackBar("Enter District Level");
+            showSnackBar(getString(R.string.ent_dis_lvel));
             returnFlag = false;
         } else if (TextUtils.isEmpty(state_level)) {
             binding.etState.requestFocus();
-            showSnackBar("Enter State Level");
+            showSnackBar(getString(R.string.ent_state_level));
             returnFlag = false;
         } else if (TextUtils.isEmpty(national_level)) {
             binding.etNational.requestFocus();
-            showSnackBar("Enter National Level");
+            showSnackBar(getString(R.string.enter_nat_level));
             returnFlag = false;
         } else if (TextUtils.isEmpty(play_avail)) {
-            showSnackBar("Select play ground available");
+            ScrollToView(binding.rgPlayGrAvail);
+            showSnackBar(getString(R.string.sel_play_avail));
             returnFlag = false;
         } else if (play_avail.equals(AppConstants.Yes) && TextUtils.isEmpty(land_measure)) {
             binding.measLandAvail.requestFocus();
-            showSnackBar("Enter measurement of land");
+            showSnackBar(getString(R.string.ent_mea_land));
             returnFlag = false;
         } else if (play_avail.equals(AppConstants.No) && TextUtils.isEmpty(plan_play)) {
-            showSnackBar("Select plan to procure play ground");
+            ScrollToView(binding.rgPlanToProc);
+            showSnackBar(getString(R.string.sel_plan_pro));
             returnFlag = false;
         } else if (TextUtils.isEmpty(ground_level_status)) {
-            showSnackBar("Select ground levelling status");
+            ScrollToView(binding.groundLeivingRg);
+            showSnackBar(getString(R.string.sel_gro_lel_status));
             returnFlag = false;
         } else if (TextUtils.isEmpty(scouts_guides_status)) {
-            showSnackBar("Select scouts / guides implementation status");
+            ScrollToView(binding.rgScoutsImpl);
+            showSnackBar(getString(R.string.sco_gou_impl));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(scouts_guides_status) && scouts_guides_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(scout_guide_name)) {
             binding.scoutCapName.requestFocus();
-            showSnackBar("Enter scout / guide captain name");
+            showSnackBar(getString(R.string.sc_cap_name));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(scouts_guides_status) && scouts_guides_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(scut_guide_num)) {
             binding.scoutsMobNo.requestFocus();
-            showSnackBar("Enter scout / guide contact number");
+            showSnackBar(getString(R.string.sc_cap_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(scouts_guides_status) && scouts_guides_status.equals(AppConstants.Yes)
                 && scut_guide_num.length() != 10) {
             binding.scoutsMobNo.requestFocus();
-            showSnackBar("Enter scout / guide valid mobile number");
+            showSnackBar(getString(R.string.sc_valid_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(scouts_guides_status) && scouts_guides_status.equals(AppConstants.Yes)
                 && !(scut_guide_num.startsWith("6")
                 || scut_guide_num.startsWith("7") || scut_guide_num.startsWith("8") || scut_guide_num.startsWith("9"))) {
             binding.scoutsMobNo.requestFocus();
-            showSnackBar("Enter scout / guide valid mobile number");
+            showSnackBar(getString(R.string.sc_valid_ctc));
             returnFlag = false;
         } else if (TextUtils.isEmpty(ncc_stu_impl)) {
-            showSnackBar("Select NCC student implementation status");
+            ScrollToView(binding.rgNccStudImpl);
+            showSnackBar(getString(R.string.ncc_impl));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(ncc_teacher_name)) {
             binding.nccTeachName.requestFocus();
-            showSnackBar("Enter NCC teacher name");
+            showSnackBar(getString(R.string.ncc_tea_name));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(ncc_teacher_contact)) {
             binding.nccTeachMobNo.requestFocus();
-            showSnackBar("Enter NCC contact number");
+            showSnackBar(getString(R.string.ncc_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
                 && ncc_teacher_contact.length() != 10) {
             binding.nccTeachMobNo.requestFocus();
-            showSnackBar("Enter valid NCC teacher mobile number");
+            showSnackBar(getString(R.string.ncc_al_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
                 && !(ncc_teacher_contact.startsWith("6")
                 || ncc_teacher_contact.startsWith("7") || ncc_teacher_contact.startsWith("8") || ncc_teacher_contact.startsWith("9"))) {
             binding.nccTeachMobNo.requestFocus();
-            showSnackBar("Enter valid NCC teacher mobile number");
+            showSnackBar(getString(R.string.ncc_al_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(ncc_stu_impl) && ncc_stu_impl.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(ncc_teacher_battalion_num)) {
             binding.nccBatallionNo.requestFocus();
-            showSnackBar("Enter NCC battalion number");
+            showSnackBar(getString(R.string.ncc_bat_num));
             returnFlag = false;
         } else if (TextUtils.isEmpty(smc_election_status)) {
-            showSnackBar("Select SMC elections status");
+            ScrollToView(binding.rgSmcElections);
+            showSnackBar(getString(R.string.smc_ele_sta));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_chai_name)) {
             binding.smcChiName.requestFocus();
-            showSnackBar("Enter SMC chairman name");
+            showSnackBar(getString(R.string.smc_cha_name));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_chai_contact)) {
             binding.smcChiCtc.requestFocus();
-            showSnackBar("Enter SMC chairman contact number");
+            showSnackBar(getString(R.string.smc_cha_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && smc_chai_contact.length() != 10) {
             binding.smcChiCtc.requestFocus();
-            showSnackBar("Enter valid SMC chairman mobile number");
+            showSnackBar(getString(R.string.smc_cha_valid_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && !(smc_chai_contact.startsWith("6")
                 || smc_chai_contact.startsWith("7") || smc_chai_contact.startsWith("8") || smc_chai_contact.startsWith("9"))) {
             binding.smcChiCtc.requestFocus();
-            showSnackBar("Enter valid SMC chairman mobile number");
+            showSnackBar(getString(R.string.smc_cha_valid_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_resolution)) {
             binding.smcResolution.requestFocus();
-            showSnackBar("Enter SMC Resolution noted");
+            showSnackBar(getString(R.string.smc_res));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(smc_election_status) && smc_election_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(smc_parents_meeting)) {
-            showSnackBar("Select parents meeting conducted");
+            ScrollToView(binding.rgParentMeeting);
+            showSnackBar(getString(R.string.pare_meeting));
             returnFlag = false;
         } else if (TextUtils.isEmpty(kitchen_garden_status)) {
             showSnackBar("Select kitchen garden status");
@@ -804,46 +817,49 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(type_kitchen_garden)) {
             binding.typeKitchen.requestFocus();
-            showSnackBar("Enter type of kitchen gardens");
+            showSnackBar(getString(R.string.event_kit));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(kitchen_in_charge_name)) {
             binding.kitchenInchargeName.requestFocus();
-            showSnackBar("Enter kitchen garden in charge / teacher name");
+            showSnackBar(getString(R.string.kit_inc_name));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(kitchen_in_charge_contact)) {
             binding.kitchenInchargeCtc.requestFocus();
-            showSnackBar("Enter kitchen in charge contact number");
+            showSnackBar(getString(R.string.kit_inc_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && kitchen_in_charge_contact.length() != 10) {
             binding.kitchenInchargeCtc.requestFocus();
-            showSnackBar("Enter valid kitchen in charge contact number");
+            showSnackBar(getString(R.string.kit_valid_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && !(kitchen_in_charge_contact.startsWith("6")
                 || kitchen_in_charge_contact.startsWith("7") || kitchen_in_charge_contact.startsWith("8") || kitchen_in_charge_contact.startsWith("9"))) {
             binding.kitchenInchargeCtc.requestFocus();
-            showSnackBar("Enter valid kitchen in charge contact number");
+            showSnackBar(getString(R.string.kit_valid_ctc));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(plants_count)) {
             binding.etPlantsCnt.requestFocus();
-            showSnackBar("Enter Number of plants");
+            showSnackBar(getString(R.string.ent_num_plant));
             returnFlag = false;
         } else if (TextUtils.isEmpty(student_council_ele_status)) {
-            showSnackBar("Select student council election conducted status");
+            ScrollToView(binding.rgStudCounElect);
+            showSnackBar(getString(R.string.sel_stu_ele));
             returnFlag = false;
         } else if (student_council_ele_status.equals(AppConstants.Yes) && TextUtils.isEmpty(stu_com_name_dis_status)) {
-            showSnackBar("Select student council name displayed status");
+            ScrollToView(binding.rgNameOfCommDisp);
+            showSnackBar(getString(R.string.sel_stu_name));
             returnFlag = false;
         } else if (student_council_ele_status.equals(AppConstants.No) && TextUtils.isEmpty(stu_com_name_dis_status_reason)) {
             binding.etReason.requestFocus();
-            showSnackBar("Enter reason");
+            showSnackBar(getString(R.string.ent_reason));
             returnFlag = false;
         } else if (TextUtils.isEmpty(stu_Cou_date)) {
-            showSnackBar("Enter student council date");
+            ScrollToView(binding.etStuCouncilDate);
+            showSnackBar(getString(R.string.ent_stu_ele_date));
             returnFlag = false;
         }
 
