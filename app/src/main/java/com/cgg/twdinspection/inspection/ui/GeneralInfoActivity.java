@@ -35,6 +35,11 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     private String officerID, instID, insTime;
     private int localFlag = -1;
 
+
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -528,14 +533,17 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
     private boolean validateData() {
 
         if (TextUtils.isEmpty(hmPresentTime)) {
+            ScrollToView(binding.rgHmPresentTime);
             showSnackBar(getResources().getString(R.string.hm_presence));
             return false;
         }
         if (hmPresentTime.equals(AppConstants.No) && TextUtils.isEmpty(hmreasontype)) {
+            ScrollToView(binding.rgHmCapturetype);
             showSnackBar(getResources().getString(R.string.sel_leave_type));
             return false;
         }
         if (!TextUtils.isEmpty(hmreasontype) && hmreasontype.equalsIgnoreCase("Leaves") && TextUtils.isEmpty(hmCaptureLeavetype)) {
+            ScrollToView(binding.rgHmLeavecapturetype);
             showSnackBar(getResources().getString(R.string.sel_cap_leave_type));
             return false;
         }
@@ -597,6 +605,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (TextUtils.isEmpty(staffQuarters)) {
+            ScrollToView(binding.rgStaffQuarters);
             showSnackBar(getResources().getString(R.string.sel_staff_qua));
             return false;
         }

@@ -963,5 +963,6 @@
     <string name="gen_veg_ontime">Check whether vegetables supplied on time</string>
     <string name="gen_egg_ontime">Check whether eggs supplied on time</string>
     <string name="gen_fruit_ontime">Check whether fruits supplied on time</string>
+    <string name="cap_menu_image">Please capture Menu image</string>
 
 </resources>

@@ -459,7 +459,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     }
 
     private void ScrollToView(View view) {
-//        binding.sv.smoothScrollTo(0, view.getBottom());
+        binding.sv.smoothScrollTo(0, view.getBottom());
     }
 
     private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {
@@ -557,7 +557,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             return false;
         }
         if (menu_chart_painted.equalsIgnoreCase(AppConstants.Yes) && flag_menu == 0) {
-            showSnackBar("Please capture Menu image");
+            showSnackBar(getString(R.string.cap_menu_image));
             return false;
         }
         if (TextUtils.isEmpty(menu_served)) {
@@ -573,7 +573,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         }
         if (food_provisions.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(matching_with_samples)) {
             showSnackBar(getResources().getString(R.string.sel_matching_with_samples));
-            ScrollToView(binding.rgFoodProvisions);
+            ScrollToView(binding.rgMatchingWithSamples);
             return false;
         }
         if (TextUtils.isEmpty(committee_exist)) {

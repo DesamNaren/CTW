@@ -59,6 +59,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     private int localFlag;
     String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
 
+
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -348,15 +354,19 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             binding.etSickboardersArea.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(checkUpDate)) {
+            ScrollToView(binding.etMedicalCheckupDate);
             showBottomSheetSnackBar(getResources().getString(R.string.last_medical_date));
             return false;
         } else if (TextUtils.isEmpty(medicalCheckUpDoneByWhom)) {
+            ScrollToView(binding.rgMedicalCheckUpDoneByWhom);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_medical_check_up_done_by_whom));
             return false;
         } else if (TextUtils.isEmpty(anmWeeklyUpdated)) {
+            ScrollToView(binding.rgAnmWeeklyUpdated);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_tabs_of_anm_weekly_updated));
             return false;
         } else if (TextUtils.isEmpty(callHealth100)) {
+            ScrollToView(binding.rgCallHealth100);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_call_health_100));
             return false;
         } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health)) {
@@ -368,9 +378,11 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             binding.etLeftForScreening.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(recorderedInRegister)) {
+            ScrollToView(binding.rgMedicalCheckupDetails);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_visitor_register));
             return false;
         } else if (recorderedInRegister.equals(AppConstants.Yes) && tot_cnt == 0) {
+            ScrollToView(binding.etFever);
             showBottomSheetSnackBar(getResources().getString(R.string.enter_suffering_count));
             return false;
         }
