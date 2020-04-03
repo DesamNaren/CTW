@@ -474,7 +474,7 @@
     <string name="select_functioning_toilets">Enter No of functioning Toilets</string>
     <string name="select_functioning_bathrooms">Enter No of functioning Bathrooms</string>
     <string name="select_repaired_toilets">Enter Repairs required to Toilets</string>
-    <string name="select_repaired_bathrooms">Enter Repairs required to Toilets</string>
+    <string name="select_repaired_bathrooms">Enter Repairs required to Bathrooms</string>
     <string name="select_door">Select Door and Window repairs</string>
     <string name="select_painting">Select Painting, coloring of the building</string>
     <string name="select_color">Enter suggest for coloring</string>

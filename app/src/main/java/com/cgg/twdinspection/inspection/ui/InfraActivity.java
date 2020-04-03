@@ -83,6 +83,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     private String cacheDate, currentDate;
     private int localFlag = -1;
 
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -895,57 +900,69 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
         if (TextUtils.isEmpty(bigSchoolNameBoard)) {
             showSnackBar(getResources().getString(R.string.select_school));
+            ScrollToView(binding.rgBigSchoolNameBoard);
             return false;
         }
 
         if (TextUtils.isEmpty(drinkingWaterFacility)) {
+            ScrollToView(binding.rgDrinkingWaterFacility);
             showSnackBar(getResources().getString(R.string.select_water));
             return false;
         }
 
         if (drinkingWaterFacility.equals(AppConstants.Yes) && TextUtils.isEmpty(sourceOfDrinkingWater)) {
+            ScrollToView(binding.llDrinkingWater);
             showSnackBar(getResources().getString(R.string.select_src_drinking_water));
             return false;
         }
 
         if (TextUtils.isEmpty(roPlant)) {
+            ScrollToView(binding.rgRoPlant);
             showSnackBar(getResources().getString(R.string.select_roPlant));
             return false;
         }
         if (roPlant.equals(AppConstants.Yes) && flag_tds == 0) {
+            ScrollToView(binding.ivTds);
             showSnackBar("Please capture TDS image");
             return false;
         }
         if (roPlant.equals(AppConstants.No) && TextUtils.isEmpty(roplant_reason)) {
+            ScrollToView(binding.llReason);
             showSnackBar(getResources().getString(R.string.select_roPlant_reason));
             binding.etReason.requestFocus();
             return false;
         }
 
         if (TextUtils.isEmpty(runningWaterFacility)) {
+            ScrollToView(binding.rgRunningWaterFacility);
             showSnackBar(getResources().getString(R.string.select_running_water));
             return false;
         }
 
         if (runningWaterFacility.equals(AppConstants.Yes) && TextUtils.isEmpty(sourceOfRunningWater)) {
+            ScrollToView(binding.rgRunningWaterSource);
             showSnackBar(getResources().getString(R.string.select_src_running_water));
             return false;
         }
 
         if (TextUtils.isEmpty(inverter_available)) {
+            ScrollToView(binding.rgIsInverterAvailable);
             showSnackBar(getResources().getString(R.string.select_inverter));
             return false;
         }
         if (inverter_available.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(inverterWorkingStatus)) {
+            ScrollToView(binding.rgInverterWorkingStatus);
             showSnackBar(getResources().getString(R.string.select_inverter_working));
             return false;
         }
 
         if (TextUtils.isEmpty(electricity_wiring)) {
+            ScrollToView(binding.rgElectricityWiring);
             showSnackBar(getResources().getString(R.string.select_electricity));
             return false;
         }
         if (TextUtils.isEmpty(enough_fans)) {
+            ScrollToView(binding.rgEnoughFans);
             showSnackBar(getResources().getString(R.string.select_fans));
             return false;
         }
@@ -980,22 +997,27 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (TextUtils.isEmpty(dining_hall)) {
+            ScrollToView(binding.rgDiningHall);
             showSnackBar(getResources().getString(R.string.select_dininghall_available));
             return false;
         }
         if (dining_hall.equals(AppConstants.Yes) && TextUtils.isEmpty(dining_hall_used)) {
+            ScrollToView(binding.rgDininghallUsed);
             showSnackBar(getResources().getString(R.string.select_dininghall_used));
             return false;
         }
         if (TextUtils.isEmpty(separate_kitchen_room_available)) {
+            ScrollToView(binding.rgSeparateKitchenRoomAvailable);
             showSnackBar(getResources().getString(R.string.select_kitchen_available));
             return false;
         }
         if (separate_kitchen_room_available.equals(AppConstants.No) && TextUtils.isEmpty(construct_kitchen_room)) {
+            ScrollToView(binding.rgConstructKitchenRoom);
             showSnackBar(getResources().getString(R.string.select_kitchen_construct));
             return false;
         }
         if (separate_kitchen_room_available.equals(AppConstants.Yes) && TextUtils.isEmpty(is_it_in_good_condition)) {
+            ScrollToView(binding.rgIsItInGoodCondition);
             showSnackBar(getResources().getString(R.string.select_kitchen_good_condition));
             return false;
         }
@@ -1011,66 +1033,82 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         if (TextUtils.isEmpty(transformer_available)) {
             showSnackBar(getResources().getString(R.string.select_transformer));
+            ScrollToView(binding.rgTransformerAvailable);
             return false;
         }
         if (TextUtils.isEmpty(powerConnectionType)) {
             showSnackBar(getResources().getString(R.string.select_powerconnection));
+            ScrollToView(binding.rgPowerConnectionType);
             return false;
         }
         if (TextUtils.isEmpty(individual_connection)) {
             showSnackBar(getResources().getString(R.string.select_individual_connection));
+            ScrollToView(binding.rgIndividualConnection);
             return false;
         }
         if (TextUtils.isEmpty(road_required)) {
             showSnackBar(getResources().getString(R.string.select_road_req));
+            ScrollToView(binding.rgRoadRequired);
             return false;
         }
         if (TextUtils.isEmpty(compWall_required)) {
             showSnackBar(getResources().getString(R.string.select_compoundwall_req));
+            ScrollToView(binding.rgCompWallRequired);
             return false;
         }
         if (TextUtils.isEmpty(cc_cameras)) {
             showSnackBar(getResources().getString(R.string.select_cc_cameras));
+            ScrollToView(binding.rgCcCameras);
             return false;
         }
         if (TextUtils.isEmpty(steam_cooking)) {
             showSnackBar(getResources().getString(R.string.select_steam_cooking));
+            ScrollToView(binding.rgSteamCooking);
             return false;
         }
         if (TextUtils.isEmpty(bunker_beds)) {
             showSnackBar(getResources().getString(R.string.select_bunker_beds));
+            ScrollToView(binding.rgBunkerBeds);
             return false;
         }
 
         if (TextUtils.isEmpty(gate_required)) {
+            ScrollToView(binding.rgGateRequired);
             showSnackBar(getResources().getString(R.string.select_gate));
             return false;
         }
         if (TextUtils.isEmpty(pathway_required)) {
+            ScrollToView(binding.rgPathwayRequired);
             showSnackBar(getResources().getString(R.string.select_pathway));
             return false;
         }
         if (TextUtils.isEmpty(sump_required)) {
+            ScrollToView(binding.rgSumpRequired);
             showSnackBar(getResources().getString(R.string.select_sump_req));
             return false;
         }
         if (TextUtils.isEmpty(sewage_allowed)) {
+            ScrollToView(binding.rgSewageAllowed);
             showSnackBar(getResources().getString(R.string.select_sewerage));
             return false;
         }
         if (sewage_allowed.equals(AppConstants.No) && TextUtils.isEmpty(sewage_raise_req)) {
+            ScrollToView(binding.rgSewageRaiseReq);
             showSnackBar(getResources().getString(R.string.select_raise_req));
             return false;
         }
         if (TextUtils.isEmpty(drainage_functioning)) {
+            ScrollToView(binding.rgDrainageFunctioning);
             showSnackBar(getResources().getString(R.string.select_drainage));
             return false;
         }
         if (TextUtils.isEmpty(heater_available)) {
+            ScrollToView(binding.rgHeaterAvailable);
             showSnackBar(getResources().getString(R.string.select_solarwater));
             return false;
         }
         if (heater_available.equals(AppConstants.Yes) && TextUtils.isEmpty(heater_workingStatus)) {
+            ScrollToView(binding.rgHeaterWorkingStatus);
             showSnackBar(getResources().getString(R.string.select_solarwater_working));
             return false;
         }
@@ -1105,6 +1143,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (TextUtils.isEmpty(add_req)) {
+            ScrollToView(binding.rgAddReq);
             showSnackBar(getResources().getString(R.string.sel_add_req));
             return false;
         }
@@ -1135,9 +1174,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         if (TextUtils.isEmpty(repairs_to_door)) {
             showSnackBar(getResources().getString(R.string.select_door));
+            ScrollToView(binding.rgRepairsToDoor);
             return false;
         }
         if (TextUtils.isEmpty(painting)) {
+            ScrollToView(binding.rgPainting);
             showSnackBar(getResources().getString(R.string.select_painting));
             return false;
         }
