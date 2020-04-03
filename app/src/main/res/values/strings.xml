@@ -939,5 +939,29 @@
     <string name="reg_boarders">Check whether boarders movement register is updated</string>
     <string name="reg_att_boarders">Check whether attendance boarders register is updated</string>
     <string name="reg_adm">Check whether admission register is updated</string>
+    <string name="gen_store">Select storerooms are clean</string>
+    <string name="gen_water">Check whether running water available to toilets</string>
+    <string name="gen_class">Select classrooms are clean</string>
+    <string name="gen_dor">Select dormitory is clean</string>
+    <string name="gen_kit">Select kitchen is clean</string>
+    <string name="gen_toilet">Select toilets are clean</string>
+    <string name="gen_staff_att">Check whether attire of staff is appropriate</string>
+    <string name="gen_cook_hand">Check whether hands of cooking staff is clean</string>
+    <string name="gen_cook_cap">Check whether cooks wear cap during cooking and serving</string>
+    <string name="gen_stu_att">Check the attire of students</string>
+    <string name="gen_stu_ana">Check whether students found anemic</string>
+    <string name="gen_haircut">Check whether haircut is on time</string>
+    <string name="gen_sup_date">Select capture supplied date</string>
+    <string name="gen_stock">Check whether stock is supplied as per the intent</string>
+    <string name="gen_food_supp">Select date of supply of food provision by GCC and others</string>
+    <string name="gen_hm">Select date of last indent raised by HM/ HWO</string>
+    <string name="gen_qua_food">Check the quality of food provisions supplied</string>
+    <string name="gen_qua_veg">Check the quality of vegetables supplied</string>
+    <string name="gen_qau_egg">Check the quality of eggs supplied</string>
+    <string name="gen_qua_fruit">Check the quality of fruits supplied</string>
+    <string name="gen_food_ontime">Check whether food provisions supplied on time</string>
+    <string name="gen_veg_ontime">Check whether vegetables supplied on time</string>
+    <string name="gen_egg_ontime">Check whether eggs supplied on time</string>
+    <string name="gen_fruit_ontime">Check whether fruits supplied on time</string>
 
 </resources>

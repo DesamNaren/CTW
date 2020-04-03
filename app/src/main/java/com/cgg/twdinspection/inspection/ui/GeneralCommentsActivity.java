@@ -41,6 +41,11 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     private int localFlag = -1;
     private String gccDate, suppliedDate,hmhwoDate;
 
+    private void ScrollToView(View view) {
+        binding.scrl.smoothScrollTo(0, view.getTop());
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -330,77 +335,101 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     private boolean validate() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(foodTimeFruits)) {
+            ScrollToView(binding.rgFoodTimeFruits);
             returnFlag = false;
-            showSnackBar("Check whether fruits supplied on time");
+            showSnackBar(getString(R.string.gen_fruit_ontime));
         } else if (TextUtils.isEmpty(foodTimeEggs)) {
+            ScrollToView(binding.rgFoodTimeEggs);
             returnFlag = false;
-            showSnackBar("Check whether eggs supplied on time");
+            showSnackBar(getString(R.string.gen_egg_ontime));
         } else if (TextUtils.isEmpty(foodTimeVeg)) {
+            ScrollToView(binding.rgFoodTimeVeg);
             returnFlag = false;
-            showSnackBar("Check whether vegetables supplied on time");
+            showSnackBar(getString(R.string.gen_veg_ontime));
         } else if (TextUtils.isEmpty(foodTimeProvisions)) {
+            ScrollToView(binding.rgFoodTimeProvisions);
             returnFlag = false;
-            showSnackBar("Check whether food provisions supplied on time");
+            showSnackBar(getString(R.string.gen_food_ontime));
         } else if (TextUtils.isEmpty(foodQualityFruits)) {
+            ScrollToView(binding.rgFoodQualityFruits);
             returnFlag = false;
-            showSnackBar("Check the quality of fruits supplied");
+            showSnackBar(getString(R.string.gen_qua_fruit));
         } else if (TextUtils.isEmpty(foodQualityEggs)) {
+            ScrollToView(binding.rgFoodQualityEggs);
             returnFlag = false;
-            showSnackBar("Check the quality of eggs supplied");
+            showSnackBar(getString(R.string.gen_qau_egg));
         } else if (TextUtils.isEmpty(foodQualityVeg)) {
+            ScrollToView(binding.rgFoodQualityVeg);
             returnFlag = false;
-            showSnackBar("Check the quality of vegetables supplied");
+            showSnackBar(getString(R.string.gen_qua_veg));
         } else if (TextUtils.isEmpty(foodQualityProvisions)) {
+            ScrollToView(binding.rgFoodQualityProvisions);
             returnFlag = false;
-            showSnackBar("Check the quality of food provisions supplied");
+            showSnackBar(getString(R.string.gen_qua_food));
         } else if (TextUtils.isEmpty(hmhwoDate)) {
+            ScrollToView(binding.etHmHwoDate);
             returnFlag = false;
-            showSnackBar("Select date of last indent raised by HM/ HWO");
+            showSnackBar(getString(R.string.gen_hm));
         }  else if (TextUtils.isEmpty(gccDate)) {
+            ScrollToView(binding.etGccDate);
             returnFlag = false;
-            showSnackBar("Select date of supply of food provision by GCC and others");
+            showSnackBar(getString(R.string.gen_food_supp));
         } else if (TextUtils.isEmpty(stocksSupplied)) {
+            ScrollToView(binding.rgStocksSupplied);
             returnFlag = false;
-            showSnackBar("Check whether stock is supplied as per the intent");
+            showSnackBar(getString(R.string.gen_stock));
         } else if (TextUtils.isEmpty(suppliedDate)) {
+            ScrollToView(binding.etSuppliedDate);
             returnFlag = false;
-            showSnackBar("Select capture supplied date");
+            showSnackBar(getString(R.string.gen_sup_date));
         } else if (TextUtils.isEmpty(haircut)) {
+            ScrollToView(binding.rgHaircut);
             returnFlag = false;
-            showSnackBar("Check whether haircut is on time");
+            showSnackBar(getString(R.string.gen_haircut));
         } else if (TextUtils.isEmpty(studentsFoundAnemic)) {
+            ScrollToView(binding.rgStudentsFoundAnemic);
             returnFlag = false;
-            showSnackBar("Check whether students found anemic");
+            showSnackBar(getString(R.string.gen_stu_ana));
         } else if (TextUtils.isEmpty(attireOfStudents)) {
+            ScrollToView(binding.rgAttireOfStudents);
             returnFlag = false;
-            showSnackBar("Check the attire of students");
+            showSnackBar(getString(R.string.gen_stu_att));
         } else if (TextUtils.isEmpty(cooksWearingCap)) {
+            ScrollToView(binding.rgCooksWearingCap);
             returnFlag = false;
-            showSnackBar("Check whether cooks wear cap during cooking and serving");
+            showSnackBar(getString(R.string.gen_cook_cap));
         } else if (TextUtils.isEmpty(handsOfCookingStaff)) {
+            ScrollToView(binding.rgHandsOfCookingStaff);
             returnFlag = false;
-            showSnackBar("Check whether hands of cooking staff is clean");
+            showSnackBar(getString(R.string.gen_cook_hand));
         } else if (TextUtils.isEmpty(attireOfStaff)) {
+            ScrollToView(binding.rgAttireOfStaff);
             returnFlag = false;
-            showSnackBar("Check whether attire of staff is appropriate");
+            showSnackBar(getString(R.string.gen_staff_att));
         } else if (TextUtils.isEmpty(toilets)) {
+            ScrollToView(binding.rgToilets);
             returnFlag = false;
-            showSnackBar("Select toilets are clean");
+            showSnackBar(getString(R.string.gen_toilet));
         } else if (TextUtils.isEmpty(kitchen)) {
+            ScrollToView(binding.rgKitchen);
             returnFlag = false;
-            showSnackBar("Select kitchen is clean");
+            showSnackBar(getString(R.string.gen_kit));
         } else if (TextUtils.isEmpty(dormitory)) {
+            ScrollToView(binding.rgDormitory);
             returnFlag = false;
-            showSnackBar("Select dormitory is clean");
+            showSnackBar(getString(R.string.gen_dor));
         } else if (TextUtils.isEmpty(classRooms)) {
+            ScrollToView(binding.rgClassRooms);
             returnFlag = false;
-            showSnackBar("Select classrooms are clean");
+            showSnackBar(getString(R.string.gen_class));
         } else if (TextUtils.isEmpty(runningWater)) {
+            ScrollToView(binding.rgRunningWater);
             returnFlag = false;
-            showSnackBar("Check whether running water available to toilets");
+            showSnackBar(getString(R.string.gen_water));
         } else if (TextUtils.isEmpty(storeroom)) {
+            ScrollToView(binding.rgStoreroom);
             returnFlag = false;
-            showSnackBar("Select storerooms are clean");
+            showSnackBar(getString(R.string.gen_store));
         }
         return returnFlag;
     }
