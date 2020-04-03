@@ -70,7 +70,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String officerID, instID, insTime,randomNo;
+    private String officerID, instID, insTime, randomNo;
     private CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
 
@@ -711,9 +711,10 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            String deviceId=Utils.getDeviceID(UploadedPhotoActivity.this);
-            String versionName=Utils.getVersionName(UploadedPhotoActivity.this);
-            PIC_NAME =PIC_TYPE + "~" + officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" +  deviceId+ "~" +  versionName+ "~" +  randomNo + ".png";
+            String deviceId = Utils.getDeviceID(UploadedPhotoActivity.this);
+            String versionName = Utils.getVersionName(UploadedPhotoActivity.this);
+            PIC_NAME = PIC_TYPE + "~" + officerId + "~" + instId + "~" + Utils.getCurrentDateTimeFormat() + "~" + deviceId + "~" + versionName + "~" + randomNo + ".png";
+
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -829,7 +830,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             e.printStackTrace();
         }
     }
-
 
 
     @Override

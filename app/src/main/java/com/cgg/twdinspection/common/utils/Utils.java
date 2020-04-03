@@ -24,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
@@ -50,7 +49,7 @@ import static android.Manifest.permission.READ_PHONE_STATE;
 
 public class Utils {
     public static String getDeviceID(Context context) {
-        String deviceID   = null;
+        String deviceID = null;
         try {
             ContextCompat.checkSelfPermission(context, READ_PHONE_STATE);
 
@@ -193,6 +192,10 @@ public class Utils {
 
     public static String getCurrentDateTime() {
         return new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
+    }
+
+    public static String getCurrentDateTimeFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss", Locale.getDefault()).format(new Date());
     }
 
     public static String getCurrentDateTimeDisplay() {
@@ -699,6 +702,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
     public static void customGCCSyncAlert(Activity activity, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(activity);

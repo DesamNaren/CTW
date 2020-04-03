@@ -26,10 +26,10 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.InstMainActivityBinding;
 import com.cgg.twdinspection.inspection.adapter.MenuSectionsAdapter;
@@ -64,7 +64,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -736,7 +735,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void getPhotoData(SchemePhotoSubmitResponse schemePhotoSubmitResponse) {
         customProgressDialog.hide();
 
-
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
             Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_LONG).show();
             instSubmitRequest.setOfficer_id(officer_id);
@@ -764,9 +762,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
             Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),schemePhotoSubmitResponse.getStatusMessage());
+            revertFlags();
         } else {
             Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.something));
-
+            revertFlags();
         }
     }
 

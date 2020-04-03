@@ -1228,7 +1228,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + instID + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomNo + ".png";
+            String deviceId = Utils.getDeviceID(InfraActivity.this);
+            String versionName = Utils.getVersionName(InfraActivity.this);
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + instID + "~" + Utils.getCurrentDateTimeFormat() + "~" + deviceId + "~" + versionName + "~" + randomNo + ".png";
+
             mediaFile = new File(mediaStorageDir.getPath() + File.separator + PIC_NAME);
         } else {
             return null;
