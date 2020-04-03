@@ -1,11 +1,5 @@
 package com.cgg.twdinspection.inspection.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -13,18 +7,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
-import com.cgg.twdinspection.schemes.reports.ui.SchemesReportActivity;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
+import com.cgg.twdinspection.databinding.ActivityReportBinding;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.cgg.twdinspection.databinding.ActivityReportBinding;
+import com.cgg.twdinspection.schemes.reports.ui.SchemesReportActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ReportActivity extends AppCompatActivity implements ErrorHandlerInterface {
@@ -93,7 +92,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                         schemesCnt = reportCountsResponse.getSchemes();
                         instCnt = reportCountsResponse.getSchools();
 
-                        binding.gccCnt.setText(String.valueOf(gccCnt));
+//                        binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
 
@@ -111,11 +110,11 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         binding.btnGcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (gccCnt > 0) {
+               /* if (gccCnt > 0) {
                     startActivity(new Intent(ReportActivity.this, GCCReportsDashboard.class));
                 } else {
                     callSnackBar("No data found");
-                }
+                }*/
             }
         });
         binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {

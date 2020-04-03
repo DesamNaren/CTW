@@ -136,7 +136,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="6dp"
                         app:cardElevation="5dp">
@@ -192,7 +192,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_10dp"
                         app:cardCornerRadius="6dp"
