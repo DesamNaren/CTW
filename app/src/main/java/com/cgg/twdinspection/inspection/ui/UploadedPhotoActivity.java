@@ -711,7 +711,9 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + "~" + randomNo + ".png";
+            String deviceId=Utils.getDeviceID(UploadedPhotoActivity.this);
+            String versionName=Utils.getVersionName(UploadedPhotoActivity.this);
+            PIC_NAME =PIC_TYPE + "~" + officerId + "~" + instId + "~" + Utils.getCurrentDateTime() + "~" +  deviceId+ "~" +  versionName+ "~" +  randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

@@ -74,7 +74,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     int imgflag2 = 0;
     private String officerId;
     private CustomProgressDialog customProgressDialog;
-
+    String randomNo,deviceId,versionNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +91,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             }
         });
         benDetailsBinding.header.ivHome.setVisibility(View.GONE);
+        randomNo=getRandomNumberString();
+        deviceId=Utils.getDeviceID(BenDetailsActivity.this);
+        versionNo=Utils.getVersionName(BenDetailsActivity.this);
 
         try {
             beneficiaryDetail = getIntent().getParcelableExtra(AppConstants.BEN_DETAIL);
@@ -328,10 +331,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            String randomNo=getRandomNumberString();
-            String deviceId=Utils.getDeviceID(BenDetailsActivity.this);
-            String versionNo=Utils.getVersionName(BenDetailsActivity.this);
-            PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + "~" +deviceId + "~" +versionNo + "~" +randomNo + ".png";
+                   PIC_NAME = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + "~" +deviceId + "~" +versionNo + "~" +randomNo + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -360,7 +360,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime() + ".png";
+            PIC_NAME2 = officerId + "~" + beneficiaryDetail.getSchemeId() + "~" + beneficiaryDetail.getBenID() + "~" + Utils.getCurrentDateTime()+ "~" +deviceId + "~" +versionNo + "~" +randomNo  + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME2);
         } else {
