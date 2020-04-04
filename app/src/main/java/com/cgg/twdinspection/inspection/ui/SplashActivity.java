@@ -85,7 +85,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                     customBinding = DataBindingUtil.setContentView(SplashActivity.this,
                                                             R.layout.custom_layout_for_permissions);
                                                     customBinding.accept.setOnClickListener(onBtnClick);
-                                                    customBinding.declined.setOnClickListener(onBtnClick);
                                                 }  else {
                                                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                                                     finish();
@@ -136,13 +135,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         Manifest.permission.READ_PHONE_STATE},
                                 REQUEST_PERMISSION_CODE);
-                        break;
-                    case R.id.declined:
-
-                            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                            finish();
-
-
                         break;
                 }
             } catch (Exception e) {
