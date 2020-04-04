@@ -121,7 +121,7 @@
                         android:id="@+id/rg_IsAttndMarked_1_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
+                        android:layout_marginLeft="@dimen/dimen_30dp"
                         android:orientation="horizontal">
 
                         <RadioButton

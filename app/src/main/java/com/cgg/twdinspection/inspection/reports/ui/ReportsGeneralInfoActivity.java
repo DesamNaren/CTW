@@ -48,7 +48,8 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         String jsonObject  = gson.toJson(reportData.getGeneralInfo());
         if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getGeneralInfo());
-            binding.manNameTv.setText(reportData.getMandalName());
+            binding.manNameTv.setText(reportData.getMandalName()+" & "+reportData.getVillageName());
+            binding.disNameTv.setText(reportData.getDistName());
             binding.instNameTv.setText(reportData.getInstituteName());
 
             binding.includeBasicLayout.inspectionTime.setText(reportData.getGeneralInfo().getInspectionTime());
