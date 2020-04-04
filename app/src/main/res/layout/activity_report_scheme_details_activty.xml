@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="schemeData"
@@ -375,13 +376,30 @@
                             </RadioGroup>
                         </LinearLayout>
 
-                        <Spinner
-                            android:id="@+id/remarksSP"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_8dp"
-                            android:visibility="gone" />
+                            android:orientation="horizontal"
+                            android:visibility="@{schemeData.statusFieldMatch.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
+                            android:padding="@dimen/dimen_5dp">
 
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="1"
+                                android:text="Remarks"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:layout_weight="2"
+                                android:text="@={schemeData.remarksType}" />
+
+
+                        </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:id="@+id/ll_photos"
