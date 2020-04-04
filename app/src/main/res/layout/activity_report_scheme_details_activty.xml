@@ -454,7 +454,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/list_blue"
+            android:background="@drawable/btn_bg"
             android:text="Go Back"
             android:textColor="@color/white" />
     </RelativeLayout>

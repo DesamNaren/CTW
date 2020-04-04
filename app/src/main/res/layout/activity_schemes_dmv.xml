@@ -16,11 +16,11 @@
         android:layout_height="match_parent"
         android:background="@color/light_gray">
 
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:id="@+id/cv_profile"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/list_blue" />
+            android:background="@color/list_blue" />-->
 
         <include
             android:id="@+id/header"

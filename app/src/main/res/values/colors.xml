@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="colorPrimary">#D1C5B5</color>
-    <color name="colorPrimaryDark">#D1C5B5</color>
+    <color name="colorPrimary">#324755</color>
+    <color name="colorPrimaryDark">#23323B</color>
     <color name="colorAccent">#D81B60</color>
 
 
     <!--splash colors-->
-    <color name="eng_color">#97573B</color>
-    <color name="eng">#5A392A</color>
-    <color name="inst">#328A8E</color>
-    <color name="schemes">#314755</color>
+    <color name="gcc">#5B392A</color>
+    <color name="gcc_dark">#40281D</color>
+    <color name="eng">#D97D54</color>
+    <color name="eng_dark">#97573B</color>
+    <color name="inst">#348A8F</color>
+    <color name="inst_dark">#236063</color>
+    <color name="schemes">#324755</color>
+    <color name="schemes_dark">#23323B</color>
     <color name="bg1">#D1C5B5</color>
     <color name="bg2">#DBD1C5</color>
     <color name="bg3">#E0D8CD</color>
     <color name="bg4">#E7E0D8</color>
-    <color name="gcc_color">#5B392A</color>
+    <color name="appbar">#324755</color>
+    <color name="bg">#FCEACE</color>
+
 
     <!--<color name="headerTextColor">#f26222</color>-->
     <color name="white">#ffffff</color>

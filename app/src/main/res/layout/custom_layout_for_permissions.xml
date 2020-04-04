@@ -15,11 +15,18 @@
             android:orientation="vertical"
             android:padding="@dimen/dimen_10dp">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_4dp"
-                android:src="@mipmap/ic_launcher_round" />
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ctw_icon" />
+
+            </LinearLayout>
 
             <com.cgg.twdinspection.common.custom.CustomFontTextView
                 android:layout_width="wrap_content"
@@ -39,10 +46,10 @@
                 android:textStyle="bold" />
 
             <RelativeLayout
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_4dp">
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -100,10 +107,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dimen_10dp"
                         android:layout_marginLeft="@dimen/dimen_10dp"
                         android:orientation="vertical"
-                        android:padding="@dimen/dimen_4dp"
-                        android:layout_marginStart="@dimen/dimen_10dp">
+                        android:padding="@dimen/dimen_4dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -146,7 +153,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_4dp">
 
-                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/camera"
@@ -188,7 +195,7 @@
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_4dp">
 
-                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/storage"

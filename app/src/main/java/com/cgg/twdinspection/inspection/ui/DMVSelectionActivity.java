@@ -58,7 +58,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         customProgressDialog.show();
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
-        dmvSelectionActivityBinding.header.headerTitle.setText(getResources().getString(R.string.general_info));
+        dmvSelectionActivityBinding.header.headerTitle.setText("Institute Inspection");
         instMainViewModel = new InstMainViewModel(getApplication());
         selectionViewModel = new InstSelectionViewModel(getApplication());
 
