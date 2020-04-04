@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_8dp"
             android:layout_marginBottom="@dimen/dimen_8dp"
+            android:drawableTint="@color/colorPrimary"
             android:drawableLeft="@drawable/role_16"
             android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -34,6 +35,7 @@
             android:id="@+id/inspectionTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
             android:drawableLeft="@drawable/clock_16"
             android:drawablePadding="@dimen/dimen_10dp" />
     </LinearLayout>
