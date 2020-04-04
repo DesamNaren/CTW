@@ -48,8 +48,6 @@ android {
 
     buildTypes {
         release {
-            debuggable true
-
             buildConfigField("String", "SERVER_URL", "\"http://ctwws.cgg.gov.in/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"https://tsobmms.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://dev7.cgg.gov.in/gccfms/ws/gcc/\"")
