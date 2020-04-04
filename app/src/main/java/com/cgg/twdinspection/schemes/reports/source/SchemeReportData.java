@@ -73,10 +73,10 @@ public class SchemeReportData {
     @SerializedName("Status_field_match")
     @Expose
     private String statusFieldMatch;
-    @SerializedName("Remarks_Id")
+    @SerializedName("remarks_id")
     @Expose
     private String remarksId;
-    @SerializedName("Remarks_Type")
+    @SerializedName("remarks_type")
     @Expose
     private String remarksType;
     @SerializedName("scheme_Id")

@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.schemes.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -67,7 +68,7 @@ public class BenDetailsViewModel extends ViewModel {
     public void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
         Gson gson=new Gson();
         String req=gson.toJson(schemeSubmitRequest);
-
+        Log.i("schemesRequest",req);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchemeSubmitResponse(schemeSubmitRequest).enqueue(new Callback<SchemeSubmitResponse>() {
             @Override

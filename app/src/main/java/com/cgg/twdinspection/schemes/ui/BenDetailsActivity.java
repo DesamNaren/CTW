@@ -284,7 +284,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         schemeSubmitRequest.setDeviceId(Utils.getDeviceID(this));
         schemeSubmitRequest.setVersionNo(Utils.getVersionName(this));
         schemeSubmitRequest.setPhoto_key_id(randomNo);
+
         viewModel.submitSchemeDetails(schemeSubmitRequest);
+
 
     }
 

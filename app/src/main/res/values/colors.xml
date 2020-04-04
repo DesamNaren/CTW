@@ -3,6 +3,18 @@
     <color name="colorPrimary">#ff3984c6</color>
     <color name="colorPrimaryDark">#ff3984c6</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <!--splash colors-->
+    <color name="gcc">#D97D54</color>
+    <color name="eng">#5A392A</color>
+    <color name="inst">#328A8E</color>
+    <color name="schemes">#314755</color>
+    <color name="bg1">#D1C5B5</color>
+    <color name="bg2">#DBD1C5</color>
+    <color name="bg3">#E0D8CD</color>
+    <color name="bg4">#E7E0D8</color>
+
     <!--<color name="headerTextColor">#f26222</color>-->
     <color name="white">#ffffff</color>
     <color name="green">#008000</color>

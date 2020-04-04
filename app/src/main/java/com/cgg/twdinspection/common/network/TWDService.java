@@ -125,7 +125,7 @@ public interface TWDService {
     Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);
 
     @Multipart
-    @POST("upload/uploadSchemePhotos")
+    @POST("upload/uploadSchemeInspectionPhotos")
     Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image, @Part MultipartBody.Part image2);
 
     @Multipart
