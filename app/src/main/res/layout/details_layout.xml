@@ -11,6 +11,7 @@
         android:padding="@dimen/dimen_10dp">
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:textColor="@color/white"
             android:id="@+id/offNme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
             android:drawablePadding="@dimen/dimen_10dp" />
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:textColor="@color/white"
             android:id="@+id/offDes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +30,7 @@
             android:drawablePadding="@dimen/dimen_10dp" />
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:textColor="@color/white"
             android:id="@+id/inspectionTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

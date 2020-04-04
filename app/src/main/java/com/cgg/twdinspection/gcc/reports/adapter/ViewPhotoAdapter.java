@@ -1,19 +1,29 @@
 package com.cgg.twdinspection.gcc.reports.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.AdapterViewPhotoBinding;
 import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
 
 import java.util.List;
+
+import javax.sql.DataSource;
 
 public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.ItemHolder> {
 
