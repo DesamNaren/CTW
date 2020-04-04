@@ -553,7 +553,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" +  suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = officerID + "~" + divId + "~" +  suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + PIC_TYPE + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
