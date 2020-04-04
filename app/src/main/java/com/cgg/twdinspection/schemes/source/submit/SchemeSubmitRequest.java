@@ -81,10 +81,21 @@ public class SchemeSubmitRequest {
     @SerializedName("Device_Id")
     @Expose
     private String deviceId;
+@SerializedName("photo_key_id")
+    @Expose
+    private String photo_key_id;
 
     @SerializedName("Version_No")
     @Expose
     private String versionNo;
+
+    public String getPhoto_key_id() {
+        return photo_key_id;
+    }
+
+    public void setPhoto_key_id(String photo_key_id) {
+        this.photo_key_id = photo_key_id;
+    }
 
     public String getDeviceId() {
         return deviceId;

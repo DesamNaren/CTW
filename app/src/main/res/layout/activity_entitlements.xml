@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="84."
+                        android:text="83."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -741,7 +741,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="85."
+                        android:text="84."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -882,7 +882,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="86."
+                        android:text="85."
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -929,7 +929,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="87."
+                        android:text="86."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -990,7 +990,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="88."
+                        android:text="87."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1051,7 +1051,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="89."
+                        android:text="88."
                         android:textColor="@color/black" />
 
                     <RelativeLayout

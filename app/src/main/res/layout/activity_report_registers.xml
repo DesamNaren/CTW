@@ -192,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="D."
+                        android:text="C."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -253,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="E."
+                        android:text="D."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -314,7 +314,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="F."
+                        android:text="E."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -375,7 +375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="G."
+                        android:text="F."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -436,7 +436,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="H."
+                        android:text="G."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -497,7 +497,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="I."
+                        android:text="H."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -558,7 +558,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="J."
+                        android:text="I."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -620,7 +620,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="K."
+                        android:text="J."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -682,7 +682,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="L."
+                        android:text="K."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -744,7 +744,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="M."
+                        android:text="L."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -805,7 +805,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="N."
+                        android:text="M."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -867,7 +867,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="O."
+                        android:text="N."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -929,7 +929,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="P."
+                        android:text="O."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -990,7 +990,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="Q."
+                        android:text="P."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1051,7 +1051,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="R."
+                        android:text="Q."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1112,7 +1112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="T."
+                        android:text="R."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1173,7 +1173,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="U."
+                        android:text="S."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1234,7 +1234,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="V."
+                        android:text="T."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1295,7 +1295,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="W."
+                        android:text="U."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1356,7 +1356,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="X."
+                        android:text="V."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1418,7 +1418,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="Y."
+                        android:text="W."
                         android:textColor="@color/black" />
 
                     <LinearLayout
