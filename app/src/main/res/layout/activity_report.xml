@@ -191,14 +191,13 @@
 
                     <LinearLayout
                         android:layout_marginRight="@dimen/dimen_10dp"
-                        android:background="@color/gcc_color"
+                        android:background="@color/materialGrey300"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:background="@color/gcc_color"
                             android:id="@+id/btn_gcc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -216,7 +215,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/dimen_70dp"
                                     android:layout_height="@dimen/dimen_70dp"
-                                    android:background="@drawable/disabled" />
+                                    android:background="@drawable/app_bg" />
 
                                 <TextView
                                     android:id="@+id/gcc_cnt"
@@ -233,20 +232,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="GCC"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/black" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:background="@color/eng_color"
+                        android:background="@color/materialGrey300"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:background="@color/eng_color"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10dp"
@@ -263,7 +261,7 @@
                                 <ImageView
                                     android:layout_width="@dimen/dimen_70dp"
                                     android:layout_height="@dimen/dimen_70dp"
-                                    android:background="@drawable/disabled" />
+                                    android:background="@drawable/app_bg" />
 
                                 <TextView
                                     android:id="@+id/eng_cnt"
@@ -279,7 +277,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Engineering Works"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/black" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
