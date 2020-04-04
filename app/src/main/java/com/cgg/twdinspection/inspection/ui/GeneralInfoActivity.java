@@ -59,9 +59,16 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
             insTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             binding.includeBasicLayout.inspectionTime.setText(insTime);
 
-            binding.manNameTv.setText(sharedPreferences.getString(AppConstants.MAN_NAME, ""));
-            binding.instNameTv.setText(sharedPreferences.getString(AppConstants.INST_NAME, ""));
             instID = sharedPreferences.getString(AppConstants.INST_ID, "");
+            String dist = sharedPreferences.getString(AppConstants.DIST_NAME, "");
+            String mandal = sharedPreferences.getString(AppConstants.MAN_NAME, "");
+            String village = sharedPreferences.getString(AppConstants.VIL_NAME, "");
+            String instName = sharedPreferences.getString(AppConstants.INST_NAME, "");
+
+            binding.disNameTv.setText(dist);
+            binding.manNameTv.setText(mandal + " & " + village);
+            binding.instNameTv.setText(instName);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

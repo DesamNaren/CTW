@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -91,7 +91,7 @@ public class ReportsDietIssuesActivity extends BaseActivity {
     }
     private void setAdapter(List<DietListEntity > dietListEntities) {
         DietIssuesReportAdapter dietIssuesReportAdapter = new DietIssuesReportAdapter(this, dietListEntities);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.recyclerView.setAdapter(dietIssuesReportAdapter);
     }
     @Override

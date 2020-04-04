@@ -46,7 +46,9 @@
                 android:id="@+id/scrl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/dimen_10dp">
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="1."
+                            android:text="4."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -79,16 +81,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/mandal"
+                                android:text="@string/name_of_the_district"
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:id="@+id/man_name_tv"
+                                android:id="@+id/dis_name_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp" />
-
 
                         </LinearLayout>
                     </LinearLayout>
@@ -109,7 +110,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="2."
+                            android:text="5."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -132,6 +133,48 @@
                         </LinearLayout>
 
 
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="6."
+                            android:textColor="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/mandal_village"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/man_name_tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp" />
+
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <View
@@ -1126,7 +1169,6 @@
 
                         </LinearLayout>
                     </LinearLayout>
-
 
                 </LinearLayout>
 

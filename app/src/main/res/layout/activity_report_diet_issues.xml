@@ -100,8 +100,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
-                                android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                 android:orientation="horizontal">
 
                                 <RadioButton
@@ -109,6 +107,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:text="@string/yes" />
 
                                 <RadioButton
@@ -116,13 +115,11 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menuChartPainted.equalsIgnoreCase(`No`)}"
-
+                                    android:clickable="false"
                                     android:text="@string/no" />
                             </RadioGroup>
 
-
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -132,7 +129,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
-                        android:visibility="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">>
+                        android:visibility="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -159,10 +157,9 @@
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
-                                app:profileImage="@{menuImgUrl}"
-                                android:src="@drawable/ic_menu_camera" />
+                                android:src="@drawable/ic_menu_camera"
+                                app:profileImage="@{menuImgUrl}" />
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -200,8 +197,6 @@
                                 android:id="@+id/rg_prescribed_menu_served"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                 android:layout_margin="5dp"
                                 android:orientation="horizontal">
 
@@ -211,7 +206,6 @@
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menuServed.equalsIgnoreCase(`Yes`)}"
                                     android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                     android:text="@string/yes" />
 
                                 <RadioButton
@@ -220,13 +214,10 @@
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menuServed.equalsIgnoreCase(`No`)}"
                                     android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                     android:text="@string/no" />
                             </RadioGroup>
 
-
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -234,7 +225,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/black" />
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -270,18 +260,17 @@
                                     android:id="@+id/rg_food_provisions"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
                                     android:clickable="false"
                                     android:focusableInTouchMode="false"
-                                    android:layout_margin="5dp"
                                     android:orientation="horizontal">
 
                                     <RadioButton
                                         android:id="@+id/rb_food_provisions_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:checked="@{inspData.foodProvisions.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:text="@string/yes" />
 
                                     <RadioButton
@@ -290,12 +279,12 @@
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.foodProvisions.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:text="@string/no" />
                                 </RadioGroup>
 
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:id="@+id/ll_matching_with_samples"
                                 android:layout_width="match_parent"
@@ -315,9 +304,9 @@
                                     android:id="@+id/rg_matching_with_samples"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
                                     android:clickable="false"
                                     android:focusableInTouchMode="false"
-                                    android:layout_margin="5dp"
                                     android:orientation="horizontal">
 
                                     <RadioButton
@@ -326,7 +315,7 @@
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.matchingWithSamples.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
-                                    android:focusableInTouchMode="false"
+                                        android:focusableInTouchMode="false"
                                         android:text="@string/yes" />
 
                                     <RadioButton
@@ -335,7 +324,7 @@
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.matchingWithSamples.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
-                                    android:focusableInTouchMode="false"
+                                        android:focusableInTouchMode="false"
                                         android:text="@string/no" />
                                 </RadioGroup>
 
@@ -343,8 +332,6 @@
                         </LinearLayout>
 
                     </LinearLayout>
-
-
 
                     <View
                         android:layout_width="match_parent"
@@ -386,8 +373,6 @@
                                     android:id="@+id/rg_committee_exist"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                     android:layout_margin="5dp"
                                     android:orientation="horizontal">
 
@@ -397,7 +382,6 @@
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.committeeExist.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:text="@string/yes" />
 
                                     <RadioButton
@@ -406,7 +390,6 @@
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.committeeExist.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:text="@string/no" />
                                 </RadioGroup>
 
@@ -431,27 +414,23 @@
                                     android:id="@+id/rg_discussed_with_committee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                     android:layout_margin="5dp"
                                     android:orientation="horizontal">
 
                                     <RadioButton
-                                        android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:id="@+id/rb_discussed_with_committee_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.discussedWithCommittee.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:id="@+id/rb_discussed_with_committee_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.discussedWithCommittee.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:text="@string/no" />
                                 </RadioGroup>
                             </LinearLayout>
@@ -500,27 +479,27 @@
                                     android:id="@+id/rg__maintaining_register"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
                                     android:clickable="false"
                                     android:focusableInTouchMode="false"
-                                    android:layout_margin="5dp"
                                     android:orientation="horizontal">
 
                                     <RadioButton
-                                        android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:id="@+id/rb_maintaining_register_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.maintainingRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:clickable="false"
-                                    android:focusableInTouchMode="false"
                                         android:id="@+id/rb_maintaining_register_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.maintainingRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
                                         android:text="@string/no" />
                                 </RadioGroup>
                             </LinearLayout>
@@ -582,7 +561,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.menuChartServed.equalsIgnoreCase(`No`)}"
-                                   android:clickable="false"
+                                    android:clickable="false"
                                     android:focusableInTouchMode="false"
                                     android:text="@string/no" />
                             </RadioGroup>
@@ -630,8 +609,8 @@
                                 android:layout_height="100dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
-                                app:profileImage="@{officerImgUrl}"
-                                android:src="@drawable/ic_menu_camera" />
+                                android:src="@drawable/ic_menu_camera"
+                                app:profileImage="@{officerImgUrl}" />
 
                         </LinearLayout>
                     </LinearLayout>
