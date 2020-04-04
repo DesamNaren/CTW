@@ -111,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="26."
+                            android:text="25."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -209,7 +209,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="27."
+                            android:text="26."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -270,7 +270,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="28."
+                            android:text="27."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -376,7 +376,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="29."
+                            android:text="28."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -482,7 +482,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="30."
+                            android:text="29."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -549,7 +549,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="32."
+                            android:text="30."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -610,7 +610,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="33."
+                            android:text="31."
                             android:textColor="@color/black" />
 
                         <LinearLayout

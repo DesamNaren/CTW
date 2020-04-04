@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="34."
+                        android:text="32."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="35."
+                        android:text="33."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -259,7 +259,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="36."
+                        android:text="34."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -379,7 +379,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="37."
+                        android:text="35."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -514,7 +514,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="38."
+                        android:text="36."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -624,7 +624,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="39."
+                        android:text="37."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -691,7 +691,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="40."
+                        android:text="38."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -936,7 +936,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="41."
+                        android:text="39."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1206,7 +1206,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="42."
+                        android:text="40."
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -1247,7 +1247,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="43."
+                        android:text="41."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1311,7 +1311,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="44."
+                        android:text="42."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1375,7 +1375,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="45."
+                        android:text="43."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1440,7 +1440,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="46."
+                        android:text="44."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1505,7 +1505,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="47."
+                        android:text="45."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1566,7 +1566,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="48."
+                        android:text="46."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1626,7 +1626,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="49."
+                        android:text="47."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1686,7 +1686,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="50."
+                        android:text="48."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1746,7 +1746,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="51."
+                        android:text="49."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1809,7 +1809,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="52."
+                        android:text="50."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1874,7 +1874,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="53."
+                        android:text="51."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1937,7 +1937,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="54."
+                        android:text="52."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2053,7 +2053,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="55."
+                        android:text="53."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2118,7 +2118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="56."
+                        android:text="54."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2227,194 +2227,11 @@
                     android:orientation="horizontal"
                     android:padding="@dimen/dimen_5dp">
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="57."
-                        android:textColor="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_total_toilets"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/repairs_to_toilets"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.totalToilets}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_total_bathrooms"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/no_of_bath_rooms"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.totalBathrooms}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_5dp">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="57.1."
-                        android:textColor="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp">
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_functioning_toilets"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/no_of_functioning_toilets"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.functioningToilets}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_funtioning_bathrooms"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/no_of_functioning_bathrooms"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.functioningBathrooms}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_required_toilets"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/repairs_required_to_toilets"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.repairsReqToilets}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                android:id="@+id/et_required_bathrooms"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/repairs_required_to_bathrooms"
-                                android:imeOptions="actionNext"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:text="@{inspData.repairsReqBathrooms}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dimen_5dp"
-                        android:text="58."
+                        android:text="55."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2603,7 +2420,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="59"
+                        android:text="56"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2664,7 +2481,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="59.1."
+                        android:text="56.1."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2706,6 +2523,189 @@
                                 android:text="@string/bad" />
 
                         </RadioGroup>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="57."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_total_toilets"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_to_toilets"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.totalToilets}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_total_bathrooms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_bath_rooms"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.totalBathrooms}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_5dp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="57.1."
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dimen_5dp">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_functioning_toilets"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_functioning_toilets"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.functioningToilets}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_funtioning_bathrooms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_functioning_bathrooms"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.functioningBathrooms}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_required_toilets"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_required_to_toilets"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.repairsReqToilets}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:errorEnabled="true">
+
+
+                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                android:id="@+id/et_required_bathrooms"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
+                                android:hint="@string/repairs_required_to_bathrooms"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:singleLine="true"
+                                android:text="@{inspData.repairsReqBathrooms}" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
                 </LinearLayout>

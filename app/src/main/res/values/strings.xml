@@ -52,10 +52,10 @@
     <string name="password">Password</string>
     <string name="is_students_attendance_marked">12. Is students attendance marked?</string>
     <string name="is_students_attendance_marked_rep">12. Is students attendance marked?</string>
-    <string name="students_marked_present_in_register">13.Students marked present in register</string>
+    <string name="students_marked_present_in_register">13. Students marked present in register</string>
     <string name="students_marked_present_in_register_rep">13. Students marked present in register</string>
     <string name="students_present_during_inspection">14. Students present during Inspection</string>
-    <string name="students_present_during_inspection_rep">13. Students present during Inspection</string>
+    <string name="students_present_during_inspection_rep">14. Students present during Inspection</string>
     <string name="variance">15. Variance</string>
     <string name="variance_rep">15. Variance</string>
     <string name="drinking_water_facility">Whether Drinking Water Facility is Available</string>
