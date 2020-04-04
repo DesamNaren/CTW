@@ -147,7 +147,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
         holder.binding.tvYesDutyAlloted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.binding.tvYesDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+                holder.binding.tvYesDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
                 holder.binding.tvNoDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
                 employeeResponse.setYday_duty_allotted(AppConstants.Yes);
             }
@@ -157,7 +157,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             @Override
             public void onClick(View view) {
                 holder.binding.tvYesDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
-                holder.binding.tvNoDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
+                holder.binding.tvNoDutyAlloted.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
                 employeeResponse.setYday_duty_allotted(AppConstants.No);
             }
         });

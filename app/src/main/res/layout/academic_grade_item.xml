@@ -108,7 +108,7 @@
                                         android:text="A"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
 
@@ -133,7 +133,7 @@
                                         android:text="B"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
                                <View
@@ -157,7 +157,7 @@
                                         android:text="C"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
                                <View
@@ -181,7 +181,7 @@
                                         android:text="D"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
                                <View
@@ -205,7 +205,7 @@
                                         android:text="E"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
                                <View
@@ -229,7 +229,7 @@
                                         android:text="A+"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
                                <View
@@ -253,7 +253,7 @@
                                         android:text="B+"
                                         android:textAlignment="center"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                                        android:textColor="@color/list_blue" />
+                                        android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
 
@@ -291,7 +291,7 @@
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -322,7 +322,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -336,7 +336,7 @@
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -366,7 +366,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -380,7 +380,7 @@
                                             android:imeOptions="actionNext"
                                             android:inputType="number"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -410,7 +410,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -424,7 +424,7 @@
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -454,7 +454,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -468,7 +468,7 @@
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -498,7 +498,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -512,7 +512,7 @@
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
@@ -542,7 +542,7 @@
                                     <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColorHint="@color/list_blue"
+                                        android:textColorHint="@color/colorPrimary"
                                         app:errorEnabled="false">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -556,7 +556,7 @@
                                             android:inputType="number"
                                             android:maxLength="3"
                                             android:singleLine="true"
-                                            android:textColorHint="@color/list_blue" />
+                                            android:textColorHint="@color/colorPrimary" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>

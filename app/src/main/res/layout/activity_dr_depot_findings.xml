@@ -12,7 +12,7 @@
             android:id="@+id/cv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/list_blue" />
+            android:background="@color/colorPrimary" />
 
         <include
             android:id="@+id/header"

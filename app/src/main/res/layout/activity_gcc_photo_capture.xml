@@ -65,7 +65,7 @@
                                 android:layout_gravity="center"
                                 android:id="@+id/iv_entrance"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/main_buildings" />
                         </LinearLayout>
@@ -110,7 +110,7 @@
                                 android:layout_height="80dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/floor" />
                         </LinearLayout>
@@ -141,7 +141,7 @@
                                 android:layout_gravity="center"
                                 android:id="@+id/iv_ceiling"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/roof" />
                         </LinearLayout>
@@ -184,7 +184,7 @@
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:id="@+id/iv_stock_arrng1"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/godown_storage" />
                         </LinearLayout>
@@ -215,7 +215,7 @@
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:id="@+id/iv_stock_arrng2"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/godown_storage" />
                         </LinearLayout>
@@ -261,7 +261,7 @@
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:id="@+id/ivMachinary"
-                                android:background="@color/list_blue"
+                                android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/machinery" />
                         </LinearLayout>

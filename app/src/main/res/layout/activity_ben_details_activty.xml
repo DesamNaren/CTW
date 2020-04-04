@@ -35,12 +35,12 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/dimen_50dp"
-                    android:background="@drawable/schemes"
-                    android:backgroundTint="@color/list_blue" />
+                    android:background="@drawable/schemes_icon"
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_benReport"
@@ -424,14 +424,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/submitBtn"
-            android:background="@android:color/transparent"></androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:background="@android:color/transparent"/>
 
         <Button
             android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/list_blue"
+            android:background="@color/colorPrimary"
             android:text="Submit"
             android:textColor="@color/white" />
     </RelativeLayout>

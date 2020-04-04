@@ -806,7 +806,7 @@
                                     android:layout_centerVertical="true"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:background="@android:drawable/ic_menu_my_calendar"
-                                    android:backgroundTint="@color/list_blue" />
+                                    android:backgroundTint="@color/colorPrimary" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/t_cosmetics_upto_month"
@@ -1066,7 +1066,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/dimen_5dp"
                             android:background="@android:drawable/ic_menu_my_calendar"
-                            android:backgroundTint="@color/list_blue" />
+                            android:backgroundTint="@color/colorPrimary" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

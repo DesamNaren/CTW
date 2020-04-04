@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableLeft="@drawable/user_16"
-            android:drawableTint="@color/list_blue"
+            android:drawableTint="@color/colorPrimary"
             android:text="Division Name"
             android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/user_16"
-                android:drawableTint="@color/list_blue"
+                android:drawableTint="@color/colorPrimary"
                 android:text="Society Name"
                 android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/user_16"
-                android:drawableTint="@color/list_blue"
+                android:drawableTint="@color/colorPrimary"
                 android:text="DR Godown Name"
                 android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/user_16"
-                android:drawableTint="@color/list_blue"
+                android:drawableTint="@color/colorPrimary"
                 android:text="Salesman Name"
                 android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/user_16"
-                android:drawableTint="@color/list_blue"
+                android:drawableTint="@color/colorPrimary"
                 android:text="Incharge Name"
                 android:drawablePadding="@dimen/dimen_10dp" />
 
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/clock_16"
-                android:drawableTint="@color/list_blue"
+                android:drawableTint="@color/colorPrimary"
                 android:text="Date of Inspection"
                 android:drawablePadding="@dimen/dimen_10dp" />
 

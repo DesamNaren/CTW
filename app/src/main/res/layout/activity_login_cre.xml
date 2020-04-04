@@ -13,11 +13,13 @@
     </data>
 
     <RelativeLayout
+        android:background="@color/colorPrimary"
         android:id="@+id/rl_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp"
@@ -39,9 +41,10 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                android:background="@color/colorPrimary" />
+                android:background="@color/white" />
 
             <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
@@ -61,6 +64,7 @@
             android:padding="@dimen/dimen_20dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:textColorHint="@color/white"
                 android:id="@+id/t_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,6 +75,7 @@
 
 
                 <com.cgg.twdinspection.common.custom.CustomFontEditText
+                    android:textColor="@color/white"
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,6 +92,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:textColorHint="@color/white"
                     android:id="@+id/t_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +101,7 @@
                     app:errorEnabled="true">
 
                     <com.cgg.twdinspection.common.custom.CustomFontEditText
+                        android:textColor="@color/white"
                         android:id="@+id/et_pwd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -106,14 +113,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
+                    android:background="@drawable/pwd_hide"
+                    android:backgroundTint="@color/white"
                     android:id="@+id/pwdImage"
                     android:layout_width="@dimen/dimen_20dp"
                     android:layout_height="@dimen/dimen_20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dimen_20dp"
-                    android:onClick="@{()-> viewModel.onViewPwd()}"
-                    android:src="@drawable/pwd_hide" />
+                    android:onClick="@{()-> viewModel.onViewPwd()}" />
 
             </RelativeLayout>
 
@@ -142,7 +150,8 @@
         </LinearLayout>
 
 
-        <include layout="@layout/footer_layout" />
+        <include
+            layout="@layout/footer_layout" />
     </RelativeLayout>
 
 </layout>

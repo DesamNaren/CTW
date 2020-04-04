@@ -139,8 +139,8 @@
                         android:layout_marginTop="@dimen/dimen_8dp"
                         android:background="@color/white"
                         app:layout_collapseMode="pin"
-                        app:tabIndicatorColor="@color/list_blue"
-                        app:tabSelectedTextColor="@color/list_blue" />
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabSelectedTextColor="@color/colorPrimary" />
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.viewpager.widget.ViewPager
@@ -159,7 +159,7 @@
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/root_coordinator"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/list_blue"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/dimen_30dp"
                 android:visibility="visible" />
 

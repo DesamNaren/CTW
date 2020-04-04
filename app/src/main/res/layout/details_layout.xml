@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/user_16"
-            android:drawableTint="@color/list_blue"
+            android:drawableTint="@color/colorPrimary"
             android:drawablePadding="@dimen/dimen_10dp" />
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView

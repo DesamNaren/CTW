@@ -12,7 +12,7 @@
             android:id="@+id/cv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/list_blue" />
+            android:background="@color/colorPrimary" />
 
         <include
             android:id="@+id/header"
@@ -1059,7 +1059,7 @@
                                         android:layout_height="@dimen/dimen_70dp"
                                         android:layout_gravity="center"
                                         android:layout_margin="@dimen/dimen_10dp"
-                                        android:background="@color/list_blue"
+                                        android:background="@color/colorPrimary"
                                         android:padding="@dimen/dimen_10dp"
                                         android:src="@drawable/repair" />
 

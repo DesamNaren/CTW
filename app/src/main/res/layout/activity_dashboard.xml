@@ -12,7 +12,7 @@
             android:id="@+id/cv_profile"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/list_blue" />-->
+            android:background="@color/colorPrimary" />-->
 
         <include
             android:id="@+id/header"
@@ -33,7 +33,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@color/list_blue" />
+                app:srcCompat="@color/colorPrimary" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
