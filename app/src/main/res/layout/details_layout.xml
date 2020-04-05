@@ -13,7 +13,7 @@
         <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:textColor="@color/black"
             android:id="@+id/offNme"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/user_16"
             android:drawableTint="@color/colorPrimary"
@@ -22,7 +22,7 @@
         <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:textColor="@color/black"
             android:id="@+id/offDes"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_8dp"
             android:layout_marginBottom="@dimen/dimen_8dp"
@@ -33,7 +33,7 @@
         <com.cgg.twdinspection.common.custom.CustomFontTextView
             android:textColor="@color/black"
             android:id="@+id/inspectionTime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTint="@color/colorPrimary"
             android:drawableLeft="@drawable/clock_16"

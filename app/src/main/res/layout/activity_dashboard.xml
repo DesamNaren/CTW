@@ -183,8 +183,7 @@
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/gcc"
-                                android:padding="@dimen/dimen_30dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:padding="@dimen/dimen_20dp"
                                 android:src="@drawable/report" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
