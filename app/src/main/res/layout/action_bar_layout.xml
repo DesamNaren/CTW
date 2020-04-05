@@ -17,7 +17,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/appbar"
                 android:minHeight="?attr/actionBarSize"
                 app:actionViewClass="androidx.appcompat.widget.SearchView"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark">
