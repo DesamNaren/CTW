@@ -113,7 +113,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
-                    android:background="@drawable/pwd_hide"
+                    android:background="@drawable/hide"
                     android:backgroundTint="@color/white"
                     android:id="@+id/pwdImage"
                     android:layout_width="@dimen/dimen_20dp"

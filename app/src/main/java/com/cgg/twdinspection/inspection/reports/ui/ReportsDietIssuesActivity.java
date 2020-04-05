@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -64,11 +65,19 @@ public class ReportsDietIssuesActivity extends BaseActivity {
                 boolean menuFlag = false, officerFlag = false;
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("MENU.png")) {
-                        binding.setMenuImgUrl(reportData.getPhotos().get(z).getFilePath());
+                        Glide.with(ReportsDietIssuesActivity.this)
+                                .load(reportData.getPhotos().get(z).getFilePath())
+                                .error(R.drawable.camera)
+                                .placeholder(R.drawable.loader_black1)
+                                .into(binding.ivMenu);
                         menuFlag = true;
                     }
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("OFFICER.png")) {
-                        binding.setOfficerImgUrl(reportData.getPhotos().get(z).getFilePath());
+                        Glide.with(ReportsDietIssuesActivity.this)
+                                .load(reportData.getPhotos().get(z).getFilePath())
+                                .error(R.drawable.camera)
+                                .placeholder(R.drawable.loader_black1)
+                                .into(binding.ivInspOfficer);
                         officerFlag = true;
                     }
 
