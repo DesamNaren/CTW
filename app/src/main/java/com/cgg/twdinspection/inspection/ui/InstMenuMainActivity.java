@@ -758,6 +758,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 customProgressDialog.show();
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
+                revertFlags();
                 Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
             }
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {

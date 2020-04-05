@@ -12,9 +12,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.AdapterViewPhotoBinding;
@@ -29,18 +32,11 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
 
     private Context context;
     private List<ReportPhoto> list;
-    private ReportClickCallback reportClickCallback;
 
     public ViewPhotoAdapter(Context context, List<ReportPhoto> list) {
         this.context = context;
         this.list = list;
-        try {
-            reportClickCallback = (ReportClickCallback) context;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-    private int lastPosition = -1;
 
     @NonNull
     @Override
@@ -56,8 +52,13 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
     public void onBindViewHolder(@NonNull final ItemHolder holder, final int i) {
         final ReportPhoto dataModel = list.get(i);
         holder.listItemBinding.setPhoto(dataModel);
-        holder.listItemBinding.setImageUrl(dataModel.getFilePath());
         holder.bind(dataModel);
+
+        Glide.with(context)
+                .load(dataModel.getFilePath())
+                .error(R.drawable.camera)
+                .placeholder(R.drawable.loader_black1)
+                .into(holder.listItemBinding.ivRepairs);
     }
 
     @Override
