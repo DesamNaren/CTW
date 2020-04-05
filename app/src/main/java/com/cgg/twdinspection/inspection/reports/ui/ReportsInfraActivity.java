@@ -8,6 +8,7 @@ import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -55,7 +56,11 @@ public class ReportsInfraActivity extends BaseActivity {
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
-                        binding.setTdsImgUrl(reportData.getPhotos().get(z).getFilePath());
+                        Glide.with(ReportsInfraActivity.this)
+                                .load(reportData.getPhotos().get(z).getFilePath())
+                                .error(R.drawable.camera)
+                                .placeholder(R.drawable.loader_black1)
+                                .into(binding.ivTds);
                         break;
                     }
                 }
