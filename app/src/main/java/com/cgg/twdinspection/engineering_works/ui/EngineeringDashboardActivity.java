@@ -1,15 +1,15 @@
 package com.cgg.twdinspection.engineering_works.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -58,7 +58,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 startActivity(new Intent(EngineeringDashboardActivity.this, DashboardActivity.class));
             }
         });
-        binding.cvProfile.requestFocus();
+//        binding.cvProfile.requestFocus();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
