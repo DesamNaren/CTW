@@ -473,8 +473,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-//        binding.scroll.smoothScrollTo(0, view.getBottom());
-    }
+              view.getParent().requestChildFocus(view,view);
+              }
 
     private void ScrollToViewEditText(View view, String reason) {
         CustomFontEditText editText = (CustomFontEditText) view;

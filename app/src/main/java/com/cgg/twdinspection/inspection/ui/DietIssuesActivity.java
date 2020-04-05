@@ -459,7 +459,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     }
 
     private void ScrollToView(View view) {
-        binding.sv.smoothScrollTo(0, view.getBottom());
+        view.getParent().requestChildFocus(view,view);
     }
 
     private void addPhoto(String instID, String secId, String currentDateTime, String typeOfImage, String valueOfImage) {

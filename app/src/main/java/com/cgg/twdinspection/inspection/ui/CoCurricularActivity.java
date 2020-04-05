@@ -70,7 +70,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private int localFlag = -1;
 
     private void ScrollToView(View view) {
-        binding.scrl.smoothScrollTo(0, view.getTop());
+        view.getParent().requestChildFocus(view,view);
     }
 
     @Override

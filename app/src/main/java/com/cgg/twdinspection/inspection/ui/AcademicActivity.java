@@ -1196,7 +1196,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     }
 
     private void ScrollToView(View view) {
-        binding.scrl.smoothScrollTo(0, view.getTop());
+        view.getParent().requestChildFocus(view,view);
+
     }
 
 

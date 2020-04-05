@@ -40,10 +40,9 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     private int localFlag = -1;
 
     private void ScrollToView(View view) {
-        binding.scrl.smoothScrollTo(0, view.getTop());
+        view.getParent().requestChildFocus(view, view);
     }
-
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_entitlements, getResources().getString(R.string.title_entitlements));

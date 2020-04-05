@@ -855,7 +855,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-//        binding.scroll.smoothScrollTo(0, view.getBottom());
+        view.getParent().requestChildFocus(view,view);
     }
 
 
