@@ -19,6 +19,7 @@
         android:background="@color/colorPrimary">
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_50dp"
@@ -28,205 +29,225 @@
             android:textSize="@dimen/_30sp"
             android:textStyle="bold" />
 
-        <ScrollView
-            android:layout_width="match_parent"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
             <RelativeLayout
+                android:id="@+id/cover"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <RelativeLayout
-                    android:id="@+id/rl"
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@drawable/login_bg"
-                    android:elevation="4dp"
-                    android:orientation="vertical">
+                    android:layout_centerInParent="true">
 
-                    <!--<LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingTop="30dp">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:drawableLeft="@drawable/usericon"
-                                android:drawableTint="#123"
-                                android:singleLine="true"
-                                android:id="@+id/name"
-                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" />
-                            android:hint="User Name"
-                            android:inputType="text" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:singleLine="true"
-                                android:id="@+id/password"
-                                android:drawableLeft="@drawable/lockflat"
-                                android:drawableTint="#123"
-                                android:hint="Password"
-                                android:inputType="textPassword" />
-                        </android.support.design.widget.TextInputLayout>
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
-                                android:singleLine="true"
-                                android:drawableLeft="@drawable/mobile"
-                                android:drawableTint="#123"
-                                android:id="@+id/mobileno"
-                                android:hint="Mobile Number"
-                                android:maxLength="10"
-                                android:inputType="phone" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <Button
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="22dp"
-                            android:background="#d67601"
-                            android:text="Sign in"
-                            android:id="@+id/submit"
-                            android:textAllCaps="false"
-                            android:textColor="#fff"
-                            android:textSize="18sp" />
-                    </LinearLayout>-->
-
-                    <LinearLayout
-                        android:id="@+id/main_layout"
+                    <RelativeLayout
+                        android:id="@+id/rl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/login_bg"
+                        android:elevation="4dp"
                         android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/t_name"
+                        <!--<LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingTop="30dp">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableLeft="@drawable/usericon"
+                                    android:drawableTint="#123"
+                                    android:singleLine="true"
+                                    android:id="@+id/name"
+                                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" />
+                                android:hint="User Name"
+                                android:inputType="text" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:singleLine="true"
+                                    android:id="@+id/password"
+                                    android:drawableLeft="@drawable/lockflat"
+                                    android:drawableTint="#123"
+                                    android:hint="Password"
+                                    android:inputType="textPassword" />
+                            </android.support.design.widget.TextInputLayout>
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:singleLine="true"
+                                    android:drawableLeft="@drawable/mobile"
+                                    android:drawableTint="#123"
+                                    android:id="@+id/mobileno"
+                                    android:hint="Mobile Number"
+                                    android:maxLength="10"
+                                    android:inputType="phone" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <Button
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="22dp"
+                                android:background="#d67601"
+                                android:text="Sign in"
+                                android:id="@+id/submit"
+                                android:textAllCaps="false"
+                                android:textColor="#fff"
+                                android:textSize="18sp" />
+                        </LinearLayout>-->
+
+
+                        <LinearLayout
+                            android:id="@+id/main_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_20dp"
-                            android:layout_marginTop="@dimen/dimen_50dp"
-                            android:layout_marginRight="@dimen/dimen_20dp"
-                            android:textColorHint="@color/black"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/enter_user_name"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true"
-                                android:text="@={viewModel.username}"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_centerInParent="true"
+                            android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/t_pwd"
+                                android:id="@+id/t_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginTop="@dimen/dimen_50dp"
                                 android:layout_marginRight="@dimen/dimen_20dp"
                                 android:textColorHint="@color/black"
                                 app:errorEnabled="true">
 
+
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/et_pwd"
+                                    android:id="@+id/et_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/enter_pwd"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="textPassword"
+                                    android:hint="@string/enter_user_name"
+                                    android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@={viewModel.password}"
+                                    android:text="@={viewModel.username}"
                                     android:textColor="@color/black"
                                     android:textSize="16sp" />
+
                             </com.google.android.material.textfield.TextInputLayout>
 
-                            <ImageView
-                                android:id="@+id/pwdImage"
-                                android:layout_width="@dimen/dimen_20dp"
-                                android:layout_height="@dimen/dimen_20dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="@dimen/dimen_20dp"
-                                android:background="@drawable/pwd_hide"
-                                android:backgroundTint="@color/white"
-                                android:onClick="@{()-> viewModel.onViewPwd()}" />
 
-                        </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/t_pwd"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_20dp"
+                                    android:layout_marginRight="@dimen/dimen_20dp"
+                                    android:textColorHint="@color/black"
+                                    app:errorEnabled="true">
+
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_pwd"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="@string/enter_pwd"
+                                        android:imeOptions="actionDone"
+                                        android:inputType="textPassword"
+                                        android:singleLine="true"
+                                        android:text="@={viewModel.password}"
+                                        android:textColor="@color/black"
+                                        android:textSize="16sp" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <ImageView
+                                    android:id="@+id/pwdImage"
+                                    android:layout_width="@dimen/dimen_20dp"
+                                    android:layout_height="@dimen/dimen_20dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="@dimen/dimen_20dp"
+                                    android:background="@drawable/pwd_hide"
+                                    android:onClick="@{()-> viewModel.onViewPwd()}" />
+
+                            </RelativeLayout>
 
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dimen_10dp"
-                            android:layout_marginBottom="@dimen/dimen_20dp"
-                            android:padding="@dimen/dimen_10dp">
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:id="@+id/btn_login"
+                            <FrameLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:background="@color/colorPrimary"
-                                android:gravity="center"
-                                android:onClick="@{()-> viewModel.onBtnClick()}"
-                                android:paddingLeft="30dp"
-                                android:paddingTop="10dp"
-                                android:paddingRight="30dp"
-                                android:paddingBottom="10dp"
-                                android:text="Log In"
-                                android:textAlignment="center"
-                                android:textColor="@color/white"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:layout_marginBottom="@dimen/dimen_20dp"
+                                android:padding="@dimen/dimen_10dp">
 
-                        </FrameLayout>
-                    </LinearLayout>
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:id="@+id/btn_login"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@color/colorPrimary"
+                                    android:gravity="center"
+                                    android:onClick="@{()-> viewModel.onBtnClick()}"
+                                    android:paddingLeft="30dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingRight="30dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="Log In"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
 
-                </RelativeLayout>
+                            </FrameLayout>
+                        </LinearLayout>
 
-                <!-- <ImageButton
-                     android:id="@+id/user_profile_photo"
-                     android:layout_width="100dp"
-                     android:layout_height="100dp"
-                     android:layout_centerHorizontal="true"
-                     android:background="@drawable/user_profile_image_background"
-                     android:elevation="5dp" />-->
+                    </RelativeLayout>
+                </ScrollView>
             </RelativeLayout>
 
-        </ScrollView>
+            <ImageButton
+                android:id="@+id/user_profile_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/login_user"
+                android:elevation="5dp"
+                app:layout_constraintBottom_toTopOf="@+id/cover"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cover"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintVertical_weight="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <include layout="@layout/footer_layout" />
     </RelativeLayout>

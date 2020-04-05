@@ -75,10 +75,10 @@ public class LoginViewModel extends ViewModel {
 
     public void onViewPwd() {
         if (binding.etPwd.getInputType() == InputType.TYPE_CLASS_TEXT) {
-            binding.pwdImage.setImageDrawable(context.getResources().getDrawable(R.drawable.hide));
+            binding.pwdImage.setImageDrawable(context.getResources().getDrawable(R.drawable.pwd_hide));
             binding.etPwd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         } else {
-            binding.pwdImage.setImageDrawable(context.getResources().getDrawable(R.drawable.eye));
+            binding.pwdImage.setImageDrawable(context.getResources().getDrawable(R.drawable.pwd_view));
             binding.etPwd.setInputType(InputType.TYPE_CLASS_TEXT);
         }
         if (password.getValue() != null)
