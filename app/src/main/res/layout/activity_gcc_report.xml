@@ -15,7 +15,7 @@
             android:layout_below="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/materialGrey300"
+            android:background="@color/bg"
             tools:listitem="@layout/adapter_gcc_report" />
 
         <com.cgg.twdinspection.common.custom.CustomFontTextView

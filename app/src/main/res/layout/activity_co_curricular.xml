@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/cl"
-            android:background="@color/light_gray">
+            android:background="@color/bg">
 
             <LinearLayout
                 android:layout_width="match_parent"

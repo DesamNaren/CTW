@@ -13,7 +13,7 @@
 
 
     <RelativeLayout
-        android:background="@color/grey_light"
+        android:background="@color/bg"
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,7 +28,6 @@
             android:layout_width="match_parent"
             android:layout_margin="@dimen/dimen_5dp"
             android:layout_height="match_parent"
-            android:background="@color/materialGrey300"
             android:layout_above="@+id/btn_layout"
             tools:listitem="@layout/adapter_stu_att_reoprt" />
 

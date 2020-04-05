@@ -7,7 +7,6 @@
     android:layout_marginBottom="@dimen/dimen_10dp"
     android:layout_marginLeft="@dimen/dimen_70dp"
     android:layout_marginRight="@dimen/dimen_70dp"
-    android:backgroundTint="@color/white"
     android:background="@drawable/footer">
 
 </RelativeLayout>

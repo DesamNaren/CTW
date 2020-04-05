@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
             android:layout_below="@id/header"
-            android:background="@color/grey_light"
+            android:background="@color/bg"
             android:visibility="visible">
 
             <LinearLayout
