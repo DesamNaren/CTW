@@ -126,7 +126,7 @@
                         android:layout_height="40dp"
                         android:textAllCaps="false"
                         android:layout_margin="@dimen/dimen_10dp"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/btn_bg"
                         android:padding="@dimen/dimen_5dp"
                         android:text="@string/proceed"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"

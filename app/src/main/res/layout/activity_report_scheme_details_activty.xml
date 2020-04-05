@@ -82,7 +82,7 @@
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_10dp"
                                 android:text="Beneficiary Details"
-                                android:textAlignment="center"
+                                android:gravity="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                 android:textStyle="bold" />
 
