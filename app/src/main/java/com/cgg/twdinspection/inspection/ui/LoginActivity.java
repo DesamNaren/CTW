@@ -52,6 +52,8 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         instMainViewModel = new InstMainViewModel(getApplication());
         instSelectionViewModel = new InstSelectionViewModel(getApplication());
 
+
+
         clearSession();
 
         instSelectionViewModel.getSelectedInst().observe(this, new Observer<InstSelectionInfo>() {

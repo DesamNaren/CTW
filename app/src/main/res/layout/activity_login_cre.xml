@@ -232,6 +232,7 @@
             </RelativeLayout>
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/user_profile_photo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -71,13 +72,27 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
             if(schemeReportData.getPhotos()!=null  && schemeReportData.getPhotos().size()>0) {
 
                 if (schemeReportData.getPhotos().size()>=1 && schemeReportData.getPhotos().get(0) != null && schemeReportData.getPhotos().get(0) != null) {
-                    binding.setImageUrl(schemeReportData.getPhotos().get(0).getFilePath());
+
+                    Glide.with(SchemeReportDetailsActivity.this)
+                            .load(schemeReportData.getPhotos().get(0).getFilePath())
+                            .error(R.drawable.camera)
+                            .placeholder(R.drawable.loader_black1)
+                            .override(100, 100)
+                            .dontAnimate()
+                            .into(binding.ivCam1);
                 } else {
                     binding.ivCam1.setVisibility(View.GONE);
                 }
 
                 if (schemeReportData.getPhotos().size()>=2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
-                    binding.setImageUrl2(schemeReportData.getPhotos().get(1).getFilePath());
+
+                    Glide.with(SchemeReportDetailsActivity.this)
+                            .load(schemeReportData.getPhotos().get(1).getFilePath())
+                            .error(R.drawable.camera)
+                            .placeholder(R.drawable.loader_black1)
+                            .override(100, 100)
+                            .dontAnimate()
+                            .into(binding.ivCam2);
                 } else {
                     binding.ivCam2.setVisibility(View.GONE);
                 }

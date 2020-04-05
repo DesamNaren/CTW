@@ -58,6 +58,8 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
                 .load(dataModel.getFilePath())
                 .error(R.drawable.camera)
                 .placeholder(R.drawable.loader_black1)
+                .override(100, 100)
+                .dontAnimate()
                 .into(holder.listItemBinding.ivRepairs);
     }
 

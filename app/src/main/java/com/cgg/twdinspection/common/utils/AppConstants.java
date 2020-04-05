@@ -65,7 +65,7 @@ public class AppConstants {
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
 
-    public static final float DISTANCE = 100000000;
+    public static final float DISTANCE = 200;
     public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
