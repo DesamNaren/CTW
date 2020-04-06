@@ -67,7 +67,7 @@ public class ReportsDietIssuesActivity extends BaseActivity {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("MENU.png")) {
                         Glide.with(ReportsDietIssuesActivity.this)
                                 .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.camera)
+                                .error(R.drawable.no_image)
                                 .placeholder(R.drawable.loader_black1)
                                 .into(binding.ivMenu);
                         menuFlag = true;
@@ -75,7 +75,7 @@ public class ReportsDietIssuesActivity extends BaseActivity {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("OFFICER.png")) {
                         Glide.with(ReportsDietIssuesActivity.this)
                                 .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.camera)
+                                .error(R.drawable.no_image)
                                 .placeholder(R.drawable.loader_black1)
                                 .into(binding.ivInspOfficer);
                         officerFlag = true;

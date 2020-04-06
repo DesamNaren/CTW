@@ -58,7 +58,7 @@ public class ReportsInfraActivity extends BaseActivity {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
                         Glide.with(ReportsInfraActivity.this)
                                 .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.camera)
+                                .error(R.drawable.no_image)
                                 .placeholder(R.drawable.loader_black1)
                                 .into(binding.ivTds);
                         break;

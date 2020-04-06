@@ -75,26 +75,18 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
 
                     Glide.with(SchemeReportDetailsActivity.this)
                             .load(schemeReportData.getPhotos().get(0).getFilePath())
-                            .error(R.drawable.camera)
+                            .error(R.drawable.no_image)
                             .placeholder(R.drawable.loader_black1)
-                            .override(100, 100)
-                            .dontAnimate()
                             .into(binding.ivCam1);
-                } else {
-                    binding.ivCam1.setVisibility(View.GONE);
                 }
 
                 if (schemeReportData.getPhotos().size()>=2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
 
                     Glide.with(SchemeReportDetailsActivity.this)
                             .load(schemeReportData.getPhotos().get(1).getFilePath())
-                            .error(R.drawable.camera)
+                            .error(R.drawable.no_image)
                             .placeholder(R.drawable.loader_black1)
-                            .override(100, 100)
-                            .dontAnimate()
                             .into(binding.ivCam2);
-                } else {
-                    binding.ivCam2.setVisibility(View.GONE);
                 }
             }else{
                 binding.llPhotos.setVisibility(View.GONE);

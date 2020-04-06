@@ -56,10 +56,8 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
 
         Glide.with(context)
                 .load(dataModel.getFilePath())
-                .error(R.drawable.camera)
+                .error(R.drawable.no_image)
                 .placeholder(R.drawable.loader_black1)
-                .override(100, 100)
-                .dontAnimate()
                 .into(holder.listItemBinding.ivRepairs);
     }
 
