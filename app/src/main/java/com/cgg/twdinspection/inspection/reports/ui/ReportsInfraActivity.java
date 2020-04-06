@@ -9,12 +9,16 @@ import android.view.View;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityReportInfrastructureBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
+import com.cgg.twdinspection.schemes.reports.ui.SchemeReportDetailsActivity;
 import com.google.gson.Gson;
 
 public class ReportsInfraActivity extends BaseActivity {
@@ -56,12 +60,29 @@ public class ReportsInfraActivity extends BaseActivity {
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
                     if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
+
+                        binding.pbar.setVisibility(View.VISIBLE);
+
                         Glide.with(ReportsInfraActivity.this)
                                 .load(reportData.getPhotos().get(z).getFilePath())
                                 .error(R.drawable.no_image)
-                                .placeholder(R.drawable.loader_black1)
+                                .placeholder(R.drawable.camera)
+                                .listener(new RequestListener<String, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                        binding.pbar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        binding.pbar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
                                 .into(binding.ivTds);
-                        break;
+
+                        return;
                     }
                 }
             }

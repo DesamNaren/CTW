@@ -168,7 +168,7 @@
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
                         android:visibility="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
-                        >
+
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -189,15 +189,25 @@
                                 android:text="@string/_24_image_capture_option_to_take_photograph_of_menu"
                                 android:textColor="@color/black" />
 
-                            <ImageView
-                                android:id="@+id/iv_menu"
-                                android:layout_width="@dimen/_125dp"
-                                android:layout_height="@dimen/_125dp"
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen_10dp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/ic_menu_camera"
-                                app:profileImage="@{menuImgUrl}" />
+                                android:layout_marginTop="@dimen/dimen_10dp">
+                                <ImageView
+                                    android:id="@+id/iv_menu"
+                                    android:layout_width="@dimen/_125dp"
+                                    android:layout_height="@dimen/_125dp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    app:profileImage="@{menuImgUrl}" />
+                                <ProgressBar
+                                    android:id="@+id/pbar2"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -641,16 +651,27 @@
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/_31_picture_of_the_inspecting_officer"
                                 android:textColor="@color/black" />
-
-                            <ImageView
-                                android:id="@+id/iv_inspOfficer"
-                                android:layout_width="@dimen/_125dp"
-                                android:layout_height="@dimen/_125dp"
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen_10dp"
-                                android:src="@drawable/ic_menu_camera"
-                                android:scaleType="fitXY"
-                                app:profileImage="@{officerImgUrl}" />
+                                android:layout_marginTop="@dimen/dimen_10dp">
+                                <ImageView
+                                    android:src="@drawable/camera"
+                                    android:id="@+id/iv_inspOfficer"
+                                    android:layout_width="@dimen/_125dp"
+                                    android:layout_height="@dimen/_125dp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    app:profileImage="@{officerImgUrl}" />
+                                <ProgressBar
+                                    android:id="@+id/pbar"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+
 
                         </LinearLayout>
                     </LinearLayout>

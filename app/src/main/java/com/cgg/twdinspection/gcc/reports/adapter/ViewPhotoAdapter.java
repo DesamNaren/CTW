@@ -16,13 +16,12 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.AdapterViewPhotoBinding;
 import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,10 +53,26 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
         holder.listItemBinding.setPhoto(dataModel);
         holder.bind(dataModel);
 
+        holder.listItemBinding.pbar.setVisibility(View.VISIBLE);
+
+
         Glide.with(context)
                 .load(dataModel.getFilePath())
                 .error(R.drawable.no_image)
-                .placeholder(R.drawable.loader_black1)
+                .placeholder(R.drawable.camera)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        holder.listItemBinding.pbar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        holder.listItemBinding.pbar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
                 .into(holder.listItemBinding.ivRepairs);
     }
 

@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -73,20 +76,53 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
 
                 if (schemeReportData.getPhotos().size()>=1 && schemeReportData.getPhotos().get(0) != null && schemeReportData.getPhotos().get(0) != null) {
 
+                    binding.pbar.setVisibility(View.VISIBLE);
+
+
                     Glide.with(SchemeReportDetailsActivity.this)
                             .load(schemeReportData.getPhotos().get(0).getFilePath())
                             .error(R.drawable.no_image)
-                            .placeholder(R.drawable.loader_black1)
+                            .placeholder(R.drawable.camera)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
                             .into(binding.ivCam1);
                 }
 
                 if (schemeReportData.getPhotos().size()>=2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
 
+
+                    binding.pbar2.setVisibility(View.VISIBLE);
+
                     Glide.with(SchemeReportDetailsActivity.this)
                             .load(schemeReportData.getPhotos().get(1).getFilePath())
                             .error(R.drawable.no_image)
-                            .placeholder(R.drawable.loader_black1)
+                            .placeholder(R.drawable.camera)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    binding.pbar2.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    binding.pbar2.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
                             .into(binding.ivCam2);
+
                 }
             }else{
                 binding.llPhotos.setVisibility(View.GONE);

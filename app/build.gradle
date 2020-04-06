@@ -82,6 +82,7 @@ android {
 
 
 dependencies {
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     Map<String, String> dependencies = rootProject.ext.dependencies
     implementation dependencies.appCompat

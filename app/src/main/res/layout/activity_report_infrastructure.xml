@@ -323,14 +323,27 @@
                                 android:text="@string/capture_tds_meter_reading"
                                 android:textColor="@color/black" />
 
-                            <ImageView
-                                android:src="@drawable/camera"
-                                android:scaleType="fitXY"
-                                android:id="@+id/iv_tds"
-                                android:layout_width="@dimen/_125dp"
-                                android:layout_height="@dimen/_125dp"
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:profileImage="@{tdsImgUrl}" />
+                                android:layout_marginTop="@dimen/dimen_10dp">
+                                <ImageView
+                                    android:src="@drawable/camera"
+                                    android:id="@+id/iv_tds"
+                                    android:layout_width="@dimen/_125dp"
+                                    android:layout_height="@dimen/_125dp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    app:profileImage="@{tdsImgUrl}" />
+                                <ProgressBar
+                                    android:id="@+id/pbar"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+
 
                         </LinearLayout>
 
