@@ -48,46 +48,46 @@ public class ReportsInfraActivity extends BaseActivity {
             }
         });
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        Gson gson = new Gson();
-        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-        reportData = gson.fromJson(data, InspReportData.class);
-
-        String jsonObject  = gson.toJson(reportData.getInfraMaintenance());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
-            binding.setInspData(reportData.getInfraMaintenance());
-
-            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                for (int z = 0; z < reportData.getPhotos().size(); z++) {
-                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
-
-                        binding.pbar.setVisibility(View.VISIBLE);
-
-                        Glide.with(ReportsInfraActivity.this)
-                                .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.no_image)
-                                .placeholder(R.drawable.camera)
-                                .listener(new RequestListener<String, GlideDrawable>() {
-                                    @Override
-                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                        binding.pbar.setVisibility(View.GONE);
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                                        binding.pbar.setVisibility(View.GONE);
-                                        return false;
-                                    }
-                                })
-                                .into(binding.ivTds);
-
-                        return;
-                    }
-                }
-            }
-            binding.executePendingBindings();
-        }
+//        sharedPreferences = TWDApplication.get(this).getPreferences();
+//        Gson gson = new Gson();
+//        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
+//        reportData = gson.fromJson(data, InspReportData.class);
+//
+//        String jsonObject  = gson.toJson(reportData.getInfraMaintenance());
+//        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+//            binding.setInspData(reportData.getInfraMaintenance());
+//
+//            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+//                for (int z = 0; z < reportData.getPhotos().size(); z++) {
+//                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("TDS.png")) {
+//
+//                        binding.pbar.setVisibility(View.VISIBLE);
+//
+//                        Glide.with(ReportsInfraActivity.this)
+//                                .load(reportData.getPhotos().get(z).getFilePath())
+//                                .error(R.drawable.no_image)
+//                                .placeholder(R.drawable.camera)
+//                                .listener(new RequestListener<String, GlideDrawable>() {
+//                                    @Override
+//                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                                        binding.pbar.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//
+//                                    @Override
+//                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                                        binding.pbar.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//                                })
+//                                .into(binding.ivTds);
+//
+//                        return;
+//                    }
+//                }
+//            }
+//            binding.executePendingBindings();
+//        }
 
 
 

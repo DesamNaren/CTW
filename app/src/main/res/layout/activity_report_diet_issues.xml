@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
-                        android:visibility="@{inspData.menuChartPainted.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                        android:visibility="gone">
 
 
                         <TextView
@@ -631,7 +631,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"

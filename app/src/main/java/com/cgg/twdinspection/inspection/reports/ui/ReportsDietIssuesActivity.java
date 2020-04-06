@@ -9,10 +9,6 @@ import android.view.View;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -61,69 +57,69 @@ public class ReportsDietIssuesActivity extends BaseActivity {
         if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
 
             binding.setInspData(reportData.getDietIssues());
-            if(reportData.getDietIssues().getDietListEntities()!=null && reportData.getDietIssues().getDietListEntities().size()>0){
+            if (reportData.getDietIssues().getDietListEntities() != null && reportData.getDietIssues().getDietListEntities().size() > 0) {
                 setAdapter(reportData.getDietIssues().getDietListEntities());
             }
-            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                boolean menuFlag = false, officerFlag = false;
-                for (int z = 0; z < reportData.getPhotos().size(); z++) {
-                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("MENU.png")) {
-
-                        binding.pbar.setVisibility(View.VISIBLE);
-
-                        Glide.with(ReportsDietIssuesActivity.this)
-                                .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.no_image)
-                                .placeholder(R.drawable.camera)
-                                .listener(new RequestListener<String, GlideDrawable>() {
-                                    @Override
-                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                        binding.pbar.setVisibility(View.GONE);
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                                        binding.pbar.setVisibility(View.GONE);
-                                        return false;
-                                    }
-                                })
-                                .into(binding.ivMenu);
-
-                        menuFlag = true;
-                    }
-                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("OFFICER.png")) {
-                        binding.pbar2.setVisibility(View.VISIBLE);
-
-                        Glide.with(ReportsDietIssuesActivity.this)
-                                .load(reportData.getPhotos().get(z).getFilePath())
-                                .error(R.drawable.no_image)
-                                .placeholder(R.drawable.camera)
-                                .listener(new RequestListener<String, GlideDrawable>() {
-                                    @Override
-                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                        binding.pbar2.setVisibility(View.GONE);
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                                        binding.pbar2.setVisibility(View.GONE);
-                                        return false;
-                                    }
-                                })
-                                .into(binding.ivInspOfficer);
-
-                        officerFlag = true;
-                    }
-
-                    if (menuFlag && officerFlag) {
-                        return;
-                    }
-                }
-            }
-            binding.executePendingBindings();
+//            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+//                boolean menuFlag = false, officerFlag = false;
+//                for (int z = 0; z < reportData.getPhotos().size(); z++) {
+//                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("MENU.png")) {
+//
+//                        binding.pbar.setVisibility(View.VISIBLE);
+//
+//                        Glide.with(ReportsDietIssuesActivity.this)
+//                                .load(reportData.getPhotos().get(z).getFilePath())
+//                                .error(R.drawable.no_image)
+//                                .placeholder(R.drawable.camera)
+//                                .listener(new RequestListener<String, GlideDrawable>() {
+//                                    @Override
+//                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                                        binding.pbar.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//
+//                                    @Override
+//                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                                        binding.pbar.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//                                })
+//                                .into(binding.ivMenu);
+//
+//                        menuFlag = true;
+//                    }
+//                    if (reportData.getPhotos().get(z).getFileName().equalsIgnoreCase("OFFICER.png")) {
+//                        binding.pbar2.setVisibility(View.VISIBLE);
+//
+//                        Glide.with(ReportsDietIssuesActivity.this)
+//                                .load(reportData.getPhotos().get(z).getFilePath())
+//                                .error(R.drawable.no_image)
+//                                .placeholder(R.drawable.camera)
+//                                .listener(new RequestListener<String, GlideDrawable>() {
+//                                    @Override
+//                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                                        binding.pbar2.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//
+//                                    @Override
+//                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                                        binding.pbar2.setVisibility(View.GONE);
+//                                        return false;
+//                                    }
+//                                })
+//                                .into(binding.ivInspOfficer);
+//
+//                        officerFlag = true;
+//                    }
+//
+//                    if (menuFlag && officerFlag) {
+//                        return;
+//                    }
+//                }
         }
+        binding.executePendingBindings();
+//        }
 
 
         binding.btnLayout.btnNext.setText(getResources().getString(R.string.next));
@@ -134,11 +130,13 @@ public class ReportsDietIssuesActivity extends BaseActivity {
             }
         });
     }
-    private void setAdapter(List<DietListEntity > dietListEntities) {
+
+    private void setAdapter(List<DietListEntity> dietListEntities) {
         DietIssuesReportAdapter dietIssuesReportAdapter = new DietIssuesReportAdapter(this, dietListEntities);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         binding.recyclerView.setAdapter(dietIssuesReportAdapter);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
