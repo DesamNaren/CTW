@@ -191,10 +191,11 @@
 
                             <ImageView
                                 android:id="@+id/iv_menu"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="@dimen/_125dp"
+                                android:layout_height="@dimen/_125dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:scaleType="fitXY"
                                 android:src="@drawable/ic_menu_camera"
                                 app:profileImage="@{menuImgUrl}" />
                         </LinearLayout>
@@ -643,11 +644,12 @@
 
                             <ImageView
                                 android:id="@+id/iv_inspOfficer"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="@dimen/_125dp"
+                                android:layout_height="@dimen/_125dp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp"
                                 android:src="@drawable/ic_menu_camera"
+                                android:scaleType="fitXY"
                                 app:profileImage="@{officerImgUrl}" />
 
                         </LinearLayout>

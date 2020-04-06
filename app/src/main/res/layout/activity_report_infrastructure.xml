@@ -324,9 +324,11 @@
                                 android:textColor="@color/black" />
 
                             <ImageView
+                                android:src="@drawable/camera"
+                                android:scaleType="fitXY"
                                 android:id="@+id/iv_tds"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
+                                android:layout_width="@dimen/_125dp"
+                                android:layout_height="@dimen/_125dp"
                                 android:layout_gravity="center"
                                 app:profileImage="@{tdsImgUrl}" />
 

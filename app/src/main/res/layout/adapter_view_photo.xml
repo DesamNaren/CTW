@@ -32,14 +32,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:padding="@dimen/dimen_10dp">
+                android:layout_marginTop="@dimen/dimen_10dp">
             <ImageView
                 android:id="@+id/iv_repairs"
-                android:layout_width="@dimen/_100dp"
-                android:layout_height="@dimen/_100dp"
+                android:layout_width="@dimen/_125dp"
+                android:layout_height="@dimen/_125dp"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/dimen_10dp"
                 android:scaleType="fitXY"
                 app:profileImage="@{imageUrl}" />
                 <ProgressBar

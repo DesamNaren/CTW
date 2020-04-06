@@ -138,17 +138,20 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
                         if (schemeReportResponse.getSchemeReportData() != null && schemeReportResponse.getSchemeReportData().size() > 0) {
                             beneficiaryDetailsMain = schemeReportResponse.getSchemeReportData();
                             tempBeneficiaryDetails.addAll(schemeReportResponse.getSchemeReportData());
-                            mMenu.findItem(R.id.action_search).setVisible(true);
-                            mMenu.findItem(R.id.mi_filter).setVisible(true);
+                            if(mMenu!=null) {
+                                mMenu.findItem(R.id.action_search).setVisible(true);
+                                mMenu.findItem(R.id.mi_filter).setVisible(true);
+                            }
                             schemeReportBinding.recyclerView.setVisibility(View.VISIBLE);
                             schemeReportBinding.tvEmpty.setVisibility(View.GONE);
                             adapter = new SchemeReportAdapter(SchemesReportActivity.this, tempBeneficiaryDetails);
                             schemeReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(SchemesReportActivity.this));
                             schemeReportBinding.recyclerView.setAdapter(adapter);
                         } else if (schemeReportResponse.getSchemeReportData() != null && schemeReportResponse.getSchemeReportData().size() == 0) {
-                            mMenu.findItem(R.id.action_search).setVisible(false);
-                            mMenu.findItem(R.id.mi_filter).setVisible(false);
-
+                            if(mMenu!=null) {
+                                mMenu.findItem(R.id.action_search).setVisible(false);
+                                mMenu.findItem(R.id.mi_filter).setVisible(false);
+                            }
                             schemeReportBinding.recyclerView.setVisibility(View.GONE);
                             schemeReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                             callSnackBar("No data available");

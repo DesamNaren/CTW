@@ -114,12 +114,14 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
                                 adapter = new InspectionReportAdapter(InspectionReportsDashboard.this, inspReportDataList);
                                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(InspectionReportsDashboard.this));
                                 binding.recyclerView.setAdapter(adapter);
+                                if(mMenu!=null)
                                 mMenu.findItem(R.id.action_search).setVisible(true);
 
                             } else {
                                 binding.recyclerView.setVisibility(View.GONE);
                                 binding.tvEmpty.setVisibility(View.VISIBLE);
                                 callSnackBar("No data available");
+                                if(mMenu!=null)
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                             }
 

@@ -16,4 +16,5 @@
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_60dp">60dp</dimen>
     <dimen name="dimen_300dp">300dp</dimen>
+    <dimen name="_125dp">125dp</dimen>
 </resources>
