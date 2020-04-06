@@ -111,4 +111,6 @@ dependencies {
 //    implementation dependencies.itext
     implementation dependencies.lifecycle_version
     implementation dependencies.rxBinding
+    implementation 'de.hdodenhof:circleimageview:1.2.1'
+
 }
