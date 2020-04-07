@@ -27,6 +27,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityGccMfpFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCertificates;
@@ -35,7 +36,6 @@ import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.cgg.twdinspection.databinding.ActivityGccMfpFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -198,7 +198,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         });
 
 
-
         binding.rgQualityStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -277,19 +276,17 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         });
 
 
-
         binding.rgInspDateDivManager.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
                 if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_div_manager_rb_yes) {
-                    lastInsDiv= AppConstants.Yes;
+                    lastInsDiv = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.insp_date_div_manager_rb_no) {
                     lastInsDiv = AppConstants.No;
                 }
             }
         });
-
 
 
         binding.rgRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -320,7 +317,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 legalMetDateSelection();
             }
         });
-
 
 
         binding.rgRepairsReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -358,12 +354,11 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     registerBookCertificates.setInsuranceCertificate(insCer);
                     registerBookCertificates.setFireNoc(fireNOC);
                     registerBookCertificates.setWeightMeasureCertificate(weightMea);
-                    if(!weightDate.contains("/")){
+                    if (!weightDate.contains("/")) {
                         registerBookCertificates.setWeightMeasureValidity("");
-                    }else {
+                    } else {
                         registerBookCertificates.setWeightMeasureValidity(weightDate);
                     }
-
 
 
                     mfpGodownsInsp.setRegisterBookCertificates(registerBookCertificates);
@@ -391,8 +386,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
-                    editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
-                    editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
+                    editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
@@ -438,7 +433,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(stockCards)) {
             returnFlag = false;
             showSnackBar("Please check stack cards displayed");
-        }else if (TextUtils.isEmpty(godownHyg)) {
+        } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
             showSnackBar("Please check godown hygienic condition");
         } else if (TextUtils.isEmpty(driage)) {
@@ -453,14 +448,14 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
             showSnackBar("Please check last inspection date");
-        }else if (TextUtils.isEmpty(repairsReq)) {
+        } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
             showSnackBar("Please check repairs required");
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
             ScrollToView(binding.ivRepairs);
-        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
+        } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
             ScrollToView(binding.ivRepairs);
@@ -473,8 +468,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-              view.getParent().requestChildFocus(view,view);
-              }
+        view.getParent().requestChildFocus(view, view);
+    }
 
     private void ScrollToViewEditText(View view, String reason) {
         CustomFontEditText editText = (CustomFontEditText) view;
@@ -506,7 +501,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 

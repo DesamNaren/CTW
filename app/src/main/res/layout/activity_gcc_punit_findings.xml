@@ -376,7 +376,9 @@
                                         android:hint="Insurance validity"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@string/select_date"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -485,7 +487,9 @@
                                         android:hint="Certificate validity"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@string/select_date"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 

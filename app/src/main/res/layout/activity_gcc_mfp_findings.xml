@@ -177,7 +177,9 @@
                                         android:hint="Insurance validity"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@string/select_date"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -284,7 +286,9 @@
                                         android:hint="Certificate validity"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@string/select_date"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -657,8 +661,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_repairs"
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"

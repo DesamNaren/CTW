@@ -187,6 +187,8 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     }else{
+                                        binding.spSociety.setAdapter(null);
+                                        binding.spDepot.setAdapter(null);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -230,6 +232,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                                 android.R.layout.simple_spinner_dropdown_item, drDepots);
                                         binding.spDepot.setAdapter(adapter);
                                     }else {
+                                        binding.spDepot.setAdapter(null);
                                         showSnackBar("No DR Depots found");
                                     }
                                 }
@@ -255,6 +258,8 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                         if (drDepots != null) {
                             selectedDepotID = drDepots.getGodownId();
                             selectedDRDepots = drDepots;
+                        }else{
+                            showSnackBar(getString(R.string.something));
                         }
                     }
                 });

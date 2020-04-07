@@ -26,10 +26,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
@@ -238,7 +238,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                             request.setGodownId(drDepots.getGodownId());
                             request.setShop_avail(shopAvail);
                             gccPhotoViewModel.submitGCCDetails(request);
-                        }else {
+                        } else {
                             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                         }
                     }
@@ -472,9 +472,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             showSnackBar(getString(R.string.something));
         }
     }
+
     private void CallSuccessAlert(String msg) {
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
+
     @Override
     public void handleError(Throwable e, Context context) {
         customProgressDialog.hide();
@@ -569,7 +571,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
+                    Utils.getDeviceID(DRDepotActivity.this)+"~" + Utils.getVersionName(DRDepotActivity.this)+"~"+Utils.getRandomNumberString()+".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

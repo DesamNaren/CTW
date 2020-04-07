@@ -175,6 +175,8 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                                 android.R.layout.simple_spinner_dropdown_item, mfpGoDowns);
                                         binding.spMfp.setAdapter(adapter);
                                     }else {
+                                        binding.spMfp.setAdapter(null);
+                                        binding.spMfp.setAdapter(null);
                                         showSnackBar("No MFP Godowns found");
                                     }
                                 }
@@ -201,6 +203,8 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                         if (mfps != null) {
                             selectedMfpID = mfps.getGodownId();
                             selectedMfpGoDowns = mfps;
+                        }else{
+                            showSnackBar(getString(R.string.something));
                         }
                     }
                 });

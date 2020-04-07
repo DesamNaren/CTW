@@ -490,7 +490,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                         insComDate = checkUpDate;
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 

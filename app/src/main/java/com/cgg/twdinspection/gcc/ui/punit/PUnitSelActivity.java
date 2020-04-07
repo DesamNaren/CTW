@@ -191,6 +191,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
+                                        binding.spSociety.setAdapter(null);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -210,6 +211,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
                                     }else {
+                                        binding.spPUnit.setAdapter(null);
                                         showSnackBar("No processing units found");
                                     }
                                 }
@@ -255,6 +257,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
                                     } else {
+                                        binding.spPUnit.setAdapter(null);
                                         showSnackBar("No processing units found");
                                     }
                                 }
@@ -279,6 +282,8 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                         if (pUnits != null) {
                             selectedPUnitID = pUnits.getGodownId();
                             selectedPUnits = pUnits;
+                        }else{
+                            showSnackBar(getString(R.string.something));
                         }
                     }
                 });
