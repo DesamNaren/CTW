@@ -1,31 +1,24 @@
 package com.cgg.twdinspection.gcc.reports.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.AdapterViewPhotoBinding;
-import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import javax.sql.DataSource;
 
 public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.ItemHolder> {
 
@@ -74,6 +67,14 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
                     }
                 })
                 .into(holder.listItemBinding.ivRepairs);
+
+        holder.listItemBinding.ivRepairs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dataModel.getFilePath() != null && dataModel.getFileName()!=null)
+                    Utils.displayPhotoDialogBox(dataModel.getFilePath(), context, dataModel.getFileName(), true);
+            }
+        });
     }
 
     @Override
@@ -84,10 +85,12 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
 
     class ItemHolder extends RecyclerView.ViewHolder {
         AdapterViewPhotoBinding listItemBinding;
+
         ItemHolder(AdapterViewPhotoBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }
+
         void bind(Object obj) {
             listItemBinding.executePendingBindings();
         }
@@ -105,7 +108,7 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
         return position;
     }
 
-    public  void setData(List<ReportPhoto> beneficiaryDetailArrayList){
+    public void setData(List<ReportPhoto> beneficiaryDetailArrayList) {
         list.clear();
         list.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

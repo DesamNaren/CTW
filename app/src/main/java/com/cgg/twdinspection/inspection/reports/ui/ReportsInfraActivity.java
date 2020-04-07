@@ -48,14 +48,14 @@ public class ReportsInfraActivity extends BaseActivity {
             }
         });
 
-//        sharedPreferences = TWDApplication.get(this).getPreferences();
-//        Gson gson = new Gson();
-//        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-//        reportData = gson.fromJson(data, InspReportData.class);
-//
-//        String jsonObject  = gson.toJson(reportData.getInfraMaintenance());
-//        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
-//            binding.setInspData(reportData.getInfraMaintenance());
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        Gson gson = new Gson();
+        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
+        reportData = gson.fromJson(data, InspReportData.class);
+
+        String jsonObject  = gson.toJson(reportData.getInfraMaintenance());
+        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            binding.setInspData(reportData.getInfraMaintenance());
 //
 //            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
 //                for (int z = 0; z < reportData.getPhotos().size(); z++) {
@@ -86,8 +86,8 @@ public class ReportsInfraActivity extends BaseActivity {
 //                    }
 //                }
 //            }
-//            binding.executePendingBindings();
-//        }
+            binding.executePendingBindings();
+        }
 
 
 

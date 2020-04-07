@@ -16,18 +16,26 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
@@ -44,6 +52,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import okhttp3.ResponseBody;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 import static android.Manifest.permission.READ_PHONE_STATE;
 
@@ -81,6 +90,55 @@ public class Utils {
             e.printStackTrace();
         }
         return version;
+    }
+
+    public static void displayPhotoDialogBox(String photo, Context context, String title, boolean flag) {
+        final Dialog dialog = new Dialog(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.photo_dialog);
+        final ImageView imageView = dialog.findViewById(R.id.image);
+        ImageView close = dialog.findViewById(R.id.close);
+        final ProgressBar pb = dialog.findViewById(R.id.progressbar);
+        final CustomFontTextView tv = dialog.findViewById(R.id.header_tv);
+        pb.setVisibility(View.VISIBLE);
+        if (flag) {
+            tv.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(title) && title.contains(".png"))
+                tv.setText(title.replace(".png", ""));
+        } else {
+            tv.setVisibility(View.GONE);
+        }
+
+        Glide.with(context)
+                .load(photo)
+                .error(R.drawable.no_image)
+                .placeholder(R.drawable.camera)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        pb.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        pb.setVisibility(View.GONE);
+                        PhotoViewAttacher pAttacher;
+                        pAttacher = new PhotoViewAttacher(imageView);
+                        pAttacher.update();
+                        return false;
+                    }
+                })
+                .into(imageView);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+
     }
 
     public static void hideKeyboard(Context context, View mView) {

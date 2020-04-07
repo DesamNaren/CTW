@@ -1,9 +1,13 @@
 package com.cgg.twdinspection.schemes.reports.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +20,13 @@ import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
-import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class SchemeReportDetailsActivity extends AppCompatActivity {
 
@@ -58,7 +65,6 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
         });
 
 
-
         try {
             sharedPreferences = TWDApplication.get(SchemeReportDetailsActivity.this).getPreferences();
             Gson gson = new Gson();
@@ -72,9 +78,9 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         try {
-            if(schemeReportData.getPhotos()!=null  && schemeReportData.getPhotos().size()>0) {
+            if (schemeReportData.getPhotos() != null && schemeReportData.getPhotos().size() > 0) {
 
-                if (schemeReportData.getPhotos().size()>=1 && schemeReportData.getPhotos().get(0) != null && schemeReportData.getPhotos().get(0) != null) {
+                if (schemeReportData.getPhotos().size() >= 1 && schemeReportData.getPhotos().get(0) != null && schemeReportData.getPhotos().get(0) != null) {
 
                     binding.pbar.setVisibility(View.VISIBLE);
 
@@ -97,9 +103,16 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivCam1);
+
+                    binding.ivCam1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Utils.displayPhotoDialogBox(schemeReportData.getPhotos().get(0).getFilePath(), SchemeReportDetailsActivity.this, "", false);
+                        }
+                    });
                 }
 
-                if (schemeReportData.getPhotos().size()>=2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
+                if (schemeReportData.getPhotos().size() >= 2 && schemeReportData.getPhotos().get(1) != null && schemeReportData.getPhotos().get(1) != null) {
 
 
                     binding.pbar2.setVisibility(View.VISIBLE);
@@ -123,16 +136,23 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
                             })
                             .into(binding.ivCam2);
 
+                    binding.ivCam2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Utils.displayPhotoDialogBox(schemeReportData.getPhotos().get(1).getFilePath(), SchemeReportDetailsActivity.this, "", false);
+                        }
+                    });
+
                 }
-            }else{
+            } else {
                 binding.llPhotos.setVisibility(View.GONE);
             }
 
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
-
 
     }
 
