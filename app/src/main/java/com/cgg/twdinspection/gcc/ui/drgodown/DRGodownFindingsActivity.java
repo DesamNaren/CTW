@@ -137,7 +137,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
                 if (radioGroup.getCheckedRadioButtonId() == R.id.stock_yes_rb) {
                     stockReg = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.stock_no_rb) {
@@ -150,7 +149,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding.rgPurchase.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
                 if (radioGroup.getCheckedRadioButtonId() == R.id.purchase_rb_yes) {
                     purchaseReg = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.purchase_rb_no) {
@@ -163,7 +161,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding.rgSale.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
                 if (radioGroup.getCheckedRadioButtonId() == R.id.sale_rb_yes) {
                     salePriceFix = AppConstants.Yes;
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.sale_rb_no) {
@@ -659,7 +656,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
@@ -683,7 +679,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 

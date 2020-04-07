@@ -118,16 +118,24 @@
 
                         </RadioGroup>
 
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Capture Shop Image"/>
                         <ImageView
                             android:id="@+id/iv_shop_cam"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="@dimen/_100dp"
+                            android:layout_height="@dimen/_100dp"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dimen_8dp"
                             android:layout_marginBottom="@dimen/dimen_10dp"
                             android:padding="@dimen/dimen_8dp"
                             android:src="@drawable/ic_menu_camera"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                     </LinearLayout>
 

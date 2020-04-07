@@ -221,7 +221,7 @@
                             android:id="@+id/btn_gcc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/materialGrey300"
+                            android:background="@color/eng"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="@dimen/dimen_10dp">
@@ -230,15 +230,14 @@
                                 android:layout_width="@dimen/_100dp"
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/gcc_icon" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="GCC"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 

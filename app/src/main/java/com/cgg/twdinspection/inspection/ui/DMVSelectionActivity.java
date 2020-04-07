@@ -22,6 +22,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.DmvSelectionActivityBinding;
+import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
@@ -103,6 +104,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             android.R.layout.simple_spinner_dropdown_item, distNames
                     );
                     dmvSelectionActivityBinding.spDist.setAdapter(adapter);
+                }else{
+                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this,getString(R.string.app_name),"No districts found...\n Do you want to sync district master?");
                 }
             }
         });

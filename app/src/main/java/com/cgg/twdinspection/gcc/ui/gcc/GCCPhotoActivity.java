@@ -21,10 +21,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPhotoCaptureBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
@@ -54,6 +54,7 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.internal.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -64,10 +65,10 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public Uri fileUri;
     Bitmap bm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_stock_arrang1 = 0, flag_stock_arrang2 = 0, flag_machinary = 0, flag_repair =0,flag_pUnits=0;
-    File file_repair,file_entrance, file_ceiling, file_floor, file_stock_arrang1, file_stock_arrang2, file_machinary;
+    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_stock_arrang1 = 0, flag_stock_arrang2 = 0, flag_machinary = 0, flag_repair = 0, flag_pUnits = 0;
+    File file_repair, file_entrance, file_ceiling, file_floor, file_stock_arrang1, file_stock_arrang2, file_machinary;
     String FilePath, repairPath;
-    private String officerID,divId,divName,socId,socName,inchName,suppType,suppId,godId,godName;
+    private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -98,72 +99,72 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             }
         });
         try {
-            sharedPreferences= TWDApplication.get(this).getPreferences();
-            repairPath=sharedPreferences.getString(AppConstants.repairsPath,"");
-            officerID=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
-            if(!TextUtils.isEmpty(repairPath)){
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            repairPath = sharedPreferences.getString(AppConstants.repairsPath, "");
+            officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            if (!TextUtils.isEmpty(repairPath)) {
                 file_repair = new File(repairPath);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         String inspectionData = sharedPreferences.getString(AppConstants.InspectionDetails, "");
-        Gson gson=new Gson();
-        inspectionSubmitResponse=gson.fromJson(inspectionData, InspectionSubmitResponse.class);
+        Gson gson = new Gson();
+        inspectionSubmitResponse = gson.fromJson(inspectionData, InspectionSubmitResponse.class);
         String stockDetails = sharedPreferences.getString(AppConstants.stockData, "");
-        stockDetailsResponse=gson.fromJson(stockDetails,StockDetailsResponse.class);
+        stockDetailsResponse = gson.fromJson(stockDetails, StockDetailsResponse.class);
         stockSubmitRequest = new StockSubmitRequest();
 
 
-        if(inspectionSubmitResponse.getProcessingUnit()!=null){
+        if (inspectionSubmitResponse.getProcessingUnit() != null) {
             binding.machineryCV.setVisibility(View.VISIBLE);
-            flag_pUnits=1;
+            flag_pUnits = 1;
             String pUnitData = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
-            PUnits pUnits=gson.fromJson(pUnitData, PUnits.class);
-            divId=pUnits.getDivisionId();
-            divName=pUnits.getDivisionName();
-            socId=pUnits.getSocietyId();
-            socName=pUnits.getSocietyName();
-            inchName=pUnits.getIncharge();
-            suppType=getString(R.string.p_unit_req);
-            suppId=pUnits.getGodownId();
-            godName=pUnits.getGodownName();
+            PUnits pUnits = gson.fromJson(pUnitData, PUnits.class);
+            divId = pUnits.getDivisionId();
+            divName = pUnits.getDivisionName();
+            socId = pUnits.getSocietyId();
+            socName = pUnits.getSocietyName();
+            inchName = pUnits.getIncharge();
+            suppType = getString(R.string.p_unit_req);
+            suppId = pUnits.getGodownId();
+            godName = pUnits.getGodownName();
         }
-        if(inspectionSubmitResponse.getDrDepot()!=null){
+        if (inspectionSubmitResponse.getDrDepot() != null) {
             String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
-            DRDepots drDepot=gson.fromJson(depotData, DRDepots.class);
-            divId=drDepot.getDivisionId();
-            divName=drDepot.getDivisionName();
-            socId=drDepot.getSocietyId();
-            socName=drDepot.getSocietyName();
-            inchName=drDepot.getIncharge();
-            suppType=getString(R.string.dr_depot_req);
-            suppId=drDepot.getGodownId();
-            godName=drDepot.getGodownName();
+            DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
+            divId = drDepot.getDivisionId();
+            divName = drDepot.getDivisionName();
+            socId = drDepot.getSocietyId();
+            socName = drDepot.getSocietyName();
+            inchName = drDepot.getIncharge();
+            suppType = getString(R.string.dr_depot_req);
+            suppId = drDepot.getGodownId();
+            godName = drDepot.getGodownName();
         }
-        if(inspectionSubmitResponse.getDrGodown()!=null){
+        if (inspectionSubmitResponse.getDrGodown() != null) {
             String godownData = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-            DrGodowns drGodowns=gson.fromJson(godownData, DrGodowns.class);
-            divId=drGodowns.getDivisionId();
-            divName=drGodowns.getDivisionName();
-            socId=drGodowns.getSocietyId();
-            socName=drGodowns.getSocietyName();
-            inchName=drGodowns.getIncharge();
-            suppType=getString(R.string.dr_godown_req);
-            suppId=drGodowns.getGodownId();
-            godName=drGodowns.getGodownName();
+            DrGodowns drGodowns = gson.fromJson(godownData, DrGodowns.class);
+            divId = drGodowns.getDivisionId();
+            divName = drGodowns.getDivisionName();
+            socId = drGodowns.getSocietyId();
+            socName = drGodowns.getSocietyName();
+            inchName = drGodowns.getIncharge();
+            suppType = getString(R.string.dr_godown_req);
+            suppId = drGodowns.getGodownId();
+            godName = drGodowns.getGodownName();
         }
-        if(inspectionSubmitResponse.getMfpGodowns()!=null){
+        if (inspectionSubmitResponse.getMfpGodowns() != null) {
             String mfpGodown = sharedPreferences.getString(AppConstants.MFP_DEPOT_DATA, "");
-            MFPGoDowns mfpGoDowns=gson.fromJson(mfpGodown, MFPGoDowns.class);
-            divId=mfpGoDowns.getDivisionId();
-            divName=mfpGoDowns.getDivisionName();
-            socId=mfpGoDowns.getSocietyId();
-            socName=mfpGoDowns.getSocietyName();
-            inchName=mfpGoDowns.getIncharge();
-            suppType=getString(R.string.mfp_godown_req);
-            suppId=mfpGoDowns.getGodownId();
-            godName=mfpGoDowns.getGodownName();
+            MFPGoDowns mfpGoDowns = gson.fromJson(mfpGodown, MFPGoDowns.class);
+            divId = mfpGoDowns.getDivisionId();
+            divName = mfpGoDowns.getDivisionName();
+            socId = mfpGoDowns.getSocietyId();
+            socName = mfpGoDowns.getSocietyName();
+            inchName = mfpGoDowns.getIncharge();
+            suppType = getString(R.string.mfp_godown_req);
+            suppId = mfpGoDowns.getGodownId();
+            godName = mfpGoDowns.getGodownName();
         }
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,7 +253,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
+                if (validate()) {
                     if (Utils.checkInternetConnection(GCCPhotoActivity.this)) {
                         callDataSubmit();
                     } else {
@@ -264,7 +265,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private void callDataSubmit() {
-        GCCSubmitRequest request=new GCCSubmitRequest();
+        GCCSubmitRequest request = new GCCSubmitRequest();
         request.setInspectionFindings(inspectionSubmitResponse);
         request.setOfficerId(officerID);
         request.setDivisionId(divId);
@@ -281,6 +282,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
         viewModel.submitGCCDetails(request);
     }
+
     private void setStockDetailsSubmitRequest() {
 
         List<SubmitReqCommodities> essentialCommodityList = new ArrayList<>();
@@ -289,7 +291,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         List<SubmitReqCommodities> emptiesList = new ArrayList<>();
         List<SubmitReqCommodities> processing_units = new ArrayList<>();
 
-        if(stockDetailsResponse!=null && stockDetailsResponse.getEssential_commodities()!=null && stockDetailsResponse.getEssential_commodities().size()>0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
                 SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
                 essentialCommodity.setComType(stockDetailsResponse.getEssential_commodities().get(i).getCommName());
@@ -300,11 +302,11 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemValue(stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())*stockDetailsResponse.getEssential_commodities().get(i).getRate());
+                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 essentialCommodityList.add(essentialCommodity);
             }
         }
-        if(stockDetailsResponse!=null && stockDetailsResponse.getDialy_requirements()!=null && stockDetailsResponse.getDialy_requirements().size()>0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
                 SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
                 essentialCommodity.setComType(stockDetailsResponse.getDialy_requirements().get(i).getCommName());
@@ -315,11 +317,11 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemValue(stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())*stockDetailsResponse.getDialy_requirements().get(i).getRate());
+                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 dailyReqList.add(essentialCommodity);
             }
         }
-        if(stockDetailsResponse!=null && stockDetailsResponse.getMfp_commodities()!=null && stockDetailsResponse.getMfp_commodities().size()>0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
                 SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
                 essentialCommodity.setComType(stockDetailsResponse.getMfp_commodities().get(i).getCommName());
@@ -330,11 +332,11 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemValue(stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())*stockDetailsResponse.getMfp_commodities().get(i).getRate());
+                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 mfp_commodities.add(essentialCommodity);
             }
         }
-        if(stockDetailsResponse!=null && stockDetailsResponse.getEmpties()!=null && stockDetailsResponse.getEmpties().size()>0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                 SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
                 essentialCommodity.setComType(stockDetailsResponse.getEmpties().get(i).getCommName());
@@ -345,11 +347,11 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemValue(stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getEmpties().get(i).getRate());
                 essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant())*stockDetailsResponse.getEmpties().get(i).getRate());
+                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
                 emptiesList.add(essentialCommodity);
             }
         }
-        if(stockDetailsResponse!=null && stockDetailsResponse.getProcessing_units()!=null && stockDetailsResponse.getProcessing_units().size()>0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
                 SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
                 essentialCommodity.setComType(stockDetailsResponse.getProcessing_units().get(i).getCommName());
@@ -360,7 +362,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemValue(stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getProcessing_units().get(i).getRate());
                 essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())*stockDetailsResponse.getProcessing_units().get(i).getRate());
+                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
                 processing_units.add(essentialCommodity);
             }
         }
@@ -369,8 +371,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         stockSubmitRequest.setMfpCommodities(mfp_commodities);
         stockSubmitRequest.setEmpties(emptiesList);
         stockSubmitRequest.setProcessingUnits(processing_units);
-        String sysVal=sharedPreferences.getString(AppConstants.TOTAL_SYSVAL,"");
-        String phyVal=sharedPreferences.getString(AppConstants.TOTAL_PHYVAL,"");
+        String sysVal = sharedPreferences.getString(AppConstants.TOTAL_SYSVAL, "");
+        String phyVal = sharedPreferences.getString(AppConstants.TOTAL_PHYVAL, "");
         stockSubmitRequest.setTotalSystemValue(Double.parseDouble(sysVal));
         stockSubmitRequest.setTotalPhysicalValue(Double.parseDouble(phyVal));
     }
@@ -398,12 +400,12 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 MultipartBody.Part.createFormData("image", file_stock_arrang2.getName(), requestFile4);
         MultipartBody.Part body5 = null;
         MultipartBody.Part body6 = null;
-        if(flag_machinary==1) {
+        if (flag_machinary == 1) {
             RequestBody requestFile5 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_machinary);
-           body5 =MultipartBody.Part.createFormData("image", file_machinary.getName(), requestFile5);
+            body5 = MultipartBody.Part.createFormData("image", file_machinary.getName(), requestFile5);
         }
-         if (file_repair!=null) {
+        if (file_repair != null) {
             RequestBody requestFile9 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_repair);
 
@@ -430,34 +432,36 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private boolean validate() {
-        boolean returnFlag=true;
-        if(flag_entrance==0){
-            returnFlag=false;
+        boolean returnFlag = true;
+        if (flag_entrance == 0) {
+            returnFlag = false;
             showSnackBar("Please capture entrance image");
-        }else if(flag_floor==0){
-            returnFlag=false;
+        } else if (flag_floor == 0) {
+            returnFlag = false;
             showSnackBar("Please capture floor image");
-        }else if(flag_ceiling==0){
-            returnFlag=false;
+        } else if (flag_ceiling == 0) {
+            returnFlag = false;
             showSnackBar("Please capture ceiling image");
-        }else if(flag_stock_arrang1==0){
-            returnFlag=false;
+        } else if (flag_stock_arrang1 == 0) {
+            returnFlag = false;
             showSnackBar("Please capture stock arrangement image");
-        }else if(flag_stock_arrang2==0){
-            returnFlag=false;
+        } else if (flag_stock_arrang2 == 0) {
+            returnFlag = false;
             showSnackBar("Please capture stock arrangement image");
-        }else if(flag_stock_arrang2==0){
-            returnFlag=false;
+        } else if (flag_stock_arrang2 == 0) {
+            returnFlag = false;
             showSnackBar("Please capture stock arrangement image");
-        }else if(flag_pUnits==1 && flag_machinary==0){
-            returnFlag=false;
+        } else if (flag_pUnits == 1 && flag_machinary == 0) {
+            returnFlag = false;
             showSnackBar("Please capture machinary image");
         }
         return returnFlag;
     }
+
     private void showSnackBar(String str) {
         Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -510,7 +514,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     binding.ivStockArrng2.setBackgroundColor(getResources().getColor(R.color.white));
                     file_stock_arrang2 = new File(FilePath);
                     Glide.with(GCCPhotoActivity.this).load(file_stock_arrang2).into(binding.ivStockArrng2);
-                }else if (PIC_TYPE.equals(AppConstants.MACHINARY)) {
+                } else if (PIC_TYPE.equals(AppConstants.MACHINARY)) {
                     flag_machinary = 1;
                     binding.ivMachinary.setPadding(0, 0, 0, 0);
                     binding.ivMachinary.setBackgroundColor(getResources().getColor(R.color.white));
@@ -536,7 +540,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         if (imageFile != null) {
             imageUri = FileProvider.getUriForFile(
                     GCCPhotoActivity.this,
-                    BuildConfig.APPLICATION_ID +".provider", //(use your app signature + ".provider" )
+                    BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
                     imageFile);
         }
         return imageUri;
@@ -553,7 +557,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" +  suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
+                    Utils.getDeviceID(GCCPhotoActivity.this)+"~"+Utils.getVersionName(GCCPhotoActivity.this)+"~"+Utils.getRandomNumberString() +".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -600,6 +605,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
         }
     }
+
     private void CallSuccessAlert(String msg) {
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }

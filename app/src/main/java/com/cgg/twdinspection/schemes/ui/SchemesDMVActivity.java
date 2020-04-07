@@ -20,6 +20,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySchemesDmvBinding;
+import com.cgg.twdinspection.inspection.ui.DMVSelectionActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeDistrict;
@@ -112,7 +113,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                             android.R.layout.simple_spinner_dropdown_item, finYearValues);
                     schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
                 }else {
-                    callSnackBar(getResources().getString(R.string.no_fin_year));
+                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this,getString(R.string.app_name),"No financial year data found...\n Do you want to sync financial years?");
                 }
             }
         });
@@ -130,7 +131,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                             );
                             schemesDMVActivityBinding.spDist.setAdapter(adapter);
                         } else {
-                            callSnackBar(getResources().getString(R.string.no_districts));
+                            Utils.customSchoolSyncAlert(SchemesDMVActivity.this,getString(R.string.app_name),"No districts found...\n Do you want to sync district master?");
                         }
                     }
                 });

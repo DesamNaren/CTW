@@ -639,7 +639,9 @@
                                         android:hint="Cerificate issue date"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@string/select_date" />
+                                        android:text="@string/select_date"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary"/>
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1498,8 +1500,8 @@
 
                                     <ImageView
                                         android:id="@+id/iv_repairs_cam"
-                                        android:layout_width="80dp"
-                                        android:layout_height="80dp"
+                                        android:layout_width="@dimen/_100dp"
+                                        android:layout_height="@dimen/_100dp"
                                         android:layout_gravity="center"
                                         android:layout_marginTop="@dimen/dimen_8dp"
                                         android:layout_marginBottom="@dimen/dimen_10dp"

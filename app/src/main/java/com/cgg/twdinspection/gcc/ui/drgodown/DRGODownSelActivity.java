@@ -187,6 +187,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
+                                        binding.spSociety.setAdapter(null);
+                                        binding.spGodown.setAdapter(null);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -230,6 +232,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                                 android.R.layout.simple_spinner_dropdown_item, drGodowns);
                                         binding.spGodown.setAdapter(adapter);
                                     } else {
+                                        binding.spGodown.setAdapter(null);
                                         showSnackBar("No DR Godowns found");
                                     }
                                 }
@@ -254,6 +257,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                         if (drGodowns != null) {
                             selectedGoDownId = drGodowns.getGodownId();
                             selectedDrGodowns = drGodowns;
+                        }else{
+                            showSnackBar(getString(R.string.something));
                         }
                     }
                 });
