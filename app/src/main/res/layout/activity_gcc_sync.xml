@@ -84,10 +84,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_profile"
-            android:layout_marginLeft="@dimen/dimen_20dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_20dp">
+            android:layout_margin="@dimen/dimen_20dp"
+            android:layout_below="@+id/rl_profile">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,7 +93,6 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/ll_division"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -103,208 +100,271 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_weight="1"
-                        android:padding="@dimen/dimen_10dp"
-                        app:cardCornerRadius="6dp"
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_schemes"
+                            android:id="@+id/btn_division"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:background="@color/gcc_dark"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
 
                             <ImageView
-                                android:id="@+id/syncDivision"
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/division" />
+                                android:padding="@dimen/dimen_10dp"
+                                android:background="@drawable/division"
+                                android:backgroundTint="@color/white"/>
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/division_master"
-                                android:textColor="@color/black" />
+                                android:text="Division Master"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/btn_dr_godown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/schemes"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:padding="@dimen/dimen_10dp"
+                                android:background="@drawable/gcc_dr_godown"
+                                android:backgroundTint="@color/white"/>
+
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DR Godown"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/btn_dr_depot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/inst_dark"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@drawable/gcc_dr_depot"
+                                android:padding="@dimen/dimen_10dp"
+                                android:backgroundTint="@color/white" />
+
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DR Depot"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/btn_mfp_godown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/eng_dark"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_70dp"
+                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:padding="@dimen/dimen_10dp"
+                                android:background="@drawable/gcc_mfp_godown"
+                                android:backgroundTint="@color/white" />
+
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="MFP Godown"
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-
-
-                </LinearLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:padding="@dimen/dimen_10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="6dp"
-                    app:cardElevation="2dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:orientation="horizontal">
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/ll_dr_godown"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/btn_p_unit"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-
+                            android:background="@color/colorPrimaryDark"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
 
                             <ImageView
-                                android:id="@+id/iv_playgound"
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
-                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/supplier" />
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:background="@drawable/gcc_p_unit"
+                                android:backgroundTint="@color/white"/>
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@string/dr_godown"
-                                android:textColor="@color/black" />
+                                android:text="Processing Unit"
+                                android:textColor="@color/white" />
                         </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:layout_width="@dimen/dimen_2dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/grey_light" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_dr_depot"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                </LinearLayout>
 
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
-                                android:layout_gravity="center"
-                                android:id="@+id/iv_diningHall"
-                                android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/supplier" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@string/dr_depot"
-                                android:textColor="@color/black" />
 
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:padding="@dimen/dimen_10dp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_10dp"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardCornerRadius="6dp"
-                    app:cardElevation="2dp">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/ll_mfp_godown"
-
-                            android:layout_width="wrap_content"
+                            android:id="@+id/btn_petrol_pump"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
+                            android:background="@color/gcc_dark"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
 
                             <ImageView
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
-                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:id="@+id/iv_dormitory"
-                                android:background="@drawable/medical"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/supplier" />
-                            <TextView
+                                android:background="@drawable/gcc_petrol"
+                                android:backgroundTint="@color/white" />
+
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@string/mfp_godown"
-                                android:textColor="@color/black" />
-
+                                android:text="Petrol Pump"
+                                android:textColor="@color/white" />
                         </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
-                        <View
-                            android:layout_width="@dimen/dimen_2dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/grey_light" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/ll_p_unit"
-
-                            android:layout_width="wrap_content"
+                            android:id="@+id/btn_lpg"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-
+                            android:background="@color/green"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
 
                             <ImageView
                                 android:layout_width="@dimen/dimen_70dp"
                                 android:layout_height="@dimen/dimen_70dp"
-                                android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
-                                android:id="@+id/iv_mainBuilding"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/supplier" />
-                            <TextView
+                                android:padding="@dimen/dimen_20dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
+                                android:background="@drawable/gcc_lpg"
+                                android:backgroundTint="@color/white"/>
+
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="@string/p_unit"
-                                android:textColor="@color/black" />
+                                android:text="LPG"
+                                android:textColor="@color/white" />
                         </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
 
             </LinearLayout>
-
         </ScrollView>
+
 
         <ProgressBar
             android:id="@+id/progress"

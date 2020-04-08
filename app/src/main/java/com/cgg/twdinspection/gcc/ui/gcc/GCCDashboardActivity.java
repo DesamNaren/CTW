@@ -84,6 +84,20 @@ public class GCCDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(GCCDashboardActivity.this, PUnitSelActivity.class));
             }
         });
+
+        binding.btnPetrolPump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GCCDashboardActivity.this, MFPGoDownSelActivity.class));
+            }
+        });
+
+        binding.btnLpg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GCCDashboardActivity.this, PUnitSelActivity.class));
+            }
+        });
     }
 
     @Override

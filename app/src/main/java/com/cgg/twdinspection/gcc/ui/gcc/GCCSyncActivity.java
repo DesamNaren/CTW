@@ -77,7 +77,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 onBackPressed();
             }
         });
-        binding.llDivision.setOnClickListener(new View.OnClickListener() {
+        binding.btnDivision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
@@ -111,7 +111,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             }
         });
 
-        binding.llDrGodown.setOnClickListener(new View.OnClickListener() {
+        binding.btnDrGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
@@ -147,7 +147,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
 
         });
 
-        binding.llDrDepot.setOnClickListener(new View.OnClickListener() {
+        binding.btnDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
@@ -183,7 +183,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
 
         });
 
-        binding.llMfpGodown.setOnClickListener(new View.OnClickListener() {
+        binding.btnMfpGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
@@ -220,7 +220,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         });
 
 
-        binding.llPUnit.setOnClickListener(new View.OnClickListener() {
+        binding.btnPUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
