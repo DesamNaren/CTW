@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/root"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_layout"
+            android:layout_below="@id/header"
+            android:background="@color/bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:text="Petrol Pump entrance with name plate / hoarding
+                                 (Outer View)"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:id="@+id/iv_entrance"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/main_buildings" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/machineryCV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/machinary"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/ivMachinary1"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/machinery" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/machinary"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/ivMachinary2"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/machinery" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/safety_equipment"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:id="@+id/iv_safety_equi1"
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/floor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/safety_equipment"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:id="@+id/iv_safety_equi2"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/floor" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/office"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_office1"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/godown_storage" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/dimen_2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/grey_light" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/office"
+                                android:textColor="@color/black" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/dimen_10dp"
+                                android:id="@+id/iv_office2"
+                                android:background="@color/colorPrimary"
+                                android:padding="@dimen/dimen_10dp"
+                                android:src="@drawable/godown_storage" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+        </ScrollView>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
+        <include
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
+    </RelativeLayout>
+</layout>

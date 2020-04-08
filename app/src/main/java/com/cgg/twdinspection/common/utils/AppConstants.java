@@ -75,6 +75,12 @@ public class AppConstants {
     public static final String STOCK_ARRANG1 = "STOCK_ARRANG1";
     public static final String STOCK_ARRANG2 = "STOCK_ARRANG2";
     public static final String MACHINARY = "MACHINARY";
+    public static final String MACHINARY1 = "MACHINARY1";
+    public static final String MACHINARY2 = "MACHINARY2";
+    public static final String SAFETY_EQUIPMENT1 = "SAFETY_EQUIPMENT1";
+    public static final String SAFETY_EQUIPMENT2 = "SAFETY_EQUIPMENT2";
+    public static final String OFFICE1 = "OFFICE1";
+    public static final String OFFICE2 = "OFFICE2";
     public static final String REPAIR = "REPAIR";
     public static final String TOTAL_SYSVAL = "TOTAL_SYSVAL";
     public static final String TOTAL_PHYVAL = "TOTAL_PHYVAL";

@@ -267,6 +267,8 @@
             android:name="com.cgg.twdinspection.inspection.reports.ui.ReportPhotosActivity"
             android:screenOrientation="portrait" />
         <activity android:name="com.cgg.twdinspection.inspection.ui.AcademicGradeActivity" />
+        <activity android:name=".gcc.ui.petrolpump.PetrolPumpFindingsActivity" />
+        <activity android:name=".gcc.ui.petrolpump.PetrolPumpPhotoActivity" />
 
 
         <provider

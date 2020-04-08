@@ -109,9 +109,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:padding="@dimen/dimen_10dp"
                             android:background="@drawable/gcc_dr_godown"
                             android:backgroundTint="@color/white"/>
@@ -142,9 +142,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:background="@drawable/gcc_dr_depot"
                             android:padding="@dimen/dimen_10dp"
                             android:backgroundTint="@color/white" />
@@ -183,9 +183,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:padding="@dimen/dimen_10dp"
                             android:background="@drawable/gcc_mfp_godown"
                             android:backgroundTint="@color/white" />
@@ -217,9 +217,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:background="@drawable/gcc_p_unit"
@@ -262,9 +262,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:padding="@dimen/dimen_10dp"
                             android:background="@drawable/gcc_petrol"
                             android:backgroundTint="@color/white" />
@@ -296,9 +296,9 @@
                         android:padding="@dimen/dimen_10dp">
 
                         <ImageView
-                            android:layout_width="@dimen/dimen_70dp"
-                            android:layout_height="@dimen/dimen_70dp"
-                            android:layout_margin="@dimen/dimen_10dp"
+                            android:layout_width="@dimen/dimen_50dp"
+                            android:layout_height="@dimen/dimen_50dp"
+                            android:layout_margin="@dimen/dimen_20dp"
                             android:padding="@dimen/dimen_20dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:background="@drawable/gcc_lpg"

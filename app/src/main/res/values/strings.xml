@@ -968,5 +968,7 @@
     <string name="provision_of_supplies">Provision of Supplies</string>
     <string name="actual_expenditure_incurred">Actual expenditure incurred</string>
     <string name="of_financial_progress_achieved">% of financial progress achieved</string>
+    <string name="safety_equipment">Safety Equipment</string>
+    <string name="office">Office</string>
 
 </resources>
