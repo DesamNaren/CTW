@@ -23,6 +23,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
+import com.cgg.twdinspection.databinding.ActivityPetrolPumpBinding;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
@@ -45,7 +46,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
-    ActivityDrGodownBinding binding;
+    ActivityPetrolPumpBinding binding;
     private DrGodowns drGodowns;
     CustomProgressDialog customProgressDialog;
     private StockDetailsResponse stockDetailsResponsemain;
@@ -55,7 +56,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump);
         customProgressDialog = new CustomProgressDialog(this);
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
@@ -64,7 +65,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump));
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
@@ -166,7 +167,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(PetrolPumpActivity.this, DRGodownFindingsActivity.class);
+                Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
                 startActivity(intent);
             }
 
@@ -272,7 +273,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                 Utils.customWarningAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customWarningAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cgg.twdinspection.inspection.viewmodel.StockViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:id="@+id/root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/action_bar_layout" />
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_above="@+id/bottom_ll"
+                android:id="@+id/root_coordinator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header"
+                android:fitsSystemWindows="true">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/collapsing_toolbar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        app:contentScrim="?attr/colorPrimary"
+                        app:layout_scrollFlags="scroll|enterAlways">
+
+                        <RelativeLayout
+                            android:id="@+id/rl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/rl_profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_20dp"
+                                android:layout_marginRight="@dimen/dimen_20dp"
+                                app:cardBackgroundColor="@android:color/white"
+                                app:cardCornerRadius="6dp"
+                                app:cardElevation="5dp">
+
+                                <include
+                                    android:id="@+id/include_basic_layout"
+                                    layout="@layout/godown_details_layout" />
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:visibility="gone"
+                        android:id="@+id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:background="@color/white"
+                        app:layout_collapseMode="pin"
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabSelectedTextColor="@color/colorPrimary" />
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:visibility="gone"
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/no_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone" />
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/cl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/bottom_ll"
+                android:background="@android:color/transparent" />
+
+            <include
+                android:id="@+id/bottom_ll"
+                layout="@layout/buttons_layout"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
