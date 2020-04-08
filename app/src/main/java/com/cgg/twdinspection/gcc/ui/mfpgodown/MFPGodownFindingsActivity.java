@@ -34,6 +34,7 @@ import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCe
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -594,7 +595,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(MFPGodownFindingsActivity.this)
+                    + "~" + Utils.getVersionName(MFPGodownFindingsActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

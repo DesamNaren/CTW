@@ -27,6 +27,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityGccFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
@@ -36,7 +37,6 @@ import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.cgg.twdinspection.databinding.ActivityGccFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -452,19 +452,18 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     registerBookCertificates.setGodownLiabilityRegister(godownLiaReg);
                     registerBookCertificates.setInsuranceCertificate(insCer);
                     registerBookCertificates.setInsuranceCompany(insComName);
-                    if(!insComDate.contains("/")){
+                    if (!insComDate.contains("/")) {
                         registerBookCertificates.setInsuranceValidity("");
-                    }else {
+                    } else {
                         registerBookCertificates.setInsuranceValidity(insComDate);
                     }
                     registerBookCertificates.setFireDeptNoc(fireNOC);
                     registerBookCertificates.setWeightMeasureCertificate(weightMea);
-                    if(!weightDate.contains("/")){
+                    if (!weightDate.contains("/")) {
                         registerBookCertificates.setWeightMeasureValidity("");
-                    }else {
+                    } else {
                         registerBookCertificates.setWeightMeasureValidity(weightDate);
                     }
-
 
 
                     drGodownInsp.setRegisterBookCertificates(registerBookCertificates);
@@ -481,16 +480,16 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     generalFindings.setComputerizedSystem(godownCom);
                     generalFindings.setHygienicCondition(godownHyg);
                     generalFindings.setFireSafteyAvail(availEqp);
-                    if(!lastSocDate.contains("/")){
+                    if (!lastSocDate.contains("/")) {
                         generalFindings.setSocietyManagerInspectionDate("");
-                    }else {
+                    } else {
                         generalFindings.setSocietyManagerInspectionDate(lastSocDate);
                     }
 
 
-                    if(!lastDivDate.contains("/")){
+                    if (!lastDivDate.contains("/")) {
                         generalFindings.setDivisionManagerInspectionDate("");
-                    }else {
+                    } else {
                         generalFindings.setDivisionManagerInspectionDate(lastDivDate);
                     }
 
@@ -510,8 +509,9 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
-                    editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
-                    editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));String inspectionDetails = gson.toJson(inspectionSubmitResponse);
+                    editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
+                    String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
 
@@ -605,7 +605,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             ScrollToView(binding.rgInspDateDivManager);
             showSnackBar("Please check division manager last inspection date");
-        } else if (lastInsDiv.equalsIgnoreCase(AppConstants.Yes) &&  !lastDivDate.contains("/")) {
+        } else if (lastInsDiv.equalsIgnoreCase(AppConstants.Yes) && !lastDivDate.contains("/")) {
             returnFlag = false;
             ScrollToViewEditText(binding.lastInsDivDate, "Select last inspection date");
             ScrollToView(binding.lastInsDivDate);
@@ -615,7 +615,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
-        }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
+        } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
             ScrollToView(binding.ivRepairs);
@@ -628,7 +628,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
     }
 
     private void ScrollToViewEditText(View view, String reason) {
@@ -798,7 +798,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(DRGodownFindingsActivity.this)
+                    + "~" + Utils.getVersionName(DRGodownFindingsActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
