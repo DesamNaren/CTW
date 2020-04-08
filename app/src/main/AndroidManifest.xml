@@ -24,8 +24,12 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name="com.cgg.twdinspection.engineering_works.ui.UploadEngPhotosActivity"
-            android:screenOrientation="portrait"/>  <activity
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpSelActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".gcc.ui.lpg.LPGSelActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpActivity"

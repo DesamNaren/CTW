@@ -14,6 +14,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
+import com.cgg.twdinspection.gcc.ui.lpg.LPGSelActivity;
 import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
@@ -97,7 +98,7 @@ public class GCCDashboardActivity extends AppCompatActivity {
         binding.btnLpg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GCCDashboardActivity.this, PUnitSelActivity.class));
+                startActivity(new Intent(GCCDashboardActivity.this, LPGSelActivity.class));
             }
         });
     }
