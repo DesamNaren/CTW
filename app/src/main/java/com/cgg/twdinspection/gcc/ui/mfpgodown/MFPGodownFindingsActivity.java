@@ -414,7 +414,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
             ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
-            ScrollToView(binding.etInsDate);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
             showSnackBar("Please check fire department NOC");
@@ -426,35 +425,41 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
             ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
-            ScrollToView(binding.etLegalMetDate);
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
+            ScrollToView(binding.rgQualityStock);
             showSnackBar("Please check quality of the stock");
         } else if (TextUtils.isEmpty(stockCards)) {
             returnFlag = false;
+            ScrollToView(binding.rgStackCardsDisplayed);
             showSnackBar("Please check stack cards displayed");
         } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
+            ScrollToView(binding.rgGodownHyg);
             showSnackBar("Please check godown hygienic condition");
         } else if (TextUtils.isEmpty(driage)) {
             returnFlag = false;
+            ScrollToView(binding.rgDraige);
             showSnackBar("Please check driage praposal");
         } else if (TextUtils.isEmpty(genAvail)) {
             returnFlag = false;
+            ScrollToView(binding.rgGodownGenAvail);
             showSnackBar("Please check generator available");
         } else if (TextUtils.isEmpty(trayAvail)) {
             returnFlag = false;
+            ScrollToView(binding.rgTray);
             showSnackBar("Please check tray dryer available");
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
+            ScrollToView(binding.rgInspDateDivManager);
             showSnackBar("Please check last inspection date");
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
+            ScrollToView(binding.ivRepairs);
             showSnackBar("Please check repairs required");
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
-            ScrollToView(binding.ivRepairs);
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
@@ -462,7 +467,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
             showSnackBar("Please enter remarks");
-            ScrollToView(binding.etRemarks);
+            ScrollToViewEditText(binding.etRemarks, "Please enter remarks");
         }
         return returnFlag;
     }
@@ -524,7 +529,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 

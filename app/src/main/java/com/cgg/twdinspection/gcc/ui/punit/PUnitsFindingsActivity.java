@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -514,12 +515,14 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
+    }
+    private void ScrollToView(View view) {
+        view.getParent().requestChildFocus(view, view);
     }
 
     private void ScrollToViewEditText(View view, String reason) {
@@ -532,24 +535,31 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(rawStock)) {
             returnFlag = false;
+            ScrollToView(binding.rgStock);
             showSnackBar("Please check raw material stock register");
         } else if (TextUtils.isEmpty(proReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgProcessing);
             showSnackBar("Please check processing register");
         } else if (TextUtils.isEmpty(inwardReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgInward);
             showSnackBar("Please check inward register");
         } else if (TextUtils.isEmpty(outwardReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgOutward);
             showSnackBar("Please check outward register");
         } else if (TextUtils.isEmpty(saleReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgSaleInv);
             showSnackBar("Please check sale/invoice register");
         } else if (TextUtils.isEmpty(labAttReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgLabAtt);
             showSnackBar("Please check labour attendance register");
         } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
+            ScrollToView(binding.rgInsurance);
             showSnackBar("Please check insurance certificate");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
             returnFlag = false;
@@ -559,45 +569,58 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
+            ScrollToView(binding.rgFireNoc);
             showSnackBar("Please check fire department NOC");
         } else if (TextUtils.isEmpty(weightMea)) {
             returnFlag = false;
+            ScrollToView(binding.rgWeight);
             showSnackBar("Please check weight measure by legal metrology");
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
             ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
         } else if (TextUtils.isEmpty(amcMac)) {
             returnFlag = false;
+            ScrollToView(binding.rgAmc);
             showSnackBar("Please check AMC machinery");
         } else if (TextUtils.isEmpty(agmarkCer)) {
             returnFlag = false;
+            ScrollToView(binding.rgAgmark);
             showSnackBar("Please check agmark certificate");
         } else if (TextUtils.isEmpty(fsaaiCer)) {
             returnFlag = false;
+            ScrollToView(binding.rgFsaai);
             showSnackBar("Please check tray FSAAI certificate");
         } else if (TextUtils.isEmpty(empReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgEmpties);
             showSnackBar("Please check empties register");
         } else if (TextUtils.isEmpty(barrelCans)) {
             returnFlag = false;
+            ScrollToView(binding.rgBarrels);
             showSnackBar("Please check Barrels / Aluminium cans");
         } else if (TextUtils.isEmpty(cashBook)) {
             returnFlag = false;
+            ScrollToView(binding.rgCashBook);
             showSnackBar("Please check cash book");
         } else if (TextUtils.isEmpty(cashBankBal)) {
             returnFlag = false;
+            ScrollToView(binding.rgCashBank);
             showSnackBar("Please check cash and bank balance");
         } else if (TextUtils.isEmpty(vehLogBook)) {
             returnFlag = false;
+            ScrollToView(binding.rgVehLog);
             showSnackBar("Please check vehicle log book");
         } else if (TextUtils.isEmpty(qualityStock)) {
             returnFlag = false;
+            ScrollToView(binding.rgStockQua);
             showSnackBar("Please check quality of stock");
         } else if (TextUtils.isEmpty(godownHyg)) {
             returnFlag = false;
+            ScrollToView(binding.rgGodownHyg);
             showSnackBar("Please check godown is hygienic");
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
+            ScrollToView(binding.rgRepairsReq);
             showSnackBar("Please check repairs required");
         } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;

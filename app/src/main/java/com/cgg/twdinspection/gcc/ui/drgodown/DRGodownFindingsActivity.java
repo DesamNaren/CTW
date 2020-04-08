@@ -528,18 +528,23 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etReason, "Enter Reason");
         } else if (TextUtils.isEmpty(stockReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgStock);
             showSnackBar("Please check stock register");
         } else if (TextUtils.isEmpty(purchaseReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgPurchase);
             showSnackBar("Please check purchase register");
         } else if (TextUtils.isEmpty(salePriceFix)) {
             returnFlag = false;
+            ScrollToView(binding.rgSale);
             showSnackBar("Please check sale price fixation register");
         } else if (TextUtils.isEmpty(godownLiaReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgGodown);
             showSnackBar("Please check godown liability register");
         } else if (TextUtils.isEmpty(insCer)) {
             returnFlag = false;
+            ScrollToView(binding.rgInsurance);
             showSnackBar("Please check insurance certificate");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(insComName)) {
             returnFlag = false;
@@ -598,6 +603,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgInspDateSocManager);
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
+            ScrollToView(binding.rgInspDateDivManager);
             showSnackBar("Please check division manager last inspection date");
         } else if (lastInsDiv.equalsIgnoreCase(AppConstants.Yes) &&  !lastDivDate.contains("/")) {
             returnFlag = false;
@@ -609,7 +615,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
-            ScrollToView(binding.ivRepairs);
         }  else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
@@ -617,7 +622,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(remarks)) {
             returnFlag = false;
             showSnackBar("Please enter remarks");
-            ScrollToView(binding.etRemarks);
+            ScrollToViewEditText(binding.etRemarks, "Please enter remarks");
         }
         return returnFlag;
     }
@@ -703,7 +708,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
