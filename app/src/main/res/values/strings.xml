@@ -616,6 +616,7 @@
     <string name="physical_available_quantity">Physical available quantity</string>
     <string name="select_godown">Select DR Godown</string>
     <string name="select_petrol_pump">Select Petrol Pump</string>
+    <string name="select_lpg_godown">Select LPG Godown</string>
     <string name="select_depot">Select DR Depot</string>
     <string name="select_mfp_godown">Select MFP Godown</string>
     <string name="select_p_unit">Select Processing Unit</string>

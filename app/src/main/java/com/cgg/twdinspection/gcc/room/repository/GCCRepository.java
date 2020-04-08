@@ -10,6 +10,7 @@ import com.cgg.twdinspection.gcc.room.database.GCCDatabase;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
@@ -45,13 +46,22 @@ public class GCCRepository {
     public LiveData<List<PetrolSupplierInfo>> getPetrolSuppliers(String divId, String socId) {
         return gccDao.getPetrolPumps(divId, socId);
     }
+    public LiveData<List<LPGSupplierInfo>> getLPGSuppliers(String divId, String socId) {
+        return gccDao.getLPGSuppliers(divId, socId);
+    }
 
     public LiveData<List<DrGodowns>> getAllGoDowns() {
         return gccDao.getAllDrGoDowns();
     }
+
     public LiveData<List<PetrolSupplierInfo>> getAllPetrolSuppliers() {
         return gccDao.getAllPetrolSuppliers();
     }
+
+    public LiveData<List<LPGSupplierInfo>> getAllLPGSuppliers() {
+        return gccDao.getAllLPGSuppliers();
+    }
+
     public LiveData<List<DRDepots>> getDRDepots(String divId, String socId) {
         return gccDao.getDRDepots(divId, socId);
     }
@@ -95,6 +105,10 @@ public class GCCRepository {
 
     public LiveData<PetrolSupplierInfo> getPetrolPumpID(String divisionID, String societyID, String goDownName) {
         return gccDao.getPetrolPumpID(divisionID, societyID, goDownName);
+    }
+
+    public LiveData<LPGSupplierInfo> getLPGID(String divisionID, String societyID, String goDownName) {
+        return gccDao.getLPGID(divisionID, societyID, goDownName);
     }
 
     public LiveData<DRDepots> getDRDepotID(String divisionID, String societyID, String depotName) {
