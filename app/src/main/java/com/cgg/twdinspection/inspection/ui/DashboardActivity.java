@@ -98,7 +98,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding.btnEngWorks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(DashboardActivity.this, EngineeringDashboardActivity.class));
+                startActivity(new Intent(DashboardActivity.this, EngineeringDashboardActivity.class));
             }
         });
 

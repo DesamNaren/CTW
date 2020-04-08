@@ -254,7 +254,7 @@
                             android:id="@+id/btn_eng_works"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/materialGrey300"
+                            android:background="@color/green"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="@dimen/dimen_10dp">
@@ -271,10 +271,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Engineering Works"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
 
                 </LinearLayout>
 

@@ -38,6 +38,8 @@ public class LoginViewModel extends ViewModel {
         this.binding = binding;
         this.context = context;
         customProgressDialog = new CustomProgressDialog(context);
+        username.setValue("maadhavisriram");
+        password.setValue("guest");
 
         errorHandlerInterface = (ErrorHandlerInterface) context;
     }
