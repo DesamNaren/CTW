@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.R;
@@ -17,11 +18,14 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityEngDashboardBinding;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
+import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 public class EngineeringDashboardActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
@@ -30,7 +34,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
     SharedPreferences.Editor editor;
     EngDashboardViewModel viewModel;
     CustomProgressDialog customProgressDialog;
-    int sectorsCnt;
+    int insertedCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,27 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         customProgressDialog = new CustomProgressDialog(this);
 
 
+
+        viewModel.getWorksCnt().observe(EngineeringDashboardActivity.this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer worksCnt) {
+                if (worksCnt != null && worksCnt == 0) {
+                    viewModel.getWorksMasterResponse().observe(EngineeringDashboardActivity.this, new Observer<WorksMasterResponse>() {
+                        @Override
+                        public void onChanged(WorksMasterResponse worksMasterResponses) {
+                            if (worksMasterResponses != null && worksMasterResponses.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                viewModel.insertWorksInfo(worksMasterResponses.getWorkDetails());
+                            }else if(worksMasterResponses != null && worksMasterResponses.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)){
+                                callSnackBar(worksMasterResponses.getStatusMsg());
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
 
         binding.header.headerTitle.setText(getString(R.string.engineering_works));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -78,19 +103,20 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 if(TextUtils.isEmpty(binding.etEngId.getText().toString())){
                     callSnackBar("Please enter engineering work ID");
                 }else{
-                    startActivity(new Intent(EngineeringDashboardActivity.this, InspectionDetailsActivity.class));
-//                    viewModel.getWorksMaster().observe(EngineeringDashboardActivity.this, new Observer<WorksMasterResponse>() {
-//                        @Override
-//                        public void onChanged(WorksMasterResponse worksMasterResponses) {
-//                            if(worksMasterResponses!=null){
-//                                Gson gson=new Gson();
-//                                String worksMaster =gson.toJson(worksMasterResponses);
-//                                editor.putString(AppConstants.ENGWORKSMASTER,worksMaster);
-//                                editor.commit();
-//                                startActivity(new Intent(EngineeringDashboardActivity.this, InspectionDetailsActivity.class));
-//                            }
-//                        }
-//                    });
+                    viewModel.getSelWorkDetails(Integer.valueOf(binding.etEngId.getText().toString())).observe(EngineeringDashboardActivity.this, new Observer<WorkDetail>() {
+                        @Override
+                        public void onChanged(WorkDetail workDetail) {
+                            if (workDetail != null) {
+                                Gson gson=new Gson();
+                                String worksMaster =gson.toJson(workDetail);
+                                editor.putString(AppConstants.ENGWORKSMASTER,worksMaster);
+                                editor.commit();
+                                startActivity(new Intent(EngineeringDashboardActivity.this, InspectionDetailsActivity.class));
+                            }else{
+                                callSnackBar("No data found");
+                            }
+                        }
+                    });
                 }
             }
         });

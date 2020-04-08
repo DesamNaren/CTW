@@ -24,11 +24,13 @@ import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.ui.UploadEngPhotosActivity;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +63,6 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
         binding.executePendingBindings();
 
 
-
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +80,11 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
         }
 
 
+        Gson gson = new Gson();
+        WorkDetail workDetail = gson.fromJson(sharedPreferences.getString(AppConstants.ENGWORKSMASTER, ""), WorkDetail.class);
+        if (workDetail != null) {
+            binding.setWorkDetails(workDetail);
+        }
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
@@ -368,7 +374,7 @@ public class InspectionDetailsActivity extends AppCompatActivity implements Erro
             @Override
             public void onClick(View view) {
                 observation = binding.etObs.getText().toString().trim();
-                if (validate())
+//                if (validate())
                     startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
             }
         });

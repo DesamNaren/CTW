@@ -8,6 +8,10 @@
             name="viewModel"
             type="com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
 
+        <variable
+            name="workDetails"
+            type="com.cgg.twdinspection.engineering_works.source.WorkDetail" />
+
     </data>
 
     <RelativeLayout
@@ -44,13 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -71,6 +69,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.areaOfOperation}"
                                 android:textColor="@color/black" />
 
 
@@ -95,6 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.distName}"
                                 android:textColor="@color/black" />
 
 
@@ -119,6 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.mandName}"
                                 android:textColor="@color/black" />
 
 
@@ -143,6 +144,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.gpName}"
                                 android:textColor="@color/black" />
 
 
@@ -167,6 +169,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.villName}"
                                 android:textColor="@color/black" />
 
 
@@ -191,12 +194,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
+                                android:text="@={workDetails.assemblyConstName}"
                                 android:textColor="@color/black" />
 
 
                         </LinearLayout>
 
-                    </LinearLayout>
                 </LinearLayout>
 
                 <View
@@ -227,15 +230,15 @@
                         android:textColor="@color/black" />
 
 
-
                 </LinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tv_sector_others"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
                     android:visibility="gone"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:errorEnabled="true">
 
 
@@ -245,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/specify"
                         android:imeOptions="actionNext"
-                        android:singleLine="true"/>
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -279,6 +282,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.workName}"
                             android:textColor="@color/black" />
 
 
@@ -303,6 +307,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.estimateCost}"
                             android:textColor="@color/black" />
 
 
@@ -330,7 +335,6 @@
                             android:textColor="@color/black" />
 
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -352,6 +356,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.exectingAgency}"
                             android:textColor="@color/black" />
 
 
@@ -373,9 +378,10 @@
                         <TextView
                             android:id="@+id/tv_sanct_date"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.sanctionDate}"
                             android:textColor="@color/black" />
 
 
@@ -400,6 +406,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.techSanctionDate}"
                             android:textColor="@color/black" />
 
 
@@ -424,6 +431,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.commenceDate}"
                             android:textColor="@color/black" />
 
 
@@ -448,6 +456,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.targetDate}"
                             android:textColor="@color/black" />
 
 
@@ -472,6 +481,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.extensionTime}"
                             android:textColor="@color/black" />
 
 
@@ -509,6 +519,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.staffDept}"
                             android:textColor="@color/black" />
 
 
@@ -533,6 +544,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.staffMandalName}"
                             android:textColor="@color/black" />
 
 
@@ -557,6 +569,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.staffEe}"
                             android:textColor="@color/black" />
 
 
@@ -581,6 +594,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.staffDyee}"
                             android:textColor="@color/black" />
 
 
@@ -605,20 +619,135 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.staffAee}"
                             android:textColor="@color/black" />
 
 
                     </LinearLayout>
 
-                    <View
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/stage_of_work"
+                        android:textColor="@color/black" />
+
+                    <Spinner
+                        android:id="@+id/sp_stage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:id="@+id/ll_stage_work"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/stage_of_work_for_in_progress_works"
+                        android:textColor="@color/black" />
+
+                    <Spinner
+                        android:id="@+id/sp_stage_in_progress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
+                        android:visibility="visible" />
+
+
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tv_stage_others"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    android:visibility="gone"
+                    app:errorEnabled="true">
+
+
+                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_stage_others"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black" />
+                        android:layout_height="wrap_content"
+                        android:hint="@string/stage_of_work_for_in_progress_works"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/actual_expenditure_incurred"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_act_exp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.actualExpenditureIncurred}"
+                            android:textColor="@color/black" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <TextView
@@ -626,341 +755,289 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@string/stage_of_work"
+                            android:text="@string/of_financial_progress_achieved"
                             android:textColor="@color/black" />
 
-                        <Spinner
-                            android:id="@+id/sp_stage"
+                        <TextView
+                            android:id="@+id/tv_percent_fin_prog"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_gravity="center"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.percentageOfFinancialProgressAchieved}"
                             android:textColor="@color/black" />
 
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:id="@+id/ll_stage_work"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:layout_gravity="center"
-                            android:text="@string/stage_of_work_for_in_progress_works"
+                            android:text="@string/overall_appearance"
                             android:textColor="@color/black" />
 
-                        <Spinner
-                            android:id="@+id/sp_stage_in_progress"
-                            android:layout_width="0dp"
+                        <RadioGroup
+                            android:id="@+id/rg_overall_appear"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="@dimen/dimen_5dp"
-                            android:layout_gravity="center"
-                            android:visibility="visible"
-                            android:textColor="@color/black" />
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
+
+                            <RadioButton
+                                android:id="@+id/rb_overall_appear_sat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/satisfactory" />
+
+                            <RadioButton
+                                android:id="@+id/rb_overall_appear_poor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/poor" />
+
+                        </RadioGroup>
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/workmen_s_skills"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_workmen_skill"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/rb_workmen_skill_sat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/satisfactory" />
+
+                            <RadioButton
+                                android:id="@+id/rb_workmen_skill_poor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/poor" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/quality_care_curing_polishing_etc"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_qual_care"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/rb_qual_care_sat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/satisfactory" />
+
+                            <RadioButton
+                                android:id="@+id/rb_qual_care_poor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/poor" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Quality of materials"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_qual_materials"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/rb_qual_materials_sat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/satisfactory" />
+
+                            <RadioButton
+                                android:id="@+id/rb_qual_materials_poor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/poor" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Surface finishes"
+                            android:textColor="@color/black" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_surface_finish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/rb_surface_finish_sat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/satisfactory" />
+
+                            <RadioButton
+                                android:id="@+id/rb_surface_finish_poor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/poor" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="vertical">
+
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tv_stage_others"
+                        android:id="@+id/tv_obs"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:layout_margin="@dimen/dimen_10dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:errorEnabled="true">
 
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_stage_others"
+                            android:id="@+id/et_obs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/stage_of_work_for_in_progress_works"
+                            android:hint="@string/observations"
                             android:imeOptions="actionNext"
-                            android:singleLine="true"/>
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
                         android:orientation="vertical">
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Satisfaction level"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/overall_appearance"
-                                android:textColor="@color/black" />
+                        <RadioGroup
+                            android:id="@+id/rg_satis_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
-                            <RadioGroup
-                                android:id="@+id/rg_overall_appear"
+
+                            <RadioButton
+                                android:id="@+id/rb_satis_level_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_overall_appear_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_overall_appear_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/workmen_s_skills"
-                                android:textColor="@color/black" />
+                                android:text="@string/satisfactory" />
 
-                            <RadioGroup
-                                android:id="@+id/rg_workmen_skill"
+                            <RadioButton
+                                android:id="@+id/rb_satis_level_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_workmen_skill_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_workmen_skill_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/quality_care_curing_polishing_etc"
-                                android:textColor="@color/black" />
+                                android:text="@string/poor" />
 
-                            <RadioGroup
-                                android:id="@+id/rg_qual_care"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_qual_care_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_qual_care_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Quality of materials"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_qual_materials"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_qual_materials_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_qual_materials_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Surface finishes"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_surface_finish"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_surface_finish_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_surface_finish_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tv_obs"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10dp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_obs"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/observations"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true"/>
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Satisfaction level"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_satis_level"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_satis_level_sat"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/satisfactory" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_satis_level_poor"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/poor" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
+                        </RadioGroup>
 
                     </LinearLayout>
 
@@ -969,8 +1046,9 @@
 
             </LinearLayout>
         </ScrollView>
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/btn_layout"/>
+            android:id="@+id/btn_layout"
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>

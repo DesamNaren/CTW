@@ -966,5 +966,7 @@
     <string name="name_of_the_district">Name of the District</string>
     <string name="mandal_village"><![CDATA[Mandal & Village]]></string>
     <string name="provision_of_supplies">Provision of Supplies</string>
+    <string name="actual_expenditure_incurred">Actual expenditure incurred</string>
+    <string name="of_financial_progress_achieved">% of financial progress achieved</string>
 
 </resources>

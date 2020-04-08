@@ -9,8 +9,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.network.TWDService;
 import com.cgg.twdinspection.engineering_works.room.repository.SectorsRepository;
+import com.cgg.twdinspection.engineering_works.room.repository.WorksRepository;
+import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
@@ -28,13 +31,13 @@ public class EngDashboardViewModel extends AndroidViewModel {
     private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
-    private SectorsRepository sectorsRepository;
+    private WorksRepository worksRepository;
     private LiveData<List<SectorsEntity>> sectorsListLiveData;
 
 
     public EngDashboardViewModel(Context context, Application application) {
         super(application);
-        sectorsRepository=new SectorsRepository(application);
+        worksRepository =new WorksRepository(application);
         sectorsResponseLiveData = new MutableLiveData<>();
         worksMasterLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
@@ -43,21 +46,34 @@ public class EngDashboardViewModel extends AndroidViewModel {
 
     }
 
+    public int insertWorksInfo(List<WorkDetail> workDetails) {
+        return worksRepository.insertWorks(workDetails);
+    }
 
-    public LiveData<WorksMasterResponse> getWorksMaster() {
+    public LiveData<Integer> getWorksCnt() {
+        return worksRepository.getWorksCnt();
+    }
+
+
+    public LiveData<WorkDetail> getSelWorkDetails(int workId) {
+        return worksRepository.getSelWorkDetails(workId);
+    }
+
+
+    public LiveData<WorksMasterResponse> getWorksMasterResponse() {
         if (worksMasterLiveData != null) {
-            getWorksMasterResponse();
+            callWorksMasterResponse();
         }
         return worksMasterLiveData;
     }
 
-    private void getWorksMasterResponse() {
+    private void callWorksMasterResponse() {
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getWorksMaster().enqueue(new Callback<WorksMasterResponse>() {
             @Override
             public void onResponse(@NotNull Call<WorksMasterResponse> call, @NotNull Response<WorksMasterResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    //                    worksMasterLiveData.setValue(response.body());
+                    worksMasterLiveData.setValue(response.body());
                 }
             }
 
