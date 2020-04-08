@@ -12,7 +12,9 @@ import com.cgg.twdinspection.databinding.ActivityGccSyncBinding;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
@@ -28,6 +30,8 @@ public class GCCSyncViewModel extends AndroidViewModel {
     private MutableLiveData<DRGoDownMasterResponse> drGoDownMasterResponseMutableLiveData;
     private MutableLiveData<MFPGoDownMasterResponse> mfpGoDownMasterResponseMutableLiveData;
     private MutableLiveData<PUnitMasterResponse> pUnitMasterResponseMutableLiveData;
+    private MutableLiveData<PetrolPumpMasterResponse> petrolPumpMasterResponseMutableLiveData;
+    private MutableLiveData<LPGMasterResponse> lpgMasterResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivityGccSyncBinding binding;
@@ -41,6 +45,8 @@ public class GCCSyncViewModel extends AndroidViewModel {
         drGoDownMasterResponseMutableLiveData = new MutableLiveData<>();
         mfpGoDownMasterResponseMutableLiveData = new MutableLiveData<>();
         pUnitMasterResponseMutableLiveData = new MutableLiveData<>();
+        petrolPumpMasterResponseMutableLiveData = new MutableLiveData<>();
+        lpgMasterResponseMutableLiveData = new MutableLiveData<>();
         errorHandlerInterface = (ErrorHandlerInterface) context;
 
     }
@@ -97,6 +103,20 @@ public class GCCSyncViewModel extends AndroidViewModel {
         return pUnitMasterResponseMutableLiveData;
     }
 
+    public LiveData<PetrolPumpMasterResponse> getPetrolPumpMasterResponse() {
+        if (petrolPumpMasterResponseMutableLiveData != null) {
+            getPetrolPumpMasterCall();
+        }
+        return petrolPumpMasterResponseMutableLiveData;
+    }
+
+
+    public LiveData<LPGMasterResponse> getLPGMasterResponse() {
+        if (lpgMasterResponseMutableLiveData != null) {
+            getLPGMasterCall();
+        }
+        return lpgMasterResponseMutableLiveData;
+    }
     private void getDRDepotMasterCall() {
         TWDService twdService = TWDService.Factory.create("gcc");
         twdService.getDRDepotMasterResponse().enqueue(new Callback<DRDepotMasterResponse>() {
@@ -165,5 +185,43 @@ public class GCCSyncViewModel extends AndroidViewModel {
             }
         });
     }
+
+    private void getPetrolPumpMasterCall() {
+        TWDService twdService = TWDService.Factory.create("gcc");
+        twdService.getPetrolPumpMasterResponse().enqueue(new Callback<PetrolPumpMasterResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<PetrolPumpMasterResponse> call, @NotNull Response<PetrolPumpMasterResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    petrolPumpMasterResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetrolPumpMasterResponse> call, @NotNull Throwable t) {
+                errorHandlerInterface.handleError(t, context);
+            }
+        });
+
+
+    }
+
+    private void getLPGMasterCall() {
+        TWDService twdService = TWDService.Factory.create("gcc");
+        twdService.getLPGMasterResponse().enqueue(new Callback<LPGMasterResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<LPGMasterResponse> call, @NotNull Response<LPGMasterResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    lpgMasterResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<LPGMasterResponse> call, @NotNull Throwable t) {
+                errorHandlerInterface.handleError(t, context);
+            }
+        });
+    }
 }
+
+
 

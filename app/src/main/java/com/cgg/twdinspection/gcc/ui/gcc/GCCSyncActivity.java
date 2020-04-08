@@ -27,7 +27,9 @@ import com.cgg.twdinspection.gcc.room.repository.GCCSyncRepository;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.cgg.twdinspection.gcc.viewmodel.GCCSyncViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -106,7 +108,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
         });
@@ -141,7 +143,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
 
@@ -177,7 +179,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
 
@@ -213,7 +215,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
 
@@ -250,12 +252,86 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                         }
                     });
                 } else {
-                    Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                 }
             }
 
         });
+
+        binding.btnPetrolPump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<PetrolPumpMasterResponse> petrolPumpMasterResponseLiveData = viewModel.getPetrolPumpMasterResponse();
+
+                    petrolPumpMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<PetrolPumpMasterResponse>() {
+                        @Override
+                        public void onChanged(PetrolPumpMasterResponse petrolPumpMasterResponse) {
+                            customProgressDialog.hide();
+                            petrolPumpMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
+                            if (petrolPumpMasterResponse != null && petrolPumpMasterResponse.getStatusCode() != null) {
+                                if (petrolPumpMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                    if (petrolPumpMasterResponse.getPetrolSupplierInfos() != null && petrolPumpMasterResponse.getPetrolSupplierInfos().size() > 0) {
+                                        gccSyncRepository.insertPetrolPumps(GCCSyncActivity.this, petrolPumpMasterResponse.getPetrolSupplierInfos());
+                                    } else {
+                                        Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } else if (petrolPumpMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                    Snackbar.make(binding.root, petrolPumpMasterResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                }
+            }
+
+        });
+
+        binding.btnLpg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.checkInternetConnection(GCCSyncActivity.this)) {
+                    customProgressDialog.show();
+                    LiveData<LPGMasterResponse> lpgMasterResponseLiveData = viewModel.getLPGMasterResponse();
+
+                    lpgMasterResponseLiveData.observe(GCCSyncActivity.this, new Observer<LPGMasterResponse>() {
+                        @Override
+                        public void onChanged(LPGMasterResponse lpgMasterResponse) {
+                            customProgressDialog.hide();
+                            lpgMasterResponseLiveData.removeObservers(GCCSyncActivity.this);
+                            if (lpgMasterResponse != null && lpgMasterResponse.getStatusCode() != null) {
+                                if (lpgMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                                    if (lpgMasterResponse.getLpgSupplierInfos() != null && lpgMasterResponse.getLpgSupplierInfos().size() > 0) {
+                                        gccSyncRepository.insertLpg(GCCSyncActivity.this, lpgMasterResponse.getLpgSupplierInfos());
+                                    } else {
+                                        Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                                    }
+                                } else if (lpgMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                    Snackbar.make(binding.root, lpgMasterResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+                        }
+                    });
+                } else {
+                    Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                }
+            }
+
+        });
+
     }
+
 
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
@@ -332,7 +408,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Division master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No divisions found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No divisions found");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -348,7 +424,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR Depot master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No No DR Depots found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No No DR Depots found");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -364,7 +440,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR GoDown master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No DR GoDowns found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No DR GoDowns found");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -380,7 +456,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "MFP GoDown master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No MFP GoDowns found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No MFP GoDowns found");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -396,7 +472,39 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Processing Unit master synced successfully");
             } else {
-                Utils.customWarningAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Processing Units found");
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Processing Units found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void petrolPumpCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("PETROL_CNT", "petrolCount: " + cnt);
+                Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Petrol pump master synced successfully");
+            } else {
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Petrol pumps found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void lpgCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("LPG_CNT", "lpglCount: " + cnt);
+                Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
+                        "LPG master synced successfully");
+            } else {
+                Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No LPG data found");
             }
         } catch (Exception e) {
             e.printStackTrace();

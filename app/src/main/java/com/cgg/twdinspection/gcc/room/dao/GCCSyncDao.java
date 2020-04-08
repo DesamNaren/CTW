@@ -7,7 +7,9 @@ import androidx.room.Query;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 import java.util.List;
@@ -70,4 +72,23 @@ public interface GCCSyncDao {
 
     @Query("SELECT COUNT(*) FROM P_Unit")
     int pUnitCount();
+
+    @Query("DELETE FROM Petrol_Pump")
+    void deletePetrolPumps();
+
+    @Insert
+    void insertPetrolPumps(List<PetrolSupplierInfo> petrolSupplierInfos);
+
+    @Query("SELECT COUNT(*) FROM Petrol_Pump")
+    int petrolPumpCount();
+
+
+    @Query("DELETE FROM LPG")
+    void deleteLPG();
+
+    @Insert
+    void insertLPG(List<LPGSupplierInfo> lpgSupplierInfos);
+
+    @Query("SELECT COUNT(*) FROM LPG")
+    int lpgCount();
 }

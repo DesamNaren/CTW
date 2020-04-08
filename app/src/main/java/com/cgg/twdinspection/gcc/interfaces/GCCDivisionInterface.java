@@ -6,4 +6,6 @@ public interface GCCDivisionInterface {
     void drGoDownCount(int cnt);
     void mfpGoDownCount(int cnt);
     void pUNitCount(int cnt);
+    void petrolPumpCount(int cnt);
+    void lpgCount(int cnt);
 }

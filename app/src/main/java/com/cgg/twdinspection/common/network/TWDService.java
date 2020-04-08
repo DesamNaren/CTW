@@ -8,6 +8,8 @@ import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
@@ -180,6 +182,12 @@ public interface TWDService {
     @POST("getGodowns/Processing unit")
     Call<PUnitMasterResponse> getPUnitMasterResponse();
 
+
+    @POST("getGodowns/Petrolpump")
+    Call<PetrolPumpMasterResponse> getPetrolPumpMasterResponse();
+
+    @POST("getGodowns/LPG")
+    Call<LPGMasterResponse> getLPGMasterResponse();
 
     @POST("getStockDetails/{id}")
     Call<StockDetailsResponse> getDRDepotMasterResponse(@Path("id") String id);

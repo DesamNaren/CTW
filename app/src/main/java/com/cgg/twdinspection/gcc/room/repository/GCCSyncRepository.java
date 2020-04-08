@@ -10,7 +10,9 @@ import com.cgg.twdinspection.gcc.room.database.GCCDatabase;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 import java.util.List;
@@ -43,6 +45,16 @@ public class GCCSyncRepository {
         new InsertPUnitAsyncTask(dmvInterface, pUnits).execute();
     }
 
+    public void insertPetrolPumps(final GCCDivisionInterface dmvInterface, final List<PetrolSupplierInfo> petrolSupplierInfos) {
+        new InsertPetrolAsyncTask(dmvInterface, petrolSupplierInfos).execute();
+    }
+
+    public void insertLpg(final GCCDivisionInterface dmvInterface, final List<LPGSupplierInfo> lpgSupplierInfos) {
+        new InsertLPGAsyncTask(dmvInterface, lpgSupplierInfos).execute();
+    }
+
+
+
     @SuppressLint("StaticFieldLeak")
     private class InsertDivisionAsyncTask extends AsyncTask<Void, Void, Integer> {
         List<DivisionsInfo> divisionsInfos;
@@ -74,7 +86,7 @@ public class GCCSyncRepository {
         GCCDivisionInterface dmvInterface;
 
         InsertDRDepotAsyncTask(GCCDivisionInterface dmvInterface,
-                                List<DRDepots> DRDepots) {
+                               List<DRDepots> DRDepots) {
             this.DRDepots = DRDepots;
             this.dmvInterface = dmvInterface;
         }
@@ -99,7 +111,7 @@ public class GCCSyncRepository {
         GCCDivisionInterface dmvInterface;
 
         InsertDRGoDownAsyncTask(GCCDivisionInterface dmvInterface,
-                               List<DrGodowns> DRGodowns) {
+                                List<DrGodowns> DRGodowns) {
             this.DRGodowns = DRGodowns;
             this.dmvInterface = dmvInterface;
         }
@@ -124,7 +136,7 @@ public class GCCSyncRepository {
         GCCDivisionInterface dmvInterface;
 
         InsertMFPGoDownAsyncTask(GCCDivisionInterface dmvInterface,
-                                List<MFPGoDowns> mfpGoDowns) {
+                                 List<MFPGoDowns> mfpGoDowns) {
             this.mfpGoDowns = mfpGoDowns;
             this.dmvInterface = dmvInterface;
         }
@@ -150,7 +162,7 @@ public class GCCSyncRepository {
         GCCDivisionInterface dmvInterface;
 
         InsertPUnitAsyncTask(GCCDivisionInterface dmvInterface,
-                                 List<PUnits> pUnits) {
+                             List<PUnits> pUnits) {
             this.pUnits = pUnits;
             this.dmvInterface = dmvInterface;
         }
@@ -169,4 +181,53 @@ public class GCCSyncRepository {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
+    private class InsertPetrolAsyncTask extends AsyncTask<Void, Void, Integer> {
+        List<PetrolSupplierInfo> petrolSupplierInfos;
+        GCCDivisionInterface dmvInterface;
+
+        InsertPetrolAsyncTask(GCCDivisionInterface dmvInterface,
+                              List<PetrolSupplierInfo> petrolSupplierInfos) {
+            this.petrolSupplierInfos = petrolSupplierInfos;
+            this.dmvInterface = dmvInterface;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            syncDao.deletePetrolPumps();
+            syncDao.insertPetrolPumps(petrolSupplierInfos);
+            return syncDao.petrolPumpCount();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            dmvInterface.pUNitCount(integer);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertLPGAsyncTask extends AsyncTask<Void, Void, Integer> {
+        List<LPGSupplierInfo> lpgSupplierInfos;
+        GCCDivisionInterface dmvInterface;
+
+        InsertLPGAsyncTask(GCCDivisionInterface dmvInterface,
+                              List<LPGSupplierInfo> lpgSupplierInfos) {
+            this.lpgSupplierInfos = lpgSupplierInfos;
+            this.dmvInterface = dmvInterface;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            syncDao.deleteLPG();
+            syncDao.insertLPG(lpgSupplierInfos);
+            return syncDao.lpgCount();
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            dmvInterface.lpgCount(integer);
+        }
+    }
 }
