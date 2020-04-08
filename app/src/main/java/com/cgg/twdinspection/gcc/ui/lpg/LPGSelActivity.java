@@ -249,7 +249,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 selectLPGId = "";
                 binding.spLpg.setAdapter(null);
             }
-        } else if (adapterView.getId() == R.id.sp_petrol) {
+        } else if (adapterView.getId() == R.id.sp_lpg) {
             if (position != 0) {
                 selectedLPGs = null;
                 selectLPGId = "";
