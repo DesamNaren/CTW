@@ -11,21 +11,24 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cgg.twdinspection.engineering_works.room.dao.GrantSchemeDao;
 import com.cgg.twdinspection.engineering_works.room.dao.SectorsDao;
+import com.cgg.twdinspection.engineering_works.room.dao.WorksDao;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {SectorsEntity.class, GrantScheme.class},
+@Database(entities = {SectorsEntity.class, GrantScheme.class, WorkDetail.class},
         version = 1, exportSchema = false)
 public abstract class EngWorksDatabase extends RoomDatabase {
 
     private static EngWorksDatabase INSTANCE;
 
     public abstract SectorsDao sectorsDao();
+    public abstract WorksDao worksDao();
     public abstract GrantSchemeDao schemeDao();
 
     public static EngWorksDatabase getDatabase(final Context context) {

@@ -123,6 +123,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/engineering_work_id"
                             android:imeOptions="actionDone"
+                            android:inputType="number"
                             android:singleLine="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>

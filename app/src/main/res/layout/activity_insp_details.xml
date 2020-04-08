@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
+        <variable
+            name="workDetails"
+            type="com.cgg.twdinspection.engineering_works.source.WorkDetail" />
 
     </data>
 
@@ -70,6 +73,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:text="@={workDetails.areaOfOperation}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
 
@@ -93,6 +97,7 @@
                                 android:id="@+id/tv_dist"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:text="@={workDetails.distName}"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
@@ -117,6 +122,7 @@
                                 android:id="@+id/tv_mandal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:text="@={workDetails.mandName}"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
@@ -142,6 +148,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:text="@={workDetails.gpName}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
 
@@ -165,6 +172,7 @@
                                 android:id="@+id/tv_village"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:text="@={workDetails.villName}"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
@@ -189,6 +197,7 @@
                                 android:id="@+id/tv_assembly"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:text="@={workDetails.assemblyConstName}"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black" />
@@ -277,6 +286,7 @@
                             android:id="@+id/tv_name_of_work"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.workName}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -301,6 +311,7 @@
                             android:id="@+id/tv_estimate_cost"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.estimateCost}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -350,6 +361,7 @@
                             android:id="@+id/tv_exec_agency"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.exectingAgency}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -373,9 +385,10 @@
                         <TextView
                             android:id="@+id/tv_sanct_date"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.sanctionDate}"
                             android:textColor="@color/black" />
 
 
@@ -398,6 +411,7 @@
                             android:id="@+id/tv_tech_sanct_date"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.techSanctionDate}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -423,6 +437,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@={workDetails.commenceDate}"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -447,6 +462,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@={workDetails.targetDate}"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -471,6 +487,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@={workDetails.extensionTime}"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -508,6 +525,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@={workDetails.staffDept}"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -531,6 +549,7 @@
                             android:id="@+id/tv_staff_mandal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.staffMandalName}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -555,6 +574,7 @@
                             android:id="@+id/tv_ee"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.staffEe}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
@@ -580,6 +600,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="@={workDetails.staffDyee}"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
@@ -603,6 +624,7 @@
                             android:id="@+id/tv_aee"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:text="@={workDetails.staffAee}"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />

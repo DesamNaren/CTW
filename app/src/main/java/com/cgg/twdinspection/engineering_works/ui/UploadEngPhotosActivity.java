@@ -39,6 +39,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -296,7 +297,10 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + engWorkId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            String deviceId=Utils.getDeviceID(this);
+            String versionName=Utils.getVersionName(this);
+            String randomNo=getRandomNumberString();
+            PIC_NAME =  PIC_TYPE + "~"+officerID + "~" + engWorkId + "~" + Utils.getCurrentDateTimeFormat() + "~" +deviceId + "~" +versionName + "~" +randomNo+".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -305,7 +309,14 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
 
         return mediaFile;
     }
-
+    public String getRandomNumberString() {
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
+    }
     @Override
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
