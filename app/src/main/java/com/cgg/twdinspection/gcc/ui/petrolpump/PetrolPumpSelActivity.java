@@ -20,8 +20,10 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownSelBinding;
+import com.cgg.twdinspection.databinding.ActivityPetrolPumpSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -34,25 +36,25 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
-    ActivityDrGodownSelBinding binding;
+    ActivityPetrolPumpSelBinding binding;
     private Context context;
     private DivisionSelectionViewModel viewModel;
-    private String selectedDivId, selectedSocietyId, selectedGoDownId;
+    private String selectedDivId, selectedSocietyId, selectPetrolId;
     private List<DivisionsInfo> divisionsInfos;
     private List<String> societies;
-    private List<String> drGodowns;
-    private DrGodowns selectedDrGodowns;
+    private List<String> petrolPumps;
+    private PetrolSupplierInfo selectedPetrolPumps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown_sel);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_sel);
         context = PetrolPumpSelActivity.this;
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
-        drGodowns = new ArrayList<>();
+        petrolPumps = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,31 +100,31 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 }
             }
         });
-         LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
-         drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
+         LiveData<List<PetrolSupplierInfo>> petrolLiveData = viewModel.getAllPetrolPumps();
+         petrolLiveData.observe(this, new Observer<List<PetrolSupplierInfo>>() {
                     @Override
-                    public void onChanged(List<DrGodowns> drGodowns) {
-                        drGodownLiveData.removeObservers(PetrolPumpSelActivity.this);
+                    public void onChanged(List<PetrolSupplierInfo> petrolSupplierInfos) {
+                        petrolLiveData.removeObservers(PetrolPumpSelActivity.this);
                         customProgressDialog.dismiss();
-                        if (drGodowns== null || drGodowns.size() <= 0) {
-                            Utils.customGCCSyncAlert(PetrolPumpSelActivity.this,getString(R.string.app_name),"No DR Godowns found...\n Do you want to sync DR Godowns?");
+                        if (petrolSupplierInfos== null || petrolSupplierInfos.size() <= 0) {
+                            Utils.customGCCSyncAlert(PetrolPumpSelActivity.this,getString(R.string.app_name),"No Petrol pumps found...\n Do you want to sync Petrol pumps?");
                         }
                     }
                 });
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
-        binding.spGodown.setOnItemSelectedListener(this);
+        binding.spPetrol.setOnItemSelectedListener(this);
         binding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
                     Gson gson = new Gson();
-                    String goDownData = gson.toJson(selectedDrGodowns);
-                    editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
+                    String petrolPumpData = gson.toJson(selectedPetrolPumps);
+                    editor.putString(AppConstants.PETROL_PUMP_DATA, petrolPumpData);
                     editor.commit();
 
-                    startActivity(new Intent(PetrolPumpSelActivity.this, DRGodownActivity.class));
+                    startActivity(new Intent(PetrolPumpSelActivity.this, PetrolPumpActivity.class));
                 }
             }
         });
@@ -141,8 +143,8 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
             showSnackBar("Please select society");
             return false;
-        } else if (TextUtils.isEmpty(selectedGoDownId)) {
-            showSnackBar("Please select godown");
+        } else if (TextUtils.isEmpty(selectPetrolId)) {
+            showSnackBar("Please select petrol pump");
             return false;
         }
         return true;
@@ -157,10 +159,10 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
-            selectedDrGodowns = null;
+            selectedPetrolPumps = null;
             selectedSocietyId = "";
             selectedDivId = "";
-            selectedGoDownId = "";
+            selectPetrolId = "";
             binding.spSociety.setAdapter(null);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
@@ -189,7 +191,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
                                         binding.spSociety.setAdapter(null);
-                                        binding.spGodown.setAdapter(null);
+                                        binding.spPetrol.setAdapter(null);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -198,20 +200,20 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                     }
                 });
             } else {
-                selectedDrGodowns = null;
+                selectedPetrolPumps = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
                 binding.spSociety.setAdapter(null);
-                selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                selectPetrolId = "";
+                binding.spPetrol.setAdapter(null);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
-                selectedDrGodowns = null;
+                selectedPetrolPumps = null;
                 selectedSocietyId = "";
-                selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
-                drGodowns = new ArrayList<>();
+                selectPetrolId = "";
+                binding.spPetrol.setAdapter(null);
+                petrolPumps = new ArrayList<>();
                 LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(PetrolPumpSelActivity.this, new Observer<String>() {
                     @Override
@@ -219,22 +221,22 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                         liveData.removeObservers(PetrolPumpSelActivity.this);
                         if (str != null) {
                             selectedSocietyId = str;
-                            LiveData<List<DrGodowns>> listLiveData = viewModel.getDRGoDowns(selectedDivId, selectedSocietyId);
-                            listLiveData.observe(PetrolPumpSelActivity.this, new Observer<List<DrGodowns>>() {
+                            LiveData<List<PetrolSupplierInfo>> listLiveData = viewModel.getPetroPumps(selectedDivId, selectedSocietyId);
+                            listLiveData.observe(PetrolPumpSelActivity.this, new Observer<List<PetrolSupplierInfo>>() {
                                 @Override
-                                public void onChanged(List<DrGodowns> godownsList) {
+                                public void onChanged(List<PetrolSupplierInfo> petrolSupplierInfos) {
                                     listLiveData.removeObservers(PetrolPumpSelActivity.this);
-                                    if (godownsList != null && godownsList.size() > 0) {
-                                        drGodowns.add("-Select-");
-                                        for (int i = 0; i < godownsList.size(); i++) {
-                                            drGodowns.add(godownsList.get(i).getGodownName());
+                                    if (petrolSupplierInfos != null && petrolSupplierInfos.size() > 0) {
+                                        petrolPumps.add("-Select-");
+                                        for (int i = 0; i < petrolSupplierInfos.size(); i++) {
+                                            petrolPumps.add(petrolSupplierInfos.get(i).getGodownName());
                                         }
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                                android.R.layout.simple_spinner_dropdown_item, drGodowns);
-                                        binding.spGodown.setAdapter(adapter);
+                                                android.R.layout.simple_spinner_dropdown_item, petrolPumps);
+                                        binding.spPetrol.setAdapter(adapter);
                                     } else {
-                                        binding.spGodown.setAdapter(null);
-                                        showSnackBar("No DR Godowns found");
+                                        binding.spPetrol.setAdapter(null);
+                                        showSnackBar("No Petrol pumps found");
                                     }
                                 }
                             });
@@ -242,30 +244,30 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                     }
                 });
             } else {
-                selectedDrGodowns = null;
+                selectedPetrolPumps = null;
                 selectedSocietyId = "";
-                selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                selectPetrolId = "";
+                binding.spPetrol.setAdapter(null);
             }
-        } else if (adapterView.getId() == R.id.sp_godown) {
+        } else if (adapterView.getId() == R.id.sp_petrol) {
             if (position != 0) {
-                selectedDrGodowns = null;
-                selectedGoDownId = "";
-                LiveData<DrGodowns> drGodownsLiveData = viewModel.getGODownID(selectedDivId, selectedSocietyId, binding.spGodown.getSelectedItem().toString());
-                drGodownsLiveData.observe(PetrolPumpSelActivity.this, new Observer<DrGodowns>() {
+                selectedPetrolPumps = null;
+                selectPetrolId = "";
+                LiveData<PetrolSupplierInfo> drGodownsLiveData = viewModel.getPetrolPumpID(selectedDivId, selectedSocietyId, binding.spPetrol.getSelectedItem().toString());
+                drGodownsLiveData.observe(PetrolPumpSelActivity.this, new Observer<PetrolSupplierInfo>() {
                     @Override
-                    public void onChanged(DrGodowns drGodowns) {
-                        if (drGodowns != null) {
-                            selectedGoDownId = drGodowns.getGodownId();
-                            selectedDrGodowns = drGodowns;
+                    public void onChanged(PetrolSupplierInfo petrolSupplierInfo) {
+                        if (petrolSupplierInfo != null) {
+                            selectPetrolId = petrolSupplierInfo.getGodownId();
+                            selectedPetrolPumps = petrolSupplierInfo;
                         }else{
                             showSnackBar(getString(R.string.something));
                         }
                     }
                 });
             } else {
-                selectedDrGodowns = null;
-                selectedGoDownId = "";
+                selectedPetrolPumps = null;
+                selectPetrolId = "";
             }
         }
     }

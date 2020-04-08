@@ -10,7 +10,9 @@ import com.cgg.twdinspection.gcc.room.repository.GCCRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 import java.util.List;
@@ -26,6 +28,10 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
     private LiveData<List<MFPGoDowns>> allMfpGoDowns;
     private LiveData<List<PUnits>> pUnits;
     private LiveData<List<PUnits>> allpUnits;
+    private LiveData<List<PetrolSupplierInfo>> petrolSuppliers;
+    private LiveData<List<LPGSupplierInfo>> lpgSuppliers;
+    private LiveData<List<PetrolSupplierInfo>> allPetrolSuppliers;
+    private LiveData<List<LPGSupplierInfo>> allLPGSuppliers;
     private GCCRepository mRepository;
 
     public DivisionSelectionViewModel(Application application) {
@@ -40,6 +46,10 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         allMfpGoDowns = new MutableLiveData<>();
         pUnits = new MutableLiveData<>();
         allpUnits = new MutableLiveData<>();
+        petrolSuppliers = new MutableLiveData<>();
+        lpgSuppliers = new MutableLiveData<>();
+        allPetrolSuppliers = new MutableLiveData<>();
+        allLPGSuppliers = new MutableLiveData<>();
         mRepository = new GCCRepository(application);
     }
 
@@ -64,11 +74,28 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return drGodowns;
     }
+
+
+    public LiveData<List<PetrolSupplierInfo>> getPetroPumps(String divId, String socId) {
+        if (petrolSuppliers != null) {
+            petrolSuppliers = mRepository.getPetrolSuppliers(divId, socId);
+        }
+        return petrolSuppliers;
+    }
+
     public LiveData<List<DrGodowns>> getAllDRGoDowns() {
         if (allDrGodowns != null) {
             allDrGodowns = mRepository.getAllGoDowns();
         }
         return allDrGodowns;
+    }
+
+
+    public LiveData<List<PetrolSupplierInfo>> getAllPetrolPumps() {
+        if (allPetrolSuppliers != null) {
+            allPetrolSuppliers = mRepository.getAllPetrolSuppliers();
+        }
+        return allPetrolSuppliers;
     }
 
     public LiveData<List<DRDepots>> getDRDepots(String divId, String socId) {
@@ -129,6 +156,10 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
 
     public LiveData<DrGodowns> getGODownID(String divId, String socID, String goDownName) {
         return mRepository.getGoDownID(divId, socID, goDownName);
+    }
+
+    public LiveData<PetrolSupplierInfo> getPetrolPumpID(String divId, String socID, String goDownName) {
+        return mRepository.getPetrolPumpID(divId, socID, goDownName);
     }
 
     public LiveData<DRDepots> getDRDepotID(String divId, String socID, String depotName) {

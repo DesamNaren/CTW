@@ -14,7 +14,9 @@ import com.cgg.twdinspection.gcc.room.dao.GCCSyncDao;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 /**
@@ -22,10 +24,11 @@ import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
  * The fact that this has very few comments emphasizes its coolness.
  */
 
-@Database(entities = {DivisionsInfo.class, DRDepots.class, DrGodowns.class, MFPGoDowns.class, PUnits.class},
-        version = 1, exportSchema = false)
+@Database(entities = {DivisionsInfo.class, DRDepots.class, DrGodowns.class, MFPGoDowns.class, PUnits.class, PetrolSupplierInfo.class, LPGSupplierInfo.class},
+        version = 2, exportSchema = false)
 public abstract class GCCDatabase extends RoomDatabase {
     public abstract GCCDao gccDao();
+
     public abstract GCCSyncDao gccSyncDao();
 
 
@@ -40,6 +43,7 @@ public abstract class GCCDatabase extends RoomDatabase {
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
 //                            .createFromFile(new File("database/districts.json"))
+                            .fallbackToDestructiveMigration()
                             .createFromAsset("database/GCC.db")
                             .build();
                 }

@@ -202,7 +202,7 @@ public class GCCSyncRepository {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            dmvInterface.pUNitCount(integer);
+            dmvInterface.petrolPumpCount(integer);
         }
     }
 

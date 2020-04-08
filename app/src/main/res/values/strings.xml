@@ -569,6 +569,8 @@
     <string name="title_academic">Academic Overview</string>
     <string name="save">Save</string>
     <string name="dr_godown">DR Godown</string>
+    <string name="petrol_pump">Petrol Pump</string>
+    <string name="lpg">LPG</string>
     <string name="dr_depot">DR Depot</string>
     <string name="mfp_godown">MFP Godown</string>
     <string name="p_unit">Processing Unit</string>
@@ -613,6 +615,7 @@
     <string name="qty_sys">System Quantity</string>
     <string name="physical_available_quantity">Physical available quantity</string>
     <string name="select_godown">Select DR Godown</string>
+    <string name="select_petrol_pump">Select Petrol Pump</string>
     <string name="select_depot">Select DR Depot</string>
     <string name="select_mfp_godown">Select MFP Godown</string>
     <string name="select_p_unit">Select Processing Unit</string>

@@ -114,6 +114,7 @@ public class AppConstants {
     public static String punit = "punit";
 
     public static final String DR_GODOWN_DATA = "DR_GODOWN_DATA";
+    public static final String PETROL_PUMP_DATA = "PETROL_PUMP_DATA";
     public static final String DR_DEPOT_DATA = "DR_DEPOT_DATA";
     public static final String MFP_DEPOT_DATA = "MFP_DEPOT_DATA";
     public static final String P_UNIT_DATA = "P_UNIT_DATA";

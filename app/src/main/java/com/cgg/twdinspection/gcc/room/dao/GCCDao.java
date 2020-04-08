@@ -8,6 +8,7 @@ import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 
 import java.util.List;
@@ -33,8 +34,15 @@ public interface GCCDao {
     @Query("SELECT * from DR_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DrGodowns>> getDrGoDowns(String divId, String socId);
 
+    @Query("SELECT * from Petrol_Pump where divisionId LIKE :divId AND societyId LIKE :socId")
+    LiveData<List<PetrolSupplierInfo>> getPetrolPumps(String divId, String socId);
+
     @Query("SELECT * from DR_GoDown")
     LiveData<List<DrGodowns>> getAllDrGoDowns();
+
+
+    @Query("SELECT * from Petrol_Pump")
+    LiveData<List<PetrolSupplierInfo>> getAllPetrolSuppliers();
 
     @Query("SELECT * from DR_Depot where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DRDepots>> getDRDepots(String divId, String socId);
@@ -67,6 +75,8 @@ public interface GCCDao {
     @Query("SELECT * from DR_GoDown where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :goDownName")
     LiveData<DrGodowns> getGoDownID(String divisionID, String societyID, String goDownName);
 
+    @Query("SELECT * from Petrol_Pump where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :goDownName")
+    LiveData<PetrolSupplierInfo> getPetrolPumpID(String divisionID, String societyID, String goDownName);
 
     @Query("SELECT * from DR_Depot where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :depotName")
     LiveData<DRDepots> getDRDepotID(String divisionID, String societyID, String depotName);
@@ -79,4 +89,5 @@ public interface GCCDao {
 
     @Query("SELECT * from P_Unit where  divisionId LIKE :divisionID AND godownName LIKE :pUnitNmae")
     LiveData<PUnits> getPUnitID(String divisionID, String pUnitNmae);
+
 }
