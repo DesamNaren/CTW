@@ -38,7 +38,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
     private String selectedDivId, selectedMfpID;
     private List<String> mfpGoDowns;
     private MFPGoDowns selectedMfpGoDowns;
-
+    ArrayAdapter selectAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +72,9 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
 
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
@@ -150,7 +153,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
             selectedMfpGoDowns = null;
             selectedDivId = "";
             selectedMfpID = "";
-            binding.spMfp.setAdapter(null);
+            binding.spMfp.setAdapter(selectAdapter);
             mfpGoDowns = new ArrayList<>();
             if (position != 0) {
                 LiveData<String> liveData = viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());
@@ -175,8 +178,8 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                                 android.R.layout.simple_spinner_dropdown_item, mfpGoDowns);
                                         binding.spMfp.setAdapter(adapter);
                                     }else {
-                                        binding.spMfp.setAdapter(null);
-                                        binding.spMfp.setAdapter(null);
+                                        binding.spMfp.setAdapter(selectAdapter);
+                                        binding.spMfp.setAdapter(selectAdapter);
                                         showSnackBar("No MFP Godowns found");
                                     }
                                 }
@@ -189,7 +192,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 selectedDivId = "";
                 selectedMfpID = "";
                 mfpGoDowns = new ArrayList<>();
-                binding.spMfp.setAdapter(null);
+                binding.spMfp.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_mfp) {
             if (position != 0) {

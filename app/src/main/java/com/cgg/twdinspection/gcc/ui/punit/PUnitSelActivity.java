@@ -41,7 +41,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     private List<String> societies;
     private List<String> pUnits;
     private PUnits selectedPUnits;
-
+    ArrayAdapter selectAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +76,9 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
@@ -165,7 +168,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             selectedPUnitID = "";
             divisionsInfos = new ArrayList<>();
             pUnits = new ArrayList<>();
-            binding.spPUnit.setAdapter(null);
+            binding.spPUnit.setAdapter(selectAdapter);
             societies = new ArrayList<>();
             societies.add("--Select--");
             if (position != 0) {
@@ -191,7 +194,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
-                                        binding.spSociety.setAdapter(null);
+                                        binding.spSociety.setAdapter(selectAdapter);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -211,7 +214,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
                                     }else {
-                                        binding.spPUnit.setAdapter(null);
+                                        binding.spPUnit.setAdapter(selectAdapter);
                                         showSnackBar("No processing units found");
                                     }
                                 }
@@ -223,9 +226,9 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 selectedPUnits = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
-                binding.spSociety.setAdapter(null);
+                binding.spSociety.setAdapter(selectAdapter);
                 selectedPUnitID = "";
-                binding.spPUnit.setAdapter(null);
+                binding.spPUnit.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
 
@@ -246,7 +249,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                             listLiveData.observe(PUnitSelActivity.this, new Observer<List<PUnits>>() {
                                 @Override
                                 public void onChanged(List<PUnits> godownsList) {
-                                    binding.spPUnit.setAdapter(null);
+                                    binding.spPUnit.setAdapter(selectAdapter);
                                     listLiveData.removeObservers(PUnitSelActivity.this);
                                     if (godownsList != null && godownsList.size() > 0) {
                                         pUnits.add("-Select-");
@@ -257,7 +260,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
                                     } else {
-                                        binding.spPUnit.setAdapter(null);
+                                        binding.spPUnit.setAdapter(selectAdapter);
                                         showSnackBar("No processing units found");
                                     }
                                 }

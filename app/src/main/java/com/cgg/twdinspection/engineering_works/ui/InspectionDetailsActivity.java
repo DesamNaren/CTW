@@ -52,7 +52,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
     StagesResponse stagesResponse;
     ArrayList<String> majorStages,tempMajorStages;
-    ArrayAdapter majorStagesAdapter;
+    ArrayAdapter majorStagesAdapter,selectAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +82,10 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, selectList);
+
 
 
         Gson gson = new Gson();
@@ -182,7 +186,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     selWorkProgStageId = -1;
                     physProgRating = -1;
                     selWorkInProgStageName = "";
-                    binding.spStageInProgress.setAdapter(null);
+                    binding.spStageInProgress.setAdapter(selectAdapter);
                     binding.tvSectorOthers.setVisibility(View.GONE);
                     binding.etSectorOthers.setText(null);
                     binding.llStageWork.setVisibility(View.VISIBLE);

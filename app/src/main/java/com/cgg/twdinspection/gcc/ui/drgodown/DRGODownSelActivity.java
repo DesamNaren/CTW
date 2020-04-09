@@ -41,7 +41,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     private List<String> societies;
     private List<String> drGodowns;
     private DrGodowns selectedDrGodowns;
-
+    ArrayAdapter<String> selectAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,9 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
 
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
@@ -109,6 +112,9 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                     }
                 });
 
+        binding.spDivision.setAdapter(selectAdapter);
+        binding.spDivision.setAdapter(selectAdapter);
+        binding.spDivision.setAdapter(selectAdapter);
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
         binding.spGodown.setOnItemSelectedListener(this);
@@ -160,7 +166,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             selectedSocietyId = "";
             selectedDivId = "";
             selectedGoDownId = "";
-            binding.spSociety.setAdapter(null);
+            binding.spSociety.setAdapter(selectAdapter);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
@@ -187,8 +193,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
-                                        binding.spSociety.setAdapter(null);
-                                        binding.spGodown.setAdapter(null);
+                                        binding.spSociety.setAdapter(selectAdapter);
+                                        binding.spGodown.setAdapter(selectAdapter);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -200,16 +206,16 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 selectedDrGodowns = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
-                binding.spSociety.setAdapter(null);
+                binding.spSociety.setAdapter(selectAdapter);
                 selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                binding.spGodown.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
                 selectedDrGodowns = null;
                 selectedSocietyId = "";
                 selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                binding.spGodown.setAdapter(selectAdapter);
                 drGodowns = new ArrayList<>();
                 LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(DRGODownSelActivity.this, new Observer<String>() {
@@ -232,7 +238,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                                 android.R.layout.simple_spinner_dropdown_item, drGodowns);
                                         binding.spGodown.setAdapter(adapter);
                                     } else {
-                                        binding.spGodown.setAdapter(null);
+                                        binding.spGodown.setAdapter(selectAdapter);
                                         showSnackBar("No DR Godowns found");
                                     }
                                 }
@@ -244,7 +250,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 selectedDrGodowns = null;
                 selectedSocietyId = "";
                 selectedGoDownId = "";
-                binding.spGodown.setAdapter(null);
+                binding.spGodown.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_godown) {
             if (position != 0) {

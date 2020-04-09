@@ -49,7 +49,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
     List<FinancialYearsEntity> finYearList;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
-
+    ArrayAdapter selectAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +93,9 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
             Toast.makeText(context, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         mandalNames = new ArrayList<>();
         villageNames = new ArrayList<>();
@@ -237,8 +240,8 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                 selectedManName = "";
                 selectedDistName = "";
                 selectedVilName = "";
-                schemesDMVActivityBinding.spMandal.setAdapter(null);
-                schemesDMVActivityBinding.spVillage.setAdapter(null);
+                schemesDMVActivityBinding.spMandal.setAdapter(selectAdapter);
+                schemesDMVActivityBinding.spVillage.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_Mandal) {
             villageNames.clear();
@@ -274,7 +277,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                 selectedVilId = "";
                 selectedManName = "";
                 selectedVilName = "";
-                schemesDMVActivityBinding.spVillage.setAdapter(null);
+                schemesDMVActivityBinding.spVillage.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_village) {
             if (i != 0) {

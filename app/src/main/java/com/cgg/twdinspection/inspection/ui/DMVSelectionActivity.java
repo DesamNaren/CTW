@@ -50,6 +50,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     private InstSelectionViewModel selectionViewModel;
+    ArrayAdapter selectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,10 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ArrayList selectList=new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         instNames = new ArrayList<>();
         institutesEntityList = new ArrayList<>();
@@ -182,7 +187,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                                 android.R.layout.simple_spinner_dropdown_item, instNames);
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(adapter);
                                     }else{
-                                        dmvSelectionActivityBinding.spInstitution.setAdapter(null);
+                                        dmvSelectionActivityBinding.spInstitution.setAdapter(selectAdapter);
                                         showSnackBar("No institutes found");
 
                                     }
@@ -197,7 +202,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 dmvSelectionActivityBinding.mandal.setText("");
                 dmvSelectionActivityBinding.village.setText("");
                 dmvSelectionActivityBinding.address.setText("");
-                dmvSelectionActivityBinding.spInstitution.setAdapter(null);
+                dmvSelectionActivityBinding.spInstitution.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_institution) {
 
