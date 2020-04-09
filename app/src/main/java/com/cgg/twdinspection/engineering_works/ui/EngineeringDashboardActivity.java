@@ -46,28 +46,14 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         binding.executePendingBindings();
         customProgressDialog = new CustomProgressDialog(this);
 
-
-
-        viewModel.getWorksCnt().observe(EngineeringDashboardActivity.this, new Observer<Integer>() {
+        binding.header.syncIv.setVisibility(View.VISIBLE);
+        binding.header.syncIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(Integer worksCnt) {
-                if (worksCnt != null && worksCnt == 0) {
-                    viewModel.getWorksMasterResponse().observe(EngineeringDashboardActivity.this, new Observer<WorksMasterResponse>() {
-                        @Override
-                        public void onChanged(WorksMasterResponse worksMasterResponses) {
-                            if (worksMasterResponses != null && worksMasterResponses.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                viewModel.insertWorksInfo(worksMasterResponses.getWorkDetails());
-                            }else if(worksMasterResponses != null && worksMasterResponses.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)){
-                                callSnackBar(worksMasterResponses.getStatusMsg());
-                            } else {
-                                callSnackBar(getString(R.string.something));
-                            }
-                        }
-                    });
-
-                }
+            public void onClick(View view) {
+                startActivity(new Intent(EngineeringDashboardActivity.this,EngSyncActivity.class));
             }
         });
+
 
         binding.header.headerTitle.setText(getString(R.string.engineering_works));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

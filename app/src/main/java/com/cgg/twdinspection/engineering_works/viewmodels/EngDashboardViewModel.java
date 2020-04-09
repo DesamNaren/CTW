@@ -28,7 +28,6 @@ import retrofit2.Response;
 public class EngDashboardViewModel extends AndroidViewModel {
 
     private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
-    private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private WorksRepository worksRepository;
@@ -39,7 +38,6 @@ public class EngDashboardViewModel extends AndroidViewModel {
         super(application);
         worksRepository =new WorksRepository(application);
         sectorsResponseLiveData = new MutableLiveData<>();
-        worksMasterLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         this.context = context;
         errorHandlerInterface = (ErrorHandlerInterface) context;
@@ -60,29 +58,8 @@ public class EngDashboardViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<WorksMasterResponse> getWorksMasterResponse() {
-        if (worksMasterLiveData != null) {
-            callWorksMasterResponse();
-        }
-        return worksMasterLiveData;
-    }
 
-    private void callWorksMasterResponse() {
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getWorksMaster().enqueue(new Callback<WorksMasterResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<WorksMasterResponse> call, @NotNull Response<WorksMasterResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    worksMasterLiveData.setValue(response.body());
-                }
-            }
 
-            @Override
-            public void onFailure(@NotNull Call<WorksMasterResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
-    }
 
 
 }

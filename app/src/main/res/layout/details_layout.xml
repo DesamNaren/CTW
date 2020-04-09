@@ -34,8 +34,18 @@
             android:id="@+id/inspectionTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_8dp"
             android:drawableTint="@color/colorPrimary"
             android:drawableLeft="@drawable/clock_16"
+            android:drawablePadding="@dimen/dimen_10dp" />
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:textColor="@color/black"
+            android:id="@+id/tvplace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableLeft="@drawable/location_16"
             android:drawablePadding="@dimen/dimen_10dp" />
     </LinearLayout>
 

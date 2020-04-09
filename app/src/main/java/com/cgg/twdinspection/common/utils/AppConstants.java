@@ -113,6 +113,7 @@ public class AppConstants {
     public static String empties = "empties";
     public static String mfp = "mfp";
     public static String punit = "punit";
+    public static final String EngSubmitRequest = "EngSubmitRequest";
 
     public static final String DR_GODOWN_DATA = "DR_GODOWN_DATA";
     public static final String PETROL_PUMP_DATA = "PETROL_PUMP_DATA";

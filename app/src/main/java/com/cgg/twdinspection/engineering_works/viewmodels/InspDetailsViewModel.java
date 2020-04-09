@@ -28,8 +28,6 @@ import retrofit2.Response;
 
 public class InspDetailsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
-    private MutableLiveData<GrantSchemesResponse> schemesResponseMutableLiveData;
     private MutableLiveData<StagesResponse> stagesResponseMutableLiveData;
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
@@ -43,8 +41,6 @@ public class InspDetailsViewModel extends AndroidViewModel {
         super(application);
         sectorsRepository=new SectorsRepository(application);
         schemeRepository=new GrantSchemeRepository(application);
-        sectorsResponseLiveData = new MutableLiveData<>();
-        schemesResponseMutableLiveData = new MutableLiveData<>();
         stagesResponseMutableLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         schemesListLiveData = new MutableLiveData<>();
@@ -60,29 +56,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
         return sectorsListLiveData;
     }
 
-    public LiveData<SectorsResponse> getSectorResponse() {
-        if (sectorsResponseLiveData != null) {
-            getSectorsResponseCall();
-        }
-        return sectorsResponseLiveData;
-    }
 
-    private void getSectorsResponseCall() {
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getSectorsMaster().enqueue(new Callback<SectorsResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<SectorsResponse> call, @NotNull Response<SectorsResponse> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                    sectorsResponseLiveData.setValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<SectorsResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
-    }
 
     public int insertSectorsInfo(List<SectorsEntity> sectorsEntities) {
         return sectorsRepository.insertSectors(sectorsEntities);
@@ -95,29 +69,6 @@ public class InspDetailsViewModel extends AndroidViewModel {
         return schemesListLiveData;
     }
 
-    public LiveData<GrantSchemesResponse> getSchemesResponse() {
-        if (schemesResponseMutableLiveData != null) {
-            getGrantSchemesResponseCall();
-        }
-        return schemesResponseMutableLiveData;
-    }
-
-    private void getGrantSchemesResponseCall() {
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getGrantSandSchemes().enqueue(new Callback<GrantSchemesResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<GrantSchemesResponse> call, @NotNull Response<GrantSchemesResponse> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                    schemesResponseMutableLiveData.setValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<GrantSchemesResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
-    }
 
     public LiveData<StagesResponse> getStagesResponse(int sectorId) {
         if (stagesResponseMutableLiveData != null) {

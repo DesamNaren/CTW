@@ -5,6 +5,7 @@ import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
+import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -120,8 +121,8 @@ public interface TWDService {
     @POST("submitGCCInspectionDetails")
     Call<GCCSubmitResponse> getGCCSubmitResponse(@Body GCCSubmitRequest gccSubmitRequest);
 
-    @POST("CTWWorks/submitWorkInspectionDetails")
-    Call<GCCSubmitResponse> getEngWorksSubmitResponse(@Body SubmitEngWorksRequest gccSubmitRequest);
+    @POST("submitWorkInspectionDetails")
+    Call<SubmitEngWorksResponse> getEngWorksSubmitResponse(@Body SubmitEngWorksRequest submitEngWorksRequest);
 
     @POST("submitSchoolInspectionDetails")
     Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);

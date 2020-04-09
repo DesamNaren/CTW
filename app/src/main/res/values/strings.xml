@@ -225,7 +225,8 @@
     <string name="cameratxt">Camera allowing you to capture pictures in the application</string>
     <string name="storage">Storage</string>
     <string name="permissionText">Make your TW app experience better with these permissions</string>
-    <string name="storagetxt">Collect storage information to work with captured photos through device</string>    <string name="iaccept">I accept</string>
+    <string name="storagetxt">Collect storage information to work with captured photos through device</string>
+    <string name="iaccept">I accept</string>
     <string name="ideclined"><![CDATA[Declined & Proceed to Login]]></string>
     <string name="plz_grant">Please grant required permissions</string>
     <string name="whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register">Whether the details of medical checkup entered in the register</string>

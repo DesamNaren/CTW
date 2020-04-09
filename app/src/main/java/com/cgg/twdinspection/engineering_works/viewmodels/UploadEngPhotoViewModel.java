@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.cgg.twdinspection.common.network.TWDService;
 import com.cgg.twdinspection.engineering_works.interfaces.UploadEngPhotosSubmitInterface;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
+import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
@@ -39,19 +40,19 @@ public class UploadEngPhotoViewModel extends ViewModel {
 
     }
 
-    public void submitEngWorksDetails(SubmitEngWorksRequest gccSubmitRequest) {
+    public void submitEngWorksDetails(SubmitEngWorksRequest engWorksRequest) {
         Gson gson=new Gson();
-        String request=gson.toJson(gccSubmitRequest);
+        String request=gson.toJson(engWorksRequest);
         Log.i("Request",request);
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.getEngWorksSubmitResponse(gccSubmitRequest).enqueue(new Callback<GCCSubmitResponse>() {
+        twdService.getEngWorksSubmitResponse(engWorksRequest).enqueue(new Callback<SubmitEngWorksResponse>() {
             @Override
-            public void onResponse(@NotNull Call<GCCSubmitResponse> call, @NotNull Response<GCCSubmitResponse> response) {
+            public void onResponse(@NotNull Call<SubmitEngWorksResponse> call, @NotNull Response<SubmitEngWorksResponse> response) {
                 engPhotosSubmitInterface.getData(response.body());
             }
 
             @Override
-            public void onFailure(@NotNull Call<GCCSubmitResponse> call, @NotNull Throwable t) {
+            public void onFailure(@NotNull Call<SubmitEngWorksResponse> call, @NotNull Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -75,23 +76,6 @@ public class UploadEngPhotoViewModel extends ViewModel {
             errorHandlerInterface.handleError(e, context);
             e.printStackTrace();
         }
-    }
-    public void submitGCCDetails(GCCSubmitRequest gccSubmitRequest) {
-        Gson gson=new Gson();
-        String request=gson.toJson(gccSubmitRequest);
-        Log.i("Request",request);
-        TWDService twdService = TWDService.Factory.create("school");
-        twdService.getGCCSubmitResponse(gccSubmitRequest).enqueue(new Callback<GCCSubmitResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<GCCSubmitResponse> call, @NotNull Response<GCCSubmitResponse> response) {
-                engPhotosSubmitInterface.getData(response.body());
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<GCCSubmitResponse> call, @NotNull Throwable t) {
-                errorHandlerInterface.handleError(t, context);
-            }
-        });
     }
 
 }

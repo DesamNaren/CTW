@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityUploadEngPhotosBinding;
 import com.cgg.twdinspection.engineering_works.interfaces.UploadEngPhotosSubmitInterface;
+import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
+import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoViewModel;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
@@ -34,6 +37,7 @@ import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -61,6 +65,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     SharedPreferences sharedPreferences;
     private CustomProgressDialog customProgressDialog;
     UploadEngPhotoViewModel viewModel;
+    SubmitEngWorksRequest submitEngWorksRequest;
 
 
     @Override
@@ -90,6 +95,10 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         }catch (Exception e){
             e.printStackTrace();
         }
+        String request=sharedPreferences.getString(AppConstants.EngSubmitRequest,"");
+        Gson gson=new Gson();
+        if(!TextUtils.isEmpty(request))
+            submitEngWorksRequest=gson.fromJson(request,SubmitEngWorksRequest.class);
         
         binding.ivElevation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,8 +188,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     }
 
     private void callDataSubmit() {
-//        viewModel.submitEngWorksDetails(request);
-        callPhotoSubmit();
+        viewModel.submitEngWorksDetails(submitEngWorksRequest);
     }
     private void callPhotoSubmit() {
         RequestBody requestFile =
@@ -318,12 +326,12 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         return String.format("%06d", number);
     }
     @Override
-    public void getData(GCCSubmitResponse gccSubmitResponse) {
+    public void getData(SubmitEngWorksResponse engWorksResponse) {
         customProgressDialog.hide();
-        if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+        if (engWorksResponse != null && engWorksResponse.getStatusCode() != null && engWorksResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
             callPhotoSubmit();
-        } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
-            Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
+        } else if (engWorksResponse != null && engWorksResponse.getStatusCode() != null && engWorksResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+            Snackbar.make(binding.root, engWorksResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
         } else {
             Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
         }

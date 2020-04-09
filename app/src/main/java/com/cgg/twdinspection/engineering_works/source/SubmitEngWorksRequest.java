@@ -156,31 +156,6 @@ public class SubmitEngWorksRequest {
     @Expose
     private String satisfactionLevel;
 
-
-    @SerializedName("Device_Id")
-    @Expose
-    private String deviceId;
-
-    @SerializedName("Version_No")
-    @Expose
-    private String versionNo;
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getVersionNo() {
-        return versionNo;
-    }
-
-    public void setVersionNo(String versionNo) {
-        this.versionNo = versionNo;
-    }
-
     public String getOfficerId() {
         return officerId;
     }
@@ -580,4 +555,5 @@ public class SubmitEngWorksRequest {
     public void setSatisfactionLevel(String satisfactionLevel) {
         this.satisfactionLevel = satisfactionLevel;
     }
+
 }
