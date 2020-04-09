@@ -1,4 +1,4 @@
-package com.cgg.twdinspection.gcc.ui.petrolpump;
+package com.cgg.twdinspection.gcc.ui.lpg;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +26,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivityPetrolPumpPhotoCaptureBinding;
+import com.cgg.twdinspection.databinding.ActivityLpgPhotoCaptureBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
@@ -57,16 +57,15 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface {
+public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface {
 
-    ActivityPetrolPumpPhotoCaptureBinding binding;
+    ActivityLpgPhotoCaptureBinding binding;
     String PIC_NAME, PIC_TYPE;
     public Uri fileUri;
     Bitmap bm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    int flag_entrance = 0, flag_office2 = 0, flag_office1 = 0, flag_safety_equip1 = 0, flag_safety_equip2 = 0,
-            flag_machinary1 = 0, flag_machinary2 = 0, flag_repair = 0, flag_pUnits = 0;
-    File file_repair, file_entrance, file_office2, file_office1, file_safety_equip1, file_safety_equip2, file_machinary1, file_machinary2;
+    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_safety_eq1 = 0, flag_safety_eq2 = 0, flag_office = 0, flag_repair = 0, flag_pUnits = 0;
+    File file_repair, file_entrance, file_ceiling, file_floor, file_safety_eq1, file_safety_eq2, file_office;
     String FilePath, repairPath;
     private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
@@ -80,11 +79,11 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_photo_capture);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_lpg_photo_capture);
         binding.header.headerTitle.setText(getString(R.string.upload_photos));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
-        customProgressDialog = new CustomProgressDialog(PetrolPumpPhotoActivity.this);
+        customProgressDialog = new CustomProgressDialog(LpgPhotoActivity.this);
 
 
         viewModel = ViewModelProviders.of(this,
@@ -179,11 +178,11 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 }
             }
         });
-        binding.ivOffice1.setOnClickListener(new View.OnClickListener() {
+        binding.ivFloor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callPermissions()) {
-                    PIC_TYPE = AppConstants.OFFICE1;
+                    PIC_TYPE = AppConstants.FLOOR;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -193,11 +192,11 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 }
             }
         });
-        binding.ivOffice2.setOnClickListener(new View.OnClickListener() {
+        binding.ivCeiling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callPermissions()) {
-                    PIC_TYPE = AppConstants.OFFICE2;
+                    PIC_TYPE = AppConstants.CEILING;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -235,25 +234,11 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 }
             }
         });
-        binding.ivMachinary1.setOnClickListener(new View.OnClickListener() {
+        binding.ivOffice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callPermissions()) {
-                    PIC_TYPE = AppConstants.MACHINARY1;
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-                    if (fileUri != null) {
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-                    }
-                }
-            }
-        });
-        binding.ivMachinary2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (callPermissions()) {
-                    PIC_TYPE = AppConstants.MACHINARY2;
+                    PIC_TYPE = AppConstants.OFFICE;
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                     if (fileUri != null) {
@@ -267,10 +252,10 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
             @Override
             public void onClick(View view) {
                 if (validate()) {
-                    if (Utils.checkInternetConnection(PetrolPumpPhotoActivity.this)) {
+                    if (Utils.checkInternetConnection(LpgPhotoActivity.this)) {
                         callDataSubmit();
                     } else {
-                        Utils.customWarningAlert(PetrolPumpPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                        Utils.customWarningAlert(LpgPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                     }
                 }
             }
@@ -396,35 +381,32 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("image", file_entrance.getName(), requestFile);
         RequestBody requestFile1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_office1);
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_floor);
         MultipartBody.Part body1 =
-                MultipartBody.Part.createFormData("image", file_office1.getName(), requestFile1);
+                MultipartBody.Part.createFormData("image", file_floor.getName(), requestFile1);
         RequestBody requestFile2 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_office2);
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_ceiling);
         MultipartBody.Part body2 =
-                MultipartBody.Part.createFormData("image", file_office2.getName(), requestFile2);
+                MultipartBody.Part.createFormData("image", file_ceiling.getName(), requestFile2);
         RequestBody requestFile3 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_equip1);
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq1);
         MultipartBody.Part body3 =
-                MultipartBody.Part.createFormData("image", file_safety_equip1.getName(), requestFile3);
+                MultipartBody.Part.createFormData("image", file_safety_eq1.getName(), requestFile3);
         RequestBody requestFile4 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_equip2);
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq2);
         MultipartBody.Part body4 =
-                MultipartBody.Part.createFormData("image", file_safety_equip2.getName(), requestFile4);
+                MultipartBody.Part.createFormData("image", file_safety_eq2.getName(), requestFile4);
 
         RequestBody requestFile5 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_machinary1);
-        MultipartBody.Part body5 = MultipartBody.Part.createFormData("image", file_machinary1.getName(), requestFile5);
-        RequestBody requestFile6 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_machinary2);
-        MultipartBody.Part body6 = MultipartBody.Part.createFormData("image", file_machinary2.getName(), requestFile6);
-        MultipartBody.Part body7 = null;
+                RequestBody.create(MediaType.parse("multipart/form-data"), file_office);
+        MultipartBody.Part body5 = MultipartBody.Part.createFormData("image", file_office.getName(), requestFile5);
+        MultipartBody.Part body6 = null;
         if (file_repair != null) {
-            RequestBody requestFile7 =
+            RequestBody requestFile6 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file_repair);
-            body7 = MultipartBody.Part.createFormData("image", file_repair.getName(), requestFile7);
-        }
+            body6 = MultipartBody.Part.createFormData("image", file_repair.getName(), requestFile6);
 
+        }
         customProgressDialog.show();
 
 
@@ -435,10 +417,9 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         partList.add(body3);
         partList.add(body4);
         partList.add(body5);
-        partList.add(body6);
 
-        if (body7 != null) {
-            partList.add(body7);
+        if (body6 != null) {
+            partList.add(body6);
         }
 
         viewModel.UploadImageServiceCall(partList);
@@ -449,24 +430,21 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         if (flag_entrance == 0) {
             returnFlag = false;
             showSnackBar("Please capture entrance image");
-        } else if (flag_office1 == 0) {
+        } else if (flag_floor == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
-        } else if (flag_office2 == 0) {
+            showSnackBar("Please capture floor image");
+        } else if (flag_ceiling == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
-        } else if (flag_safety_equip1 == 0) {
-            returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
-        } else if (flag_safety_equip2 == 0) {
+            showSnackBar("Please capture ceiling image");
+        }  else if (flag_safety_eq1 == 0) {
             returnFlag = false;
             showSnackBar("Please capture safety equipment image");
-        } else if (flag_machinary1 == 0) {
+        } else if (flag_safety_eq2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
-        } else if (flag_machinary2 == 0) {
+            showSnackBar("Please capture safety equipment image");
+        } else if (flag_office == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
+            showSnackBar("Please capture office image");
         }
         return returnFlag;
     }
@@ -501,44 +479,38 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                     binding.ivEntrance.setPadding(0, 0, 0, 0);
                     binding.ivEntrance.setBackgroundColor(getResources().getColor(R.color.white));
                     file_entrance = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
+                    Glide.with(LpgPhotoActivity.this).load(file_entrance).into(binding.ivEntrance);
 
-                } else if (PIC_TYPE.equals(AppConstants.OFFICE1)) {
-                    flag_office1 = 1;
-                    binding.ivOffice1.setPadding(0, 0, 0, 0);
-                    binding.ivOffice1.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_office1 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_office1).into(binding.ivOffice1);
-                } else if (PIC_TYPE.equals(AppConstants.OFFICE2)) {
-                    flag_office2 = 1;
-                    binding.ivOffice2.setPadding(0, 0, 0, 0);
-                    binding.ivOffice2.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_office2 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_office2).into(binding.ivOffice2);
+                } else if (PIC_TYPE.equals(AppConstants.FLOOR)) {
+                    flag_floor = 1;
+                    binding.ivFloor.setPadding(0, 0, 0, 0);
+                    binding.ivFloor.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_floor = new File(FilePath);
+                    Glide.with(LpgPhotoActivity.this).load(file_floor).into(binding.ivFloor);
+                } else if (PIC_TYPE.equals(AppConstants.CEILING)) {
+                    flag_ceiling = 1;
+                    binding.ivCeiling.setPadding(0, 0, 0, 0);
+                    binding.ivCeiling.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_ceiling = new File(FilePath);
+                    Glide.with(LpgPhotoActivity.this).load(file_ceiling).into(binding.ivCeiling);
                 } else if (PIC_TYPE.equals(AppConstants.SAFETY_EQUIPMENT1)) {
-                    flag_safety_equip1 = 1;
+                    flag_safety_eq1 = 1;
                     binding.ivSafetyEqui1.setPadding(0, 0, 0, 0);
                     binding.ivSafetyEqui1.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_safety_equip1 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_safety_equip1).into(binding.ivSafetyEqui1);
+                    file_safety_eq1 = new File(FilePath);
+                    Glide.with(LpgPhotoActivity.this).load(file_safety_eq1).into(binding.ivSafetyEqui1);
                 } else if (PIC_TYPE.equals(AppConstants.SAFETY_EQUIPMENT2)) {
-                    flag_safety_equip2 = 1;
+                    flag_safety_eq2 = 1;
                     binding.ivSafetyEqui2.setPadding(0, 0, 0, 0);
                     binding.ivSafetyEqui2.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_safety_equip2 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_safety_equip2).into(binding.ivSafetyEqui2);
-                } else if (PIC_TYPE.equals(AppConstants.MACHINARY1)) {
-                    flag_machinary1 = 1;
-                    binding.ivMachinary1.setPadding(0, 0, 0, 0);
-                    binding.ivMachinary1.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_machinary1 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_machinary1).into(binding.ivMachinary1);
-                } else if (PIC_TYPE.equals(AppConstants.MACHINARY2)) {
-                    flag_machinary2 = 1;
-                    binding.ivMachinary2.setPadding(0, 0, 0, 0);
-                    binding.ivMachinary2.setBackgroundColor(getResources().getColor(R.color.white));
-                    file_machinary2 = new File(FilePath);
-                    Glide.with(PetrolPumpPhotoActivity.this).load(file_machinary2).into(binding.ivMachinary2);
+                    file_safety_eq2 = new File(FilePath);
+                    Glide.with(LpgPhotoActivity.this).load(file_safety_eq2).into(binding.ivSafetyEqui2);
+                } else if (PIC_TYPE.equals(AppConstants.OFFICE)) {
+                    flag_office = 1;
+                    binding.ivOffice.setPadding(0, 0, 0, 0);
+                    binding.ivOffice.setBackgroundColor(getResources().getColor(R.color.white));
+                    file_office = new File(FilePath);
+                    Glide.with(LpgPhotoActivity.this).load(file_office).into(binding.ivOffice);
                 }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
@@ -558,7 +530,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         Uri imageUri = null;
         if (imageFile != null) {
             imageUri = FileProvider.getUriForFile(
-                    PetrolPumpPhotoActivity.this,
+                    LpgPhotoActivity.this,
                     BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
                     imageFile);
         }
@@ -577,7 +549,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(PetrolPumpPhotoActivity.this) + "~" + Utils.getVersionName(PetrolPumpPhotoActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
+                    Utils.getDeviceID(LpgPhotoActivity.this) + "~" + Utils.getVersionName(LpgPhotoActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

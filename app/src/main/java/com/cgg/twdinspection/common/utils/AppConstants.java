@@ -79,6 +79,7 @@ public class AppConstants {
     public static final String MACHINARY2 = "MACHINARY2";
     public static final String SAFETY_EQUIPMENT1 = "SAFETY_EQUIPMENT1";
     public static final String SAFETY_EQUIPMENT2 = "SAFETY_EQUIPMENT2";
+    public static final String OFFICE = "OFFICE";
     public static final String OFFICE1 = "OFFICE1";
     public static final String OFFICE2 = "OFFICE2";
     public static final String REPAIR = "REPAIR";

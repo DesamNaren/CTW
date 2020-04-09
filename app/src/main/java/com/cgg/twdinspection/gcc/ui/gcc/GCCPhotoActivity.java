@@ -54,7 +54,6 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.internal.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -448,10 +447,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         } else if (flag_stock_arrang2 == 0) {
             returnFlag = false;
             showSnackBar("Please capture stock arrangement image");
-        } else if (flag_stock_arrang2 == 0) {
-            returnFlag = false;
-            showSnackBar("Please capture stock arrangement image");
-        } else if (flag_pUnits == 1 && flag_machinary == 0) {
+        }  else if (flag_pUnits == 1 && flag_machinary == 0) {
             returnFlag = false;
             showSnackBar("Please capture machinary image");
         }
