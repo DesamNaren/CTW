@@ -119,6 +119,8 @@
                         </RadioGroup>
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:visibility="gone"
+                            android:id="@+id/tv_close"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textStyle="bold"
                             android:layout_marginTop="@dimen/dimen_8dp"
@@ -135,7 +137,7 @@
                             android:layout_marginBottom="@dimen/dimen_10dp"
                             android:padding="@dimen/dimen_8dp"
                             android:src="@drawable/ic_menu_camera"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
