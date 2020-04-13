@@ -99,6 +99,7 @@ public class AppConstants {
 
     public static final String SCHEME_REP_DATA = "SCHEME_REP_DATA";
     public static final String FROM_CLASS = "FROM_CLASS";
+    public static final String SOURCE_CLASS = "SOURCE_CLASS";
     public static final String COCAR = "COCAR";
     public static final String REPORT_COCAR = "REPORT_COCAR";
     public static final String OD = "OD";
@@ -118,6 +119,8 @@ public class AppConstants {
     public static final String DR_GODOWN_DATA = "DR_GODOWN_DATA";
     public static final String PETROL_PUMP_DATA = "PETROL_PUMP_DATA";
     public static final String LPG_DATA = "LPG_DATA";
+    public static final String LPG = "LPG";
+    public static final String PETROL_PUMP = "PETROL_PUMP";
     public static final String DR_DEPOT_DATA = "DR_DEPOT_DATA";
     public static final String MFP_DEPOT_DATA = "MFP_DEPOT_DATA";
     public static final String P_UNIT_DATA = "P_UNIT_DATA";

@@ -1,4 +1,4 @@
-package com.cgg.twdinspection.gcc.ui.petrolpump;
+package com.cgg.twdinspection.gcc.ui.lpg;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,16 +22,15 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpBinding;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -42,7 +41,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandlerInterface {
+public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
@@ -161,29 +160,29 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                 Gson gson = new Gson();
                 String stockData = gson.toJson(stockDetailsResponsemain);
                 try {
-                    editor = TWDApplication.get(PetrolPumpActivity.this).getPreferences().edit();
+                    editor = TWDApplication.get(LPGActivity.this).getPreferences().edit();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
-                intent.putExtra(AppConstants.SOURCE_CLASS, AppConstants.PETROL_PUMP);
+                Intent intent = new Intent(LPGActivity.this, PetrolPumpFindingsActivity.class);
+                intent.putExtra(AppConstants.SOURCE_CLASS, AppConstants.LPG);
                 startActivity(intent);
             }
 
         });
 
-        if (Utils.checkInternetConnection(PetrolPumpActivity.this)) {
+        if (Utils.checkInternetConnection(LPGActivity.this)) {
             if (drGodowns != null && drGodowns.getGodownId() != null) {
                 customProgressDialog.show();
                 LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(drGodowns.getGodownId());
-                officesResponseLiveData.observe(PetrolPumpActivity.this, new Observer<StockDetailsResponse>() {
+                officesResponseLiveData.observe(LPGActivity.this, new Observer<StockDetailsResponse>() {
                     @Override
                     public void onChanged(StockDetailsResponse stockDetailsResponse) {
 
                         customProgressDialog.hide();
-                        officesResponseLiveData.removeObservers(PetrolPumpActivity.this);
+                        officesResponseLiveData.removeObservers(LPGActivity.this);
                         stockDetailsResponsemain = stockDetailsResponse;
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
@@ -271,10 +270,10 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
 
                 });
             } else {
-                Utils.customWarningAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
+                Utils.customWarningAlert(LPGActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             }
         } else {
-            Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            Utils.customErrorAlert(LPGActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
 
 

@@ -35,6 +35,7 @@ import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookC
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.ui.lpg.LpgPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -64,6 +65,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
+    private String sourceClass="";
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -76,6 +78,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            sourceClass = getIntent().getStringExtra(AppConstants.SOURCE_CLASS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -493,7 +496,15 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
 
-                    startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class));
+                    if(!TextUtils.isEmpty(sourceClass)){
+                        if(sourceClass.equalsIgnoreCase(AppConstants.LPG)){
+                            startActivity(new Intent(PetrolPumpFindingsActivity.this, LpgPhotoActivity.class));
+                        }else{
+                            startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class));
+                        }
+                    }else{
+                        Toast.makeText(PetrolPumpFindingsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

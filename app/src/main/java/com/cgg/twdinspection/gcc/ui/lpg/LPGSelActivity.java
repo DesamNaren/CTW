@@ -25,6 +25,7 @@ import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpActivity;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -124,7 +125,8 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                     editor.putString(AppConstants.LPG_DATA, lpgData);
                     editor.commit();
 
-                    startActivity(new Intent(LPGSelActivity.this, LPGSelActivity.class));
+                    startActivity(new Intent(LPGSelActivity.this, PetrolPumpFindingsActivity.class));
+
                 }
             }
         });
