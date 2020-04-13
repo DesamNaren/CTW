@@ -1,10 +1,5 @@
 package com.cgg.twdinspection.gcc.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,11 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -128,6 +128,17 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                 editor.putString(AppConstants.Selected_Supp_Report, data);
                 editor.commit();
                 startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+            }
+        });
+        binding.btnPetrolPump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Gson gson = new Gson();
+                String drDepotData = gson.toJson(drDepot);
+                editor.putString(AppConstants.Selected_Supp_Report, drDepotData);
+                editor.commit();
+                startActivity(new Intent(GCCReportsDashboard.this, PetrolpumpInspRepActivity.class));
             }
         });
 

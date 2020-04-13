@@ -284,6 +284,7 @@
         <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpPhotoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".gcc.reports.ui.PetrolpumpInspRepActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
