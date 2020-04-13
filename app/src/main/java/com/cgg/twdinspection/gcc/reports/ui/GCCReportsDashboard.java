@@ -157,10 +157,10 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                                         break;
                                 }
                             }
-                            binding.tvDepotCnt.setText(String.valueOf(drDepot.size()));
-                            binding.tvGodownCnt.setText(String.valueOf(drGodown.size()));
-                            binding.tvMfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
-                            binding.tvPunitCnt.setText(String.valueOf(processingUnit.size()));
+                            binding.drDepotCnt.setText(String.valueOf(drDepot.size()));
+                            binding.drGodownCnt.setText(String.valueOf(drGodown.size()));
+                            binding.mfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
+                            binding.pUnitCnt.setText(String.valueOf(processingUnit.size()));
 
                             Gson gson = new Gson();
                             String drDepotData = gson.toJson(drDepot);
