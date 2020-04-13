@@ -189,7 +189,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/floor" />
+                                android:src="@drawable/engineering" />
                         </LinearLayout>
 
                         <View
@@ -220,7 +220,7 @@
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/floor" />
+                                android:src="@drawable/engineering" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -263,7 +263,7 @@
                                 android:id="@+id/iv_office1"
                                 android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/godown_storage" />
+                                android:src="@drawable/home" />
                         </LinearLayout>
 
                         <View
@@ -294,7 +294,7 @@
                                 android:id="@+id/iv_office2"
                                 android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
-                                android:src="@drawable/godown_storage" />
+                                android:src="@drawable/home" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
