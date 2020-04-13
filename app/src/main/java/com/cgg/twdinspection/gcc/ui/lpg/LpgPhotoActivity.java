@@ -164,6 +164,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             suppId = mfpGoDowns.getGodownId();
             godName = mfpGoDowns.getGodownName();
         }
+
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
