@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -40,13 +41,22 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
 
-        binding.setInspData(reportData.getInspectionFindings().getDrGodown());
-        binding.setImageUrl(reportData.getPhotos().get(0).getFilePath());
+        if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrGodown() != null) {
+            binding.setInspData(reportData.getInspectionFindings().getDrGodown());
+        } else {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+        }
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0 && reportData.getPhotos().get(0).getFilePath() != null) {
+            binding.setImageUrl(reportData.getPhotos().get(0).getFilePath());
+        } else {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+        }
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrGodownInspRepActivity.this,ViewPhotosActivity.class));
+                startActivity(new Intent(DrGodownInspRepActivity.this, ViewPhotosActivity.class));
             }
         });
+
     }
 }

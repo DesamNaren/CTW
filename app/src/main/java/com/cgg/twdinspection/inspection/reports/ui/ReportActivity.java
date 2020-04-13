@@ -19,6 +19,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.databinding.ActivityReportBinding;
 import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
+import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
@@ -114,11 +115,11 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         binding.btnGcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* if (gccCnt > 0) {
+                if (gccCnt > 0) {
                     startActivity(new Intent(ReportActivity.this, GCCReportsDashboard.class));
                 } else {
                     callSnackBar("No data found");
-                }*/
+                }
             }
         });
         binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {

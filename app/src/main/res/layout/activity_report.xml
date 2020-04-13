@@ -94,14 +94,13 @@
                     <LinearLayout
                         android:padding="@dimen/dimen_10dp"
                         android:layout_marginRight="@dimen/dimen_10dp"
-                        android:background="@color/schemes"
+                        android:background="@color/schemes_dark"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
 
                         <LinearLayout
-                            android:background="@color/schemes"
                             android:id="@+id/btn_schemes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -140,7 +139,7 @@
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
-                        android:background="@color/inst"
+                        android:background="@color/inst_dark"
                         android:padding="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         android:layout_width="0dp"
@@ -197,7 +196,7 @@
 
                     <LinearLayout
                         android:layout_marginRight="@dimen/dimen_10dp"
-                        android:background="@color/materialGrey300"
+                        android:background="@color/gcc_dark"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_10dp"
                         android:layout_width="0dp"
@@ -238,15 +237,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="GCC"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/white" />
                         </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:background="@color/green"
+                        android:background="@color/eng_dark"
                         android:layout_weight="1"
-                        android:id="@+id/btn_eng"
+                        android:id="@+id/btnEng"
                         android:padding="@dimen/dimen_10dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -39,7 +40,13 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
-        binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
+
+
+        if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null) {
+            binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
+        } else {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+        }
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
