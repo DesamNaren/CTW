@@ -93,7 +93,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                         schemesCnt = reportCountsResponse.getSchemes();
                         instCnt = reportCountsResponse.getSchools();
 
-//                        binding.gccCnt.setText(String.valueOf(gccCnt));
+                        binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
 
