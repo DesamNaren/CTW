@@ -109,6 +109,7 @@ public class AppConstants {
     public static final String SATISFACTORY = "Satisfactory";
     public static final String POOR = "Poor";
     public static String stockData = "STOCK_DATA";
+    public static String petComm = "petComm";
     public static String essComm = "essComm";
     public static String dailyReq = "dailyReq";
     public static String empties = "empties";

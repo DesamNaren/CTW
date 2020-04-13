@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:textColor="@color/black"
-                    android:text="Division name"/>
+                    android:text="Division"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Society name"/>
+                    android:text="Society"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Incharge name"/>
+                    android:text="Incharge"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Godown name"/>
+                    android:text="Godown/Depot/Unit"/>
 
                 <TextView
                     android:layout_width="0dp"
