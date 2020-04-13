@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class ReportCountsResponse {
 
+    @SerializedName("engineering_works")
+    @Expose
+    private Integer engineeringWorks;
     @SerializedName("schools")
     @Expose
     private Integer schools;
@@ -17,6 +20,14 @@ public class ReportCountsResponse {
     @SerializedName("Status_Code")
     @Expose
     private String statusCode;
+
+    public Integer getEngineeringWorks() {
+        return engineeringWorks;
+    }
+
+    public void setEngineeringWorks(Integer engineeringWorks) {
+        this.engineeringWorks = engineeringWorks;
+    }
 
     public Integer getSchools() {
         return schools;
@@ -49,5 +60,4 @@ public class ReportCountsResponse {
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
     }
-
 }

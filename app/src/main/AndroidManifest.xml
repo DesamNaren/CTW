@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".engineering_works.ui.EngSyncActivity"></activity>
+        <activity android:name=".engineering_works.reports.ui.ViewEngPhotosActivity"></activity>
+        <activity android:name=".engineering_works.ui.EngSyncActivity" />
         <activity
             android:name=".engineering_works.ui.UploadEngPhotosActivity"
             android:screenOrientation="portrait" />
@@ -283,6 +284,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".engineering_works.reports.ui.EngReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme" />
+        <activity
+            android:name=".engineering_works.reports.ui.EngReportDetailsActivity"
             android:screenOrientation="portrait" />
 
         <provider

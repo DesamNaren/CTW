@@ -11,7 +11,7 @@ public class Stage {
     @SerializedName("stage_name")
     @Expose
     private String stageName;
-    @SerializedName("stage_progress_rating")
+    @SerializedName("rating")
     @Expose
     private Integer stageProgressRating;
 
