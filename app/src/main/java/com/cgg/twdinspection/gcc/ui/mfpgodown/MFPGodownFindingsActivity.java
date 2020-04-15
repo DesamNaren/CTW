@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -34,7 +33,6 @@ import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCe
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,7 +41,6 @@ import com.google.gson.Gson;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -353,6 +350,12 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     MFPRegisterBookCertificates registerBookCertificates = new MFPRegisterBookCertificates();
                     registerBookCertificates.setMfpStockRegister(stockReg);
                     registerBookCertificates.setInsuranceCertificate(insCer);
+                    if (!insComDate.contains("/"))
+                        registerBookCertificates.setInsuranceValidity("");
+                    else
+                        registerBookCertificates.setInsuranceValidity(insComDate);
+
+                    registerBookCertificates.setInsuranceCompany(insComName);
                     registerBookCertificates.setFireNoc(fireNOC);
                     registerBookCertificates.setWeightMeasureCertificate(weightMea);
                     if (!weightDate.contains("/")) {
@@ -375,7 +378,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     generalFindings.setDivManagerInspDate(lastInsDiv);
                     generalFindings.setRepairReq(repairsReq);
                     generalFindings.setRepairType(repairType);
-                    generalFindings.setRepairType(remarks);
+                    generalFindings.setRemarks(remarks);
 
                     mfpGodownsInsp.setGeneralFindings(generalFindings);
 
