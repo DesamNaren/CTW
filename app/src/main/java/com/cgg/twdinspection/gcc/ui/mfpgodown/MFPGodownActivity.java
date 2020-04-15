@@ -188,7 +188,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                         stockDetailsResponsemain = stockDetailsResponse;
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
-                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.VISIBLE);
                                 binding.tabs.setVisibility(View.VISIBLE);
                                 binding.noDataTv.setVisibility(View.GONE);
