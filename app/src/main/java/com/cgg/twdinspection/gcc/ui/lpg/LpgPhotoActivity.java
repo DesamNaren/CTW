@@ -276,6 +276,9 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         request.setInspectionTime(Utils.getCurrentDateTime());
         request.setGodownId(suppId);
         request.setGodown_name(godName);
+        request.setDeviceId(Utils.getDeviceID(this));
+        request.setVersionNo(Utils.getVersionName(this));
+        request.setPhoto_key_id(Utils.getRandomNumberString());
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 

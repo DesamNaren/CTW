@@ -54,6 +54,19 @@ public class GCCSubmitRequest {
     @Expose
     private String versionNo;
 
+
+    @SerializedName("photo_key_id")
+    @Expose
+    private String photo_key_id;
+
+    public String getPhoto_key_id() {
+        return photo_key_id;
+    }
+
+    public void setPhoto_key_id(String photo_key_id) {
+        this.photo_key_id = photo_key_id;
+    }
+
     public String getDeviceId() {
         return deviceId;
     }
