@@ -87,6 +87,18 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             if (reportData != null) {
                 binding.includeBasicLayout.divName.setText(reportData.getDivisionName());
                 binding.includeBasicLayout.socName.setText(reportData.getSocietyName());
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
+                    binding.includeBasicLayout.drGodownName.setText("Dr Godown");
+                }
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+                    binding.includeBasicLayout.drGodownName.setText("Dr Depot");
+                }
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+                    binding.includeBasicLayout.drGodownName.setText("MFP Godown");
+                }
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+                    binding.includeBasicLayout.drGodownName.setText("Processing Unit");
+                }
                 binding.includeBasicLayout.drGodownName.setText(reportData.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(reportData.getInchargeName());
                 binding.includeBasicLayout.dateTv.setText(reportData.getInspectionTime());
@@ -174,7 +186,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setAdapter(adapter);
 
         }
-        if (reportData != null && ((reportData.getStockDetails().getProcessingUnits() == null) && reportData.getStockDetails().getDailyRequirements() == null
+        if (reportData != null && ((reportData.getStockDetails()!=null &&
+                reportData.getStockDetails().getProcessingUnits() == null) && reportData.getStockDetails().getDailyRequirements() == null
                 && reportData.getStockDetails().getEmpties() == null && reportData.getStockDetails().getEssentialCommodities() == null && reportData.getStockDetails().getMfpCommodities() == null)) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);

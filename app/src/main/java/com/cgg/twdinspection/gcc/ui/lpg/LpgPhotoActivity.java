@@ -164,6 +164,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             suppId = mfpGoDowns.getGodownId();
             godName = mfpGoDowns.getGodownName();
         }
+
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -471,8 +472,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
 
                 if (PIC_TYPE.equals(AppConstants.ENTRANCE)) {
                     flag_entrance = 1;
@@ -559,11 +558,6 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         return mediaFile;
     }
 
-    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
-    }
 
     @Override
     public void handleError(Throwable e, Context context) {

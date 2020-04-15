@@ -10,6 +10,7 @@ import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
@@ -196,6 +197,9 @@ public interface TWDService {
 
     @POST("getStockDetails/{id}")
     Call<StockDetailsResponse> getDRDepotMasterResponse(@Path("id") String id);
+
+    @POST("getStockDetails/{id}")
+    Call<PetrolStockDetailsResponse> getPLPGMasterResponse(@Path("id") String id);
 
 
 }

@@ -33,8 +33,11 @@ import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindin
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.lpg.LpgPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -60,7 +63,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     File file;
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0;
-    private StockDetailsResponse stockDetailsResponse;
+    private PetrolStockDetailsResponse stockDetailsResponse;
     private String stockReg, purchaseReg, dailysales, godownLiaReg, cashbook, remittance, remittanceCash, insCer, fireNOC, weightMea;
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
@@ -92,41 +95,31 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         Gson gson = new Gson();
-        stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
-        String godownData = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-        DrGodowns drGodown = gson.fromJson(godownData, DrGodowns.class);
-        divId = drGodown.getDivisionId();
-        suppId = drGodown.getGodownId();
+        stockDetailsResponse = gson.fromJson(stockData, PetrolStockDetailsResponse.class);
+
+        if(!TextUtils.isEmpty(sourceClass)){
+            if(sourceClass.equalsIgnoreCase(AppConstants.LPG)){
+                String lpgData = sharedPreferences.getString(AppConstants.LPG_DATA, "");
+                LPGSupplierInfo lpgSupplierInfo = gson.fromJson(lpgData, LPGSupplierInfo.class);
+                divId = lpgSupplierInfo.getDivisionId();
+                suppId = lpgSupplierInfo.getGodownId();
+            }else{
+                String petrolData = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
+                PetrolSupplierInfo petrolSupplierInfo = gson.fromJson(petrolData, PetrolSupplierInfo.class);
+                divId = petrolSupplierInfo.getDivisionId();
+                suppId = petrolSupplierInfo.getGodownId();
+            }
+        }else{
+            Toast.makeText(PetrolPumpFindingsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+        }
+
+
 
         if (stockDetailsResponse != null) {
-            if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
-                }
-            }
-            if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
-                    sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
+            if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getCommonCommodities().size(); i++) {
+                    physVal += Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant());
+                    sysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate();
                 }
             }
         }
@@ -737,8 +730,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
+
                 binding.ivRepairs.setPadding(0, 0, 0, 0);
                 binding.ivRepairs.setBackgroundColor(getResources().getColor(R.color.white));
                 file = new File(FilePath);
@@ -788,12 +780,6 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         }
 
         return mediaFile;
-    }
-
-    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     }
 
     @Override

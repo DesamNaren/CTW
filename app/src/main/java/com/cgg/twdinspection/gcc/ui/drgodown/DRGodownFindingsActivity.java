@@ -755,8 +755,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
                 binding.ivRepairs.setPadding(0, 0, 0, 0);
                 binding.ivRepairs.setBackgroundColor(getResources().getColor(R.color.white));
                 file = new File(FilePath);
@@ -807,12 +805,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         }
 
         return mediaFile;
-    }
-
-    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
     }
 
     @Override

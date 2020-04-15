@@ -60,18 +60,18 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         setAnimation(holder.itemView, i);
 
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            holder.listItemBinding.tvSuppType.setText("Godown Name");
+            holder.listItemBinding.tvSuppType.setText("DR Godown");
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            holder.listItemBinding.tvSuppType.setText("Depot Name");
+            holder.listItemBinding.tvSuppType.setText("DR Depot");
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            holder.listItemBinding.tvSuppType.setText("MFP Godown Name");
+            holder.listItemBinding.tvSuppType.setText("MFP Godown");
             holder.listItemBinding.llSoc.setVisibility(View.GONE);
             holder.listItemBinding.vSoc.setVisibility(View.GONE);
         }
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            holder.listItemBinding.tvSuppType.setText("Unit Name");
+            holder.listItemBinding.tvSuppType.setText("Processing Unit");
         }
 
         holder.listItemBinding.cvGccReport.setOnClickListener(new View.OnClickListener() {

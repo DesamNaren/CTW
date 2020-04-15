@@ -395,12 +395,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
-
                 imgflag1 = 1;
-
-
                 benDetailsBinding.ivCam1.setImageBitmap(bm);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -425,11 +420,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                String OLDmyBase64Image = encodeToBase64(bm, Bitmap.CompressFormat.JPEG,
-                        100);
-
                 imgflag2 = 1;
-
                 benDetailsBinding.ivCam2.setImageBitmap(bm);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -446,11 +437,6 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     }
 
-    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
-        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
-        image.compress(compressFormat, quality, byteArrayOS);
-        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
-    }
 
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(benDetailsBinding.root, msg, Snackbar.LENGTH_INDEFINITE);

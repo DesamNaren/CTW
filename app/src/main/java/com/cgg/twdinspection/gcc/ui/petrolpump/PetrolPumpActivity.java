@@ -22,16 +22,11 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpBinding;
-import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
-import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
-import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
-import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
-import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.ui.fragment.PLPGFragment;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,9 +42,9 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
     ActivityPetrolPumpBinding binding;
-    private DrGodowns drGodowns;
+    private PetrolSupplierInfo petrolSupplierInfo;
     CustomProgressDialog customProgressDialog;
-    private StockDetailsResponse stockDetailsResponsemain;
+    private PetrolStockDetailsResponse petrolStockDetailsResponseMain;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -58,12 +53,8 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump);
         customProgressDialog = new CustomProgressDialog(this);
-        stockDetailsResponsemain = null;
-        EssentialFragment.commonCommodities = null;
-        DailyFragment.commonCommodities = null;
-        EmptiesFragment.commonCommodities = null;
-        MFPFragment.commonCommodities = null;
-        PUnitFragment.commonCommodities = null;
+        petrolStockDetailsResponseMain = null;
+        PLPGFragment.commonCommodities = null;
 
         binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump));
         binding.header.ivHome.setVisibility(View.GONE);
@@ -86,13 +77,13 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             Gson gson = new Gson();
-            String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-            drGodowns = gson.fromJson(str, DrGodowns.class);
-            if (drGodowns != null) {
-                binding.includeBasicLayout.divName.setText(drGodowns.getDivisionName());
-                binding.includeBasicLayout.socName.setText(drGodowns.getSocietyName());
-                binding.includeBasicLayout.drGodownName.setText(drGodowns.getGodownName());
-                binding.includeBasicLayout.inchargeName.setText(drGodowns.getIncharge());
+            String str = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
+            petrolSupplierInfo = gson.fromJson(str, PetrolSupplierInfo.class);
+            if (petrolSupplierInfo != null) {
+                binding.includeBasicLayout.divName.setText(petrolSupplierInfo.getDivisionName());
+                binding.includeBasicLayout.socName.setText(petrolSupplierInfo.getSocietyName());
+                binding.includeBasicLayout.drGodownName.setText(petrolSupplierInfo.getGodownName());
+                binding.includeBasicLayout.inchargeName.setText(petrolSupplierInfo.getIncharge());
                 binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());
             }
         } catch (Exception e) {
@@ -102,64 +93,18 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
+                if (PLPGFragment.commonCommodities != null && PLPGFragment.commonCommodities.size() > 0) {
+                    petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
+                    for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
+                        if (TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
+                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
                             setFragPos(header, z);
                             return;
                         }
                     }
                 }
-                if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-
-                if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-
-                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
-                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
-                        }
-                    }
-                }
-
                 Gson gson = new Gson();
-                String stockData = gson.toJson(stockDetailsResponsemain);
+                String stockData = gson.toJson(petrolStockDetailsResponseMain);
                 try {
                     editor = TWDApplication.get(PetrolPumpActivity.this).getPreferences().edit();
                 } catch (Exception e) {
@@ -175,91 +120,46 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         });
 
         if (Utils.checkInternetConnection(PetrolPumpActivity.this)) {
-            if (drGodowns != null && drGodowns.getGodownId() != null) {
+            if (petrolSupplierInfo != null && petrolSupplierInfo.getGodownId() != null) {
                 customProgressDialog.show();
-                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(drGodowns.getGodownId());
-                officesResponseLiveData.observe(PetrolPumpActivity.this, new Observer<StockDetailsResponse>() {
+                LiveData<PetrolStockDetailsResponse> officesResponseLiveData = viewModel.getPLPGStockData(petrolSupplierInfo.getGodownId());
+                officesResponseLiveData.observe(PetrolPumpActivity.this, new Observer<PetrolStockDetailsResponse>() {
                     @Override
-                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
+                    public void onChanged(PetrolStockDetailsResponse petrolStockDetailsResponse) {
 
                         customProgressDialog.hide();
                         officesResponseLiveData.removeObservers(PetrolPumpActivity.this);
-                        stockDetailsResponsemain = stockDetailsResponse;
+                        petrolStockDetailsResponseMain = petrolStockDetailsResponse;
 
-                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
-                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                        if (petrolStockDetailsResponse != null && petrolStockDetailsResponse.getStatusCode() != null) {
+                            if (petrolStockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.VISIBLE);
                                 binding.tabs.setVisibility(View.VISIBLE);
                                 binding.noDataTv.setVisibility(View.GONE);
                                 binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                                    stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
-                                    EssentialFragment essentialFragment = new EssentialFragment();
+                                if (petrolStockDetailsResponse.getCommonCommodities() != null && petrolStockDetailsResponse.getCommonCommodities().size() > 0) {
+                                    petrolStockDetailsResponse.getCommonCommodities().get(0).setComHeader("Petrol Commodities");
+                                    PLPGFragment plpgFragment = new PLPGFragment();
                                     Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
+                                    String petrolComm = gson.toJson(petrolStockDetailsResponse.getCommonCommodities());
                                     Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.essComm, essentialComm);
-                                    essentialFragment.setArguments(bundle);
-                                    adapter.addFrag(essentialFragment, "Essential Commodities");
-                                }
-
-                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                                    stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
-                                    DailyFragment dailyFragment = new DailyFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.dailyReq, essentialComm);
-                                    dailyFragment.setArguments(bundle);
-                                    adapter.addFrag(dailyFragment, "Daily Requirements");
-                                }
-
-                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                                    stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
-                                    EmptiesFragment emptiesFragment = new EmptiesFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.empties, essentialComm);
-                                    emptiesFragment.setArguments(bundle);
-                                    adapter.addFrag(emptiesFragment, "Empties");
-                                }
-
-
-                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                                    stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
-                                    MFPFragment mfpFragment = new MFPFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.mfp, essentialComm);
-                                    mfpFragment.setArguments(bundle);
-                                    adapter.addFrag(mfpFragment, "MFP Commodities");
-                                }
-
-                                if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                                    stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
-                                    PUnitFragment pUnitFragment = new PUnitFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.punit, essentialComm);
-                                    pUnitFragment.setArguments(bundle);
-                                    adapter.addFrag(pUnitFragment, "Processing Units");
+                                    bundle.putString(AppConstants.petComm, petrolComm);
+                                    plpgFragment.setArguments(bundle);
+                                    adapter.addFrag(plpgFragment, "Petrol Commodities");
                                 }
 
                                 binding.tabs.setupWithViewPager(binding.viewPager);
                                 binding.viewPager.setAdapter(adapter);
 
-                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                            } else if (petrolStockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.GONE);
                                 binding.tabs.setVisibility(View.GONE);
                                 binding.noDataTv.setVisibility(View.VISIBLE);
                                 binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                                callSnackBar(stockDetailsResponse.getStatusMessage());
+                                binding.noDataTv.setText(petrolStockDetailsResponse.getStatusMessage());
+                                callSnackBar(petrolStockDetailsResponse.getStatusMessage());
                             } else {
                                 callSnackBar(getString(R.string.something));
                             }
@@ -285,20 +185,8 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
             if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
                 callSnackBar("Submit all records in " + header);
                 binding.viewPager.setCurrentItem(x);
-                if (header.contains("Essential Commodities")) {
-                    ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Daily Requirements")) {
-                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Empties")) {
-                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("MFP Commodities")) {
-                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
-                }
-                if (header.equalsIgnoreCase("Processing Units")) {
-                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
+                if (header.contains("Petrol Commodities")) {
+                    ((PLPGFragment) mFragmentList.get(x)).setPos(pos);
                 }
                 break;
             }
@@ -315,7 +203,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));
