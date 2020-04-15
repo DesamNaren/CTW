@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -30,17 +29,12 @@ import com.cgg.twdinspection.databinding.ActivityPetrolPumpPhotoCaptureBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockSubmitRequest;
 import com.cgg.twdinspection.gcc.source.stock.SubmitReqCommodities;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
-import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
@@ -79,6 +73,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     PetrolStockDetailsResponse
             stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
+    private String randomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +84,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(PetrolPumpPhotoActivity.this);
 
+        randomNum = Utils.getRandomNumberString();
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -257,7 +253,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         request.setGodown_name(godName);
         request.setDeviceId(Utils.getDeviceID(this));
         request.setVersionNo(Utils.getVersionName(this));
-        request.setPhoto_key_id(Utils.getRandomNumberString());
+        request.setPhoto_key_id(randomNum);
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 
@@ -269,8 +265,8 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         List<SubmitReqCommodities> petrolCommoditiesList = new ArrayList<>();
 
 
-        if (stockDetailsResponse != null && stockDetailsResponse.getCommonCommodities() != null 
-        && stockDetailsResponse.getCommonCommodities().size() > 0) {
+        if (stockDetailsResponse != null && stockDetailsResponse.getCommonCommodities() != null
+                && stockDetailsResponse.getCommonCommodities().size() > 0) {
             for (int i = 0; i < stockDetailsResponse.getCommonCommodities().size(); i++) {
                 SubmitReqCommodities petrolCommodities = new SubmitReqCommodities();
                 petrolCommodities.setComType(stockDetailsResponse.getCommonCommodities().get(i).getCommName());
@@ -285,8 +281,8 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 petrolCommoditiesList.add(petrolCommodities);
             }
         }
-        
-       
+
+
         stockSubmitRequest.setPetrolPumps(petrolCommoditiesList);
         String sysVal = sharedPreferences.getString(AppConstants.TOTAL_SYSVAL, "");
         String phyVal = sharedPreferences.getString(AppConstants.TOTAL_PHYVAL, "");
@@ -479,7 +475,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(PetrolPumpPhotoActivity.this) + "~" + Utils.getVersionName(PetrolPumpPhotoActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
+                    Utils.getDeviceID(PetrolPumpPhotoActivity.this) + "~" + Utils.getVersionName(PetrolPumpPhotoActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -502,6 +498,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
         if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            Snackbar.make(binding.root, "Data Submitted, Uploading photos", Snackbar.LENGTH_SHORT).show();
             callPhotoSubmit();
         } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();

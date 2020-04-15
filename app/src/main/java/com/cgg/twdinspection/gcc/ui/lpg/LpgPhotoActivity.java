@@ -77,6 +77,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     InspectionSubmitResponse inspectionSubmitResponse;
     StockDetailsResponse stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
+    private String randomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(LpgPhotoActivity.this);
-
+        randomNum = Utils.getRandomNumberString();
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -244,7 +245,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         request.setGodown_name(godName);
         request.setDeviceId(Utils.getDeviceID(this));
         request.setVersionNo(Utils.getVersionName(this));
-        request.setPhoto_key_id(Utils.getRandomNumberString());
+        request.setPhoto_key_id(randomNum);
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 
@@ -517,7 +518,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(LpgPhotoActivity.this) + "~" + Utils.getVersionName(LpgPhotoActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
+                    Utils.getDeviceID(LpgPhotoActivity.this) + "~" + Utils.getVersionName(LpgPhotoActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
@@ -540,6 +541,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void getData(GCCSubmitResponse gccSubmitResponse) {
         customProgressDialog.hide();
         if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            Snackbar.make(binding.root, "Data Submitted, Uploading photos", Snackbar.LENGTH_SHORT).show();
             callPhotoSubmit();
         } else if (gccSubmitResponse != null && gccSubmitResponse.getStatusCode() != null && gccSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
