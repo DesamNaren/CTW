@@ -17,7 +17,7 @@ public class ReportStockDetails {
     @SerializedName("essential_commodities")
     @Expose
     private List<ReportSubmitReqCommodities> essentialCommodities = null;
-    @SerializedName("daily_requirements")
+    @SerializedName("dialy_requirements")
     @Expose
     private List<ReportSubmitReqCommodities> dailyRequirements = null;
     @SerializedName("empties")

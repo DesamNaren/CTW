@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -497,7 +496,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     generalFindings.setDivisionManagerInspection(lastInsDiv);
                     generalFindings.setSocietyManagerInspection(lastInsSoc);
                     generalFindings.setRepairsRequired(repairsReq);
-                    generalFindings.setRepairType(remarks);
+                    generalFindings.setRepairType(repairType);
                     generalFindings.setRemarks(remarks);
                     drGodownInsp.setGeneralFindings(generalFindings);
 

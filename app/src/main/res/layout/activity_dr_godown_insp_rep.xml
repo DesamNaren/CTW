@@ -594,7 +594,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.registerBookCertificates.weightMeasureValidity.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                                    android:visibility="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                     <com.google.android.material.textfield.TextInputLayout
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -1198,7 +1198,6 @@
                                     <ImageView
                                         android:id="@+id/iv_repairs"
                                         android:layout_width="@dimen/dimen_70dp"
-                                        android:visibility="gone"
                                         android:layout_height="@dimen/dimen_70dp"
                                         android:layout_gravity="center"
                                         android:layout_margin="@dimen/dimen_10dp"
