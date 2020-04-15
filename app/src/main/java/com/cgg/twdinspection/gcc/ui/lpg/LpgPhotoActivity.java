@@ -37,7 +37,9 @@ import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
@@ -64,7 +66,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public Uri fileUri;
     Bitmap bm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_safety_eq1 = 0, flag_safety_eq2 = 0, flag_office = 0, flag_repair = 0, flag_pUnits = 0;
+    int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_safety_eq1 = 0, flag_safety_eq2 = 0, flag_office = 0, flag_repair = 0, flag_lpgSupplierInfo = 0;
     File file_repair, file_entrance, file_ceiling, file_floor, file_safety_eq1, file_safety_eq2, file_office;
     String FilePath, repairPath;
     private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
@@ -115,55 +117,19 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         stockSubmitRequest = new StockSubmitRequest();
 
 
-        if (inspectionSubmitResponse.getProcessingUnit() != null) {
-            flag_pUnits = 1;
-            String pUnitData = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
-            PUnits pUnits = gson.fromJson(pUnitData, PUnits.class);
-            divId = pUnits.getDivisionId();
-            divName = pUnits.getDivisionName();
-            socId = pUnits.getSocietyId();
-            socName = pUnits.getSocietyName();
-            inchName = pUnits.getIncharge();
+        if (inspectionSubmitResponse.getLpg() != null) {
+            String lpgData = sharedPreferences.getString(AppConstants.LPG_DATA, "");
+            LPGSupplierInfo lpgSupplierInfo = gson.fromJson(lpgData, LPGSupplierInfo.class);
+            divId = lpgSupplierInfo.getDivisionId();
+            divName = lpgSupplierInfo.getDivisionName();
+            socId = lpgSupplierInfo.getSocietyId();
+            socName = lpgSupplierInfo.getSocietyName();
+            inchName = lpgSupplierInfo.getIncharge();
             suppType = getString(R.string.p_unit_req);
-            suppId = pUnits.getGodownId();
-            godName = pUnits.getGodownName();
+            suppId = lpgSupplierInfo.getGodownId();
+            godName = lpgSupplierInfo.getGodownName();
         }
-        if (inspectionSubmitResponse.getDrDepot() != null) {
-            String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
-            DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
-            divId = drDepot.getDivisionId();
-            divName = drDepot.getDivisionName();
-            socId = drDepot.getSocietyId();
-            socName = drDepot.getSocietyName();
-            inchName = drDepot.getIncharge();
-            suppType = getString(R.string.dr_depot_req);
-            suppId = drDepot.getGodownId();
-            godName = drDepot.getGodownName();
-        }
-        if (inspectionSubmitResponse.getDrGodown() != null) {
-            String godownData = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-            DrGodowns drGodowns = gson.fromJson(godownData, DrGodowns.class);
-            divId = drGodowns.getDivisionId();
-            divName = drGodowns.getDivisionName();
-            socId = drGodowns.getSocietyId();
-            socName = drGodowns.getSocietyName();
-            inchName = drGodowns.getIncharge();
-            suppType = getString(R.string.dr_godown_req);
-            suppId = drGodowns.getGodownId();
-            godName = drGodowns.getGodownName();
-        }
-        if (inspectionSubmitResponse.getMfpGodowns() != null) {
-            String mfpGodown = sharedPreferences.getString(AppConstants.MFP_DEPOT_DATA, "");
-            MFPGoDowns mfpGoDowns = gson.fromJson(mfpGodown, MFPGoDowns.class);
-            divId = mfpGoDowns.getDivisionId();
-            divName = mfpGoDowns.getDivisionName();
-            socId = mfpGoDowns.getSocietyId();
-            socName = mfpGoDowns.getSocietyName();
-            inchName = mfpGoDowns.getIncharge();
-            suppType = getString(R.string.mfp_godown_req);
-            suppId = mfpGoDowns.getGodownId();
-            godName = mfpGoDowns.getGodownName();
-        }
+        
 
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override

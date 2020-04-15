@@ -39,6 +39,7 @@ import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
@@ -117,55 +118,17 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         stockDetailsResponse = gson.fromJson(stockDetails, PetrolStockDetailsResponse.class);
         stockSubmitRequest = new StockSubmitRequest();
 
-
-        if (inspectionSubmitResponse.getProcessingUnit() != null) {
-            flag_pUnits = 1;
-            String pUnitData = sharedPreferences.getString(AppConstants.P_UNIT_DATA, "");
-            PUnits pUnits = gson.fromJson(pUnitData, PUnits.class);
-            divId = pUnits.getDivisionId();
-            divName = pUnits.getDivisionName();
-            socId = pUnits.getSocietyId();
-            socName = pUnits.getSocietyName();
-            inchName = pUnits.getIncharge();
+        if (inspectionSubmitResponse.getPetrolPump() != null) {
+            String petrolPumpData = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
+            PetrolSupplierInfo petrolSupplierInfo = gson.fromJson(petrolPumpData, PetrolSupplierInfo.class);
+            divId = petrolSupplierInfo.getDivisionId();
+            divName = petrolSupplierInfo.getDivisionName();
+            socId = petrolSupplierInfo.getSocietyId();
+            socName = petrolSupplierInfo.getSocietyName();
+            inchName = petrolSupplierInfo.getIncharge();
             suppType = getString(R.string.p_unit_req);
-            suppId = pUnits.getGodownId();
-            godName = pUnits.getGodownName();
-        }
-        if (inspectionSubmitResponse.getDrDepot() != null) {
-            String depotData = sharedPreferences.getString(AppConstants.DR_DEPOT_DATA, "");
-            DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
-            divId = drDepot.getDivisionId();
-            divName = drDepot.getDivisionName();
-            socId = drDepot.getSocietyId();
-            socName = drDepot.getSocietyName();
-            inchName = drDepot.getIncharge();
-            suppType = getString(R.string.dr_depot_req);
-            suppId = drDepot.getGodownId();
-            godName = drDepot.getGodownName();
-        }
-        if (inspectionSubmitResponse.getDrGodown() != null) {
-            String godownData = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
-            DrGodowns drGodowns = gson.fromJson(godownData, DrGodowns.class);
-            divId = drGodowns.getDivisionId();
-            divName = drGodowns.getDivisionName();
-            socId = drGodowns.getSocietyId();
-            socName = drGodowns.getSocietyName();
-            inchName = drGodowns.getIncharge();
-            suppType = getString(R.string.dr_godown_req);
-            suppId = drGodowns.getGodownId();
-            godName = drGodowns.getGodownName();
-        }
-        if (inspectionSubmitResponse.getMfpGodowns() != null) {
-            String mfpGodown = sharedPreferences.getString(AppConstants.MFP_DEPOT_DATA, "");
-            MFPGoDowns mfpGoDowns = gson.fromJson(mfpGodown, MFPGoDowns.class);
-            divId = mfpGoDowns.getDivisionId();
-            divName = mfpGoDowns.getDivisionName();
-            socId = mfpGoDowns.getSocietyId();
-            socName = mfpGoDowns.getSocietyName();
-            inchName = mfpGoDowns.getIncharge();
-            suppType = getString(R.string.mfp_godown_req);
-            suppId = mfpGoDowns.getGodownId();
-            godName = mfpGoDowns.getGodownName();
+            suppId = petrolSupplierInfo.getGodownId();
+            godName = petrolSupplierInfo.getGodownName();
         }
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
