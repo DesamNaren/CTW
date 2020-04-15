@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.common.network;
 
 
+import com.cgg.twdinspection.engineering_works.reports.source.WorkReportResponse;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
@@ -94,6 +95,9 @@ public interface TWDService {
 
     @GET("CTWServiceDetails/getGCCDetails")
     Call<GCCReportResponse> getGCCReports(@Query("officerId") String username);
+
+    @GET("CTWWorks/viewWorkDetails")
+    Call<WorkReportResponse> getEngReports(@Query("officerId") String officerId);
 
     @GET("CTWServiceDetails/getSchemeDetails") //
     Call<SchemeReportResponse> getSchemeReports(@Query("officerId") String username);

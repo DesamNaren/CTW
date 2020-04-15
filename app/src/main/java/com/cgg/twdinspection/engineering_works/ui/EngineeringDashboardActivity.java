@@ -97,6 +97,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                 String worksMaster =gson.toJson(workDetail);
                                 editor.putString(AppConstants.ENGWORKSMASTER,worksMaster);
                                 editor.commit();
+                                binding.etEngId.setText("");
                                 startActivity(new Intent(EngineeringDashboardActivity.this, InspectionDetailsActivity.class));
                             }else{
                                 callSnackBar("No data found");
