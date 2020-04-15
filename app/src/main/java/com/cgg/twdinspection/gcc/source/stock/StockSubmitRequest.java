@@ -31,6 +31,30 @@ public class StockSubmitRequest {
     @Expose
     private List<SubmitReqCommodities> processingUnits = null;
 
+    @SerializedName("petrol_pump")
+    @Expose
+    private List<SubmitReqCommodities> petrolPumps = null;
+
+    @SerializedName("lpg")
+    @Expose
+    private List<SubmitReqCommodities> lpg = null;
+
+    public List<SubmitReqCommodities> getPetrolPumps() {
+        return petrolPumps;
+    }
+
+    public void setPetrolPumps(List<SubmitReqCommodities> petrolPumps) {
+        this.petrolPumps = petrolPumps;
+    }
+
+    public List<SubmitReqCommodities> getLpg() {
+        return lpg;
+    }
+
+    public void setLpg(List<SubmitReqCommodities> lpg) {
+        this.lpg = lpg;
+    }
+
     public Double getTotalPhysicalValue() {
         return totalPhysicalValue;
     }

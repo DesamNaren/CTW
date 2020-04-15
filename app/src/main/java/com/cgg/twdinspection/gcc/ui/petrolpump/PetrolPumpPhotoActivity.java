@@ -29,6 +29,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpPhotoCaptureBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockSubmitRequest;
 import com.cgg.twdinspection.gcc.source.stock.SubmitReqCommodities;
@@ -74,7 +75,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     SharedPreferences sharedPreferences;
     GCCPhotoViewModel viewModel;
     InspectionSubmitResponse inspectionSubmitResponse;
-    StockDetailsResponse stockDetailsResponse;
+    PetrolStockDetailsResponse stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
 
     @Override
@@ -112,7 +113,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         Gson gson = new Gson();
         inspectionSubmitResponse = gson.fromJson(inspectionData, InspectionSubmitResponse.class);
         String stockDetails = sharedPreferences.getString(AppConstants.stockData, "");
-        stockDetailsResponse = gson.fromJson(stockDetails, StockDetailsResponse.class);
+        stockDetailsResponse = gson.fromJson(stockDetails, PetrolStockDetailsResponse.class);
         stockSubmitRequest = new StockSubmitRequest();
 
 
@@ -298,92 +299,28 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
 
     private void setStockDetailsSubmitRequest() {
 
-        List<SubmitReqCommodities> essentialCommodityList = new ArrayList<>();
-        List<SubmitReqCommodities> dailyReqList = new ArrayList<>();
-        List<SubmitReqCommodities> mfp_commodities = new ArrayList<>();
-        List<SubmitReqCommodities> emptiesList = new ArrayList<>();
-        List<SubmitReqCommodities> processing_units = new ArrayList<>();
+        List<SubmitReqCommodities> petrolCommoditiesList = new ArrayList<>();
 
-        if (stockDetailsResponse != null && stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-            for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
-                essentialCommodity.setComType(stockDetailsResponse.getEssential_commodities().get(i).getCommName());
-                essentialCommodity.setComCode(stockDetailsResponse.getEssential_commodities().get(i).getCommCode());
-                essentialCommodity.setUnits(stockDetailsResponse.getEssential_commodities().get(i).getUnits());
-                essentialCommodity.setSystemQty(stockDetailsResponse.getEssential_commodities().get(i).getQty());
-                essentialCommodity.setSystemRate(stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                essentialCommodity.setSystemValue(stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                essentialCommodity.setPhysicalRate(stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                essentialCommodityList.add(essentialCommodity);
+
+        if (stockDetailsResponse != null && stockDetailsResponse.getCommonCommodities() != null 
+        && stockDetailsResponse.getCommonCommodities().size() > 0) {
+            for (int i = 0; i < stockDetailsResponse.getCommonCommodities().size(); i++) {
+                SubmitReqCommodities petrolCommodities = new SubmitReqCommodities();
+                petrolCommodities.setComType(stockDetailsResponse.getCommonCommodities().get(i).getCommName());
+                petrolCommodities.setComCode(stockDetailsResponse.getCommonCommodities().get(i).getCommCode());
+                petrolCommodities.setUnits(stockDetailsResponse.getCommonCommodities().get(i).getUnits());
+                petrolCommodities.setSystemQty(stockDetailsResponse.getCommonCommodities().get(i).getQty());
+                petrolCommodities.setSystemRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                petrolCommodities.setSystemValue(stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                petrolCommodities.setPhysicalRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                petrolCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
+                petrolCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                petrolCommoditiesList.add(petrolCommodities);
             }
         }
-        if (stockDetailsResponse != null && stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-            for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
-                essentialCommodity.setComType(stockDetailsResponse.getDialy_requirements().get(i).getCommName());
-                essentialCommodity.setComCode(stockDetailsResponse.getDialy_requirements().get(i).getCommCode());
-                essentialCommodity.setUnits(stockDetailsResponse.getDialy_requirements().get(i).getUnits());
-                essentialCommodity.setSystemQty(stockDetailsResponse.getDialy_requirements().get(i).getQty());
-                essentialCommodity.setSystemRate(stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                essentialCommodity.setSystemValue(stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                essentialCommodity.setPhysicalRate(stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                dailyReqList.add(essentialCommodity);
-            }
-        }
-        if (stockDetailsResponse != null && stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-            for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-                SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
-                essentialCommodity.setComType(stockDetailsResponse.getMfp_commodities().get(i).getCommName());
-                essentialCommodity.setComCode(stockDetailsResponse.getMfp_commodities().get(i).getCommCode());
-                essentialCommodity.setUnits(stockDetailsResponse.getMfp_commodities().get(i).getUnits());
-                essentialCommodity.setSystemQty(stockDetailsResponse.getMfp_commodities().get(i).getQty());
-                essentialCommodity.setSystemRate(stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                essentialCommodity.setSystemValue(stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                essentialCommodity.setPhysicalRate(stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                mfp_commodities.add(essentialCommodity);
-            }
-        }
-        if (stockDetailsResponse != null && stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-            for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
-                essentialCommodity.setComType(stockDetailsResponse.getEmpties().get(i).getCommName());
-                essentialCommodity.setComCode(stockDetailsResponse.getEmpties().get(i).getCommCode());
-                essentialCommodity.setUnits(stockDetailsResponse.getEmpties().get(i).getUnits());
-                essentialCommodity.setSystemQty(stockDetailsResponse.getEmpties().get(i).getQty());
-                essentialCommodity.setSystemRate(stockDetailsResponse.getEmpties().get(i).getRate());
-                essentialCommodity.setSystemValue(stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate());
-                essentialCommodity.setPhysicalRate(stockDetailsResponse.getEmpties().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
-                emptiesList.add(essentialCommodity);
-            }
-        }
-        if (stockDetailsResponse != null && stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-            for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-                SubmitReqCommodities essentialCommodity = new SubmitReqCommodities();
-                essentialCommodity.setComType(stockDetailsResponse.getProcessing_units().get(i).getCommName());
-                essentialCommodity.setComCode(stockDetailsResponse.getProcessing_units().get(i).getCommCode());
-                essentialCommodity.setUnits(stockDetailsResponse.getProcessing_units().get(i).getUnits());
-                essentialCommodity.setSystemQty(stockDetailsResponse.getProcessing_units().get(i).getQty());
-                essentialCommodity.setSystemRate(stockDetailsResponse.getProcessing_units().get(i).getRate());
-                essentialCommodity.setSystemValue(stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate());
-                essentialCommodity.setPhysicalRate(stockDetailsResponse.getProcessing_units().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
-                processing_units.add(essentialCommodity);
-            }
-        }
-        stockSubmitRequest.setEssentialCommodities(essentialCommodityList);
-        stockSubmitRequest.setDailyRequirements(dailyReqList);
-        stockSubmitRequest.setMfpCommodities(mfp_commodities);
-        stockSubmitRequest.setEmpties(emptiesList);
-        stockSubmitRequest.setProcessingUnits(processing_units);
+        
+       
+        stockSubmitRequest.setPetrolPumps(petrolCommoditiesList);
         String sysVal = sharedPreferences.getString(AppConstants.TOTAL_SYSVAL, "");
         String phyVal = sharedPreferences.getString(AppConstants.TOTAL_PHYVAL, "");
         stockSubmitRequest.setTotalSystemValue(Double.parseDouble(sysVal));
