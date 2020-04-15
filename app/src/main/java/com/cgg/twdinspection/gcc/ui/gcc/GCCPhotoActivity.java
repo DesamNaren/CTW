@@ -75,6 +75,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     InspectionSubmitResponse inspectionSubmitResponse;
     StockDetailsResponse stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
+    private String randomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(GCCPhotoActivity.this);
-
+randomNum = Utils.getRandomNumberString();
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -276,6 +277,9 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         request.setInspectionTime(Utils.getCurrentDateTime());
         request.setGodownId(suppId);
         request.setGodown_name(godName);
+        request.setDeviceId(Utils.getDeviceID(this));
+        request.setVersionNo(Utils.getVersionName(this));
+        request.setPhoto_key_id(randomNum);
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 
@@ -553,7 +557,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(GCCPhotoActivity.this)+"~"+Utils.getVersionName(GCCPhotoActivity.this)+"~"+Utils.getRandomNumberString() +".png";
+                    Utils.getDeviceID(GCCPhotoActivity.this)+"~"+Utils.getVersionName(GCCPhotoActivity.this)+"~"+randomNum +".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
