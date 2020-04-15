@@ -18,7 +18,6 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.databinding.ActivityReportBinding;
-import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
@@ -35,7 +34,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
     SharedPreferences.Editor editor;
     String officerId;
     ReportsViewModel viewModel;
-    int gccCnt, instCnt, schemesCnt,engCnt;
+    int gccCnt, instCnt, schemesCnt;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -45,7 +44,6 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         gccCnt = -1;
         instCnt = -1;
         schemesCnt = -1;
-        engCnt = -1;
         viewModel =
                 ViewModelProviders.of(ReportActivity.this,
                         new ReportsCustomViewModel(ReportActivity.this)).get(ReportsViewModel.class);
@@ -94,12 +92,10 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                         gccCnt = reportCountsResponse.getGcc();
                         schemesCnt = reportCountsResponse.getSchemes();
                         instCnt = reportCountsResponse.getSchools();
-                        engCnt = reportCountsResponse.getEngineeringWorks();
 
-//                        binding.gccCnt.setText(String.valueOf(gccCnt));
+                        binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
-                        binding.engCnt.setText(String.valueOf(engCnt));
 
                     } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
                         callSnackBar(getString(R.string.something));
@@ -138,16 +134,6 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             public void onClick(View view) {
                 if (schemesCnt > 0) {
                     startActivity(new Intent(ReportActivity.this, SchemesReportActivity.class));
-                } else {
-                    callSnackBar("No data found");
-                }
-            }
-        });
-        binding.btnEng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (engCnt > 0) {
-                    startActivity(new Intent(ReportActivity.this, EngReportActivity.class));
                 } else {
                     callSnackBar("No data found");
                 }
