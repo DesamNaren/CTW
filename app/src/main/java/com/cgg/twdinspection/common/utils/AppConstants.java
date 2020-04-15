@@ -99,7 +99,6 @@ public class AppConstants {
 
     public static final String SCHEME_REP_DATA = "SCHEME_REP_DATA";
     public static final String FROM_CLASS = "FROM_CLASS";
-    public static final String SOURCE_CLASS = "SOURCE_CLASS";
     public static final String COCAR = "COCAR";
     public static final String REPORT_COCAR = "REPORT_COCAR";
     public static final String OD = "OD";

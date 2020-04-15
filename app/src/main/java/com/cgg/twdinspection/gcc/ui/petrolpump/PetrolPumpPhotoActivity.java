@@ -75,7 +75,8 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     SharedPreferences sharedPreferences;
     GCCPhotoViewModel viewModel;
     InspectionSubmitResponse inspectionSubmitResponse;
-    PetrolStockDetailsResponse stockDetailsResponse;
+    PetrolStockDetailsResponse
+            stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
 
     @Override

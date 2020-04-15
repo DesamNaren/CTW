@@ -1,4 +1,4 @@
-package com.cgg.twdinspection.gcc.ui.petrolpump;
+package com.cgg.twdinspection.gcc.ui.lpg;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -28,6 +28,10 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPetrolPumpFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
+import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGGeneralFindings;
+import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGIns;
+import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGRegisterBookCertificates;
+import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpIns;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
@@ -35,6 +39,7 @@ import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpStockD
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -46,7 +51,7 @@ import java.util.Date;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class PetrolPumpFindingsActivity extends LocBaseActivity {
+public class LPGFindingsActivity extends LocBaseActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityGccPetrolPumpFindingsBinding binding;
@@ -91,10 +96,12 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, PetrolStockDetailsResponse.class);
 
-        String petrolData = sharedPreferences.getString(AppConstants.PETROL_PUMP_DATA, "");
-        PetrolSupplierInfo petrolSupplierInfo = gson.fromJson(petrolData, PetrolSupplierInfo.class);
-        divId = petrolSupplierInfo.getDivisionId();
-        suppId = petrolSupplierInfo.getGodownId();
+        String lpgData = sharedPreferences.getString(AppConstants.LPG_DATA, "");
+        LPGSupplierInfo lpgSupplierInfo = gson.fromJson(lpgData, LPGSupplierInfo.class);
+        divId = lpgSupplierInfo.getDivisionId();
+        suppId = lpgSupplierInfo.getGodownId();
+
+
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {
@@ -397,17 +404,17 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
                 if (validate()) {
 
-                    PetrolPumpIns petrolPumpIns = new PetrolPumpIns();
+                    LPGIns lpgIns = new LPGIns();
 
-                    PetrolPumpStockDetails stockDetails = new PetrolPumpStockDetails();
+                    LPGStockDetails stockDetails = new LPGStockDetails();
                     stockDetails.setStockValueAsPerSystem(sysVal);
                     stockDetails.setStockValueAsPerPhysical(physVal);
                     stockDetails.setDeficit(difference);
                     stockDetails.setDeficitReason(deficitReason);
 
-                    petrolPumpIns.setStockDetails(stockDetails);
+                    lpgIns.setStockDetails(stockDetails);
 
-                    PetrolPumpRegisterBookCertificates registerBookCertificates = new PetrolPumpRegisterBookCertificates();
+                    LPGRegisterBookCertificates registerBookCertificates = new LPGRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
                     registerBookCertificates.setSalePriceFixationRegister(dailysales);
@@ -427,9 +434,9 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                         registerBookCertificates.setWeightMeasureValidity(weightDate);
                     }
 
-                    petrolPumpIns.setRegisterBookCertificates(registerBookCertificates);
+                    lpgIns.setRegisterBookCertificates(registerBookCertificates);
 
-                    PetrolPumpGeneralFindings generalFindings = new PetrolPumpGeneralFindings();
+                    LPGGeneralFindings generalFindings = new LPGGeneralFindings();
 
                     generalFindings.setFireDeptNoc(fireNOC);
                     generalFindings.setWeightMeasureCertificate(weightMea);
@@ -454,10 +461,10 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     generalFindings.setRepairsRequired(repairsReq);
                     generalFindings.setRepairType(remarks);
                     generalFindings.setRemarks(remarks);
-                    petrolPumpIns.setGeneralFindings(generalFindings);
+                    lpgIns.setGeneralFindings(generalFindings);
 
                     InspectionSubmitResponse inspectionSubmitResponse = new InspectionSubmitResponse();
-                    inspectionSubmitResponse.setPetrolPump(petrolPumpIns);
+                    inspectionSubmitResponse.setLpg(lpgIns);
                     try {
                         editor = sharedPreferences.edit();
                     } catch (Exception e) {
@@ -469,8 +476,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
-
-                    startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class));
+                    startActivity(new Intent(LPGFindingsActivity.this, LpgPhotoActivity.class));
                 }
             }
         });
@@ -707,7 +713,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                 binding.ivRepairs.setPadding(0, 0, 0, 0);
                 binding.ivRepairs.setBackgroundColor(getResources().getColor(R.color.white));
                 file = new File(FilePath);
-                Glide.with(PetrolPumpFindingsActivity.this).load(file).into(binding.ivRepairs);
+                Glide.with(LPGFindingsActivity.this).load(file).into(binding.ivRepairs);
                 repairsFlag = 1;
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -727,7 +733,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         Uri imageUri = null;
         if (imageFile != null) {
             imageUri = FileProvider.getUriForFile(
-                    PetrolPumpFindingsActivity.this,
+                    LPGFindingsActivity.this,
                     BuildConfig.APPLICATION_ID + ".provider",
                     imageFile);
         }

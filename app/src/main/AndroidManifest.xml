@@ -288,6 +288,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".gcc.ui.lpg.LPGActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".gcc.ui.lpg.LPGFindingsActivity"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

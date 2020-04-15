@@ -113,7 +113,6 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
                 Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
-                intent.putExtra(AppConstants.SOURCE_CLASS, AppConstants.PETROL_PUMP);
                 startActivity(intent);
             }
 

@@ -114,8 +114,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                 }
                 editor.putString(AppConstants.stockData, stockData);
                 editor.commit();
-                Intent intent = new Intent(LPGActivity.this, PetrolPumpFindingsActivity.class);
-                intent.putExtra(AppConstants.SOURCE_CLASS, AppConstants.PETROL_PUMP);
+                Intent intent = new Intent(LPGActivity.this, LPGFindingsActivity.class);
                 startActivity(intent);
             }
 
