@@ -47,6 +47,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         customProgressDialog = new CustomProgressDialog(this);
 
         binding.header.syncIv.setVisibility(View.VISIBLE);
+        binding.includeBasicLayout.tvplace.setVisibility(View.VISIBLE);
         binding.header.syncIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +76,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+            binding.includeBasicLayout.tvplace.setText(sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK, ""));
             String curTime = Utils.getCurrentDateTimeDisplay();
             editor.putString(AppConstants.INSP_TIME, curTime);
             editor.commit();

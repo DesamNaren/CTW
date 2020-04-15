@@ -683,8 +683,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black"
-                        android:visibility="visible" />
+                        android:textColor="@color/black" />
 
 
                 </LinearLayout>

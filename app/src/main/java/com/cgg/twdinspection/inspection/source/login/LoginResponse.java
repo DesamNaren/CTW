@@ -5,44 +5,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
-    @SerializedName("user_name")
-    @Expose
-    private String userName;
-    @SerializedName("Status_Code")
-    @Expose
-    private String statusCode;
-    @SerializedName("designation")
-    @Expose
-    private String designation;
-    @SerializedName("user_id")
-    @Expose
-    private String userId;
     @SerializedName("Status_Message")
     @Expose
     private String statusMessage;
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
+    @SerializedName("user_name")
+    @Expose
+    private String userName;
+    @SerializedName("place_of_work")
+    @Expose
+    private String placeOfWork;
+    @SerializedName("designation")
+    @Expose
+    private String designation;
+    @SerializedName("Status_Code")
+    @Expose
+    private String statusCode;
 
-    public String getUserName() {
-        return userName;
+    public String getStatusMessage() {
+        return statusMessage;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public String getUserId() {
@@ -53,12 +40,36 @@ public class LoginResponse {
         this.userId = userId;
     }
 
-    public String getStatusMessage() {
-        return statusMessage;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setStatusMessage(String statusMessage) {
-        this.statusMessage = statusMessage;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPlaceOfWork() {
+        return placeOfWork;
+    }
+
+    public void setPlaceOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 
 }

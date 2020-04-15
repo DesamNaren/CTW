@@ -1,15 +1,13 @@
 package com.cgg.twdinspection.engineering_works.reports.source;
 
 import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
+import com.cgg.twdinspection.inspection.reports.source.Photo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class ReportWorkDetails {
-    @SerializedName("expenditure")
-    @Expose
-    private String expenditure;
     @SerializedName("work_name")
     @Expose
     private String workName;
@@ -88,6 +86,9 @@ public class ReportWorkDetails {
     @SerializedName("execting_agency")
     @Expose
     private String exectingAgency;
+    @SerializedName("sector_name")
+    @Expose
+    private String sectorName;
     @SerializedName("surface_finish")
     @Expose
     private String surfaceFinish;
@@ -112,9 +113,6 @@ public class ReportWorkDetails {
     @SerializedName("estimate_cost")
     @Expose
     private String estimateCost;
-    @SerializedName("shortfall")
-    @Expose
-    private String shortfall;
     @SerializedName("Device_Id")
     @Expose
     private String deviceId;
@@ -136,9 +134,9 @@ public class ReportWorkDetails {
     @SerializedName("gp_id")
     @Expose
     private String gpId;
-    @SerializedName("fin_progress_targetted")
+    @SerializedName("scheme_name")
     @Expose
-    private String finProgressTargetted;
+    private String schemeName;
     @SerializedName("sanction_date")
     @Expose
     private String sanctionDate;
@@ -172,14 +170,6 @@ public class ReportWorkDetails {
     @SerializedName("work_in_prog_name")
     @Expose
     private String workInProgName;
-
-    public String getExpenditure() {
-        return expenditure;
-    }
-
-    public void setExpenditure(String expenditure) {
-        this.expenditure = expenditure;
-    }
 
     public String getWorkName() {
         return workName;
@@ -389,6 +379,14 @@ public class ReportWorkDetails {
         this.exectingAgency = exectingAgency;
     }
 
+    public String getSectorName() {
+        return sectorName;
+    }
+
+    public void setSectorName(String sectorName) {
+        this.sectorName = sectorName;
+    }
+
     public String getSurfaceFinish() {
         return surfaceFinish;
     }
@@ -453,14 +451,6 @@ public class ReportWorkDetails {
         this.estimateCost = estimateCost;
     }
 
-    public String getShortfall() {
-        return shortfall;
-    }
-
-    public void setShortfall(String shortfall) {
-        this.shortfall = shortfall;
-    }
-
     public String getDeviceId() {
         return deviceId;
     }
@@ -517,12 +507,12 @@ public class ReportWorkDetails {
         this.gpId = gpId;
     }
 
-    public String getFinProgressTargetted() {
-        return finProgressTargetted;
+    public String getSchemeName() {
+        return schemeName;
     }
 
-    public void setFinProgressTargetted(String finProgressTargetted) {
-        this.finProgressTargetted = finProgressTargetted;
+    public void setSchemeName(String schemeName) {
+        this.schemeName = schemeName;
     }
 
     public String getSanctionDate() {
@@ -612,4 +602,5 @@ public class ReportWorkDetails {
     public void setWorkInProgName(String workInProgName) {
         this.workInProgName = workInProgName;
     }
+
 }

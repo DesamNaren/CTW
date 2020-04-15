@@ -71,7 +71,7 @@ public class EngReportActivity extends AppCompatActivity implements ErrorHandler
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
                         RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
                 tv.setLayoutParams(lp);
-                tv.setText(getResources().getString(R.string.insp_reports));
+                tv.setText(getResources().getString(R.string.eng_reports));
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(Color.WHITE);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);

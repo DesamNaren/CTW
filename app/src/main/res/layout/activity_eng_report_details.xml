@@ -225,7 +225,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@{workDetails.sectorId}"
+                        android:text="@{workDetails.sectorName}"
                         android:padding="@dimen/dimen_5dp"
                         android:textColor="@color/black" />
 
@@ -331,7 +331,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@{workDetails.sectorId}"
+                            android:text="@{workDetails.schemeName}"
                             android:textColor="@color/black" />
 
 
@@ -803,6 +803,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_overall_appear_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -812,6 +813,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_overall_appear_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -845,6 +847,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_workmen_skill_sat"
                                 android:layout_width="wrap_content"
                                 android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Satisfactory`)}"
@@ -854,6 +857,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_workmen_skill_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -886,6 +890,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_qual_care_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -895,6 +900,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_qual_care_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -928,6 +934,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_qual_materials_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -937,6 +944,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_qual_materials_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -970,6 +978,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_surface_finish_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -979,6 +988,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_surface_finish_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1047,6 +1057,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_satis_level_sat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1056,6 +1067,7 @@
 
                             <RadioButton
                                 android:focusableInTouchMode="false"
+                                android:clickable="false"
                                 android:id="@+id/rb_satis_level_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

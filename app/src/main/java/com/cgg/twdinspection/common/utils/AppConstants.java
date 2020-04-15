@@ -108,6 +108,7 @@ public class AppConstants {
     public static final String ENG_REPORT_DATA = "ENG_REPORT_DATA";
     public static final String SATISFACTORY = "Satisfactory";
     public static final String POOR = "Poor";
+    public static final String OFF_PLACE_OF_WORK = "OFF_PLACE_OF_WORK";
     public static String stockData = "STOCK_DATA";
     public static String petComm = "petComm";
     public static String essComm = "essComm";

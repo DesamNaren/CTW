@@ -61,7 +61,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     File file_elevation,file_sideView, file_3DView, file_rearView;
     String FilePath;
     public static final String IMAGE_DIRECTORY_NAME = "ENGINEERING_WORKS_IMAGES";
-    String officerID,engWorkId;
+    String officerID,engWorkId,randomNo;
     SharedPreferences sharedPreferences;
     private CustomProgressDialog customProgressDialog;
     UploadEngPhotoViewModel viewModel;
@@ -91,15 +91,17 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         try {
             sharedPreferences= TWDApplication.get(this).getPreferences();
             officerID=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
-            officerID=sharedPreferences.getString(AppConstants.ENG_WORK_ID,"");
+            engWorkId=sharedPreferences.getString(AppConstants.ENG_WORK_ID,"");
         }catch (Exception e){
             e.printStackTrace();
         }
+        randomNo=getRandomNumberString();
+
         String request=sharedPreferences.getString(AppConstants.EngSubmitRequest,"");
         Gson gson=new Gson();
         if(!TextUtils.isEmpty(request))
             submitEngWorksRequest=gson.fromJson(request,SubmitEngWorksRequest.class);
-        
+
         binding.ivElevation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,6 +190,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     }
 
     private void callDataSubmit() {
+        submitEngWorksRequest.setPhotoKeyId(randomNo);
         viewModel.submitEngWorksDetails(submitEngWorksRequest);
     }
     private void callPhotoSubmit() {
@@ -307,7 +310,6 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         if (type == MEDIA_TYPE_IMAGE) {
             String deviceId=Utils.getDeviceID(this);
             String versionName=Utils.getVersionName(this);
-            String randomNo=getRandomNumberString();
             PIC_NAME =  PIC_TYPE + "~"+officerID + "~" + engWorkId + "~" + Utils.getCurrentDateTimeFormat() + "~" +deviceId + "~" +versionName + "~" +randomNo+".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);

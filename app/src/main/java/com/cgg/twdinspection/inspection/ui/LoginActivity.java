@@ -115,6 +115,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                         editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
                         editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
                         editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
+                        editor.putString(AppConstants.OFF_PLACE_OF_WORK, employeeResponses.getPlaceOfWork());
                         editor.commit();
 
                         startActivity(new Intent(LoginActivity.this, DashboardActivity.class));

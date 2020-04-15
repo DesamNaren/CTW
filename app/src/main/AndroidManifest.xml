@@ -279,12 +279,23 @@
             android:name=".inspection.ui.AcademicGradeActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".engineering_works.reports.ui.EngReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme" />
+        <activity
+            android:name=".engineering_works.reports.ui.EngReportDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".engineering_works.reports.ui.ViewEngPhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpFindingsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".gcc.ui.petrolpump.PetrolPumpPhotoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".gcc.reports.ui.PetrolpumpInspRepActivity"
+        <activity
+            android:name=".gcc.reports.ui.PetrolpumpInspRepActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".gcc.ui.lpg.LPGActivity"
             android:screenOrientation="portrait"/>

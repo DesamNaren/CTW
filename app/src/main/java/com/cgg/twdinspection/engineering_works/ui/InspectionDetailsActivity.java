@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityInspDetailsBinding;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
@@ -41,7 +42,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
     ActivityInspDetailsBinding binding;
     ArrayAdapter spinnerAdapter;
-    String inspTime, officerName, officerDesg, place,officerId;
+    String inspTime, officerName, officerDesg, place,officerId,sectorOthers;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     InspDetailsViewModel viewModel;
@@ -79,6 +80,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             officerDesg = sharedPreferences.getString(AppConstants.OFFICER_DES, "");
             inspTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
             officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            place = sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,6 +94,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         WorkDetail workDetail = gson.fromJson(sharedPreferences.getString(AppConstants.ENGWORKSMASTER, ""), WorkDetail.class);
         if (workDetail != null) {
             binding.setWorkDetails(workDetail);
+            editor.putString(AppConstants.ENG_WORK_ID,workDetail.getWorkId().toString());
+            editor.commit();
         }
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
@@ -368,12 +372,17 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
                 Location dLocation = new Location("dLoc");
                 observation = binding.etObs.getText().toString().trim();
+                sectorOthers = binding.etSectorOthers.getText().toString().trim();
+                if(binding.etStageOthers.getVisibility()==View.VISIBLE){
+                    selWorkProgStageId=-1;
+                    selWorkInProgStageName=binding.etStageOthers.getText().toString().trim();
+                }
                 if (validate()) {
                     SubmitEngWorksRequest submitEngWorksRequest = new SubmitEngWorksRequest();
                     submitEngWorksRequest.setOfficerId(officerId);
                     submitEngWorksRequest.setOfficerName(officerName);
                     submitEngWorksRequest.setDesignation(officerDesg);
-//                submitEngWorksRequest.setPlaceOfWork(officerDesg);
+                    submitEngWorksRequest.setPlaceOfWork(place);
                     submitEngWorksRequest.setInspectionTime(inspTime);
                     submitEngWorksRequest.setLatitude(String.valueOf(mCurrentLocation.getLatitude()));
                     submitEngWorksRequest.setLongitude(String.valueOf(mCurrentLocation.getLongitude()));
@@ -390,7 +399,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     submitEngWorksRequest.setAssemblyContId(workDetail.getAssemblyContId());
                     submitEngWorksRequest.setSectorId(selSectorId.toString());
                     submitEngWorksRequest.setWorkName(workDetail.getWorkName());
-                    submitEngWorksRequest.setEstimateCost(Double.valueOf(workDetail.getEstimateCost()));
+                    submitEngWorksRequest.setEstimateCost(workDetail.getEstimateCost());
                     submitEngWorksRequest.setSchemeId(selSchemeId.toString());
                     submitEngWorksRequest.setExectingAgency(workDetail.getExectingAgency());
                     submitEngWorksRequest.setSanctionDate(workDetail.getSanctionDate());
@@ -417,6 +426,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     submitEngWorksRequest.setSurfaceFinish(surfaceFinishing);
                     submitEngWorksRequest.setObservation(observation);
                     submitEngWorksRequest.setSatisfactionLevel(satLevel);
+                    submitEngWorksRequest.setVersionNo(Utils.getVersionName(InspectionDetailsActivity.this));
+                    submitEngWorksRequest.setDeviceId(Utils.getDeviceID(InspectionDetailsActivity.this));
+                    submitEngWorksRequest.setSchemeName(selSchemeName);
+                    submitEngWorksRequest.setSectorName(selSectorName);
+                    submitEngWorksRequest.setSectorOtherValue(sectorOthers);
                     String request = gson.toJson(submitEngWorksRequest);
                     editor.putString(AppConstants.EngSubmitRequest, request);
                     editor.commit();
@@ -430,13 +444,16 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         if (selSectorId == -1) {
             callSnackBar("Please select sector");
             return false;
-        } else if (selSchemeId == -1) {
+        } else if (selSchemeId != -1 && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
+            callSnackBar("Please enter sector");
+            return false;
+        }else if (selSchemeId == -1) {
             callSnackBar("Please select scheme");
             return false;
         } else if (TextUtils.isEmpty(selStageName)) {
             callSnackBar("Please select stage of work");
             return false;
-        } else if (selWorkProgStageId == -1) {
+        } else if (binding.spStageInProgress.getVisibility()==View.VISIBLE && selWorkProgStageId == -1) {
             callSnackBar("Please select stage of works for in progress works");
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {
