@@ -1,13 +1,13 @@
 package com.cgg.twdinspection.gcc.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -47,6 +47,14 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
+
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0 &&
+                reportData.getPhotos().get(0).getFilePath() != null) {
+            binding.setImageUrl(reportData.getPhotos().get(0).getFilePath());
+        } else {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+        }
+
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

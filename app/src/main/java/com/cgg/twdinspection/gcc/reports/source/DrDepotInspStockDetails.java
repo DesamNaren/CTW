@@ -29,7 +29,7 @@ public class DrDepotInspStockDetails {
     @SerializedName("deficit")
     @Expose
     private String deficit;
-    @SerializedName("reason")
+    @SerializedName("deficit_reason")
     @Expose
     private String deficit_reason;
 
