@@ -38,6 +38,7 @@ public class EngReportDetailsActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_eng_report_details);
         binding.header.headerTitle.setText(getString(R.string.engineering_works));
+        binding.btnLayout.btnNext.setText(getString(R.string.next));
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

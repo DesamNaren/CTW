@@ -50,155 +50,149 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/area_of_operation"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/area_of_operation"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_area_operation"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.areaOfOperation}"
-                                android:textColor="@color/black" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_area_operation"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/district"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_dist"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.distName}"
-                                android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.areaOfOperation}" />
 
 
-                        </LinearLayout>
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/district"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/mandal"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_mandal"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.mandName}"
-                                android:textColor="@color/black" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_dist"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="GP"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_gp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.gpName}"
-                                android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.distName}"/>
 
 
-                        </LinearLayout>
+                    </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/mandal"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Village"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_village"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.villName}"
-                                android:textColor="@color/black" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tv_mandal"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/assembly_constituency"
-                                android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/tv_assembly"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@={workDetails.assemblyConstName}"
-                                android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.mandName}"/>
 
 
-                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="GP"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_gp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.gpName}" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Village"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_village"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.villName}" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/assembly_constituency"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_assembly"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.assemblyConstName}"/>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -225,9 +219,7 @@
                         android:id="@+id/sp_sector"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:layout_weight="1" />
 
 
                 </LinearLayout>
@@ -237,9 +229,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:visibility="gone"
-                    app:errorEnabled="true">
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:layout_marginBottom="@dimen/dimen_5dp"
+                    android:visibility="gone">
 
 
                     <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -282,8 +275,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.workName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.workName}"/>
 
 
                     </LinearLayout>
@@ -307,8 +299,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.estimateCost}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.estimateCost}" />
 
 
                     </LinearLayout>
@@ -330,9 +321,7 @@
                             android:id="@+id/sp_scheme"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="@dimen/dimen_5dp"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1" />
 
 
                     </LinearLayout>
@@ -356,8 +345,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.exectingAgency}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.exectingAgency}"/>
 
 
                     </LinearLayout>
@@ -381,8 +369,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.sanctionDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.sanctionDate}" />
 
 
                     </LinearLayout>
@@ -406,8 +393,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.techSanctionDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.techSanctionDate}" />
 
 
                     </LinearLayout>
@@ -431,8 +417,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.commenceDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.commenceDate}" />
 
 
                     </LinearLayout>
@@ -456,8 +441,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.targetDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.targetDate}" />
 
 
                     </LinearLayout>
@@ -481,8 +465,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.extensionTime}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.extensionTime}" />
 
 
                     </LinearLayout>
@@ -519,8 +502,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffDept}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffDept}" />
 
 
                     </LinearLayout>
@@ -544,8 +526,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffMandalName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffMandalName}" />
 
 
                     </LinearLayout>
@@ -569,8 +550,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffEe}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffEe}" />
 
 
                     </LinearLayout>
@@ -594,8 +574,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffDyee}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffDyee}" />
 
 
                     </LinearLayout>
@@ -619,8 +598,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffAee}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffAee}" />
 
 
                     </LinearLayout>
@@ -648,9 +626,7 @@
                         android:id="@+id/sp_stage"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:layout_weight="1" />
 
 
                 </LinearLayout>
@@ -680,10 +656,7 @@
                         android:id="@+id/sp_stage_in_progress"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:layout_weight="1"/>
 
 
                 </LinearLayout>
@@ -695,8 +668,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
-                    android:visibility="gone"
-                    app:errorEnabled="true">
+                    android:visibility="gone">
 
 
                     <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -738,8 +710,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.actualExpenditureIncurred}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.actualExpenditureIncurred}"/>
 
 
                     </LinearLayout>
@@ -764,8 +735,7 @@
                             android:layout_weight="1"
                             android:layout_gravity="center"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.percentageOfFinancialProgressAchieved}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.percentageOfFinancialProgressAchieved}" />
 
 
                     </LinearLayout>
@@ -988,8 +958,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_10dp"
-                        app:errorEnabled="true">
+                        android:layout_margin="@dimen/dimen_10dp">
 
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -1005,6 +974,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_10dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -1045,6 +1015,13 @@
 
             </LinearLayout>
         </ScrollView>
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_layout"
+            android:background="@android:color/transparent" />
+
 
         <include
             android:id="@+id/btn_layout"

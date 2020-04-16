@@ -17,7 +17,9 @@ import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapter;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.inspection.reports.ui.InstReportsMenuActivity;
+import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportPhotosActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.google.gson.Gson;
 
 public class ViewEngPhotosActivity extends AppCompatActivity {
@@ -34,7 +36,7 @@ public class ViewEngPhotosActivity extends AppCompatActivity {
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewEngPhotosActivity.this, InstReportsMenuActivity.class));
+                startActivity(new Intent(ViewEngPhotosActivity.this, DashboardActivity.class));
             }
         });
 

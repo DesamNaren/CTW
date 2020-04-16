@@ -370,10 +370,9 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             @Override
             public void onClick(View view) {
 
-                Location dLocation = new Location("dLoc");
                 observation = binding.etObs.getText().toString().trim();
                 sectorOthers = binding.etSectorOthers.getText().toString().trim();
-                if(binding.etStageOthers.getVisibility()==View.VISIBLE){
+                if(binding.llStageWork.getVisibility()==View.GONE){
                     selWorkProgStageId=-1;
                     selWorkInProgStageName=binding.etStageOthers.getText().toString().trim();
                 }
@@ -444,8 +443,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         if (selSectorId == -1) {
             callSnackBar("Please select sector");
             return false;
-        } else if (selSchemeId != -1 && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
-            callSnackBar("Please enter sector");
+        } else if (binding.tvSectorOthers.getVisibility()==View.VISIBLE && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
+            callSnackBar("Please specify sector name");
             return false;
         }else if (selSchemeId == -1) {
             callSnackBar("Please select scheme");
@@ -453,8 +452,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } else if (TextUtils.isEmpty(selStageName)) {
             callSnackBar("Please select stage of work");
             return false;
-        } else if (binding.spStageInProgress.getVisibility()==View.VISIBLE && selWorkProgStageId == -1) {
+        } else if (binding.llStageWork.getVisibility()==View.VISIBLE && selWorkProgStageId == -1) {
             callSnackBar("Please select stage of works for in progress works");
+            return false;
+        } else if (binding.llStageWork.getVisibility()==View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
+            callSnackBar("Please enter stage of works for in progress works");
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {
             callSnackBar("Please check overall apearance");
@@ -482,7 +484,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     }
 
     void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.show();
     }
