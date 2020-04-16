@@ -88,16 +88,16 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 binding.includeBasicLayout.divName.setText(reportData.getDivisionName());
                 binding.includeBasicLayout.socName.setText(reportData.getSocietyName());
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                    binding.includeBasicLayout.drGodownName.setText("Dr Godown");
+                    binding.includeBasicLayout.drGodownNameTV.setText("Dr Godown");
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                    binding.includeBasicLayout.drGodownName.setText("Dr Depot");
+                    binding.includeBasicLayout.drGodownNameTV.setText("Dr Depot");
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    binding.includeBasicLayout.drGodownName.setText("MFP Godown");
+                    binding.includeBasicLayout.drGodownNameTV.setText("MFP Godown");
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    binding.includeBasicLayout.drGodownName.setText("Processing Unit");
+                    binding.includeBasicLayout.drGodownNameTV.setText("Processing Unit");
                 }
                 binding.includeBasicLayout.drGodownName.setText(reportData.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(reportData.getInchargeName());
@@ -186,9 +186,47 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setAdapter(adapter);
 
         }
-        if (reportData != null && ((reportData.getStockDetails()!=null &&
-                reportData.getStockDetails().getProcessingUnits() == null) && reportData.getStockDetails().getDailyRequirements() == null
-                && reportData.getStockDetails().getEmpties() == null && reportData.getStockDetails().getEssentialCommodities() == null && reportData.getStockDetails().getMfpCommodities() == null)) {
+        boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
+        if (reportData.getStockDetails().getProcessingUnits() != null) {
+            if (reportData.getStockDetails().getProcessingUnits().size() <= 0)
+                punit_flag = false;
+            else
+                punit_flag = true;
+        } else
+            punit_flag = false;
+        if (reportData.getStockDetails().getDailyRequirements() != null) {
+            if (reportData.getStockDetails().getDailyRequirements().size() <= 0)
+                dailyreq_flag = false;
+            else
+                dailyreq_flag = true;
+        } else
+            dailyreq_flag = false;
+        if (reportData.getStockDetails().getEmpties() != null) {
+            if (reportData.getStockDetails().getEmpties().size() <= 0)
+                emp_flag = false;
+            else
+                emp_flag = true;
+        } else
+            emp_flag = false;
+
+        if (reportData.getStockDetails().getEssentialCommodities() != null) {
+            if (reportData.getStockDetails().getEssentialCommodities().size() <= 0)
+                ess_flag = false;
+            else
+                ess_flag = true;
+        } else
+            ess_flag = false;
+
+        if (reportData.getStockDetails().getMfpCommodities() != null) {
+            if (reportData.getStockDetails().getMfpCommodities().size() <= 0)
+                mfp_flag = false;
+            else
+                mfp_flag = true;
+        } else
+            mfp_flag = false;
+
+        if (reportData != null && (reportData.getStockDetails() != null && !punit_flag &&
+                !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag)) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);
