@@ -51,8 +51,16 @@ public class ViewEngPhotosActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.ENG_REPORT_DATA, "");
         reportData = gson.fromJson(data, ReportWorkDetails.class);
-        ViewPhotoAdapter adapter = new ViewPhotoAdapter(ViewEngPhotosActivity.this, reportData.getPhotos());
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        binding.recyclerView.setAdapter(adapter);
+        if(reportData.getPhotos().size()>0){
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.tvEmpty.setVisibility(View.GONE);
+            ViewPhotoAdapter adapter = new ViewPhotoAdapter(ViewEngPhotosActivity.this, reportData.getPhotos());
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+            binding.recyclerView.setAdapter(adapter);
+        }else{
+            binding.tvEmpty.setVisibility(View.VISIBLE);
+            binding.recyclerView.setVisibility(View.GONE);
+        }
+
     }
 }

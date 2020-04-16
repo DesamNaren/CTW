@@ -69,8 +69,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.areaOfOperation}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.areaOfOperation}"/>
 
 
                     </LinearLayout>
@@ -94,8 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.distName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.distName}" />
 
 
                     </LinearLayout>
@@ -119,8 +117,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.mandName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.mandName}" />
 
 
                     </LinearLayout>
@@ -135,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="GP"
+                            android:text="@string/gp"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -144,8 +141,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.gpName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.gpName}" />
 
 
                     </LinearLayout>
@@ -160,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Village"
+                            android:text="@string/village"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -169,8 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.villName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.villName}" />
 
 
                     </LinearLayout>
@@ -194,8 +189,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.assemblyConstName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.assemblyConstName}" />
 
 
                     </LinearLayout>
@@ -226,8 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@{workDetails.sectorName}"
-                        android:padding="@dimen/dimen_5dp"
-                        android:textColor="@color/black" />
+                        android:padding="@dimen/dimen_5dp" />
 
 
                 </LinearLayout>
@@ -282,8 +275,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.workName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.workName}" />
 
 
                     </LinearLayout>
@@ -307,8 +299,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.estimateCost}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.estimateCost}" />
 
 
                     </LinearLayout>
@@ -331,8 +322,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@{workDetails.schemeName}"
-                            android:textColor="@color/black" />
+                            android:text="@{workDetails.schemeName}" />
 
 
                     </LinearLayout>
@@ -356,8 +346,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.exectingAgency}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.exectingAgency}" />
 
 
                     </LinearLayout>
@@ -381,8 +370,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.sanctionDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.sanctionDate}" />
 
 
                     </LinearLayout>
@@ -406,8 +394,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.techSanctionDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.techSanctionDate}" />
 
 
                     </LinearLayout>
@@ -431,8 +418,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.commenceDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.commenceDate}" />
 
 
                     </LinearLayout>
@@ -456,8 +442,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.targetDate}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.targetDate}" />
 
 
                     </LinearLayout>
@@ -481,8 +466,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.extensionTime}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.extensionTime}" />
 
 
                     </LinearLayout>
@@ -510,7 +494,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Department"
+                            android:text="@string/staff_department"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -519,8 +503,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffDeptName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffDeptName}" />
 
 
                     </LinearLayout>
@@ -535,7 +518,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Mandal"
+                            android:text="@string/staff_mandal"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -544,8 +527,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffMandalName}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffMandalName}" />
 
 
                     </LinearLayout>
@@ -560,7 +542,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="EE"
+                            android:text="@string/ee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -569,8 +551,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffEe}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffEe}" />
 
 
                     </LinearLayout>
@@ -585,7 +566,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="DyEE"
+                            android:text="@string/dyee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -594,8 +575,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffDyee}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffDyee}" />
 
 
                     </LinearLayout>
@@ -610,7 +590,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="AEE"
+                            android:text="@string/aee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -619,8 +599,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.staffAee}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.staffAee}" />
 
 
                     </LinearLayout>
@@ -649,8 +628,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="@{workDetails.stageOfWork}"
-                        android:textColor="@color/black" />
+                        android:text="@{workDetails.stageOfWork}" />
 
 
                 </LinearLayout>
@@ -682,8 +660,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="@{workDetails.workInProgName}"
-                        android:textColor="@color/black" />
+                        android:text="@{workDetails.workInProgName}" />
 
 
                 </LinearLayout>
@@ -713,6 +690,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/black" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -738,8 +716,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.actExpIncurred}"
-                            android:textColor="@color/black" />
+                            android:text="@={workDetails.actExpIncurred}" />
 
 
                     </LinearLayout>
@@ -764,8 +741,115 @@
                             android:layout_weight="1"
                             android:layout_gravity="center"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.finProgressAchieved}"
+                            android:text="@={workDetails.finProgressAchieved}" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/inspection_date"
                             android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_insp_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.inspectionTime}" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/inspecting_officer_name"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_off_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.officerName}" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/inspecting_officer_designation"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_desg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.designation}" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/place_of_work"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_off_place"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@={workDetails.placeOfWork}" />
 
 
                     </LinearLayout>
@@ -921,7 +1005,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Quality of materials"
+                            android:text="@string/quality_of_materials"
                             android:textColor="@color/black" />
 
                         <RadioGroup
@@ -965,7 +1049,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Surface finishes"
+                            android:text="@string/surface_finishes"
                             android:textColor="@color/black" />
 
                         <RadioGroup
@@ -1044,7 +1128,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Satisfaction level"
+                            android:text="@string/satisfaction_level"
                             android:textColor="@color/black" />
 
                         <RadioGroup

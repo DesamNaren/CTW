@@ -132,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="GP"
+                            android:text="@string/gp"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -156,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Village"
+                            android:text="@string/village"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -493,7 +493,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Department"
+                            android:text="@string/staff_department"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -517,7 +517,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Mandal"
+                            android:text="@string/staff_mandal"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -541,7 +541,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="EE"
+                            android:text="@string/ee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -565,7 +565,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="DyEE"
+                            android:text="@string/dyee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -589,7 +589,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="AEE"
+                            android:text="@string/aee"
                             android:textColor="@color/black" />
 
                         <TextView
@@ -873,7 +873,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Quality of materials"
+                            android:text="@string/quality_of_materials"
                             android:textColor="@color/black" />
 
                         <RadioGroup
@@ -911,7 +911,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Surface finishes"
+                            android:text="@string/surface_finishes"
                             android:textColor="@color/black" />
 
                         <RadioGroup
@@ -981,7 +981,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Satisfaction level"
+                            android:text="@string/satisfaction_level"
                             android:textColor="@color/black" />
 
                         <RadioGroup

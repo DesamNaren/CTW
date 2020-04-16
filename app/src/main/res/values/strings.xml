@@ -976,5 +976,19 @@
     <string name="of_financial_progress_achieved">% of financial progress achieved</string>
     <string name="safety_equipment">Safety Equipment</string>
     <string name="office">Office</string>
+    <string name="inspection_date">Inspection date</string>
+    <string name="staff_mandal">Staff Mandal</string>
+    <string name="staff_department">Staff Department</string>
+    <string name="gp">GP</string>
+    <string name="village">Village</string>
+    <string name="ee">EE</string>
+    <string name="dyee">DyEE</string>
+    <string name="aee">AEE</string>
+    <string name="surface_finishes">Surface finishes</string>
+    <string name="satisfaction_level">Satisfaction level</string>
+    <string name="quality_of_materials">Quality of materials</string>
+    <string name="inspecting_officer_name">Inspecting officer name</string>
+    <string name="inspecting_officer_designation">Inspecting officer designation</string>
+    <string name="place_of_work">Place of work</string>
 
 </resources>

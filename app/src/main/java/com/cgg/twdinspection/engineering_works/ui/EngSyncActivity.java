@@ -221,7 +221,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
             if (cnt > 0) {
                 Log.i("SC_CNT", "schCount: " + cnt);
                 Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Schemes synced successfully");
+                        "Sectors synced successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
@@ -255,7 +255,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
             if (cnt > 0) {
                 Log.i("SC_CNT", "schCount: " + cnt);
                 Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Schemes synced successfully");
+                        "ENgineering works synced successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
