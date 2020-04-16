@@ -41,6 +41,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
     ReportData reportData;
+    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,7 +187,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setAdapter(adapter);
 
         }
-        boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
+
         if (reportData.getStockDetails().getProcessingUnits() != null) {
             if (reportData.getStockDetails().getProcessingUnits().size() <= 0)
                 punit_flag = false;

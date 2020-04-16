@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -16,6 +15,7 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
@@ -24,12 +24,10 @@ import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class PUnitsFindingsActivity extends LocBaseActivity {
     private SharedPreferences sharedPreferences;
@@ -167,6 +165,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     registerBookCertificates.setBarrelsAlumnCansRemarks(barralesRemarks);
                     registerBookCertificates.setCashBookRemarks(cahBookRemarks);
                     registerBookCertificates.setCashBankBalRemarks(cashBankRemarks);
+                    registerBookCertificates.setVehLogBookType(vehLogBook);
                     registerBookCertificates.setVehLogBookRemarks(vehlogRemarks);
 
 
