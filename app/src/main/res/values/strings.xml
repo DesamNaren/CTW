@@ -65,6 +65,8 @@
     <string name="dr_depot_req">dr_depot</string>
     <string name="mfp_godown_req">mfp_commodities</string>
     <string name="p_unit_req">processing_unit</string>
+    <string name="petrol_req">petrol_pump</string>
+    <string name="lpg_req">lpg</string>
     <string name="no">No</string>
     <string name="good">Good</string>
     <string name="bad">Bad</string>
@@ -659,10 +661,14 @@
     <string name="depot_title">Dr Depot</string>
     <string name="mfp_godown_title">MFP Godown</string>
     <string name="processing_unit_title">Processing Unit</string>
+    <string name="petrol_pump_title">Petrol Pump</string>
+    <string name="lpg_title">LPG Godown</string>
     <string name="godown_search_hint">Search by Division/Society/Godown Name</string>
     <string name="depot_search_hint">Search by Division/Society/Depot Name</string>
     <string name="mfp_search_hint">Search by Division/MFP Godown Name</string>
     <string name="unit_search_hint">Search by Division/Society/Unit Name</string>
+    <string name="petrol_search_hint">Search by Division/Society/Godown Name</string>
+    <string name="lpg_search_hint">Search by Division/Society/LPG Godown Name</string>
     <string name="high_class_syl">Select highest class syllabus completed</string>
     <string name="sel_plan">Select plan for completing the syllabus prepared</string>
     <string name="sel_is_strength">Select is the strength accommodated</string>

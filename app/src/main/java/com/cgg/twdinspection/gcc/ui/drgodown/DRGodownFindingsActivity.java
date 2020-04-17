@@ -471,9 +471,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     DrGodownGeneralFindings generalFindings = new DrGodownGeneralFindings();
                     generalFindings.setStockRegisterEntries(stockRegEntry);
                     generalFindings.setValuesAsPerSalePrice(valuesAsperSale);
-                    generalFindings.setFireDeptNoc(fireNOC);
-                    generalFindings.setWeightMeasureCertificate(weightMea);
-                    generalFindings.setWeightMeasureValidity(weightDate);
+
                     generalFindings.setStockQualityVerified(qualityStock);
                     generalFindings.setStockCardDisplay(stockCards);
                     generalFindings.setComputerizedSystem(godownCom);

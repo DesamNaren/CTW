@@ -33,7 +33,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
     public GCCReportAdapter(Context context, List<ReportData> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             reportClickCallback = (ReportClickCallback) context;
@@ -41,6 +41,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -73,6 +74,12 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
             holder.listItemBinding.tvSuppType.setText("Processing Unit");
         }
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+            holder.listItemBinding.tvSuppType.setText("Petrol Pump");
+        }
+        if (dataModel.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+            holder.listItemBinding.tvSuppType.setText("LPG Godown");
+        }
 
         holder.listItemBinding.cvGccReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +100,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -110,7 +118,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
                 } else {
                     for (ReportData otData : list) {
                         if (otData.getDivisionName().toLowerCase().contains(charString.toLowerCase()) ||
-                                otData.getSocietyName().toLowerCase().contains(charString.toLowerCase())||
+                                otData.getSocietyName().toLowerCase().contains(charString.toLowerCase()) ||
                                 otData.getGodownName().toLowerCase().contains(charString.toLowerCase())) {
                             filterList.add(otData);
                         }
@@ -156,7 +164,7 @@ public class GCCReportAdapter extends RecyclerView.Adapter<GCCReportAdapter.Item
         return position;
     }
 
-    public  void setData(List<ReportData> beneficiaryDetailArrayList){
+    public void setData(List<ReportData> beneficiaryDetailArrayList) {
         filterList.clear();
         filterList.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

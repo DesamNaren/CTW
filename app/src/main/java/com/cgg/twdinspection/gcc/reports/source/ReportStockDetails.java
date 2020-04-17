@@ -29,6 +29,28 @@ public class ReportStockDetails {
     @SerializedName("processing_units")
     @Expose
     private List<ReportSubmitReqCommodities> processingUnits = null;
+    @SerializedName("petrol_pump")
+    @Expose
+    private List<ReportSubmitReqCommodities> petrolCommodities = null;
+    @SerializedName("lpg")
+    @Expose
+    private List<ReportSubmitReqCommodities> lpgCommodities = null;
+
+    public List<ReportSubmitReqCommodities> getPetrolCommodities() {
+        return petrolCommodities;
+    }
+
+    public void setPetrolCommodities(List<ReportSubmitReqCommodities> petrolCommodities) {
+        this.petrolCommodities = petrolCommodities;
+    }
+
+    public List<ReportSubmitReqCommodities> getLpgCommodities() {
+        return lpgCommodities;
+    }
+
+    public void setLpgCommodities(List<ReportSubmitReqCommodities> lpgCommodities) {
+        this.lpgCommodities = lpgCommodities;
+    }
 
     public String getTotalSystemValue() {
         return totalSystemValue;

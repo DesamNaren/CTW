@@ -33,7 +33,6 @@ import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpIns;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpStockDetails;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -64,6 +63,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
+    private String randomNum;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -73,6 +73,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
+        randomNum = Utils.getRandomNumberString();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -409,8 +410,11 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
                     PetrolPumpRegisterBookCertificates registerBookCertificates = new PetrolPumpRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
+                    registerBookCertificates.setCashBook(cashbook);
+                    registerBookCertificates.setDailyRemittance(remittance);
+                    registerBookCertificates.setRemittance(remittanceCash);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
-                    registerBookCertificates.setSalePriceFixationRegister(dailysales);
+                    registerBookCertificates.setDailySalesRegister(dailysales);
                     registerBookCertificates.setGodownLiabilityRegister(godownLiaReg);
                     registerBookCertificates.setInsuranceCertificate(insCer);
                     registerBookCertificates.setInsuranceCompany(insComName);
@@ -431,9 +435,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
                     PetrolPumpGeneralFindings generalFindings = new PetrolPumpGeneralFindings();
 
-                    generalFindings.setFireDeptNoc(fireNOC);
-                    generalFindings.setWeightMeasureCertificate(weightMea);
-                    generalFindings.setWeightMeasureValidity(weightDate);
+
+                    generalFindings.setCcCamerasAvail(availCcCameras);
                     generalFindings.setComputerizedSystem(petrolPumpCom);
                     generalFindings.setHygienicCondition(petrolPumpHyg);
                     generalFindings.setFireSafteyAvail(availEqp);
@@ -452,7 +455,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     generalFindings.setDivisionManagerInspection(lastInsDiv);
                     generalFindings.setSocietyManagerInspection(lastInsSoc);
                     generalFindings.setRepairsRequired(repairsReq);
-                    generalFindings.setRepairType(remarks);
+                    generalFindings.setRepairsType(repairType);
                     generalFindings.setRemarks(remarks);
                     petrolPumpIns.setGeneralFindings(generalFindings);
 
@@ -483,10 +486,11 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etReason, "Enter Reason");
         } else if (TextUtils.isEmpty(stockReg)) {
             returnFlag = false;
-            ScrollToView(binding.rgPurchase);
+            ScrollToView(binding.rgStock);
             showSnackBar("Please check stock register");
         } else if (TextUtils.isEmpty(purchaseReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgPurchase);
             showSnackBar("Please check purchase register");
         } else if (TextUtils.isEmpty(dailysales)) {
             returnFlag = false;
@@ -494,7 +498,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             showSnackBar("Please check Daily Sales Register");
         } else if (TextUtils.isEmpty(godownLiaReg)) {
             returnFlag = false;
-            ScrollToView(binding.rgRemittanceCash);
+            ScrollToView(binding.rgGodown);
             showSnackBar("Please check godown liability register");
         } else if (TextUtils.isEmpty(cashbook)) {
             returnFlag = false;
@@ -517,7 +521,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etComName, "Enter insurance company name");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select insurance validity");
             ScrollToView(binding.etInsDate);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
@@ -529,7 +533,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgWeight);
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select weight measure certificate validity");
             ScrollToView(binding.etLegalMetDate);
         } else if (TextUtils.isEmpty(petrolPumpCom)) {
             returnFlag = false;
@@ -553,22 +557,23 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgInspDateSocManager);
         } else if (lastInsSoc.equalsIgnoreCase(AppConstants.Yes) && !lastSocDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select society manager last inspection date");
             ScrollToView(binding.rgInspDateSocManager);
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
             showSnackBar("Please check division manager last inspection date");
         } else if (lastInsDiv.equalsIgnoreCase(AppConstants.Yes) && !lastDivDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select division manager last inspection date");
             ScrollToView(binding.lastInsDivDate);
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
+            ScrollToView(binding.rgRepairsReq);
             showSnackBar("Please check repairs required");
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
-            ScrollToView(binding.ivRepairs);
+            ScrollToView(binding.etRepairType);
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");
@@ -752,7 +757,11 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" +
+                    Utils.getCurrentDateTimeFormat() + "~" +
+                    Utils.getDeviceID(PetrolPumpFindingsActivity.this) + "~" +
+                    Utils.getVersionName(PetrolPumpFindingsActivity.this) + "~" + randomNum + ".png";
+
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

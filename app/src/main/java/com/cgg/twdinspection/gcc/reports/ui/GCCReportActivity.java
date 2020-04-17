@@ -48,7 +48,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     List<ReportData> reportData;
     SharedPreferences.Editor editor;
     private List<ReportData> tempReportData;
-    private Menu mMenu=null;
+    private Menu mMenu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,8 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.Selected_Supp_Report, "");
-        Type type = new TypeToken<List<ReportData>>() {}.getType();
+        Type type = new TypeToken<List<ReportData>>() {
+        }.getType();
         reportData = gson.fromJson(data, type);
 
 
@@ -92,6 +93,12 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
                     tv.setText(getResources().getString(R.string.processing_unit_title));
                 }
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+                    tv.setText(getResources().getString(R.string.petrol_pump_title));
+                }
+                if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+                    tv.setText(getResources().getString(R.string.lpg_title));
+                }
 
 //                tv.setText(getResources().getString(R.string.godown_title));
                 tv.setGravity(Gravity.CENTER);
@@ -108,7 +115,6 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         }
 
 
-
         gccReportBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +129,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-               onBackPressed();
+                onBackPressed();
                 break;
         }
         return true;
@@ -159,19 +165,25 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
         mSearchView = (SearchView) mSearch.getActionView();
         String hint = null;
         if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            hint=getResources().getString(R.string.godown_search_hint);
+            hint = getResources().getString(R.string.godown_search_hint);
         }
         if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            hint=getResources().getString(R.string.depot_search_hint);
+            hint = getResources().getString(R.string.depot_search_hint);
         }
         if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            hint=getResources().getString(R.string.mfp_search_hint);
+            hint = getResources().getString(R.string.mfp_search_hint);
         }
         if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            hint=getResources().getString(R.string.unit_search_hint);
+            hint = getResources().getString(R.string.unit_search_hint);
+        }
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+            hint = getResources().getString(R.string.petrol_search_hint);
+        }
+        if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+            hint = getResources().getString(R.string.lpg_search_hint);
         }
 
-        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" +hint + "</font>"));
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + hint + "</font>"));
         mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);

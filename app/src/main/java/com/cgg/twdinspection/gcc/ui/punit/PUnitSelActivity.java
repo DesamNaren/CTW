@@ -277,30 +277,35 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             if (position != 0) {
                 selectedPUnits = null;
                 selectedPUnitID = "";
-                LiveData<PUnits> liveData = viewModel.getPUnitID(selectedDivId, selectedSocietyId, binding.spPUnit.getSelectedItem().toString());
-                liveData.observe(PUnitSelActivity.this, new Observer<PUnits>() {
-                    @Override
-                    public void onChanged(PUnits pUnits) {
-                        liveData.removeObservers(PUnitSelActivity.this);
-                        if (pUnits != null) {
-                            selectedPUnitID = pUnits.getGodownId();
-                            selectedPUnits = pUnits;
-                        }else{
-                            showSnackBar(getString(R.string.something));
+                if(!TextUtils.isEmpty(selectedSocietyId)) {
+                    LiveData<PUnits> liveData = viewModel.getPUnitID(selectedDivId, selectedSocietyId, binding.spPUnit.getSelectedItem().toString());
+                    liveData.observe(PUnitSelActivity.this, new Observer<PUnits>() {
+                        @Override
+                        public void onChanged(PUnits pUnits) {
+                            liveData.removeObservers(PUnitSelActivity.this);
+                            if (pUnits != null) {
+                                selectedPUnitID = pUnits.getGodownId();
+                                selectedPUnits = pUnits;
+                            } else {
+                                showSnackBar(getString(R.string.something));
+                            }
                         }
-                    }
-                });
-                LiveData<PUnits> liveDataPUnit = viewModel.getPUnitID(selectedDivId, binding.spPUnit.getSelectedItem().toString());
-                liveDataPUnit.observe(PUnitSelActivity.this, new Observer<PUnits>() {
-                    @Override
-                    public void onChanged(PUnits pUnits) {
-                        liveDataPUnit.removeObservers(PUnitSelActivity.this);
-                        if (pUnits != null) {
-                            selectedPUnitID = pUnits.getGodownId();
-                            selectedPUnits = pUnits;
+                    });
+                }else {
+                    LiveData<PUnits> liveDataPUnit = viewModel.getPUnitID(selectedDivId, binding.spPUnit.getSelectedItem().toString());
+                    liveDataPUnit.observe(PUnitSelActivity.this, new Observer<PUnits>() {
+                        @Override
+                        public void onChanged(PUnits pUnits) {
+                            liveDataPUnit.removeObservers(PUnitSelActivity.this);
+                            if (pUnits != null) {
+                                selectedPUnitID = pUnits.getGodownId();
+                                selectedPUnits = pUnits;
+                            } else {
+                                showSnackBar(getString(R.string.something));
+                            }
                         }
-                    }
-                });
+                    });
+                }
             } else {
                 selectedPUnits = null;
                 selectedPUnitID = "";

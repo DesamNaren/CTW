@@ -295,12 +295,21 @@
             android:name=".gcc.ui.petrolpump.PetrolPumpPhotoActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".gcc.ui.lpg.LpgPhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.ui.lpg.LPGActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".gcc.ui.lpg.LPGFindingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".gcc.reports.ui.PetrolpumpInspRepActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".gcc.ui.lpg.LPGActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".gcc.ui.lpg.LPGFindingsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gcc.reports.ui.LPGInspRepActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
