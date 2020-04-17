@@ -122,7 +122,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
             socId = petrolSupplierInfo.getSocietyId();
             socName = petrolSupplierInfo.getSocietyName();
             inchName = petrolSupplierInfo.getIncharge();
-            suppType = getString(R.string.p_unit_req);
+            suppType = getString(R.string.petrol_req);
             suppId = petrolSupplierInfo.getGodownId();
             godName = petrolSupplierInfo.getGodownName();
         }

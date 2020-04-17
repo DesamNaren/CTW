@@ -65,6 +65,8 @@
     <string name="dr_depot_req">dr_depot</string>
     <string name="mfp_godown_req">mfp_commodities</string>
     <string name="p_unit_req">processing_unit</string>
+    <string name="petrol_req">petrol_pump</string>
+    <string name="lpg_req">lpg</string>
     <string name="no">No</string>
     <string name="good">Good</string>
     <string name="bad">Bad</string>
