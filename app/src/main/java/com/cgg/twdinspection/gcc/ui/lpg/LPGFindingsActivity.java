@@ -412,6 +412,10 @@ public class LPGFindingsActivity extends LocBaseActivity {
 
                     LPGRegisterBookCertificates registerBookCertificates = new LPGRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
+                    registerBookCertificates.setCashBook(cashbook);
+                    registerBookCertificates.setDailyRemittance(remittance);
+                    registerBookCertificates.setRemittance(remittanceCash);
+                    registerBookCertificates.setStockRegister(stockReg);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
                     registerBookCertificates.setDailySalesRegister(dailysales);
                     registerBookCertificates.setGodownLiabilityRegister(godownLiaReg);
@@ -435,6 +439,8 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     LPGGeneralFindings generalFindings = new LPGGeneralFindings();
 
 
+
+                    generalFindings.setCcCamerasAvail(availCcCameras);
                     generalFindings.setComputerizedSystem(petrolPumpCom);
                     generalFindings.setHygienicCondition(petrolPumpHyg);
                     generalFindings.setFireSafteyAvail(availEqp);

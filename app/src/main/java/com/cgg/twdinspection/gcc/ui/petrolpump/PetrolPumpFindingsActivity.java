@@ -410,6 +410,9 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
 
                     PetrolPumpRegisterBookCertificates registerBookCertificates = new PetrolPumpRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
+                    registerBookCertificates.setCashBook(cashbook);
+                    registerBookCertificates.setDailyRemittance(remittance);
+                    registerBookCertificates.setRemittance(remittanceCash);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
                     registerBookCertificates.setDailySalesRegister(dailysales);
                     registerBookCertificates.setGodownLiabilityRegister(godownLiaReg);
@@ -433,6 +436,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     PetrolPumpGeneralFindings generalFindings = new PetrolPumpGeneralFindings();
 
 
+                    generalFindings.setCcCamerasAvail(availCcCameras);
                     generalFindings.setComputerizedSystem(petrolPumpCom);
                     generalFindings.setHygienicCondition(petrolPumpHyg);
                     generalFindings.setFireSafteyAvail(availEqp);

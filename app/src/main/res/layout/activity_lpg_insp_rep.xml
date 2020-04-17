@@ -463,9 +463,11 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:padding="@dimen/dimen_5dp"
+                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`Yes`)}"
                                             android:text="@string/yes" />
 
                                         <RadioButton
+                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`No`)}"
                                             android:id="@+id/remittance_rb_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -480,7 +482,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="gone">
+                                    android:visibility="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
 
                                     <RadioGroup
@@ -491,6 +493,7 @@
 
 
                                         <RadioButton
+                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Daily`)}"
                                             android:id="@+id/remittance_cash_rb_daily"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -498,6 +501,7 @@
                                             android:text="Daily" />
 
                                         <RadioButton
+                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Alternate days`)}"
                                             android:id="@+id/remittance_cash_rb_alt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -505,6 +509,7 @@
                                             android:text="Alternate days" />
 
                                         <RadioButton
+                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Weekly`)}"
                                             android:id="@+id/remittance_cash_rb_weekly"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"

@@ -263,7 +263,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
 
 
         if (reportData != null && (reportData.getStockDetails() != null && !punit_flag &&
-                !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag)) {
+                !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag && !petrol_flag && !lpg_flag)) {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);
