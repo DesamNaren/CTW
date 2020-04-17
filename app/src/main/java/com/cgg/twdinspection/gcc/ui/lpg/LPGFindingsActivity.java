@@ -194,7 +194,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_daily) {
                     remittanceCash = "Daily";
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_alt) {
-                    remittanceCash = "Alternative Days";
+                    remittanceCash = "Alternate days";
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_weekly) {
                     remittanceCash = "Weekly";
                 }
@@ -413,8 +413,8 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     LPGRegisterBookCertificates registerBookCertificates = new LPGRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
                     registerBookCertificates.setCashBook(cashbook);
-                    registerBookCertificates.setDailyRemittance(remittance);
-                    registerBookCertificates.setRemittance(remittanceCash);
+                    registerBookCertificates.setDailyRemittance(remittanceCash);
+                    registerBookCertificates.setRemittance(remittance);
                     registerBookCertificates.setStockRegister(stockReg);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
                     registerBookCertificates.setDailySalesRegister(dailysales);
@@ -437,8 +437,6 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     lpgIns.setRegisterBookCertificates(registerBookCertificates);
 
                     LPGGeneralFindings generalFindings = new LPGGeneralFindings();
-
-
 
                     generalFindings.setCcCamerasAvail(availCcCameras);
                     generalFindings.setComputerizedSystem(petrolPumpCom);

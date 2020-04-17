@@ -179,7 +179,8 @@
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@{inspData.stockDetails.deficitReason}" />
+                                    android:text="@{inspData.stockDetails.deficitReason}"
+                                    android:textColor="@color/black" />
                                 />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -420,6 +421,8 @@
                                         android:id="@+id/cash_rb_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.cashBook.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -427,6 +430,8 @@
                                         android:id="@+id/cash_rb_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.cashBook.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -462,15 +467,17 @@
                                             android:id="@+id/remittance_rb_yes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
-                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`Yes`)}"
                                             android:text="@string/yes" />
 
                                         <RadioButton
-                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`No`)}"
                                             android:id="@+id/remittance_rb_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -482,7 +489,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:visibility="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+                                    android:visibility="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
 
 
                                     <RadioGroup
@@ -493,26 +500,29 @@
 
 
                                         <RadioButton
-                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Daily`)}"
                                             android:id="@+id/remittance_cash_rb_daily"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`Daily`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Daily" />
 
                                         <RadioButton
-                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Alternate days`)}"
                                             android:id="@+id/remittance_cash_rb_alt"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`Alternate days`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Alternate days" />
 
                                         <RadioButton
-                                            android:checked="@{inspData.registerBookCertificates.remittance.equalsIgnoreCase(`Weekly`)}"
                                             android:id="@+id/remittance_cash_rb_weekly"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:checked="@{inspData.registerBookCertificates.dailyRemittance.equalsIgnoreCase(`Weekly`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Weekly" />
 
@@ -585,7 +595,8 @@
                                             android:hint="Company Name"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
-                                            android:text="@{inspData.registerBookCertificates.insuranceCompany}" />
+                                            android:text="@{inspData.registerBookCertificates.insuranceCompany}"
+                                            android:textColor="@color/black" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -622,7 +633,8 @@
                                                 android:imeOptions="actionNext"
                                                 android:paddingLeft="@dimen/dimen_30dp"
                                                 android:singleLine="true"
-                                                android:text="@{inspData.registerBookCertificates.insuranceValidity}" />
+                                                android:text="@{inspData.registerBookCertificates.insuranceValidity}"
+                                                android:textColor="@color/black" />
 
                                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -754,7 +766,8 @@
                                                 android:imeOptions="actionNext"
                                                 android:paddingLeft="@dimen/dimen_30dp"
                                                 android:singleLine="true"
-                                                android:text="@{inspData.registerBookCertificates.weightMeasureValidity}" />
+                                                android:text="@{inspData.registerBookCertificates.weightMeasureValidity}"
+                                                android:textColor="@color/black" />
 
                                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -948,6 +961,8 @@
                                         android:id="@+id/avail_cc_cameras_rb_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.ccCamerasAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -955,6 +970,8 @@
                                         android:id="@+id/avail_cc_cameras_rb_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.ccCamerasAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1041,7 +1058,8 @@
                                                 android:imeOptions="actionNext"
                                                 android:paddingLeft="@dimen/dimen_30dp"
                                                 android:singleLine="true"
-                                                android:text="@{inspData.generalFindings.societyManagerInspectionDate}" />
+                                                android:text="@{inspData.generalFindings.societyManagerInspectionDate}"
+                                                android:textColor="@color/black" />
 
                                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1129,7 +1147,8 @@
                                                 android:imeOptions="actionNext"
                                                 android:paddingLeft="@dimen/dimen_30dp"
                                                 android:singleLine="true"
-                                                android:text="@{inspData.generalFindings.divisionManagerInspectionDate}" />
+                                                android:text="@{inspData.generalFindings.divisionManagerInspectionDate}"
+                                                android:textColor="@color/black" />
 
                                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1203,7 +1222,8 @@
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
-                                            android:text="@{inspData.generalFindings.repairsType}" />
+                                            android:text="@{inspData.generalFindings.repairsType}"
+                                            android:textColor="@color/black" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1237,7 +1257,8 @@
                                         android:hint="Remarks of Inspection officer"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@{inspData.generalFindings.remarks}" />
+                                        android:text="@{inspData.generalFindings.remarks}"
+                                        android:textColor="@color/black" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 

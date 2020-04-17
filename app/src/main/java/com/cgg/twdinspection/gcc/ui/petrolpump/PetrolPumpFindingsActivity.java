@@ -192,7 +192,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_daily) {
                     remittanceCash = "Daily";
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_alt) {
-                    remittanceCash = "Alternative Days";
+                    remittanceCash = "Alternate days";
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.remittance_cash_rb_weekly) {
                     remittanceCash = "Weekly";
                 }
@@ -411,8 +411,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     PetrolPumpRegisterBookCertificates registerBookCertificates = new PetrolPumpRegisterBookCertificates();
                     registerBookCertificates.setStockRegister(stockReg);
                     registerBookCertificates.setCashBook(cashbook);
-                    registerBookCertificates.setDailyRemittance(remittance);
-                    registerBookCertificates.setRemittance(remittanceCash);
+                    registerBookCertificates.setDailyRemittance(remittanceCash);
+                    registerBookCertificates.setRemittance(remittance);
                     registerBookCertificates.setPurchaseRegister(purchaseReg);
                     registerBookCertificates.setDailySalesRegister(dailysales);
                     registerBookCertificates.setGodownLiabilityRegister(godownLiaReg);
