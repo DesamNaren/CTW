@@ -473,6 +473,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
                     startActivity(new Intent(LPGFindingsActivity.this, LpgPhotoActivity.class));
                 }

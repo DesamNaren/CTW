@@ -471,6 +471,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
                     startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class));
@@ -760,7 +761,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" +
                     Utils.getCurrentDateTimeFormat() + "~" +
                     Utils.getDeviceID(PetrolPumpFindingsActivity.this) + "~" +
-                    Utils.getVersionName(PetrolPumpFindingsActivity.this) + "~" + randomNum + ".png";
+                    Utils.getVersionName(PetrolPumpFindingsActivity.this) + "~" + randomNum
+                    + ".png";
 
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);

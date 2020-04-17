@@ -85,7 +85,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(GCCPhotoActivity.this);
-randomNum = Utils.getRandomNumberString();
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -102,6 +101,8 @@ randomNum = Utils.getRandomNumberString();
             sharedPreferences = TWDApplication.get(this).getPreferences();
             repairPath = sharedPreferences.getString(AppConstants.repairsPath, "");
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            randomNum = sharedPreferences.getString(AppConstants.randomNum, "");
+
             if (!TextUtils.isEmpty(repairPath)) {
                 file_repair = new File(repairPath);
             }

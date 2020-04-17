@@ -75,6 +75,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     private String depotTimimg, mfpComm, ecComm, drComm, stockBal, valuesAsPerSale, valuesAsPerPurchasePrice, qualVerified, depotMaintHygeine, repairsReq, repairsType;
     private String cashBal, phyCash, vocBills, liaBal, deficitBal, reason, remarks, feedback;
     private int repairsFlag = 0;
+    private String randomNum;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -84,6 +85,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
+        randomNum = Utils.getRandomNumberString();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -564,6 +566,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
                     startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class));
@@ -947,7 +950,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(DRDepotFindingsActivity.this)
-                    + "~" + Utils.getVersionName(DRDepotFindingsActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
+                    + "~" + Utils.getVersionName(DRDepotFindingsActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

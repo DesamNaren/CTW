@@ -64,6 +64,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     private String qualityStock, stockCards, godownCom, godownHyg, availEqp, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
+    private String randomNum;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -73,6 +74,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
+        randomNum = Utils.getRandomNumberString();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -510,6 +512,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
                     startActivity(new Intent(DRGodownFindingsActivity.this, GCCPhotoActivity.class));
@@ -794,7 +797,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(DRGodownFindingsActivity.this)
-                    + "~" + Utils.getVersionName(DRGodownFindingsActivity.this) + "~" + Utils.getRandomNumberString() + ".png";
+                    + "~" + Utils.getVersionName(DRGodownFindingsActivity.this) + "~" + randomNum+ ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

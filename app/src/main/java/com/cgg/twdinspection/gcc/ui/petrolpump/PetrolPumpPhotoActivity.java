@@ -84,7 +84,6 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(PetrolPumpPhotoActivity.this);
 
-        randomNum = Utils.getRandomNumberString();
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -101,6 +100,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
             sharedPreferences = TWDApplication.get(this).getPreferences();
             repairPath = sharedPreferences.getString(AppConstants.repairsPath, "");
             officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+            randomNum = sharedPreferences.getString(AppConstants.randomNum, "");
             if (!TextUtils.isEmpty(repairPath)) {
                 file_repair = new File(repairPath);
             }

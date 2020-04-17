@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,8 +47,13 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
-        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>1 && reportData.getPhotos().get(1).getFilePath() != null) {
-            binding.setImageUrl(reportData.getPhotos().get(1).getFilePath());
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0) {
+            for(int z=0;z<reportData.getPhotos().size();z++) {
+                if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
+                        && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
+                    binding.setImageUrl(reportData.getPhotos().get(z).getFilePath());
+                break;
+            }
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
