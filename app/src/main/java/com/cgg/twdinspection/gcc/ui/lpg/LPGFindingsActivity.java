@@ -438,9 +438,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
 
                     LPGGeneralFindings generalFindings = new LPGGeneralFindings();
 
-                    generalFindings.setFireDeptNoc(fireNOC);
-                    generalFindings.setWeightMeasureCertificate(weightMea);
-                    generalFindings.setWeightMeasureValidity(weightDate);
+
                     generalFindings.setComputerizedSystem(petrolPumpCom);
                     generalFindings.setHygienicCondition(petrolPumpHyg);
                     generalFindings.setFireSafteyAvail(availEqp);
@@ -459,7 +457,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     generalFindings.setDivisionManagerInspection(lastInsDiv);
                     generalFindings.setSocietyManagerInspection(lastInsSoc);
                     generalFindings.setRepairsRequired(repairsReq);
-                    generalFindings.setRepairType(remarks);
+                    generalFindings.setRepairType(repairType);
                     generalFindings.setRemarks(remarks);
                     lpgIns.setGeneralFindings(generalFindings);
 
@@ -489,10 +487,11 @@ public class LPGFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etReason, "Enter Reason");
         } else if (TextUtils.isEmpty(stockReg)) {
             returnFlag = false;
-            ScrollToView(binding.rgPurchase);
+            ScrollToView(binding.rgStock);
             showSnackBar("Please check stock register");
         } else if (TextUtils.isEmpty(purchaseReg)) {
             returnFlag = false;
+            ScrollToView(binding.rgPurchase);
             showSnackBar("Please check purchase register");
         } else if (TextUtils.isEmpty(dailysales)) {
             returnFlag = false;
@@ -500,7 +499,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
             showSnackBar("Please check Daily Sales Register");
         } else if (TextUtils.isEmpty(godownLiaReg)) {
             returnFlag = false;
-            ScrollToView(binding.rgRemittanceCash);
+            ScrollToView(binding.rgGodown);
             showSnackBar("Please check godown liability register");
         } else if (TextUtils.isEmpty(cashbook)) {
             returnFlag = false;
@@ -523,7 +522,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etComName, "Enter insurance company name");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select insurance validity");
             ScrollToView(binding.etInsDate);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
@@ -535,7 +534,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgWeight);
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select weight measure certificate validity");
             ScrollToView(binding.etLegalMetDate);
         } else if (TextUtils.isEmpty(petrolPumpCom)) {
             returnFlag = false;
@@ -559,22 +558,23 @@ public class LPGFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgInspDateSocManager);
         } else if (lastInsSoc.equalsIgnoreCase(AppConstants.Yes) && !lastSocDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select society manager last inspection date");
             ScrollToView(binding.rgInspDateSocManager);
         } else if (TextUtils.isEmpty(lastInsDiv)) {
             returnFlag = false;
             showSnackBar("Please check division manager last inspection date");
         } else if (lastInsDiv.equalsIgnoreCase(AppConstants.Yes) && !lastDivDate.contains("/")) {
             returnFlag = false;
-
+            showSnackBar("Please select division manager last inspection date");
             ScrollToView(binding.lastInsDivDate);
         } else if (TextUtils.isEmpty(repairsReq)) {
             returnFlag = false;
+            ScrollToView(binding.rgRepairsReq);
             showSnackBar("Please check repairs required");
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(repairType)) {
             returnFlag = false;
             ScrollToViewEditText(binding.etRepairType, "Enter repair type");
-            ScrollToView(binding.ivRepairs);
+            ScrollToView(binding.etRepairType);
         } else if (repairsReq.equalsIgnoreCase(AppConstants.Yes) && repairsFlag == 0) {
             returnFlag = false;
             showSnackBar("Please capture repairs required photo");

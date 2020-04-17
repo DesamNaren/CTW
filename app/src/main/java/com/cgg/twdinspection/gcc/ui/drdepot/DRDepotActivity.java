@@ -61,6 +61,7 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.internal.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -85,6 +86,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     StockDetailsResponse stockDetailsResponse;
     private int shopFlag = 0;
     GCCPhotoViewModel gccPhotoViewModel;
+    private String randomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
 
+        randomNum = Utils.getRandomNumberString();
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -237,6 +240,9 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                             request.setGodown_name(drDepots.getGodownName());
                             request.setGodownId(drDepots.getGodownId());
                             request.setShop_avail(shopAvail);
+                            request.setDeviceId(Utils.getDeviceID(DRDepotActivity.this));
+                            request.setVersionNo(Utils.getVersionName(DRDepotActivity.this));
+                            request.setPhoto_key_id(randomNum);
                             gccPhotoViewModel.submitGCCDetails(request);
                         } else {
                             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
@@ -392,17 +398,21 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private void callPhotoSubmit() {
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        if(Utils.checkInternetConnection(DRDepotActivity.this)) {
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-        customProgressDialog.show();
+            customProgressDialog.show();
 
 
-        List<MultipartBody.Part> partList = new ArrayList<>();
-        partList.add(body);
-        gccPhotoViewModel.UploadImageServiceCall(partList);
+            List<MultipartBody.Part> partList = new ArrayList<>();
+            partList.add(body);
+            gccPhotoViewModel.UploadImageServiceCall(partList);
+        }else{
+            Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+        }
     }
 
     private void showSnackBar(String str) {
@@ -574,7 +584,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(DRDepotActivity.this)+"~" + Utils.getVersionName(DRDepotActivity.this)+"~"+Utils.getRandomNumberString()+".png";
+                    Utils.getDeviceID(DRDepotActivity.this)+"~" + Utils.getVersionName(DRDepotActivity.this)+"~"+randomNum+".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

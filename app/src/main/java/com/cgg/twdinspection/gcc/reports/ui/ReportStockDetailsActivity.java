@@ -3,6 +3,7 @@ package com.cgg.twdinspection.gcc.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,17 +16,17 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
+import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.EssentialReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
-import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
-import com.cgg.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
-import com.cgg.twdinspection.gcc.reports.fragments.EssentialReportFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
-import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
-import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -130,6 +131,16 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
 
         });
 
+        if (reportData != null && !TextUtils.isEmpty(reportData.getSupplierType()) &&
+                reportData.getSupplierType().equalsIgnoreCase(getString(R.string.dr_depot_req))
+                && !TextUtils.isEmpty(reportData.getShopAvail())
+                && reportData.getShopAvail().equalsIgnoreCase(AppConstants.close)) {
+            binding.viewPager.setVisibility(View.GONE);
+            binding.tabs.setVisibility(View.GONE);
+            binding.llShopClose.setVisibility(View.VISIBLE);
+//            binding.ivShopCam.setImageURI(reportData.getIm);
+        }
+
         if (reportData != null && reportData.getStockDetails() != null) {
             binding.viewPager.setVisibility(View.VISIBLE);
             binding.tabs.setVisibility(View.VISIBLE);
@@ -144,6 +155,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.essRepComm, essentialComm);
                 essentialFragment.setArguments(bundle);
                 adapter.addFrag(essentialFragment, "Essential Commodities");
+                ess_flag = true;
+            } else {
+                ess_flag = false;
             }
 
             if (reportData.getStockDetails().getDailyRequirements() != null && reportData.getStockDetails().getDailyRequirements().size() > 0) {
@@ -153,6 +167,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.dailyRepReq, essentialComm);
                 dailyFragment.setArguments(bundle);
                 adapter.addFrag(dailyFragment, "Daily Requirements");
+                dailyreq_flag = true;
+            } else {
+                dailyreq_flag = false;
             }
 
             if (reportData.getStockDetails().getEmpties() != null && reportData.getStockDetails().getEmpties().size() > 0) {
@@ -162,6 +179,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.emptiesRep, essentialComm);
                 emptiesFragment.setArguments(bundle);
                 adapter.addFrag(emptiesFragment, "Empties");
+                ess_flag = true;
+            } else {
+                ess_flag = false;
             }
 
 
@@ -172,6 +192,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.mfpRep, essentialComm);
                 mfpFragment.setArguments(bundle);
                 adapter.addFrag(mfpFragment, "MFP Commodities");
+                mfp_flag = true;
+            } else {
+                mfp_flag = false;
             }
 
             if (reportData.getStockDetails().getProcessingUnits() != null && reportData.getStockDetails().getProcessingUnits().size() > 0) {
@@ -181,6 +204,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.punitRep, essentialComm);
                 pUnitFragment.setArguments(bundle);
                 adapter.addFrag(pUnitFragment, "Processing Units");
+                punit_flag = true;
+            } else {
+                punit_flag = false;
             }
 
             binding.tabs.setupWithViewPager(binding.viewPager);
@@ -188,43 +214,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
 
         }
 
-        if (reportData.getStockDetails().getProcessingUnits() != null) {
-            if (reportData.getStockDetails().getProcessingUnits().size() <= 0)
-                punit_flag = false;
-            else
-                punit_flag = true;
-        } else
-            punit_flag = false;
-        if (reportData.getStockDetails().getDailyRequirements() != null) {
-            if (reportData.getStockDetails().getDailyRequirements().size() <= 0)
-                dailyreq_flag = false;
-            else
-                dailyreq_flag = true;
-        } else
-            dailyreq_flag = false;
-        if (reportData.getStockDetails().getEmpties() != null) {
-            if (reportData.getStockDetails().getEmpties().size() <= 0)
-                emp_flag = false;
-            else
-                emp_flag = true;
-        } else
-            emp_flag = false;
-
-        if (reportData.getStockDetails().getEssentialCommodities() != null) {
-            if (reportData.getStockDetails().getEssentialCommodities().size() <= 0)
-                ess_flag = false;
-            else
-                ess_flag = true;
-        } else
-            ess_flag = false;
-
-        if (reportData.getStockDetails().getMfpCommodities() != null) {
-            if (reportData.getStockDetails().getMfpCommodities().size() <= 0)
-                mfp_flag = false;
-            else
-                mfp_flag = true;
-        } else
-            mfp_flag = false;
 
         if (reportData != null && (reportData.getStockDetails() != null && !punit_flag &&
                 !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag)) {

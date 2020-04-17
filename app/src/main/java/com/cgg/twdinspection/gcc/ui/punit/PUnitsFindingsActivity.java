@@ -165,7 +165,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     registerBookCertificates.setBarrelsAlumnCansRemarks(barralesRemarks);
                     registerBookCertificates.setCashBookRemarks(cahBookRemarks);
                     registerBookCertificates.setCashBankBalRemarks(cashBankRemarks);
-                    registerBookCertificates.setVehLogBookType(vehLogBook);
                     registerBookCertificates.setVehLogBookRemarks(vehlogRemarks);
 
 

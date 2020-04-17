@@ -66,7 +66,42 @@
 
                         </RelativeLayout>
 
+
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/ll_shop_close"
+                        android:layout_below="@+id/collapsing_toolbar_layout"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:visibility="visible"
+                            android:id="@+id/tv_close"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/white"
+                            android:layout_height="wrap_content"
+                            android:text="Closed Shop Image"/>
+                        <ImageView
+                            android:id="@+id/iv_shop_cam"
+                            android:layout_width="@dimen/_100dp"
+                            android:layout_height="@dimen/_100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:layout_marginBottom="@dimen/dimen_10dp"
+                            android:padding="@dimen/dimen_8dp"
+                            android:src="@drawable/ic_menu_camera"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
 
                     <com.google.android.material.tabs.TabLayout
                         android:visibility="gone"
