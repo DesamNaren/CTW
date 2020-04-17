@@ -16,7 +16,7 @@ import com.cgg.twdinspection.databinding.ActivityLpgInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.google.gson.Gson;
 
-public class LpgInspRepActivity extends AppCompatActivity {
+public class LPGInspRepActivity extends AppCompatActivity {
 
     ActivityLpgInspRepBinding binding;
     private SharedPreferences sharedPreferences;
@@ -36,7 +36,7 @@ public class LpgInspRepActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        sharedPreferences = TWDApplication.get(LpgInspRepActivity.this).getPreferences();
+        sharedPreferences = TWDApplication.get(LPGInspRepActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
@@ -55,7 +55,7 @@ public class LpgInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LpgInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(LPGInspRepActivity.this, ViewPhotosActivity.class));
             }
         });
     }

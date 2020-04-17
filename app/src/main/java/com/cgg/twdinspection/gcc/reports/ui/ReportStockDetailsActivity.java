@@ -19,8 +19,10 @@ import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.EssentialReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.LPGlReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
+import com.cgg.twdinspection.gcc.reports.fragments.PetrollReportFragment;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
@@ -42,7 +44,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
     ReportData reportData;
-    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
+    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag, petrol_flag, lpg_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +146,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PetrolpumpInspRepActivity.class);
                     startActivity(intent);
                 }else if (reportData.getInspectionFindings().getLpg() != null) {
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, LpgInspRepActivity.class);
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, LPGInspRepActivity.class);
                     startActivity(intent);
                 } else {
                     callSnackBar("No Inspection data found");
@@ -201,9 +203,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 bundle.putString(AppConstants.emptiesRep, essentialComm);
                 emptiesFragment.setArguments(bundle);
                 adapter.addFrag(emptiesFragment, "Empties");
-                ess_flag = true;
+                emp_flag = true;
             } else {
-                ess_flag = false;
+                emp_flag = false;
             }
 
 
@@ -231,6 +233,29 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 punit_flag = false;
             }
 
+            if (reportData.getStockDetails().getPetrolCommodities() != null && reportData.getStockDetails().getPetrolCommodities().size() > 0) {
+                PetrollReportFragment petrollReportFragment = new PetrollReportFragment();
+                String petrolComm = gson.toJson(reportData.getStockDetails().getPetrolCommodities());
+                Bundle bundle = new Bundle();
+                bundle.putString(AppConstants.petrolPumpRep, petrolComm);
+                petrollReportFragment.setArguments(bundle);
+                adapter.addFrag(petrollReportFragment, "Petrol Commodities");
+                petrol_flag = true;
+            } else {
+                petrol_flag = false;
+            }
+
+            if (reportData.getStockDetails().getLpgCommodities() != null && reportData.getStockDetails().getLpgCommodities().size() > 0) {
+                LPGlReportFragment lpGlReportFragment = new LPGlReportFragment();
+                String lpgComm = gson.toJson(reportData.getStockDetails().getLpgCommodities());
+                Bundle bundle = new Bundle();
+                bundle.putString(AppConstants.lpgRep, lpgComm);
+                lpGlReportFragment.setArguments(bundle);
+                adapter.addFrag(lpGlReportFragment, "LPG Commodities");
+                lpg_flag = true;
+            } else {
+                lpg_flag = false;
+            }
             binding.tabs.setupWithViewPager(binding.viewPager);
             binding.viewPager.setAdapter(adapter);
 

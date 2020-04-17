@@ -145,6 +145,8 @@ public class AppConstants {
     public static String emptiesRep = "emptiesRep";
     public static String mfpRep = "mfpRep";
     public static String punitRep = "punitRep";
+    public static String petrolPumpRep = "petrolPumpRep";
+    public static String lpgRep = "lpgRep";
 
     public static String LOCAL_FLAG = "LOCAL_FLAG";
 
