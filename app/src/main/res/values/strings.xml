@@ -996,5 +996,6 @@
     <string name="inspecting_officer_name">Inspecting officer name</string>
     <string name="inspecting_officer_designation">Inspecting officer designation</string>
     <string name="place_of_work">Place of work</string>
+    <string name="search_by_workId">Search by work ID</string>
 
 </resources>
