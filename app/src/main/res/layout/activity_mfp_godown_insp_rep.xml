@@ -721,14 +721,26 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <ImageView
-                                android:id="@+id/iv_repairs"
-                                android:layout_width="120dp"
-                                android:layout_height="120dp"
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_margin="@dimen/dimen_10dp"
-                                app:profileImage="@{imageUrl}"
-                                android:src="@drawable/repair" />
+                                android:layout_marginTop="@dimen/dimen_10dp">
+                                <ImageView
+                                    android:id="@+id/iv_repairs"
+                                    android:layout_width="@dimen/_125dp"
+                                    android:layout_height="@dimen/_125dp"
+                                    android:layout_gravity="center"
+                                    android:scaleType="fitXY"
+                                    app:profileImage="@{imageUrl}" />
+                                <ProgressBar
+                                    android:id="@+id/pbar"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+
 
 
                         </LinearLayout>

@@ -10,6 +10,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
@@ -53,7 +57,24 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
             for(int z=0;z<reportData.getPhotos().size();z++) {
                 if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
                         && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
-                    binding.setImageUrl(reportData.getPhotos().get(z).getFilePath());
+                    Glide.with(DrDepotInspRepActivity.this)
+                            .load( reportData.getPhotos().get(z).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
+                            .into(binding.ivRepairsCam);
                 break;
             }
         } else {

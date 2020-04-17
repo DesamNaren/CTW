@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -12,9 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
@@ -139,13 +145,13 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
                     startActivity(intent);
-                }else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
+                } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
                     startActivity(intent);
-                }else if (reportData.getInspectionFindings().getPetrolPump() != null) {
+                } else if (reportData.getInspectionFindings().getPetrolPump() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PetrolpumpInspRepActivity.class);
                     startActivity(intent);
-                }else if (reportData.getInspectionFindings().getLpg() != null) {
+                } else if (reportData.getInspectionFindings().getLpg() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, LPGInspRepActivity.class);
                     startActivity(intent);
                 } else {
@@ -155,6 +161,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
 
         });
 
+
+
         if (reportData != null && !TextUtils.isEmpty(reportData.getSupplierType()) &&
                 reportData.getSupplierType().equalsIgnoreCase(getString(R.string.dr_depot_req))
                 && !TextUtils.isEmpty(reportData.getShopAvail())
@@ -162,7 +170,40 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.llShopClose.setVisibility(View.VISIBLE);
-//            binding.ivShopCam.setImageURI(reportData.getIm);
+            if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+                for (int z = 0; z < reportData.getPhotos().size(); z++) {
+                    if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
+                            && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.SHOP_CLOSED))
+                        Glide.with(ReportStockDetailsActivity.this)
+                                .load( reportData.getPhotos().get(z).getFilePath())
+                                .error(R.drawable.no_image)
+                                .placeholder(R.drawable.camera)
+                                .listener(new RequestListener<String, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                        binding.pbar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        binding.pbar.setVisibility(View.GONE);
+                                        return false;
+                                    }
+                                })
+                                .into(binding.ivShopCam);
+
+                    binding.ivShopCam.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Utils.displayPhotoDialogBox(reportData.getPhotos().get(z).getFilePath(), ReportStockDetailsActivity.this, reportData.getPhotos().get(z).getFileName(), true);
+                        }
+                    });
+                    break;
+                }
+            } else {
+                Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (reportData != null && reportData.getStockDetails() != null) {

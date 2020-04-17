@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,16 +96,27 @@
                             android:textColor="@color/white"
                             android:layout_height="wrap_content"
                             android:text="Closed Shop Image"/>
-                        <ImageView
-                            android:id="@+id/iv_shop_cam"
-                            android:layout_width="@dimen/_100dp"
-                            android:layout_height="@dimen/_100dp"
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dimen_8dp"
-                            android:layout_marginBottom="@dimen/dimen_10dp"
-                            android:padding="@dimen/dimen_8dp"
-                            android:src="@drawable/ic_menu_camera"
-                            android:visibility="visible" />
+                            android:layout_marginTop="@dimen/dimen_10dp">
+                            <ImageView
+                                android:id="@+id/iv_shop_cam"
+                                android:layout_width="@dimen/_125dp"
+                                android:layout_height="@dimen/_125dp"
+                                android:layout_gravity="center"
+                                android:scaleType="fitXY"
+                                app:profileImage="@{imageUrl}" />
+                            <ProgressBar
+                                android:id="@+id/pbar"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"/>
+                        </FrameLayout>
+
+
 
                     </LinearLayout>
 
