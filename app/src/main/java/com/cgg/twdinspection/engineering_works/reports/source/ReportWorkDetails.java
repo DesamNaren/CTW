@@ -11,6 +11,9 @@ public class ReportWorkDetails {
     @SerializedName("work_name")
     @Expose
     private String workName;
+    @SerializedName("work_id")
+    @Expose
+    private String workId;
     @SerializedName("extension_time")
     @Expose
     private String extensionTime;
@@ -170,6 +173,14 @@ public class ReportWorkDetails {
     @SerializedName("work_in_prog_name")
     @Expose
     private String workInProgName;
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId;
+    }
 
     public String getWorkName() {
         return workName;

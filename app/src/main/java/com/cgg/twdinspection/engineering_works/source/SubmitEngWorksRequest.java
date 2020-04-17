@@ -1,8 +1,13 @@
 package com.cgg.twdinspection.engineering_works.source;
 
+import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class SubmitEngWorksRequest {
+
 
     @SerializedName("work_name")
     @Expose
@@ -10,6 +15,9 @@ public class SubmitEngWorksRequest {
     @SerializedName("extension_time")
     @Expose
     private String extensionTime;
+    @SerializedName("photos")
+    @Expose
+    private List<ReportPhoto> photos = null;
     @SerializedName("qual_care")
     @Expose
     private String qualCare;
@@ -112,7 +120,10 @@ public class SubmitEngWorksRequest {
     @SerializedName("inspection_time")
     @Expose
     private String inspectionTime;
-    @SerializedName("asseFmbly_const_name")
+    @SerializedName("work_id")
+    @Expose
+    private String workId;
+    @SerializedName("assembly_const_name")
     @Expose
     private String assemblyConstName;
     @SerializedName("observation")
@@ -178,6 +189,14 @@ public class SubmitEngWorksRequest {
 
     public void setExtensionTime(String extensionTime) {
         this.extensionTime = extensionTime;
+    }
+
+    public List<ReportPhoto> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<ReportPhoto> photos) {
+        this.photos = photos;
     }
 
     public String getQualCare() {
@@ -450,6 +469,14 @@ public class SubmitEngWorksRequest {
 
     public void setInspectionTime(String inspectionTime) {
         this.inspectionTime = inspectionTime;
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId;
     }
 
     public String getAssemblyConstName() {

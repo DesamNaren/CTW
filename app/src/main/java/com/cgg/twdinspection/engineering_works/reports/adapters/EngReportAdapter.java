@@ -95,7 +95,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
                     filterList.addAll(list);
                 } else {
                     for (ReportWorkDetails otData : list) {
-                        if (otData.getWorkName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (otData.getWorkId().toLowerCase().contains(charString.toLowerCase())) {
                             filterList.add(otData);
                         }
                     }

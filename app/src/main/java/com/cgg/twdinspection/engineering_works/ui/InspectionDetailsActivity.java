@@ -398,6 +398,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     submitEngWorksRequest.setAssemblyContId(workDetail.getAssemblyContId());
                     submitEngWorksRequest.setSectorId(selSectorId.toString());
                     submitEngWorksRequest.setWorkName(workDetail.getWorkName());
+                    submitEngWorksRequest.setWorkId(workDetail.getWorkId().toString());
                     submitEngWorksRequest.setEstimateCost(workDetail.getEstimateCost());
                     submitEngWorksRequest.setSchemeId(selSchemeId.toString());
                     submitEngWorksRequest.setExectingAgency(workDetail.getExectingAgency());

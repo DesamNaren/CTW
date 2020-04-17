@@ -179,8 +179,9 @@ public class EngReportActivity extends AppCompatActivity implements ErrorHandler
         mMenu.findItem(R.id.mi_filter).setVisible(false);
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
-        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_inst) + "</font>"));
-        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_workId) + "</font>"));
+        mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mSearchView.setMaxWidth(Integer.MAX_VALUE);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);
         textView.setTextColor(Color.WHITE);

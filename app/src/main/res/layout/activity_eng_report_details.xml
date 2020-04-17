@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -231,15 +232,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
-                    android:visibility="gone"
+                    android:visibility="@{workDetails.sectorName.equalsIgnoreCase(`Others`)? View.VISIBLE : View.GONE, default = gone}"
                     app:errorEnabled="true">
 
 
                     <com.cgg.twdinspection.common.custom.CustomFontEditText
                         android:id="@+id/et_sector_others"
-                        android:layout_width="match_parent"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"  android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/specify"
+                        android:text="@{workDetails.sectorOtherValue}"
                         android:imeOptions="actionNext"
                         android:singleLine="true" />
 
