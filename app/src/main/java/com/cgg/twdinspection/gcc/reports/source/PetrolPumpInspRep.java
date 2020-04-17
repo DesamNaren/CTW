@@ -1,7 +1,7 @@
 package com.cgg.twdinspection.gcc.reports.source;
 
-import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGGeneralFindings;
-import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGRegisterBookCertificates;
+import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpGeneralFindings;
+import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,27 +9,27 @@ public class PetrolPumpInspRep {
 
     @SerializedName("general_findings")
     @Expose
-    private LPGGeneralFindings generalFindings;
+    private PetrolPumpGeneralFindings generalFindings;
     @SerializedName("register_book_certificates")
     @Expose
-    private LPGRegisterBookCertificates registerBookCertificates;
+    private PetrolPumpRegisterBookCertificates registerBookCertificates;
     @SerializedName("stock_details")
     @Expose
     private PetrolPumpReportStockDetails stockDetails;
 
-    public LPGGeneralFindings getGeneralFindings() {
+    public PetrolPumpGeneralFindings getGeneralFindings() {
         return generalFindings;
     }
 
-    public void setGeneralFindings(LPGGeneralFindings generalFindings) {
+    public void setGeneralFindings(PetrolPumpGeneralFindings generalFindings) {
         this.generalFindings = generalFindings;
     }
 
-    public LPGRegisterBookCertificates getRegisterBookCertificates() {
+    public PetrolPumpRegisterBookCertificates getRegisterBookCertificates() {
         return registerBookCertificates;
     }
 
-    public void setRegisterBookCertificates(LPGRegisterBookCertificates registerBookCertificates) {
+    public void setRegisterBookCertificates(PetrolPumpRegisterBookCertificates registerBookCertificates) {
         this.registerBookCertificates = registerBookCertificates;
     }
 

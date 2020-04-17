@@ -338,7 +338,7 @@
                                         android:id="@+id/sale_rb_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.dailySalesRegister.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
@@ -347,7 +347,7 @@
                                         android:id="@+id/sale_rb_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{inspData.registerBookCertificates.dailySalesRegister.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -1198,7 +1198,7 @@
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
-                                            android:text="@{inspData.generalFindings.repairType}" />
+                                            android:text="@{inspData.generalFindings.repairsType}" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
