@@ -1,10 +1,5 @@
 package com.cgg.twdinspection.gcc.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,11 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -41,6 +41,8 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
     List<ReportData> drGodown;
     List<ReportData> mfpGodown;
     List<ReportData> processingUnit;
+    List<ReportData> petrolpump;
+    List<ReportData> lpg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         drGodown = new ArrayList<>();
         mfpGodown = new ArrayList<>();
         processingUnit = new ArrayList<>();
+        petrolpump = new ArrayList<>();
+        lpg = new ArrayList<>();
+
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
@@ -63,6 +68,8 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             editor.putString(AppConstants.DR_Godown_Report, "");
             editor.putString(AppConstants.MFP_Godown_Report, "");
             editor.putString(AppConstants.PUnit_Report, "");
+            editor.putString(AppConstants.Petrol_Report, "");
+            editor.putString(AppConstants.lpg_Report, "");
             editor.putString(AppConstants.Selected_Supp_Report, "");
             editor.commit();
 
@@ -131,6 +138,30 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
             }
         });
 
+        binding.btnPetrolPump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Gson gson = new Gson();
+                String data = gson.toJson(petrolpump);
+                editor.putString(AppConstants.Selected_Supp_Report, data);
+                editor.commit();
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+            }
+        });
+
+        binding.btnLpg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Gson gson = new Gson();
+                String data = gson.toJson(lpg);
+                editor.putString(AppConstants.Selected_Supp_Report, data);
+                editor.commit();
+                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+            }
+        });
+
         if (Utils.checkInternetConnection(GCCReportsDashboard.this)) {
             customProgressDialog.show();
             LiveData<GCCReportResponse> gccReports = viewModel.getGCCReports(officerId);
@@ -155,12 +186,20 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
                                     case AppConstants.REPORT_PUNIT_REP:
                                         processingUnit.add(gccReportResponse.getData().get(i));
                                         break;
+                                    case AppConstants.REPORT_PETROL_REP:
+                                        petrolpump.add(gccReportResponse.getData().get(i));
+                                        break;
+                                    case AppConstants.REPORT_LPG_REP:
+                                        lpg.add(gccReportResponse.getData().get(i));
+                                        break;
                                 }
                             }
                             binding.drDepotCnt.setText(String.valueOf(drDepot.size()));
                             binding.drGodownCnt.setText(String.valueOf(drGodown.size()));
                             binding.mfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
                             binding.pUnitCnt.setText(String.valueOf(processingUnit.size()));
+                            binding.petrolPumpCnt.setText(String.valueOf(petrolpump.size()));
+                            binding.lpgCnt.setText(String.valueOf(lpg.size()));
 
                             Gson gson = new Gson();
                             String drDepotData = gson.toJson(drDepot);
@@ -174,6 +213,13 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
 
                             String pUnitData = gson.toJson(processingUnit);
                             editor.putString(AppConstants.PUnit_Report, pUnitData);
+
+                            String petrolData = gson.toJson(petrolpump);
+                            editor.putString(AppConstants.Petrol_Report, petrolData);
+
+                            String lpgData = gson.toJson(lpg);
+                            editor.putString(AppConstants.lpg_Report, lpgData);
+
                             editor.commit();
 
                         } else if (gccReportResponse.getData() != null && gccReportResponse.getData().size() == 0) {

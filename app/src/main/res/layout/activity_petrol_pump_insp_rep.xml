@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="inspData"
+            type="com.cgg.twdinspection.gcc.reports.source.PetrolPumpInspRep" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/cv_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary" />
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/action_bar_layout" />
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:layout_below="@+id/header">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/stock_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    android:background="@color/white"
+                    android:elevation="@dimen/dimen_10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Stock Details / Position"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Stock Value as per System"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvSysVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.stockDetails.stockValueAsPerSystem}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Stock Value as per Physical Verification"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvPhysVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.stockDetails.stockValueAsPerPhysical}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Deficit / Surplus "
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvDiffVal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.stockDetails.deficit}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Reason mentioned by In charge regarding Deficit / Surplus"
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_reason"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:enabled="false"
+                                    android:hint="@string/reason"
+                                    android:imeOptions="actionNext"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.stockDetails.deficitReason}" />
+                                />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Registers, Books and Certificates"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Stock Register"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_stock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/stock_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.stockRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/stock_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.stockRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Purchase Register"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_purchase"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/purchase_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.purchaseRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/purchase_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.purchaseRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Daily Sales Register"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_sale"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/sale_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/sale_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.salePriceFixationRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Godown Liability Register"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_godown"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/godown_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.godownLiabilityRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/godown_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.godownLiabilityRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Cash Book"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_cash"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/cash_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/cash_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Daily Remittance of Cash to society office"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_remittance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/remittance_rb_yes"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/remittance_rb_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/ll_remittance_cash"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_remittance_cash"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <RadioButton
+                                            android:id="@+id/remittance_cash_rb_daily"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Daily" />
+
+                                        <RadioButton
+                                            android:id="@+id/remittance_cash_rb_alt"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Alternate days" />
+
+                                        <RadioButton
+                                            android:id="@+id/remittance_cash_rb_weekly"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Weekly" />
+
+                                    </RadioGroup>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Insurance Certificate"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_insurance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/insurance_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/insurance_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/ins_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
+
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_com_name"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:hint="Company Name"
+                                            android:imeOptions="actionNext"
+                                            android:singleLine="true"
+                                            android:text="@{inspData.registerBookCertificates.insuranceCompany}" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_ins_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:enabled="false"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Insurance Validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{inspData.registerBookCertificates.insuranceValidity}" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Fire Department NOC"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_fire_noc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/fire_noc_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/fire_noc_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Weights and Measurements certificate issued by legal Metrology"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_weight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/weight_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/weight_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/legal_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_legal_met_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:enabled="false"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Certificate Validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{inspData.registerBookCertificates.weightMeasureValidity}" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="General Findings"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether Petrol Pump has been computerized and receipt and delivery are being effected through computerized system"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_petrol_pump_computerized"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/petrol_pump_computerized_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.computerizedSystem.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/petrol_pump_computerized_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.computerizedSystem.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether the Petrol Pump is maintained in hygienic condition or not"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_petrol_pump_maintained"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/petrol_pump_maintained_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/petrol_pump_maintained_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Availability of Fire Safety Equipment"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_avail_equipment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/avail_equipment_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.fireSafteyAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/avail_equipment_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.fireSafteyAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Availability of CC Cameras"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_avail_cc_cameras"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/avail_cc_cameras_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/avail_cc_cameras_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Last Inspection Date - Society Manager"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_insp_date_soc_manager"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_soc_manager_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.societyManagerInspection.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_soc_manager_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.societyManagerInspection.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/last_ins_soc_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.generalFindings.societyManagerInspection.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/last_ins_soc_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:enabled="false"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Last Inspection Date"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{inspData.generalFindings.societyManagerInspectionDate}" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Last Inspection Date - Division Manager"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_insp_date_div_manager"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_div_manager_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.divisionManagerInspection.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_div_manager_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.divisionManagerInspection.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/last_ins_div_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.generalFindings.divisionManagerInspection.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/last_ins_div_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Last Inspection Date"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{inspData.generalFindings.divisionManagerInspectionDate}" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Any Repairs required for Petrol Pump"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_repairs_req"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/repairs_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{inspData.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
+
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_repair_type"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:hint="@string/repair_type"
+                                            android:imeOptions="actionNext"
+                                            android:singleLine="true"
+                                            android:text="@{inspData.generalFindings.repairType}" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    <ImageView
+                                        android:id="@+id/iv_repairs"
+                                        android:layout_width="@dimen/_100dp"
+                                        android:layout_height="@dimen/_100dp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="@dimen/dimen_10dp"
+                                        android:background="@color/colorPrimary"
+                                        android:padding="@dimen/dimen_10dp"
+                                        app:profileImage="@{imageUrl}" />
+
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:layout_marginTop="@dimen/dimen_5dp"
+                                    android:textColorHint="@color/colorAccent"
+                                    app:errorEnabled="true">
+
+                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                        android:id="@+id/et_remarks"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:enabled="false"
+                                        android:hint="Remarks of Inspection officer"
+                                        android:imeOptions="actionNext"
+                                        android:singleLine="true"
+                                        android:text="@{inspData.generalFindings.remarks}" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottom_ll"
+            android:background="@android:color/transparent" />
+
+        <include
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
+    </RelativeLayout>
+
+</layout>
+
+

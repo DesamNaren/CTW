@@ -33,7 +33,6 @@ import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpIns;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpStockDetails;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
@@ -64,6 +63,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
+    private String randomNum;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -73,6 +73,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
+        randomNum = Utils.getRandomNumberString();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -752,7 +753,11 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         }
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
-            PIC_NAME = officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTime() + "~" + PIC_TYPE + ".png";
+            PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" +
+                    Utils.getCurrentDateTimeFormat() + "~" +
+                    Utils.getDeviceID(PetrolPumpFindingsActivity.this) + "~" +
+                    Utils.getVersionName(PetrolPumpFindingsActivity.this) + "~" + randomNum + ".png";
+
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

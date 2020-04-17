@@ -93,6 +93,8 @@ public class AppConstants {
     public static final String REPORT_DEPOT_REP = "dr_depot";
     public static final String REPORT_MFP_GODOWN_REP = "mfp_commodities";
     public static final String REPORT_PUNIT_REP = "processing_unit";
+    public static final String REPORT_PETROL_REP = "petrol_pump";
+    public static final String REPORT_LPG_REP = "lpg";
     public static final String REP_DATA = "REP_DATA";
     public static final String INSP_REP_DATA = "INSP_REP_DATA";
 
@@ -135,6 +137,8 @@ public class AppConstants {
     public static String DR_Godown_Report = "DR_GODOWN_REPORT";
     public static String MFP_Godown_Report = "MFP_GODOWN_REPORT";
     public static String PUnit_Report = "PUNIT_REPORT";
+    public static String Petrol_Report = "PETROL_PUMP_REPORT";
+    public static String lpg_Report = "LPG_REPORT";
     public static String Selected_Supp_Report = "Selected_Supp_Report";
     public static String essRepComm = "essRepComm";
     public static String dailyRepReq = "dailyRepReq";

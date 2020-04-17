@@ -18,6 +18,13 @@ public class InspectionReportResponse {
     @SerializedName("processing_unit")
     @Expose
     private PUnitInsp processingUnit;
+    @SerializedName("petrol_pump")
+    @Expose
+    private PetrolPumpInspRep petrolPump;
+
+    @SerializedName("lpg")
+    @Expose
+    private LpgInspRep lpg;
 
     public DrGodownInspReport getDrGodown() {
         return drGodown;
@@ -51,4 +58,19 @@ public class InspectionReportResponse {
         this.processingUnit = processingUnit;
     }
 
+    public PetrolPumpInspRep getPetrolPump() {
+        return petrolPump;
+    }
+
+    public void setPetrolPump(PetrolPumpInspRep petrolPump) {
+        this.petrolPump = petrolPump;
+    }
+
+    public LpgInspRep getLpg() {
+        return lpg;
+    }
+
+    public void setLpg(LpgInspRep lpg) {
+        this.lpg = lpg;
+    }
 }

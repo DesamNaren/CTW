@@ -72,6 +72,13 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
             binding.header.headerTitle.setText("Processing Unit");
         }
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+            binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump_title));
+        }
+        if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+            binding.header.headerTitle.setText(getResources().getString(R.string.lpg_title));
+        }
+
         binding.header.ivHome.setVisibility(View.GONE);
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
@@ -101,6 +108,12 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
                     binding.includeBasicLayout.drGodownNameTV.setText("Processing Unit");
                 }
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+                    binding.includeBasicLayout.drGodownNameTV.setText(getResources().getString(R.string.petrol_pump_title));
+                }
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+                    binding.includeBasicLayout.drGodownNameTV.setText(getResources().getString(R.string.lpg_title));
+                }
                 binding.includeBasicLayout.drGodownName.setText(reportData.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(reportData.getInchargeName());
                 binding.includeBasicLayout.dateTv.setText(reportData.getInspectionTime());
@@ -123,6 +136,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
+                    startActivity(intent);
+                }else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
+                    startActivity(intent);
+                }else if (reportData.getInspectionFindings().getPetrolPump() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, PetrolpumpInspRepActivity.class);
+                    startActivity(intent);
+                }else if (reportData.getInspectionFindings().getLpg() != null) {
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, LpgInspRepActivity.class);
                     startActivity(intent);
                 } else {
                     callSnackBar("No Inspection data found");
