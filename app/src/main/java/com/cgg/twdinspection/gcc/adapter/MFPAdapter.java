@@ -61,9 +61,9 @@ public class MFPAdapter extends RecyclerView.Adapter<MFPAdapter.ItemHolder> {
         }else {
             holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
         }
-        holder.stockChildRowBinding.tvSysRate.setText(dataModel.getRate() +" Rs");
+        holder.stockChildRowBinding.tvSysRate.setText("Rs "+dataModel.getRate());
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
-        holder.stockChildRowBinding.tvPhyRate.setText(dataModel.getRate() + " Rs");
+        holder.stockChildRowBinding.tvPhyRate.setText("Rs "+dataModel.getRate());
         if (!TextUtils.isEmpty(dataModel.getPhyQuant()))
             holder.stockChildRowBinding.phyAvaQty.setText(String.valueOf(dataModel.getPhyQuant()));
 

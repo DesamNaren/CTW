@@ -50,9 +50,9 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
             holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getSystemQty()));
         }
 
-        holder.stockChildRowBinding.tvSysRate.setText(dataModel.getSystemRate()+" Rs");
+        holder.stockChildRowBinding.tvSysRate.setText("Rs "+dataModel.getSystemRate());
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getSystemValue()));
-        holder.stockChildRowBinding.tvPhyRate.setText(dataModel.getPhysicalRate()+" Rs");
+        holder.stockChildRowBinding.tvPhyRate.setText("Rs "+dataModel.getPhysicalRate());
         holder.stockChildRowBinding.tvPhyAvailQnty.setText(String.valueOf(dataModel.getPhysiacalQty()));
         holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(dataModel.getPhysicalValue()));
     }

@@ -57,7 +57,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0, difference = 0;
+    double physVal = 0, sysVal = 0, difference = 0, insSysVal=0, notInsSysVal=0;
     private PetrolStockDetailsResponse stockDetailsResponse;
     private String stockReg, purchaseReg, dailysales, godownLiaReg, cashbook, remittance, remittanceCash, insCer, fireNOC, weightMea;
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
@@ -104,6 +104,7 @@ public class LPGFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getCommonCommodities().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate();
                 }
@@ -114,10 +115,15 @@ public class LPGFindingsActivity extends LocBaseActivity {
         physVal = Double.valueOf(String.format("%.2f", physVal));
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
-        difference = sysVal - physVal;
+        difference = insSysVal - physVal;
         difference = Double.valueOf(String.format("%.2f", difference));
         binding.tvDiffVal.setText(String.format("%.2f", difference));
 
+
+        notInsSysVal = sysVal-insSysVal;
+        notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+        binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
+        binding.tvNotInsSysVal.setText(String.format("%.2f", notInsSysVal));
 
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

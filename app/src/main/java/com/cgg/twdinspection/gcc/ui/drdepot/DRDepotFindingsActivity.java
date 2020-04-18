@@ -68,7 +68,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0, difference=0;
+    double physVal = 0, sysVal = 0, difference=0, insSysVal=0, notInsSysVal=0;
     private StockDetailsResponse stockDetailsResponse;
     private String ecsStock, drStock, emptyStock, abstractSales, depotCashBook, liabilityReg, visitorsBook, saleBook, weightsMeasurements, certIssueDate;
     private String depotAuthCert, mfpStock, mfpPurchase, billAbstract, abstractAccnt, advanceAccnt, mfpLiability, depotNameBoard, gccObjPrinc;
@@ -114,6 +114,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
                 }
@@ -122,6 +123,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
                         if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                             physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+                            insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                 }
@@ -130,6 +132,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
@@ -141,7 +144,11 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         physVal = Double.valueOf(String.format("%.2f", physVal));
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
-        difference = sysVal - physVal;
+        notInsSysVal = sysVal-insSysVal;
+        notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+        binding.tvSysValIns.setText(String.format("%.2f", insSysVal));
+        binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
+        difference = insSysVal - physVal;
         difference = Double.valueOf(String.format("%.2f", difference));
         binding.tvDiffVal.setText(String.format("%.2f", difference));
 
