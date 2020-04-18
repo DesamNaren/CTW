@@ -258,7 +258,7 @@ public class Utils {
     }
 
     public static String getCurrentDateTimeDisplay() {
-        return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.getDefault()).format(new Date());
+        return new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.getDefault()).format(new Date());
     }
 
     public static String getCurrentDate() {
