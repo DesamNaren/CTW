@@ -110,10 +110,14 @@ public class LPGFindingsActivity extends LocBaseActivity {
             }
         }
 
+        sysVal = Double.valueOf(String.format("%.2f", sysVal));
+        physVal = Double.valueOf(String.format("%.2f", physVal));
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
-        binding.tvDiffVal.setText(String.format("%.2f", sysVal - physVal));
         difference = sysVal - physVal;
+        difference = Double.valueOf(String.format("%.2f", difference));
+        binding.tvDiffVal.setText(String.format("%.2f", difference));
+
 
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

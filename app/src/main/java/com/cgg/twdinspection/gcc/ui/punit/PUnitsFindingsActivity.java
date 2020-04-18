@@ -195,6 +195,8 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
+                    sysVal = Double.valueOf(String.format("%.2f", sysVal));
+                    physVal = Double.valueOf(String.format("%.2f", physVal));
                     editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
                     editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);

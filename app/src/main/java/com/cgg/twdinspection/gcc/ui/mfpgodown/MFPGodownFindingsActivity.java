@@ -369,6 +369,10 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
+
+                    sysVal = Double.valueOf(String.format("%.2f", sysVal));
+                    physVal = Double.valueOf(String.format("%.2f", physVal));
+
                     editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);

@@ -100,7 +100,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
@@ -108,7 +108,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
@@ -116,7 +116,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
@@ -124,10 +124,14 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             }
         }
 
+        sysVal = Double.valueOf(String.format("%.2f", sysVal));
+        physVal = Double.valueOf(String.format("%.2f", physVal));
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
-        binding.tvDiffVal.setText(String.format("%.2f", sysVal - physVal));
         difference = sysVal - physVal;
+        difference = Double.valueOf(String.format("%.2f", difference));
+        binding.tvDiffVal.setText(String.format("%.2f", difference));
+
 
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -791,7 +795,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(DRGodownFindingsActivity.this)
-                    + "~" + Utils.getVersionName(DRGodownFindingsActivity.this) + "~" + randomNum+ ".png";
+                    + "~" + Utils.getVersionName(DRGodownFindingsActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {

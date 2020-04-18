@@ -68,7 +68,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0;
+    double physVal = 0, sysVal = 0, difference=0;
     private StockDetailsResponse stockDetailsResponse;
     private String ecsStock, drStock, emptyStock, abstractSales, depotCashBook, liabilityReg, visitorsBook, saleBook, weightsMeasurements, certIssueDate;
     private String depotAuthCert, mfpStock, mfpPurchase, billAbstract, abstractAccnt, advanceAccnt, mfpLiability, depotNameBoard, gccObjPrinc;
@@ -137,9 +137,13 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
 
         }
 
+        sysVal = Double.valueOf(String.format("%.2f", sysVal));
+        physVal = Double.valueOf(String.format("%.2f", physVal));
         binding.tvSysVal.setText(String.format("%.2f", sysVal));
         binding.tvPhysVal.setText(String.format("%.2f", physVal));
-        binding.tvDiffVal.setText(String.format("%.2f", sysVal - physVal));
+        difference = sysVal - physVal;
+        difference = Double.valueOf(String.format("%.2f", difference));
+        binding.tvDiffVal.setText(String.format("%.2f", difference));
 
         binding.rgWeightMeasCert.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -495,7 +499,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     StockDetails stockDetails = new StockDetails();
                     stockDetails.setStockValueAsPerSystem(sysVal);
                     stockDetails.setStockValueAsPerPhysical(physVal);
-                    stockDetails.setDifference(sysVal - physVal);
+                    stockDetails.setDifference(difference);
                     stockDetails.setCashBalAsPerCashBook(Double.valueOf(cashBal));
                     stockDetails.setPhysicalCash(Double.valueOf(phyCash));
                     stockDetails.setVouchers(Double.valueOf(vocBills));
