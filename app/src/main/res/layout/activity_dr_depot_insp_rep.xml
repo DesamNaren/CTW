@@ -280,6 +280,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
                             android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
@@ -292,7 +294,8 @@
                                 android:hint="Reason mentioned by incharge regarding deficit / surplus "
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
-                                android:text="@{drDepot.stockDetails.deficit_reason}" />
+                                android:text="@{drDepot.stockDetails.deficit_reason}"
+                                android:textColor="@color/black" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -713,30 +716,47 @@
 
                                 </RadioGroup>
 
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/weight_cert_issue_date"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    android:visibility="@{drDepot.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
-                                    app:errorEnabled="true">
+                                    android:visibility="@{drDepot.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary" />
 
-                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_weight_cert_issue"
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/weight_cert_issue_date"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Cerificate issue date"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@{drDepot.registerBookCertificates.weightMeasureValidity}" />
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
 
-                                </com.google.android.material.textfield.TextInputLayout>
 
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_weight_cert_issue"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="Cerificate issue date"
+                                            android:imeOptions="actionNext"
+                                            android:paddingLeft="@dimen/dimen_30dp"
+                                            android:singleLine="true"
+                                            android:text="@{drDepot.registerBookCertificates.weightMeasureValidity}"
+                                            android:textColor="@color/black" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </RelativeLayout>
 
                             </LinearLayout>
 
@@ -1653,6 +1673,8 @@
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
                                         android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
@@ -1666,7 +1688,8 @@
                                             android:hint="Repairs type"
                                             android:imeOptions="actionNext"
                                             android:singleLine="true"
-                                            android:text="@{drDepot.generalFindings.repairType}" />
+                                            android:text="@{drDepot.generalFindings.repairType}"
+                                            android:textColor="@color/black" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1700,6 +1723,8 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
                                 android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
@@ -1713,7 +1738,8 @@
                                     android:hint="Feedback of Card Holders"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@{drDepot.generalFindings.feedback}" />
+                                    android:text="@{drDepot.generalFindings.feedback}"
+                                    android:textColor="@color/black" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1722,6 +1748,8 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
                                 android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
@@ -1735,7 +1763,8 @@
                                     android:hint="Remarks of Inspection officer"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@{drDepot.generalFindings.remarks}" />
+                                    android:text="@{drDepot.generalFindings.remarks}"
+                                    android:textColor="@color/black" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 

@@ -170,6 +170,8 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                    android:layout_marginTop="@dimen/dimen_5dp"
                                     android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
@@ -181,31 +183,48 @@
                                         android:hint="@string/com_name"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
-                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}" />
+                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}"
+                                        android:textColor="@color/black" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/ins_val_date"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    app:errorEnabled="true">
+                                    android:layout_height="wrap_content">
 
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary" />
 
-                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_ins_date"
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/ins_val_date"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Insurance validity"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@{mfp.registerBookCertificates.insuranceValidity}" />
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
 
-                                </com.google.android.material.textfield.TextInputLayout>
 
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_ins_date"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="Insurance validity"
+                                            android:imeOptions="actionNext"
+                                            android:paddingLeft="@dimen/dimen_30dp"
+                                            android:singleLine="true"
+                                            android:text="@{mfp.registerBookCertificates.insuranceValidity}"
+                                            android:textColor="@color/black" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+                                </RelativeLayout>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -300,27 +319,44 @@
                                 android:orientation="vertical"
                                 android:visibility="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/legal_met_val"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    app:errorEnabled="true">
+                                    android:layout_height="wrap_content">
 
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary" />
 
-                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_legal_met_date"
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/legal_met_val"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Certificate validity"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@{mfp.registerBookCertificates.weightMeasureValidity}" />
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
 
-                                </com.google.android.material.textfield.TextInputLayout>
 
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_legal_met_date"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="Certificate validity"
+                                            android:imeOptions="actionNext"
+                                            android:paddingLeft="@dimen/dimen_30dp"
+                                            android:singleLine="true"
+                                            android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
+                                            android:textColor="@color/black" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+                                </RelativeLayout>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -706,6 +742,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_5dp"
                                 android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
@@ -718,7 +755,8 @@
                                     android:hint="@string/repair_type"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:text="@{mfp.generalFindings.repairType}" />
+                                    android:text="@{mfp.generalFindings.repairType}"
+                                    android:textColor="@color/black" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -752,6 +790,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
                             android:layout_marginTop="@dimen/dimen_5dp"
                             android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
@@ -764,7 +803,8 @@
                                 android:hint="@string/remarks"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
-                                android:text="@{mfp.generalFindings.remarks}" />
+                                android:text="@{mfp.generalFindings.remarks}"
+                                android:textColor="@color/black" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 

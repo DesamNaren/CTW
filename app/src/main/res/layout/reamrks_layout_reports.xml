@@ -18,7 +18,8 @@
             android:editable="false"
             android:hint="@string/remarks"
             android:imeOptions="actionNext"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
