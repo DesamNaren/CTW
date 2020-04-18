@@ -9,6 +9,7 @@
             name="imageUrl"
             type="String" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,10 +27,10 @@
                 layout="@layout/action_bar_layout" />
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:layout_above="@+id/bottom_ll"
                 android:id="@+id/root_coordinator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/bottom_ll"
                 android:layout_below="@+id/header"
                 android:fitsSystemWindows="true">
 
@@ -37,6 +38,7 @@
                     android:id="@+id/app_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/bg"
                     android:fitsSystemWindows="true">
 
                     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -70,74 +72,76 @@
                             </androidx.cardview.widget.CardView>
 
 
-
                         </RelativeLayout>
 
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/ll_shop_close"
-                        android:layout_below="@+id/collapsing_toolbar_layout"
-                        android:layout_marginTop="@dimen/dimen_8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:background="@color/white"
+                        android:layout_below="@+id/collapsing_toolbar_layout"
+                        android:layout_margin="@dimen/dimen_20dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
-                            android:visibility="visible"
                             android:id="@+id/tv_close"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textStyle="bold"
-                            android:layout_marginTop="@dimen/dimen_8dp"
-                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
-                            android:textColor="@color/white"
                             android:layout_height="wrap_content"
-                            android:text="Closed Shop Image"/>
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dimen_8dp"
+                            android:text="Closed Shop Image"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dimen_10dp">
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:layout_marginBottom="@dimen/dimen_10dp">
+
                             <ImageView
                                 android:id="@+id/iv_shop_cam"
-                                android:layout_width="@dimen/_125dp"
-                                android:layout_height="@dimen/_125dp"
+                                android:layout_width="@dimen/_100dp"
+                                android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
-                                android:scaleType="fitXY"
-                                app:profileImage="@{imageUrl}" />
+                                android:scaleType="fitXY" />
+
                             <ProgressBar
                                 android:id="@+id/pbar"
-                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center"/>
+                                android:layout_gravity="center"
+                                android:visibility="gone" />
                         </FrameLayout>
-
 
 
                     </LinearLayout>
 
 
                     <com.google.android.material.tabs.TabLayout
-                        android:visibility="gone"
                         android:id="@+id/tabs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_8dp"
                         android:background="@color/white"
+                        android:visibility="gone"
                         app:layout_collapseMode="pin"
                         app:tabIndicatorColor="@color/colorPrimary"
                         app:tabSelectedTextColor="@color/colorPrimary" />
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <androidx.viewpager.widget.ViewPager
-                    android:visibility="gone"
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>

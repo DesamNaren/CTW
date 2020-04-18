@@ -162,7 +162,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         });
 
 
-
         if (reportData != null && !TextUtils.isEmpty(reportData.getSupplierType()) &&
                 reportData.getSupplierType().equalsIgnoreCase(getString(R.string.dr_depot_req))
                 && !TextUtils.isEmpty(reportData.getShopAvail())
@@ -173,9 +172,9 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
                     if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                            && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.SHOP_CLOSED))
+                            && reportData.getPhotos().get(z).getFileName().contains(AppConstants.SHOP_CLOSED)) {
                         Glide.with(ReportStockDetailsActivity.this)
-                                .load( reportData.getPhotos().get(z).getFilePath())
+                                .load(reportData.getPhotos().get(z).getFilePath())
                                 .error(R.drawable.no_image)
                                 .placeholder(R.drawable.camera)
                                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -192,14 +191,17 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                                     }
                                 })
                                 .into(binding.ivShopCam);
+                        break;
+                    }
 
+                    int pos = z;
                     binding.ivShopCam.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Utils.displayPhotoDialogBox(reportData.getPhotos().get(z).getFilePath(), ReportStockDetailsActivity.this, reportData.getPhotos().get(z).getFileName(), true);
+                            Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                                    ReportStockDetailsActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
                         }
                     });
-                    break;
                 }
             } else {
                 Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();

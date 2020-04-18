@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="mfp"
             type="com.cgg.twdinspection.gcc.reports.source.MfpGodownsInspRep" />
@@ -141,8 +143,8 @@
                                     android:id="@+id/insurance_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -167,19 +169,19 @@
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
-                                    android:textColorHint="@color/colorAccent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_com_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/com_name"
                                         android:focusableInTouchMode="false"
-                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}"
+                                        android:hint="@string/com_name"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -198,9 +200,9 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
                                         android:hint="Insurance validity"
-                                        android:text="@{mfp.registerBookCertificates.insuranceValidity}"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{mfp.registerBookCertificates.insuranceValidity}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -313,9 +315,9 @@
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
                                         android:hint="Certificate validity"
-                                        android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:singleLine="true"
+                                        android:text="@{mfp.registerBookCertificates.weightMeasureValidity}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -386,8 +388,8 @@
                                     android:id="@+id/qual_stock_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -395,8 +397,8 @@
                                     android:id="@+id/qual_stock_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -427,8 +429,8 @@
                                     android:id="@+id/stack_cards_displayed_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -468,8 +470,8 @@
                                     android:id="@+id/godown_hyg_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -509,8 +511,8 @@
                                     android:id="@+id/draige_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -518,8 +520,8 @@
                                     android:id="@+id/draige_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -550,8 +552,8 @@
                                     android:id="@+id/gen_avail_yes_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -559,8 +561,8 @@
                                     android:id="@+id/gen_avail_no_rb"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -591,8 +593,8 @@
                                     android:id="@+id/tray_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -600,8 +602,8 @@
                                     android:id="@+id/tray_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -633,8 +635,8 @@
                                     android:id="@+id/insp_date_div_manager_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -642,8 +644,8 @@
                                     android:id="@+id/insp_date_div_manager_rb_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -674,8 +676,8 @@
                                     android:id="@+id/repairs_req_rb_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -704,8 +706,8 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColorHint="@color/colorAccent"
                                 android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -714,9 +716,9 @@
                                     android:layout_height="wrap_content"
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/repair_type"
-                                    android:text="@{mfp.generalFindings.repairType}"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{mfp.generalFindings.repairType}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -725,22 +727,23 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen_10dp">
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:layout_marginBottom="@dimen/dimen_10dp">
+
                                 <ImageView
                                     android:id="@+id/iv_repairs"
-                                    android:layout_width="@dimen/_125dp"
-                                    android:layout_height="@dimen/_125dp"
+                                    android:layout_width="@dimen/_100dp"
+                                    android:layout_height="@dimen/_100dp"
                                     android:layout_gravity="center"
-                                    android:scaleType="fitXY"
-                                    app:profileImage="@{imageUrl}" />
+                                    android:scaleType="fitXY" />
+
                                 <ProgressBar
                                     android:id="@+id/pbar"
-                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"/>
+                                    android:layout_gravity="center"
+                                    android:visibility="gone" />
                             </FrameLayout>
-
 
 
                         </LinearLayout>
@@ -749,19 +752,19 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorAccent"
                             android:layout_marginTop="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_remarks"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/remarks"
                                 android:focusableInTouchMode="false"
-                                android:text="@{mfp.generalFindings.remarks}"
+                                android:hint="@string/remarks"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@{mfp.generalFindings.remarks}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
