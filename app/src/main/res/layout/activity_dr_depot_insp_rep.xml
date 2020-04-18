@@ -169,9 +169,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:padding="@dimen/dimen_5dp"
-                                android:textStyle="bold"
                                 android:text="@{drDepot.stockDetails.cashBalAsPerCashBook}"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
@@ -193,10 +193,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.physicalCash}"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
@@ -219,10 +219,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.vouchers}"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
@@ -245,10 +245,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
-                                android:textStyle="bold"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.liabilityBalance}"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
@@ -271,9 +271,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:padding="@dimen/dimen_5dp"
-                                android:textStyle="bold"
                                 android:text="@{drDepot.stockDetails.deficit}"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -1622,11 +1622,11 @@
 
 
                                     <RadioButton
-                                        android:clickable="false"
                                         android:id="@+id/repairs_req_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{drDepot.generalFindings.repairsRequired.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
@@ -1652,8 +1652,8 @@
                                         android:id="@+id/repairs_type"
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
-                                        android:textColorHint="@color/colorAccent"
                                         android:layout_height="wrap_content"
+                                        android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
 
@@ -1674,20 +1674,22 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:layout_marginTop="@dimen/dimen_10dp">
+                                        android:layout_marginTop="@dimen/dimen_10dp"
+                                        android:layout_marginBottom="@dimen/dimen_10dp">
+
                                         <ImageView
                                             android:id="@+id/iv_repairs_cam"
-                                            android:layout_width="@dimen/_125dp"
-                                            android:layout_height="@dimen/_125dp"
+                                            android:layout_width="@dimen/_100dp"
+                                            android:layout_height="@dimen/_100dp"
                                             android:layout_gravity="center"
-                                            android:scaleType="fitXY"
-                                            app:profileImage="@{imageUrl}" />
+                                            android:scaleType="fitXY" />
+
                                         <ProgressBar
                                             android:id="@+id/pbar"
-                                            android:visibility="gone"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center"/>
+                                            android:layout_gravity="center"
+                                            android:visibility="gone" />
                                     </FrameLayout>
                                 </LinearLayout>
 
@@ -1719,8 +1721,8 @@
                                 android:id="@+id/remarks"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
-                                android:textColorHint="@color/colorAccent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 

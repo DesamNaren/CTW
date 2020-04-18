@@ -52,12 +52,12 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
-        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0) {
-            for(int z=0;z<reportData.getPhotos().size();z++) {
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
                 if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
+                        && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
                     Glide.with(DrGodownInspRepActivity.this)
-                            .load( reportData.getPhotos().get(z).getFilePath())
+                            .load(reportData.getPhotos().get(z).getFilePath())
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.camera)
                             .listener(new RequestListener<String, GlideDrawable>() {
@@ -74,14 +74,17 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairs);
+                    break;
+                }
 
+                int pos = z;
                 binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(z).getFilePath(), DrGodownInspRepActivity.this, reportData.getPhotos().get(z).getFileName(), true);
+                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                                DrGodownInspRepActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
                     }
                 });
-                break;
             }
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();

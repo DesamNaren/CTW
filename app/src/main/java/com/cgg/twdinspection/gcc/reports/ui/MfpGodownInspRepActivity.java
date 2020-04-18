@@ -1,14 +1,14 @@
 package com.cgg.twdinspection.gcc.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -52,12 +52,12 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
-        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0) {
-            for(int z=0;z<reportData.getPhotos().size();z++) {
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
                 if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                        && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
+                        && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
                     Glide.with(MfpGodownInspRepActivity.this)
-                            .load( reportData.getPhotos().get(z).getFilePath())
+                            .load(reportData.getPhotos().get(z).getFilePath())
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.camera)
                             .listener(new RequestListener<String, GlideDrawable>() {
@@ -74,17 +74,22 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairs);
+                    break;
+                }
+
+                int pos = z;
                 binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(z).getFilePath(), MfpGodownInspRepActivity.this, reportData.getPhotos().get(z).getFileName(), true);
+                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                                MfpGodownInspRepActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
                     }
                 });
-                break;
             }
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
+
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

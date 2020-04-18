@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.google.gson.Gson;
@@ -41,7 +42,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        sharedPreferences= TWDApplication.get(DrDepotInspRepActivity.this).getPreferences();
+        sharedPreferences = TWDApplication.get(DrDepotInspRepActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
@@ -53,12 +54,13 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
 
-        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0) {
-            for(int z=0;z<reportData.getPhotos().size();z++) {
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
                 if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                        && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
+                        && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
                     Glide.with(DrDepotInspRepActivity.this)
-                            .load( reportData.getPhotos().get(z).getFilePath())
+                            .load(reportData.getPhotos().get(z).getFilePath())
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.camera)
                             .listener(new RequestListener<String, GlideDrawable>() {
@@ -75,7 +77,17 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairsCam);
-                break;
+                    break;
+                }
+
+                int pos = z;
+                binding.ivRepairsCam.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                                DrDepotInspRepActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
+                    }
+                });
             }
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
@@ -84,7 +96,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrDepotInspRepActivity.this,ViewPhotosActivity.class));
+                startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class));
             }
         });
     }

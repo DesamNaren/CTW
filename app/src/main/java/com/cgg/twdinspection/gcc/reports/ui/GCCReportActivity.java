@@ -206,46 +206,6 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     }
 
 
-   /* public void showSchemeDetails(List<SchemeEntity> schemesInfoEntitiesMain) {
-        View view = getLayoutInflater().inflate(R.layout.scheme_bottom_sheet, null);
-        RecyclerView filterRecyclerView = view.findViewById(R.id.schemeRV);
-        dialog = new BottomSheetDialog(SchemesReportActivity.this);
-        LinearLayout scheme_entries = view.findViewById(R.id.scheme_entries);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(scheme_entries);
-        bottomSheetBehavior.setPeekHeight(1500);
-        dialog.setContentView(view);
-        dialog.show();
-
-    }*/
-
-//    @Override
-//    public void onItemClick(String schemeID) {
-//
-//        if (reportData.size() > 0) {
-//            if (schemeID.equals("-1")) {
-//                tempBeneficiaryDetails.addAll(beneficiaryDetailsMain);
-//            } else {
-//                for (BeneficiaryDetail beneficiaryDetail : beneficiaryDetailsMain) {
-//                    if (schemeID.equals(beneficiaryDetail.getSchemeId())) {
-//                        tempBeneficiaryDetails.add(beneficiaryDetail);
-//                    }
-//                }
-//            }
-//
-//            if (tempBeneficiaryDetails.size() > 0) {
-//                beneficiaryReportBinding.tvEmpty.setVisibility(View.GONE);
-//                beneficiaryReportBinding.recyclerView.setVisibility(View.VISIBLE);
-//                adapter.setData(tempBeneficiaryDetails);
-//            } else {
-//                beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-//                beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
-//            }
-//        } else {
-//            beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
-//            beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
-//        }
-//    }
-
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(gccReportBinding.root, msg, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));

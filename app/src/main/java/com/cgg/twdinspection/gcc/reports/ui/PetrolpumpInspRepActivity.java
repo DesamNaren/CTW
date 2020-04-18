@@ -20,7 +20,6 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
 import com.google.gson.Gson;
 
 public class PetrolpumpInspRepActivity extends AppCompatActivity {
@@ -53,18 +52,18 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
-        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size()>0) {
-            for(int z=0;z<reportData.getPhotos().size();z++) {
+        if (reportData != null && reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
                 if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                        && reportData.getPhotos().get(z).getFileName().equalsIgnoreCase(AppConstants.REPAIR))
+                        && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
                     Glide.with(PetrolpumpInspRepActivity.this)
-                            .load( reportData.getPhotos().get(z).getFilePath())
+                            .load(reportData.getPhotos().get(z).getFilePath())
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.camera)
                             .listener(new RequestListener<String, GlideDrawable>() {
                                 @Override
                                 public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                                   binding.pbar.setVisibility(View.GONE);
+                                    binding.pbar.setVisibility(View.GONE);
                                     return false;
                                 }
 
@@ -75,13 +74,16 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairs);
+                    break;
+                }
+                int pos = z;
                 binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(z).getFilePath(), PetrolpumpInspRepActivity.this, reportData.getPhotos().get(z).getFileName(), true);
+                        Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                                PetrolpumpInspRepActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
                     }
                 });
-                break;
             }
         } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
