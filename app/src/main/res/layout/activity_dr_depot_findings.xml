@@ -138,6 +138,9 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -155,6 +158,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -172,6 +177,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -189,6 +196,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -228,6 +237,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -620,31 +631,45 @@
 
                                 </RadioGroup>
 
-
-                                <com.google.android.material.textfield.TextInputLayout
+                                <RelativeLayout
                                     android:id="@+id/weight_cert_issue_date"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColorHint="@color/colorAccent"
-                                    android:visibility="gone"
-                                    app:errorEnabled="true">
+                                    android:visibility="gone">
 
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:background="@android:drawable/ic_menu_my_calendar"
+                                        android:backgroundTint="@color/colorPrimary" />
 
-                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_weight_cert_issue"
+                                    <com.google.android.material.textfield.TextInputLayout
+
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:focusableInTouchMode="false"
-                                        android:hint="Cerificate issue date"
-                                        android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@string/select_date"
-                                        android:background="@android:drawable/ic_menu_my_calendar"
-                                        android:backgroundTint="@color/colorPrimary"/>
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
 
-                                </com.google.android.material.textfield.TextInputLayout>
 
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_weight_cert_issue"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="Cerificate issue date"
+                                            android:imeOptions="actionNext"
+                                            android:paddingLeft="@dimen/dimen_30dp"
+                                            android:singleLine="true" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </RelativeLayout>
 
                             </LinearLayout>
 
@@ -1485,6 +1510,9 @@
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
 
@@ -1516,6 +1544,9 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1534,6 +1565,9 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 

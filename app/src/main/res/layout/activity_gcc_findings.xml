@@ -152,6 +152,8 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -407,6 +409,8 @@
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -419,30 +423,43 @@
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_10dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:layout_height="wrap_content">
 
-
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_ins_date"
-                                            android:layout_width="match_parent"
+                                        <ImageView
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Insurance Validity"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@string/select_date"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
                                             android:background="@android:drawable/ic_menu_my_calendar"
                                             android:backgroundTint="@color/colorPrimary" />
 
-                                    </com.google.android.material.textfield.TextInputLayout>
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_ins_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Insurance Validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
+
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -528,30 +545,42 @@
                                     android:orientation="vertical"
                                     android:visibility="gone">
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_10dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:layout_height="wrap_content">
 
-
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_legal_met_date"
-                                            android:layout_width="match_parent"
+                                        <ImageView
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Certificate Validity"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@string/select_date"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
                                             android:background="@android:drawable/ic_menu_my_calendar"
                                             android:backgroundTint="@color/colorPrimary" />
 
-                                    </com.google.android.material.textfield.TextInputLayout>
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_legal_met_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Certificate Validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
 
                                 </LinearLayout>
 
@@ -900,30 +929,42 @@
                                     android:orientation="vertical"
                                     android:visibility="gone">
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_10dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:layout_height="wrap_content">
 
-
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/last_ins_soc_date"
-                                            android:layout_width="match_parent"
+                                        <ImageView
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Last Inspection Date"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@string/select_date"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
                                             android:background="@android:drawable/ic_menu_my_calendar"
                                             android:backgroundTint="@color/colorPrimary" />
 
-                                    </com.google.android.material.textfield.TextInputLayout>
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/last_ins_soc_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Last Inspection Date"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
 
                                 </LinearLayout>
 
@@ -971,30 +1012,43 @@
                                     android:orientation="vertical"
                                     android:visibility="gone">
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_10dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:layout_height="wrap_content">
 
-
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/last_ins_div_date"
-                                            android:layout_width="match_parent"
+                                        <ImageView
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Last Inspection Date"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@string/select_date"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
                                             android:background="@android:drawable/ic_menu_my_calendar"
                                             android:backgroundTint="@color/colorPrimary" />
 
-                                    </com.google.android.material.textfield.TextInputLayout>
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/last_ins_div_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Last Inspection Date"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </RelativeLayout>
+
 
                                 </LinearLayout>
 
@@ -1047,7 +1101,9 @@
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
                                         android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
                                         <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -1078,7 +1134,9 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_marginTop="@dimen/dimen_5dp"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
