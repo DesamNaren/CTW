@@ -245,7 +245,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
                 bm = BitmapFactory.decodeFile(FilePath, options);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bm.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-               
+
                 if (PIC_TYPE.equals(AppConstants.ELEVATION)) {
                     flag_elevation = 1;
                     binding.ivElevation.setPadding(0, 0, 0, 0);

@@ -4,16 +4,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -31,6 +35,8 @@ import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsCustomViewM
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -383,62 +389,105 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     submitEngWorksRequest.setDesignation(officerDesg);
                     submitEngWorksRequest.setPlaceOfWork(place);
                     submitEngWorksRequest.setInspectionTime(inspTime);
-                    submitEngWorksRequest.setLatitude(String.valueOf(mCurrentLocation.getLatitude()));
-                    submitEngWorksRequest.setLongitude(String.valueOf(mCurrentLocation.getLongitude()));
-                    submitEngWorksRequest.setAreaOfOperation(workDetail.getAreaOfOperation());
-                    submitEngWorksRequest.setDistName(workDetail.getDistName());
-                    submitEngWorksRequest.setDistId(workDetail.getDistId());
-                    submitEngWorksRequest.setMandName(workDetail.getMandName());
-                    submitEngWorksRequest.setMandId(workDetail.getMandId());
-                    submitEngWorksRequest.setGpName(workDetail.getGpName());
-                    submitEngWorksRequest.setGpId(workDetail.getGpId());
-                    submitEngWorksRequest.setVillName(workDetail.getVillName());
-                    submitEngWorksRequest.setVillId(workDetail.getVillId());
-                    submitEngWorksRequest.setAssemblyConstName(workDetail.getAssemblyConstName());
-                    submitEngWorksRequest.setAssemblyContId(workDetail.getAssemblyContId());
-                    submitEngWorksRequest.setSectorId(selSectorId.toString());
-                    submitEngWorksRequest.setWorkName(workDetail.getWorkName());
-                    submitEngWorksRequest.setWorkId(workDetail.getWorkId().toString());
-                    submitEngWorksRequest.setEstimateCost(workDetail.getEstimateCost());
-                    submitEngWorksRequest.setSchemeId(selSchemeId.toString());
-                    submitEngWorksRequest.setExectingAgency(workDetail.getExectingAgency());
-                    submitEngWorksRequest.setSanctionDate(workDetail.getSanctionDate());
-                    submitEngWorksRequest.setTechSanctionDate(workDetail.getTechSanctionDate());
-                    submitEngWorksRequest.setCommenceDate(workDetail.getCommenceDate());
-                    submitEngWorksRequest.setTargetDate(workDetail.getTargetDate());
-                    submitEngWorksRequest.setExtensionTime(workDetail.getExtensionTime());
-                    submitEngWorksRequest.setStaffDeptName(workDetail.getStaffDept());
-                    submitEngWorksRequest.setStaffMandalName(workDetail.getStaffMandalName());
-                    submitEngWorksRequest.setStaffMandalId(workDetail.getStaffMandalId());
-                    submitEngWorksRequest.setStaffEe(workDetail.getStaffEe());
-                    submitEngWorksRequest.setStaffDyee(workDetail.getStaffDyee());
-                    submitEngWorksRequest.setStaffAee(workDetail.getStaffAee());
-                    submitEngWorksRequest.setStageOfWork(selStageName);
-                    submitEngWorksRequest.setWorkInProgId(selWorkProgStageId.toString());
-                    submitEngWorksRequest.setWorkInProgName(selWorkInProgStageName);
-                    submitEngWorksRequest.setPhysProgressRating(physProgRating.toString());
-                    submitEngWorksRequest.setActExpIncurred(workDetail.getActualExpenditureIncurred());
-                    submitEngWorksRequest.setFinProgressAchieved(workDetail.getPercentageOfFinancialProgressAchieved());
-                    submitEngWorksRequest.setOverallExp(overallAppearance);
-                    submitEngWorksRequest.setWorkmenSkill(worksmenSkill);
-                    submitEngWorksRequest.setQualCare(qualCare);
-                    submitEngWorksRequest.setQualMat(qualMat);
-                    submitEngWorksRequest.setSurfaceFinish(surfaceFinishing);
-                    submitEngWorksRequest.setObservation(observation);
-                    submitEngWorksRequest.setSatisfactionLevel(satLevel);
-                    submitEngWorksRequest.setVersionNo(Utils.getVersionName(InspectionDetailsActivity.this));
-                    submitEngWorksRequest.setDeviceId(Utils.getDeviceID(InspectionDetailsActivity.this));
-                    submitEngWorksRequest.setSchemeName(selSchemeName);
-                    submitEngWorksRequest.setSectorName(selSectorName);
-                    submitEngWorksRequest.setSectorOtherValue(sectorOthers);
-                    String request = gson.toJson(submitEngWorksRequest);
-                    editor.putString(AppConstants.EngSubmitRequest, request);
-                    editor.commit();
-                    startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
+                    if (mCurrentLocation != null && mCurrentLocation.getLatitude() > 0 && mCurrentLocation.getLongitude() > 0) {
+                        submitEngWorksRequest.setLatitude(String.valueOf(mCurrentLocation.getLatitude()));
+                        submitEngWorksRequest.setLongitude(String.valueOf(mCurrentLocation.getLongitude()));
+                    }
+                    if (workDetail != null) {
+                        submitEngWorksRequest.setAreaOfOperation(workDetail.getAreaOfOperation());
+                        submitEngWorksRequest.setDistName(workDetail.getDistName());
+                        submitEngWorksRequest.setDistId(workDetail.getDistId());
+                        submitEngWorksRequest.setMandName(workDetail.getMandName());
+                        submitEngWorksRequest.setMandId(workDetail.getMandId());
+                        submitEngWorksRequest.setGpName(workDetail.getGpName());
+                        submitEngWorksRequest.setGpId(workDetail.getGpId());
+                        submitEngWorksRequest.setVillName(workDetail.getVillName());
+                        submitEngWorksRequest.setVillId(workDetail.getVillId());
+                        submitEngWorksRequest.setAssemblyConstName(workDetail.getAssemblyConstName());
+                        submitEngWorksRequest.setAssemblyContId(workDetail.getAssemblyContId());
+                        submitEngWorksRequest.setSectorId(selSectorId.toString());
+                        submitEngWorksRequest.setWorkName(workDetail.getWorkName());
+                        submitEngWorksRequest.setWorkId(workDetail.getWorkId().toString());
+                        submitEngWorksRequest.setEstimateCost(workDetail.getEstimateCost());
+                        submitEngWorksRequest.setSchemeId(selSchemeId.toString());
+                        submitEngWorksRequest.setExectingAgency(workDetail.getExectingAgency());
+                        submitEngWorksRequest.setSanctionDate(workDetail.getSanctionDate());
+                        submitEngWorksRequest.setTechSanctionDate(workDetail.getTechSanctionDate());
+                        submitEngWorksRequest.setCommenceDate(workDetail.getCommenceDate());
+                        submitEngWorksRequest.setTargetDate(workDetail.getTargetDate());
+                        submitEngWorksRequest.setExtensionTime(workDetail.getExtensionTime());
+                        submitEngWorksRequest.setStaffDeptName(workDetail.getStaffDept());
+                        submitEngWorksRequest.setStaffMandalName(workDetail.getStaffMandalName());
+                        submitEngWorksRequest.setStaffMandalId(workDetail.getStaffMandalId());
+                        submitEngWorksRequest.setStaffEe(workDetail.getStaffEe());
+                        submitEngWorksRequest.setStaffDyee(workDetail.getStaffDyee());
+                        submitEngWorksRequest.setStaffAee(workDetail.getStaffAee());
+                        submitEngWorksRequest.setStageOfWork(selStageName);
+                        submitEngWorksRequest.setWorkInProgId(selWorkProgStageId.toString());
+                        submitEngWorksRequest.setWorkInProgName(selWorkInProgStageName);
+                        submitEngWorksRequest.setPhysProgressRating(physProgRating.toString());
+                        submitEngWorksRequest.setActExpIncurred(workDetail.getActualExpenditureIncurred());
+                        submitEngWorksRequest.setFinProgressAchieved(workDetail.getPercentageOfFinancialProgressAchieved());
+                        submitEngWorksRequest.setOverallExp(overallAppearance);
+                        submitEngWorksRequest.setWorkmenSkill(worksmenSkill);
+                        submitEngWorksRequest.setQualCare(qualCare);
+                        submitEngWorksRequest.setQualMat(qualMat);
+                        submitEngWorksRequest.setSurfaceFinish(surfaceFinishing);
+                        submitEngWorksRequest.setObservation(observation);
+                        submitEngWorksRequest.setSatisfactionLevel(satLevel);
+                        submitEngWorksRequest.setVersionNo(Utils.getVersionName(InspectionDetailsActivity.this));
+                        submitEngWorksRequest.setDeviceId(Utils.getDeviceID(InspectionDetailsActivity.this));
+                        submitEngWorksRequest.setSchemeName(selSchemeName);
+                        submitEngWorksRequest.setSectorName(selSectorName);
+                        submitEngWorksRequest.setSectorOtherValue(sectorOthers);
+                        String request = gson.toJson(submitEngWorksRequest);
+                        editor.putString(AppConstants.EngSubmitRequest, request);
+                        editor.commit();
+                        startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
+                    }else{
+                        Toast.makeText(InspectionDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mGpsSwitchStateReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                mCurrentLocation = locationResult.getLastLocation();
+            }
+        };
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mGpsSwitchStateReceiver);
+    }
+
+
+    private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (intent.getAction().matches("android.location.PROVIDERS_CHANGED")) {
+                    // Make an action or refresh an already managed state.
+                    callPermissions();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
 
     private boolean validate() {
         if (selSectorId == -1) {
