@@ -503,7 +503,7 @@
     <string name="enter_adm_date">Please enter admitted date</string>
     <string name="title_infra">Infrastructure &amp; Maintenance</string>
     <string name="rec_su">Records submitted</string>
-    <string name="are_go_back">You have not submitted all records, Do you want to go back?</string>
+    <string name="are_go_back">You have not submitted any record, Do you want to go back?</string>
     <string name="edit">Edit</string>
     <string name="go_home">Are you sure you want to go home?</string>
     <string name="go_back">Are you sure you want to go back?</string>
@@ -614,6 +614,7 @@
     <string name="select_division">Select Division</string>
     <string name="select_society">Select Society</string>
     <string name="comm_name">Commodity Name</string>
+    <string name="comm_code">Commodity Code</string>
     <string name="units_of">Units of Measure</string>
     <string name="qty_sys">System Quantity</string>
     <string name="physical_available_quantity">Physical available quantity</string>
@@ -831,6 +832,7 @@
     <string name="leave_balance">Leave Balance</string>
     <string name="teacher_s_last_year_academic_panel_grade">Teacher\'s last year academic panel grade</string>
     <string name="not_submitted_records">You have not submitted any records, Still do you want to submit data?</string>
+    <string name="one_record">You have not submitted any records, Minimum of one record need to be submitted</string>
     <string name="on_roll_count_validation">Count cannot exceed the class on-roll count</string>
     <string name="claer_errors">Clear the errors to submit records</string>
     <string name="capture">Capture</string>
@@ -870,6 +872,7 @@
     <string name="app_ver">App version from client end is null</string>
     <string name="update_msg">You have an update. Please update the latest version!</string>
     <string name="plz_check_int">No network connectivity found, Please check your internet connection</string>
+    <string name="stock_exceed">Physical available quantity should not exceed system quantity</string>
     <string name="dist_mas_sync">District master synced successfully</string>
     <string name="ins_mas_syn">Institute master synced successfully</string>
     <string name="no_ins_rem">No inspection remarks found</string>

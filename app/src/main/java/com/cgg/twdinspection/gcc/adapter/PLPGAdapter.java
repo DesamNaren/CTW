@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.BR;
 import com.cgg.twdinspection.R;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.StockChildRowBinding;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -48,6 +49,7 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
     public void onBindViewHolder(@NonNull final PLPGAdapter.ItemHolder holder, final int i) {
 
         final CommonCommodity dataModel = commonCommodities.get(i);
+        holder.stockChildRowBinding.tvComCode.setText(dataModel.getCommCode());
         holder.stockChildRowBinding.tvComName.setText(dataModel.getCommName());
         if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
             holder.stockChildRowBinding.sysQty.setText(dataModel.getQty() + " " + dataModel.getUnits());
@@ -59,9 +61,9 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
         }else {
             holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
         }
-        holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getRate()));
+        holder.stockChildRowBinding.tvSysRate.setText(dataModel.getRate() +" Rs");
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
-        holder.stockChildRowBinding.tvPhyRate.setText(String.valueOf(dataModel.getRate()));
+        holder.stockChildRowBinding.tvPhyRate.setText(dataModel.getRate() +" Rs");
         if (!TextUtils.isEmpty(dataModel.getPhyQuant()))
             holder.stockChildRowBinding.phyAvaQty.setText(String.valueOf(dataModel.getPhyQuant()));
 
@@ -81,8 +83,15 @@ public class PLPGAdapter extends RecyclerView.Adapter<PLPGAdapter.ItemHolder> {
 
                         String str = textViewTextChangeEvent.text().toString();
                         if (!TextUtils.isEmpty(str) && !str.equals(".")) {
-                            holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(Double.valueOf(str) * dataModel.getRate()));
-                            dataModel.setPhyQuant(String.valueOf(Double.valueOf(str)));
+                            if(Double.valueOf(str)<=dataModel.getQty()) {
+                                holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(Double.valueOf(str) * dataModel.getRate()));
+                                dataModel.setPhyQuant(String.valueOf(Double.valueOf(str)));
+                            }else {
+                                holder.stockChildRowBinding.phyAvaQty.setText("");
+                                holder.stockChildRowBinding.tvPhyVal.setText("");
+                                dataModel.setPhyQuant(null);
+                                Utils.customErrorAlert(context, context.getResources().getString(R.string.app_name), context.getResources().getString(R.string.stock_exceed));
+                            }
                         }else{
                             holder.stockChildRowBinding.tvPhyVal.setText("");
                             dataModel.setPhyQuant(null);

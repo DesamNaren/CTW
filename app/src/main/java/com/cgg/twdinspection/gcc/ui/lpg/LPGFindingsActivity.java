@@ -102,7 +102,9 @@ public class LPGFindingsActivity extends LocBaseActivity {
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getCommonCommodities().size(); i++) {
-                    physVal += Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant());
+                    if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant());
+                    }
                     sysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate();
                 }
             }

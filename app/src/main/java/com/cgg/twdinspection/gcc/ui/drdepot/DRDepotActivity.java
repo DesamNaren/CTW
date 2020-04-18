@@ -156,73 +156,81 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             @Override
             public void onClick(View v) {
                 if (shopAvail.equals(AppConstants.open)) {
+                    boolean existFlag = false;
 
                     if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
                         stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
                         for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
-                            if (TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-                                String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
-                                setFragPos(header, z);
-                                return;
+                            if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
+                                existFlag = true;
+//                                String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
+//                                setFragPos(header, z);
+                                break;
                             }
                         }
                     }
-                    if (DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
+                    if (!existFlag && DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
                         stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
                         for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
-                            if (TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
-                                String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
-                                setFragPos(header, z);
-                                return;
+                            if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
+                                existFlag = true;
+//                                String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
+//                                setFragPos(header, z);
+                                break;
                             }
                         }
                     }
 
-                    if (EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                    if (!existFlag &&EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
                         stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
                         for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
-                            if (TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                                String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
-                                setFragPos(header, z);
-                                return;
+                            if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+                                existFlag =true;
+//                                String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
+//                                setFragPos(header, z);
+                                break;
                             }
                         }
                     }
 
 
-                    if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                        stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-                        for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-                            if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                                String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-                                setFragPos(header, z);
-                                return;
-                            }
-                        }
-                    }
+//                    if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
+//                        stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+//                        for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
+//                            if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
+//                                String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
+//                                setFragPos(header, z);
+//                                return;
+//                            }
+//                        }
+//                    }
+//
+//                    if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
+//                        stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+//                        for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
+//                            if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
+//                                String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
+//                                setFragPos(header, z);
+//                                return;
+//                            }
+//                        }
+//                    }
 
-                    if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                        stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-                        for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-                            if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-                                String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-                                setFragPos(header, z);
-                                return;
-                            }
+                    if(existFlag) {
+                        Gson gson = new Gson();
+                        String stockData = gson.toJson(stockDetailsResponsemain);
+                        try {
+                            editor = TWDApplication.get(DRDepotActivity.this).getPreferences().edit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+                        editor.putString(AppConstants.stockData, stockData);
+                        editor.commit();
+                        Intent intent = new Intent(DRDepotActivity.this, DRDepotFindingsActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Utils.customErrorAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                     }
-
-                    Gson gson = new Gson();
-                    String stockData = gson.toJson(stockDetailsResponsemain);
-                    try {
-                        editor = TWDApplication.get(DRDepotActivity.this).getPreferences().edit();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    editor.putString(AppConstants.stockData, stockData);
-                    editor.commit();
-                    Intent intent = new Intent(DRDepotActivity.this, DRDepotFindingsActivity.class);
-                    startActivity(intent);
                 } else {
                     if (shopFlag == 0) {
                         showSnackBar("Please capture shop image");

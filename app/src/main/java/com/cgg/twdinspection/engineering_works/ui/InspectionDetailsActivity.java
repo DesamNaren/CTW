@@ -1,15 +1,10 @@
 package com.cgg.twdinspection.engineering_works.ui;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,15 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityInspDetailsBinding;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
-import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
-import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
@@ -48,18 +45,19 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
     ActivityInspDetailsBinding binding;
     ArrayAdapter spinnerAdapter;
-    String inspTime, officerName, officerDesg, place,officerId,sectorOthers;
+    String inspTime, officerName, officerDesg, place, officerId, sectorOthers;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     InspDetailsViewModel viewModel;
     int sectorsCnt, schemesCnt;
     List<SectorsEntity> sectorsEntities = new ArrayList<>();
-    Integer selSectorId = -1, selSchemeId = -1, selWorkProgStageId = -1,physProgRating=-1;
+    Integer selSectorId = -1, selSchemeId = -1, selWorkProgStageId = -1, physProgRating = -1;
     String selSectorName, selSchemeName, selStageName, selWorkInProgStageName;
     private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
     StagesResponse stagesResponse;
-    ArrayList<String> majorStages,tempMajorStages;
-    ArrayAdapter majorStagesAdapter,selectAdapter;
+    ArrayList<String> majorStages, tempMajorStages;
+    ArrayAdapter majorStagesAdapter, selectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +79,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
-            editor=sharedPreferences.edit();
+            editor = sharedPreferences.edit();
             officerName = sharedPreferences.getString(AppConstants.OFFICER_NAME, "");
             officerDesg = sharedPreferences.getString(AppConstants.OFFICER_DES, "");
             inspTime = sharedPreferences.getString(AppConstants.INSP_TIME, "");
@@ -90,17 +88,16 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, selectList);
-
 
 
         Gson gson = new Gson();
         WorkDetail workDetail = gson.fromJson(sharedPreferences.getString(AppConstants.ENGWORKSMASTER, ""), WorkDetail.class);
         if (workDetail != null) {
             binding.setWorkDetails(workDetail);
-            editor.putString(AppConstants.ENG_WORK_ID,workDetail.getWorkId().toString());
+            editor.putString(AppConstants.ENG_WORK_ID, workDetail.getWorkId().toString());
             editor.commit();
         }
         viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
@@ -116,7 +113,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, sectorsList);
                     binding.spSector.setAdapter(spinnerAdapter);
                 } else {
-                   callSnackBar("No data found");
+                    callSnackBar("No data found");
                 }
             }
         });
@@ -138,14 +135,14 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             }
         });
 
-        majorStages=new ArrayList<>();
+        majorStages = new ArrayList<>();
         majorStages.add("Not Started");
         majorStages.add("Tender stage");
         majorStages.add("Grounded");
         majorStages.add("In progress");
         majorStages.add("Work Stopped");
         majorStages.add("Completed");
-        tempMajorStages=new ArrayList<>();
+        tempMajorStages = new ArrayList<>();
         tempMajorStages.add("Select");
         tempMajorStages.addAll(majorStages);
         majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
@@ -154,20 +151,20 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.spStage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                int selPos=0;
+                int selPos = 0;
                 if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
                     selStageName = "";
                 } else {
                     selStageName = binding.spStage.getSelectedItem().toString();
                     tempMajorStages.clear();
-                    for(int z=0;z<majorStages.size();z++){
-                        if(majorStages.get(z).equalsIgnoreCase(selStageName)){
-                            selPos=z;
+                    for (int z = 0; z < majorStages.size(); z++) {
+                        if (majorStages.get(z).equalsIgnoreCase(selStageName)) {
+                            selPos = z;
                             break;
                         }
                     }
-                    for(int z=0;z<majorStages.size();z++){
-                        if(z>=selPos){
+                    for (int z = 0; z < majorStages.size(); z++) {
+                        if (z >= selPos) {
                             tempMajorStages.add(majorStages.get(z));
                         }
                     }
@@ -287,11 +284,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.spStageInProgress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (binding.spStageInProgress.getSelectedItem()!=null && binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                if (binding.spStageInProgress.getSelectedItem() != null && binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase("Select")) {
                     selWorkProgStageId = -1;
                     physProgRating = -1;
                     selWorkInProgStageName = "";
-                } else if(binding.spStageInProgress.getSelectedItem()!=null){
+                } else if (binding.spStageInProgress.getSelectedItem() != null) {
                     selWorkInProgStageName = binding.spStageInProgress.getSelectedItem().toString();
                     if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
                         for (int z = 0; z < stagesResponse.getStages().size(); z++) {
@@ -378,9 +375,9 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
                 observation = binding.etObs.getText().toString().trim();
                 sectorOthers = binding.etSectorOthers.getText().toString().trim();
-                if(binding.llStageWork.getVisibility()==View.GONE){
-                    selWorkProgStageId=-1;
-                    selWorkInProgStageName=binding.etStageOthers.getText().toString().trim();
+                if (binding.llStageWork.getVisibility() == View.GONE) {
+                    selWorkProgStageId = -1;
+                    selWorkInProgStageName = binding.etStageOthers.getText().toString().trim();
                 }
                 if (validate()) {
                     SubmitEngWorksRequest submitEngWorksRequest = new SubmitEngWorksRequest();
@@ -444,7 +441,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                         editor.putString(AppConstants.EngSubmitRequest, request);
                         editor.commit();
                         startActivity(new Intent(InspectionDetailsActivity.this, UploadEngPhotosActivity.class));
-                    }else{
+                    } else {
                         Toast.makeText(InspectionDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -493,19 +490,19 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         if (selSectorId == -1) {
             callSnackBar("Please select sector");
             return false;
-        } else if (binding.tvSectorOthers.getVisibility()==View.VISIBLE && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
+        } else if (binding.tvSectorOthers.getVisibility() == View.VISIBLE && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
             callSnackBar("Please specify sector name");
             return false;
-        }else if (selSchemeId == -1) {
+        } else if (selSchemeId == -1) {
             callSnackBar("Please select scheme");
             return false;
         } else if (TextUtils.isEmpty(selStageName)) {
             callSnackBar("Please select stage of work");
             return false;
-        } else if (binding.llStageWork.getVisibility()==View.VISIBLE && selWorkProgStageId == -1) {
+        } else if (binding.llStageWork.getVisibility() == View.VISIBLE && selWorkProgStageId == -1) {
             callSnackBar("Please select stage of works for in progress works");
             return false;
-        } else if (binding.llStageWork.getVisibility()==View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
+        } else if (binding.llStageWork.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
             callSnackBar("Please enter stage of works for in progress works");
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {

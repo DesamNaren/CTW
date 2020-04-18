@@ -93,27 +93,33 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean existFlag=false;
                 if (PLPGFragment.commonCommodities != null && PLPGFragment.commonCommodities.size() > 0) {
                     petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
                     for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
-                        if (TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
-                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
-                            setFragPos(header, z);
-                            return;
+                        if (!TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
+                            existFlag=true;
+//                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
+//                            setFragPos(header, z);
+                            break;
                         }
                     }
                 }
-                Gson gson = new Gson();
-                String stockData = gson.toJson(petrolStockDetailsResponseMain);
-                try {
-                    editor = TWDApplication.get(PetrolPumpActivity.this).getPreferences().edit();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(existFlag) {
+                    Gson gson = new Gson();
+                    String stockData = gson.toJson(petrolStockDetailsResponseMain);
+                    try {
+                        editor = TWDApplication.get(PetrolPumpActivity.this).getPreferences().edit();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    editor.putString(AppConstants.stockData, stockData);
+                    editor.commit();
+                    Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
+                    startActivity(intent);
+                }else {
+                    Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
-                editor.putString(AppConstants.stockData, stockData);
-                editor.commit();
-                Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
-                startActivity(intent);
             }
 
         });

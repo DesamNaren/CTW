@@ -42,6 +42,7 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
     public void onBindViewHolder(@NonNull final CommCommodityAdapter.ItemHolder holder, final int i) {
 
         final ReportSubmitReqCommodities dataModel = commonCommodities.get(i);
+        holder.stockChildRowBinding.tvComCode.setText(dataModel.getComCode());
         holder.stockChildRowBinding.tvComName.setText(dataModel.getComType());
         if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
             holder.stockChildRowBinding.sysQty.setText(dataModel.getSystemQty() + " " + dataModel.getUnits());
@@ -49,9 +50,9 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
             holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getSystemQty()));
         }
 
-        holder.stockChildRowBinding.tvSysRate.setText(String.valueOf(dataModel.getSystemRate()));
+        holder.stockChildRowBinding.tvSysRate.setText(dataModel.getSystemRate()+" Rs");
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getSystemValue()));
-        holder.stockChildRowBinding.tvPhyRate.setText(String.valueOf(dataModel.getPhysicalRate()));
+        holder.stockChildRowBinding.tvPhyRate.setText(dataModel.getPhysicalRate()+" Rs");
         holder.stockChildRowBinding.tvPhyAvailQnty.setText(String.valueOf(dataModel.getPhysiacalQty()));
         holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(dataModel.getPhysicalValue()));
     }
