@@ -937,7 +937,7 @@
                                 android:clickable="false"
                                 android:id="@+id/rb_workmen_skill_sat"
                                 android:layout_width="wrap_content"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Satisfactory`)}"
+                                android:checked="@{workDetails.workmenSkill.equalsIgnoreCase(`Satisfactory`)}"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/satisfactory" />
@@ -948,7 +948,7 @@
                                 android:id="@+id/rb_workmen_skill_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Poor`)}"
+                                android:checked="@{workDetails.workmenSkill.equalsIgnoreCase(`Poor`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/poor" />
 
@@ -982,7 +982,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Satisfactory`)}"
+                                android:checked="@{workDetails.qualCare.equalsIgnoreCase(`Satisfactory`)}"
                                 android:text="@string/satisfactory" />
 
                             <RadioButton
@@ -991,7 +991,7 @@
                                 android:id="@+id/rb_qual_care_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Poor`)}"
+                                android:checked="@{workDetails.qualCare.equalsIgnoreCase(`Poor`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/poor" />
 
@@ -1026,7 +1026,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Satisfactory`)}"
+                                android:checked="@{workDetails.qualMat.equalsIgnoreCase(`Satisfactory`)}"
                                 android:text="@string/satisfactory" />
 
                             <RadioButton
@@ -1035,7 +1035,7 @@
                                 android:id="@+id/rb_qual_materials_poor"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Poor`)}"
+                                android:checked="@{workDetails.qualMat.equalsIgnoreCase(`Poor`)}"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/poor" />
 
@@ -1070,7 +1070,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Satisfactory`)}"
+                                android:checked="@{workDetails.surfaceFinish.equalsIgnoreCase(`Satisfactory`)}"
                                 android:text="@string/satisfactory" />
 
                             <RadioButton
@@ -1080,7 +1080,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:checked="@{workDetails.overallExp.equalsIgnoreCase(`Poor`)}"
+                                android:checked="@{workDetails.surfaceFinish.equalsIgnoreCase(`Poor`)}"
                                 android:text="@string/poor" />
 
                         </RadioGroup>
@@ -1104,8 +1104,10 @@
                         android:id="@+id/tv_obs"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
+                        android:hint="@{workDetails.sectorName.equalsIgnoreCase(`Others`)?`Observation for specified sector`:`Observation for `+workDetails.sectorName }"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_10dp"
+                        android:textColorHint="@color/colorAccent"
                         app:errorEnabled="true">
 
 
@@ -1113,7 +1115,6 @@
                             android:id="@+id/et_obs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/observations"
                             android:focusableInTouchMode="false"
                             android:clickable="false"
                             android:text="@{workDetails.observation}"

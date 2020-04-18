@@ -68,8 +68,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@={workDetails.areaOfOperation}" />
+                            android:padding="@dimen/dimen_5dp" />
 
 
                     </LinearLayout>
@@ -951,25 +950,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:id="@+id/ll_obs"
+                    android:visibility="gone"
                     android:orientation="vertical">
-
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tv_obs"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_10dp">
-
+                        android:id="@+id/tv_obs">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_obs"
                             android:layout_width="match_parent"
+                            android:id="@+id/et_obs"
                             android:layout_height="wrap_content"
-                            android:hint="@string/observations"
                             android:imeOptions="actionNext"
-                            android:singleLine="true" />
+                            android:paddingLeft="@dimen/dimen_10dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -16,6 +16,8 @@ import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
+import com.cgg.twdinspection.engineering_works.source.SubmittedStageResponse;
+import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +37,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
     private GrantSchemeRepository schemeRepository;
     private LiveData<List<SectorsEntity>> sectorsListLiveData;
     private LiveData<List<GrantScheme>> schemesListLiveData;
+    private MutableLiveData<SubmittedStageResponse> submittedStage;
 
 
     public InspDetailsViewModel(Context context, Application application) {
@@ -44,6 +47,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
         stagesResponseMutableLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         schemesListLiveData = new MutableLiveData<>();
+        submittedStage = new MutableLiveData<>();
         this.context = context;
         errorHandlerInterface = (ErrorHandlerInterface) context;
 
@@ -55,8 +59,29 @@ public class InspDetailsViewModel extends AndroidViewModel {
         }
         return sectorsListLiveData;
     }
+    public LiveData<SubmittedStageResponse> getSubmittedStageResponse(int workId) {
+        if (submittedStage != null) {
+            callSubmittedStageResponse(workId);
+        }
+        return submittedStage;
+    }
 
+    private void callSubmittedStageResponse(int workId) {
+        TWDService twdService = TWDService.Factory.create("school");
+        twdService.getSubmittedStage(workId).enqueue(new Callback<SubmittedStageResponse>() {
+            @Override
+            public void onResponse(@NotNull Call<SubmittedStageResponse> call, @NotNull Response<SubmittedStageResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    submittedStage.setValue(response.body());
+                }
+            }
 
+            @Override
+            public void onFailure(@NotNull Call<SubmittedStageResponse> call, @NotNull Throwable t) {
+                errorHandlerInterface.handleError(t, context);
+            }
+        });
+    }
 
     public int insertSectorsInfo(List<SectorsEntity> sectorsEntities) {
         return sectorsRepository.insertSectors(sectorsEntities);

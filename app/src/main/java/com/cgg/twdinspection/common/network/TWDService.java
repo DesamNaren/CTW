@@ -7,6 +7,7 @@ import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
+import com.cgg.twdinspection.engineering_works.source.SubmittedStageResponse;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
@@ -126,9 +127,6 @@ public interface TWDService {
     @POST("submitGCCInspectionDetails")
     Call<GCCSubmitResponse> getGCCSubmitResponse(@Body GCCSubmitRequest gccSubmitRequest);
 
-    @POST("submitWorkInspectionDetails")
-    Call<SubmitEngWorksResponse> getEngWorksSubmitResponse(@Body SubmitEngWorksRequest submitEngWorksRequest);
-
     @POST("submitSchoolInspectionDetails")
     Call<InstSubmitResponse> getInstSubmitResponse(@Body InstSubmitRequest instSubmitRequest);
 
@@ -144,10 +142,6 @@ public interface TWDService {
     @POST("upload/uploadGCCInspectionPhotos")
     Call<GCCPhotoSubmitResponse> uploadGCCImageCall(@Part List<MultipartBody.Part> partList);
 
-    @Multipart
-    @POST("upload/uploadEngineeringWorksPhotos")
-    Call<GCCPhotoSubmitResponse> uploadEngPhotoCall(@Part List<MultipartBody.Part> partList);
-
     @GET("CTWServiceDetails/getDMVMasters")
     Call<SchoolDMVResponse> getSchoolDMV(@Query("userId") String officerId);
 
@@ -160,21 +154,6 @@ public interface TWDService {
 
     @POST("getOffices")
     Call<GetOfficesResponse> getDivisionMasterResponse();
-
-
-    @GET("CTWWorks/getWorksMaster")
-    Call<WorksMasterResponse> getWorksMaster();
-
-
-    @GET("CTWWorks/getSectors")
-    Call<SectorsResponse> getSectorsMaster();
-
-
-    @GET("CTWWorks/getGrantSandSchemes")
-    Call<GrantSchemesResponse> getGrantSandSchemes();
-
-    @GET("CTWWorks/getStages")
-    Call<StagesResponse> getStages(@Query("sector_id")int sectorId);
 
     @POST("getGodowns/DR Depot")
     Call<DRDepotMasterResponse> getDRDepotMasterResponse();
@@ -201,6 +180,32 @@ public interface TWDService {
     @POST("getStockDetails/{id}")
     Call<PetrolStockDetailsResponse> getPLPGMasterResponse(@Path("id") String id);
 
+    //------------------- Engineering ----------------------------------------
+
+
+    @GET("CTWWorks/getWorksMaster")
+    Call<WorksMasterResponse> getWorksMaster();
+
+    @GET("CTWWorks/getWorksMaster")
+    Call<SubmittedStageResponse> getSubmittedStage(@Query("work_id")int workId);
+
+
+    @GET("CTWWorks/getSectors")
+    Call<SectorsResponse> getSectorsMaster();
+
+
+    @GET("CTWWorks/getGrantSandSchemes")
+    Call<GrantSchemesResponse> getGrantSandSchemes();
+
+    @GET("CTWWorks/getStages")
+    Call<StagesResponse> getStages(@Query("sector_id")int sectorId);
+
+    @Multipart
+    @POST("upload/uploadEngineeringWorksPhotos")
+    Call<GCCPhotoSubmitResponse> uploadEngPhotoCall(@Part List<MultipartBody.Part> partList);
+
+    @POST("submitWorkInspectionDetails")
+    Call<SubmitEngWorksResponse> getEngWorksSubmitResponse(@Body SubmitEngWorksRequest submitEngWorksRequest);
 
 }
 

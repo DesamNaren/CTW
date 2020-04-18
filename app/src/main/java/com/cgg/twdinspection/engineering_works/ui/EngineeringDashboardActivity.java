@@ -91,6 +91,10 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 if(TextUtils.isEmpty(binding.etEngId.getText().toString())){
                     callSnackBar("Please enter engineering work ID");
                 }else{
+                    editor.putString(AppConstants.ENGWORKSMASTER,"");
+                    editor.commit();
+                    editor.putString(AppConstants.EngSubmitRequest,"");
+                    editor.commit();
                     viewModel.getSelWorkDetails(Integer.valueOf(binding.etEngId.getText().toString())).observe(EngineeringDashboardActivity.this, new Observer<WorkDetail>() {
                         @Override
                         public void onChanged(WorkDetail workDetail) {
