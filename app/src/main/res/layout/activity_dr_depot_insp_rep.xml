@@ -79,12 +79,13 @@
 
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
@@ -92,7 +93,8 @@
 
                             <TextView
                                 android:id="@+id/tv_sys_val"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.stockValueAsPerSystem}"
@@ -103,12 +105,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
@@ -116,7 +119,8 @@
 
                             <TextView
                                 android:id="@+id/tv_phys_val"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.stockValueAsPerPhysical}"
@@ -127,12 +131,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/difference"
@@ -140,7 +145,8 @@
 
                             <TextView
                                 android:id="@+id/tv_diff_val"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.deficit}"
@@ -167,7 +173,7 @@
                                 android:id="@+id/tv_stock"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.cashBalAsPerCashBook}"
                                 android:textColor="@color/black"
@@ -192,7 +198,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.physicalCash}"
                                 android:textColor="@color/black"
@@ -218,7 +224,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.vouchers}"
                                 android:textColor="@color/black"
@@ -244,7 +250,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.liabilityBalance}"
                                 android:textColor="@color/black"
@@ -269,7 +275,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.5"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.deficit}"
                                 android:textColor="@color/black"

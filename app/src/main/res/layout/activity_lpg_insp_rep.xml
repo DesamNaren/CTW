@@ -81,12 +81,13 @@
 
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
@@ -94,7 +95,8 @@
 
                             <TextView
                                 android:id="@+id/tvSysVal"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerSystem}"
@@ -105,12 +107,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
@@ -118,7 +121,8 @@
 
                             <TextView
                                 android:id="@+id/tvPhysVal"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerPhysical}"
@@ -129,12 +133,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Deficit / Surplus "
@@ -142,7 +147,8 @@
 
                             <TextView
                                 android:id="@+id/tvDiffVal"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.deficit}"

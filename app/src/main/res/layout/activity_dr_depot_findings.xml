@@ -66,12 +66,13 @@
 
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
@@ -79,7 +80,8 @@
 
                              <TextView
                                 android:id="@+id/tv_sys_val"
-                                android:layout_width="wrap_content"
+                                 android:layout_weight="1"
+                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
@@ -89,12 +91,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Inspected)"
@@ -102,7 +105,8 @@
 
                             <TextView
                                 android:id="@+id/tv_sys_val_ins"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
@@ -112,12 +116,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
@@ -125,7 +130,8 @@
 
                             <TextView
                                 android:id="@+id/tv_phys_val"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
@@ -135,12 +141,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/difference"
@@ -148,7 +155,8 @@
 
                             <TextView
                                 android:id="@+id/tv_diff_val"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
@@ -268,19 +276,20 @@
                                 android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Reason mentioned by incharge regarding deficit / surplus "
+                                android:hint="Reason mentioned by incharge regarding deficit / surplus"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Not inspected)"
@@ -288,7 +297,8 @@
 
                             <TextView
                                 android:id="@+id/tv_sys_val_not_ins"
-                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
