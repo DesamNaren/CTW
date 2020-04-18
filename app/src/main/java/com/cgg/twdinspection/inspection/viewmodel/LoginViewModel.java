@@ -11,12 +11,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.network.TWDService;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
 import com.cgg.twdinspection.inspection.source.login.LoginUser;
-import com.cgg.twdinspection.common.utils.CustomProgressDialog;
-import com.cgg.twdinspection.inspection.ui.SplashActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
