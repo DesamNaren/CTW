@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TW Inspection App</string>
+    <string name="app_name">TWD Inspection App</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
     <string name="verify_your_number">Verify Your Number</string>
