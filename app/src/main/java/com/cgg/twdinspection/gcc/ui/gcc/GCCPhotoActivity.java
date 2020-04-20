@@ -305,8 +305,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemRate(stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 essentialCommodity.setSystemValue(stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getEssential_commodities().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
+                    essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
+                    essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
+                }else{
+                    essentialCommodity.setPhysiacalQty(-1.0);
+                    essentialCommodity.setPhysicalValue(-1.0);
+                }
                 essentialCommodityList.add(essentialCommodity);
             }
         }
@@ -320,8 +325,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemRate(stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 essentialCommodity.setSystemValue(stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getDialy_requirements().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
+                    essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
+                    essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
+                }else{
+                    essentialCommodity.setPhysiacalQty(-1.0);
+                    essentialCommodity.setPhysicalValue(-1.0);
+                }
                 dailyReqList.add(essentialCommodity);
             }
         }
@@ -335,8 +345,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemRate(stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 essentialCommodity.setSystemValue(stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getMfp_commodities().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
+                    essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
+                    essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
+                }else{
+                    essentialCommodity.setPhysiacalQty(-1.0);
+                    essentialCommodity.setPhysicalValue(-1.0);
+                }
                 mfp_commodities.add(essentialCommodity);
             }
         }
@@ -350,8 +365,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemRate(stockDetailsResponse.getEmpties().get(i).getRate());
                 essentialCommodity.setSystemValue(stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getEmpties().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
+                    essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
+                    essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
+                }else{
+                    essentialCommodity.setPhysiacalQty(-1.0);
+                    essentialCommodity.setPhysicalValue(-1.0);
+                }
                 emptiesList.add(essentialCommodity);
             }
         }
@@ -365,8 +385,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 essentialCommodity.setSystemRate(stockDetailsResponse.getProcessing_units().get(i).getRate());
                 essentialCommodity.setSystemValue(stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate());
                 essentialCommodity.setPhysicalRate(stockDetailsResponse.getProcessing_units().get(i).getRate());
-                essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
-                essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())) {
+                    essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
+                    essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
+                }else{
+                    essentialCommodity.setPhysiacalQty(-1.0);
+                    essentialCommodity.setPhysicalValue(-1.0);
+                }
                 processing_units.add(essentialCommodity);
             }
         }

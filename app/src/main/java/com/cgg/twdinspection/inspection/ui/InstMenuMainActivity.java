@@ -570,10 +570,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
         } else if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             revertFlags();
-            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),schemeSubmitResponse.getStatusMessage()+" Failed data submit");
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), schemeSubmitResponse.getStatusMessage() + " Failed data submit");
         } else {
             revertFlags();
-            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getResources().getString(R.string.something)+" Failed data submit");
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getResources().getString(R.string.something) + " Failed data submit");
         }
     }
 
@@ -608,30 +608,34 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     @Override
     public void onBackPressed() {
 
-        if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
-            boolean flag = false;
-            for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                clearSharedPref();
-                instMainViewModel.deleteMenuData();
-                startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
-            } else {
-                Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
-            }
-        } else {
-            clearSharedPref();
-            instMainViewModel.deleteMenuData();
-            startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-            finish();
-        }
+        startActivity(new Intent(this, DashboardActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
+
+//        if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
+//            boolean flag = false;
+//            for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
+//                if (arrayListLiveData.getValue().get(i).getFlag_completed() == 1) {
+//                    flag = true;
+//                    break;
+//                }
+//            }
+//            if (!flag) {
+//                clearSharedPref();
+//                instMainViewModel.deleteMenuData();
+//                startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
+//                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                finish();
+//            } else {
+//                Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
+//            }
+//        } else {
+//            clearSharedPref();
+//            instMainViewModel.deleteMenuData();
+//            startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
+//                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//            finish();
+//        }
     }
 
     private void clearSharedPref() {
@@ -759,13 +763,13 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
                 revertFlags();
-                Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
+                Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
             }
         } else if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_CODE)) {
-            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),schemePhotoSubmitResponse.getStatusMessage());
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), schemePhotoSubmitResponse.getStatusMessage());
             revertFlags();
         } else {
-            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.something));
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
             revertFlags();
         }
     }
@@ -775,7 +779,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
             callPhotoSubmit(instSubmitRequest);
         } else {
-            Utils.customErrorAlert(InstMenuMainActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
+            Utils.customErrorAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
     }
 

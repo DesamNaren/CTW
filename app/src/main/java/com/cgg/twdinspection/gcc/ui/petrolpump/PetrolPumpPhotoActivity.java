@@ -276,8 +276,14 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 petrolCommodities.setSystemRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 petrolCommodities.setSystemValue(stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 petrolCommodities.setPhysicalRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                petrolCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
-                petrolCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
+                    petrolCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
+                    petrolCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                }else{
+                    petrolCommodities.setPhysiacalQty(-1.0);
+                    petrolCommodities.setPhysicalValue(-1.0);
+                }
+
                 petrolCommoditiesList.add(petrolCommodities);
             }
         }

@@ -42,6 +42,8 @@ import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
@@ -262,8 +264,13 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 lpgCommodities.setSystemRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 lpgCommodities.setSystemValue(stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 lpgCommodities.setPhysicalRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                lpgCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
-                lpgCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
+                    lpgCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
+                    lpgCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
+                }else{
+                    lpgCommodities.setPhysiacalQty(-1.0);
+                    lpgCommodities.setPhysicalValue(-1.0);
+                }
                 lpgReqCommoditiesList.add(lpgCommodities);
             }
         }
