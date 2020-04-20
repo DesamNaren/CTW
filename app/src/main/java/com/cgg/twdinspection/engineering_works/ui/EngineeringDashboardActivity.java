@@ -88,6 +88,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         binding.btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.hideKeyboard(EngineeringDashboardActivity.this,binding.btnProceed);
                 if(TextUtils.isEmpty(binding.etEngId.getText().toString())){
                     callSnackBar("Please enter engineering work ID");
                 }else{

@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityInspDetailsBinding;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
@@ -58,6 +61,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     StagesResponse stagesResponse;
     ArrayList<String> majorStages, tempMajorStages;
     ArrayAdapter majorStagesAdapter, selectAdapter;
+    CustomProgressDialog customProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
+        customProgressDialog = new CustomProgressDialog(this);
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,31 +135,39 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         tempMajorStages.addAll(majorStages);
         majorStagesAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, tempMajorStages);
         binding.spStage.setAdapter(majorStagesAdapter);
-
-//        viewModel.getSubmittedStageResponse(workDetail.getWorkId()).observe(InspectionDetailsActivity.this, new Observer<SubmittedStageResponse>() {
-//            @Override
-//            public void onChanged(SubmittedStageResponse stageResponse) {
-//                int selPos=0;
-//                if (stageResponse != null && TextUtils.isEmpty(stageResponse.getStageOfWork())) {
-//                    String subStageName =stageResponse.getStageOfWork();
-//                    tempMajorStages.clear();
-//                    for (int z = 0; z < majorStages.size(); z++) {
-//                        if (majorStages.get(z).equalsIgnoreCase(subStageName)) {
-//                            selPos = z;
-//                            break;
-//                        }
-//                    }
-//                    for (int z = 0; z < majorStages.size(); z++) {
-//                        if (z >= selPos) {
-//                            tempMajorStages.add(majorStages.get(z));
-//                        }
-//                    }
-//                    binding.spStage.setAdapter(majorStagesAdapter);
-//                } else {
-//                    callSnackBar("No data found");
-//                }
-//            }
-//        });
+        if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
+            customProgressDialog.show();
+            viewModel.getSubmittedStageResponse(workDetail.getWorkId()).observe(InspectionDetailsActivity.this, new Observer<SubmittedStageResponse>() {
+                @Override
+                public void onChanged(SubmittedStageResponse stageResponse) {
+                    customProgressDialog.hide();
+                    int selPos = 0;
+                    if (stageResponse != null && !TextUtils.isEmpty(stageResponse.getStageOfWork())) {
+                        String subStageName = stageResponse.getStageOfWork();
+                        tempMajorStages.clear();
+                        tempMajorStages.add("Select");
+                        for (int z = 0; z < majorStages.size(); z++) {
+                            if (majorStages.get(z).equalsIgnoreCase(subStageName)) {
+                                selPos = z;
+                                break;
+                            }
+                        }
+                        for (int z = 0; z < majorStages.size(); z++) {
+                            if (z >= selPos) {
+                                tempMajorStages.add(majorStages.get(z));
+                            }
+                        }
+                        binding.spStage.setAdapter(majorStagesAdapter);
+                    } else if(stageResponse!=null && TextUtils.isEmpty(stageResponse.getStageOfWork())){
+                        binding.spStage.setAdapter(majorStagesAdapter);
+                    }else{
+                        callSnackBar(getString(R.string.something));
+                    }
+                }
+            });
+        } else {
+            Utils.customErrorAlert(InspectionDetailsActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+        }
 
         viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
@@ -182,19 +195,19 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     selStageName = "";
                 } else {
                     selStageName = binding.spStage.getSelectedItem().toString();
-                    tempMajorStages.clear();
-                    for (int z = 0; z < majorStages.size(); z++) {
-                        if (majorStages.get(z).equalsIgnoreCase(selStageName)) {
-                            selPos = z;
-                            break;
-                        }
-                    }
-                    for (int z = 0; z < majorStages.size(); z++) {
-                        if (z >= selPos) {
-                            tempMajorStages.add(majorStages.get(z));
-                        }
-                    }
-                    binding.spStage.setAdapter(majorStagesAdapter);
+//                    tempMajorStages.clear();
+//                    for (int z = 0; z < majorStages.size(); z++) {
+//                        if (majorStages.get(z).equalsIgnoreCase(selStageName)) {
+//                            selPos = z;
+//                            break;
+//                        }
+//                    }
+//                    for (int z = 0; z < majorStages.size(); z++) {
+//                        if (z >= selPos) {
+//                            tempMajorStages.add(majorStages.get(z));
+//                        }
+//                    }
+//                    binding.spStage.setAdapter(majorStagesAdapter);
                 }
             }
 
@@ -237,6 +250,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                 selSectorId = integer;
                                 selSectorName = binding.spSector.getSelectedItem().toString();
                                 if (selSectorName.equalsIgnoreCase("Others")) {
+                                    binding.llFinProgRat.setVisibility(View.GONE);
                                     binding.llObs.setVisibility(View.VISIBLE);
                                     binding.tvObs.setHint("Observations for specified sector");
                                     binding.tvSectorOthers.setVisibility(View.VISIBLE);
@@ -249,6 +263,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                     binding.tvPercentFinProg.setText("");
                                     binding.tvActExp.setText("");
                                 } else {
+                                    binding.llFinProgRat.setVisibility(View.VISIBLE);
                                     binding.llObs.setVisibility(View.VISIBLE);
                                     binding.tvObs.setHint("Observations for " + binding.spSector.getSelectedItem().toString());
                                     binding.tvSectorOthers.setVisibility(View.GONE);
@@ -256,24 +271,30 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                     binding.tvStageOthers.setVisibility(View.GONE);
                                     binding.etSectorOthers.setText(null);
                                     binding.etStageOthers.setText(null);
-                                    viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
-                                        @Override
-                                        public void onChanged(StagesResponse stagesResponse) {
-                                            InspectionDetailsActivity.this.stagesResponse = stagesResponse;
-                                            if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
-                                                stagesList.clear();
-                                                stagesList.add("Select");
-                                                for (int y = 0; y < stagesResponse.getStages().size(); y++) {
-                                                    stagesList.add(stagesResponse.getStages().get(y).getStageName());
-                                                }
-                                                ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
-                                                binding.spStageInProgress.setAdapter(spinnerAdapter);
-                                            } else {
-                                                callSnackBar(getString(R.string.something));
-                                            }
-                                        }
-                                    });
+                                    if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
+                                        customProgressDialog.show();
 
+                                        viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
+                                            @Override
+                                            public void onChanged(StagesResponse stagesResponse) {
+                                                InspectionDetailsActivity.this.stagesResponse = stagesResponse;
+                                                if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
+                                                    customProgressDialog.hide();
+                                                    stagesList.clear();
+                                                    stagesList.add("Select");
+                                                    for (int y = 0; y < stagesResponse.getStages().size(); y++) {
+                                                        stagesList.add(stagesResponse.getStages().get(y).getStageName());
+                                                    }
+                                                    ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                                                    binding.spStageInProgress.setAdapter(spinnerAdapter);
+                                                } else {
+                                                    callSnackBar(getString(R.string.something));
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Utils.customErrorAlert(InspectionDetailsActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+                                    }
                                 }
                             } else {
                                 callSnackBar(getString(R.string.something));
@@ -586,7 +607,10 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
     @Override
     public void handleError(Throwable e, Context context) {
-
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        Log.i("MSG", "handleError: " + errMsg);
+        callSnackBar(errMsg);
     }
 }
 
