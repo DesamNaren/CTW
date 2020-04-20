@@ -65,7 +65,6 @@
                         android:padding="@dimen/dimen_5dp"
                         android:text="@={workDetails.workId}"/>
 
-
                 </LinearLayout>
 
                 <View
