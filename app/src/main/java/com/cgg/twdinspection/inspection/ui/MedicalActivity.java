@@ -535,7 +535,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     }
                 }
 
-                binding.totalStrength.setText(String.valueOf(totalStrength));
+                binding.totalStrength.setText("Institute overall strength: "+ totalStrength);
 
             }
         });
