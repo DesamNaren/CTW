@@ -78,9 +78,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
                 if (masterClassInfos != null && masterClassInfos.size() > 0) {
                     for (int i = masterClassInfos.size(); i > 0; i--) {
-                        if (masterClassInfos.get(i - 1).getClassId() > 0) {
+                        if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i-1).getStudentCount()>0) {
                             highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
-                            binding.highClassStrength.setText("Highest Class Strength: " + highClassStrength);
+                            binding.highClassStrength.setText("Highest Class: Class "+masterClassInfos.get(i-1).getClassId()+", Strength: " + highClassStrength);
                             return;
                         }
                     }
