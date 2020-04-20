@@ -23,130 +23,142 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:textColor="@color/black"
-                    android:text="Work ID"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Work ID"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
                     android:text="@{engReport.workId}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:textColor="@color/black"
-                    android:text="Work Name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Work Name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
                     android:text="@{engReport.workName}" />
 
 
             </LinearLayout>
+
             <View
+                android:id="@+id/v_soc"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:id="@+id/v_soc"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
+                android:id="@+id/ll_soc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_soc"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="District name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="District name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
                     android:text="@{engReport.distName}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Mandal name"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="1"
+                    android:text="Mandal name"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
                     android:text="@{engReport.mandName}" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:id="@+id/tv_suppType"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Village name"/>
+                    android:layout_weight="1"
+                    android:text="Village name"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
                     android:text="@{engReport.villName}" />
 
 

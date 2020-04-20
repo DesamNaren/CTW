@@ -688,6 +688,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:id="@+id/ll_finProgRat"
                     android:orientation="vertical">
 
                     <LinearLayout

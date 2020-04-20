@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class SubmittedStageResponse {
 
-    @SerializedName("Status_Code ")
+    @SerializedName("Status_Code")
     @Expose
     private Integer statusCode;
-    @SerializedName("Status_Message ")
+    @SerializedName("Status_Message")
     @Expose
     private String statusMessage;
     @SerializedName("stage_of_work")
