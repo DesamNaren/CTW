@@ -832,7 +832,7 @@
     <string name="leave_balance">Leave Balance</string>
     <string name="teacher_s_last_year_academic_panel_grade">Teacher\'s last year academic panel grade</string>
     <string name="not_submitted_records">You have not submitted any records, Still do you want to submit data?</string>
-    <string name="one_record">You have not submitted any records, Minimum of one record need to be submitted</string>
+    <string name="one_record">Physical value has to enter for atleast one record</string>
     <string name="on_roll_count_validation">Count cannot exceed the class on-roll count</string>
     <string name="claer_errors">Clear the errors to submit records</string>
     <string name="capture">Capture</string>
