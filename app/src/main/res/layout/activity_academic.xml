@@ -77,6 +77,11 @@
                             android:textAllCaps="false"
                             android:textColor="@color/white" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
+
 
                     </LinearLayout>
                 </LinearLayout>
@@ -365,11 +370,6 @@
                         </RadioGroup>
                     </LinearLayout>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dip"
-                    android:background="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -663,6 +663,20 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
+
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:text="@string/comm_code"
+                            android:textColor="@color/black"
+                            android:layout_margin="@dimen/dimen_8dp"
+                            android:layout_marginLeft="@dimen/dimen_8dp"
+                            android:padding="@dimen/dimen_8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:id="@+id/high_class_strength"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

@@ -9,6 +9,7 @@ import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
 import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
+import com.google.common.reflect.ClassPath;
 
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class ClassInfoRepository {
 
     public LiveData<MasterInstituteInfo> getMasterClassIdsList(String inst_id) {
         return classInfoDao.getMasterClassIdList(inst_id);
+    }
+
+    public LiveData<StudAttendInfoEntity> getHighClassInfo(String inst_id) {
+        return classInfoDao.getHighClassInfo(inst_id);
     }
 
     public  LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {

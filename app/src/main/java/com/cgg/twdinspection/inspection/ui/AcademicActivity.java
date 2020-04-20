@@ -8,7 +8,9 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -27,9 +29,11 @@ import com.cgg.twdinspection.databinding.ActivityAcademicBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -56,12 +60,33 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private String instId, officerId, insTime;
     private int localFlag = -1;
     private List<AcademicGradeEntity> academicGradeEntities;
+    private StudentsAttndViewModel studentsAttndViewModel;
+    private int highClassStrength;
+
+    private void getHighClassStrength() {
+        LiveData<StudAttendInfoEntity> masterInstituteInfoLiveData = studentsAttndViewModel.getHighClassInfo(
+                instId);
+        masterInstituteInfoLiveData.observe(AcademicActivity.this, new Observer<StudAttendInfoEntity>() {
+            @Override
+            public void onChanged(StudAttendInfoEntity studAttendInfoEntity) {
+                masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
+                if (studAttendInfoEntity != null && !TextUtils.isEmpty(studAttendInfoEntity.getTotal_students())) {
+                    highClassStrength = Integer.valueOf(studAttendInfoEntity.getTotal_students());
+                    binding.highClassStrength.setText("Highest Class: " + studAttendInfoEntity.getClass_type() + ", Strength: " + highClassStrength);
+                }
+
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_academic, getString(R.string.title_academic));
         instMainViewModel = new InstMainViewModel(getApplication());
+        studentsAttndViewModel = new StudentsAttndViewModel(getApplication());
+        getHighClassStrength();
 
         academicViewModel = ViewModelProviders.of(AcademicActivity.this,
                 new AcademicCustomViewModel(binding, this, getApplication())).get(AcademicViewModel.class);
@@ -90,6 +115,99 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        binding.highestClassGradeA.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    int cnt = Integer.valueOf(s.toString());
+                    if (cnt > highClassStrength) {
+                        binding.highestClassGradeA.setText("");
+                        binding.highestClassGradeA.setError("Entered count should not exceed the high class strength");
+                        binding.highestClassGradeA.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.highestClassGradeB.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    int cnt = Integer.valueOf(s.toString());
+                    if (cnt > highClassStrength) {
+                        binding.highestClassGradeB.setText("");
+                        binding.highestClassGradeB.setError("Entered count should not exceed the high class strength");
+                        binding.highestClassGradeB.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.highestClassGradeC.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    int cnt = Integer.valueOf(s.toString());
+                    if (cnt > highClassStrength) {
+                        binding.highestClassGradeC.setText("");
+                        binding.highestClassGradeC.setError("Entered count should not exceed the high class strength");
+                        binding.highestClassGradeC.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.highestClassTotal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    int cnt = Integer.valueOf(s.toString());
+                    if (cnt > highClassStrength) {
+                        binding.highestClassTotal.setText("");
+                        binding.highestClassTotal.setError("Entered count should not exceed the high class strength");
+                        binding.highestClassTotal.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         academicViewModel.getAcademicGradeInfo(instId).observe(AcademicActivity.this, new Observer<List<AcademicGradeEntity>>() {
             @Override
@@ -768,8 +886,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     }
 
 
-
-
     private boolean validate() {
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
             showSnackBar(getString(R.string.high_class_syl));
@@ -928,7 +1044,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.lab_mat_reason));
             return false;
         }
-        if ( TextUtils.isEmpty(maint_accession_reg)) {
+        if (TextUtils.isEmpty(maint_accession_reg)) {
             ScrollToView(binding.rgMaintLibReg);
             showSnackBar(getString(R.string.mai_ass_reg));
             return false;
@@ -1002,7 +1118,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-        if ( manaTvMobileNo.length() != 10) {
+        if (manaTvMobileNo.length() != 10) {
             binding.etManaTvMobileNo.requestFocus();
             showSnackBar(getString(R.string.valid_mana_tv_mob_num));
             return false;
@@ -1196,7 +1312,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     }
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
 
     }
 
@@ -1236,9 +1352,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
     @Override
     public void onBackPressed() {
-        if(academicGradeEntities!=null && academicGradeEntities.size()>0 && !(localFlag==1)){
-            customExitAlert(AcademicActivity.this,  getString(R.string.app_name),getString(R.string.data_lost));
-        }else {
+        if (academicGradeEntities != null && academicGradeEntities.size() > 0 && !(localFlag == 1)) {
+            customExitAlert(AcademicActivity.this, getString(R.string.app_name), getString(R.string.data_lost));
+        } else {
             super.callBack();
         }
     }

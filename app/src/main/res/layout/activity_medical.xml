@@ -409,6 +409,7 @@
                 </LinearLayout>
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_8dp"
                     android:layout_marginLeft="@dimen/dimen_8dp"
                     android:padding="@dimen/dimen_8dp"
