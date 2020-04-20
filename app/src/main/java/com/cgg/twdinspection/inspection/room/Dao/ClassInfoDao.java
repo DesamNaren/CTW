@@ -20,12 +20,6 @@ public interface ClassInfoDao {
     @Query("SELECT * from class_info where institute_id LIKE :inst_id")
     LiveData<List<StudAttendInfoEntity>> getClassIdList(String inst_id);
 
-    @Query("SELECT max(cast (class_id as integer)) from class_info where institute_id LIKE :inst_id")
-    LiveData<Integer> getHighClassInfoId(String inst_id);
-
-
-    @Query("SELECT * from class_info where institute_id LIKE :inst_id")
-    LiveData<StudAttendInfoEntity> getHighClassInfo(String inst_id);
 
     @Insert
     void insertStudAttendInfo(List<StudAttendInfoEntity> studAttendInfoEntityList);

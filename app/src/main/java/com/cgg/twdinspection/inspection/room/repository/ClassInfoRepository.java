@@ -36,9 +36,6 @@ public class ClassInfoRepository {
     }
 
 
-    public LiveData<StudAttendInfoEntity> getHighClassInfo(String inst_id) {
-        return classInfoDao.getHighClassInfo(inst_id);
-    }
 
     public  LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
         return classInfoDao.getClassIdList(inst_id);
