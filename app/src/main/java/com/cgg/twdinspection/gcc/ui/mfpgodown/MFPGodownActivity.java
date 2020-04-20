@@ -167,6 +167,13 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     bundle.putString(AppConstants.mfp, essentialComm);
                                     mfpFragment.setArguments(bundle);
                                     adapter.addFrag(mfpFragment, "MFP Commodities");
+                                }else {
+                                    binding.viewPager.setVisibility(View.GONE);
+                                    binding.tabs.setVisibility(View.GONE);
+                                    binding.noDataTv.setVisibility(View.VISIBLE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                                    callSnackBar(stockDetailsResponse.getStatusMessage());
                                 }
 
                                 binding.tabs.setupWithViewPager(binding.viewPager);

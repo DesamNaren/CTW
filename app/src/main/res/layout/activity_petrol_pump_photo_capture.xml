@@ -65,6 +65,7 @@
                                 android:layout_width="@dimen/_100dp"
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
+                                android:scaleType="fitXY"
                                 android:id="@+id/iv_entrance"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
@@ -111,6 +112,7 @@
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
+                                android:scaleType="fitXY"
                                 android:id="@+id/ivMachinary1"
                                 android:background="@color/colorPrimary"
                                 android:padding="@dimen/dimen_10dp"
@@ -140,6 +142,7 @@
                             <ImageView
                                 android:layout_width="@dimen/_100dp"
                                 android:layout_height="@dimen/_100dp"
+                                android:scaleType="fitXY"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:id="@+id/ivMachinary2"
@@ -185,6 +188,7 @@
                                 android:id="@+id/iv_safety_equi1"
                                 android:layout_width="@dimen/_100dp"
                                 android:layout_height="@dimen/_100dp"
+                                android:scaleType="fitXY"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
@@ -219,6 +223,7 @@
                                 android:id="@+id/iv_safety_equi2"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
+                                android:scaleType="fitXY"
                                 android:padding="@dimen/dimen_10dp"
                                 android:src="@drawable/engineering" />
                         </LinearLayout>
@@ -257,6 +262,7 @@
 
                             <ImageView
                                 android:layout_width="@dimen/_100dp"
+                                android:scaleType="fitXY"
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"
@@ -288,6 +294,7 @@
 
                             <ImageView
                                 android:layout_width="@dimen/_100dp"
+                                android:scaleType="fitXY"
                                 android:layout_height="@dimen/_100dp"
                                 android:layout_gravity="center"
                                 android:layout_margin="@dimen/dimen_10dp"

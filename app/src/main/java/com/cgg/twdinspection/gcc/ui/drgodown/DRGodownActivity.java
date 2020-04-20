@@ -50,6 +50,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
     private StockDetailsResponse stockDetailsResponsemain;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private boolean dailyreq_flag, emp_flag, ess_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +173,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                     editor.commit();
                     Intent intent = new Intent(DRGodownActivity.this, DRGodownFindingsActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Utils.customErrorAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
             }
@@ -200,6 +201,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
                                     stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
                                     EssentialFragment essentialFragment = new EssentialFragment();
                                     Gson gson = new Gson();
@@ -211,6 +213,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                                 }
 
                                 if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
                                     stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
                                     DailyFragment dailyFragment = new DailyFragment();
                                     Gson gson = new Gson();
@@ -222,6 +225,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                                 }
 
                                 if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
                                     stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
                                     EmptiesFragment emptiesFragment = new EmptiesFragment();
                                     Gson gson = new Gson();
@@ -268,6 +272,16 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                             } else {
                                 callSnackBar(getString(R.string.something));
                             }
+
+                            if (dailyreq_flag && emp_flag && ess_flag) {
+                                binding.viewPager.setVisibility(View.GONE);
+                                binding.tabs.setVisibility(View.GONE);
+                                binding.noDataTv.setVisibility(View.VISIBLE);
+                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                                callSnackBar(stockDetailsResponse.getStatusMessage());
+                            }
+
                         } else {
                             callSnackBar(getString(R.string.something));
                         }

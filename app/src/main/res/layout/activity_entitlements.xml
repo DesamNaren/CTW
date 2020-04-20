@@ -903,8 +903,10 @@
                                 android:hint="@string/entitlements_dress_distributed"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:maxLength="2"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
+
                                 android:text="@={inspData.pairOfDressDistributedCount}" />
 
                         </com.google.android.material.textfield.TextInputLayout>

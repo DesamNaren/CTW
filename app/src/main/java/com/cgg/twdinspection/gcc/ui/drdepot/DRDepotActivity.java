@@ -61,7 +61,6 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.internal.Util;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -87,6 +86,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     private int shopFlag = 0;
     GCCPhotoViewModel gccPhotoViewModel;
     private String randomNum;
+    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,11 +181,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         }
                     }
 
-                    if (!existFlag &&EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                    if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
                         stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
                         for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                                existFlag =true;
+                                existFlag = true;
 //                                String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();
 //                                setFragPos(header, z);
                                 break;
@@ -216,7 +216,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 //                        }
 //                    }
 
-                    if(existFlag) {
+                    if (existFlag) {
                         Gson gson = new Gson();
                         String stockData = gson.toJson(stockDetailsResponsemain);
                         try {
@@ -228,7 +228,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         editor.commit();
                         Intent intent = new Intent(DRDepotActivity.this, DRDepotFindingsActivity.class);
                         startActivity(intent);
-                    }else {
+                    } else {
                         Utils.customErrorAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                     }
                 } else {
@@ -278,6 +278,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
                                     stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
                                     EssentialFragment essentialFragment = new EssentialFragment();
                                     Gson gson = new Gson();
@@ -289,6 +290,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                 }
 
                                 if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
                                     stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
                                     DailyFragment dailyFragment = new DailyFragment();
                                     Gson gson = new Gson();
@@ -300,6 +302,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                 }
 
                                 if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
                                     stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
                                     EmptiesFragment emptiesFragment = new EmptiesFragment();
                                     Gson gson = new Gson();
@@ -312,6 +315,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
 
                                 if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                                    mfp_flag = true;
                                     stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                     MFPFragment mfpFragment = new MFPFragment();
                                     Gson gson = new Gson();
@@ -323,6 +327,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                 }
 
                                 if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+                                    punit_flag = true;
                                     stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
                                     PUnitFragment pUnitFragment = new PUnitFragment();
                                     Gson gson = new Gson();
@@ -331,6 +336,14 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                     bundle.putString(AppConstants.punit, essentialComm);
                                     pUnitFragment.setArguments(bundle);
                                     adapter.addFrag(pUnitFragment, "Processing Units");
+                                }
+
+                                if (punit_flag && dailyreq_flag && emp_flag && ess_flag && mfp_flag) {
+                                    binding.tabs.setVisibility(View.GONE);
+                                    binding.viewPager.setVisibility(View.GONE);
+                                    binding.noDataTv.setVisibility(View.VISIBLE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                    binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
                                 }
 
                                 binding.tabs.setupWithViewPager(binding.viewPager);
@@ -406,7 +419,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private void callPhotoSubmit() {
-        if(Utils.checkInternetConnection(DRDepotActivity.this)) {
+        if (Utils.checkInternetConnection(DRDepotActivity.this)) {
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), file);
             MultipartBody.Part body =
@@ -418,7 +431,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             List<MultipartBody.Part> partList = new ArrayList<>();
             partList.add(body);
             gccPhotoViewModel.UploadImageServiceCall(partList);
-        }else{
+        } else {
             Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
         }
     }
@@ -592,7 +605,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" +
-                    Utils.getDeviceID(DRDepotActivity.this)+"~" + Utils.getVersionName(DRDepotActivity.this)+"~"+randomNum+".png";
+                    Utils.getDeviceID(DRDepotActivity.this) + "~" + Utils.getVersionName(DRDepotActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + PIC_NAME);
         } else {
