@@ -638,6 +638,7 @@
     <string name="deficit_excess">Deficit/Excess</string>
     <string name="report">Reports</string>
     <string name="gcc_reports">GCC Reports</string>
+    <string name="gcc">GCC Dashboard</string>
     <string name="reason_mentioned_by_incharge_regarding_deficit_surplus">Reason mentioned by incharge regarding deficit / surplus</string>
     <string name="abstract_sales_register">Abstract sales register</string>
     <string name="sale_bill_book">Sale bill book</string>

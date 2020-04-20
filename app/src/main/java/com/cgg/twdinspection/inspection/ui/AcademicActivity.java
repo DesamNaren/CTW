@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -29,6 +30,8 @@ import com.cgg.twdinspection.databinding.ActivityAcademicBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
@@ -64,20 +67,31 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private int highClassStrength;
 
     private void getHighClassStrength() {
-        LiveData<StudAttendInfoEntity> masterInstituteInfoLiveData = studentsAttndViewModel.getHighClassInfo(
-                instId);
-        masterInstituteInfoLiveData.observe(AcademicActivity.this, new Observer<StudAttendInfoEntity>() {
-            @Override
-            public void onChanged(StudAttendInfoEntity studAttendInfoEntity) {
-                masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
-                if (studAttendInfoEntity != null && !TextUtils.isEmpty(studAttendInfoEntity.getTotal_students())) {
-                    highClassStrength = Integer.valueOf(studAttendInfoEntity.getTotal_students());
-                    binding.highClassStrength.setText("Highest Class: " + studAttendInfoEntity.getClass_type() + ", Strength: " + highClassStrength);
-                }
 
+        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
+                instId);
+        masterInstituteInfoLiveData.observe(AcademicActivity.this, new Observer<MasterInstituteInfo>() {
+            @Override
+            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
+                if(masterInstituteInfos!=null && masterInstituteInfos.getClassInfo()!=null && masterInstituteInfos.getClassInfo().size()>0){
+                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                    for (int i = masterClassInfos.size(); i > 0; i--) {
+                        if (masterClassInfos.get(i - 1).getClassId() > 0) {
+                            highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
+                            binding.highClassStrength.setText("Highest Class Strength: " + highClassStrength);
+                            return;
+                        }
+                    }
+                }
+                }else {
+                    Toast.makeText(AcademicActivity.this, "No master institute data found", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
+
     }
 
     @Override
@@ -85,14 +99,14 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_academic, getString(R.string.title_academic));
         instMainViewModel = new InstMainViewModel(getApplication());
+        sharedPreferences = TWDApplication.get(this).getPreferences();
         studentsAttndViewModel = new StudentsAttndViewModel(getApplication());
-        getHighClassStrength();
+
 
         academicViewModel = ViewModelProviders.of(AcademicActivity.this,
                 new AcademicCustomViewModel(binding, this, getApplication())).get(AcademicViewModel.class);
         binding.setViewModel(academicViewModel);
 
-        sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, null);
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, null);
         insTime = sharedPreferences.getString(AppConstants.INSP_TIME, null);
@@ -115,6 +129,8 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        getHighClassStrength();
 
         binding.highestClassGradeA.addTextChangedListener(new TextWatcher() {
             @Override

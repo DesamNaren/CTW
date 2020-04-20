@@ -88,27 +88,32 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                         @Override
                         public void onChanged(MasterInstituteInfo masterInstituteInfos) {
                             masterInstituteInfoLiveData.removeObservers(StudentsAttendActivity.this);
-                            StudentsAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
-                            List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
-                            if (masterClassInfos != null && masterClassInfos.size() > 0) {
-                                for (int i = 0; i < masterClassInfos.size(); i++) {
-                                    if (masterClassInfos.get(i).getStudentCount() > 0) {
-                                        StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0,
-                                                instId, masterClassInfos.get(i).getType(),
-                                                String.valueOf(masterClassInfos.get(i).getClassId()),
-                                                String.valueOf(masterClassInfos.get(i).getStudentCount()));
-                                        studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                            if(masterInstituteInfos!=null) {
+                                StudentsAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
+                                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                                if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                                    for (int i = 0; i < masterClassInfos.size(); i++) {
+                                        if (masterClassInfos.get(i).getStudentCount() > 0) {
+                                            StudAttendInfoEntity studAttendInfoEntity = new StudAttendInfoEntity(officerId, 0,
+                                                    instId, masterClassInfos.get(i).getType(),
+                                                    String.valueOf(masterClassInfos.get(i).getClassId()),
+                                                    String.valueOf(masterClassInfos.get(i).getStudentCount()));
+                                            studAttendInfoEntityListMain.add(studAttendInfoEntity);
+                                        }
                                     }
                                 }
-                            }
 
-                            if (studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) {
-                                studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain);
-                            } else {
+                                if (studAttendInfoEntityListMain != null && studAttendInfoEntityListMain.size() > 0) {
+                                    studentsAttndViewModel.insertClassInfo(studAttendInfoEntityListMain);
+                                } else {
+                                    binding.emptyView.setVisibility(View.VISIBLE);
+                                    binding.recyclerView.setVisibility(View.GONE);
+                                }
+
+                            }else{
                                 binding.emptyView.setVisibility(View.VISIBLE);
                                 binding.recyclerView.setVisibility(View.GONE);
                             }
-
                         }
                     });
                 }
