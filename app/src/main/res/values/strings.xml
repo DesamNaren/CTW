@@ -1001,5 +1001,6 @@
     <string name="place_of_work">Place of work</string>
     <string name="search_by_workId">Search by work ID</string>
     <string name="work_id">Work ID</string>
+    <string name="gcc">GCC</string>
 
 </resources>

@@ -30,7 +30,7 @@ public class GCCDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_dashboard);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

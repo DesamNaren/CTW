@@ -156,16 +156,22 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                                 beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                             }
                         } else if (beneficiaryDetails.getStatusCode() != null && beneficiaryDetails.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
+                            mMenu.findItem(R.id.action_search).setVisible(false);
+                            mMenu.findItem(R.id.mi_filter).setVisible(false);
                             beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                             beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                             Snackbar.make(beneficiaryReportBinding.root, beneficiaryDetails.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                         } else {
+                            mMenu.findItem(R.id.action_search).setVisible(false);
+                            mMenu.findItem(R.id.mi_filter).setVisible(false);
                             beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                             beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                             callSnackBar(getString(R.string.something));
                             beneficiaryReportBinding.tvEmpty.setText(getString(R.string.something));
                         }
                     } else {
+                        mMenu.findItem(R.id.action_search).setVisible(false);
+                        mMenu.findItem(R.id.mi_filter).setVisible(false);
                         beneficiaryReportBinding.tvEmpty.setVisibility(View.VISIBLE);
                         beneficiaryReportBinding.recyclerView.setVisibility(View.GONE);
                         callSnackBar(getString(R.string.something));
@@ -278,7 +284,8 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                if(adapter!=null)
+                     adapter.getFilter().filter(newText);
 
                 return true;
             }

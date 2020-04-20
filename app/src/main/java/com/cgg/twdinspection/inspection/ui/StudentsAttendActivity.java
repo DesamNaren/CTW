@@ -50,7 +50,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     List<StudAttendInfoEntity> studAttendInfoEntityListMain;
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
-    LinearLayout ll_stud_pres;
+    LinearLayout ll_stud_pres,ll_variance;
     InstMainViewModel instMainViewModel;
     CoordinatorLayout bottom_ll;
     SharedPreferences sharedPreferences;
@@ -173,6 +173,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         CustomFontTextView tv_variance = view.findViewById(R.id.tv_variance);
         ImageView btn_save = view.findViewById(R.id.btn_save);
         ll_stud_pres = view.findViewById(R.id.ll_stud_pres);
+        ll_variance = view.findViewById(R.id.ll_variance);
 
         if (studAttendInfoEntity.getAttendence_marked() != null) {
             if (studAttendInfoEntity.getAttendence_marked().equals(AppConstants.Yes)) {
@@ -205,10 +206,12 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_yes) {
                     IsattenMarked = AppConstants.Yes;
+                    ll_variance.setVisibility(View.VISIBLE);
                     ll_stud_pres.setVisibility(View.VISIBLE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_no) {
                     IsattenMarked = AppConstants.No;
                     ll_stud_pres.setVisibility(View.GONE);
+                    ll_variance.setVisibility(View.GONE);
                     et_studMarkedPres.setText("");
                     tv_variance.setText("");
                 }

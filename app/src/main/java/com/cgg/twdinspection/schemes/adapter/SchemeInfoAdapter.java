@@ -63,7 +63,7 @@ public class SchemeInfoAdapter extends RecyclerView.Adapter<SchemeInfoAdapter.It
                 selectedPos = i;
                 notifyDataSetChanged();
                 dataModel.setSelection(true);
-                schemeClickCallback.onItemClick(String.valueOf(dataModel.getSchemeType()));
+                schemeClickCallback.onItemClick(String.valueOf(dataModel.getSchemeId()));
             }
         });
 
