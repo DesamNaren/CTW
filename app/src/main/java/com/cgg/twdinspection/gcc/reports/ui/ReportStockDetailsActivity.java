@@ -310,7 +310,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.noDataTv.setVisibility(View.VISIBLE);
-            callSnackBar(getString(R.string.something));
 
         }
 

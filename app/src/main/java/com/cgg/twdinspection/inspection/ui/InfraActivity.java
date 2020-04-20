@@ -84,7 +84,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     private int localFlag = -1;
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
     }
 
 
@@ -1112,36 +1112,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_solarwater_working));
             return false;
         }
-        if (TextUtils.isEmpty(totalToilets)) {
-            showSnackBar(getResources().getString(R.string.select_toilets));
-            binding.etTotalToilets.requestFocus();
-            return false;
-        }
-        if (TextUtils.isEmpty(totalBathrooms)) {
-            showSnackBar(getResources().getString(R.string.select_bathrooms));
-            binding.etTotalBathrooms.requestFocus();
-            return false;
-        }
-        if (TextUtils.isEmpty(functioningToilets)) {
-            showSnackBar(getResources().getString(R.string.select_functioning_toilets));
-            binding.etFunctioningToilets.requestFocus();
-            return false;
-        }
-        if (TextUtils.isEmpty(functioningBathrooms)) {
-            showSnackBar(getResources().getString(R.string.select_functioning_bathrooms));
-            binding.etFuntioningBathrooms.requestFocus();
-            return false;
-        }
-        if (TextUtils.isEmpty(repairsReqToilets)) {
-            showSnackBar(getResources().getString(R.string.select_repaired_toilets));
-            binding.etRequiredToilets.requestFocus();
-            return false;
-        }
-        if (TextUtils.isEmpty(repairsReqBathrooms)) {
-            showSnackBar(getResources().getString(R.string.select_repaired_bathrooms));
-            binding.etRequiredBathrooms.requestFocus();
-            return false;
-        }
+
         if (TextUtils.isEmpty(add_req)) {
             ScrollToView(binding.rgAddReq);
             showSnackBar(getResources().getString(R.string.sel_add_req));
@@ -1180,6 +1151,36 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         if (TextUtils.isEmpty(painting)) {
             ScrollToView(binding.rgPainting);
             showSnackBar(getResources().getString(R.string.select_painting));
+            return false;
+        }
+        if (TextUtils.isEmpty(totalToilets)) {
+            showSnackBar(getResources().getString(R.string.select_toilets));
+            binding.etTotalToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(totalBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_bathrooms));
+            binding.etTotalBathrooms.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(functioningToilets)) {
+            showSnackBar(getResources().getString(R.string.select_functioning_toilets));
+            binding.etFunctioningToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(functioningBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_functioning_bathrooms));
+            binding.etFuntioningBathrooms.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(repairsReqToilets)) {
+            showSnackBar(getResources().getString(R.string.select_repaired_toilets));
+            binding.etRequiredToilets.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(repairsReqBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_repaired_bathrooms));
+            binding.etRequiredBathrooms.requestFocus();
             return false;
         }
 
