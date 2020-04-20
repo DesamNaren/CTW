@@ -947,6 +947,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.last_year_ssc));
             return false;
         }
+        if (Integer.parseInt(last_yr_ssc_percent) > 100) {
+            binding.lastYrSscPercentEt.requestFocus();
+            showSnackBar("Enter valid Percentage");
+            return false;
+        }
         if (TextUtils.isEmpty(punadi_books_supplied)) {
             ScrollToView(binding.rgPunadiBooksSupplied);
             showSnackBar(getString(R.string.sel_pun_books));
@@ -955,6 +960,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (punadi_books_supplied.equals(AppConstants.Yes) && TextUtils.isEmpty(sufficient_books_supplied)) {
             ScrollToView(binding.rgSufficientBooksSupplied);
             showSnackBar(getString(R.string.sel_suff_books_suplied));
+            return false;
+        }
+        if (punadi_books_supplied.equals(AppConstants.No) && TextUtils.isEmpty(punadiBooksReq)) {
+            binding.etClasswiseBooksReq.requestFocus();
+            showSnackBar(getString(R.string.sel_punadi_books_required));
             return false;
         }
         if (TextUtils.isEmpty(punadiPrgmConducted)) {
@@ -985,7 +995,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.sel_kara));
             return false;
         }
-        if (kara_dipath_prgm_cond.equals(AppConstants.No) && TextUtils.isEmpty(kara_dipath_prgm_cond)) {
+        if (kara_dipath_prgm_cond.equals(AppConstants.No) && TextUtils.isEmpty(karaDipathPrgmCondReason)) {
             binding.etKaraDipathPrgmCond.requestFocus();
             showSnackBar(getString(R.string.enter_kara_reason));
             return false;

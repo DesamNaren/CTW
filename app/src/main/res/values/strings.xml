@@ -684,6 +684,7 @@
     <string name="last_year_ssc">Enter last year SSC results percentage</string>
     <string name="sel_pun_books">Select punadi-2 books supplied</string>
     <string name="sel_suff_books_suplied">Select Sufficient books supplied</string>
+    <string name="sel_punadi_books_required">Enter No of Punadi-2 books required</string>
     <string name="sel_pun2_con">Select punadi-2 program is conducted</string>
     <string name="sel_punadi2_test_marks">Select punadi-2 test marks entered</string>
     <string name="enter_punadi2_reason">Enter punadi-2 test marks Reason</string>

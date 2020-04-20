@@ -33,7 +33,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     EntitlementsEntity entitlementsEntity;
     String bedSheets, carpets, uniforms, sportsDress, slippers, nightDress,
             sanitary_napkins_supplied, sanitaryNapkins, sanitary_napkins_reason, schoolBags,
-            notesSupplied, notes, notes_reason, cosmetics, cosmetics_upto_month, cosmetics_reason, hair_cut_complted, entitlementsUniforms;
+            notesSupplied, notes, notes_reason, cosmetics, cosmetics_upto_month, cosmetics_reason,
+            hair_cut_complted, entitlementsUniforms, haircut_date;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     String instId, officerID;
@@ -42,7 +43,8 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
     }
-        @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_entitlements, getResources().getString(R.string.title_entitlements));
@@ -264,6 +266,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 notes_reason = binding.etNotesReason.getText().toString().trim();
                 cosmetics_upto_month = binding.etCosmeticsUptoMonth.getText().toString().trim();
                 cosmetics_reason = binding.etCosmeticsReason.getText().toString().trim();
+                haircut_date = binding.etEntitlementsHaircutDate.getText().toString().trim();
 
                 if (validate()) {
 
@@ -393,7 +396,7 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgHaircut);
             returnFlag = false;
             showSnackBar(getString(R.string.chk_haircut));
-        } else if ((binding.etEntitlementsHaircutDate.getText().toString().equals(getResources().getString(R.string.select_date)))) {
+        } else if (TextUtils.isEmpty(haircut_date)) {
             ScrollToView(binding.etEntitlementsHaircutDate);
             returnFlag = false;
             showSnackBar(getString(R.string.sel_last_hair_cut));
