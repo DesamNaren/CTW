@@ -172,7 +172,7 @@
     <string name="_26_does_the_supplier_provides_samples_of_food_provisions">Does the supplier provides samples of food provisions</string>
     <string name="_27_does_food_provisions_matching_with_samples_provided">Does food provisions matching with samples provided</string>
     <string name="_28_does_mess_committee_exist_or_not">Does mess committee exist or not</string>
-    <string name="_30_weather_prescribed_menu_served">Weather Prescribed menu Served?</string>
+    <string name="_30_weather_prescribed_menu_served">Whether Prescribed menu Served?</string>
     <string name="_31_picture_of_the_inspecting_officer">Picture of the Inspecting officer</string>
     <string name="_79_store_room">Store Room</string>
     <string name="_80_varandah">Varandah</string>
@@ -419,7 +419,7 @@
     <string name="sel_staff_qua">Select staff quarters available</string>
     <string name="sel_stay_facility">Select statying facilities type</string>
     <string name="sel_distance">Select operating from distance</string>
-    <string name="attendance_marked">Check weather students attendance marked</string>
+    <string name="attendance_marked">Check whether students attendance marked</string>
     <string name="count_in_register">Please enter students count in register</string>
     <string name="count_dur_insp">Please enter students count during inspection</string>
     <string name="stud_greater_than_roll">Students present cannot be greater than students on roll</string>
@@ -510,7 +510,7 @@
     <string name="diet_issues">Diet Issues</string>
     <string name="last_medical_date">Select last medical check up date</string>
     <string name="select_menu_chart_served">Select Link to latest approved menu chart to be served</string>
-    <string name="sel_menu_chart_painted">Select Weather menu chart Painted on wall</string>
+    <string name="sel_menu_chart_painted">Select whether menu chart Painted on wall</string>
     <string name="sel_menu_served">Select Whether Prescribed Menu served</string>
     <string name="sel_food_provisions">Select Does the supplier provides samples of food provisions</string>
     <string name="sel_matching_with_samples">Select Does food provisions matching with samples provided</string>
@@ -843,7 +843,7 @@
     <string name="sel_no_of_sick_boarders_area">Enter No. of Sick boarders referred to Area/District Hospital</string>
     <string name="screened_by_call_health">No. of Students Screened by Call Health</string>
     <string name="left_for_screening">No. of Students left for Screening</string>
-    <string name="weather_menu_chart_painted_on_wall">Weather latest menu chart Painted on wall</string>
+    <string name="weather_menu_chart_painted_on_wall">Whether latest menu chart Painted on wall</string>
     <string name="have_you_met_discussed_with_mess_committee"><![CDATA[Have you met & discussed with Mess Committee]]></string>
     <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
