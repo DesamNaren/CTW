@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -23,6 +25,9 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMedicalBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
+import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -32,8 +37,11 @@ import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.MedicalCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.MedicalDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.MedicalViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -58,7 +66,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     SharedPreferences.Editor editor;
     private int localFlag;
     String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
-
+    StudentsAttndViewModel studentsAttndViewModel;
+    private int totalStrength=0;
+    private String instId;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view,view);
@@ -71,6 +81,8 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         binding = putContentView(R.layout.activity_medical, getResources().getString(R.string.medical_health));
         medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
+        studentsAttndViewModel = new StudentsAttndViewModel(MedicalActivity.this);
+
 
         callHealthViewModel = ViewModelProviders.of(MedicalActivity.this,
                 new CallHealthCustomViewModel(this)).get(CallHealthViewModel.class);
@@ -87,6 +99,8 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        getTotalInstStrength();
 
         binding.etMedicalCheckupDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -341,6 +355,190 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        binding.etFever.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int fevCnt = Integer.valueOf(s.toString());
+                    if(fevCnt>totalStrength){
+                        binding.etFever.setText("");
+                        binding.etFever.setError("Entered count should not exceed the total strength");
+                        binding.etFever.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etCold.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int fevCnt = Integer.valueOf(s.toString());
+                    if(fevCnt>totalStrength){
+                        binding.etCold.setText("");
+                        binding.etCold.setError("Entered count should not exceed the total strength");
+                        binding.etCold.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etDiarrhea.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int fevCnt = Integer.valueOf(s.toString());
+                    if(fevCnt>totalStrength){
+                        binding.etDiarrhea.setText("");
+                        binding.etDiarrhea.setError("Entered count should not exceed the total strength");
+                        binding.etDiarrhea.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etHeadache.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int fevCnt = Integer.valueOf(s.toString());
+                    if(fevCnt>totalStrength){
+                        binding.etHeadache.setText("");
+                        binding.etHeadache.setError("Entered count should not exceed the total strength");
+                        binding.etHeadache.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });binding.etMalaria.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int fevCnt = Integer.valueOf(s.toString());
+                    if(fevCnt>totalStrength){
+                        binding.etMalaria.setText("");
+                        binding.etMalaria.setError("Entered count should not exceed the total strength");
+                        binding.etMalaria.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etOthers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int cnt = Integer.valueOf(s.toString());
+                    if(cnt>totalStrength){
+                        binding.etOthers.setText("");
+                        binding.etOthers.setError("Entered count should not exceed the total strength");
+                        binding.etOthers.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        binding.etLeftForScreening.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!TextUtils.isEmpty(s)){
+                    int cnt = Integer.valueOf(s.toString());
+                    if(cnt>totalStrength){
+                        binding.etLeftForScreening.setText("");
+                        binding.etLeftForScreening.setError("Entered count should not exceed the total strength");
+                        binding.etLeftForScreening.requestFocus();
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+    }
+
+    private void getTotalInstStrength() {
+        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
+                instID);
+        masterInstituteInfoLiveData.observe(MedicalActivity.this, new Observer<MasterInstituteInfo>() {
+            @Override
+            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                masterInstituteInfoLiveData.removeObservers(MedicalActivity.this);
+                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                    for (int i = 0; i < masterClassInfos.size(); i++) {
+                        if (masterClassInfos.get(i).getStudentCount() > 0) {
+                          totalStrength+=masterClassInfos.get(i).getStudentCount();
+                        }
+                    }
+                }
+
+                binding.totalStrength.setText(String.valueOf(totalStrength));
+
+            }
+        });
     }
 
     private boolean validateData(int tot_cnt) {
