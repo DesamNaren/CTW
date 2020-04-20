@@ -39,9 +39,6 @@ public class StudentsAttndViewModel extends ViewModel {
          return mRepository.getClassIdsList(inst_id);
     }
 
-    public LiveData<StudAttendInfoEntity> getHighClassInfo(String inst_id) {
-        return mRepository.getHighClassInfo(inst_id);
-    }
 
     public long updateClassInfo(StudAttendInfoEntity studAttendInfoEntity) {
         return mRepository.updateClassInfo(studAttendInfoEntity);
