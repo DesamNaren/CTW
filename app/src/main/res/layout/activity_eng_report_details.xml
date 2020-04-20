@@ -36,7 +36,6 @@
             android:visibility="visible">
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
@@ -44,12 +43,41 @@
                 android:elevation="@dimen/dimen_10dp"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/work_id"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_work_id"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@={workDetails.workId}"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -698,6 +726,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
+                    android:visibility="@{workDetails.sectorName.equalsIgnoreCase(`Others`)?View.GONE:View.VISIBLE, default=gone}"
                     android:orientation="vertical">
 
                     <LinearLayout

@@ -186,7 +186,7 @@ public interface TWDService {
     @GET("CTWWorks/getWorksMaster")
     Call<WorksMasterResponse> getWorksMaster();
 
-    @GET("CTWWorks/getWorksMaster")
+    @GET("CTWWorks/getMajorStage")
     Call<SubmittedStageResponse> getSubmittedStage(@Query("work_id")int workId);
 
 

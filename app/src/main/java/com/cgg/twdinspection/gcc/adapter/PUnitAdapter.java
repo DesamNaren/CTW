@@ -51,10 +51,12 @@ public class PUnitAdapter extends RecyclerView.Adapter<PUnitAdapter.ItemHolder> 
         final CommonCommodity dataModel = commonCommodities.get(i);
         holder.stockChildRowBinding.tvComCode.setText(dataModel.getCommCode());
         holder.stockChildRowBinding.tvComName.setText(dataModel.getCommName());
+
+        double sysQty = Utils.round(dataModel.getQty(), 2);
         if (dataModel.getUnits() != null && !dataModel.getUnits().contains("No")) {
-            holder.stockChildRowBinding.sysQty.setText(dataModel.getQty() + " " + dataModel.getUnits());
+            holder.stockChildRowBinding.sysQty.setText(sysQty+ " " + dataModel.getUnits());
         } else {
-            holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getQty()));
+            holder.stockChildRowBinding.sysQty.setText(String.valueOf(sysQty));
         }
         if (dataModel.getUnits() != null && !dataModel.getUnits().contains("No")) {
             holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity (" + dataModel.getUnits() + ")");
@@ -62,7 +64,10 @@ public class PUnitAdapter extends RecyclerView.Adapter<PUnitAdapter.ItemHolder> 
             holder.stockChildRowBinding.phyAvaQty.setHint("Physical Available Quantity");
         }
         holder.stockChildRowBinding.tvSysRate.setText("Rs "+dataModel.getRate());
-        holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getQty() * dataModel.getRate()));
+
+        double val = Utils.round(dataModel.getQty() * dataModel.getRate(), 2);
+        holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(val));
+
         holder.stockChildRowBinding.tvPhyRate.setText("Rs "+dataModel.getRate());
         if (!TextUtils.isEmpty(dataModel.getPhyQuant()))
             holder.stockChildRowBinding.phyAvaQty.setText(String.valueOf(dataModel.getPhyQuant()));
