@@ -585,10 +585,10 @@
                                     android:id="@+id/highest_class_gradeA"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:gravity="center"
                                     android:hint="@string/a"
                                     android:imeOptions="actionNext"
+                                    android:maxLength="3"
                                     android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeA}" />
@@ -607,7 +607,7 @@
                                     android:id="@+id/highest_class_gradeB"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
+                                    android:maxLength="3"
                                     android:gravity="center"
                                     android:hint="@string/b"
                                     android:imeOptions="actionNext"
@@ -629,7 +629,7 @@
                                     android:id="@+id/highest_class_gradeC"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
+                                    android:maxLength="3"
                                     android:gravity="center"
                                     android:hint="@string/c"
                                     android:imeOptions="actionNext"
@@ -652,11 +652,11 @@
                                     android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:gravity="center"
                                     android:hint="@string/total"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:maxLength="3"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_total}" />
 
@@ -675,10 +675,9 @@
                                 android:id="@+id/last_yr_ssc_percent_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:hint="@string/last_year_ssc_results_percentage"
                                 android:imeOptions="actionNext"
-                                android:inputType="number"
+                                android:inputType="numberDecimal"
                                 android:singleLine="true"
                                 android:text="@={inspData.last_yr_ssc_percent}" />
 

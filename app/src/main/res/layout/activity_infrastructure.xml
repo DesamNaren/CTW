@@ -2483,7 +2483,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_to_toilets"
                                 android:imeOptions="actionNext"
-                                android:inputType="text"
+                                android:inputType="number"
                                 android:singleLine="true"
                                 android:text="@{inspData.total_toilets}" />
 
