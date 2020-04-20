@@ -609,8 +609,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void onBackPressed() {
 
 //        startActivity(new Intent(this, DashboardActivity.class)
-//                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-//        finish();
+//                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)); finish();
 
         if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
             boolean flag = false;
