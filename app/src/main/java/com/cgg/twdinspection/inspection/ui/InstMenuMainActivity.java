@@ -608,8 +608,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     @Override
     public void onBackPressed() {
 
-        startActivity(new Intent(this, DashboardActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)); finish();
 
         if (arrayListLiveData != null && arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
             boolean flag = false;
@@ -626,7 +624,10 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             } else {
-                Utils.customCloseAppAlert(this, getResources().getString(R.string.app_name), "Do you want to exit from app?");
+
+                startActivity(new Intent(this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
             }
         } else {
             clearSharedPref();
