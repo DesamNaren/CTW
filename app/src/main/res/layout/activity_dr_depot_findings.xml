@@ -71,18 +71,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
                                 android:textColor="@color/black" />
 
-                             <TextView
+                            <TextView
                                 android:id="@+id/tv_sys_val"
-                                 android:layout_weight="1"
-                                 android:layout_width="0dp"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -96,18 +96,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Inspected)"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_sys_val_ins"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -121,18 +121,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_phys_val"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -146,18 +146,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/difference"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_diff_val"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -288,18 +288,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Not inspected)"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_sys_val_not_ins"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -307,8 +307,6 @@
 
                         </LinearLayout>
                     </LinearLayout>
-
-
 
 
                 </LinearLayout>
@@ -1632,6 +1630,7 @@
                                     android:id="@+id/et_remarks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:hint="Remarks of Inspection officer"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true" />

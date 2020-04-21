@@ -1206,6 +1206,7 @@
                                         android:id="@+id/et_remarks"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                         android:hint="Remarks of Inspection officer"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true" />
