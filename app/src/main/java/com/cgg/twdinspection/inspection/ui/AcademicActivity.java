@@ -39,6 +39,8 @@ import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class AcademicActivity extends BaseActivity implements SaveListener {
@@ -65,6 +67,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private List<AcademicGradeEntity> academicGradeEntities;
     private StudentsAttndViewModel studentsAttndViewModel;
     private int highClassStrength;
+    private int gradeAcnt, gradeBCnt, gradeCCnt;
 
     private void getHighClassStrength() {
 
@@ -141,11 +144,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
-                    if (cnt > highClassStrength) {
+                    gradeAcnt = Integer.valueOf(s.toString());
+                    if (gradeAcnt > highClassStrength) {
                         binding.highestClassGradeA.setText("");
                         binding.highestClassGradeA.setError("Entered count should not exceed the high class strength");
+                        binding.highestClassTotal.setText("");
                         binding.highestClassGradeA.requestFocus();
+                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                        binding.highestClassGradeA.setText("");
+                        binding.highestClassGradeA.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
+                        binding.highestClassTotal.setText("");
+                        binding.highestClassGradeA.requestFocus();
+                    }else{
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
                     }
                 }
             }
@@ -164,11 +175,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
-                    if (cnt > highClassStrength) {
+                    gradeBCnt = Integer.valueOf(s.toString());
+                    if (gradeBCnt > highClassStrength) {
                         binding.highestClassGradeB.setText("");
                         binding.highestClassGradeB.setError("Entered count should not exceed the high class strength");
                         binding.highestClassGradeB.requestFocus();
+                        binding.highestClassTotal.setText("");
+                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                        binding.highestClassGradeB.setText("");
+                        binding.highestClassGradeB.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
+                        binding.highestClassGradeB.requestFocus();
+                        binding.highestClassTotal.setText("");
+                    }else{
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
                     }
                 }
             }
@@ -187,34 +206,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
-                    if (cnt > highClassStrength) {
+                    gradeCCnt = Integer.valueOf(s.toString());
+                    if (gradeCCnt > highClassStrength) {
                         binding.highestClassGradeC.setText("");
                         binding.highestClassGradeC.setError("Entered count should not exceed the high class strength");
-                        binding.highestClassGradeC.requestFocus();
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        binding.highestClassTotal.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!TextUtils.isEmpty(s)) {
-                    int cnt = Integer.valueOf(s.toString());
-                    if (cnt > highClassStrength) {
                         binding.highestClassTotal.setText("");
-                        binding.highestClassTotal.setError("Entered count should not exceed the high class strength");
-                        binding.highestClassTotal.requestFocus();
+                        binding.highestClassGradeC.requestFocus();
+                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                        binding.highestClassGradeC.setText("");
+                        binding.highestClassGradeC.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
+                        binding.highestClassGradeC.requestFocus();
+                        binding.highestClassTotal.setText("");
+                    }else{
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
                     }
                 }
             }

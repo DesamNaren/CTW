@@ -658,6 +658,7 @@
 
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:enabled="false"
                                     android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -681,7 +682,6 @@
                             android:layout_margin="@dimen/dimen_8dp"
                             android:layout_marginLeft="@dimen/dimen_8dp"
                             android:padding="@dimen/dimen_8dp"
-                            android:text="@string/comm_code"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/black" />
 
@@ -695,6 +695,7 @@
 
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                android:maxLength="3"
                                 android:id="@+id/last_yr_ssc_percent_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
