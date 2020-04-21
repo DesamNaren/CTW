@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -23,9 +24,14 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.cgg.twdinspection.databinding.ActivityDashboardBinding;
+
+import java.util.List;
 
 public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -33,6 +39,8 @@ public class DashboardActivity extends AppCompatActivity {
     private String cacheDate, currentDate;
     ActivityDashboardBinding binding;
     InstMainViewModel instMainViewModel;
+    InstSelectionViewModel instSelectionViewModel;
+    private String instId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
         binding.header.ivHome.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
+        instSelectionViewModel = new InstSelectionViewModel(getApplication());
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +79,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
+            instId = sharedPreferences.getString(AppConstants.INST_ID,"");
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -84,7 +94,45 @@ public class DashboardActivity extends AppCompatActivity {
         binding.btnInstInsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+                instSelectionViewModel.getSelectedInst().observe(DashboardActivity.this, new Observer<InstSelectionInfo>() {
+                    @Override
+                    public void onChanged(InstSelectionInfo instSelectionInfo) {
+                        if(instSelectionInfo!=null){
+                            instId = instSelectionInfo.getInst_id();
+                            if(!TextUtils.isEmpty(instId)) {
+                                instMainViewModel.getAllSections().observe(DashboardActivity.this, new Observer<List<InstMenuInfoEntity>>() {
+                                    @Override
+                                    public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
+                                        if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
+
+                                            boolean flag = false;
+                                            for (int i = 0; i < instMenuInfoEntities.size(); i++) {
+                                                if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
+                                                    flag = true;
+                                                    break;
+                                                }
+                                            }
+                                            if (flag) {
+                                                startActivity(new Intent(DashboardActivity.this, InstMenuMainActivity.class));
+                                                finish();
+                                            } else {
+                                                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+                                            }
+                                        } else {
+                                            startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+                                        }
+                                    }
+
+                                });
+                            }else {
+                                startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+                            }
+                        }else {
+                            startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
+                        }
+                    }
+                });
+
             }
         });
 
@@ -175,6 +223,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         Utils.customExitAlert(this,
                 getResources().getString(R.string.app_name),
                 getString(R.string.exit_msg));

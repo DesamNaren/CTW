@@ -398,7 +398,7 @@
     <string name="no_records_found">No records found</string>
     <string name="no_remarks">No remarks found</string>
     <string name="remarks">Remarks</string>
-    <string name="exit_msg">Do you want to exit?</string>
+    <string name="exit_msg">Do you want to exit from app?</string>
     <string name="districs_mandals_villages">District Master</string>
     <string name="division_master">Division Master</string>
     <string name="supplier_master">Supplier Master</string>

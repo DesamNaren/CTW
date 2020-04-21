@@ -203,7 +203,8 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        activity.startActivity(new Intent(activity, InstMenuMainActivity.class));
+                        activity.startActivity(new Intent(activity, InstMenuMainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });
@@ -295,7 +296,12 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        activity.startActivity(new Intent(activity, LoginActivity.class));
+//                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                        Intent newIntent = new Intent(activity, QuitAppActivity.class);
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(newIntent);
+                        activity.finish();
                         activity.finish();
                     }
                 });
