@@ -829,7 +829,7 @@
         <item>Daily Wages</item>
     </string-array>
     <string name="category">Category</string>
-    <string name="no_of_leaves_availed">Leaves availed</string>
+    <string name="no_of_leaves_availed">Total Leaves</string>
     <string name="no_of_leaves_taken">Leaves taken</string>
     <string name="leave_balance">Leave Balance</string>
     <string name="teacher_s_last_year_academic_panel_grade">Teacher\'s last year academic panel grade</string>

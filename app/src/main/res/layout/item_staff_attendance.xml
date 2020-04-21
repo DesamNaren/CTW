@@ -370,6 +370,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:maxLength="3"
                             android:id="@+id/et_leaves_availed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -390,6 +391,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:maxLength="3"
                             android:id="@+id/et_leaves_taken"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -411,6 +413,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:enabled="false"
                             android:id="@+id/et_leave_bal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -441,6 +444,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:maxLength="3"
                             android:id="@+id/last_week"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -475,7 +479,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.acad_panel_grade}" />

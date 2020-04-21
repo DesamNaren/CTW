@@ -3,6 +3,7 @@ package com.cgg.twdinspection.inspection.adapter;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> {
 
@@ -65,6 +74,77 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
         holder.bind(employeeResponse);
         setAnimation(holder.itemView, position);
+
+        RxTextView
+                .textChangeEvents(holder.binding.etLeavesAvailed)
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+
+                        String str = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesTaken.getText()!=null && !TextUtils.isEmpty((holder.binding.etLeavesTaken.getText().toString()))) {
+                            int tot = Integer.valueOf(str);
+                            int taken = Integer.valueOf(holder.binding.etLeavesTaken.getText().toString());
+                            holder.binding.etLeaveBal.setText(String.valueOf(tot-taken));
+                        } else {
+                            holder.binding.etLeaveBal.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+        RxTextView
+                .textChangeEvents(holder.binding.etLeavesTaken)
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+
+                        String str = textViewTextChangeEvent.text().toString();
+                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesAvailed.getText()!=null && !TextUtils.isEmpty((holder.binding.etLeavesAvailed.getText().toString()))) {
+                            int taken = Integer.valueOf(str);
+                            int tot = Integer.valueOf(holder.binding.etLeavesAvailed.getText().toString());
+                            holder.binding.etLeaveBal.setText(String.valueOf(tot-taken));
+                        } else {
+                            holder.binding.etLeaveBal.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
 
         holder.binding.llPresent.setOnClickListener(new View.OnClickListener() {
