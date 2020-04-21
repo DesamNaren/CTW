@@ -171,10 +171,10 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
                     hmCaptureLeavetype = "CL";
 
                 } else if (selctedItem == R.id.rb_hm_ccl) {
-                    hmCaptureLeavetype = "Medical";
+                    hmCaptureLeavetype = "CCL";
 
                 } else if (selctedItem == R.id.rb_hm_scl) {
-                    hmCaptureLeavetype = "Maternity";
+                    hmCaptureLeavetype = "SCL";
 
                 } else if (selctedItem == R.id.rb_hm_medical) {
                     hmCaptureLeavetype = "Medical";
