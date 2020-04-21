@@ -208,7 +208,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={``+ viewModel.beneficiaryDetail.unitCost}" />
+                                android:text="@{`Rs `+ viewModel.beneficiaryDetail.unitCost}" />
 
                         </LinearLayout>
 
@@ -236,7 +236,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={`` + viewModel.beneficiaryDetail.subsidy}" />
+                                android:text="@{`Rs ` + viewModel.beneficiaryDetail.subsidy}" />
 
 
                         </LinearLayout>
@@ -265,7 +265,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={`` + viewModel.beneficiaryDetail.bankLoan}" />
+                                android:text="@{`Rs ` + viewModel.beneficiaryDetail.bankLoan}" />
 
 
                         </LinearLayout>
@@ -294,7 +294,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={`` + viewModel.beneficiaryDetail.contribution}" />
+                                android:text="@{`Rs ` + viewModel.beneficiaryDetail.contribution}" />
 
 
                         </LinearLayout>

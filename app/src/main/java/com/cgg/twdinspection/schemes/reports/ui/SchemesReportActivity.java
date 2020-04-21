@@ -39,6 +39,7 @@ import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.viewmodel.SchemeReportsViewModel;
 import com.cgg.twdinspection.schemes.adapter.SchemeInfoAdapter;
+import com.cgg.twdinspection.schemes.adapter.SchemeInfoReportAdapter;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeClickCallback;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
@@ -237,13 +238,18 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
         bottomSheetBehavior.setPeekHeight(1500);
         dialog.setContentView(view);
         dialog.show();
-        SchemeInfoAdapter schemeInfoAdapter = new SchemeInfoAdapter(this, schemesInfoEntitiesMain);
+        SchemeInfoReportAdapter schemeInfoAdapter = new SchemeInfoReportAdapter(this, schemesInfoEntitiesMain);
         filterRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         filterRecyclerView.setAdapter(schemeInfoAdapter);
     }
 
     @Override
     public void onItemClick(ReportData reportData) {
+
+    }
+
+    @Override
+    public void onItemClick(String schemeId) {
 
     }
 
@@ -257,7 +263,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
     }
 
     @Override
-    public void onItemClick(String schemeType) {
+    public void onSchemeItemClick(String schemeType) {
         if (dialog != null && dialog.isShowing())
             dialog.dismiss();
         tempBeneficiaryDetails.clear();

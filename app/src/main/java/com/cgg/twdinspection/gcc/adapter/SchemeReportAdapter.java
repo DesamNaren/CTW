@@ -84,6 +84,7 @@ public class SchemeReportAdapter extends RecyclerView.Adapter<SchemeReportAdapte
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
     }
 
+
     @Override
     public Filter getFilter() {
         return new Filter() {

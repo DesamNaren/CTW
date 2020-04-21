@@ -223,7 +223,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={schemeData.unitCost}" />
+                                android:text="@{`Rs `+schemeData.unitCost}" />
 
                         </LinearLayout>
 
@@ -251,7 +251,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={schemeData.subsidy}" />
+                                android:text="@{`Rs `+schemeData.subsidy}" />
 
 
                         </LinearLayout>
@@ -280,7 +280,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={schemeData.bankLoan}" />
+                                android:text="@{`Rs `+schemeData.bankLoan}" />
 
 
                         </LinearLayout>
@@ -309,7 +309,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="@={schemeData.contribution}" />
+                                android:text="@{`Rs `+schemeData.contribution}" />
 
 
                         </LinearLayout>

@@ -206,6 +206,10 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     }
 
     @Override
+    public void onSchemeItemClick(String schemeType) {
+    }
+
+    @Override
     public void onItemClick(String schemeID) {
         if (dialog != null && dialog.isShowing())
             dialog.dismiss();
