@@ -121,8 +121,8 @@
                                     android:id="@+id/entry_register_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.stockEntryRegister.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -130,8 +130,8 @@
                                     android:id="@+id/entry_register_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.stockEntryRegister.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -174,8 +174,8 @@
                                         android:id="@+id/game_room_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="Yes" />
 
@@ -183,8 +183,8 @@
                                         android:id="@+id/game_room_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.gameSportRoomAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="No" />
 
@@ -208,6 +208,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -215,11 +216,11 @@
                                     android:id="@+id/pd_pft_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/name_of_the_pd_pft"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:focusableInTouchMode="false"
                                     android:singleLine="true"
                                     android:text="@{inspData.pdPftName}"
                                     android:textSize="@dimen/dimen_15dp" />
@@ -243,6 +244,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -250,10 +252,10 @@
                                     android:id="@+id/pd_mob_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:focusableInTouchMode="false"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -277,17 +279,17 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_cocur"
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp" />
+                                android:padding="5dp"
+                                android:visibility="gone" />
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:visibility="gone"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="gone">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                     android:id="@+id/btn_addStud"
@@ -315,15 +317,16 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_district"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/district_level"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -336,15 +339,16 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_state"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/state_level"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -357,15 +361,16 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_national"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/national_level"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -491,6 +496,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.playGroundAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -499,9 +505,9 @@
                                 android:id="@+id/et_land"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
-                                android:focusableInTouchMode="false"
                                 android:inputType="numberDecimal"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
@@ -650,6 +656,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -657,9 +664,9 @@
                                     android:id="@+id/et_sc_gu_nmae"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/scout_master_guide_captain_name"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -673,6 +680,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -680,10 +688,10 @@
                                     android:id="@+id/et_sc_gu_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:focusableInTouchMode="false"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -771,6 +779,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -794,6 +803,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -818,6 +828,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -886,8 +897,8 @@
                                     android:id="@+id/rb_smcElectionsYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -895,8 +906,8 @@
                                     android:id="@+id/rb_smcElectionsNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.smcEleStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -916,6 +927,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -938,6 +950,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -945,9 +958,9 @@
                                     android:id="@+id/smc_num"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
@@ -961,14 +974,15 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/smc_resolution"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/resolution_noted"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/resolution_noted"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"
@@ -1000,8 +1014,8 @@
                                         android:id="@+id/parents_meeting_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.smcEleConParentMeeting.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="Yes" />
 
@@ -1009,8 +1023,8 @@
                                         android:id="@+id/parents_meeting_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.smcEleConParentMeeting.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="No" />
 
@@ -1076,8 +1090,8 @@
                                     android:id="@+id/rb_kitchenAvailNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.kitchenGardenStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1098,15 +1112,16 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/types_of_kitchen_garden"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -1120,14 +1135,15 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/kit_in_charge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/name_of_the_kitchen_garden_in_charge_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
@@ -1142,6 +1158,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1149,9 +1166,9 @@
                                     android:id="@+id/kit_in_cha_ctc"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="number"
                                     android:maxLength="10"
                                     android:paddingLeft="@dimen/dimen_10dp"
@@ -1160,19 +1177,21 @@
                                     android:textSize="@dimen/dimen_15dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/t_plants_cnt"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/et_plants_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="@string/number_of_plants"
                                     android:focusableInTouchMode="false"
+                                    android:hint="@string/number_of_plants"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
@@ -1276,8 +1295,8 @@
                                     android:id="@+id/rb_nameOfCommYes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -1285,8 +1304,8 @@
                                     android:id="@+id/rb_nameOfCommNo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.stuComDisplayStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
@@ -1306,15 +1325,16 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                                     android:id="@+id/reason_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:focusableInTouchMode="false"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
@@ -1328,9 +1348,9 @@
 
                         <LinearLayout
                             android:id="@+id/ll_stu_cou_date"
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
 
                             <com.google.android.material.textfield.TextInputLayout

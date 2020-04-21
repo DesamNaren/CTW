@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -54,6 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_5dp"
                         android:layout_marginTop="@dimen/dimen_10dp"
+                        android:textColorHint="@color/colorAccent"
                         app:errorEnabled="true">
 
 
@@ -62,11 +64,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/total_no_of_sick_boarders"
-                            android:text="@{medical.sickBoarders}"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="@{medical.sickBoarders}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_5dp"
                         android:layout_marginTop="@dimen/dimen_10dp"
+                        android:textColorHint="@color/colorAccent"
                         app:errorEnabled="true">
 
 
@@ -104,11 +107,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/total_no_of_sick_boarders_referred_to_area_district_hospital"
-                            android:text="@{medical.sickBoarders_area}"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            android:text="@{medical.sickBoarders_area}" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,6 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -183,11 +187,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/fever"
-                                    android:text="@{medical.feverCount}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.feverCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -215,6 +219,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -227,8 +232,8 @@
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
 
-                                    android:text="@{medical.coldCount}"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.coldCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -256,6 +261,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -267,9 +273,9 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
 
-                                    android:text="@{medical.headacheCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.headacheCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -304,6 +310,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -316,8 +323,8 @@
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
 
-                                    android:text="@{medical.diarrheaCount}"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.diarrheaCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -345,6 +352,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -356,9 +364,9 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
 
-                                    android:text="@{medical.malariaCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.malariaCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -386,6 +394,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -397,9 +406,9 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
 
-                                    android:text="@{medical.othersCount}"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.othersCount}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -409,14 +418,14 @@
                 </LinearLayout>
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
-                    android:textColor="@color/black"
+                    android:id="@+id/total_strength"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_8dp"
                     android:layout_marginLeft="@dimen/dimen_8dp"
                     android:padding="@dimen/dimen_8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:id="@+id/total_strength"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/black" />
 
                 <View
                     android:layout_width="match_parent"
@@ -465,12 +474,12 @@
                                 android:id="@+id/et_medical_checkup_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/medical_checkup"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_30dp"
-                                android:focusableInTouchMode="false"
-                                android:text="@{medical.last_medical_checkup_date}"
-                                android:singleLine="true" />
+                                android:singleLine="true"
+                                android:text="@{medical.last_medical_checkup_date}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -524,19 +533,19 @@
 
                                 <RadioButton
 
-                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`MEDICAL OFFICER`) ? true : false}"
                                     android:id="@+id/rb_medical_officer"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`MEDICAL OFFICER`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/medical_officer" />
 
                                 <RadioButton
 
-                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`ANM`) ? true : false}"
                                     android:id="@+id/rb_anm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.medicalCheckUpDoneByWhom.equalsIgnoreCase(`ANM`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/anm" />
 
@@ -563,19 +572,19 @@
 
 
                                 <RadioButton
-                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:id="@+id/rb_yes_anm_weekly_updated"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
 
-                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`No`) ? true : false}"
                                     android:id="@+id/rb_no_anm_weekly_updated"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.anmWeeklyUpdated.equalsIgnoreCase(`No`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -637,30 +646,30 @@
                                     android:orientation="horizontal">
 
                                     <RadioButton
-                                        android:checked="@{medical.callHealth100.equalsIgnoreCase(`Yes`) ? true : false}"
                                         android:id="@+id/yes_call_health_100"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{medical.callHealth100.equalsIgnoreCase(`Yes`) ? true : false}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
 
-                                        android:checked="@{medical.callHealth100.equalsIgnoreCase(`No`) ? true : false}"
                                         android:id="@+id/no_call_health_100"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:checked="@{medical.callHealth100.equalsIgnoreCase(`No`) ? true : false}"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
                                 </RadioGroup>
 
                                 <LinearLayout
-                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontButtonView
                                         android:id="@+id/btn_addCall"
@@ -688,9 +697,9 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_screened_by_call_health"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/ll_screened_by_call_health"
                             android:visibility="@{medical.callHealth100.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -700,6 +709,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -708,20 +718,20 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/screened_by_call_health"
-                                    android:text="@{medical.screenedByCallHealth}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.screenedByCallHealth}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/ll_left_for_screening"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/ll_left_for_screening"
                             android:visibility="@{medical.callHealth100.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -731,6 +741,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -739,11 +750,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/left_for_screening"
-                                    android:text="@{medical.leftForscreening}"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:text="@{medical.leftForscreening}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -799,19 +810,19 @@
 
                                 <RadioButton
 
-                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:id="@+id/medical_checkup_details_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`Yes`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
                                 <RadioButton
 
-                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`No`) ? true : false}"
                                     android:id="@+id/medical_checkup_details_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:checked="@{medical.recorded_in_register.equalsIgnoreCase(`No`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 

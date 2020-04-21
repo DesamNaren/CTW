@@ -45,8 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:visibility="@{inspData.academicGradeEntities.size()>0? View.VISIBLE : View.GONE}"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{inspData.academicGradeEntities.size()>0? View.VISIBLE : View.GONE}">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -125,23 +125,23 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/highest_class_syllabus_completed_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.highestClassSyllabusCompleted.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/highest_class_syllabus_completed_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.highestClassSyllabusCompleted.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -173,24 +173,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_plan_syll_comp_prepared_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.planSyllCompPrepared.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_plan_syll_comp_prepared_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.planSyllCompPrepared.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -238,24 +238,24 @@
                             android:orientation="horizontal">
 
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/strength_accomodated_asper_infrastructure_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.strengthAccomodatedAsperInfrastructure.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/strength_accomodated_asper_infrastructure_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.strengthAccomodatedAsperInfrastructure.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -302,14 +302,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textColorHint="@color/colorAccent"
                         android:visibility="gone"
                         app:errorEnabled="true">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
-                            android:focusableInTouchMode="false"
                             android:layout_height="wrap_content"
+                            android:focusableInTouchMode="false"
                             android:hint="@string/enter_reason"
                             android:imeOptions="actionNext"
                             android:singleLine="true" />
@@ -349,33 +350,33 @@
                             android:padding="@dimen/dimen_5dp"
                             android:text="@string/does_staff"
                             android:textColor="@color/black" />
-                        
+
                         <RadioGroup
                             android:id="@+id/rg_staff_accomodated_asper_stud_strength"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                           <RadioButton
-                                android:focusableInTouchMode="false"
-                                android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/staff_accomodated_asper_stud_strength_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.staffAccomodatedAsperStudStrength.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/staff_accomodated_asper_stud_strength_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked="@{inspData.staffAccomodatedAsperStudStrength.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -427,24 +428,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/plan_prepared_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.planPrepared.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/plan_prepared_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.planPrepared.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -472,24 +473,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_textbooks_rec_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.textbooksRec.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_textbooks_rec_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.textbooksRec.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -539,24 +540,24 @@
                             android:orientation="horizontal">
 
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/assessment_test_conducted_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.assessmentTestConducted.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/assessment_test_conducted_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.assessmentTestConducted.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -607,6 +608,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -629,6 +631,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -651,6 +654,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -674,6 +678,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -697,6 +702,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -733,24 +739,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/punadi_books_supplied_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.punadiBooksSupplied.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/punadi_books_supplied_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.punadiBooksSupplied.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -780,24 +786,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/sufficient_books_supplied_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficientBooksSupplied.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/sufficient_books_supplied_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficientBooksSupplied.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -810,6 +816,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadiBooksSupplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -818,11 +825,11 @@
                                 android:id="@+id/et_classwise_books_req"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/no_of_classwise_punadi_2_books_required"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/no_of_classwise_punadi_2_books_required"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"
                                 android:inputType="number"
+                                android:singleLine="true"
                                 android:text="@={inspData.punadiBooksReq}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -869,24 +876,24 @@
                             android:orientation="horizontal">
 
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_punadi_prgm_conducted_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_punadi_prgm_conducted_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -898,6 +905,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -957,24 +965,24 @@
                             android:orientation="horizontal">
 
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_punadi2_testmarks_entered_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadi2TestmarksEntered.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_punadi2_testmarks_entered_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.punadi2TestmarksEntered.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -986,6 +994,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadi2TestmarksEntered.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -1043,24 +1052,24 @@
                             android:layout_margin="@dimen/dimen_5dp"
                             android:orientation="horizontal">
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_kara_dipath_prgm_cond_yes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.karaDipathPrgmCond.equalsIgnoreCase(`Yes`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/yes" />
 
-                           <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                            <RadioButton
                                 android:id="@+id/rb_kara_dipath_prgm_cond_no"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.karaDipathPrgmCond.equalsIgnoreCase(`No`)}"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
 
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/no" />
@@ -1072,6 +1081,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="gone"
                             app:errorEnabled="true">
 
@@ -1080,8 +1090,8 @@
                                 android:id="@+id/et_kara_dipath_prgm_cond"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/reason"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/reason"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
                                 android:text="@={inspData.karaDipathPrgmCondReason}" />
@@ -1135,24 +1145,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_labManuals_received_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labManualsReceived.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_labManuals_received_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labManualsReceived.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1183,23 +1193,23 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_properly_using_manuals_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.properlyUsingManuals.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_properly_using_manuals_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.properlyUsingManuals.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1254,24 +1264,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_labroom_available_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labroomAvailable.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_labroom_available_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labroomAvailable.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1291,6 +1301,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1310,6 +1321,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1350,24 +1362,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_lab_mat_entered_reg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labMatEnteredReg.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_lab_mat_entered_reg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.labMatEnteredReg.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1380,6 +1392,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.labMatEnteredReg.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -1388,9 +1401,9 @@
                                 android:id="@+id/et_mat_enter_reg_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:focusableInTouchMode="false"
                                 android:singleLine="true"
                                 android:text="@={inspData.labMatEnteredRegReason}" />
 
@@ -1443,23 +1456,23 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_maint_accession_reg_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.maintAccessionReg.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_maint_accession_reg_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.maintAccessionReg.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1478,6 +1491,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1500,6 +1514,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1519,6 +1534,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1556,24 +1572,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_proper_light_fan_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.properLightFan.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_proper_light_fan_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.properLightFan.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1627,24 +1643,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_big_tv_rot_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_big_tv_rot_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.bigTvRotAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1658,6 +1674,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="gone"
                             app:errorEnabled="true">
 
@@ -1666,8 +1683,8 @@
                                 android:id="@+id/et_tv_rot_working_status"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/working_condition"
                                 android:focusableInTouchMode="false"
+                                android:hint="@string/working_condition"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
                                 android:text="@={inspData.tvRotWorkingStatus}" />
@@ -1695,23 +1712,23 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_big_tv_rot_avail_con_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_big_tv_rot_avail_con_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1766,24 +1783,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_mana_tv_lessons_shown_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_mana_tv_lessons_shown_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.manaTvLessonsShown.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1803,6 +1820,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1820,10 +1838,12 @@
 
 
                         </LinearLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1843,6 +1863,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1906,24 +1927,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_comp_lab_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_comp_lab_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.compLabAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -1943,6 +1964,7 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1958,10 +1980,12 @@
                                     android:text="@{inspData.noOfComputersAvailable}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1976,6 +2000,7 @@
                                     android:text="@={inspData.compWorkingStatus}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1996,24 +2021,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_ict_instr_avail_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.ictInstrAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_ict_instr_avail_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.ictInstrAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2034,6 +2059,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2053,6 +2079,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2060,9 +2087,9 @@
                                         android:id="@+id/et_mob_no_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
-                                        android:focusableInTouchMode="false"
                                         android:inputType="number"
                                         android:maxLength="10"
                                         android:singleLine="true"
@@ -2091,24 +2118,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_timetable_disp_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.timetableDisp.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_timetable_disp_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.timetableDisp.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2137,24 +2164,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_comp_syll_completed_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.compSyllCompleted.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_comp_syll_completed_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.compSyllCompleted.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2183,24 +2210,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_comp_lab_cond_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.compLabCond.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_comp_lab_cond_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.compLabCond.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2229,23 +2256,23 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_digital_content_used_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.digitalContentUsed.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_digital_content_used_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.digitalContentUsed.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -2302,24 +2329,24 @@
                                 android:orientation="horizontal">
 
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_eLearning_avail_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.eLearningAvail.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
-                               <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                <RadioButton
                                     android:id="@+id/rb_eLearning_avail_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.eLearningAvail.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
+                                    android:focusableInTouchMode="false"
 
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
@@ -2355,24 +2382,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_showing_stud_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.eLearningStudUsingAsPerSched.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_showing_stud_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.eLearningStudUsingAsPerSched.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2392,6 +2419,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2411,6 +2439,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2438,6 +2467,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2457,6 +2487,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2496,24 +2527,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_separate_timetable_disp_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_separate_timetable_disp_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2543,24 +2574,24 @@
                                     android:orientation="horizontal">
 
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_tabs_supplied_yes"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.tabsSupplied.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
-                                   <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                    <RadioButton
                                         android:id="@+id/rb_tabs_supplied_no"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.tabsSupplied.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:focusableInTouchMode="false"
 
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -2580,6 +2611,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2616,24 +2648,24 @@
                                         android:orientation="horizontal">
 
 
-                                       <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                        <RadioButton
                                             android:id="@+id/rb_stud_using_as_per_sched_yes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.tabsStudUsingAsPerSched.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
 
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
-                                       <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                        <RadioButton
                                             android:id="@+id/rb_stud_using_as_per_sched_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.tabsStudUsingAsPerSched.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
 
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
@@ -2646,6 +2678,7 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2665,14 +2698,15 @@
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_tab_incharge_mblno"
                                         android:layout_width="match_parent"
-                                        android:focusableInTouchMode="false"
                                         android:layout_height="wrap_content"
+                                        android:focusableInTouchMode="false"
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
@@ -2703,24 +2737,24 @@
                                         android:orientation="horizontal">
 
 
-                                       <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                        <RadioButton
                                             android:id="@+id/rb_tabs_timetable_disp_yes"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
 
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
-                                       <RadioButton
-                                     android:focusableInTouchMode="false"
-                               android:clickable="false"
+                                        <RadioButton
                                             android:id="@+id/rb_tabs_timetable_disp_no"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:focusableInTouchMode="false"
 
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />

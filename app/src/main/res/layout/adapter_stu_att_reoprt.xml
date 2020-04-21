@@ -14,16 +14,16 @@
 
 
     <RelativeLayout
-        android:paddingLeft="@dimen/dimen_5dp"
-        android:paddingRight="@dimen/dimen_5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dimen_5dp"
+        android:paddingRight="@dimen/dimen_5dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_margin="@dimen/dimen_5dp"
             android:id="@+id/cv_gccReport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_5dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="6dp"
             app:cardElevation="2dp">
@@ -73,7 +73,8 @@
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:text="@string/students_on_roll"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorAccent">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -161,7 +162,8 @@
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:text="@string/students_on_roll"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorAccent">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -208,7 +210,8 @@
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
                         android:text="@string/students_on_roll"
-                        android:textColor="@color/black">
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/colorAccent">
 
                         <TextView
                             android:layout_width="wrap_content"

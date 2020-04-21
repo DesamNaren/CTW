@@ -71,8 +71,8 @@
                             android:id="@+id/rg_big_school_name_board"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="5dp">
 
 
                             <RadioButton
@@ -134,8 +134,8 @@
                                 android:id="@+id/rg_drinking_water_facility"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
 
                                 <RadioButton
@@ -174,8 +174,8 @@
                                 <RadioGroup
                                     android:id="@+id/rg_source_of_drinking_water"
                                     android:layout_width="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp">
 
                                     <RadioButton
                                         android:id="@+id/drinking_water_ro_plant"
@@ -272,8 +272,8 @@
                                 android:id="@+id/rg_ro_plant"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="5dp">
 
 
                                 <RadioButton
@@ -331,6 +331,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -431,8 +432,8 @@
                             <RadioGroup
                                 android:id="@+id/rg_runningWater_source"
                                 android:layout_width="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/runningWater_source_open_well"
@@ -676,8 +677,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                           >
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -737,6 +737,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -757,6 +758,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -778,6 +780,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -823,6 +826,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -844,6 +848,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -865,6 +870,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -1125,6 +1131,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1170,6 +1177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
+                        android:textColorHint="@color/colorAccent"
                         app:errorEnabled="true">
 
 
@@ -1409,8 +1417,8 @@
                             android:id="@+id/rg_road_required"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/road_required_yes"
@@ -1472,8 +1480,8 @@
                             android:id="@+id/rg_compWall_required"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/compWall_required_yes"
@@ -1530,8 +1538,8 @@
                             android:id="@+id/rg_cc_cameras"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
 
                             <RadioButton
@@ -1588,8 +1596,8 @@
                             android:id="@+id/rg_steam_cooking"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
 
                             <RadioButton
@@ -1646,8 +1654,8 @@
                             android:id="@+id/rg_bunker_beds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
 
                             <RadioButton
@@ -1704,9 +1712,9 @@
                         <RadioGroup
                             android:id="@+id/rg_gate_required"
                             android:layout_width="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/gate_required_yes"
@@ -1764,9 +1772,9 @@
                         <RadioGroup
                             android:id="@+id/rg_pathway_required"
                             android:layout_width="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/pathway_required_yes"
@@ -1827,9 +1835,9 @@
                         <RadioGroup
                             android:id="@+id/rg_sump_required"
                             android:layout_width="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/sump_required_yes"
@@ -1893,9 +1901,9 @@
                             <RadioGroup
                                 android:id="@+id/rg_sewage_allowed"
                                 android:layout_width="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/sewage_allowed_yes"
@@ -1936,9 +1944,9 @@
                             <RadioGroup
                                 android:id="@+id/rg_sewage_raise_req"
                                 android:layout_width="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/sewage_raise_req_yes"
@@ -2000,9 +2008,9 @@
                         <RadioGroup
                             android:id="@+id/rg_drainage_functioning"
                             android:layout_width="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
                             <RadioButton
                                 android:id="@+id/drainage_functioning_yes"
@@ -2068,9 +2076,9 @@
                             <RadioGroup
                                 android:id="@+id/rg_heater_available"
                                 android:layout_width="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/heater_available_yes"
@@ -2111,9 +2119,9 @@
                             <RadioGroup
                                 android:id="@+id/rg_heater_workingStatus"
                                 android:layout_width="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/heater_workingStatus_yes"
@@ -2162,8 +2170,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                       >
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -2180,8 +2187,8 @@
                                 android:id="@+id/rg_add_req"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
                                 <RadioButton
                                     android:id="@+id/add_req_yes"
@@ -2216,6 +2223,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2237,6 +2245,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2259,6 +2268,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2281,6 +2291,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2303,6 +2314,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2360,8 +2372,8 @@
                             android:id="@+id/rg_repairs_to_door"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dimen_5dp">
 
 
                             <RadioButton
@@ -2420,8 +2432,8 @@
                             android:id="@+id/rg_painting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="5dp">
 
 
                             <RadioButton
@@ -2474,6 +2486,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -2493,6 +2506,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2543,6 +2557,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2563,6 +2578,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2583,6 +2599,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2603,6 +2620,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 

@@ -48,6 +48,7 @@
                         android:layout_weight="1"
                         android:orientation="vertical"
                         android:padding="@dimen/dimen_10dp">
+
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -302,9 +303,9 @@
                         android:layout_marginLeft="@dimen/dimen_10dp">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_yes_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@{staff.ydayDutyAllotted.equalsIgnoreCase(`Yes`) ? @color/colorPrimary : @color/light_gray}"
                             android:gravity="center"
@@ -317,9 +318,9 @@
                             android:layout_height="wrap_content" />
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/tv_no_dutyAlloted"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_no_dutyAlloted"
                             android:layout_weight="1"
                             android:background="@{staff.ydayDutyAllotted.equalsIgnoreCase(`No`) ? @color/colorPrimary : @color/light_gray}"
                             android:gravity="center"
@@ -368,9 +369,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="false"
+                        android:entries="@array/category"
                         android:focusableInTouchMode="false"
-                        android:selectedItemPosition="@{Double.valueOf(staff.categPos).intValue()}"
-                        android:entries="@array/category"/>
+                        android:selectedItemPosition="@{Double.valueOf(staff.categPos).intValue()}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -388,17 +389,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dimen_5dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_leaves_availed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusableInTouchMode="false"
                             android:hint="@string/no_of_leaves_availed"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:focusableInTouchMode="false"
-                            android:enabled="false"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@={staff.leavesAvailed}" />
@@ -409,16 +411,17 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_leaves_taken"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusableInTouchMode="false"
                             android:hint="@string/no_of_leaves_taken"
                             android:imeOptions="actionNext"
-                            android:focusableInTouchMode="false"
-                            android:enabled="false"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
@@ -431,16 +434,17 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen_5dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_leave_bal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:focusableInTouchMode="false"
                             android:hint="@string/leave_balance"
                             android:inputType="number"
-                            android:focusableInTouchMode="false"
-                            android:enabled="false"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leavesBal}" />
@@ -462,15 +466,16 @@
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/last_week"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/last_week"
-                            android:focusableInTouchMode="false"
                             android:enabled="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/last_week"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"
@@ -493,15 +498,16 @@
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_acad_grade_panel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:focusableInTouchMode="false"
                             android:enabled="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/teacher_s_last_year_academic_panel_grade"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"

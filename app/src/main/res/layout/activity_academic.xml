@@ -290,10 +290,12 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/t_name"
+
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_5dp"
+                        android:textColorHint="@color/colorAccent"
                         android:visibility="gone"
                         app:errorEnabled="true">
 
@@ -575,9 +577,11 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -588,8 +592,8 @@
                                     android:gravity="center"
                                     android:hint="@string/a"
                                     android:imeOptions="actionNext"
-                                    android:maxLength="3"
                                     android:inputType="number"
+                                    android:maxLength="3"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeA}" />
 
@@ -597,9 +601,11 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -607,11 +613,11 @@
                                     android:id="@+id/highest_class_gradeB"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:maxLength="3"
                                     android:gravity="center"
                                     android:hint="@string/b"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:maxLength="3"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeB}" />
 
@@ -619,9 +625,11 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -629,11 +637,11 @@
                                     android:id="@+id/highest_class_gradeC"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:maxLength="3"
                                     android:gravity="center"
                                     android:hint="@string/c"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:maxLength="3"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeC}" />
 
@@ -645,6 +653,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -666,22 +675,22 @@
 
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
-                            android:text="@string/comm_code"
-                            android:textColor="@color/black"
+                            android:id="@+id/high_class_strength"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_8dp"
                             android:layout_marginLeft="@dimen/dimen_8dp"
                             android:padding="@dimen/dimen_8dp"
+                            android:text="@string/comm_code"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/high_class_strength"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
+                            android:textColor="@color/black" />
 
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -765,7 +774,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`Yes`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -774,7 +782,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sufficient_books_supplied.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -783,9 +790,11 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/tv_classwise_books_req"
+
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadi_books_supplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -796,8 +805,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/no_of_classwise_punadi_2_books_required"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"
                                 android:inputType="number"
+                                android:singleLine="true"
                                 android:text="@={inspData.punadi_books_req}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -869,6 +878,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadiPrgmConducted.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -950,9 +960,11 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_punadi2_testmarks_reason"
+
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.punadi2_testmarks_entered.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -1032,9 +1044,11 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_kara_dipath_prgm_cond"
+
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="gone"
                             app:errorEnabled="true">
 
@@ -1239,8 +1253,10 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1258,8 +1274,10 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1323,9 +1341,11 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_mat_enter_reg_reason"
+
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="@{inspData.lab_mat_entered_reg.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
@@ -1417,8 +1437,10 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1438,8 +1460,10 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1457,8 +1481,10 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1587,9 +1613,11 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_tv_rot_working_status"
+
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             android:visibility="gone"
                             app:errorEnabled="true">
 
@@ -1724,8 +1752,10 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1742,10 +1772,13 @@
 
 
                         </LinearLayout>
+
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1762,8 +1795,10 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -1858,8 +1893,10 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1876,10 +1913,13 @@
                                     android:text="@{inspData.noOfComputersAvailable}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1893,6 +1933,7 @@
                                     android:text="@={inspData.compWorkingStatus}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1945,8 +1986,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -1963,8 +2006,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2277,8 +2322,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2296,8 +2343,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2323,8 +2372,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2342,8 +2393,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2457,8 +2510,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2519,8 +2574,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -2538,8 +2595,10 @@
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 

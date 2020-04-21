@@ -328,20 +328,22 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_10dp">
+
                                 <ImageView
-                                    android:src="@drawable/camera"
                                     android:id="@+id/iv_tds"
                                     android:layout_width="@dimen/_125dp"
                                     android:layout_height="@dimen/_125dp"
                                     android:layout_gravity="center"
                                     android:scaleType="fitXY"
+                                    android:src="@drawable/camera"
                                     app:profileImage="@{tdsImgUrl}" />
+
                                 <ProgressBar
                                     android:id="@+id/pbar"
-                                    android:visibility="gone"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"/>
+                                    android:layout_gravity="center"
+                                    android:visibility="gone" />
                             </FrameLayout>
 
 
@@ -359,6 +361,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -779,6 +782,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -800,6 +804,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -822,6 +827,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -868,6 +874,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -890,6 +897,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -912,6 +920,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/dimen_5dp"
                                     android:layout_weight="1"
+                                    android:textColorHint="@color/colorAccent"
                                     app:errorEnabled="true">
 
 
@@ -1183,6 +1192,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -1229,6 +1239,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
+                        android:textColorHint="@color/colorAccent"
                         app:errorEnabled="true">
 
 
@@ -2307,6 +2318,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -2328,6 +2340,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2351,6 +2364,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -2373,6 +2387,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2396,6 +2411,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
 
@@ -2571,6 +2587,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -2591,6 +2608,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2642,6 +2660,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2663,6 +2682,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2684,6 +2704,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
@@ -2705,6 +2726,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 

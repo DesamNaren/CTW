@@ -569,6 +569,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -709,6 +710,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_5dp"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -824,9 +826,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:focusableInTouchMode="false"
-                                        android:paddingLeft="@dimen/dimen_30dp"
                                         android:hint="@string/entitlements_cosmetics_upto_month"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_30dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.cosmetic_distributed_upto_month}" />
 
@@ -848,6 +850,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -893,6 +896,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
 
