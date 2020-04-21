@@ -26,6 +26,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityDrDepotFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.DrDepot.DrDepotInsp;
 import com.cgg.twdinspection.gcc.source.inspections.DrDepot.GeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.DrDepot.HoardingsBoards;
@@ -35,10 +36,8 @@ import com.cgg.twdinspection.gcc.source.inspections.DrDepot.StockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.cgg.twdinspection.databinding.ActivityDrDepotFindingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -760,7 +759,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             showSnackBar("Please check weights and measurements certificate issued by legal metrology");
             ScrollToView(binding.rgWeightMeasCert);
-        } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().equals(getResources().getString(R.string.select_date))) {
+        } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().contains("/")) {
             returnFlag = false;
             showSnackBar("Please select certificate issue date");
             ScrollToView(binding.etWeightCertIssue);
@@ -851,7 +850,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         } else if (TextUtils.isEmpty(binding.etFeedback.getText().toString().trim())) {
             returnFlag = false;
             showSnackBar("Please enter feedback of card holders");
-            ScrollToViewEditText(binding.etRemarks, "Enter feedback");
+            ScrollToViewEditText(binding.etFeedback, "Enter feedback");
         } else if (TextUtils.isEmpty(binding.etRemarks.getText().toString().trim())) {
             returnFlag = false;
             showSnackBar("Please enter remarks");

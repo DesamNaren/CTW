@@ -556,7 +556,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             ScrollToViewEditText(binding.etComName, "Enter insurance company name");
         } else if (insCer.equalsIgnoreCase(AppConstants.Yes) && !insComDate.contains("/")) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
+            showSnackBar("Enter insurance validity");
+//            ScrollToViewEditText(binding.etInsDate, "Enter insurance validity");
             ScrollToView(binding.etInsDate);
         } else if (TextUtils.isEmpty(fireNOC)) {
             returnFlag = false;
@@ -568,7 +569,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             ScrollToView(binding.rgWeight);
         } else if (weightMea.equalsIgnoreCase(AppConstants.Yes) && !weightDate.contains("/")) {
             returnFlag = false;
-            ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
+            showSnackBar("Enter weight measure validity date");
+//            ScrollToViewEditText(binding.etLegalMetDate, "Enter weight measure validity date");
             ScrollToView(binding.etLegalMetDate);
         } else if (TextUtils.isEmpty(stockRegEntry)) {
             returnFlag = false;
