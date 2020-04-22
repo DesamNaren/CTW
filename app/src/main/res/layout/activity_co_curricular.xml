@@ -214,10 +214,10 @@
                                     android:id="@+id/pd_pft_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/name_of_the_pd_pft"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.pd_pft_name}"
@@ -661,6 +661,7 @@
                                     android:hint="@string/scout_master_guide_captain_name"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.scout_guide_captain_name}"
@@ -780,7 +781,7 @@
                                     android:id="@+id/ncc_tea_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:hint="@string/name_of_the_ncc_teacher"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
@@ -925,7 +926,7 @@
                                     android:id="@+id/smc_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:hint="@string/name_of_the_smc_chairman"
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
@@ -1106,10 +1107,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/types_of_kitchen_garden"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true"
                                     android:text="@{inspData.kitchen_garden_types}"
                                     android:textSize="@dimen/dimen_15dp" />
 
@@ -1131,6 +1132,7 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:singleLine="true"
                                     android:text="@{inspData.kitchen_garden_in_charge_name}"
                                     android:textSize="@dimen/dimen_15dp" />
@@ -1309,7 +1311,7 @@
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
-
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:id="@+id/reason_et"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -1317,7 +1319,6 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="textPersonName"
                                     android:paddingLeft="@dimen/dimen_10dp"
-                                    android:singleLine="true"
                                     android:text="@{inspData.reason}"
                                     android:textSize="@dimen/dimen_15dp" />
 

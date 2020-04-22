@@ -340,7 +340,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/enter_reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:text="@{inspData.ro_plant_reason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1142,7 +1142,7 @@
                                     android:hint="@string/kitchen_repair_required"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
-                                    android:singleLine="true"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:text="@{inspData.kitchen_repair_required}" />
 
                             </com.google.android.material.textfield.TextInputLayout>

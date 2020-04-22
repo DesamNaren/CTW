@@ -240,6 +240,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:visibility="@{stuData.attendenceMarked.equalsIgnoreCase(`Yes`) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView

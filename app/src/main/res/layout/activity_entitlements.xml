@@ -575,10 +575,10 @@
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_sanitary_reason"
                                 android:layout_width="match_parent"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"
                                 android:text="@{inspData.sanitary_napkins_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -719,7 +719,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                 android:text="@{inspData.notes_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -859,7 +859,7 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:text="@{inspData.cosmetic_reason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>

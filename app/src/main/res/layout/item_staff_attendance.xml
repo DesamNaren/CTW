@@ -478,6 +478,7 @@
                             android:id="@+id/et_acad_grade_panel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                             android:hint="@string/teacher_s_last_year_academic_panel_grade"
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:singleLine="true"

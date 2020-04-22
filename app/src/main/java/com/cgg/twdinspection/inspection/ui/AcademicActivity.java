@@ -968,7 +968,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.last_year_ssc));
             return false;
         }
-        if (Integer.parseInt(last_yr_ssc_percent) > 100) {
+        if (Double.parseDouble(last_yr_ssc_percent) > 100) {
             binding.lastYrSscPercentEt.requestFocus();
             showSnackBar("Enter valid Percentage");
             return false;
