@@ -132,7 +132,7 @@ public interface TWDService {
 
     @Multipart
     @POST("upload/uploadSchemeInspectionPhotos")
-    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part MultipartBody.Part image, @Part MultipartBody.Part image2);
+    Call<SchemePhotoSubmitResponse> uploadSchemeImageCall(@Part List<MultipartBody.Part> partList);
 
     @Multipart
     @POST("upload/uploadSchoolInspectionPhotos")
