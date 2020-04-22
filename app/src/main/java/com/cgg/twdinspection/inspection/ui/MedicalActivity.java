@@ -68,7 +68,6 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
     StudentsAttndViewModel studentsAttndViewModel;
     private int totalStrength=0;
-    private String instId;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view,view);
@@ -335,26 +334,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         });
 
 
-        try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
-            if (localFlag == 1) {
-                //get local record & set to data binding
-                LiveData<MedicalInfoEntity> medicalInfo = instMainViewModel.getMedicalInfo();
-                medicalInfo.observe(MedicalActivity.this, new Observer<MedicalInfoEntity>() {
-                    @Override
-                    public void onChanged(MedicalInfoEntity medicalInfoEntity) {
-                        medicalInfo.removeObservers(MedicalActivity.this);
-                        if (medicalInfoEntity != null) {
-                            binding.setMedical(medicalInfoEntity);
-                            binding.executePendingBindings();
-                            checkUpDate = binding.etMedicalCheckupDate.getText().toString();
-                        }
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         binding.etFever.addTextChangedListener(new TextWatcher() {
             @Override
@@ -559,6 +539,27 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 }
 
                 binding.totalStrength.setText("Institute overall strength: "+ totalStrength);
+
+                try {
+                    localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+                    if (localFlag == 1) {
+                        //get local record & set to data binding
+                        LiveData<MedicalInfoEntity> medicalInfo = instMainViewModel.getMedicalInfo();
+                        medicalInfo.observe(MedicalActivity.this, new Observer<MedicalInfoEntity>() {
+                            @Override
+                            public void onChanged(MedicalInfoEntity medicalInfoEntity) {
+                                medicalInfo.removeObservers(MedicalActivity.this);
+                                if (medicalInfoEntity != null) {
+                                    binding.setMedical(medicalInfoEntity);
+                                    binding.executePendingBindings();
+                                    checkUpDate = binding.etMedicalCheckupDate.getText().toString();
+                                }
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         });

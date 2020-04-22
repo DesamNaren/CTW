@@ -507,6 +507,7 @@
     <string name="edit">Edit</string>
     <string name="go_home">Are you sure you want to go home?</string>
     <string name="go_back">Are you sure you want to go back?</string>
+    <string name="inst_loc">Selected institute location details does not found. So, You cannot complete the inspection, Still do you want to proceed?</string>
     <string name="diet_issues">Diet Issues</string>
     <string name="last_medical_date">Select last medical check up date</string>
     <string name="select_menu_chart_served">Select Link to latest approved menu chart to be served</string>

@@ -325,8 +325,14 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
                         editor.commit();
 
-                        startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
-                        finish();
+                        if(!TextUtils.isEmpty(instSelectionInfo.getInst_lat()) && Double.valueOf(instSelectionInfo.getInst_lat())>0.0
+                                && !TextUtils.isEmpty(instSelectionInfo.getInst_lng()) && Double.valueOf(instSelectionInfo.getInst_lng())>0.0){
+                            startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
+                            finish();
+                        }else {
+                            Utils.customHomeAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.inst_loc));
+                        }
+
                     }
                 }
             });

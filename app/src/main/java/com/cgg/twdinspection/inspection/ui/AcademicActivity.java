@@ -84,9 +84,29 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                         if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i-1).getStudentCount()>0) {
                             highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
                             binding.highClassStrength.setText("Highest Class: Class "+masterClassInfos.get(i-1).getClassId()+", Strength: " + highClassStrength);
-                            return;
+                            break;
                         }
                     }
+                    try {
+                        localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+                        if (localFlag == 1) {
+                            //get local record & set to data binding
+                            LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
+                            academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
+                                @Override
+                                public void onChanged(AcademicEntity generalInfoEntity) {
+                                    academicInfoData.removeObservers(AcademicActivity.this);
+                                    if (generalInfoEntity != null) {
+                                        binding.setInspData(generalInfoEntity);
+                                        binding.executePendingBindings();
+                                    }
+                                }
+                            });
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 }else {
                     Toast.makeText(AcademicActivity.this, "No master institute data found", Toast.LENGTH_SHORT).show();
@@ -113,25 +133,6 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         instId = sharedPreferences.getString(AppConstants.INST_ID, null);
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, null);
         insTime = sharedPreferences.getString(AppConstants.INSP_TIME, null);
-        try {
-            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
-            if (localFlag == 1) {
-                //get local record & set to data binding
-                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
-                academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
-                    @Override
-                    public void onChanged(AcademicEntity generalInfoEntity) {
-                        academicInfoData.removeObservers(AcademicActivity.this);
-                        if (generalInfoEntity != null) {
-                            binding.setInspData(generalInfoEntity);
-                            binding.executePendingBindings();
-                        }
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         getHighClassStrength();
 

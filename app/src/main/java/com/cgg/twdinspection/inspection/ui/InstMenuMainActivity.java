@@ -263,6 +263,16 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     }
 
     private void getLocationData() {
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                if (mCurrentLocation == null) {
+                    mCurrentLocation = locationResult.getLastLocation();
+                }
+            }
+        };
+
         Location cLocation = null, dLocation = null;
 
         if (!TextUtils.isEmpty(desLat) && !TextUtils.isEmpty(desLng)) {
@@ -279,6 +289,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (cLocation == null) {
             Snackbar.make(binding.appbar.root, getString(R.string.loc_not_ava), Snackbar.LENGTH_SHORT).show();
+
             return;
         }
 
@@ -287,7 +298,8 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (distance <= AppConstants.DISTANCE) {
                 submitCall();
             } else {
-                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the 100 meter radius of selected institute");
+                Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the "
+                        + AppConstants.DISTANCE+" meter radius of selected institute");
             }
         } else {
             Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, institute location details are not found");
