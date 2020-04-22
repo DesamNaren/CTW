@@ -338,7 +338,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                     adapter.addFrag(pUnitFragment, "Processing Units");
                                 }
 
-                                if (punit_flag && dailyreq_flag && emp_flag && ess_flag && mfp_flag) {
+                                if (!punit_flag && !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag) {
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
