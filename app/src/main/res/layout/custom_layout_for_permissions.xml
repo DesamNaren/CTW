@@ -25,7 +25,7 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:padding="@dimen/dimen_4dp"
-                    android:src="@drawable/ctw_icon" />
+                    android:src="@drawable/ctw_icon_latest" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:layout_width="wrap_content"
