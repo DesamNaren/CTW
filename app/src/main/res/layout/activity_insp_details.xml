@@ -964,6 +964,7 @@
                             android:layout_width="match_parent"
                             android:id="@+id/et_obs"
                             android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                             android:imeOptions="actionNext"
                             android:paddingLeft="@dimen/dimen_10dp" />
 
