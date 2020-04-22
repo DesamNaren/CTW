@@ -276,9 +276,10 @@
                                 android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                 android:hint="Reason mentioned by incharge regarding deficit / surplus"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:inputType="textMultiLine" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -1575,9 +1576,10 @@
                                             android:id="@+id/et_repairs_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                             android:hint="Repairs type"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true" />
+                                            android:inputType="textMultiLine" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1609,9 +1611,10 @@
                                     android:id="@+id/et_feedback"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:hint="Feedback of Card Holders"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:inputType="textMultiLine" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -1633,7 +1636,7 @@
                                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:hint="Remarks of Inspection officer"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:inputType="textMultiLine" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 

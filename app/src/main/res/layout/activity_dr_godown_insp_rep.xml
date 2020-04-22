@@ -91,18 +91,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvSysVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerSystem}"
                                 android:textColor="@color/black"
@@ -117,18 +117,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvPhysVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerPhysical}"
                                 android:textColor="@color/black"
@@ -143,18 +143,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Deficit / Surplus "
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvDiffVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.deficit}"
                                 android:textColor="@color/black"
@@ -188,10 +188,11 @@
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:enabled="false"
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:inputType="textMultiLine"
                                     android:text="@{inspData.stockDetails.deficitReason}"
                                     android:textColor="@color/black" />
 
@@ -1250,10 +1251,11 @@
                                             android:id="@+id/et_repair_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                             android:enabled="false"
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true"
+                                            android:inputType="textMultiLine"
                                             android:text="@{inspData.generalFindings.repairType}"
                                             android:textColor="@color/black" />
 
@@ -1298,11 +1300,11 @@
                                         android:id="@+id/et_remarks"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:enabled="false"
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                        android:enabled="false"
                                         android:hint="@string/remarks"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
+                                        android:inputType="textMultiLine"
                                         android:text="@{inspData.generalFindings.remarks}"
                                         android:textColor="@color/black" />
 

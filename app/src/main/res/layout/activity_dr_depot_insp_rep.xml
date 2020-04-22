@@ -84,18 +84,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_sys_val"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.stockValueAsPerSystem}"
                                 android:textColor="@color/black"
@@ -110,18 +110,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_phys_val"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.stockValueAsPerPhysical}"
                                 android:textColor="@color/black"
@@ -136,18 +136,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@string/difference"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_diff_val"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{drDepot.stockDetails.deficit}"
                                 android:textColor="@color/black"
@@ -296,10 +296,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:clickable="false"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                 android:focusableInTouchMode="false"
                                 android:hint="Reason mentioned by incharge regarding deficit / surplus "
                                 android:imeOptions="actionNext"
-                                android:singleLine="true"
+                                android:inputType="textMultiLine"
                                 android:text="@{drDepot.stockDetails.deficit_reason}"
                                 android:textColor="@color/black" />
 
@@ -1690,10 +1691,11 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:clickable="false"
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                             android:focusableInTouchMode="false"
                                             android:hint="Repairs type"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true"
+                                            android:inputType="textMultiLine"
                                             android:text="@{drDepot.generalFindings.repairType}"
                                             android:textColor="@color/black" />
 
@@ -1740,10 +1742,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:clickable="false"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                     android:focusableInTouchMode="false"
                                     android:hint="Feedback of Card Holders"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:inputType="textMultiLine"
                                     android:text="@{drDepot.generalFindings.feedback}"
                                     android:textColor="@color/black" />
 
@@ -1768,7 +1771,7 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="Remarks of Inspection officer"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:inputType="textMultiLine"
                                     android:text="@{drDepot.generalFindings.remarks}"
                                     android:textColor="@color/black" />
 
