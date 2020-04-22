@@ -355,24 +355,24 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         if (flag_entrance == 0) {
             returnFlag = false;
             showSnackBar("Please capture entrance image");
-        } else if (flag_office1 == 0) {
+        }else if (flag_machinary1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
-        } else if (flag_office2 == 0) {
+            showSnackBar("Please capture machinary image");
+        } else if (flag_machinary2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture office image");
+            showSnackBar("Please capture machinary image");
         } else if (flag_safety_equip1 == 0) {
             returnFlag = false;
             showSnackBar("Please capture safety equipment image");
         } else if (flag_safety_equip2 == 0) {
             returnFlag = false;
             showSnackBar("Please capture safety equipment image");
-        } else if (flag_machinary1 == 0) {
+        }  else if (flag_office1 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
-        } else if (flag_machinary2 == 0) {
+            showSnackBar("Please capture office image");
+        } else if (flag_office2 == 0) {
             returnFlag = false;
-            showSnackBar("Please capture machinary image");
+            showSnackBar("Please capture office image");
         }
         return returnFlag;
     }

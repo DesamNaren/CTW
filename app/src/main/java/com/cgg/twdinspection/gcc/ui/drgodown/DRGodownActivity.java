@@ -273,7 +273,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                                 callSnackBar(getString(R.string.something));
                             }
 
-                            if (dailyreq_flag && emp_flag && ess_flag) {
+                            if (!dailyreq_flag && !emp_flag && !ess_flag) {
                                 binding.viewPager.setVisibility(View.GONE);
                                 binding.tabs.setVisibility(View.GONE);
                                 binding.noDataTv.setVisibility(View.VISIBLE);

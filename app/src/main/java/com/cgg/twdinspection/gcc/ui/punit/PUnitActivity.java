@@ -50,6 +50,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
     private PUnits pUnits;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
         PUnitFragment.commonCommodities = null;
 
         customProgressDialog = new CustomProgressDialog(this);
-        viewModel = new StockViewModel(getApplication(),this);
+        viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         binding.header.ivHome.setVisibility(View.GONE);
@@ -100,12 +101,12 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean existFlag= false;
+                boolean existFlag = false;
                 if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
                     stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
-                            existFlag= true;
+                            existFlag = true;
                             break;
                         }
                     }
@@ -120,11 +121,11 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                     }
                 }
 
-                if (!existFlag &&EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
                     stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
-                            existFlag=true;
+                            existFlag = true;
                             break;
                         }
                     }
@@ -134,7 +135,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                     stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                           existFlag=true;
+                            existFlag = true;
                             break;
                         }
                     }
@@ -144,13 +145,13 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                     stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
                     for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-                            existFlag=true;
+                            existFlag = true;
                             break;
                         }
                     }
                 }
 
-                if(existFlag) {
+                if (existFlag) {
                     Gson gson = new Gson();
                     String stockData = gson.toJson(stockDetailsResponsemain);
                     try {
@@ -162,7 +163,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                     editor.commit();
                     Intent intent = new Intent(PUnitActivity.this, PUnitsFindingsActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Utils.customErrorAlert(PUnitActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
             }
@@ -192,6 +193,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
                                     stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
                                     EssentialFragment essentialFragment = new EssentialFragment();
                                     Gson gson = new Gson();
@@ -203,6 +205,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                 }
 
                                 if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
                                     stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
                                     DailyFragment dailyFragment = new DailyFragment();
                                     Gson gson = new Gson();
@@ -214,6 +217,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                 }
 
                                 if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
                                     stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
                                     EmptiesFragment emptiesFragment = new EmptiesFragment();
                                     Gson gson = new Gson();
@@ -226,6 +230,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
 
                                 if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                                    mfp_flag = true;
                                     stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                     MFPFragment mfpFragment = new MFPFragment();
                                     Gson gson = new Gson();
@@ -237,6 +242,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                 }
 
                                 if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+                                    punit_flag = true;
                                     stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
                                     PUnitFragment pUnitFragment = new PUnitFragment();
                                     Gson gson = new Gson();
@@ -245,6 +251,14 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                     bundle.putString(AppConstants.punit, essentialComm);
                                     pUnitFragment.setArguments(bundle);
                                     adapter.addFrag(pUnitFragment, "Processing Units");
+                                }
+                                if (!punit_flag && !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag) {
+                                    binding.viewPager.setVisibility(View.GONE);
+                                    binding.tabs.setVisibility(View.GONE);
+                                    binding.noDataTv.setVisibility(View.VISIBLE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                                    callSnackBar(stockDetailsResponse.getStatusMessage());
                                 }
 
                                 binding.tabs.setupWithViewPager(binding.viewPager);

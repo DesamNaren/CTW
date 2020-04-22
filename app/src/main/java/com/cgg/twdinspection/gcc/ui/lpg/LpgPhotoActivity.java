@@ -42,8 +42,6 @@ import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
@@ -126,7 +124,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             suppId = lpgSupplierInfo.getGodownId();
             godName = lpgSupplierInfo.getGodownName();
         }
-        
+
 
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,10 +262,10 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 lpgCommodities.setSystemRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 lpgCommodities.setSystemValue(stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 lpgCommodities.setPhysicalRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
+                if (!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                     lpgCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
                     lpgCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                }else{
+                } else {
                     lpgCommodities.setPhysiacalQty(-1.0);
                     lpgCommodities.setPhysicalValue(-1.0);
                 }
@@ -282,6 +280,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         stockSubmitRequest.setTotalSystemValue(Double.parseDouble(sysVal));
         stockSubmitRequest.setTotalPhysicalValue(Double.parseDouble(phyVal));
     }
+
     private void callPhotoSubmit() {
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file_entrance);
@@ -337,18 +336,18 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         if (flag_entrance == 0) {
             returnFlag = false;
             showSnackBar("Please capture entrance image");
+        } else if (flag_safety_eq1 == 0) {
+            returnFlag = false;
+            showSnackBar("Please capture safety equipment image");
+        } else if (flag_safety_eq2 == 0) {
+            returnFlag = false;
+            showSnackBar("Please capture safety equipment image");
         } else if (flag_floor == 0) {
             returnFlag = false;
             showSnackBar("Please capture floor image");
         } else if (flag_ceiling == 0) {
             returnFlag = false;
             showSnackBar("Please capture ceiling image");
-        }  else if (flag_safety_eq1 == 0) {
-            returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
-        } else if (flag_safety_eq2 == 0) {
-            returnFlag = false;
-            showSnackBar("Please capture safety equipment image");
         } else if (flag_office == 0) {
             returnFlag = false;
             showSnackBar("Please capture office image");

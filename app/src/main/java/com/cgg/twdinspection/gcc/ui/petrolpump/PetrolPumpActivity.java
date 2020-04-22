@@ -25,7 +25,6 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpBinding;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PLPGFragment;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -153,6 +152,13 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                                     bundle.putString(AppConstants.petComm, petrolComm);
                                     plpgFragment.setArguments(bundle);
                                     adapter.addFrag(plpgFragment, "Petrol Commodities");
+                                }else {
+                                    binding.viewPager.setVisibility(View.GONE);
+                                    binding.tabs.setVisibility(View.GONE);
+                                    binding.noDataTv.setVisibility(View.VISIBLE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                    binding.noDataTv.setText(petrolStockDetailsResponse.getStatusMessage());
+                                    callSnackBar(petrolStockDetailsResponse.getStatusMessage());
                                 }
 
                                 binding.tabs.setupWithViewPager(binding.viewPager);
