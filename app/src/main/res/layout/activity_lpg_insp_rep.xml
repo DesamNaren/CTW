@@ -187,7 +187,7 @@
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:text="@{inspData.stockDetails.deficitReason}"
                                     android:textColor="@color/black" />
                                 />
@@ -1226,7 +1226,7 @@
                                             android:id="@+id/et_repair_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                             android:enabled="false"
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"

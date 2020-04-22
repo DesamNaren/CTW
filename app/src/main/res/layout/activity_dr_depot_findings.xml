@@ -276,7 +276,7 @@
                                 android:id="@+id/et_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="Reason mentioned by incharge regarding deficit / surplus"
                                 android:imeOptions="actionNext"
                                 android:inputType="textMultiLine" />
@@ -1576,7 +1576,7 @@
                                             android:id="@+id/et_repairs_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                             android:hint="Repairs type"
                                             android:imeOptions="actionNext"
                                             android:inputType="textMultiLine" />
@@ -1611,7 +1611,7 @@
                                     android:id="@+id/et_feedback"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="Feedback of Card Holders"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine" />
@@ -1633,7 +1633,7 @@
                                     android:id="@+id/et_remarks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="Remarks of Inspection officer"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine" />

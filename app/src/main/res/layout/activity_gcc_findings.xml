@@ -191,7 +191,7 @@
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine" />
@@ -1170,7 +1170,7 @@
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
                                             android:inputType="textMultiLine"
-                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                             />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -1202,7 +1202,7 @@
                                         android:id="@+id/et_remarks"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/remarks"
                                         android:imeOptions="actionNext"
                                         android:inputType="textMultiLine" />

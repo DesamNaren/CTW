@@ -685,7 +685,7 @@
                                     android:id="@+id/et_repair_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/repair_type"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine" />
@@ -719,7 +719,7 @@
                                 android:id="@+id/et_remarks"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/remarks"
                                 android:imeOptions="actionNext"
                                 android:inputType="textMultiLine" />
