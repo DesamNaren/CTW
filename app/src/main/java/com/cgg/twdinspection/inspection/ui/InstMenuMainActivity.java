@@ -263,15 +263,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     }
 
     private void getLocationData() {
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                if (mCurrentLocation == null) {
-                    mCurrentLocation = locationResult.getLastLocation();
-                }
-            }
-        };
 
         Location cLocation = null, dLocation = null;
 
