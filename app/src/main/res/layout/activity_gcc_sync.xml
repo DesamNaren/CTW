@@ -16,17 +16,17 @@
         android:background="@color/bg"
         android:orientation="vertical">
 
-    <!--    <RelativeLayout
-            android:id="@+id/cv_profile"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorPrimary" />-->
+        <!--    <RelativeLayout
+                android:id="@+id/cv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/colorPrimary" />-->
 
         <include
             android:id="@+id/header"
             layout="@layout/action_bar_layout" />
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:id="@+id/rl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,13 +79,13 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+        </RelativeLayout>-->
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/dimen_20dp"
-            android:layout_below="@+id/rl_profile">
+            android:layout_below="@+id/rl_profile"
+            android:layout_margin="@dimen/dimen_20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,31 +107,49 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_division"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/gcc_dark"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_10dp"
-                                android:background="@drawable/division"
-                                android:backgroundTint="@color/white"/>
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Division Master"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/division"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Division Master"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/white"/>
+
+                            <Button
+                                android:id="@+id/btn_division"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/gcc_dark"
+                                android:text="Download"
+                                android:textAllCaps="false"
                                 android:textColor="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,29 +166,45 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_dr_godown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/schemes"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_10dp"
-                                android:background="@drawable/gcc_dr_godown"
-                                android:backgroundTint="@color/white"/>
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="DR Godown"
-                                android:textColor="@color/white" />
+                                android:background="@color/schemes"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_dr_godown"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="DR Godown"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_dr_godown"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -181,28 +215,44 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_dr_depot"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/inst_dark"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:background="@drawable/gcc_dr_depot"
-                                android:padding="@dimen/dimen_10dp"
-                                android:backgroundTint="@color/white" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="DR Depot"
-                                android:textColor="@color/white" />
+                                android:background="@color/inst_dark"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_dr_depot"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="DR Depot"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_dr_depot"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+
                         </LinearLayout>
+
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
@@ -222,28 +272,43 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_mfp_godown"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/eng_dark"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_10dp"
-                                android:background="@drawable/gcc_mfp_godown"
-                                android:backgroundTint="@color/white" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="MFP Godown"
-                                android:textColor="@color/white" />
+                                android:background="@color/eng_dark"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_mfp_godown"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="MFP Godown"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_mfp_godown"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
                         </LinearLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -256,34 +321,47 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_p_unit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/colorPrimaryDark"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:background="@drawable/gcc_p_unit"
-                                android:backgroundTint="@color/white"/>
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Processing Unit"
-                                android:textColor="@color/white" />
+                                android:background="@color/colorPrimaryDark"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_p_unit"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_20dp"
+                                    android:paddingBottom="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Processing Unit"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_p_unit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -301,27 +379,41 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_petrol_pump"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/gcc_dark"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_10dp"
-                                android:background="@drawable/gcc_petrol"
-                                android:backgroundTint="@color/white" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Petrol Pump"
-                                android:textColor="@color/white" />
+                                android:background="@color/gcc_dark"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_petrol"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Petrol Pump"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_petrol_pump"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -335,28 +427,42 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_lpg"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@color/green"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
-                                android:layout_margin="@dimen/dimen_20dp"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:background="@drawable/gcc_lpg"
-                                android:backgroundTint="@color/white"/>
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="LPG"
-                                android:textColor="@color/white" />
+                                android:background="@color/green"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen_50dp"
+                                    android:layout_height="@dimen/dimen_50dp"
+                                    android:layout_margin="@dimen/dimen_20dp"
+                                    android:background="@drawable/gcc_lpg"
+                                    android:backgroundTint="@color/white"
+                                    android:padding="@dimen/dimen_20dp"
+                                    android:paddingBottom="@dimen/dimen_10dp" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="LPG"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_lpg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 

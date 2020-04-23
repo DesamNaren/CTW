@@ -16,25 +16,34 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccSyncBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCDivisionInterface;
 import com.cgg.twdinspection.gcc.room.repository.GCCSyncRepository;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCSyncViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInterface, ErrorHandlerInterface {
     private GCCSyncRepository gccSyncRepository;
@@ -44,6 +53,8 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
+    private DivisionSelectionViewModel divisionSelectionViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +69,101 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         gccSyncRepository = new GCCSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
+        divisionSelectionViewModel = new DivisionSelectionViewModel(getApplication());
 
         binding.header.ivHome.setVisibility(View.GONE);
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
-            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
-            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
-            binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
+//            binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
+//            binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+//            binding.includeBasicLayout.inspectionTime.setText(sharedPreferences.getString(AppConstants.INSP_TIME, ""));
         } catch (Exception e) {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+        LiveData<List<LPGSupplierInfo>> lpgLiveData = divisionSelectionViewModel.getAllLPGSuppliers();
+        lpgLiveData.observe(this, new Observer<List<LPGSupplierInfo>>() {
+            @Override
+            public void onChanged(List<LPGSupplierInfo> drGodowns) {
+                lpgLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnLpg.setText("Download");
+                else
+                    binding.btnLpg.setText("Re-Download");
+
+            }
+        });
+
+
+        LiveData<List<PetrolSupplierInfo>> petrolLiveData = divisionSelectionViewModel.getAllPetrolPumps();
+        petrolLiveData.observe(this, new Observer<List<PetrolSupplierInfo>>() {
+            @Override
+            public void onChanged(List<PetrolSupplierInfo> drGodowns) {
+                petrolLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnPetrolPump.setText("Download");
+                else
+                    binding.btnPetrolPump.setText("Re-Download");
+            }
+        });
+
+
+        LiveData<List<PUnits>> punitLiveData = divisionSelectionViewModel.getAllPUnits();
+        punitLiveData.observe(this, new Observer<List<PUnits>>() {
+            @Override
+            public void onChanged(List<PUnits> drGodowns) {
+                punitLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnPUnit.setText("Download");
+                else
+                    binding.btnPUnit.setText("Re-Download");
+
+            }
+        });
+        LiveData<List<MFPGoDowns>> mfpLiveData = divisionSelectionViewModel.getAllMFPGoDowns();
+        mfpLiveData.observe(this, new Observer<List<MFPGoDowns>>() {
+            @Override
+            public void onChanged(List<MFPGoDowns> drGodowns) {
+                mfpLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnMfpGodown.setText("Download");
+                else
+                    binding.btnMfpGodown.setText("Re-Download");
+            }
+        });
+
+        LiveData<List<DRDepots>> drDepotLiveData = divisionSelectionViewModel.getAllDRDepots();
+        drDepotLiveData.observe(this, new Observer<List<DRDepots>>() {
+            @Override
+            public void onChanged(List<DRDepots> drGodowns) {
+                drDepotLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnDrDepot.setText("Download");
+                else
+                    binding.btnDrDepot.setText("Re-Download");
+
+            }
+        });
+
+        LiveData<List<DrGodowns>> drGodownLiveData = divisionSelectionViewModel.getAllDRGoDowns();
+        drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
+            @Override
+            public void onChanged(List<DrGodowns> drGodowns) {
+                drGodownLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0)
+                    binding.btnDrGodown.setText("Download");
+                else
+                    binding.btnDrGodown.setText("Re-Download");
+            }
+        });
 
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +172,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                 onBackPressed();
             }
         });
+
         binding.btnDivision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
