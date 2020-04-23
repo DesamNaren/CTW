@@ -86,18 +86,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvSysVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerSystem}"
                                 android:textColor="@color/black"
@@ -112,18 +112,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvPhysVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.stockValueAsPerPhysical}"
                                 android:textColor="@color/black"
@@ -138,18 +138,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Deficit / Surplus "
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tvDiffVal"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="@{inspData.stockDetails.deficit}"
                                 android:textColor="@color/black"
@@ -186,7 +186,8 @@
                                     android:enabled="false"
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true"
+                                    android:inputType="textMultiLine"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:text="@{inspData.stockDetails.deficitReason}"
                                     android:textColor="@color/black" />
                                 />
@@ -1225,10 +1226,11 @@
                                             android:id="@+id/et_repair_type"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                             android:enabled="false"
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true"
+                                            android:inputType="textMultiLine"
                                             android:text="@{inspData.generalFindings.repairsType}"
                                             android:textColor="@color/black" />
 
@@ -1275,7 +1277,7 @@
                                         android:enabled="false"
                                         android:hint="Remarks of Inspection officer"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
+                                        android:inputType="textMultiLine"
                                         android:text="@{inspData.generalFindings.remarks}"
                                         android:textColor="@color/black" />
 

@@ -290,9 +290,9 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     }
 
-    void callUploadPhoto(final MultipartBody.Part body, final MultipartBody.Part body2) {
+    void callUploadPhoto(List<MultipartBody.Part> partList) {
         customProgressDialog.show();
-        viewModel.UploadImageServiceCall(body, body2);
+        viewModel.UploadImageServiceCall(partList);
     }
 
     private void CallSuccessAlert(String msg) {
@@ -462,7 +462,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     public void getData(SchemeSubmitResponse schemeSubmitResponse) {
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)
-        &&imgflag1 == 1 && imgflag2 == 1) {
+        &&(imgflag1 == 1 || imgflag2 == 1)) {
 
             callSnackBar("Data inserted sucessfully.Uploading photos...");
 
@@ -480,7 +480,12 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     RequestBody.create(MediaType.parse("multipart/form-data"), file2);
             MultipartBody.Part body2 =
                     MultipartBody.Part.createFormData("image", file2.getName(), requestFile1);
-            callUploadPhoto(body, body2);
+            List<MultipartBody.Part> partList=new ArrayList<>();
+            if(PIC_NAME!=null)
+                partList.add(body);
+            if(PIC_NAME2!=null)
+                partList.add(body2);
+            callUploadPhoto(partList);
 
         }else  if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)
                 &&imgflag1 == 0 && imgflag2 == 0){

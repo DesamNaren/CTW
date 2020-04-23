@@ -20,9 +20,9 @@
 
 
         <ScrollView
-            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
             <LinearLayout
@@ -676,8 +676,8 @@
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dimen_5dp"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_5dp"
                                 android:textColorHint="@color/colorAccent"
                                 app:errorEnabled="true">
 
@@ -685,9 +685,10 @@
                                     android:id="@+id/et_repair_type"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/repair_type"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:inputType="textMultiLine" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -709,8 +710,8 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen_5dp"
                             android:layout_marginLeft="@dimen/dimen_5dp"
+                            android:layout_marginTop="@dimen/dimen_5dp"
                             android:textColorHint="@color/colorAccent"
                             app:errorEnabled="true">
 
@@ -718,10 +719,10 @@
                                 android:id="@+id/et_remarks"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/remarks"
                                 android:imeOptions="actionNext"
-                                android:singleLine="true" />
+                                android:inputType="textMultiLine" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -732,15 +733,17 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll" />
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>

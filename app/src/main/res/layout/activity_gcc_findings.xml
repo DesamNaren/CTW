@@ -73,18 +73,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System"
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:layout_weight="1"
                                 android:id="@+id/tvSysVal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -98,18 +98,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Inspected)"
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:layout_weight="1"
                                 android:id="@+id/tvInsSysVal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -123,18 +123,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per Physical Verification"
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:layout_weight="1"
                                 android:id="@+id/tvPhysVal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -148,18 +148,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Deficit / Surplus "
                                 android:textColor="@color/black" />
 
                             <TextView
-                                android:layout_weight="1"
                                 android:id="@+id/tvDiffVal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -191,9 +191,10 @@
                                     android:id="@+id/et_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:singleLine="true" />
+                                    android:inputType="textMultiLine" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -205,18 +206,18 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:text="Stock Value as per System (Not inspected)"
                                 android:textColor="@color/black" />
 
                             <TextView
                                 android:id="@+id/tv_sys_val_not_ins"
-                                android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
                                 android:textColor="@color/black"
                                 android:textSize="18sp"
@@ -1168,7 +1169,9 @@
                                             android:layout_height="wrap_content"
                                             android:hint="@string/repair_type"
                                             android:imeOptions="actionNext"
-                                            android:singleLine="true" />
+                                            android:inputType="textMultiLine"
+                                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
+                                            />
 
                                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -1198,11 +1201,11 @@
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
                                         android:id="@+id/et_remarks"
                                         android:layout_width="match_parent"
-                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                                         android:layout_height="wrap_content"
+                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/remarks"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true" />
+                                        android:inputType="textMultiLine" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 

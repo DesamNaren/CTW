@@ -19,7 +19,7 @@
             android:focusableInTouchMode="false"
             android:hint="@string/remarks"
             android:imeOptions="actionNext"
-            android:singleLine="true"
+            android:inputType="textMultiLine"
             android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>

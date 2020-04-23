@@ -83,9 +83,9 @@ public class BenDetailsViewModel extends ViewModel {
         });
     }
 
-    public void UploadImageServiceCall(final MultipartBody.Part body,final MultipartBody.Part body2) {
+    public void UploadImageServiceCall(List<MultipartBody.Part> partList) {
         TWDService twdService = TWDService.Factory.create("school");
-        twdService.uploadSchemeImageCall(body,body2).enqueue(new Callback<SchemePhotoSubmitResponse>() {
+        twdService.uploadSchemeImageCall(partList).enqueue(new Callback<SchemePhotoSubmitResponse>() {
             @Override
             public void onResponse(@NotNull Call<SchemePhotoSubmitResponse> call, @NotNull Response<SchemePhotoSubmitResponse> response) {
                 schemeSubmitInterface.getPhotoData(response.body());

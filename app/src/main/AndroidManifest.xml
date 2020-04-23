@@ -14,10 +14,10 @@
     <application
         android:name=".common.application.TWDApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ctw_icon"
+        android:icon="@drawable/ctw_icon_latest"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@drawable/ctw_icon"
+        android:roundIcon="@drawable/ctw_icon_latest"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">

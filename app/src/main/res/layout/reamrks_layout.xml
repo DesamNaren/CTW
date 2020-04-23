@@ -6,8 +6,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_5dp"
         android:layout_marginLeft="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
         android:textColorHint="@color/colorAccent"
         app:errorEnabled="true">
 
@@ -15,10 +15,10 @@
             android:id="@+id/et_remarks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
             android:hint="@string/remarks"
-            android:inputType="text"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "            android:imeOptions="actionNext"
-            android:singleLine="true" />
+            android:imeOptions="actionNext"
+            android:inputType="textMultiLine" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
