@@ -266,8 +266,8 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     lpgCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
                     lpgCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 } else {
-                    lpgCommodities.setPhysiacalQty(-1.0);
-                    lpgCommodities.setPhysicalValue(-1.0);
+                    //lpgCommodities.setPhysiacalQty(-1.0);
+                    //lpgCommodities.setPhysicalValue(-1.0);
                 }
                 lpgReqCommoditiesList.add(lpgCommodities);
             }

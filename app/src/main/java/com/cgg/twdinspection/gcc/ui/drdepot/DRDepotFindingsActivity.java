@@ -122,7 +122,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
                         if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                             physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                            insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
+                            insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                 }
@@ -131,7 +131,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }

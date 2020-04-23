@@ -309,8 +309,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate());
                 }else{
-                    essentialCommodity.setPhysiacalQty(-1.0);
-                    essentialCommodity.setPhysicalValue(-1.0);
+                    //essentialCommodity.setPhysiacalQty(-1.0);
+                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 essentialCommodityList.add(essentialCommodity);
             }
@@ -329,8 +329,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate());
                 }else{
-                    essentialCommodity.setPhysiacalQty(-1.0);
-                    essentialCommodity.setPhysicalValue(-1.0);
+                   // essentialCommodity.setPhysiacalQty(-1.0);
+                   // essentialCommodity.setPhysicalValue(-1.0);
                 }
                 dailyReqList.add(essentialCommodity);
             }
@@ -349,8 +349,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate());
                 }else{
-                    essentialCommodity.setPhysiacalQty(-1.0);
-                    essentialCommodity.setPhysicalValue(-1.0);
+                    //essentialCommodity.setPhysiacalQty(-1.0);
+                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 mfp_commodities.add(essentialCommodity);
             }
@@ -369,8 +369,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate());
                 }else{
-                    essentialCommodity.setPhysiacalQty(-1.0);
-                    essentialCommodity.setPhysicalValue(-1.0);
+                    //essentialCommodity.setPhysiacalQty(-1.0);
+                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 emptiesList.add(essentialCommodity);
             }
@@ -389,8 +389,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                     essentialCommodity.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()));
                     essentialCommodity.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate());
                 }else{
-                    essentialCommodity.setPhysiacalQty(-1.0);
-                    essentialCommodity.setPhysicalValue(-1.0);
+                    //essentialCommodity.setPhysiacalQty(-1.0);
+                    //essentialCommodity.setPhysicalValue(-1.0);
                 }
                 processing_units.add(essentialCommodity);
             }
