@@ -22,4 +22,14 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/filter" />
 
+    <item
+        android:visible="false"
+        android:orderInCategory="300"
+        android:id="@+id/mi_sync"
+        android:title="Sync"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/sync_white"
+        android:iconTint="@color/white"/>
+
+
 </menu>
