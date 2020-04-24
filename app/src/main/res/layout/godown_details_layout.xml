@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableLeft="@drawable/user_16"
+            android:drawableLeft="@drawable/division"
             android:drawableTint="@color/colorPrimary"
             android:text="Division"
             android:drawablePadding="@dimen/dimen_10dp" />
@@ -49,7 +49,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/user_16"
+                android:drawableLeft="@drawable/supplier"
                 android:drawableTint="@color/colorPrimary"
                 android:text="Society"
                 android:drawablePadding="@dimen/dimen_10dp" />
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/user_16"
+                android:drawableLeft="@drawable/dr_godown"
                 android:drawableTint="@color/colorPrimary"
                 android:text="DR Godown"
                 android:drawablePadding="@dimen/dimen_10dp" />
