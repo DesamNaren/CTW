@@ -500,7 +500,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("DIV_CNT", "divCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Division master synced successfully");
+                        "Division master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No divisions found");
             }
@@ -516,7 +516,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("SUP_CNT", "supCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "DR Depot master synced successfully");
+                        "DR Depot master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No No DR Depots found");
             }
@@ -532,7 +532,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("SUP_CNT", "drGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "DR GoDown master synced successfully");
+                        "DR GoDown master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No DR GoDowns found");
             }
@@ -548,7 +548,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("SUP_CNT", "mfpGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "MFP GoDown master synced successfully");
+                        "MFP GoDown master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No MFP GoDowns found");
             }
@@ -564,7 +564,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("SUP_CNT", "pUnitCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Processing Unit master synced successfully");
+                        "Processing Unit master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Processing Units found");
             }
@@ -580,7 +580,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("PETROL_CNT", "petrolCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Petrol pump master synced successfully");
+                        "Petrol pump master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No Petrol pumps found");
             }
@@ -596,7 +596,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
             if (cnt > 0) {
                 Log.i("LPG_CNT", "lpglCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
-                        "LPG master synced successfully");
+                        "LPG master data downloaded successfully");
             } else {
                 Utils.customErrorAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name), "No LPG data found");
             }
