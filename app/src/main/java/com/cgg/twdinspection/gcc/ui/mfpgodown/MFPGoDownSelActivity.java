@@ -103,7 +103,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns== null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this,getString(R.string.app_name),"No MFP Godowns found...\n Do you want to sync MFP Godowns?");
+                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this,getString(R.string.app_name),"No MFP Godowns found...\n Please download MFP Godown master data to proceed further?");
                 }
             }
         });

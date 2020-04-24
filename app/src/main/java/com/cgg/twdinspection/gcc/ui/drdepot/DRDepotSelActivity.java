@@ -108,7 +108,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 drGodownLiveData.removeObservers(DRDepotSelActivity.this);
                 customProgressDialog.dismiss();
                 if (drGodowns== null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No DR Depots found...\n Do you want to sync DR Depots?");
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No DR Depots found...\n Please download DR Depot master da to proceed further");
                 }
             }
         });

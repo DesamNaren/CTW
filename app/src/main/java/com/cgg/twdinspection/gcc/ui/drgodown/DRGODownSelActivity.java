@@ -107,7 +107,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                         drGodownLiveData.removeObservers(DRGODownSelActivity.this);
                         customProgressDialog.dismiss();
                         if (drGodowns== null || drGodowns.size() <= 0) {
-                            Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No DR Godowns found...\n Do you want to sync DR Godowns?");
+                            Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No DR Godowns found...\n Please download DR Godown master data to proceed further?");
                         }
                     }
                 });

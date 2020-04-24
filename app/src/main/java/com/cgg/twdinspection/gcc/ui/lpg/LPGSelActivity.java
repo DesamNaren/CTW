@@ -97,7 +97,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                     );
                     binding.spDivision.setAdapter(adapter);
                 }else{
-                    Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No divisions found...\n Please download the division master data to proceed further?");
                 }
             }
         });
@@ -108,7 +108,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                         lpgLiveData.removeObservers(LPGSelActivity.this);
                         customProgressDialog.dismiss();
                         if (lpgSupplierInfos== null || lpgSupplierInfos.size() <= 0) {
-                            Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No LPG godowns found...\n Do you want to sync LPG godowns?");
+                            Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No LPG godowns found...\n Please download LPG godown master data to proceed further");
                         }
                     }
                 });

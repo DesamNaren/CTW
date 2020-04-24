@@ -107,7 +107,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                         petrolLiveData.removeObservers(PetrolPumpSelActivity.this);
                         customProgressDialog.dismiss();
                         if (petrolSupplierInfos== null || petrolSupplierInfos.size() <= 0) {
-                            Utils.customGCCSyncAlert(PetrolPumpSelActivity.this,getString(R.string.app_name),"No Petrol pumps found...\n Do you want to sync Petrol pumps?");
+                            Utils.customGCCSyncAlert(PetrolPumpSelActivity.this,getString(R.string.app_name),"No Petrol pumps found...\n Please download petrol pump master ata to proceed further?");
                         }
                     }
                 });
