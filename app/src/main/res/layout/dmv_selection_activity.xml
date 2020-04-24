@@ -31,7 +31,8 @@
             android:id="@+id/rl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_100dp">
+            android:layout_marginTop="@dimen/_100dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/cover"
@@ -75,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center">
+
                         <include
                             android:id="@+id/include_basic_layout"
                             layout="@layout/details_layout" />
@@ -88,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_proceed"
-            android:layout_below="@+id/rl_profile"
+            android:layout_below="@+id/header"
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginTop="@dimen/dimen_30dp"
             android:layout_marginRight="@dimen/dimen_20dp">
@@ -96,6 +98,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:visibility="visible"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="6dp"
@@ -168,19 +171,19 @@
                         android:padding="@dimen/dimen_5dp">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/mandal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:id="@+id/mandal"
                             android:hint="Mandal"
+                            android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
                         <Spinner
                             android:id="@+id/sp_Mandal"
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:spinnerMode="dropdown" />
+                            android:spinnerMode="dropdown"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <View
@@ -196,11 +199,11 @@
                         android:padding="@dimen/dimen_5dp">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/village"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:hint="Village"
-                            android:id="@+id/village"
+                            android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
                         <Spinner
@@ -208,7 +211,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:spinnerMode="dropdown"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
 
                     </LinearLayout>
@@ -227,17 +230,14 @@
                         android:padding="@dimen/dimen_5dp">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
                             android:hint="Address"
-                            android:id="@+id/address"
+                            android:padding="@dimen/dimen_5dp"
                             android:textColor="@color/black" />
 
                     </LinearLayout>
-
-
-
 
 
                 </LinearLayout>
@@ -249,7 +249,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_proceed"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_proceed"

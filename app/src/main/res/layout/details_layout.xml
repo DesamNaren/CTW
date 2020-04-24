@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.cgg.twdinspection.common.custom.CustomFontTextView
-            android:textColor="@color/black"
-            android:id="@+id/offNme"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/user_16"
-            android:drawableTint="@color/colorPrimary"
-            android:drawablePadding="@dimen/dimen_10dp" />
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp">
 
-        <com.cgg.twdinspection.common.custom.CustomFontTextView
-            android:textColor="@color/black"
-            android:id="@+id/offDes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_8dp"
-            android:layout_marginBottom="@dimen/dimen_8dp"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableLeft="@drawable/role_16"
-            android:drawablePadding="@dimen/dimen_10dp" />
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/offNme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-        <com.cgg.twdinspection.common.custom.CustomFontTextView
-            android:textColor="@color/black"
-            android:id="@+id/inspectionTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_8dp"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableLeft="@drawable/clock_16"
-            android:drawablePadding="@dimen/dimen_10dp" />
-        <com.cgg.twdinspection.common.custom.CustomFontTextView
-            android:textColor="@color/black"
-            android:id="@+id/tvplace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableLeft="@drawable/location_16"
-            android:drawablePadding="@dimen/dimen_10dp" />
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/offDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/inspectionTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                android:id="@+id/tvplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
 </layout>

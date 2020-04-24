@@ -2,12 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-   <variable
-       name="viewModel"
-       type="com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel" />
 
     </data>
+
     <RelativeLayout
         android:id="@+id/rl_root"
         android:layout_width="match_parent"
@@ -15,11 +18,11 @@
         android:background="@color/bg">
 
 
-       <!-- <RelativeLayout
-            android:id="@+id/cv_profile"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorPrimary" />-->
+        <!-- <RelativeLayout
+             android:id="@+id/cv_profile"
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             android:background="@color/colorPrimary" />-->
 
         <include
             android:id="@+id/header"
@@ -29,7 +32,8 @@
             android:id="@+id/rl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_100dp">
+            android:layout_marginTop="@dimen/_100dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/cover"
@@ -73,6 +77,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center">
+
                         <include
                             android:id="@+id/include_basic_layout"
                             layout="@layout/details_layout" />
@@ -85,14 +90,15 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_profile"
             android:layout_above="@id/cl"
+            android:layout_below="@+id/header"
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginRight="@dimen/dimen_20dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_50dp"
                 android:visibility="visible"
                 app:cardBackgroundColor="@android:color/white"
@@ -106,13 +112,12 @@
                     android:orientation="vertical">
 
 
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tv_eng_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_10dp"
                         android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
                         android:layout_marginRight="@dimen/dimen_20dp"
                         app:errorEnabled="true">
 
@@ -123,20 +128,21 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/engineering_work_id"
                             android:imeOptions="actionDone"
-                            android:maxLength="9"
                             android:inputType="number"
-                            android:singleLine="true"/>
+                            android:maxLength="9"
+                            android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <Button
                         android:id="@+id/btn_proceed"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:textAllCaps="false"
                         android:layout_margin="@dimen/dimen_10dp"
                         android:background="@drawable/btn_bg"
                         android:padding="@dimen/dimen_5dp"
                         android:text="@string/proceed"
+                        android:textAllCaps="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -148,10 +154,10 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"/>
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent" />
 
     </RelativeLayout>
 
