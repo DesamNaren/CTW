@@ -154,6 +154,8 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                     }
                                 });
                             } else {
+                                callSnackBar("no district ID found");
+                                mMenu.findItem(R.id.action_search).setVisible(false);
                                 selDistId = "";
                                 selMandId = "";
                                 selMandalName = "";
@@ -166,6 +168,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     selDistName = "";
                     selDistId = "";
                     binding.spMandal.setAdapter(selectAdapter);
+                    mMenu.findItem(R.id.action_search).setVisible(false);
                 }
 
             }
@@ -227,6 +230,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     selMandId = "";
                     binding.recyclerView.setVisibility(View.GONE);
                     binding.tvEmpty.setVisibility(View.VISIBLE);
+                    mMenu.findItem(R.id.action_search).setVisible(false);
                 }
 
             }
@@ -272,7 +276,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_workId) + "</font>"));
-        mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
         mSearchView.setMaxWidth(Integer.MAX_VALUE);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);
