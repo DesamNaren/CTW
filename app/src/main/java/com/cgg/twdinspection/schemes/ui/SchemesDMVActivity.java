@@ -57,7 +57,6 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
 
         schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
         schemesDMVActivityBinding.header.headerTitle.setText("Schemes");
-        schemesDMVActivityBinding.header.ivHome.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 
         schemesDMVActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
