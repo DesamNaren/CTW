@@ -48,13 +48,27 @@ public class EngDashboardViewModel extends AndroidViewModel {
         return worksRepository.insertWorks(workDetails);
     }
 
+    public LiveData<List<String>> getDistricts() {
+        return worksRepository.getDistricts();
+    }
+    public LiveData<List<String>> getMandals(String distId) {
+        return worksRepository.getMandals(distId);
+    }
+
+    public LiveData<String> getDistId(String distName) {
+        return worksRepository.getDistId(distName);
+    }
+    public LiveData<String> getMandalId(String mandalName) {
+        return worksRepository.getMandalId(mandalName);
+    }
+
     public LiveData<Integer> getWorksCnt() {
         return worksRepository.getWorksCnt();
     }
 
 
-    public LiveData<WorkDetail> getSelWorkDetails(int workId) {
-        return worksRepository.getSelWorkDetails(workId);
+    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId,String mandId){
+        return worksRepository.getSelWorkDetails(distId,mandId);
     }
 
 

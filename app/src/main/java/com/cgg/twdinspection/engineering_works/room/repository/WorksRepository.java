@@ -16,15 +16,15 @@ import java.util.List;
 public class WorksRepository {
 
     WorksDao worksDao;
-    private LiveData<WorkDetail> workDetailLiveData = new MutableLiveData<>();
+    private LiveData<List<WorkDetail>> workDetailLiveData = new MutableLiveData<>();
     private int x;
     public WorksRepository(Application application) {
         EngWorksDatabase database=EngWorksDatabase.getDatabase(application);
         worksDao =database.worksDao();
     }
-    public LiveData<WorkDetail> getSelWorkDetails(int workId) {
+    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId,String mandId) {
         if(workDetailLiveData !=null){
-            workDetailLiveData = worksDao.getWorkDetails(workId);
+            workDetailLiveData = worksDao.getWorkDetails(distId,mandId);
         }
         return workDetailLiveData;
     }
@@ -33,7 +33,24 @@ public class WorksRepository {
         new InsertWorksAsyncTask(workDetails).execute();
         return x;
     }
-   public LiveData<Integer> getWorksCnt(){
+
+    public LiveData<List<String>> getDistricts() {
+        return worksDao.getDistricts();
+    }
+
+    public LiveData<List<String>> getMandals(String distId) {
+        return worksDao.getMandalList(distId);
+    }
+
+    public LiveData<String> getDistId(String distName) {
+        return worksDao.getDistrictId(distName);
+    }
+
+    public LiveData<String> getMandalId(String mandalName) {
+        return worksDao.getMandalId(mandalName);
+    }
+
+    public LiveData<Integer> getWorksCnt(){
        return worksDao.getWorksCount();
     }
 

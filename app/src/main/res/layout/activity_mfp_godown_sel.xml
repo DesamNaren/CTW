@@ -31,7 +31,8 @@
             android:id="@+id/rl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_100dp">
+            android:layout_marginTop="@dimen/_100dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/cover"
@@ -75,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center">
+
                         <include
                             android:id="@+id/include_basic_layout"
                             layout="@layout/details_layout" />
@@ -87,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_proceed"
-            android:layout_below="@+id/rl_profile"
+            android:layout_below="@+id/header"
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginTop="@dimen/dimen_30dp"
             android:layout_marginRight="@dimen/dimen_20dp">
@@ -95,6 +97,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:visibility="visible"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="6dp"
@@ -133,12 +136,12 @@
                         android:background="@color/black" />
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/ll_selectInstitute"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp">
+                        android:padding="@dimen/dimen_5dp"
+                        android:visibility="gone">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:layout_width="match_parent"
@@ -191,7 +194,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_proceed"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_proceed"
@@ -201,12 +204,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:background="@drawable/btn_bg"
+            android:drawableEnd="@drawable/right_arrow_16"
             android:drawableRight="@drawable/right_arrow_16"
             android:padding="@dimen/dimen_5dp"
             android:text="@string/proceed"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/right_arrow_16" />
+            android:textStyle="bold" />
     </RelativeLayout>
 </layout>
