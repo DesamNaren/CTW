@@ -38,6 +38,7 @@ import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCSyncViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -71,8 +72,15 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         instMainViewModel = new InstMainViewModel(getApplication());
         divisionSelectionViewModel = new DivisionSelectionViewModel(getApplication());
 
-        binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GCCSyncActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
 
+            }
+        });
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
@@ -188,7 +196,9 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                                 if (officesResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                     if (officesResponse.getDivisions() != null && officesResponse.getDivisions().size() > 0) {
                                         gccSyncRepository.insertDivisions(GCCSyncActivity.this, officesResponse.getDivisions());
+                                        binding.btnDivision.setText("Re-Download");
                                     } else {
+                                        binding.btnDivision.setText("Download");
                                         Snackbar.make(binding.root, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
                                     }
                                 } else if (officesResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {

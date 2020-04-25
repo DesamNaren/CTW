@@ -22,6 +22,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPUnitSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     private List<String> pUnits;
     private PUnits selectedPUnits;
     ArrayAdapter selectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +54,19 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         pUnits = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PUnitSelActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
             }
         });
 
@@ -76,30 +86,30 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
-                    @Override
-                    public void onChanged(List<String> divisions) {
-                        divisionLiveData.removeObservers(PUnitSelActivity.this);
-                        customProgressDialog.dismiss();
-                        if (divisions != null && divisions.size() > 0) {
-                            ArrayList<String> divisionNames = new ArrayList<>();
-                            divisionNames.add("-Select-");
-                            divisionNames.addAll(divisions);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item, divisionNames
-                            );
-                            binding.spDivision.setAdapter(adapter);
-                        }else{
-                            Utils.customGCCSyncAlert(PUnitSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
-                        }
-                    }
-                });
+            @Override
+            public void onChanged(List<String> divisions) {
+                divisionLiveData.removeObservers(PUnitSelActivity.this);
+                customProgressDialog.dismiss();
+                if (divisions != null && divisions.size() > 0) {
+                    ArrayList<String> divisionNames = new ArrayList<>();
+                    divisionNames.add("-Select-");
+                    divisionNames.addAll(divisions);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, divisionNames
+                    );
+                    binding.spDivision.setAdapter(adapter);
+                } else {
+                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                }
+            }
+        });
 
         LiveData<List<PUnits>> drGodownLiveData = viewModel.getAllPUnits();
         drGodownLiveData.observe(this, new Observer<List<PUnits>>() {
@@ -107,8 +117,8 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             public void onChanged(List<PUnits> drGodowns) {
                 drGodownLiveData.removeObservers(PUnitSelActivity.this);
                 customProgressDialog.dismiss();
-                if (drGodowns== null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(PUnitSelActivity.this,getString(R.string.app_name),"No processing units found...\n Do you want to sync processing units?");
+                if (drGodowns == null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No processing units found...\n Do you want to sync processing units?");
                 }
             }
         });
@@ -213,7 +223,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, pUnits);
                                         binding.spPUnit.setAdapter(adapter);
-                                    }else {
+                                    } else {
                                         binding.spPUnit.setAdapter(selectAdapter);
                                         showSnackBar("No processing units found");
                                     }
@@ -277,7 +287,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             if (position != 0) {
                 selectedPUnits = null;
                 selectedPUnitID = "";
-                if(!TextUtils.isEmpty(selectedSocietyId)) {
+                if (!TextUtils.isEmpty(selectedSocietyId)) {
                     LiveData<PUnits> liveData = viewModel.getPUnitID(selectedDivId, selectedSocietyId, binding.spPUnit.getSelectedItem().toString());
                     liveData.observe(PUnitSelActivity.this, new Observer<PUnits>() {
                         @Override
@@ -291,7 +301,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                             }
                         }
                     });
-                }else {
+                } else {
                     LiveData<PUnits> liveDataPUnit = viewModel.getPUnitID(selectedDivId, binding.spPUnit.getSelectedItem().toString());
                     liveDataPUnit.observe(PUnitSelActivity.this, new Observer<PUnits>() {
                         @Override

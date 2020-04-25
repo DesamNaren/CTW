@@ -20,12 +20,9 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLpgSelBinding;
-import com.cgg.twdinspection.databinding.ActivityPetrolPumpSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
-import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpActivity;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -56,14 +53,21 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
         LPGs = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.lpg));
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LPGSelActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
 
+            }
+        });
         viewModel = new DivisionSelectionViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
@@ -96,22 +100,22 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
-                }else{
-                    Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No divisions found...\n Please download the division master data to proceed further?");
+                } else {
+                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No divisions found...\n Please download the division master data to proceed further?");
                 }
             }
         });
-         LiveData<List<LPGSupplierInfo>> lpgLiveData = viewModel.getAllLPGSuppliers();
+        LiveData<List<LPGSupplierInfo>> lpgLiveData = viewModel.getAllLPGSuppliers();
         lpgLiveData.observe(this, new Observer<List<LPGSupplierInfo>>() {
-                    @Override
-                    public void onChanged(List<LPGSupplierInfo> lpgSupplierInfos) {
-                        lpgLiveData.removeObservers(LPGSelActivity.this);
-                        customProgressDialog.dismiss();
-                        if (lpgSupplierInfos== null || lpgSupplierInfos.size() <= 0) {
-                            Utils.customGCCSyncAlert(LPGSelActivity.this,getString(R.string.app_name),"No LPG godowns found...\n Please download LPG godown master data to proceed further");
-                        }
-                    }
-                });
+            @Override
+            public void onChanged(List<LPGSupplierInfo> lpgSupplierInfos) {
+                lpgLiveData.removeObservers(LPGSelActivity.this);
+                customProgressDialog.dismiss();
+                if (lpgSupplierInfos == null || lpgSupplierInfos.size() <= 0) {
+                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No LPG godowns found...\n Please download LPG godown master data to proceed further");
+                }
+            }
+        });
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
@@ -262,7 +266,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                         if (lpgSupplierInfo != null) {
                             selectLPGId = lpgSupplierInfo.getGodownId();
                             selectedLPGs = lpgSupplierInfo;
-                        }else{
+                        } else {
                             showSnackBar(getString(R.string.something));
                         }
                     }

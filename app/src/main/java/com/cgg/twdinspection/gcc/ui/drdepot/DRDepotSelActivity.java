@@ -22,6 +22,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     private List<String> drDepots;
     private DRDepots selectedDRDepots;
     ArrayAdapter selectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +54,21 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         drDepots = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DRDepotSelActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
 
+            }
+        });
         viewModel = new DivisionSelectionViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
@@ -77,29 +86,29 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             e.printStackTrace();
         }
 
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
-                    @Override
-                    public void onChanged(List<String> divisions) {
-                        divisionLiveData.removeObservers(DRDepotSelActivity.this);
-                        customProgressDialog.dismiss();
-                        if (divisions != null && divisions.size() > 0) {
-                            ArrayList<String> divisionNames = new ArrayList<>();
-                            divisionNames.add("-Select-");
-                            divisionNames.addAll(divisions);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item, divisionNames
-                            );
-                            binding.spDivision.setAdapter(adapter);
-                        }else{
-                            Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
-                        }
-                    }
-                });
+            @Override
+            public void onChanged(List<String> divisions) {
+                divisionLiveData.removeObservers(DRDepotSelActivity.this);
+                customProgressDialog.dismiss();
+                if (divisions != null && divisions.size() > 0) {
+                    ArrayList<String> divisionNames = new ArrayList<>();
+                    divisionNames.add("-Select-");
+                    divisionNames.addAll(divisions);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, divisionNames
+                    );
+                    binding.spDivision.setAdapter(adapter);
+                } else {
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                }
+            }
+        });
 
         LiveData<List<DRDepots>> drGodownLiveData = viewModel.getAllDRDepots();
         drGodownLiveData.observe(this, new Observer<List<DRDepots>>() {
@@ -107,8 +116,8 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             public void onChanged(List<DRDepots> drGodowns) {
                 drGodownLiveData.removeObservers(DRDepotSelActivity.this);
                 customProgressDialog.dismiss();
-                if (drGodowns== null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(DRDepotSelActivity.this,getString(R.string.app_name),"No DR Depots found...\n Please download DR Depot master da to proceed further");
+                if (drGodowns == null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No DR Depots found...\n Please download DR Depot master da to proceed further");
                 }
             }
         });
@@ -143,7 +152,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         } else if (TextUtils.isEmpty(selectedSocietyId)) {
             showSnackBar("Please select society");
             return false;
-        }else if (TextUtils.isEmpty(selectedDepotID)) {
+        } else if (TextUtils.isEmpty(selectedDepotID)) {
             showSnackBar("Please select depot");
             return false;
         }
@@ -159,7 +168,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
-            selectedDRDepots=null;
+            selectedDRDepots = null;
             selectedSocietyId = "";
             selectedDivId = "";
             selectedDepotID = "";
@@ -168,7 +177,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             societies = new ArrayList<>();
             societies.add("--Select--");
             if (position != 0) {
-                LiveData<String> liveData =  viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());
+                LiveData<String> liveData = viewModel.getDivisionId(binding.spDivision.getSelectedItem().toString());
                 liveData.observe(DRDepotSelActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String str) {
@@ -189,7 +198,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
-                                    }else{
+                                    } else {
                                         binding.spSociety.setAdapter(selectAdapter);
                                         binding.spDepot.setAdapter(selectAdapter);
                                         showSnackBar("No societies found");
@@ -200,7 +209,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                     }
                 });
             } else {
-                selectedDRDepots=null;
+                selectedDRDepots = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
                 binding.spSociety.setAdapter(selectAdapter);
@@ -209,20 +218,20 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
-                selectedDRDepots=null;
+                selectedDRDepots = null;
                 selectedSocietyId = "";
                 selectedDepotID = "";
                 binding.spDepot.setAdapter(selectAdapter);
                 drDepots = new ArrayList<>();
-                LiveData<String> liveData= viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
+                LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(DRDepotSelActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String str) {
                         liveData.removeObservers(DRDepotSelActivity.this);
                         if (str != null) {
                             selectedSocietyId = str;
-                           LiveData<List<DRDepots>> listLiveData = viewModel.getDRDepots(selectedDivId, selectedSocietyId);
-                           listLiveData.observe(DRDepotSelActivity.this, new Observer<List<DRDepots>>() {
+                            LiveData<List<DRDepots>> listLiveData = viewModel.getDRDepots(selectedDivId, selectedSocietyId);
+                            listLiveData.observe(DRDepotSelActivity.this, new Observer<List<DRDepots>>() {
                                 @Override
                                 public void onChanged(List<DRDepots> depotsList) {
                                     listLiveData.removeObservers(DRDepotSelActivity.this);
@@ -234,7 +243,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, drDepots);
                                         binding.spDepot.setAdapter(adapter);
-                                    }else {
+                                    } else {
                                         binding.spDepot.setAdapter(selectAdapter);
                                         showSnackBar("No DR Depots found");
                                     }
@@ -244,30 +253,30 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                     }
                 });
             } else {
-                selectedDRDepots=null;
+                selectedDRDepots = null;
                 selectedSocietyId = "";
                 selectedDepotID = "";
                 binding.spDepot.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_depot) {
             if (position != 0) {
-                selectedDRDepots=null;
+                selectedDRDepots = null;
                 selectedDepotID = "";
-               LiveData<DRDepots> liveData= viewModel.getDRDepotID(selectedDivId, selectedSocietyId, binding.spDepot.getSelectedItem().toString());
-               liveData.observe(DRDepotSelActivity.this, new Observer<DRDepots>() {
+                LiveData<DRDepots> liveData = viewModel.getDRDepotID(selectedDivId, selectedSocietyId, binding.spDepot.getSelectedItem().toString());
+                liveData.observe(DRDepotSelActivity.this, new Observer<DRDepots>() {
                     @Override
                     public void onChanged(DRDepots drDepots) {
                         liveData.removeObservers(DRDepotSelActivity.this);
                         if (drDepots != null) {
                             selectedDepotID = drDepots.getGodownId();
                             selectedDRDepots = drDepots;
-                        }else{
+                        } else {
                             showSnackBar(getString(R.string.something));
                         }
                     }
                 });
             } else {
-                selectedDRDepots=null;
+                selectedDRDepots = null;
                 selectedDepotID = "";
             }
         }

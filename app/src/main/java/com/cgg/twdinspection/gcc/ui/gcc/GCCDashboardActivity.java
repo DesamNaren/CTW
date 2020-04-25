@@ -12,14 +12,14 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityGccDashboardBinding;
 import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.cgg.twdinspection.gcc.ui.lpg.LPGSelActivity;
 import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
 import com.cgg.twdinspection.gcc.ui.punit.PUnitSelActivity;
-import com.cgg.twdinspection.databinding.ActivityGccDashboardBinding;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -31,11 +31,19 @@ public class GCCDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_dashboard);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc));
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GCCDashboardActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
             }
         });
 
