@@ -1,13 +1,13 @@
 package com.cgg.twdinspection.gcc.reports.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -29,19 +29,26 @@ public class PUnitInspRepActivity extends AppCompatActivity {
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("Processing Unit Inspection Report");
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
-        sharedPreferences= TWDApplication.get(PUnitInspRepActivity.this).getPreferences();
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PUnitInspRepActivity.this, GCCReportsDashboard.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
+        sharedPreferences = TWDApplication.get(PUnitInspRepActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
-        if(reportData!=null && reportData.getInspectionFindings()!=null && reportData.getInspectionFindings().getProcessingUnit()!=null
-        && reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates()!=null) {
+        if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null
+                && reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates() != null) {
             try {
                 binding.remarksStock.etRemarks.setText(reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates().getRawMatStockRegisterRemarks());
                 binding.remarksProcessing.etRemarks.setText(reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates().getProcessingRegisterRemarks());
@@ -60,9 +67,9 @@ public class PUnitInspRepActivity extends AppCompatActivity {
                 binding.remarksVehLog.etRemarks.setText(reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates().getVehLogBookRemarks());
                 binding.remarks.etRemarks.setText(reportData.getInspectionFindings().getProcessingUnit().getGeneralFindings().getRemarks());
             } catch (Exception e) {
-                Toast.makeText(this, getString(R.string.something)+" "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.something) + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }else{
+        } else {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null) {
@@ -74,7 +81,7 @@ public class PUnitInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PUnitInspRepActivity.this,ViewPhotosActivity.class));
+                startActivity(new Intent(PUnitInspRepActivity.this, ViewPhotosActivity.class));
             }
         });
     }

@@ -35,11 +35,18 @@ public class LPGInspRepActivity extends AppCompatActivity {
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("LPG Inspection Report");
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LPGInspRepActivity.this, GCCReportsDashboard.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
             }
         });
         sharedPreferences = TWDApplication.get(LPGInspRepActivity.this).getPreferences();

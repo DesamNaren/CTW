@@ -34,12 +34,19 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_insp_rep);
         binding.header.headerTitle.setText("Depot Inspection Report");
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText("Next");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DrDepotInspRepActivity.this, GCCReportsDashboard.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
             }
         });
         sharedPreferences = TWDApplication.get(DrDepotInspRepActivity.this).getPreferences();

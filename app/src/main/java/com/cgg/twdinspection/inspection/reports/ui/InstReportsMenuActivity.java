@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
 
@@ -25,7 +26,6 @@ public class InstReportsMenuActivity extends LocBaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
-        binding.actionBar.ivHome.setVisibility(View.GONE);
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,11 +33,18 @@ public class InstReportsMenuActivity extends LocBaseActivity {
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         });
-
+        binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(InstReportsMenuActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
 
         String[] stringArray = getResources().getStringArray(R.array.inst_sections);
         ArrayList<String> sections = new ArrayList<>(Arrays.asList(stringArray));
-        sections.set(sections.size()-1, "View Photographs");
+        sections.set(sections.size() - 1, "View Photographs");
         if (sections.size() > 0) {
             ReportsMenuSectionsAdapter adapter = new ReportsMenuSectionsAdapter(InstReportsMenuActivity.this, sections);
             binding.rvMenu.setLayoutManager(new LinearLayoutManager(InstReportsMenuActivity.this));
@@ -49,7 +56,8 @@ public class InstReportsMenuActivity extends LocBaseActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(InstReportsMenuActivity.this, InspectionReportsDashboard.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));;
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        ;
     }
 }
 

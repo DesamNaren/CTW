@@ -35,14 +35,21 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("MFPGodown Inspection Report");
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
-        sharedPreferences= TWDApplication.get(MfpGodownInspRepActivity.this).getPreferences();
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MfpGodownInspRepActivity.this, GCCReportsDashboard.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
+        sharedPreferences = TWDApplication.get(MfpGodownInspRepActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
@@ -93,7 +100,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MfpGodownInspRepActivity.this,ViewPhotosActivity.class));
+                startActivity(new Intent(MfpGodownInspRepActivity.this, ViewPhotosActivity.class));
             }
         });
     }

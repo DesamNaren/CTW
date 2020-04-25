@@ -35,7 +35,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
     SharedPreferences.Editor editor;
     String officerId;
     ReportsViewModel viewModel;
-    int gccCnt, instCnt, schemesCnt,engCnt;
+    int gccCnt, instCnt, schemesCnt, engCnt;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -46,9 +46,8 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         instCnt = -1;
         schemesCnt = -1;
         engCnt = -1;
-        viewModel =
-                ViewModelProviders.of(ReportActivity.this,
-                        new ReportsCustomViewModel(ReportActivity.this)).get(ReportsViewModel.class);
+        viewModel = ViewModelProviders.of(ReportActivity.this,
+                new ReportsCustomViewModel(ReportActivity.this)).get(ReportsViewModel.class);
 
         binding.header.headerTitle.setVisibility(View.VISIBLE);
         binding.header.headerTitle.setText(getResources().getString(R.string.report));
@@ -172,7 +171,8 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
     public void onBackPressed() {
         startActivity(new Intent(ReportActivity.this, DashboardActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-        finish();    }
+        finish();
+    }
 
     @Override
     public void handleError(Throwable e, Context context) {

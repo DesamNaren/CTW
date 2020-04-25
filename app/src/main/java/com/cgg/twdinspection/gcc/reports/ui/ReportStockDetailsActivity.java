@@ -87,12 +87,18 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.header.headerTitle.setText(getResources().getString(R.string.lpg_title));
         }
 
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.inchargeLL.setVisibility(View.VISIBLE);
-
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportStockDetailsActivity.this, GCCReportsDashboard.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

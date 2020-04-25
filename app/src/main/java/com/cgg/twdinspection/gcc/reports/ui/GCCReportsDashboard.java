@@ -22,6 +22,7 @@ import com.cgg.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.viewmodel.GCCReportsViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -49,7 +50,6 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_dashboard);
         binding.header.headerTitle.setText(getString(R.string.gcc_reports));
-        binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new GCCReportsViewModel(GCCReportsDashboard.this, getApplication());
         customProgressDialog = new CustomProgressDialog(this);
 
@@ -59,7 +59,14 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         processingUnit = new ArrayList<>();
         petrolpump = new ArrayList<>();
         lpg = new ArrayList<>();
-
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GCCReportsDashboard.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
