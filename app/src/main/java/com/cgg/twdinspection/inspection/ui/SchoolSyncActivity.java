@@ -58,8 +58,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_school_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
 
-        binding.header.ivHome.setVisibility(View.GONE);
-
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
@@ -77,6 +75,15 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SchoolSyncActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
             }
         });
 

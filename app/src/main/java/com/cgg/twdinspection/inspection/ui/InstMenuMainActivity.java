@@ -101,12 +101,20 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         customProgressDialog = new CustomProgressDialog(InstMenuMainActivity.this);
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         binding.appbar.header.syncIv.setVisibility(View.GONE);
-        binding.appbar.header.ivHome.setVisibility(View.GONE);
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));
         binding.appbar.header.backBtn.setVisibility(View.GONE);
         viewModel = new UploadPhotoViewModel(InstMenuMainActivity.this);
 
         binding.appbar.header.ivChange.setVisibility(View.VISIBLE);
+        binding.appbar.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(InstMenuMainActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
+
         binding.appbar.header.ivChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -22,11 +22,10 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.DmvSelectionActivityBinding;
-import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
@@ -70,7 +69,15 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 finish();
             }
         });
-        dmvSelectionActivityBinding.header.ivHome.setVisibility(View.GONE);
+        dmvSelectionActivityBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DMVSelectionActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+
+            }
+        });
 
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
@@ -89,7 +96,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
             e.printStackTrace();
         }
 
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -109,8 +116,8 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             android.R.layout.simple_spinner_dropdown_item, distNames
                     );
                     dmvSelectionActivityBinding.spDist.setAdapter(adapter);
-                }else{
-                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this,getString(R.string.app_name),"No districts found...\n Do you want to sync district master?");
+                } else {
+                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
                 }
             }
         });
@@ -126,10 +133,10 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
                     InstSelectionInfo instSelectionInfo = new InstSelectionInfo(selectedInstId,
                             selInstName,
-                            String.valueOf(selectedDistId),  String.valueOf(selectedManId),  String.valueOf(selectedVilId),
+                            String.valueOf(selectedDistId), String.valueOf(selectedManId), String.valueOf(selectedVilId),
                             selectedDistName, selectedManName, selectedVilName, lat, lng, address);
 
-                    selectionViewModel.insertInstitutes(DMVSelectionActivity.this,instSelectionInfo);
+                    selectionViewModel.insertInstitutes(DMVSelectionActivity.this, instSelectionInfo);
                 }
             }
         });
@@ -171,9 +178,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         if (str != null) {
                             selectedDistName = dmvSelectionActivityBinding.spDist.getSelectedItem().toString();
                             selectedDistId = Integer.valueOf(str);
-                                dmvSelectionActivityBinding.mandal.setText("");
-                                dmvSelectionActivityBinding.village.setText("");
-                                dmvSelectionActivityBinding.address.setText("");
+                            dmvSelectionActivityBinding.mandal.setText("");
+                            dmvSelectionActivityBinding.village.setText("");
+                            dmvSelectionActivityBinding.address.setText("");
                             viewModel.getInstitutes(selectedDistId).observe(DMVSelectionActivity.this, new Observer<List<MasterInstituteInfo>>() {
                                 @Override
                                 public void onChanged(List<MasterInstituteInfo> institutesEntities) {
@@ -186,7 +193,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                                                 android.R.layout.simple_spinner_dropdown_item, instNames);
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(adapter);
-                                    }else{
+                                    } else {
                                         dmvSelectionActivityBinding.spInstitution.setAdapter(selectAdapter);
                                         showSnackBar("No institutes found");
 
@@ -305,13 +312,13 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void getCount(int cnt) {
-        if(cnt!=-1){
-            LiveData<InstSelectionInfo> liveData =  selectionViewModel.getSelectedInst();
+        if (cnt != -1) {
+            LiveData<InstSelectionInfo> liveData = selectionViewModel.getSelectedInst();
             liveData.observe(DMVSelectionActivity.this, new Observer<InstSelectionInfo>() {
                 @Override
                 public void onChanged(InstSelectionInfo instSelectionInfo) {
                     liveData.removeObservers(DMVSelectionActivity.this);
-                    if(instSelectionInfo!=null){
+                    if (instSelectionInfo != null) {
                         editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
                         editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
                         editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
@@ -325,18 +332,18 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                         editor.putString(AppConstants.ADDRESS, instSelectionInfo.getInst_address());
                         editor.commit();
 
-                        if(!TextUtils.isEmpty(instSelectionInfo.getInst_lat()) && Double.valueOf(instSelectionInfo.getInst_lat())>0.0
-                                && !TextUtils.isEmpty(instSelectionInfo.getInst_lng()) && Double.valueOf(instSelectionInfo.getInst_lng())>0.0){
+                        if (!TextUtils.isEmpty(instSelectionInfo.getInst_lat()) && Double.valueOf(instSelectionInfo.getInst_lat()) > 0.0
+                                && !TextUtils.isEmpty(instSelectionInfo.getInst_lng()) && Double.valueOf(instSelectionInfo.getInst_lng()) > 0.0) {
                             startActivity(new Intent(DMVSelectionActivity.this, InstMenuMainActivity.class));
                             finish();
-                        }else {
+                        } else {
                             Utils.customHomeAlert(DMVSelectionActivity.this, getString(R.string.app_name), getString(R.string.inst_loc));
                         }
 
                     }
                 }
             });
-        }else{
+        } else {
             Toast.makeText(context, "Something went wrong..Please try again", Toast.LENGTH_SHORT).show();
         }
     }
