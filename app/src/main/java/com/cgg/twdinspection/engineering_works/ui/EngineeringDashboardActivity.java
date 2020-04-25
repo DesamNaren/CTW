@@ -120,10 +120,13 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
             @Override
             public void onChanged(List<String> strings) {
                 if (strings != null && strings.size() > 0) {
-                    ArrayList<String> districtList = new ArrayList<>();
-                    districtList.add("Select");
-                    districtList.addAll(strings);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, districtList);
+                    strings.add(0,"Select");
+                    for(int i=0;i<strings.size();i++){
+                        if(TextUtils.isEmpty(strings.get(i))){
+                            strings.remove(i);
+                        }
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, strings);
                     binding.spDist.setAdapter(adapter);
                 } else {
                     callSnackBar(getString(R.string.something));
@@ -144,11 +147,13 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                     @Override
                                     public void onChanged(List<String> strings) {
                                         if (strings != null && strings.size() > 0) {
-                                            ArrayList<String> mandals = new ArrayList<>();
-                                            mandals.clear();
-                                            mandals.add("Select");
-                                            mandals.addAll(strings);
-                                            ArrayAdapter<String> adapter = new ArrayAdapter<>(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, mandals);
+                                            strings.add(0,"Select");
+                                            for(int i=0;i<strings.size();i++){
+                                                if(TextUtils.isEmpty(strings.get(i))){
+                                                    strings.remove(i);
+                                                }
+                                            }
+                                            ArrayAdapter<String> adapter = new ArrayAdapter(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, strings);
                                             binding.spMandal.setAdapter(adapter);
                                         }
                                     }
@@ -190,12 +195,10 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                             if (TextUtils.isEmpty(selDistId)) {
                                 callSnackBar("No district Id found");
                                 binding.recyclerView.setVisibility(View.GONE);
-                                binding.tvEmpty.setVisibility(View.VISIBLE);
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                             } else if (TextUtils.isEmpty(selMandId)) {
                                 callSnackBar("No mandal Id found");
                                 binding.recyclerView.setVisibility(View.GONE);
-                                binding.tvEmpty.setVisibility(View.VISIBLE);
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                             } else {
                                 viewModel.getSelWorkDetails(selDistId, selMandId).observe(EngineeringDashboardActivity.this, new Observer<List<WorkDetail>>() {
@@ -229,7 +232,6 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     selMandalName = "";
                     selMandId = "";
                     binding.recyclerView.setVisibility(View.GONE);
-                    binding.tvEmpty.setVisibility(View.VISIBLE);
                     mMenu.findItem(R.id.action_search).setVisible(false);
                 }
 
