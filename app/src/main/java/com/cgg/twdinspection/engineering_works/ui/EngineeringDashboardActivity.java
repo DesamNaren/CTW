@@ -186,8 +186,14 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                             selMandId = integer;
                             if (TextUtils.isEmpty(selDistId)) {
                                 callSnackBar("No district Id found");
+                                binding.recyclerView.setVisibility(View.GONE);
+                                binding.tvEmpty.setVisibility(View.VISIBLE);
+                                mMenu.findItem(R.id.action_search).setVisible(false);
                             } else if (TextUtils.isEmpty(selMandId)) {
                                 callSnackBar("No mandal Id found");
+                                binding.recyclerView.setVisibility(View.GONE);
+                                binding.tvEmpty.setVisibility(View.VISIBLE);
+                                mMenu.findItem(R.id.action_search).setVisible(false);
                             } else {
                                 viewModel.getSelWorkDetails(selDistId, selMandId).observe(EngineeringDashboardActivity.this, new Observer<List<WorkDetail>>() {
                                     @Override
