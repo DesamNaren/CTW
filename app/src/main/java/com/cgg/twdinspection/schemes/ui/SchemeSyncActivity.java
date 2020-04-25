@@ -16,10 +16,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySchemeSyncBinding;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
@@ -27,12 +27,20 @@ import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeDMVInterface;
 import com.cgg.twdinspection.schemes.room.repository.SchemeSyncRepository;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeDMVResponse;
+import com.cgg.twdinspection.schemes.source.dmv.SchemeDistrict;
 import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
+import com.cgg.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
+import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
+import com.cgg.twdinspection.schemes.viewmodel.BenDetailsViewModel;
+import com.cgg.twdinspection.schemes.viewmodel.BenReportViewModel;
 import com.cgg.twdinspection.schemes.viewmodel.SchemeSyncViewModel;
+import com.cgg.twdinspection.schemes.viewmodel.SchemesDMVViewModel;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVInterface, ErrorHandlerInterface {
     private SchemeSyncRepository schemeSyncRepository;
@@ -43,20 +51,25 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
+    SchemesDMVViewModel viewModel;
+    BenReportViewModel benReportViewModel;
+    private BenDetailsViewModel benDetailsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(SchemeSyncActivity.this, R.layout.activity_scheme_sync);
-
+        viewModel = new SchemesDMVViewModel(getApplication());
+        benDetailsViewModel = new BenDetailsViewModel(getApplication());
+        benReportViewModel = new BenReportViewModel(SchemeSyncActivity.this);
         customProgressDialog = new CustomProgressDialog(this);
-        SchemeSyncViewModel viewModel = new SchemeSyncViewModel(SchemeSyncActivity.this, getApplication(), binding);
-        binding.setViewModel(viewModel);
+        SchemeSyncViewModel sviewModel = new SchemeSyncViewModel(SchemeSyncActivity.this, getApplication(), binding);
+        binding.setViewModel(sviewModel);
         binding.executePendingBindings();
         schemeSyncRepository = new SchemeSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         binding.header.ivHome.setVisibility(View.GONE);
 
@@ -83,7 +96,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchemeSyncActivity.this)) {
                     customProgressDialog.show();
-                    LiveData<SchemeDMVResponse> schemeDMVReposnse = viewModel.getSchemeDMVReposnse();
+                    LiveData<SchemeDMVResponse> schemeDMVReposnse = sviewModel.getSchemeDMVReposnse();
                     schemeDMVReposnse.observe(SchemeSyncActivity.this, new Observer<SchemeDMVResponse>() {
                         @Override
                         public void onChanged(SchemeDMVResponse schemeDMVResponse) {
@@ -93,8 +106,9 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                             if (schemeDMVResponse != null && schemeDMVResponse.getStatusCode() != null) {
                                 if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (schemeDMVResponse.getDistricts() != null && schemeDMVResponse.getDistricts().size() > 0) {
+
                                         schemeSyncRepository.insertSchemeDistricts(SchemeSyncActivity.this, schemeDMVResponse.getDistricts());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
                                     }
                                 } else if (Integer.valueOf(schemeDMVResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
@@ -118,7 +132,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchemeSyncActivity.this)) {
                     customProgressDialog.show();
-                    LiveData<FinancialYearResponse> financialYearResponseLiveData = viewModel.getFinYearResponse();
+                    LiveData<FinancialYearResponse> financialYearResponseLiveData = sviewModel.getFinYearResponse();
 
                     financialYearResponseLiveData.observe(SchemeSyncActivity.this, new Observer<FinancialYearResponse>() {
                         @Override
@@ -128,7 +142,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                 if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (financialYearResponse.getFinYears() != null && financialYearResponse.getFinYears().size() > 0) {
                                         schemeSyncRepository.insertFinYears(SchemeSyncActivity.this, financialYearResponse.getFinYears());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
                                     }
                                 } else if (Integer.valueOf(financialYearResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
@@ -154,7 +168,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchemeSyncActivity.this)) {
                     customProgressDialog.show();
-                    LiveData<InspectionRemarkResponse> inspectionRemarkResponseLiveData = viewModel.getInspectionRemarks();
+                    LiveData<InspectionRemarkResponse> inspectionRemarkResponseLiveData = sviewModel.getInspectionRemarks();
                     inspectionRemarkResponseLiveData.observe(SchemeSyncActivity.this, new Observer<InspectionRemarkResponse>() {
                         @Override
                         public void onChanged(InspectionRemarkResponse inspectionRemarkResponse) {
@@ -163,7 +177,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                 if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (inspectionRemarkResponse.getSchemes() != null && inspectionRemarkResponse.getSchemes().size() > 0) {
                                         schemeSyncRepository.insertInsRemarks(SchemeSyncActivity.this, inspectionRemarkResponse.getSchemes());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
                                     }
                                 } else if (Integer.valueOf(inspectionRemarkResponse.getStatusCode()) == AppConstants.FAILURE_CODE) {
@@ -190,7 +204,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchemeSyncActivity.this)) {
                     customProgressDialog.show();
-                    LiveData<SchemeResponse> schemeResponseLiveData = viewModel.getSchemeResponse();
+                    LiveData<SchemeResponse> schemeResponseLiveData = sviewModel.getSchemeResponse();
                     schemeResponseLiveData.observe(SchemeSyncActivity.this, new Observer<SchemeResponse>() {
                         @Override
                         public void onChanged(SchemeResponse schemeResponse) {
@@ -200,7 +214,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                                     if (schemeResponse.getSchemes() != null && schemeResponse.getSchemes().size() > 0) {
                                         schemeResponse.getSchemes().add(0, new SchemeEntity(false, "ALL", "-1"));
                                         schemeSyncRepository.insertSchemes(SchemeSyncActivity.this, schemeResponse.getSchemes());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
                                     }
 
@@ -215,9 +229,57 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
                         }
                     });
                 } else {
-                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));                }
+                    Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
+                }
             }
         });
+
+        viewModel.getFinancialYrs().observe(SchemeSyncActivity.this, new Observer<List<FinancialYearsEntity>>() {
+            @Override
+            public void onChanged(List<FinancialYearsEntity> institutesEntities) {
+
+                if (institutesEntities != null && institutesEntities.size() > 0) {
+                    binding.syncBtnYears.setText("Re-Download");
+                } else {
+                    binding.syncBtnYears.setText("Download");
+                }
+            }
+        });
+        viewModel.getAllDistricts().observe(this, new Observer<List<SchemeDistrict>>() {
+            @Override
+            public void onChanged(List<SchemeDistrict> schemeDistricts) {
+                if (schemeDistricts != null && schemeDistricts.size() > 0) {
+                    binding.btnDmv.setText("Re-Download");
+                } else {
+                    binding.btnDmv.setText("Download");
+                }
+            }
+        });
+
+
+        benReportViewModel.getSchemeInfo().observe(this, new Observer<List<SchemeEntity>>() {
+            @Override
+            public void onChanged(List<SchemeEntity> schemesInfoEntities) {
+                if (schemesInfoEntities != null && schemesInfoEntities.size() > 0) {
+                    binding.syncLlSchemes.setText("Re-Download");
+                } else {
+                    binding.syncLlSchemes.setText("Download");
+                }
+            }
+        });
+
+        benDetailsViewModel.getRemarks().observe(this, new Observer<List<InspectionRemarksEntity>>() {
+            @Override
+            public void onChanged(List<InspectionRemarksEntity> inspectionRemarksEntities) {
+                if (inspectionRemarksEntities != null && inspectionRemarksEntities.size() > 0) {
+
+                    binding.btnInstInsp.setText("Re-Download");
+                } else {
+                    binding.btnInstInsp.setText("Download");
+                }
+            }
+        });
+
     }
 
     void callSnackBar(String msg) {
@@ -281,7 +343,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Log.i("V_CNT", "vilCount: " + cnt);
+                binding.btnDmv.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "District master synced successfully");
                 // Success Alert;
@@ -298,7 +360,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Log.i("F_CNT", "finCount: " + cnt);
+                binding.syncBtnYears.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Financial years synced successfully");
                 // Success Alert;
@@ -315,7 +377,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Log.i("IN_CNT", "insCount: " + cnt);
+                binding.btnInstInsp.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Inspection remarks synced successfully");
                 // Success Alert;
@@ -332,7 +394,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                Log.i("SC_CNT", "schCount: " + cnt);
+                binding.syncLlSchemes.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
                         "Schemes synced successfully");
                 // Success Alert;

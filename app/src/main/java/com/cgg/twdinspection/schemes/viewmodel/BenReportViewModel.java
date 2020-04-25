@@ -49,10 +49,8 @@ public class BenReportViewModel extends ViewModel {
         }
     }
 
-    BenReportViewModel(ActivitySchemeReportBinding schemeReportBinding, Activity context) {
-        this.schemeReportBinding = schemeReportBinding;
+    public BenReportViewModel( Activity context) {
         this.context= context;
-        beneficiaryLiveData = new MutableLiveData<>();
         schemesMutableLiveData = new MutableLiveData<>();
         schemesInfoRepository = new SchemesInfoRepository(context);
         try {
