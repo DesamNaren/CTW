@@ -20,7 +20,6 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySchemesDmvBinding;
-import com.cgg.twdinspection.inspection.ui.DMVSelectionActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeDistrict;
@@ -50,6 +49,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     ArrayAdapter selectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
         schemesDMVActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_schemes_dmv);
         schemesDMVActivityBinding.header.headerTitle.setText("Schemes");
         schemesDMVActivityBinding.header.ivHome.setVisibility(View.GONE);
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         schemesDMVActivityBinding.header.syncIv.setVisibility(View.VISIBLE);
         schemesDMVActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +67,18 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                 onBackPressed();
             }
         });
-
+        schemesDMVActivityBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SchemesDMVActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
         schemesDMVActivityBinding.header.syncIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              startActivity(new Intent(SchemesDMVActivity.this,SchemeSyncActivity.class));
+                startActivity(new Intent(SchemesDMVActivity.this, SchemeSyncActivity.class));
             }
         });
 
@@ -93,7 +100,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
             Toast.makeText(context, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -115,29 +122,29 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_dropdown_item, finYearValues);
                     schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
-                }else {
-                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this,getString(R.string.app_name),"No financial year data found...\n Do you want to sync financial years?");
+                } else {
+                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No financial year data found...\n Do you want to sync financial years?");
                 }
             }
         });
         viewModel.getAllDistricts().observe(this, new Observer<List<SchemeDistrict>>() {
-                    @Override
-                    public void onChanged(List<SchemeDistrict> schemeDistricts) {
-                        if (schemeDistricts != null && schemeDistricts.size() > 0) {
-                            ArrayList<String> distNames = new ArrayList<>();
-                            distNames.add("-Select-");
-                            for (int i = 0; i < schemeDistricts.size(); i++) {
-                                distNames.add(schemeDistricts.get(i).getDistName());
-                            }
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                                    android.R.layout.simple_spinner_dropdown_item, distNames
-                            );
-                            schemesDMVActivityBinding.spDist.setAdapter(adapter);
-                        } else {
-                            Utils.customSchoolSyncAlert(SchemesDMVActivity.this,getString(R.string.app_name),"No districts found...\n Do you want to sync district master?");
-                        }
+            @Override
+            public void onChanged(List<SchemeDistrict> schemeDistricts) {
+                if (schemeDistricts != null && schemeDistricts.size() > 0) {
+                    ArrayList<String> distNames = new ArrayList<>();
+                    distNames.add("-Select-");
+                    for (int i = 0; i < schemeDistricts.size(); i++) {
+                        distNames.add(schemeDistricts.get(i).getDistName());
                     }
-                });
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            android.R.layout.simple_spinner_dropdown_item, distNames
+                    );
+                    schemesDMVActivityBinding.spDist.setAdapter(adapter);
+                } else {
+                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
+                }
+            }
+        });
 
         schemesDMVActivityBinding.spDist.setOnItemSelectedListener(this);
         schemesDMVActivityBinding.spMandal.setOnItemSelectedListener(this);
@@ -184,7 +191,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
         return true;
     }
 
-    void callSnackBar(String msg){
+    void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(schemesDMVActivityBinding.cl, msg, Snackbar.LENGTH_INDEFINITE);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -215,17 +222,17 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                             selectedDistId = value;
                             selectedDistName = schemesDMVActivityBinding.spDist.getSelectedItem().toString();
                             viewModel.getAllMandals(value).observe(SchemesDMVActivity.this, new Observer<List<SchemeMandal>>() {
-                                        @Override
-                                        public void onChanged(List<SchemeMandal> schemeMandals) {
-                                            if (schemeMandals != null && schemeMandals.size() > 0) {
-                                                for (int i = 0; i < schemeMandals.size(); i++) {
-                                                    mandalNames.add(schemeMandals.get(i).getMandalName());
-                                                }
-                                            } else {
-                                                callSnackBar(getResources().getString(R.string.no_mandals));
-                                            }
+                                @Override
+                                public void onChanged(List<SchemeMandal> schemeMandals) {
+                                    if (schemeMandals != null && schemeMandals.size() > 0) {
+                                        for (int i = 0; i < schemeMandals.size(); i++) {
+                                            mandalNames.add(schemeMandals.get(i).getMandalName());
                                         }
-                                    });
+                                    } else {
+                                        callSnackBar(getResources().getString(R.string.no_mandals));
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -255,17 +262,17 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                             selectedManId = value;
                             selectedManName = schemesDMVActivityBinding.spMandal.getSelectedItem().toString();
                             viewModel.getAllVillages(value, selectedDistId).observe(SchemesDMVActivity.this, new Observer<List<SchemeVillage>>() {
-                                        @Override
-                                        public void onChanged(List<SchemeVillage> schemeVillages) {
-                                            if (schemeVillages != null && schemeVillages.size() > 0) {
-                                                for (int i = 0; i < schemeVillages.size(); i++) {
-                                                    villageNames.add(schemeVillages.get(i).getVillageName());
-                                                }
-                                            } else {
-                                                callSnackBar(getResources().getString(R.string.no_villages));
-                                            }
+                                @Override
+                                public void onChanged(List<SchemeVillage> schemeVillages) {
+                                    if (schemeVillages != null && schemeVillages.size() > 0) {
+                                        for (int i = 0; i < schemeVillages.size(); i++) {
+                                            villageNames.add(schemeVillages.get(i).getVillageName());
                                         }
-                                    });
+                                    } else {
+                                        callSnackBar(getResources().getString(R.string.no_villages));
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -366,7 +373,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, DashboardActivity.class)
-        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
 
