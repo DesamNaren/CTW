@@ -56,6 +56,10 @@ public class DMVRepository {
         LiveData<List<MasterInstituteInfo>> institutes=districtDao.getInstitutes(districtId);
         return institutes;
     }
+ public LiveData<List<MasterInstituteInfo>> getAllInstitutes() {
+        LiveData<List<MasterInstituteInfo>> institutes=districtDao.getAllInstitutes();
+        return institutes;
+    }
 
 
 

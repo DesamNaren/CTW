@@ -345,7 +345,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             if (cnt > 0) {
                 binding.btnDmv.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
-                        "District master synced successfully");
+                        "District master data downloaded successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_villages));
@@ -362,7 +362,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             if (cnt > 0) {
                 binding.syncBtnYears.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Financial years synced successfully");
+                        "Financial years master data downloaded successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
@@ -379,7 +379,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             if (cnt > 0) {
                 binding.btnInstInsp.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Inspection remarks synced successfully");
+                        "Inspection remarks master data downloaded successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
@@ -396,7 +396,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
             if (cnt > 0) {
                 binding.syncLlSchemes.setText("Re-Download");
                 Utils.customSyncSuccessAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Schemes synced successfully");
+                        "Schemes master data downloaded successfully");
                 // Success Alert;
             } else {
                 Utils.customErrorAlert(SchemeSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));

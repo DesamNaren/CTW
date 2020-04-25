@@ -876,8 +876,8 @@
     <string name="update_msg">You have an update. Please update the latest version!</string>
     <string name="plz_check_int">No network connectivity found, Please check your internet connection</string>
     <string name="stock_exceed">Physical available quantity should not exceed system quantity</string>
-    <string name="dist_mas_sync">District master synced successfully</string>
-    <string name="ins_mas_syn">Institute master synced successfully</string>
+    <string name="dist_mas_sync">District master data downloaded successfully</string>
+    <string name="ins_mas_syn">Institute master data downloaded successfully</string>
     <string name="no_ins_rem">No inspection remarks found</string>
     <string name="punadi_reason">Enter Punadi-2 program Reason</string>
     <string name="sel_spo_mat">Select sports material received</string>

@@ -19,6 +19,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
     private LiveData<List<SchoolMandal>> mandals;
     private LiveData<List<SchoolVillage>> villages;
     private LiveData<List<MasterInstituteInfo>> inst_names;
+    private LiveData<List<MasterInstituteInfo>> all_inst;
     private DMVRepository mRepository;
 
     public DMVDetailsViewModel(Application application) {
@@ -27,6 +28,7 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         mandals = new MutableLiveData<>();
         villages = new MutableLiveData<>();
         inst_names = new MutableLiveData<>();
+        all_inst= new MutableLiveData<>();
         mRepository = new DMVRepository(application);
     }
 
@@ -37,6 +39,12 @@ public class DMVDetailsViewModel extends AndroidViewModel {
         return districts;
     }
 
+    public LiveData<List<MasterInstituteInfo>> getAllInstitutes() {
+        if (all_inst != null) {
+            all_inst=mRepository.getAllInstitutes();
+        }
+        return all_inst;
+    }
 
     public LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId) {
         if (inst_names != null) {

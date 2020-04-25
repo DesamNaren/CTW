@@ -45,8 +45,7 @@ public class BenDetailsViewModel extends ViewModel {
         this.context = context;
 
         remarksRepository = new InspectionRemarksRepository(context);
-        errorHandlerInterface = (ErrorHandlerInterface) context;
-        schemeSubmitInterface = (SchemeSubmitInterface) context;
+
     }
     BenDetailsViewModel(BeneficiaryDetail beneficiaryDetail,
                         ActivityBenDetailsActivtyBinding benDetailsActivtyBinding,

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +27,17 @@ import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.room.repository.SchoolSyncRepository;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
+import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.viewmodel.DMVDetailsViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.SchoolSyncViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, ErrorHandlerInterface {
     private SchoolSyncRepository schoolSyncRepository;
@@ -43,14 +50,14 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     CustomProgressDialog customProgressDialog;
     private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
-
+    DMVDetailsViewModel dmvViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         customProgressDialog = new CustomProgressDialog(SchoolSyncActivity.this);
 
         binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
-
+       dmvViewModel = new DMVDetailsViewModel(getApplication());
         SchoolSyncViewModel viewModel = new SchoolSyncViewModel(SchoolSyncActivity.this, getApplication(), binding);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
@@ -69,6 +76,27 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+
+        dmvViewModel.getAllDistricts().observe(this, new Observer<List<SchoolDistrict>>() {
+            @Override
+            public void onChanged(List<SchoolDistrict> schoolDistricts) {
+
+                if (schoolDistricts != null && schoolDistricts.size() > 0) {
+                    binding.btnDmv.setText("Re-Download");
+                } else {
+                    binding.btnDmv.setText("Download");                }
+            }
+        }); dmvViewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
+            @Override
+            public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
+
+                if (masterInstituteInfos != null && masterInstituteInfos.size() > 0) {
+                    binding.syncBtnYears.setText("Re-Download");
+                } else {
+                    binding.syncBtnYears.setText("Download");                }
+            }
+        });
+
 
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

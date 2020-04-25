@@ -42,6 +42,8 @@ public interface DistrictDao {
 
     @Query("SELECT * from master_inst_info where districtID LIKE :districtId")
     LiveData<List<MasterInstituteInfo>> getInstitutes(int districtId);
+    @Query("SELECT * from master_inst_info ")
+    LiveData<List<MasterInstituteInfo>> getAllInstitutes();
 
     @Query("SELECT count(*) from districts_info")
     int getCount();

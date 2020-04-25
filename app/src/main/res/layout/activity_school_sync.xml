@@ -113,7 +113,11 @@
                         app:cardElevation="5dp">
 
                         <LinearLayout
-                            android:id="@+id/btn_dmv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                        <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10dp"
@@ -136,6 +140,20 @@
                                 android:text="@string/districs_mandals_villages"
                                 android:textColor="@color/black" />
                         </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <Button
+                            android:id="@+id/btn_dmv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:text="Download"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black" />
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
 
@@ -147,9 +165,12 @@
                         android:padding="@dimen/dimen_10dp"
                         app:cardCornerRadius="6dp"
                         app:cardElevation="5dp">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
                         <LinearLayout
-                            android:id="@+id/syncBtnYears"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_10dp"
@@ -159,7 +180,7 @@
                             <ImageView
                                 android:id="@+id/syncInstitutes"
                                 android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
+                                android:layout_height="81dp"
                                 android:layout_margin="@dimen/dimen_10dp"
                                 android:background="@drawable/medical"
                                 android:padding="@dimen/dimen_20dp"
@@ -173,6 +194,20 @@
                                 android:text="Institutes"
                                 android:textColor="@color/black" />
                         </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"/>
+
+                        <Button
+                            android:id="@+id/syncBtnYears"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:text="Download"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black" />
+</LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
