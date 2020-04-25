@@ -12,6 +12,7 @@ import com.cgg.twdinspection.schemes.source.dmv.SchemeMandal;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeVillage;
 import com.cgg.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
+import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class SchemesDMVViewModel extends AndroidViewModel {
         }
         return districts;
     }
+
+
 
     public LiveData<List<SchemeMandal>> getAllMandals(String distId) {
         if (mandals != null) {
