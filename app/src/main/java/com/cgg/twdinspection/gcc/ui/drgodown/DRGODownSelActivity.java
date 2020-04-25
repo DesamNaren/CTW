@@ -22,6 +22,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -42,6 +43,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     private List<String> drGodowns;
     private DrGodowns selectedDrGodowns;
     ArrayAdapter<String> selectAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +54,21 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         drGodowns = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
-        binding.header.ivHome.setVisibility(View.GONE);
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+        binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DRGODownSelActivity.this, DashboardActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
 
+            }
+        });
         viewModel = new DivisionSelectionViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
@@ -77,7 +86,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
 
-        ArrayList selectList=new ArrayList();
+        ArrayList selectList = new ArrayList();
         selectList.add("Select");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
@@ -95,22 +104,22 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
-                }else{
-                    Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No divisions found...\n Do you want to sync divisions?");
+                } else {
+                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
                 }
             }
         });
-         LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
-         drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
-                    @Override
-                    public void onChanged(List<DrGodowns> drGodowns) {
-                        drGodownLiveData.removeObservers(DRGODownSelActivity.this);
-                        customProgressDialog.dismiss();
-                        if (drGodowns== null || drGodowns.size() <= 0) {
-                            Utils.customGCCSyncAlert(DRGODownSelActivity.this,getString(R.string.app_name),"No DR Godowns found...\n Please download DR Godown master data to proceed further?");
-                        }
-                    }
-                });
+        LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
+        drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
+            @Override
+            public void onChanged(List<DrGodowns> drGodowns) {
+                drGodownLiveData.removeObservers(DRGODownSelActivity.this);
+                customProgressDialog.dismiss();
+                if (drGodowns == null || drGodowns.size() <= 0) {
+                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No DR Godowns found...\n Please download DR Godown master data to proceed further?");
+                }
+            }
+        });
 
         binding.spDivision.setAdapter(selectAdapter);
         binding.spDivision.setAdapter(selectAdapter);
@@ -263,7 +272,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                         if (drGodowns != null) {
                             selectedGoDownId = drGodowns.getGodownId();
                             selectedDrGodowns = drGodowns;
-                        }else{
+                        } else {
                             showSnackBar(getString(R.string.something));
                         }
                     }

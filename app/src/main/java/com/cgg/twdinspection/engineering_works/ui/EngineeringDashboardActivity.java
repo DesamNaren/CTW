@@ -120,10 +120,13 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
             @Override
             public void onChanged(List<String> strings) {
                 if (strings != null && strings.size() > 0) {
-                    ArrayList<String> districtList = new ArrayList<>();
-                    districtList.add("Select");
-                    districtList.addAll(strings);
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, districtList);
+                    strings.add(0,"Select");
+                    for(int i=0;i<strings.size();i++){
+                        if(TextUtils.isEmpty(strings.get(i))){
+                            strings.remove(i);
+                        }
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, strings);
                     binding.spDist.setAdapter(adapter);
                 } else {
                     callSnackBar(getString(R.string.something));
@@ -144,16 +147,20 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                     @Override
                                     public void onChanged(List<String> strings) {
                                         if (strings != null && strings.size() > 0) {
-                                            ArrayList<String> mandals = new ArrayList<>();
-                                            mandals.clear();
-                                            mandals.add("Select");
-                                            mandals.addAll(strings);
-                                            ArrayAdapter<String> adapter = new ArrayAdapter<>(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, mandals);
+                                            strings.add(0,"Select");
+                                            for(int i=0;i<strings.size();i++){
+                                                if(TextUtils.isEmpty(strings.get(i))){
+                                                    strings.remove(i);
+                                                }
+                                            }
+                                            ArrayAdapter<String> adapter = new ArrayAdapter(EngineeringDashboardActivity.this, R.layout.support_simple_spinner_dropdown_item, strings);
                                             binding.spMandal.setAdapter(adapter);
                                         }
                                     }
                                 });
                             } else {
+                                callSnackBar("no district ID found");
+                                mMenu.findItem(R.id.action_search).setVisible(false);
                                 selDistId = "";
                                 selMandId = "";
                                 selMandalName = "";
@@ -166,6 +173,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     selDistName = "";
                     selDistId = "";
                     binding.spMandal.setAdapter(selectAdapter);
+                    mMenu.findItem(R.id.action_search).setVisible(false);
                 }
 
             }
@@ -187,12 +195,10 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                             if (TextUtils.isEmpty(selDistId)) {
                                 callSnackBar("No district Id found");
                                 binding.recyclerView.setVisibility(View.GONE);
-                                binding.tvEmpty.setVisibility(View.VISIBLE);
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                             } else if (TextUtils.isEmpty(selMandId)) {
                                 callSnackBar("No mandal Id found");
                                 binding.recyclerView.setVisibility(View.GONE);
-                                binding.tvEmpty.setVisibility(View.VISIBLE);
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                             } else {
                                 viewModel.getSelWorkDetails(selDistId, selMandId).observe(EngineeringDashboardActivity.this, new Observer<List<WorkDetail>>() {
@@ -226,7 +232,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     selMandalName = "";
                     selMandId = "";
                     binding.recyclerView.setVisibility(View.GONE);
-                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                    mMenu.findItem(R.id.action_search).setVisible(false);
                 }
 
             }
@@ -272,7 +278,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
         MenuItem mSearch = mMenu.findItem(R.id.action_search);
         mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_workId) + "</font>"));
-        mSearchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
         mSearchView.setMaxWidth(Integer.MAX_VALUE);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);

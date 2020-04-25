@@ -39,4 +39,7 @@ public interface WorksDao {
     @Query("SELECT mandId from WorkDetail where mandName LIKE :mandName")
     LiveData<String> getMandalId(String mandName);
 
+    @Query("SELECT * from WorkDetail")
+    LiveData<List<WorkDetail>> getWorks();
+
 }
