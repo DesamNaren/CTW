@@ -24,18 +24,16 @@ import com.cgg.twdinspection.engineering_works.interfaces.EngSyncInterface;
 import com.cgg.twdinspection.engineering_works.room.repository.EngSyncRepository;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
+import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngSyncViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.cgg.twdinspection.schemes.source.dmv.SchemeDMVResponse;
-import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
-import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
-import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
-import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class EngSyncActivity extends AppCompatActivity implements EngSyncInterface, ErrorHandlerInterface {
     private EngSyncRepository engSyncRepository;
@@ -57,7 +55,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
         binding.executePendingBindings();
         engSyncRepository = new EngSyncRepository(getApplication());
         binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         binding.header.ivHome.setVisibility(View.GONE);
 
@@ -94,7 +92,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                 if (sectorsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                     if (sectorsResponse.getSectorsEntitys() != null && sectorsResponse.getSectorsEntitys().size() > 0) {
                                         engSyncRepository.insertEngSectors(EngSyncActivity.this, sectorsResponse.getSectorsEntitys());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
                                     }
                                 } else if (sectorsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
@@ -128,7 +126,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                 if (Integer.valueOf(grantSchemesResponse.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                                     if (grantSchemesResponse.getSchemes() != null && grantSchemesResponse.getSchemes().size() > 0) {
                                         engSyncRepository.insertEngSchemes(EngSyncActivity.this, grantSchemesResponse.getSchemes());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
                                     }
                                 } else if (grantSchemesResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
@@ -163,7 +161,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                 if (worksMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                                     if (worksMasterResponse.getWorkDetails() != null && worksMasterResponse.getWorkDetails().size() > 0) {
                                         engSyncRepository.insertWorkDetails(EngSyncActivity.this, worksMasterResponse.getWorkDetails());
-                                    }else{
+                                    } else {
                                         Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
                                     }
                                 } else if (worksMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
@@ -184,84 +182,118 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
             }
 
         });
-    }
-
-    void callSnackBar(String msg) {
-        Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
-        snackbar.setActionTextColor(getResources().getColor(R.color.white));
-        snackbar.setAction("OK", new View.OnClickListener() {
+        viewModel.getEngWorks().observe(EngSyncActivity.this, new Observer<List<WorkDetail>>() {
             @Override
-            public void onClick(View v) {
-                snackbar.dismiss();
+            public void onChanged(List<WorkDetail> workDetails) {
+                if (workDetails != null && workDetails.size() > 0) {
+                    binding.btnEngWorks.setText("Re-Download");
+                } else {
+                    binding.btnEngWorks.setText("Download");
+                }
             }
         });
-
-        snackbar.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(EngSyncActivity.this, EngineeringDashboardActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-
-        finish();
-    }
-
-    @Override
-    public void handleError(Throwable e, Context context) {
-        customProgressDialog.hide();
-        String errMsg = ErrorHandler.handleError(e, context);
-        callSnackBar(errMsg);
-    }
-
-    @Override
-    public void setorsCnt(int cnt) {
-        customProgressDialog.hide();
-        try {
-            if (cnt > 0) {
-                Log.i("SC_CNT", "schCount: " + cnt);
-                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Sectors synced successfully");
-                // Success Alert;
-            } else {
-                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+        viewModel.getGrantSchemes().observe(EngSyncActivity.this, new Observer<List<GrantScheme>>() {
+            @Override
+            public void onChanged(List<GrantScheme> grantSchemes) {
+                if (grantSchemes != null && grantSchemes.size() > 0) {
+                    binding.syncBtnSchemes.setText("Re-Download");
+                } else {
+                    binding.syncBtnSchemes.setText("Download");
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        });
+        viewModel.getSectors().observe(EngSyncActivity.this, new Observer<List<SectorsEntity>>() {
+            @Override
+            public void onChanged(List<SectorsEntity> sectorsEntities) {
+                if (sectorsEntities != null && sectorsEntities.size() > 0) {
+                    binding.btnSector.setText("Re-Download");
+                } else {
+                    binding.btnSector.setText("Download");
+                }
+            }
+        });
+    }
+
+
+        void callSnackBar (String msg){
+            Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
+            snackbar.setActionTextColor(getResources().getColor(R.color.white));
+            snackbar.setAction("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    snackbar.dismiss();
+                }
+            });
+
+            snackbar.show();
+        }
+
+        @Override
+        public void onBackPressed () {
+            startActivity(new Intent(EngSyncActivity.this, EngineeringDashboardActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
+            finish();
+        }
+
+        @Override
+        public void handleError (Throwable e, Context context){
+            customProgressDialog.hide();
+            String errMsg = ErrorHandler.handleError(e, context);
+            callSnackBar(errMsg);
+        }
+
+        @Override
+        public void setorsCnt ( int cnt){
+            customProgressDialog.hide();
+            try {
+                if (cnt > 0) {
+                    Log.i("SC_CNT", "schCount: " + cnt);
+                    binding.btnSector.setText("Re-Download");
+                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                            "Sectors synced successfully");
+                    // Success Alert;
+                } else {
+                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void schemesCnt ( int cnt){
+            customProgressDialog.hide();
+            try {
+                if (cnt > 0) {
+                    Log.i("SC_CNT", "schCount: " + cnt);
+                    binding.syncBtnSchemes.setText("Re-Download");
+                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                            "Schemes synced successfully");
+                    // Success Alert;
+                } else {
+                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void engWorksCnt ( int cnt){
+            customProgressDialog.hide();
+            try {
+                if (cnt > 0) {
+                    Log.i("SC_CNT", "schCount: " + cnt);
+                    binding.btnEngWorks.setText("Re-Download");
+                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                            "ENgineering works synced successfully");
+                    // Success Alert;
+                } else {
+                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-
-    @Override
-    public void schemesCnt(int cnt) {
-        customProgressDialog.hide();
-        try {
-            if (cnt > 0) {
-                Log.i("SC_CNT", "schCount: " + cnt);
-                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                        "Schemes synced successfully");
-                // Success Alert;
-            } else {
-                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void engWorksCnt(int cnt) {
-        customProgressDialog.hide();
-        try {
-            if (cnt > 0) {
-                Log.i("SC_CNT", "schCount: " + cnt);
-                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                        "ENgineering works synced successfully");
-                // Success Alert;
-            } else {
-                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}

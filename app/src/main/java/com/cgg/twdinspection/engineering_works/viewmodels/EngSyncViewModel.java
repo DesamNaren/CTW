@@ -10,29 +10,38 @@ import androidx.lifecycle.MutableLiveData;
 import com.cgg.twdinspection.common.network.TWDService;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityEngSyncBinding;
-import com.cgg.twdinspection.databinding.ActivitySchemeSyncBinding;
+import com.cgg.twdinspection.engineering_works.room.repository.GrantSchemeRepository;
+import com.cgg.twdinspection.engineering_works.room.repository.SectorsRepository;
+import com.cgg.twdinspection.engineering_works.room.repository.WorksRepository;
+import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
+import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.cgg.twdinspection.schemes.source.dmv.SchemeDMVResponse;
-import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
-import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
-import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
 
 import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
+
+import java.util.List;
 
 public class EngSyncViewModel extends AndroidViewModel {
     private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
     private MutableLiveData<SectorsResponse> sectorsResponseLiveData;
     private MutableLiveData<GrantSchemesResponse> schemesResponseMutableLiveData;
+    private LiveData<List<WorkDetail>> engWorks;
+    private LiveData<List<GrantScheme>> grantSchemes;
+    private LiveData<List<SectorsEntity>> sectors;
     Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     ActivityEngSyncBinding binding;
+    WorksRepository worksRepository;
+    GrantSchemeRepository schemesRepository;
+    SectorsRepository sectorRepository;
 
     public EngSyncViewModel(Context context, Application application, ActivityEngSyncBinding binding) {
         super(application);
@@ -41,6 +50,12 @@ public class EngSyncViewModel extends AndroidViewModel {
         worksMasterLiveData = new MutableLiveData<>();
         sectorsResponseLiveData = new MutableLiveData<>();
         schemesResponseMutableLiveData = new MutableLiveData<>();
+        engWorks = new MutableLiveData();
+        grantSchemes = new MutableLiveData();
+        sectors = new MutableLiveData();
+        worksRepository = new WorksRepository(application);
+        schemesRepository = new GrantSchemeRepository(application);
+        sectorRepository = new SectorsRepository(application);
         errorHandlerInterface = (ErrorHandlerInterface) context;
 
     }
@@ -115,6 +130,25 @@ public class EngSyncViewModel extends AndroidViewModel {
                 errorHandlerInterface.handleError(t, context);
             }
         });
+    }
+
+    public LiveData<List<WorkDetail>> getEngWorks() {
+        if (engWorks != null) {
+            engWorks=worksRepository.getWorks();
+        }
+        return engWorks;
+    }
+    public LiveData<List<GrantScheme>> getGrantSchemes() {
+        if (grantSchemes != null) {
+            grantSchemes=schemesRepository.getGrantSchemes();
+        }
+        return grantSchemes;
+    }
+    public LiveData<List<SectorsEntity>> getSectors() {
+        if (sectors != null) {
+            sectors=sectorRepository.getSectors();
+        }
+        return sectors;
     }
 
 }

@@ -78,4 +78,10 @@ public class WorksRepository {
     public LiveData<Integer> getSectorId(String sectorName) {
         return worksDao.getSectorId(sectorName);
     }
+
+    public LiveData<List<WorkDetail>> getWorks() {
+        LiveData<List<WorkDetail>> works=worksDao.getWorks();
+        return works;
+    }
+
 }
