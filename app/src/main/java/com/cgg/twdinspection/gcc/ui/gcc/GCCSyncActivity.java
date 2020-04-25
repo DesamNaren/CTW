@@ -508,6 +508,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnDivision.setText("Re-Download");
                 Log.i("DIV_CNT", "divCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Division master data downloaded successfully");
@@ -524,6 +525,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnDrDepot.setText("Re-Download");
                 Log.i("SUP_CNT", "supCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR Depot master data downloaded successfully");
@@ -540,6 +542,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnDrGodown.setText("Re-Download");
                 Log.i("SUP_CNT", "drGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "DR GoDown master data downloaded successfully");
@@ -556,6 +559,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnMfpGodown.setText("Re-Download");
                 Log.i("SUP_CNT", "mfpGodCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "MFP GoDown master data downloaded successfully");
@@ -572,6 +576,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnPUnit.setText("Re-Download");
                 Log.i("SUP_CNT", "pUnitCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Processing Unit master data downloaded successfully");
@@ -588,6 +593,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnPetrolPump.setText("Re-Download");
                 Log.i("PETROL_CNT", "petrolCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "Petrol pump master data downloaded successfully");
@@ -604,6 +610,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
+                binding.btnLpg.setText("Re-Download");
                 Log.i("LPG_CNT", "lpglCount: " + cnt);
                 Utils.customSyncSuccessAlert(GCCSyncActivity.this, getResources().getString(R.string.app_name),
                         "LPG master data downloaded successfully");
