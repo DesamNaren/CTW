@@ -252,7 +252,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <include layout="@layout/footer_layout" />
+        <include layout="@layout/footer_layout_new" />
     </RelativeLayout>
 
 </layout>
