@@ -179,10 +179,12 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
         mSearchView = (SearchView) mSearch.getActionView();
         mSearchView.setQueryHint(Html.fromHtml("<font color = #ffffff>" + getResources().getString(R.string.search_by_inst) + "</font>"));
         mSearchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        mSearchView.setMaxWidth(Integer.MAX_VALUE);
         int id = mSearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
         TextView textView = mSearchView.findViewById(id);
         textView.setTextColor(Color.WHITE);
         mSearchView.setGravity(Gravity.CENTER);
+        mMenu.findItem(R.id.action_search).setVisible(false);
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
