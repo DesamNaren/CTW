@@ -48,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
         binding.header.headerTitle.setText(getResources().getString(R.string.dashboard));
         binding.header.ivHome.setVisibility(View.GONE);
+        binding.header.ivLogout.setVisibility(View.VISIBLE);
         instMainViewModel = new InstMainViewModel(getApplication());
         instSelectionViewModel = new InstSelectionViewModel(getApplication());
 
@@ -57,6 +58,15 @@ public class DashboardActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        binding.header.ivLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.customLogoutAlert(DashboardActivity.this, getResources().getString(R.string.app_name),
+                        getString(R.string.logout), instMainViewModel, editor);
+
+            }
+        });
+
         try {
             if (getSupportActionBar() != null) {
 //                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
@@ -79,7 +89,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
-            instId = sharedPreferences.getString(AppConstants.INST_ID,"");
+            instId = sharedPreferences.getString(AppConstants.INST_ID, "");
             editor = sharedPreferences.edit();
             binding.includeBasicLayout.offNme.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
             binding.includeBasicLayout.offDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
@@ -97,9 +107,9 @@ public class DashboardActivity extends AppCompatActivity {
                 instSelectionViewModel.getSelectedInst().observe(DashboardActivity.this, new Observer<InstSelectionInfo>() {
                     @Override
                     public void onChanged(InstSelectionInfo instSelectionInfo) {
-                        if(instSelectionInfo!=null){
+                        if (instSelectionInfo != null) {
                             instId = instSelectionInfo.getInst_id();
-                            if(!TextUtils.isEmpty(instId)) {
+                            if (!TextUtils.isEmpty(instId)) {
                                 instMainViewModel.getAllSections().observe(DashboardActivity.this, new Observer<List<InstMenuInfoEntity>>() {
                                     @Override
                                     public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
@@ -124,10 +134,10 @@ public class DashboardActivity extends AppCompatActivity {
                                     }
 
                                 });
-                            }else {
+                            } else {
                                 startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
                             }
-                        }else {
+                        } else {
                             startActivity(new Intent(DashboardActivity.this, DMVSelectionActivity.class));
                         }
                     }

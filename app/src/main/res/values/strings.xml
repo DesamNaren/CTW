@@ -740,6 +740,7 @@
     <string name="tab_mob_num">Enter tab incharge mobile no</string>
     <string name="valid_incharge_mob_num">Enter valid tab incharge mobile no</string>
     <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
+    <string name="logout">Do you want to Logout?</string>
     <string name="data_lost">Do you want to go back? On click of Yes entered data will be lost</string>
 
 

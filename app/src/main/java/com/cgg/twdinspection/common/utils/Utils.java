@@ -433,6 +433,67 @@ public class Utils {
         }
     }
 
+    public static void customLogoutAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel, SharedPreferences.Editor editor) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        editor.putString(AppConstants.INST_ID, "");
+                        editor.putString(AppConstants.INST_NAME, "");
+                        editor.putInt(AppConstants.DIST_ID, -1);
+                        editor.putInt(AppConstants.MAN_ID, -1);
+                        editor.putInt(AppConstants.VILL_ID, -1);
+                        editor.putString(AppConstants.DIST_NAME, "");
+                        editor.putString(AppConstants.MAN_NAME, "");
+                        editor.putString(AppConstants.VIL_NAME, "");
+                        editor.putString(AppConstants.LAT, "");
+                        editor.putString(AppConstants.LNG, "");
+                        editor.putString(AppConstants.ADDRESS, "");
+
+                        editor.commit();
+                        instMainViewModel.deleteAllInspectionData();
+
+                        Intent newIntent = new Intent(activity, LoginActivity.class);
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(newIntent);
+                        activity.finish();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void customHomeAlert(Activity activity, String title, String msg) {
         try {
