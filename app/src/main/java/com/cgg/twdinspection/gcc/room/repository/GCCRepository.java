@@ -53,6 +53,9 @@ public class GCCRepository {
     public LiveData<List<DrGodowns>> getAllGoDowns() {
         return gccDao.getAllDrGoDowns();
     }
+    public LiveData<List<DivisionsInfo>> getAllDivisions() {
+        return gccDao.getAllDivisions();
+    }
 
     public LiveData<List<PetrolSupplierInfo>> getAllPetrolSuppliers() {
         return gccDao.getAllPetrolSuppliers();

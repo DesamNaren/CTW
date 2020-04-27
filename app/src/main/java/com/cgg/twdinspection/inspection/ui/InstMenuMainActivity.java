@@ -110,7 +110,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(InstMenuMainActivity.this, DashboardActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             }
         });
@@ -153,6 +153,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             Utils.ShowDeviceSessionAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.ses_expire_re), instMainViewModel);
+            return;
         }
 
         LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
@@ -298,7 +299,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 submitCall();
             } else {
                 Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the "
-                        + AppConstants.DISTANCE+" meter radius of selected institute");
+                        + AppConstants.DISTANCE + " meter radius of selected institute");
             }
         } else {
             Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, institute location details are not found");
@@ -632,19 +633,19 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 clearSharedPref();
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             } else {
 
                 startActivity(new Intent(this, DashboardActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             }
         } else {
             clearSharedPref();
             instMainViewModel.deleteMenuData();
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             finish();
         }
     }
@@ -801,7 +802,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setContentView(R.layout.custom_alert_confirmation);
                 dialog.setCancelable(false);
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(title);

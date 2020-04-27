@@ -104,22 +104,23 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                    LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
+                    drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<List<DrGodowns>>() {
+                        @Override
+                        public void onChanged(List<DrGodowns> drGodowns) {
+                            drGodownLiveData.removeObservers(DRGODownSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (drGodowns == null || drGodowns.size() <= 0) {
+                                Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No DR Godowns found...\n Do you want to sync DR Godown master data to proceed further?");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
                 }
             }
         });
-        LiveData<List<DrGodowns>> drGodownLiveData = viewModel.getAllDRGoDowns();
-        drGodownLiveData.observe(this, new Observer<List<DrGodowns>>() {
-            @Override
-            public void onChanged(List<DrGodowns> drGodowns) {
-                drGodownLiveData.removeObservers(DRGODownSelActivity.this);
-                customProgressDialog.dismiss();
-                if (drGodowns == null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(DRGODownSelActivity.this, getString(R.string.app_name), "No DR Godowns found...\n Please download DR Godown master data to proceed further?");
-                }
-            }
-        });
+
 
         binding.spDivision.setAdapter(selectAdapter);
         binding.spDivision.setAdapter(selectAdapter);

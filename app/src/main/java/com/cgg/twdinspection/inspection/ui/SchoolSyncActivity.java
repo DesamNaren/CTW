@@ -121,7 +121,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {
                     customProgressDialog.show();
 
-                    LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse("maadhavisriram");
+                    LiveData<SchoolDMVResponse> schoolDMVResponseLiveData = viewModel.getSchoolDMVReposnse(officerId);
                     schoolDMVResponseLiveData.observe(SchoolSyncActivity.this, new Observer<SchoolDMVResponse>() {
                         @Override
                         public void onChanged(SchoolDMVResponse schoolDMVResponse) {

@@ -99,23 +99,24 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                    LiveData<List<MFPGoDowns>> drGodownLiveData = viewModel.getAllMFPGoDowns();
+                    drGodownLiveData.observe(MFPGoDownSelActivity.this, new Observer<List<MFPGoDowns>>() {
+                        @Override
+                        public void onChanged(List<MFPGoDowns> drGodowns) {
+                            drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (drGodowns == null || drGodowns.size() <= 0) {
+                                Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No MFP Godowns found...\n Do you want sync MFP Godown master data to proceed further?");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
                 }
             }
         });
 
-        LiveData<List<MFPGoDowns>> drGodownLiveData = viewModel.getAllMFPGoDowns();
-        drGodownLiveData.observe(this, new Observer<List<MFPGoDowns>>() {
-            @Override
-            public void onChanged(List<MFPGoDowns> drGodowns) {
-                drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
-                customProgressDialog.dismiss();
-                if (drGodowns == null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(MFPGoDownSelActivity.this, getString(R.string.app_name), "No MFP Godowns found...\n Please download MFP Godown master data to proceed further?");
-                }
-            }
-        });
+
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spMfp.setOnItemSelectedListener(this);
         binding.btnProceed.setOnClickListener(new View.OnClickListener() {

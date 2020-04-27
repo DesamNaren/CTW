@@ -52,6 +52,13 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     ArrayAdapter selectAdapter;
 
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(DMVSelectionActivity.this, DashboardActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = DMVSelectionActivity.this;
@@ -66,7 +73,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
         dmvSelectionActivityBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +85,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
             }
         });
+
+
+
 
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);

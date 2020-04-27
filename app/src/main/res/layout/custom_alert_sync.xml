@@ -95,23 +95,19 @@
         android:layout_marginTop="35dp">
 
         <RelativeLayout
-            style="@style/circleBackgroundInfo"
+            style="@style/circleBackground_red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true">
 
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="!"
-                android:textStyle="bold"
-                android:textSize="30sp"
-                android:textColor="@color/white"
+                android:background="@drawable/ic_close_white"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true" />
-
 
         </RelativeLayout>
 

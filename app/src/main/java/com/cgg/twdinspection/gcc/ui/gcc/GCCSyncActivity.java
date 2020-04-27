@@ -24,6 +24,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccSyncBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCDivisionInterface;
 import com.cgg.twdinspection.gcc.room.repository.GCCSyncRepository;
+import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
@@ -170,6 +171,18 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
                     binding.btnDrGodown.setText("Download");
                 else
                     binding.btnDrGodown.setText("Re-Download");
+            }
+        });
+        LiveData<List<DivisionsInfo>> divisionListLiveData = divisionSelectionViewModel.getAllDivisionsMaster();
+        divisionListLiveData.observe(this, new Observer<List<DivisionsInfo>>() {
+            @Override
+            public void onChanged(List<DivisionsInfo> divisionsInfos) {
+                divisionListLiveData.removeObservers(GCCSyncActivity.this);
+                customProgressDialog.dismiss();
+                if (divisionsInfos == null || divisionsInfos.size() <= 0)
+                    binding.btnDivision.setText("Download");
+                else
+                    binding.btnDivision.setText("Re-Download");
             }
         });
 

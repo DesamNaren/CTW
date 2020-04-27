@@ -100,22 +100,23 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                    LiveData<List<PetrolSupplierInfo>> petrolLiveData = viewModel.getAllPetrolPumps();
+                    petrolLiveData.observe(PetrolPumpSelActivity.this, new Observer<List<PetrolSupplierInfo>>() {
+                        @Override
+                        public void onChanged(List<PetrolSupplierInfo> petrolSupplierInfos) {
+                            petrolLiveData.removeObservers(PetrolPumpSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (petrolSupplierInfos == null || petrolSupplierInfos.size() <= 0) {
+                                Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No Petrol pumps found...\n Do you want to sync petrol pump master data to proceed further?");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
                 }
             }
         });
-        LiveData<List<PetrolSupplierInfo>> petrolLiveData = viewModel.getAllPetrolPumps();
-        petrolLiveData.observe(this, new Observer<List<PetrolSupplierInfo>>() {
-            @Override
-            public void onChanged(List<PetrolSupplierInfo> petrolSupplierInfos) {
-                petrolLiveData.removeObservers(PetrolPumpSelActivity.this);
-                customProgressDialog.dismiss();
-                if (petrolSupplierInfos == null || petrolSupplierInfos.size() <= 0) {
-                    Utils.customGCCSyncAlert(PetrolPumpSelActivity.this, getString(R.string.app_name), "No Petrol pumps found...\n Please download petrol pump master ata to proceed further?");
-                }
-            }
-        });
+
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);

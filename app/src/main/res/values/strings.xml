@@ -1070,5 +1070,7 @@
     <string name="bank_loan">Bank loan</string>
     <string name="contribution">Contribution</string>
     <string name="status">Status</string>
+    <string name="no_sectors">No sectors found</string>
+    <string name="no_works">No work details found</string>
 
 </resources>

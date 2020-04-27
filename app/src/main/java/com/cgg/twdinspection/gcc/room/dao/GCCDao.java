@@ -44,6 +44,9 @@ public interface GCCDao {
     @Query("SELECT * from DR_GoDown")
     LiveData<List<DrGodowns>> getAllDrGoDowns();
 
+    @Query("SELECT * from Divisions")
+    LiveData<List<DivisionsInfo>> getAllDivisions();
+
 
     @Query("SELECT * from Petrol_Pump")
     LiveData<List<PetrolSupplierInfo>> getAllPetrolSuppliers();

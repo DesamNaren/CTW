@@ -22,6 +22,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
     private LiveData<List<DivisionsInfo>> societies;
     private LiveData<List<DrGodowns>> drGodowns;
     private LiveData<List<DrGodowns>> allDrGodowns;
+    private LiveData<List<DivisionsInfo>> allDivisions;
     private LiveData<List<DRDepots>> drDepots;
     private LiveData<List<DRDepots>> allDrDepots;
     private LiveData<List<MFPGoDowns>> mfpGoDowns;
@@ -40,6 +41,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         societies = new MutableLiveData<>();
         drGodowns = new MutableLiveData<>();
         allDrGodowns = new MutableLiveData<>();
+        allDivisions = new MutableLiveData<>();
         drDepots = new MutableLiveData<>();
         allDrDepots = new MutableLiveData<>();
         mfpGoDowns = new MutableLiveData<>();
@@ -94,6 +96,12 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
             allDrGodowns = mRepository.getAllGoDowns();
         }
         return allDrGodowns;
+    }
+    public LiveData<List<DivisionsInfo>> getAllDivisionsMaster() {
+        if (allDivisions != null) {
+            allDivisions = mRepository.getAllDivisions();
+        }
+        return allDivisions;
     }
 
 

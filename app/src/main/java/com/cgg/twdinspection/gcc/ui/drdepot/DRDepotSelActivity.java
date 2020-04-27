@@ -104,23 +104,25 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+
+                    LiveData<List<DRDepots>> drGodownLiveData = viewModel.getAllDRDepots();
+                    drGodownLiveData.observe(DRDepotSelActivity.this, new Observer<List<DRDepots>>() {
+                        @Override
+                        public void onChanged(List<DRDepots> drGodowns) {
+                            drGodownLiveData.removeObservers(DRDepotSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (drGodowns == null || drGodowns.size() <= 0) {
+                                Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No DR Depots found...\n Do you want to sync DR Depot master data to proceed further");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
                 }
             }
         });
 
-        LiveData<List<DRDepots>> drGodownLiveData = viewModel.getAllDRDepots();
-        drGodownLiveData.observe(this, new Observer<List<DRDepots>>() {
-            @Override
-            public void onChanged(List<DRDepots> drGodowns) {
-                drGodownLiveData.removeObservers(DRDepotSelActivity.this);
-                customProgressDialog.dismiss();
-                if (drGodowns == null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(DRDepotSelActivity.this, getString(R.string.app_name), "No DR Depots found...\n Please download DR Depot master da to proceed further");
-                }
-            }
-        });
+
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
         binding.spDepot.setOnItemSelectedListener(this);

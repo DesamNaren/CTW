@@ -222,85 +222,85 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
     }
 
 
-        void callSnackBar (String msg){
-            Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
-            snackbar.setActionTextColor(getResources().getColor(R.color.white));
-            snackbar.setAction("OK", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    snackbar.dismiss();
-                }
-            });
-
-            snackbar.show();
-        }
-
-        @Override
-        public void onBackPressed () {
-            startActivity(new Intent(EngSyncActivity.this, EngineeringDashboardActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-
-            finish();
-        }
-
-        @Override
-        public void handleError (Throwable e, Context context){
-            customProgressDialog.hide();
-            String errMsg = ErrorHandler.handleError(e, context);
-            callSnackBar(errMsg);
-        }
-
-        @Override
-        public void setorsCnt ( int cnt){
-            customProgressDialog.hide();
-            try {
-                if (cnt > 0) {
-                    Log.i("SC_CNT", "schCount: " + cnt);
-                    binding.btnSector.setText("Re-Download");
-                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "Sectors master data downloaded successfully");
-                    // Success Alert;
-                } else {
-                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.root, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
             }
-        }
+        });
 
-        @Override
-        public void schemesCnt ( int cnt){
-            customProgressDialog.hide();
-            try {
-                if (cnt > 0) {
-                    Log.i("SC_CNT", "schCount: " + cnt);
-                    binding.syncBtnSchemes.setText("Re-Download");
-                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "Schemes master data downloaded successfully");
-                    // Success Alert;
-                } else {
-                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        snackbar.show();
+    }
 
-        @Override
-        public void engWorksCnt ( int cnt){
-            customProgressDialog.hide();
-            try {
-                if (cnt > 0) {
-                    Log.i("SC_CNT", "schCount: " + cnt);
-                    binding.btnEngWorks.setText("Re-Download");
-                    Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "Engineering works master data downloaded successfully");
-                    // Success Alert;
-                } else {
-                    Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(EngSyncActivity.this, EngineeringDashboardActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        finish();
+    }
+
+    @Override
+    public void handleError(Throwable e, Context context) {
+        customProgressDialog.hide();
+        String errMsg = ErrorHandler.handleError(e, context);
+        callSnackBar(errMsg);
+    }
+
+    @Override
+    public void setorsCnt(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SC_CNT", "schCount: " + cnt);
+                binding.btnSector.setText("Re-Download");
+                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Sectors master data downloaded successfully");
+                // Success Alert;
+            } else {
+                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    @Override
+    public void schemesCnt(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SC_CNT", "schCount: " + cnt);
+                binding.syncBtnSchemes.setText("Re-Download");
+                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Schemes master data downloaded successfully");
+                // Success Alert;
+            } else {
+                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void engWorksCnt(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Log.i("SC_CNT", "schCount: " + cnt);
+                binding.btnEngWorks.setText("Re-Download");
+                Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
+                        "Engineering works master data downloaded successfully");
+                // Success Alert;
+            } else {
+                Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -100,22 +100,23 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                    LiveData<List<LPGSupplierInfo>> lpgLiveData = viewModel.getAllLPGSuppliers();
+                    lpgLiveData.observe(LPGSelActivity.this, new Observer<List<LPGSupplierInfo>>() {
+                        @Override
+                        public void onChanged(List<LPGSupplierInfo> lpgSupplierInfos) {
+                            lpgLiveData.removeObservers(LPGSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (lpgSupplierInfos == null || lpgSupplierInfos.size() <= 0) {
+                                Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No LPG godowns found...\n Do you want sync LPG Godown master data to proceed further");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No divisions found...\n Please download the division master data to proceed further?");
+                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want sync division master data to proceed further?");
                 }
             }
         });
-        LiveData<List<LPGSupplierInfo>> lpgLiveData = viewModel.getAllLPGSuppliers();
-        lpgLiveData.observe(this, new Observer<List<LPGSupplierInfo>>() {
-            @Override
-            public void onChanged(List<LPGSupplierInfo> lpgSupplierInfos) {
-                lpgLiveData.removeObservers(LPGSelActivity.this);
-                customProgressDialog.dismiss();
-                if (lpgSupplierInfos == null || lpgSupplierInfos.size() <= 0) {
-                    Utils.customGCCSyncAlert(LPGSelActivity.this, getString(R.string.app_name), "No LPG godowns found...\n Please download LPG godown master data to proceed further");
-                }
-            }
-        });
+
 
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);

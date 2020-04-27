@@ -105,23 +105,24 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                             android.R.layout.simple_spinner_dropdown_item, divisionNames
                     );
                     binding.spDivision.setAdapter(adapter);
+                    LiveData<List<PUnits>> drGodownLiveData = viewModel.getAllPUnits();
+                    drGodownLiveData.observe(PUnitSelActivity.this, new Observer<List<PUnits>>() {
+                        @Override
+                        public void onChanged(List<PUnits> drGodowns) {
+                            drGodownLiveData.removeObservers(PUnitSelActivity.this);
+                            customProgressDialog.dismiss();
+                            if (drGodowns == null || drGodowns.size() <= 0) {
+                                Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No processing units found...\n Do you want to sync processing unit master data to proceed further?");
+                            }
+                        }
+                    });
                 } else {
-                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync divisions?");
+                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No divisions found...\n Do you want to sync division master data to proceed further?");
                 }
             }
         });
 
-        LiveData<List<PUnits>> drGodownLiveData = viewModel.getAllPUnits();
-        drGodownLiveData.observe(this, new Observer<List<PUnits>>() {
-            @Override
-            public void onChanged(List<PUnits> drGodowns) {
-                drGodownLiveData.removeObservers(PUnitSelActivity.this);
-                customProgressDialog.dismiss();
-                if (drGodowns == null || drGodowns.size() <= 0) {
-                    Utils.customGCCSyncAlert(PUnitSelActivity.this, getString(R.string.app_name), "No processing units found...\n Do you want to sync processing units?");
-                }
-            }
-        });
+
         binding.spDivision.setOnItemSelectedListener(this);
         binding.spSociety.setOnItemSelectedListener(this);
         binding.spPUnit.setOnItemSelectedListener(this);
