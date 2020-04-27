@@ -120,18 +120,18 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_10dp"
-                                android:gravity="center"
                                 android:background="@color/colorPrimary"
-                                android:orientation="vertical">
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
 
                                 <ImageView
                                     android:id="@+id/syncDMV"
                                     android:layout_width="@dimen/dimen_70dp"
                                     android:layout_height="@dimen/dimen_70dp"
                                     android:layout_margin="@dimen/dimen_10dp"
-                                    android:padding="@dimen/dimen_20dp"
                                     android:background="@drawable/sync_bg"
+                                    android:padding="@dimen/dimen_20dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:src="@drawable/dmv" />
 
@@ -171,10 +171,10 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_10dp"
                                 android:background="@color/colorPrimary"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
 
                                 <ImageView
                                     android:id="@+id/syncInstitutes"
@@ -184,8 +184,7 @@
                                     android:background="@drawable/sync_bg"
                                     android:padding="@dimen/dimen_20dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
-                                    android:src="@drawable/school"
-                                     />
+                                    android:src="@drawable/school" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                                     android:layout_width="wrap_content"
