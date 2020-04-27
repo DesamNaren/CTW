@@ -90,7 +90,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Stock Value as per System"
+                                android:text="@string/stock_value_as_per_system"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -116,7 +116,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Stock Value as per Physical Verification"
+                                android:text="@string/stock_value_as_per_physical_verification"
                                 android:textColor="@color/black" />
 
                             <TextView
