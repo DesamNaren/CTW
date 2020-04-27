@@ -81,7 +81,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
                         RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
                 tv.setLayoutParams(lp);
-                tv.setText(getResources().getString(R.string.engineering_works));
+                tv.setText("ENGINEERING WORKS");
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(Color.WHITE);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);

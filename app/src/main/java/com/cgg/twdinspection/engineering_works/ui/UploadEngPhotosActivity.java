@@ -4,17 +4,25 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import okhttp3.MediaType;
@@ -34,6 +42,7 @@ import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoCustomVi
 import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoViewModel;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
+import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -72,7 +81,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_upload_eng_photos);
-        binding.header.headerTitle.setText("Upload Photos");
+        binding.header.headerTitle.setText("WORKS - UPLOAD PHOTOS");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(UploadEngPhotosActivity.this);
@@ -162,7 +171,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
             public void onClick(View view) {
                 if(validate()){
                     if (Utils.checkInternetConnection(UploadEngPhotosActivity.this)) {
-                        callDataSubmit();
+                        customSaveAlert(UploadEngPhotosActivity.this, getString(R.string.app_name), getString(R.string.do_you_want));
                     } else {
                         Utils.customWarningAlert(UploadEngPhotosActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                     }
@@ -170,6 +179,52 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
             }
         });
     }
+
+
+    public void customSaveAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callDataSubmit();
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private boolean validate() {
         boolean returnFlag=true;
         if(flag_elevation==0){
@@ -190,6 +245,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
 
     private void callDataSubmit() {
         submitEngWorksRequest.setPhotoKeyId(randomNo);
+        customProgressDialog.show();
         viewModel.submitEngWorksDetails(submitEngWorksRequest);
     }
     private void callPhotoSubmit() {

@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.engineering_works.ui;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -67,7 +68,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_insp_details);
-        binding.header.headerTitle.setText("Work Details");
+        binding.header.headerTitle.setText("WORK DETAILS");
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = ViewModelProviders.of(this,
                 new InspDetailsCustomViewModel(this, getApplication())).get(InspDetailsViewModel.class);
@@ -106,9 +107,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             binding.setWorkDetails(workDetail);
             editor.commit();
         }
-        viewModel.getSectors().observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
+       LiveData<List<SectorsEntity>> liveData =  viewModel.getSectors();
+        liveData.observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
+                liveData.removeObservers(InspectionDetailsActivity.this);
                 InspectionDetailsActivity.this.sectorsEntities = sectorsEntities;
                 if (sectorsEntities != null && sectorsEntities.size() > 0) {
                     ArrayList<String> sectorsList = new ArrayList<>();
@@ -137,9 +140,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.spStage.setAdapter(majorStagesAdapter);
         if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
             customProgressDialog.show();
-            viewModel.getSubmittedStageResponse(workDetail.getWorkId()).observe(InspectionDetailsActivity.this, new Observer<SubmittedStageResponse>() {
+            LiveData<SubmittedStageResponse> submittedStageResponseLiveData = viewModel.getSubmittedStageResponse(workDetail.getWorkId());
+            submittedStageResponseLiveData.observe(InspectionDetailsActivity.this, new Observer<SubmittedStageResponse>() {
                 @Override
                 public void onChanged(SubmittedStageResponse stageResponse) {
+                    submittedStageResponseLiveData.removeObservers(InspectionDetailsActivity.this);
                     customProgressDialog.hide();
                     int selPos = 0;
                     if (stageResponse != null && !TextUtils.isEmpty(stageResponse.getStageOfWork())) {
@@ -169,9 +174,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             Utils.customErrorAlert(InspectionDetailsActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
-        viewModel.getGrantSchemes().observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
+       LiveData<List<GrantScheme>> grantListLiveData =  viewModel.getGrantSchemes();
+        grantListLiveData.observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
+                grantListLiveData.removeObservers(InspectionDetailsActivity.this);
                 if (grantSchemes != null && grantSchemes.size() > 0) {
                     ArrayList<String> schemesList = new ArrayList<>();
                     schemesList.add("Select");
@@ -243,9 +250,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     binding.tvPercentFinProg.setText("");
                     binding.tvActExp.setText("");
                 } else {
-                    viewModel.getSectorId(binding.spSector.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                   LiveData<Integer> liveData1 = viewModel.getSectorId(binding.spSector.getSelectedItem().toString());
+                   liveData1.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer integer) {
+                            liveData1.removeObservers(InspectionDetailsActivity.this);
                             if (integer != null) {
                                 selSectorId = integer;
                                 selSectorName = binding.spSector.getSelectedItem().toString();
@@ -274,9 +283,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                     if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
                                         customProgressDialog.show();
 
-                                        viewModel.getStagesResponse(selSectorId).observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
+                                       LiveData<StagesResponse> liveData2 = viewModel.getStagesResponse(selSectorId);
+                                       liveData2.observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
                                             @Override
                                             public void onChanged(StagesResponse stagesResponse) {
+                                                liveData2.removeObservers(InspectionDetailsActivity.this);
                                                 InspectionDetailsActivity.this.stagesResponse = stagesResponse;
                                                 if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
                                                     customProgressDialog.hide();
@@ -319,10 +330,13 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     selSchemeId = -1;
                     selSchemeName = "";
                 } else {
-                    viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString()).observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                   LiveData<Integer> integerLiveData = viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString());
+                   integerLiveData.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer integer) {
+                            integerLiveData.removeObservers(InspectionDetailsActivity.this);
                             if (integer != null) {
+
                                 selSchemeId = integer;
                                 selSchemeName = binding.spScheme.getSelectedItem().toString();
                             } else {
