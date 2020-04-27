@@ -82,25 +82,23 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
                 tv.setLayoutParams(lp);
 
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-                    tv.setText(getResources().getString(R.string.godown_title));
+                    tv.setText("DR GODOWN REPORT");
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-                    tv.setText(getResources().getString(R.string.depot_title));
+                    tv.setText("DR DEPOT REPORT");
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    tv.setText(getResources().getString(R.string.mfp_godown_title));
+                    tv.setText("MFP GODOWN REPORT");
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    tv.setText(getResources().getString(R.string.processing_unit_title));
+                    tv.setText("PROCESSING UNIT REPORT");
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-                    tv.setText(getResources().getString(R.string.petrol_pump_title));
+                    tv.setText("PETROL PUMP REPORT");
                 }
                 if (reportData.get(0).getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    tv.setText(getResources().getString(R.string.lpg_title));
+                    tv.setText("LPG REPORT");
                 }
-
-//                tv.setText(getResources().getString(R.string.godown_title));
                 tv.setGravity(Gravity.CENTER);
                 tv.setTextColor(Color.WHITE);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);

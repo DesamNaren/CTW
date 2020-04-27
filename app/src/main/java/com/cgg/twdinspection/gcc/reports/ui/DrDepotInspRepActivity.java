@@ -33,7 +33,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_insp_rep);
-        binding.header.headerTitle.setText("Depot Inspection Report");
+        binding.header.headerTitle.setText("DR DEPOT FINDINGS REPORT");
         binding.bottomLl.btnNext.setText("Next");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +103,8 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class)
+                .putExtra(AppConstants.PHOTO_TITLE, "DR DEPOT PHOTOS"));
             }
         });
     }

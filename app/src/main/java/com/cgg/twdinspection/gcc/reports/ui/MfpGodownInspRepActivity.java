@@ -34,7 +34,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown_insp_rep);
 
         binding.bottomLl.btnNext.setText("Next");
-        binding.header.headerTitle.setText("MFPGodown Inspection Report");
+        binding.header.headerTitle.setText("MFP GODOWN FINDINGS REPORT");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +100,8 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MfpGodownInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(MfpGodownInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "MFP GODOWN PHOTOS"));
             }
         });
     }

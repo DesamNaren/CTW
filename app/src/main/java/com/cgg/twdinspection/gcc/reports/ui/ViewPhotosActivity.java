@@ -30,7 +30,8 @@ public class ViewPhotosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_photos);
         binding.executePendingBindings();
-        binding.header.headerTitle.setText(getString(R.string.gcc_reports));
+        if (getIntent() != null)
+            binding.header.headerTitle.setText(getIntent().getStringExtra(AppConstants.PHOTO_TITLE));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,16 +47,16 @@ public class ViewPhotosActivity extends AppCompatActivity {
             }
         });
 
-        sharedPreferences= TWDApplication.get(ViewPhotosActivity.this).getPreferences();
+        sharedPreferences = TWDApplication.get(ViewPhotosActivity.this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
 
 
-        String jsonObject  = gson.toJson(reportData.getPhotos());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(reportData.getPhotos());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             adapter = new ViewPhotoAdapter(this, reportData.getPhotos());
-            binding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             binding.recyclerView.setAdapter(adapter);
         }
 

@@ -144,7 +144,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
             }
         });
 
-        binding.syncInstitutes.setOnClickListener(new View.OnClickListener() {
+        binding.syncBtnYears.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Utils.checkInternetConnection(SchoolSyncActivity.this)) {

@@ -51,7 +51,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();
     ReportData reportData;
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag, petrol_flag, lpg_flag;
-
+    int pos=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,22 +69,22 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         reportData = gson.fromJson(data, ReportData.class);
 
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-            binding.header.headerTitle.setText("Dr Godown");
+            binding.header.headerTitle.setText("GCC - DR GODOWN REPORT");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-            binding.header.headerTitle.setText("Dr Depot");
+            binding.header.headerTitle.setText("GCC- DR DEPOT REPORT");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-            binding.header.headerTitle.setText("MFP Godown");
+            binding.header.headerTitle.setText("GCC - MFP GODOWN REPORT");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-            binding.header.headerTitle.setText("Processing Unit");
+            binding.header.headerTitle.setText("GCC - PROCESSING UNIT REPORT");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-            binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump_title));
+            binding.header.headerTitle.setText("GCC - PETROL PUMP REPORT");
         }
         if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-            binding.header.headerTitle.setText(getResources().getString(R.string.lpg_title));
+            binding.header.headerTitle.setText("GCC - LPG REPORT");
         }
 
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
@@ -175,6 +175,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.llShopClose.setVisibility(View.VISIBLE);
+
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
                     if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
@@ -197,17 +198,12 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                                     }
                                 })
                                 .into(binding.ivShopCam);
+                        pos = z;
                         break;
                     }
 
-                    int pos = z;
-                    binding.ivShopCam.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
-                                    ReportStockDetailsActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
-                        }
-                    });
+
+
                 }
             } else {
                 Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
@@ -319,7 +315,20 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
 
         }
 
+        binding.ivShopCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pos!=-1){
+                Utils.displayPhotoDialogBox(reportData.getPhotos().get(pos).getFilePath(),
+                        ReportStockDetailsActivity.this, reportData.getPhotos().get(pos).getFileName(), true);
+                }
+
+            }
+        });
+
     }
+
+
 
 
     void callSnackBar(String msg) {

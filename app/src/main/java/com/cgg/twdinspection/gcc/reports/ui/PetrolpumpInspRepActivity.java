@@ -34,7 +34,7 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_insp_rep);
 
         binding.bottomLl.btnNext.setText("Next");
-        binding.header.headerTitle.setText("Petrol Pump Inspection Report");
+        binding.header.headerTitle.setText("PETROL PUMP FINDINGS REPORT");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +98,8 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PetrolpumpInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(PetrolpumpInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "PETROL PUMP PHOTOS"));
             }
         });
     }

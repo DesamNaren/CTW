@@ -34,7 +34,7 @@ public class LPGInspRepActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_lpg_insp_rep);
 
         binding.bottomLl.btnNext.setText("Next");
-        binding.header.headerTitle.setText("LPG Inspection Report");
+        binding.header.headerTitle.setText("LPG FINDINGS REPPORT");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,8 @@ public class LPGInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LPGInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(LPGInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "LPG PHOTOS"));
             }
         });
     }

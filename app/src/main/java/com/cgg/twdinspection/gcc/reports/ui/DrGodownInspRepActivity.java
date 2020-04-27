@@ -34,7 +34,7 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown_insp_rep);
 
         binding.bottomLl.btnNext.setText("Next");
-        binding.header.headerTitle.setText("Dr Godown Inspection Report");
+        binding.header.headerTitle.setText("DR GODOWN FINDINGS REPORT");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,7 +99,8 @@ public class DrGodownInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrGodownInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(DrGodownInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "DR GODOWN PHOTOS"));
             }
         });
 

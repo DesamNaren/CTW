@@ -32,7 +32,7 @@ public class ViewEngPhotosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_eng_photos);
         binding.executePendingBindings();
-        binding.header.headerTitle.setText(getString(R.string.title_view_photos));
+        binding.header.headerTitle.setText("WORKS PHOTOS");
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

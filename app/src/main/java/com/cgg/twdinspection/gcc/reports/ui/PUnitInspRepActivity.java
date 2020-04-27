@@ -28,7 +28,7 @@ public class PUnitInspRepActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_punit_insp_rep);
 
         binding.bottomLl.btnNext.setText("Next");
-        binding.header.headerTitle.setText("Processing Unit Inspection Report");
+        binding.header.headerTitle.setText("PROCESSING UNIT FINDINGS REPORT");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +81,8 @@ public class PUnitInspRepActivity extends AppCompatActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PUnitInspRepActivity.this, ViewPhotosActivity.class));
+                startActivity(new Intent(PUnitInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "PROCESSING UNIT PHOTOS"));
             }
         });
     }

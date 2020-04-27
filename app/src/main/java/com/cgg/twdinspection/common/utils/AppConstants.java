@@ -112,6 +112,7 @@ public class AppConstants {
     public static final String POOR = "Poor";
     public static final String OFF_PLACE_OF_WORK = "OFF_PLACE_OF_WORK";
     public static final String TITLE = "TITLE";
+    public static final String PHOTO_TITLE = "PHOTO_TITLE";
     public static String stockData = "STOCK_DATA";
     public static String petComm = "petComm";
     public static String essComm = "essComm";
