@@ -44,6 +44,7 @@ import com.cgg.twdinspection.inspection.ui.LoginActivity;
 import com.cgg.twdinspection.inspection.ui.QuitAppActivity;
 import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.schemes.ui.SchemeSyncActivity;
 
 import org.json.JSONObject;
 
@@ -836,7 +837,7 @@ public class Utils {
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setContentView(R.layout.custom_alert_sync);
 
                 dialog.setCancelable(false);
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
@@ -875,7 +876,7 @@ public class Utils {
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setContentView(R.layout.custom_alert_sync);
 
                 dialog.setCancelable(false);
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
@@ -896,6 +897,45 @@ public class Utils {
                     public void onClick(View v) {
                         dialog.dismiss();
                         activity.startActivity(new Intent(activity, SchoolSyncActivity.class));
+                        activity.finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void customSchemeSyncAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_sync);
+
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        activity.finish();
+                        dialog.dismiss();
+                    }
+                });
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        activity.startActivity(new Intent(activity, SchemeSyncActivity.class));
                         activity.finish();
                     }
                 });

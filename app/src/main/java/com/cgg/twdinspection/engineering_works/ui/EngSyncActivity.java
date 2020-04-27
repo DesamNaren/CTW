@@ -100,7 +100,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                     if (sectorsResponse.getSectorsEntitys() != null && sectorsResponse.getSectorsEntitys().size() > 0) {
                                         engSyncRepository.insertEngSectors(EngSyncActivity.this, sectorsResponse.getSectorsEntitys());
                                     } else {
-                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_districts));
+                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_sectors));
                                     }
                                 } else if (sectorsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                     Snackbar.make(binding.root, sectorsResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -134,7 +134,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                     if (grantSchemesResponse.getSchemes() != null && grantSchemesResponse.getSchemes().size() > 0) {
                                         engSyncRepository.insertEngSchemes(EngSyncActivity.this, grantSchemesResponse.getSchemes());
                                     } else {
-                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_fin_year));
+                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
                                     }
                                 } else if (grantSchemesResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                     Snackbar.make(binding.root, grantSchemesResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
@@ -169,7 +169,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                                     if (worksMasterResponse.getWorkDetails() != null && worksMasterResponse.getWorkDetails().size() > 0) {
                                         engSyncRepository.insertWorkDetails(EngSyncActivity.this, worksMasterResponse.getWorkDetails());
                                     } else {
-                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_ins_rem));
+                                        Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_works));
                                     }
                                 } else if (worksMasterResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                     Snackbar.make(binding.root, worksMasterResponse.getStatusMsg(), Snackbar.LENGTH_SHORT).show();

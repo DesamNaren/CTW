@@ -122,7 +122,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                             android.R.layout.simple_spinner_dropdown_item, finYearValues);
                     schemesDMVActivityBinding.spFinYr.setAdapter(adapter);
                 } else {
-                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No financial year data found...\n Do you want to sync financial years?");
+                    Utils.customSchemeSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No financial year data found...\n Do you want to sync financial years?");
                 }
             }
         });
@@ -140,7 +140,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
                     );
                     schemesDMVActivityBinding.spDist.setAdapter(adapter);
                 } else {
-                    Utils.customSchoolSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
+                    Utils.customSchemeSyncAlert(SchemesDMVActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
                 }
             }
         });

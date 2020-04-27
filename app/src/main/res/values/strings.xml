@@ -1062,5 +1062,7 @@
     <string name="stock_value_as_per_physical_verification">Stock value as per physical verification</string>
     <string name="stock_value_as_per_system_inspected">Stock value as per system (Inspected)</string>
     <string name="stock_value_as_per_system_not_inspected">Stock value as per system (Not inspected)</string>
+    <string name="no_sectors">No sectors fouund</string>
+    <string name="no_works">No work details found</string>
 
 </resources>
