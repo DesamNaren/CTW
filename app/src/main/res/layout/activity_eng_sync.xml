@@ -115,40 +115,43 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10dp"
-                            android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/syncSector"
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
-                                android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/dmv" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/sector"
-                                android:layout_marginBottom="@dimen/dimen_10dp"
-                                android:textColor="@color/black" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"/>
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
 
-                    <Button
-                        android:id="@+id/btn_sector"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:text="Download"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/syncSector"
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:layout_margin="@dimen/dimen_10dp"
+                                    android:background="@drawable/sync_bg"
+                                    android:padding="@dimen/dimen_20dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:src="@drawable/dmv" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dimen_10dp"
+                                    android:text="@string/sector"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_sector"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
 
@@ -164,41 +167,44 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10dp"
-                            android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/syncSchemes"
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
-                                android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/schemes_icon"
-                                android:tint="@color/white" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/dimen_10dp"
-                                android:text="@string/scheme"
-                                android:textColor="@color/black" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"/>
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="@dimen/dimen_10dp">
 
-                    <Button
-                        android:id="@+id/syncBtnSchemes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:text="Download"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/syncSchemes"
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:layout_margin="@dimen/dimen_10dp"
+                                    android:background="@drawable/sync_bg"
+                                    android:padding="@dimen/dimen_20dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:src="@drawable/scheme"
+                                    />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dimen_10dp"
+                                    android:text="@string/scheme"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/syncBtnSchemes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -219,40 +225,44 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_10dp"
-                            android:gravity="center"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/syncEngWorks"
-                                android:layout_width="@dimen/dimen_70dp"
-                                android:layout_height="@dimen/dimen_70dp"
-                                android:layout_margin="@dimen/dimen_10dp"
-                                android:background="@drawable/medical"
-                                android:padding="@dimen/dimen_20dp"
-                                android:paddingBottom="@dimen/dimen_10dp"
-                                android:src="@drawable/engineering_works_icon" />
-
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/engineering_works"
-                                android:layout_marginBottom="@dimen/dimen_10dp"
-                                android:textColor="@color/black" />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"/>
+                                android:padding="@dimen/dimen_10dp"
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btn_engWorks"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:text="Download"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/syncEngWorks"
+                                    android:layout_width="@dimen/dimen_70dp"
+                                    android:layout_height="@dimen/dimen_70dp"
+                                    android:layout_margin="@dimen/dimen_10dp"
+                                    android:background="@drawable/sync_bg"
+                                    android:padding="@dimen/dimen_20dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:src="@drawable/engineeringworks"
+                                    android:tint="@color/colorPrimary" />
+
+                                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/dimen_10dp"
+                                    android:text="@string/engineering_works"
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/btn_engWorks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/white"
+                                android:text="Download"
+                                android:textAllCaps="false"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
