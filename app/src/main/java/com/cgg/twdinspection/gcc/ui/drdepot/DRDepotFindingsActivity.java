@@ -81,7 +81,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_findings);
-        binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
+        binding.header.headerTitle.setText(getString(R.string.dr_depot_ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
@@ -574,7 +574,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
-                    startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class));
+                    startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class)
+                    .putExtra(AppConstants.TITLE, getString(R.string.dr_depot_upload_photos)));
                 }
             }
         });

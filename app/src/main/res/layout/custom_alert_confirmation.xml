@@ -46,7 +46,7 @@
 
 
             <Button
-                android:id="@+id/btDialogExit"
+                android:id="@+id/btDialogNo"
                 style="@style/roundedDialog_red"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -59,7 +59,7 @@
                 android:paddingLeft="10dp"
                 android:paddingEnd="10dp"
                 android:paddingRight="10dp"
-                android:text="@string/yes"
+                android:text="@string/no"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:visibility="visible" />
@@ -68,7 +68,7 @@
             <Button
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:id="@+id/btDialogCancel"
+                android:id="@+id/btDialogYes"
                 style="@style/roundedDialogInfo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -79,7 +79,7 @@
                 android:paddingEnd="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="@string/no"
+                android:text="@string/yes"
                 android:paddingStart="10dp"
                 android:textColor="@color/white"
                 android:visibility="visible" />
@@ -95,7 +95,7 @@
         android:layout_marginTop="35dp">
 
         <RelativeLayout
-            style="@style/circleBackground_red"
+            style="@style/circleBackgroundInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

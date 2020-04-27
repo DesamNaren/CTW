@@ -70,7 +70,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_petrol_pump_findings);
-        binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
+        binding.header.headerTitle.setText(getString(R.string.petrol_ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
@@ -484,7 +484,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
-                    startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class));
+                    startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class)
+                            .putExtra(AppConstants.TITLE, getString(R.string.petrol_upload_photos)));
                 }
             }
         });

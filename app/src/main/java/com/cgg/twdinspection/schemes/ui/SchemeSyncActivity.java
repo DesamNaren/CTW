@@ -69,7 +69,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         binding.setViewModel(sviewModel);
         binding.executePendingBindings();
         schemeSyncRepository = new SchemeSyncRepository(getApplication());
-        binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
+        binding.header.headerTitle.setText(getResources().getString(R.string.sync_scheme_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {

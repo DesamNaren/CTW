@@ -93,7 +93,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot);
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_depot));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_depot));
 
         randomNum = Utils.getRandomNumberString();
         stockDetailsResponsemain = null;

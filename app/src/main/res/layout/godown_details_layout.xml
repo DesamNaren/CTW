@@ -14,6 +14,7 @@
             android:padding="@dimen/dimen_10dp">
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/divLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -21,7 +22,6 @@
                 android:visibility="gone">
 
                 <ImageView
-
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
@@ -49,6 +49,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/socLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,6 +84,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/drGodownLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,6 +120,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/salesLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,6 +157,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/inchargeLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,6 +195,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:gravity="center"
                 android:id="@+id/dateLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

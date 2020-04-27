@@ -56,7 +56,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown);
-        binding.header.headerTitle.setText(getResources().getString(R.string.mfp_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_mfp_godown));
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;

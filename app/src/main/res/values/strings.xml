@@ -235,7 +235,10 @@
     <string name="sel_visitor_register">Select whether the details of medical checkup entered in the register</string>
     <string name="general_info">GENERAL INFO</string>
     <string name="sync_activity">SYNC DATA</string>
-    <string name="sync_school_activity">SYNC SCHOOL DATA</string>
+    <string name="sync_scheme_activity">SCHME SYNC</string>
+    <string name="sync_school_activity">School SYNC</string>
+    <string name="sync_gcc_activity">GCC SYNC</string>
+    <string name="sync_eng_activity">WORKS SYNC</string>
     <string name="dashboard">DASHBOARD</string>
     <string name="title_activity_institute_menu">InstituteMenuActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -343,6 +346,12 @@
     <string name="ben_report">BENEFICIARY REPORT</string>
     <string name="ben_details">BENEFICIARY DETAILS</string>
     <string name="upload_photos">UPLOAD PHOTOS</string>
+    <string name="dr_godown_upload_photos">DR GODOWN - PHOTOS</string>
+    <string name="dr_depot_upload_photos">DR DEPOT - PHOTOS</string>
+    <string name="mfp_godown_upload_photos">MFP GODOWN - PHOTOS</string>
+    <string name="p_unit_upload_photos">PROCESSING UNIT - PHOTOS</string>
+    <string name="petrol_upload_photos">PETROL PUMP - PHOTOS</string>
+    <string name="lpg_upload_photos">LPG - PHOTOS</string>
     <string-array name="inst_sections">
         <item>General Information</item>
         <item>Students Attendance</item>
@@ -578,6 +587,16 @@
     <string name="dr_depot">DR Depot</string>
     <string name="mfp_godown">MFP Godown</string>
     <string name="p_unit">Processing Unit</string>
+
+
+    <string name="gcc_dr_godown">GCC - DR GODOWN</string>
+    <string name="gcc_petrol_pump">GCC - PETROL PUMP</string>
+    <string name="gcc_lpg">GCC - LPG</string>
+    <string name="gcc_dr_depot">GCC - DR DEPOT</string>
+    <string name="gcc_mfp_godown">GCC - MFP GODOWN</string>
+    <string name="gcc_p_unit">GCC - PROCESSING UNIT</string>
+
+
     <string name="man_unit_name">Manufacturing Unit Name</string>
     <string name="dr_depo_name">DR Depot Name</string>
     <string name="mfp_godown_name">MFP Godown Name</string>
@@ -586,7 +605,13 @@
     <string name="ceil_roof">Ceiling / Roof</string>
     <string name="stock_arrangement">Stock Arrangement</string>
     <string name="machinary">Machinery</string>
-    <string name="ins_off_fin">Inspection Officer Findings</string>
+    <string name="dr_godown_ins_off_fin">DR GODOWN - FINDINGS</string>
+    <string name="dr_depot_ins_off_fin">DR DEPOT - FINDINGS</string>
+    <string name="mfp_godown_ins_off_fin">MFP GODOWN - FINDINGS</string>
+    <string name="p_unit_ins_off_fin">PROCESSING UNIT - FINDINGS</string>
+    <string name="petrol_ins_off_fin">PETROL PUMP - FINDINGS</string>
+    <string name="lpg_ins_off_fin">LPG - FINDINGS</string>
+
     <string name="repair_type">Repair type</string>
     <string name="com_name">Company Name</string>
     <string name="cash_balance_as_per_cash_book">Cash balance as per cash book</string>
@@ -637,9 +662,9 @@
     <string name="b_adjustment_vouchers_bills">B.Adjustment vouchers / bills</string>
     <string name="liability_balance_as_per_liability_register">Liability balance as per liability register</string>
     <string name="deficit_excess">Deficit/Excess</string>
-    <string name="report">Reports</string>
-    <string name="gcc_reports">GCC Reports</string>
-    <string name="gcc">GCC Dashboard</string>
+    <string name="report">REPORTS</string>
+    <string name="gcc_reports">GCC REPORTS</string>
+    <string name="gcc">GCC DASHBOARD</string>
     <string name="reason_mentioned_by_incharge_regarding_deficit_surplus">Reason mentioned by incharge regarding deficit / surplus</string>
     <string name="abstract_sales_register">Abstract sales register</string>
     <string name="sale_bill_book">Sale bill book</string>
@@ -740,7 +765,7 @@
     <string name="tab_mob_num">Enter tab incharge mobile no</string>
     <string name="valid_incharge_mob_num">Enter valid tab incharge mobile no</string>
     <string name="change_insp">Do you want to change the institute? On click of Yes your inspection data will lost</string>
-    <string name="logout">Do you want to Logout?</string>
+    <string name="logout">Do you want to Logout from app?</string>
     <string name="data_lost">Do you want to go back? On click of Yes entered data will be lost</string>
 
 
@@ -1005,5 +1030,6 @@
     <string name="place_of_work">Place of work</string>
     <string name="search_by_workId">Search by work ID/workname</string>
     <string name="work_id">Work ID</string>
+    <string name="do_you_want">Are you sure, Do you want submit data?</string>
 
 </resources>

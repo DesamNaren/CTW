@@ -53,7 +53,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         societies = new ArrayList<>();
         pUnits = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_p_unit));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

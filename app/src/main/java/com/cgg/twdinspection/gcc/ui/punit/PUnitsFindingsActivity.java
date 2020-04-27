@@ -47,7 +47,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_punit_findings);
-        binding.header.headerTitle.setText(getString(R.string.ins_off_fin));
+        binding.header.headerTitle.setText(getString(R.string.p_unit_ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
@@ -202,7 +202,8 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.commit();
 
-                    startActivity(new Intent(PUnitsFindingsActivity.this, GCCPhotoActivity.class));
+                    startActivity(new Intent(PUnitsFindingsActivity.this, GCCPhotoActivity.class)
+                            .putExtra(AppConstants.TITLE, getString(R.string.p_unit_upload_photos)));
                 }
             }
         });

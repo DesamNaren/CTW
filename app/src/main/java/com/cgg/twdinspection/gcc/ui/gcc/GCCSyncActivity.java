@@ -68,7 +68,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
         gccSyncRepository = new GCCSyncRepository(getApplication());
-        binding.header.headerTitle.setText(getResources().getString(R.string.sync_activity));
+        binding.header.headerTitle.setText(getResources().getString(R.string.sync_gcc_activity));
         instMainViewModel = new InstMainViewModel(getApplication());
         divisionSelectionViewModel = new DivisionSelectionViewModel(getApplication());
 

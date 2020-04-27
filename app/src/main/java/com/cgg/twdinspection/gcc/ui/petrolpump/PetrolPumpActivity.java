@@ -55,7 +55,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         petrolStockDetailsResponseMain = null;
         PLPGFragment.commonCommodities = null;
 
-        binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_petrol_pump));
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);

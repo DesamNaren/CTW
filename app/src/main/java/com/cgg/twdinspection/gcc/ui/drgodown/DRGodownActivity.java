@@ -64,7 +64,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        binding.header.headerTitle.setText(getResources().getString(R.string.dr_godown));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_godown));
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);

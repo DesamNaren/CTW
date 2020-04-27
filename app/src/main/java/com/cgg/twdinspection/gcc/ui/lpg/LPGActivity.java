@@ -55,7 +55,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
         petrolStockDetailsResponseMain = null;
         PLPGFragment.commonCommodities = null;
 
-        binding.header.headerTitle.setText(getResources().getString(R.string.lpg));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_lpg));
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);

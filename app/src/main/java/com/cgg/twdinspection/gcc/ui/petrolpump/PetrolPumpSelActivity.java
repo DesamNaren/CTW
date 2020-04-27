@@ -52,7 +52,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         societies = new ArrayList<>();
         petrolPumps = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
-        binding.header.headerTitle.setText(getResources().getString(R.string.petrol_pump));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_petrol_pump));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

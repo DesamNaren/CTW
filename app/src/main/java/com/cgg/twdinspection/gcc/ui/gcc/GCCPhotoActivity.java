@@ -81,7 +81,11 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_photo_capture);
-        binding.header.headerTitle.setText(getString(R.string.upload_photos));
+        if(getIntent()!=null) {
+            binding.header.headerTitle.setText(getIntent().getStringExtra(AppConstants.TITLE));
+        }else{
+            binding.header.headerTitle.setText(getString(R.string.upload_photos));
+        }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(GCCPhotoActivity.this);

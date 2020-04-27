@@ -57,7 +57,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_p_unit);
-        binding.header.headerTitle.setText(getResources().getString(R.string.p_unit));
+        binding.header.headerTitle.setText(getResources().getString(R.string.gcc_p_unit));
 
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;

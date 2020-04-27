@@ -1,10 +1,15 @@
 package com.cgg.twdinspection.schemes.ui;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,9 +17,12 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
@@ -30,6 +38,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
+import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -245,8 +254,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
                     Toast.makeText(BenDetailsActivity.this, "Please capture images", Toast.LENGTH_SHORT).show();
                 } else {
                     if (Utils.checkInternetConnection(BenDetailsActivity.this)) {
-                        customProgressDialog.show();
-                        submitCall(beneficiaryDetail);
+                        customSaveAlert(BenDetailsActivity.this, getString(R.string.app_name), getString(R.string.do_you_want));
                     } else {
                         Utils.customErrorAlert(BenDetailsActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
                     }
@@ -254,6 +262,53 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
             }
         });
     }
+
+    public void customSaveAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        customProgressDialog.show();
+                        submitCall(beneficiaryDetail);
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void submitCall(BeneficiaryDetail beneficiaryDetail) {
         SchemeSubmitRequest schemeSubmitRequest = new SchemeSubmitRequest();
