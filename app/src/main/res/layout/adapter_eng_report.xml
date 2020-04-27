@@ -37,9 +37,10 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="Work ID"
-                    android:textColor="@color/black" />
+                     />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
@@ -65,9 +66,10 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="Work Name"
-                    android:textColor="@color/black" />
+                   />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
@@ -95,9 +97,10 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="District name"
-                    android:textColor="@color/black" />
+                    />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
@@ -123,9 +126,10 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="Mandal name"
-                    android:textColor="@color/black" />
+                    />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
@@ -152,9 +156,10 @@
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
                     android:text="Village name"
-                    android:textColor="@color/black" />
+                    />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
