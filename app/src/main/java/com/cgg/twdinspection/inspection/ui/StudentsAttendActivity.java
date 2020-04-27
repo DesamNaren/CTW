@@ -329,7 +329,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             flag = false;
         } else if (IsattenMarked.equals(AppConstants.Yes)) {
             if (Integer.parseInt(et_studMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
-                showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
+                showBottomSheetSnackBar(getResources().getString(R.string.stud_marked_greater_than_roll));
                 flag = false;
             } else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
                 showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));

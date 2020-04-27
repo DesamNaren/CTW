@@ -923,7 +923,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         }
         if (roPlant.equals(AppConstants.Yes) && flag_tds == 0) {
             ScrollToView(binding.ivTds);
-            showSnackBar("Please capture TDS image");
+            showSnackBar(getString(R.string.capture_tds_image));
             return false;
         }
         if (roPlant.equals(AppConstants.No) && TextUtils.isEmpty(roplant_reason)) {
@@ -1304,12 +1304,12 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             } else if (resultCode == RESULT_CANCELED) {
                 binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        getString(R.string.user_cancelled), Toast.LENGTH_SHORT)
                         .show();
             } else {
                 binding.ivTds.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera));
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        getString(R.string.image_capture_failed), Toast.LENGTH_SHORT)
                         .show();
             }
         }

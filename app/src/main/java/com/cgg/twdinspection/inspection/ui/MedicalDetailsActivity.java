@@ -1,5 +1,6 @@
 package com.cgg.twdinspection.inspection.ui;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -240,6 +241,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onItemClick(int position) {
 
@@ -261,7 +263,7 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
             }
             binding.recyclerView.setVisibility(View.GONE);
             binding.tvEmpty.setVisibility(View.VISIBLE);
-            binding.tvEmpty.setText("Records submitted");
+            binding.tvEmpty.setText(R.string.records_submitted);
 
             totalList.addAll(list);
             medicalDetailsViewModel.insertMedicalDetailsInfo(totalList);
