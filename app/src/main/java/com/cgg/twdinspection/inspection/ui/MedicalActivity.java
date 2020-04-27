@@ -348,7 +348,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fevCnt = Integer.valueOf(s.toString());
                     if(fevCnt>totalStrength){
                         binding.etFever.setText("");
-                        binding.etFever.setError("Entered count should not exceed the total strength");
+                        binding.etFever.setError(getString(R.string.count_not_exceed_strength));
                         binding.etFever.requestFocus();
                     }
                 }
@@ -371,7 +371,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fevCnt = Integer.valueOf(s.toString());
                     if(fevCnt>totalStrength){
                         binding.etCold.setText("");
-                        binding.etCold.setError("Entered count should not exceed the total strength");
+                        binding.etCold.setError(getString(R.string.count_not_exceed_strength));
                         binding.etCold.requestFocus();
                     }
                 }
@@ -394,7 +394,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fevCnt = Integer.valueOf(s.toString());
                     if(fevCnt>totalStrength){
                         binding.etDiarrhea.setText("");
-                        binding.etDiarrhea.setError("Entered count should not exceed the total strength");
+                        binding.etDiarrhea.setError(getString(R.string.count_not_exceed_strength));
                         binding.etDiarrhea.requestFocus();
                     }
                 }
@@ -417,7 +417,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fevCnt = Integer.valueOf(s.toString());
                     if(fevCnt>totalStrength){
                         binding.etHeadache.setText("");
-                        binding.etHeadache.setError("Entered count should not exceed the total strength");
+                        binding.etHeadache.setError(getString(R.string.count_not_exceed_strength));
                         binding.etHeadache.requestFocus();
                     }
                 }
@@ -439,7 +439,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int fevCnt = Integer.valueOf(s.toString());
                     if(fevCnt>totalStrength){
                         binding.etMalaria.setText("");
-                        binding.etMalaria.setError("Entered count should not exceed the total strength");
+                        binding.etMalaria.setError(getString(R.string.count_not_exceed_strength));
                         binding.etMalaria.requestFocus();
                     }
                 }
@@ -462,7 +462,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int cnt = Integer.valueOf(s.toString());
                     if(cnt>totalStrength){
                         binding.etOthers.setText("");
-                        binding.etOthers.setError("Entered count should not exceed the total strength");
+                        binding.etOthers.setError(getString(R.string.count_not_exceed_strength));
                         binding.etOthers.requestFocus();
                     }
                 }
@@ -485,7 +485,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int cnt = Integer.valueOf(s.toString());
                     if(cnt>totalStrength){
                         binding.etLeftForScreening.setText("");
-                        binding.etLeftForScreening.setError("Entered count should not exceed the total strength");
+                        binding.etLeftForScreening.setError(getString(R.string.count_not_exceed_strength));
                         binding.etLeftForScreening.requestFocus();
                     }
                 }
@@ -508,7 +508,7 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     int cnt = Integer.valueOf(s.toString());
                     if(cnt>totalStrength){
                         binding.etScreenedByCallHealth.setText("");
-                        binding.etScreenedByCallHealth.setError("Entered count should not exceed the total strength");
+                        binding.etScreenedByCallHealth.setError(getString(R.string.count_not_exceed_strength));
                         binding.etScreenedByCallHealth.requestFocus();
                     }
                 }

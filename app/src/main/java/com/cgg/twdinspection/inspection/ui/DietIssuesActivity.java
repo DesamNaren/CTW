@@ -599,7 +599,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             return false;
         }
         if (flag_officer == 0) {
-            showSnackBar("Please capture Inspector Officer image");
+            showSnackBar(getString(R.string.insp_officer_image));
             return false;
         }
 
@@ -719,11 +719,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        R.string.user_cancelled, Toast.LENGTH_SHORT)
                         .show();
             } else {
                 Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        R.string.image_capture_failed, Toast.LENGTH_SHORT)
                         .show();
             }
         }

@@ -598,13 +598,13 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private boolean validatePlantsData() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(plantTypeStr)) {
-            showBottomSheetSnackBar("Please enter plant type");
+            showBottomSheetSnackBar(getString(R.string.plant_type));
             returnFlag = false;
         } else if (TextUtils.isEmpty(plantCntStr)) {
-            showBottomSheetSnackBar("Please enter no of plants");
+            showBottomSheetSnackBar(getString(R.string.no_of_plants));
             returnFlag = false;
         } else if (!(Integer.valueOf(plantCntStr) > 0)) {
-            showBottomSheetSnackBar("Count should be greater than zero");
+            showBottomSheetSnackBar(getString(R.string.count_greater_than_zero));
             returnFlag = false;
         }
         return returnFlag;
@@ -613,25 +613,25 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
     private boolean validate() {
         boolean returnFlag = true;
         if (TextUtils.isEmpty(stuNameStr)) {
-            showStudBottomSheetSnackBar("Please enter student name");
+            showStudBottomSheetSnackBar(getString(R.string.plz_enter_stu_name));
             returnFlag = false;
         } else if (TextUtils.isEmpty(studClassStr)) {
-            showStudBottomSheetSnackBar("Please enter student class");
+            showStudBottomSheetSnackBar(getString(R.string.plz_enter_stu_class));
             returnFlag = false;
         } else if (TextUtils.isEmpty(locationStr)) {
-            showStudBottomSheetSnackBar("Please enter winning place location");
+            showStudBottomSheetSnackBar(getString(R.string.winning_prize_loc));
             returnFlag = false;
         } else if (TextUtils.isEmpty(levelStr)) {
-            showStudBottomSheetSnackBar("Please enter level");
+            showStudBottomSheetSnackBar(getString(R.string.enter_level));
             returnFlag = false;
         } else if (TextUtils.isEmpty(eventStr)) {
-            showStudBottomSheetSnackBar("Please enter event");
+            showStudBottomSheetSnackBar(getString(R.string.enter_event));
             returnFlag = false;
         } else if (TextUtils.isEmpty(participationStr)) {
-            showStudBottomSheetSnackBar("Please enter whether student participated/won");
+            showStudBottomSheetSnackBar(getString(R.string.enter_stud_part));
             returnFlag = false;
         } else if (TextUtils.isEmpty(studClassStr)) {
-            showStudBottomSheetSnackBar("Please enter student class");
+            showStudBottomSheetSnackBar(getString(R.string.plz_enter_stu_class));
             returnFlag = false;
         }
         return returnFlag;
@@ -670,7 +670,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.sel_spo_mat));
             returnFlag = false;
         } else if (spo_mat_rec.equals(AppConstants.Yes) && TextUtils.isEmpty(entry_stock)) {
-            showSnackBar("Select stock entry register");
+            showSnackBar(getString(R.string.stock_entry_reg));
             returnFlag = false;
         } else if (TextUtils.isEmpty(game_sport_room)) {
             ScrollToView(binding.gameSportRoomRg);
@@ -812,7 +812,7 @@ public class CoCurricularActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.pare_meeting));
             returnFlag = false;
         } else if (TextUtils.isEmpty(kitchen_garden_status)) {
-            showSnackBar("Select kitchen garden status");
+            showSnackBar(getString(R.string.kitchen_garden_status));
             returnFlag = false;
         } else if (!TextUtils.isEmpty(kitchen_garden_status) && kitchen_garden_status.equals(AppConstants.Yes)
                 && TextUtils.isEmpty(type_kitchen_garden)) {
