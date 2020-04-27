@@ -84,7 +84,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Beneficiary ID"
+                                android:text="@string/beneficiary_id"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -113,7 +113,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Beneficiary Name"
+                                android:text="@string/beneficiary_name"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -142,7 +142,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Activity"
+                                android:text="@string/activity"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -171,7 +171,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Scheme"
+                                android:text="@string/scheme"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -200,7 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Unit Cost"
+                                android:text="@string/unit_cost"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -228,7 +228,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Subsidy"
+                                android:text="@string/subsidy"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -257,7 +257,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Bank Loan"
+                                android:text="@string/bank_loan"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -286,7 +286,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Contribution"
+                                android:text="@string/contribution"
                                 android:textColor="@color/black" />
 
                             <TextView
@@ -315,7 +315,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
                                 android:layout_weight="1"
-                                android:text="Status"
+                                android:text="@string/status"
                                 android:textColor="@color/black" />
 
                             <TextView

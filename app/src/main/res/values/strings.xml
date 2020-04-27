@@ -1,8 +1,8 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">TWD Inspection App</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
-    <string name="verify_your_number">Verify Your Number</string>
+    <string name="verify_your_number">Verify your number</string>
     <string name="plz_enter_mob">Please enter your mobile number to \n receive a verification code.</string>
     <string name="enter_mobile_number">Enter mobile number</string>
     <string name="con">Continue</string>
@@ -101,7 +101,7 @@
     <string name="is_path">Is path way required</string>
     <string name="is_sump">Is sump required</string>
     <string name="is_sewerage">Is sewerage connected to drainage system</string>
-    <string name="raise_request">Raise request to construct Soak Pit</string>
+    <string name="raise_request">Raise request to construct soak pit</string>
     <string name="is_drainage">Is drainage line functioning</string>
     <string name="is_solar">Is solar water heater available</string>
     <!--<string name="working_status">Working Status</string>-->
@@ -123,7 +123,7 @@
     <string name="c">C</string>
     <string name="total">Total</string>
     <string name="are_the">89. Are the following registers update?</string>
-    <string name="adm_reg">Admission Register</string>
+    <string name="adm_reg">Admission register</string>
     <string name="att_boa_reg">Boarders Attendance Register</string>
     <string name="boa_sign_reg">Boarders Signature Register</string>
     <string name="boa_mov_reg">Boarders Movement Register</string>
@@ -157,8 +157,8 @@
     <string name="entitlements_cosmetics_upto_month">Cosmetics distributed up to which month</string>
     <string name="entitlements_uniforms">Uniforms Provided are in good quality, properly stitched as per student size</string>
     <string name="entitlements_haircut">Whether Hait cutting has been completed (Boys)</string>
-    <string name="entitlements_haircut_date">Populated the date of last Haircut</string>
-    <string name="entitlements_dress_distributed">How many Pairs of dress distributed to each candidate</string>
+    <string name="entitlements_haircut_date">Populated the date of last haircut</string>
+    <string name="entitlements_dress_distributed">How many pairs of dress distributed to each candidate</string>
     <string name="rice">A. Rice</string>
     <string name="rg_dal_kg">B. RG Dal (KG)</string>
     <string name="palm_oil_number">C. Palm Oil (Number)</string>
@@ -172,7 +172,7 @@
     <string name="_26_does_the_supplier_provides_samples_of_food_provisions">Does the supplier provides samples of food provisions</string>
     <string name="_27_does_food_provisions_matching_with_samples_provided">Does food provisions matching with samples provided</string>
     <string name="_28_does_mess_committee_exist_or_not">Does mess committee exist or not</string>
-    <string name="_30_weather_prescribed_menu_served">Whether Prescribed menu Served?</string>
+    <string name="_30_weather_prescribed_menu_served">Whether prescribed menu served?</string>
     <string name="_31_picture_of_the_inspecting_officer">Picture of the inspecting officer</string>
     <string name="_79_store_room">Store Room</string>
     <string name="_80_varandah">Varandah</string>
@@ -184,17 +184,17 @@
     <string name="_86_kitchen">Kitchen</string>
     <string name="_87_classroom">ClassRoom</string>
     <string name="Fruits">Fruits</string>
-    <string name="food_provisions">Whether Food provisions supplied on Time?</string>
+    <string name="food_provisions">Whether food provisions supplied on time?</string>
     <string name="eggs">Eggs</string>
     <string name="vegetables">Vegetables</string>
     <string name="food">Food Provisions</string>
     <string name="quality_of_food">What is the Quality of food provisions supplied?</string>
     <string name="inferior">Inferior</string>
-    <string name="personal_hygiene">How is the Personal Hygiene of students</string>
+    <string name="personal_hygiene">How is the personal hygiene of students</string>
     <string name="haircut_on_time">Hair cutting on time</string>
-    <string name="students_found_anemic">Students Found Anemic</string>
+    <string name="students_found_anemic">Students found anemic</string>
     <string name="attire_of_students">Attire of students</string>
-    <string name="hygiene_staff">How is Hygiene of staff</string>
+    <string name="hygiene_staff">How is hygiene of staff</string>
     <string name="cooks_wearing_cap_during_cook_and_serving">Cooks wearing cap during cook and serving</string>
     <string name="hands_of_cooking_staff">Hands of cooking staff are clean</string>
     <string name="attire_of_staff_is_appropriate">Is the Attire of staff is appropriate</string>
@@ -276,7 +276,7 @@
     <string name="event_of_kitchen_in_charge">Event of kitchen in charge</string>
     <string name="types_of_kitchen_garden">Varieties of kitchen Garden</string>
     <string name="name_of_the_kitchen_garden_in_charge_teacher">Name of the kitchen garden in charge/ teacher</string>
-    <string name="whether_haritha_haram_conducted_2019_2020">Whether Haritha Haram conducted 2019-2020</string>
+    <string name="whether_haritha_haram_conducted_2019_2020">Whether haritha haram conducted 2019-2020</string>
     <string name="whether_students_council_elections_conducted_during_2019_2020">Whether students council elections conducted during 2019- 2020</string>
     <string name="reason">Reason</string>
     <string name="name_of_the_student_s_council_captain">Name of the student’s council captain</string>
@@ -292,7 +292,7 @@
     <string name="itda_level">ITDA level</string>
     <string name="state_level">State Level</string>
     <string name="movement_register_entry">Did HM make entry in the movement register along with name of the incharge </string>
-    <string name="hwo_movement_register_entry">Did HWO/ Deputy warden make entry in the movement Register along with Name of the In Charge</string>
+    <string name="hwo_movement_register_entry">Did HWO/ Deputy warden make entry in the movement register along with name of the incharge</string>
     <string name="whether_staff_quarters_available">Whether staff quarters available</string>
     <string name="capture_operating_from_distance">Capture operating from distance (in KMS)</string>
     <string name="below_30">below 30</string>
@@ -338,10 +338,10 @@
     <string name="slippers">Slippers</string>
     <string name="night_dress">Night Dress</string>
     <string name="school_bags">School Bags</string>
-    <string name="sanitary_napkins_supplied">Sanitary Napkins supplied</string>
-    <string name="sanitary_napkins">Sanitary Napkins</string>
-    <string name="notes_supplied">Note Books Supplied</string>
-    <string name="notes">Note Books</string>
+    <string name="sanitary_napkins_supplied">Sanitary napkins supplied</string>
+    <string name="sanitary_napkins">Sanitary napkins</string>
+    <string name="notes_supplied">Notebooks supplied</string>
+    <string name="notes">Notebooks</string>
     <string name="whether_online">Whether online status and field status match?</string>
     <string name="ben_report">BENEFICIARY REPORT</string>
     <string name="ben_details">BENEFICIARY DETAILS</string>
@@ -388,7 +388,7 @@
     <string name="unauthorized_absent">Unauthorized Absent</string>
     <string name="od">OD</string>
 
-    <string name="con_time_out">The Connection has timed out, Please try again</string>
+    <string name="con_time_out">The connection has timed out, please try again</string>
     <string name="io_exe">:IO Exception</string>
     <string name="something">Something went wrong, please try again</string>
     <string name="server_not">Server not responding, Please try later</string>
@@ -447,7 +447,7 @@
     <string name="select_roPlant">Select RO plant working</string>
     <string name="select_roPlant_reason">Enter RO plant reason</string>
     <string name="select_src_drinking_water">Select source of drinking water</string>
-    <string name="select_inverter">Select Is inverter available</string>
+    <string name="select_inverter">Select is inverter available</string>
     <string name="select_inverter_working">Select inverter working status</string>
     <string name="select_lighting_facility">Select lighting facility</string>
     <string name="select_electricity">Select electricity wiring, switch board are good</string>
@@ -823,19 +823,19 @@
     <string name="engineering_work_id">Engineering work ID</string>
     <string name="area_of_operation">Area of operation</string>
     <string name="district">District</string>
-    <string name="assembly_constituency">Assembly Constituency</string>
+    <string name="assembly_constituency">Assembly constituency</string>
     <string name="sector">Sector</string>
     <string name="name_of_the_work">Name of the work</string>
     <string name="estimate_cost">Estimate Cost</string>
     <string name="scheme">Scheme</string>
-    <string name="executing_agency">Executing Agency</string>
+    <string name="executing_agency">Executing agency</string>
     <string name="sanction_date">Sanction date</string>
-    <string name="technical_sanction_date">Technical Sanction date</string>
+    <string name="technical_sanction_date">Technical sanction date</string>
     <string name="commencement_date">Commencement date</string>
     <string name="target_date_of_completion">Target date of completion</string>
     <string name="extension_time_given">Extension time given</string>
     <string name="stage_of_work">Stage of work</string>
-    <string name="stage_of_work_for_in_progress_works">Stage of work for In-progress works</string>
+    <string name="stage_of_work_for_in_progress_works">Stage of work for in-progress works</string>
     <string name="overall_appearance">Overall appearance</string>
     <string name="workmen_s_skills">Workmen’s skills</string>
     <string name="quality_care_curing_polishing_etc">Quality care (Curing, Polishing etc)</string>
@@ -881,8 +881,8 @@
     <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
     <string name="ro_plant">RO Plant</string>
-    <string name="ceiling_fans_required">No. of Ceiling Fans Required</string>
-    <string name="wall_mounted_req">No. of Wall mounted Required</string>
+    <string name="ceiling_fans_required">No. of ceiling fans required</string>
+    <string name="wall_mounted_req">No. of wall mounted required</string>
     <string name="cc_cameras">Whether CC cameras are working</string>
     <string name="steam_cooking">Is steam cooking available</string>
     <string name="bunker_beds">Are bunker beds available</string>
@@ -1019,8 +1019,8 @@
     <string name="safety_equipment">Safety Equipment</string>
     <string name="office">Office</string>
     <string name="inspection_date">Inspection date</string>
-    <string name="staff_mandal">Staff Mandal</string>
-    <string name="staff_department">Staff Department</string>
+    <string name="staff_mandal">Staff mandal</string>
+    <string name="staff_department">Staff department</string>
     <string name="gp">GP</string>
     <string name="village">Village</string>
     <string name="ee">EE</string>
@@ -1062,7 +1062,13 @@
     <string name="stock_value_as_per_physical_verification">Stock value as per physical verification</string>
     <string name="stock_value_as_per_system_inspected">Stock value as per system (Inspected)</string>
     <string name="stock_value_as_per_system_not_inspected">Stock value as per system (Not inspected)</string>
-    <string name="no_sectors">No sectors fouund</string>
-    <string name="no_works">No work details found</string>
+    <string name="beneficiary_id">Beneficiary ID</string>
+    <string name="beneficiary_name">Beneficiary name</string>
+    <string name="activity">Activity</string>
+    <string name="unit_cost">Unit cost</string>
+    <string name="subsidy">Subsidy</string>
+    <string name="bank_loan">Bank loan</string>
+    <string name="contribution">Contribution</string>
+    <string name="status">Status</string>
 
 </resources>
