@@ -258,7 +258,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                     Log.i("SC_CNT", "schCount: " + cnt);
                     binding.btnSector.setText("Re-Download");
                     Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "Sectors synced successfully");
+                            "Sectors data synced successfully");
                     // Success Alert;
                 } else {
                     Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
@@ -276,7 +276,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                     Log.i("SC_CNT", "schCount: " + cnt);
                     binding.syncBtnSchemes.setText("Re-Download");
                     Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "Schemes synced successfully");
+                            "Schemes data synced successfully");
                     // Success Alert;
                 } else {
                     Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
@@ -294,7 +294,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
                     Log.i("SC_CNT", "schCount: " + cnt);
                     binding.btnEngWorks.setText("Re-Download");
                     Utils.customSyncSuccessAlert(EngSyncActivity.this, getResources().getString(R.string.app_name),
-                            "ENgineering works synced successfully");
+                            "Engineering works data synced successfully");
                     // Success Alert;
                 } else {
                     Utils.customErrorAlert(EngSyncActivity.this, getResources().getString(R.string.app_name), getString(R.string.no_scheme));
