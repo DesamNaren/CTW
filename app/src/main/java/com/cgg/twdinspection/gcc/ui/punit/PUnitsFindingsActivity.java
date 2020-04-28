@@ -15,6 +15,7 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
@@ -42,7 +43,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private String empReg, barrelCans, cashBook, cashBankBal, vehLogBook;
     private String stockRemarks, proRemarks, inwardRemarks, outwardRemarks, saleRemarks, labRemarks, fireRemarks, amcRemarks, agmarkRemarks,
             fsaaiRemarks, emptyRemarks, barralesRemarks, cahBookRemarks, cashBankRemarks, vehlogRemarks;
-
+    private String randomNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         String stockData = sharedPreferences.getString(AppConstants.stockData, "");
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
+        randomNum = Utils.getRandomNumberString();
 
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
@@ -200,6 +202,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
                     editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
+                    editor.putString(AppConstants.randomNum, randomNum);
                     editor.commit();
 
                     startActivity(new Intent(PUnitsFindingsActivity.this, GCCPhotoActivity.class)

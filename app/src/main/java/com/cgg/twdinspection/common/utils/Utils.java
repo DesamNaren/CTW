@@ -250,6 +250,9 @@ public class Utils {
         }
     }
 
+    public static String getRandomCurrentDateTime() {
+        return new SimpleDateFormat("ddMMYYhhmm", Locale.getDefault()).format(new Date());
+    }
 
     public static String getCurrentDateTime() {
         return new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
@@ -618,7 +621,9 @@ public class Utils {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
         // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
+        String randomNum = String.format("%06d", number);
+        String time = getRandomCurrentDateTime();
+        return  randomNum.concat(time);
     }
 
     public static void customErrorAlert(Context activity, String title, String msg) {

@@ -92,8 +92,6 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity {
                     }
                 });
             }
-        } else {
-            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

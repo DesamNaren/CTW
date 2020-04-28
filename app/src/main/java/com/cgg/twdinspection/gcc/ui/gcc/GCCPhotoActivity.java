@@ -677,6 +677,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     public void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse) {
         customProgressDialog.hide();
         if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
+
             CallSuccessAlert(gccPhotoSubmitResponse.getStatusMessage());
         } else if (gccPhotoSubmitResponse != null && gccPhotoSubmitResponse.getStatusCode() != null && gccPhotoSubmitResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
             Snackbar.make(binding.root, gccPhotoSubmitResponse.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
