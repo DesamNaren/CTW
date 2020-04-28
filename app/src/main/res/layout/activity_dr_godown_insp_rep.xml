@@ -110,6 +110,31 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_system_inspected"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvInsSysVal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@{inspData.stockDetails.stockValueAsPerSystemInsp}"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -197,6 +222,31 @@
                                     android:textColor="@color/black" />
 
                             </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_system_not_inspected"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_sys_val_not_ins"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@{inspData.stockDetails.stockValueAsPerSystemNotInsp}"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 

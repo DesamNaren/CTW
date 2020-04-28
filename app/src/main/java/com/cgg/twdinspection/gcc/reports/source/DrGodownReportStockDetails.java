@@ -18,6 +18,29 @@ public class DrGodownReportStockDetails {
     @Expose
     private String deficitReason;
 
+    @SerializedName("stock_value_as_per_sys_insp")
+    @Expose
+    private String stockValueAsPerSystemInsp;
+    @SerializedName("stock_value_as_per_sys_not_insp")
+    @Expose
+    private String stockValueAsPerSystemNotInsp;
+
+    public String getStockValueAsPerSystemInsp() {
+        return stockValueAsPerSystemInsp;
+    }
+
+    public void setStockValueAsPerSystemInsp(String stockValueAsPerSystemInsp) {
+        this.stockValueAsPerSystemInsp = stockValueAsPerSystemInsp;
+    }
+
+    public String getStockValueAsPerSystemNotInsp() {
+        return stockValueAsPerSystemNotInsp;
+    }
+
+    public void setStockValueAsPerSystemNotInsp(String stockValueAsPerSystemNotInsp) {
+        this.stockValueAsPerSystemNotInsp = stockValueAsPerSystemNotInsp;
+    }
+
     public String getStockValueAsPerSystem() {
         return stockValueAsPerSystem;
     }

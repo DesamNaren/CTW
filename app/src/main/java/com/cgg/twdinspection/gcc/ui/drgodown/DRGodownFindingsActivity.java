@@ -448,6 +448,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     stockDetails.setStockValueAsPerPhysical(physVal);
                     stockDetails.setDeficit(difference);
                     stockDetails.setDeficitReason(deficitReason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
 
                     drGodownInsp.setStockDetails(stockDetails);
 

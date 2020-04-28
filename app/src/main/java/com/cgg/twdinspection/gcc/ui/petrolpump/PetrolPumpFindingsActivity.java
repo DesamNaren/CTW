@@ -415,6 +415,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     stockDetails.setStockValueAsPerPhysical(physVal);
                     stockDetails.setDeficit(difference);
                     stockDetails.setDeficitReason(deficitReason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
 
                     petrolPumpIns.setStockDetails(stockDetails);
 

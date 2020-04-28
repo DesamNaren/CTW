@@ -513,6 +513,8 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     stockDetails.setLiabilityBalance(Double.valueOf(liaBal));
                     stockDetails.setDeficit(Double.valueOf(deficitBal));
                     stockDetails.setDeficit_reason(reason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
                     drDepotInspection.setStockDetails(stockDetails);
 
                     RegisterBookCertificates registerBookCertificates = new RegisterBookCertificates();

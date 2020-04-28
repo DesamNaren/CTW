@@ -419,6 +419,8 @@ public class LPGFindingsActivity extends LocBaseActivity {
                     stockDetails.setStockValueAsPerPhysical(physVal);
                     stockDetails.setDeficit(difference);
                     stockDetails.setDeficitReason(deficitReason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
 
                     lpgIns.setStockDetails(stockDetails);
 
