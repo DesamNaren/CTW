@@ -151,10 +151,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                binding.viewPager.setVisibility(View.VISIBLE);
-                                binding.tabs.setVisibility(View.VISIBLE);
-                                binding.noDataTv.setVisibility(View.GONE);
-                                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+
 
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -167,17 +164,23 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     bundle.putString(AppConstants.mfp, essentialComm);
                                     mfpFragment.setArguments(bundle);
                                     adapter.addFrag(mfpFragment, "MFP Commodities");
+
+                                    binding.viewPager.setVisibility(View.VISIBLE);
+                                    binding.tabs.setVisibility(View.VISIBLE);
+                                    binding.noDataTv.setVisibility(View.GONE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                                    binding.tabs.setupWithViewPager(binding.viewPager);
+                                    binding.viewPager.setAdapter(adapter);
                                 }else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
                                     binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                                    callSnackBar(stockDetailsResponse.getStatusMessage());
+                                    binding.noDataTv.setText("No data found");
+                                    callSnackBar("No data found");
                                 }
 
-                                binding.tabs.setupWithViewPager(binding.viewPager);
-                                binding.viewPager.setAdapter(adapter);
+
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.GONE);
@@ -237,7 +240,8 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+        &&  stockDetailsResponsemain.getMfp_commodities()!=null && stockDetailsResponsemain.getMfp_commodities().size()>0) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

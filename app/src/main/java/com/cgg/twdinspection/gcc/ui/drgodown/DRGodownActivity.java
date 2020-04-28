@@ -194,10 +194,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                binding.viewPager.setVisibility(View.VISIBLE);
-                                binding.tabs.setVisibility(View.VISIBLE);
-                                binding.noDataTv.setVisibility(View.GONE);
-                                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -236,6 +233,22 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                                     adapter.addFrag(emptiesFragment, "Empties");
                                 }
 
+                                if(ess_flag || dailyreq_flag|| emp_flag)
+                                {
+                                    binding.viewPager.setVisibility(View.VISIBLE);
+                                    binding.tabs.setVisibility(View.VISIBLE);
+                                    binding.noDataTv.setVisibility(View.GONE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                                    binding.tabs.setupWithViewPager(binding.viewPager);
+                                    binding.viewPager.setAdapter(adapter);
+                                }else {
+                                    binding.viewPager.setVisibility(View.GONE);
+                                    binding.tabs.setVisibility(View.GONE);
+                                    binding.noDataTv.setVisibility(View.VISIBLE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                    binding.noDataTv.setText("No data found");
+                                    callSnackBar("No data found");
+                                }
 
 //                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
 //                                    stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
@@ -259,8 +272,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 //                                    adapter.addFrag(pUnitFragment, "Processing Units");
 //                                }
 
-                                binding.tabs.setupWithViewPager(binding.viewPager);
-                                binding.viewPager.setAdapter(adapter);
+
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.GONE);
@@ -334,7 +346,8 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+                && (ess_flag|| dailyreq_flag|| emp_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

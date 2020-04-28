@@ -313,41 +313,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                                     adapter.addFrag(emptiesFragment, "Empties");
                                 }
 
+                                    if(ess_flag || dailyreq_flag || emp_flag) {
+                                        binding.tabs.setupWithViewPager(binding.viewPager);
+                                        binding.viewPager.setAdapter(adapter);
+                                    }
 
-                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                                    mfp_flag = true;
-                                    stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
-                                    MFPFragment mfpFragment = new MFPFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.mfp, essentialComm);
-                                    mfpFragment.setArguments(bundle);
-                                    adapter.addFrag(mfpFragment, "MFP Commodities");
-                                }
-
-                                if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-                                    punit_flag = true;
-                                    stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
-                                    PUnitFragment pUnitFragment = new PUnitFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.punit, essentialComm);
-                                    pUnitFragment.setArguments(bundle);
-                                    adapter.addFrag(pUnitFragment, "Processing Units");
-                                }
-
-                                if (!punit_flag && !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag) {
-                                    binding.tabs.setVisibility(View.GONE);
-                                    binding.viewPager.setVisibility(View.GONE);
-                                    binding.noDataTv.setVisibility(View.VISIBLE);
-                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
-                                }
-
-                                binding.tabs.setupWithViewPager(binding.viewPager);
-                                binding.viewPager.setAdapter(adapter);
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
 
@@ -377,7 +347,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     binding.tvClose.setVisibility(View.GONE);
                     shopAvail = AppConstants.open;
                     binding.noDataTv.setVisibility(View.GONE);
-                    if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                    if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+                     && (ess_flag||dailyreq_flag||emp_flag)) {
                         binding.viewPager.setVisibility(View.VISIBLE);
                         binding.tabs.setVisibility(View.VISIBLE);
                         binding.noDataTv.setVisibility(View.GONE);
@@ -473,7 +444,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+        && (ess_flag|| dailyreq_flag|| emp_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

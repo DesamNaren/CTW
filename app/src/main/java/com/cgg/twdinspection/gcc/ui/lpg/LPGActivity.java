@@ -79,6 +79,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
             String str = sharedPreferences.getString(AppConstants.LPG_DATA, "");
             lpgSupplierInfo = gson.fromJson(str, LPGSupplierInfo.class);
             if (lpgSupplierInfo != null) {
+                binding.includeBasicLayout.drGodownNameTV.setText("LPG");
                 binding.includeBasicLayout.divName.setText(lpgSupplierInfo.getDivisionName());
                 binding.includeBasicLayout.socName.setText(lpgSupplierInfo.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(lpgSupplierInfo.getGodownName());
@@ -214,7 +215,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
 
     @Override
     public void onBackPressed() {
-        if (petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (petrolStockDetailsResponseMain!=null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

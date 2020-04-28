@@ -80,6 +80,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
             petrolSupplierInfo = gson.fromJson(str, PetrolSupplierInfo.class);
             if (petrolSupplierInfo != null) {
                 binding.includeBasicLayout.divName.setText(petrolSupplierInfo.getDivisionName());
+                binding.includeBasicLayout.drGodownNameTV.setText("Petrol Pump");
                 binding.includeBasicLayout.socName.setText(petrolSupplierInfo.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(petrolSupplierInfo.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(petrolSupplierInfo.getIncharge());
@@ -214,7 +215,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
 
     @Override
     public void onBackPressed() {
-        if (petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (petrolStockDetailsResponseMain!=null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

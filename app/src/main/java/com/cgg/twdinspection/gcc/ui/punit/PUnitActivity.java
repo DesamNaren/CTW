@@ -185,10 +185,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
                         if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
                             if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-                                binding.viewPager.setVisibility(View.VISIBLE);
-                                binding.tabs.setVisibility(View.VISIBLE);
-                                binding.noDataTv.setVisibility(View.GONE);
-                                binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+
 
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -252,17 +249,22 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                     pUnitFragment.setArguments(bundle);
                                     adapter.addFrag(pUnitFragment, "Processing Units");
                                 }
-                                if (!punit_flag && !dailyreq_flag && !emp_flag && !ess_flag && !mfp_flag) {
+                                if(ess_flag || dailyreq_flag|| emp_flag || mfp_flag || punit_flag)
+                                {
+                                    binding.viewPager.setVisibility(View.VISIBLE);
+                                    binding.tabs.setVisibility(View.VISIBLE);
+                                    binding.noDataTv.setVisibility(View.GONE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                                    binding.tabs.setupWithViewPager(binding.viewPager);
+                                    binding.viewPager.setAdapter(adapter);
+                                }else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
                                     binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                                    callSnackBar(stockDetailsResponse.getStatusMessage());
+                                    binding.noDataTv.setText("No data found");
+                                    callSnackBar("No data found");
                                 }
-
-                                binding.tabs.setupWithViewPager(binding.viewPager);
-                                binding.viewPager.setAdapter(adapter);
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
                                 binding.viewPager.setVisibility(View.GONE);
@@ -326,7 +328,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+                && (ess_flag|| dailyreq_flag|| emp_flag || mfp_flag || punit_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));
