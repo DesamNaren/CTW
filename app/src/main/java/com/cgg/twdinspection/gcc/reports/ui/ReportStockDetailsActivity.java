@@ -151,10 +151,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
                     startActivity(intent);
-                } else if (reportData.getInspectionFindings().getProcessingUnit() != null) {
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, PUnitInspRepActivity.class);
-                    startActivity(intent);
-                } else if (reportData.getInspectionFindings().getPetrolPump() != null) {
+                }else if (reportData.getInspectionFindings().getPetrolPump() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, PetrolpumpInspRepActivity.class);
                     startActivity(intent);
                 } else if (reportData.getInspectionFindings().getLpg() != null) {

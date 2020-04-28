@@ -1021,7 +1021,7 @@ public class Utils {
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
                 dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_information);
+                dialog.setContentView(R.layout.custom_alert_confirmation);
                 dialog.setCancelable(false);
                 TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
                 dialogTitle.setText(title);
