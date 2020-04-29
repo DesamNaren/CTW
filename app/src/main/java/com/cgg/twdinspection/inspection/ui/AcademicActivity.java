@@ -908,9 +908,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
 
 
     private boolean validate() {
-        if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
-            showSnackBar(getString(R.string.high_class_syl));
-            ScrollToView(binding.rgHighestClassSyllabusCompleted);
+        boolean listFlag = false;
+        for (int z = 0; z < academicGradeEntities.size(); z++) {
+            if (academicGradeEntities.get(z).getFlag_completed() == 1) {
+                listFlag =  true;
+                break;
+            }
+        }
+        if (!listFlag) {
+            showSnackBar(getString(R.string.capture_class_per));
+            ScrollToView(binding.btnAddStud);
             return false;
         }
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
