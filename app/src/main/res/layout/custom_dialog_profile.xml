@@ -24,7 +24,6 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:layout_margin="@dimen/dimen_5dp"
-            android:text="@string/app_name"
             android:textSize="20sp" />
 
         <TextView
@@ -33,7 +32,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_gravity="center"
-            android:text="maadhavisriram"
             android:layout_margin="@dimen/dimen_5dp"
             android:gravity="center" />
 
@@ -42,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="head office"
             android:layout_gravity="center"
             android:layout_margin="@dimen/dimen_5dp"
             android:gravity="center" />
@@ -52,19 +49,8 @@
             android:layout_width="wrap_content"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text="head office"
             android:layout_gravity="center"
             android:layout_margin="@dimen/dimen_5dp"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/dialog_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_5dp"
-            android:layout_gravity="center"
-            android:text="head office"
-            android:textColor="@color/black"
             android:gravity="center" />
 
             <Button
