@@ -17,6 +17,7 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
+import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportBinding;
 import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
@@ -50,6 +51,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                 new ReportsCustomViewModel(ReportActivity.this)).get(ReportsViewModel.class);
 
         binding.header.headerTitle.setVisibility(View.VISIBLE);
+        binding.header.ivProfile.setVisibility(View.VISIBLE);
         binding.header.headerTitle.setText(getResources().getString(R.string.report));
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,12 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                 startActivity(new Intent(ReportActivity.this, DashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
+            }
+        });
+        binding.header.ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Utils.showProfile(ReportActivity.this);
             }
         });
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

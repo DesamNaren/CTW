@@ -1063,6 +1063,46 @@ public class Utils {
         }
     }
 
+    public static void showProfile(Activity activity) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_dialog_profile);
+                dialog.setCancelable(false);
+                TextView tvUserName = dialog.findViewById(R.id.user_name);
+                TextView tvUserId = dialog.findViewById(R.id.user_id);
+                TextView tvDesig = dialog.findViewById(R.id.designation);
+                TextView tvPlace = dialog.findViewById(R.id.place_of_work);
+                SharedPreferences sharedPreferences = TWDApplication.get(activity).getPreferences();
+                String userName=sharedPreferences.getString(AppConstants.OFFICER_NAME,"");
+                tvUserName.setText(userName);
+                String userId=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+                tvUserId.setText(userId);
+                String designation=sharedPreferences.getString(AppConstants.OFFICER_DES,"");
+                tvDesig.setText(designation);
+                String place=sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK,"");
+                tvPlace.setText(place);
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

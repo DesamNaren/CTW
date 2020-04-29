@@ -101,6 +101,19 @@
                     android:visibility="gone" />
 
 
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:src="@drawable/user_white"
+                    android:tint="@color/white"
+                    android:visibility="gone" />
+
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
     </RelativeLayout>

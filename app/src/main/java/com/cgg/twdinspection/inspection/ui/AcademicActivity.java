@@ -913,6 +913,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgHighestClassSyllabusCompleted);
             return false;
         }
+        if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
+            showSnackBar(getString(R.string.high_class_syl));
+            ScrollToView(binding.rgHighestClassSyllabusCompleted);
+            return false;
+        }
         if (highest_class_syllabus_completed.equals(AppConstants.No) && TextUtils.isEmpty(plan_syll_comp_prepared)) {
             showSnackBar(getString(R.string.sel_plan));
             ScrollToView(binding.rgPlanSyllCompPrepared);

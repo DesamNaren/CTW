@@ -1072,5 +1072,6 @@
     <string name="status">Status</string>
     <string name="no_sectors">No sectors found</string>
     <string name="no_works">No work details found</string>
+    <string name="greater_than_zero">Students marked present should be greater than zero</string>
 
 </resources>
