@@ -103,7 +103,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         }catch (Exception e){
             e.printStackTrace();
         }
-        randomNo=getRandomNumberString();
+        randomNo=Utils.getRandomNumberString();
 
         String request=sharedPreferences.getString(AppConstants.EngSubmitRequest,"");
         Gson gson=new Gson();
@@ -373,14 +373,6 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         }
 
         return mediaFile;
-    }
-    public String getRandomNumberString() {
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
     }
     @Override
     public void getData(SubmitEngWorksResponse engWorksResponse) {
