@@ -26,6 +26,7 @@ public class InstReportsMenuActivity extends LocBaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
+        binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +42,14 @@ public class InstReportsMenuActivity extends LocBaseActivity {
                 finish();
             }
         });
+        binding.actionBar.ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(InstReportsMenuActivity.this, PreviewPdfActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
 
         String[] stringArray = getResources().getStringArray(R.array.inst_sections);
         ArrayList<String> sections = new ArrayList<>(Arrays.asList(stringArray));
@@ -51,7 +60,6 @@ public class InstReportsMenuActivity extends LocBaseActivity {
             binding.rvMenu.setAdapter(adapter);
         }
     }
-
 
     @Override
     public void onBackPressed() {

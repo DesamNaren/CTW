@@ -115,5 +115,8 @@ dependencies {
     implementation dependencies.lifecycle_version
     implementation dependencies.rxBinding
     implementation 'de.hdodenhof:circleimageview:1.2.1'
+    // Itext pdf library
+    implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.madgag.spongycastle:core:1.58.0.0'
 
 }

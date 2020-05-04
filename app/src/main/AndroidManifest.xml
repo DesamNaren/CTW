@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".engineering_works.adapters.EngWorksAdapter"></activity>
+        <activity android:name=".inspection.reports.ui.PreviewPdfActivity"></activity>
+        <activity android:name=".engineering_works.adapters.EngWorksAdapter" />
         <activity
             android:name=".engineering_works.ui.EngSyncActivity"
             android:screenOrientation="portrait" />
@@ -46,8 +47,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".engineering_works.ui.EngineeringDashboardActivity"
-            android:theme="@style/Light_AppTheme"
             android:screenOrientation="portrait"
+            android:theme="@style/Light_AppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".gcc.reports.ui.PUnitInspRepActivity"

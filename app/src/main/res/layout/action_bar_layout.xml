@@ -112,6 +112,17 @@
                     android:src="@drawable/user_white"
                     android:tint="@color/white"
                     android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/iv_pdf"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:src="@android:drawable/stat_sys_download"
+                    android:tint="@color/white"
+                    android:visibility="gone" />
 
 
             </androidx.appcompat.widget.Toolbar>

@@ -18,16 +18,20 @@
         android:orientation="vertical"
         tools:context=".inspection.ui.MedicalActivity">
 
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <include
             android:id="@+id/action_bar"
             layout="@layout/action_bar_layout" />
 
-
+        </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@+id/action_bar"
+            android:layout_below="@+id/header"
             android:background="@color/bg">
 
             <LinearLayout
