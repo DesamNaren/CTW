@@ -19,20 +19,29 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
+import com.cgg.twdinspection.inspection.reports.ui.PreviewPdfActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class SchemeReportDetailsActivity extends AppCompatActivity {
+public class SchemeReportDetailsActivity extends AppCompatActivity  implements PDFUtil.PDFUtilListener{
 
     ActivityReportSchemeDetailsActivtyBinding binding;
     private SharedPreferences sharedPreferences;
     private SchemeReportData schemeReportData;
+    CustomProgressDialog customProgressDialog;
+    String directory_path, filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,8 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_scheme_details_activty);
         binding.header.headerTitle.setText(getString(R.string.scheme_report_details));
+        binding.header.ivPdf.setVisibility(View.VISIBLE);
+        customProgressDialog=new CustomProgressDialog(this);
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +59,29 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+        binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    customProgressDialog.show();
+                    List<View> views = new ArrayList<>();
+                    views.add(binding.scrl);
 
+
+                    directory_path = getExternalFilesDir(null)
+                            + "/" + "TWD/Schemes/";
+
+                    filePath = directory_path + "schemes_" + schemeReportData.getBenId() + "_" + schemeReportData.getInspectionTime() + ".pdf";
+                    File file =new File(filePath);
+                    PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this);
+                } catch (Exception e) {
+                    if (customProgressDialog.isShowing())
+                        customProgressDialog.hide();
+                    Toast.makeText(SchemeReportDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +187,18 @@ public class SchemeReportDetailsActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void pdfGenerationSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+        Utils.customSyncSuccessAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+    }
+
+    @Override
+    public void pdfGenerationFailure(Exception exception) {
+        customProgressDialog.hide();
+        Utils.customErrorAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something)+" "+exception.getMessage());
     }
 
 }

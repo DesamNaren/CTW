@@ -195,7 +195,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
                     views.add(binding.viewPhotos.recyclerView);
 
                     directory_path = getExternalFilesDir(null)
-                            + "/" + "TWD/";
+                            + "/" + "TWD/Schools/";
 
                     filePath = directory_path + "schools_" + inspReportData.getInstituteId() + "_" + inspReportData.getInspectionTime() + ".pdf";
                     File file =new File(filePath);
