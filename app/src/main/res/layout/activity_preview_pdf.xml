@@ -16,9 +16,10 @@
             android:id="@+id/action_bar"
             layout="@layout/action_bar_layout" />
 
-        <ScrollView
-            android:layout_width="wrap_content"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
             android:id="@+id/scrollView"
+            android:fillViewport="false"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -30,13 +31,40 @@
                     android:id="@+id/general_info"
                     layout="@layout/activity_report_general_info" />
                 <include
+                    android:id="@+id/stud_att"
+                    layout="@layout/report_activity_students_attendance" />
+                <include
+                    android:id="@+id/staff"
+                    layout="@layout/report_activity_students_attendance" />
+                <include
                     android:id="@+id/medical"
                     layout="@layout/activity_report_medical" />
                 <include
                     android:id="@+id/diet"
                     layout="@layout/activity_report_diet_issues" />
+                <include
+                    android:id="@+id/infra"
+                    layout="@layout/activity_report_infrastructure" />
+                <include
+                    android:id="@+id/academic"
+                    layout="@layout/activity_report_academic" />
+                <include
+                    android:id="@+id/co_curricular"
+                    layout="@layout/activity_report_co_curricular" />
+                <include
+                    android:id="@+id/entitlement"
+                    layout="@layout/activity_report_entitlements" />
+                <include
+                    android:id="@+id/registers"
+                    layout="@layout/activity_report_registers" />
+                <include
+                    android:id="@+id/gen_comments"
+                    layout="@layout/activity_report_general_comments" />
+                <include
+                    android:id="@+id/view_photos"
+                    layout="@layout/activity_view_photos" />
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>

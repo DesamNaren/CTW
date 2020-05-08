@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+    <import type="android.text.TextUtils"/>
         <variable
             name="staff"
             type="com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo" />
@@ -371,7 +371,7 @@
                         android:clickable="false"
                         android:entries="@array/category"
                         android:focusableInTouchMode="false"
-                        android:selectedItemPosition="@{Double.valueOf(staff.categPos).intValue()}" />
+                        android:selectedItemPosition="@{!TextUtils.isEmpty(staff.categPos)?Double.valueOf(staff.categPos).intValue():0}" />
                 </LinearLayout>
 
                 <LinearLayout

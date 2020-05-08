@@ -26,7 +26,6 @@
             android:layout_below="@+id/action_bar"
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/dimen_5dp"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
             tools:listitem="@layout/adapter_stu_att_reoprt" />

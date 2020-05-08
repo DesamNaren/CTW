@@ -47,7 +47,6 @@ public class InstReportsMenuActivity extends LocBaseActivity {
             public void onClick(View v) {
                 startActivity(new Intent(InstReportsMenuActivity.this, PreviewPdfActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
             }
         });
 
