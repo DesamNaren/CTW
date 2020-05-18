@@ -122,7 +122,7 @@
     <string name="b">B</string>
     <string name="c">C</string>
     <string name="total">Total</string>
-    <string name="are_the">89. Are the following registers update?</string>
+    <string name="are_the">89. Are the following registers maintained up to date?</string>
     <string name="adm_reg">Admission register</string>
     <string name="att_boa_reg">Boarders Attendance Register</string>
     <string name="boa_sign_reg">Boarders Signature Register</string>
@@ -135,7 +135,7 @@
     <string name="stock_issue">Stock Issue (Food Provision) Register</string>
     <string name="per_article">Permanent Article Register</string>
     <string name="bud_watch">Budget Watch Register</string>
-    <string name="acq_reg">Acquaintance Register</string>
+    <string name="acq_reg">Aquittance Register</string>
     <string name="acq_dress">Acquaintance Dresses, Notebooks, Register</string>
     <string name="acq_cos">Acquaintance Cosmetics Register</string>
     <string name="pay_bill">Pay Bill Register</string>
@@ -147,7 +147,7 @@
     <string name="cl_acc">CL Account Register</string>
     <string name="par_meet">Parents Meeting Register</string>
     <string name="ins_reg">Inspection Register for Departmental Officers</string>
-    <string name="visit_book">Visit Book (Remarks) for Officials &amp; Non-Officials</string>
+    <string name="visit_book">Visitors Register</string>
 
     <string name="previous">PREVIOUS</string>
     <string name="saveandnext">SAVE &amp; NEXT</string>
@@ -156,7 +156,7 @@
     <string name="entitlements_cosmetics">Cosmetics distributed</string>
     <string name="entitlements_cosmetics_upto_month">Cosmetics distributed up to which month</string>
     <string name="entitlements_uniforms">Uniforms Provided are in good quality, properly stitched as per student size</string>
-    <string name="entitlements_haircut">Whether Hait cutting has been completed (Boys)</string>
+    <string name="entitlements_haircut">Whether Hair cutting has been completed (Boys)</string>
     <string name="entitlements_haircut_date">Populated the date of last haircut</string>
     <string name="entitlements_dress_distributed">How many pairs of dress distributed to each candidate</string>
     <string name="rice">A. Rice</string>
@@ -191,20 +191,20 @@
     <string name="quality_of_food">What is the Quality of food provisions supplied?</string>
     <string name="inferior">Inferior</string>
     <string name="personal_hygiene">How is the personal hygiene of students</string>
-    <string name="haircut_on_time">Hair cutting on time</string>
-    <string name="students_found_anemic">Students found anemic</string>
+    <string name="haircut_on_time">Whether hair cut taken up on time </string>
+    <string name="students_found_anemic">Are students aneamic</string>
     <string name="attire_of_students">Attire of students</string>
     <string name="hygiene_staff">How is hygiene of staff</string>
-    <string name="cooks_wearing_cap_during_cook_and_serving">Cooks wearing cap during cook and serving</string>
-    <string name="hands_of_cooking_staff">Hands of cooking staff are clean</string>
-    <string name="attire_of_staff_is_appropriate">Is the Attire of staff is appropriate</string>
+    <string name="cooks_wearing_cap_during_cook_and_serving">Cooks wearing cap during cooking and serving</string>
+    <string name="hands_of_cooking_staff">Are the cooking staff neat</string>
+    <string name="attire_of_staff_is_appropriate">Is the Attire of staff appropriate</string>
     <string name="sanitation_at_this_institution">How is the sanitation at this institution</string>
-    <string name="toilets_not_clean">Toilets not clean</string>
-    <string name="kitchen_not_clean">Kitchen not clean</string>
-    <string name="dormitory_not_clean">Dormitory not clean</string>
-    <string name="class_rooms_not_clean">Class rooms not clean</string>
+    <string name="toilets_not_clean">Are toilets clean</string>
+    <string name="kitchen_not_clean">Is kitchen clean</string>
+    <string name="dormitory_not_clean">Is dormitory clean</string>
+    <string name="class_rooms_not_clean">Are classrooms clean</string>
     <string name="running_water_available_to_toilets">Running water available to toilets</string>
-    <string name="store_room_not_clean">Store room not clean</string>
+    <string name="store_room_not_clean">Is storeroom clean</string>
     <string name="hm_hwo_date">Date of last indent raised by HM/ HWO</string>
     <string name="gcc_date">Date of supply of food provision by GCC and others</string>
     <string name="stocks_supplied">Whether stock is supplied as per Indent or not</string>
@@ -257,7 +257,7 @@
     <string name="whether_sports_material_received_during_the_year_2019_2020">Whether sports material received during the year 2019- 2020</string>
     <string name="entered_in_stock_entry_register">Entered in stock entry register</string>
     <string name="separate_games_sports_room_available">Separate games &amp; sports room available</string>
-    <string name="name_of_the_pd_pft">Name of the PD/ PFT</string>
+    <string name="name_of_the_pd_pft">Name of the PD/ PET</string>
     <string name="play_ground_available">Playground available</string>
     <string name="plan_to_procure_playground">Plan to procure playground</string>
     <string name="measurement_of_land_available_for_games">Measurement of land available for games</string>
@@ -893,7 +893,7 @@
     <string name="working_status">Working Status</string>
     <string name="working_condition">Working condition</string>
     <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MEO</string>
-    <string name="whether_library_room_is_available">Whether library room is maintaining the library register</string>
+    <string name="whether_library_room_is_available">Whether library incharge is maintaining the library register</string>
     <string name="mai_ass_reg">Select library room is maintaining the library register</string>
     <string name="sel_timetable">Select timetable displayed</string>
     <string name="no_of_classwise_punadi_2_books_required">No of classwise punadi-2 books required.</string>
@@ -912,7 +912,7 @@
     <string name="punadi_reason">Enter punadi-2 program reason</string>
     <string name="sel_spo_mat">Select sports material received</string>
     <string name="game_sport"><![CDATA[Select game & sport room available]]></string>
-    <string name="pd_pft_name_enter">Enter name of PD/PFT</string>
+    <string name="pd_pft_name_enter">Enter name of PD/PET</string>
     <string name="ent_mob_num">Enter mobile number</string>
     <string name="ent_val_mob_num">Enter valid mobile number</string>
     <string name="ent_dis_lvel">Enter district Level</string>
@@ -997,6 +997,7 @@
     <string name="gen_cook_cap">Check whether cooks wear cap during cooking and serving</string>
     <string name="gen_stu_att">Check the attire of students</string>
     <string name="gen_stu_ana">Check whether students found anemic</string>
+    <string name="ane_stud_cnt">Enter how many students found anemic,out of a total</string>
     <string name="gen_haircut">Check whether haircut is on time</string>
     <string name="gen_sup_date">Select capture supplied date</string>
     <string name="gen_stock">Check whether stock is supplied as per the intent</string>
@@ -1074,5 +1075,6 @@
     <string name="no_works">No work details found</string>
     <string name="greater_than_zero">Students marked present should be greater than zero</string>
     <string name="capture_class_per">Please capture classes performance</string>
+    <string name="enter_how_many_out_of_a_total_no">Enter how many,out of a total no</string>
 
 </resources>

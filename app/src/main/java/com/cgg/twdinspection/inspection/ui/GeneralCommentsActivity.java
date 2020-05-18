@@ -33,16 +33,16 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     GenCommentsViewModel genCommentsViewModel;
     GeneralCommentsEntity generalCommentsEntity;
     String foodTimeFruits, foodTimeEggs, foodTimeVeg, foodTimeProvisions, foodQualityFruits, foodQualityEggs, foodQualityVeg, foodQualityProvisions;
-    String stocksSupplied, haircut, studentsFoundAnemic, attireOfStudents, cooksWearingCap, handsOfCookingStaff, attireOfStaff;
+    String stocksSupplied, haircut, studentsFoundAnemic,anemicStudCnt, attireOfStudents, cooksWearingCap, handsOfCookingStaff, attireOfStaff;
     String toilets, kitchen, dormitory, runningWater, classRooms, storeroom;
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
     private int localFlag = -1;
-    private String gccDate, suppliedDate,hmhwoDate;
+    private String gccDate, suppliedDate, hmhwoDate;
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
 
     }
 
@@ -159,19 +159,23 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHaircut.getCheckedRadioButtonId();
                 if (selctedItem == R.id.haircut_yes)
-                    haircut = AppConstants.GOOD;
+                    haircut = AppConstants.Yes;
                 else
-                    haircut = AppConstants.INFERIOR;
+                    haircut = AppConstants.No;
             }
         });
         binding.rgStudentsFoundAnemic.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgStudentsFoundAnemic.getCheckedRadioButtonId();
-                if (selctedItem == R.id.students_found_anemic_yes)
-                    studentsFoundAnemic = AppConstants.GOOD;
-                else
-                    studentsFoundAnemic = AppConstants.INFERIOR;
+                if (selctedItem == R.id.students_found_anemic_yes) {
+                    studentsFoundAnemic = AppConstants.Yes;
+                    binding.tvAnaemicStudCnt.setVisibility(View.VISIBLE);
+                } else {
+                    binding.etAnaemicStudCnt.setText("");
+                    binding.tvAnaemicStudCnt.setVisibility(View.GONE);
+                    studentsFoundAnemic = AppConstants.No;
+                }
             }
         });
         binding.rgAttireOfStudents.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -189,9 +193,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgCooksWearingCap.getCheckedRadioButtonId();
                 if (selctedItem == R.id.cooks_wearing_cap_yes)
-                    cooksWearingCap = AppConstants.GOOD;
+                    cooksWearingCap = AppConstants.Yes;
                 else
-                    cooksWearingCap = AppConstants.INFERIOR;
+                    cooksWearingCap = AppConstants.No;
             }
         });
         binding.rgHandsOfCookingStaff.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -199,9 +203,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgHandsOfCookingStaff.getCheckedRadioButtonId();
                 if (selctedItem == R.id.hands_of_cooking_staff_yes)
-                    handsOfCookingStaff = AppConstants.GOOD;
+                    handsOfCookingStaff = AppConstants.Yes;
                 else
-                    handsOfCookingStaff = AppConstants.INFERIOR;
+                    handsOfCookingStaff = AppConstants.No;
             }
         });
         binding.rgAttireOfStaff.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -282,7 +286,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 gccDate = binding.etGccDate.getText().toString().trim();
                 suppliedDate = binding.etSuppliedDate.getText().toString().trim();
                 hmhwoDate = binding.etHmHwoDate.getText().toString().trim();
-
+                anemicStudCnt=binding.etAnaemicStudCnt.getText().toString();
                 if (validate())
                     Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -302,7 +306,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             }
         });
 
-       binding.etHmHwoDate.setOnClickListener(new View.OnClickListener() {
+        binding.etHmHwoDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dateSelection("hmhwoDate");
@@ -391,6 +395,10 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             ScrollToView(binding.rgStudentsFoundAnemic);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_stu_ana));
+        } else if (studentsFoundAnemic.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(anemicStudCnt) ) {
+            ScrollToView(binding.etAnaemicStudCnt);
+            returnFlag = false;
+            showSnackBar(getString(R.string.ane_stud_cnt));
         } else if (TextUtils.isEmpty(attireOfStudents)) {
             ScrollToView(binding.rgAttireOfStudents);
             returnFlag = false;
@@ -456,7 +464,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                             binding.etGccDate.setText(date);
                         else if (flag.equalsIgnoreCase("suppliedDate"))
                             binding.etSuppliedDate.setText(date);
-                       else if (flag.equalsIgnoreCase("hmhwoDate"))
+                        else if (flag.equalsIgnoreCase("hmhwoDate"))
                             binding.etHmHwoDate.setText(date);
                     }
                 }, mYear, mMonth, mDay);
@@ -485,6 +493,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         generalCommentsEntity.setStocksSupplied(stocksSupplied);
         generalCommentsEntity.setHair_cut_onTime(haircut);
         generalCommentsEntity.setStud_found_anemic(studentsFoundAnemic);
+        generalCommentsEntity.setAnemic_stud_cnt(anemicStudCnt);
         generalCommentsEntity.setStud_attire(attireOfStudents);
         generalCommentsEntity.setCook_wearing_cap(cooksWearingCap);
         generalCommentsEntity.setStaff_hands_clean(handsOfCookingStaff);

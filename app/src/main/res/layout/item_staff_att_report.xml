@@ -352,6 +352,8 @@
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dimen_5dp"
                     android:paddingRight="@dimen/dimen_5dp"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
                     android:paddingBottom="@dimen/dimen_5dp"
                     android:visibility="visible">
 
@@ -362,12 +364,20 @@
                         android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         android:text="@string/category" />
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_weight="1"
+                        android:text="@{staff.category}" />
 
                     <androidx.appcompat.widget.AppCompatSpinner
                         android:id="@+id/sp_category"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:visibility="gone"
                         android:clickable="false"
                         android:entries="@array/category"
                         android:focusableInTouchMode="false"

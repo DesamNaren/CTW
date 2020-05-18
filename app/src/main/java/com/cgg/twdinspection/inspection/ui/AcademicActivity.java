@@ -836,7 +836,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     academicEntity.setHighest_class_gradeC(highestClassGradeC);
                     academicEntity.setHighest_class_total(highestClassGradeTotal);
 
-                    academicEntity.setLast_yr_ssc_percent(last_yr_ssc_percent);
+//                    academicEntity.setLast_yr_ssc_percent(last_yr_ssc_percent);
                     academicEntity.setPunadi_books_supplied(punadi_books_supplied);
                     academicEntity.setSufficient_books_supplied(sufficient_books_supplied);
                     academicEntity.setPunadiPrgmConducted(punadiPrgmConducted);
@@ -975,16 +975,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.enter_total));
             return false;
         }
-        if (TextUtils.isEmpty(last_yr_ssc_percent)) {
-            binding.lastYrSscPercentEt.requestFocus();
-            showSnackBar(getString(R.string.last_year_ssc));
-            return false;
-        }
-        if (Double.parseDouble(last_yr_ssc_percent) > 100) {
-            binding.lastYrSscPercentEt.requestFocus();
-            showSnackBar("Enter valid Percentage");
-            return false;
-        }
+//        if (TextUtils.isEmpty(last_yr_ssc_percent)) {
+//            binding.lastYrSscPercentEt.requestFocus();
+//            showSnackBar(getString(R.string.last_year_ssc));
+//            return false;
+//        }
+//        if (Double.parseDouble(last_yr_ssc_percent) > 100) {
+//            binding.lastYrSscPercentEt.requestFocus();
+//            showSnackBar("Enter valid Percentage");
+//            return false;
+//        }
         if (TextUtils.isEmpty(punadi_books_supplied)) {
             ScrollToView(binding.rgPunadiBooksSupplied);
             showSnackBar(getString(R.string.sel_pun_books));

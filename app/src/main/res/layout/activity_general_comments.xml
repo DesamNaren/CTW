@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -861,18 +862,18 @@
                                     android:id="@+id/haircut_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.hair_cut_onTime.equalsIgnoreCase(`Good`) ? true : false}"
+                                    android:checked="@{comments.hair_cut_onTime.equalsIgnoreCase(`YES`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
 
                                     android:id="@+id/haircut_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.hair_cut_onTime.equalsIgnoreCase(`Inferior`) ? true : false}"
+                                    android:checked="@{comments.hair_cut_onTime.equalsIgnoreCase(`NO`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -899,7 +900,7 @@
                             android:src="@drawable/blood" />
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:paddingLeft="@dimen/dimen_10dp">
@@ -923,20 +924,45 @@
                                     android:id="@+id/students_found_anemic_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.stud_found_anemic.equalsIgnoreCase(`Good`) ? true : false}"
+                                    android:checked="@{comments.stud_found_anemic.equalsIgnoreCase(`YES`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
 
                                     android:id="@+id/students_found_anemic_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.stud_found_anemic.equalsIgnoreCase(`Inferior`) ? true : false}"
+                                    android:checked="@{comments.stud_found_anemic.equalsIgnoreCase(`NO`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tv_anaemic_stud_cnt"
+                                android:visibility="@{comments.stud_found_anemic.equalsIgnoreCase(`Yes`)?View.VISIBLE : View.GONE, default = gone}"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_anaemic_stud_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/enter_how_many_out_of_a_total_no"
+                                    android:imeOptions="actionNext"
+                                    android:text="@{comments.anemic_stud_cnt}"
+                                    android:paddingLeft="@dimen/dimen_30dp"
+                                    android:inputType="number"
+                                    android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
@@ -1082,18 +1108,18 @@
                                     android:id="@+id/cooks_wearing_cap_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.cook_wearing_cap.equalsIgnoreCase(`Good`) ? true : false}"
+                                    android:checked="@{comments.cook_wearing_cap.equalsIgnoreCase(`YES`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
 
                                     android:id="@+id/cooks_wearing_cap_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.cook_wearing_cap.equalsIgnoreCase(`Inferior`) ? true : false}"
+                                    android:checked="@{comments.cook_wearing_cap.equalsIgnoreCase(`NO`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 
@@ -1144,18 +1170,18 @@
                                     android:id="@+id/hands_of_cooking_staff_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.staff_hands_clean.equalsIgnoreCase(`Good`) ? true : false}"
+                                    android:checked="@{comments.staff_hands_clean.equalsIgnoreCase(`YES`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/good" />
+                                    android:text="@string/yes" />
 
                                 <RadioButton
 
                                     android:id="@+id/hands_of_cooking_staff_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{comments.staff_hands_clean.equalsIgnoreCase(`Inferior`) ? true : false}"
+                                    android:checked="@{comments.staff_hands_clean.equalsIgnoreCase(`NO`) ? true : false}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/inferior" />
+                                    android:text="@string/no" />
 
                             </RadioGroup>
 

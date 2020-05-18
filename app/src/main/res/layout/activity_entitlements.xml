@@ -114,7 +114,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.bedSheets.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_bedsheets"
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.bedSheets.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -167,7 +167,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.carpets.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_carpets"
@@ -175,7 +175,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.carpets.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -220,7 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.uniforms.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_uniforms"
@@ -228,7 +228,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.uniforms.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -273,7 +273,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.sportsDress.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_sports_dress"
@@ -281,7 +281,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.sportsDress.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -326,7 +326,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.slippers.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_slippers"
@@ -334,7 +334,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.slippers.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -379,7 +379,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.nightDress.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_night_dress"
@@ -387,7 +387,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.nightDress.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -432,7 +432,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.schoolBags.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_school_bags"
@@ -440,7 +440,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.schoolBags.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -543,7 +543,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_sanitary"
@@ -551,7 +551,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -684,7 +684,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.notes.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/good" />
+                                android:text="@string/yes" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_notes"
@@ -692,7 +692,7 @@
                                 android:layout_height="wrap_content"
                                 android:checked="@{inspData.notes.equalsIgnoreCase(`No`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/bad" />
+                                android:text="@string/no" />
 
                         </RadioGroup>
                     </LinearLayout>

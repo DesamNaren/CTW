@@ -66,6 +66,9 @@ public class GeneralCommentsEntity {
     private String stud_found_anemic;
 
     @ColumnInfo()
+    private String anemic_stud_cnt;
+
+    @ColumnInfo()
     private String stud_attire;
 
     @ColumnInfo()
@@ -141,6 +144,14 @@ public class GeneralCommentsEntity {
 
     public void setInspection_time(String inspection_time) {
         this.inspection_time = inspection_time;
+    }
+
+    public String getAnemic_stud_cnt() {
+        return anemic_stud_cnt;
+    }
+
+    public void setAnemic_stud_cnt(String anemic_stud_cnt) {
+        this.anemic_stud_cnt = anemic_stud_cnt;
     }
 
     @NotNull

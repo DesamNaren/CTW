@@ -218,62 +218,64 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 uploadPhotos = new ArrayList<>();
 
                 if (flag_storeroom == 0) {
-                    showSnackBar("Please capture storeroom image");
-                    return;
+//                    showSnackBar("Please capture storeroom image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.STOREROOM, String.valueOf(file_storeroom));
                 }
                 if (flag_varandah == 0) {
-                    showSnackBar("Please capture varandah image");
-                    return;
+//                    showSnackBar("Please capture varandah image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.VARANDAH, String.valueOf(file_varandah));
                 }
                 if (flag_playGround == 0) {
-                    showSnackBar("Please capture playground image");
-                    return;
+//                    showSnackBar("Please capture playground image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.PLAYGROUND, String.valueOf(file_playGround));
                 }
                 if (flag_diningHall == 0) {
-                    showSnackBar("Please capture dining hall image");
-                    return;
+//                    showSnackBar("Please capture dining hall image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DININGHALL, String.valueOf(file_diningHall));
                 }
                 if (flag_dormitory == 0) {
-                    showSnackBar("Please capture dormitory image");
-                    return;
+//                    showSnackBar("Please capture dormitory image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.DORMITORY, String.valueOf(file_dormitory));
                 }
                 if (flag_mainBuilding == 0) {
-                    showSnackBar("Please capture main building image");
-                    return;
+//                    showSnackBar("Please capture main building image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.MAINBUILDING, String.valueOf(file_mainBulding));
                 }
                 if (flag_toilet == 0) {
-                    showSnackBar("Please capture toilet image");
-                    return;
+//                    showSnackBar("Please capture toilet image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.TOILET, String.valueOf(file_toilet));
                 }
                 if (flag_kitchen == 0) {
-                    showSnackBar("Please capture kitchen image");
-                    return;
+//                    showSnackBar("Please capture kitchen image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.KITCHEN, String.valueOf(file_kitchen));
                 }
                 if (flag_classroom == 0) {
-                    showSnackBar("Please capture classroom image");
-                    return;
+//                    showSnackBar("Please capture classroom image");
+//                    return;
                 } else {
                     addPhoto(instID, "12", Utils.getCurrentDateTime(), AppConstants.CLASSROOM, String.valueOf(file_classroom));
                 }
-
-                Utils.customSaveAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
-
+                if(uploadPhotos.size()>0) {
+                    Utils.customSaveAlert(UploadedPhotoActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
+                }else{
+                    showSnackBar("Capture atleast one image to save data");
+                }
             }
         });
 
@@ -739,7 +741,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     @Override
     public void submitData() {
         long x = viewModel.insertPhotos(uploadPhotos);
-        if (x >= 0) {
+        if (x >= 0 && uploadPhotos.size()==9) {
             final long[] z = {0};
             try {
                 LiveData<Integer> liveData = instMainViewModel.getSectionId("Photos");
@@ -761,7 +763,11 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
             }
 
         } else {
-            showSnackBar(getString(R.string.failed));
+            if (x >= 0) {
+                Utils.customSectionSaveAlert(UploadedPhotoActivity.this, getString(R.string.data_saved), getString(R.string.app_name));
+            } else {
+                showSnackBar(getString(R.string.failed));
+            }
         }
     }
 

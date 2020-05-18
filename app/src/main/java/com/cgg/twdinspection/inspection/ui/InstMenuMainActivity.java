@@ -767,6 +767,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             instSubmitRequest.setPhoto_key_id(randomNo);
             instSubmitRequest.setDevice_Id(Utils.getDeviceID(this));
             instSubmitRequest.setVersion_No(Utils.getVersionName(this));
+            instSubmitRequest.getAcademic_overview().setLast_yr_ssc_percent(instSubmitRequest.getGeneral_comments().getAnemic_stud_cnt());
 
 
             if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
