@@ -542,12 +542,14 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
+                        android:visibility="gone"
                         android:background="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView
@@ -615,7 +617,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="31."
+                            android:text="30."
                             android:textColor="@color/black" />
 
                         <LinearLayout

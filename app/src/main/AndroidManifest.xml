@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".inspection.reports.ui.PreviewPdfActivity"></activity>
+        <activity android:name=".engineering_works.reports.ui.EngPDFActivity"></activity>
+        <activity android:name=".inspection.reports.ui.PreviewPdfActivity" />
         <activity android:name=".engineering_works.adapters.EngWorksAdapter" />
         <activity
             android:name=".engineering_works.ui.EngSyncActivity"

@@ -70,7 +70,6 @@
                                 android:id="@+id/rg_sportMatRec"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_5dp"
                                 android:orientation="horizontal">
 
 
@@ -79,7 +78,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sport_mat_received.equalsIgnoreCase(`Yes`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="Yes" />
 
@@ -88,7 +86,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.sport_mat_received.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="No" />
 
