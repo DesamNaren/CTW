@@ -98,11 +98,26 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                 liveData.removeObservers(ReportActivity.this);
                 if (reportCountsResponse != null && reportCountsResponse.getStatusCode() != null) {
                     if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
-                        gccCnt = reportCountsResponse.getGcc();
-                        schemesCnt = reportCountsResponse.getSchemes();
-                        instCnt = reportCountsResponse.getSchools();
-                        engCnt = reportCountsResponse.getEngineeringWorks();
-
+                        if(reportCountsResponse.getGcc()!=null){
+                            gccCnt = reportCountsResponse.getGcc();
+                        }else {
+                            gccCnt=0;
+                        }
+                        if(reportCountsResponse.getSchemes()!=null) {
+                            schemesCnt = reportCountsResponse.getSchemes();
+                        }else {
+                            schemesCnt=0;
+                        }
+                        if(reportCountsResponse.getSchools()!=null) {
+                            instCnt = reportCountsResponse.getSchools();
+                        }else {
+                            instCnt=0;
+                        }
+                        if(reportCountsResponse.getEngineeringWorks()!=null) {
+                            engCnt = reportCountsResponse.getEngineeringWorks();
+                        }else {
+                            engCnt=0;
+                        }
                         binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
