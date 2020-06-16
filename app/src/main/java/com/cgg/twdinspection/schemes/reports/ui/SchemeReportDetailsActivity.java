@@ -1,13 +1,9 @@
 package com.cgg.twdinspection.schemes.reports.ui;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +20,6 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
-import com.cgg.twdinspection.inspection.reports.ui.PreviewPdfActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
@@ -33,9 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.senab.photoview.PhotoViewAttacher;
-
-public class SchemeReportDetailsActivity extends AppCompatActivity  implements PDFUtil.PDFUtilListener{
+public class SchemeReportDetailsActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
 
     ActivityReportSchemeDetailsActivtyBinding binding;
     private SharedPreferences sharedPreferences;
@@ -46,11 +39,30 @@ public class SchemeReportDetailsActivity extends AppCompatActivity  implements P
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_scheme_details_activty);
+
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+
+            Gson gson = new Gson();
+            String data = sharedPreferences.getString(AppConstants.SCHEME_REP_DATA, "");
+            schemeReportData = gson.fromJson(data, SchemeReportData.class);
+            binding.setSchemeData(schemeReportData);
+            binding.executePendingBindings();
+
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
         binding.header.headerTitle.setText(getString(R.string.scheme_report_details));
         binding.header.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog=new CustomProgressDialog(this);
+
+        binding.tvDate.setText(schemeReportData.getInspectionTime());
+        binding.tvOfficerName.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
+        binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+
+        customProgressDialog = new CustomProgressDialog(this);
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +84,9 @@ public class SchemeReportDetailsActivity extends AppCompatActivity  implements P
                             + "/" + "TWD/Schemes/";
 
                     filePath = directory_path + "schemes_" + schemeReportData.getBenId() + "_" + schemeReportData.getInspectionTime() + ".pdf";
-                    File file =new File(filePath);
+                    File file = new File(filePath);
                     PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this);
+
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
@@ -98,18 +111,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity  implements P
         });
 
 
-        try {
-            sharedPreferences = TWDApplication.get(SchemeReportDetailsActivity.this).getPreferences();
-            Gson gson = new Gson();
-            String data = sharedPreferences.getString(AppConstants.SCHEME_REP_DATA, "");
-            schemeReportData = gson.fromJson(data, SchemeReportData.class);
-            binding.setSchemeData(schemeReportData);
-            binding.executePendingBindings();
 
-        } catch (Exception e) {
-            Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
         try {
             if (schemeReportData.getPhotos() != null && schemeReportData.getPhotos().size() > 0) {
 
@@ -198,7 +200,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity  implements P
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
-        Utils.customErrorAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something)+" "+exception.getMessage());
+        Utils.customErrorAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
 }

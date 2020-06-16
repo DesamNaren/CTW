@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.common.screenshot;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
@@ -11,7 +10,6 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -168,7 +166,7 @@ public class PDFUtil {
                 // Save document to file.
                 return savePDFDocumentToStorage(pdfDocument);
             } catch (Exception exception) {
-                mException=exception;
+                mException = exception;
                 Log.e(TAG, exception.getMessage());
                 return null;
             }
@@ -203,10 +201,10 @@ public class PDFUtil {
                 //Get Content View.
                 View contentView = mContentViews.get(i);
 
-                if(contentView.getWidth()>0 && contentView.getHeight()>0) {
+                if (contentView.getWidth() > 0 && contentView.getHeight() > 0) {
                     // crate a page description
                     PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.
-                            Builder((int) contentView.getWidth(), contentView.getHeight(), i + 1).create();
+                            Builder((int) 595, 842, i + 1).create();
 
                     // start a page
                     PdfDocument.Page page = pdfDocument.startPage(pageInfo);
@@ -220,6 +218,7 @@ public class PDFUtil {
                     int measuredHeight = View.MeasureSpec.makeMeasureSpec(pageHeight, View.MeasureSpec.EXACTLY);
                     contentView.measure(measureWidth, measuredHeight);
                     contentView.layout(0, 0, pageWidth, pageHeight);
+                    //595, 842
                     contentView.draw(pageCanvas);
 
                     // finish the page
@@ -274,7 +273,7 @@ public class PDFUtil {
                 }
                 return pdfFile;
             } catch (IOException exception) {
-                mException=exception;
+                mException = exception;
                 exception.printStackTrace();
                 if (fos != null) {
                     fos.close();
@@ -318,7 +317,7 @@ public class PDFUtil {
      *
      * @param pdfFile pdf file
      * @return list of bitmap of every page
-//     * @throws MyOPDException
+     * //     * @throws MyOPDException
      */
     public static ArrayList<Bitmap> pdfToBitmap(File pdfFile) throws IllegalStateException {
         if (pdfFile == null || pdfFile.exists() == false) {
