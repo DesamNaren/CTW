@@ -17,15 +17,16 @@
     <dimen name="dimen_60dp">60dp</dimen>
     <dimen name="dimen_300dp">300dp</dimen>
     <dimen name="_125dp">125dp</dimen>
-    <dimen name="dimen_text">3dp</dimen>
+    <dimen name="dimen_text">4dp</dimen>
     <dimen name="dimen_footer_text">4dp</dimen>
     <dimen name="dimen_header">5dp</dimen>
     <dimen name="dimen_title">6dp</dimen>
     <dimen name="dimen_padding">1dp</dimen>
-    <dimen name="dimen_margin">2dp</dimen>
+    <dimen name="dimen_margin">1dp</dimen>
     <dimen name="dimen_padding_left">10dp</dimen>
     <dimen name="dimen_view">0.2dp</dimen>
     <dimen name="dimen_img">30dp</dimen>
-    <dimen name="dimen_logo_img">20dp</dimen>
-    <dimen name="dimen_img_margin">5dp</dimen>
+    <dimen name="dimen_logo_img">15dp</dimen>
+    <dimen name="dimen_img_margin">25dp</dimen>
+    <dimen name="dimen_margin_seperator">10dp</dimen>
 </resources>

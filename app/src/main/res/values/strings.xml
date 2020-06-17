@@ -1076,5 +1076,6 @@
     <string name="greater_than_zero">Students marked present should be greater than zero</string>
     <string name="capture_class_per">Please capture classes performance</string>
     <string name="enter_how_many_out_of_a_total_no">Enter how many,out of a total no</string>
+    <string name="pdf_preview">PDF Preview</string>
 
 </resources>

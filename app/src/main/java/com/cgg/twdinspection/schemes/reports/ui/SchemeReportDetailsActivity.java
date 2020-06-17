@@ -75,16 +75,17 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
             @Override
             public void onClick(View view) {
                 try {
+                    binding.scrlPdf.setVisibility(View.VISIBLE);
                     customProgressDialog.show();
-                    List<View> views = new ArrayList<>();
-                    views.add(binding.scrl);
-
 
                     directory_path = getExternalFilesDir(null)
                             + "/" + "TWD/Schemes/";
 
                     filePath = directory_path + "schemes_" + schemeReportData.getBenId() + "_" + schemeReportData.getInspectionTime() + ".pdf";
                     File file = new File(filePath);
+                    List<View> views = new ArrayList<>();
+                    views.add(binding.scrlPdf);
+
                     PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this);
 
                 } catch (Exception e) {
@@ -138,6 +139,24 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                                 }
                             })
                             .into(binding.ivCam1);
+                             Glide.with(SchemeReportDetailsActivity.this)
+                            .load(schemeReportData.getPhotos().get(0).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    binding.pbar.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
+                            .into(binding.ivCam1Pdf);
 
                     binding.ivCam1.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -171,6 +190,25 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                             })
                             .into(binding.ivCam2);
 
+                    Glide.with(SchemeReportDetailsActivity.this)
+                            .load(schemeReportData.getPhotos().get(1).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .listener(new RequestListener<String, GlideDrawable>() {
+                                @Override
+                                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                    binding.pbar2.setVisibility(View.GONE);
+                                    return false;
+                                }
+
+                                @Override
+                                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                    binding.pbar2.setVisibility(View.GONE);
+                                    return false;
+                                }
+                            })
+                            .into(binding.ivCam2Pdf);
+
                     binding.ivCam2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -194,12 +232,14 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
+        binding.scrlPdf.setVisibility(View.GONE);
         Utils.customSyncSuccessAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
     }
 
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
+        binding.scrlPdf.setVisibility(View.GONE);
         Utils.customErrorAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
