@@ -3,6 +3,7 @@ package com.cgg.twdinspection.schemes.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     private SchemeReportData schemeReportData;
     CustomProgressDialog customProgressDialog;
     String directory_path, filePath;
+    private String TAG=SchemeReportDetailsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,6 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
             @Override
             public void onClick(View view) {
                 try {
-                    binding.scrlPdf.setVisibility(View.VISIBLE);
                     customProgressDialog.show();
 
                     directory_path = getExternalFilesDir(null)
@@ -87,10 +88,12 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                     views.add(binding.scrlPdf);
 
                     PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this);
+                    Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
+
                     Toast.makeText(SchemeReportDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                 }
 
@@ -110,7 +113,6 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                 finish();
             }
         });
-
 
 
         try {
@@ -139,7 +141,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                                 }
                             })
                             .into(binding.ivCam1);
-                             Glide.with(SchemeReportDetailsActivity.this)
+                    Glide.with(SchemeReportDetailsActivity.this)
                             .load(schemeReportData.getPhotos().get(0).getFilePath())
                             .error(R.drawable.no_image)
                             .placeholder(R.drawable.camera)
@@ -232,14 +234,14 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        binding.scrlPdf.setVisibility(View.GONE);
+
         Utils.customSyncSuccessAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
     }
 
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
-        binding.scrlPdf.setVisibility(View.GONE);
+
         Utils.customErrorAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
