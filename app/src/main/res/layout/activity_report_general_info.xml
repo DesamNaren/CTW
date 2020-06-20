@@ -21,10 +21,12 @@
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_layout" />
+
+            <include
+                android:id="@+id/action_bar"
+                layout="@layout/action_bar_layout" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,19 +39,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
-                android:visibility="gone"
                 android:background="@color/white"
-                android:padding="@dimen/dimen_10dp">
+                android:padding="@dimen/dimen_10dp"
+                android:visibility="gone">
 
-                    <include
-                        android:id="@+id/include_basic_layout"
-                        layout="@layout/details_layout" />
+                <include
+                    android:id="@+id/include_basic_layout"
+                    layout="@layout/details_layout" />
             </LinearLayout>
 
             <ScrollView
+                android:id="@+id/sv_general_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/sv_general_info">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -226,9 +228,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hmPresence.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes"
-                                        android:clickable="false"/>
+                                        android:text="@string/yes" />
 
                                     <RadioButton
                                         android:id="@+id/rb_no_hm_present_time"
@@ -274,8 +276,8 @@
                                             android:id="@+id/rb_hm_leaves"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`Leaves`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/leaves" />
 
@@ -283,8 +285,8 @@
                                             android:id="@+id/rb_hm_absent"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/unauthorized_absent" />
 
@@ -292,8 +294,8 @@
                                             android:id="@+id/rb_hm_od"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmReasonType.equalsIgnoreCase(`OD`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/od" />
 
@@ -324,9 +326,9 @@
                                         <RadioButton
                                             android:id="@+id/rb_hm_cl"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`CL`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="CL" />
 
@@ -334,8 +336,8 @@
                                             android:id="@+id/rb_hm_ccl"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`CCL`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="CCL" />
 
@@ -343,17 +345,17 @@
                                             android:id="@+id/rb_hm_scl"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`SCL`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="SCL" />
 
                                         <RadioButton
                                             android:id="@+id/rb_hm_medical"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Medical`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Medical" />
 
@@ -361,8 +363,8 @@
                                             android:id="@+id/rb_hm_maternity"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Maternity`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Maternity" />
 
@@ -370,8 +372,8 @@
                                             android:id="@+id/rb_hm_paternity"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmcaptureleavetype.equalsIgnoreCase(`Paternity`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Paternity" />
 
@@ -412,26 +414,26 @@
                                             android:id="@+id/rb_hm_within_campus"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within campus`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_campus" />
 
                                         <RadioButton
                                             android:id="@+id/rb_hm_within_mandal"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_mandal" />
 
                                         <RadioButton
                                             android:id="@+id/rb_hm_within_district"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`Within District`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_district" />
 
@@ -439,17 +441,17 @@
                                             android:id="@+id/rb_hm_itda_level"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/itda_level" />
 
                                         <RadioButton
                                             android:id="@+id/rb_hm_state_level"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmCaptureodtype.equalsIgnoreCase(`State Level`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/state_level" />
 
@@ -481,9 +483,9 @@
                                         <RadioButton
                                             android:id="@+id/rb_yes_hm_movement_register_entry"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hmMovementRegisterEntry.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
@@ -491,8 +493,8 @@
                                             android:id="@+id/rb_no_hm_movement_register_entry"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hmMovementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -552,17 +554,17 @@
                                         android:id="@+id/rb_yes_present_time"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hwoPresence.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
                                         android:id="@+id/rb_no_present_time"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hwoPresence.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -601,26 +603,26 @@
                                             android:id="@+id/rb_leaves"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`Leaves`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/leaves" />
 
                                         <RadioButton
                                             android:id="@+id/rb_absent"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`Unauthorized Absent`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/unauthorized_absent" />
 
                                         <RadioButton
                                             android:id="@+id/rb_od"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwoReasonType.equalsIgnoreCase(`OD`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/od" />
 
@@ -651,36 +653,36 @@
                                         <RadioButton
                                             android:id="@+id/rb_cl"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`CL`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="CL" />
 
                                         <RadioButton
                                             android:id="@+id/rb_medical"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Medical`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Medical" />
 
                                         <RadioButton
                                             android:id="@+id/rb_maternity"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Maternity`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Maternity" />
 
                                         <RadioButton
                                             android:id="@+id/rb_paternity"
-                                            android:clickable="false"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwocaptureleavetype.equalsIgnoreCase(`Paternity`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="Paternity" />
 
@@ -712,8 +714,8 @@
                                             android:id="@+id/rb_out_of_station"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Out of station`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/out_of_station" />
 
@@ -721,8 +723,8 @@
                                             android:id="@+id/rb_within_campus"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within campus`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_campus" />
 
@@ -730,8 +732,8 @@
                                             android:id="@+id/rb_within_mandal"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within Mandal`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_mandal" />
 
@@ -739,17 +741,17 @@
                                             android:id="@+id/rb_within_district"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`Within District`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/within_district" />
 
                                         <RadioButton
                                             android:id="@+id/rb_itda_level"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`ITDA level`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/itda_level" />
 
@@ -757,8 +759,8 @@
                                             android:id="@+id/rb_state_level"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwocaptureodtype.equalsIgnoreCase(`State Level`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/state_level" />
 
@@ -790,17 +792,17 @@
                                             android:id="@+id/rb_yes_movement_register_entry"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:clickable="false"
                                             android:checked="@{inspData.hwomovementRegisterEntry.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
                                         <RadioButton
                                             android:id="@+id/rb_no_movement_register_entry"
                                             android:layout_width="wrap_content"
-                                            android:clickable="false"
                                             android:layout_height="wrap_content"
                                             android:checked="@{inspData.hwomovementRegisterEntry.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
 
@@ -862,17 +864,17 @@
                                         android:id="@+id/rb_yes_hm_head_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hmheadquarters.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
                                         android:id="@+id/rb_no_hm_head_quarters"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hmheadquarters.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -904,8 +906,8 @@
                                         android:id="@+id/rb_hm_below_30"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`below 30`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/below_30" />
 
@@ -913,8 +915,8 @@
                                         android:id="@+id/rb_hm_31_50"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`31-50`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/_31_50" />
 
@@ -922,8 +924,8 @@
                                         android:id="@+id/rb_hm_above_50"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hmcaptureDistance.equalsIgnoreCase(`above 50`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/above_50" />
 
@@ -955,18 +957,18 @@
                                     <RadioButton
                                         android:id="@+id/rb_hm_in_staff_quarters"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_staff_quarters" />
 
                                     <RadioButton
                                         android:id="@+id/rb_hm_in_school_building"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_school_building" />
 
@@ -974,8 +976,8 @@
                                         android:id="@+id/rb_hm_pvt_building"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hmstayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/pvt_building" />
 
@@ -1032,17 +1034,17 @@
                                         android:id="@+id/rb_yes_head_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hwoheadquarters.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
                                         android:id="@+id/rb_no_head_quarters"
-                                        android:clickable="false"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hwoheadquarters.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
 
@@ -1073,27 +1075,27 @@
                                     <RadioButton
                                         android:id="@+id/rb_below_30"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`below 30`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/below_30" />
 
                                     <RadioButton
                                         android:id="@+id/rb_31_50"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`31-50`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/_31_50" />
 
                                     <RadioButton
                                         android:id="@+id/rb_above_50"
                                         android:layout_width="wrap_content"
-                                        android:clickable="false"
                                         android:layout_height="wrap_content"
                                         android:checked="@{inspData.hwocaptureDistance.equalsIgnoreCase(`above 50`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/above_50" />
 
@@ -1126,8 +1128,8 @@
                                         android:id="@+id/rb_in_staff_quarters"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`in Staff Quarters`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_staff_quarters" />
 
@@ -1135,8 +1137,8 @@
                                         android:id="@+id/rb_in_school_building"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`in School Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/in_school_building" />
 
@@ -1144,8 +1146,8 @@
                                         android:id="@+id/rb_pvt_building"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:clickable="false"
                                         android:checked="@{inspData.hwostayingFacilitiesType.equalsIgnoreCase(`Pvt. Building`)}"
+                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/pvt_building" />
 
@@ -1205,9 +1207,9 @@
                                 <RadioButton
                                     android:id="@+id/rb_yes_staff_quarters"
                                     android:layout_width="wrap_content"
-                                    android:clickable="false"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.staffQuarters.equalsIgnoreCase(`Yes`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/yes" />
 
@@ -1215,8 +1217,8 @@
                                     android:id="@+id/rb_no_staff_quarters"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:clickable="false"
                                     android:checked="@{inspData.staffQuarters.equalsIgnoreCase(`No`)}"
+                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1236,7 +1238,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_next"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <Button
             android:id="@+id/btn_next"
