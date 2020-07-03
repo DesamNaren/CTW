@@ -84,12 +84,12 @@ public class PDFUtil {
      * @param listener     PDFUtilListener to send callback for PDF generation.
      */
     public final void generatePDF(final List<View> contentViews, final String filePath,
-                                  final PDFUtilListener listener) {
+                                  final PDFUtilListener listener, String flag) {
         // Check Api Version.
         int currentApiVersion = Build.VERSION.SDK_INT;
         if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             // Kitkat
-            new GeneratePDFAsync(contentViews, filePath, listener).execute();
+            new GeneratePDFAsync(contentViews, filePath, listener, flag).execute();
         } else {
             // Before Kitkat
             Log.e(TAG, "Generate PDF is not available for your android version.");
@@ -127,6 +127,7 @@ public class PDFUtil {
 
         // mFilePath.
         private String mFilePath;
+        private String flag;
 
         // mListener.
         private PDFUtilListener mListener = null;
@@ -141,10 +142,11 @@ public class PDFUtil {
          * @param filePath     FilePath where the PDF has to be stored.
          * @param listener     PDFUtilListener to send callback for PDF generation.
          */
-        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener) {
+        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag) {
             this.mContentViews = contentViews;
             this.mFilePath = filePath;
             this.mListener = listener;
+            this.flag = flag;
         }
 
 
@@ -202,9 +204,15 @@ public class PDFUtil {
                 View contentView = mContentViews.get(i);
 
                 if (contentView.getWidth() > 0 && contentView.getHeight() > 0) {
-                    // crate a page description
-                    PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.
-                            Builder((int) 595, 842, i + 1).create();
+                    PdfDocument.PageInfo pageInfo;
+                    if (flag.equalsIgnoreCase("schemes")) {
+                        // crate a page description
+                        pageInfo = new PdfDocument.PageInfo.
+                                Builder(595, 842, i + 1).create();
+                    } else {
+                        pageInfo = new PdfDocument.PageInfo.
+                                Builder((int) contentView.getWidth(), contentView.getHeight(), i + 1).create();
+                    }
 
                     // start a page
                     PdfDocument.Page page = pdfDocument.startPage(pageInfo);

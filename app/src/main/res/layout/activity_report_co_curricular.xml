@@ -16,6 +16,7 @@
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg"
         android:orientation="vertical">
 
         <include
@@ -23,12 +24,11 @@
             layout="@layout/action_bar_layout" />
 
         <ScrollView
+            android:id="@+id/scrl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:id="@+id/scrl"
-            android:layout_below="@+id/action_bar"
-            android:background="@color/bg">
+            android:layout_below="@+id/action_bar">
 
 
             <LinearLayout
@@ -36,7 +36,21 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
                 android:background="@color/white"
+                android:elevation="@dimen/dimen_10dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:gravity="center"
+                    android:padding="@dimen/dimen_10dp"
+                    android:text="@string/title_co_cir"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

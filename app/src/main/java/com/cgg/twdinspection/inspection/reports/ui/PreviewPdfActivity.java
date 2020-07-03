@@ -1,19 +1,19 @@
 package com.cgg.twdinspection.inspection.reports.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.graphics.Bitmap;
-import android.widget.Toast;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -32,7 +32,6 @@ import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
-import com.cgg.twdinspection.inspection.ui.DMVSelectionActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.google.gson.Gson;
 
@@ -57,58 +56,75 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preview_pdf);
         customProgressDialog = new CustomProgressDialog(this);
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        Gson gson = new Gson();
+        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
+        inspReportData = gson.fromJson(data, InspReportData.class);
+
+        binding.tvDate.setText(inspReportData.getInspectionTime());
+
+        String jsonObject = gson.toJson(inspReportData.getGeneralInfo());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+
+            binding.generalInfo.setInspData(inspReportData.getGeneralInfo());
+            binding.generalInfo.manNameTv.setText(inspReportData.getMandalName() + " & " + inspReportData.getVillageName());
+            binding.generalInfo.disNameTv.setText(inspReportData.getDistName());
+            binding.generalInfo.instNameTv.setText(inspReportData.getInstituteName());
+            binding.executePendingBindings();
+        }
 
         binding.generalInfo.btnNext.setVisibility(View.GONE);
-        binding.generalInfo.actionBar.headerTitle.setText(getString(R.string.general_info));
-        binding.generalInfo.actionBar.backBtn.setVisibility(View.GONE);
-        binding.generalInfo.actionBar.ivHome.setVisibility(View.GONE);
+        binding.generalInfo.tvTitle.setVisibility(View.VISIBLE);
+        binding.generalInfo.actionBar.appbar.setVisibility(View.GONE);
+
         binding.studAtt.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.studAtt.actionBar.headerTitle.setText(getString(R.string.stu_att));
-        binding.studAtt.actionBar.backBtn.setVisibility(View.GONE);
-        binding.studAtt.actionBar.ivHome.setVisibility(View.GONE);
+        binding.studAtt.tvTitle.setVisibility(View.VISIBLE);
+        binding.studAtt.actionBar.appbar.setVisibility(View.GONE);
+
         binding.staff.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.staff.actionBar.headerTitle.setText(getString(R.string.sta_att));
-        binding.staff.actionBar.backBtn.setVisibility(View.GONE);
-        binding.staff.actionBar.ivHome.setVisibility(View.GONE);
+        binding.staff.tvTitle.setVisibility(View.VISIBLE);
+        binding.staff.tvTitle.setText(getString(R.string.sta_att));
+        binding.staff.actionBar.appbar.setVisibility(View.GONE);
+
         binding.medical.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.medical.actionBar.headerTitle.setText(getString(R.string.medical_health));
-        binding.medical.actionBar.backBtn.setVisibility(View.GONE);
-        binding.medical.actionBar.ivHome.setVisibility(View.GONE);
+        binding.medical.tvTitle.setVisibility(View.VISIBLE);
+        binding.medical.actionBar.appbar.setVisibility(View.GONE);
+
         binding.diet.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.diet.actionBar.headerTitle.setText(getString(R.string.diet_issues));
-        binding.diet.actionBar.backBtn.setVisibility(View.GONE);
-        binding.diet.actionBar.ivHome.setVisibility(View.GONE);
+        binding.diet.tvTitle.setVisibility(View.VISIBLE);
+        binding.diet.actionBar.appbar.setVisibility(View.GONE);
+
         binding.infra.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.infra.actionBar.headerTitle.setText(getString(R.string.title_infra));
-        binding.infra.actionBar.backBtn.setVisibility(View.GONE);
-        binding.infra.actionBar.ivHome.setVisibility(View.GONE);
+        binding.infra.tvTitle.setVisibility(View.VISIBLE);
+        binding.infra.actionBar.appbar.setVisibility(View.GONE);
+
         binding.academic.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.academic.actionBar.headerTitle.setText(getString(R.string.title_academic));
-        binding.academic.actionBar.backBtn.setVisibility(View.GONE);
-        binding.academic.actionBar.ivHome.setVisibility(View.GONE);
+        binding.academic.tvTitle.setVisibility(View.VISIBLE);
+        binding.academic.actionBar.appbar.setVisibility(View.GONE);
+
         binding.coCurricular.btnNext.setVisibility(View.GONE);
-        binding.coCurricular.actionBar.headerTitle.setText(getString(R.string.title_co_cir));
-        binding.coCurricular.actionBar.backBtn.setVisibility(View.GONE);
-        binding.coCurricular.actionBar.ivHome.setVisibility(View.GONE);
+        binding.coCurricular.tvTitle.setVisibility(View.VISIBLE);
+        binding.coCurricular.actionBar.appbar.setVisibility(View.GONE);
+
         binding.entitlement.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.entitlement.actionBar.headerTitle.setText(getString(R.string.title_entitlements));
-        binding.entitlement.actionBar.backBtn.setVisibility(View.GONE);
-        binding.entitlement.actionBar.ivHome.setVisibility(View.GONE);
+        binding.entitlement.tvTitle.setVisibility(View.VISIBLE);
+        binding.entitlement.actionBar.appbar.setVisibility(View.GONE);
+
         binding.registers.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.registers.actionBar.headerTitle.setText(getString(R.string.title_registers));
-        binding.registers.actionBar.backBtn.setVisibility(View.GONE);
-        binding.registers.actionBar.ivHome.setVisibility(View.GONE);
+        binding.registers.tvTitle.setVisibility(View.VISIBLE);
+        binding.registers.actionBar.appbar.setVisibility(View.GONE);
+
         binding.genComments.btnLayout.btnLayout.setVisibility(View.GONE);
-        binding.genComments.actionBar.headerTitle.setText(getString(R.string.title_general_comments));
-        binding.genComments.actionBar.backBtn.setVisibility(View.GONE);
-        binding.genComments.actionBar.ivHome.setVisibility(View.GONE);
-        binding.viewPhotos.header.headerTitle.setText(getString(R.string.title_view_photos));
+        binding.genComments.tvTitle.setVisibility(View.VISIBLE);
+        binding.genComments.actionBar.appbar.setVisibility(View.GONE);
+
         binding.viewPhotos.header.backBtn.setVisibility(View.GONE);
-        binding.viewPhotos.header.ivHome.setVisibility(View.GONE);
+        binding.viewPhotos.tvTitle.setVisibility(View.VISIBLE);
+        binding.viewPhotos.header.root.setVisibility(View.GONE);
 
         binding.btnLayout.btnNext.setText("Get PDF");
         binding.actionBar.headerTitle.setText("PDF Preview");
-        sharedPreferences = TWDApplication.get(this).getPreferences();
+
 
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +141,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
 
             }
         });
-        Gson gson = new Gson();
-        String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-        inspReportData = gson.fromJson(data, InspReportData.class);
+
         if (inspReportData != null) {
             String generalInfo = gson.toJson(inspReportData.getGeneralInfo());
             if (!TextUtils.isEmpty(generalInfo) && !generalInfo.equalsIgnoreCase("{}")) {
@@ -141,8 +155,8 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
                     setStudAdapter(studentAttendInfoList);
                 }
             }
-            String jsonObject = gson.toJson(inspReportData.getStaffAttendenceInfo());
-            if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+            String staffAttendence = gson.toJson(inspReportData.getStaffAttendenceInfo());
+            if (!TextUtils.isEmpty(staffAttendence) && !staffAttendence.equalsIgnoreCase("{}")) {
                 staffAttendenceInfos = inspReportData.getStaffAttendenceInfo();
                 if (staffAttendenceInfos != null && staffAttendenceInfos.size() > 0) {
                     setStaffAdapter(staffAttendenceInfos);
@@ -205,38 +219,43 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
                 try {
                     customProgressDialog.show();
                     List<View> views = new ArrayList<>();
-                    views.add(binding.generalInfo.actionBar.getRoot());
+
+                    views.add(binding.logo);
                     views.add(binding.generalInfo.svGeneralInfo);
-                    views.add(binding.studAtt.actionBar.getRoot());
+//                    views.add(binding.studAtt.actionBar.getRoot());
+                    views.add(binding.studAtt.llTitle);
                     views.add(binding.studAtt.recyclerView);
-                    views.add(binding.staff.actionBar.getRoot());
+//                    views.add(binding.staff.actionBar.getRoot());
+                    views.add(binding.staff.llTitle);
                     views.add(binding.staff.recyclerView);
-                    views.add(binding.medical.actionBar.getRoot());
+//                    views.add(binding.medical.actionBar.getRoot());
                     views.add(binding.medical.sv);
-                    views.add(binding.diet.actionBar.getRoot());
+//                    views.add(binding.diet.actionBar.getRoot());
                     views.add(binding.diet.sv);
-                    views.add(binding.infra.actionBar.getRoot());
+//                    views.add(binding.infra.actionBar.getRoot());
                     views.add(binding.infra.scrl);
-                    views.add(binding.academic.actionBar.getRoot());
+//                    views.add(binding.academic.actionBar.getRoot());
                     views.add(binding.academic.scrl);
-                    views.add(binding.coCurricular.actionBar.getRoot());
+//                    views.add(binding.coCurricular.actionBar.getRoot());
                     views.add(binding.coCurricular.scrl);
-                    views.add(binding.entitlement.actionBar.getRoot());
+//                    views.add(binding.entitlement.actionBar.getRoot());
                     views.add(binding.entitlement.scrl);
-                    views.add(binding.registers.actionBar.getRoot());
+//                    views.add(binding.registers.actionBar.getRoot());
                     views.add(binding.registers.baseQueTv);
                     views.add(binding.registers.scrl);
-                    views.add(binding.genComments.actionBar.getRoot());
+//                    views.add(binding.genComments.actionBar.getRoot());
                     views.add(binding.genComments.scrl);
-                    views.add(binding.viewPhotos.header.getRoot());
+//                    views.add(binding.viewPhotos.header.getRoot());
+                    views.add(binding.viewPhotos.llTitle);
                     views.add(binding.viewPhotos.recyclerView);
 
                     directory_path = getExternalFilesDir(null)
                             + "/" + "TWD/Schools/";
 
                     filePath = directory_path + "schools_" + inspReportData.getInstituteId() + "_" + inspReportData.getInspectionTime() + ".pdf";
-                    File file =new File(filePath);
-                    PDFUtil.getInstance().generatePDF(views, filePath, PreviewPdfActivity.this);
+                    File file = new File(filePath);
+                    PDFUtil.getInstance().generatePDF(views, filePath, PreviewPdfActivity.this, "schools");
+
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
@@ -256,7 +275,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
-        Utils.customErrorAlert(PreviewPdfActivity.this, getString(R.string.app_name), getString(R.string.something)+" "+exception.getMessage());
+        Utils.customErrorAlert(PreviewPdfActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
     private void setStudAdapter(List<StudentAttendenceInfo> studentAttendInfoList) {

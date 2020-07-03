@@ -87,7 +87,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                     List<View> views = new ArrayList<>();
                     views.add(binding.scrlPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this);
+                    PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this,"schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {

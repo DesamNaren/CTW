@@ -1,15 +1,15 @@
 package com.cgg.twdinspection.engineering_works.reports.ui;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -20,7 +20,6 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityEngPdfBinding;
 import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapter;
-import com.cgg.twdinspection.inspection.reports.ui.PreviewPdfActivity;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -83,7 +82,7 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
 
                     filePath = directory_path + "works_" + reportWorkDetails.getWorkId() + "_" + reportWorkDetails.getInspectionTime() + ".pdf";
                     File file =new File(filePath);
-                    PDFUtil.getInstance().generatePDF(views, filePath, EngPDFActivity.this);
+                    PDFUtil.getInstance().generatePDF(views, filePath, EngPDFActivity.this,"engworks");
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
