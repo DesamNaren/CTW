@@ -2,31 +2,42 @@ package com.cgg.twdinspection.common.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.pdf.PdfDocument;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -48,8 +59,13 @@ import com.cgg.twdinspection.schemes.ui.SchemeSyncActivity;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -64,9 +80,9 @@ public class Utils {
         try {
             ContextCompat.checkSelfPermission(context, READ_PHONE_STATE);
 
-            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.P) {
-                deviceID = android.provider.Settings.Secure.getString(
-                        context.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                deviceID = Settings.Secure.getString(
+                        context.getContentResolver(), Settings.Secure.ANDROID_ID);
             } else {
                 deviceID = null;
                 deviceID = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
@@ -205,7 +221,7 @@ public class Utils {
                             dialog.dismiss();
                         }
                         activity.startActivity(new Intent(activity, InstMenuMainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });
@@ -623,7 +639,7 @@ public class Utils {
         // this will convert any number sequence into 6 character.
         String randomNum = String.format("%06d", number);
         String time = getRandomCurrentDateTime();
-        return  randomNum.concat(time);
+        return randomNum.concat(time);
     }
 
     public static void customErrorAlert(Context activity, String title, String msg) {
@@ -1077,13 +1093,13 @@ public class Utils {
                 TextView tvDesig = dialog.findViewById(R.id.designation);
                 TextView tvPlace = dialog.findViewById(R.id.place_of_work);
                 SharedPreferences sharedPreferences = TWDApplication.get(activity).getPreferences();
-                String userName=sharedPreferences.getString(AppConstants.OFFICER_NAME,"");
+                String userName = sharedPreferences.getString(AppConstants.OFFICER_NAME, "");
                 tvUserName.setText(userName);
-                String userId=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+                String userId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
                 tvUserId.setText(userId);
-                String designation=sharedPreferences.getString(AppConstants.OFFICER_DES,"");
+                String designation = sharedPreferences.getString(AppConstants.OFFICER_DES, "");
                 tvDesig.setText(designation);
-                String place=sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK,"");
+                String place = sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK, "");
                 tvPlace.setText(place);
                 Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
                 btDialogYes.setOnClickListener(new View.OnClickListener() {
@@ -1121,6 +1137,291 @@ public class Utils {
         return (double) tmp / factor;
     }
 
+    private static Uri fileUri;
+    private static Uri imageUri;
+    private static final int MEDIA_TYPE_IMAGE = 1;
+    final static String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/CTW";
+    private static File mediaFile;
+    private static Bitmap bitmap;
+
+    public static void takeSCImage(Activity activity, ScrollView llScroll, String title, int len) {
+        try {
+
+            int totalHeightOfScrollView = llScroll.getChildAt(0).getHeight();
+
+            bitmap = loadBitmapFromView(llScroll, llScroll.getWidth(), totalHeightOfScrollView);
+            createPdf(activity, bitmap, title, len);
+
+//            fileUri = getOutputMediaFileUri(activity, MEDIA_TYPE_IMAGE);
+//
+//            if (bitmap != null) {
+//                store(bitmap, activity);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
+    public static void takeSCImageSchool(Activity activity, ScrollView llScroll, String title, int len, ArrayList<ScrollView> scrollViews) {
+        try {
+
+            int totalHeightOfScrollView = llScroll.getChildAt(0).getHeight();
+
+//            bitmap = loadBitmapFromView(llScroll, llScroll.getWidth(),totalHeightOfScrollView);
+            createPdfSchool(activity, title, len,scrollViews);
+
+//            fileUri = getOutputMediaFileUri(activity, MEDIA_TYPE_IMAGE);
+//
+//            if (bitmap != null) {
+//                store(bitmap, activity);
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static File filePath;
+
+
+    private static void createPdf(Activity activity, Bitmap bitmap, String title, int len) {
+        try {
+            WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+            //  Display display = wm.getDefaultDisplay();
+            DisplayMetrics displaymetrics = new DisplayMetrics();
+            activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+            float hight = displaymetrics.heightPixels;
+            float width = displaymetrics.widthPixels;
+
+            int convertHighet = (int) hight, convertWidth = (int) width;
+
+//        Resources mResources = getResources();
+//        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.screenshot);
+
+            PdfDocument document = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                document = new PdfDocument();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create();
+                PdfDocument.Page page = document.startPage(pageInfo);
+
+                Canvas canvas = page.getCanvas();
+                Paint paint = new Paint();
+                canvas.drawPaint(paint);
+
+                document.finishPage(page);
+
+                bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHighet, true);
+
+                paint.setColor(Color.BLUE);
+                canvas.drawBitmap(bitmap, 0, 0, null);
+                document.finishPage(page);
+
+                // write the document content
+                File targetPdf = new File(activity.getExternalFilesDir(null) + "/Android/data/"
+                        + "Files/");
+
+                if (!targetPdf.exists()) {
+                    if (!targetPdf.mkdirs()) {
+                        Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                                + " directory");
+                    }
+                }
+
+
+                filePath = new File(targetPdf.getPath() + "/" + title + ".pdf");
+                filePath = new File(filePath.getPath());
+                try {
+                    filePath.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    document.writeTo(new FileOutputStream(filePath));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(activity, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+                }
+
+                // close the document
+                document.close();
+                Toast.makeText(activity, "PDF of Scroll is created!!!", Toast.LENGTH_SHORT).show();
+
+    //            openGeneratedPDF(activity);
+
+                shareImage(activity, fileUri);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private static void createPdfSchool(Activity activity, String title, int len, ArrayList<ScrollView> scrollViews) {
+        int totWei = 0, totHei = 0;
+        PdfDocument document = null;
+        Paint paint = new Paint();
+        for (int i = 0; i < scrollViews.size(); i++) {
+
+            float hight = scrollViews.get(i).getHeight();
+            float width = scrollViews.get(i).getWidth();
+            int convertHighet = (int) hight, convertWidth = (int) width;
+            totHei += convertHighet;
+            totWei += convertWidth;
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                document = new PdfDocument();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create();
+                PdfDocument.Page page = document.startPage(pageInfo);
+
+                Canvas canvas = page.getCanvas();
+
+                canvas.drawPaint(paint);
+                bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHighet, true);
+                paint.setColor(Color.BLUE);
+                canvas.drawBitmap(bitmap, 0, 0, null);
+                document.finishPage(page);
+            }
+
+
+        }
+
+
+        // write the document content
+        File targetPdf = new File(activity.getExternalFilesDir(null) + "/Android/data/"
+                + "Files/");
+
+        if (!targetPdf.exists()) {
+            if (!targetPdf.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create " + "Android File Upload"
+                        + " directory");
+            }
+        }
+
+
+        filePath = new File(targetPdf.getPath() + "/" + title + ".pdf");
+        filePath = new File(filePath.getPath());
+        try {
+            filePath.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                document.writeTo(new FileOutputStream(filePath));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(activity, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        // close the document
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            document.close();
+        }
+        Toast.makeText(activity, "PDF of Scroll is created!!!", Toast.LENGTH_SHORT).show();
+
+//            openGeneratedPDF(activity);
+
+        shareImage(activity, fileUri);
+
+
+    }
+
+    private static void openGeneratedPDF(Activity activity) {
+        File file = new File(filePath.getPath());
+        if (file.exists()) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(file);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            try {
+                activity.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(activity, "No Application available to view pdf", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+    private static Bitmap loadBitmapFromView(View v, int width, int height) {
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.draw(c);
+
+        return b;
+    }
+
+    public static Bitmap getScreenShot(View ll) {
+        ll.setDrawingCacheEnabled(true);
+        ll.buildDrawingCache(true);
+        return Bitmap.createBitmap(ll.getDrawingCache());
+    }
+
+    public static void store(Bitmap bm, Activity activity) {
+        try {
+            FileOutputStream fOut = new FileOutputStream(mediaFile);
+            bm.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+
+            shareImage(activity, fileUri);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void shareImage(Activity activity, Uri fileUri) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setType("image/*");
+
+            intent.putExtra(Intent.EXTRA_SUBJECT, activity.getResources().getString(R.string.app_name));
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+            try {
+                activity.startActivity(Intent.createChooser(intent, "Project Data"));
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(activity, "No App Available", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Uri getOutputMediaFileUri(Activity activity, int type) {
+        File imageFile = getOutputMediaFile(type);
+        imageUri = FileProvider.getUriForFile(
+                activity,
+                "com.cgg.twdinspection.provider", //(use your app signature + ".provider" )
+                imageFile);
+        return imageUri;
+    }
+
+    private static File getOutputMediaFile(int type) {
+        File mediaStorageDir = new File(dirPath);
+        if (!mediaStorageDir.exists()) {
+            mediaStorageDir.mkdirs();
+        }
+
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + getTimeStamp() + ".png");
+        } else {
+            return null;
+        }
+        return mediaFile;
+    }
+
+    private static String getTimeStamp() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+        return simpleDateFormat.format(new Date());
+    }
 }

@@ -103,6 +103,15 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                 }
             }
+
+            if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+                    }
+                    sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
+                }
+            }
         }
         binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
             @Override

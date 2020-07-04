@@ -189,6 +189,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
             }
 
         });
+
         viewModel.getEngWorks().observe(EngSyncActivity.this, new Observer<List<WorkDetail>>() {
             @Override
             public void onChanged(List<WorkDetail> workDetails) {

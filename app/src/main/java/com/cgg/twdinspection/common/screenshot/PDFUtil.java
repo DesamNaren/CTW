@@ -212,6 +212,8 @@ public class PDFUtil {
                     } else {
                         pageInfo = new PdfDocument.PageInfo.
                                 Builder((int) contentView.getWidth(), contentView.getHeight(), i + 1).create();
+
+
                     }
 
                     // start a page
@@ -254,7 +256,7 @@ public class PDFUtil {
 
             //Create parent directories
             File parentFile = pdfFile.getParentFile();
-            if (!parentFile.exists() && !parentFile.mkdirs()) {
+            if (parentFile!=null&&!parentFile.exists() && !parentFile.mkdirs()) {
                 throw new IllegalStateException("Couldn't create directory: " + parentFile);
             }
             boolean fileExists = pdfFile.exists();

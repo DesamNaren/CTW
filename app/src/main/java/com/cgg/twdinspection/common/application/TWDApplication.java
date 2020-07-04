@@ -31,8 +31,6 @@ public class TWDApplication extends MultiDexApplication {
         super.attachBaseContext(base);
     }
 
-
-
     public SharedPreferences getPreferences() {
         if (sharedPreferences == null) {
             sharedPreferences = getSharedPreferences(AppConstants.SHARED_PREF, MODE_PRIVATE);

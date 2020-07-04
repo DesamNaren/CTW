@@ -50,6 +50,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
     private MFPGoDowns mfpGoDowns;
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private boolean mfp_flag, emp_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +117,16 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                     }
                 }
 
+                if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
+                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+                    for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
+                        if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
+                            existFlag = true;
+                            break;
+                        }
+                    }
+                }
+
 
                 if (existFlag) {
                     Gson gson = new Gson();
@@ -156,6 +167,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                                    mfp_flag=true;
                                     stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                     MFPFragment mfpFragment = new MFPFragment();
                                     Gson gson = new Gson();
@@ -165,6 +177,26 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     mfpFragment.setArguments(bundle);
                                     adapter.addFrag(mfpFragment, "MFP Commodities");
 
+                                    binding.viewPager.setVisibility(View.VISIBLE);
+                                    binding.tabs.setVisibility(View.VISIBLE);
+                                    binding.noDataTv.setVisibility(View.GONE);
+                                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                                    binding.tabs.setupWithViewPager(binding.viewPager);
+                                    binding.viewPager.setAdapter(adapter);
+                                }if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
+                                    stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
+                                    EmptiesFragment emptiesFragment = new EmptiesFragment();
+                                    Gson gson = new Gson();
+                                    String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(AppConstants.empties, essentialComm);
+                                    emptiesFragment.setArguments(bundle);
+                                    adapter.addFrag(emptiesFragment, "Empties");
+                                }
+
+                                if(mfp_flag|| emp_flag)
+                                {
                                     binding.viewPager.setVisibility(View.VISIBLE);
                                     binding.tabs.setVisibility(View.VISIBLE);
                                     binding.noDataTv.setVisibility(View.GONE);
@@ -191,6 +223,14 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                 callSnackBar(stockDetailsResponse.getStatusMessage());
                             } else {
                                 callSnackBar(getString(R.string.something));
+                            }
+                            if (!mfp_flag && !emp_flag ) {
+                                binding.viewPager.setVisibility(View.GONE);
+                                binding.tabs.setVisibility(View.GONE);
+                                binding.noDataTv.setVisibility(View.VISIBLE);
+                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                                callSnackBar(stockDetailsResponse.getStatusMessage());
                             }
                         } else {
                             callSnackBar(getString(R.string.something));
@@ -241,7 +281,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
     @Override
     public void onBackPressed() {
         if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
-        &&  stockDetailsResponsemain.getMfp_commodities()!=null && stockDetailsResponsemain.getMfp_commodities().size()>0) {
+                && (mfp_flag|| emp_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

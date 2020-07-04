@@ -82,7 +82,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+        </RelativeLayout>Da
 
         <ScrollView
             android:layout_width="match_parent"

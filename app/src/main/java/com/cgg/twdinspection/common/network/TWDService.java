@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.common.network;
 
 
+import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.engineering_works.reports.source.WorkReportResponse;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
@@ -68,7 +69,7 @@ public interface TWDService {
             if (type.equals("school")) {
                 BASEURL = TWDURL.TWD_BASE_URL;
             } else if (type.equals("gcc")) {
-//                httpClient.addInterceptor(new BasicAuthInterceptor(AppConstants.GCC_AUTH_USER, AppConstants.GCC_AUTH_PWD));
+                httpClient.addInterceptor(new BasicAuthInterceptor(AppConstants.GCC_AUTH_USER, AppConstants.GCC_AUTH_PWD));
                 BASEURL = TWDURL.GCC_BASE_URL;
             } else {
                 BASEURL = TWDURL.SCHEME_BASE_URL;

@@ -73,7 +73,7 @@ android {
         uat {
             buildConfigField("String", "SERVER_URL", "\"http://uat2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
-            buildConfigField("String", "GCC_SERVER_URL", "\"http://uat7.cgg.gov.in/gccfms/ws/gcc/\"")
+            buildConfigField("String", "GCC_SERVER_URL", "\"http://uat7.cgg.gov.in/gccfms/webservice/gcc/\"")
             signingConfig signingConfigs.release
             debuggable true
         }
@@ -118,5 +118,5 @@ dependencies {
     // Itext pdf library
     implementation 'com.itextpdf:itextg:5.5.10'
     implementation 'com.madgag.spongycastle:core:1.58.0.0'
-
+//
 }
