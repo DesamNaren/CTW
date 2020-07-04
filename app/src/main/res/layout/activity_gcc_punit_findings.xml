@@ -31,6 +31,206 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/stock_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header"
+                    android:layout_margin="@dimen/dimen_10dp"
+                    android:background="@color/white"
+                    android:elevation="@dimen/dimen_10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Stock Details / Position"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_system"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvSysVal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_system_inspected"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvInsSysVal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_physical_verification"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvPhysVal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Deficit / Surplus "
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvDiffVal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="Reason mentioned by In charge regarding Deficit / Surplus"
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_reason"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
+                                    android:hint="@string/reason"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textMultiLine" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/stock_value_as_per_system_not_inspected"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_sys_val_not_ins"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="@dimen/dimen_5dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
