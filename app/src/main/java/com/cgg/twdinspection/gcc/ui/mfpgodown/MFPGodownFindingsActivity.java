@@ -56,7 +56,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0, difference = 0;
+    double physVal = 0, sysVal = 0, difference = 0, notInsSysVal=0, insSysVal=0;
     private StockDetailsResponse stockDetailsResponse;
     private String stockReg, insCer, fireNOC, weightMea;
     private String qualityStock, stockCards, godownHyg, driage, trayAvail, repairsReq;
@@ -99,6 +99,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                 }
@@ -108,10 +109,25 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
             }
+
+            sysVal = Double.valueOf(String.format("%.2f", sysVal));
+            physVal = Double.valueOf(String.format("%.2f", physVal));
+            binding.tvSysVal.setText(String.format("%.2f", sysVal));
+            binding.tvPhysVal.setText(String.format("%.2f", physVal));
+
+            notInsSysVal = sysVal-insSysVal;
+            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
+            binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
+            difference = insSysVal - physVal;
+            difference = Double.valueOf(String.format("%.2f", difference));
+            binding.tvDiffVal.setText(String.format("%.2f", difference));
+
         }
         binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -378,9 +394,6 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                         e.printStackTrace();
                     }
                     editor.putString(AppConstants.repairsPath, FilePath);
-
-                    sysVal = Double.valueOf(String.format("%.2f", sysVal));
-                    physVal = Double.valueOf(String.format("%.2f", physVal));
 
                     editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
                     editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));

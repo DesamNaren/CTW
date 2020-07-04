@@ -36,7 +36,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     ActivityGccPunitFindingsBinding binding;
     private String officerID, divId, suppId;
     private StockDetailsResponse stockDetailsResponse;
-    double physVal = 0, sysVal = 0;
+    double physVal = 0, sysVal = 0, notInsSysVal=0, insSysVal=0, difference=0;
     private String remarks, insComName, insComDate, insCer, weightDate, weightMea;
     private String fireNOC, qualityStock, godownHyg, repairsReq;
     private String rawStock, proReg, inwardReg, outwardReg, saleReg, labAttReg, amcMac, agmarkCer, fsaaiCer;
@@ -44,6 +44,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private String stockRemarks, proRemarks, inwardRemarks, outwardRemarks, saleRemarks, labRemarks, fireRemarks, amcRemarks, agmarkRemarks,
             fsaaiRemarks, emptyRemarks, barralesRemarks, cahBookRemarks, cashBankRemarks, vehlogRemarks;
     private String randomNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
                 }
@@ -83,6 +85,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                 }
@@ -91,6 +94,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
@@ -99,6 +103,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                 }
@@ -107,10 +112,25 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                 for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getProcessing_units().get(i).getQty();
                     }
                     sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
                 }
             }
+
+            sysVal = Double.valueOf(String.format("%.2f", sysVal));
+            physVal = Double.valueOf(String.format("%.2f", physVal));
+            binding.tvSysVal.setText(String.format("%.2f", sysVal));
+            binding.tvPhysVal.setText(String.format("%.2f", physVal));
+
+            notInsSysVal = sysVal-insSysVal;
+            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
+            binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
+            difference = insSysVal - physVal;
+            difference = Double.valueOf(String.format("%.2f", difference));
+            binding.tvDiffVal.setText(String.format("%.2f", difference));
+
         }
 
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {

@@ -125,20 +125,22 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
             }
+
+
+            sysVal = Double.valueOf(String.format("%.2f", sysVal));
+            physVal = Double.valueOf(String.format("%.2f", physVal));
+            binding.tvSysVal.setText(String.format("%.2f", sysVal));
+            binding.tvPhysVal.setText(String.format("%.2f", physVal));
+
+            notInsSysVal = sysVal-insSysVal;
+            notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
+            binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
+            binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
+            difference = insSysVal - physVal;
+            difference = Double.valueOf(String.format("%.2f", difference));
+            binding.tvDiffVal.setText(String.format("%.2f", difference));
         }
 
-        sysVal = Double.valueOf(String.format("%.2f", sysVal));
-        physVal = Double.valueOf(String.format("%.2f", physVal));
-        binding.tvSysVal.setText(String.format("%.2f", sysVal));
-        binding.tvPhysVal.setText(String.format("%.2f", physVal));
-
-        notInsSysVal = sysVal-insSysVal;
-        notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
-        binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
-        binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
-        difference = insSysVal - physVal;
-        difference = Double.valueOf(String.format("%.2f", difference));
-        binding.tvDiffVal.setText(String.format("%.2f", difference));
 
         binding.rgStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
