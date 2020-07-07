@@ -36,89 +36,1109 @@
             android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:elevation="@dimen/dimen_10dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/registers_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_img"
+                                android:layout_height="@dimen/dimen_img"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:background="@drawable/telangana" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:gravity="center"
+                                android:text="Tribal Welfare Department"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_title"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Government of Telangana"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:gravity="center"
+                                android:text="Inspection Report-GCC"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_header"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:text="skjfhij"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Registers, Books and Certificates"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Raw Material Stock Register"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.rawMatStockRegisterType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_stock_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Processing Register"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.processingRegisterType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_processing_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Inward Register"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.inwardRegisterType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_inward_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Outward Register"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.outwardRegisterType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_outward_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.outwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Sale / Invoice Book"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.saleInvoiceBookType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_sale_inv_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.saleInvoiceBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Labour Attendance Register"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.labourAttendRegisterType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_lab_att_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.labourAttendRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Insurance Certificate"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.insuranceCertType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                                    android:text="@string/com_name"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:text="@{pUnit.registerBookCertificates.insCompName}"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+                                            </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                                    android:text="Insurance validity"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:text="@{pUnit.registerBookCertificates.insValidity}"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+                                            </LinearLayout>
+
+                                            <com.google.android.material.textfield.TextInputLayout
+                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                                android:layout_marginTop="@dimen/dimen_5dp"
+                                                android:textColorHint="@color/colorAccent"
+                                                android:visibility="gone"
+                                                app:errorEnabled="true">
+
+                                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:hint="@string/com_name"
+                                                    android:imeOptions="actionNext"
+                                                    android:singleLine="true"
+                                                    android:text="@{pUnit.registerBookCertificates.insCompName}"
+                                                    android:textColor="@color/black" />
+
+                                            </com.google.android.material.textfield.TextInputLayout>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:visibility="gone">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_alignParentLeft="true"
+                                                    android:layout_centerVertical="true"
+                                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                                    android:background="@android:drawable/ic_menu_my_calendar"
+                                                    android:backgroundTint="@color/colorPrimary" />
+
+                                                <com.google.android.material.textfield.TextInputLayout
+                                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                                    android:textColorHint="@color/colorAccent"
+                                                    app:errorEnabled="true">
+
+
+                                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:focusableInTouchMode="false"
+                                                        android:hint="Insurance validity"
+                                                        android:imeOptions="actionNext"
+                                                        android:paddingLeft="@dimen/dimen_30dp"
+                                                        android:singleLine="true"
+                                                        android:text="@{pUnit.registerBookCertificates.insValidity}"
+                                                        android:textColor="@color/black" />
+
+                                                </com.google.android.material.textfield.TextInputLayout>
+                                            </RelativeLayout>
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Fire Department NOC"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.fireDeptType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_fire_noc_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Weights and Measurements certificate issued by legal Metrology"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.weightMeasureCertificateType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                                    android:text="Certificate validity"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                            </LinearLayout>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:visibility="gone">
+
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_alignParentLeft="true"
+                                                    android:layout_centerVertical="true"
+                                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                                    android:background="@android:drawable/ic_menu_my_calendar"
+                                                    android:backgroundTint="@color/colorPrimary" />
+
+                                                <com.google.android.material.textfield.TextInputLayout
+                                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="@dimen/dimen_5dp"
+                                                    android:layout_marginTop="@dimen/dimen_5dp"
+                                                    android:textColorHint="@color/colorAccent"
+                                                    app:errorEnabled="true">
+
+
+                                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:focusableInTouchMode="false"
+                                                        android:hint="Certificate validity"
+                                                        android:imeOptions="actionNext"
+                                                        android:paddingLeft="@dimen/dimen_30dp"
+                                                        android:singleLine="true"
+                                                        android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
+                                                        android:textColor="@color/black" />
+
+                                                </com.google.android.material.textfield.TextInputLayout>
+                                            </RelativeLayout>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                                    android:text="AMC for Machinery"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:text="@{pUnit.registerBookCertificates.amcMachinaryType}"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+                                            </LinearLayout>
+
+                                            <include
+                                                android:id="@+id/remarks_amc_pdf"
+                                                layout="@layout/remarks_layout_reports_pdf"
+                                                android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="horizontal">
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                                    android:text="Agmark Certificate"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_margin="@dimen/dimen_margin"
+                                                    android:layout_weight="1"
+                                                    android:text="@{pUnit.registerBookCertificates.agmarkCertType}"
+                                                    android:textColor="@color/black"
+                                                    android:textSize="@dimen/dimen_text" />
+
+                                            </LinearLayout>
+
+                                            <include
+                                                android:id="@+id/remarks_agmark_pdf"
+                                                layout="@layout/remarks_layout_reports_pdf"
+                                                android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/general_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/dimen_10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="FSAAI Certificate"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.fsaaiCertType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+
+                                        <include
+                                            android:id="@+id/remarks_fsaai_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.fsaaiCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Empties Register"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.emptiesRegisterType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_empties_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="@{pUnit.registerBookCertificates.emptiesRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Barrels / Aluminium Cans"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.barrelsAlumnCansType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_barrels_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="@{pUnit.registerBookCertificates.barrelsAlumnCansRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Cash Book"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.cashBookType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_cash_book_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="@{pUnit.registerBookCertificates.cashBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Cash and Bank Balances"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.cashBankBalType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_cash_bank_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="gone" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Vehicle Log Book"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.vehLogBookType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_veh_log_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="@{pUnit.registerBookCertificates.vehLogBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="General Findings"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_15dp"
+                                        android:text="@{pUnit.generalFindings.stockQualityVerified}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether the godown  is maintained in hygienic condition or not"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_15dp"
+                                        android:text="@{pUnit.generalFindings.hygienicCondition}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Any Repairs required for Manufacturing Unit"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:paddingLeft="@dimen/dimen_15dp"
+                                        android:text="@{pUnit.generalFindings.repairReq}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+
+                                </LinearLayout>
+
+                                <include
+                                    android:id="@+id/remarks_pdf"
+                                    layout="@layout/remarks_layout_reports_pdf" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="Registers, Books and Certificates"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical"
+                        android:visibility="visible">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Raw Material Stock Register"
+                                android:text="Registers, Books and Certificates"
                                 android:textColor="@color/black" />
+                        </LinearLayout>
 
-                            <RadioGroup
-                                android:id="@+id/rg_stock"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
 
-
-                                <RadioButton
-                                    android:id="@+id/stock_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/stock_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <include
-                                android:id="@+id/remarks_stock"
-                                layout="@layout/reamrks_layout_reports"
-                                android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
 
 
                             <LinearLayout
@@ -130,30 +1150,30 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="Processing Register"
+                                    android:text="Raw Material Stock Register"
                                     android:textColor="@color/black" />
 
                                 <RadioGroup
-                                    android:id="@+id/rg_processing"
+                                    android:id="@+id/rg_stock"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
 
                                     <RadioButton
-                                        android:id="@+id/pro_yes_rb"
+                                        android:id="@+id/stock_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:id="@+id/pro_no_rb"
+                                        android:id="@+id/stock_no_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`No`)}"
+                                        android:checked="@{pUnit.registerBookCertificates.rawMatStockRegisterType.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -161,409 +1181,284 @@
                                 </RadioGroup>
 
                                 <include
-                                    android:id="@+id/remarks_processing"
+                                    android:id="@+id/remarks_stock"
                                     layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                            </LinearLayout>
+                                    android:visibility="@{pUnit.registerBookCertificates.rawMatStockRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Inward Register"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_inward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/inward_yes_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
-
-                                    <RadioButton
-                                        android:id="@+id/inward_no_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
-
-                                </RadioGroup>
-
-                                <include
-                                    android:id="@+id/remarks_inward"
-                                    layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Outward Register"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_outward"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/outward_yes_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
-
-                                    <RadioButton
-                                        android:id="@+id/outward_no_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
-
-                                </RadioGroup>
-
-                                <include
-                                    android:id="@+id/remarks_outward"
-                                    layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.outwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Sale / Invoice Book"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_sale_inv"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/sale_inv_yes_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
-
-                                    <RadioButton
-                                        android:id="@+id/sale_inv_no_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
-
-                                </RadioGroup>
-
-                                <include
-                                    android:id="@+id/remarks_sale_inv"
-                                    layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.saleInvoiceBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Labour Attendance Register"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_lab_att"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/lab_att_yes_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
-
-                                    <RadioButton
-                                        android:id="@+id/lab_att_no_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
-
-                                </RadioGroup>
-
-                                <include
-                                    android:id="@+id/remarks_lab_att"
-                                    layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.labourAttendRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Insurance Certificate"
-                                    android:textColor="@color/black" />
-
-                                <RadioGroup
-                                    android:id="@+id/rg_insurance"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/insurance_yes_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
-
-                                    <RadioButton
-                                        android:id="@+id/insurance_no_rb"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
-
-                                </RadioGroup>
 
                                 <LinearLayout
-                                    android:id="@+id/ins_ll"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                                    android:orientation="vertical">
 
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                        android:layout_width="match_parent"
+                                    <TextView
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_5dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Processing Register"
+                                        android:textColor="@color/black" />
 
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_com_name"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:hint="@string/com_name"
-                                            android:imeOptions="actionNext"
-                                            android:singleLine="true"
-                                            android:text="@{pUnit.registerBookCertificates.insCompName}"
-                                            android:textColor="@color/black" />
+                                    <RadioGroup
+                                        android:id="@+id/rg_processing"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
 
-                                    </com.google.android.material.textfield.TextInputLayout>
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <ImageView
+                                        <RadioButton
+                                            android:id="@+id/pro_yes_rb"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="@dimen/dimen_5dp"
-                                            android:background="@android:drawable/ic_menu_my_calendar"
-                                            android:backgroundTint="@color/colorPrimary" />
+                                            android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
 
-                                        <com.google.android.material.textfield.TextInputLayout
-                                            android:id="@+id/ins_val_date"
-                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                            android:layout_width="match_parent"
+                                        <RadioButton
+                                            android:id="@+id/pro_no_rb"
+                                            android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginLeft="@dimen/dimen_5dp"
-                                            android:textColorHint="@color/colorAccent"
-                                            app:errorEnabled="true">
+                                            android:checked="@{pUnit.registerBookCertificates.processingRegisterType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
 
+                                    </RadioGroup>
 
-                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                                android:id="@+id/et_ins_date"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:focusableInTouchMode="false"
-                                                android:hint="Insurance validity"
-                                                android:imeOptions="actionNext"
-                                                android:paddingLeft="@dimen/dimen_30dp"
-                                                android:singleLine="true"
-                                                android:text="@{pUnit.registerBookCertificates.insValidity}"
-                                                android:textColor="@color/black" />
-
-                                        </com.google.android.material.textfield.TextInputLayout>
-                                    </RelativeLayout>
+                                    <include
+                                        android:id="@+id/remarks_processing"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.processingRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
                                 </LinearLayout>
 
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Fire Department NOC"
-                                    android:textColor="@color/black" />
+                                    android:orientation="vertical">
 
-                                <RadioGroup
-                                    android:id="@+id/rg_fire_noc"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-
-                                    <RadioButton
-                                        android:id="@+id/fire_noc_rb_yes"
+                                    <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
+                                        android:text="Inward Register"
+                                        android:textColor="@color/black" />
 
-                                    <RadioButton
-                                        android:id="@+id/fire_noc_rb_no"
+                                    <RadioGroup
+                                        android:id="@+id/rg_inward"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
+                                        android:orientation="horizontal">
 
-                                </RadioGroup>
 
-                                <include
-                                    android:id="@+id/remarks_fire_noc"
-                                    layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                        <RadioButton
+                                            android:id="@+id/inward_yes_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
 
-                            </LinearLayout>
+                                        <RadioButton
+                                            android:id="@+id/inward_no_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.inwardRegisterType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                    </RadioGroup>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
+                                    <include
+                                        android:id="@+id/remarks_inward"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.inwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="Weights and Measurements certificate issued by legal Metrology"
-                                    android:textColor="@color/black" />
+                                    android:orientation="vertical">
 
-                                <RadioGroup
-                                    android:id="@+id/rg_weight"
-                                    android:layout_width="wrap_content"
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Outward Register"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_outward"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/outward_yes_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/outward_no_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.outwardRegisterType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                    <include
+                                        android:id="@+id/remarks_outward"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.outwardRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical">
 
-
-                                    <RadioButton
-                                        android:id="@+id/weight_rb_yes"
+                                    <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)}"
-                                        android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/yes" />
+                                        android:text="Sale / Invoice Book"
+                                        android:textColor="@color/black" />
 
-                                    <RadioButton
-                                        android:id="@+id/weight_rb_no"
+                                    <RadioGroup
+                                        android:id="@+id/rg_sale_inv"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`No`)}"
-                                        android:clickable="false"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/no" />
+                                        android:orientation="horizontal">
 
-                                </RadioGroup>
+
+                                        <RadioButton
+                                            android:id="@+id/sale_inv_yes_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/sale_inv_no_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.saleInvoiceBookType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                    <include
+                                        android:id="@+id/remarks_sale_inv"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.saleInvoiceBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Labour Attendance Register"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_lab_att"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/lab_att_yes_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/lab_att_no_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.labourAttendRegisterType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                    <include
+                                        android:id="@+id/remarks_lab_att"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.labourAttendRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                </LinearLayout>
 
 
                                 <LinearLayout
-                                    android:id="@+id/legal_ll"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                                    android:orientation="vertical">
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Insurance Certificate"
+                                        android:textColor="@color/black" />
 
-                                        <ImageView
+                                    <RadioGroup
+                                        android:id="@+id/rg_insurance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/insurance_yes_rb"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_alignParentLeft="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="@dimen/dimen_5dp"
-                                            android:background="@android:drawable/ic_menu_my_calendar"
-                                            android:backgroundTint="@color/colorPrimary" />
+                                            android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/insurance_no_rb"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                    <LinearLayout
+                                        android:id="@+id/ins_ll"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                         <com.google.android.material.textfield.TextInputLayout
-                                            android:id="@+id/legal_met_val"
                                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -572,21 +1467,329 @@
                                             android:textColorHint="@color/colorAccent"
                                             app:errorEnabled="true">
 
-
                                             <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                                android:id="@+id/et_legal_met_date"
+                                                android:id="@+id/et_com_name"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:focusableInTouchMode="false"
-                                                android:hint="Certificate validity"
+                                                android:hint="@string/com_name"
                                                 android:imeOptions="actionNext"
-                                                android:paddingLeft="@dimen/dimen_30dp"
                                                 android:singleLine="true"
-                                                android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
+                                                android:text="@{pUnit.registerBookCertificates.insCompName}"
                                                 android:textColor="@color/black" />
 
                                         </com.google.android.material.textfield.TextInputLayout>
-                                    </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_centerVertical="true"
+                                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                                android:background="@android:drawable/ic_menu_my_calendar"
+                                                android:backgroundTint="@color/colorPrimary" />
+
+                                            <com.google.android.material.textfield.TextInputLayout
+                                                android:id="@+id/ins_val_date"
+                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                                android:textColorHint="@color/colorAccent"
+                                                app:errorEnabled="true">
+
+
+                                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                    android:id="@+id/et_ins_date"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:focusableInTouchMode="false"
+                                                    android:hint="Insurance validity"
+                                                    android:imeOptions="actionNext"
+                                                    android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:singleLine="true"
+                                                    android:text="@{pUnit.registerBookCertificates.insValidity}"
+                                                    android:textColor="@color/black" />
+
+                                            </com.google.android.material.textfield.TextInputLayout>
+                                        </RelativeLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Fire Department NOC"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_fire_noc"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/fire_noc_rb_yes"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/fire_noc_rb_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.fireDeptType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+                                    <include
+                                        android:id="@+id/remarks_fire_noc"
+                                        layout="@layout/reamrks_layout_reports"
+                                        android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="Weights and Measurements certificate issued by legal Metrology"
+                                        android:textColor="@color/black" />
+
+                                    <RadioGroup
+                                        android:id="@+id/rg_weight"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <RadioButton
+                                            android:id="@+id/weight_rb_yes"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/yes" />
+
+                                        <RadioButton
+                                            android:id="@+id/weight_rb_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:checked="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`No`)}"
+                                            android:clickable="false"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="@string/no" />
+
+                                    </RadioGroup>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/legal_ll"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_alignParentLeft="true"
+                                                android:layout_centerVertical="true"
+                                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                                android:background="@android:drawable/ic_menu_my_calendar"
+                                                android:backgroundTint="@color/colorPrimary" />
+
+                                            <com.google.android.material.textfield.TextInputLayout
+                                                android:id="@+id/legal_met_val"
+                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                                android:layout_marginTop="@dimen/dimen_5dp"
+                                                android:textColorHint="@color/colorAccent"
+                                                app:errorEnabled="true">
+
+
+                                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                    android:id="@+id/et_legal_met_date"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:focusableInTouchMode="false"
+                                                    android:hint="Certificate validity"
+                                                    android:imeOptions="actionNext"
+                                                    android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:singleLine="true"
+                                                    android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
+                                                    android:textColor="@color/black" />
+
+                                            </com.google.android.material.textfield.TextInputLayout>
+                                        </RelativeLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="AMC for Machinery"
+                                            android:textColor="@color/black" />
+
+                                        <RadioGroup
+                                            android:id="@+id/rg_amc"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+
+                                            <RadioButton
+                                                android:id="@+id/amc_yes_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`Yes`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/yes" />
+
+                                            <RadioButton
+                                                android:id="@+id/amc_no_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`No`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/no" />
+
+                                        </RadioGroup>
+
+                                        <include
+                                            android:id="@+id/remarks_amc"
+                                            layout="@layout/reamrks_layout_reports"
+                                            android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="Agmark Certificate"
+                                            android:textColor="@color/black" />
+
+                                        <RadioGroup
+                                            android:id="@+id/rg_agmark"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+
+                                            <RadioButton
+                                                android:id="@+id/agmark_yes_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`Yes`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/yes" />
+
+                                            <RadioButton
+                                                android:id="@+id/agmark_no_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`No`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/no" />
+
+                                        </RadioGroup>
+
+                                        <include
+                                            android:id="@+id/remarks_agmark"
+                                            layout="@layout/reamrks_layout_reports"
+                                            android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/dimen_5dp"
+                                            android:text="FSAAI Certificate"
+                                            android:textColor="@color/black" />
+
+                                        <RadioGroup
+                                            android:id="@+id/rg_fsaai"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+
+                                            <RadioButton
+                                                android:id="@+id/fsaai_yes_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`Yes`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/yes" />
+
+                                            <RadioButton
+                                                android:id="@+id/fsaai_no_rb"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`No`)}"
+                                                android:clickable="false"
+                                                android:padding="@dimen/dimen_5dp"
+                                                android:text="@string/no" />
+
+                                        </RadioGroup>
+
+                                        <include
+                                            android:id="@+id/remarks_fsaai"
+                                            layout="@layout/reamrks_layout_reports"
+                                            android:visibility="@{pUnit.registerBookCertificates.fsaaiCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -598,30 +1801,30 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:padding="@dimen/dimen_5dp"
-                                        android:text="AMC for Machinery"
+                                        android:text="Empties Register"
                                         android:textColor="@color/black" />
 
                                     <RadioGroup
-                                        android:id="@+id/rg_amc"
+                                        android:id="@+id/rg_empties"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">
 
 
                                         <RadioButton
-                                            android:id="@+id/amc_yes_rb"
+                                            android:id="@+id/empties_yes_rb"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`Yes`)}"
+                                            android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`Yes`)}"
                                             android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/yes" />
 
                                         <RadioButton
-                                            android:id="@+id/amc_no_rb"
+                                            android:id="@+id/empties_no_rb"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.amcMachinaryType.equalsIgnoreCase(`No`)}"
+                                            android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`No`)}"
                                             android:clickable="false"
                                             android:padding="@dimen/dimen_5dp"
                                             android:text="@string/no" />
@@ -629,99 +1832,9 @@
                                     </RadioGroup>
 
                                     <include
-                                        android:id="@+id/remarks_amc"
+                                        android:id="@+id/remarks_empties"
                                         layout="@layout/reamrks_layout_reports"
-                                        android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="Agmark Certificate"
-                                        android:textColor="@color/black" />
-
-                                    <RadioGroup
-                                        android:id="@+id/rg_agmark"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-
-                                        <RadioButton
-                                            android:id="@+id/agmark_yes_rb"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`Yes`)}"
-                                            android:clickable="false"
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/yes" />
-
-                                        <RadioButton
-                                            android:id="@+id/agmark_no_rb"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.agmarkCertType.equalsIgnoreCase(`No`)}"
-                                            android:clickable="false"
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/no" />
-
-                                    </RadioGroup>
-
-                                    <include
-                                        android:id="@+id/remarks_agmark"
-                                        layout="@layout/reamrks_layout_reports"
-                                        android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="FSAAI Certificate"
-                                        android:textColor="@color/black" />
-
-                                    <RadioGroup
-                                        android:id="@+id/rg_fsaai"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="horizontal">
-
-
-                                        <RadioButton
-                                            android:id="@+id/fsaai_yes_rb"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`Yes`)}"
-                                            android:clickable="false"
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/yes" />
-
-                                        <RadioButton
-                                            android:id="@+id/fsaai_no_rb"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{pUnit.registerBookCertificates.fsaaiCertType.equalsIgnoreCase(`No`)}"
-                                            android:clickable="false"
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/no" />
-
-                                    </RadioGroup>
-
-                                    <include
-                                        android:id="@+id/remarks_fsaai"
-                                        layout="@layout/reamrks_layout_reports"
-                                        android:visibility="@{pUnit.registerBookCertificates.fsaaiCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                        android:visibility="@{pUnit.registerBookCertificates.emptiesRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
                                 </LinearLayout>
 
 
@@ -736,30 +1849,30 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="Empties Register"
+                                    android:text="Barrels / Aluminium Cans"
                                     android:textColor="@color/black" />
 
                                 <RadioGroup
-                                    android:id="@+id/rg_empties"
+                                    android:id="@+id/rg_barrels"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
 
                                     <RadioButton
-                                        android:id="@+id/empties_yes_rb"
+                                        android:id="@+id/barrels_yes_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`Yes`)}"
+                                        android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`Yes`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/yes" />
 
                                     <RadioButton
-                                        android:id="@+id/empties_no_rb"
+                                        android:id="@+id/barrels_no_rb"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:checked="@{pUnit.registerBookCertificates.emptiesRegisterType.equalsIgnoreCase(`No`)}"
+                                        android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`No`)}"
                                         android:clickable="false"
                                         android:padding="@dimen/dimen_5dp"
                                         android:text="@string/no" />
@@ -767,365 +1880,319 @@
                                 </RadioGroup>
 
                                 <include
-                                    android:id="@+id/remarks_empties"
+                                    android:id="@+id/remarks_barrels"
                                     layout="@layout/reamrks_layout_reports"
-                                    android:visibility="@{pUnit.registerBookCertificates.emptiesRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    android:visibility="@{pUnit.registerBookCertificates.barrelsAlumnCansRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Cash Book"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_cash_book"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/cash_book_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/cash_book_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <include
+                                    android:id="@+id/remarks_cash_book"
+                                    layout="@layout/reamrks_layout_reports"
+                                    android:visibility="@{pUnit.registerBookCertificates.cashBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Cash and Bank Balances"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_cash_bank"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/cash_bank_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/cash_bank_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <include
+                                    android:id="@+id/remarks_cash_bank"
+                                    layout="@layout/reamrks_layout_reports"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Vehicle Log Book"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_veh_log"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/veh_log_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/veh_log_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <include
+                                    android:id="@+id/remarks_veh_log"
+                                    layout="@layout/reamrks_layout_reports"
+                                    android:visibility="@{pUnit.registerBookCertificates.vehLogBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="General Findings"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_stock_qua"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/rb_stock_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_stock_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
                             </LinearLayout>
 
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Barrels / Aluminium Cans"
-                                android:textColor="@color/black" />
+                                android:orientation="vertical">
 
-                            <RadioGroup
-                                android:id="@+id/rg_barrels"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/barrels_yes_rb"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="Whether the godown  is maintained in hygienic condition or not"
+                                    android:textColor="@color/black" />
 
-                                <RadioButton
-                                    android:id="@+id/barrels_no_rb"
+                                <RadioGroup
+                                    android:id="@+id/rg_godown_hyg"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.barrelsAlumnCansType.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:orientation="horizontal">
 
-                            </RadioGroup>
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hyg_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/rb_hyg_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Any Repairs required for Manufacturing Unit"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_repairs_req"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
 
                             <include
-                                android:id="@+id/remarks_barrels"
-                                layout="@layout/reamrks_layout_reports"
-                                android:visibility="@{pUnit.registerBookCertificates.barrelsAlumnCansRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                android:id="@+id/remarks"
+                                layout="@layout/reamrks_layout_reports" />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Cash Book"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_cash_book"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/cash_book_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/cash_book_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.cashBookType.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <include
-                                android:id="@+id/remarks_cash_book"
-                                layout="@layout/reamrks_layout_reports"
-                                android:visibility="@{pUnit.registerBookCertificates.cashBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Cash and Bank Balances"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_cash_bank"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/cash_bank_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/cash_bank_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.cashBankBalType.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <include
-                                android:id="@+id/remarks_cash_bank"
-                                layout="@layout/reamrks_layout_reports"
-                                android:visibility="gone" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Vehicle Log Book"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_veh_log"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/veh_log_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/veh_log_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.registerBookCertificates.vehLogBookType.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                            <include
-                                android:id="@+id/remarks_veh_log"
-                                layout="@layout/reamrks_layout_reports"
-                                android:visibility="@{pUnit.registerBookCertificates.vehLogBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                        </LinearLayout>
 
                     </LinearLayout>
-
-
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="General Findings"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_stock_qua"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_stock_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_stock_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the godown  is maintained in hygienic condition or not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_godown_hyg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/rb_hyg_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_hyg_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Any Repairs required for Manufacturing Unit"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_repairs_req"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{pUnit.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <include
-                            android:id="@+id/remarks"
-                            layout="@layout/reamrks_layout_reports" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
