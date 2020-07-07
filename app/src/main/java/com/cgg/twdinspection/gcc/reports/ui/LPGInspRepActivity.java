@@ -123,7 +123,6 @@ public class LPGInspRepActivity extends AppCompatActivity implements PDFUtil.PDF
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
 
-        binding.tvDate.setText(reportData.getInspectionTime());
         binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
