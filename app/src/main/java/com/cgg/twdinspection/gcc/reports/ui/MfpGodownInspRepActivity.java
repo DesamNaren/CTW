@@ -16,17 +16,25 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMfpGodownInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.google.gson.Gson;
 
-public class MfpGodownInspRepActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MfpGodownInspRepActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
 
     ActivityMfpGodownInspRepBinding binding;
     SharedPreferences sharedPreferences;
     ReportData reportData;
+    CustomProgressDialog customProgressDialog;
+    String directory_path, filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,9 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("MFP GODOWN FINDINGS REPORT");
+        binding.header.ivPdf.setVisibility(View.VISIBLE);
+        customProgressDialog = new CustomProgressDialog(this);
+
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +64,16 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
-
+        try {
+            if (reportData != null) {
+                binding.divName.setText(reportData.getDivisionName());
+                binding.drGodownName.setText(reportData.getGodownName());
+                binding.inchargeName.setText(reportData.getInchargeName());
+                binding.tvDate.setText(reportData.getInspectionTime());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getMfpGodowns() != null) {
             binding.setMfp(reportData.getInspectionFindings().getMfpGodowns());
         } else {
@@ -81,6 +101,11 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairs);
+                    Glide.with(MfpGodownInspRepActivity.this)
+                            .load(reportData.getPhotos().get(z).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .into(binding.ivRepairsPdf);
                     break;
                 }
 
@@ -97,6 +122,33 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
 
+        binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    customProgressDialog.show();
+
+                    directory_path = getExternalFilesDir(null)
+                            + "/" + "TWD/GCC/";
+
+                    filePath = directory_path + "MFP_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                    File file = new File(filePath);
+                    List<View> views = new ArrayList<>();
+                    views.add(binding.titlePdf);
+                    views.add(binding.generalPdf);
+
+                    PDFUtil.getInstance().generatePDF(views, filePath, MfpGodownInspRepActivity.this, "schemes");
+
+                } catch (Exception e) {
+                    if (customProgressDialog.isShowing())
+                        customProgressDialog.hide();
+
+                    Toast.makeText(MfpGodownInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,5 +156,18 @@ public class MfpGodownInspRepActivity extends AppCompatActivity {
                         .putExtra(AppConstants.PHOTO_TITLE, "MFP GODOWN PHOTOS"));
             }
         });
+    }
+    @Override
+    public void pdfGenerationSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+
+        Utils.customSyncSuccessAlert(MfpGodownInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+    }
+
+    @Override
+    public void pdfGenerationFailure(Exception exception) {
+        customProgressDialog.hide();
+
+        Utils.customErrorAlert(MfpGodownInspRepActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 }

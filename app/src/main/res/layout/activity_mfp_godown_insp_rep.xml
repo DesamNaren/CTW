@@ -38,133 +38,1668 @@
             android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:elevation="@dimen/dimen_10dp"
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/title_pdf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="Registers, Books and Certificates"
-                            android:textColor="@color/black" />
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="@dimen/dimen_img"
+                                android:layout_height="@dimen/dimen_img"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dimen_10dp"
+                                android:background="@drawable/telangana" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:gravity="center"
+                                android:text="Tribal Welfare Department"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_title"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Government of Telangana"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:gravity="center"
+                                android:text="Inspection Report-GCC"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_header"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/dimen_margin"
+                                android:text="skjfhij"
+                                android:textAlignment="center"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/details_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Details"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Division"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:id="@+id/divName"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="MFP Godown"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:id="@+id/drGodownName"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Incharge"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:id="@+id/inchargeName"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!--<LinearLayout
+                            android:id="@+id/stock_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Stock Details / Position"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.stockValueAsPerSystem}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system_inspected"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.stockValueAsPerSystemInsp}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_physical_verification"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.stockValueAsPerPhysical}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Deficit / Surplus "
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.deficit}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Reason mentioned by In charge regarding Deficit / Surplus"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.deficitReason}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system_not_inspected"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.stockDetails.stockValueAsPerSystemNotInsp}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Registers, Books and Certificates"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="MFP Stock Register"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.registerBookCertificates.mfpStockRegister}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.3"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Insurance Certificate"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{mfp.registerBookCertificates.insuranceCertificate}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.3"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Company Name"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{mfp.registerBookCertificates.insuranceCompany}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.3"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Insurance Validity"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{mfp.registerBookCertificates.insuranceValidity}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Fire Department NOC"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.registerBookCertificates.insuranceCertificate}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.3"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Weights and Measurements certificate issued by legal Metrology"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{mfp.registerBookCertificates.weightMeasureCertificate}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.3"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Certificate Validity"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <View
+                    <LinearLayout
+                        android:id="@+id/general_pdf"
                         android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="General Findings"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.stockQualityVerified}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether stack cards have been prominently displayed in each stack or not"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.stackCardsDisp}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether the godown  is maintained in hygienic condition or not"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.hygienicCondition}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Whether there are any driage proposals submitted for deficit"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.driagePropSubmitted}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Availability of generator in Godown"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.generatorAvail}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Availability of Tray Dryer"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.trayDryerAvail}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.3"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Last Inspection Date - Division Manager"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{mfp.generalFindings.divManagerInspDate}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.3"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Any Repairs required for MFP Godown"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{mfp.generalFindings.repairReq}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.3"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="@string/repair_type"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{mfp.generalFindings.repairType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="@dimen/dimen_10dp"
+                                            android:layout_marginBottom="@dimen/dimen_10dp">
+
+                                            <ImageView
+                                                android:id="@+id/iv_repairs_pdf"
+                                                android:layout_width="@dimen/dimen_img"
+                                                android:layout_height="@dimen/dimen_img"
+                                                android:layout_gravity="center"
+                                                android:scaleType="fitXY" />
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.3"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Remarks"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{mfp.generalFindings.remarks}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
                         android:orientation="vertical">
-
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="MFP Stock Register"
+                                android:text="Registers, Books and Certificates"
                                 android:textColor="@color/black" />
+                        </LinearLayout>
 
-                            <RadioGroup
-                                android:id="@+id/rg_stock"
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="MFP Stock Register"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_stock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/stock_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/stock_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Insurance Certificate"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_insurance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/insurance_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/insurance_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/ins_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/dimen_5dp"
+                                        android:layout_marginTop="@dimen/dimen_5dp"
+                                        android:textColorHint="@color/colorAccent"
+                                        app:errorEnabled="true">
+
+                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                            android:id="@+id/et_com_name"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:focusableInTouchMode="false"
+                                            android:hint="@string/com_name"
+                                            android:imeOptions="actionNext"
+                                            android:singleLine="true"
+                                            android:text="@{mfp.registerBookCertificates.insuranceCompany}"
+                                            android:textColor="@color/black" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/ins_val_date"
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_ins_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Insurance validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{mfp.registerBookCertificates.insuranceValidity}"
+                                                android:textColor="@color/black" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+                                    </RelativeLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:orientation="vertical">
 
-
-                                <RadioButton
-                                    android:id="@+id/stock_yes_rb"
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="Fire Department NOC"
+                                    android:textColor="@color/black" />
 
-                                <RadioButton
-                                    android:id="@+id/stock_no_rb"
+                                <RadioGroup
+                                    android:id="@+id/rg_fire_noc"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.mfpStockRegister.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:orientation="horizontal">
 
-                            </RadioGroup>
+
+                                    <RadioButton
+                                        android:id="@+id/fire_noc_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/fire_noc_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Weights and Measurements certificate issued by legal Metrology"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_weight"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/weight_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/weight_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                                <LinearLayout
+                                    android:id="@+id/legal_ll"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentLeft="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:background="@android:drawable/ic_menu_my_calendar"
+                                            android:backgroundTint="@color/colorPrimary" />
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/legal_met_val"
+                                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/dimen_5dp"
+                                            android:layout_marginTop="@dimen/dimen_5dp"
+                                            android:textColorHint="@color/colorAccent"
+                                            app:errorEnabled="true">
+
+
+                                            <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                                android:id="@+id/et_legal_met_date"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:focusableInTouchMode="false"
+                                                android:hint="Certificate validity"
+                                                android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_30dp"
+                                                android:singleLine="true"
+                                                android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
+                                                android:textColor="@color/black" />
+
+                                        </com.google.android.material.textfield.TextInputLayout>
+                                    </RelativeLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="Insurance Certificate"
+                                android:text="General Findings"
                                 android:textColor="@color/black" />
+                        </LinearLayout>
 
-                            <RadioGroup
-                                android:id="@+id/rg_insurance"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/black" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:orientation="vertical">
 
-                                <RadioButton
-                                    android:id="@+id/insurance_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/insurance_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
 
                             <LinearLayout
-                                android:id="@+id/ins_ll"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_quality_stock"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/qual_stock_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/qual_stock_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether stack cards have been prominently displayed in each stack or not"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_stack_cards_displayed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/stack_cards_displayed_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/stack_cards_displayed_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether the godown  is maintained in hygienic condition or not"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_godown_hyg"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/godown_hyg_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/godown_hyg_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Whether there are any driage proposals submitted for deficit "
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_draige"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/draige_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/draige_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Availability of generator in Godown"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_godown_gen_avail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/gen_avail_yes_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/gen_avail_no_rb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Availability of Tray Dryer"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_tray"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/tray_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/tray_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Last Inspection Date - Division Manager"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_insp_date_div_manager"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_div_manager_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.divManagerInspDate.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/insp_date_div_manager_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.divManagerInspDate.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="Any Repairs required for MFP Godown"
+                                    android:textColor="@color/black" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_repairs_req"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_yes"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/yes" />
+
+                                    <RadioButton
+                                        android:id="@+id/repairs_req_rb_no"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
+                                        android:clickable="false"
+                                        android:padding="@dimen/dimen_5dp"
+                                        android:text="@string/no" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/repairs_ll"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="@{mfp.registerBookCertificates.insuranceCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+                                android:visibility="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -176,567 +1711,44 @@
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_com_name"
+                                        android:id="@+id/et_repair_type"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:focusableInTouchMode="false"
-                                        android:hint="@string/com_name"
+                                        android:hint="@string/repair_type"
                                         android:imeOptions="actionNext"
-                                        android:singleLine="true"
-                                        android:text="@{mfp.registerBookCertificates.insuranceCompany}"
+                                        android:inputType="textMultiLine"
+                                        android:text="@{mfp.generalFindings.repairType}"
                                         android:textColor="@color/black" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/dimen_10dp"
+                                    android:layout_marginBottom="@dimen/dimen_10dp">
 
                                     <ImageView
+                                        android:id="@+id/iv_repairs"
+                                        android:layout_width="@dimen/_100dp"
+                                        android:layout_height="@dimen/_100dp"
+                                        android:layout_gravity="center"
+                                        android:scaleType="fitXY" />
+
+                                    <ProgressBar
+                                        android:id="@+id/pbar"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:background="@android:drawable/ic_menu_my_calendar"
-                                        android:backgroundTint="@color/colorPrimary" />
-
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:id="@+id/ins_val_date"
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
+                                        android:layout_gravity="center"
+                                        android:visibility="gone" />
+                                </FrameLayout>
 
 
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_ins_date"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Insurance validity"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@{mfp.registerBookCertificates.insuranceValidity}"
-                                            android:textColor="@color/black" />
-
-                                    </com.google.android.material.textfield.TextInputLayout>
-                                </RelativeLayout>
                             </LinearLayout>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Fire Department NOC"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_fire_noc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/fire_noc_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/fire_noc_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.fireNoc.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Weights and Measurements certificate issued by legal Metrology"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_weight"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/weight_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/weight_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-
-                            <LinearLayout
-                                android:id="@+id/legal_ll"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{mfp.registerBookCertificates.weightMeasureCertificate.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:background="@android:drawable/ic_menu_my_calendar"
-                                        android:backgroundTint="@color/colorPrimary" />
-
-                                    <com.google.android.material.textfield.TextInputLayout
-                                        android:id="@+id/legal_met_val"
-                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="@dimen/dimen_5dp"
-                                        android:layout_marginTop="@dimen/dimen_5dp"
-                                        android:textColorHint="@color/colorAccent"
-                                        app:errorEnabled="true">
-
-
-                                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                            android:id="@+id/et_legal_met_date"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:focusableInTouchMode="false"
-                                            android:hint="Certificate validity"
-                                            android:imeOptions="actionNext"
-                                            android:paddingLeft="@dimen/dimen_30dp"
-                                            android:singleLine="true"
-                                            android:text="@{mfp.registerBookCertificates.weightMeasureValidity}"
-                                            android:textColor="@color/black" />
-
-                                    </com.google.android.material.textfield.TextInputLayout>
-                                </RelativeLayout>
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_10dp"
-                    android:background="@color/white"
-                    android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="General Findings"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/black" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_quality_stock"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/qual_stock_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/qual_stock_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.stockQualityVerified.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether stack cards have been prominently displayed in each stack or not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_stack_cards_displayed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/stack_cards_displayed_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/stack_cards_displayed_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.stackCardsDisp.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether the godown  is maintained in hygienic condition or not"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_godown_hyg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/godown_hyg_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/godown_hyg_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.hygienicCondition.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Whether there are any driage proposals submitted for deficit "
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_draige"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/draige_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/draige_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.driagePropSubmitted.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Availability of generator in Godown"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_godown_gen_avail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/gen_avail_yes_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/gen_avail_no_rb"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.generatorAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Availability of Tray Dryer"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_tray"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/tray_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/tray_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Last Inspection Date - Division Manager"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_insp_date_div_manager"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/insp_date_div_manager_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/insp_date_div_manager_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.trayDryerAvail.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="Any Repairs required for MFP Godown"
-                                android:textColor="@color/black" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_repairs_req"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_yes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
-
-                                <RadioButton
-                                    android:id="@+id/repairs_req_rb_no"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:checked="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`No`)}"
-                                    android:clickable="false"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
-
-                            </RadioGroup>
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/repairs_ll"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="@{mfp.generalFindings.repairReq.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -748,73 +1760,25 @@
                                 app:errorEnabled="true">
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/et_repair_type"
+                                    android:id="@+id/et_remarks"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:focusableInTouchMode="false"
-                                    android:hint="@string/repair_type"
+                                    android:hint="@string/remarks"
                                     android:imeOptions="actionNext"
                                     android:inputType="textMultiLine"
-                                    android:text="@{mfp.generalFindings.repairType}"
+                                    android:text="@{mfp.generalFindings.remarks}"
                                     android:textColor="@color/black" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
-
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen_10dp"
-                                android:layout_marginBottom="@dimen/dimen_10dp">
-
-                                <ImageView
-                                    android:id="@+id/iv_repairs"
-                                    android:layout_width="@dimen/_100dp"
-                                    android:layout_height="@dimen/_100dp"
-                                    android:layout_gravity="center"
-                                    android:scaleType="fitXY" />
-
-                                <ProgressBar
-                                    android:id="@+id/pbar"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:visibility="gone" />
-                            </FrameLayout>
-
-
                         </LinearLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_5dp"
-                            android:layout_marginTop="@dimen/dimen_5dp"
-                            android:textColorHint="@color/colorAccent"
-                            app:errorEnabled="true">
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_remarks"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/remarks"
-                                android:imeOptions="actionNext"
-                                android:inputType="textMultiLine"
-                                android:text="@{mfp.generalFindings.remarks}"
-                                android:textColor="@color/black" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-            </LinearLayout>
+
+            </RelativeLayout>
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
