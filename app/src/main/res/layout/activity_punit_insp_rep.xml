@@ -119,9 +119,7 @@
                             android:background="@color/white"
                             android:elevation="@dimen/dimen_10dp"
                             android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_10dp"
-                            android:paddingTop="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_10dp"
+                            android:padding="@dimen/dimen_10dp"
                             android:visibility="visible">
 
                             <LinearLayout
@@ -302,7 +300,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Raw Material Stock Register"
                                                 android:textColor="@color/black"
@@ -338,7 +336,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Processing Register"
                                                 android:textColor="@color/black"
@@ -374,7 +372,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Inward Register"
                                                 android:textColor="@color/black"
@@ -411,7 +409,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Outward Register"
                                                 android:textColor="@color/black"
@@ -447,7 +445,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Sale / Invoice Book"
                                                 android:textColor="@color/black"
@@ -484,7 +482,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Labour Attendance Register"
                                                 android:textColor="@color/black"
@@ -521,7 +519,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Insurance Certificate"
                                                 android:textColor="@color/black"
@@ -552,7 +550,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="1.4"
                                                     android:paddingLeft="@dimen/dimen_padding_left"
                                                     android:text="@string/com_name"
                                                     android:textColor="@color/black"
@@ -577,7 +575,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="1.4"
                                                     android:paddingLeft="@dimen/dimen_padding_left"
                                                     android:text="Insurance validity"
                                                     android:textColor="@color/black"
@@ -592,64 +590,6 @@
                                                     android:textColor="@color/black"
                                                     android:textSize="@dimen/dimen_text" />
                                             </LinearLayout>
-
-                                            <com.google.android.material.textfield.TextInputLayout
-                                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginLeft="@dimen/dimen_5dp"
-                                                android:layout_marginTop="@dimen/dimen_5dp"
-                                                android:textColorHint="@color/colorAccent"
-                                                android:visibility="gone"
-                                                app:errorEnabled="true">
-
-                                                <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:hint="@string/com_name"
-                                                    android:imeOptions="actionNext"
-                                                    android:singleLine="true"
-                                                    android:text="@{pUnit.registerBookCertificates.insCompName}"
-                                                    android:textColor="@color/black" />
-
-                                            </com.google.android.material.textfield.TextInputLayout>
-
-                                            <RelativeLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:visibility="gone">
-
-                                                <ImageView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_alignParentLeft="true"
-                                                    android:layout_centerVertical="true"
-                                                    android:layout_marginLeft="@dimen/dimen_5dp"
-                                                    android:background="@android:drawable/ic_menu_my_calendar"
-                                                    android:backgroundTint="@color/colorPrimary" />
-
-                                                <com.google.android.material.textfield.TextInputLayout
-                                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/dimen_5dp"
-                                                    android:textColorHint="@color/colorAccent"
-                                                    app:errorEnabled="true">
-
-
-                                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:focusableInTouchMode="false"
-                                                        android:hint="Insurance validity"
-                                                        android:imeOptions="actionNext"
-                                                        android:paddingLeft="@dimen/dimen_30dp"
-                                                        android:singleLine="true"
-                                                        android:text="@{pUnit.registerBookCertificates.insValidity}"
-                                                        android:textColor="@color/black" />
-
-                                                </com.google.android.material.textfield.TextInputLayout>
-                                            </RelativeLayout>
 
                                         </LinearLayout>
 
@@ -669,7 +609,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Fire Department NOC"
                                                 android:textColor="@color/black"
@@ -707,7 +647,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="Weights and Measurements certificate issued by legal Metrology"
                                                 android:textColor="@color/black"
@@ -738,7 +678,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="1.4"
                                                     android:paddingLeft="@dimen/dimen_padding_left"
                                                     android:text="Certificate validity"
                                                     android:textColor="@color/black"
@@ -755,43 +695,6 @@
 
                                             </LinearLayout>
 
-                                            <RelativeLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:visibility="gone">
-
-                                                <ImageView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_alignParentLeft="true"
-                                                    android:layout_centerVertical="true"
-                                                    android:layout_marginLeft="@dimen/dimen_5dp"
-                                                    android:background="@android:drawable/ic_menu_my_calendar"
-                                                    android:backgroundTint="@color/colorPrimary" />
-
-                                                <com.google.android.material.textfield.TextInputLayout
-                                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="@dimen/dimen_5dp"
-                                                    android:layout_marginTop="@dimen/dimen_5dp"
-                                                    android:textColorHint="@color/colorAccent"
-                                                    app:errorEnabled="true">
-
-
-                                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:focusableInTouchMode="false"
-                                                        android:hint="Certificate validity"
-                                                        android:imeOptions="actionNext"
-                                                        android:paddingLeft="@dimen/dimen_30dp"
-                                                        android:singleLine="true"
-                                                        android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
-                                                        android:textColor="@color/black" />
-
-                                                </com.google.android.material.textfield.TextInputLayout>
-                                            </RelativeLayout>
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -808,7 +711,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="1.4"
                                                     android:paddingLeft="@dimen/dimen_padding_left"
                                                     android:text="AMC for Machinery"
                                                     android:textColor="@color/black"
@@ -844,7 +747,7 @@
                                                     android:layout_width="0dp"
                                                     android:layout_height="wrap_content"
                                                     android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
+                                                    android:layout_weight="1.4"
                                                     android:paddingLeft="@dimen/dimen_padding_left"
                                                     android:text="Agmark Certificate"
                                                     android:textColor="@color/black"
@@ -871,7 +774,6 @@
 
                                 </LinearLayout>
 
-
                             </LinearLayout>
 
                         </LinearLayout>
@@ -882,25 +784,23 @@
                         android:id="@+id/general_pdf"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_10dp"
-                        android:layout_marginTop="@dimen/dimen_10dp"
-                        android:layout_marginRight="@dimen/dimen_10dp"
-                        android:background="@color/white"
-                        android:elevation="@dimen/dimen_10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
                             android:orientation="vertical"
                             android:padding="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:paddingLeft="@dimen/dimen_10dp"
-                                android:paddingRight="@dimen/dimen_10dp">
+                                android:orientation="vertical">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -921,7 +821,7 @@
                                                 android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
+                                                android:layout_weight="1.4"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="FSAAI Certificate"
                                                 android:textColor="@color/black"
@@ -953,7 +853,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.4"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="Empties Register"
                                             android:textColor="@color/black"
@@ -990,7 +890,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.4"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="Barrels / Aluminium Cans"
                                             android:textColor="@color/black"
@@ -1027,7 +927,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.4"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="Cash Book"
                                             android:textColor="@color/black"
@@ -1064,7 +964,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.4"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="Cash and Bank Balances"
                                             android:textColor="@color/black"
@@ -1101,7 +1001,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="1"
+                                            android:layout_weight="1.4"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="Vehicle Log Book"
                                             android:textColor="@color/black"
@@ -1127,9 +1027,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingLeft="@dimen/dimen_10dp"
-                                android:paddingRight="@dimen/dimen_10dp">
+                                android:layout_height="wrap_content">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -1145,9 +1043,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:paddingLeft="@dimen/dimen_10dp"
-                                android:paddingRight="@dimen/dimen_10dp">
+                                android:orientation="vertical">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1252,11 +1148,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
-                                android:gravity="center"
                                 android:layout_marginTop="@dimen/dimen_margin_seperator"
+                                android:gravity="center"
                                 android:text=""
-                                android:textSize="@dimen/dimen_text"
                                 android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1269,8 +1165,8 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="3dp"
                                 android:layout_marginLeft="3dp"
-                                android:text=""
                                 android:gravity="center"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
                         </LinearLayout>
@@ -1282,8 +1178,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/bg"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
