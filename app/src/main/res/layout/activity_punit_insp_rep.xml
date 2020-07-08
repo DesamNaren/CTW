@@ -119,7 +119,9 @@
                             android:background="@color/white"
                             android:elevation="@dimen/dimen_10dp"
                             android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
                             android:visibility="visible">
 
                             <LinearLayout
@@ -258,7 +260,9 @@
                             android:background="@color/white"
                             android:elevation="@dimen/dimen_10dp"
                             android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
                             android:visibility="visible">
 
                             <LinearLayout
@@ -795,7 +799,9 @@
                             android:background="@color/white"
                             android:elevation="@dimen/dimen_10dp"
                             android:orientation="vertical"
-                            android:padding="@dimen/dimen_10dp">
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -1048,20 +1054,20 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
+                                        android:layout_weight="1.4"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Whether the quality of the stocks stored in godown was verified and found in good condition"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
@@ -1075,20 +1081,20 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
+                                        android:layout_weight="1.4"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Whether the godown  is maintained in hygienic condition or not"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
@@ -1102,20 +1108,20 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="vertical">
+                                    android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
+                                        android:layout_weight="1.4"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Any Repairs required for Manufacturing Unit"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
@@ -1180,7 +1186,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/bg"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
