@@ -16,17 +16,25 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.google.gson.Gson;
 
-public class DrDepotInspRepActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
 
     ActivityDrDepotInspRepBinding binding;
     SharedPreferences sharedPreferences;
     ReportData reportData;
+    CustomProgressDialog customProgressDialog;
+    String directory_path, filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,9 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_insp_rep);
         binding.header.headerTitle.setText("DR DEPOT FINDINGS REPORT");
+        binding.header.ivPdf.setVisibility(View.VISIBLE);
+        customProgressDialog = new CustomProgressDialog(this);
+
         binding.bottomLl.btnNext.setText("Next");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +65,17 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
 
+        try {
+            if (reportData != null) {
+                binding.divName.setText(reportData.getDivisionName());
+                binding.socName.setText(reportData.getSocietyName());
+                binding.drGodownName.setText(reportData.getGodownName());
+                binding.inchargeName.setText(reportData.getInchargeName());
+                binding.tvDate.setText(reportData.getInspectionTime());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null) {
             binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
@@ -84,6 +106,11 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
                                 }
                             })
                             .into(binding.ivRepairsCam);
+                    Glide.with(DrDepotInspRepActivity.this)
+                            .load(reportData.getPhotos().get(z).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .into(binding.ivRepairsPdf);
                     break;
                 }
 
@@ -100,12 +127,52 @@ public class DrDepotInspRepActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
         }
 
+        binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    customProgressDialog.show();
+
+                    directory_path = getExternalFilesDir(null)
+                            + "/" + "TWD/GCC/";
+
+                    filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                    File file = new File(filePath);
+                    List<View> views = new ArrayList<>();
+                    views.add(binding.titlePdf);
+                    views.add(binding.generalPdf);
+
+                    PDFUtil.getInstance().generatePDF(views, filePath, DrDepotInspRepActivity.this, "schemes");
+
+                } catch (Exception e) {
+                    if (customProgressDialog.isShowing())
+                        customProgressDialog.hide();
+
+                    Toast.makeText(DrDepotInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class)
-                .putExtra(AppConstants.PHOTO_TITLE, "DR DEPOT PHOTOS"));
+                        .putExtra(AppConstants.PHOTO_TITLE, "DR DEPOT PHOTOS"));
             }
         });
+    }
+    @Override
+    public void pdfGenerationSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+
+        Utils.customSyncSuccessAlert(DrDepotInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+    }
+
+    @Override
+    public void pdfGenerationFailure(Exception exception) {
+        customProgressDialog.hide();
+
+        Utils.customErrorAlert(DrDepotInspRepActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 }
