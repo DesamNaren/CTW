@@ -71,6 +71,9 @@ public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUti
                 binding.drGodownName.setText(reportData.getGodownName());
                 binding.inchargeName.setText(reportData.getInchargeName());
                 binding.tvDate.setText(reportData.getInspectionTime());
+                binding.tvOfficerName.setText(reportData.getOfficerId());
+                binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+
             }
         } catch (Exception e) {
             e.printStackTrace();

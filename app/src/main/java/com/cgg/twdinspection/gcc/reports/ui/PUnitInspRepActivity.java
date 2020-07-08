@@ -58,6 +58,20 @@ public class PUnitInspRepActivity extends AppCompatActivity implements PDFUtil.P
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
+        try {
+            if (reportData != null) {
+                binding.divName.setText(reportData.getDivisionName());
+                binding.socName.setText(reportData.getSocietyName());
+                binding.drGodownName.setText(reportData.getGodownName());
+                binding.inchargeName.setText(reportData.getInchargeName());
+                binding.tvDate.setText(reportData.getInspectionTime());
+                binding.tvOfficerName.setText(reportData.getOfficerId());
+                binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null
                 && reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates() != null) {

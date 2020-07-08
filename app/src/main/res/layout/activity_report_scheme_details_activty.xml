@@ -636,7 +636,7 @@
                             android:layout_centerHorizontal="true"
                             android:gravity="center"
                             android:layout_marginTop="@dimen/dimen_margin_seperator"
-                            android:text="maadhavisriram"
+                            android:text=""
                             android:textSize="@dimen/dimen_text"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
@@ -651,7 +651,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="3dp"
                             android:layout_marginLeft="3dp"
-                            android:text="headquarters"
+                            android:text=""
                             android:gravity="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_text" />

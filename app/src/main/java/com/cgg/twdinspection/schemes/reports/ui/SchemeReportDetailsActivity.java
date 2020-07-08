@@ -61,7 +61,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         binding.header.ivPdf.setVisibility(View.VISIBLE);
 
         binding.tvDate.setText(schemeReportData.getInspectionTime());
-        binding.tvOfficerName.setText(sharedPreferences.getString(AppConstants.OFFICER_NAME, ""));
+        binding.tvOfficerName.setText(schemeReportData.getOfficerId());
         binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
         customProgressDialog = new CustomProgressDialog(this);
