@@ -102,8 +102,13 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
             @Override
             public void onClick(View v) {
                 boolean existFlag = false;
+                stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+                stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+                stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+                stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+                stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
                 if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
                             existFlag = true;
@@ -112,7 +117,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                     }
                 }
                 if (!existFlag && DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
                             existFlag = true;
@@ -122,7 +127,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                 }
 
                 if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
                             existFlag = true;
@@ -132,7 +137,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                 }
 
                 if (!existFlag && MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
                             existFlag = true;
@@ -142,7 +147,7 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                 }
 
                 if (!existFlag && PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
                             existFlag = true;

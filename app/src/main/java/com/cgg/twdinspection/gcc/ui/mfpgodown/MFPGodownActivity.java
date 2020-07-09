@@ -106,9 +106,10 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
             @Override
             public void onClick(View v) {
                 boolean existFlag = false;
-
+                stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+                stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
                 if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
                             existFlag= true;
@@ -118,7 +119,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                 }
 
                 if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
                             existFlag = true;

@@ -157,9 +157,12 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
             public void onClick(View v) {
                 if (shopAvail.equals(AppConstants.open)) {
                     boolean existFlag = false;
+                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
 
+                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
                     if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                        stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+
                         for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
                                 existFlag = true;
@@ -170,7 +173,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         }
                     }
                     if (!existFlag && DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                        stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+
                         for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
                                 existFlag = true;
@@ -182,7 +185,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     }
 
                     if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                        stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+
                         for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                             if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
                                 existFlag = true;

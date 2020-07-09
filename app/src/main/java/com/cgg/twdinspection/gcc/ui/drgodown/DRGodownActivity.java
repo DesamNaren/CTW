@@ -102,8 +102,13 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
             @Override
             public void onClick(View v) {
                 boolean existFlag = false;
+
+                stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+                stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+                stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+
                 if (EssentialFragment.commonCommodities != null && EssentialFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEssential_commodities(EssentialFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getEssential_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEssential_commodities().get(z).getPhyQuant())) {
 //                            String header = stockDetailsResponsemain.getEssential_commodities().get(0).getComHeader();
@@ -114,7 +119,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                     }
                 }
                 if (!existFlag && DailyFragment.commonCommodities != null && DailyFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setDialy_requirements(DailyFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getDialy_requirements().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getDialy_requirements().get(z).getPhyQuant())) {
 //                            String header = stockDetailsResponsemain.getDialy_requirements().get(0).getComHeader();
@@ -127,7 +132,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
 
                 if (!existFlag && EmptiesFragment.commonCommodities != null && EmptiesFragment.commonCommodities.size() > 0) {
-                    stockDetailsResponsemain.setEmpties(EmptiesFragment.commonCommodities);
+
                     for (int z = 0; z < stockDetailsResponsemain.getEmpties().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getEmpties().get(z).getPhyQuant())) {
 //                            String header = stockDetailsResponsemain.getEmpties().get(0).getComHeader();

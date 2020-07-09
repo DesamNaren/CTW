@@ -94,8 +94,9 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
             @Override
             public void onClick(View v) {
                 boolean existFlag=false;
+                petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
                 if (PLPGFragment.commonCommodities != null && PLPGFragment.commonCommodities.size() > 0) {
-                    petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
+
                     for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
                         if (!TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
                             existFlag=true;
