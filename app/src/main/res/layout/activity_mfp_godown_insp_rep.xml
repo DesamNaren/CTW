@@ -227,7 +227,7 @@
 
                         </LinearLayout>
 
-                        <!--<LinearLayout
+                        <LinearLayout
                             android:id="@+id/stock_pdf"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:text="@{mfp.stockDetails.stockValueAsPerSystem}"
+                                        android:text="@{String.valueOf(mfp.stockDetails.stockValueAsPerSystem)}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -334,7 +334,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:text="@{mfp.stockDetails.stockValueAsPerPhysical}"
+                                        android:text="@{String.valueOf(mfp.stockDetails.stockValueAsPerPhysical)}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -360,7 +360,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:text="@{mfp.stockDetails.deficit}"
+                                        android:text="@{String.valueOf(mfp.stockDetails.deficit)}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -419,7 +419,7 @@
 
                             </LinearLayout>
 
-                        </LinearLayout>-->
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
