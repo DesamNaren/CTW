@@ -256,7 +256,7 @@ public class PDFUtil {
             // Create file.
             File file = null;
             File pdfFile = null;
-            file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)+  "/CTW/"+folderName+"/");
+            file = new File(context.getExternalFilesDir(null)+  "/CTW/"+folderName+"/");
             if (!file.exists()) {
                 file.mkdirs();
             }
