@@ -145,7 +145,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
                     views.add(binding.titlePdf);
                     views.add(binding.generalPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, DrDepotInspRepActivity.this, "schemes");
+                    PDFUtil.getInstance(DrDepotInspRepActivity.this).generatePDF(views, filePath, DrDepotInspRepActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -169,7 +169,8 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(DrDepotInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(DrDepotInspRepActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

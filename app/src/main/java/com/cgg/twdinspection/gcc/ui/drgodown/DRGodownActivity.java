@@ -23,6 +23,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
@@ -169,6 +170,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                 if (existFlag) {
                     Gson gson = new Gson();
                     String stockData = gson.toJson(stockDetailsResponsemain);
+
                     try {
                         editor = TWDApplication.get(DRGodownActivity.this).getPreferences().edit();
                     } catch (Exception e) {

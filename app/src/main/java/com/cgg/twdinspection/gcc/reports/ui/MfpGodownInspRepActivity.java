@@ -140,7 +140,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity implements PDFUt
                     views.add(binding.titlePdf);
                     views.add(binding.generalPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, MfpGodownInspRepActivity.this, "schemes");
+                    PDFUtil.getInstance(MfpGodownInspRepActivity.this).generatePDF(views, filePath, MfpGodownInspRepActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -164,7 +164,8 @@ public class MfpGodownInspRepActivity extends AppCompatActivity implements PDFUt
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(MfpGodownInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(MfpGodownInspRepActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

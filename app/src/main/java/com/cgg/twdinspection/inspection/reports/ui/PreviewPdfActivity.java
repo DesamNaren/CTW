@@ -254,7 +254,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
 
                     filePath = directory_path + "schools_" + inspReportData.getInstituteId() + "_" + inspReportData.getInspectionTime() + ".pdf";
                     File file = new File(filePath);
-                    PDFUtil.getInstance().generatePDF(views, filePath, PreviewPdfActivity.this, "schools");
+                    PDFUtil.getInstance(PreviewPdfActivity.this).generatePDF(views, filePath, PreviewPdfActivity.this, "schools", "Schools");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -269,7 +269,8 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        Utils.customSyncSuccessAlert(PreviewPdfActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(PreviewPdfActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

@@ -145,7 +145,7 @@ public class PUnitInspRepActivity extends AppCompatActivity implements PDFUtil.P
                     views.add(binding.registersPdf);
                     views.add(binding.generalPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, PUnitInspRepActivity.this, "schemes");
+                    PDFUtil.getInstance(PUnitInspRepActivity.this).generatePDF(views, filePath, PUnitInspRepActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -163,7 +163,8 @@ public class PUnitInspRepActivity extends AppCompatActivity implements PDFUtil.P
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(PUnitInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(PUnitInspRepActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

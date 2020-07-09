@@ -22,6 +22,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpInspRepBinding;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -138,7 +139,7 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity implements PDFU
                     views.add(binding.titlePdf);
                     views.add(binding.generalPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, PetrolpumpInspRepActivity.this, "schemes");
+                    PDFUtil.getInstance(PetrolpumpInspRepActivity.this).generatePDF(views, filePath, PetrolpumpInspRepActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -163,7 +164,8 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity implements PDFU
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(PetrolpumpInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(PetrolpumpInspRepActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

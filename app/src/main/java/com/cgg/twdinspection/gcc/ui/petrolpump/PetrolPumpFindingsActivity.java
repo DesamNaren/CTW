@@ -32,6 +32,7 @@ import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpGenera
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpIns;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpStockDetails;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
@@ -40,8 +41,11 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -59,11 +63,13 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0,insSysVal=0, notInsSysVal=0;
     private PetrolStockDetailsResponse stockDetailsResponse;
+    private PetrolStockDetailsResponse finalStockDetailsResponse;
     private String stockReg, purchaseReg, dailysales, godownLiaReg, cashbook, remittance, remittanceCash, insCer, fireNOC, weightMea;
     private String petrolPumpCom, petrolPumpHyg, availEqp, availCcCameras, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
     private String randomNum;
+    private List<CommonCommodity> finalPetCom;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -74,6 +80,8 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
+
+        finalPetCom = new ArrayList<>();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -103,6 +111,7 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty();
+                        finalPetCom.add(stockDetailsResponse.getCommonCommodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate();
                 }
@@ -486,6 +495,13 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
+
+                    finalStockDetailsResponse = new PetrolStockDetailsResponse();
+                    finalStockDetailsResponse.setCommonCommodities(finalPetCom);
+
+                    String stockData = gson.toJson(finalStockDetailsResponse);
+                    editor.putString(AppConstants.finalStockData, stockData);
+
                     editor.commit();
 
                     startActivity(new Intent(PetrolPumpFindingsActivity.this, PetrolPumpPhotoActivity.class)

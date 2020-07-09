@@ -123,7 +123,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         String inspectionData = sharedPreferences.getString(AppConstants.InspectionDetails, "");
         Gson gson = new Gson();
         inspectionSubmitResponse = gson.fromJson(inspectionData, InspectionSubmitResponse.class);
-        String stockDetails = sharedPreferences.getString(AppConstants.stockData, "");
+        String stockDetails = sharedPreferences.getString(AppConstants.finalStockData, "");
         stockDetailsResponse = gson.fromJson(stockDetails, PetrolStockDetailsResponse.class);
         stockSubmitRequest = new StockSubmitRequest();
 

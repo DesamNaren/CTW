@@ -33,6 +33,7 @@ import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCe
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGStockDetails;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
@@ -42,7 +43,10 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -66,6 +70,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     private int repairsFlag = 0;
     private String randomNum;
     private String difReason;
+    private List<CommonCommodity> finalMFPCom, finalEmpCom;
+    private StockDetailsResponse finalStockDetailsResponse;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -76,6 +82,9 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
+
+        finalEmpCom=new ArrayList<>();
+        finalMFPCom=new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
         } catch (Exception e) {
@@ -103,6 +112,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     if(!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty();
+                        finalMFPCom.add(stockDetailsResponse.getMfp_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                 }
@@ -113,6 +123,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
+                        finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
@@ -414,6 +425,17 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
+
+                    finalStockDetailsResponse = new StockDetailsResponse();
+                    finalStockDetailsResponse.setEssential_commodities(null);
+                    finalStockDetailsResponse.setDialy_requirements(null);
+                    finalStockDetailsResponse.setEmpties(finalEmpCom);
+                    finalStockDetailsResponse.setMfp_commodities(finalMFPCom);
+                    finalStockDetailsResponse.setProcessing_units(null);
+
+                    String stockData = gson.toJson(finalStockDetailsResponse);
+                    editor.putString(AppConstants.finalStockData, stockData);
+
                     editor.commit();
 
                     startActivity(new Intent(MFPGodownFindingsActivity.this, GCCPhotoActivity.class)

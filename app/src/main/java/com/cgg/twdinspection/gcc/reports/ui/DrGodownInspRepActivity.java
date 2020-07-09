@@ -28,7 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener{
+public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
 
     ActivityDrGodownInspRepBinding binding;
     private SharedPreferences sharedPreferences;
@@ -140,7 +140,7 @@ public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUti
                     views.add(binding.titlePdf);
                     views.add(binding.generalPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, DrGodownInspRepActivity.this, "schemes");
+                    PDFUtil.getInstance(DrGodownInspRepActivity.this).generatePDF(views, filePath, DrGodownInspRepActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -161,11 +161,13 @@ public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUti
         });
 
     }
+
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(DrGodownInspRepActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(DrGodownInspRepActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

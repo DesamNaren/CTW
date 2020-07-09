@@ -21,6 +21,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
+import com.cgg.twdinspection.gcc.reports.ui.DrGodownInspRepActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
@@ -87,7 +88,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                     List<View> views = new ArrayList<>();
                     views.add(binding.scrlPdf);
 
-                    PDFUtil.getInstance().generatePDF(views, filePath, SchemeReportDetailsActivity.this,"schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath, SchemeReportDetailsActivity.this,"schemes","Schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
@@ -235,7 +236,8 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
 
-        Utils.customSyncSuccessAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name), "PDF saved successfully at " + savedPDFFile.getPath().toString());
+        Utils.customPDFAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override

@@ -32,6 +32,7 @@ import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindin
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
@@ -41,8 +42,10 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -60,11 +63,14 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     private String officerID, divId, suppId;
     double physVal = 0, sysVal = 0, difference = 0, insSysVal=0, notInsSysVal=0;
     private StockDetailsResponse stockDetailsResponse;
+    private StockDetailsResponse finalStockDetailsResponse;
     private String stockReg, purchaseReg, salePriceFix, godownLiaReg, insCer, fireNOC, weightMea, stockRegEntry, valuesAsperSale;
     private String qualityStock, stockCards, godownCom, godownHyg, availEqp, lastInsSoc, lastInsDiv, repairsReq;
     private String insComName, insComDate, weightDate, lastSocDate, lastDivDate, deficitReason, remarks, repairType;
     private int repairsFlag = 0;
     private String randomNum;
+
+    private List<CommonCommodity> finalEssCom, finalDaiCom, finalEmpCom, finalMFPCom, finalPUnitCom;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -75,6 +81,13 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
+
+
+        finalEssCom = new ArrayList<>();
+        finalDaiCom = new ArrayList<>();
+        finalEmpCom = new ArrayList<>();
+        finalMFPCom = new ArrayList<>();
+        finalPUnitCom = new ArrayList<>();
 
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -103,6 +116,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
+                        finalEssCom.add(stockDetailsResponse.getEssential_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
                 }
@@ -112,6 +126,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
+                        finalDaiCom.add(stockDetailsResponse.getDialy_requirements().get(i));
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                 }
@@ -121,6 +136,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
+                        finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                 }
@@ -522,6 +538,18 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
+
+                    finalStockDetailsResponse = new StockDetailsResponse();
+                    finalStockDetailsResponse.setEssential_commodities(finalEssCom);
+                    finalStockDetailsResponse.setDialy_requirements(finalDaiCom);
+                    finalStockDetailsResponse.setEmpties(finalEmpCom);
+                    finalStockDetailsResponse.setMfp_commodities(null);
+                    finalStockDetailsResponse.setProcessing_units(null);
+
+                    String stockData = gson.toJson(finalStockDetailsResponse);
+                    editor.putString(AppConstants.finalStockData, stockData);
+
+
                     editor.commit();
 
                     startActivity(new Intent(DRGodownFindingsActivity.this, GCCPhotoActivity.class)

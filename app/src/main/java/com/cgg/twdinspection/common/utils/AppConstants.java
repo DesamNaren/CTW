@@ -114,6 +114,7 @@ public class AppConstants {
     public static final String TITLE = "TITLE";
     public static final String PHOTO_TITLE = "PHOTO_TITLE";
     public static String stockData = "STOCK_DATA";
+    public static String finalStockData = "FINAL_STOCK_DATA";
     public static String petComm = "petComm";
     public static String essComm = "essComm";
     public static String dailyReq = "dailyReq";

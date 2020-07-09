@@ -82,7 +82,7 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
 
                     filePath = directory_path + "works_" + reportWorkDetails.getWorkId() + "_" + reportWorkDetails.getInspectionTime() + ".pdf";
                     File file =new File(filePath);
-                    PDFUtil.getInstance().generatePDF(views, filePath, EngPDFActivity.this,"engworks");
+                    PDFUtil.getInstance(EngPDFActivity.this).generatePDF(views, filePath, EngPDFActivity.this,"engworks", "Engineerinig");
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();

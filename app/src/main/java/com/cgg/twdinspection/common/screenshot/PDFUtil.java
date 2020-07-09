@@ -1,15 +1,19 @@
 package com.cgg.twdinspection.common.screenshot;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.View;
+
+import com.cgg.twdinspection.common.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -50,12 +54,13 @@ public class PDFUtil {
      * Singleton instance for PDFUtil.
      */
     private static PDFUtil sInstance;
+    private Context context;
 
     /**
      * Constructor.
      */
-    private PDFUtil() {
-
+    private PDFUtil(Context context) {
+        this.context=context;
     }
 
     /**
@@ -63,9 +68,9 @@ public class PDFUtil {
      *
      * @return singleton instance of PDFUtil.
      */
-    public static PDFUtil getInstance() {
+    public static PDFUtil getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new PDFUtil();
+            sInstance = new PDFUtil(context);
         }
         return sInstance;
     }
@@ -84,12 +89,12 @@ public class PDFUtil {
      * @param listener     PDFUtilListener to send callback for PDF generation.
      */
     public final void generatePDF(final List<View> contentViews, final String filePath,
-                                  final PDFUtilListener listener, String flag) {
+                                  final PDFUtilListener listener, String flag, String folderName) {
         // Check Api Version.
         int currentApiVersion = Build.VERSION.SDK_INT;
         if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             // Kitkat
-            new GeneratePDFAsync(contentViews, filePath, listener, flag).execute();
+            new GeneratePDFAsync(contentViews, filePath, listener, flag, folderName).execute();
         } else {
             // Before Kitkat
             Log.e(TAG, "Generate PDF is not available for your android version.");
@@ -128,6 +133,7 @@ public class PDFUtil {
         // mFilePath.
         private String mFilePath;
         private String flag;
+        private String folderName;
 
         // mListener.
         private PDFUtilListener mListener = null;
@@ -142,11 +148,12 @@ public class PDFUtil {
          * @param filePath     FilePath where the PDF has to be stored.
          * @param listener     PDFUtilListener to send callback for PDF generation.
          */
-        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag) {
+        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag,String folderName) {
             this.mContentViews = contentViews;
             this.mFilePath = filePath;
             this.mListener = listener;
             this.flag = flag;
+            this.folderName = folderName;
         }
 
 
@@ -247,12 +254,21 @@ public class PDFUtil {
         private File savePDFDocumentToStorage(final PdfDocument pdfDocument) throws IOException {
             FileOutputStream fos = null;
             // Create file.
+            File file = null;
             File pdfFile = null;
-            if (mFilePath == null || mFilePath.isEmpty()) {
-                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");
-            } else {
-                pdfFile = new File(mFilePath);
+            file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)+  "/CTW/"+folderName+"/");
+            if (!file.exists()) {
+                file.mkdirs();
             }
+
+            pdfFile = new File(file.getPath(), Utils.getCurrentDateTime() + ".pdf");
+
+
+//            if (mFilePath == null || mFilePath.isEmpty()) {
+//                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");
+//            } else {
+//                pdfFile = new File(mFilePath);
+//            }
 
             //Create parent directories
             File parentFile = pdfFile.getParentFile();
