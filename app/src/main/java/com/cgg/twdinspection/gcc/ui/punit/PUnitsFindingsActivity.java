@@ -17,7 +17,11 @@ import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
+import com.cgg.twdinspection.gcc.source.inspections.DrDepot.StockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
+import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
+import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
+import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitRegisterBookCertificates;
@@ -37,7 +41,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private String officerID, divId, suppId;
     private StockDetailsResponse stockDetailsResponse;
     double physVal = 0, sysVal = 0, notInsSysVal=0, insSysVal=0, difference=0;
-    private String remarks, insComName, insComDate, insCer, weightDate, weightMea;
+    private String remarks, insComName, insComDate, insCer, weightDate, weightMea, difReason;
     private String fireNOC, qualityStock, godownHyg, repairsReq;
     private String rawStock, proReg, inwardReg, outwardReg, saleReg, labAttReg, amcMac, agmarkCer, fsaaiCer;
     private String empReg, barrelCans, cashBook, cashBankBal, vehLogBook;
@@ -137,6 +141,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             @Override
             public void onClick(View view) {
 
+                difReason = binding.etReason.getText().toString().trim();
                 remarks = binding.remarks.etRemarks.getText().toString().trim();
                 insComName = binding.etComName.getText().toString().trim();
                 insComDate = binding.etInsDate.getText().toString().trim();
@@ -161,6 +166,20 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
 
                 if (validate()) {
                     PUnitInsp pUnitInsp = new PUnitInsp();
+
+
+                    PUStockDetails stockDetails = new PUStockDetails();
+                    stockDetails.setStockValueAsPerSystem(sysVal);
+                    stockDetails.setStockValueAsPerPhysical(physVal);
+                    stockDetails.setDeficit(difference);
+                    stockDetails.setDeficitReason(difReason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
+
+                    pUnitInsp.setStockDetails(stockDetails);
+
+
+
                     PUnitRegisterBookCertificates registerBookCertificates = new PUnitRegisterBookCertificates();
                     registerBookCertificates.setRawMatStockRegisterType(rawStock);
                     registerBookCertificates.setProcessingRegisterType(proReg);

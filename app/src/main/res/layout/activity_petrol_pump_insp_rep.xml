@@ -1447,7 +1447,7 @@
                                         android:inputType="textMultiLine"
                                         android:text="@{inspData.stockDetails.deficitReason}"
                                         android:textColor="@color/black" />
-                                    />
+
 
                                 </com.google.android.material.textfield.TextInputLayout>
 

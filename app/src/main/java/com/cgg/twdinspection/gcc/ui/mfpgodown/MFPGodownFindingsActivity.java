@@ -30,7 +30,9 @@ import com.cgg.twdinspection.databinding.ActivityGccMfpFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCertificates;
+import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
+import com.cgg.twdinspection.gcc.source.inspections.lpg.LPGStockDetails;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
@@ -63,6 +65,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
     private String insComName, insComDate, weightDate, genAvail, remarks, repairType, lastInsDiv;
     private int repairsFlag = 0;
     private String randomNum;
+    private String difReason;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -339,7 +342,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                difReason= binding.etReason.getText().toString().trim();
                 remarks = binding.etRemarks.getText().toString().trim();
                 insComName = binding.etComName.getText().toString().trim();
                 insComDate = binding.etInsDate.getText().toString().trim();
@@ -349,6 +352,17 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                 if (validate()) {
 
                     MfpGodownsInsp mfpGodownsInsp = new MfpGodownsInsp();
+
+                    MFPStockDetails stockDetails = new MFPStockDetails();
+                    stockDetails.setStockValueAsPerSystem(sysVal);
+                    stockDetails.setStockValueAsPerPhysical(physVal);
+                    stockDetails.setDeficit(difference);
+                    stockDetails.setDeficitReason(difReason);
+                    stockDetails.setStockValueAsPerSystemInsp(String.valueOf(insSysVal));
+                    stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
+
+                    mfpGodownsInsp.setStockDetails(stockDetails);
+
 
 
                     MFPRegisterBookCertificates registerBookCertificates = new MFPRegisterBookCertificates();
