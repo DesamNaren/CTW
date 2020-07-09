@@ -45,9 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-
-
+                    
                     <LinearLayout
                         android:id="@+id/registers_pdf"
                         android:layout_width="match_parent"
@@ -245,6 +243,200 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/stock_pdf"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Stock Details / Position"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystem)}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system_inspected"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{pUnit.stockDetails.stockValueAsPerSystemInsp}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_physical_verification"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerPhysical)}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Deficit / Surplus "
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{String.valueOf(pUnit.stockDetails.deficit)}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="Reason mentioned by In charge regarding Deficit / Surplus"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{pUnit.stockDetails.deficitReason}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1.4"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@string/stock_value_as_per_system_not_inspected"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:layout_weight="1"
+                                        android:text="@{pUnit.stockDetails.stockValueAsPerSystemNotInsp}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -511,273 +703,6 @@
                                             android:visibility="@{pUnit.registerBookCertificates.labourAttendRegisterRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
                                     </LinearLayout>
 
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1.4"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="Insurance Certificate"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
-                                                android:text="@{pUnit.registerBookCertificates.insuranceCertType}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1.4"
-                                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                                    android:text="@string/com_name"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
-                                                    android:text="@{pUnit.registerBookCertificates.insCompName}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1.4"
-                                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                                    android:text="Insurance validity"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
-                                                    android:text="@{pUnit.registerBookCertificates.insValidity}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-                                            </LinearLayout>
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1.4"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="Fire Department NOC"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
-                                                android:text="@{pUnit.registerBookCertificates.fireDeptType}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <include
-                                            android:id="@+id/remarks_fire_noc_pdf"
-                                            layout="@layout/remarks_layout_reports_pdf"
-                                            android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1.4"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="Weights and Measurements certificate issued by legal Metrology"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:layout_weight="1"
-                                                android:text="@{pUnit.registerBookCertificates.weightMeasureCertificateType}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1.4"
-                                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                                    android:text="Certificate validity"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
-                                                    android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                            </LinearLayout>
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1.4"
-                                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                                    android:text="AMC for Machinery"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
-                                                    android:text="@{pUnit.registerBookCertificates.amcMachinaryType}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-                                            </LinearLayout>
-
-                                            <include
-                                                android:id="@+id/remarks_amc_pdf"
-                                                layout="@layout/remarks_layout_reports_pdf"
-                                                android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1.4"
-                                                    android:paddingLeft="@dimen/dimen_padding_left"
-                                                    android:text="Agmark Certificate"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_margin="@dimen/dimen_margin"
-                                                    android:layout_weight="1"
-                                                    android:text="@{pUnit.registerBookCertificates.agmarkCertType}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="@dimen/dimen_text" />
-
-                                            </LinearLayout>
-
-                                            <include
-                                                android:id="@+id/remarks_agmark_pdf"
-                                                layout="@layout/remarks_layout_reports_pdf"
-                                                android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
-                                        </LinearLayout>
-
-                                    </LinearLayout>
-
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -809,6 +734,273 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.4"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Insurance Certificate"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.insuranceCertType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{pUnit.registerBookCertificates.insuranceCertType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.4"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="@string/com_name"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.insCompName}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.4"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Insurance validity"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.insValidity}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.4"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Fire Department NOC"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.fireDeptType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <include
+                                        android:id="@+id/remarks_fire_noc_pdf"
+                                        layout="@layout/remarks_layout_reports_pdf"
+                                        android:visibility="@{pUnit.registerBookCertificates.fireDeptRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.4"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="Weights and Measurements certificate issued by legal Metrology"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:text="@{pUnit.registerBookCertificates.weightMeasureCertificateType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{pUnit.registerBookCertificates.weightMeasureCertificateType.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.4"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Certificate validity"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.4"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="AMC for Machinery"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.amcMachinaryType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_amc_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.amcMachinaryRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1.4"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="Agmark Certificate"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="wrap_content"
+                                                android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
+                                                android:text="@{pUnit.registerBookCertificates.agmarkCertType}"
+                                                android:textColor="@color/black"
+                                                android:textSize="@dimen/dimen_text" />
+
+                                        </LinearLayout>
+
+                                        <include
+                                            android:id="@+id/remarks_agmark_pdf"
+                                            layout="@layout/remarks_layout_reports_pdf"
+                                            android:visibility="@{pUnit.registerBookCertificates.agmarkCertRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1031,6 +1223,7 @@
                                         layout="@layout/remarks_layout_reports_pdf"
                                         android:visibility="@{pUnit.registerBookCertificates.vehLogBookRemarks.equalsIgnoreCase(``)? View.GONE : View.VISIBLE}" />
                                 </LinearLayout>
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -1073,7 +1266,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_15dp"
                                         android:text="@{pUnit.generalFindings.stockQualityVerified}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
@@ -1100,7 +1292,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_15dp"
                                         android:text="@{pUnit.generalFindings.hygienicCondition}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
@@ -1127,7 +1318,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_15dp"
                                         android:text="@{pUnit.generalFindings.repairReq}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />

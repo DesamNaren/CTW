@@ -377,7 +377,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1.4"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/difference"
+                                        android:text="Deficit / Surplus"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -493,24 +493,6 @@
                                         android:text="@{drDepot.stockDetails.liabilityBalance}"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1.4"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/deficit_excess"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
 
                                 </LinearLayout>
 
@@ -1793,7 +1775,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/difference"
+                                    android:text="Deficit / Surplus"
                                     android:textColor="@color/black" />
 
                                 <TextView
@@ -1907,21 +1889,6 @@
                                     android:textColor="@color/black"
                                     android:textStyle="bold" />
 
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/deficit_excess"
-                                    android:textColor="@color/black" />
 
                             </LinearLayout>
 
