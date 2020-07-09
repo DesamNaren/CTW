@@ -54,7 +54,7 @@
             android:layout_height="wrap_content">
             <Button
                 android:layout_weight="1"
-                android:id="@+id/btDialoNo"
+                android:id="@+id/btDialogNo"
                 style="@style/roundedDialog_print"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
