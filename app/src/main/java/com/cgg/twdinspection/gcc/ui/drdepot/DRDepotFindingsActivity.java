@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observer;
@@ -788,7 +787,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             returnFlag = false;
             showSnackBar("Please check weights and measurements certificate issued by legal metrology");
             ScrollToView(binding.rgWeightMeasCert);
-        } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && binding.etWeightCertIssue.getText().toString().contains("/")) {
+        } else if (!TextUtils.isEmpty(weightsMeasurements) && weightsMeasurements.equals(AppConstants.Yes) && !binding.etWeightCertIssue.getText().toString().contains("/")) {
             returnFlag = false;
             showSnackBar("Please select certificate issue date");
             ScrollToView(binding.etWeightCertIssue);

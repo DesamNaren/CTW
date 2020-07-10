@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -765,36 +766,6 @@
 
                                 </LinearLayout>
 
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/general_pdf"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_10dp"
-                            android:layout_marginRight="@dimen/dimen_10dp"
-                            android:background="@color/white"
-                            android:elevation="@dimen/dimen_10dp"
-                            android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_10dp"
-                            android:paddingTop="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_10dp"
-                            android:visibility="visible">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -882,6 +853,36 @@
 
                                 </LinearLayout>
 
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/general_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -896,7 +897,7 @@
                                         android:text="@string/depot_authorisation_certificate_issued_by_revenue_authorities"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
-                                    
+
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -1609,7 +1610,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
                             android:layout_marginRight="@dimen/dimen_30dp"
                             android:orientation="vertical">
 
@@ -1618,11 +1618,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/dimen_5dp"
                                 android:gravity="center"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
                                 android:text=""
-                                android:textSize="@dimen/dimen_text"
                                 android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1635,11 +1635,61 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="3dp"
                                 android:layout_marginLeft="3dp"
-                                android:text=""
                                 android:gravity="center"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/photos_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Photos"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/ll_title"
+                            android:layout_centerHorizontal="true"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_5dp"
+                            tools:listitem="@layout/adapter_view_photo_pdf" />
 
                     </LinearLayout>
 
@@ -3421,6 +3471,7 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

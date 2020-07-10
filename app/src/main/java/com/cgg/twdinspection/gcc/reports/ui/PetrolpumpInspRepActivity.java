@@ -3,12 +3,14 @@ package com.cgg.twdinspection.gcc.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -21,8 +23,8 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpInspRepBinding;
+import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -36,6 +38,7 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity implements PDFU
     ReportData reportData;
     CustomProgressDialog customProgressDialog;
     String directory_path, filePath;
+    ViewPhotoAdapterPdf adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,13 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity implements PDFU
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String jsonObject = gson.toJson(reportData.getPhotos());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
+            adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            binding.recyclerView.setAdapter(adapter);
+        }
+
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getPetrolPump() != null) {
             binding.setInspData(reportData.getInspectionFindings().getPetrolPump());
         } else {
@@ -130,14 +140,20 @@ public class PetrolpumpInspRepActivity extends AppCompatActivity implements PDFU
                 try {
                     customProgressDialog.show();
 
-                    directory_path = getExternalFilesDir(null)
-                            + "/" + "TWD/GCC/";
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                        directory_path = getExternalFilesDir(null)
+                                + "/" + "CTW/GCC/";
+                    } else {
+                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                + "/" + "CTW/GCC/";
+                    }
 
                     filePath = directory_path + "Petrol_Pump_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
                     File file = new File(filePath);
                     List<View> views = new ArrayList<>();
                     views.add(binding.titlePdf);
                     views.add(binding.generalPdf);
+                    views.add(binding.photosPdf);
 
                     PDFUtil.getInstance(PetrolpumpInspRepActivity.this).generatePDF(views, filePath, PetrolpumpInspRepActivity.this, "schemes", "GCC");
 

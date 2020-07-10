@@ -54,12 +54,11 @@ public class ViewPhotosActivity extends AppCompatActivity {
 
 
         String jsonObject = gson.toJson(reportData.getPhotos());
-        if (!TextUtils.isEmpty(jsonObject) &&   !jsonObject.equalsIgnoreCase("[]")
-                ) {
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
             adapter = new ViewPhotoAdapter(this, reportData.getPhotos());
             binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             binding.recyclerView.setAdapter(adapter);
-        }else{
+        } else {
             binding.recyclerView.setVisibility(View.GONE);
             binding.tvEmpty.setVisibility(View.VISIBLE);
             binding.tvEmpty.setText("No photos found");

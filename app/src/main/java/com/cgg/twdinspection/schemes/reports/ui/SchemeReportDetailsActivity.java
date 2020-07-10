@@ -3,6 +3,7 @@ package com.cgg.twdinspection.schemes.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -21,7 +22,6 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
-import com.cgg.twdinspection.gcc.reports.ui.DrGodownInspRepActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
@@ -37,7 +37,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     private SchemeReportData schemeReportData;
     CustomProgressDialog customProgressDialog;
     String directory_path, filePath;
-    private String TAG=SchemeReportDetailsActivity.class.getSimpleName();
+    private String TAG = SchemeReportDetailsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +80,20 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                 try {
                     customProgressDialog.show();
 
-                    directory_path = getExternalFilesDir(null)
-                            + "/" + "TWD/Schemes/";
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                        directory_path = getExternalFilesDir(null)
+                                + "/" + "CTW/Schemes/";
+                    } else {
+                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                + "/" + "CTW/Schemes/";
+                    }
 
                     filePath = directory_path + "schemes_" + schemeReportData.getBenId() + "_" + schemeReportData.getInspectionTime() + ".pdf";
                     File file = new File(filePath);
                     List<View> views = new ArrayList<>();
                     views.add(binding.scrlPdf);
 
-                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath, SchemeReportDetailsActivity.this,"schemes","Schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath, SchemeReportDetailsActivity.this, "schemes", "Schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
