@@ -8,18 +8,14 @@ import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.View;
-
-import com.cgg.twdinspection.common.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -261,7 +257,7 @@ public class PDFUtil {
                 file.mkdirs();
             }
 
-            pdfFile = new File(file.getPath(), Utils.getCurrentDateTime() + ".pdf");
+            pdfFile = new File(file.getPath(), mFilePath+ ".pdf");
 
 
 //            if (mFilePath == null || mFilePath.isEmpty()) {

@@ -113,15 +113,15 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                         }else {
                             instCnt=0;
                         }
-                        if(reportCountsResponse.getEngineeringWorks()!=null) {
-                            engCnt = reportCountsResponse.getEngineeringWorks();
-                        }else {
-                            engCnt=0;
-                        }
+//                        if(reportCountsResponse.getEngineeringWorks()!=null) {
+//                            engCnt = reportCountsResponse.getEngineeringWorks();
+//                        }else {
+//                            engCnt=0;
+//                        }
                         binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
-                        binding.engCnt.setText(String.valueOf(engCnt));
+//                        binding.engCnt.setText(String.valueOf(engCnt));
 
                     } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
                         callSnackBar(getString(R.string.something));

@@ -27,7 +27,7 @@ public class InstReportsMenuActivity extends LocBaseActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
-        binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
+        binding.actionBar.ivPdf.setVisibility(View.GONE);
         customProgressDialog=new CustomProgressDialog(this);
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
