@@ -42,6 +42,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     private List<String> societies;
     private List<String> petrolPumps;
     private PetrolSupplierInfo selectedPetrolPumps;
+    ArrayAdapter selectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,10 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ArrayList selectList = new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
@@ -169,7 +174,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             selectedSocietyId = "";
             selectedDivId = "";
             selectPetrolId = "";
-            binding.spSociety.setAdapter(null);
+            binding.spSociety.setAdapter(selectAdapter);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
@@ -196,8 +201,8 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
-                                        binding.spSociety.setAdapter(null);
-                                        binding.spPetrol.setAdapter(null);
+                                        binding.spSociety.setAdapter(selectAdapter);
+                                        binding.spPetrol.setAdapter(selectAdapter);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -209,16 +214,16 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 selectedPetrolPumps = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
-                binding.spSociety.setAdapter(null);
+                binding.spSociety.setAdapter(selectAdapter);
                 selectPetrolId = "";
-                binding.spPetrol.setAdapter(null);
+                binding.spPetrol.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
                 selectedPetrolPumps = null;
                 selectedSocietyId = "";
                 selectPetrolId = "";
-                binding.spPetrol.setAdapter(null);
+                binding.spPetrol.setAdapter(selectAdapter);
                 petrolPumps = new ArrayList<>();
                 LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(PetrolPumpSelActivity.this, new Observer<String>() {
@@ -241,7 +246,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                                 android.R.layout.simple_spinner_dropdown_item, petrolPumps);
                                         binding.spPetrol.setAdapter(adapter);
                                     } else {
-                                        binding.spPetrol.setAdapter(null);
+                                        binding.spPetrol.setAdapter(selectAdapter);
                                         showSnackBar("No Petrol pumps found");
                                     }
                                 }
@@ -253,7 +258,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 selectedPetrolPumps = null;
                 selectedSocietyId = "";
                 selectPetrolId = "";
-                binding.spPetrol.setAdapter(null);
+                binding.spPetrol.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_petrol) {
             if (position != 0) {

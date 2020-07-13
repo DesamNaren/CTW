@@ -42,6 +42,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
     private List<String> societies;
     private List<String> LPGs;
     private LPGSupplierInfo selectedLPGs;
+    ArrayAdapter selectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,9 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             e.printStackTrace();
         }
 
+        ArrayList selectList = new ArrayList();
+        selectList.add("Select");
+        selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         LiveData<List<String>> divisionLiveData = viewModel.getAllDivisions();
         divisionLiveData.observe(this, new Observer<List<String>>() {
@@ -170,7 +174,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             selectedSocietyId = "";
             selectedDivId = "";
             selectLPGId = "";
-            binding.spSociety.setAdapter(null);
+            binding.spSociety.setAdapter(selectAdapter);
             divisionsInfos = new ArrayList<>();
             societies = new ArrayList<>();
             societies.add("--Select--");
@@ -197,8 +201,8 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                                                 android.R.layout.simple_spinner_dropdown_item, societies);
                                         binding.spSociety.setAdapter(adapter);
                                     } else {
-                                        binding.spSociety.setAdapter(null);
-                                        binding.spLpg.setAdapter(null);
+                                        binding.spSociety.setAdapter(selectAdapter);
+                                        binding.spLpg.setAdapter(selectAdapter);
                                         showSnackBar("No societies found");
                                     }
                                 }
@@ -210,16 +214,16 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 selectedLPGs = null;
                 selectedDivId = "";
                 selectedSocietyId = "";
-                binding.spSociety.setAdapter(null);
+                binding.spSociety.setAdapter(selectAdapter);
                 selectLPGId = "";
-                binding.spLpg.setAdapter(null);
+                binding.spLpg.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
                 selectedLPGs = null;
                 selectedSocietyId = "";
                 selectLPGId = "";
-                binding.spLpg.setAdapter(null);
+                binding.spLpg.setAdapter(selectAdapter);
                 LPGs = new ArrayList<>();
                 LiveData<String> liveData = viewModel.getSocietyId(selectedDivId, binding.spSociety.getSelectedItem().toString());
                 liveData.observe(LPGSelActivity.this, new Observer<String>() {
@@ -242,7 +246,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                                                 android.R.layout.simple_spinner_dropdown_item, LPGs);
                                         binding.spLpg.setAdapter(adapter);
                                     } else {
-                                        binding.spLpg.setAdapter(null);
+                                        binding.spLpg.setAdapter(selectAdapter);
                                         showSnackBar("No LPG godown found");
                                     }
                                 }
@@ -254,7 +258,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 selectedLPGs = null;
                 selectedSocietyId = "";
                 selectLPGId = "";
-                binding.spLpg.setAdapter(null);
+                binding.spLpg.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_lpg) {
             if (position != 0) {
