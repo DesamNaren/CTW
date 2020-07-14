@@ -1,24 +1,1400 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
 
-    <LinearLayout
+        <import type="android.view.View" />
+
+        <variable
+            name="generalInfo"
+            type="com.cgg.twdinspection.inspection.reports.source.GeneralInfo" />
+
+        <variable
+            name="medical"
+            type="com.cgg.twdinspection.inspection.reports.source.MedicalIssues" />
+
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/action_bar"
-            layout="@layout/action_bar_layout" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_menu"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/dimen_8dp" />
+            android:background="@color/bg">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/general_info_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dimen_img"
+                            android:layout_height="@dimen/dimen_img"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dimen_10dp"
+                            android:background="@drawable/telangana" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_margin"
+                            android:gravity="center"
+                            android:text="Tribal Welfare Department"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Government of Telangana"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_text" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_margin"
+                            android:gravity="center"
+                            android:text="Inspection Report-GCC"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_header"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dimen_margin"
+                            android:text="skjfhij"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/header"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_padding"
+                                android:text="@string/general_info"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_header"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 4."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/name_of_the_district"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:id="@+id/dis_name_tv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 5."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/name_of_the_institution"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:id="@+id/inst_name_tv"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 6."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/mandal_village"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:id="@+id/man_name_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 7."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/hm_present_time"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hmPresence}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hmPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/leave_reason_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hmReasonType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hmReasonType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/leaves_capture_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hmcaptureleavetype}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hmReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/od_capture_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hmCaptureodtype}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hmReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/movement_register_entry"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hmMovementRegisterEntry}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 8."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/hwo_present_time"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hwoPresence}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{generalInfo.hwoPresence.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/leave_reason_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hwoReasonType}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hwoReasonType.equalsIgnoreCase(`Leaves`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/leaves_capture_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hwocaptureleavetype}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hwoReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE,default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/od_capture_type"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hwocaptureodtype}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{generalInfo.hwoReasonType.equalsIgnoreCase(`OD`)? View.VISIBLE : View.GONE, default = gone }">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/hwo_movement_register_entry"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{generalInfo.hwomovementRegisterEntry}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text=" 9."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/hm_head_quarters"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hmheadquarters}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{generalInfo.hmheadquarters.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/capture_operating_from_distance"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hmcaptureDistance}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{generalInfo.hmheadquarters.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/capture_staying_facilities_type"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hmstayingFacilitiesType}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="10."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/hwo_head_quarters"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hwoheadquarters}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{generalInfo.hwoheadquarters.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/capture_operating_from_distance"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hwocaptureDistance}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{generalInfo.hwoheadquarters.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/capture_staying_facilities_type"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{generalInfo.hwostayingFacilitiesType}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="11."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/whether_staff_quarters_available"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{generalInfo.staffQuarters}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/medical_pdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/header"
+                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_marginRight="@dimen/dimen_10dp"
+                        android:background="@color/white"
+                        android:elevation="@dimen/dimen_10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dimen_10dp"
+                        android:paddingTop="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_padding"
+                                android:text="@string/medical_health"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_header"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="17."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/total_no_of_sick_boarders"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.sickBoarders}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="18."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/total_no_of_sick_boarders_referred_to_area_district_hospital"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.sickBoardersArea}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="19."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:text="@string/enter_number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_padding_left">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/fever"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.feverCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/cold_amp_cough"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.coldCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/headache"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.headacheCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/diarrhea"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.diarrheaCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/diarrhea"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.diarrheaCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/malaria"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.malariaCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="1"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@string/others"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:layout_weight="2"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.othersCount}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="20."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/medical_checkup"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.lastMedicalCheckupDate}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="21."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/medical_check_up_done_by_whom"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{medical.medicalCheckUpDoneByWhom}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/tabs_of_anm_weekly_updated"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{medical.anmWeeklyUpdated}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="22."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/call_health_100"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{medical.callHealth100}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{medical.callHealth100.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/screened_by_call_health"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{medical.screenedByCallHealth}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="@{medical.callHealth100.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/left_for_screening"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{medical.leftForscreening}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_margin"
+                                android:paddingLeft="@dimen/dimen_padding_left"
+                                android:text="23."
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/whether_the_details_of_medical_checkup_entered_in_the_visitor_s_register"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{medical.recordedInRegister}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <include
+                android:id="@+id/action_bar"
+                layout="@layout/action_bar_layout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/dimen_8dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </layout>

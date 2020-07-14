@@ -56,7 +56,7 @@ public class PDFUtil {
      * Constructor.
      */
     private PDFUtil(Context context) {
-        this.context=context;
+        this.context = context;
     }
 
     /**
@@ -144,7 +144,7 @@ public class PDFUtil {
          * @param filePath     FilePath where the PDF has to be stored.
          * @param listener     PDFUtilListener to send callback for PDF generation.
          */
-        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag,String folderName) {
+        public GeneratePDFAsync(final List<View> contentViews, final String filePath, final PDFUtilListener listener, String flag, String folderName) {
             this.mContentViews = contentViews;
             this.mFilePath = filePath;
             this.mListener = listener;
@@ -252,13 +252,12 @@ public class PDFUtil {
             // Create file.
             File file = null;
             File pdfFile = null;
-            file = new File(context.getExternalFilesDir(null)+  "/CTW/"+folderName+"/");
+            file = new File(context.getExternalFilesDir(null) + "/CTW/" + folderName + "/");
             if (!file.exists()) {
                 file.mkdirs();
             }
 
-            pdfFile = new File(file.getPath(), mFilePath+ ".pdf");
-
+            pdfFile = new File(file.getPath(), mFilePath);
 
 //            if (mFilePath == null || mFilePath.isEmpty()) {
 //                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");
@@ -268,7 +267,7 @@ public class PDFUtil {
 
             //Create parent directories
             File parentFile = pdfFile.getParentFile();
-            if (parentFile!=null&&!parentFile.exists() && !parentFile.mkdirs()) {
+            if (parentFile != null && !parentFile.exists() && !parentFile.mkdirs()) {
                 throw new IllegalStateException("Couldn't create directory: " + parentFile);
             }
             boolean fileExists = pdfFile.exists();

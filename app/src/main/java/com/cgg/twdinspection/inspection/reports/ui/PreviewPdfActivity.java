@@ -281,7 +281,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
 
     private void setStudAdapter(List<StudentAttendenceInfo> studentAttendInfoList) {
         StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
-        binding.studAtt.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.studAtt.recyclerView.setLayoutManager(new GridLayoutManager(this,3));
         binding.studAtt.recyclerView.setAdapter(stockSubAdapter);
     }
 
