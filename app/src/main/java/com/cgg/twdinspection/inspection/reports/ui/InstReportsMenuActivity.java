@@ -10,32 +10,63 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.ItextMerge;
 import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
+import com.cgg.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
+import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.gson.Gson;
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.PDFUtilListener {
+public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.PDFUtilListener, ItextMerge.PDFMergeListener {
     ReportsInstMenuActivityBinding binding;
     CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
     private InspReportData inspReportData;
-    String directory_path, filePath;
+    String directory_path, filePath, filePath1, filePath2;
+    File file;
+
+    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+            Font.BOLD);
+    private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+            Font.NORMAL, BaseColor.RED);
+    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+            Font.BOLD);
+    private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+            Font.BOLD);
+    private java.util.List<StudentAttendenceInfo> studentAttendInfoList;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +82,13 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         inspReportData = gson.fromJson(data, InspReportData.class);
 
-
         String jsonObject = gson.toJson(inspReportData.getGeneralInfo());
         if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
 
             binding.manNameTv.setText(inspReportData.getMandalName() + " & " + inspReportData.getVillageName());
             binding.disNameTv.setText(inspReportData.getDistName());
             binding.instNameTv.setText(inspReportData.getInstituteName());
-//            binding.tvDate.setText(inspReportData.getInspectionTime());
+            binding.tvDate.setText(inspReportData.getInspectionTime());
         }
 
         if (inspReportData != null) {
@@ -67,34 +97,37 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.setGeneralInfo(inspReportData.getGeneralInfo());
                 binding.executePendingBindings();
             }
-            /*String studAttendance = gson.toJson(inspReportData.getStudentAttendenceInfo());
+
+            String studAttendance = gson.toJson(inspReportData.getStudentAttendenceInfo());
             if (!TextUtils.isEmpty(studAttendance) && !studAttendance.equalsIgnoreCase("{}")) {
                 studentAttendInfoList = inspReportData.getStudentAttendenceInfo();
                 if (studentAttendInfoList != null && studentAttendInfoList.size() > 0) {
                     setStudAdapter(studentAttendInfoList);
                 }
             }
-            String staffAttendence = gson.toJson(inspReportData.getStaffAttendenceInfo());
+
+           /*String staffAttendence = gson.toJson(inspReportData.getStaffAttendenceInfo());
             if (!TextUtils.isEmpty(staffAttendence) && !staffAttendence.equalsIgnoreCase("{}")) {
                 staffAttendenceInfos = inspReportData.getStaffAttendenceInfo();
                 if (staffAttendenceInfos != null && staffAttendenceInfos.size() > 0) {
                     setStaffAdapter(staffAttendenceInfos);
                 }
             }*/
+
             String medical = gson.toJson(inspReportData.getMedicalIssues());
             if (!TextUtils.isEmpty(medical) && !medical.equalsIgnoreCase("{}")) {
                 binding.setMedical(inspReportData.getMedicalIssues());
                 binding.executePendingBindings();
             }
-           /* String diet = gson.toJson(inspReportData.getDietIssues());
+            String diet = gson.toJson(inspReportData.getDietIssues());
             if (!TextUtils.isEmpty(diet) && !diet.equalsIgnoreCase("{}")) {
-                binding.diet.setInspData(inspReportData.getDietIssues());
+                binding.setDiet(inspReportData.getDietIssues());
                 binding.executePendingBindings();
             }
-            if (inspReportData.getDietIssues().getDietListEntities() != null && inspReportData.getDietIssues().getDietListEntities().size() > 0) {
-                setDietAdapter(inspReportData.getDietIssues().getDietListEntities());
-            }
-            String infra = gson.toJson(inspReportData.getInfraMaintenance());
+//            if (inspReportData.getDietIssues().getDietListEntities() != null && inspReportData.getDietIssues().getDietListEntities().size() > 0) {
+//                setDietAdapter(inspReportData.getDietIssues().getDietListEntities());
+//            }
+           /* String infra = gson.toJson(inspReportData.getInfraMaintenance());
             if (!TextUtils.isEmpty(infra) && !infra.equalsIgnoreCase("{}")) {
                 binding.infra.setInspData(inspReportData.getInfraMaintenance());
                 binding.executePendingBindings();
@@ -161,13 +194,15 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                                 + "/" + "CTW/Schools/";
                     }
 
-                    filePath = directory_path + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime() + ".pdf";
-                    File file = new File(filePath);
+                    filePath = directory_path + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
+
+                    filePath1 = filePath + "_1" + ".pdf";
                     List<View> views = new ArrayList<>();
                     views.add(binding.generalInfoPdf);
                     views.add(binding.medicalPdf);
+                    views.add(binding.dietPdf);
 
-                    PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath, InstReportsMenuActivity.this, "schemes", "GCC");
+                    PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
@@ -190,6 +225,79 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             binding.rvMenu.setLayoutManager(new LinearLayoutManager(InstReportsMenuActivity.this));
             binding.rvMenu.setAdapter(adapter);
         }
+
+
+    }
+
+    private void addContent(Document document) throws DocumentException {
+        Anchor anchor = new Anchor("Student Attendance", catFont);
+        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+        catPart.setNumberDepth(-1);
+        Paragraph subPara = new Paragraph("", subFont);
+        Section subCatPart = catPart.addSection(subPara);
+        Paragraph paragraph = new Paragraph();
+        addEmptyLine(paragraph, 2);
+        subCatPart.add(paragraph);
+        createTable(subCatPart);
+        document.add(catPart);
+    }
+
+    private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
+        StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
+        layoutManager = new LinearLayoutManager(this);
+        binding.studAtt.recyclerView.setLayoutManager(layoutManager);
+        binding.studAtt.recyclerView.setAdapter(stockSubAdapter);
+    }
+
+    private static void addEmptyLine(Paragraph paragraph, int number) {
+        for (int i = 0; i < number; i++) {
+            paragraph.add(new Paragraph(" "));
+        }
+    }
+
+    private void createTable(Section subCatPart)
+            throws BadElementException {
+        PdfPTable table = new PdfPTable(6);
+
+        PdfPCell c1 = new PdfPCell(new Phrase("Class"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("On Roll Count"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Attendance Marked"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Presence Count"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Inspection Count"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Variance"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < studentAttendInfoList.size(); i++) {
+                table.addCell(studentAttendInfoList.get(i).getClassId());
+                table.addCell(studentAttendInfoList.get(i).getTotalStudents());
+                table.addCell(studentAttendInfoList.get(i).getAttendenceMarked());
+                table.addCell(studentAttendInfoList.get(i).getStudentCountInRegister());
+                table.addCell(studentAttendInfoList.get(i).getStudentCountDuringInspection());
+                table.addCell(studentAttendInfoList.get(i).getVariance());
+            }
+            subCatPart.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -208,14 +316,123 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+        filePath2 = filePath + "_2" + ".pdf";
+
+        try {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
+            document.open();
+            addContent(document);
+//            addStaffContent(document);
+            document.close();
+
+//            File f =new File(filePath);
+//            File f2 =new File(filePath);
+//            mergeFiles(f.getAbsolutePath(), f2.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this);
     }
+
+    /*private void mergeFiles(String file1, String file2) {
+        PdfReader reader1 = null;
+        try {
+            reader1 = new PdfReader(file1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PdfReader reader2 = null;
+        try {
+            reader2 = new PdfReader(file2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document document = new Document();
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        PdfCopy copy = null;
+        try {
+            copy = new PdfCopy(document, fos);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        document.open();
+        PdfImportedPage page;
+        PdfCopy.PageStamp stamp;
+        Phrase phrase;
+        BaseFont bf = null;
+        try {
+            bf = BaseFont.createFont();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Font font = new Font(bf, 9);
+        int n = reader1.getNumberOfPages();
+        for (int i = 1; i <= reader1.getNumberOfPages(); i++) {
+            page = copy.getImportedPage(reader1, i);
+            stamp = copy.createPageStamp(page);
+            phrase = new Phrase("page " + i, font);
+            ColumnText.showTextAligned(stamp.getOverContent(), Element.ALIGN_CENTER, phrase, 520, 5, 0);
+            try {
+                stamp.alterContents();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                copy.addPage(page);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (BadPdfFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        for (int i = 1; i <= reader2.getNumberOfPages(); i++) {
+            page = copy.getImportedPage(reader2, i);
+            stamp = copy.createPageStamp(page);
+            phrase = new Phrase("page " + (n + i), font);
+            ColumnText.showTextAligned(stamp.getOverContent(), Element.ALIGN_CENTER, phrase, 520, 5, 0);
+            try {
+                stamp.alterContents();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                copy.addPage(page);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (BadPdfFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        document.close();
+        reader1.close();
+        reader2.close();
+    }*/
 
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
         Utils.customErrorAlert(InstReportsMenuActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
+    }
+
+    @Override
+    public void pdfMergeSuccess(File savedPDFFile) {
+        Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+    }
+
+    @Override
+    public void pdfMergeFailure(Exception exception) {
+        Utils.customErrorAlert(InstReportsMenuActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
+
     }
 }
 

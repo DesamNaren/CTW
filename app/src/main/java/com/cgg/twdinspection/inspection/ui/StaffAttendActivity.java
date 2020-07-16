@@ -129,7 +129,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
         boolean returnFlag = true;
         for (int i = 0; i < staffAttendanceEntitiesmain.size(); i++) {
             if (localFlag != 1 && !(staffAttendanceEntitiesmain.get(i).isAbsentFlag() || staffAttendanceEntitiesmain.get(i).isPresentFlag()
-                    || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag() )) {
+                    || staffAttendanceEntitiesmain.get(i).isOndepFlag() || staffAttendanceEntitiesmain.get(i).isLeavesFlag())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.mark_att_emp));
                 break;
@@ -141,23 +141,23 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.sel_category));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed()) || staffAttendanceEntitiesmain.get(i).getLeaves_availed().equals("0")) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.total_leaves));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken()) || staffAttendanceEntitiesmain.get(i).getLeaves_taken().equals("0")) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leaves_taken));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal()) || staffAttendanceEntitiesmain.get(i).getLeaves_bal().equals("0")) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leave_bal));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended()) || staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended().equals("0")) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade()) || staffAttendanceEntitiesmain.get(i).getAcad_panel_grade().equals("0")) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_yr_acad_panel));
                 break;

@@ -892,7 +892,7 @@
     <string name="select_bunker_beds">Select whether bunker beds are available</string>
     <string name="working_status">Working Status</string>
     <string name="working_condition">Working condition</string>
-    <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MEO</string>
+    <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MTO</string>
     <string name="whether_library_room_is_available">Whether library incharge is maintaining the library register</string>
     <string name="mai_ass_reg">Select library room is maintaining the library register</string>
     <string name="sel_timetable">Select timetable displayed</string>

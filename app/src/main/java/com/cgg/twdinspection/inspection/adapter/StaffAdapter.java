@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -90,10 +89,10 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         String str = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesTaken.getText()!=null && !TextUtils.isEmpty((holder.binding.etLeavesTaken.getText().toString()))) {
+                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesTaken.getText() != null && !TextUtils.isEmpty((holder.binding.etLeavesTaken.getText().toString()))) {
                             int tot = Integer.valueOf(str);
                             int taken = Integer.valueOf(holder.binding.etLeavesTaken.getText().toString());
-                            holder.binding.etLeaveBal.setText(String.valueOf(tot-taken));
+                            holder.binding.etLeaveBal.setText(String.valueOf(tot - taken));
                         } else {
                             holder.binding.etLeaveBal.setText("");
                         }
@@ -126,10 +125,10 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
                     public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
 
                         String str = textViewTextChangeEvent.text().toString();
-                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesAvailed.getText()!=null && !TextUtils.isEmpty((holder.binding.etLeavesAvailed.getText().toString()))) {
+                        if (!TextUtils.isEmpty(str) && holder.binding.etLeavesAvailed.getText() != null && !TextUtils.isEmpty((holder.binding.etLeavesAvailed.getText().toString()))) {
                             int taken = Integer.valueOf(str);
                             int tot = Integer.valueOf(holder.binding.etLeavesAvailed.getText().toString());
-                            holder.binding.etLeaveBal.setText(String.valueOf(tot-taken));
+                            holder.binding.etLeaveBal.setText(String.valueOf(tot - taken));
                         } else {
                             holder.binding.etLeaveBal.setText("");
                         }
@@ -280,12 +279,18 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (count > 0)
+                    holder.binding.etLeavesTaken.setEnabled(true);
+                else {
+                    holder.binding.etLeavesTaken.setEnabled(false);
+                    holder.binding.etLeavesTaken.setText("");
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 employeeResponse.setLeaves_availed(s.toString());
+
             }
         });
         holder.binding.etLeaveBal.addTextChangedListener(new TextWatcher() {

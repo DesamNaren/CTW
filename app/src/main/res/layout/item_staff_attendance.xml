@@ -391,6 +391,7 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
+                            android:enabled="false"
                             android:maxLength="3"
                             android:id="@+id/et_leaves_taken"
                             android:layout_width="match_parent"

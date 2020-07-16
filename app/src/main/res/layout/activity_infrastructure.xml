@@ -2610,6 +2610,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_required_to_toilets"
                                 android:imeOptions="actionNext"
+                                android:inputType="number"
                                 android:singleLine="true"
                                 android:text="@{inspData.repairs_req_toilets}" />
 
@@ -2630,7 +2631,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/repairs_required_to_bathrooms"
                                 android:imeOptions="actionNext"
-                                android:inputType="text"
+                                android:inputType="number"
                                 android:singleLine="true"
                                 android:text="@{inspData.repairs_req_bathrooms}" />
 

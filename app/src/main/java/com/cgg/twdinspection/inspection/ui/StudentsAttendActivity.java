@@ -50,7 +50,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     List<StudAttendInfoEntity> studAttendInfoEntityListMain;
     String IsattenMarked, count_reg, count_during_insp, variance;
     CustomFontEditText et_studMarkedPres, et_studPresInsp;
-    LinearLayout ll_stud_pres,ll_variance;
+    LinearLayout ll_stud_pres, ll_variance;
     InstMainViewModel instMainViewModel;
     CoordinatorLayout bottom_ll;
     SharedPreferences sharedPreferences;
@@ -88,7 +88,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                         @Override
                         public void onChanged(MasterInstituteInfo masterInstituteInfos) {
                             masterInstituteInfoLiveData.removeObservers(StudentsAttendActivity.this);
-                            if(masterInstituteInfos!=null) {
+                            if (masterInstituteInfos != null) {
                                 StudentsAttendActivity.this.masterInstituteInfos = masterInstituteInfos;
                                 List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
                                 if (masterClassInfos != null && masterClassInfos.size() > 0) {
@@ -110,7 +110,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                                     binding.recyclerView.setVisibility(View.GONE);
                                 }
 
-                            }else{
+                            } else {
                                 binding.emptyView.setVisibility(View.VISIBLE);
                                 binding.recyclerView.setVisibility(View.GONE);
                             }
@@ -234,12 +234,12 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                 if (et_studPresInsp.getVisibility() == View.VISIBLE) {
                     if (!TextUtils.isEmpty(et_studMarkedPres.getText().toString()) &&
                             !TextUtils.isEmpty(et_studPresInsp.getText().toString())) {
-                        String var=null;
-                        if(Integer.parseInt(et_studMarkedPres.getText().toString().trim())>Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
+                        String var = null;
+                        if (Integer.parseInt(et_studMarkedPres.getText().toString().trim()) > Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
                             var = String.valueOf(Integer.parseInt(et_studMarkedPres.getText().toString().trim()) -
                                     Integer.parseInt(et_studPresInsp.getText().toString().trim()));
-                        }else{
-                            var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim())-
+                        } else {
+                            var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim()) -
                                     Integer.parseInt(et_studMarkedPres.getText().toString().trim()));
                         }
                         tv_variance.setText(var);
@@ -267,14 +267,15 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
                     if (et_studMarkedPres.getVisibility() == View.VISIBLE) {
                         if (!TextUtils.isEmpty(et_studMarkedPres.getText().toString()) &&
                                 !TextUtils.isEmpty(et_studPresInsp.getText().toString())) {
-                            String var=null;
-                            if(Integer.parseInt(et_studMarkedPres.getText().toString().trim())>Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
+                            String var = null;
+                            if (Integer.parseInt(et_studMarkedPres.getText().toString().trim()) > Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
                                 var = String.valueOf(Integer.parseInt(et_studMarkedPres.getText().toString().trim()) -
                                         Integer.parseInt(et_studPresInsp.getText().toString().trim()));
-                            }else{
-                                var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim())-
+                            } else {
+                                var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim()) -
                                         Integer.parseInt(et_studMarkedPres.getText().toString().trim()));
-                            }     tv_variance.setText(var);
+                            }
+                            tv_variance.setText(var);
                         } else {
                             tv_variance.setText("");
                         }
@@ -330,7 +331,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         if (TextUtils.isEmpty(IsattenMarked)) {
             showBottomSheetSnackBar(getResources().getString(R.string.attendance_marked));
             flag = false;
-        } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE) {
+        } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE || count_reg.equals("0")) {
             et_studMarkedPres.requestFocus();
             showBottomSheetSnackBar(getResources().getString(R.string.count_in_register));
             flag = false;
@@ -342,7 +343,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             if (Integer.parseInt(et_studMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
                 showBottomSheetSnackBar(getResources().getString(R.string.stud_marked_greater_than_roll));
                 flag = false;
-            }else if(Integer.parseInt(et_studMarkedPres.getText().toString())==0){
+            } else if (Integer.parseInt(et_studMarkedPres.getText().toString()) == 0) {
                 showBottomSheetSnackBar(getString(R.string.greater_than_zero));
                 flag = false;
             } else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {

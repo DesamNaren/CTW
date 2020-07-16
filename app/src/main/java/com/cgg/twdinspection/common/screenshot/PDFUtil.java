@@ -257,7 +257,7 @@ public class PDFUtil {
                 file.mkdirs();
             }
 
-            pdfFile = new File(file.getPath(), mFilePath);
+            pdfFile = new File(mFilePath);
 
 //            if (mFilePath == null || mFilePath.isEmpty()) {
 //                pdfFile = File.createTempFile(Long.toString(new Date().getTime()), "pdf");

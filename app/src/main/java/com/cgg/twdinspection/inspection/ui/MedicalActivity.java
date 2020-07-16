@@ -25,11 +25,10 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMedicalBinding;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
-import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.CallHealthCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.CallHealthViewModel;
@@ -40,8 +39,6 @@ import com.cgg.twdinspection.inspection.viewmodel.MedicalViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -67,10 +64,10 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     private int localFlag;
     String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
     StudentsAttndViewModel studentsAttndViewModel;
-    private int totalStrength=0;
+    private int totalStrength = 0;
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
     }
 
 
@@ -162,12 +159,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                     callHealth100 = "YES";
                     binding.llScreenedByCallHealth.setVisibility(View.VISIBLE);
                     binding.llLeftForScreening.setVisibility(View.GONE);
-                    left_for_screening=null;
+                    left_for_screening = null;
                 } else if (selctedItem == R.id.no_call_health_100) {
                     callHealth100 = "NO";
                     binding.llScreenedByCallHealth.setVisibility(View.GONE);
                     binding.llLeftForScreening.setVisibility(View.VISIBLE);
-                    screened_by_call_health=null;
+                    screened_by_call_health = null;
                 } else callHealth100 = null;
             }
         });
@@ -334,8 +331,6 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
         });
 
 
-
-
         binding.etFever.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -344,9 +339,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int fevCnt = Integer.valueOf(s.toString());
-                    if(fevCnt>totalStrength){
+                    if (fevCnt > totalStrength) {
                         binding.etFever.setText("");
                         binding.etFever.setError(getString(R.string.count_not_exceed_strength));
                         binding.etFever.requestFocus();
@@ -367,9 +362,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int fevCnt = Integer.valueOf(s.toString());
-                    if(fevCnt>totalStrength){
+                    if (fevCnt > totalStrength) {
                         binding.etCold.setText("");
                         binding.etCold.setError(getString(R.string.count_not_exceed_strength));
                         binding.etCold.requestFocus();
@@ -390,9 +385,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int fevCnt = Integer.valueOf(s.toString());
-                    if(fevCnt>totalStrength){
+                    if (fevCnt > totalStrength) {
                         binding.etDiarrhea.setText("");
                         binding.etDiarrhea.setError(getString(R.string.count_not_exceed_strength));
                         binding.etDiarrhea.requestFocus();
@@ -413,9 +408,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int fevCnt = Integer.valueOf(s.toString());
-                    if(fevCnt>totalStrength){
+                    if (fevCnt > totalStrength) {
                         binding.etHeadache.setText("");
                         binding.etHeadache.setError(getString(R.string.count_not_exceed_strength));
                         binding.etHeadache.requestFocus();
@@ -427,7 +422,8 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             public void afterTextChanged(Editable s) {
 
             }
-        });binding.etMalaria.addTextChangedListener(new TextWatcher() {
+        });
+        binding.etMalaria.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -435,9 +431,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int fevCnt = Integer.valueOf(s.toString());
-                    if(fevCnt>totalStrength){
+                    if (fevCnt > totalStrength) {
                         binding.etMalaria.setText("");
                         binding.etMalaria.setError(getString(R.string.count_not_exceed_strength));
                         binding.etMalaria.requestFocus();
@@ -458,9 +454,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int cnt = Integer.valueOf(s.toString());
-                    if(cnt>totalStrength){
+                    if (cnt > totalStrength) {
                         binding.etOthers.setText("");
                         binding.etOthers.setError(getString(R.string.count_not_exceed_strength));
                         binding.etOthers.requestFocus();
@@ -481,9 +477,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int cnt = Integer.valueOf(s.toString());
-                    if(cnt>totalStrength){
+                    if (cnt > totalStrength) {
                         binding.etLeftForScreening.setText("");
                         binding.etLeftForScreening.setError(getString(R.string.count_not_exceed_strength));
                         binding.etLeftForScreening.requestFocus();
@@ -504,9 +500,9 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(!TextUtils.isEmpty(s)){
+                if (!TextUtils.isEmpty(s)) {
                     int cnt = Integer.valueOf(s.toString());
-                    if(cnt>totalStrength){
+                    if (cnt > totalStrength) {
                         binding.etScreenedByCallHealth.setText("");
                         binding.etScreenedByCallHealth.setError(getString(R.string.count_not_exceed_strength));
                         binding.etScreenedByCallHealth.requestFocus();
@@ -533,12 +529,12 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
                 if (masterClassInfos != null && masterClassInfos.size() > 0) {
                     for (int i = 0; i < masterClassInfos.size(); i++) {
                         if (masterClassInfos.get(i).getStudentCount() > 0) {
-                          totalStrength+=masterClassInfos.get(i).getStudentCount();
+                            totalStrength += masterClassInfos.get(i).getStudentCount();
                         }
                     }
                 }
 
-                binding.totalStrength.setText("Institute overall strength: "+ totalStrength);
+                binding.totalStrength.setText("Institute overall strength: " + totalStrength);
 
                 try {
                     localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
@@ -567,11 +563,11 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
     private boolean validateData(int tot_cnt) {
 
-        if (TextUtils.isEmpty(sickboarders)) {
+        if (TextUtils.isEmpty(sickboarders) || sickboarders.equals("0")) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders));
             binding.etSickboarders.requestFocus();
             return false;
-        } else if (TextUtils.isEmpty(sickboardersArea)) {
+        } else if (TextUtils.isEmpty(sickboardersArea) || sickboardersArea.equals("0")) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders_area));
             binding.etSickboardersArea.requestFocus();
             return false;
@@ -591,11 +587,11 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgCallHealth100);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_call_health_100));
             return false;
-        } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health)) {
+        } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health) || screened_by_call_health.equals("0")) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health));
             binding.etScreenedByCallHealth.requestFocus();
             return false;
-        } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening)) {
+        } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening) || left_for_screening.equals("0")) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening));
             binding.etLeftForScreening.requestFocus();
             return false;
