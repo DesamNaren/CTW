@@ -305,9 +305,9 @@
     <string name="medical_check_up_done_by_whom">Medical checkup done by whom</string>
     <string name="sel_medical_check_up_done_by_whom">Select medical check up done by whom</string>
     <string name="tabs_of_anm_weekly_updated">Whether part time health coordinator health condition being monitored by them through tab or not?</string>
-    <string name="sel_tabs_of_anm_weekly_updated">Select tabs of ANM weekly updated</string>
+    <string name="sel_tabs_of_anm_weekly_updated">Select part time health coordinator health condition being monitored by them through tab or not</string>
     <string name="medical_officer">Medical Officer</string>
-    <string name="anm">Part time health coordinator</string>
+    <string name="anm">ANM</string>
     <string name="call_health_100">Did screening completed for all students by call health?</string>
     <string name="sel_call_health_100">Select screening completed for all students by call health</string>
     <string name="sel_screened_by_call_health">Enter no of students screened by call health</string>
@@ -1077,5 +1077,11 @@
     <string name="capture_class_per">Please capture classes performance</string>
     <string name="enter_how_many_out_of_a_total_no">Enter how many,out of a total no</string>
     <string name="pdf_preview">PDF Preview</string>
+    <string name="sel_sick_boarders_zero">Sick boarders count should not be zero</string>
+    <string name="sel_sick_boarders_area_zero">Sick boarders referred to area/district hospital should not be zero</string>
+    <string name="sel_screened_by_call_health_zero">Students screened by call health count should not be zero</string>
+    <string name="sel_left_for_screening_zero">Students left for screening count should not be zero</string>
+    <string name="count_in_register_zero">Students count in register should not be zero</string>
+    <string name="total_leaves_zero">Total leaves should not be zero</string>
 
 </resources>

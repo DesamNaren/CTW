@@ -563,12 +563,22 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
 
     private boolean validateData(int tot_cnt) {
 
-        if (TextUtils.isEmpty(sickboarders) || sickboarders.equals("0")) {
+        if (TextUtils.isEmpty(sickboarders)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders));
             binding.etSickboarders.requestFocus();
             return false;
-        } else if (TextUtils.isEmpty(sickboardersArea) || sickboardersArea.equals("0")) {
+        } else if (sickboarders.equals("0")) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_sick_boarders_zero));
+            binding.etSickboarders.setText("");
+            binding.etSickboarders.requestFocus();
+            return false;
+        } else if (TextUtils.isEmpty(sickboardersArea)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_no_of_sick_boarders_area));
+            binding.etSickboardersArea.requestFocus();
+            return false;
+        } else if (sickboardersArea.equals("0")) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_sick_boarders_area_zero));
+            binding.etSickboardersArea.setText("");
             binding.etSickboardersArea.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(checkUpDate)) {
@@ -587,12 +597,22 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgCallHealth100);
             showBottomSheetSnackBar(getResources().getString(R.string.sel_call_health_100));
             return false;
-        } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health) || screened_by_call_health.equals("0")) {
+        } else if (callHealth100.equalsIgnoreCase("Yes") && TextUtils.isEmpty(screened_by_call_health)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health));
             binding.etScreenedByCallHealth.requestFocus();
             return false;
-        } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening) || left_for_screening.equals("0")) {
+        } else if (callHealth100.equalsIgnoreCase("Yes") && screened_by_call_health.equals("0")) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_screened_by_call_health_zero));
+            binding.etScreenedByCallHealth.setText("");
+            binding.etScreenedByCallHealth.requestFocus();
+            return false;
+        } else if (callHealth100.equalsIgnoreCase("No") && TextUtils.isEmpty(left_for_screening)) {
             showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening));
+            binding.etLeftForScreening.requestFocus();
+            return false;
+        } else if (callHealth100.equalsIgnoreCase("No") && left_for_screening.equals("0")) {
+            showBottomSheetSnackBar(getResources().getString(R.string.sel_left_for_screening_zero));
+            binding.etLeftForScreening.setText("");
             binding.etLeftForScreening.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(recorderedInRegister)) {

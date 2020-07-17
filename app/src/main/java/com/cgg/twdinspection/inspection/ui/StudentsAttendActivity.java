@@ -331,9 +331,14 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         if (TextUtils.isEmpty(IsattenMarked)) {
             showBottomSheetSnackBar(getResources().getString(R.string.attendance_marked));
             flag = false;
-        } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE || count_reg.equals("0")) {
+        } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE ) {
             et_studMarkedPres.requestFocus();
             showBottomSheetSnackBar(getResources().getString(R.string.count_in_register));
+            flag = false;
+        } else if (ll_stud_pres.getVisibility() == View.VISIBLE && count_reg.equals("0")) {
+            showBottomSheetSnackBar(getResources().getString(R.string.count_in_register_zero));
+            et_studMarkedPres.setText("");
+            et_studMarkedPres.requestFocus();
             flag = false;
         } else if (TextUtils.isEmpty(count_during_insp)) {
             et_studPresInsp.requestFocus();

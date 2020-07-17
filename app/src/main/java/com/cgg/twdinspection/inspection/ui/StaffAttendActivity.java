@@ -141,15 +141,19 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.sel_category));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed()) || staffAttendanceEntitiesmain.get(i).getLeaves_availed().equals("0")) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.total_leaves));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken()) || staffAttendanceEntitiesmain.get(i).getLeaves_taken().equals("0")) {
+            } else if (staffAttendanceEntitiesmain.get(i).getLeaves_availed().equals("0")) {
+                returnFlag = false;
+                showSnackBar(getString(R.string.total_leaves_zero));
+                break;
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_taken())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leaves_taken));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal()) || staffAttendanceEntitiesmain.get(i).getLeaves_bal().equals("0")) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_bal())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leave_bal));
                 break;

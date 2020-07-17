@@ -279,7 +279,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count > 0)
+                if (count > 0 && !holder.binding.etLeavesAvailed.getText().toString().equals("0"))
                     holder.binding.etLeavesTaken.setEnabled(true);
                 else {
                     holder.binding.etLeavesTaken.setEnabled(false);
