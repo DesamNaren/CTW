@@ -127,17 +127,18 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 //            if (inspReportData.getDietIssues().getDietListEntities() != null && inspReportData.getDietIssues().getDietListEntities().size() > 0) {
 //                setDietAdapter(inspReportData.getDietIssues().getDietListEntities());
 //            }
-           /* String infra = gson.toJson(inspReportData.getInfraMaintenance());
+            String infra = gson.toJson(inspReportData.getInfraMaintenance());
             if (!TextUtils.isEmpty(infra) && !infra.equalsIgnoreCase("{}")) {
-                binding.infra.setInspData(inspReportData.getInfraMaintenance());
+                binding.setInfra(inspReportData.getInfraMaintenance());
                 binding.executePendingBindings();
             }
+
             String academic = gson.toJson(inspReportData.getAcademicOverview());
             if (!TextUtils.isEmpty(academic) && !academic.equalsIgnoreCase("{}")) {
-                binding.academic.setInspData(inspReportData.getAcademicOverview());
+                binding.setAcademic(inspReportData.getAcademicOverview());
                 binding.executePendingBindings();
             }
-            String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
+           /* String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
             if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")) {
                 binding.coCurricular.setInspData(inspReportData.getCoCurricularInfo());
                 binding.executePendingBindings();
@@ -201,6 +202,10 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     views.add(binding.generalInfoPdf);
                     views.add(binding.medicalPdf);
                     views.add(binding.dietPdf);
+                    views.add(binding.infraPdf1);
+                    views.add(binding.infraPdf2);
+                    views.add(binding.infraPdf3);
+                    views.add(binding.academicPdf1);
 
                     PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 
