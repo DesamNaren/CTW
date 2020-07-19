@@ -20,9 +20,11 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
+import com.cgg.twdinspection.inspection.reports.adapter.DietIssuesReportAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
+import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
@@ -69,6 +71,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             Font.BOLD);
     private java.util.List<StudentAttendenceInfo> studentAttendInfoList;
     private java.util.List<StaffAttendenceInfo> staffAttendenceInfoList;
+    private java.util.List<DietListEntity> dietListEntityList;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -126,9 +129,10 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.setDiet(inspReportData.getDietIssues());
                 binding.executePendingBindings();
             }
-//            if (inspReportData.getDietIssues().getDietListEntities() != null && inspReportData.getDietIssues().getDietListEntities().size() > 0) {
-//                setDietAdapter(inspReportData.getDietIssues().getDietListEntities());
-//            }
+            if (inspReportData.getDietIssues().getDietListEntities() != null && inspReportData.getDietIssues().getDietListEntities().size() > 0) {
+                dietListEntityList = inspReportData.getDietIssues().getDietListEntities();
+                setDietAdapter(dietListEntityList);
+            }
             String infra = gson.toJson(inspReportData.getInfraMaintenance());
             if (!TextUtils.isEmpty(infra) && !infra.equalsIgnoreCase("{}")) {
                 binding.setInfra(inspReportData.getInfraMaintenance());
@@ -257,9 +261,22 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         Paragraph subPara = new Paragraph("", subFont);
         Section subCatPart = catPart.addSection(subPara);
         Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 5);
+        addEmptyLine(paragraph, 2);
         subCatPart.add(paragraph);
         createStaffTable(subCatPart);
+        document.add(catPart);
+    }
+
+    private void addDietContent(Document document) throws DocumentException {
+        Anchor anchor = new Anchor("Diet Issues - Provision of Supplies", catFont);
+        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+        catPart.setNumberDepth(-1);
+        Paragraph subPara = new Paragraph("", subFont);
+        Section subCatPart = catPart.addSection(subPara);
+        Paragraph paragraph = new Paragraph();
+        addEmptyLine(paragraph, 2);
+        subCatPart.add(paragraph);
+        createDietTable(subCatPart);
         document.add(catPart);
     }
 
@@ -329,6 +346,36 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
+    private void createDietTable(Section subCatPart)
+            throws BadElementException {
+        PdfPTable table = new PdfPTable(3);
+        PdfPCell c1 = new PdfPCell(new Phrase("Item Type"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Book Balance"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Ground Balance"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < dietListEntityList.size(); i++) {
+                table.addCell(dietListEntityList.get(i).getItemName());
+                table.addCell(dietListEntityList.get(i).getBookBal());
+                table.addCell(dietListEntityList.get(i).getGroundBal());
+            }
+            subCatPart.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
@@ -343,6 +390,14 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         layoutManager = new LinearLayoutManager(this);
         binding.staffAtt.recyclerView.setLayoutManager(layoutManager);
         binding.staffAtt.recyclerView.setAdapter(staffAttReportAdapter);
+    }
+
+
+    private void setDietAdapter(java.util.List<DietListEntity> dietListEntities) {
+        DietIssuesReportAdapter dietIssuesReportAdapter = new DietIssuesReportAdapter(this, dietListEntities);
+        layoutManager = new LinearLayoutManager(this);
+        binding.dietIssues.recyclerView.setLayoutManager(layoutManager);
+        binding.dietIssues.recyclerView.setAdapter(dietIssuesReportAdapter);
     }
 
 
@@ -421,6 +476,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             document.open();
             addContent(document);
             addStaffContent(document);
+            addDietContent(document);
             document.close();
 
 //            File f =new File(filePath);
