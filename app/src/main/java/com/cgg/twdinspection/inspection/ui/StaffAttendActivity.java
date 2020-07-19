@@ -157,7 +157,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leave_bal));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended()) || staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended().equals("0")) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
                 break;

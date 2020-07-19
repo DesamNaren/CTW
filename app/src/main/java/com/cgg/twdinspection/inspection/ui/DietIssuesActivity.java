@@ -593,11 +593,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             ScrollToView(binding.rgMaintainingRegister);
             return false;
         }
-        if (TextUtils.isEmpty(menu_chart_served)) {
-            showSnackBar(getResources().getString(R.string.select_menu_chart_served));
-            ScrollToView(binding.rgMenuChartServed);
-            return false;
-        }
+//        if (TextUtils.isEmpty(menu_chart_served)) {
+//            showSnackBar(getResources().getString(R.string.select_menu_chart_served));
+//            ScrollToView(binding.rgMenuChartServed);
+//            return false;
+//        }
         if (flag_officer == 0) {
             showSnackBar(getString(R.string.insp_officer_image));
             return false;
