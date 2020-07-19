@@ -539,7 +539,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
 
-                    finalStockDetailsResponse = new StockDetailsResponse();
+
                     finalStockDetailsResponse.setEssential_commodities(finalEssCom);
                     finalStockDetailsResponse.setDialy_requirements(finalDaiCom);
                     finalStockDetailsResponse.setEmpties(finalEmpCom);
@@ -548,7 +548,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
                     String stockData = gson.toJson(finalStockDetailsResponse);
                     editor.putString(AppConstants.finalStockData, stockData);
-
+                    editor.commit();
 
                     editor.commit();
 

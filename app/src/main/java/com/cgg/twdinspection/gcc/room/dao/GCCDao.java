@@ -25,11 +25,10 @@ import java.util.List;
 
 @Dao
 public interface GCCDao {
-    @Query("SELECT DISTINCT divisionName from Divisions")
-    LiveData<List<String>> getDivisionsInfo();
+//    @Query("SELECT DISTINCT divisionName from Divisions")
+//    LiveData<List<String>> getDivisionsInfo();
 
-    @Query("SELECT * from Divisions where divisionId LIKE :divID")
-    LiveData<List<DivisionsInfo>> getSocietyInfo(String divID);
+
 
 
     @Query("SELECT * from DR_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
@@ -75,12 +74,45 @@ public interface GCCDao {
     @Query("SELECT * from P_Unit where divisionId LIKE :divId")
     LiveData<List<PUnits>> getPUnitsDiv(String divId);
 
+
+
+
+
+
+
+
+
+
+
+
+    @Query("SELECT DISTINCT divisionName from Divisions")
+    LiveData<List<String>> getDivisionsInfo();
+
     @Query("SELECT divisionId from Divisions where divisionName LIKE :divisionName")
     LiveData<String> getDivisionID(String divisionName);
 
+    @Query("SELECT * from Divisions where divisionId LIKE :divID")
+    LiveData<List<DivisionsInfo>> getSocietyInfo(String divID);
 
     @Query("SELECT societyId from Divisions where  divisionId LIKE :divisionID AND societyName LIKE :societyName")
     LiveData<String> getSocietyID(String divisionID, String societyName);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Query("SELECT * from DR_GoDown where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :goDownName")
     LiveData<DrGodowns> getGoDownID(String divisionID, String societyID, String goDownName);

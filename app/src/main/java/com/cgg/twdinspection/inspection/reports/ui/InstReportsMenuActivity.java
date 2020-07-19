@@ -21,8 +21,10 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
+import com.cgg.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
+import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
@@ -66,6 +68,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
             Font.BOLD);
     private java.util.List<StudentAttendenceInfo> studentAttendInfoList;
+    private java.util.List<StaffAttendenceInfo> staffAttendenceInfoList;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -105,14 +108,13 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     setStudAdapter(studentAttendInfoList);
                 }
             }
-
-           /*String staffAttendence = gson.toJson(inspReportData.getStaffAttendenceInfo());
+            String staffAttendence = gson.toJson(inspReportData.getStaffAttendenceInfo());
             if (!TextUtils.isEmpty(staffAttendence) && !staffAttendence.equalsIgnoreCase("{}")) {
-                staffAttendenceInfos = inspReportData.getStaffAttendenceInfo();
-                if (staffAttendenceInfos != null && staffAttendenceInfos.size() > 0) {
-                    setStaffAdapter(staffAttendenceInfos);
+                staffAttendenceInfoList = inspReportData.getStaffAttendenceInfo();
+                if (staffAttendenceInfoList != null && staffAttendenceInfoList.size() > 0) {
+                    setStaffAdapter(staffAttendenceInfoList);
                 }
-            }*/
+            }
 
             String medical = gson.toJson(inspReportData.getMedicalIssues());
             if (!TextUtils.isEmpty(medical) && !medical.equalsIgnoreCase("{}")) {
@@ -247,12 +249,102 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         document.add(catPart);
     }
 
+
+    private void addStaffContent(Document document) throws DocumentException {
+        Anchor anchor = new Anchor("Staff Attendance", catFont);
+        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+        catPart.setNumberDepth(-1);
+        Paragraph subPara = new Paragraph("", subFont);
+        Section subCatPart = catPart.addSection(subPara);
+        Paragraph paragraph = new Paragraph();
+        addEmptyLine(paragraph, 5);
+        subCatPart.add(paragraph);
+        createStaffTable(subCatPart);
+        document.add(catPart);
+    }
+
+    private void createStaffTable(Section subCatPart)
+            throws BadElementException {
+        PdfPTable table = new PdfPTable(8);
+        PdfPCell c1 = new PdfPCell(new Phrase("ID"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Name"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Designation"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Category"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Total leaves"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Leaves taken"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Leaves balance"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+        c1 = new PdfPCell(new Phrase("Attendance"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+//        c1 = new PdfPCell(new Phrase("Yesterday super vision duty allotted"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+//        c1 = new PdfPCell(new Phrase("Last week turn duties attended"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+//        c1 = new PdfPCell(new Phrase("Last year academic panel grade"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < staffAttendenceInfoList.size(); i++) {
+                table.addCell(staffAttendenceInfoList.get(i).getEmpId());
+                table.addCell(staffAttendenceInfoList.get(i).getEmpName());
+                table.addCell(staffAttendenceInfoList.get(i).getDesignation());
+                table.addCell(staffAttendenceInfoList.get(i).getCategory());
+                table.addCell(staffAttendenceInfoList.get(i).getLeavesAvailed());
+                table.addCell(staffAttendenceInfoList.get(i).getLeavesTaken());
+                table.addCell(staffAttendenceInfoList.get(i).getLeavesBal());
+                table.addCell(staffAttendenceInfoList.get(i).getEmpPresence());
+//                table.addCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted());
+//                table.addCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended());
+//                table.addCell(staffAttendenceInfoList.get(i).getAcadPanelGrade());
+            }
+            subCatPart.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
     private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
         StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
         layoutManager = new LinearLayoutManager(this);
         binding.studAtt.recyclerView.setLayoutManager(layoutManager);
         binding.studAtt.recyclerView.setAdapter(stockSubAdapter);
     }
+
+    private void setStaffAdapter(java.util.List<StaffAttendenceInfo> staffAttendenceInfoList) {
+        StaffAttReportAdapter staffAttReportAdapter = new StaffAttReportAdapter(this, staffAttendenceInfoList);
+        layoutManager = new LinearLayoutManager(this);
+        binding.staffAtt.recyclerView.setLayoutManager(layoutManager);
+        binding.staffAtt.recyclerView.setAdapter(staffAttReportAdapter);
+    }
+
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
@@ -328,7 +420,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
             document.open();
             addContent(document);
-//            addStaffContent(document);
+            addStaffContent(document);
             document.close();
 
 //            File f =new File(filePath);

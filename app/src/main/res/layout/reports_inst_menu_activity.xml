@@ -812,6 +812,10 @@
                         android:id="@+id/stud_att"
                         layout="@layout/report_activity_students_attendance" />
 
+                    <include
+                        android:id="@+id/staff_att"
+                        layout="@layout/report_activity_students_attendance" />
+
                     <LinearLayout
                         android:id="@+id/medical_pdf"
                         android:layout_width="match_parent"
