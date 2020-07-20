@@ -212,6 +212,9 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     views.add(binding.infraPdf2);
                     views.add(binding.infraPdf3);
                     views.add(binding.academicPdf1);
+                    views.add(binding.academicPdf2);
+                    views.add(binding.academicPdf3);
+                    views.add(binding.cocurricularPdf1);
 
                     PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 
