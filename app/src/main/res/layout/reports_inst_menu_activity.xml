@@ -823,6 +823,9 @@
                     <include
                         android:id="@+id/diet_issues"
                         layout="@layout/activity_report_diet_issues" />
+                    <include
+                        android:id="@+id/academic_grade"
+                        layout="@layout/activity_report_academic_grade" />
 
                     <LinearLayout
                         android:id="@+id/medical_pdf"

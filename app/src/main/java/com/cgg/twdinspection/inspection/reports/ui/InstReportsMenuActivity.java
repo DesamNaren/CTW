@@ -21,9 +21,11 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
 import com.cgg.twdinspection.inspection.reports.adapter.DietIssuesReportAdapter;
+import com.cgg.twdinspection.inspection.reports.adapter.ReportAcademicGradeAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.StaffAttReportAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.StuAttReportAdapter;
+import com.cgg.twdinspection.inspection.reports.source.AcademicGradeEntity;
 import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
@@ -72,6 +74,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private java.util.List<StudentAttendenceInfo> studentAttendInfoList;
     private java.util.List<StaffAttendenceInfo> staffAttendenceInfoList;
     private java.util.List<DietListEntity> dietListEntityList;
+    private java.util.List<AcademicGradeEntity> academicGradeEntityList;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -144,6 +147,14 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.setAcademic(inspReportData.getAcademicOverview());
                 binding.executePendingBindings();
             }
+
+
+            if (inspReportData.getAcademicOverview().getAcademicGradeEntities() != null && inspReportData.getAcademicOverview().getAcademicGradeEntities().size() > 0) {
+                academicGradeEntityList = inspReportData.getAcademicOverview().getAcademicGradeEntities();
+                setAcademicAdapter(academicGradeEntityList);
+            }
+
+
            /* String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
             if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")) {
                 binding.coCurricular.setInspData(inspReportData.getCoCurricularInfo());
@@ -243,6 +254,13 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
+    private void setAcademicAdapter(List<AcademicGradeEntity> academicGradeEntityList) {
+        ReportAcademicGradeAdapter reportAcademicGradeAdapter = new ReportAcademicGradeAdapter(this, academicGradeEntityList);
+        layoutManager = new LinearLayoutManager(this);
+        binding.academicGrade.gradeRV.setLayoutManager(layoutManager);
+        binding.academicGrade.gradeRV.setAdapter(reportAcademicGradeAdapter);
+    }
+
     private void addContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor("Student Attendance", catFont);
         Chapter catPart = new Chapter(new Paragraph(anchor), 0);
@@ -283,6 +301,19 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         document.add(catPart);
     }
 
+    private void addAcademicContent(Document document) throws DocumentException {
+        Anchor anchor = new Anchor("Academic OverView - Classes Performance", catFont);
+        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+        catPart.setNumberDepth(-1);
+        Paragraph subPara = new Paragraph("", subFont);
+        Section subCatPart = catPart.addSection(subPara);
+        Paragraph paragraph = new Paragraph();
+        addEmptyLine(paragraph, 2);
+        subCatPart.add(paragraph);
+        createAcademicTable(subCatPart);
+        document.add(catPart);
+    }
+
     private void createStaffTable(Section subCatPart)
             throws BadElementException {
         PdfPTable table = new PdfPTable(8);
@@ -294,26 +325,26 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Designation"));
+        c1 = new PdfPCell(new Phrase("Designation   "));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Category"));
+        c1 = new PdfPCell(new Phrase("Category  "));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Total leaves"));
+        c1 = new PdfPCell(new Phrase("Total Leaves"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Leaves taken"));
+        c1 = new PdfPCell(new Phrase("Leaves Taken"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Leaves balance"));
+        c1 = new PdfPCell(new Phrase("Leave Balance"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
-        c1 = new PdfPCell(new Phrase("Attendance"));
+        c1 = new PdfPCell(new Phrase("Attendance  "));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 //        c1 = new PdfPCell(new Phrase("Yesterday super vision duty allotted"));
@@ -371,6 +402,69 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 table.addCell(dietListEntityList.get(i).getItemName());
                 table.addCell(dietListEntityList.get(i).getBookBal());
                 table.addCell(dietListEntityList.get(i).getGroundBal());
+            }
+            subCatPart.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void createAcademicTable(Section subCatPart)
+            throws BadElementException {
+        PdfPTable table = new PdfPTable(9);
+        PdfPCell c1 = new PdfPCell(new Phrase("Class Name"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Total Strength"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Grade A"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+
+        c1 = new PdfPCell(new Phrase("Grade B"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Grade C"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Grade D"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Grade E"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Grade A+"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+
+        c1 = new PdfPCell(new Phrase("Grade B+"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < academicGradeEntityList.size(); i++) {
+                table.addCell(academicGradeEntityList.get(i).getClassType());
+                table.addCell(academicGradeEntityList.get(i).getTotalStudents());
+                table.addCell(academicGradeEntityList.get(i).getGradeAStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeBStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeCStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeDStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeEStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeAplusStuCount());
+                table.addCell(academicGradeEntityList.get(i).getGradeBplusStuCount());
             }
             subCatPart.add(table);
         } catch (Exception e) {
@@ -480,6 +574,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             addContent(document);
             addStaffContent(document);
             addDietContent(document);
+            addAcademicContent(document);
             document.close();
 
 //            File f =new File(filePath);
