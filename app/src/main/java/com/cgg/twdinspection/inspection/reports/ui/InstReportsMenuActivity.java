@@ -157,18 +157,19 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 setAcademicAdapter(academicGradeEntityList);
             }
 
-
-           /* String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
+            String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
             if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")) {
-                binding.coCurricular.setInspData(inspReportData.getCoCurricularInfo());
+                binding.setCocurricular(inspReportData.getCoCurricularInfo());
                 binding.executePendingBindings();
             }
+
             String entitlements = gson.toJson(inspReportData.getEntitlements());
             if (!TextUtils.isEmpty(entitlements) && !entitlements.equalsIgnoreCase("{}")) {
-                binding.entitlement.setInspData(inspReportData.getEntitlements());
+                binding.setEntitlements(inspReportData.getEntitlements());
                 binding.executePendingBindings();
             }
-            String registers = gson.toJson(inspReportData.getRegisters());
+
+           /* String registers = gson.toJson(inspReportData.getRegisters());
             if (!TextUtils.isEmpty(registers) && !registers.equalsIgnoreCase("{}")) {
                 binding.registers.setInspData(inspReportData.getRegisters());
                 binding.executePendingBindings();
@@ -229,6 +230,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     views.add(binding.academicPdf2);
                     views.add(binding.academicPdf3);
                     views.add(binding.cocurricularPdf1);
+                    views.add(binding.entitlementPdf);
 
                     PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 

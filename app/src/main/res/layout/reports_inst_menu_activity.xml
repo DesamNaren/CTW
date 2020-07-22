@@ -29,6 +29,10 @@
             name="cocurricular"
             type="com.cgg.twdinspection.inspection.reports.source.CoCurricularInfo" />
 
+        <variable
+            name="entitlements"
+            type="com.cgg.twdinspection.inspection.reports.source.Entitlements" />
+
     </data>
 
 
@@ -823,6 +827,7 @@
                     <include
                         android:id="@+id/diet_issues"
                         layout="@layout/activity_report_diet_issues" />
+
                     <include
                         android:id="@+id/academic_grade"
                         layout="@layout/activity_report_academic_grade" />
@@ -5721,6 +5726,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/district_level"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -5745,6 +5751,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/state_level"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -5769,6 +5776,7 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/national_level"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -6058,7 +6066,6 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@string/whether_ncc_student_implemented_in_school"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
@@ -6588,6 +6595,632 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/entitlement_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="@string/title_entitlements"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="83."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/entitlements_provided_to_students"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/bedsheets"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.bedSheets}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/carpets"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.carpets}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/uniforms"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.uniforms}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/sports_dress"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.sportsDress}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/slippers"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.slippers}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/night_dress"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.nightDress}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/school_bags"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.schoolBags}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/sanitary_napkins_supplied"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.sanitaryNapkinsSupplied}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{entitlements.sanitaryNapkinsSupplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/sanitary_napkins"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.sanitaryNapkins}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{entitlements.sanitaryNapkinsSupplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/reason"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.sanitaryNapkinsReason}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/notes_supplied"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.notesSupplied}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="84."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/entitlements_cosmetics"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.cosmeticDistributed}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{entitlements.cosmeticDistributed.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/entitlements_cosmetics_upto_month"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.cosmeticDistributedUptoMonth}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{entitlements.cosmeticDistributed.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/reason"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.cosmeticReason}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="85."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/entitlements_dress_distributed"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{entitlements.pairOfDressDistributedCount}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="86."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/entitlements_uniforms"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{entitlements.uniformsProvidedQuality}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="87."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/entitlements_haircut"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{entitlements.hairCutComplted}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:textSize="@dimen/dimen_text"
+                                    android:text="88."
+                                    android:textColor="@color/black" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/entitlements_haircut_date"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{entitlements.lastHaircutDate}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </ScrollView>
@@ -6597,7 +7230,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/bg"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_menu"
