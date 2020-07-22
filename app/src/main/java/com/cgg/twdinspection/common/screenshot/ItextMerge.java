@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfContentByte;
@@ -28,7 +29,8 @@ public class ItextMerge {
     private File destFile = null;
     private PDFMergeListener listener;
 
-    public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener) {
+
+    public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener, InspReportData inspReportData) {
 
         this.filePath = filePath;
         this.filePath1 = filePath1;

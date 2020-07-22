@@ -3,6 +3,7 @@ package com.cgg.twdinspection.gcc.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -19,7 +20,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
 import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
@@ -30,6 +33,7 @@ import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PetrollReportFragment;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
+import com.cgg.twdinspection.gcc.reports.source.ReportStockDetails;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -40,10 +44,11 @@ import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportStockDetailsActivity extends AppCompatActivity {
+public class ReportStockDetailsActivity extends AppCompatActivity  implements PDFUtil.PDFUtilListener {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityReportStockDetailsBinding binding;
@@ -52,10 +57,16 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
     ReportData reportData;
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag, petrol_flag, lpg_flag;
     int pos=-1;
+    CustomProgressDialog customProgressDialog;
+    String directory_path, filePath;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_stock_details);
+        binding.header.ivPdf.setVisibility(View.VISIBLE);
+        customProgressDialog = new CustomProgressDialog(ReportStockDetailsActivity.this);
         binding.bottomLl.btnNext.setText("Next");
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -260,6 +271,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
                 adapter.addFrag(mfpFragment, "MFP Commodities");
                 mfp_flag = true;
             } else {
+
                 mfp_flag = false;
             }
 
@@ -301,6 +313,39 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             binding.tabs.setupWithViewPager(binding.viewPager);
             binding.viewPager.setAdapter(adapter);
 
+            binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        customProgressDialog.show();
+
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                            directory_path = getExternalFilesDir(null)
+                                    + "/" + "CTW/GCC/";
+                        } else {
+                            directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                    + "/" + "CTW/GCC/";
+                        }
+
+                        filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                        File file = new File(filePath);
+                        List<View> views = new ArrayList<>();
+                        views.add(binding.titlePdf);
+                        views.add(binding.generalPdf);
+                        views.add(binding.photosPdf);
+
+                        PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+
+                    } catch (Exception e) {
+                        if (customProgressDialog.isShowing())
+                            customProgressDialog.hide();
+
+                        Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
         }
 
 
@@ -334,6 +379,21 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
         snackbar.show();
     }
 
+    @Override
+    public void pdfGenerationSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+
+        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+    }
+
+    @Override
+    public void pdfGenerationFailure(Exception exception) {
+        customProgressDialog.hide();
+
+        Utils.customErrorAlert(ReportStockDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
 
@@ -362,5 +422,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity {
             return mFragmentTitleList.get(position);
         }
     }
+
+
+
 
 }

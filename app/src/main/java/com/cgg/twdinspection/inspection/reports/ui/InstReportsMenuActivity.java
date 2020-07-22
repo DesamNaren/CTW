@@ -1,7 +1,9 @@
 package com.cgg.twdinspection.inspection.reports.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -41,6 +43,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
@@ -562,9 +565,85 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
+    private void addPhotoContent(Document document) throws DocumentException {
+        new InsertPhotoAsyncTask(document).execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class InsertPhotoAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        Document document;
+
+        InsertPhotoAsyncTask(Document document) {
+            this.document = document;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            boolean flag = false;
+            Anchor anchor = new Anchor("Photos", catFont);
+            Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+            catPart.setNumberDepth(-1);
+            Paragraph subPara = new Paragraph("", subFont);
+            Section subCatPart = catPart.addSection(subPara);
+            Paragraph paragraph = new Paragraph();
+            addEmptyLine(paragraph, 2);
+            subCatPart.add(paragraph);
+            try {
+                createPhotoTable(subCatPart, document);
+                document.add(catPart);
+            } catch (BadElementException e) {
+                e.printStackTrace();
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+
+            return flag;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            document.close();
+            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this, inspReportData);
+
+        }
+    }
+
+    private void createPhotoTable(Section subCatPart, Document document)
+            throws BadElementException {
+
+        PdfPTable table = new PdfPTable(2);
+        PdfPCell c1 = new PdfPCell(new Phrase("Name"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase("Image"));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(c1);
+
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < inspReportData.getPhotos().size(); i++) {
+                table.addCell(inspReportData.getPhotos().get(i).getFileName());
+                Image image = Image.getInstance(inspReportData.getPhotos().get(i).getFilePath());
+                table.addCell(image);
+            }
+            subCatPart.add(table);
+            table.setTotalWidth(document.getPageSize().getWidth()/3);
+            table.setLockedWidth(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
-        customProgressDialog.hide();
+
         filePath2 = filePath + "_2" + ".pdf";
 
         try {
@@ -575,16 +654,12 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             addStaffContent(document);
             addDietContent(document);
             addAcademicContent(document);
-            document.close();
+            addPhotoContent(document);
 
-//            File f =new File(filePath);
-//            File f2 =new File(filePath);
-//            mergeFiles(f.getAbsolutePath(), f2.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this);
     }
 
     /*private void mergeFiles(String file1, String file2) {
@@ -676,12 +751,14 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     @Override
     public void pdfMergeSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
         Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
                 "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     @Override
     public void pdfMergeFailure(Exception exception) {
+        customProgressDialog.hide();
         Utils.customErrorAlert(InstReportsMenuActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
 
     }
