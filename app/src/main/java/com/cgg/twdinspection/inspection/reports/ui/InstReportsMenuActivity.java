@@ -169,18 +169,19 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.executePendingBindings();
             }
 
-           /* String registers = gson.toJson(inspReportData.getRegisters());
+            String registers = gson.toJson(inspReportData.getRegisters());
             if (!TextUtils.isEmpty(registers) && !registers.equalsIgnoreCase("{}")) {
-                binding.registers.setInspData(inspReportData.getRegisters());
-                binding.executePendingBindings();
-            }
-            String genComments = gson.toJson(inspReportData.getGeneralComments());
-            if (!TextUtils.isEmpty(genComments) && !genComments.equalsIgnoreCase("{}")) {
-                binding.genComments.setComments(inspReportData.getGeneralComments());
+                binding.setRegisters(inspReportData.getRegisters());
                 binding.executePendingBindings();
             }
 
-            if (inspReportData.getPhotos() != null && inspReportData.getPhotos().size() > 0) {
+            String genComments = gson.toJson(inspReportData.getGeneralComments());
+            if (!TextUtils.isEmpty(genComments) && !genComments.equalsIgnoreCase("{}")) {
+                binding.setComments(inspReportData.getGeneralComments());
+                binding.executePendingBindings();
+            }
+
+           /*  if (inspReportData.getPhotos() != null && inspReportData.getPhotos().size() > 0) {
                 String reportData = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
                 ReportData reportData1 = gson.fromJson(reportData, ReportData.class);
                 setPhotosAdapter(reportData1.getPhotos());
@@ -230,7 +231,11 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     views.add(binding.academicPdf2);
                     views.add(binding.academicPdf3);
                     views.add(binding.cocurricularPdf1);
+                    views.add(binding.cocurricularPdf2);
                     views.add(binding.entitlementPdf);
+                    views.add(binding.registersPdf1);
+                    views.add(binding.registersPdf2);
+                    views.add(binding.generalCommentsPdf);
 
                     PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 
@@ -633,7 +638,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 table.addCell(image);
             }
             subCatPart.add(table);
-            table.setTotalWidth(document.getPageSize().getWidth()/3);
+            table.setTotalWidth(document.getPageSize().getWidth() / 3);
             table.setLockedWidth(true);
 
         } catch (Exception e) {
