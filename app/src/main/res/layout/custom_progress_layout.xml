@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageprogress"
         android:layout_centerHorizontal="true"
-        android:paddingTop="@dimen/dimen_20dp"
-        android:textColor="@color/colorAccent"
+        android:layout_marginTop="30dp"
+        android:text="Loading..."
+        android:textColor="@color/white"
         android:textSize="@dimen/dimen_20dp"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -348,23 +348,27 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     }
 
     private void createFooter(Document document) {
-        Anchor anchor = new Anchor("", catFont);
-        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-        catPart.setNumberDepth(-1);
-        Paragraph subPara = new Paragraph("", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 5);
-        subCatPart.add(paragraph);
 
         PdfPTable pdfPTable = new PdfPTable(1);
-        pdfPTable.setWidthPercentage(90);
-        pdfPTable.addCell(getCell(inspReportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
+        pdfPTable.addCell(getCell(" ", PdfPCell.ALIGN_RIGHT));
+
         PdfPTable pdfPTable1 = new PdfPTable(1);
-        pdfPTable1.setWidthPercentage(90);
-        pdfPTable1.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
+        pdfPTable1.setWidthPercentage(80);
+        pdfPTable1.addCell(getCell(inspReportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
+
+        PdfPTable pdfPTable2 = new PdfPTable(1);
+        pdfPTable2.setWidthPercentage(80);
+        pdfPTable2.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
+
         try {
+
             document.add(pdfPTable);
+            document.add(pdfPTable);
+            document.add(pdfPTable);
+            document.add(pdfPTable1);
+            document.add(pdfPTable);
+            document.add(pdfPTable2);
+
         } catch (DocumentException e) {
             e.printStackTrace();
         }
