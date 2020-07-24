@@ -1687,7 +1687,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="@color/colorAccent"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 

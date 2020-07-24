@@ -50,7 +50,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
 
         binding = DataBindingUtil.setContentView(EngSyncActivity.this, R.layout.activity_eng_sync);
 
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         EngSyncViewModel viewModel = new EngSyncViewModel(EngSyncActivity.this, getApplication(), binding);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();

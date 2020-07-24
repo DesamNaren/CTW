@@ -36,7 +36,7 @@ public class LoginViewModel extends ViewModel {
     LoginViewModel(ActivityLoginCreBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
-        customProgressDialog = new CustomProgressDialog(context);
+        customProgressDialog = new CustomProgressDialog(context,"");
         username.setValue("maadhavisriram");
         password.setValue("guest");
 

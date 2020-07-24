@@ -86,7 +86,7 @@ public class EngReportActivity extends AppCompatActivity implements ErrorHandler
         }
 
         viewModel = new EngReportsViewModel(EngReportActivity.this, getApplication());
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         workDetails = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

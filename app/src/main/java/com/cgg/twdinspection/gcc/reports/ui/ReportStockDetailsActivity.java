@@ -33,7 +33,6 @@ import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PetrollReportFragment;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
-import com.cgg.twdinspection.gcc.reports.source.ReportStockDetails;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -66,7 +65,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity  implements PD
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_stock_details);
         binding.header.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(ReportStockDetailsActivity.this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         binding.bottomLl.btnNext.setText("Next");
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;

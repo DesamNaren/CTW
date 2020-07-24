@@ -64,7 +64,7 @@ public class SchemeSyncActivity extends AppCompatActivity implements SchemeDMVIn
         viewModel = new SchemesDMVViewModel(getApplication());
         benDetailsViewModel = new BenDetailsViewModel(getApplication());
         benReportViewModel = new BenReportViewModel(SchemeSyncActivity.this);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         SchemeSyncViewModel sviewModel = new SchemeSyncViewModel(SchemeSyncActivity.this, getApplication(), binding);
         binding.setViewModel(sviewModel);
         binding.executePendingBindings();

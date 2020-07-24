@@ -57,7 +57,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;

@@ -52,7 +52,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
         drGodowns = new ArrayList<>();
-        customProgressDialog = new CustomProgressDialog(context);
+        customProgressDialog = new CustomProgressDialog(context,"");
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_godown));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

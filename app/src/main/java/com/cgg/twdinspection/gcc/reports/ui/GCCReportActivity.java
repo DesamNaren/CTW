@@ -54,7 +54,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
 

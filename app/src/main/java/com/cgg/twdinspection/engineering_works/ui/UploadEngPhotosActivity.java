@@ -1,9 +1,5 @@
 package com.cgg.twdinspection.engineering_works.ui;
 
-import androidx.core.content.FileProvider;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -25,14 +21,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import okhttp3.MediaType;
+import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityUploadEngPhotosBinding;
 import com.cgg.twdinspection.engineering_works.interfaces.UploadEngPhotosSubmitInterface;
@@ -41,8 +40,6 @@ import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.UploadEngPhotoViewModel;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
-import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
-import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,8 +49,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
@@ -84,7 +81,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
         binding.header.headerTitle.setText("WORKS - UPLOAD PHOTOS");
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
-        customProgressDialog = new CustomProgressDialog(UploadEngPhotosActivity.this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
 
         viewModel = ViewModelProviders.of(this,

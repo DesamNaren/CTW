@@ -43,7 +43,6 @@ import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
@@ -95,7 +94,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
-        customProgressDialog = new CustomProgressDialog(PetrolPumpPhotoActivity.this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
 
         viewModel = ViewModelProviders.of(this,

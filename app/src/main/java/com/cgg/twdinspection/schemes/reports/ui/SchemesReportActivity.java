@@ -76,7 +76,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         schemeReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_scheme_report);
         schemeReportBinding.executePendingBindings();
         schemesInfoEntitiesMain = new ArrayList<>();

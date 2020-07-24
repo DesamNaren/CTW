@@ -78,7 +78,7 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         distId = Integer.parseInt(sharedPreferences.getString(AppConstants.SCHEME_DIST_ID, ""));

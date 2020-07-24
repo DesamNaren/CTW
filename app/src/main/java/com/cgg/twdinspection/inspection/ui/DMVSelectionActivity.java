@@ -62,7 +62,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = DMVSelectionActivity.this;
-        customProgressDialog = new CustomProgressDialog(context);
+        customProgressDialog = new CustomProgressDialog(context,"");
         customProgressDialog.show();
         dmvSelectionActivityBinding = DataBindingUtil.setContentView(this, R.layout.dmv_selection_activity);
         dmvSelectionActivityBinding.header.syncIv.setVisibility(View.VISIBLE);

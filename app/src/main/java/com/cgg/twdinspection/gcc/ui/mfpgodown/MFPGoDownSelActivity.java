@@ -47,7 +47,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         binding = DataBindingUtil.setContentView(this, R.layout.activity_mfp_godown_sel);
         context = MFPGoDownSelActivity.this;
         mfpGoDowns = new ArrayList<>();
-        customProgressDialog = new CustomProgressDialog(context);
+        customProgressDialog = new CustomProgressDialog(context,"");
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_mfp_godown));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

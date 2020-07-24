@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -32,15 +31,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
-import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
-import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeSubmitInterface;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
@@ -56,7 +53,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -89,7 +85,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         super.onCreate(savedInstanceState);
 
         callPermissions();
-        customProgressDialog = new CustomProgressDialog(BenDetailsActivity.this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
         benDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_ben_details_activty);
         benDetailsBinding.header.headerTitle.setText(getString(R.string.ben_details));

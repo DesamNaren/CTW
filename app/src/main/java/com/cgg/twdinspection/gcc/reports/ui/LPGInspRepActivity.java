@@ -48,7 +48,7 @@ public class LPGInspRepActivity extends AppCompatActivity implements PDFUtil.PDF
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("LPG FINDINGS REPPORT");
         binding.header.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

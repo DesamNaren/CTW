@@ -302,8 +302,8 @@
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
                             android:id="@+id/et_name"
                             android:layout_width="match_parent"
-                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                             android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                             android:hint="@string/enter_reason"
                             android:imeOptions="actionNext" />
 
@@ -658,10 +658,10 @@
 
 
                                 <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                    android:enabled="false"
                                     android:id="@+id/highest_class_total"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:enabled="false"
                                     android:gravity="center"
                                     android:hint="@string/total"
                                     android:imeOptions="actionNext"
@@ -689,20 +689,20 @@
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:textColorHint="@color/colorAccent"
+                            android:visibility="gone"
                             app:errorEnabled="true">
 
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:maxLength="5"
                                 android:id="@+id/last_yr_ssc_percent_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/last_year_ssc_results_percentage"
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
+                                android:maxLength="5"
                                 android:singleLine="true"
                                 android:text="@={inspData.last_yr_ssc_percent}" />
 
@@ -889,9 +889,9 @@
                                 android:id="@+id/et_punadi_prgm_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:text="@={inspData.punadiPrgmReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -975,9 +975,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:text="@={inspData.punadi2TestmarksReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1058,9 +1058,9 @@
                                 android:id="@+id/et_kara_dipath_prgm_cond"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:text="@={inspData.karaDipathPrgmCondReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1265,8 +1265,9 @@
                                     android:id="@+id/et_lab_incharge_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "            android:imeOptions="actionNext"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
+                                    android:imeOptions="actionNext"
                                     android:singleLine="true"
                                     android:text="@={inspData.labInchargeName}" />
 
@@ -1354,9 +1355,9 @@
                                 android:id="@+id/et_mat_enter_reg_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:text="@={inspData.lab_mat_entered_reg_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1603,7 +1604,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:checked="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`No`)}"
-
                                     android:padding="@dimen/dimen_5dp"
                                     android:text="@string/no" />
 
@@ -1613,22 +1613,20 @@
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/t_tv_rot_working_status"
-
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="@color/colorAccent"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
-
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
                                 android:id="@+id/et_tv_rot_working_status"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/working_condition"
                                 android:imeOptions="actionNext"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:text="@={inspData.tvRotWorkingStatus}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1763,9 +1761,9 @@
                                     android:id="@+id/et_mana_tv_lessons_reason"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/state_the_reason"
                                     android:imeOptions="actionNext"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:text="@{inspData.manaTvLessonsReason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1786,8 +1784,8 @@
                                 android:id="@+id/et_mana_tv_incharge_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/mana_tv_incharge_teacher_name"
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
+                                android:hint="@string/mana_tv_incharge_teacher_name"
                                 android:imeOptions="actionNext"
                                 android:singleLine="true"
                                 android:text="@{inspData.manaTvInchargeName}" />
@@ -1928,10 +1926,10 @@
                                     android:id="@+id/et_comp_working_status"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
                                     android:singleLine="true"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:text="@={inspData.compWorkingStatus}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1999,8 +1997,8 @@
                                         android:id="@+id/et_name_ict_instr"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="@string/name_of_the_ict_instructor"
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
+                                        android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
                                         android:singleLine="true"
                                         android:text="@={inspData.nameIctInstr}" />

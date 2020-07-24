@@ -36,7 +36,7 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_eng_pdf);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         binding.engDetails.header.getRoot().setVisibility(View.GONE);
         binding.engDetails.btnLayout.btnLayout.setVisibility(View.GONE);
         binding.photos.header.getRoot().setVisibility(View.GONE);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -68,7 +69,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/general_info_pdf"
+                        android:id="@+id/general_info_pdf1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -585,7 +586,6 @@
 
                             </LinearLayout>
 
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -682,6 +682,29 @@
 
                                 </LinearLayout>
                             </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/general_info_pdf2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -969,208 +992,207 @@
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/dimen_margin"
-                                    android:text="@string/enter_number"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/dimen_text" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:paddingLeft="@dimen/dimen_padding_left">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="0dp"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/fever"
+                                        android:text="@string/enter_number"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.feverCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                </LinearLayout>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/fever"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.feverCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/cold_amp_cough"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/cold_amp_cough"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.coldCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.coldCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                </LinearLayout>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/headache"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.headacheCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/headache"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/diarrhea"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.diarrheaCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.headacheCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                </LinearLayout>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/diarrhea"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.diarrheaCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/diarrhea"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                    <TextView
-                                        android:layout_width="0dp"
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/malaria"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.malariaCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.diarrheaCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="horizontal">
 
-                                </LinearLayout>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/others"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{medical.othersCount}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/diarrhea"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.diarrheaCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/malaria"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.malariaCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="1"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@string/others"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:layout_weight="2"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{medical.othersCount}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
@@ -2766,46 +2788,6 @@
 
                                 </LinearLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="43."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/is_approach"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{infra.roadRequired}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
                             </LinearLayout>
 
                         </LinearLayout>
@@ -2829,6 +2811,46 @@
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:paddingTop="@dimen/dimen_10dp"
                             android:paddingRight="@dimen/dimen_10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="43."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/is_approach"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{infra.roadRequired}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -4095,6 +4117,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/a"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -4121,6 +4144,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/b"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -4147,6 +4171,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/c"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -4173,6 +4198,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:layout_weight="1"
+                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/total"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -4412,6 +4438,29 @@
                                 </LinearLayout>
                             </LinearLayout>
 
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/academic_pdf2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -4450,28 +4499,6 @@
 
                                 </LinearLayout>
                             </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/academic_pdf2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_10dp"
-                            android:layout_marginRight="@dimen/dimen_10dp"
-                            android:background="@color/white"
-                            android:elevation="@dimen/dimen_10dp"
-                            android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_10dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -4881,9 +4908,57 @@
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{academic.bigTvRotAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/working_condition"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{academic.tvRotWorkingStatus}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
                             </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/academic_pdf3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -5004,28 +5079,6 @@
 
                                 </LinearLayout>
                             </LinearLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/academic_pdf3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_10dp"
-                            android:layout_marginRight="@dimen/dimen_10dp"
-                            android:background="@color/white"
-                            android:elevation="@dimen/dimen_10dp"
-                            android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_10dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -5249,6 +5302,27 @@
                                 </LinearLayout>
 
                             </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/academic_pdf4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -9125,6 +9199,56 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/photos_pdf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/header"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp"
+                            android:visibility="visible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/dimen_padding"
+                                    android:text="Photos"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_header"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/ll_title"
+                            android:layout_centerHorizontal="true"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_5dp"
+                            tools:listitem="@layout/adapter_view_photo_pdf" />
 
                     </LinearLayout>
 

@@ -6,11 +6,13 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,8 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ReportsInstMenuActivityBinding;
+import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
+import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.inspection.reports.adapter.DietIssuesReportAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportAcademicGradeAdapter;
 import com.cgg.twdinspection.inspection.reports.adapter.ReportsMenuSectionsAdapter;
@@ -79,6 +83,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private java.util.List<DietListEntity> dietListEntityList;
     private java.util.List<AcademicGradeEntity> academicGradeEntityList;
     private RecyclerView.LayoutManager layoutManager;
+    ViewPhotoAdapterPdf adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +92,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
         binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this, "Please wait...Downloading Pdf");
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
@@ -103,6 +108,15 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             binding.tvDate.setText(inspReportData.getInspectionTime());
         }
 
+        ReportData reportData = gson.fromJson(data, ReportData.class);
+        if (reportData != null) {
+            String jsonObj = gson.toJson(reportData.getPhotos());
+            if (!TextUtils.isEmpty(jsonObj) && !jsonObj.equalsIgnoreCase("[]")) {
+                adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
+                binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+                binding.recyclerView.setAdapter(adapter);
+            }
+        }
         if (inspReportData != null) {
             String generalInfo = gson.toJson(inspReportData.getGeneralInfo());
             if (!TextUtils.isEmpty(generalInfo) && !generalInfo.equalsIgnoreCase("{}")) {
@@ -206,45 +220,55 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.actionBar.ivPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    customProgressDialog.show();
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                        directory_path = getExternalFilesDir(null)
-                                + "/" + "CTW/Schools/";
-                    } else {
-                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                + "/" + "CTW/Schools/";
+                customProgressDialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                                directory_path = getExternalFilesDir(null)
+                                        + "/" + "CTW/Schools/";
+                            } else {
+                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                        + "/" + "CTW/Schools/";
+                            }
+
+                            filePath = directory_path + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
+
+                            filePath1 = filePath + "_1" + ".pdf";
+                            List<View> views = new ArrayList<>();
+                            views.add(binding.generalInfoPdf1);
+                            views.add(binding.generalInfoPdf2);
+                            views.add(binding.medicalPdf);
+                            views.add(binding.dietPdf);
+                            views.add(binding.infraPdf1);
+                            views.add(binding.infraPdf2);
+                            views.add(binding.infraPdf3);
+                            views.add(binding.academicPdf1);
+                            views.add(binding.academicPdf2);
+                            views.add(binding.academicPdf3);
+                            views.add(binding.academicPdf4);
+                            views.add(binding.cocurricularPdf1);
+                            views.add(binding.cocurricularPdf2);
+                            views.add(binding.entitlementPdf);
+                            views.add(binding.registersPdf1);
+                            views.add(binding.registersPdf2);
+                            views.add(binding.generalCommentsPdf);
+                            views.add(binding.photosPdf);
+
+                            PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
+
+                        } catch (Exception e) {
+                            if (customProgressDialog.isShowing())
+                                customProgressDialog.hide();
+
+                            Toast.makeText(InstReportsMenuActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        }
                     }
+                }, 10000);
 
-                    filePath = directory_path + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
-
-                    filePath1 = filePath + "_1" + ".pdf";
-                    List<View> views = new ArrayList<>();
-                    views.add(binding.generalInfoPdf);
-                    views.add(binding.medicalPdf);
-                    views.add(binding.dietPdf);
-                    views.add(binding.infraPdf1);
-                    views.add(binding.infraPdf2);
-                    views.add(binding.infraPdf3);
-                    views.add(binding.academicPdf1);
-                    views.add(binding.academicPdf2);
-                    views.add(binding.academicPdf3);
-                    views.add(binding.cocurricularPdf1);
-                    views.add(binding.cocurricularPdf2);
-                    views.add(binding.entitlementPdf);
-                    views.add(binding.registersPdf1);
-                    views.add(binding.registersPdf2);
-                    views.add(binding.generalCommentsPdf);
-
-                    PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
-
-                } catch (Exception e) {
-                    if (customProgressDialog.isShowing())
-                        customProgressDialog.hide();
-
-                    Toast.makeText(InstReportsMenuActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                }
 //                startActivity(new Intent(InstReportsMenuActivity.this, PreviewPdfActivity.class)
 //                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
 //                finish();
@@ -284,7 +308,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         document.add(catPart);
     }
 
-
     private void addStaffContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor("Staff Attendance", catFont);
         Chapter catPart = new Chapter(new Paragraph(anchor), 0);
@@ -320,8 +343,31 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         Paragraph paragraph = new Paragraph();
         addEmptyLine(paragraph, 2);
         subCatPart.add(paragraph);
-        createAcademicTable(subCatPart);
+        createAcademicTable(subCatPart, document);
         document.add(catPart);
+    }
+
+    private void createFooter(Document document) {
+        Anchor anchor = new Anchor("", catFont);
+        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+        catPart.setNumberDepth(-1);
+        Paragraph subPara = new Paragraph("", subFont);
+        Section subCatPart = catPart.addSection(subPara);
+        Paragraph paragraph = new Paragraph();
+        addEmptyLine(paragraph, 5);
+        subCatPart.add(paragraph);
+
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.setWidthPercentage(90);
+        pdfPTable.addCell(getCell(inspReportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
+        PdfPTable pdfPTable1 = new PdfPTable(1);
+        pdfPTable1.setWidthPercentage(90);
+        pdfPTable1.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
+        try {
+            document.add(pdfPTable);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStaffTable(Section subCatPart)
@@ -421,7 +467,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
-    private void createAcademicTable(Section subCatPart)
+    private void createAcademicTable(Section subCatPart, Document document)
             throws BadElementException {
         PdfPTable table = new PdfPTable(9);
         PdfPCell c1 = new PdfPCell(new Phrase("Class Name"));
@@ -477,6 +523,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 table.addCell(academicGradeEntityList.get(i).getGradeBplusStuCount());
             }
             subCatPart.add(table);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -484,6 +532,13 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
+    public PdfPCell getCell(String text, int alignment) {
+        PdfPCell cell = new PdfPCell(new Phrase(text));
+        cell.setPadding(0);
+        cell.setHorizontalAlignment(alignment);
+        cell.setBorder(PdfPCell.NO_BORDER);
+        return cell;
+    }
 
     private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
         StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
@@ -498,7 +553,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.staffAtt.recyclerView.setLayoutManager(layoutManager);
         binding.staffAtt.recyclerView.setAdapter(staffAttReportAdapter);
     }
-
 
     private void setDietAdapter(java.util.List<DietListEntity> dietListEntities) {
         DietIssuesReportAdapter dietIssuesReportAdapter = new DietIssuesReportAdapter(this, dietListEntities);
@@ -610,8 +664,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            document.close();
-            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this, inspReportData);
 
         }
     }
@@ -661,12 +713,16 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             addStaffContent(document);
             addDietContent(document);
             addAcademicContent(document);
-            addPhotoContent(document);
+            createFooter(document);
+
+//            addPhotoContent(document);
+
+            document.close();
+            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this, inspReportData);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /*private void mergeFiles(String file1, String file2) {

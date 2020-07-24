@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +35,6 @@ import com.cgg.twdinspection.inspection.viewmodel.SchoolSyncViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVInterface, SchoolInstInterface, ErrorHandlerInterface {
@@ -54,7 +52,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        customProgressDialog = new CustomProgressDialog(SchoolSyncActivity.this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
         binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
        dmvViewModel = new DMVDetailsViewModel(getApplication());

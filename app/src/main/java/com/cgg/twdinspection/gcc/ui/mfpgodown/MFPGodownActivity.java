@@ -65,7 +65,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         MFPFragment.commonCommodities = null;
         PUnitFragment.commonCommodities = null;
 
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
         viewModel = new StockViewModel(getApplication(), this);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();

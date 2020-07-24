@@ -8,7 +8,18 @@
         android:id="@+id/imageprogress"
         android:layout_width="@dimen/dimen_50dp"
         android:layout_height="@dimen/dimen_50dp"
-        android:tint="@color/colorPrimary"
         android:layout_centerInParent="true"
+        android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/loader_black1" />
+
+    <TextView
+        android:id="@+id/tv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageprogress"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/dimen_20dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/dimen_20dp"
+        android:textStyle="bold" />
 </RelativeLayout>

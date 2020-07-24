@@ -75,7 +75,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
-        customProgressDialog = new CustomProgressDialog(this);
+        customProgressDialog = new CustomProgressDialog(this,"");
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
