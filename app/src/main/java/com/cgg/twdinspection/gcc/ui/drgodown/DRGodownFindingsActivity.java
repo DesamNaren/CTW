@@ -539,7 +539,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
 
-
+                    finalStockDetailsResponse = new StockDetailsResponse();
                     finalStockDetailsResponse.setEssential_commodities(finalEssCom);
                     finalStockDetailsResponse.setDialy_requirements(finalDaiCom);
                     finalStockDetailsResponse.setEmpties(finalEmpCom);
@@ -550,7 +550,6 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
                     editor.putString(AppConstants.finalStockData, stockData);
                     editor.commit();
 
-                    editor.commit();
 
                     startActivity(new Intent(DRGodownFindingsActivity.this, GCCPhotoActivity.class)
                             .putExtra(AppConstants.TITLE, getString(R.string.dr_godown_upload_photos)));

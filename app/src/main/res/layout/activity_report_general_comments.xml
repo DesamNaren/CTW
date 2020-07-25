@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -967,9 +966,11 @@
                                     android:id="@+id/et_anaemic_stud_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/enter_how_many_out_of_a_total_no"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:text="@{comments.ho"
                                     android:paddingLeft="@dimen/dimen_30dp"
                                     android:singleLine="true" />
 
