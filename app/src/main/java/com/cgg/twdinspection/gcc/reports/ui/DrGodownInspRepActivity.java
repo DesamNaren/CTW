@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -140,34 +141,42 @@ public class DrGodownInspRepActivity extends AppCompatActivity implements PDFUti
         binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    customProgressDialog.show();
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                        directory_path = getExternalFilesDir(null)
-                                + "/" + "CTW/GCC/";
-                    } else {
-                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                + "/" + "CTW/GCC/";
+                customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Downloading Pdf");
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                                directory_path = getExternalFilesDir(null)
+                                        + "/" + "CTW/GCC/";
+                            } else {
+                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                        + "/" + "CTW/GCC/";
+                            }
+
+
+                            filePath = directory_path + "Dr_Godown_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                            File file = new File(filePath);
+                            List<View> views = new ArrayList<>();
+                            views.add(binding.titlePdf);
+                            views.add(binding.generalPdf);
+                            views.add(binding.photosPdf);
+
+                            PDFUtil.getInstance(DrGodownInspRepActivity.this).generatePDF(views, filePath, DrGodownInspRepActivity.this, "schemes", "GCC");
+
+                        } catch (Exception e) {
+                            if (customProgressDialog.isShowing())
+                                customProgressDialog.hide();
+
+                            Toast.makeText(DrGodownInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        }
                     }
-
-
-                    filePath = directory_path + "Dr_Godown_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                    File file = new File(filePath);
-                    List<View> views = new ArrayList<>();
-                    views.add(binding.titlePdf);
-                    views.add(binding.generalPdf);
-                    views.add(binding.photosPdf);
-
-                    PDFUtil.getInstance(DrGodownInspRepActivity.this).generatePDF(views, filePath, DrGodownInspRepActivity.this, "schemes", "GCC");
-
-                } catch (Exception e) {
-                    if (customProgressDialog.isShowing())
-                        customProgressDialog.hide();
-
-                    Toast.makeText(DrGodownInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                }
-
+                }, 10000);
             }
         });
 

@@ -93,6 +93,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             file_mainBulding, file_toilet, file_kitchen, file_classroom,
             file_tds, file_menu, file_officer;
     private String randomNo;
+    public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -365,6 +366,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
 
         customProgressDialog.show();
+        customProgressDialog.addText("Please wait...Uploadig Photos");
 
 
         List<MultipartBody.Part> partList = new ArrayList<>();
@@ -605,6 +607,15 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     }
 
     private void CallSuccessAlert(String msg) {
+
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+
+        if (mediaStorageDir.isDirectory()) {
+            String[] children = mediaStorageDir.list();
+            for (int i = 0; i < children.length; i++)
+                new File(mediaStorageDir, children[i]).delete();
+            mediaStorageDir.delete();
+        }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 
@@ -752,7 +763,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         customProgressDialog.hide();
 
         if (schemePhotoSubmitResponse != null && schemePhotoSubmitResponse.getStatusCode() != null && schemePhotoSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_CODE)) {
-            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_LONG).show();
+//            Snackbar.make(binding.appbar.root, "Uploaded photos successfully.Submitting data...", Snackbar.LENGTH_LONG).show();
             instSubmitRequest.setOfficer_id(officer_id);
             instSubmitRequest.setInstitute_id(instId);
             instSubmitRequest.setInspection_time(Utils.getCurrentDateTime());
@@ -773,6 +784,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             if (Utils.checkInternetConnection(InstMenuMainActivity.this)) {
                 submitFlag = true;
                 customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Uploading Data");
                 instMainViewModel.submitInstDetails(instSubmitRequest);
             } else {
                 revertFlags();

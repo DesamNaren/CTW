@@ -75,6 +75,7 @@
                                 android:layout_marginTop="@dimen/dimen_margin"
                                 android:gravity="center"
                                 android:text="Tribal Welfare Department"
+                                android:theme="@style/ToolbarTheme"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_title"
                                 android:textStyle="bold" />
@@ -94,6 +95,7 @@
                                 android:layout_marginTop="@dimen/dimen_margin"
                                 android:gravity="center"
                                 android:text="Inspection Report-GCC"
+                                android:theme="@style/ToolbarTheme"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_header"
                                 android:textStyle="bold" />
@@ -104,7 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_margin"
-                                android:text="skjfhij"
+                                android:text=""
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
@@ -135,6 +137,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_padding"
+                                    android:theme="@style/ToolbarTheme"
                                     android:text="Details"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
@@ -278,6 +281,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_padding"
+                                    android:theme="@style/ToolbarTheme"
                                     android:text="Stock Details / Position"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
@@ -468,6 +472,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:theme="@style/ToolbarTheme"
                                     android:padding="@dimen/dimen_padding"
                                     android:text="Registers, Books and Certificates"
                                     android:textColor="@color/black"
@@ -882,6 +887,7 @@
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_padding"
                                     android:text="General Findings"
+                                    android:theme="@style/ToolbarTheme"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
                                     android:textStyle="bold" />
@@ -1296,6 +1302,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="@dimen/dimen_padding"
+                                    android:theme="@style/ToolbarTheme"
                                     android:text="Photos"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"

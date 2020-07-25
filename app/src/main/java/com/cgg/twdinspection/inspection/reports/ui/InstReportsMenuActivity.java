@@ -195,11 +195,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 binding.executePendingBindings();
             }
 
-           /*  if (inspReportData.getPhotos() != null && inspReportData.getPhotos().size() > 0) {
-                String reportData = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-                ReportData reportData1 = gson.fromJson(reportData, ReportData.class);
-                setPhotosAdapter(reportData1.getPhotos());
-            }*/
         }
 
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {

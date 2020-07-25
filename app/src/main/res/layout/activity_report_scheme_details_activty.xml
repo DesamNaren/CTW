@@ -74,12 +74,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_marginTop="@dimen/dimen_margin"
+                            android:gravity="center"
                             android:text="Tribal Welfare Department"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_title"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:theme="@style/ToolbarTheme" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -93,12 +94,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_marginTop="@dimen/dimen_margin"
+                            android:gravity="center"
                             android:text="Inspection Report-Schemes"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_header"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:theme="@style/ToolbarTheme" />
 
                         <TextView
                             android:id="@+id/tv_date"
@@ -106,7 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dimen_margin"
-                            android:text="skjfhij"
+                            android:text=""
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_text" />
@@ -141,23 +143,24 @@
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/dimen_margin_seperator"
                                         android:layout_weight="1"
                                         android:gravity="center"
-                                        android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                        android:textColor="@color/black"
                                         android:padding="@dimen/dimen_padding"
                                         android:text="Beneficiary Details"
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_header"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:theme="@style/ToolbarTheme" />
 
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
                                     android:layout_marginTop="@dimen/dimen_margin"
+                                    android:orientation="horizontal"
                                     android:padding="@dimen/dimen_padding">
 
                                     <TextView
@@ -166,8 +169,8 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:textColor="@color/black"
                                         android:text="Beneficiary ID"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -199,10 +202,10 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:textColor="@color/black"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Beneficiary Name"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -235,9 +238,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:textColor="@color/black"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Activity"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -270,9 +273,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:textColor="@color/black"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Scheme"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -305,9 +308,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:textColor="@color/black"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Unit Cost"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -338,10 +341,10 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:textColor="@color/black"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Subsidy"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -373,10 +376,10 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:textColor="@color/black"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Bank Loan"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -409,9 +412,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
-                                        android:textColor="@color/black"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Contribution"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -442,11 +445,11 @@
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/black"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Status"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -477,11 +480,11 @@
                                     <TextView
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/black"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="@string/whether_online"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -540,10 +543,10 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
-                                        android:textColor="@color/black"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
                                         android:text="Remarks"
+                                        android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
                                     <TextView
@@ -562,16 +565,16 @@
                                     android:id="@+id/ll_photos_pdf"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="left"
                                     android:layout_marginLeft="@dimen/dimen_padding_left"
+                                    android:gravity="left"
                                     android:orientation="horizontal">
 
                                     <FrameLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
-                                        android:layout_marginTop="@dimen/dimen_margin"
                                         android:layout_marginLeft="@dimen/dimen_padding_left"
+                                        android:layout_marginTop="@dimen/dimen_margin"
                                         android:layout_marginRight="@dimen/dimen_margin">
 
                                         <ImageView
@@ -634,11 +637,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:gravity="center"
                             android:layout_marginTop="@dimen/dimen_margin_seperator"
+                            android:gravity="center"
                             android:text=""
-                            android:textSize="@dimen/dimen_text"
                             android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_text"
                             android:textStyle="bold" />
 
                         <TextView
@@ -651,8 +654,8 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="3dp"
                             android:layout_marginLeft="3dp"
-                            android:text=""
                             android:gravity="center"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_text" />
                     </LinearLayout>
@@ -1041,8 +1044,8 @@
                                     android:id="@+id/ll_photos"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:layout_marginBottom="@dimen/dimen_10dp"
+                                    android:gravity="center"
                                     android:orientation="horizontal">
 
                                     <FrameLayout

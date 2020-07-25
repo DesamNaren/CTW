@@ -77,7 +77,8 @@
                                 android:text="Tribal Welfare Department"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_title"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -96,7 +97,8 @@
                                 android:text="Inspection Report-GCC"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_header"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:id="@+id/tv_date"
@@ -138,7 +140,8 @@
                                     android:text="Details"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -281,7 +284,8 @@
                                     android:text="Stock Details / Position"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -472,7 +476,8 @@
                                     android:text="Registers, Books and Certificates"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -884,7 +889,8 @@
                                     android:text="General Findings"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1242,11 +1248,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
-                                android:gravity="center"
                                 android:layout_marginTop="@dimen/dimen_margin_seperator"
+                                android:gravity="center"
                                 android:text=""
-                                android:textSize="@dimen/dimen_text"
                                 android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_text"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -1259,8 +1265,8 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="3dp"
                                 android:layout_marginLeft="3dp"
-                                android:text=""
                                 android:gravity="center"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
                         </LinearLayout>
@@ -1299,7 +1305,8 @@
                                     android:text="Photos"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                         </LinearLayout>

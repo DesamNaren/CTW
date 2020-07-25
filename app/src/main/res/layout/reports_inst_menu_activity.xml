@@ -97,7 +97,8 @@
                                 android:text="Tribal Welfare Department"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_title"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -116,7 +117,8 @@
                                 android:text="Inspection Report-Schools"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_header"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:id="@+id/tv_date"
@@ -124,7 +126,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_margin"
-                                android:text="skjfhij"
+                                android:text=""
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
@@ -155,7 +157,8 @@
                                     android:text="@string/general_info"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -894,7 +897,8 @@
                                     android:text="@string/medical_health"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -1478,7 +1482,8 @@
                                     android:text="@string/diet_issues"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -1898,7 +1903,8 @@
                                     android:text="@string/title_infra"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -3365,20 +3371,22 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
                                                 android:text="@string/cls_count"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="2.5"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@{infra.addClassRequiredCnt}"
                                                 android:textColor="@color/black"
@@ -3389,20 +3397,22 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
                                                 android:text="@string/din_count"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="2.5"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@{infra.addDiningRequiredCnt}"
                                                 android:textColor="@color/black"
@@ -3413,20 +3423,22 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
                                                 android:text="@string/dor_count"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="2.5"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@{infra.addDormitoryRequiredCnt}"
                                                 android:textColor="@color/black"
@@ -3437,20 +3449,22 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
                                                 android:text="@string/toilets_count"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="2.5"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@{infra.addToiletsRequiredCnt}"
                                                 android:textColor="@color/black"
@@ -3461,20 +3475,22 @@
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:orientation="vertical">
+                                            android:orientation="horizontal">
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="1"
                                                 android:text="@string/bathrooms_count"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="match_parent"
+                                                android:layout_width="0dp"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
+                                                android:layout_weight="2.5"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@{infra.addBathroomsRequiredCnt}"
                                                 android:textColor="@color/black"
@@ -3598,7 +3614,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="57."
+                                    android:text="57.  "
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -3610,20 +3626,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/repairs_to_toilets"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.totalToilets}"
                                             android:textColor="@color/black"
@@ -3634,20 +3652,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/no_of_bath_rooms"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.totalBathrooms}"
                                             android:textColor="@color/black"
@@ -3669,7 +3689,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="57.1."
+                                    android:text="57.1"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -3681,20 +3701,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/no_of_functioning_toilets"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.functioningToilets}"
                                             android:textColor="@color/black"
@@ -3705,20 +3727,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/no_of_functioning_bathrooms"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.functioningBathrooms}"
                                             android:textColor="@color/black"
@@ -3729,20 +3753,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/repairs_required_to_toilets"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.repairsReqToilets}"
                                             android:textColor="@color/black"
@@ -3753,20 +3779,22 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:orientation="horizontal">
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
                                             android:text="@string/repairs_required_to_bathrooms"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/dimen_text" />
 
                                         <TextView
-                                            android:layout_width="match_parent"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{infra.repairsReqBathrooms}"
                                             android:textColor="@color/black"
@@ -3812,7 +3840,8 @@
                                     android:text="@string/title_academic"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -5594,7 +5623,8 @@
                                     android:text="@string/title_co_cir"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -6732,7 +6762,8 @@
                                     android:text="@string/title_entitlements"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -7064,6 +7095,64 @@
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{entitlements.notesSupplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/notes"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.notes}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:visibility="@{entitlements.notesSupplied.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="1"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@string/reason"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:layout_weight="2"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{entitlements.notesReason}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -7358,7 +7447,8 @@
                                     android:text="@string/title_registers"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -8345,7 +8435,8 @@
                                     android:text="@string/title_general_comments"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -9234,7 +9325,8 @@
                                     android:text="Photos"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                         </LinearLayout>

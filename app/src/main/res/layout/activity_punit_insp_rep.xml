@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    
+
                     <LinearLayout
                         android:id="@+id/registers_pdf"
                         android:layout_width="match_parent"
@@ -76,7 +76,8 @@
                                 android:text="Tribal Welfare Department"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_title"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -95,7 +96,8 @@
                                 android:text="Inspection Report-GCC"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_header"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:theme="@style/ToolbarTheme" />
 
                             <TextView
                                 android:id="@+id/tv_date"
@@ -103,7 +105,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen_margin"
-                                android:text="skjfhij"
+                                android:text=""
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_text" />
@@ -137,7 +139,8 @@
                                     android:text="Details"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -280,7 +283,8 @@
                                     android:text="Stock Details / Position"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -472,7 +476,8 @@
                                     android:text="Registers, Books and Certificates"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -1238,7 +1243,8 @@
                                     android:text="General Findings"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
 
                             </LinearLayout>
 
@@ -1404,7 +1410,8 @@
                                     android:text="Photos"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_header"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:theme="@style/ToolbarTheme" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -1430,6 +1437,7 @@
                     android:background="@color/bg"
                     android:orientation="vertical"
                     android:visibility="visible">
+
                     <LinearLayout
                         android:id="@+id/stock_ll"
                         android:layout_width="match_parent"
@@ -1479,12 +1487,12 @@
                                     android:textColor="@color/black" />
 
                                 <TextView
-                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystem)}"
                                     android:id="@+id/tvSysVal"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystem)}"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -1505,12 +1513,12 @@
                                     android:textColor="@color/black" />
 
                                 <TextView
-                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystemInsp)}"
                                     android:id="@+id/tvInsSysVal"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystemInsp)}"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -1531,12 +1539,12 @@
                                     android:textColor="@color/black" />
 
                                 <TextView
-                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerPhysical)}"
                                     android:id="@+id/tvPhysVal"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerPhysical)}"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -1557,12 +1565,12 @@
                                     android:textColor="@color/black" />
 
                                 <TextView
-                                    android:text="@{String.valueOf(pUnit.stockDetails.deficit)}"
                                     android:id="@+id/tvDiffVal"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:text="@{String.valueOf(pUnit.stockDetails.deficit)}"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -1590,13 +1598,14 @@
                                     app:errorEnabled="true">
 
                                     <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:text="@{pUnit.stockDetails.deficitReason}"                                        android:id="@+id/et_reason"
+                                        android:id="@+id/et_reason"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/reason"
                                         android:imeOptions="actionNext"
-                                        android:inputType="textMultiLine" />
+                                        android:inputType="textMultiLine"
+                                        android:text="@{pUnit.stockDetails.deficitReason}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -1616,12 +1625,12 @@
                                     android:textColor="@color/black" />
 
                                 <TextView
-                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystemNotInsp)}"
                                     android:id="@+id/tv_sys_val_not_ins"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:padding="@dimen/dimen_5dp"
+                                    android:text="@{String.valueOf(pUnit.stockDetails.stockValueAsPerSystemNotInsp)}"
                                     android:textColor="@color/black"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -1632,7 +1641,6 @@
 
 
                     </LinearLayout>
-
 
 
                     <LinearLayout
