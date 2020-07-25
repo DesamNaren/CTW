@@ -52,7 +52,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
         drDepots = new ArrayList<>();
-        customProgressDialog = new CustomProgressDialog(context,"");
+        customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_depot));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

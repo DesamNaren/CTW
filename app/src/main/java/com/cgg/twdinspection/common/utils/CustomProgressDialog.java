@@ -14,17 +14,17 @@ import com.cgg.twdinspection.R;
 
 public class CustomProgressDialog extends Dialog {
     private CustomProgressDialog mDialog;
+    TextView tv_loading;
 
-    public CustomProgressDialog(Context context, String msg) {
+    public CustomProgressDialog(Context context) {
         super(context);
         try {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             View view = LayoutInflater.from(context).inflate(R.layout.custom_progress_layout, null);
             ImageView imageprogress = view.findViewById(R.id.imageprogress);
-            TextView tv_loading = view.findViewById(R.id.tv_loading);
+            tv_loading = view.findViewById(R.id.tv_loading);
             GlideDrawableImageViewTarget imageViewTarget = new GlideDrawableImageViewTarget(imageprogress);
             Glide.with(context).load(R.drawable.loader_black1).into(imageViewTarget);
-            tv_loading.setText(msg);
             //  customProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             setContentView(view);
             if (getWindow() != null)
@@ -34,6 +34,10 @@ public class CustomProgressDialog extends Dialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void addText(String msg) {
+        tv_loading.setText(msg);
     }
 
 }

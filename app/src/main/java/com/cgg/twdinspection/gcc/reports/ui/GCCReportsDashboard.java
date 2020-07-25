@@ -51,7 +51,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_dashboard);
         binding.header.headerTitle.setText(getString(R.string.gcc_reports));
         viewModel = new GCCReportsViewModel(GCCReportsDashboard.this, getApplication());
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         drDepot = new ArrayList<>();
         drGodown = new ArrayList<>();

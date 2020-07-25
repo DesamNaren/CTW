@@ -64,8 +64,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity  implements PD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_stock_details);
-        binding.header.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        binding.header.ivPdf.setVisibility(View.GONE);
+        customProgressDialog = new CustomProgressDialog(this);
         binding.bottomLl.btnNext.setText("Next");
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;

@@ -92,7 +92,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);

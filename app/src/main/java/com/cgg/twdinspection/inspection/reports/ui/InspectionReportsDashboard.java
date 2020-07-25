@@ -84,7 +84,7 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
         }
 
         viewModel = new InspectionReportsViewModel(InspectionReportsDashboard.this, getApplication());
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         inspReportDataList = new ArrayList<>();
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();

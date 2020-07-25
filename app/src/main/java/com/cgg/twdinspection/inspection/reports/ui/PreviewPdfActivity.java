@@ -55,7 +55,7 @@ public class PreviewPdfActivity extends AppCompatActivity implements PDFUtil.PDF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_preview_pdf);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");

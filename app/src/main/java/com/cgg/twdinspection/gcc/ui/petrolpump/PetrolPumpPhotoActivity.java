@@ -94,7 +94,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         }
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
 
         viewModel = ViewModelProviders.of(this,

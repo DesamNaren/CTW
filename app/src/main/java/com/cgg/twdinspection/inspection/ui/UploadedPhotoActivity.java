@@ -85,7 +85,7 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_uploaded_photo);
         binding.header.headerTitle.setText(getString(R.string.upload_photos));
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);

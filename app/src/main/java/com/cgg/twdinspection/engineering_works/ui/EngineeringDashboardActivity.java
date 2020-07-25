@@ -72,7 +72,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 new EngDashboardCustomViewModel(this, getApplication())).get(EngDashboardViewModel.class);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         try {
             if (getSupportActionBar() != null) {

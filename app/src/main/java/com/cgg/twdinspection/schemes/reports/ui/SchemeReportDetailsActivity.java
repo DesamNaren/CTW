@@ -65,7 +65,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         binding.tvOfficerName.setText(schemeReportData.getOfficerId());
         binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

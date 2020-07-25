@@ -113,7 +113,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dimen_margin"
                                 android:gravity="center"
-                                android:text="Inspection Report-GCC"
+                                android:text="Inspection Report-Schools"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_header"
                                 android:textStyle="bold" />

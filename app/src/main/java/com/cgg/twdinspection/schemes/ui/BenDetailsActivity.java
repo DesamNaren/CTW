@@ -85,7 +85,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
         super.onCreate(savedInstanceState);
 
         callPermissions();
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         benDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_ben_details_activty);
         benDetailsBinding.header.headerTitle.setText(getString(R.string.ben_details));

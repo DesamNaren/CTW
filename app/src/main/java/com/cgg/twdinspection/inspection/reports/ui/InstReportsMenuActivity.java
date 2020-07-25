@@ -92,7 +92,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
         binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(this, "Please wait...Downloading Pdf");
+        customProgressDialog = new CustomProgressDialog(this);
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         Gson gson = new Gson();
@@ -222,6 +222,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             public void onClick(View view) {
 
                 customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Downloading Pdf");
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -295,7 +297,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.academicGrade.gradeRV.setAdapter(reportAcademicGradeAdapter);
     }
 
-    private void addContent(Document document) throws DocumentException {
+    private void addStudContent(Document document) throws DocumentException {
         Anchor anchor = new Anchor("Student Attendance", catFont);
         Chapter catPart = new Chapter(new Paragraph(anchor), 0);
         catPart.setNumberDepth(-1);
@@ -374,8 +376,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         }
     }
 
-    private void createStaffTable(Section subCatPart)
-            throws BadElementException {
+    private void createStaffTable(Section subCatPart) throws BadElementException {
         PdfPTable table = new PdfPTable(8);
         PdfPCell c1 = new PdfPCell(new Phrase("ID"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -440,8 +441,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
-    private void createDietTable(Section subCatPart)
-            throws BadElementException {
+    private void createDietTable(Section subCatPart) throws BadElementException {
         PdfPTable table = new PdfPTable(3);
         PdfPCell c1 = new PdfPCell(new Phrase("Item Type"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -471,8 +471,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     }
 
-    private void createAcademicTable(Section subCatPart, Document document)
-            throws BadElementException {
+    private void createAcademicTable(Section subCatPart, Document document) throws BadElementException {
         PdfPTable table = new PdfPTable(9);
         PdfPCell c1 = new PdfPCell(new Phrase("Class Name"));
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -564,7 +563,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.dietIssues.recyclerView.setLayoutManager(layoutManager);
         binding.dietIssues.recyclerView.setAdapter(dietIssuesReportAdapter);
     }
-
 
     private static void addEmptyLine(Paragraph paragraph, int number) {
         for (int i = 0; i < number; i++) {
@@ -713,7 +711,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
             document.open();
-            addContent(document);
+            addStudContent(document);
             addStaffContent(document);
             addDietContent(document);
             addAcademicContent(document);

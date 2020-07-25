@@ -64,7 +64,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
 
         binding = DataBindingUtil.setContentView(GCCSyncActivity.this, R.layout.activity_gcc_sync);
 
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         GCCSyncViewModel viewModel = new GCCSyncViewModel(GCCSyncActivity.this, getApplication(), binding);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();

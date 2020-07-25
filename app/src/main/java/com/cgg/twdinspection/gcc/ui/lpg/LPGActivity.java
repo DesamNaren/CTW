@@ -51,7 +51,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         petrolStockDetailsResponseMain = null;
         PLPGFragment.commonCommodities = null;
 

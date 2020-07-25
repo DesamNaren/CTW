@@ -52,7 +52,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
         LPGs = new ArrayList<>();
-        customProgressDialog = new CustomProgressDialog(context,"");
+        customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_lpg));
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

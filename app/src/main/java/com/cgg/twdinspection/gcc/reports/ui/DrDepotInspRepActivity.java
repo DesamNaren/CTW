@@ -47,7 +47,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_insp_rep);
         binding.header.headerTitle.setText("DR DEPOT FINDINGS REPORT");
         binding.header.ivPdf.setVisibility(View.VISIBLE);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

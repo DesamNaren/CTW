@@ -98,7 +98,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
         binding = DataBindingUtil.setContentView(this, R.layout.inst_main_activity);
         binding.appbar.header.syncIv.setVisibility(View.GONE);
         binding.appbar.header.headerTitle.setText(getString(R.string.dashboard));

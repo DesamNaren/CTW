@@ -52,7 +52,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        customProgressDialog = new CustomProgressDialog(this,"");
+        customProgressDialog = new CustomProgressDialog(this);
 
         binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
        dmvViewModel = new DMVDetailsViewModel(getApplication());
