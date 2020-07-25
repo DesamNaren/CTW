@@ -28,12 +28,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_layout"
-            android:layout_below="@+id/action_bar">
+            android:layout_below="@+id/action_bar"
+            android:layout_margin="@dimen/dimen_10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -970,7 +970,6 @@
                                     android:hint="@string/enter_how_many_out_of_a_total_no"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:text="@{comments.ho"
                                     android:paddingLeft="@dimen/dimen_30dp"
                                     android:singleLine="true" />
 
