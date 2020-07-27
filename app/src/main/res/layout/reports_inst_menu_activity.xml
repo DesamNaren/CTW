@@ -2365,15 +2365,102 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/wall_mounted_fans"
+                                                android:text="@string/ceiling_fans"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="vertical">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@string/working"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@{infra.ceilingfansWorking}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@string/non_working"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@{infra.ceilingfansNonworking}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@string/required"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                                        android:text="@{infra.ceilingfansRequired}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="@dimen/dimen_text" />
+
+                                                </LinearLayout>
+
+                                            </LinearLayout>
 
                                             <TextView
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
                                                 android:text="@string/wall_mounted_fans"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
@@ -2389,17 +2476,20 @@
                                                     android:orientation="horizontal">
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@string/working"
                                                         android:textColor="@color/black"
                                                         android:textSize="@dimen/dimen_text" />
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
                                                         android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@{infra.mountedfansWorking}"
                                                         android:textColor="@color/black"
@@ -2413,17 +2503,20 @@
                                                     android:orientation="horizontal">
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@string/non_working"
                                                         android:textColor="@color/black"
                                                         android:textSize="@dimen/dimen_text" />
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
                                                         android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@{infra.mountedfansNonworking}"
                                                         android:textColor="@color/black"
@@ -2437,17 +2530,20 @@
                                                     android:orientation="horizontal">
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="1"
+                                                        android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@string/required"
                                                         android:textColor="@color/black"
                                                         android:textSize="@dimen/dimen_text" />
 
                                                     <TextView
-                                                        android:layout_width="match_parent"
+                                                        android:layout_width="0dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_margin="@dimen/dimen_margin"
+                                                        android:layout_weight="2"
                                                         android:paddingLeft="@dimen/dimen_padding_left"
                                                         android:text="@{infra.mountedfansRequired}"
                                                         android:textColor="@color/black"
@@ -2458,337 +2554,6 @@
                                             </LinearLayout>
 
                                         </LinearLayout>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="38."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/dining_hall"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.dininghallAvailable}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{infra.dininghallAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/being_used"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.dininghallUsed}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/separate_kitchen_room_available"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.separateKitchenRoomAvailable}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{infra.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/whether_place_is_available_for_construct_kitchen_room"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.constructKitchenRoom}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{infra.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/is_it_in_good_condition"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.kitchenGoodCondition}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical"
-                                            android:visibility="@{infra.kitchenGoodCondition.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:text="@string/kitchen_repair_required"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_margin="@dimen/dimen_margin"
-                                                android:paddingLeft="@dimen/dimen_padding_left"
-                                                android:text="@{infra.kitchenRepairRequired}"
-                                                android:textColor="@color/black"
-                                                android:textSize="@dimen/dimen_text" />
-
-                                        </LinearLayout>
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="39."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/how_many_buildings"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{infra.howManyBuildings}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="40."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/trans_avail"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{infra.transformerAvailable}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="41."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/type_of_power"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{infra.powerConnectionType}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="42."
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:text="@string/is_ind_conn"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_margin="@dimen/dimen_margin"
-                                            android:paddingLeft="@dimen/dimen_padding_left"
-                                            android:text="@{infra.individualConnection}"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/dimen_text" />
 
                                     </LinearLayout>
 
@@ -2817,6 +2582,337 @@
                             android:paddingLeft="@dimen/dimen_10dp"
                             android:paddingTop="@dimen/dimen_10dp"
                             android:paddingRight="@dimen/dimen_10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="38."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/dining_hall"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.dininghallAvailable}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.dininghallAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/being_used"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.dininghallUsed}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/separate_kitchen_room_available"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.separateKitchenRoomAvailable}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.separateKitchenRoomAvailable.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/whether_place_is_available_for_construct_kitchen_room"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.constructKitchenRoom}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.separateKitchenRoomAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/is_it_in_good_condition"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.kitchenGoodCondition}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.kitchenGoodCondition.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/kitchen_repair_required"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.kitchenRepairRequired}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="39."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/how_many_buildings"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{infra.howManyBuildings}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="40."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/trans_avail"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{infra.transformerAvailable}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="41."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/type_of_power"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{infra.powerConnectionType}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="42."
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:text="@string/is_ind_conn"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/dimen_margin"
+                                        android:paddingLeft="@dimen/dimen_padding_left"
+                                        android:text="@{infra.individualConnection}"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/dimen_text" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3132,7 +3228,30 @@
                                         android:textSize="@dimen/dimen_text" />
 
                                 </LinearLayout>
+
                             </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/infra_pdf3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10dp"
+                            android:layout_marginRight="@dimen/dimen_10dp"
+                            android:background="@color/white"
+                            android:elevation="@dimen/dimen_10dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -3503,27 +3622,6 @@
                                 </LinearLayout>
 
                             </LinearLayout>
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/infra_pdf3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dimen_10dp"
-                            android:layout_marginRight="@dimen/dimen_10dp"
-                            android:background="@color/white"
-                            android:elevation="@dimen/dimen_10dp"
-                            android:orientation="vertical"
-                            android:paddingLeft="@dimen/dimen_10dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingRight="@dimen/dimen_10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -4509,24 +4607,57 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:text="@string/whether_the_kara_dipath_program_is_conducted_as_per_schedule"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical">
 
-                                    <TextView
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/whether_the_kara_dipath_program_is_conducted_as_per_schedule"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{academic.karaDipathPrgmCond}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{academic.karaDipathPrgmCond}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical"
+                                        android:visibility="@{academic.karaDipathPrgmCond.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/reason"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{academic.karaDipathPrgmCondReason}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -6813,7 +6944,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.bedSheets}"
                                             android:textColor="@color/black"
@@ -6840,7 +6971,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.carpets}"
                                             android:textColor="@color/black"
@@ -6867,7 +6998,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.uniforms}"
                                             android:textColor="@color/black"
@@ -6894,7 +7025,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.sportsDress}"
                                             android:textColor="@color/black"
@@ -6921,7 +7052,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.slippers}"
                                             android:textColor="@color/black"
@@ -6948,7 +7079,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.nightDress}"
                                             android:textColor="@color/black"
@@ -6975,7 +7106,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.schoolBags}"
                                             android:textColor="@color/black"
@@ -7002,7 +7133,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.sanitaryNapkinsSupplied}"
                                             android:textColor="@color/black"
@@ -7031,7 +7162,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.sanitaryNapkins}"
                                             android:textColor="@color/black"
@@ -7060,7 +7191,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.sanitaryNapkinsReason}"
                                             android:textColor="@color/black"
@@ -7087,7 +7218,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.notesSupplied}"
                                             android:textColor="@color/black"
@@ -7116,7 +7247,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.notes}"
                                             android:textColor="@color/black"
@@ -7145,7 +7276,7 @@
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="@dimen/dimen_margin"
-                                            android:layout_weight="2"
+                                            android:layout_weight="1.5"
                                             android:paddingLeft="@dimen/dimen_padding_left"
                                             android:text="@{entitlements.notesReason}"
                                             android:textColor="@color/black"
@@ -8932,7 +9063,8 @@
                                             android:visibility="@{comments.studFoundAnemic.equalsIgnoreCase(`Yes`)?View.VISIBLE : View.GONE, default = gone}">
 
                                             <TextView
-                                                android:layout_width="wrap_content"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
@@ -8941,10 +9073,12 @@
                                                 android:textSize="@dimen/dimen_text" />
 
                                             <TextView
-                                                android:layout_width="wrap_content"
+                                                android:layout_width="0dp"
+                                                android:layout_weight="1.2"
                                                 android:layout_height="wrap_content"
                                                 android:layout_margin="@dimen/dimen_margin"
                                                 android:paddingLeft="@dimen/dimen_padding_left"
+                                                android:text="@{academic.lastYrSscPercent}"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/dimen_text" />
                                         </LinearLayout>

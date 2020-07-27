@@ -1093,7 +1093,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="@color/colorAccent"
-                            android:visibility="gone"
+                            android:visibility="@{inspData.karaDipathPrgmCond.equalsIgnoreCase(`No`)? View.VISIBLE : View.GONE}"
                             app:errorEnabled="true">
 
 
