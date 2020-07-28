@@ -183,10 +183,12 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         if (studAttendInfoEntity.getAttendence_marked() != null) {
             if (studAttendInfoEntity.getAttendence_marked().equals(AppConstants.Yes)) {
                 ll_stud_pres.setVisibility(View.VISIBLE);
+                ll_variance.setVisibility(View.VISIBLE);
                 rb_attMark_yes.setChecked(true);
             }
             if (studAttendInfoEntity.getAttendence_marked().equals(AppConstants.No)) {
                 ll_stud_pres.setVisibility(View.GONE);
+                ll_variance.setVisibility(View.GONE);
                 rb_attMark_yno.setChecked(true);
             }
         }

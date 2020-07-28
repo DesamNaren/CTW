@@ -499,7 +499,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/measurement_of_land_available_for_games"
                                 android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
+                                android:inputType="text"
                                 android:paddingLeft="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.land_mea_value}"
@@ -830,7 +830,7 @@
 
                                     android:hint="@string/battalion_number"
                                     android:imeOptions="actionNext"
-                                    android:inputType="number"
+                                    android:inputType="text"
                                     android:paddingLeft="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.ncc_teacher_battalion_num}"
