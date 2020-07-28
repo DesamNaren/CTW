@@ -699,17 +699,22 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
-
+        customProgressDialog.hide();
         filePath2 = filePath + "_2" + ".pdf";
 
         try {
+            customProgressDialog.show();
+            customProgressDialog.addText("Please wait...Downloading Pdf");
+
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
             document.open();
             addStudContent(document);
             addStaffContent(document);
-            addDietContent(document);
-            addAcademicContent(document);
+            if (dietListEntityList != null)
+                addDietContent(document);
+            if (academicGradeEntityList != null)
+                addAcademicContent(document);
             createFooter(document);
 
 //            addPhotoContent(document);

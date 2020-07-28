@@ -32,14 +32,11 @@ import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
-import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -915,11 +912,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 break;
             }
         }
-        if (!listFlag) {
+        /*if (!listFlag) {
             showSnackBar(getString(R.string.capture_class_per));
             ScrollToView(binding.btnAddStud);
             return false;
-        }
+        }*/
         if (TextUtils.isEmpty(highest_class_syllabus_completed)) {
             showSnackBar(getString(R.string.high_class_syl));
             ScrollToView(binding.rgHighestClassSyllabusCompleted);
