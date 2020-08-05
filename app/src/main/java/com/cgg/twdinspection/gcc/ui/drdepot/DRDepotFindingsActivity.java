@@ -4,8 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -46,6 +51,9 @@ import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,7 +78,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     Bitmap bm;
     File file;
     private String officerID, divId, suppId;
-    double physVal = 0, sysVal = 0, difference=0, insSysVal=0, notInsSysVal=0;
+    double physVal = 0, sysVal = 0, difference = 0, insSysVal = 0, notInsSysVal = 0;
     private StockDetailsResponse stockDetailsResponse;
     private String ecsStock, drStock, emptyStock, abstractSales, depotCashBook, liabilityReg, visitorsBook, saleBook, weightsMeasurements, certIssueDate;
     private String depotAuthCert, mfpStock, mfpPurchase, billAbstract, abstractAccnt, advanceAccnt, mfpLiability, depotNameBoard, gccObjPrinc;
@@ -120,7 +128,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
                         finalEssCom.add(stockDetailsResponse.getEssential_commodities().get(i));
@@ -129,18 +137,18 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 }
             }
             if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                    for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                        if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
-                            physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                            insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
-                            finalDaiCom.add(stockDetailsResponse.getDialy_requirements().get(i));
+                for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
+                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
+                        finalDaiCom.add(stockDetailsResponse.getDialy_requirements().get(i));
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                 }
             }
             if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
                         physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
                         insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
                         finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
@@ -153,7 +161,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             physVal = Double.valueOf(String.format("%.2f", physVal));
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
-            notInsSysVal = sysVal-insSysVal;
+            notInsSysVal = sysVal - insSysVal;
             notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
             binding.tvSysValIns.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
@@ -162,7 +170,6 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             binding.tvDiffVal.setText(String.format("%.2f", difference));
 
         }
-
 
 
         binding.rgWeightMeasCert.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -602,7 +609,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     editor.commit();
 
                     startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class)
-                    .putExtra(AppConstants.TITLE, getString(R.string.dr_depot_upload_photos)));
+                            .putExtra(AppConstants.TITLE, getString(R.string.dr_depot_upload_photos)));
                 }
             }
         });
@@ -892,7 +899,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
     }
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
     }
 
 
@@ -925,6 +932,172 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         datePickerDialog.show();
     }
 
+    public String compressImage(String imageUri) {
+
+        String filePath = getRealPathFromURI(imageUri);
+        Bitmap scaledBitmap = null;
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+
+//      by setting this field as true, the actual bitmap pixels are not loaded in the memory. Just the bounds are loaded. If
+//      you try the use the bitmap here, you will get null.
+        options.inJustDecodeBounds = true;
+        Bitmap bmp = BitmapFactory.decodeFile(filePath, options);
+
+        int actualHeight = options.outHeight;
+        int actualWidth = options.outWidth;
+
+//      max Height and width values of the compressed image is taken as 816x612
+
+        float maxHeight = 816.0f;
+        float maxWidth = 612.0f;
+        float imgRatio = actualWidth / actualHeight;
+        float maxRatio = maxWidth / maxHeight;
+
+//      width and height values are set maintaining the aspect ratio of the image
+
+        if (actualHeight > maxHeight || actualWidth > maxWidth) {
+            if (imgRatio < maxRatio) {
+                imgRatio = maxHeight / actualHeight;
+                actualWidth = (int) (imgRatio * actualWidth);
+                actualHeight = (int) maxHeight;
+            } else if (imgRatio > maxRatio) {
+                imgRatio = maxWidth / actualWidth;
+                actualHeight = (int) (imgRatio * actualHeight);
+                actualWidth = (int) maxWidth;
+            } else {
+                actualHeight = (int) maxHeight;
+                actualWidth = (int) maxWidth;
+
+            }
+        }
+
+//      setting inSampleSize value allows to load a scaled down version of the original image
+
+        options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
+
+//      inJustDecodeBounds set to false to load the actual bitmap
+        options.inJustDecodeBounds = false;
+
+//      this options allow android to claim the bitmap memory if it runs low on memory
+        options.inPurgeable = true;
+        options.inInputShareable = true;
+        options.inTempStorage = new byte[16 * 1024];
+
+        try {
+//          load the bitmap from its path
+            bmp = BitmapFactory.decodeFile(filePath, options);
+        } catch (OutOfMemoryError exception) {
+            exception.printStackTrace();
+
+        }
+        try {
+            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
+        } catch (OutOfMemoryError exception) {
+            exception.printStackTrace();
+        }
+
+        float ratioX = actualWidth / (float) options.outWidth;
+        float ratioY = actualHeight / (float) options.outHeight;
+        float middleX = actualWidth / 2.0f;
+        float middleY = actualHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+//      check the rotation of the image and display it properly
+        ExifInterface exif;
+        try {
+            exif = new ExifInterface(filePath);
+
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION, 0);
+            Log.d("EXIF", "Exif: " + orientation);
+            Matrix matrix = new Matrix();
+            if (orientation == 6) {
+                matrix.postRotate(90);
+                Log.d("EXIF", "Exif: " + orientation);
+            } else if (orientation == 3) {
+                matrix.postRotate(180);
+                Log.d("EXIF", "Exif: " + orientation);
+            } else if (orientation == 8) {
+                matrix.postRotate(270);
+                Log.d("EXIF", "Exif: " + orientation);
+            }
+            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
+                    scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
+                    true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileOutputStream out = null;
+        String filename = getFilename();
+        try {
+            out = new FileOutputStream(filename);
+
+//          write the compressed bitmap at the destination specified by filename.
+            scaledBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return filename;
+
+    }
+
+    public String getFilename() {
+        FilePath = getExternalFilesDir(null)
+                + "/" + IMAGE_DIRECTORY_NAME;
+
+        String Image_name = PIC_NAME;
+        FilePath = FilePath + "/" + Image_name;
+
+//        File file = new File(Environment.getExternalStorageDirectory().getPath(), "MyFolder/Images");
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+//        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
+        return FilePath;
+
+    }
+
+    private String getRealPathFromURI(String contentURI) {
+        Uri contentUri = Uri.parse(contentURI);
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        if (cursor == null) {
+            return contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(index);
+        }
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        final float totalPixels = width * height;
+        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
+        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
+            inSampleSize++;
+        }
+
+        return inSampleSize;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -935,8 +1108,10 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                 FilePath = getExternalFilesDir(null)
                         + "/" + IMAGE_DIRECTORY_NAME;
 
-                String Image_name = PIC_NAME;
+                String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
+
+                FilePath = compressImage(FilePath);
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 8;
@@ -985,7 +1160,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
             PIC_NAME = PIC_TYPE + "~" + officerID + "~" + divId + "~" + suppId + "~" + Utils.getCurrentDateTimeFormat() + "~" + Utils.getDeviceID(DRDepotFindingsActivity.this)
                     + "~" + Utils.getVersionName(DRDepotFindingsActivity.this) + "~" + randomNum + ".png";
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + PIC_NAME);
+                    + PIC_TYPE + ".png");
         } else {
             return null;
         }
