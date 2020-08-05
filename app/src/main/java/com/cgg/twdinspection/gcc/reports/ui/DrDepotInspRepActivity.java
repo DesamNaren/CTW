@@ -148,50 +148,48 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
                 customProgressDialog.addText("Please wait...Downloading Pdf");
 
                 new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run () {
-                    try {
+                    @Override
+                    public void run() {
+                        try {
 
 
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                            directory_path = getExternalFilesDir(null)
-                                    + "/" + "CTW/GCC/";
-                        } else {
-                            directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                    + "/" + "CTW/GCC/";
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                                directory_path = getExternalFilesDir(null)
+                                        + "/" + "CTW/GCC/";
+                            } else {
+                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                        + "/" + "CTW/GCC/";
+                            }
+
+                            filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                            File file = new File(filePath);
+                            List<View> views = new ArrayList<>();
+                            views.add(binding.titlePdf);
+                            views.add(binding.generalPdf);
+                            views.add(binding.photosPdf);
+
+                            PDFUtil.getInstance(DrDepotInspRepActivity.this).generatePDF(views, filePath, DrDepotInspRepActivity.this, "schemes", "GCC");
+
+                        } catch (Exception e) {
+                            if (customProgressDialog.isShowing())
+                                customProgressDialog.hide();
+
+                            Toast.makeText(DrDepotInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                         }
-
-                        filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                        File file = new File(filePath);
-                        List<View> views = new ArrayList<>();
-                        views.add(binding.titlePdf);
-                        views.add(binding.generalPdf);
-                        views.add(binding.photosPdf);
-
-                        PDFUtil.getInstance(DrDepotInspRepActivity.this).generatePDF(views, filePath, DrDepotInspRepActivity.this, "schemes", "GCC");
-
-                    } catch (Exception e) {
-                        if (customProgressDialog.isShowing())
-                            customProgressDialog.hide();
-
-                        Toast.makeText(DrDepotInspRepActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                     }
-                }
-            },10000);
+                }, 10000);
 
-        }
-    });
+            }
+        });
 
-        binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener()
-
-    {
-        @Override
-        public void onClick (View view){
-        startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class)
-                .putExtra(AppConstants.PHOTO_TITLE, "DR DEPOT PHOTOS"));
+        binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DrDepotInspRepActivity.this, ViewPhotosActivity.class)
+                        .putExtra(AppConstants.PHOTO_TITLE, "DR DEPOT PHOTOS"));
+            }
+        });
     }
-    });
-}
 
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {

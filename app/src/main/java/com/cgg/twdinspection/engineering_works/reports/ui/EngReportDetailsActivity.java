@@ -3,34 +3,36 @@ package com.cgg.twdinspection.engineering_works.reports.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityEngReportDetailsBinding;
-import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
 import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
-import com.cgg.twdinspection.inspection.reports.ui.ReportCoCarricularActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
-import com.cgg.twdinspection.inspection.ui.PlantsInfoActivity;
-import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
 
-public class EngReportDetailsActivity extends AppCompatActivity {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EngReportDetailsActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
 
     ActivityEngReportDetailsBinding binding;
     private SharedPreferences sharedPreferences;
     private ReportWorkDetails reportWorkDetails;
+    CustomProgressDialog customProgressDialog;
+    String directory_path, filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,10 @@ public class EngReportDetailsActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_eng_report_details);
         binding.header.headerTitle.setText(getString(R.string.engineering_works_rep));
         binding.btnLayout.btnNext.setText(getString(R.string.next));
+
         binding.header.ivPdf.setVisibility(View.VISIBLE);
+        customProgressDialog = new CustomProgressDialog(this);
+
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,16 +53,44 @@ public class EngReportDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
-         binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
+        binding.header.ivPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EngReportDetailsActivity.this, EngPDFActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
+                customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Downloading Pdf");
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                                directory_path = getExternalFilesDir(null)
+                                        + "/" + "CTW/Engineering Works/";
+                            } else {
+                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                        + "/" + "CTW/Engineering Works/";
+                            }
+
+                            filePath = directory_path + reportWorkDetails.getOfficerId() + "_" + reportWorkDetails.getInspectionTime() + ".pdf";
+                            File file = new File(filePath);
+                            List<View> views = new ArrayList<>();
+                            views.add(binding.engWorksPdf1);
+                            views.add(binding.engWorksPdf2);
+
+
+                            PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views, filePath, EngReportDetailsActivity.this, "schemes", "GCC");
+
+                        } catch (Exception e) {
+                            if (customProgressDialog.isShowing())
+                                customProgressDialog.hide();
+
+                            Toast.makeText(EngReportDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, 10000);
             }
         });
-
-
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +108,6 @@ public class EngReportDetailsActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         try {
@@ -167,6 +199,21 @@ public class EngReportDetailsActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void pdfGenerationSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+
+        Utils.customPDFAlert(EngReportDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+    }
+
+    @Override
+    public void pdfGenerationFailure(Exception exception) {
+        customProgressDialog.hide();
+
+        Utils.customErrorAlert(EngReportDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
 }
