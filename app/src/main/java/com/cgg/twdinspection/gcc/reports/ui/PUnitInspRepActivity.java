@@ -77,7 +77,7 @@ public class PUnitInspRepActivity extends AppCompatActivity implements PDFUtil.P
                 String jsonObject = gson.toJson(reportData.getPhotos());
                 if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
                     adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                    binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
                     binding.recyclerView.setAdapter(adapter);
                 }
             }
