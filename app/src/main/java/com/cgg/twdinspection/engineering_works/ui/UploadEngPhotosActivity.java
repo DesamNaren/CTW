@@ -80,7 +80,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     private CustomProgressDialog customProgressDialog;
     UploadEngPhotoViewModel viewModel;
     SubmitEngWorksRequest submitEngWorksRequest;
-
+    File mediaStorageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,6 +251,8 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     private void callDataSubmit() {
         submitEngWorksRequest.setPhotoKeyId(randomNo);
         customProgressDialog.show();
+        customProgressDialog.addText("Please wait...Uploading Data");
+
         viewModel.submitEngWorksDetails(submitEngWorksRequest);
     }
 
@@ -274,7 +276,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
 
 
         customProgressDialog.show();
-
+        customProgressDialog.addText("Please wait...Uploadig Photos");
 
         List<MultipartBody.Part> partList = new ArrayList<>();
         partList.add(body);
@@ -528,7 +530,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
@@ -575,6 +577,12 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
     }
 
     private void CallSuccessAlert(String msg) {
+        if (mediaStorageDir.isDirectory()) {
+            String[] children = mediaStorageDir.list();
+            for (int i = 0; i < children.length; i++)
+                new File(mediaStorageDir, children[i]).delete();
+            mediaStorageDir.delete();
+        }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 

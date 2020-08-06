@@ -49,6 +49,8 @@ public class AppConstants {
     public static final String SIDEVIEW = "SIDEVIEW";
     public static final String REARVIEW = "REARVIEW";
     public static final String THREE_D_VIEW = "3DVIEW";
+    public static final String PIC1 = "PIC1";
+    public static final String PIC2 = "PIC2";
 
 
     public static final int SUCCESS_CODE = 200;
