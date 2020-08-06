@@ -95,6 +95,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     GCCPhotoViewModel gccPhotoViewModel;
     private String randomNum;
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
+    File mediaStorageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -490,6 +491,12 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private void CallSuccessAlert(String msg) {
+        if (mediaStorageDir.isDirectory()) {
+            String[] children = mediaStorageDir.list();
+            for (int i = 0; i < children.length; i++)
+                new File(mediaStorageDir, children[i]).delete();
+            mediaStorageDir.delete();
+        }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 
@@ -745,7 +752,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"

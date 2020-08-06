@@ -80,16 +80,17 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
                 binding.tvOfficerName.setText(reportData.getOfficerId());
                 binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
+                String jsonObject = gson.toJson(reportData.getPhotos());
+                if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
+                    adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                    binding.recyclerView.setAdapter(adapter);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String jsonObject = gson.toJson(reportData.getPhotos());
-        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-            adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            binding.recyclerView.setAdapter(adapter);
-        }
+
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null) {
             binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
         } else {
@@ -127,7 +128,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
                     break;
                 }
 
-                int pos = z;
+                int pos = reportData.getPhotos().size() - 1;
                 binding.ivRepairsCam.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -165,6 +166,7 @@ public class DrDepotInspRepActivity extends AppCompatActivity implements PDFUtil
                             File file = new File(filePath);
                             List<View> views = new ArrayList<>();
                             views.add(binding.titlePdf);
+                            views.add(binding.mfpPdf);
                             views.add(binding.generalPdf);
                             views.add(binding.photosPdf);
 

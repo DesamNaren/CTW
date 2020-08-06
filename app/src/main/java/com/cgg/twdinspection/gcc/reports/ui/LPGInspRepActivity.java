@@ -79,16 +79,17 @@ public class LPGInspRepActivity extends AppCompatActivity implements PDFUtil.PDF
                 binding.tvOfficerName.setText(reportData.getOfficerId());
                 binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
+                String jsonObject = gson.toJson(reportData.getPhotos());
+                if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
+                    adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                    binding.recyclerView.setAdapter(adapter);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String jsonObject = gson.toJson(reportData.getPhotos());
-        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-            adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            binding.recyclerView.setAdapter(adapter);
-        }
+
         if (reportData != null && reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getLpg() != null) {
             binding.setInspData(reportData.getInspectionFindings().getLpg());
         } else {
@@ -124,7 +125,7 @@ public class LPGInspRepActivity extends AppCompatActivity implements PDFUtil.PDF
                     break;
                 }
 
-                int pos = z;
+                int pos = reportData.getPhotos().size() - 1;
                 binding.ivRepairs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

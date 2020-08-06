@@ -83,7 +83,7 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
                             List<View> views = new ArrayList<>();
                             views.add(binding.engWorksPdf1);
                             views.add(binding.engWorksPdf2);
-
+                            views.add(binding.photosPdf);
 
                             PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views, filePath, EngReportDetailsActivity.this, "schemes", "GCC");
 
@@ -128,12 +128,24 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
             Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        String jsonObject = gson.toJson(reportWorkDetails.getPhotos());
-        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-            adapter = new ViewPhotoAdapterPdf(this, reportWorkDetails.getPhotos());
-            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            binding.recyclerView.setAdapter(adapter);
+        try {
+            if (reportWorkDetails != null) {
+
+                binding.tvDate.setText(reportWorkDetails.getInspectionTime());
+                binding.tvOfficerName.setText(reportWorkDetails.getOfficerId());
+                binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+
+                String jsonObject = gson.toJson(reportWorkDetails.getPhotos());
+                if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
+                    adapter = new ViewPhotoAdapterPdf(this, reportWorkDetails.getPhotos());
+                    binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                    binding.recyclerView.setAdapter(adapter);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
        /* try {
             if (reportWorkDetails.getPhotos() != null && reportWorkDetails.getPhotos().size() > 0) {
 

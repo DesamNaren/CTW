@@ -90,14 +90,15 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
             stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
     private String randomNum;
+    File mediaStorageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_photo_capture);
-        if(getIntent()!=null) {
+        if (getIntent() != null) {
             binding.header.headerTitle.setText(getIntent().getStringExtra(AppConstants.TITLE));
-        }else{
+        } else {
             binding.header.headerTitle.setText(getString(R.string.upload_photos));
         }
         binding.header.ivHome.setVisibility(View.GONE);
@@ -344,10 +345,10 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
                 petrolCommodities.setSystemRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 petrolCommodities.setSystemValue(stockDetailsResponse.getCommonCommodities().get(i).getQty() * stockDetailsResponse.getCommonCommodities().get(i).getRate());
                 petrolCommodities.setPhysicalRate(stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                if(!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
+                if (!TextUtils.isEmpty(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant())) {
                     petrolCommodities.setPhysiacalQty(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()));
                     petrolCommodities.setPhysicalValue(Double.parseDouble(stockDetailsResponse.getCommonCommodities().get(i).getPhyQuant()) * stockDetailsResponse.getCommonCommodities().get(i).getRate());
-                }else{
+                } else {
                     //petrolCommodities.setPhysiacalQty(-1.0);
                     //petrolCommodities.setPhysicalValue(-1.0);
                 }
@@ -423,7 +424,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         if (flag_entrance == 0) {
             returnFlag = false;
             showSnackBar("Please capture entrance image");
-        }else if (flag_machinary1 == 0) {
+        } else if (flag_machinary1 == 0) {
             returnFlag = false;
             showSnackBar("Please capture machinary image");
         } else if (flag_machinary2 == 0) {
@@ -435,7 +436,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
         } else if (flag_safety_equip2 == 0) {
             returnFlag = false;
             showSnackBar("Please capture safety equipment image");
-        }  else if (flag_office1 == 0) {
+        } else if (flag_office1 == 0) {
             returnFlag = false;
             showSnackBar("Please capture office image");
         } else if (flag_office2 == 0) {
@@ -448,6 +449,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     private void showSnackBar(String str) {
         Snackbar.make(binding.root, str, Snackbar.LENGTH_SHORT).show();
     }
+
     public String compressImage(String imageUri) {
 
         String filePath = getRealPathFromURI(imageUri);
@@ -706,7 +708,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
@@ -762,6 +764,12 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
     }
 
     private void CallSuccessAlert(String msg) {
+        if (mediaStorageDir.isDirectory()) {
+            String[] children = mediaStorageDir.list();
+            for (int i = 0; i < children.length; i++)
+                new File(mediaStorageDir, children[i]).delete();
+            mediaStorageDir.delete();
+        }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 }

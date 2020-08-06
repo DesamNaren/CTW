@@ -100,72 +100,90 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         binding.btnDrDepot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String drDepotData = gson.toJson(drDepot);
-                editor.putString(AppConstants.Selected_Supp_Report, drDepotData);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (drDepot != null && drDepot.size() > 0) {
+                    Gson gson = new Gson();
+                    String drDepotData = gson.toJson(drDepot);
+                    editor.putString(AppConstants.Selected_Supp_Report, drDepotData);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
         binding.btnDrGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String drGodownData = gson.toJson(drGodown);
-                editor.putString(AppConstants.Selected_Supp_Report, drGodownData);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (drGodown != null && drGodown.size() > 0) {
+                    Gson gson = new Gson();
+                    String drGodownData = gson.toJson(drGodown);
+                    editor.putString(AppConstants.Selected_Supp_Report, drGodownData);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
         binding.btnMfpGodown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String data = gson.toJson(mfpGodown);
-                editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (mfpGodown != null && mfpGodown.size() > 0) {
+                    Gson gson = new Gson();
+                    String data = gson.toJson(mfpGodown);
+                    editor.putString(AppConstants.Selected_Supp_Report, data);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
         binding.btnPUnit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String data = gson.toJson(processingUnit);
-                editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (processingUnit != null && processingUnit.size() > 0) {
+                    Gson gson = new Gson();
+                    String data = gson.toJson(processingUnit);
+                    editor.putString(AppConstants.Selected_Supp_Report, data);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
         binding.btnPetrolPump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String data = gson.toJson(petrolpump);
-                editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (petrolpump != null && petrolpump.size() > 0) {
+                    Gson gson = new Gson();
+                    String data = gson.toJson(petrolpump);
+                    editor.putString(AppConstants.Selected_Supp_Report, data);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 
         binding.btnLpg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Gson gson = new Gson();
-                String data = gson.toJson(lpg);
-                editor.putString(AppConstants.Selected_Supp_Report, data);
-                editor.commit();
-                startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                if (lpg != null && lpg.size() > 0) {
+                    Gson gson = new Gson();
+                    String data = gson.toJson(lpg);
+                    editor.putString(AppConstants.Selected_Supp_Report, data);
+                    editor.commit();
+                    startActivity(new Intent(GCCReportsDashboard.this, GCCReportActivity.class));
+                } else {
+                    callSnackBar("No data found");
+                }
             }
         });
 

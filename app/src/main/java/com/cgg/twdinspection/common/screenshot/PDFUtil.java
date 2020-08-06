@@ -250,13 +250,13 @@ public class PDFUtil {
         private File savePDFDocumentToStorage(final PdfDocument pdfDocument) throws IOException {
             FileOutputStream fos = null;
             // Create file.
-            File file = null;
-            File pdfFile = null;
-            file = new File(context.getExternalFilesDir(null) + "/CTW/" + folderName + "/");
-            if (!file.exists()) {
-                file.mkdirs();
-            }
+//            File file = null;
+//            file = new File(context.getExternalFilesDir(null) + "/CTW/" + folderName + "/");
+//            if (!file.exists()) {
+//                file.mkdirs();
+//            }
 
+            File pdfFile = null;
             pdfFile = new File(mFilePath);
 
 //            if (mFilePath == null || mFilePath.isEmpty()) {
