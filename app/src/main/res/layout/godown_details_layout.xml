@@ -14,10 +14,10 @@
             android:padding="@dimen/dimen_10dp">
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/divLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
@@ -26,9 +26,7 @@
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/p_unit"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -37,7 +35,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_weight="1"
-
                     android:text="Division" />
 
 
@@ -46,14 +43,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/socLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
@@ -63,9 +61,7 @@
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/godown_storage"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/socNameTV"
@@ -75,33 +71,29 @@
                     android:layout_weight="1"
                     android:text="Society" />
 
-
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/socName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/drGodownLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
-
                 <ImageView
-
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/dr_godown"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/drGodownNameTV"
@@ -111,32 +103,29 @@
                     android:layout_weight="1"
                     android:text="DR Godown" />
 
-
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/drGodownName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/salesLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <ImageView
                     android:layout_width="16dp"
-
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/user_16"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/gone"
@@ -146,7 +135,6 @@
                     android:layout_weight="1"
                     android:text="Salesman" />
 
-
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/salesManTV"
                     android:layout_width="0dp"
@@ -154,34 +142,31 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/inchargeLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <ImageView
                     android:layout_width="16dp"
-
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/user_16"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
-
                     android:id="@+id/inchargeNameTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5dp"
                     android:layout_weight="1"
-
                     android:text="Incharge" />
 
 
@@ -192,25 +177,23 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1" />
+
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center"
                 android:id="@+id/dateLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="16dp"
-
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:background="@drawable/clock_16"
-                    android:backgroundTint="@color/colorPrimary"
-
-                    />
+                    android:backgroundTint="@color/colorPrimary" />
 
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/insDate"
@@ -220,16 +203,16 @@
                     android:layout_weight="1"
                     android:text="Date of Inspection" />
 
-
                 <com.cgg.twdinspection.common.custom.CustomFontTextView
                     android:id="@+id/dateTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-            </LinearLayout>
 
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
 </layout>
