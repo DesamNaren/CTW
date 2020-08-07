@@ -116,8 +116,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty();
+                        physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                         finalMFPCom.add(stockDetailsResponse.getMfp_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
@@ -127,8 +127,8 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
             if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
+                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                         finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();

@@ -122,8 +122,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
+                        physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
                         finalEssCom.add(stockDetailsResponse.getEssential_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
@@ -132,8 +132,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
+                        physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                         finalDaiCom.add(stockDetailsResponse.getDialy_requirements().get(i));
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
@@ -142,8 +142,8 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
             if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
                     if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
+                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                         finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();

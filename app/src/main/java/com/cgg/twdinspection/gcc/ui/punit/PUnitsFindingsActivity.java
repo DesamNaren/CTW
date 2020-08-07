@@ -17,10 +17,7 @@ import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPunitFindingsBinding;
-import com.cgg.twdinspection.gcc.source.inspections.DrDepot.StockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
-import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
-import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
@@ -36,7 +33,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class PUnitsFindingsActivity extends LocBaseActivity {
     private SharedPreferences sharedPreferences;
@@ -44,7 +40,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     ActivityGccPunitFindingsBinding binding;
     private String officerID, divId, suppId;
     private StockDetailsResponse stockDetailsResponse;
-    double physVal = 0, sysVal = 0, notInsSysVal=0, insSysVal=0, difference=0;
+    double physVal = 0, sysVal = 0, notInsSysVal = 0, insSysVal = 0, difference = 0;
     private String remarks, insComName, insComDate, insCer, weightDate, weightMea, difReason;
     private String fireNOC, qualityStock, godownHyg, repairsReq;
     private String rawStock, proReg, inwardReg, outwardReg, saleReg, labAttReg, amcMac, agmarkCer, fsaaiCer;
@@ -67,11 +63,11 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));
         randomNum = Utils.getRandomNumberString();
 
-        finalEssCom= new ArrayList<>();
-        finalDaiCom= new ArrayList<>();
-        finalMFPCom= new ArrayList<>();
-        finalEmpCom= new ArrayList<>();
-        finalPUnitCCom= new ArrayList<>();
+        finalEssCom = new ArrayList<>();
+        finalDaiCom = new ArrayList<>();
+        finalMFPCom = new ArrayList<>();
+        finalEmpCom = new ArrayList<>();
+        finalPUnitCCom = new ArrayList<>();
 
         Gson gson = new Gson();
         stockDetailsResponse = gson.fromJson(stockData, StockDetailsResponse.class);
@@ -90,9 +86,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEssential_commodities().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty();
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getEssential_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getEssential_commodities().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
                         finalEssCom.add(stockDetailsResponse.getEssential_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getEssential_commodities().get(i).getQty() * stockDetailsResponse.getEssential_commodities().get(i).getRate();
@@ -100,9 +96,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getDialy_requirements().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty();
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getDialy_requirements().get(i).getPhyQuant()) * stockDetailsResponse.getDialy_requirements().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
                         finalDaiCom.add(stockDetailsResponse.getDialy_requirements().get(i));
                     }
                     sysVal += stockDetailsResponse.getDialy_requirements().get(i).getQty() * stockDetailsResponse.getDialy_requirements().get(i).getRate();
@@ -110,9 +106,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getEmpties().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty();
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getEmpties().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getEmpties().get(i).getPhyQuant()) * stockDetailsResponse.getEmpties().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
                         finalEmpCom.add(stockDetailsResponse.getEmpties().get(i));
                     }
                     sysVal += stockDetailsResponse.getEmpties().get(i).getQty() * stockDetailsResponse.getEmpties().get(i).getRate();
@@ -120,9 +116,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getMfp_commodities().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty();
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getMfp_commodities().get(i).getPhyQuant()) * stockDetailsResponse.getMfp_commodities().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
                         finalMFPCom.add(stockDetailsResponse.getMfp_commodities().get(i));
                     }
                     sysVal += stockDetailsResponse.getMfp_commodities().get(i).getQty() * stockDetailsResponse.getMfp_commodities().get(i).getRate();
@@ -130,9 +126,9 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             }
             if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
                 for (int i = 0; i < stockDetailsResponse.getProcessing_units().size(); i++) {
-                    if(!TextUtils.isEmpty(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())) {
-                        physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant());
-                        insSysVal += stockDetailsResponse.getProcessing_units().get(i).getQty();
+                    if (!TextUtils.isEmpty(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant())) {
+                        physVal += Double.parseDouble(stockDetailsResponse.getProcessing_units().get(i).getPhyQuant()) * stockDetailsResponse.getProcessing_units().get(i).getRate();
+                        insSysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
                         finalPUnitCCom.add(stockDetailsResponse.getProcessing_units().get(i));
                     }
                     sysVal += stockDetailsResponse.getProcessing_units().get(i).getQty() * stockDetailsResponse.getProcessing_units().get(i).getRate();
@@ -144,7 +140,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             binding.tvSysVal.setText(String.format("%.2f", sysVal));
             binding.tvPhysVal.setText(String.format("%.2f", physVal));
 
-            notInsSysVal = sysVal-insSysVal;
+            notInsSysVal = sysVal - insSysVal;
             notInsSysVal = Double.valueOf(String.format("%.2f", notInsSysVal));
             binding.tvInsSysVal.setText(String.format("%.2f", insSysVal));
             binding.tvSysValNotIns.setText(String.format("%.2f", notInsSysVal));
@@ -194,7 +190,6 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     stockDetails.setStockValueAsPerSystemNotInsp(String.valueOf(notInsSysVal));
 
                     pUnitInsp.setStockDetails(stockDetails);
-
 
 
                     PUnitRegisterBookCertificates registerBookCertificates = new PUnitRegisterBookCertificates();
@@ -255,8 +250,8 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     String inspectionDetails = gson.toJson(inspectionSubmitResponse);
                     sysVal = Double.valueOf(String.format("%.2f", sysVal));
                     physVal = Double.valueOf(String.format("%.2f", physVal));
-                    editor.putString(AppConstants.TOTAL_PHYVAL,String.valueOf(physVal));
-                    editor.putString(AppConstants.TOTAL_SYSVAL,String.valueOf(sysVal));
+                    editor.putString(AppConstants.TOTAL_PHYVAL, String.valueOf(physVal));
+                    editor.putString(AppConstants.TOTAL_SYSVAL, String.valueOf(sysVal));
                     editor.putString(AppConstants.InspectionDetails, inspectionDetails);
                     editor.putString(AppConstants.randomNum, randomNum);
 
@@ -602,6 +597,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
     private void showSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
+
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
     }
