@@ -128,6 +128,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity  implements PD
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
                     binding.includeBasicLayout.drGodownNameTV.setText("MFP Godown");
+                    binding.includeBasicLayout.socLL.setVisibility(View.GONE);
                 }
                 if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
                     binding.includeBasicLayout.drGodownNameTV.setText("Processing Unit");

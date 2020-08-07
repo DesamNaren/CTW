@@ -81,7 +81,6 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
 
 
         binding.includeBasicLayout.divLL.setVisibility(View.VISIBLE);
-        binding.includeBasicLayout.socLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.drGodownNameTV.setText(getString(R.string.mfp_godown_name));
         binding.includeBasicLayout.drGodownLL.setVisibility(View.VISIBLE);
         binding.includeBasicLayout.inchargeLL.setVisibility(View.VISIBLE);
@@ -93,7 +92,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
             mfpGoDowns = gson.fromJson(str, MFPGoDowns.class);
             if (mfpGoDowns != null) {
                 binding.includeBasicLayout.divName.setText(mfpGoDowns.getDivisionName());
-                binding.includeBasicLayout.socName.setText(mfpGoDowns.getSocietyName());
+//                binding.includeBasicLayout.socName.setText(mfpGoDowns.getSocietyName());
                 binding.includeBasicLayout.drGodownName.setText(mfpGoDowns.getGodownName());
                 binding.includeBasicLayout.inchargeName.setText(mfpGoDowns.getIncharge());
                 binding.includeBasicLayout.dateTv.setText(Utils.getCurrentDateTimeDisplay());

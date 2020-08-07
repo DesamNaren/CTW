@@ -88,6 +88,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     private String officerId;
     private CustomProgressDialog customProgressDialog;
     String randomNo, deviceId, versionNo;
+    File mediaStorageDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -361,6 +362,12 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     }
 
     private void CallSuccessAlert(String msg) {
+        if (mediaStorageDir.isDirectory()) {
+            String[] children = mediaStorageDir.list();
+            for (int i = 0; i < children.length; i++)
+                new File(mediaStorageDir, children[i]).delete();
+            mediaStorageDir.delete();
+        }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
     }
 
@@ -389,7 +396,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
