@@ -533,9 +533,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgBigTvRotAvailCon.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_big_tv_rot_avail_con_yes) {
-                    TvRotWorkingStatus = AppConstants.Yes;
+                    TvRotWorkingStatus = AppConstants.GOOD;
                 } else if (selctedItem == R.id.rb_big_tv_rot_avail_con_no) {
-                    TvRotWorkingStatus = AppConstants.No;
+                    TvRotWorkingStatus = AppConstants.BAD;
                 } else {
                     TvRotWorkingStatus = null;
                 }

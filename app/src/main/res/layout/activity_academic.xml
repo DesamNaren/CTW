@@ -1611,26 +1611,6 @@
 
                         </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/t_tv_rot_working_status"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorAccent"
-                            android:visibility="gone"
-                            app:errorEnabled="true">
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_tv_rot_working_status"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
-                                android:hint="@string/working_condition"
-                                android:imeOptions="actionNext"
-                                android:text="@={inspData.tvRotWorkingStatus}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
                         <LinearLayout
                             android:id="@+id/big_tv_ll"
                             android:layout_width="match_parent"

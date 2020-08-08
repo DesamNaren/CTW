@@ -1690,7 +1690,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/whether_big_tv_rot_available"
+                                android:text="@string/working_condition"
                                 android:textColor="@color/black" />
 
                             <RadioGroup

@@ -169,9 +169,9 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgSanitary.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_sanitary)
-                    sanitaryNapkins = AppConstants.Yes;
+                    sanitaryNapkins = AppConstants.GOOD;
                 else if (selctedItem == R.id.rb_no_sanitary)
-                    sanitaryNapkins = AppConstants.No;
+                    sanitaryNapkins = AppConstants.BAD;
                 else
                     sanitaryNapkins = null;
             }
@@ -203,9 +203,9 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgNotes.getCheckedRadioButtonId();
                 if (selctedItem == R.id.rb_yes_notes)
-                    notes = AppConstants.Yes;
+                    notes = AppConstants.GOOD;
                 else if (selctedItem == R.id.rb_no_notes)
-                    notes = AppConstants.No;
+                    notes = AppConstants.BAD;
                 else
                     notes = null;
             }
