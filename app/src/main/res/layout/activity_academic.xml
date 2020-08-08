@@ -1617,7 +1617,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="@color/colorAccent"
-                            android:visibility="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
+                            android:visibility="gone"
                             app:errorEnabled="true">
 
                             <com.cgg.twdinspection.common.custom.CustomFontEditText
@@ -1636,7 +1636,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.big_tv_rot_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
                                 android:layout_width="wrap_content"
@@ -1656,17 +1656,17 @@
                                     android:id="@+id/rb_big_tv_rot_avail_con_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Good`)}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="@string/good" />
 
                                 <RadioButton
                                     android:id="@+id/rb_big_tv_rot_avail_con_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`No`)}"
+                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Bad`)}"
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:text="@string/bad" />
 
                             </RadioGroup>
                         </LinearLayout>
@@ -1982,7 +1982,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.ict_instr_avail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -2507,7 +2507,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.tabs_supplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

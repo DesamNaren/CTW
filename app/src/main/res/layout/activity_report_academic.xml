@@ -1680,43 +1680,20 @@
 
                         </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/t_tv_rot_working_status"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="@color/colorAccent"
-                            android:visibility="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}"
-                            app:errorEnabled="true">
-
-
-                            <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                android:id="@+id/et_tv_rot_working_status"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:focusableInTouchMode="false"
-                                android:hint="@string/working_condition"
-                                android:imeOptions="actionNext"
-                                android:singleLine="true"
-                                android:text="@={inspData.tvRotWorkingStatus}" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
                         <LinearLayout
-                            android:id="@+id/big_tv_ll"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.bigTvRotAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/working_condition"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/whether_big_tv_rot_available"
                                 android:textColor="@color/black" />
 
                             <RadioGroup
-                                android:id="@+id/rg_big_tv_rot_avail_con"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_5dp"
@@ -1724,28 +1701,28 @@
 
 
                                 <RadioButton
-                                    android:id="@+id/rb_big_tv_rot_avail_con_yes"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Yes`)}"
+                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Good`)}"
                                     android:clickable="false"
                                     android:focusableInTouchMode="false"
+
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/yes" />
+                                    android:text="@string/good" />
 
                                 <RadioButton
-                                    android:id="@+id/rb_big_tv_rot_avail_con_no"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`No`)}"
+                                    android:checked="@{inspData.tvRotWorkingStatus.equalsIgnoreCase(`Bad`)}"
                                     android:clickable="false"
                                     android:focusableInTouchMode="false"
+
                                     android:padding="@dimen/dimen_5dp"
-                                    android:text="@string/no" />
+                                    android:text="@string/bad" />
 
                             </RadioGroup>
-                        </LinearLayout>
 
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -2064,7 +2041,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.ictInstrAvail.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -2616,7 +2593,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:visibility="gone">
+                                android:visibility="@{inspData.tabsSupplied.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -2727,52 +2704,6 @@
 
                                 </com.google.android.material.textfield.TextInputLayout>
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:visibility="gone">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:padding="@dimen/dimen_5dp"
-                                        android:text="@string/separate_time_table_displayed"
-                                        android:textColor="@color/black" />
-
-                                    <RadioGroup
-                                        android:id="@+id/rg_tabs_timetable_disp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_5dp"
-                                        android:orientation="horizontal">
-
-
-                                        <RadioButton
-                                            android:id="@+id/rb_tabs_timetable_disp_yes"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`Yes`)}"
-                                            android:clickable="false"
-                                            android:focusableInTouchMode="false"
-
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/yes" />
-
-                                        <RadioButton
-                                            android:id="@+id/rb_tabs_timetable_disp_no"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:checked="@{inspData.separateTimetableDisp.equalsIgnoreCase(`No`)}"
-                                            android:clickable="false"
-                                            android:focusableInTouchMode="false"
-
-                                            android:padding="@dimen/dimen_5dp"
-                                            android:text="@string/no" />
-
-                                    </RadioGroup>
-
-                                </LinearLayout>
 
                             </LinearLayout>
 

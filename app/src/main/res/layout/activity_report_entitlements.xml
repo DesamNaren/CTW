@@ -569,19 +569,19 @@
                                 android:id="@+id/rb_yes_sanitary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Yes`)}"
+                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Good`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/good" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_sanitary"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`No`)}"
+                                android:checked="@{inspData.sanitaryNapkins.equalsIgnoreCase(`Bad`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
+                                android:text="@string/bad" />
 
                         </RadioGroup>
                     </LinearLayout>
@@ -714,19 +714,19 @@
                                 android:id="@+id/rb_yes_notes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.notes.equalsIgnoreCase(`Yes`)}"
+                                android:checked="@{inspData.notes.equalsIgnoreCase(`Good`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/good" />
 
                             <RadioButton
                                 android:id="@+id/rb_no_notes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.notes.equalsIgnoreCase(`No`)}"
+                                android:checked="@{inspData.notes.equalsIgnoreCase(`Bad`)}"
                                 android:clickable="false"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
+                                android:text="@string/bad" />
 
                         </RadioGroup>
                     </LinearLayout>
