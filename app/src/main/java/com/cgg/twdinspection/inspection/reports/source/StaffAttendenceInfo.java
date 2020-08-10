@@ -32,7 +32,7 @@ public class StaffAttendenceInfo {
     @SerializedName("emp_presence")
     @Expose
     private String empPresence;
-    @SerializedName("last_week_teacher_attended")
+    @SerializedName("last_week_turn_duties_attended")
     @Expose
     private String lastWeekTeacherAttended;
     @SerializedName("absentFlag")
