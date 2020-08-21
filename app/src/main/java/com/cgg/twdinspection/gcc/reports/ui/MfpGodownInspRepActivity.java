@@ -48,7 +48,7 @@ public class MfpGodownInspRepActivity extends AppCompatActivity implements PDFUt
 
         binding.bottomLl.btnNext.setText("Next");
         binding.header.headerTitle.setText("MFP GODOWN FINDINGS REPORT");
-        binding.header.ivPdf.setVisibility(View.VISIBLE);
+        binding.header.ivPdf.setVisibility(View.GONE);
         customProgressDialog = new CustomProgressDialog(this);
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
