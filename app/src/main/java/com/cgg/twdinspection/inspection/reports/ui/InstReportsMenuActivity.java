@@ -720,7 +720,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 //            addPhotoContent(document);
 
             document.close();
-            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this, inspReportData);
+            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this);
 
         } catch (Exception e) {
             e.printStackTrace();

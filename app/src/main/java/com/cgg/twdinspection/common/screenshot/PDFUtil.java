@@ -208,16 +208,10 @@ public class PDFUtil {
 
                 if (contentView.getWidth() > 0 && contentView.getHeight() > 0) {
                     PdfDocument.PageInfo pageInfo;
-                    if (flag.equalsIgnoreCase("schemes")) {
-                        // crate a page description
-                        pageInfo = new PdfDocument.PageInfo.
-                                Builder(595, 842, i + 1).create();
-                    } else {
-                        pageInfo = new PdfDocument.PageInfo.
-                                Builder((int) contentView.getWidth(), contentView.getHeight(), i + 1).create();
+                    // crate a page description
+                    pageInfo = new PdfDocument.PageInfo.
+                            Builder(595, 842, i + 1).create();
 
-
-                    }
 
                     // start a page
                     PdfDocument.Page page = pdfDocument.startPage(pageInfo);

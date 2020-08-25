@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -22,11 +23,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
+import com.cgg.twdinspection.common.screenshot.ItextMerge;
 import com.cgg.twdinspection.common.screenshot.PDFUtil;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportStockDetailsBinding;
+import com.cgg.twdinspection.gcc.reports.adapter.CommCommodityAdapter;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
 import com.cgg.twdinspection.gcc.reports.fragments.DailyReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.EmptiesReportFragment;
@@ -36,6 +39,7 @@ import com.cgg.twdinspection.gcc.reports.fragments.MFPReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PUnitReportFragment;
 import com.cgg.twdinspection.gcc.reports.fragments.PetrollReportFragment;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
+import com.cgg.twdinspection.gcc.reports.source.ReportSubmitReqCommodities;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -43,14 +47,27 @@ import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportStockDetailsActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener {
+public class ReportStockDetailsActivity extends AppCompatActivity implements PDFUtil.PDFUtilListener, ItextMerge.PDFMergeListener {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ActivityReportStockDetailsBinding binding;
@@ -60,8 +77,14 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag, petrol_flag, lpg_flag;
     int pos = -1;
     CustomProgressDialog customProgressDialog;
-    String directory_path, filePath;
+    String directory_path, filePath, filePath1, filePath2;
     ViewPhotoAdapterPdf adapter;
+    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+            Font.BOLD);
+    private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
+            Font.BOLD);
+    private List<ReportSubmitReqCommodities> essentialList, dailyreqList, emptiesList, mfpList, punitList, petrolList, lpgList;
+    Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +102,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         PUnitFragment.commonCommodities = null;
 
         sharedPreferences = TWDApplication.get(ReportStockDetailsActivity.this).getPreferences();
-        Gson gson = new Gson();
+        gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.REP_DATA, "");
         reportData = gson.fromJson(data, ReportData.class);
 
@@ -148,10 +171,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                             }
                         }
                     }
-
-                }
-
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
+                    addCommoditiesListData();
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null) {
                         binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
@@ -187,10 +208,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                             }
                         }
                     }
-
-                }
-
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
+                    addCommoditiesListData();
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getMfpGodowns() != null) {
                         binding.setMfp(reportData.getInspectionFindings().getMfpGodowns());
@@ -225,10 +244,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                             }
                         }
                     }
-
-                }
-
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
+                    addCommoditiesListData();
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null)
                         binding.setPUnit(reportData.getInspectionFindings().getProcessingUnit());
@@ -271,10 +288,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                         binding.punitRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
                         binding.punitRecyclerView.setAdapter(adapter);
                     }
-
-                }
-
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
+                    addCommoditiesListData();
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getPetrolPump() != null)
                         binding.setPetrolpump(reportData.getInspectionFindings().getPetrolPump());
@@ -309,10 +324,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                             }
                         }
                     }
-
-                }
-
-                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+                    addCommoditiesListData();
+                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getLpg() != null)
                         binding.setLpg(reportData.getInspectionFindings().getLpg());
 
@@ -346,10 +359,10 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                             }
                         }
                     }
-
+                    addCommoditiesListData();
                 }
 
-                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -406,7 +419,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             @Override
             public void onClick(View v) {
                 if (reportData.getInspectionFindings().getDrGodown() != null) {
-                    Intent intent = new Intent(ReportStockDetailsActivity.this, ReportStockDetailsActivity.class);
+                    Intent intent = new Intent(ReportStockDetailsActivity.this, DrGodownInspRepActivity.class);
                     startActivity(intent);
                 } else if (reportData.getInspectionFindings().getDrDepot() != null) {
                     Intent intent = new Intent(ReportStockDetailsActivity.this, DrDepotInspRepActivity.class);
@@ -437,6 +450,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             binding.viewPager.setVisibility(View.GONE);
             binding.tabs.setVisibility(View.GONE);
             binding.llShopClose.setVisibility(View.VISIBLE);
+            binding.header.ivPdf.setVisibility(View.GONE);
 
             if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
                 for (int z = 0; z < reportData.getPhotos().size(); z++) {
@@ -588,13 +602,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "Dr_Godown_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                                filePath = directory_path + "Dr_Godown_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.drGownTitlePdf);
                                 views.add(binding.drGodownGeneralPdf);
                                 views.add(binding.drGodownPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
 
                             } catch (Exception e) {
@@ -623,15 +639,16 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                                File file = new File(filePath);
+                                filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.drDepotTitlePdf);
                                 views.add(binding.drDepotMfpPdf);
                                 views.add(binding.drDepotGeneralPdf);
                                 views.add(binding.drDepotPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
                             } catch (Exception e) {
                                 if (customProgressDialog.isShowing())
@@ -660,14 +677,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "MFP_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                                File file = new File(filePath);
+                                filePath = directory_path + "MFP_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.mfpTitlePdf);
                                 views.add(binding.mfpGeneralPdf);
                                 views.add(binding.mfpPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
                             } catch (Exception e) {
                                 if (customProgressDialog.isShowing())
@@ -694,14 +712,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "Processing_Unit_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                                File file = new File(filePath);
+                                filePath = directory_path + "Processing_Unit_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.punitRegistersPdf);
                                 views.add(binding.punitGeneralPdf);
                                 views.add(binding.punitPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
                             } catch (Exception e) {
                                 if (customProgressDialog.isShowing())
@@ -730,13 +749,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "Petrol_Pump_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
+                                filePath = directory_path + "Petrol_Pump_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.petrolPumpTitlePdf);
                                 views.add(binding.petrolPumpGeneralPdf);
                                 views.add(binding.petrolPumpPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
                             } catch (Exception e) {
                                 if (customProgressDialog.isShowing())
@@ -765,14 +786,15 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "LPG_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() + ".pdf";
-                                File file = new File(filePath);
+                                filePath = directory_path + "LPG_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() ;
+                                filePath1 = filePath + "_1" + ".pdf";
+
                                 List<View> views = new ArrayList<>();
                                 views.add(binding.lpgTitlePdf);
                                 views.add(binding.lpgGeneralPdf);
                                 views.add(binding.lpgPhotosPdf);
 
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath, ReportStockDetailsActivity.this, "schemes", "GCC");
+                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
 
                             } catch (Exception e) {
                                 if (customProgressDialog.isShowing())
@@ -812,6 +834,92 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
 
     }
 
+    private void addCommoditiesListData() {
+
+        if (reportData != null && reportData.getStockDetails() != null) {
+            if (reportData.getStockDetails().getEssentialCommodities() != null &&
+                    reportData.getStockDetails().getEssentialCommodities().size() > 0) {
+
+                String essential = gson.toJson(reportData.getStockDetails().getEssentialCommodities());
+                if (!TextUtils.isEmpty(essential) && !essential.equalsIgnoreCase("{}")) {
+                    essentialList = reportData.getStockDetails().getEssentialCommodities();
+                    if (essentialList != null && essentialList.size() > 0) {
+                        setAdapter(essentialList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getDailyRequirements() != null &&
+                    reportData.getStockDetails().getDailyRequirements().size() > 0) {
+                String daily = gson.toJson(reportData.getStockDetails().getDailyRequirements());
+                if (!TextUtils.isEmpty(daily) && !daily.equalsIgnoreCase("{}")) {
+                    dailyreqList = reportData.getStockDetails().getDailyRequirements();
+                    if (dailyreqList != null && dailyreqList.size() > 0) {
+                        setAdapter(dailyreqList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getEmpties() != null &&
+                    reportData.getStockDetails().getEmpties().size() > 0) {
+                String empties = gson.toJson(reportData.getStockDetails().getEmpties());
+                if (!TextUtils.isEmpty(empties) && !empties.equalsIgnoreCase("{}")) {
+                    emptiesList = reportData.getStockDetails().getEmpties();
+                    if (emptiesList != null && emptiesList.size() > 0) {
+                        setAdapter(emptiesList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getMfpCommodities() != null &&
+                    reportData.getStockDetails().getMfpCommodities().size() > 0) {
+                String mfp = gson.toJson(reportData.getStockDetails().getMfpCommodities());
+                if (!TextUtils.isEmpty(mfp) && !mfp.equalsIgnoreCase("{}")) {
+                    mfpList = reportData.getStockDetails().getMfpCommodities();
+                    if (mfpList != null && mfpList.size() > 0) {
+                        setAdapter(mfpList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getProcessingUnits() != null &&
+                    reportData.getStockDetails().getProcessingUnits().size() > 0) {
+                String punit = gson.toJson(reportData.getStockDetails().getProcessingUnits());
+                if (!TextUtils.isEmpty(punit) && !punit.equalsIgnoreCase("{}")) {
+                    punitList = reportData.getStockDetails().getProcessingUnits();
+                    if (punitList != null && punitList.size() > 0) {
+                        setAdapter(punitList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getPetrolCommodities() != null &&
+                    reportData.getStockDetails().getPetrolCommodities().size() > 0) {
+                String petrolpump = gson.toJson(reportData.getStockDetails().getPetrolCommodities());
+                if (!TextUtils.isEmpty(petrolpump) && !petrolpump.equalsIgnoreCase("{}")) {
+                    petrolList = reportData.getStockDetails().getPetrolCommodities();
+                    if (petrolList != null && petrolList.size() > 0) {
+                        setAdapter(petrolList);
+                    }
+                }
+            }
+            if (reportData.getStockDetails().getLpgCommodities() != null &&
+                    reportData.getStockDetails().getLpgCommodities().size() > 0) {
+                String lpg = gson.toJson(reportData.getStockDetails().getLpgCommodities());
+                if (!TextUtils.isEmpty(lpg) && !lpg.equalsIgnoreCase("{}")) {
+                    lpgList = reportData.getStockDetails().getLpgCommodities();
+                    if (lpgList != null && lpgList.size() > 0) {
+                        setAdapter(lpgList);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void setAdapter(List<ReportSubmitReqCommodities> list) {
+
+        CommCommodityAdapter stockSubAdapter = new CommCommodityAdapter(this, list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.commodities.groupRV.setLayoutManager(layoutManager);
+        binding.commodities.groupRV.setAdapter(stockSubAdapter);
+    }
+
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
         snackbar.setActionTextColor(getResources().getColor(R.color.white));
@@ -821,15 +929,255 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
+        filePath2 = filePath + "_2" + ".pdf";
 
-        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+        try {
+
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
+            document.open();
+
+            if (essentialList != null || dailyreqList != null || emptiesList != null || mfpList != null ||
+                    punitList != null || petrolList != null || lpgList != null) {
+
+                customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Downloading Pdf");
+
+                addCommoditiesContent(document);
+            }
+
+            document.close();
+            new ItextMerge(ReportStockDetailsActivity.this, filePath, filePath1, filePath2, ReportStockDetailsActivity.this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
+//                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+    }
+
+    private void addCommoditiesContent(Document document) throws DocumentException {
+
+//        Anchor anchor = new Anchor("Commodities", catFont);
+//        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
+//        catPart.setNumberDepth(-1);
+        if (essentialList != null && essentialList.size() > 0) {
+            Paragraph paragraph1 = new Paragraph("Essential Commodities", catFont);
+            document.add(paragraph1);
+            addLineSeperator(document);
+            createTable(document, essentialList);
+            addLineSeperator(document);
+        }
+        if (dailyreqList != null && dailyreqList.size() > 0) {
+            Paragraph paragraph2 = new Paragraph("Daily Requirements", catFont);
+            document.add(paragraph2);
+            addLineSeperator(document);
+            createTable(document, dailyreqList);
+            addLineSeperator(document);
+        }
+        if (emptiesList != null && emptiesList.size() > 0) {
+            Paragraph paragraph3 = new Paragraph("Empties", catFont);
+            document.add(paragraph3);
+            addLineSeperator(document);
+            createTable(document, emptiesList);
+            addLineSeperator(document);
+        }
+        if (mfpList != null && mfpList.size() > 0) {
+            Paragraph paragraph4 = new Paragraph("MFP Commodities", catFont);
+            document.add(paragraph4);
+            addLineSeperator(document);
+            createTable(document, mfpList);
+            addLineSeperator(document);
+        }
+        if (punitList != null && punitList.size() > 0) {
+            Paragraph paragraph5 = new Paragraph("Processing Units", catFont);
+            document.add(paragraph5);
+            addLineSeperator(document);
+            createTable(document, punitList);
+            addLineSeperator(document);
+        }
+        if (petrolList != null && petrolList.size() > 0) {
+            Paragraph paragraph6 = new Paragraph("Petrol Commodities", catFont);
+            document.add(paragraph6);
+            addLineSeperator(document);
+            createTable(document, petrolList);
+            addLineSeperator(document);
+        }
+        if (lpgList != null && lpgList.size() > 0) {
+            Paragraph paragraph7 = new Paragraph("LPG Commodities", catFont);
+            document.add(paragraph7);
+            addLineSeperator(document);
+            createTable(document, lpgList);
+            addLineSeperator(document);
+        }
+
+    }
+
+    private void addLineSeperator(Document document) {
+        try {
+            LineSeparator separator = new LineSeparator();
+            separator.setPercentage(100);
+            separator.setLineColor(BaseColor.WHITE);
+            Chunk linebreak = new Chunk(separator);
+            document.add(linebreak);
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void addEmptyLine(Paragraph paragraph, int number) {
+        for (int i = 0; i < number; i++) {
+            paragraph.add(new Paragraph(" "));
+        }
+    }
+
+    private PdfPTable createTable(Document document, List<ReportSubmitReqCommodities> list) {
+
+        PdfPTable table = new PdfPTable(8);
+
+        PdfPCell c1 = new PdfPCell(new Phrase(getString(R.string.comm_code)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.comm_name)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.qty_sys)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.sys_rate)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.sys_val)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.phy_rate)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.phy_val)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+
+        c1 = new PdfPCell(new Phrase(getString(R.string.phy_ava_qty)));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+
+        table.setHeaderRows(1);
+
+        try {
+
+            for (int i = 0; i < list.size(); i++) {
+
+                c1 = new PdfPCell(new Phrase(list.get(i).getComCode()));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+                c1 = new PdfPCell(new Phrase(list.get(i).getComType()));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+                PdfPCell c2;
+                if (list.get(i).getUnits() != null && !list.get(i).getUnits().contains("No")) {
+                    c2 = new PdfPCell(new Phrase(list.get(i).getSystemQty() + " " + list.get(i).getUnits()));
+                } else {
+                    c2 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getSystemQty())));
+                }
+                c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c2.setPaddingTop(5);
+                c2.setPaddingBottom(5);
+                table.addCell(c2);
+
+
+                c1 = new PdfPCell(new Phrase("Rs " + list.get(i).getSystemRate()));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+
+                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getSystemValue())));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+
+                c1 = new PdfPCell(new Phrase("Rs " + list.get(i).getPhysicalRate()));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+
+                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getPhysicalValue())));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+
+                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getPhysiacalQty())));
+                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c1.setPaddingTop(5);
+                c1.setPaddingBottom(5);
+                table.addCell(c1);
+
+            }
+            document.add(table);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return table;
     }
 
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
 
+        Utils.customErrorAlert(ReportStockDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
+    }
+
+    @Override
+    public void pdfMergeSuccess(File savedPDFFile) {
+        customProgressDialog.hide();
+        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+
+    }
+
+    @Override
+    public void pdfMergeFailure(Exception exception) {
+        customProgressDialog.hide();
         Utils.customErrorAlert(ReportStockDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 

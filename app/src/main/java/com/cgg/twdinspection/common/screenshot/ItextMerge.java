@@ -30,7 +30,7 @@ public class ItextMerge {
     private PDFMergeListener listener;
 
 
-    public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener, InspReportData inspReportData) {
+    public ItextMerge(Context context, String filePath, String filePath1, String filePath2, PDFMergeListener listener) {
 
         this.filePath = filePath;
         this.filePath1 = filePath1;

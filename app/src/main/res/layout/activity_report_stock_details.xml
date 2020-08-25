@@ -8040,6 +8040,11 @@
 
                 </LinearLayout>
 
+                <include
+                    android:id="@+id/commodities"
+                    layout="@layout/stock_main_row" />
+
+
             </RelativeLayout>
         </ScrollView>
 
