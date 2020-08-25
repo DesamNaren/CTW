@@ -1232,41 +1232,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
-                            android:layout_marginRight="@dimen/dimen_30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/dr_godown_tv_officerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/dr_godown_tv_officerDes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_below="@+id/tv_officerName"
-                                android:layout_alignStart="@+id/tv_officerName"
-                                android:layout_alignLeft="@+id/tv_officerName"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text" />
-                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -2912,41 +2877,6 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:layout_marginRight="@dimen/dimen_30dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/dr_depot_tv_officerName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginTop="@dimen/dimen_5dp"
-                                    android:gravity="center"
-                                    android:text=""
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/dimen_text"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/dr_depot_tv_officerDes"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_below="@+id/tv_officerName"
-                                    android:layout_alignStart="@+id/tv_officerName"
-                                    android:layout_alignLeft="@+id/tv_officerName"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="3dp"
-                                    android:layout_marginLeft="3dp"
-                                    android:gravity="center"
-                                    android:text=""
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/dimen_text" />
-                            </LinearLayout>
-
                         </LinearLayout>
 
                     </LinearLayout>
@@ -3967,42 +3897,6 @@
 
                             </LinearLayout>
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
-                            android:layout_marginRight="@dimen/dimen_30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/mfp_tv_officerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/mfp_tv_officerDes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_below="@+id/tv_officerName"
-                                android:layout_alignStart="@+id/tv_officerName"
-                                android:layout_alignLeft="@+id/tv_officerName"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -5356,42 +5250,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
-                            android:layout_marginRight="@dimen/dimen_30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/punit_tv_officerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/punit_tv_officerDes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_below="@+id/tv_officerName"
-                                android:layout_alignStart="@+id/tv_officerName"
-                                android:layout_alignLeft="@+id/tv_officerName"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text" />
-                        </LinearLayout>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -6653,42 +6511,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
-                            android:layout_marginRight="@dimen/dimen_30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/petrol_pump_tv_officerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/petrol_pump_tv_officerDes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_below="@+id/tv_officerName"
-                                android:layout_alignStart="@+id/tv_officerName"
-                                android:layout_alignLeft="@+id/tv_officerName"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text" />
-                        </LinearLayout>
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -7947,42 +7769,6 @@
 
                             </LinearLayout>
 
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="@dimen/dimen_header"
-                            android:layout_marginRight="@dimen/dimen_30dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/lpg_tv_officerName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="@dimen/dimen_margin_seperator"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/lpg_tv_officerDes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_below="@+id/tv_officerName"
-                                android:layout_alignStart="@+id/tv_officerName"
-                                android:layout_alignLeft="@+id/tv_officerName"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="3dp"
-                                android:layout_marginLeft="3dp"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_text" />
                         </LinearLayout>
 
                     </LinearLayout>

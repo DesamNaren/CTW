@@ -146,8 +146,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.drGodownName.setText(reportData.getGodownName());
                     binding.drGodownInchargeName.setText(reportData.getInchargeName());
                     binding.drGodownTvDate.setText(reportData.getInspectionTime());
-                    binding.drGodownTvOfficerName.setText(reportData.getOfficerId());
-                    binding.drGodownTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     String jsonObject = gson.toJson(reportData.getPhotos());
                     if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -183,8 +181,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.drDepotName.setText(reportData.getGodownName());
                     binding.drDepotInchargeName.setText(reportData.getInchargeName());
                     binding.drDepotTvDate.setText(reportData.getInspectionTime());
-                    binding.drDepotTvOfficerName.setText(reportData.getOfficerId());
-                    binding.drDepotTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     String jsonObject = gson.toJson(reportData.getPhotos());
                     if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -219,8 +215,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.mfpName.setText(reportData.getGodownName());
                     binding.mfpInchargeName.setText(reportData.getInchargeName());
                     binding.mfpTvDate.setText(reportData.getInspectionTime());
-                    binding.mfpTvOfficerName.setText(reportData.getOfficerId());
-                    binding.mfpTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     String jsonObject = gson.toJson(reportData.getPhotos());
                     if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -255,8 +249,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.punitName.setText(reportData.getGodownName());
                     binding.punitInchargeName.setText(reportData.getInchargeName());
                     binding.punitTvDate.setText(reportData.getInspectionTime());
-                    binding.punitTvOfficerName.setText(reportData.getOfficerId());
-                    binding.punitTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null
                             && reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates() != null) {
@@ -299,8 +291,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.petrolPumpName.setText(reportData.getGodownName());
                     binding.petrolPumpInchargeName.setText(reportData.getInchargeName());
                     binding.petrolPumpTvDate.setText(reportData.getInspectionTime());
-                    binding.petrolPumpTvOfficerName.setText(reportData.getOfficerId());
-                    binding.petrolPumpTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     String jsonObject = gson.toJson(reportData.getPhotos());
                     if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -334,8 +324,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     binding.lpgName.setText(reportData.getGodownName());
                     binding.lpgInchargeName.setText(reportData.getInchargeName());
                     binding.lpgTvDate.setText(reportData.getInspectionTime());
-                    binding.lpgTvOfficerName.setText(reportData.getOfficerId());
-                    binding.lpgTvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                     String jsonObject = gson.toJson(reportData.getPhotos());
                     if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -786,7 +774,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                                             + "/" + "CTW/GCC/";
                                 }
 
-                                filePath = directory_path + "LPG_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime() ;
+                                filePath = directory_path + "LPG_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
                                 filePath1 = filePath + "_1" + ".pdf";
 
                                 List<View> views = new ArrayList<>();
@@ -944,6 +932,7 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 customProgressDialog.addText("Please wait...Downloading Pdf");
 
                 addCommoditiesContent(document);
+                createFooter(document);
             }
 
             document.close();
@@ -952,8 +941,6 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
-//                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
     private void addCommoditiesContent(Document document) throws DocumentException {
@@ -1011,6 +998,38 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             addLineSeperator(document);
         }
 
+    }
+
+    private void createFooter(Document document) {
+
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.addCell(getCell(" ", PdfPCell.ALIGN_RIGHT));
+
+        PdfPTable pdfPTable1 = new PdfPTable(1);
+        pdfPTable1.setWidthPercentage(80);
+        pdfPTable1.addCell(getCell(reportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
+
+        PdfPTable pdfPTable2 = new PdfPTable(1);
+        pdfPTable2.setWidthPercentage(80);
+        pdfPTable2.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
+
+        try {
+
+            document.add(pdfPTable1);
+            document.add(pdfPTable);
+            document.add(pdfPTable2);
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public PdfPCell getCell(String text, int alignment) {
+        PdfPCell cell = new PdfPCell(new Phrase(text));
+        cell.setPadding(0);
+        cell.setHorizontalAlignment(alignment);
+        cell.setBorder(PdfPCell.NO_BORDER);
+        return cell;
     }
 
     private void addLineSeperator(Document document) {
