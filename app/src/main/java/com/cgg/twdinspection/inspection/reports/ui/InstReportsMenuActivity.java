@@ -414,7 +414,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     private void createStaffTable(Document document) throws BadElementException {
 
-        PdfPTable table = new PdfPTable(8);
+        PdfPTable table = new PdfPTable(11);
 
         createCell("ID", table);
         createCell("Name", table);
@@ -424,16 +424,9 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         createCell("Leaves Taken", table);
         createCell("Leave Balance", table);
         createCell("Attendance", table);
-
-//        c1 = new PdfPCell(new Phrase("Yesterday super vision duty allotted"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
-//        c1 = new PdfPCell(new Phrase("Last week turn duties attended"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
-//        c1 = new PdfPCell(new Phrase("Last year academic panel grade"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
+        createCell("Yesterday super vision duty allotted", table);
+        createCell("Last week turn duties attended", table);
+        createCell("Teacher's last year academic panel grade", table);
 
         table.setHeaderRows(1);
 
@@ -449,10 +442,10 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 createCell(staffAttendenceInfoList.get(i).getLeavesTaken(), table);
                 createCell(staffAttendenceInfoList.get(i).getLeavesBal(), table);
                 createCell(staffAttendenceInfoList.get(i).getEmpPresence(), table);
+                createCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted(), table);
+                createCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended(), table);
+                createCell(staffAttendenceInfoList.get(i).getAcadPanelGrade(), table);
 
-//                table.addCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted());
-//                table.addCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended());
-//                table.addCell(staffAttendenceInfoList.get(i).getAcadPanelGrade());
             }
             document.add(table);
         } catch (Exception e) {
