@@ -1,9 +1,7 @@
 package com.cgg.twdinspection.inspection.reports.ui;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -39,21 +37,19 @@ import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.gson.Gson;
-import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -212,6 +208,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 finish();
             }
         });
+
         binding.actionBar.ivPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -272,7 +269,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             }
         });
 
-
         String[] stringArray = getResources().getStringArray(R.array.inst_sections);
         ArrayList<String> sections = new ArrayList<>(Arrays.asList(stringArray));
         sections.set(sections.size() - 1, "View Photographs");
@@ -283,259 +279,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         }
 
 
-    }
-
-    private void setAcademicAdapter(List<AcademicGradeEntity> academicGradeEntityList) {
-        ReportAcademicGradeAdapter reportAcademicGradeAdapter = new ReportAcademicGradeAdapter(this, academicGradeEntityList);
-        layoutManager = new LinearLayoutManager(this);
-        binding.academicGrade.gradeRV.setLayoutManager(layoutManager);
-        binding.academicGrade.gradeRV.setAdapter(reportAcademicGradeAdapter);
-    }
-
-    private void addStudContent(Document document) throws DocumentException {
-        Anchor anchor = new Anchor("Student Attendance", catFont);
-        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-        catPart.setNumberDepth(-1);
-        Paragraph subPara = new Paragraph("", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 2);
-        subCatPart.add(paragraph);
-        createTable(subCatPart);
-        document.add(catPart);
-    }
-
-    private void addStaffContent(Document document) throws DocumentException {
-        Anchor anchor = new Anchor("Staff Attendance", catFont);
-        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-        catPart.setNumberDepth(-1);
-        Paragraph subPara = new Paragraph("", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 2);
-        subCatPart.add(paragraph);
-        createStaffTable(subCatPart);
-        document.add(catPart);
-    }
-
-    private void addDietContent(Document document) throws DocumentException {
-        Anchor anchor = new Anchor("Diet Issues - Provision of Supplies", catFont);
-        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-        catPart.setNumberDepth(-1);
-        Paragraph subPara = new Paragraph("", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 2);
-        subCatPart.add(paragraph);
-        createDietTable(subCatPart);
-        document.add(catPart);
-    }
-
-    private void addAcademicContent(Document document) throws DocumentException {
-        Anchor anchor = new Anchor("Academic OverView - Classes Performance", catFont);
-        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-        catPart.setNumberDepth(-1);
-        Paragraph subPara = new Paragraph("", subFont);
-        Section subCatPart = catPart.addSection(subPara);
-        Paragraph paragraph = new Paragraph();
-        addEmptyLine(paragraph, 2);
-        subCatPart.add(paragraph);
-        createAcademicTable(subCatPart, document);
-        document.add(catPart);
-    }
-
-    private void createFooter(Document document) {
-
-        PdfPTable pdfPTable = new PdfPTable(1);
-        pdfPTable.addCell(getCell(" ", PdfPCell.ALIGN_RIGHT));
-
-        PdfPTable pdfPTable1 = new PdfPTable(1);
-        pdfPTable1.setWidthPercentage(80);
-        pdfPTable1.addCell(getCell(inspReportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
-
-        PdfPTable pdfPTable2 = new PdfPTable(1);
-        pdfPTable2.setWidthPercentage(80);
-        pdfPTable2.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
-
-        try {
-
-            document.add(pdfPTable);
-            document.add(pdfPTable);
-            document.add(pdfPTable);
-            document.add(pdfPTable1);
-            document.add(pdfPTable);
-            document.add(pdfPTable2);
-
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void createStaffTable(Section subCatPart) throws BadElementException {
-        PdfPTable table = new PdfPTable(8);
-        PdfPCell c1 = new PdfPCell(new Phrase("ID"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Name"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Designation   "));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Category  "));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Total Leaves"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Leaves Taken"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Leave Balance"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        c1 = new PdfPCell(new Phrase("Attendance  "));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-//        c1 = new PdfPCell(new Phrase("Yesterday super vision duty allotted"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
-//        c1 = new PdfPCell(new Phrase("Last week turn duties attended"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
-//        c1 = new PdfPCell(new Phrase("Last year academic panel grade"));
-//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        table.addCell(c1);
-        table.setHeaderRows(1);
-        try {
-
-            for (int i = 0; i < staffAttendenceInfoList.size(); i++) {
-                table.addCell(staffAttendenceInfoList.get(i).getEmpId());
-                table.addCell(staffAttendenceInfoList.get(i).getEmpName());
-                table.addCell(staffAttendenceInfoList.get(i).getDesignation());
-                table.addCell(staffAttendenceInfoList.get(i).getCategory());
-                table.addCell(staffAttendenceInfoList.get(i).getLeavesAvailed());
-                table.addCell(staffAttendenceInfoList.get(i).getLeavesTaken());
-                table.addCell(staffAttendenceInfoList.get(i).getLeavesBal());
-                table.addCell(staffAttendenceInfoList.get(i).getEmpPresence());
-//                table.addCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted());
-//                table.addCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended());
-//                table.addCell(staffAttendenceInfoList.get(i).getAcadPanelGrade());
-            }
-            subCatPart.add(table);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    private void createDietTable(Section subCatPart) throws BadElementException {
-        PdfPTable table = new PdfPTable(3);
-        PdfPCell c1 = new PdfPCell(new Phrase("Item Type"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Book Balance"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Ground Balance"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        table.setHeaderRows(1);
-        try {
-
-            for (int i = 0; i < dietListEntityList.size(); i++) {
-                table.addCell(dietListEntityList.get(i).getItemName());
-                table.addCell(dietListEntityList.get(i).getBookBal());
-                table.addCell(dietListEntityList.get(i).getGroundBal());
-            }
-            subCatPart.add(table);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    private void createAcademicTable(Section subCatPart, Document document) throws BadElementException {
-        PdfPTable table = new PdfPTable(9);
-        PdfPCell c1 = new PdfPCell(new Phrase("Class Name"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Total Strength"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Grade A"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-
-        c1 = new PdfPCell(new Phrase("Grade B"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Grade C"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Grade D"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Grade E"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Grade A+"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-
-        c1 = new PdfPCell(new Phrase("Grade B+"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        table.setHeaderRows(1);
-        try {
-
-            for (int i = 0; i < academicGradeEntityList.size(); i++) {
-                table.addCell(academicGradeEntityList.get(i).getClassType());
-                table.addCell(academicGradeEntityList.get(i).getTotalStudents());
-                table.addCell(academicGradeEntityList.get(i).getGradeAStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeBStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeCStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeDStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeEStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeAplusStuCount());
-                table.addCell(academicGradeEntityList.get(i).getGradeBplusStuCount());
-            }
-            subCatPart.add(table);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public PdfPCell getCell(String text, int alignment) {
-        PdfPCell cell = new PdfPCell(new Phrase(text));
-        cell.setPadding(0);
-        cell.setHorizontalAlignment(alignment);
-        cell.setBorder(PdfPCell.NO_BORDER);
-        return cell;
     }
 
     private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
@@ -559,55 +302,11 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.dietIssues.recyclerView.setAdapter(dietIssuesReportAdapter);
     }
 
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
-    }
-
-    private void createTable(Section subCatPart)
-            throws BadElementException {
-        PdfPTable table = new PdfPTable(6);
-
-        PdfPCell c1 = new PdfPCell(new Phrase("Class"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("On Roll Count"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Attendance Marked"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Presence Count"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Inspection Count"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Variance"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        table.setHeaderRows(1);
-        try {
-
-            for (int i = 0; i < studentAttendInfoList.size(); i++) {
-                table.addCell(studentAttendInfoList.get(i).getClassId());
-                table.addCell(studentAttendInfoList.get(i).getTotalStudents());
-                table.addCell(studentAttendInfoList.get(i).getAttendenceMarked());
-                table.addCell(studentAttendInfoList.get(i).getStudentCountInRegister());
-                table.addCell(studentAttendInfoList.get(i).getStudentCountDuringInspection());
-                table.addCell(studentAttendInfoList.get(i).getVariance());
-            }
-            subCatPart.add(table);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void setAcademicAdapter(List<AcademicGradeEntity> academicGradeEntityList) {
+        ReportAcademicGradeAdapter reportAcademicGradeAdapter = new ReportAcademicGradeAdapter(this, academicGradeEntityList);
+        layoutManager = new LinearLayoutManager(this);
+        binding.academicGrade.gradeRV.setLayoutManager(layoutManager);
+        binding.academicGrade.gradeRV.setAdapter(reportAcademicGradeAdapter);
     }
 
     @Override
@@ -623,80 +322,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    private void addPhotoContent(Document document) throws DocumentException {
-        new InsertPhotoAsyncTask(document).execute();
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class InsertPhotoAsyncTask extends AsyncTask<Void, Void, Boolean> {
-        Document document;
-
-        InsertPhotoAsyncTask(Document document) {
-            this.document = document;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            boolean flag = false;
-            Anchor anchor = new Anchor("Photos", catFont);
-            Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-            catPart.setNumberDepth(-1);
-            Paragraph subPara = new Paragraph("", subFont);
-            Section subCatPart = catPart.addSection(subPara);
-            Paragraph paragraph = new Paragraph();
-            addEmptyLine(paragraph, 2);
-            subCatPart.add(paragraph);
-            try {
-                createPhotoTable(subCatPart, document);
-                document.add(catPart);
-            } catch (BadElementException e) {
-                e.printStackTrace();
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-
-            return flag;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-
-        }
-    }
-
-    private void createPhotoTable(Section subCatPart, Document document)
-            throws BadElementException {
-
-        PdfPTable table = new PdfPTable(2);
-        PdfPCell c1 = new PdfPCell(new Phrase("Name"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Image"));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-
-        table.setHeaderRows(1);
-        try {
-
-            for (int i = 0; i < inspReportData.getPhotos().size(); i++) {
-                table.addCell(inspReportData.getPhotos().get(i).getFileName());
-                Image image = Image.getInstance(inspReportData.getPhotos().get(i).getFilePath());
-                table.addCell(image);
-            }
-            subCatPart.add(table);
-            table.setTotalWidth(document.getPageSize().getWidth() / 3);
-            table.setLockedWidth(true);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
@@ -709,6 +334,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream(this.filePath2));
             document.open();
+
             addStudContent(document);
             addStaffContent(document);
             if (dietListEntityList != null)
@@ -717,14 +343,242 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 addAcademicContent(document);
             createFooter(document);
 
-//            addPhotoContent(document);
-
             document.close();
             new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void addStudContent(Document document) throws DocumentException {
+        Paragraph paragraph1 = new Paragraph("Student Attendance", catFont);
+        document.add(paragraph1);
+        addLineSeperator(document);
+        createStudTable(document);
+        addLineSeperator(document);
+    }
+
+    private void addStaffContent(Document document) throws DocumentException {
+        Paragraph paragraph1 = new Paragraph("Staff Attendance", catFont);
+        document.add(paragraph1);
+        addLineSeperator(document);
+        createStaffTable(document);
+        addLineSeperator(document);
+    }
+
+    private void addDietContent(Document document) throws DocumentException {
+        Paragraph paragraph1 = new Paragraph("Diet Issues - Provision of Supplies", catFont);
+        document.add(paragraph1);
+        addLineSeperator(document);
+        createDietTable(document);
+        addLineSeperator(document);
+    }
+
+    private void addAcademicContent(Document document) throws DocumentException {
+        Paragraph paragraph1 = new Paragraph("Academic OverView - Classes Performance", catFont);
+        document.add(paragraph1);
+        addLineSeperator(document);
+        createAcademicTable(document);
+        addLineSeperator(document);
+    }
+
+    private void createStudTable(Document document) throws BadElementException {
+        PdfPTable table = new PdfPTable(6);
+
+        createCell("Class", table);
+        createCell("On Roll Count", table);
+        createCell("Attendance Marked", table);
+        createCell("Presence Count", table);
+        createCell("Inspection Count", table);
+        createCell("Variance", table);
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < studentAttendInfoList.size(); i++) {
+
+                createCell(studentAttendInfoList.get(i).getClassId(), table);
+                createCell(studentAttendInfoList.get(i).getTotalStudents(), table);
+                createCell(studentAttendInfoList.get(i).getAttendenceMarked(), table);
+                createCell(studentAttendInfoList.get(i).getStudentCountInRegister(), table);
+                createCell(studentAttendInfoList.get(i).getStudentCountDuringInspection(), table);
+                createCell(studentAttendInfoList.get(i).getVariance(), table);
+
+            }
+            document.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createStaffTable(Document document) throws BadElementException {
+
+        PdfPTable table = new PdfPTable(8);
+
+        createCell("ID", table);
+        createCell("Name", table);
+        createCell("Designation", table);
+        createCell("Category", table);
+        createCell("Total Leaves", table);
+        createCell("Leaves Taken", table);
+        createCell("Leave Balance", table);
+        createCell("Attendance", table);
+
+//        c1 = new PdfPCell(new Phrase("Yesterday super vision duty allotted"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+//        c1 = new PdfPCell(new Phrase("Last week turn duties attended"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+//        c1 = new PdfPCell(new Phrase("Last year academic panel grade"));
+//        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//        table.addCell(c1);
+
+        table.setHeaderRows(1);
+
+        try {
+
+            for (int i = 0; i < staffAttendenceInfoList.size(); i++) {
+
+                createCell(staffAttendenceInfoList.get(i).getEmpId(), table);
+                createCell(staffAttendenceInfoList.get(i).getEmpName(), table);
+                createCell(staffAttendenceInfoList.get(i).getDesignation(), table);
+                createCell(staffAttendenceInfoList.get(i).getCategory(), table);
+                createCell(staffAttendenceInfoList.get(i).getLeavesAvailed(), table);
+                createCell(staffAttendenceInfoList.get(i).getLeavesTaken(), table);
+                createCell(staffAttendenceInfoList.get(i).getLeavesBal(), table);
+                createCell(staffAttendenceInfoList.get(i).getEmpPresence(), table);
+
+//                table.addCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted());
+//                table.addCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended());
+//                table.addCell(staffAttendenceInfoList.get(i).getAcadPanelGrade());
+            }
+            document.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void createDietTable(Document document) throws BadElementException {
+
+        PdfPTable table = new PdfPTable(3);
+
+        createCell("Item Type", table);
+        createCell("Book Balance", table);
+        createCell("Ground Balance", table);
+        table.setHeaderRows(1);
+
+        try {
+
+            for (int i = 0; i < dietListEntityList.size(); i++) {
+
+                createCell(dietListEntityList.get(i).getItemName(), table);
+                createCell(dietListEntityList.get(i).getBookBal(), table);
+                createCell(dietListEntityList.get(i).getGroundBal(), table);
+
+            }
+            document.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void createAcademicTable(Document document) throws BadElementException {
+
+        PdfPTable table = new PdfPTable(9);
+
+        createCell("Class Name", table);
+        createCell("Total Strength", table);
+        createCell("Grade A", table);
+        createCell("Grade B", table);
+        createCell("Grade C", table);
+        createCell("Grade D", table);
+        createCell("Grade E", table);
+        createCell("Grade A+", table);
+        createCell("Grade B+", table);
+
+        table.setHeaderRows(1);
+        try {
+
+            for (int i = 0; i < academicGradeEntityList.size(); i++) {
+
+                createCell(academicGradeEntityList.get(i).getClassType(), table);
+                createCell(academicGradeEntityList.get(i).getTotalStudents(), table);
+                createCell(academicGradeEntityList.get(i).getGradeAStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeBStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeCStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeDStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeEStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeAplusStuCount(), table);
+                createCell(academicGradeEntityList.get(i).getGradeBplusStuCount(), table);
+            }
+            document.add(table);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private void createCell(String label, PdfPTable table) {
+        PdfPCell c1 = new PdfPCell(new Phrase(label));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
+    }
+
+    private void addLineSeperator(Document document) {
+        try {
+            LineSeparator separator = new LineSeparator();
+            separator.setPercentage(100);
+            separator.setLineColor(BaseColor.WHITE);
+            Chunk linebreak = new Chunk(separator);
+            document.add(linebreak);
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createFooter(Document document) {
+
+        PdfPTable pdfPTable = new PdfPTable(1);
+        pdfPTable.addCell(getCell(" ", PdfPCell.ALIGN_RIGHT));
+
+        PdfPTable pdfPTable1 = new PdfPTable(1);
+        pdfPTable1.setWidthPercentage(80);
+        pdfPTable1.addCell(getCell(inspReportData.getOfficerId(), PdfPCell.ALIGN_RIGHT));
+
+        PdfPTable pdfPTable2 = new PdfPTable(1);
+        pdfPTable2.setWidthPercentage(80);
+        pdfPTable2.addCell(getCell(sharedPreferences.getString(AppConstants.OFFICER_DES, ""), PdfPCell.ALIGN_RIGHT));
+
+        try {
+
+            document.add(pdfPTable1);
+            document.add(pdfPTable);
+            document.add(pdfPTable2);
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public PdfPCell getCell(String text, int alignment) {
+        PdfPCell cell = new PdfPCell(new Phrase(text));
+        cell.setPadding(0);
+        cell.setHorizontalAlignment(alignment);
+        cell.setBorder(PdfPCell.NO_BORDER);
+        return cell;
     }
 
     @Override

@@ -7,6 +7,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -140,115 +144,40 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrGodown() != null)
                         binding.setDrgodown(reportData.getInspectionFindings().getDrGodown());
 
-
-                    binding.drGodownDivName.setText(reportData.getDivisionName());
-                    binding.drGodownSocName.setText(reportData.getSocietyName());
-                    binding.drGodownName.setText(reportData.getGodownName());
-                    binding.drGodownInchargeName.setText(reportData.getInchargeName());
-                    binding.drGodownTvDate.setText(reportData.getInspectionTime());
-
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.drGodownRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.drGodownRecyclerView.setAdapter(adapter);
-                    }
-
-                    if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                        for (int z = 0; z < reportData.getPhotos().size(); z++) {
-
-                            if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                                    && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
-
-                                Glide.with(ReportStockDetailsActivity.this)
-                                        .load(reportData.getPhotos().get(z).getFilePath())
-                                        .error(R.drawable.no_image)
-                                        .placeholder(R.drawable.camera)
-                                        .into(binding.drGodownIvRepairsPdf);
-                                break;
-                            }
-                        }
-                    }
+                    setDetails(binding.drGodownDivName, binding.drGodownSocName, binding.drGodownName,
+                            binding.drGodownInchargeName, binding.drGodownTvDate);
+                    setPhotosAdapter(binding.drGodownRecyclerView);
+                    setRepairImage(binding.drGodownIvRepairsPdf);
                     addCommoditiesListData();
+
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
 
-                    if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null) {
+                    if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getDrDepot() != null)
                         binding.setDrDepot(reportData.getInspectionFindings().getDrDepot());
-                    }
 
-                    binding.drDepotDivName.setText(reportData.getDivisionName());
-                    binding.drDepotSocName.setText(reportData.getSocietyName());
-                    binding.drDepotName.setText(reportData.getGodownName());
-                    binding.drDepotInchargeName.setText(reportData.getInchargeName());
-                    binding.drDepotTvDate.setText(reportData.getInspectionTime());
-
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.drDepotRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.drDepotRecyclerView.setAdapter(adapter);
-                    }
-
-                    if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                        for (int z = 0; z < reportData.getPhotos().size(); z++) {
-
-                            if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                                    && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
-
-                                Glide.with(ReportStockDetailsActivity.this)
-                                        .load(reportData.getPhotos().get(z).getFilePath())
-                                        .error(R.drawable.no_image)
-                                        .placeholder(R.drawable.camera)
-                                        .into(binding.drDepotIvRepairsPdf);
-                                break;
-                            }
-                        }
-                    }
+                    setDetails(binding.drDepotDivName, binding.drDepotSocName, binding.drDepotName,
+                            binding.drDepotInchargeName, binding.drDepotTvDate);
+                    setPhotosAdapter(binding.drDepotRecyclerView);
+                    setRepairImage(binding.drDepotIvRepairsPdf);
                     addCommoditiesListData();
+
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
 
-                    if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getMfpGodowns() != null) {
+                    if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getMfpGodowns() != null)
                         binding.setMfp(reportData.getInspectionFindings().getMfpGodowns());
-                    }
 
-                    binding.mfpDivName.setText(reportData.getDivisionName());
-                    binding.mfpName.setText(reportData.getGodownName());
-                    binding.mfpInchargeName.setText(reportData.getInchargeName());
-                    binding.mfpTvDate.setText(reportData.getInspectionTime());
-
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.mfpRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.mfpRecyclerView.setAdapter(adapter);
-                    }
-
-                    if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                        for (int z = 0; z < reportData.getPhotos().size(); z++) {
-
-                            if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                                    && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
-
-                                Glide.with(ReportStockDetailsActivity.this)
-                                        .load(reportData.getPhotos().get(z).getFilePath())
-                                        .error(R.drawable.no_image)
-                                        .placeholder(R.drawable.camera)
-                                        .into(binding.mfpIvRepairsPdf);
-                                break;
-                            }
-                        }
-                    }
+                    setDetails(binding.mfpDivName, binding.mfpName, binding.mfpInchargeName, binding.mfpTvDate);
+                    setPhotosAdapter(binding.mfpRecyclerView);
+                    setRepairImage(binding.mfpIvRepairsPdf);
                     addCommoditiesListData();
+
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null)
                         binding.setPUnit(reportData.getInspectionFindings().getProcessingUnit());
 
-                    binding.punitDivName.setText(reportData.getDivisionName());
-                    binding.punitSocName.setText(reportData.getSocietyName());
-                    binding.punitName.setText(reportData.getGodownName());
-                    binding.punitInchargeName.setText(reportData.getInchargeName());
-                    binding.punitTvDate.setText(reportData.getInspectionTime());
+                    setDetails(binding.punitDivName, binding.punitSocName, binding.punitName,
+                            binding.punitInchargeName, binding.punitTvDate);
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getProcessingUnit() != null
                             && reportData.getInspectionFindings().getProcessingUnit().getRegisterBookCertificates() != null) {
@@ -274,80 +203,30 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                         Toast.makeText(this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                     }
 
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.punitRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.punitRecyclerView.setAdapter(adapter);
-                    }
+                    setPhotosAdapter(binding.punitRecyclerView);
                     addCommoditiesListData();
+
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
 
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getPetrolPump() != null)
                         binding.setPetrolpump(reportData.getInspectionFindings().getPetrolPump());
 
-                    binding.petrolPumpDivName.setText(reportData.getDivisionName());
-                    binding.petrolPumpSocName.setText(reportData.getSocietyName());
-                    binding.petrolPumpName.setText(reportData.getGodownName());
-                    binding.petrolPumpInchargeName.setText(reportData.getInchargeName());
-                    binding.petrolPumpTvDate.setText(reportData.getInspectionTime());
-
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.petrolPumpRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.petrolPumpRecyclerView.setAdapter(adapter);
-                    }
-
-                    if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                        for (int z = 0; z < reportData.getPhotos().size(); z++) {
-
-                            if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                                    && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
-
-                                Glide.with(ReportStockDetailsActivity.this)
-                                        .load(reportData.getPhotos().get(z).getFilePath())
-                                        .error(R.drawable.no_image)
-                                        .placeholder(R.drawable.camera)
-                                        .into(binding.petrolPumpIvRepairsPdf);
-                                break;
-                            }
-                        }
-                    }
+                    setDetails(binding.petrolPumpDivName, binding.petrolPumpSocName, binding.petrolPumpName,
+                            binding.petrolPumpInchargeName, binding.petrolPumpTvDate);
+                    setPhotosAdapter(binding.petrolPumpRecyclerView);
+                    setRepairImage(binding.petrolPumpIvRepairsPdf);
                     addCommoditiesListData();
+
                 } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
                     if (reportData.getInspectionFindings() != null && reportData.getInspectionFindings().getLpg() != null)
                         binding.setLpg(reportData.getInspectionFindings().getLpg());
 
-                    binding.lpgDivName.setText(reportData.getDivisionName());
-                    binding.lpgSocName.setText(reportData.getSocietyName());
-                    binding.lpgName.setText(reportData.getGodownName());
-                    binding.lpgInchargeName.setText(reportData.getInchargeName());
-                    binding.lpgTvDate.setText(reportData.getInspectionTime());
-
-                    String jsonObject = gson.toJson(reportData.getPhotos());
-                    if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
-                        adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
-                        binding.lpgRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-                        binding.lpgRecyclerView.setAdapter(adapter);
-                    }
-
-                    if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
-                        for (int z = 0; z < reportData.getPhotos().size(); z++) {
-
-                            if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
-                                    && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
-
-                                Glide.with(ReportStockDetailsActivity.this)
-                                        .load(reportData.getPhotos().get(z).getFilePath())
-                                        .error(R.drawable.no_image)
-                                        .placeholder(R.drawable.camera)
-                                        .into(binding.lpgIvRepairsPdf);
-                                break;
-                            }
-                        }
-                    }
+                    setDetails(binding.lpgDivName, binding.lpgSocName, binding.lpgName,
+                            binding.lpgInchargeName, binding.lpgTvDate);
+                    setPhotosAdapter(binding.lpgRecyclerView);
+                    setRepairImage(binding.lpgIvRepairsPdf);
                     addCommoditiesListData();
+
                 }
 
             }
@@ -572,228 +451,24 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             @Override
             public void onClick(View view) {
 
-                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN)) {
-
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "Dr_Godown_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.drGownTitlePdf);
-                                views.add(binding.drGodownGeneralPdf);
-                                views.add(binding.drGodownPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, 10000);
-
-                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP)) {
-
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "Dr_Depot_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.drDepotTitlePdf);
-                                views.add(binding.drDepotMfpPdf);
-                                views.add(binding.drDepotGeneralPdf);
-                                views.add(binding.drDepotPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, 10000);
-
-                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP)) {
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "MFP_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.mfpTitlePdf);
-                                views.add(binding.mfpGeneralPdf);
-                                views.add(binding.mfpPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, 10000);
-
-                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP)) {
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "Processing_Unit_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.punitRegistersPdf);
-                                views.add(binding.punitGeneralPdf);
-                                views.add(binding.punitPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, 10000);
-
-                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP)) {
-
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "Petrol_Pump_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.petrolPumpTitlePdf);
-                                views.add(binding.petrolPumpGeneralPdf);
-                                views.add(binding.petrolPumpPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }, 10000);
-
-                } else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
-                    customProgressDialog.show();
-                    customProgressDialog.addText("Please wait...Downloading Pdf");
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            try {
-
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-                                    directory_path = getExternalFilesDir(null)
-                                            + "/" + "CTW/GCC/";
-                                } else {
-                                    directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                            + "/" + "CTW/GCC/";
-                                }
-
-                                filePath = directory_path + "LPG_" + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
-                                filePath1 = filePath + "_1" + ".pdf";
-
-                                List<View> views = new ArrayList<>();
-                                views.add(binding.lpgTitlePdf);
-                                views.add(binding.lpgGeneralPdf);
-                                views.add(binding.lpgPhotosPdf);
-
-                                PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
-
-                            } catch (Exception e) {
-                                if (customProgressDialog.isShowing())
-                                    customProgressDialog.hide();
-
-                                Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    }, 10000);
-
+                if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_GODOWN))
+                    createPdf("Dr_Godown_", binding.drGownTitlePdf, null,
+                            binding.drGodownGeneralPdf, binding.drGodownPhotosPdf);
+                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_DEPOT_REP))
+                    createPdf("Dr_Depot_", binding.drDepotTitlePdf, binding.drDepotMfpPdf,
+                            binding.drDepotGeneralPdf, binding.drDepotPhotosPdf);
+                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_MFP_GODOWN_REP))
+                    createPdf("MFP_", binding.mfpTitlePdf, null,
+                            binding.mfpGeneralPdf, binding.mfpPhotosPdf);
+                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PUNIT_REP))
+                    createPdf("Processing_Unit_", binding.punitRegistersPdf, null,
+                            binding.punitGeneralPdf, binding.punitPhotosPdf);
+                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_PETROL_REP))
+                    createPdf("Petrol_Pump_", binding.petrolPumpTitlePdf, null,
+                            binding.petrolPumpGeneralPdf, binding.petrolPumpPhotosPdf);
+                else if (reportData.getSupplierType().equalsIgnoreCase(AppConstants.REPORT_LPG_REP)) {
+                    createPdf("LPG_", binding.lpgTitlePdf, null,
+                            binding.lpgGeneralPdf, binding.lpgPhotosPdf);
                 } else {
                     customProgressDialog.hide();
                     Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
@@ -820,6 +495,87 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             }
         });
 
+    }
+
+    private void createPdf(String godown, LinearLayout titlePdf, LinearLayout mfpPdf,
+                           LinearLayout generalPdf, LinearLayout photosPdf) {
+
+        customProgressDialog.show();
+        customProgressDialog.addText("Please wait...Downloading Pdf");
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                        directory_path = getExternalFilesDir(null)
+                                + "/" + "CTW/GCC/";
+                    } else {
+                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                + "/" + "CTW/GCC/";
+                    }
+
+                    filePath = directory_path + godown + reportData.getOfficerId() + "_" + reportData.getInspectionTime();
+                    filePath1 = filePath + "_1" + ".pdf";
+
+                    List<View> views = new ArrayList<>();
+                    views.add(titlePdf);
+                    if (godown.equalsIgnoreCase("Dr_Depot_"))
+                        views.add(mfpPdf);
+                    views.add(generalPdf);
+                    views.add(photosPdf);
+
+                    PDFUtil.getInstance(ReportStockDetailsActivity.this).generatePDF(views, filePath1, ReportStockDetailsActivity.this, "schemes", "GCC");
+
+                } catch (Exception e) {
+                    if (customProgressDialog.isShowing())
+                        customProgressDialog.hide();
+                    Toast.makeText(ReportStockDetailsActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, 10000);
+    }
+
+    private void setRepairImage(ImageView imageView) {
+        if (reportData.getPhotos() != null && reportData.getPhotos().size() > 0) {
+            for (int z = 0; z < reportData.getPhotos().size(); z++) {
+
+                if (!TextUtils.isEmpty(reportData.getPhotos().get(z).getFileName())
+                        && reportData.getPhotos().get(z).getFileName().contains(AppConstants.REPAIR)) {
+
+                    Glide.with(ReportStockDetailsActivity.this)
+                            .load(reportData.getPhotos().get(z).getFilePath())
+                            .error(R.drawable.no_image)
+                            .placeholder(R.drawable.camera)
+                            .into(imageView);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void setPhotosAdapter(RecyclerView recyclerView) {
+        String jsonObject = gson.toJson(reportData.getPhotos());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
+            adapter = new ViewPhotoAdapterPdf(this, reportData.getPhotos());
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    private void setDetails(TextView divName, TextView socName, TextView godownName, TextView inchargeName, TextView date) {
+        divName.setText(reportData.getDivisionName());
+        socName.setText(reportData.getSocietyName());
+        godownName.setText(reportData.getGodownName());
+        inchargeName.setText(reportData.getInchargeName());
+        date.setText(reportData.getInspectionTime());
+    }
+
+    private void setDetails(TextView divName, TextView godownName, TextView inchargeName, TextView date) {
+        divName.setText(reportData.getDivisionName());
+        godownName.setText(reportData.getGodownName());
+        inchargeName.setText(reportData.getInchargeName());
+        date.setText(reportData.getInspectionTime());
     }
 
     private void addCommoditiesListData() {
@@ -931,8 +687,22 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 customProgressDialog.show();
                 customProgressDialog.addText("Please wait...Downloading Pdf");
 
-                addCommoditiesContent(document);
+                if (essentialList != null && essentialList.size() > 0)
+                    addCommoditiesContent(document, "Essential Commodities", essentialList);
+                if (dailyreqList != null && dailyreqList.size() > 0)
+                    addCommoditiesContent(document, "Daily Requirements", dailyreqList);
+                if (emptiesList != null && emptiesList.size() > 0)
+                    addCommoditiesContent(document, "Empties", emptiesList);
+                if (mfpList != null && mfpList.size() > 0)
+                    addCommoditiesContent(document, "MFP Commodities", mfpList);
+                if (punitList != null && punitList.size() > 0)
+                    addCommoditiesContent(document, "Processing Units", punitList);
+                if (petrolList != null && petrolList.size() > 0)
+                    addCommoditiesContent(document, "Petrol Commodities", petrolList);
+                if (lpgList != null && lpgList.size() > 0)
+                    addCommoditiesContent(document, "LPG Commodities", lpgList);
                 createFooter(document);
+
             }
 
             document.close();
@@ -943,61 +713,13 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         }
     }
 
-    private void addCommoditiesContent(Document document) throws DocumentException {
-
-//        Anchor anchor = new Anchor("Commodities", catFont);
-//        Chapter catPart = new Chapter(new Paragraph(anchor), 0);
-//        catPart.setNumberDepth(-1);
-        if (essentialList != null && essentialList.size() > 0) {
-            Paragraph paragraph1 = new Paragraph("Essential Commodities", catFont);
-            document.add(paragraph1);
-            addLineSeperator(document);
-            createTable(document, essentialList);
-            addLineSeperator(document);
-        }
-        if (dailyreqList != null && dailyreqList.size() > 0) {
-            Paragraph paragraph2 = new Paragraph("Daily Requirements", catFont);
-            document.add(paragraph2);
-            addLineSeperator(document);
-            createTable(document, dailyreqList);
-            addLineSeperator(document);
-        }
-        if (emptiesList != null && emptiesList.size() > 0) {
-            Paragraph paragraph3 = new Paragraph("Empties", catFont);
-            document.add(paragraph3);
-            addLineSeperator(document);
-            createTable(document, emptiesList);
-            addLineSeperator(document);
-        }
-        if (mfpList != null && mfpList.size() > 0) {
-            Paragraph paragraph4 = new Paragraph("MFP Commodities", catFont);
-            document.add(paragraph4);
-            addLineSeperator(document);
-            createTable(document, mfpList);
-            addLineSeperator(document);
-        }
-        if (punitList != null && punitList.size() > 0) {
-            Paragraph paragraph5 = new Paragraph("Processing Units", catFont);
-            document.add(paragraph5);
-            addLineSeperator(document);
-            createTable(document, punitList);
-            addLineSeperator(document);
-        }
-        if (petrolList != null && petrolList.size() > 0) {
-            Paragraph paragraph6 = new Paragraph("Petrol Commodities", catFont);
-            document.add(paragraph6);
-            addLineSeperator(document);
-            createTable(document, petrolList);
-            addLineSeperator(document);
-        }
-        if (lpgList != null && lpgList.size() > 0) {
-            Paragraph paragraph7 = new Paragraph("LPG Commodities", catFont);
-            document.add(paragraph7);
-            addLineSeperator(document);
-            createTable(document, lpgList);
-            addLineSeperator(document);
-        }
-
+    private void addCommoditiesContent(Document document, String label, List<ReportSubmitReqCommodities> list)
+            throws DocumentException {
+        Paragraph paragraph1 = new Paragraph(label, catFont);
+        document.add(paragraph1);
+        addLineSeperator(document);
+        createTable(document, list);
+        addLineSeperator(document);
     }
 
     private void createFooter(Document document) {
@@ -1056,55 +778,14 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
 
         PdfPTable table = new PdfPTable(8);
 
-        PdfPCell c1 = new PdfPCell(new Phrase(getString(R.string.comm_code)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.comm_name)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.qty_sys)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.sys_rate)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.sys_val)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.phy_rate)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.phy_val)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
-
-
-        c1 = new PdfPCell(new Phrase(getString(R.string.phy_ava_qty)));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        c1.setPaddingTop(5);
-        c1.setPaddingBottom(5);
-        table.addCell(c1);
+        createCell(getString(R.string.comm_code), table);
+        createCell(getString(R.string.comm_name), table);
+        createCell(getString(R.string.qty_sys), table);
+        createCell(getString(R.string.sys_rate), table);
+        createCell(getString(R.string.sys_val), table);
+        createCell(getString(R.string.phy_rate), table);
+        createCell(getString(R.string.phy_val), table);
+        createCell(getString(R.string.phy_ava_qty), table);
 
         table.setHeaderRows(1);
 
@@ -1112,17 +793,8 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
 
             for (int i = 0; i < list.size(); i++) {
 
-                c1 = new PdfPCell(new Phrase(list.get(i).getComCode()));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
-
-                c1 = new PdfPCell(new Phrase(list.get(i).getComType()));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
+                createCell(list.get(i).getComCode(), table);
+                createCell(list.get(i).getComType(), table);
 
                 PdfPCell c2;
                 if (list.get(i).getUnits() != null && !list.get(i).getUnits().contains("No")) {
@@ -1135,40 +807,11 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 c2.setPaddingBottom(5);
                 table.addCell(c2);
 
-
-                c1 = new PdfPCell(new Phrase("Rs " + list.get(i).getSystemRate()));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
-
-
-                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getSystemValue())));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
-
-
-                c1 = new PdfPCell(new Phrase("Rs " + list.get(i).getPhysicalRate()));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
-
-
-                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getPhysicalValue())));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
-
-
-                c1 = new PdfPCell(new Phrase(String.valueOf(list.get(i).getPhysiacalQty())));
-                c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c1.setPaddingTop(5);
-                c1.setPaddingBottom(5);
-                table.addCell(c1);
+                createCell("Rs " + list.get(i).getSystemRate(), table);
+                createCell(String.valueOf(list.get(i).getSystemValue()), table);
+                createCell("Rs " + list.get(i).getPhysicalRate(), table);
+                createCell(String.valueOf(list.get(i).getPhysicalValue()), table);
+                createCell(String.valueOf(list.get(i).getPhysiacalQty()), table);
 
             }
             document.add(table);
@@ -1177,6 +820,14 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
             e.printStackTrace();
         }
         return table;
+    }
+
+    private void createCell(String label, PdfPTable table) {
+        PdfPCell c1 = new PdfPCell(new Phrase(label));
+        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+        c1.setPaddingTop(5);
+        c1.setPaddingBottom(5);
+        table.addCell(c1);
     }
 
     @Override
