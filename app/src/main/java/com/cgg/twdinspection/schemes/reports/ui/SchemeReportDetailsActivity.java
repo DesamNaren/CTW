@@ -25,8 +25,20 @@ import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBindi
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +74,8 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         binding.header.ivPdf.setVisibility(View.VISIBLE);
 
         binding.tvDate.setText(schemeReportData.getInspectionTime());
-        binding.tvOfficerName.setText(schemeReportData.getOfficerId());
-        binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+//        binding.tvOfficerName.setText(schemeReportData.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
+//        binding.tvOfficerDes.setText("Inspection Report-Schemes" + ", " + schemeReportData.getInspectionTime());
 
         customProgressDialog = new CustomProgressDialog(this);
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
@@ -88,12 +100,11 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                                 + "/" + "CTW/Schemes/";
                     }
 
-                    filePath = directory_path + "schemes_" + schemeReportData.getBenId() + "_" + schemeReportData.getInspectionTime() + ".pdf";
-                    File file = new File(filePath);
+                    filePath = directory_path + "Schemes_" + schemeReportData.getOfficerId() + "_" + schemeReportData.getInspectionTime();
                     List<View> views = new ArrayList<>();
                     views.add(binding.scrlPdf);
 
-                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath, SchemeReportDetailsActivity.this, "schemes", "Schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath+ "_temp" + ".pdf", SchemeReportDetailsActivity.this, "schemes", "Schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
@@ -236,13 +247,46 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         }
 
     }
+    public void addWatermark() throws IOException, DocumentException {
+
+        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        Font f = new Font(Font.FontFamily.HELVETICA, 11);
+        f.setColor(BaseColor.GRAY);
+        int n = reader.getNumberOfPages();
+
+        for (int i = 1; i <= n; i++) {
+            PdfContentByte over = stamper.getOverContent(i);
+            Phrase p1 = new Phrase(schemeReportData.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p1, 550, 30, 0);
+            Phrase p2 = new Phrase("Inspection Report-Schemes" + ", " + schemeReportData.getInspectionTime(), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p2, 550, 15, 0);
+            over.saveState();
+            PdfGState gs1 = new PdfGState();
+            gs1.setFillOpacity(0.5f);
+            over.setGState(gs1);
+            over.restoreState();
+        }
+        stamper.close();
+        reader.close();
+    }
 
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-
+        File savedFile = new File(filePath + ".pdf");
+        customProgressDialog.hide();
+        try {
+            addWatermark();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        File file = new File(filePath + "_temp" + ".pdf");
+        file.delete();
         Utils.customPDFAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+                "PDF File Generated Successfully. \n File saved at " + savedFile + "\n Do you want open it?", savedFile);
     }
 
     @Override

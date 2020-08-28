@@ -24,8 +24,20 @@ import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.google.gson.Gson;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,14 +90,14 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
                                         + "/" + "CTW/Engineering Works/";
                             }
 
-                            filePath = directory_path + reportWorkDetails.getOfficerId() + "_" + reportWorkDetails.getInspectionTime() + ".pdf";
-                            File file = new File(filePath);
+                            filePath = directory_path + "Engineering_Works_" + reportWorkDetails.getOfficerId() + "_" + reportWorkDetails.getInspectionTime();
+
                             List<View> views = new ArrayList<>();
                             views.add(binding.engWorksPdf1);
                             views.add(binding.engWorksPdf2);
                             views.add(binding.photosPdf);
 
-                            PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views, filePath, EngReportDetailsActivity.this, "schemes", "GCC");
+                            PDFUtil.getInstance(EngReportDetailsActivity.this).generatePDF(views, filePath + "_temp" + ".pdf", EngReportDetailsActivity.this, "schemes", "GCC");
 
                         } catch (Exception e) {
                             if (customProgressDialog.isShowing())
@@ -132,8 +144,6 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
             if (reportWorkDetails != null) {
 
                 binding.tvDate.setText(reportWorkDetails.getInspectionTime());
-                binding.tvOfficerName.setText(reportWorkDetails.getOfficerId());
-                binding.tvOfficerDes.setText(sharedPreferences.getString(AppConstants.OFFICER_DES, ""));
 
                 String jsonObject = gson.toJson(reportWorkDetails.getPhotos());
                 if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("[]")) {
@@ -223,12 +233,46 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
 
     }
 
+    public void addWatermark() throws IOException, DocumentException {
+
+        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        Font f = new Font(Font.FontFamily.HELVETICA, 11);
+        f.setColor(BaseColor.GRAY);
+        int n = reader.getNumberOfPages();
+
+        for (int i = 1; i <= n; i++) {
+            PdfContentByte over = stamper.getOverContent(i);
+            Phrase p1 = new Phrase(reportWorkDetails.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p1, 550, 30, 0);
+            Phrase p2 = new Phrase("Inspection Report-Engineering Works" + ", " + reportWorkDetails.getInspectionTime(), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p2, 550, 15, 0);
+            over.saveState();
+            PdfGState gs1 = new PdfGState();
+            gs1.setFillOpacity(0.5f);
+            over.setGState(gs1);
+            over.restoreState();
+        }
+        stamper.close();
+        reader.close();
+    }
+
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-
+        File savedFile = new File(filePath + ".pdf");
+        customProgressDialog.hide();
+        try {
+            addWatermark();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        File file = new File(filePath + "_temp" + ".pdf");
+        file.delete();
         Utils.customPDFAlert(EngReportDetailsActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+                "PDF File Generated Successfully. \n File saved at " + savedFile + "\n Do you want open it?", savedFile);
     }
 
     @Override

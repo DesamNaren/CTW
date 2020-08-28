@@ -235,7 +235,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                                         + "/" + "CTW/Schools/";
                             }
 
-                            filePath = directory_path + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
+                            filePath = directory_path + "Schools_" + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
 
                             filePath1 = filePath + "_1" + ".pdf";
                             List<View> views = new ArrayList<>();

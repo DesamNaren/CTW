@@ -19,6 +19,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportBinding;
+import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
@@ -112,15 +113,15 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
                         }else {
                             instCnt=0;
                         }
-//                        if(reportCountsResponse.getEngineeringWorks()!=null) {
-//                            engCnt = reportCountsResponse.getEngineeringWorks();
-//                        }else {
-//                            engCnt=0;
-//                        }
+                        if(reportCountsResponse.getEngineeringWorks()!=null) {
+                            engCnt = reportCountsResponse.getEngineeringWorks();
+                        }else {
+                            engCnt=0;
+                        }
                         binding.gccCnt.setText(String.valueOf(gccCnt));
                         binding.schemeCnt.setText(String.valueOf(schemesCnt));
                         binding.instCnt.setText(String.valueOf(instCnt));
-//                        binding.engCnt.setText(String.valueOf(engCnt));
+                        binding.engCnt.setText(String.valueOf(engCnt));
 
                     } else if (reportCountsResponse.getStatusCode() != null && reportCountsResponse.getStatusCode().equals(AppConstants.FAILURE_STRING_CODE)) {
                         callSnackBar(getString(R.string.something));
@@ -168,7 +169,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
             @Override
             public void onClick(View view) {
                 if (engCnt > 0) {
-//                    startActivity(new Intent(ReportActivity.this, EngReportActivity.class));
+                    startActivity(new Intent(ReportActivity.this, EngReportActivity.class));
                 } else {
                     callSnackBar("No data found");
                 }
