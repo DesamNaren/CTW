@@ -43,7 +43,7 @@ public class ItextMerge {
 
     public interface PDFMergeListener {
 
-        void pdfMergeSuccess(File savedPDFFile);
+        void pdfMergeSuccess();
 
         void pdfMergeFailure(final Exception exception);
     }
@@ -82,7 +82,7 @@ public class ItextMerge {
                 File file2 = new File(filePath2);
                 file2.delete();
 
-                listener.pdfMergeSuccess(destFile);
+                listener.pdfMergeSuccess();
             } else {
                 //Send Error callback.
                 listener.pdfMergeFailure(mException);

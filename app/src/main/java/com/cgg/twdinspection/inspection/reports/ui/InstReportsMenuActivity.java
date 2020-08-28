@@ -46,13 +46,19 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -341,10 +347,9 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 addDietContent(document);
             if (academicGradeEntityList != null)
                 addAcademicContent(document);
-            createFooter(document);
 
             document.close();
-            new ItextMerge(InstReportsMenuActivity.this, filePath, filePath1, filePath2, InstReportsMenuActivity.this);
+            new ItextMerge(InstReportsMenuActivity.this, filePath + "_temp", filePath1, filePath2, InstReportsMenuActivity.this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -385,7 +390,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     private void createStudTable(Document document) throws BadElementException {
         PdfPTable table = new PdfPTable(6);
-
+        table.setTotalWidth(550);
+        table.setLockedWidth(true);
         createCell("Class", table);
         createCell("On Roll Count", table);
         createCell("Attendance Marked", table);
@@ -415,7 +421,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private void createStaffTable(Document document) throws BadElementException {
 
         PdfPTable table = new PdfPTable(11);
-
+        table.setTotalWidth(550);
+        table.setLockedWidth(true);
         createCell("ID", table);
         createCell("Name", table);
         createCell("Designation", table);
@@ -458,7 +465,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private void createDietTable(Document document) throws BadElementException {
 
         PdfPTable table = new PdfPTable(3);
-
+        table.setTotalWidth(550);
+        table.setLockedWidth(true);
         createCell("Item Type", table);
         createCell("Book Balance", table);
         createCell("Ground Balance", table);
@@ -484,7 +492,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private void createAcademicTable(Document document) throws BadElementException {
 
         PdfPTable table = new PdfPTable(9);
-
+        table.setTotalWidth(550);
+        table.setLockedWidth(true);
         createCell("Class Name", table);
         createCell("Total Strength", table);
         createCell("Grade A", table);
@@ -581,10 +590,46 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     }
 
     @Override
-    public void pdfMergeSuccess(File savedPDFFile) {
+    public void pdfMergeSuccess() {
+        File savedPDFFile = new File(filePath + ".pdf");
         customProgressDialog.hide();
+        try {
+            addWatermark();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        File file = new File(filePath + "_temp" + ".pdf");
+        file.delete();
         Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
                 "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+    }
+
+    public void addWatermark() throws IOException, DocumentException {
+
+        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        Font f = new Font(Font.FontFamily.HELVETICA, 11);
+        f.setColor(BaseColor.GRAY);
+        int n = reader.getNumberOfPages();
+
+        for (int i = 1; i <= n; i++) {
+            PdfContentByte over = stamper.getOverContent(i);
+            Phrase p1 = new Phrase(inspReportData.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p1, 550, 30, 0);
+            Phrase p2 = new Phrase("Inspection Report-Schools" + ", " + inspReportData.getInspectionTime(), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p2, 550, 15, 0);
+            over.saveState();
+            PdfGState gs1 = new PdfGState();
+            gs1.setFillOpacity(0.5f);
+            over.setGState(gs1);
+            over.restoreState();
+        }
+
+
+        stamper.close();
+        reader.close();
     }
 
     @Override

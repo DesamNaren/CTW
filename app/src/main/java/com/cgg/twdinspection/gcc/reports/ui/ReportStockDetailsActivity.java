@@ -59,8 +59,13 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
@@ -68,6 +73,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -701,12 +707,12 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                     addCommoditiesContent(document, "Petrol Commodities", petrolList);
                 if (lpgList != null && lpgList.size() > 0)
                     addCommoditiesContent(document, "LPG Commodities", lpgList);
-                createFooter(document);
+//                createFooter(document);
 
             }
 
             document.close();
-            new ItextMerge(ReportStockDetailsActivity.this, filePath, filePath1, filePath2, ReportStockDetailsActivity.this);
+            new ItextMerge(ReportStockDetailsActivity.this, filePath + "_temp", filePath1, filePath2, ReportStockDetailsActivity.this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -768,15 +774,11 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
 
     }
 
-    private static void addEmptyLine(Paragraph paragraph, int number) {
-        for (int i = 0; i < number; i++) {
-            paragraph.add(new Paragraph(" "));
-        }
-    }
-
-    private PdfPTable createTable(Document document, List<ReportSubmitReqCommodities> list) {
+    private void createTable(Document document, List<ReportSubmitReqCommodities> list) {
 
         PdfPTable table = new PdfPTable(8);
+        table.setTotalWidth(550);
+        table.setLockedWidth(true);
 
         createCell(getString(R.string.comm_code), table);
         createCell(getString(R.string.comm_name), table);
@@ -807,19 +809,20 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
                 c2.setPaddingBottom(5);
                 table.addCell(c2);
 
-                createCell("Rs " + list.get(i).getSystemRate(), table);
+                createCell("Rs" + list.get(i).getSystemRate(), table);
                 createCell(String.valueOf(list.get(i).getSystemValue()), table);
-                createCell("Rs " + list.get(i).getPhysicalRate(), table);
+                createCell("Rs" + list.get(i).getPhysicalRate(), table);
                 createCell(String.valueOf(list.get(i).getPhysicalValue()), table);
                 createCell(String.valueOf(list.get(i).getPhysiacalQty()), table);
 
             }
+            table.setSplitLate(true);
             document.add(table);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return table;
+
     }
 
     private void createCell(String label, PdfPTable table) {
@@ -837,9 +840,18 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
         Utils.customErrorAlert(ReportStockDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
-    @Override
-    public void pdfMergeSuccess(File savedPDFFile) {
+    public void pdfMergeSuccess() {
+        File savedPDFFile = new File(filePath + ".pdf");
         customProgressDialog.hide();
+        try {
+            addWatermark();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        File file = new File(filePath + "_temp" + ".pdf");
+        file.delete();
         Utils.customPDFAlert(ReportStockDetailsActivity.this, getString(R.string.app_name),
                 "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
 
@@ -849,6 +861,30 @@ public class ReportStockDetailsActivity extends AppCompatActivity implements PDF
     public void pdfMergeFailure(Exception exception) {
         customProgressDialog.hide();
         Utils.customErrorAlert(ReportStockDetailsActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
+    }
+
+
+    public void addWatermark() throws IOException, DocumentException {
+        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
+        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        Font f = new Font(Font.FontFamily.HELVETICA, 11);
+        f.setColor(BaseColor.GRAY);
+        int n = reader.getNumberOfPages();
+
+        for (int i = 1; i <= n; i++) {
+            PdfContentByte over = stamper.getOverContent(i);
+            Phrase p1 = new Phrase(reportData.getOfficerId() + ", " + sharedPreferences.getString(AppConstants.OFFICER_DES, ""), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p1, 550, 30, 0);
+            Phrase p2 = new Phrase("Inspection Report-GCC" + ", " + reportData.getInspectionTime(), f);
+            ColumnText.showTextAligned(over, Element.ALIGN_RIGHT, p2, 550, 15, 0);
+            over.saveState();
+            PdfGState gs1 = new PdfGState();
+            gs1.setFillOpacity(0.5f);
+            over.setGState(gs1);
+            over.restoreState();
+        }
+        stamper.close();
+        reader.close();
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
