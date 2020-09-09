@@ -99,9 +99,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                 }else if (versionResponse.getStatusMessage() != null) {
                                     Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());
                                 }else{
-                                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                                    finish();
-//                                    Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
+                                    Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
                                 }
                             } else {
                                 Toast.makeText(context, getString(R.string.app_ver), Toast.LENGTH_SHORT).show();
