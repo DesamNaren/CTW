@@ -1083,5 +1083,22 @@
     <string name="sel_left_for_screening_zero">Students left for screening count should not be zero</string>
     <string name="count_in_register_zero">Students count in register should not be zero</string>
     <string name="total_leaves_zero">Total leaves should not be zero</string>
+    <string name="enter_valid_fin_progress_percentage">Please enter valid percentage of financial progress achieved</string>
+    <string name="select">Select</string>
+    <string name="no_data_found">No data found</string>
+    <string name="please_select_sector">Please select sector</string>
+    <string name="please_specify_sect_name">Please specify sector name</string>
+    <string name="please_select_scheme">Please select scheme</string>
+    <string name="please_select_stage_of_work">Please select stage of work</string>
+    <string name="select_stage_of_work_in_progress_work">Please select stage of works for in progress works</string>
+    <string name="enter_stage_of_work_in_progress_work">Please enter stage of works for in progress works</string>
+    <string name="enter_fin_prog_acheived">Please enter percentage of financial progress achieved</string>
+    <string name="check_overall_experience">Please check overall apearance</string>
+    <string name="check_workmen_skill">Please check workmen\'s skill</string>
+    <string name="check_qual_care">Please check quality care</string>
+    <string name="check_qual_materials">Please check quality of materials</string>
+    <string name="check_surface_finishings">Please check surface finishes</string>
+    <string name="enter_observations">Please enter observations</string>
+    <string name="check_sat_level">Please check satisfaction level</string>
 
 </resources>

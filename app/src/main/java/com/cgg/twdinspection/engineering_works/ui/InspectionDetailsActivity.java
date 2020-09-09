@@ -12,7 +12,9 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,8 +57,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
     SharedPreferences.Editor editor;
     InspDetailsViewModel viewModel;
     List<SectorsEntity> sectorsEntities = new ArrayList<>();
-    Integer selSectorId = -1, selSchemeId = -1, selWorkProgStageId = -1, physProgRating = -1;
-    Double actExpIncurred = -1.0;
+    Integer selSectorId = -1, selSchemeId = -1, selWorkProgStageId = -1;
+    Double actExpIncurred = -1.0, physProgRating = -1.0;
     String selSectorName, selSchemeName, selStageName, selWorkInProgStageName;
     private String overallAppearance, worksmenSkill, qualCare, qualMat, surfaceFinishing, observation, satLevel;
     StagesResponse stagesResponse;
@@ -96,8 +98,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList selectList = new ArrayList();
-        selectList.add("Select");
+        ArrayList selectList = new ArrayList<>();
+        selectList.add(getString(R.string.select));
         selectAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, selectList);
 
 
@@ -107,7 +109,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             binding.setWorkDetails(workDetail);
             editor.commit();
         }
-       LiveData<List<SectorsEntity>> liveData =  viewModel.getSectors();
+        LiveData<List<SectorsEntity>> liveData = viewModel.getSectors();
         liveData.observe(InspectionDetailsActivity.this, new Observer<List<SectorsEntity>>() {
             @Override
             public void onChanged(List<SectorsEntity> sectorsEntities) {
@@ -115,14 +117,14 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                 InspectionDetailsActivity.this.sectorsEntities = sectorsEntities;
                 if (sectorsEntities != null && sectorsEntities.size() > 0) {
                     ArrayList<String> sectorsList = new ArrayList<>();
-                    sectorsList.add("Select");
+                    sectorsList.add(getString(R.string.select));
                     for (int i = 0; i < sectorsEntities.size(); i++) {
                         sectorsList.add(sectorsEntities.get(i).getSectorName());
                     }
                     ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, sectorsList);
                     binding.spSector.setAdapter(spinnerAdapter);
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -150,7 +152,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     if (stageResponse != null && !TextUtils.isEmpty(stageResponse.getStageOfWork())) {
                         String subStageName = stageResponse.getStageOfWork();
                         tempMajorStages.clear();
-                        tempMajorStages.add("Select");
+                        tempMajorStages.add(getString(R.string.select));
                         for (int z = 0; z < majorStages.size(); z++) {
                             if (majorStages.get(z).equalsIgnoreCase(subStageName)) {
                                 selPos = z;
@@ -163,9 +165,9 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                             }
                         }
                         binding.spStage.setAdapter(majorStagesAdapter);
-                    } else if(stageResponse!=null && TextUtils.isEmpty(stageResponse.getStageOfWork())){
+                    } else if (stageResponse != null && TextUtils.isEmpty(stageResponse.getStageOfWork())) {
                         binding.spStage.setAdapter(majorStagesAdapter);
-                    }else{
+                    } else {
                         callSnackBar(getString(R.string.something));
                     }
                 }
@@ -174,21 +176,21 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             Utils.customErrorAlert(InspectionDetailsActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
-       LiveData<List<GrantScheme>> grantListLiveData =  viewModel.getGrantSchemes();
+        LiveData<List<GrantScheme>> grantListLiveData = viewModel.getGrantSchemes();
         grantListLiveData.observe(InspectionDetailsActivity.this, new Observer<List<GrantScheme>>() {
             @Override
             public void onChanged(List<GrantScheme> grantSchemes) {
                 grantListLiveData.removeObservers(InspectionDetailsActivity.this);
                 if (grantSchemes != null && grantSchemes.size() > 0) {
                     ArrayList<String> schemesList = new ArrayList<>();
-                    schemesList.add("Select");
+                    schemesList.add(getString(R.string.select));
                     for (int i = 0; i < grantSchemes.size(); i++) {
                         schemesList.add(grantSchemes.get(i).getSchemeName());
                     }
                     ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, schemesList);
                     binding.spScheme.setAdapter(spinnerAdapter);
                 } else {
-                    callSnackBar("No data found");
+                    callSnackBar(getString(R.string.no_data_found));
                 }
             }
         });
@@ -198,7 +200,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 int selPos = 0;
-                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                if (binding.spStage.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.select))) {
                     selStageName = "";
                 } else {
                     selStageName = binding.spStage.getSelectedItem().toString();
@@ -233,12 +235,12 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 //                binding.tvStageOthers.setVisibility(View.GONE);
 //                binding.llStageWork.setVisibility(View.VISIBLE);
                 ArrayList<String> stagesList = new ArrayList<>();
-                if (binding.spSector.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                if (binding.spSector.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.select))) {
                     binding.llObs.setVisibility(View.GONE);
                     selSectorId = -1;
                     selSectorName = "";
                     selWorkProgStageId = -1;
-                    physProgRating = -1;
+                    physProgRating = -1.0;
                     actExpIncurred = -1.0;
                     selWorkInProgStageName = "";
                     binding.spStageInProgress.setAdapter(selectAdapter);
@@ -250,8 +252,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     binding.tvPercentFinProg.setText("");
                     binding.tvActExp.setText("");
                 } else {
-                   LiveData<Integer> liveData1 = viewModel.getSectorId(binding.spSector.getSelectedItem().toString());
-                   liveData1.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                    LiveData<Integer> liveData1 = viewModel.getSectorId(binding.spSector.getSelectedItem().toString());
+                    liveData1.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer integer) {
                             liveData1.removeObservers(InspectionDetailsActivity.this);
@@ -260,19 +262,21 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                 selSectorName = binding.spSector.getSelectedItem().toString();
                                 if (selSectorName.equalsIgnoreCase("Others")) {
                                     binding.llFinProgRat.setVisibility(View.GONE);
+                                    binding.tvFinProgressOthers.setVisibility(View.VISIBLE);
                                     binding.llObs.setVisibility(View.VISIBLE);
                                     binding.tvObs.setHint("Observations for specified sector");
                                     binding.tvSectorOthers.setVisibility(View.VISIBLE);
                                     binding.llStageWork.setVisibility(View.GONE);
                                     binding.tvStageOthers.setVisibility(View.VISIBLE);
                                     selWorkProgStageId = -1;
-                                    physProgRating = -1;
+                                    physProgRating = -1.0;
                                     actExpIncurred = -1.0;
                                     selWorkInProgStageName = "";
                                     binding.tvPercentFinProg.setText("");
                                     binding.tvActExp.setText("");
                                 } else {
                                     binding.llFinProgRat.setVisibility(View.VISIBLE);
+                                    binding.tvFinProgressOthers.setVisibility(View.GONE);
                                     binding.llObs.setVisibility(View.VISIBLE);
                                     binding.tvObs.setHint("Observations for " + binding.spSector.getSelectedItem().toString());
                                     binding.tvSectorOthers.setVisibility(View.GONE);
@@ -283,16 +287,16 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                                     if (Utils.checkInternetConnection(InspectionDetailsActivity.this)) {
                                         customProgressDialog.show();
 
-                                       LiveData<StagesResponse> liveData2 = viewModel.getStagesResponse(selSectorId);
-                                       liveData2.observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
+                                        LiveData<StagesResponse> liveData2 = viewModel.getStagesResponse(selSectorId);
+                                        liveData2.observe(InspectionDetailsActivity.this, new Observer<StagesResponse>() {
                                             @Override
                                             public void onChanged(StagesResponse stagesResponse) {
-                                                liveData2.removeObservers(InspectionDetailsActivity.this);
+//                                                liveData2.removeObservers(InspectionDetailsActivity.this);
                                                 InspectionDetailsActivity.this.stagesResponse = stagesResponse;
                                                 if (stagesResponse != null && stagesResponse.getStages().size() > 0) {
                                                     customProgressDialog.hide();
                                                     stagesList.clear();
-                                                    stagesList.add("Select");
+                                                    stagesList.add(getString(R.string.select));
                                                     for (int y = 0; y < stagesResponse.getStages().size(); y++) {
                                                         stagesList.add(stagesResponse.getStages().get(y).getStageName());
                                                     }
@@ -312,13 +316,48 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                             }
                         }
                     });
-                    spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
+                    spinnerAdapter = new ArrayAdapter<>(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, stagesList);
                     binding.spStageInProgress.setAdapter(spinnerAdapter);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        binding.etFinProgressOthers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (charSequence.length() > 0) {
+                    try {
+                        physProgRating = Double.valueOf(charSequence.toString());
+                        if (physProgRating < 100.00 && workDetail != null) {
+                            actExpIncurred = (physProgRating / 100) * Double.valueOf(workDetail.getEstimateCost()).intValue();
+                            binding.tvActExp.setText(String.format("%.2f", actExpIncurred.doubleValue()));
+                        } else {
+                            binding.etFinProgressOthers.requestFocus();
+                            binding.etFinProgressOthers.setError(getResources().getString(R.string.enter_valid_fin_progress_percentage));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        binding.etFinProgressOthers.setText("");
+                        binding.tvActExp.setText("");
+                    }
+                } else {
+                    binding.tvActExp.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -330,8 +369,8 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     selSchemeId = -1;
                     selSchemeName = "";
                 } else {
-                   LiveData<Integer> integerLiveData = viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString());
-                   integerLiveData.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
+                    LiveData<Integer> integerLiveData = viewModel.getgrantSchemeId(binding.spScheme.getSelectedItem().toString());
+                    integerLiveData.observe(InspectionDetailsActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer integer) {
                             integerLiveData.removeObservers(InspectionDetailsActivity.this);
@@ -356,9 +395,9 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         binding.spStageInProgress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (binding.spStageInProgress.getSelectedItem() != null && binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase("Select")) {
+                if (binding.spStageInProgress.getSelectedItem() != null && binding.spStageInProgress.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.select))) {
                     selWorkProgStageId = -1;
-                    physProgRating = -1;
+                    physProgRating = -1.0;
                     actExpIncurred = -1.0;
                     selWorkInProgStageName = "";
                     binding.tvPercentFinProg.setText("");
@@ -369,7 +408,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                         for (int z = 0; z < stagesResponse.getStages().size(); z++) {
                             if (stagesResponse.getStages().get(z).getStageName().equalsIgnoreCase(selWorkInProgStageName)) {
                                 selWorkProgStageId = stagesResponse.getStages().get(z).getStageId();
-                                physProgRating = stagesResponse.getStages().get(z).getStageProgressRating();
+                                physProgRating = stagesResponse.getStages().get(z).getStageProgressRating().doubleValue();
                                 try {
                                     actExpIncurred = (Double.valueOf(physProgRating) / 100) * Double.valueOf(workDetail.getEstimateCost()).intValue();
                                 } catch (Exception e) {
@@ -571,43 +610,46 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 
     private boolean validate() {
         if (selSectorId == -1) {
-            callSnackBar("Please select sector");
+            callSnackBar(getString(R.string.please_select_sector));
             return false;
         } else if (binding.tvSectorOthers.getVisibility() == View.VISIBLE && TextUtils.isEmpty(binding.etSectorOthers.getText())) {
-            callSnackBar("Please specify sector name");
+            callSnackBar(getString(R.string.please_specify_sect_name));
             return false;
         } else if (selSchemeId == -1) {
-            callSnackBar("Please select scheme");
+            callSnackBar(getString(R.string.please_select_scheme));
             return false;
         } else if (TextUtils.isEmpty(selStageName)) {
-            callSnackBar("Please select stage of work");
+            callSnackBar(getString(R.string.please_select_stage_of_work));
             return false;
         } else if (binding.llStageWork.getVisibility() == View.VISIBLE && selWorkProgStageId == -1) {
-            callSnackBar("Please select stage of works for in progress works");
+            callSnackBar(getString(R.string.select_stage_of_work_in_progress_work));
             return false;
         } else if (binding.llStageWork.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
-            callSnackBar("Please enter stage of works for in progress works");
+            callSnackBar(getString(R.string.enter_stage_of_work_in_progress_work));
+            return false;
+        }else if (binding.etFinProgressOthers.getVisibility() == View.VISIBLE && TextUtils.isEmpty(binding.etFinProgressOthers.getText())) {
+            callSnackBar(getString(R.string.enter_fin_prog_acheived));
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {
-            callSnackBar("Please check overall apearance");
+            callSnackBar(getString(R.string.check_overall_experience));
             return false;
         } else if (TextUtils.isEmpty(worksmenSkill)) {
-            callSnackBar("Please check workmen's skill");
+            callSnackBar(getString(R.string.check_workmen_skill));
             return false;
         } else if (TextUtils.isEmpty(qualCare)) {
-            callSnackBar("Please check quality care");
+            callSnackBar(getString(R.string.check_qual_care));
             return false;
         } else if (TextUtils.isEmpty(qualMat)) {
-            callSnackBar("Please check quality of materials");
+            callSnackBar(getString(R.string.check_qual_materials));
             return false;
         } else if (TextUtils.isEmpty(surfaceFinishing)) {
-            callSnackBar("Please check surface finishes");
+            callSnackBar(getString(R.string.check_surface_finishings));
             return false;
         } else if (TextUtils.isEmpty(observation)) {
-            callSnackBar("Please enter observations");
+            callSnackBar(getString(R.string.enter_observations));
             return false;
         } else if (TextUtils.isEmpty(satLevel)) {
-            callSnackBar("Please check satisfaction level");
+            callSnackBar(getString(R.string.check_sat_level));
             return false;
         }
         return true;
