@@ -147,10 +147,10 @@
                                 android:id="@+id/btn_sector"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                app:backgroundTint="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -202,7 +202,8 @@
                                 android:background="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                app:backgroundTint="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -259,7 +260,8 @@
                                 android:background="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
-                                android:textColor="@color/black" />
+                                android:textColor="@color/black"
+                                app:backgroundTint="@color/white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 

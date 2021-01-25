@@ -383,6 +383,10 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/enter_reason"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.roPlantReason}" />
 
@@ -805,6 +809,10 @@
                                         android:hint="@string/working"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.ceilingfansWorking}" />
 
@@ -828,6 +836,10 @@
                                         android:hint="@string/non_working"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.ceilingfansNonworking}" />
 
@@ -851,6 +863,10 @@
                                         android:hint="@string/required"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.ceilingfansRequired}" />
 
@@ -898,6 +914,10 @@
                                         android:hint="@string/working"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.mountedfansWorking}" />
 
@@ -921,6 +941,10 @@
                                         android:hint="@string/non_working"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.mountedfansNonworking}" />
 
@@ -944,6 +968,10 @@
                                         android:hint="@string/required"
                                         android:imeOptions="actionDone"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.mountedfansRequired}" />
 
@@ -1216,6 +1244,10 @@
                                     android:hint="@string/kitchen_repair_required"
                                     android:imeOptions="actionNext"
                                     android:inputType="text"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.kitchenRepairRequired}" />
 
@@ -1263,6 +1295,10 @@
                             android:hint="@string/how_many_buildings"
                             android:imeOptions="actionNext"
                             android:inputType="number"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{inspData.howManyBuildings}" />
 
@@ -2340,6 +2376,10 @@
                                     android:hint="@string/cls_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.addClassRequiredCnt}" />
 
@@ -2364,6 +2404,10 @@
                                     android:hint="@string/din_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.addDiningRequiredCnt}" />
 
@@ -2387,6 +2431,10 @@
                                     android:hint="@string/dor_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.addDormitoryRequiredCnt}" />
 
@@ -2411,6 +2459,10 @@
                                     android:hint="@string/toilets_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.addToiletsRequiredCnt}" />
 
@@ -2435,6 +2487,10 @@
                                     android:hint="@string/bathrooms_count"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.addBathroomsRequiredCnt}" />
 
@@ -2610,6 +2666,10 @@
                                 android:hint="@string/repairs_to_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.totalToilets}" />
 
@@ -2632,6 +2692,10 @@
                                 android:hint="@string/no_of_bath_rooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.totalBathrooms}" />
 
@@ -2684,6 +2748,10 @@
                                 android:hint="@string/no_of_functioning_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.functioningToilets}" />
 
@@ -2706,6 +2774,10 @@
                                 android:hint="@string/no_of_functioning_bathrooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.functioningBathrooms}" />
 
@@ -2728,6 +2800,10 @@
                                 android:hint="@string/repairs_required_to_toilets"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.repairsReqToilets}" />
 
@@ -2750,6 +2826,10 @@
                                 android:hint="@string/repairs_required_to_bathrooms"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.repairsReqBathrooms}" />
 

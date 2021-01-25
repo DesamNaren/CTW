@@ -32,8 +32,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dimen_10dp"
-                    android:padding="@dimen/dimen_4dp"
                     android:gravity="center"
+                    android:padding="@dimen/dimen_4dp"
                     android:text="@string/permissionText"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/white" />
@@ -107,19 +107,19 @@
                             android:padding="@dimen/dimen_4dp">
 
                             <TextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/location"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="@string/locationtxt" />
+                                android:text="@string/locationtxt"
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -150,19 +150,19 @@
                             android:padding="@dimen/dimen_4dp">
 
                             <TextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/camera"
+                                android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="@string/cameratxt" />
+                                android:text="@string/cameratxt"
+                                android:textColor="@color/white" />
                         </LinearLayout>
 
 
@@ -196,19 +196,19 @@
                             android:padding="@dimen/dimen_4dp">
 
                             <TextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/storage"
+                                android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="@string/storagetxt" />
+                                android:text="@string/storagetxt"
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -240,19 +240,19 @@
                             android:padding="@dimen/dimen_4dp">
 
                             <TextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/phone"
+                                android:textColor="@color/white"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <com.cgg.twdinspection.common.custom.CustomFontTextView
-                                android:textColor="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:text="@string/phonetxt" />
+                                android:text="@string/phonetxt"
+                                android:textColor="@color/white" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -261,24 +261,21 @@
 
 
                 <Button
-                    android:padding="@dimen/dimen_10dp"
-                    android:layout_marginTop="@dimen/dimen_30dp"
-                    android:layout_gravity="end"
                     android:id="@+id/accept"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/dimen_30dp"
                     android:layout_marginRight="@dimen/dimen_30dp"
+                    android:padding="@dimen/dimen_10dp"
                     android:text="Accept"
-                    android:textSize="16sp"
                     android:textAllCaps="false"
-                    android:background="@color/white"
-                     />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/white" />
 
             </LinearLayout>
         </ScrollView>
-
-
-
 
 
     </RelativeLayout>

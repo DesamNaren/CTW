@@ -66,7 +66,10 @@
                             android:hint="@string/total_no_of_sick_boarders"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{medical.sickBoarders}" />
 
@@ -109,7 +112,10 @@
                             android:hint="@string/total_no_of_sick_boarders_referred_to_area_district_hospital"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{medical.sickBoarders_area}" />
 
@@ -189,7 +195,10 @@
                                     android:hint="@string/fever"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.feverCount}" />
 
@@ -230,8 +239,10 @@
                                     android:hint="@string/cold_amp_cough"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_10dp"
-
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.coldCount}" />
 
@@ -272,8 +283,10 @@
                                     android:hint="@string/headache"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.headacheCount}" />
 
@@ -321,8 +334,10 @@
                                     android:hint="@string/diarrhea"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_10dp"
-
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.diarrheaCount}" />
 
@@ -363,8 +378,10 @@
                                     android:hint="@string/malaria"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.malariaCount}" />
 
@@ -405,8 +422,10 @@
                                     android:hint="@string/others"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.othersCount}" />
 
@@ -476,6 +495,9 @@
                                 android:layout_height="wrap_content"
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/medical_checkup"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_30dp"
                                 android:singleLine="true"
@@ -720,7 +742,10 @@
                                     android:hint="@string/screened_by_call_health"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.screenedByCallHealth}" />
 
@@ -752,7 +777,10 @@
                                     android:hint="@string/left_for_screening"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_10dp"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.leftForscreening}" />
 

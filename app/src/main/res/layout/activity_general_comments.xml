@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -656,6 +657,9 @@
                                     android:hint="@string/hm_hwo_date"
                                     android:imeOptions="actionNext"
                                     android:paddingLeft="@dimen/dimen_30dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{comments.hm_hwo_date}" />
 
@@ -695,6 +699,9 @@
                                     android:hint="@string/gcc_date"
                                     android:imeOptions="actionNext"
                                     android:paddingLeft="@dimen/dimen_30dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{comments.gcc_date}" />
 
@@ -776,6 +783,9 @@
                                     android:hint="@string/supplied_date"
                                     android:imeOptions="actionNext"
                                     android:paddingLeft="@dimen/dimen_30dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{comments.supplied_date}" />
 
@@ -940,14 +950,14 @@
                             </RadioGroup>
 
                             <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tv_anaemic_stud_cnt"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tv_anaemic_stud_cnt"
-                                android:visibility="@{comments.stud_found_anemic.equalsIgnoreCase(`Yes`)?View.VISIBLE : View.GONE, default = gone}"
                                 android:layout_marginLeft="@dimen/dimen_5dp"
                                 android:layout_marginTop="@dimen/dimen_10dp"
                                 android:textColorHint="@color/colorAccent"
+                                android:visibility="@{comments.stud_found_anemic.equalsIgnoreCase(`Yes`)?View.VISIBLE : View.GONE, default = gone}"
                                 app:errorEnabled="true">
 
 
@@ -957,10 +967,13 @@
                                     android:layout_height="wrap_content"
                                     android:hint="@string/enter_how_many_out_of_a_total_no"
                                     android:imeOptions="actionNext"
-                                    android:text="@{comments.anemic_stud_cnt}"
-                                    android:paddingLeft="@dimen/dimen_30dp"
                                     android:inputType="number"
-                                    android:singleLine="true" />
+                                    android:paddingLeft="@dimen/dimen_30dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{comments.anemic_stud_cnt}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 

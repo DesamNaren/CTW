@@ -370,14 +370,17 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:maxLength="3"
                             android:id="@+id/et_leaves_availed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/no_of_leaves_availed"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:maxLength="3"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leaves_availed}" />
 
@@ -391,15 +394,18 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:enabled="false"
-                            android:maxLength="3"
                             android:id="@+id/et_leaves_taken"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
                             android:hint="@string/no_of_leaves_taken"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:maxLength="3"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leaves_taken}" />
 
@@ -414,13 +420,16 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:enabled="false"
                             android:id="@+id/et_leave_bal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
                             android:hint="@string/leave_balance"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leaves_bal}" />
 
@@ -445,13 +454,16 @@
                         android:textColorHint="@color/colorAccent">
 
                         <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:maxLength="3"
                             android:id="@+id/last_week"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_week"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:maxLength="3"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.last_week_turn_duties_attended}" />
 
@@ -481,7 +493,10 @@
                             android:layout_height="wrap_content"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                             android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.acad_panel_grade}" />
 

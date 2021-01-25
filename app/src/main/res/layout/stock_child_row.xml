@@ -240,7 +240,10 @@
                             android:id="@+id/phy_ava_qty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"  android:imeOptions="actionNext"
                             android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textSize="18sp" />

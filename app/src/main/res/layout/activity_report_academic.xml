@@ -324,6 +324,10 @@
                             android:focusableInTouchMode="false"
                             android:hint="@string/enter_reason"
                             android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -632,6 +636,10 @@
                                     android:hint="@string/a"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highestClassGradeA}" />
 
@@ -655,6 +663,10 @@
                                     android:hint="@string/b"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highestClassGradeB}" />
 
@@ -678,6 +690,10 @@
                                     android:hint="@string/c"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highestClassGradeC}" />
 
@@ -702,6 +718,10 @@
                                     android:hint="@string/total"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highestClassTotal}" />
 
@@ -726,6 +746,10 @@
                                 android:hint="@string/last_year_ssc_results_percentage"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -840,6 +864,10 @@
                                 android:hint="@string/no_of_classwise_punadi_2_books_required"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.punadiBooksReq}" />
 
@@ -928,6 +956,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.punadiPrgmReason}" />
 
@@ -1017,6 +1049,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.punadi2TestmarksReason}" />
 
@@ -1104,6 +1140,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.karaDipathPrgmCondReason}" />
 
@@ -1323,6 +1363,10 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.labInchargeName}" />
 
@@ -1345,6 +1389,10 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.labMobileNo}" />
 
@@ -1415,6 +1463,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.labMatEnteredRegReason}" />
 
@@ -1514,6 +1566,10 @@
                                     android:hint="@string/no_of_books_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.noOfBooks}" />
 
@@ -1536,6 +1592,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/name_of_the_library_in_charge_teacher"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.nameLibraryIncharge}" />
 
@@ -1558,6 +1618,10 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:maxLength="10"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.libraryMobileNo}" />
 
@@ -1819,6 +1883,10 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/state_the_reason"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.manaTvLessonsReason}" />
 
@@ -1842,6 +1910,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/mana_tv_incharge_teacher_name"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.manaTvInchargeName}" />
 
@@ -1864,6 +1936,10 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:maxLength="10"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.manaTvMobileNo}" />
 
@@ -1964,6 +2040,10 @@
                                     android:hint="@string/number_of_computers_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.noOfComputersAvailable}" />
 
@@ -1984,6 +2064,10 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.compWorkingStatus}" />
 
@@ -2058,6 +2142,10 @@
                                         android:focusableInTouchMode="false"
                                         android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.nameIctInstr}" />
 
@@ -2080,6 +2168,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.mobNoIctInstr}" />
 
@@ -2418,6 +2510,10 @@
                                         android:focusableInTouchMode="false"
                                         android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.volSchoolCoordName}" />
 
@@ -2440,6 +2536,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.volSchoolCoordMobNo}" />
 
@@ -2466,6 +2566,10 @@
                                         android:focusableInTouchMode="false"
                                         android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.eLearningInchargeName}" />
 
@@ -2488,6 +2592,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.eLearningMobNum}" />
 
@@ -2611,6 +2719,10 @@
                                         android:hint="@string/number_of_tabs"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.noOfTabs}" />
 
@@ -2677,6 +2789,10 @@
                                         android:focusableInTouchMode="false"
                                         android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.tabInchargeName}" />
 
@@ -2699,6 +2815,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.tabInchargeMblno}" />
 

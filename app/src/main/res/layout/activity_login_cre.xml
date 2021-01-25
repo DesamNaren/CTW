@@ -31,9 +31,9 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/constraint"
             android:layout_centerInParent="true">
 
             <RelativeLayout
@@ -132,71 +132,71 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="0dp"
+                            android:layout_marginTop="@dimen/dimen_20dp"
+                            android:layout_marginBottom="@dimen/dimen_20dp"
                             android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/t_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/dimen_20dp"
-                                android:layout_marginTop="@dimen/dimen_50dp"
-                                android:layout_marginRight="@dimen/dimen_20dp"
-                                android:textColorHint="@color/black"
-                                app:errorEnabled="true">
+                                android:textColorHint="@color/light_gray"
+                                app:boxStrokeColor="@color/light_gray"
+                                app:errorEnabled="false"
+                                app:errorTextAppearance="@style/text_in_layout_error_hint_Style"
+                                app:hintTextAppearance="@style/text_in_layout_hint_Style"
+                                app:hintTextColor="@color/light_gray">
 
-
-                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/et_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:background="@color/white"
+                                    android:drawablePadding="25dp"
+                                    android:ems="10"
                                     android:hint="@string/enter_user_name"
                                     android:imeOptions="actionNext"
+                                    android:maxLength="40"
                                     android:singleLine="true"
                                     android:text="@={viewModel.username}"
+                                    android:textAllCaps="true"
                                     android:textColor="@color/black"
-                                    android:textSize="16sp" />
-
+                                    android:textSize="@dimen/dimen_16sp" />
                             </com.google.android.material.textfield.TextInputLayout>
 
-
-                            <RelativeLayout
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/t_pwd"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:textColorHint="@color/light_gray"
+                                app:boxStrokeColor="@color/light_gray"
+                                app:errorEnabled="false"
+                                app:errorTextAppearance="@style/text_in_layout_error_hint_Style"
+                                app:hintTextAppearance="@style/text_in_layout_hint_Style"
+                                app:hintTextColor="@color/light_gray"
+                                app:passwordToggleEnabled="true">
 
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/t_pwd"
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/et_pwd"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/dimen_20dp"
-                                    android:layout_marginRight="@dimen/dimen_20dp"
-                                    android:textColorHint="@color/black"
-                                    app:errorEnabled="true">
-
-                                    <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                        android:id="@+id/et_pwd"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:hint="@string/enter_pwd"
-                                        android:imeOptions="actionDone"
-                                        android:inputType="textPassword"
-                                        android:singleLine="true"
-                                        android:text="@={viewModel.password}"
-                                        android:textColor="@color/black"
-                                        android:textSize="16sp" />
-                                </com.google.android.material.textfield.TextInputLayout>
-
-                                <ImageView
-                                    android:id="@+id/pwdImage"
-                                    android:layout_width="@dimen/dimen_20dp"
-                                    android:layout_height="@dimen/dimen_20dp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginRight="@dimen/dimen_20dp"
-                                    android:background="@drawable/pwd_hide"
-                                    android:onClick="@{()-> viewModel.onViewPwd()}" />
-
-                            </RelativeLayout>
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:background="@color/white"
+                                    android:drawablePadding="20dp"
+                                    android:ems="10"
+                                    android:hint="@string/enter_pwd"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="textPassword"
+                                    android:singleLine="true"
+                                    android:text="@={viewModel.password}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_16sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
 
                             <FrameLayout
@@ -241,7 +241,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/cover"
                 app:layout_constraintVertical_bias="0.5"
-                app:layout_constraintVertical_weight="0.5" >
+                app:layout_constraintVertical_weight="0.5">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_profile_photo"
                     android:layout_width="100dp"

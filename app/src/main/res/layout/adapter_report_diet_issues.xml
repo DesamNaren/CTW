@@ -23,26 +23,28 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dimen_5dp"
-                android:text="@{dietIssues.itemName}"
-                android:id="@+id/header"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dimen_5dp"
+                    android:text="@{dietIssues.itemName}"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_8dp">
@@ -53,23 +55,32 @@
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="false"
                     android:hint="@string/a_book_balance"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_10dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_8dp">
 
 
                 <com.cgg.twdinspection.common.custom.CustomFontEditText
+                    android:id="@+id/ground_bal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/b_ground_balance"
-                    android:id="@+id/ground_bal"
                     android:focusableInTouchMode="false"
-                    android:inputType="numberDecimal" />
+                    android:hint="@string/b_ground_balance"
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="@dimen/dimen_5dp"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:paddingRight="@dimen/dimen_5dp"
+                    android:paddingBottom="@dimen/dimen_10dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -147,7 +147,7 @@
                                 android:id="@+id/btn_dmv"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -199,7 +199,7 @@
                                 android:id="@+id/syncBtnYears"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -258,7 +258,7 @@
                                 android:id="@+id/btn_instInsp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -306,7 +306,7 @@
                                 android:id="@+id/sync_ll_schemes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />

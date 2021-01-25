@@ -11,9 +11,9 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/root_layout"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -44,6 +44,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -54,7 +55,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Student Name"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +73,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -78,7 +84,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Class"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,6 +102,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -102,7 +113,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Reason"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,6 +132,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -127,7 +143,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Hospital Name"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,6 +162,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -152,7 +173,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Accompanied Name"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,6 +192,7 @@
 
 
                         <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dimen_8dp">
@@ -177,7 +203,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Accompanied Designation"
-                                android:inputType="text" />
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,6 +259,9 @@
                                     android:hint="Admitted Date"
                                     android:imeOptions="actionNext"
                                     android:paddingLeft="@dimen/dimen_30dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@string/select_date" />
 
@@ -241,8 +274,8 @@
 
                     <include
                         android:id="@+id/btn_layout"
-                        android:visibility="gone"
-                        layout="@layout/buttons_layout" />
+                        layout="@layout/buttons_layout"
+                        android:visibility="gone" />
 
                 </LinearLayout>
             </LinearLayout>

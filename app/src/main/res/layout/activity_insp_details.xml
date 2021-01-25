@@ -3,7 +3,8 @@
 
     <data>
 
-        <import type="android.text.TextUtils"/>
+        <import type="android.text.TextUtils" />
+
         <variable
             name="viewModel"
             type="com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
@@ -243,6 +244,10 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/specify"
                             android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -659,6 +664,10 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/stage_of_work_for_in_progress_works"
                             android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -699,11 +708,11 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_finProgRat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ll_finProgRat"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="0dp"
@@ -724,6 +733,7 @@
 
 
                     </LinearLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tv_fin_progress_others"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -737,10 +747,14 @@
                             android:id="@+id/et_fin_progress_others"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:maxLength="5"
                             android:hint="@string/of_financial_progress_achieved"
                             android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLength="5"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -965,7 +979,10 @@
                             android:layout_height="wrap_content"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                             android:imeOptions="actionNext"
-                            android:paddingLeft="@dimen/dimen_10dp" />
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

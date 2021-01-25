@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginEnd="10dp"
     android:layout_marginStart="10dp"
     android:orientation="vertical">
@@ -52,6 +53,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/Ok"
+            app:backgroundTint="@color/green"
             android:paddingStart="10dp"
             android:textColor="@color/white"
             android:visibility="visible" />

@@ -31,7 +31,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontEditText;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivityGccFindingsBinding;
+import com.cgg.twdinspection.databinding.ActivityDrGodownFindingsBinding;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
@@ -60,7 +60,7 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 public class DRGodownFindingsActivity extends LocBaseActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    ActivityGccFindingsBinding binding;
+    ActivityDrGodownFindingsBinding binding;
     String PIC_NAME, PIC_TYPE;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
@@ -84,7 +84,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_findings);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown_findings);
         binding.header.headerTitle.setText(getString(R.string.dr_godown_ins_off_fin));
         binding.header.ivHome.setVisibility(View.GONE);
         binding.bottomLl.btnNext.setText(getString(R.string.saveandnext));

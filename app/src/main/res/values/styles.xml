@@ -1,7 +1,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,7 +11,7 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="Light_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Light_AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -96,4 +96,14 @@
     <style name="Theme.Navigation.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Navigation.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="text_in_layout_hint_Style" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/dimen_16sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="text_in_layout_error_hint_Style">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/dimen_16sp</item>
+    </style>
 </resources>

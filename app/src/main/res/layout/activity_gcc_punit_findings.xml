@@ -20,9 +20,9 @@
 
 
         <ScrollView
-            android:layout_above="@id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_ll"
             android:layout_below="@+id/header">
 
             <LinearLayout
@@ -194,7 +194,11 @@
                                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
-                                    android:inputType="textMultiLine" />
+                                    android:inputType="textMultiLine"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp" />
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -231,13 +235,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10dp"
                     android:background="@color/white"
                     android:elevation="@dimen/dimen_10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -299,9 +303,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_stock"/>
+                                android:id="@+id/remarks_stock"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
 
@@ -339,9 +344,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_processing"/>
+                                android:id="@+id/remarks_processing"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -378,9 +384,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_inward"/>
+                                android:id="@+id/remarks_inward"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -417,9 +424,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_outward"/>
+                                android:id="@+id/remarks_outward"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -456,9 +464,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_sale_inv"/>
+                                android:id="@+id/remarks_sale_inv"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -495,9 +504,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_lab_att"/>
+                                android:id="@+id/remarks_lab_att"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
 
@@ -558,6 +568,10 @@
                                         android:layout_height="wrap_content"
                                         android:hint="@string/com_name"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -576,10 +590,10 @@
                                         android:backgroundTint="@color/colorPrimary" />
 
                                     <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/ins_val_date"
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/ins_val_date"
                                         android:layout_marginLeft="@dimen/dimen_5dp"
                                         android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
@@ -593,6 +607,9 @@
                                             android:hint="Insurance Validity"
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
+                                            android:paddingTop="@dimen/dimen_10dp"
+                                            android:paddingRight="@dimen/dimen_5dp"
+                                            android:paddingBottom="@dimen/dimen_10dp"
                                             android:singleLine="true" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -638,9 +655,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_fire_noc"/>
+                                android:id="@+id/remarks_fire_noc"
+                                layout="@layout/reamrks_layout" />
 
                         </LinearLayout>
 
@@ -701,12 +719,12 @@
                                         android:backgroundTint="@color/colorPrimary" />
 
                                     <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/legal_met_val"
                                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="@dimen/dimen_5dp"
                                         android:layout_marginTop="@dimen/dimen_5dp"
-                                        android:id="@+id/legal_met_val"
                                         android:textColorHint="@color/colorAccent"
                                         app:errorEnabled="true">
 
@@ -719,6 +737,9 @@
                                             android:hint="Certificate validity"
                                             android:imeOptions="actionNext"
                                             android:paddingLeft="@dimen/dimen_30dp"
+                                            android:paddingTop="@dimen/dimen_10dp"
+                                            android:paddingRight="@dimen/dimen_5dp"
+                                            android:paddingBottom="@dimen/dimen_10dp"
                                             android:singleLine="true" />
 
                                     </com.google.android.material.textfield.TextInputLayout>
@@ -761,9 +782,10 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_amc"/>
+                                    android:id="@+id/remarks_amc"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -800,9 +822,10 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_agmark"/>
+                                    android:id="@+id/remarks_agmark"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -839,9 +862,10 @@
                                         android:text="@string/no" />
 
                                 </RadioGroup>
+
                                 <include
-                                    layout="@layout/reamrks_layout"
-                                    android:id="@+id/remarks_fsaai"/>
+                                    android:id="@+id/remarks_fsaai"
+                                    layout="@layout/reamrks_layout" />
                             </LinearLayout>
 
 
@@ -881,9 +905,10 @@
                                     android:text="@string/no" />
 
                             </RadioGroup>
+
                             <include
-                                layout="@layout/reamrks_layout"
-                                android:id="@+id/remarks_empties"/>
+                                android:id="@+id/remarks_empties"
+                                layout="@layout/reamrks_layout" />
                         </LinearLayout>
 
 
@@ -923,10 +948,12 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_barrels"/>
+                            android:id="@+id/remarks_barrels"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -961,9 +988,10 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_cash_book"/>
+                            android:id="@+id/remarks_cash_book"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -1000,9 +1028,10 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_cash_bank"/>
+                            android:id="@+id/remarks_cash_bank"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -1039,9 +1068,10 @@
                                 android:text="@string/no" />
 
                         </RadioGroup>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks_veh_log"/>
+                            android:id="@+id/remarks_veh_log"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1191,32 +1221,31 @@
                             </RadioGroup>
 
                         </LinearLayout>
+
                         <include
-                            layout="@layout/reamrks_layout"
-                            android:id="@+id/remarks"/>
+                            android:id="@+id/remarks"
+                            layout="@layout/reamrks_layout" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
 
-
-
-
         </ScrollView>
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom_ll"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
-            layout="@layout/buttons_layout"
-            android:id="@+id/bottom_ll" />
+            android:id="@+id/bottom_ll"
+            layout="@layout/buttons_layout" />
 
     </RelativeLayout>
 </layout>

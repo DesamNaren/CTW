@@ -412,7 +412,10 @@
                             android:hint="@string/no_of_leaves_availed"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@={staff.leavesAvailed}" />
 
@@ -434,7 +437,10 @@
                             android:hint="@string/no_of_leaves_taken"
                             android:imeOptions="actionNext"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leavesTaken}" />
 
@@ -456,7 +462,10 @@
                             android:focusableInTouchMode="false"
                             android:hint="@string/leave_balance"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leavesBal}" />
 
@@ -488,7 +497,10 @@
                             android:focusableInTouchMode="false"
                             android:hint="@string/last_week"
                             android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.lastWeekTeacherAttended}" />
 
@@ -519,7 +531,10 @@
                             android:enabled="false"
                             android:focusableInTouchMode="false"
                             android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:paddingLeft="@dimen/dimen_10dp"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.acadPanelGrade}" />
 

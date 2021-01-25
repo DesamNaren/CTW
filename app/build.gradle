@@ -77,7 +77,7 @@ android {
             buildConfigField("String", "SERVER_URL", "\"http://uat2.cgg.gov.in/InspectionAppServices/\"")
             buildConfigField("String", "SCHEME_SERVER_URL", "\"http://uat4.cgg.gov.in/TSOBMMSWebServices/\"")
             buildConfigField("String", "GCC_SERVER_URL", "\"http://uat7.cgg.gov.in/gccfms/webservice/gcc/\"")
-            versionNameSuffix ".1"
+            versionNameSuffix ".0"
             signingConfig signingConfigs.release
             debuggable true
         }

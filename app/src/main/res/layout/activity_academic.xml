@@ -290,7 +290,6 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/t_name"
-
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -305,7 +304,11 @@
                             android:layout_height="wrap_content"
                             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                             android:hint="@string/enter_reason"
-                            android:imeOptions="actionNext" />
+                            android:imeOptions="actionNext"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -594,6 +597,10 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="3"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeA}" />
 
@@ -618,6 +625,10 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="3"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeB}" />
 
@@ -642,6 +653,10 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="3"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_gradeC}" />
 
@@ -667,6 +682,10 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="3"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.highest_class_total}" />
 
@@ -703,6 +722,10 @@
                                 android:imeOptions="actionNext"
                                 android:inputType="numberDecimal"
                                 android:maxLength="5"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.last_yr_ssc_percent}" />
 
@@ -808,6 +831,10 @@
                                 android:hint="@string/no_of_classwise_punadi_2_books_required"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.punadi_books_req}" />
 
@@ -892,6 +919,10 @@
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:text="@={inspData.punadiPrgmReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -974,10 +1005,13 @@
                                 android:id="@+id/et_punadi2_testmarks_reason"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:text="@={inspData.punadi2TestmarksReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1061,6 +1095,10 @@
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:text="@={inspData.karaDipathPrgmCondReason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1268,6 +1306,10 @@
                                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/name_of_the_science_lab_in_charge_teacher"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.labInchargeName}" />
 
@@ -1286,11 +1328,14 @@
                                     android:id="@+id/et_lab_mobileNo"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
                                     android:hint="@string/mobile_number"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:maxLength="10"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.labMobileNo}" />
 
@@ -1358,6 +1403,10 @@
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:text="@={inspData.lab_mat_entered_reg_reason}" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1452,6 +1501,10 @@
                                     android:hint="@string/no_of_books_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.noOfBooks}" />
 
@@ -1475,6 +1528,10 @@
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/name_of_the_library_in_charge_teacher"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.nameLibraryIncharge}" />
 
@@ -1493,11 +1550,14 @@
                                 android:id="@+id/et_library_mobileNo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:hint="@string/mobile_number"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:maxLength="10"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.libraryMobileNo}" />
 
@@ -1744,6 +1804,10 @@
                                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/state_the_reason"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:text="@{inspData.manaTvLessonsReason}" />
 
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1767,6 +1831,10 @@
                                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                 android:hint="@string/mana_tv_incharge_teacher_name"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.manaTvInchargeName}" />
 
@@ -1785,11 +1853,14 @@
                                 android:id="@+id/et_mana_tv_mobileNo"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:hint="@string/mobile_number"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
                                 android:maxLength="10"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.manaTvMobileNo}" />
 
@@ -1883,11 +1954,13 @@
                                     android:id="@+id/et_no_of_computers_available"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-
-
                                     android:hint="@string/number_of_computers_available"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.noOfComputersAvailable}" />
 
@@ -1909,6 +1982,10 @@
                                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                     android:hint="@string/working_status_of_computer"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@={inspData.compWorkingStatus}" />
 
@@ -1980,6 +2057,10 @@
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/name_of_the_ict_instructor"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.nameIctInstr}" />
 
@@ -2002,6 +2083,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.mobNoIctInstr}" />
 
@@ -2317,6 +2402,10 @@
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/name_of_the_voluntary_school_coordinator"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.volSchoolCoordName}" />
 
@@ -2335,11 +2424,14 @@
                                         android:id="@+id/et_vol_school_coord_mob_no"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.volSchoolCoordMobNo}" />
 
@@ -2367,6 +2459,10 @@
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/name_of_the_e_learning_classes_incharge_teacher"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.eLearningInchargeName}" />
 
@@ -2385,11 +2481,14 @@
                                         android:id="@+id/et_eLearning_inchrg_mobileNo"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-
                                         android:hint="@string/mobile_number"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.eLearningMobNum}" />
 
@@ -2502,10 +2601,13 @@
                                         android:id="@+id/et_no_of_tabs"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-
                                         android:hint="@string/number_of_tabs"
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.noOfTabs}" />
 
@@ -2569,6 +2671,10 @@
                                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
                                         android:hint="@string/name_of_the_tab_in_charge"
                                         android:imeOptions="actionNext"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.tabInchargeName}" />
 
@@ -2591,6 +2697,10 @@
                                         android:imeOptions="actionNext"
                                         android:inputType="number"
                                         android:maxLength="10"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@={inspData.tabInchargeMblno}" />
 

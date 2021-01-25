@@ -124,7 +124,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/division"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_10dp" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -143,7 +143,7 @@
                                 android:id="@+id/btn_division"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -183,7 +183,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_dr_godown"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_10dp" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -197,7 +197,7 @@
                                 android:id="@+id/btn_dr_godown"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -232,7 +232,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_dr_depot"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_10dp" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -246,7 +246,7 @@
                                 android:id="@+id/btn_dr_depot"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -289,7 +289,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_mfp_godown"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_10dp" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -303,7 +303,7 @@
                                 android:id="@+id/btn_mfp_godown"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -338,7 +338,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_p_unit"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_20dp"
                                     android:paddingBottom="@dimen/dimen_10dp" />
 
@@ -353,7 +353,7 @@
                                 android:id="@+id/btn_p_unit"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -396,7 +396,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_petrol"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_10dp" />
 
                                 <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -410,7 +410,7 @@
                                 android:id="@+id/btn_petrol_pump"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />
@@ -444,7 +444,7 @@
                                     android:layout_height="@dimen/dimen_50dp"
                                     android:layout_margin="@dimen/dimen_20dp"
                                     android:background="@drawable/gcc_lpg"
-                                    android:backgroundTint="@color/white"
+                                    app:backgroundTint="@color/white"
                                     android:padding="@dimen/dimen_20dp"
                                     android:paddingBottom="@dimen/dimen_10dp" />
 
@@ -459,7 +459,7 @@
                                 android:id="@+id/btn_lpg"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
+                                app:backgroundTint="@color/white"
                                 android:text="Download"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black" />

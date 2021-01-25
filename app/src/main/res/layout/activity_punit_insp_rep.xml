@@ -1605,6 +1605,10 @@
                                         android:hint="@string/reason"
                                         android:imeOptions="actionNext"
                                         android:inputType="textMultiLine"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:text="@{pUnit.stockDetails.deficitReason}" />
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -2010,6 +2014,10 @@
                                                 android:layout_height="wrap_content"
                                                 android:hint="@string/com_name"
                                                 android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_5dp"
+                                                android:paddingTop="@dimen/dimen_10dp"
+                                                android:paddingRight="@dimen/dimen_5dp"
+                                                android:paddingBottom="@dimen/dimen_10dp"
                                                 android:singleLine="true"
                                                 android:text="@{pUnit.registerBookCertificates.insCompName}"
                                                 android:textColor="@color/black" />
@@ -2047,6 +2055,9 @@
                                                     android:hint="Insurance validity"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{pUnit.registerBookCertificates.insValidity}"
                                                     android:textColor="@color/black" />
@@ -2183,6 +2194,9 @@
                                                     android:hint="Certificate validity"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{pUnit.registerBookCertificates.weightMeasureValidityType}"
                                                     android:textColor="@color/black" />

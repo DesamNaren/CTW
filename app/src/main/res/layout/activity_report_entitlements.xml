@@ -608,6 +608,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.sanitaryNapkinsReason}" />
 
@@ -753,6 +757,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/reason"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.notesReason}" />
 
@@ -865,6 +873,9 @@
                                         android:hint="@string/entitlements_cosmetics_upto_month"
                                         android:imeOptions="actionNext"
                                         android:paddingLeft="@dimen/dimen_30dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:singleLine="true"
                                         android:text="@{inspData.cosmeticDistributedUptoMonth}" />
 
@@ -896,6 +907,10 @@
                                     android:focusableInTouchMode="false"
                                     android:hint="@string/reason"
                                     android:imeOptions="actionNext"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.cosmeticReason}" />
 
@@ -945,7 +960,10 @@
                                 android:hint="@string/entitlements_dress_distributed"
                                 android:imeOptions="actionNext"
                                 android:inputType="number"
-                                android:paddingLeft="@dimen/dimen_10dp"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@={inspData.pairOfDressDistributedCount}" />
 
@@ -1128,6 +1146,9 @@
                                 android:hint="@string/entitlements_haircut_date"
                                 android:imeOptions="actionNext"
                                 android:paddingLeft="@dimen/dimen_30dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{inspData.lastHaircutDate}" />
 

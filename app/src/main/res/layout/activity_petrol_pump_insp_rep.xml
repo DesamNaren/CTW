@@ -1519,6 +1519,10 @@
                                         android:hint="@string/reason"
                                         android:imeOptions="actionNext"
                                         android:inputType="textMultiLine"
+                                        android:paddingLeft="@dimen/dimen_5dp"
+                                        android:paddingTop="@dimen/dimen_10dp"
+                                        android:paddingRight="@dimen/dimen_5dp"
+                                        android:paddingBottom="@dimen/dimen_10dp"
                                         android:text="@{inspData.stockDetails.deficitReason}"
                                         android:textColor="@color/black" />
 
@@ -1959,6 +1963,10 @@
                                                 android:enabled="false"
                                                 android:hint="Company Name"
                                                 android:imeOptions="actionNext"
+                                                android:paddingLeft="@dimen/dimen_5dp"
+                                                android:paddingTop="@dimen/dimen_10dp"
+                                                android:paddingRight="@dimen/dimen_5dp"
+                                                android:paddingBottom="@dimen/dimen_10dp"
                                                 android:singleLine="true"
                                                 android:text="@{inspData.registerBookCertificates.insuranceCompany}"
                                                 android:textColor="@color/black" />
@@ -1996,6 +2004,9 @@
                                                     android:hint="Insurance Validity"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{inspData.registerBookCertificates.insuranceValidity}"
                                                     android:textColor="@color/black" />
@@ -2129,6 +2140,9 @@
                                                     android:hint="Certificate Validity"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{inspData.registerBookCertificates.weightMeasureValidity}"
                                                     android:textColor="@color/black" />
@@ -2421,6 +2435,9 @@
                                                     android:hint="Last Inspection Date"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{inspData.generalFindings.societyManagerInspectionDate}"
                                                     android:textColor="@color/black" />
@@ -2510,6 +2527,9 @@
                                                     android:hint="Last Inspection Date"
                                                     android:imeOptions="actionNext"
                                                     android:paddingLeft="@dimen/dimen_30dp"
+                                                    android:paddingTop="@dimen/dimen_10dp"
+                                                    android:paddingRight="@dimen/dimen_5dp"
+                                                    android:paddingBottom="@dimen/dimen_10dp"
                                                     android:singleLine="true"
                                                     android:text="@{inspData.generalFindings.divisionManagerInspectionDate}"
                                                     android:textColor="@color/black" />
@@ -2587,6 +2607,10 @@
                                                 android:hint="@string/repair_type"
                                                 android:imeOptions="actionNext"
                                                 android:inputType="textMultiLine"
+                                                android:paddingLeft="@dimen/dimen_5dp"
+                                                android:paddingTop="@dimen/dimen_10dp"
+                                                android:paddingRight="@dimen/dimen_5dp"
+                                                android:paddingBottom="@dimen/dimen_10dp"
                                                 android:text="@{inspData.generalFindings.repairsType}"
                                                 android:textColor="@color/black" />
 
@@ -2634,6 +2658,10 @@
                                             android:hint="Remarks of Inspection officer"
                                             android:imeOptions="actionNext"
                                             android:inputType="textMultiLine"
+                                            android:paddingLeft="@dimen/dimen_5dp"
+                                            android:paddingTop="@dimen/dimen_10dp"
+                                            android:paddingRight="@dimen/dimen_5dp"
+                                            android:paddingBottom="@dimen/dimen_10dp"
                                             android:text="@{inspData.generalFindings.remarks}"
                                             android:textColor="@color/black" />
 

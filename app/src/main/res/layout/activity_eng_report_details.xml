@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.text.TextUtils"/>
+
+        <import type="android.text.TextUtils" />
+
         <import type="android.view.View" />
 
         <variable
@@ -1558,6 +1560,10 @@
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/specify"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{workDetails.sectorOtherValue}" />
 
@@ -1983,6 +1989,10 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/stage_of_work_for_in_progress_works"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -2410,6 +2420,10 @@
                                 android:clickable="false"
                                 android:focusableInTouchMode="false"
                                 android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_5dp"
+                                android:paddingTop="@dimen/dimen_10dp"
+                                android:paddingRight="@dimen/dimen_5dp"
+                                android:paddingBottom="@dimen/dimen_10dp"
                                 android:singleLine="true"
                                 android:text="@{workDetails.observation}" />
 
