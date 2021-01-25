@@ -110,7 +110,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
         binding.appbar.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InstMenuMainActivity.this, DashboardActivity.class)
+                startActivity(new Intent(InstMenuMainActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             }
@@ -648,7 +648,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 finish();
             } else {
 
-                startActivity(new Intent(this, DashboardActivity.class)
+                startActivity(new Intent(this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 finish();
             }

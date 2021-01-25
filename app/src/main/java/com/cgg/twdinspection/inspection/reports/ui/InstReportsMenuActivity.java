@@ -34,7 +34,7 @@ import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.gson.Gson;
 import com.itextpdf.text.BadElementException;
@@ -209,7 +209,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InstReportsMenuActivity.this, DashboardActivity.class)
+                startActivity(new Intent(InstReportsMenuActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

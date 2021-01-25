@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cgg.twdinspection">
+    package="com.cgg.twdinspection" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -20,9 +20,14 @@
         android:roundIcon="@drawable/ctw_icon_latest"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".inspection.ui.DashboardMenuActivity"
+            android:label="@string/title_activity_dashboard_menu"
+            android:theme="@style/Theme.Navigation.NoActionBar" >
+
+        </activity>
         <activity android:name=".engineering_works.reports.ui.EngPDFActivity" />
-        <activity android:name=".engineering_works.adapters.EngWorksAdapter" />
         <activity
             android:name=".engineering_works.ui.EngSyncActivity"
             android:screenOrientation="portrait" />
@@ -94,7 +99,7 @@
             android:name=".schemes.ui.BeneficiaryReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Light_AppTheme"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -116,7 +121,7 @@
         <activity
             android:name=".inspection.ui.SplashActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -400,7 +405,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />

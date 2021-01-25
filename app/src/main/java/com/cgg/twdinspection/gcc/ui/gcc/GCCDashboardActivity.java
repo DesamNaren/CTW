@@ -19,7 +19,7 @@ import com.cgg.twdinspection.gcc.ui.lpg.LPGSelActivity;
 import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
 import com.cgg.twdinspection.gcc.ui.punit.PUnitSelActivity;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 
 public class GCCDashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
@@ -40,7 +40,7 @@ public class GCCDashboardActivity extends AppCompatActivity {
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GCCDashboardActivity.this, DashboardActivity.class)
+                startActivity(new Intent(GCCDashboardActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

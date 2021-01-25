@@ -15,7 +15,7 @@ public interface WorksDao {
     @Insert
     void insertWorks(List<WorkDetail> workDetails);
 
-    @Query("SELECT * from workdetail where distId LIKE :distId AND mandId LIKE :mandalId")
+    @Query("SELECT * from workdetail where distId LIKE :distId AND mandId LIKE :mandalId AND is_sanctioned LIKE 'Y'")
     LiveData<List<WorkDetail>> getWorkDetails(String distId,String mandalId);
 
     @Query("SELECT COUNT(*) FROM workdetail")

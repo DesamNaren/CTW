@@ -21,7 +21,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMfpGodownSelBinding;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -58,7 +58,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MFPGoDownSelActivity.this, DashboardActivity.class)
+                startActivity(new Intent(MFPGoDownSelActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

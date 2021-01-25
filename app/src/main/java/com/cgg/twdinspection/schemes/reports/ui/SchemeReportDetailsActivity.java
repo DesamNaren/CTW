@@ -22,7 +22,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityReportSchemeDetailsActivtyBinding;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.schemes.reports.source.SchemeReportData;
 import com.google.gson.Gson;
 import com.itextpdf.text.BaseColor;
@@ -81,7 +81,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SchemeReportDetailsActivity.this, DashboardActivity.class)
+                startActivity(new Intent(SchemeReportDetailsActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

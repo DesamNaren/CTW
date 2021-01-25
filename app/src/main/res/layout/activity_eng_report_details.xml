@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.text.TextUtils"/>
         <import type="android.view.View" />
 
         <variable
@@ -145,7 +145,7 @@
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:layout_weight="1"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="@={workDetails.workId}"
+                                    android:text='@{TextUtils.isEmpty(workDetails.workId)? "-" : workDetails.workId}'
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -178,7 +178,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.areaOfOperation}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.areaOfOperation)? "-" : workDetails.areaOfOperation}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -206,7 +206,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.distName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.distName)? "-" : workDetails.distName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -234,7 +234,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.mandName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.mandName)? "-" : workDetails.mandName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -261,7 +261,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.gpName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.gpName)? "-" : workDetails.gpName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -289,7 +289,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.villName}"
+                                        android:text='@{(TextUtils.isEmpty(workDetails.villName)||workDetails.villName.equalsIgnoreCase(" "))? "-" : workDetails.villName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -317,7 +317,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.assemblyConstName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.assemblyConstName)? "-" : workDetails.assemblyConstName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -352,7 +352,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{workDetails.sectorName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.sectorName)? "-" : workDetails.sectorName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -381,7 +381,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{workDetails.sectorOtherValue}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.sectorOtherValue)? "-" : workDetails.sectorOtherValue}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -409,7 +409,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.workName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.workName)? "-" : workDetails.workName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -437,7 +437,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.estimateCost}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.estimateCost)? "-" : workDetails.estimateCost}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -465,7 +465,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{workDetails.schemeName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.schemeName)? "-" : workDetails.schemeName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -493,7 +493,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.exectingAgency}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.exectingAgency)? "-" : workDetails.exectingAgency}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -521,7 +521,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.sanctionDate}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.sanctionDate)? "-" : workDetails.sanctionDate}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -549,7 +549,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.techSanctionDate}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.techSanctionDate)? "-" : workDetails.techSanctionDate}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -577,7 +577,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.commenceDate}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.commenceDate)? "-" : workDetails.commenceDate}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -605,7 +605,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.targetDate}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.targetDate)? "-" : workDetails.targetDate}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -633,7 +633,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.extensionTime}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.extensionTime)? "-" : workDetails.extensionTime}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -668,7 +668,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.staffDeptName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.staffDeptName)? "-" : workDetails.staffDeptName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -696,7 +696,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.staffMandalName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.staffMandalName)? "-" : workDetails.staffMandalName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -724,7 +724,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.staffEe}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.staffEe)? "-" : workDetails.staffEe}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -752,7 +752,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.staffDyee}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.staffDyee)? "-" : workDetails.staffDyee}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -780,7 +780,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.staffAee}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.staffAee)? "-" : workDetails.staffAee}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -815,7 +815,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{workDetails.stageOfWork}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.stageOfWork)? "-" : workDetails.stageOfWork}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -842,7 +842,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{workDetails.workInProgName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.workInProgName)? "-" : workDetails.workInProgName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -853,8 +853,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:visibility="@{workDetails.sectorName.equalsIgnoreCase(`Others`)?View.GONE:View.VISIBLE, default=gone}">
+                                android:orientation="vertical">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -877,7 +876,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.actExpIncurred}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.actExpIncurred)? "-" : workDetails.actExpIncurred}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -905,7 +904,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.finProgressAchieved}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.finProgressAchieved)? "-" : workDetails.finProgressAchieved}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -963,7 +962,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.inspectionTime}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.inspectionTime)? "-" : workDetails.inspectionTime}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -991,7 +990,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.officerName}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.officerName)? "-" : workDetails.officerName}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1019,7 +1018,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.designation}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.designation)? "-" : workDetails.designation}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1047,7 +1046,7 @@
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:layout_weight="1"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@={workDetails.placeOfWork}"
+                                        android:text='@{TextUtils.isEmpty(workDetails.placeOfWork)? "-" : workDetails.placeOfWork}'
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1997,8 +1996,7 @@
                         android:background="@color/white"
                         android:elevation="@dimen/dimen_10dp"
                         android:orientation="vertical"
-                        android:padding="@dimen/dimen_5dp"
-                        android:visibility="@{workDetails.sectorName.equalsIgnoreCase(`Others`)?View.GONE:View.VISIBLE, default=gone}">
+                        android:padding="@dimen/dimen_5dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"

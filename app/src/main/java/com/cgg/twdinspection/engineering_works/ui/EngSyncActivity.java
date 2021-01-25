@@ -29,7 +29,7 @@ import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngSyncViewModel;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -61,7 +61,7 @@ public class EngSyncActivity extends AppCompatActivity implements EngSyncInterfa
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EngSyncActivity.this, DashboardActivity.class)
+                startActivity(new Intent(EngSyncActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

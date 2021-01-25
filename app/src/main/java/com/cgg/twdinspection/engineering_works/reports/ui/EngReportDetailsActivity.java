@@ -22,7 +22,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityEngReportDetailsBinding;
 import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
 import com.cgg.twdinspection.gcc.reports.adapter.ViewPhotoAdapterPdf;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.google.gson.Gson;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
@@ -65,7 +65,7 @@ public class EngReportDetailsActivity extends AppCompatActivity implements PDFUt
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EngReportDetailsActivity.this, DashboardActivity.class)
+                startActivity(new Intent(EngReportDetailsActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

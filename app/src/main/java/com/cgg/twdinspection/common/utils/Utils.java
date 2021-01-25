@@ -47,9 +47,10 @@ import com.cgg.twdinspection.BuildConfig;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
+import com.cgg.twdinspection.engineering_works.ui.EngSyncActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.cgg.twdinspection.inspection.ui.LoginActivity;
 import com.cgg.twdinspection.inspection.ui.QuitAppActivity;
@@ -427,7 +428,7 @@ public class Utils {
                         editor.commit();
                         instMainViewModel.deleteAllInspectionData();
 
-                        Intent newIntent = new Intent(activity, DashboardActivity.class);
+                        Intent newIntent = new Intent(activity, DashboardMenuActivity.class);
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(newIntent);
@@ -733,7 +734,7 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        activity.startActivity(new Intent(activity, DashboardActivity.class)
+                        activity.startActivity(new Intent(activity, DashboardMenuActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
@@ -879,6 +880,44 @@ public class Utils {
                     public void onClick(View v) {
                         dialog.dismiss();
                         activity.startActivity(new Intent(activity, GCCSyncActivity.class));
+                        activity.finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void customEngSyncAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_sync);
+
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button yes = dialog.findViewById(R.id.btDialogYes);
+                Button no = dialog.findViewById(R.id.btDialogNo);
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        activity.finish();
+                        dialog.dismiss();
+                    }
+                });
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        activity.startActivity(new Intent(activity, EngSyncActivity.class));
                         activity.finish();
                     }
                 });

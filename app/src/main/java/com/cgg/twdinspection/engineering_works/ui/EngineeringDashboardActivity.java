@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,10 +37,13 @@ import com.cgg.twdinspection.databinding.ActivityEngDashboardBinding;
 import com.cgg.twdinspection.engineering_works.adapters.EngWorksAdapter;
 import com.cgg.twdinspection.engineering_works.reports.adapters.EngReportAdapter;
 import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
+import com.cgg.twdinspection.engineering_works.source.GrantScheme;
+import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel;
+import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -53,15 +57,16 @@ import java.util.List;
 
 public class EngineeringDashboardActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
-    ActivityEngDashboardBinding binding;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    EngDashboardViewModel viewModel;
-    CustomProgressDialog customProgressDialog;
-    String selDistId, selDistName, selMandId, selMandalName;
+    private ActivityEngDashboardBinding binding;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private EngDashboardViewModel viewModel;
+    private CustomProgressDialog customProgressDialog;
+    private String selDistId, selDistName, selMandId, selMandalName;
     private Menu mMenu = null;
-    SearchView mSearchView;
-    EngWorksAdapter adapter;
+    private SearchView mSearchView;
+    private EngWorksAdapter adapter;
+    private InspDetailsViewModel inspDetailsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +134,31 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(EngineeringDashboardActivity.this, android.R.layout.simple_spinner_dropdown_item, strings);
                     binding.spDist.setAdapter(adapter);
                 } else {
-                    callSnackBar(getString(R.string.something));
+//                    callSnackBar(getString(R.string.something));
+                    Utils.customEngSyncAlert(EngineeringDashboardActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync Works master data to proceed further?");
+
+                }
+            }
+        });
+        inspDetailsViewModel=new InspDetailsViewModel(EngineeringDashboardActivity.this,getApplication());
+        LiveData<List<GrantScheme>> grantListLiveData = inspDetailsViewModel.getGrantSchemes();
+        grantListLiveData.observe(EngineeringDashboardActivity.this, new Observer<List<GrantScheme>>() {
+            @Override
+            public void onChanged(List<GrantScheme> grantSchemes) {
+                grantListLiveData.removeObservers(EngineeringDashboardActivity.this);
+                if (!(grantSchemes != null && grantSchemes.size() > 0)) {
+                    Utils.customEngSyncAlert(EngineeringDashboardActivity.this, getString(R.string.app_name), "No schemes found...\n Do you want to sync Scheme master data to proceed further?");
+                }
+            }
+        });
+
+        LiveData<List<SectorsEntity>> liveData = inspDetailsViewModel.getSectors();
+        liveData.observe(EngineeringDashboardActivity.this, new Observer<List<SectorsEntity>>() {
+            @Override
+            public void onChanged(List<SectorsEntity> sectorsEntities) {
+                liveData.removeObservers(EngineeringDashboardActivity.this);
+                if (!(sectorsEntities != null && sectorsEntities.size() > 0)) {
+                    Utils.customEngSyncAlert(EngineeringDashboardActivity.this, getString(R.string.app_name), "No sectors found...\n Do you want to sync Sector master data to proceed further?");
                 }
             }
         });
@@ -218,7 +247,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                         } else {
                                             binding.recyclerView.setVisibility(View.GONE);
                                             binding.tvEmpty.setVisibility(View.VISIBLE);
-                                            callSnackBar("No data available");
+                                            callSnackBar(getString(R.string.no_sanctioned_works_found));
                                             if (mMenu != null)
                                                 mMenu.findItem(R.id.action_search).setVisible(false);
                                         }

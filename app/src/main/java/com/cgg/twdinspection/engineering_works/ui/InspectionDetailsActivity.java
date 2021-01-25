@@ -124,7 +124,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, sectorsList);
                     binding.spSector.setAdapter(spinnerAdapter);
                 } else {
-                    callSnackBar(getString(R.string.no_data_found));
+                    Utils.customEngSyncAlert(InspectionDetailsActivity.this, getString(R.string.app_name), "No sectors found...\n Do you want to sync Sector master data to proceed further?");
                 }
             }
         });
@@ -190,7 +190,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
                     ArrayAdapter spinnerAdapter = new ArrayAdapter(InspectionDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item, schemesList);
                     binding.spScheme.setAdapter(spinnerAdapter);
                 } else {
-                    callSnackBar(getString(R.string.no_data_found));
+                    Utils.customEngSyncAlert(InspectionDetailsActivity.this, getString(R.string.app_name), "No schemes found...\n Do you want to sync Scheme master data to proceed further?");
                 }
             }
         });
@@ -235,6 +235,7 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
 //                binding.tvStageOthers.setVisibility(View.GONE);
 //                binding.llStageWork.setVisibility(View.VISIBLE);
                 ArrayList<String> stagesList = new ArrayList<>();
+                binding.etFinProgressOthers.setText("");
                 if (binding.spSector.getSelectedItem().toString().equalsIgnoreCase(getString(R.string.select))) {
                     binding.llObs.setVisibility(View.GONE);
                     selSectorId = -1;
@@ -627,8 +628,11 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } else if (binding.llStageWork.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
             callSnackBar(getString(R.string.enter_stage_of_work_in_progress_work));
             return false;
-        }else if (binding.etFinProgressOthers.getVisibility() == View.VISIBLE && TextUtils.isEmpty(binding.etFinProgressOthers.getText())) {
+        }else if (binding.llFinProgRat.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etFinProgressOthers.getText())) {
             callSnackBar(getString(R.string.enter_fin_prog_acheived));
+            return false;
+        }else if (physProgRating>100.00) {
+            callSnackBar(getString(R.string.enter_valid_fin_progress_percentage));
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {
             callSnackBar(getString(R.string.check_overall_experience));

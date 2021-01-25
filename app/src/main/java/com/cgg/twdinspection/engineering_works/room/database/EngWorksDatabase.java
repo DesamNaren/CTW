@@ -23,7 +23,7 @@ import com.cgg.twdinspection.engineering_works.source.WorkDetail;
  */
 
 @Database(entities = {SectorsEntity.class, GrantScheme.class, WorkDetail.class},
-        version = 1, exportSchema = false)
+        version = 2, exportSchema = false)
 public abstract class EngWorksDatabase extends RoomDatabase {
 
     private static EngWorksDatabase INSTANCE;
@@ -43,6 +43,7 @@ public abstract class EngWorksDatabase extends RoomDatabase {
                             // Migration is not part of this codelab.
 //                            .createFromFile(new File("database/districts.json"))
                             .createFromAsset("database/EngWorks.db")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

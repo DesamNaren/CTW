@@ -23,6 +23,7 @@ import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
 import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -57,7 +58,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportActivity.this, DashboardActivity.class)
+                startActivity(new Intent(ReportActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }
@@ -192,7 +193,7 @@ public class ReportActivity extends AppCompatActivity implements ErrorHandlerInt
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ReportActivity.this, DashboardActivity.class)
+        startActivity(new Intent(ReportActivity.this, DashboardMenuActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
         finish();
     }

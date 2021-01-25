@@ -22,7 +22,7 @@ import com.cgg.twdinspection.databinding.ActivityReportDashboardBinding;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.viewmodel.GCCReportsViewModel;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -62,7 +62,7 @@ public class GCCReportsDashboard extends AppCompatActivity implements ErrorHandl
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GCCReportsDashboard.this, DashboardActivity.class)
+                startActivity(new Intent(GCCReportsDashboard.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

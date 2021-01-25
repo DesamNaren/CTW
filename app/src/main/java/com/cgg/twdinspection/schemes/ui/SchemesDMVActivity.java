@@ -20,7 +20,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySchemesDmvBinding;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeDistrict;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeMandal;
@@ -69,7 +69,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
         schemesDMVActivityBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SchemesDMVActivity.this, DashboardActivity.class)
+                startActivity(new Intent(SchemesDMVActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }
@@ -371,7 +371,7 @@ public class SchemesDMVActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, DashboardActivity.class)
+        startActivity(new Intent(this, DashboardMenuActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }

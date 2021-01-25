@@ -106,7 +106,7 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SchoolSyncActivity.this, DashboardActivity.class)
+                startActivity(new Intent(SchoolSyncActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

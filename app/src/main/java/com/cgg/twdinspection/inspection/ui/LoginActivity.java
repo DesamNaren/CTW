@@ -75,7 +75,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                                         }
                                     }
                                     if (flag) {
-                                        startActivity(new Intent(LoginActivity.this, InstMenuMainActivity.class));
+                                        startActivity(new Intent(LoginActivity.this, DashboardMenuActivity.class));
                                         finish();
                                     } else {
                                         callLoginProcess();
@@ -118,7 +118,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                         editor.putString(AppConstants.OFF_PLACE_OF_WORK, employeeResponses.getPlaceOfWork());
                         editor.commit();
 
-                        startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                        startActivity(new Intent(LoginActivity.this, DashboardMenuActivity.class));
                         finish();
                     } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
                         Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();

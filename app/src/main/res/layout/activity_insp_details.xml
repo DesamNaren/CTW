@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="android.text.TextUtils"></import>
+        <import type="android.text.TextUtils"/>
         <variable
             name="viewModel"
             type="com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel" />
@@ -702,6 +702,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/ll_finProgRat"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <TextView

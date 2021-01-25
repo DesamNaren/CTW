@@ -99,6 +99,41 @@ public class WorkDetail {
     @SerializedName("area_of_operation")
     @Expose
     private String areaOfOperation;
+    @SerializedName("lat")
+    @Expose
+    private String lat;
+    @SerializedName("long")
+    @Expose
+    private String longitude;
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getIs_sanctioned() {
+        return is_sanctioned;
+    }
+
+    public void setIs_sanctioned(String is_sanctioned) {
+        this.is_sanctioned = is_sanctioned;
+    }
+
+    @SerializedName("is_sanctioned")
+    @Expose
+
+    private String is_sanctioned;
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
 
     public String getStaffDept() {
         return staffDept;

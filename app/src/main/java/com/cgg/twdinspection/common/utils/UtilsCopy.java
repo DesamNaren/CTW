@@ -42,7 +42,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.cgg.twdinspection.inspection.ui.LoginActivity;
 import com.cgg.twdinspection.inspection.ui.QuitAppActivity;
@@ -417,7 +417,7 @@ public class UtilsCopy {
                         editor.commit();
                         instMainViewModel.deleteAllInspectionData();
 
-                        Intent newIntent = new Intent(activity, DashboardActivity.class);
+                        Intent newIntent = new Intent(activity, DashboardMenuActivity.class);
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(newIntent);
@@ -723,7 +723,7 @@ public class UtilsCopy {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        activity.startActivity(new Intent(activity, DashboardActivity.class)
+                        activity.startActivity(new Intent(activity, DashboardMenuActivity.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }

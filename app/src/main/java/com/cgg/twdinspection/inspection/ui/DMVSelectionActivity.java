@@ -53,7 +53,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(DMVSelectionActivity.this, DashboardActivity.class)
+        startActivity(new Intent(DMVSelectionActivity.this, DashboardMenuActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         finish();
     }
@@ -79,7 +79,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         dmvSelectionActivityBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DMVSelectionActivity.this, DashboardActivity.class)
+                startActivity(new Intent(DMVSelectionActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

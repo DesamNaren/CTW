@@ -39,7 +39,7 @@ import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.viewmodel.GCCSyncViewModel;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -76,7 +76,7 @@ public class GCCSyncActivity extends AppCompatActivity implements GCCDivisionInt
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(GCCSyncActivity.this, DashboardActivity.class)
+                startActivity(new Intent(GCCSyncActivity.this, DashboardMenuActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
 

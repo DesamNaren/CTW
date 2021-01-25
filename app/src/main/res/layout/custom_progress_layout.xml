@@ -12,15 +12,15 @@
         android:tint="@color/colorPrimary"
         app:srcCompat="@drawable/loader_black1" />
 
-    <TextView
-        android:id="@+id/tv_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageprogress"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="Loading..."
-        android:textColor="@color/white"
-        android:textSize="@dimen/dimen_20dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageprogress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Loading..."
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_20dp"
+            android:textStyle="bold" />
 </RelativeLayout>
