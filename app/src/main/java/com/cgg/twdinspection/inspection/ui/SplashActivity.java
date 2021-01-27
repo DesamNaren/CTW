@@ -28,9 +28,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySplashBinding;
-import com.cgg.twdinspection.databinding.ActivitySplashBindingImpl;
 import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
-import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.inspection.viewmodel.SplashViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -55,11 +53,11 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         appVersion = Utils.getVersionName(this);
         splashViewModel = new SplashViewModel(this, getApplication());
 
-        if(Utils.checkInternetConnection(this)){
+        if (Utils.checkInternetConnection(this)) {
             splashViewModel.getCurrentVersion().observe(this, new Observer<VersionResponse>() {
                 @Override
                 public void onChanged(VersionResponse versionResponse) {
-                    if(versionResponse!=null) {
+                    if (versionResponse != null) {
                         if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
                             if (appVersion != null) {
                                 if (versionResponse.getCurrentVersion() != null && versionResponse.getCurrentVersion().equalsIgnoreCase(appVersion)) {
@@ -67,7 +65,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         @Override
                                         public void run() {
                                             try {
-                                                AppConstants.DISTANCE= Float.parseFloat(versionResponse.getRadius());
+                                                AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
                                                 int permissionCheck1 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                                                 int permissionCheck2 = ContextCompat.checkSelfPermission(
@@ -86,7 +84,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                     customBinding = DataBindingUtil.setContentView(SplashActivity.this,
                                                             R.layout.custom_layout_for_permissions);
                                                     customBinding.accept.setOnClickListener(onBtnClick);
-                                                }  else {
+                                                } else {
                                                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                                                     finish();
 
@@ -97,30 +95,30 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         }
                                     }, 1000);
 
-                                }else if (versionResponse.getStatusMessage() != null) {
+                                } else if (versionResponse.getStatusMessage() != null) {
                                     Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());
-                                }else{
+                                } else {
                                     Utils.ShowPlayAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.update_msg));
                                 }
                             } else {
                                 Toast.makeText(context, getString(R.string.app_ver), Toast.LENGTH_SHORT).show();
                             }
                         } else if (versionResponse.getStatusCode() != null && versionResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                            if(!TextUtils.isEmpty(versionResponse.getStatusMessage())) {
-                                Utils.customErrorAlert(SplashActivity.this, versionResponse.getStatusMessage(), getString(R.string.plz_check_int));
-                            }else{
-                                Snackbar.make(binding.cl, getString(R.string.something), Snackbar.LENGTH_SHORT).show();
+                            if (!TextUtils.isEmpty(versionResponse.getStatusMessage())) {
+                                Utils.customErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), versionResponse.getStatusMessage());
+                            } else {
+                                Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
                             }
                         } else {
-                            Snackbar.make(binding.cl, getString(R.string.server_not), Snackbar.LENGTH_SHORT).show();
+                            Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
                         }
-                    }else{
-                        Snackbar.make(binding.cl, getString(R.string.server_not), Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.server_not));
                     }
                 }
             });
         } else {
-            Utils.customErrorAlert(SplashActivity.this,getResources().getString(R.string.app_name),getString(R.string.plz_check_int));
+            Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
     }
@@ -159,8 +157,8 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                             @Override
                             public void run() {
 
-                                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                                    finish();
+                                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                                finish();
 
                             }
                         }, 1000);
@@ -224,7 +222,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
     public void handleError(Throwable e, Context context) {
         String errMsg = ErrorHandler.handleError(e, context);
         Log.i("MSG", "handleError: " + errMsg);
-        Snackbar.make(binding.cl, errMsg, Snackbar.LENGTH_SHORT).show();
+        Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), errMsg);
     }
 
 }

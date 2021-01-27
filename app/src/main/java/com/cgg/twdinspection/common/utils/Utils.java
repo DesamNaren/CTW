@@ -66,7 +66,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -673,6 +672,37 @@ public class Utils {
         }
     }
 
+    public static void customSplashErrorAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_error);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btnOK = dialog.findViewById(R.id.btDialogYes);
+                btnOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        activity.finish();
+                    }
+                });
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void ShowPlayAlert(Activity activity, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(activity);
@@ -890,6 +920,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
     public static void customEngSyncAlert(Activity activity, String title, String msg) {
         try {
             final Dialog dialog = new Dialog(activity);
@@ -1260,7 +1291,7 @@ public class Utils {
             int totalHeightOfScrollView = llScroll.getChildAt(0).getHeight();
 
 //            bitmap = loadBitmapFromView(llScroll, llScroll.getWidth(),totalHeightOfScrollView);
-            createPdfSchool(activity, title, len,scrollViews);
+            createPdfSchool(activity, title, len, scrollViews);
 
 //            fileUri = getOutputMediaFileUri(activity, MEDIA_TYPE_IMAGE);
 //
@@ -1338,7 +1369,7 @@ public class Utils {
                 document.close();
                 Toast.makeText(activity, "PDF of Scroll is created!!!", Toast.LENGTH_SHORT).show();
 
-    //            openGeneratedPDF(activity);
+                //            openGeneratedPDF(activity);
 
                 shareImage(activity, fileUri);
 
