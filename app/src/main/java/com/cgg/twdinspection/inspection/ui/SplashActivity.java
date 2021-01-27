@@ -67,6 +67,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         @Override
                                         public void run() {
                                             try {
+                                                AppConstants.DISTANCE= Float.parseFloat(versionResponse.getRadius());
                                                 int permissionCheck1 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                                                 int permissionCheck2 = ContextCompat.checkSelfPermission(

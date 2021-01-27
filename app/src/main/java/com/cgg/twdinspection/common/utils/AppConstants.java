@@ -67,7 +67,7 @@ public class AppConstants {
     public static final String TOILET = "Toilet";
     public static final String KITCHEN = "Kitchen";
 
-    public static final float DISTANCE = 200;
+    public static float DISTANCE;
     public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
@@ -159,5 +159,5 @@ public class AppConstants {
     public static final String GOOD = "GOOD";
     public static final String BAD = "BAD";
     public static final String INFERIOR = "INFERIOR";
-    public static String randomNum="randomNum";
+    public static String randomNum = "randomNum";
 }

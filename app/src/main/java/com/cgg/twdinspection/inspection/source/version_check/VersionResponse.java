@@ -14,8 +14,19 @@ public class VersionResponse {
     @SerializedName("Status_Message")
     @Expose
     private String statusMessage;
+    @SerializedName("radius")
+    @Expose
+    private String radius;
 
-     public String getStatusCode() {
+    public String getRadius() {
+        return radius;
+    }
+
+    public void setRadius(String radius) {
+        this.radius = radius;
+    }
+
+    public String getStatusCode() {
         return statusCode;
     }
 
