@@ -60,6 +60,9 @@ public class AcademicOverview {
     @SerializedName("staff_accomodated_asper_stud_strength")
     @Expose
     private String staffAccomodatedAsperStudStrength;
+    @SerializedName("subject_names")
+    @Expose
+    private String subject_names;
     @SerializedName("assessment_test_conducted")
     @Expose
     private String assessmentTestConducted;
@@ -267,6 +270,14 @@ public class AcademicOverview {
 
     public void setLibraryMobileNo(String libraryMobileNo) {
         this.libraryMobileNo = libraryMobileNo;
+    }
+
+    public String getSubject_names() {
+        return subject_names;
+    }
+
+    public void setSubject_names(String subject_names) {
+        this.subject_names = subject_names;
     }
 
     public String getId() {

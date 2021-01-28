@@ -141,7 +141,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.sel_category));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
+            } /*else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.total_leaves));
                 break;
@@ -157,7 +157,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.leave_bal));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
+            }*/ else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLast_week_turn_duties_attended())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
                 break;

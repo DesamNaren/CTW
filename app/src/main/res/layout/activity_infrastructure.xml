@@ -46,7 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -98,7 +99,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/black" />
+                    android:background="@color/black"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1024,6 +1026,128 @@
 
                             </RadioGroup>
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_dininghall_add_req"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.dininghall_available.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/add_req_dininghall"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_dininghall_add_req"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/dininghall_add_req_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.dininghall_add_req.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/dininghall_add_req_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.dininghall_add_req.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_add_din_cnt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.dininghall_add_req.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/add_din_layout"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                    android:id="@+id/add_din_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/din_count"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.add_dining_required_cnt}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_dininghall_avail_construction"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.dininghall_available.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
+                                android:text="@string/avail_construction"
+                                android:textColor="@color/black" />
+
+                            <RadioGroup
+                                android:id="@+id/rg_dininghall_avail_construction"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/dimen_5dp"
+                                android:orientation="horizontal">
+
+
+                                <RadioButton
+                                    android:id="@+id/dininghall_avail_construction_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.dininghall_avail_construction.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/dininghall_avail_construction_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.dininghall_avail_construction.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
 
                         </LinearLayout>
 
@@ -1504,39 +1628,80 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/is_compound"
-                            android:textColor="@color/black" />
+                            android:orientation="vertical">
 
-
-                        <RadioGroup
-                            android:id="@+id/rg_compWall_required"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/dimen_5dp">
-
-                            <RadioButton
-                                android:id="@+id/compWall_required_yes"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked="@{inspData.compWall_required.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/is_compound"
+                                android:textColor="@color/black" />
 
-                            <RadioButton
-                                android:id="@+id/compWall_required_no"
+                            <RadioGroup
+                                android:id="@+id/rg_compWall_required"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:checked="@{inspData.compWall_required.equalsIgnoreCase(`No`)}"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
-                        </RadioGroup>
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
+
+                                <RadioButton
+                                    android:id="@+id/compWall_required_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="@{inspData.compWall_required.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/compWall_required_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="@{inspData.compWall_required.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_compoundwall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.compWall_required.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+                                    android:id="@+id/et_compoundwall_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/compwall_count"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.compWall_cnt}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -1679,38 +1844,82 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dimen_5dp"
-                            android:text="@string/bunker_beds"
-                            android:textColor="@color/black" />
+                            android:orientation="vertical">
 
-                        <RadioGroup
-                            android:id="@+id/rg_bunker_beds"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/dimen_5dp">
-
-
-                            <RadioButton
-                                android:id="@+id/bunker_beds_yes"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.cc_cameras.equalsIgnoreCase(`Yes`)}"
                                 android:padding="@dimen/dimen_5dp"
-                                android:text="@string/yes" />
+                                android:text="@string/bunker_beds"
+                                android:textColor="@color/black" />
 
-                            <RadioButton
-                                android:id="@+id/bunker_beds_no"
+                            <RadioGroup
+                                android:id="@+id/rg_bunker_beds"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:checked="@{inspData.cc_cameras.equalsIgnoreCase(`No`)}"
-                                android:padding="@dimen/dimen_5dp"
-                                android:text="@string/no" />
+                                android:orientation="horizontal"
+                                android:padding="@dimen/dimen_5dp">
 
-                        </RadioGroup>
+
+                                <RadioButton
+                                    android:id="@+id/bunker_beds_yes"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.bunker_beds.equalsIgnoreCase(`Yes`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/yes" />
+
+                                <RadioButton
+                                    android:id="@+id/bunker_beds_no"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="@{inspData.bunker_beds.equalsIgnoreCase(`No`)}"
+                                    android:padding="@dimen/dimen_5dp"
+                                    android:text="@string/no" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_bunker_beds_cnt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="@{inspData.bunker_beds.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dimen_5dp"
+                                android:textColorHint="@color/colorAccent"
+                                app:errorEnabled="true">
+
+
+                                <com.cgg.twdinspection.common.custom.CustomFontEditText
+
+                                    android:id="@+id/et_bunker_beds_cnt"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/bunker_beds_cnt"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
+                                    android:paddingLeft="@dimen/dimen_5dp"
+                                    android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
+                                    android:paddingBottom="@dimen/dimen_10dp"
+                                    android:singleLine="true"
+                                    android:text="@{inspData.bunker_beds_cnt}" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -2216,6 +2425,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:padding="@dimen/dimen_5dp"
                                 android:text="@string/any_additional_requirements_needed"
                                 android:textColor="@color/black" />
 
@@ -2280,33 +2490,6 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/add_din_layout"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/dimen_5dp"
-                                android:textColorHint="@color/colorAccent"
-                                app:errorEnabled="true">
-
-
-                                <com.cgg.twdinspection.common.custom.CustomFontEditText
-
-                                    android:id="@+id/add_din_cnt"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/din_count"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="number"
-                                    android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingTop="@dimen/dimen_10dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
-                                    android:paddingBottom="@dimen/dimen_10dp"
-                                    android:singleLine="true"
-                                    android:text="@{inspData.add_dining_required_cnt}" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/add_dom_layout"
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                                 android:layout_width="match_parent"
@@ -2349,11 +2532,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/toilets_count"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
                                     android:paddingRight="@dimen/dimen_5dp"
-                                    android:paddingBottom="@dimen/dimen_10dp"    android:imeOptions="actionNext"
-                                    android:inputType="number"
+                                    android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_toilets_required_cnt}" />
 
@@ -2374,13 +2558,13 @@
                                     android:id="@+id/add_bathrooms_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:hint="@string/bathrooms_count"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
                                     android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
-                                    android:hint="@string/bathrooms_count"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="number"
                                     android:singleLine="true"
                                     android:text="@{inspData.add_bathrooms_required_cnt}" />
 

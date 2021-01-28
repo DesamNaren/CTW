@@ -88,6 +88,12 @@ public class InfraStructureEntity {
     private String dininghall_used;
 
     @ColumnInfo()
+    private String dininghall_add_req;
+
+    @ColumnInfo()
+    private String dininghall_avail_construction;
+
+    @ColumnInfo()
     private String separate_kitchen_room_available;
 
     @ColumnInfo()
@@ -117,6 +123,9 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String compWall_required;
 
+     @ColumnInfo()
+    private String compWall_cnt;
+
     @ColumnInfo()
     private String cc_cameras;
 
@@ -125,6 +134,9 @@ public class InfraStructureEntity {
 
     @ColumnInfo()
     private String bunker_beds;
+
+     @ColumnInfo()
+    private String bunker_beds_cnt;
 
     @ColumnInfo()
     private String gate_required;
@@ -233,6 +245,14 @@ public class InfraStructureEntity {
         this.bunker_beds = bunker_beds;
     }
 
+    public String getBunker_beds_cnt() {
+        return bunker_beds_cnt;
+    }
+
+    public void setBunker_beds_cnt(String bunker_beds_cnt) {
+        this.bunker_beds_cnt = bunker_beds_cnt;
+    }
+
     public String getCeilingfans_required() {
         return ceilingfans_required;
     }
@@ -307,12 +327,28 @@ public class InfraStructureEntity {
         this.mountedfans_count = mountedfans_count;
     }
 
+    public String getDininghall_avail_construction() {
+        return dininghall_avail_construction;
+    }
+
+    public void setDininghall_avail_construction(String dininghall_avail_construction) {
+        this.dininghall_avail_construction = dininghall_avail_construction;
+    }
+
     public String getDininghall_used() {
         return dininghall_used;
     }
 
     public void setDininghall_used(String dininghall_used) {
         this.dininghall_used = dininghall_used;
+    }
+
+    public String getDininghall_add_req() {
+        return dininghall_add_req;
+    }
+
+    public void setDininghall_add_req(String dininghall_add_req) {
+        this.dininghall_add_req = dininghall_add_req;
     }
 
     public String getInverterWorkingStatus() {
@@ -531,6 +567,14 @@ public class InfraStructureEntity {
 
     public void setCompWall_required(String compWall_required) {
         this.compWall_required = compWall_required;
+    }
+
+    public String getCompWall_cnt() {
+        return compWall_cnt;
+    }
+
+    public void setCompWall_cnt(String compWall_cnt) {
+        this.compWall_cnt = compWall_cnt;
     }
 
     public String getGate_required() {

@@ -88,6 +88,8 @@
     <string name="wall_mounted_fans">Details of wall mounted fans</string>
     <string name="dining_hall">Dining hall available</string>
     <string name="being_used">Is it being used</string>
+    <string name="avail_construction">Place is available for construction</string>
+    <string name="add_req_dininghall">Any additional requirements needed</string>
     <string name="how_many_buildings">How many buildings are dilapidated state</string>
     <string name="trans_avail">Transformers available</string>
     <string name="type_of_power">Type of power connection</string>
@@ -114,7 +116,7 @@
     <string name="whether_highest">Whether (Highest class) syllabus completed as per schedule in all subjects?</string>
     <string name="capture_highest">Capture classes performance</string>
     <string name="is_strength">Is the strength accommodated as per infrastructure availability</string>
-    <string name="does_staff">Does staff strength accommodate as per student strength</string>
+    <string name="does_staff">Are Teachers available for all subjects</string>
     <string name="is_school">Is school plan for next academic year is prepared</string>
     <string name="does_any_assessment">Does any assessment tests conducted</string>
     <string name="student_acadamic">Students academic performances (Grading) (for 10th class/ highest only) in the above test</string>
@@ -320,6 +322,8 @@
     <string name="whether_place_is_available_for_construct_kitchen_room">Whether place is available for constructing kitchen room</string>
     <string name="is_it_in_good_condition">Is it in good condition</string>
     <string name="kitchen_repair_required">Repairs required</string>
+    <string name="subject_names">Subject Names</string>
+    <string name="sel_subject_names">Enter Subject Names</string>
     <string name="no_of_bath_rooms">No of bathrooms</string>
     <string name="no_of_functioning_toilets">No of functioning toilets</string>
     <string name="no_of_functioning_bathrooms">No of functioning bathrooms</string>
@@ -460,6 +464,8 @@
     <string name="select_mountedFansReq">Enter no of wall mounted fans required</string>
     <string name="select_dininghall_available">Select whether dining hall available</string>
     <string name="select_dininghall_used">Select whether dining hall being used or not</string>
+    <string name="select_dininghall_add_req">Select any additional requirements needed</string>
+    <string name="select_dininghall_avail_construction">Select place is available for construction</string>
     <string name="select_kitchen_available">Select whether separate kitchen room available</string>
     <string name="select_kitchen_construct">Select place is available for construct kitchen room</string>
     <string name="select_kitchen_good_condition">Select if it is in good condition</string>
@@ -551,8 +557,8 @@
     <string name="maintaining_the_accession_register">Maintaining the accession register</string>
     <string name="whether_proper_lighting_fans_available_in_library">Whether proper lighting &amp; fans available in library</string>
     <string name="whether_big_tv_rot_available">"Whether big TV &amp; ROT (Receive Only Terminals) available</string>
-    <string name="whether_mana_tv_lessons_are_shown_to_students_daily_as_per_schedule">Whether MANA TV lessons are shown to students daily as per schedule</string>
-    <string name="mana_tv_incharge_teacher_name">MANA TV incharge teacher name</string>
+    <string name="whether_mana_tv_lessons_are_shown_to_students_daily_as_per_schedule">Whether eStudio lessons are shown to students daily as per schedule</string>
+    <string name="mana_tv_incharge_teacher_name">eStudio incharge teacher name</string>
     <string name="state_the_reason">State the reason</string>
     <string name="whether_computer_lab_is_available">Whether computer lab is available</string>
     <string name="number_of_computers_available">Number of computers available</string>
@@ -576,7 +582,10 @@
     <string name="add_enter_number">Enter number</string>
     <string name="sel_add_req">Select any additional requirements needed</string>
     <string name="cls_count">Classroom count</string>
+    <string name="compwall_count">New construction part (in meters)</string>
+    <string name="sel_compwall_count">Select New construction part (in meters)</string>
     <string name="din_count">Dining hall count</string>
+    <string name="sel_din_count">Enter Dining hall count</string>
     <string name="dor_count">Dormitories count</string>
     <string name="toilets_count">Toilets count</string>
     <string name="bathrooms_count">Bathrooms count</string>
@@ -701,7 +710,7 @@
     <string name="high_class_syl">Select highest class syllabus completed</string>
     <string name="sel_plan">Select plan for completing the syllabus prepared</string>
     <string name="sel_is_strength">Select is the strength accommodated</string>
-    <string name="select_does_staff">Select does staff strength accommodate</string>
+    <string name="select_does_staff">Select are teachers available for all subjects</string>
     <string name="select_school_plan">Select school plan for next academic year is prepared</string>
     <string name="sel_suff_books">Select sufficient text books received</string>
     <string name="sel_assessments">Select assessment tests conducted</string>
@@ -735,11 +744,11 @@
     <string name="light_fan_avail"><![CDATA[Select proper lighting & fans available]]></string>
     <string name="big_tv_avail"><![CDATA[Select big TV & ROT (Receive Only Terminals) available]]></string>
     <string name="big_tv_status"><![CDATA[Select big TV & ROT (Receive Only Terminals) working status]]></string>
-    <string name="mana_tv_lessions">Select MANA TV lessons are shown to students</string>
-    <string name="mana_tv_reason">Enter MANA TV reason</string>
-    <string name="mana_tv_incharge">Enter MANA TV incharge teacher name</string>
-    <string name="mana_tv_mob_num">Enter MANA TV mobile number</string>
-    <string name="valid_mana_tv_mob_num">Enter valid MANA TV mobile number</string>
+    <string name="mana_tv_lessions">Select eStudio lessons are shown to students</string>
+    <string name="mana_tv_reason">Enter eStudio reason</string>
+    <string name="mana_tv_incharge">Enter eStudio incharge teacher name</string>
+    <string name="mana_tv_mob_num">Enter eStudio mobile number</string>
+    <string name="valid_mana_tv_mob_num">Enter valid eStudio mobile number</string>
     <string name="com_lab_avail">Select computer lab is available</string>
     <string name="num_of_com">Enter no of computers</string>
     <string name="com_status">Enter working status of computers</string>
@@ -888,6 +897,8 @@
     <string name="select_cc_cameras">Select CC cameras are working</string>
     <string name="select_steam_cooking">Select whether steam cooking is available</string>
     <string name="select_bunker_beds">Select whether bunker beds are available</string>
+    <string name="select_bunker_beds_cnt">Select excess if any</string>
+    <string name="bunker_beds_cnt">Excess if any</string>
     <string name="working_status">Working Status</string>
     <string name="working_condition">Working condition</string>
     <string name="whether_sufficient_text_books_received_from_mto">Whether sufficient text books received from MEO</string>

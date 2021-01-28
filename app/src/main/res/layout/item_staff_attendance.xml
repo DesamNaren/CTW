@@ -359,7 +359,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

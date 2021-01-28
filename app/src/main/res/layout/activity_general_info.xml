@@ -13,6 +13,10 @@
         <variable
             name="inspDataGeneral"
             type="com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity" />
+
+        <variable
+            name="slno"
+            type="com.cgg.twdinspection.inspection.viewmodel.SerialNumber" />
     </data>
 
 
@@ -34,15 +38,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dimen_10dp"
-                android:visibility="gone"
                 android:background="@color/white"
-                android:padding="@dimen/dimen_10dp">
+                android:padding="@dimen/dimen_10dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center">
+
                     <include
                         android:id="@+id/include_basic_layout"
                         layout="@layout/details_layout" />
@@ -54,8 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp">
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginBottom="@dimen/dimen_10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,7 +80,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="4."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -117,7 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="5."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -157,7 +162,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="6."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -200,7 +205,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="7."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -508,7 +513,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="8."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -801,7 +806,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="9."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -963,7 +968,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="10."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -1134,7 +1139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="11."
+                            android:text="@{slno.setSlNo()}"
                             android:textColor="@color/black" />
 
                         <LinearLayout

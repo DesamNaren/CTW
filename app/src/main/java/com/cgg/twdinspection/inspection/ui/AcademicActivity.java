@@ -44,7 +44,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     ActivityAcademicBinding binding;
     AcademicViewModel academicViewModel;
     AcademicEntity academicEntity;
-    String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength,
+    String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength, subject_names,
             plan_prepared, textbooks_rec, assessment_test_conducted, punadiPrgmConducted, punadi2_testmarks_entered,
             kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg,
             big_tv_rot_avail, mana_tv_lessons_shown, comp_lab_avail, ict_instr_avail, eLearning_avail, showing_stud, tabs_supplied,
@@ -74,38 +74,38 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onChanged(MasterInstituteInfo masterInstituteInfos) {
                 masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
-                if(masterInstituteInfos!=null && masterInstituteInfos.getClassInfo()!=null && masterInstituteInfos.getClassInfo().size()>0){
-                List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
-                if (masterClassInfos != null && masterClassInfos.size() > 0) {
-                    for (int i = masterClassInfos.size(); i > 0; i--) {
-                        if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i-1).getStudentCount()>0) {
-                            highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
-                            binding.highClassStrength.setText("Highest Class: Class "+masterClassInfos.get(i-1).getClassId()+", Strength: " + highClassStrength);
-                            break;
+                if (masterInstituteInfos != null && masterInstituteInfos.getClassInfo() != null && masterInstituteInfos.getClassInfo().size() > 0) {
+                    List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                    if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                        for (int i = masterClassInfos.size(); i > 0; i--) {
+                            if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i - 1).getStudentCount() > 0) {
+                                highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
+                                binding.highClassStrength.setText("Highest Class: Class " + masterClassInfos.get(i - 1).getClassId() + ", Strength: " + highClassStrength);
+                                break;
+                            }
                         }
-                    }
-                    try {
-                        localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
-                        if (localFlag == 1) {
-                            //get local record & set to data binding
-                            LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
-                            academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
-                                @Override
-                                public void onChanged(AcademicEntity generalInfoEntity) {
-                                    academicInfoData.removeObservers(AcademicActivity.this);
-                                    if (generalInfoEntity != null) {
-                                        binding.setInspData(generalInfoEntity);
-                                        binding.executePendingBindings();
+                        try {
+                            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+                            if (localFlag == 1) {
+                                //get local record & set to data binding
+                                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
+                                academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
+                                    @Override
+                                    public void onChanged(AcademicEntity generalInfoEntity) {
+                                        academicInfoData.removeObservers(AcademicActivity.this);
+                                        if (generalInfoEntity != null) {
+                                            binding.setInspData(generalInfoEntity);
+                                            binding.executePendingBindings();
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
-                }
-                }else {
+                    }
+                } else {
                     Toast.makeText(AcademicActivity.this, "No master institute data found", Toast.LENGTH_SHORT).show();
                 }
 
@@ -148,13 +148,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                         binding.highestClassGradeA.setError("Entered count should not exceed the high class strength");
                         binding.highestClassTotal.setText("");
                         binding.highestClassGradeA.requestFocus();
-                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                    } else if (gradeAcnt + gradeBCnt + gradeCCnt > highClassStrength) {
                         binding.highestClassGradeA.setText("");
                         binding.highestClassGradeA.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
                         binding.highestClassTotal.setText("");
                         binding.highestClassGradeA.requestFocus();
-                    }else{
-                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
+                    } else {
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt + gradeBCnt + gradeCCnt));
                     }
                 }
             }
@@ -179,13 +179,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                         binding.highestClassGradeB.setError("Entered count should not exceed the high class strength");
                         binding.highestClassGradeB.requestFocus();
                         binding.highestClassTotal.setText("");
-                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                    } else if (gradeAcnt + gradeBCnt + gradeCCnt > highClassStrength) {
                         binding.highestClassGradeB.setText("");
                         binding.highestClassGradeB.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
                         binding.highestClassGradeB.requestFocus();
                         binding.highestClassTotal.setText("");
-                    }else{
-                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
+                    } else {
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt + gradeBCnt + gradeCCnt));
                     }
                 }
             }
@@ -210,13 +210,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                         binding.highestClassGradeC.setError("Entered count should not exceed the high class strength");
                         binding.highestClassTotal.setText("");
                         binding.highestClassGradeC.requestFocus();
-                    }else if(gradeAcnt+gradeBCnt+gradeCCnt > highClassStrength){
+                    } else if (gradeAcnt + gradeBCnt + gradeCCnt > highClassStrength) {
                         binding.highestClassGradeC.setText("");
                         binding.highestClassGradeC.setError("Entered sum up of grade-A, grade-B and grade-C count should not exceed the high class strength");
                         binding.highestClassGradeC.requestFocus();
                         binding.highestClassTotal.setText("");
-                    }else{
-                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt+gradeBCnt+gradeCCnt));
+                    } else {
+                        binding.highestClassTotal.setText(String.valueOf(gradeAcnt + gradeBCnt + gradeCCnt));
                     }
                 }
             }
@@ -372,10 +372,13 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgStaffAccomodatedAsperStudStrength.getCheckedRadioButtonId();
-                if (selctedItem == R.id.staff_accomodated_asper_stud_strength_yes)
+                if (selctedItem == R.id.staff_accomodated_asper_stud_strength_yes) {
                     staff_accomodated_asper_stud_strength = AppConstants.Yes;
-                else
+                    binding.llSubjectNames.setVisibility(View.GONE);
+                } else {
                     staff_accomodated_asper_stud_strength = AppConstants.No;
+                    binding.llSubjectNames.setVisibility(View.VISIBLE);
+                }
             }
         });
         binding.rgPlanPrepared.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -814,6 +817,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 noOfTabs = binding.etNoOfTabs.getText().toString().trim();
                 tabInchargeName = binding.etTabInchargeName.getText().toString().trim();
                 tabInchargeMblno = binding.etTabInchargeMblno.getText().toString().trim();
+                subject_names = binding.etSubjectNames.getText().toString().trim();
 
                 if (validate()) {
                     academicEntity = new AcademicEntity();
@@ -824,6 +828,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                     academicEntity.setPlan_syll_comp_prepared(plan_syll_comp_prepared);
                     academicEntity.setStrength_accomodated_asper_infrastructure(strength_accomodated_asper_infrastructure);
                     academicEntity.setStaff_accomodated_asper_stud_strength(staff_accomodated_asper_stud_strength);
+                    academicEntity.setSubject_names(subject_names);
                     academicEntity.setPlan_prepared(plan_prepared);
                     academicEntity.setTextbooks_rec(textbooks_rec);
                     academicEntity.setAssessment_test_conducted(assessment_test_conducted);
@@ -908,7 +913,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         boolean listFlag = false;
         for (int z = 0; z < academicGradeEntities.size(); z++) {
             if (academicGradeEntities.get(z).getFlag_completed() == 1) {
-                listFlag =  true;
+                listFlag = true;
                 break;
             }
         }
@@ -935,6 +940,11 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         if (TextUtils.isEmpty(staff_accomodated_asper_stud_strength)) {
             showSnackBar(getString(R.string.select_does_staff));
             ScrollToView(binding.rgStaffAccomodatedAsperStudStrength);
+            return false;
+        }
+        if (staff_accomodated_asper_stud_strength.equals(AppConstants.No) &&TextUtils.isEmpty(subject_names)) {
+            showSnackBar(getString(R.string.sel_subject_names));
+            binding.etSubjectNames.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(plan_prepared)) {
@@ -997,7 +1007,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             showSnackBar(getString(R.string.sel_punadi_books_required));
             return false;
         }
-        if (TextUtils.isEmpty(punadiPrgmConducted)) {
+      /*  if (TextUtils.isEmpty(punadiPrgmConducted)) {
             ScrollToView(binding.rgPunadiPrgmConducted);
             showSnackBar(getString(R.string.sel_pun2_con));
             return false;
@@ -1029,7 +1039,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             binding.etKaraDipathPrgmCond.requestFocus();
             showSnackBar(getString(R.string.enter_kara_reason));
             return false;
-        }
+        }*/
         if (TextUtils.isEmpty(labManuals_received)) {
             ScrollToView(binding.rgLabManualsReceived);
             showSnackBar(getString(R.string.enter_ssci_lab));

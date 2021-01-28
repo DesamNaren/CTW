@@ -14,6 +14,10 @@
         <variable
             name="medical"
             type="com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity" />
+
+        <variable
+            name="slno"
+            type="com.cgg.twdinspection.inspection.viewmodel.SerialNumber" />
     </data>
 
     <RelativeLayout
@@ -42,10 +46,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slNo14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="17."
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -88,10 +92,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slNo15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="18."
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -134,10 +138,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slNo16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="19."
                         android:textColor="@color/black" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -461,7 +465,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="20."
+                        android:id="@+id/slNo17"
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -526,7 +530,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="21."
+                        android:id="@+id/slNo18"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -634,7 +638,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="22."
+                        android:id="@+id/slNo19"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -807,7 +811,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="23."
+                        android:id="@+id/slNo20"
                         android:textColor="@color/black" />
 
                     <LinearLayout

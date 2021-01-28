@@ -18,6 +18,7 @@ import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.GeneralInfoViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.SerialNumber;
 import com.google.android.material.snackbar.Snackbar;
 
 public class GeneralInfoActivity extends BaseActivity implements SaveListener {
@@ -45,6 +46,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
 
+        SerialNumber.resetValue(0);
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
         binding.setViewModel(generalInfoViewModel);

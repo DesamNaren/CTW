@@ -28,6 +28,9 @@ public class InfraMaintenance {
     @SerializedName("compWall_required")
     @Expose
     private String compWallRequired;
+    @SerializedName("compWall_cnt")
+    @Expose
+    private String compWall_cnt;
     @SerializedName("transformer_available")
     @Expose
     private String transformerAvailable;
@@ -67,6 +70,12 @@ public class InfraMaintenance {
     @SerializedName("dininghall_available")
     @Expose
     private String dininghallAvailable;
+    @SerializedName("dininghall_add_req")
+    @Expose
+    private String dininghall_add_req;
+    @SerializedName("dininghall_avail_construction")
+    @Expose
+    private String dininghall_avail_construction;
     @SerializedName("add_bathrooms_required_cnt")
     @Expose
     private String addBathroomsRequiredCnt;
@@ -181,6 +190,9 @@ public class InfraMaintenance {
     @SerializedName("bunker_beds")
     @Expose
     private String bunkerBeds;
+    @SerializedName("bunker_beds_cnt")
+    @Expose
+    private String bunker_beds_cnt;
 
     public String getBigSchoolNameBoard() {
         return bigSchoolNameBoard;
@@ -204,6 +216,22 @@ public class InfraMaintenance {
 
     public void setHeaterWorkingStatus(String heaterWorkingStatus) {
         this.heaterWorkingStatus = heaterWorkingStatus;
+    }
+
+    public String getDininghall_add_req() {
+        return dininghall_add_req;
+    }
+
+    public void setDininghall_add_req(String dininghall_add_req) {
+        this.dininghall_add_req = dininghall_add_req;
+    }
+
+    public String getDininghall_avail_construction() {
+        return dininghall_avail_construction;
+    }
+
+    public void setDininghall_avail_construction(String dininghall_avail_construction) {
+        this.dininghall_avail_construction = dininghall_avail_construction;
     }
 
     public String getGateRequired() {
@@ -244,6 +272,14 @@ public class InfraMaintenance {
 
     public void setCompWallRequired(String compWallRequired) {
         this.compWallRequired = compWallRequired;
+    }
+
+    public String getCompWall_cnt() {
+        return compWall_cnt;
+    }
+
+    public void setCompWall_cnt(String compWall_cnt) {
+        this.compWall_cnt = compWall_cnt;
     }
 
     public String getTransformerAvailable() {
@@ -652,5 +688,13 @@ public class InfraMaintenance {
 
     public void setBunkerBeds(String bunkerBeds) {
         this.bunkerBeds = bunkerBeds;
+    }
+
+    public String getBunker_beds_cnt() {
+        return bunker_beds_cnt;
+    }
+
+    public void setBunker_beds_cnt(String bunker_beds_cnt) {
+        this.bunker_beds_cnt = bunker_beds_cnt;
     }
 }

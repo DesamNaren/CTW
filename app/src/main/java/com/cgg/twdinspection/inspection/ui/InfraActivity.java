@@ -68,10 +68,10 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     InfraStructureEntity infrastuctureEntity;
     String drinkingWaterFacility, runningWaterFacility, bigSchoolNameBoard, roPlant,
             sourceOfDrinkingWater, sourceOfRunningWater, inverter_available, inverterWorkingStatus,
-            electricity_wiring, enough_fans, dining_hall, dining_hall_used,
+            electricity_wiring, enough_fans, dining_hall, dining_hall_used, dining_hall_avail_construction, dining_hall_add_req,
             separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition,
             transformer_available, powerConnectionType, individual_connection, road_required,
-            compWall_required, cc_cameras, steam_cooking, bunker_beds, gate_required, pathway_required,
+            compWall_required, compWall_cnt, cc_cameras, steam_cooking, bunker_beds, bunker_beds_cnt, gate_required, pathway_required,
             sump_required, sewage_allowed, sewage_raise_req, drainage_functioning, heater_available, heater_workingStatus,
             repairs_to_door, painting, electricity_wiring_reason,
             roplant_reason, ceilingFansWorking, ceilingFansNonWorking, ceilingFansReq,
@@ -352,14 +352,20 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 if (selctedItem == R.id.dining_hall_yes) {
                     dining_hall = "YES";
                     binding.llDininghallUsed.setVisibility(View.VISIBLE);
+                    binding.llDininghallAddReq.setVisibility(View.VISIBLE);
+                    binding.llDininghallAvailConstruction.setVisibility(View.GONE);
                 } else if (selctedItem == R.id.dining_hall_no) {
                     dining_hall = "NO";
                     binding.rgDininghallUsed.clearCheck();
                     binding.llDininghallUsed.setVisibility(View.GONE);
+                    binding.llDininghallAddReq.setVisibility(View.GONE);
+                    binding.llDininghallAvailConstruction.setVisibility(View.VISIBLE);
                 } else {
                     dining_hall = null;
                     binding.rgDininghallUsed.clearCheck();
                     binding.llDininghallUsed.setVisibility(View.GONE);
+                    binding.llDininghallAddReq.setVisibility(View.GONE);
+                    binding.llDininghallAvailConstruction.setVisibility(View.GONE);
                 }
             }
         });
@@ -374,6 +380,36 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     dining_hall_used = "NO";
                 else
                     dining_hall_used = null;
+            }
+        });
+
+        binding.rgDininghallAddReq.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgDininghallAddReq.getCheckedRadioButtonId();
+                if (selctedItem == R.id.dininghall_add_req_yes) {
+                    dining_hall_add_req = "YES";
+                    binding.llAddDinCnt.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.dininghall_add_req_no) {
+                    dining_hall_add_req = "NO";
+                    binding.llAddDinCnt.setVisibility(View.GONE);
+                } else {
+                    dining_hall_add_req = null;
+                    binding.llAddDinCnt.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        binding.rgDininghallAvailConstruction.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgDininghallAvailConstruction.getCheckedRadioButtonId();
+                if (selctedItem == R.id.dininghall_avail_construction_yes)
+                    dining_hall_avail_construction = "YES";
+                else if (selctedItem == R.id.dininghall_avail_construction_no)
+                    dining_hall_avail_construction = "NO";
+                else
+                    dining_hall_avail_construction = null;
             }
         });
 
@@ -495,12 +531,16 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgCompWallRequired.getCheckedRadioButtonId();
-                if (selctedItem == R.id.compWall_required_yes)
+                if (selctedItem == R.id.compWall_required_yes) {
                     compWall_required = "YES";
-                else if (selctedItem == R.id.compWall_required_no)
+                    binding.llCompoundwall.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.compWall_required_no) {
                     compWall_required = "NO";
-                else
+                    binding.llCompoundwall.setVisibility(View.GONE);
+                } else {
                     compWall_required = null;
+                    binding.llCompoundwall.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -534,12 +574,16 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int selctedItem = binding.rgBunkerBeds.getCheckedRadioButtonId();
-                if (selctedItem == R.id.bunker_beds_yes)
+                if (selctedItem == R.id.bunker_beds_yes) {
                     bunker_beds = "YES";
-                else if (selctedItem == R.id.bunker_beds_no)
+                    binding.llBunkerBedsCnt.setVisibility(View.VISIBLE);
+                } else if (selctedItem == R.id.bunker_beds_no) {
                     bunker_beds = "NO";
-                else
+                    binding.llBunkerBedsCnt.setVisibility(View.GONE);
+                } else {
                     bunker_beds = null;
+                    binding.llBunkerBedsCnt.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -693,7 +737,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     add_req = "NO";
                     binding.llAddReq.setVisibility(View.GONE);
                     binding.addClassCnt.setText("");
-                    binding.addDinCnt.setText("");
                     binding.addDomCnt.setText("");
                     binding.addToiletsCnt.setText("");
                     binding.addBathroomsCnt.setText("");
@@ -728,6 +771,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 add_dom_cnt = binding.addDomCnt.getText().toString().trim();
                 add_toilets_cnt = binding.addToiletsCnt.getText().toString().trim();
                 add_bathrooms_cnt = binding.addBathroomsCnt.getText().toString().trim();
+                compWall_cnt = binding.etCompoundwallCnt.getText().toString().trim();
+                bunker_beds_cnt = binding.etBunkerBedsCnt.getText().toString().trim();
 
                 if (validateData()) {
                     infrastuctureEntity = new InfraStructureEntity();
@@ -753,6 +798,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setMountedfans_required(mountedFansReq);
                     infrastuctureEntity.setDininghall_available(dining_hall);
                     infrastuctureEntity.setDininghall_used(dining_hall_used);
+                    infrastuctureEntity.setDininghall_add_req(dining_hall_add_req);
+                    infrastuctureEntity.setDininghall_avail_construction(dining_hall_avail_construction);
                     infrastuctureEntity.setSeparate_kitchen_room_available(separate_kitchen_room_available);
                     infrastuctureEntity.setConstruct_kitchen_room(construct_kitchen_room);
                     infrastuctureEntity.setIs_it_in_good_condition(is_it_in_good_condition);
@@ -764,6 +811,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
                     infrastuctureEntity.setRoad_required(road_required);
                     infrastuctureEntity.setCompWall_required(compWall_required);
+                    infrastuctureEntity.setCompWall_cnt(compWall_cnt);
                     infrastuctureEntity.setGate_required(gate_required);
                     infrastuctureEntity.setPathway_required(pathway_required);
                     infrastuctureEntity.setSump_required(sump_required);
@@ -782,6 +830,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setCc_cameras(cc_cameras);
                     infrastuctureEntity.setSteam_cooking(steam_cooking);
                     infrastuctureEntity.setBunker_beds(bunker_beds);
+                    infrastuctureEntity.setBunker_beds_cnt(bunker_beds_cnt);
                     infrastuctureEntity.setAdd_req(add_req);
                     infrastuctureEntity.setAdd_class_required_cnt(add_cls_cnt);
                     infrastuctureEntity.setAdd_dining_required_cnt(add_din_cnt);
@@ -908,11 +957,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
 
     private boolean validateData() {
 
-        if (TextUtils.isEmpty(bigSchoolNameBoard)) {
+        /*if (TextUtils.isEmpty(bigSchoolNameBoard)) {
             showSnackBar(getResources().getString(R.string.select_school));
             ScrollToView(binding.rgBigSchoolNameBoard);
             return false;
-        }
+        }*/
 
         if (TextUtils.isEmpty(drinkingWaterFacility)) {
             ScrollToView(binding.rgDrinkingWaterFacility);
@@ -1016,6 +1065,21 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             showSnackBar(getResources().getString(R.string.select_dininghall_used));
             return false;
         }
+        if (dining_hall.equals(AppConstants.Yes) && TextUtils.isEmpty(dining_hall_add_req)) {
+            ScrollToView(binding.rgDininghallAddReq);
+            showSnackBar(getResources().getString(R.string.select_dininghall_add_req));
+            return false;
+        }
+        if (dining_hall.equals(AppConstants.Yes) && dining_hall_add_req.equals(AppConstants.Yes) && TextUtils.isEmpty(add_din_cnt)) {
+            binding.addDinLayout.requestFocus();
+            showSnackBar(getResources().getString(R.string.sel_din_count));
+            return false;
+        }
+        if (dining_hall.equals(AppConstants.No) && TextUtils.isEmpty(dining_hall_avail_construction)) {
+            ScrollToView(binding.rgDininghallAvailConstruction);
+            showSnackBar(getResources().getString(R.string.select_dininghall_avail_construction));
+            return false;
+        }
         if (TextUtils.isEmpty(separate_kitchen_room_available)) {
             ScrollToView(binding.rgSeparateKitchenRoomAvailable);
             showSnackBar(getResources().getString(R.string.select_kitchen_available));
@@ -1066,6 +1130,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgCompWallRequired);
             return false;
         }
+        if (compWall_required.equals(AppConstants.Yes) && TextUtils.isEmpty(compWall_cnt)) {
+            showSnackBar(getResources().getString(R.string.sel_compwall_count));
+            binding.etCompoundwallCnt.requestFocus();
+            return false;
+        }
         if (TextUtils.isEmpty(cc_cameras)) {
             showSnackBar(getResources().getString(R.string.select_cc_cameras));
             ScrollToView(binding.rgCcCameras);
@@ -1077,6 +1146,12 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             return false;
         }
         if (TextUtils.isEmpty(bunker_beds)) {
+            showSnackBar(getResources().getString(R.string.select_bunker_beds));
+            ScrollToView(binding.rgBunkerBeds);
+            return false;
+        }
+
+         if (bunker_beds.equals(AppConstants.Yes) &&TextUtils.isEmpty(bunker_beds_cnt)) {
             showSnackBar(getResources().getString(R.string.select_bunker_beds));
             ScrollToView(binding.rgBunkerBeds);
             return false;
@@ -1133,11 +1208,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.addClassLayout.requestFocus();
             return false;
         }
-        if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_din_cnt)) {
-            showSnackBar(getResources().getString(R.string.din_count));
-            binding.addDinLayout.requestFocus();
-            return false;
-        }
+
         if (add_req.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(add_dom_cnt)) {
             showSnackBar(getResources().getString(R.string.dor_count));
             binding.addDomLayout.requestFocus();

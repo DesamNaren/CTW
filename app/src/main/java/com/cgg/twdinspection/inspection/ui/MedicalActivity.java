@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.LiveData;
@@ -65,16 +66,23 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
     String screened_by_call_health, left_for_screening, sickboarders, sickboardersArea;
     StudentsAttndViewModel studentsAttndViewModel;
     private int totalStrength = 0;
+    TextView[] ids;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
     }
 
+    int SL_NO = 13;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_medical, getResources().getString(R.string.medical_health));
+
+        ids = new TextView[]{binding.slNo14, binding.slNo15, binding.slNo16, binding.slNo17, binding.slNo18,
+                binding.slNo19, binding.slNo20};
+        setIds();
+
         medicalDetailsViewModel = new MedicalDetailsViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
         studentsAttndViewModel = new StudentsAttndViewModel(MedicalActivity.this);
@@ -516,6 +524,13 @@ public class MedicalActivity extends BaseActivity implements SaveListener {
             }
         });
 
+    }
+
+    private void setIds() {
+        for (TextView id : ids) {
+            SL_NO = SL_NO + 1;
+            id.setText(SL_NO + ".");
+        }
     }
 
     private void getTotalInstStrength() {

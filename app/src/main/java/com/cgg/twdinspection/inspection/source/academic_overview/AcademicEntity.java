@@ -43,6 +43,9 @@ public class AcademicEntity {
     private String staff_accomodated_asper_stud_strength;
 
     @ColumnInfo()
+    private String subject_names;
+
+    @ColumnInfo()
     private String plan_prepared;
 
     @ColumnInfo()
@@ -278,6 +281,14 @@ public class AcademicEntity {
 
     public void setStaff_accomodated_asper_stud_strength(String staff_accomodated_asper_stud_strength) {
         this.staff_accomodated_asper_stud_strength = staff_accomodated_asper_stud_strength;
+    }
+
+    public String getSubject_names() {
+        return subject_names;
+    }
+
+    public void setSubject_names(String subject_names) {
+        this.subject_names = subject_names;
     }
 
     public String getPlan_prepared() {
