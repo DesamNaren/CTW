@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -18,7 +19,6 @@ import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.GeneralInfoViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
-import com.cgg.twdinspection.inspection.viewmodel.SerialNumber;
 import com.google.android.material.snackbar.Snackbar;
 
 public class GeneralInfoActivity extends BaseActivity implements SaveListener {
@@ -46,7 +46,10 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_info, getResources().getString(R.string.general_info));
 
-        SerialNumber.resetValue(0);
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8};
+        BaseActivity.setIds(ids, 0);
+
         generalInfoViewModel = new GeneralInfoViewModel(getApplication());
         instMainViewModel = new InstMainViewModel(getApplication());
         binding.setViewModel(generalInfoViewModel);

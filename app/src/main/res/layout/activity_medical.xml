@@ -15,9 +15,6 @@
             name="medical"
             type="com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity" />
 
-        <variable
-            name="slno"
-            type="com.cgg.twdinspection.inspection.viewmodel.SerialNumber" />
     </data>
 
     <RelativeLayout
@@ -46,7 +43,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/slNo14"
+                        android:id="@+id/slNo1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
@@ -71,8 +68,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{medical.sickBoarders}" />
@@ -92,7 +89,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/slNo15"
+                        android:id="@+id/slNo2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
@@ -117,8 +114,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{medical.sickBoarders_area}" />
@@ -138,7 +135,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/slNo16"
+                        android:id="@+id/slNo3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
@@ -200,8 +197,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.feverCount}" />
@@ -244,8 +241,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.coldCount}" />
@@ -288,8 +285,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.headacheCount}" />
@@ -339,8 +336,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.diarrheaCount}" />
@@ -383,8 +380,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.malariaCount}" />
@@ -427,8 +424,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.othersCount}" />
@@ -462,10 +459,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slNo4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slNo17"
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -499,11 +496,11 @@
                                 android:layout_height="wrap_content"
                                 android:focusableInTouchMode="false"
                                 android:hint="@string/medical_checkup"
+                                android:imeOptions="actionNext"
+                                android:paddingLeft="@dimen/dimen_30dp"
                                 android:paddingTop="@dimen/dimen_10dp"
                                 android:paddingRight="@dimen/dimen_5dp"
                                 android:paddingBottom="@dimen/dimen_10dp"
-                                android:imeOptions="actionNext"
-                                android:paddingLeft="@dimen/dimen_30dp"
                                 android:singleLine="true"
                                 android:text="@{medical.last_medical_checkup_date}" />
 
@@ -527,10 +524,10 @@
 
 
                     <TextView
+                        android:id="@+id/slNo5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slNo18"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -635,10 +632,10 @@
 
 
                     <TextView
+                        android:id="@+id/slNo6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slNo19"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -747,8 +744,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.screenedByCallHealth}" />
@@ -782,8 +779,8 @@
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
                                     android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
+                                    android:paddingRight="@dimen/dimen_5dp"
                                     android:paddingBottom="@dimen/dimen_10dp"
                                     android:singleLine="true"
                                     android:text="@{medical.leftForscreening}" />
@@ -808,10 +805,10 @@
 
 
                     <TextView
+                        android:id="@+id/slNo7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slNo20"
                         android:textColor="@color/black" />
 
                     <LinearLayout

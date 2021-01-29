@@ -47,17 +47,17 @@
     <string name="others">Others</string>
     <string name="select_date">Select date</string>
     <string name="enter_number">Enter number of suffering students</string>
-    <string name="students_on_roll">11. Students on roll</string>
+    <string name="students_on_roll">Students on roll</string>
     <string name="students_on_roll_rep">Students on roll</string>
     <string name="password">Password</string>
-    <string name="is_students_attendance_marked">12. Is students attendance marked?</string>
-    <string name="is_students_attendance_marked_rep">12. Is students attendance marked?</string>
-    <string name="students_marked_present_in_register">13. Students marked present in register</string>
-    <string name="students_marked_present_in_register_rep">13. Students marked present in register</string>
-    <string name="students_present_during_inspection">14. Students present during inspection</string>
-    <string name="students_present_during_inspection_rep">14. Students present during Inspection</string>
-    <string name="variance">15. Variance</string>
-    <string name="variance_rep">15. Variance</string>
+    <string name="is_students_attendance_marked">Is students attendance marked?</string>
+    <string name="is_students_attendance_marked_rep">Is students attendance marked?</string>
+    <string name="students_marked_present_in_register">Students marked present in register</string>
+    <string name="students_marked_present_in_register_rep">Students marked present in register</string>
+    <string name="students_present_during_inspection">Students present during inspection</string>
+    <string name="students_present_during_inspection_rep">Students present during Inspection</string>
+    <string name="variance">Variance</string>
+    <string name="variance_rep">Variance</string>
     <string name="drinking_water_facility">Whether drinking water facility is available</string>
     <string name="running_water_facility">Whether running water facility is available</string>
     <string name="yes">Yes</string>
@@ -124,7 +124,7 @@
     <string name="b">B</string>
     <string name="c">C</string>
     <string name="total">Total</string>
-    <string name="are_the">89. Are the following registers maintained up to date?</string>
+    <string name="are_the">Are the following registers maintained up to date?</string>
     <string name="adm_reg">Admission register</string>
     <string name="att_boa_reg">Boarders Attendance Register</string>
     <string name="boa_sign_reg">Boarders Signature Register</string>
@@ -1121,5 +1121,6 @@
     <string name="gcc_title">GCC</string>
     <string name="my_inspections">My Inspections</string>
     <string name="logout_str">Logout</string>
-
+    <string name="insp_remarks">Inspection Officer Remarks</string>
+    <string name="sel_insp_remarks">Enter Inspection Officer Remarks</string>
 </resources>

@@ -66,58 +66,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private int highClassStrength;
     private int gradeAcnt, gradeBCnt, gradeCCnt;
 
-    private void getHighClassStrength() {
-
-        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
-                instId);
-        masterInstituteInfoLiveData.observe(AcademicActivity.this, new Observer<MasterInstituteInfo>() {
-            @Override
-            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
-                masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
-                if (masterInstituteInfos != null && masterInstituteInfos.getClassInfo() != null && masterInstituteInfos.getClassInfo().size() > 0) {
-                    List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
-                    if (masterClassInfos != null && masterClassInfos.size() > 0) {
-                        for (int i = masterClassInfos.size(); i > 0; i--) {
-                            if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i - 1).getStudentCount() > 0) {
-                                highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
-                                binding.highClassStrength.setText("Highest Class: Class " + masterClassInfos.get(i - 1).getClassId() + ", Strength: " + highClassStrength);
-                                break;
-                            }
-                        }
-                        try {
-                            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
-                            if (localFlag == 1) {
-                                //get local record & set to data binding
-                                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
-                                academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
-                                    @Override
-                                    public void onChanged(AcademicEntity generalInfoEntity) {
-                                        academicInfoData.removeObservers(AcademicActivity.this);
-                                        if (generalInfoEntity != null) {
-                                            binding.setInspData(generalInfoEntity);
-                                            binding.executePendingBindings();
-                                        }
-                                    }
-                                });
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                } else {
-                    Toast.makeText(AcademicActivity.this, "No master institute data found", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_academic, getString(R.string.title_academic));
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
+                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17};
+        BaseActivity.setIds(ids, 53);
+
         instMainViewModel = new InstMainViewModel(getApplication());
         sharedPreferences = TWDApplication.get(this).getPreferences();
         studentsAttndViewModel = new StudentsAttndViewModel(getApplication());
@@ -908,6 +866,53 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         });
     }
 
+    private void getHighClassStrength() {
+
+        LiveData<MasterInstituteInfo> masterInstituteInfoLiveData = studentsAttndViewModel.getMasterClassInfo(
+                instId);
+        masterInstituteInfoLiveData.observe(AcademicActivity.this, new Observer<MasterInstituteInfo>() {
+            @Override
+            public void onChanged(MasterInstituteInfo masterInstituteInfos) {
+                masterInstituteInfoLiveData.removeObservers(AcademicActivity.this);
+                if (masterInstituteInfos != null && masterInstituteInfos.getClassInfo() != null && masterInstituteInfos.getClassInfo().size() > 0) {
+                    List<MasterClassInfo> masterClassInfos = masterInstituteInfos.getClassInfo();
+                    if (masterClassInfos != null && masterClassInfos.size() > 0) {
+                        for (int i = masterClassInfos.size(); i > 0; i--) {
+                            if (masterClassInfos.get(i - 1).getClassId() > 0 && masterClassInfos.get(i - 1).getStudentCount() > 0) {
+                                highClassStrength = masterClassInfos.get(i - 1).getStudentCount();
+                                binding.highClassStrength.setText("Highest Class: Class " + masterClassInfos.get(i - 1).getClassId() + ", Strength: " + highClassStrength);
+                                break;
+                            }
+                        }
+                        try {
+                            localFlag = getIntent().getIntExtra(AppConstants.LOCAL_FLAG, -1);
+                            if (localFlag == 1) {
+                                //get local record & set to data binding
+                                LiveData<AcademicEntity> academicInfoData = instMainViewModel.getAcademicInfoData();
+                                academicInfoData.observe(AcademicActivity.this, new Observer<AcademicEntity>() {
+                                    @Override
+                                    public void onChanged(AcademicEntity generalInfoEntity) {
+                                        academicInfoData.removeObservers(AcademicActivity.this);
+                                        if (generalInfoEntity != null) {
+                                            binding.setInspData(generalInfoEntity);
+                                            binding.executePendingBindings();
+                                        }
+                                    }
+                                });
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                } else {
+                    Toast.makeText(AcademicActivity.this, "No master institute data found", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+    }
 
     private boolean validate() {
         boolean listFlag = false;

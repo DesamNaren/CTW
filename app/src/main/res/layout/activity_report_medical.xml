@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="17."
+                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="18."
+                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -161,7 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="19."
+                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -480,7 +480,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="20."
+                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -546,7 +546,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="21."
+                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -655,7 +655,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="22."
+                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -802,7 +802,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="23."
+                        android:id="@+id/slno7"
                         android:textColor="@color/black" />
 
                     <LinearLayout

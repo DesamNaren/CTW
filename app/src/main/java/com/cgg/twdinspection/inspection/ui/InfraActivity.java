@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -102,6 +103,15 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_infrastructure);
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
+                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17, binding.slno18,
+                binding.slno19, binding.slno20, binding.slno21, binding.slno22, binding.slno23, binding.slno24,
+                binding.slno25, binding.slno26};
+        BaseActivity.setIds(ids, 27);
+        binding.slno261.setText(binding.slno26.getText().toString() + "1.");
+
         binding.header.headerTitle.setText(getResources().getString(R.string.title_infra));
         binding.header.ivHome.setVisibility(View.GONE);
         viewModel = new UploadPhotoViewModel(InfraActivity.this);
@@ -1151,7 +1161,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             return false;
         }
 
-         if (bunker_beds.equals(AppConstants.Yes) &&TextUtils.isEmpty(bunker_beds_cnt)) {
+        if (bunker_beds.equals(AppConstants.Yes) && TextUtils.isEmpty(bunker_beds_cnt)) {
             showSnackBar(getResources().getString(R.string.select_bunker_beds));
             ScrollToView(binding.rgBunkerBeds);
             return false;

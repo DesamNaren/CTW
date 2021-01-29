@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="83."
+                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -751,7 +751,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="84."
+                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -900,7 +900,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="85."
+                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <RelativeLayout
@@ -952,7 +952,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="86."
+                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1013,7 +1013,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="87."
+                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1074,7 +1074,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="88."
+                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <RelativeLayout

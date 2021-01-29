@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -25,6 +26,11 @@ public class ReportCoCarricularActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_co_curricular);
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8};
+        BaseActivity.setIds(ids, 70);
+
         binding.actionBar.headerTitle.setText(getString(R.string.title_co_cir));
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override

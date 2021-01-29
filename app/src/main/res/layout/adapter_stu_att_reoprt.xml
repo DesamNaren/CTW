@@ -63,38 +63,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/slno1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/students_on_roll"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/colorAccent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:inputType="textEmailAddress"
-                            android:text="@string/students_on_roll_rep"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:textSize="@dimen/dimen_15dp" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:layout_weight="3"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/students_on_roll"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
 
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_classCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:padding="5dp"
                         android:text="@{stuData.totalStudents}"
                         android:textColor="@color/black"
@@ -108,24 +104,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="vertical">
 
-                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/is_students_attendance_marked_rep"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_15dp" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/slno2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:padding="@dimen/dimen_5dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_15dp" />
+
+                        <com.cgg.twdinspection.common.custom.CustomFontTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:inputType="textEmailAddress"
+                            android:padding="5dp"
+                            android:text="@string/is_students_attendance_marked"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_15dp" />
+                    </LinearLayout>
 
                     <RadioGroup
                         android:id="@+id/rg_IsAttndMarked_1_2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_30dp"
+                        android:layout_marginLeft="@dimen/dimen_50dp"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -154,37 +164,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal"
                     android:visibility="@{stuData.attendenceMarked.equalsIgnoreCase(`Yes`) ? View.VISIBLE : View.GONE}">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <TextView
+                        android:id="@+id/slno3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
+
+
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:id="@+id/et_studMarkedPres"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
                         android:layout_weight="3"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/students_on_roll"
+                        android:inputType="number"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/students_marked_present_in_register"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/colorAccent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:inputType="textEmailAddress"
-                            android:text="@string/students_marked_present_in_register_rep"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:textSize="@dimen/dimen_15dp" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_regCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
                         android:padding="5dp"
                         android:text="@{stuData.studentCountInRegister}"
@@ -197,82 +207,81 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/slno4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
+
+
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:id="@+id/et_studPresInsp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:visibility="gone" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
                         android:layout_weight="3"
-                        android:inputType="textEmailAddress"
-                        android:padding="5dp"
-                        android:text="@string/students_on_roll"
+                        android:inputType="number"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/students_present_during_inspection"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/colorAccent">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:layout_marginLeft="@dimen/dimen_8dp"
-                            android:inputType="textEmailAddress"
-                            android:text="@string/students_present_during_inspection_rep"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:textSize="@dimen/dimen_15dp" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_insCount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:padding="5dp"
                         android:text="@{stuData.studentCountDuringInspection}"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
+
                 </LinearLayout>
 
-
                 <LinearLayout
+                    android:id="@+id/ll_variance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:visibility="@{stuData.attendenceMarked.equalsIgnoreCase(`Yes`) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/slno5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_8dp"
+                        android:layout_margin="@dimen/dimen_5dp"
                         android:layout_weight="3"
                         android:inputType="textEmailAddress"
                         android:padding="5dp"
-                        android:text="@string/variance_rep"
+                        android:text="@string/variance"
                         android:textColor="@color/black" />
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:id="@+id/tv_variance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:padding="5dp"
                         android:text="@{stuData.variance}"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
-
+                        android:textSize="18sp"/>
 
                 </LinearLayout>
 

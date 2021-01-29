@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="58."
+                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -108,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="59."
+                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -226,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="60."
+                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -279,62 +279,6 @@
 
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dimen_10dp"
-                    android:visibility="gone">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="visible">
-
-                        <com.cgg.twdinspection.common.custom.CustomFontTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/capture_tds_meter_reading" />
-
-                        <ImageView
-                            android:layout_width="@dimen/_100dp"
-                            android:layout_height="@dimen/_100dp"
-                            android:padding="@dimen/dimen_5dp"
-                            android:src="@drawable/ic_launcher_background" />
-
-                    </LinearLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/t_name"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_5dp"
-                        android:textColorHint="@color/colorAccent"
-                        android:visibility="gone"
-                        app:errorEnabled="true">
-
-                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:focusableInTouchMode="false"
-                            android:hint="@string/enter_reason"
-                            android:imeOptions="actionNext"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </FrameLayout>
-
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
@@ -351,7 +295,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="61."
+                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -455,7 +399,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="62."
+                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -572,7 +516,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="63."
+                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -637,7 +581,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="64."
+                        android:id="@+id/slno7"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -932,7 +876,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="65."
+                        android:id="@+id/slno8"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1025,7 +969,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="66."
+                        android:id="@+id/slno9"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1117,7 +1061,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="67."
+                        android:id="@+id/slno10"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1208,7 +1152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="68."
+                        android:id="@+id/slno11"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1327,7 +1271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="69."
+                        android:id="@+id/slno12"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1531,7 +1475,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="70."
+                        android:id="@+id/slno13"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1730,7 +1674,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="71."
+                        android:id="@+id/slno14"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1847,7 +1791,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="72."
+                        android:id="@+id/slno15"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2003,7 +1947,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="73."
+                        android:id="@+id/slno16"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2421,7 +2365,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="74."
+                        android:id="@+id/slno17"
                         android:textColor="@color/black" />
 
                     <LinearLayout

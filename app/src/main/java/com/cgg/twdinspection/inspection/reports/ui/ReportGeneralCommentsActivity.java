@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -30,6 +31,11 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_general_comments);
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6};
+        BaseActivity.setIds(ids, 85);
+
         binding.actionBar.headerTitle.setText(getString(R.string.title_general_comments));
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override

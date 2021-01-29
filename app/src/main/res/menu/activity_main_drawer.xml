@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/menu1">
+    <group
+        android:id="@+id/menu1"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/home"
+            app:iconTint="@color/colorPrimaryDark"
+            android:icon="@drawable/dashboard"
             android:title="@string/menu_home" />
     </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/menu2">
+    <group
+        android:id="@+id/menu2"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_school"
-            android:icon="@drawable/school"
-            android:title="@string/institute_inspection" />
+            android:icon="@drawable/schools_icon"
+            android:title="@string/institute_inspection"
+            app:iconTint="@color/colorPrimaryDark" />
         <item
             android:id="@+id/nav_schemes"
-            android:icon="@drawable/scheme"
-            android:title="@string/scheme" />
+            android:icon="@drawable/schemes_icon"
+            android:title="@string/scheme"
+            app:iconTint="@color/colorPrimaryDark" />
         <item
             android:id="@+id/nav_gcc"
             android:icon="@drawable/gcc_icon"
-            android:title="@string/gcc_title" />
+            android:title="@string/gcc_title"
+            app:iconTint="@color/colorPrimaryDark" />
         <item
             android:id="@+id/nav_eng"
-            android:icon="@drawable/engineering"
-            android:title="@string/engineering_works" />
+            android:icon="@drawable/engineering_works_icon"
+            android:title="@string/engineering_works"
+            app:iconTint="@color/colorPrimaryDark" />
     </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/menu3">
+    <group
+        android:id="@+id/menu3"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_reports"
+            app:iconTint="@color/colorPrimaryDark"
             android:icon="@drawable/report"
             android:title="@string/report" />
         <item
             android:id="@+id/nav_my_insp"
             android:icon="@drawable/dmv"
-            android:visible="false"
-            android:title="@string/my_inspections" />
+            android:title="@string/my_inspections"
+            android:visible="false" />
         <item
             android:id="@+id/nav_logout"
+            app:iconTint="@color/colorPrimaryDark"
             android:icon="@drawable/logout"
             android:title="@string/logout_str" />
     </group>

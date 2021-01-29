@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +15,7 @@ import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityReportGeneralInfoBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
+import com.cgg.twdinspection.inspection.ui.BaseActivity;
 import com.google.gson.Gson;
 
 public class ReportsGeneralInfoActivity extends AppCompatActivity {
@@ -26,6 +28,11 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_general_info);
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8};
+        BaseActivity.setIds(ids, 0);
+
         binding.actionBar.headerTitle.setText(getString(R.string.general_info));
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

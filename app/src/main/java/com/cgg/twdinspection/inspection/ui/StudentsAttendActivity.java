@@ -7,13 +7,11 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,11 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.common.custom.CustomFontEditText;
-import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityStudentsAttendanceBinding;
+import com.cgg.twdinspection.databinding.BottomSheetBinding;
 import com.cgg.twdinspection.inspection.adapter.StudentsAttAdapter;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.interfaces.StudAttendInterface;
@@ -49,12 +46,10 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     MasterInstituteInfo masterInstituteInfos;
     List<StudAttendInfoEntity> studAttendInfoEntityListMain;
     String IsattenMarked, count_reg, count_during_insp, variance;
-    CustomFontEditText et_studMarkedPres, et_studPresInsp;
-    LinearLayout ll_stud_pres, ll_variance;
     InstMainViewModel instMainViewModel;
-    CoordinatorLayout bottom_ll;
     SharedPreferences sharedPreferences;
     String instId, officerId;
+    private BottomSheetBinding bs_binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +147,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     }
 
     private void showBottomSheetSnackBar(String str) {
-        Snackbar.make(bottom_ll, str, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(bs_binding.bottomLl, str, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -161,71 +156,61 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
     }
 
     public void showContactDetails(StudAttendInfoEntity studAttendInfoEntity) {
-        View view = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
-        bottom_ll = view.findViewById(R.id.bottom_ll);
+        bs_binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.bottom_sheet, null, false);
         dialog = new BottomSheetDialog(StudentsAttendActivity.this);
-        dialog.setContentView(view);
+        dialog.setContentView(bs_binding.getRoot());
         dialog.setCancelable(true);
 
-        ImageView ic_close = view.findViewById(R.id.ic_close);
-        RadioGroup rg_IsAttndMarked_1_2 = view.findViewById(R.id.rg_IsAttndMarked_1_2);
-        TextView tv_classType = view.findViewById(R.id.tv_classType);
-        CustomFontTextView tv_classCount = view.findViewById(R.id.tv_classCount);
-        RadioButton rb_attMark_yes = view.findViewById(R.id.rb_yes);
-        RadioButton rb_attMark_yno = view.findViewById(R.id.rb_no);
-        et_studPresInsp = view.findViewById(R.id.et_studPresInsp);
-        et_studMarkedPres = view.findViewById(R.id.et_studMarkedPres);
-        CustomFontTextView tv_variance = view.findViewById(R.id.tv_variance);
-        ImageView btn_save = view.findViewById(R.id.btn_save);
-        ll_stud_pres = view.findViewById(R.id.ll_stud_pres);
-        ll_variance = view.findViewById(R.id.ll_variance);
+        TextView[] ids = new TextView[]{bs_binding.slno1, bs_binding.slno2, bs_binding.slno3, bs_binding.slno4,
+                bs_binding.slno5};
+        BaseActivity.setIds(ids, 8);
 
         if (studAttendInfoEntity.getAttendence_marked() != null) {
             if (studAttendInfoEntity.getAttendence_marked().equals(AppConstants.Yes)) {
-                ll_stud_pres.setVisibility(View.VISIBLE);
-                ll_variance.setVisibility(View.VISIBLE);
-                rb_attMark_yes.setChecked(true);
+                bs_binding.llStudPres.setVisibility(View.VISIBLE);
+                bs_binding.llVariance.setVisibility(View.VISIBLE);
+                bs_binding.rbYes.setChecked(true);
             }
             if (studAttendInfoEntity.getAttendence_marked().equals(AppConstants.No)) {
-                ll_stud_pres.setVisibility(View.GONE);
-                ll_variance.setVisibility(View.GONE);
-                rb_attMark_yno.setChecked(true);
+                bs_binding.llStudPres.setVisibility(View.GONE);
+                bs_binding.llVariance.setVisibility(View.GONE);
+                bs_binding.rbNo.setChecked(true);
             }
         }
 
-        tv_classCount.setText(studAttendInfoEntity.getTotal_students());
-        tv_classType.setText(studAttendInfoEntity.getClass_type());
-        et_studMarkedPres.setText(studAttendInfoEntity.getStudent_count_in_register());
-        et_studPresInsp.setText(studAttendInfoEntity.getStudent_count_during_inspection());
-        tv_variance.setText(studAttendInfoEntity.getVariance());
+        bs_binding.tvClassCount.setText(studAttendInfoEntity.getTotal_students());
+        bs_binding.tvClassType.setText(studAttendInfoEntity.getClass_type());
+        bs_binding.etStudMarkedPres.setText(studAttendInfoEntity.getStudent_count_in_register());
+        bs_binding.etStudPresInsp.setText(studAttendInfoEntity.getStudent_count_during_inspection());
+        bs_binding.tvVariance.setText(studAttendInfoEntity.getVariance());
         IsattenMarked = studAttendInfoEntity.getAttendence_marked();
 
 
-        ic_close.setOnClickListener(new View.OnClickListener() {
+        bs_binding.icClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
 
-        rg_IsAttndMarked_1_2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        bs_binding.rgIsAttndMarked12.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (radioGroup.getCheckedRadioButtonId() == R.id.rb_yes) {
                     IsattenMarked = AppConstants.Yes;
-                    ll_variance.setVisibility(View.VISIBLE);
-                    ll_stud_pres.setVisibility(View.VISIBLE);
+                    bs_binding.llVariance.setVisibility(View.VISIBLE);
+                    bs_binding.llStudPres.setVisibility(View.VISIBLE);
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.rb_no) {
                     IsattenMarked = AppConstants.No;
-                    ll_stud_pres.setVisibility(View.GONE);
-                    ll_variance.setVisibility(View.GONE);
-                    et_studMarkedPres.setText("");
-                    tv_variance.setText("");
+                    bs_binding.llStudPres.setVisibility(View.GONE);
+                    bs_binding.llVariance.setVisibility(View.GONE);
+                    bs_binding.etStudMarkedPres.setText("");
+                    bs_binding.tvVariance.setText("");
                 }
             }
         });
 
-        et_studPresInsp.addTextChangedListener(new TextWatcher() {
+        bs_binding.etStudPresInsp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -233,20 +218,20 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (et_studPresInsp.getVisibility() == View.VISIBLE) {
-                    if (!TextUtils.isEmpty(et_studMarkedPres.getText().toString()) &&
-                            !TextUtils.isEmpty(et_studPresInsp.getText().toString())) {
+                if (bs_binding.etStudPresInsp.getVisibility() == View.VISIBLE) {
+                    if (!TextUtils.isEmpty(bs_binding.etStudMarkedPres.getText().toString()) &&
+                            !TextUtils.isEmpty(bs_binding.etStudPresInsp.getText().toString())) {
                         String var = null;
-                        if (Integer.parseInt(et_studMarkedPres.getText().toString().trim()) > Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
-                            var = String.valueOf(Integer.parseInt(et_studMarkedPres.getText().toString().trim()) -
-                                    Integer.parseInt(et_studPresInsp.getText().toString().trim()));
+                        if (Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()) > Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim())) {
+                            var = String.valueOf(Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()) -
+                                    Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim()));
                         } else {
-                            var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim()) -
-                                    Integer.parseInt(et_studMarkedPres.getText().toString().trim()));
+                            var = String.valueOf(Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim()) -
+                                    Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()));
                         }
-                        tv_variance.setText(var);
+                        bs_binding.tvVariance.setText(var);
                     } else {
-                        tv_variance.setText("");
+                        bs_binding.tvVariance.setText("");
                     }
                 }
             }
@@ -257,7 +242,7 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
             }
         });
 
-        et_studMarkedPres.addTextChangedListener(new TextWatcher() {
+        bs_binding.etStudMarkedPres.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -265,21 +250,21 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (et_studMarkedPres.getVisibility() == View.VISIBLE) {
-                    if (et_studMarkedPres.getVisibility() == View.VISIBLE) {
-                        if (!TextUtils.isEmpty(et_studMarkedPres.getText().toString()) &&
-                                !TextUtils.isEmpty(et_studPresInsp.getText().toString())) {
+                if (bs_binding.etStudMarkedPres.getVisibility() == View.VISIBLE) {
+                    if (bs_binding.etStudMarkedPres.getVisibility() == View.VISIBLE) {
+                        if (!TextUtils.isEmpty(bs_binding.etStudMarkedPres.getText().toString()) &&
+                                !TextUtils.isEmpty(bs_binding.etStudPresInsp.getText().toString())) {
                             String var = null;
-                            if (Integer.parseInt(et_studMarkedPres.getText().toString().trim()) > Integer.parseInt(et_studPresInsp.getText().toString().trim())) {
-                                var = String.valueOf(Integer.parseInt(et_studMarkedPres.getText().toString().trim()) -
-                                        Integer.parseInt(et_studPresInsp.getText().toString().trim()));
+                            if (Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()) > Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim())) {
+                                var = String.valueOf(Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()) -
+                                        Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim()));
                             } else {
-                                var = String.valueOf(Integer.parseInt(et_studPresInsp.getText().toString().trim()) -
-                                        Integer.parseInt(et_studMarkedPres.getText().toString().trim()));
+                                var = String.valueOf(Integer.parseInt(bs_binding.etStudPresInsp.getText().toString().trim()) -
+                                        Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString().trim()));
                             }
-                            tv_variance.setText(var);
+                            bs_binding.tvVariance.setText(var);
                         } else {
-                            tv_variance.setText("");
+                            bs_binding.tvVariance.setText("");
                         }
                     }
                 }
@@ -294,14 +279,14 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
 
         dialog.show();
 
-        btn_save.setOnClickListener(new View.OnClickListener() {
+        bs_binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (dialog.isShowing()) {
 
-                    count_reg = et_studMarkedPres.getText().toString().trim();
-                    count_during_insp = et_studPresInsp.getText().toString().trim();
-                    variance = tv_variance.getText().toString().trim();
+                    count_reg = bs_binding.etStudMarkedPres.getText().toString().trim();
+                    count_during_insp = bs_binding.etStudPresInsp.getText().toString().trim();
+                    variance = bs_binding.tvVariance.getText().toString().trim();
 
                     if (validate(studAttendInfoEntity)) {
 
@@ -333,31 +318,31 @@ public class StudentsAttendActivity extends BaseActivity implements StudAttendIn
         if (TextUtils.isEmpty(IsattenMarked)) {
             showBottomSheetSnackBar(getResources().getString(R.string.attendance_marked));
             flag = false;
-        } else if (TextUtils.isEmpty(count_reg) && ll_stud_pres.getVisibility() == View.VISIBLE ) {
-            et_studMarkedPres.requestFocus();
+        } else if (TextUtils.isEmpty(count_reg) && bs_binding.llStudPres.getVisibility() == View.VISIBLE) {
+            bs_binding.etStudMarkedPres.requestFocus();
             showBottomSheetSnackBar(getResources().getString(R.string.count_in_register));
             flag = false;
-        } else if (ll_stud_pres.getVisibility() == View.VISIBLE && count_reg.equals("0")) {
+        } else if (bs_binding.llStudPres.getVisibility() == View.VISIBLE && count_reg.equals("0")) {
             showBottomSheetSnackBar(getResources().getString(R.string.count_in_register_zero));
-            et_studMarkedPres.setText("");
-            et_studMarkedPres.requestFocus();
+            bs_binding.etStudMarkedPres.setText("");
+            bs_binding.etStudMarkedPres.requestFocus();
             flag = false;
         } else if (TextUtils.isEmpty(count_during_insp)) {
-            et_studPresInsp.requestFocus();
+            bs_binding.etStudPresInsp.requestFocus();
             showBottomSheetSnackBar(getResources().getString(R.string.count_dur_insp));
             flag = false;
         } else if (IsattenMarked.equals(AppConstants.Yes)) {
-            if (Integer.parseInt(et_studMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+            if (Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
                 showBottomSheetSnackBar(getResources().getString(R.string.stud_marked_greater_than_roll));
                 flag = false;
-            } else if (Integer.parseInt(et_studMarkedPres.getText().toString()) == 0) {
+            } else if (Integer.parseInt(bs_binding.etStudMarkedPres.getText().toString()) == 0) {
                 showBottomSheetSnackBar(getString(R.string.greater_than_zero));
                 flag = false;
-            } else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+            } else if (Integer.parseInt(bs_binding.etStudPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
                 showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
                 flag = false;
             }
-        } else if (Integer.parseInt(et_studPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
+        } else if (Integer.parseInt(bs_binding.etStudPresInsp.getText().toString()) > Integer.parseInt(studAttendInfoEntity.getTotal_students())) {
             showBottomSheetSnackBar(getResources().getString(R.string.stud_greater_than_roll));
             flag = false;
         }

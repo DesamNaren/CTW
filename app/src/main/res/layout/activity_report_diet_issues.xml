@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,14 +9,6 @@
         <variable
             name="inspData"
             type="com.cgg.twdinspection.inspection.reports.source.DietIssues" />
-
-        <variable
-            name="menuImgUrl"
-            type="String" />
-
-        <variable
-            name="officerImgUrl"
-            type="String" />
 
     </data>
 
@@ -74,13 +65,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/dimen_5dp"
                         android:paddingTop="@dimen/dimen_10dp"
                         android:paddingRight="@dimen/dimen_5dp"
                         android:paddingBottom="@dimen/dimen_10dp"
-                        android:text="24."
                         android:textColor="@color/black" />
 
                     <TextView
@@ -136,10 +127,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="25."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -221,8 +212,7 @@
                                     android:layout_width="@dimen/_125dp"
                                     android:layout_height="@dimen/_125dp"
                                     android:layout_gravity="center"
-                                    android:scaleType="fitXY"
-                                    app:profileImage="@{menuImgUrl}" />
+                                    android:scaleType="fitXY" />
 
                                 <ProgressBar
                                     android:id="@+id/pbar2"
@@ -247,10 +237,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="26."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -305,10 +295,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="27."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -417,10 +407,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="28."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -523,10 +513,10 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="29."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -655,14 +645,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_5dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/slno7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="30."
                             android:textColor="@color/black" />
 
                         <LinearLayout
@@ -681,7 +670,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen_10dp">
+                                android:layout_margin="@dimen/dimen_10dp">
 
                                 <ImageView
                                     android:id="@+id/iv_inspOfficer"
@@ -689,8 +678,7 @@
                                     android:layout_height="@dimen/_125dp"
                                     android:layout_gravity="center"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/camera"
-                                    app:profileImage="@{officerImgUrl}" />
+                                    android:src="@drawable/camera" />
 
                                 <ProgressBar
                                     android:id="@+id/pbar"

@@ -11,10 +11,6 @@
             name="inspData"
             type="com.cgg.twdinspection.inspection.reports.source.InfraMaintenance" />
 
-        <variable
-            name="tdsImgUrl"
-            type="String" />
-
     </data>
 
     <RelativeLayout
@@ -54,7 +50,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="31."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -112,10 +107,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="32."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -257,10 +252,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="33."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -315,9 +310,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{inspData.roPlantWoking.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE}">
 
-                            <TextView
+
+                        <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/dimen_5dp"
@@ -336,8 +332,7 @@
                                     android:layout_height="@dimen/_125dp"
                                     android:layout_gravity="center"
                                     android:scaleType="fitXY"
-                                    android:src="@drawable/camera"
-                                    app:profileImage="@{tdsImgUrl}" />
+                                    android:src="@drawable/camera" />
 
                                 <ProgressBar
                                     android:id="@+id/pbar"
@@ -399,10 +394,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="34."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -534,10 +529,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="35."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -644,10 +639,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="36."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -711,10 +706,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="37."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -986,10 +981,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="38."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1388,11 +1383,11 @@
 
 
                     <TextView
+                        android:id="@+id/slno8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="39."
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -1435,10 +1430,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="40."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1499,10 +1494,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="41."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1563,10 +1558,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="42."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1628,10 +1623,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="43."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1693,10 +1688,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="44."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1796,10 +1791,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="45."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1856,10 +1851,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="46."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1916,10 +1911,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="47."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1989,10 +1984,10 @@
                                     android:id="@+id/et_bunker_beds_cnt"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:focusableInTouchMode="false"
                                     android:hint="@string/bunker_beds_cnt"
                                     android:imeOptions="actionNext"
                                     android:inputType="number"
-                                    android:focusableInTouchMode="false"
                                     android:paddingLeft="@dimen/dimen_5dp"
                                     android:paddingTop="@dimen/dimen_10dp"
                                     android:paddingRight="@dimen/dimen_5dp"
@@ -2020,10 +2015,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="48."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2083,10 +2078,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="49."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2148,10 +2143,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="50."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2211,10 +2206,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno20"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="51."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2327,10 +2322,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="52."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2392,10 +2387,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno22"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="53."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2505,10 +2500,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno23"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="54."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2690,10 +2685,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno24"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="55"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2751,10 +2746,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno25"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="56"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2813,10 +2808,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="57."
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2893,10 +2888,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno26_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:text="57.1."
                         android:textColor="@color/black" />
 
                     <LinearLayout

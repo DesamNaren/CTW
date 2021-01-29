@@ -109,6 +109,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_diet_issues);
 
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7};
+        BaseActivity.setIds(ids, 20);
+
         viewModel = new UploadPhotoViewModel(DietIssuesActivity.this);
 
         try {

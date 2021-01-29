@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -26,6 +27,12 @@ public class ReportsAcademicActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_report_academic);
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
+                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17};
+        BaseActivity.setIds(ids, 53);
+
         binding.actionBar.headerTitle.setText(getString(R.string.title_academic));
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override

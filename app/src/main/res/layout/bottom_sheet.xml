@@ -1,251 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/bottom_ll"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent" />
+        android:layout_height="match_parent">
 
-
-    <LinearLayout
-        android:id="@+id/ll_entries"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bottom_ll"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/_100dp"
-        android:visibility="visible"
-        app:layout_behavior="@string/bottom_sheet_behavior">
-
-
-        <RelativeLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/bottom_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dimen_8dp"
-            android:paddingTop="@dimen/dimen_8dp"
-            android:paddingRight="@dimen/dimen_8dp"
-            android:paddingBottom="@dimen/dimen_8dp">
+            android:background="@color/colorAccent" />
 
-            <ImageView
-                android:id="@+id/ic_close"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:src="@drawable/ic_cancel"
-                android:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/tv_classType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_toEndOf="@+id/ic_close"
-                android:layout_toRightOf="@+id/ic_close"
-                android:padding="@dimen/dimen_5dp"
-                android:text="Class Name"
-                android:textColor="@color/white"
-                android:textSize="22dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:src="@drawable/save" />
-
-        </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ll_entries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:layout_below="@+id/bottom_ll"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_100dp"
+            android:visibility="visible"
+            app:layout_behavior="@string/bottom_sheet_behavior">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0dp"
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:text="@string/students_on_roll"
-                android:textColor="@color/black">
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimen_8dp"
+                android:paddingTop="@dimen/dimen_8dp"
+                android:paddingRight="@dimen/dimen_8dp"
+                android:paddingBottom="@dimen/dimen_8dp">
+
+                <ImageView
+                    android:id="@+id/ic_close"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:tint="@color/white" />
 
                 <TextView
+                    android:id="@+id/tv_classType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_8dp"
-                    android:inputType="textEmailAddress"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_toEndOf="@+id/ic_close"
+                    android:layout_toRightOf="@+id/ic_close"
+                    android:padding="@dimen/dimen_5dp"
+                    android:text="Class Name"
+                    android:textColor="@color/white"
+                    android:textSize="22dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:src="@drawable/save" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/slno1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_15dp" />
+
+                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
+                    android:padding="@dimen/dimen_5dp"
                     android:text="@string/students_on_roll"
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_15dp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                android:id="@+id/tv_classCount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-
-
-        </LinearLayout>
+                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    android:id="@+id/tv_classCount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:orientation="vertical">
+            </LinearLayout>
 
-            <com.cgg.twdinspection.common.custom.CustomFontTextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:text="@string/is_students_attendance_marked"
-                android:textColor="@color/black"
-                android:textSize="@dimen/dimen_15dp" />
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/rg_IsAttndMarked_1_2"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/slno2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:padding="@dimen/dimen_5dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_5dp"
+                        android:inputType="textEmailAddress"
+                        android:padding="5dp"
+                        android:text="@string/is_students_attendance_marked"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_15dp" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/rg_IsAttndMarked_1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_30dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/rb_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_stud_pres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/slno3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_15dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp">
+
+
+                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_studMarkedPres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/students_marked_present_in_register"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_5dp"
+                        android:paddingBottom="@dimen/dimen_10dp"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_yes"
+                <TextView
+                    android:id="@+id/slno4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Yes" />
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dimen_15dp" />
 
-                <RadioButton
-                    android:id="@+id/rb_no"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp">
+
+
+                    <com.cgg.twdinspection.common.custom.CustomFontEditText
+                        android:id="@+id/et_studPresInsp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/students_present_during_inspection"
+                        android:inputType="number"
+                        android:paddingLeft="@dimen/dimen_5dp"
+                        android:paddingTop="@dimen/dimen_10dp"
+                        android:paddingRight="@dimen/dimen_5dp"
+                        android:paddingBottom="@dimen/dimen_10dp"
+                        android:textSize="@dimen/dimen_15dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_variance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/slno5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No" />
-            </RadioGroup>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_stud_pres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                <com.cgg.twdinspection.common.custom.CustomFontEditText
-                    android:id="@+id/et_studMarkedPres"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/students_marked_present_in_register"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/dimen_5dp"
-                    android:paddingTop="@dimen/dimen_10dp"
-                    android:paddingRight="@dimen/dimen_5dp"
-                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:padding="@dimen/dimen_5dp"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/dimen_15dp" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:visibility="gone" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp">
-
-
-                <com.cgg.twdinspection.common.custom.CustomFontEditText
-                    android:id="@+id/et_studPresInsp"
-                    android:layout_width="match_parent"
+                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/students_present_during_inspection"
-                    android:inputType="number"
-                    android:paddingLeft="@dimen/dimen_5dp"
-                    android:paddingTop="@dimen/dimen_10dp"
-                    android:paddingRight="@dimen/dimen_5dp"
-                    android:paddingBottom="@dimen/dimen_10dp"
-                    android:textSize="@dimen/dimen_15dp" />
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_weight="2"
+                    android:inputType="textEmailAddress"
+                    android:padding="5dp"
+                    android:text="@string/variance"
+                    android:textColor="@color/black" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.cgg.twdinspection.common.custom.CustomFontTextView
+                    android:id="@+id/tv_variance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp" />
 
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_variance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp"
-                android:layout_weight="2"
-                android:inputType="textEmailAddress"
-                android:padding="5dp"
-                android:text="@string/variance"
-                android:textColor="@color/black" />
-
-            <com.cgg.twdinspection.common.custom.CustomFontTextView
-                android:id="@+id/tv_variance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-
+            </LinearLayout>
 
         </LinearLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
-</RelativeLayout>
+</layout>

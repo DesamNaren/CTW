@@ -90,6 +90,9 @@ public class GeneralComments {
     @SerializedName("stud_found_anemic")
     @Expose
     private String studFoundAnemic;
+    @SerializedName("remarks")
+    @Expose
+    private String remarks;
 
     public String getCookWearingCap() {
         return cookWearingCap;
@@ -313,5 +316,13 @@ public class GeneralComments {
 
     public void setStudFoundAnemic(String studFoundAnemic) {
         this.studFoundAnemic = studFoundAnemic;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

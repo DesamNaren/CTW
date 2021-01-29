@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +16,7 @@ import com.cgg.twdinspection.databinding.AdapterInspReportBinding;
 import com.cgg.twdinspection.databinding.AdapterStuAttReoprtBinding;
 import com.cgg.twdinspection.inspection.reports.interfaces.InspReportClickCallback;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
+import com.cgg.twdinspection.inspection.ui.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,10 @@ public class StuAttReportAdapter extends RecyclerView.Adapter<StuAttReportAdapte
         AdapterStuAttReoprtBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_stu_att_reoprt, parent, false);
+
+        TextView[] ids = new TextView[]{listItemBinding.slno1, listItemBinding.slno2, listItemBinding.slno3, listItemBinding.slno4,
+                listItemBinding.slno5};
+        BaseActivity.setIds(ids, 8);
 
         return new ItemHolder(listItemBinding);
     }
@@ -99,6 +105,7 @@ public class StuAttReportAdapter extends RecyclerView.Adapter<StuAttReportAdapte
             super(listItemBinding.getRoot());
             this.listItemBinding = listItemBinding;
         }
+
 
         void bind(Object obj) {
             listItemBinding.executePendingBindings();

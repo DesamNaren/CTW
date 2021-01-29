@@ -47,7 +47,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp">
+                android:layout_margin="@dimen/dimen_5dp">
 
                 <com.cgg.twdinspection.common.custom.CustomFontEditText
                     android:id="@+id/book_bal"
@@ -67,7 +67,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_8dp">
+                android:layout_margin="@dimen/dimen_5dp">
 
 
                 <com.cgg.twdinspection.common.custom.CustomFontEditText

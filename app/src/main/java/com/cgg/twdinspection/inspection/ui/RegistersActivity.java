@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -43,6 +44,10 @@ public class RegistersActivity extends BaseActivity implements SaveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_registers, getResources().getString(R.string.title_registers));
+
+        TextView[] ids = new TextView[]{binding.slno1};
+        BaseActivity.setIds(ids, 84);
+
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         instMainViewModel = new InstMainViewModel(getApplication());
 

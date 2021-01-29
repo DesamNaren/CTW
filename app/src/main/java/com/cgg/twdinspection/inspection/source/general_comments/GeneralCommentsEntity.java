@@ -98,6 +98,9 @@ public class GeneralCommentsEntity {
     @ColumnInfo()
     private String storeroom_not_clean;
 
+    @ColumnInfo()
+    private String remarks;
+
     public String getHm_hwo_date() {
         return hm_hwo_date;
     }
@@ -329,5 +332,13 @@ public class GeneralCommentsEntity {
 
     public void setStoreroom_not_clean(String storeroom_not_clean) {
         this.storeroom_not_clean = storeroom_not_clean;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

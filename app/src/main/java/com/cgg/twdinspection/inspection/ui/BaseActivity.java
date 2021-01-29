@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -45,6 +46,13 @@ public class BaseActivity extends AppCompatActivity {
                 Utils.customHomeAlert(BaseActivity.this, getString(R.string.app_name), getString(R.string.go_home));
             }
         });
+    }
+
+    public static void setIds(TextView[] ids,int SL_NO) {
+        for (TextView id : ids) {
+            SL_NO = SL_NO + 1;
+            id.setText(SL_NO + ".");
+        }
     }
 
     protected <T extends ViewDataBinding> T putContentView(@LayoutRes int resId, String title) {

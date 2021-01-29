@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -33,7 +34,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     GenCommentsViewModel genCommentsViewModel;
     GeneralCommentsEntity generalCommentsEntity;
     String foodTimeFruits, foodTimeEggs, foodTimeVeg, foodTimeProvisions, foodQualityFruits, foodQualityEggs, foodQualityVeg, foodQualityProvisions;
-    String stocksSupplied, haircut, studentsFoundAnemic,anemicStudCnt, attireOfStudents, cooksWearingCap, handsOfCookingStaff, attireOfStaff;
+    String stocksSupplied, haircut, studentsFoundAnemic,anemicStudCnt, attireOfStudents, cooksWearingCap,
+            handsOfCookingStaff, attireOfStaff,remarks;
     String toilets, kitchen, dormitory, runningWater, classRooms, storeroom;
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
@@ -51,6 +53,11 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_comments, getResources().getString(R.string.title_general_comments));
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6};
+        BaseActivity.setIds(ids, 85);
+
         binding.btnLayout.btnPrevious.setVisibility(View.GONE);
         genCommentsViewModel = ViewModelProviders.of(GeneralCommentsActivity.this,
                 new GenCommentsCustomViewModel(binding, this, getApplication())).get(GenCommentsViewModel.class);
@@ -286,7 +293,9 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 gccDate = binding.etGccDate.getText().toString().trim();
                 suppliedDate = binding.etSuppliedDate.getText().toString().trim();
                 hmhwoDate = binding.etHmHwoDate.getText().toString().trim();
-                anemicStudCnt=binding.etAnaemicStudCnt.getText().toString();
+                anemicStudCnt=binding.etAnaemicStudCnt.getText().toString().trim();
+                remarks=binding.etRemarks.getText().toString().trim();
+
                 if (validate())
                     Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
 
@@ -439,6 +448,10 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             ScrollToView(binding.rgStoreroom);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_store));
+        }else if (TextUtils.isEmpty(remarks)) {
+            ScrollToView(binding.etRemarks);
+            returnFlag = false;
+            showSnackBar(getString(R.string.sel_insp_remarks));
         }
         return returnFlag;
     }
@@ -504,6 +517,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
         generalCommentsEntity.setClassroom_not_clean(classRooms);
         generalCommentsEntity.setWater_available(runningWater);
         generalCommentsEntity.setStoreroom_not_clean(storeroom);
+        generalCommentsEntity.setRemarks(remarks);
 
         long x = genCommentsViewModel.insertGeneralCommentsInfo(generalCommentsEntity);
         if (x >= 0) {

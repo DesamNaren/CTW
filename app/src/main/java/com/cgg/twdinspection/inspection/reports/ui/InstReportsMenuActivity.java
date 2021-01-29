@@ -202,8 +202,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         binding.actionBar.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InstReportsMenuActivity.this, InspectionReportsDashboard.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
             }
         });
         binding.actionBar.ivHome.setOnClickListener(new View.OnClickListener() {
@@ -324,8 +323,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(InstReportsMenuActivity.this, InspectionReportsDashboard.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+        finish();
     }
 
     @Override

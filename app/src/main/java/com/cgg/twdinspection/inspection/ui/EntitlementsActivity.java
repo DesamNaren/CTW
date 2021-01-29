@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -48,6 +49,10 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_entitlements, getResources().getString(R.string.title_entitlements));
+
+        TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6};
+        BaseActivity.setIds(ids, 78);
 
         entitlementsViewModel = ViewModelProviders.of(EntitlementsActivity.this,
                 new EntitilementsCustomViewModel(binding, this, getApplication())).get(EntitlementsViewModel.class);
