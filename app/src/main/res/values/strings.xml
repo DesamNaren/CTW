@@ -533,7 +533,7 @@
     <string name="sel_matching_with_samples">Select whether food provisions matching with samples provided</string>
     <string name="sel_committee_exist">Select whether mess committee exist or not</string>
     <string name="sel_discussed_with_committee">Select whether you met &amp; discussed with mess committee</string>
-    <string name="sel_maintaining_register">Are you maintaining mess register</string>
+    <string name="sel_maintaining_register">Are you maintaining Daily Menu Register</string>
     <string name="stu_class">Class</string>
     <string name="title_plant_info">Plants Info</string>
     <string name="plants_data">Plants Data</string>
@@ -885,7 +885,7 @@
     <string name="left_for_screening">No. of students left for screening</string>
     <string name="weather_menu_chart_painted_on_wall">Whether latest menu chart painted on wall</string>
     <string name="have_you_met_discussed_with_mess_committee"><![CDATA[Have you met & discussed with mess committee]]></string>
-    <string name="are_you_maintaining_mess_register">Are you maintaining mess register?</string>
+    <string name="are_you_maintaining_mess_register">Are you maintaining Daily Menu Register?</string>
     <string name="unauthorised_absent">Unauthorised Absent</string>
     <string name="ro_plant">RO Plant</string>
     <string name="ceiling_fans_required">No. of ceiling fans required</string>

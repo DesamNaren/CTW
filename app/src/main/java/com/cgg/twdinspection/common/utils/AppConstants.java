@@ -10,6 +10,7 @@ public class AppConstants {
     public static final String TDS = "TDS";
     public static final String MENU = "MENU";
     public static final String OFFICER = "OFFICER";
+    public static final String SIGN = "SIGN";
 
     public static final String LOGIN_FLAG = "LOGIN_FLAG";
     public static final String OFFICER_ID = "OFFICER_ID";

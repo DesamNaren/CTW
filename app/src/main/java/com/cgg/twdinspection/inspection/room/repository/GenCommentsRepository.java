@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.cgg.twdinspection.inspection.room.Dao.GenCommentsInfoDao;
 import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
+import com.cgg.twdinspection.inspection.ui.GeneralCommentsActivity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -66,6 +68,51 @@ public class GenCommentsRepository {
             public void onComplete() {
 //                flag = true;
                 Log.i("Tag", tag+"onComplete: " + x);
+            }
+        };
+
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(observer);
+        return x;
+    }
+
+
+
+    public long updateGeneralCommentsInfo(GeneralCommentsEntity generalCommentsEntity) {
+
+
+        Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                genCommentsInfoDao.updateGenCommentsInfo(generalCommentsEntity);
+            }
+        });
+
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i("Tag", tag + "onSubscribe: ");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                x = aLong;
+//                flag = true;
+                Log.i("Tag", tag + "onNext: " + x);
+            }
+
+
+            @Override
+            public void onError(Throwable e) {
+//                flag = false;
+                Log.i("Tag", tag + "onError: " + x);
+            }
+
+            @Override
+            public void onComplete() {
+//                flag = true;
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

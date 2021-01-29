@@ -1,13 +1,16 @@
 package com.cgg.twdinspection.inspection.ui;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -34,14 +37,16 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     GenCommentsViewModel genCommentsViewModel;
     GeneralCommentsEntity generalCommentsEntity;
     String foodTimeFruits, foodTimeEggs, foodTimeVeg, foodTimeProvisions, foodQualityFruits, foodQualityEggs, foodQualityVeg, foodQualityProvisions;
-    String stocksSupplied, haircut, studentsFoundAnemic,anemicStudCnt, attireOfStudents, cooksWearingCap,
-            handsOfCookingStaff, attireOfStaff,remarks;
+    String stocksSupplied, haircut, studentsFoundAnemic, anemicStudCnt, attireOfStudents, cooksWearingCap,
+            handsOfCookingStaff, attireOfStaff, remarks;
     String toilets, kitchen, dormitory, runningWater, classRooms, storeroom;
     String officerID, instID, insTime;
     SharedPreferences sharedPreferences;
     InstMainViewModel instMainViewModel;
     private int localFlag = -1;
     private String gccDate, suppliedDate, hmhwoDate;
+
+    public static final int SIGNATURE_ACTIVITY = 1;
 
     private void ScrollToView(View view) {
         view.getParent().requestChildFocus(view, view);
@@ -53,6 +58,13 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = putContentView(R.layout.activity_general_comments, getResources().getString(R.string.title_general_comments));
+        binding.signature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GeneralCommentsActivity.this, CaptureSignature.class);
+                startActivityForResult(intent, SIGNATURE_ACTIVITY);
+            }
+        });
 
         TextView[] ids = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
                 binding.slno6};
@@ -293,8 +305,8 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 gccDate = binding.etGccDate.getText().toString().trim();
                 suppliedDate = binding.etSuppliedDate.getText().toString().trim();
                 hmhwoDate = binding.etHmHwoDate.getText().toString().trim();
-                anemicStudCnt=binding.etAnaemicStudCnt.getText().toString().trim();
-                remarks=binding.etRemarks.getText().toString().trim();
+                anemicStudCnt = binding.etAnaemicStudCnt.getText().toString().trim();
+                remarks = binding.etRemarks.getText().toString().trim();
 
                 if (validate())
                     Utils.customSaveAlert(GeneralCommentsActivity.this, getString(R.string.app_name), getString(R.string.are_you_sure));
@@ -384,7 +396,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             ScrollToView(binding.etHmHwoDate);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_hm));
-        }  else if (TextUtils.isEmpty(gccDate)) {
+        } else if (TextUtils.isEmpty(gccDate)) {
             ScrollToView(binding.etGccDate);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_food_supp));
@@ -404,7 +416,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             ScrollToView(binding.rgStudentsFoundAnemic);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_stu_ana));
-        } else if (studentsFoundAnemic.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(anemicStudCnt) ) {
+        } else if (studentsFoundAnemic.equalsIgnoreCase(AppConstants.Yes) && TextUtils.isEmpty(anemicStudCnt)) {
             ScrollToView(binding.etAnaemicStudCnt);
             returnFlag = false;
             showSnackBar(getString(R.string.ane_stud_cnt));
@@ -448,7 +460,7 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
             ScrollToView(binding.rgStoreroom);
             returnFlag = false;
             showSnackBar(getString(R.string.gen_store));
-        }else if (TextUtils.isEmpty(remarks)) {
+        } else if (TextUtils.isEmpty(remarks)) {
             ScrollToView(binding.etRemarks);
             returnFlag = false;
             showSnackBar(getString(R.string.sel_insp_remarks));
@@ -549,5 +561,22 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
     @Override
     public void onBackPressed() {
         super.callBack();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SIGNATURE_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
+
+                Bundle bundle = data.getExtras();
+                String status = bundle.getString("status");
+                if (status.equalsIgnoreCase("done")) {
+                    Toast toast = Toast.makeText(this, "Signature capture successful!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 105, 50);
+                    toast.show();
+                }
+            }
+        }
+
     }
 }
