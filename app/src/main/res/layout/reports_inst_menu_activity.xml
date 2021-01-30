@@ -168,11 +168,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno1_1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 4."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -207,11 +207,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno1_2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 5."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -247,11 +247,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno1_3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 6."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -286,11 +286,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno1_4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 7."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -441,11 +441,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno1_5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 8."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -594,13 +594,12 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
-
                                 <TextView
+                                    android:id="@+id/slno1_6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text=" 9."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -716,11 +715,11 @@
 
 
                                 <TextView
+                                    android:id="@+id/slno1_7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="10."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -813,11 +812,11 @@
 
 
                                 <TextView
+                                    android:id="@+id/slno1_8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="11."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -908,11 +907,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="17."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -948,11 +947,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="18."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -988,11 +987,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="19."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -1181,11 +1180,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="20."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -1221,11 +1220,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="21."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -1292,11 +1291,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="22."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -1389,11 +1388,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/slno4_7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/dimen_margin"
                                     android:paddingLeft="@dimen/dimen_padding_left"
-                                    android:text="23."
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/dimen_text" />
 
@@ -1472,11 +1471,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/slno5_1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="25."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1512,11 +1511,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/slno5_2"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="26."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1552,11 +1551,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/slno5_3"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="27."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1624,11 +1623,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/slno5_4"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="28."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1696,11 +1695,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/slno5_5"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_margin="@dimen/dimen_margin"
                                         android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="29."
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/dimen_text" />
 
@@ -1886,7 +1885,7 @@
                                 android:background="@color/white"
                                 android:orientation="vertical">
 
-                                <LinearLayout
+                                <!--<LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
@@ -1923,7 +1922,7 @@
                                             android:textSize="@dimen/dimen_text" />
 
                                     </LinearLayout>
-                                </LinearLayout>
+                                </LinearLayout>-->
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -2627,6 +2626,81 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.dininghallAvailable.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/add_req_dininghall"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.dininghall_add_req}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.dininghall_add_req.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/din_count"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.addDiningRequiredCnt}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.dininghallAvailable.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/avail_construction"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.dininghall_avail_construction}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical">
 
                                         <TextView
@@ -2947,22 +3021,54 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:text="@string/is_compound"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical">
 
-                                    <TextView
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/is_compound"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.compWallRequired}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{infra.compWallRequired}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.compWallRequired.equalsIgnoreCase(`Yes`)? View.VISIBLE : View.GONE, default = gone}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/compwall_count"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.compWall_cnt}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -3064,22 +3170,52 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:text="@string/bunker_beds"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical">
 
-                                    <TextView
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/bunker_beds"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.bunkerBeds}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{infra.ccCameras}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical"
+                                        android:visibility="@{infra.bunkerBeds.equalsIgnoreCase(`Yes`)?View.VISIBLE:View.GONE}">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/bunker_beds_cnt"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{infra.bunker_beds_cnt}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -4046,22 +4182,53 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
-                                    <TextView
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:text="@string/does_staff"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical">
 
-                                    <TextView
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/does_staff"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{academic.staffAccomodatedAsperStudStrength}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_margin="@dimen/dimen_margin"
-                                        android:paddingLeft="@dimen/dimen_padding_left"
-                                        android:text="@{academic.staffAccomodatedAsperStudStrength}"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/dimen_text" />
+                                        android:orientation="vertical"
+                                        android:visibility="@{academic.staffAccomodatedAsperStudStrength.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
+
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:text="@string/subject_names"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="@dimen/dimen_margin"
+                                            android:paddingLeft="@dimen/dimen_padding_left"
+                                            android:text="@{academic.subject_names}"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/dimen_text" />
+                                    </LinearLayout>
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -9554,6 +9721,30 @@
                                     </LinearLayout>
 
                                 </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:text="@string/insp_remarks"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/dimen_margin"
+                                    android:paddingLeft="@dimen/dimen_padding_left"
+                                    android:text="@{comments.remarks}"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dimen_text" />
 
                             </LinearLayout>
 

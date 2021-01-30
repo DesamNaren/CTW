@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -34,6 +35,7 @@ import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
+import com.cgg.twdinspection.inspection.ui.BaseActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.gson.Gson;
@@ -92,6 +94,26 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.reports_inst_menu_activity);
+
+        TextView[] ids1 = new TextView[]{binding.slno11, binding.slno12, binding.slno13, binding.slno14, binding.slno15,
+                binding.slno16, binding.slno17, binding.slno18};
+        BaseActivity.setIds(ids1, 0);
+
+        TextView[] ids4 = new TextView[]{binding.slno41, binding.slno42, binding.slno43, binding.slno44, binding.slno45,
+                binding.slno46, binding.slno47};
+        BaseActivity.setIds(ids4, 13);
+
+        TextView[] ids5 = new TextView[]{binding.slno51, binding.slno52, binding.slno53, binding.slno54, binding.slno55};
+        BaseActivity.setIds(ids5, 21);
+
+        /*TextView[] ids6 = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
+                binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
+                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17, binding.slno18,
+                binding.slno19, binding.slno20, binding.slno21, binding.slno22, binding.slno23, binding.slno24,
+                binding.slno25, binding.slno26};
+        BaseActivity.setIds(ids6, 27);
+        binding.slno261.setText(binding.slno26.getText().toString() + "1.");*/
+
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
         binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
         customProgressDialog = new CustomProgressDialog(this);
