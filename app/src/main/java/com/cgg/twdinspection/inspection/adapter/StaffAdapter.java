@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -255,7 +256,23 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             }
         });
 
-        holder.binding.lastWeek.addTextChangedListener(new TextWatcher() {
+
+        holder.binding.spAcadGradePanel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                employeeResponse.setAcad_panel_grade_pos(i);
+                employeeResponse.setAcad_panel_grade(holder.binding.spAcadGradePanel.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+        /*holder.binding.lastWeek.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -270,7 +287,24 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.UserHolder> 
             public void afterTextChanged(Editable s) {
                 employeeResponse.setLast_week_turn_duties_attended(s.toString());
             }
+        });*/
+
+        holder.binding.rgLastWeek.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                String lastweek;
+                int selctedItem = holder.binding.rgLastWeek.getCheckedRadioButtonId();
+                if (selctedItem == R.id.rb_last_week_yes) {
+                    lastweek = AppConstants.Yes;
+                } else if (selctedItem == R.id.rb_last_week_no) {
+                    lastweek = AppConstants.No;
+                } else {
+                    lastweek = null;
+                }
+                employeeResponse.setLast_week_turn_duties_attended(lastweek);
+            }
         });
+
         holder.binding.etLeavesAvailed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

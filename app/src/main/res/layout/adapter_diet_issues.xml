@@ -79,10 +79,11 @@
                     android:id="@+id/ground_bal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusableInTouchMode="false"
                     android:hint="@string/b_ground_balance"
                     android:inputType="numberDecimal"
+                    android:digits="0123456789-."
                     android:paddingLeft="@dimen/dimen_5dp"
+                    android:maxLength="8"
                     android:paddingTop="@dimen/dimen_10dp"
                     android:paddingRight="@dimen/dimen_5dp"
                     android:paddingBottom="@dimen/dimen_10dp" />

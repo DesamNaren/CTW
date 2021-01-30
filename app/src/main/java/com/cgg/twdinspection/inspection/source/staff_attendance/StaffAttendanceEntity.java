@@ -68,8 +68,18 @@ public class StaffAttendanceEntity {
     private String acad_panel_grade;
 
     @ColumnInfo()
+    private int acad_panel_grade_pos;
+
+    @ColumnInfo()
     private int categ_pos;
 
+    public int getAcad_panel_grade_pos() {
+        return acad_panel_grade_pos;
+    }
+
+    public void setAcad_panel_grade_pos(int acad_panel_grade_pos) {
+        this.acad_panel_grade_pos = acad_panel_grade_pos;
+    }
 
     public int getCateg_pos() {
         return categ_pos;

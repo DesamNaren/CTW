@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">TWD Inspection App</string>
     <string name="font_name_source_opensans">OpenSans</string>
     <string name="districts">districts</string>
@@ -488,9 +488,13 @@
     <string name="select_toilets">Enter no of toilets</string>
     <string name="select_bathrooms">Enter no of bathrooms</string>
     <string name="select_functioning_toilets">Enter no of functioning toilets</string>
+    <string name="select_valid_functioning_toilets">Enter valid no of functioning toilets</string>
     <string name="select_functioning_bathrooms">Enter no of functioning bathrooms</string>
+    <string name="select_valid_functioning_bathrooms">Enter valid no of functioning bathrooms</string>
     <string name="select_repaired_toilets">Enter repairs required to toilets</string>
+    <string name="select_valid_repaired_toilets">Enter valid count of repairs required to toilets</string>
     <string name="select_repaired_bathrooms">Enter repairs required to bathrooms</string>
+    <string name="select_valid_repaired_bathrooms">Enter valid count of repairs required to bathrooms</string>
     <string name="select_door">Select door and window repairs</string>
     <string name="select_painting">Select painting, coloring of the building</string>
     <string name="select_color">Enter suggest for coloring</string>
@@ -866,6 +870,25 @@
         <item>AI (Academic -Instructor)</item>
         <item>Daily Wages</item>
     </string-array>
+    <string-array name="grades">
+        <item>Select</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="items_list">
+        <item>Rice</item>
+        <item>Red Gram Dall</item>
+        <item>G.G.Dal</item>
+        <item>Gas</item>
+        <item>P. Oil</item>
+        <item>Eggs</item>
+        <item>Spl Fruit</item>
+        <item>Ragimalt</item>
+        <item>Milk</item>
+        <item>Vegetables</item>
+    </string-array>
     <string name="category">Category</string>
     <string name="no_of_leaves_availed">Total Leaves</string>
     <string name="no_of_leaves_taken">Leaves taken</string>
@@ -1047,11 +1070,12 @@
     <string name="do_you_want">Are you sure, Do you want submit data?</string>
     <string name="mark_att_emp">Please mark attendance of all employees</string>
     <string name="yes_duty_alloted">Please mark yesterday duty alloted to all employees</string>
+    <string name="sel_ground_bal">Please enter valid Ground Balance</string>
     <string name="sel_category">Please select category</string>
     <string name="total_leaves">Please enter total leaves</string>
     <string name="leaves_taken">Please enter leaves taken</string>
     <string name="leave_bal">Please enter leave balance</string>
-    <string name="last_week_turn_att">Please enter last week turn duties teacher attended</string>
+    <string name="last_week_turn_att">Please select last week turn duties teacher attended</string>
     <string name="last_yr_acad_panel">Please enter teacher\'s last year academic panel grade</string>
     <string name="count_not_exceed_strength">Entered count should not exceed the total strength</string>
     <string name="records_submitted">Records submitted</string>

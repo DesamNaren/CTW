@@ -756,7 +756,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             }
         });
 
-
         binding.btnLayout.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1259,8 +1258,18 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.etFunctioningToilets.requestFocus();
             return false;
         }
+        if (Long.parseLong(totalToilets) < Long.parseLong(functioningToilets)) {
+            showSnackBar(getResources().getString(R.string.select_valid_functioning_toilets));
+            binding.etFunctioningToilets.requestFocus();
+            return false;
+        }
         if (TextUtils.isEmpty(functioningBathrooms)) {
             showSnackBar(getResources().getString(R.string.select_functioning_bathrooms));
+            binding.etFuntioningBathrooms.requestFocus();
+            return false;
+        }
+        if (Long.parseLong(totalBathrooms) < Long.parseLong(functioningBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_valid_functioning_bathrooms));
             binding.etFuntioningBathrooms.requestFocus();
             return false;
         }
@@ -1269,12 +1278,21 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             binding.etRequiredToilets.requestFocus();
             return false;
         }
+        if (Long.parseLong(totalToilets) < Long.parseLong(repairsReqToilets)) {
+            showSnackBar(getResources().getString(R.string.select_valid_repaired_toilets));
+            binding.etRequiredToilets.requestFocus();
+            return false;
+        }
         if (TextUtils.isEmpty(repairsReqBathrooms)) {
             showSnackBar(getResources().getString(R.string.select_repaired_bathrooms));
             binding.etRequiredBathrooms.requestFocus();
             return false;
         }
-
+        if (Long.parseLong(totalBathrooms) < Long.parseLong(repairsReqBathrooms)) {
+            showSnackBar(getResources().getString(R.string.select_valid_repaired_bathrooms));
+            binding.etRequiredBathrooms.requestFocus();
+            return false;
+        }
         return true;
     }
 

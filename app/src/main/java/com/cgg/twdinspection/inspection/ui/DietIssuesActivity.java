@@ -55,7 +55,8 @@ import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDietIssuesBinding;
-import com.cgg.twdinspection.inspection.adapter.DietIssuesAdapter;
+import com.cgg.twdinspection.inspection.adapter.DietIssuesMandatoryItemsAdapter;
+import com.cgg.twdinspection.inspection.adapter.DietIssuesTempItemsAdapter;
 import com.cgg.twdinspection.inspection.interfaces.DietInterface;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
@@ -74,6 +75,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
@@ -86,8 +88,9 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     DietIssuesEntity dietIssuesEntity;
     SharedPreferences sharedPreferences;
     private String officerID, instID, insTime, randomNo;
-    List<DietListEntity> dietInfoEntityListMain;
-    DietIssuesAdapter adapter;
+    List<DietListEntity> dietInfoEntityListMain, mandatoryList, tempList;
+    List<String> itemsList;
+    DietIssuesTempItemsAdapter adapter;
     MasterInstituteInfo masterInstituteInfos;
     String menu_chart_served, menu_chart_painted, menu_served, food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
     private String cacheDate, currentDate;
@@ -103,6 +106,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     private int localFlag = -1;
     SearchView mSearchView;
     Menu mMenu = null;
+    TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +121,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
 
         try {
             if (getSupportActionBar() != null) {
-                TextView tv = new TextView(getApplicationContext());
+                tv = new TextView(getApplicationContext());
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView
                         RelativeLayout.LayoutParams.WRAP_CONTENT); // Height of TextView
@@ -140,6 +144,11 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         binding.setViewModel(dietIsuuesViewModel);
         instMainViewModel = new InstMainViewModel(getApplication());
         dietInfoEntityListMain = new ArrayList<>();
+        mandatoryList = new ArrayList<>();
+        tempList = new ArrayList<>();
+        itemsList = new ArrayList<>();
+        itemsList = Arrays.asList(getResources().getStringArray(R.array.items_list));
+
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
             editor = sharedPreferences.edit();
@@ -158,7 +167,23 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             public void onChanged(List<DietListEntity> dietIssuesEntities) {
                 if (dietIssuesEntities != null && dietIssuesEntities.size() > 0) {
                     dietInfoEntityListMain = dietIssuesEntities;
-                    adapter = new DietIssuesAdapter(DietIssuesActivity.this, dietInfoEntityListMain);
+                    tempList.addAll(dietIssuesEntities);
+
+                    for (int i = 0; i < itemsList.size(); i++) {
+                        for (int j = 0; j < dietInfoEntityListMain.size(); j++) {
+                            if (itemsList.get(i).trim().equalsIgnoreCase(dietInfoEntityListMain.get(j).getItem_name().trim())) {
+                                mandatoryList.add(dietInfoEntityListMain.get(j));
+                            }
+                        }
+                    }
+
+                    tempList.removeAll(mandatoryList);
+
+                    DietIssuesMandatoryItemsAdapter adapter1 = new DietIssuesMandatoryItemsAdapter(DietIssuesActivity.this, mandatoryList);
+                    binding.rvMandatory.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
+                    binding.rvMandatory.setAdapter(adapter1);
+
+                    adapter = new DietIssuesTempItemsAdapter(DietIssuesActivity.this, tempList);
                     binding.recyclerView.setLayoutManager(new GridLayoutManager(DietIssuesActivity.this, 2));
                     binding.recyclerView.setAdapter(adapter);
 
@@ -172,7 +197,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                             List<MasterDietInfo> masterDietInfos = masterInstituteInfos.getDietInfo();
                             if (masterDietInfos != null && masterDietInfos.size() > 0) {
                                 for (int i = 0; i < masterDietInfos.size(); i++) {
-                                    DietListEntity studAttendInfoEntity = new DietListEntity(masterDietInfos.get(i).getItemName(), masterDietInfos.get(i).getGroundBal(), masterDietInfos.get(i).getBookBal(), instID, officerID);
+                                    DietListEntity studAttendInfoEntity = new DietListEntity(masterDietInfos.get(i).getItemName(), String.valueOf(masterDietInfos.get(i).getGroundBal()), String.valueOf(masterDietInfos.get(i).getBookBal()), instID, officerID);
                                     dietInfoEntityListMain.add(studAttendInfoEntity);
                                 }
                             }
@@ -389,7 +414,7 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
             @Override
             public void onClick(View view) {
 
-                if (validateData()) {
+                if (adaptervalidations() && validateData()) {
                     dietIssuesEntity = new DietIssuesEntity();
                     dietIssuesEntity.setInstitute_id(instID);
                     dietIssuesEntity.setInspection_time(Utils.getCurrentDateTime());
@@ -514,6 +539,12 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 return true;
             }
         });
+        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv.setVisibility(View.GONE);
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -561,6 +592,22 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
         });
 
         snackbar.show();
+    }
+
+    private boolean adaptervalidations() {
+        boolean returnFlag = true;
+        for (int i = 0; i < dietInfoEntityListMain.size(); i++) {
+            if (dietInfoEntityListMain.get(i).isFlag_selected()
+                    && (TextUtils.isEmpty(String.valueOf(dietInfoEntityListMain.get(i).getGround_bal()))
+                    || !dietInfoEntityListMain.get(i).getGround_bal().matches("\\d+(?:\\.\\d+)?")
+                    || String.valueOf(dietInfoEntityListMain.get(i).getGround_bal()).equals("-"))) {
+                returnFlag = false;
+                showSnackBar(getString(R.string.sel_ground_bal) + " for " + dietInfoEntityListMain.get(i).getItem_name());
+                break;
+            }
+
+        }
+        return returnFlag;
     }
 
     private boolean validateData() {

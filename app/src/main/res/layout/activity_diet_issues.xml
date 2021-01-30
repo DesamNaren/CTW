@@ -27,7 +27,7 @@
             layout="@layout/action_bar_layout"
             android:visibility="gone" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -69,7 +69,7 @@
                         android:paddingTop="@dimen/dimen_10dp"
                         android:paddingRight="@dimen/dimen_5dp"
                         android:paddingBottom="@dimen/dimen_10dp"
-                        android:text="@string/provision_of_supplies"
+                        android:text="Provision of Supplies *"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -81,9 +81,45 @@
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_mandatory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dimen_5dp"
+                        android:layout_marginRight="@dimen/dimen_5dp"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="@dimen/dimen_5dp"
+                            android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
+                            android:paddingBottom="@dimen/dimen_10dp"
+                            android:text="@string/provision_of_supplies"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="200dp" />
 
                     <TextView
                         android:id="@+id/empty_view"
@@ -646,7 +682,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/cl"

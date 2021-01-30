@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigDecimal;
+
 @Entity(tableName = "diet_list_info")
 public class DietListEntity {
 
@@ -19,10 +21,10 @@ public class DietListEntity {
     private String item_name;
 
     @ColumnInfo()
-    private Double ground_bal;
+    private String ground_bal;
 
     @ColumnInfo()
-    private Double book_bal;
+    private String book_bal;
 
     @ColumnInfo()
     private String institute_id;
@@ -41,7 +43,7 @@ public class DietListEntity {
         this.flag_selected = flag_selected;
     }
 
-    public DietListEntity(@NotNull String item_name, Double ground_bal, Double book_bal, String institute_id, String officerId) {
+    public DietListEntity(@NotNull String item_name, String ground_bal, String book_bal, String institute_id, String officerId) {
         this.item_name = item_name;
         this.ground_bal = ground_bal;
         this.book_bal = book_bal;
@@ -82,19 +84,19 @@ public class DietListEntity {
         this.item_name = item_name;
     }
 
-    public Double getGround_bal() {
+    public String getGround_bal() {
         return ground_bal;
     }
 
-    public void setGround_bal(Double ground_bal) {
+    public void setGround_bal(String ground_bal) {
         this.ground_bal = ground_bal;
     }
 
-    public Double getBook_bal() {
+    public String getBook_bal() {
         return book_bal;
     }
 
-    public void setBook_bal(Double book_bal) {
+    public void setBook_bal(String book_bal) {
         this.book_bal = book_bal;
     }
 }

@@ -137,11 +137,11 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.yes_duty_alloted));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos() == 0) {
+            } /*else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getCategory()) || staffAttendanceEntitiesmain.get(i).getCateg_pos() == 0) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.sel_category));
                 break;
-            } /*else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getLeaves_availed())) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.total_leaves));
                 break;
@@ -161,7 +161,7 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_week_turn_att));
                 break;
-            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade()) || staffAttendanceEntitiesmain.get(i).getAcad_panel_grade().equals("0")) {
+            } else if (TextUtils.isEmpty(staffAttendanceEntitiesmain.get(i).getAcad_panel_grade()) || staffAttendanceEntitiesmain.get(i).getAcad_panel_grade_pos() == 0) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.last_yr_acad_panel));
                 break;

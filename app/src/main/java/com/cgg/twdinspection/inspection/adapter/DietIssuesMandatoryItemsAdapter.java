@@ -2,9 +2,10 @@ package com.cgg.twdinspection.inspection.adapter;
 
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -19,18 +20,19 @@ import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DietIssuesAdapter extends RecyclerView.Adapter<DietIssuesAdapter.ItemHolder> implements Filterable {
+public class DietIssuesMandatoryItemsAdapter extends RecyclerView.Adapter<DietIssuesMandatoryItemsAdapter.ItemHolder> implements Filterable {
 
     Context context;
     List<DietListEntity> list;
     List<DietListEntity> filterList;
     private int selectedPos = -1;
 
-    public DietIssuesAdapter(Context context, List<DietListEntity> list) {
+    public DietIssuesMandatoryItemsAdapter(Context context, List<DietListEntity> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
-        filterList.addAll(list);}
+        filterList = new ArrayList<>();
+        filterList.addAll(list);
+    }
 
     @NonNull
     @Override
@@ -48,13 +50,28 @@ public class DietIssuesAdapter extends RecyclerView.Adapter<DietIssuesAdapter.It
         final DietListEntity dataModel = filterList.get(position);
         holder.listItemBinding.setDietIssues(dataModel);
 
+        holder.listItemBinding.cbSel.setChecked(true);
+        filterList.get(i).setFlag_selected(true);
+        holder.listItemBinding.cbSel.setEnabled(false);
+
         holder.listItemBinding.bookBal.setText(String.valueOf(filterList.get(i).getBook_bal()));
         holder.listItemBinding.groundBal.setText(String.valueOf(filterList.get(i).getGround_bal()));
 
-        holder.listItemBinding.cbSel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        holder.listItemBinding.groundBal.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                filterList.get(i).setFlag_selected(b);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterList.get(i).setGround_bal(s.toString());
             }
         });
         holder.bind(dataModel);
