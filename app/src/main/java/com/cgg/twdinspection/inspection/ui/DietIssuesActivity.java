@@ -77,6 +77,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -597,10 +598,13 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     private boolean adaptervalidations() {
         boolean returnFlag = true;
         for (int i = 0; i < dietInfoEntityListMain.size(); i++) {
-            if (dietInfoEntityListMain.get(i).isFlag_selected()
-                    && (TextUtils.isEmpty(String.valueOf(dietInfoEntityListMain.get(i).getGround_bal()))
-                    || !dietInfoEntityListMain.get(i).getGround_bal().matches("\\d+(?:\\.\\d+)?")
-                    || String.valueOf(dietInfoEntityListMain.get(i).getGround_bal()).equals("-"))) {
+
+            String regex = "(.)*(\\d)(.)*";
+            Pattern pattern = Pattern.compile(regex);
+            boolean containsNumber = pattern.matcher(dietInfoEntityListMain.get(i).getGround_bal()).matches();
+
+            if (dietInfoEntityListMain.get(i).isFlag_selected() && !containsNumber && (dietInfoEntityListMain.get(i).getGround_bal().startsWith("-")
+                    || dietInfoEntityListMain.get(i).getGround_bal().startsWith("."))) {
                 returnFlag = false;
                 showSnackBar(getString(R.string.sel_ground_bal) + " for " + dietInfoEntityListMain.get(i).getItem_name());
                 break;

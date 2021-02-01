@@ -72,7 +72,8 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             electricity_wiring, enough_fans, dining_hall, dining_hall_used, dining_hall_avail_construction, dining_hall_add_req,
             separate_kitchen_room_available, construct_kitchen_room, is_it_in_good_condition,
             transformer_available, powerConnectionType, individual_connection, road_required,
-            compWall_required, compWall_cnt, cc_cameras, steam_cooking, bunker_beds, bunker_beds_cnt, gate_required, pathway_required,
+            compWall_required, construction_part_type, compWall_cnt, cc_cameras, steam_cooking, bunker_beds, bunker_beds_cnt,
+            gate_required, pathway_required,
             sump_required, sewage_allowed, sewage_raise_req, drainage_functioning, heater_available, heater_workingStatus,
             repairs_to_door, painting, electricity_wiring_reason,
             roplant_reason, ceilingFansWorking, ceilingFansNonWorking, ceilingFansReq,
@@ -554,6 +555,20 @@ public class InfraActivity extends BaseActivity implements SaveListener {
             }
         });
 
+        binding.rgConstructionPartType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int selctedItem = binding.rgConstructionPartType.getCheckedRadioButtonId();
+                if (selctedItem == R.id.construction_part_type_yes) {
+                    construction_part_type = getResources().getString(R.string.new_construction);
+                } else if (selctedItem == R.id.construction_part_type_no) {
+                    construction_part_type = getResources().getString(R.string.part_construction);
+                } else {
+                    construction_part_type = null;
+                }
+            }
+        });
+
         binding.rgCcCameras.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -820,6 +835,7 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                     infrastuctureEntity.setRunningWater_source(sourceOfRunningWater);
                     infrastuctureEntity.setRoad_required(road_required);
                     infrastuctureEntity.setCompWall_required(compWall_required);
+                    infrastuctureEntity.setConstruction_part_type(construction_part_type);
                     infrastuctureEntity.setCompWall_cnt(compWall_cnt);
                     infrastuctureEntity.setGate_required(gate_required);
                     infrastuctureEntity.setPathway_required(pathway_required);
@@ -1137,6 +1153,11 @@ public class InfraActivity extends BaseActivity implements SaveListener {
         if (TextUtils.isEmpty(compWall_required)) {
             showSnackBar(getResources().getString(R.string.select_compoundwall_req));
             ScrollToView(binding.rgCompWallRequired);
+            return false;
+        }
+        if (compWall_required.equals(AppConstants.Yes) && TextUtils.isEmpty(construction_part_type)) {
+            showSnackBar(getResources().getString(R.string.sel_construction_part_type));
+            ScrollToView(binding.rgConstructionPartType);
             return false;
         }
         if (compWall_required.equals(AppConstants.Yes) && TextUtils.isEmpty(compWall_cnt)) {

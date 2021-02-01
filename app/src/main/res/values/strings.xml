@@ -323,7 +323,7 @@
     <string name="is_it_in_good_condition">Is it in good condition</string>
     <string name="kitchen_repair_required">Repairs required</string>
     <string name="subject_names">Subject Names</string>
-    <string name="sel_subject_names">Enter Subject Names</string>
+    <string name="sel_subject_names">Select at least one subject</string>
     <string name="no_of_bath_rooms">No of bathrooms</string>
     <string name="no_of_functioning_toilets">No of functioning toilets</string>
     <string name="no_of_functioning_bathrooms">No of functioning bathrooms</string>
@@ -586,8 +586,10 @@
     <string name="add_enter_number">Enter number</string>
     <string name="sel_add_req">Select any additional requirements needed</string>
     <string name="cls_count">Classroom count</string>
-    <string name="compwall_count">New construction part (in meters)</string>
-    <string name="sel_compwall_count">Select New construction part (in meters)</string>
+    <string name="construction_part_type">Construction part type</string>
+    <string name="sel_construction_part_type">Select construction part type</string>
+    <string name="compwall_count">Construction part (in meters)</string>
+    <string name="sel_compwall_count">Enter construction part (in meters)</string>
     <string name="din_count">Dining hall count</string>
     <string name="sel_din_count">Enter Dining hall count</string>
     <string name="dor_count">Dormitories count</string>
@@ -827,6 +829,18 @@
         <item>Flooring repairs</item>
         <item>WC Bath Doors repairs</item>
         <item>Electrical repairs</item>
+    </string-array>
+
+    <string-array name="subjects">
+        <item>Telugu</item>
+        <item>Hindi</item>
+        <item>English</item>
+        <item>Maths</item>
+        <item>Physics</item>
+        <item>Biology</item>
+        <item>Social Studies</item>
+        <item>PD</item>
+        <item>SGT</item>
     </string-array>
 
     <string name="latitude">Latitude</string>
@@ -1147,4 +1161,6 @@
     <string name="logout_str">Logout</string>
     <string name="insp_remarks">Inspection Officer Remarks</string>
     <string name="sel_insp_remarks">Enter Inspection Officer Remarks</string>
+    <string name="new_construction">New Construction</string>
+    <string name="part_construction">Part Construction</string>
 </resources>

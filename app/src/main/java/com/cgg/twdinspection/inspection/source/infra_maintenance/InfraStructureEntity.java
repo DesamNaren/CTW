@@ -123,6 +123,9 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String compWall_required;
 
+    @ColumnInfo()
+    private String construction_part_type;
+
      @ColumnInfo()
     private String compWall_cnt;
 
@@ -567,6 +570,14 @@ public class InfraStructureEntity {
 
     public void setCompWall_required(String compWall_required) {
         this.compWall_required = compWall_required;
+    }
+
+    public String getConstruction_part_type() {
+        return construction_part_type;
+    }
+
+    public void setConstruction_part_type(String construction_part_type) {
+        this.construction_part_type = construction_part_type;
     }
 
     public String getCompWall_cnt() {

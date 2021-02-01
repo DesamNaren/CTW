@@ -21,15 +21,18 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityAcademicBinding;
+import com.cgg.twdinspection.inspection.adapter.SubjectsAdapter;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
+import com.cgg.twdinspection.inspection.source.academic_overview.AcademicSubjectsEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicCustomViewModel;
@@ -38,13 +41,15 @@ import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AcademicActivity extends BaseActivity implements SaveListener {
     ActivityAcademicBinding binding;
     AcademicViewModel academicViewModel;
     AcademicEntity academicEntity;
-    String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength, subject_names,
+    String highest_class_syllabus_completed, strength_accomodated_asper_infrastructure, staff_accomodated_asper_stud_strength,
             plan_prepared, textbooks_rec, assessment_test_conducted, punadiPrgmConducted, punadi2_testmarks_entered,
             kara_dipath_prgm_cond, labManuals_received, labroom_available, lab_mat_entered_reg,
             big_tv_rot_avail, mana_tv_lessons_shown, comp_lab_avail, ict_instr_avail, eLearning_avail, showing_stud, tabs_supplied,
@@ -65,6 +70,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
     private StudentsAttndViewModel studentsAttndViewModel;
     private int highClassStrength;
     private int gradeAcnt, gradeBCnt, gradeCCnt;
+    private List<AcademicSubjectsEntity> subjectsList;
+    private String subject_names;
+    private SubjectsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,20 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         sharedPreferences = TWDApplication.get(this).getPreferences();
         studentsAttndViewModel = new StudentsAttndViewModel(getApplication());
 
+        subjectsList = new ArrayList<>();
+        List<String> subjectsNamesList=Arrays.asList(getResources().getStringArray(R.array.subjects));
+
+        for (int x = 0; x < subjectsNamesList.size(); x++) {
+            AcademicSubjectsEntity entity = new AcademicSubjectsEntity();
+            entity.setName(subjectsNamesList.get(x));
+            entity.setStatus(false);
+            subjectsList.add(entity);
+        }
+
+        adapter = new SubjectsAdapter(AcademicActivity.this, subjectsList);
+        binding.rvSubjects.setLayoutManager(new GridLayoutManager(AcademicActivity.this, 3));
+        binding.rvSubjects.setAdapter(adapter);
+        binding.rvSubjects.setHasFixedSize(true);
 
         academicViewModel = ViewModelProviders.of(AcademicActivity.this,
                 new AcademicCustomViewModel(binding, this, getApplication())).get(AcademicViewModel.class);
@@ -329,13 +351,17 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         binding.rgStaffAccomodatedAsperStudStrength.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                subject_names = "";
                 int selctedItem = binding.rgStaffAccomodatedAsperStudStrength.getCheckedRadioButtonId();
                 if (selctedItem == R.id.staff_accomodated_asper_stud_strength_yes) {
+
                     staff_accomodated_asper_stud_strength = AppConstants.Yes;
                     binding.llSubjectNames.setVisibility(View.GONE);
                 } else {
                     staff_accomodated_asper_stud_strength = AppConstants.No;
                     binding.llSubjectNames.setVisibility(View.VISIBLE);
+
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -775,7 +801,16 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                 noOfTabs = binding.etNoOfTabs.getText().toString().trim();
                 tabInchargeName = binding.etTabInchargeName.getText().toString().trim();
                 tabInchargeMblno = binding.etTabInchargeMblno.getText().toString().trim();
-                subject_names = binding.etSubjectNames.getText().toString().trim();
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < subjectsList.size(); i++) {
+                    if (subjectsList.get(i).isStatus())
+                        stringBuilder.append(subjectsList.get(i).getName()).append(", ");
+                }
+                subject_names = stringBuilder.toString();
+                if (!TextUtils.isEmpty(subject_names)) {
+                    subject_names = subject_names.substring(0, subject_names.length() - 2);
+                }
 
                 if (validate()) {
                     academicEntity = new AcademicEntity();
@@ -896,6 +931,19 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
                                         if (generalInfoEntity != null) {
                                             binding.setInspData(generalInfoEntity);
                                             binding.executePendingBindings();
+                                            List<String> strings = new ArrayList<>(Arrays.asList(generalInfoEntity.getSubject_names().split(",")));
+
+                                            if (strings.size() > 0) {
+                                                for (int x = 0; x < subjectsList.size(); x++) {
+                                                    if (strings.toString().contains(subjectsList.get(x).getName())) {
+                                                        subjectsList.get(x).setStatus(true);
+                                                    } else {
+                                                        subjectsList.get(x).setStatus(false);
+                                                    }
+                                                }
+                                                adapter.notifyDataSetChanged();
+                                            }
+
                                         }
                                     }
                                 });
@@ -947,9 +995,9 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
             ScrollToView(binding.rgStaffAccomodatedAsperStudStrength);
             return false;
         }
-        if (staff_accomodated_asper_stud_strength.equals(AppConstants.No) &&TextUtils.isEmpty(subject_names)) {
+        if (staff_accomodated_asper_stud_strength.equals(AppConstants.No) && TextUtils.isEmpty(subject_names)) {
             showSnackBar(getString(R.string.sel_subject_names));
-            binding.etSubjectNames.requestFocus();
+            ScrollToView(binding.rgStaffAccomodatedAsperStudStrength);
             return false;
         }
         if (TextUtils.isEmpty(plan_prepared)) {

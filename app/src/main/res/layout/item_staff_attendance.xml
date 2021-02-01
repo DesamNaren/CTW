@@ -76,12 +76,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
                     android:orientation="horizontal"
-                    android:padding="@dimen/dimen_10dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:paddingRight="@dimen/dimen_10dp">
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingRight="@dimen/dimen_10dp"
+                    android:paddingBottom="@dimen/dimen_5dp">
 
                     <LinearLayout
                         android:id="@+id/ll_present"
@@ -153,12 +152,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5dp"
-                    android:layout_marginRight="@dimen/dimen_5dp"
                     android:orientation="horizontal"
-                    android:padding="@dimen/dimen_10dp"
                     android:paddingLeft="@dimen/dimen_10dp"
-                    android:paddingRight="@dimen/dimen_10dp">
+                    android:paddingTop="@dimen/dimen_5dp"
+                    android:paddingRight="@dimen/dimen_10dp"
+                    android:paddingBottom="@dimen/dimen_5dp">
 
                     <LinearLayout
                         android:id="@+id/ll_absent"
@@ -203,7 +201,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/leave_reason_ll"
@@ -263,7 +260,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
+                    android:layout_margin="@dimen/dimen_2dp"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
@@ -440,9 +437,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_5dp"
-                    android:orientation="vertical"
-                 >
+                    android:layout_margin="@dimen/dimen_2dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -454,9 +450,7 @@
                         android:id="@+id/rg_last_week"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:orientation="horizontal">
-
 
                         <RadioButton
                             android:id="@+id/rb_last_week_yes"
@@ -515,13 +509,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_2dp"
                     android:orientation="vertical">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="@dimen/dimen_5dp"
                         android:padding="@dimen/dimen_5dp"
                         android:text="@string/teacher_s_last_year_academic_panel_grade" />
 
@@ -530,11 +524,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/grades"
-                        android:layout_margin="@dimen/dimen_5dp"
                         android:padding="@dimen/dimen_5dp"
                         android:selectedItemPosition="@{staff.acad_panel_grade_pos}" />
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -568,6 +560,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

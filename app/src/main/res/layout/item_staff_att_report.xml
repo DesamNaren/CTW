@@ -3,7 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-    <import type="android.text.TextUtils"/>
+
+        <import type="android.text.TextUtils" />
+
         <variable
             name="staff"
             type="com.cgg.twdinspection.inspection.reports.source.StaffAttendenceInfo" />
@@ -284,24 +286,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_5dp"
                     android:orientation="horizontal"
-                    android:paddingLeft="@dimen/dimen_5dp"
-                    android:paddingRight="@dimen/dimen_5dp"
-                    android:paddingBottom="@dimen/dimen_5dp"
                     android:visibility="visible">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/dimen_10dp"
+                        android:layout_margin="@dimen/dimen_5dp"
                         android:text="@string/yesterday_supervision_duty_allotted" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/dimen_10dp">
+                        android:layout_margin="@dimen/dimen_5dp">
 
                         <com.cgg.twdinspection.common.custom.CustomFontTextView
                             android:id="@+id/tv_yes_dutyAlloted"
@@ -350,13 +350,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dimen_5dp"
                     android:paddingRight="@dimen/dimen_5dp"
-                    android:clickable="false"
-                    android:focusableInTouchMode="false"
                     android:paddingBottom="@dimen/dimen_5dp"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
@@ -365,6 +365,7 @@
                         android:layout_marginLeft="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         android:text="@string/category" />
+
                     <com.cgg.twdinspection.common.custom.CustomFontTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -378,11 +379,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:visibility="gone"
                         android:clickable="false"
                         android:entries="@array/category"
                         android:focusableInTouchMode="false"
-                        android:selectedItemPosition="@{!TextUtils.isEmpty(staff.categPos)?Double.valueOf(staff.categPos).intValue():0}" />
+                        android:selectedItemPosition="@{!TextUtils.isEmpty(staff.categPos)?Double.valueOf(staff.categPos).intValue():0}"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -413,8 +414,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@={staff.leavesAvailed}" />
@@ -438,8 +439,8 @@
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leavesTaken}" />
@@ -463,8 +464,8 @@
                             android:hint="@string/leave_balance"
                             android:inputType="number"
                             android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingTop="@dimen/dimen_10dp"
+                            android:paddingRight="@dimen/dimen_5dp"
                             android:paddingBottom="@dimen/dimen_10dp"
                             android:singleLine="true"
                             android:text="@{staff.leavesBal}" />
@@ -476,69 +477,69 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:paddingLeft="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:visibility="visible">
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorAccent">
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/last_week" />
 
-                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/last_week"
-                            android:layout_width="match_parent"
+                    <RadioGroup
+                        android:id="@+id/rg_last_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <RadioButton
+                            android:id="@+id/rb_last_week_yes"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="@string/last_week"
-                            android:inputType="number"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:singleLine="true"
-                            android:text="@{staff.lastWeekTeacherAttended}" />
+                            android:checked="@{staff.lastWeekTeacherAttended.equalsIgnoreCase(`Yes`)}"
+                            android:clickable="false"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/yes" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <RadioButton
+                            android:id="@+id/rb_last_week_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="@{staff.lastWeekTeacherAttended.equalsIgnoreCase(`No`)}"
+                            android:clickable="false"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="@string/no" />
+
+                    </RadioGroup>
+
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:layout_marginBottom="@dimen/dimen_10dp"
-                    android:paddingLeft="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingRight="2dp"
-                    android:visibility="visible">
+                    android:layout_margin="@dimen/dimen_5dp"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                    <com.cgg.twdinspection.common.custom.CustomFontTextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/colorAccent">
+                        android:layout_gravity="center"
+                        android:layout_weight="5"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@string/teacher_s_last_year_academic_panel_grade" />
 
-                        <com.cgg.twdinspection.common.custom.CustomFontEditText
-                            android:id="@+id/et_acad_grade_panel"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="@string/teacher_s_last_year_academic_panel_grade"
-                            android:paddingLeft="@dimen/dimen_5dp"
-                            android:paddingRight="@dimen/dimen_5dp"
-                            android:paddingTop="@dimen/dimen_10dp"
-                            android:paddingBottom="@dimen/dimen_10dp"
-                            android:singleLine="true"
-                            android:text="@{staff.acadPanelGrade}" />
+                    <TextView
+                        android:id="@+id/sp_acad_grade_panel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:entries="@array/grades"
+                        android:padding="@dimen/dimen_5dp"
+                        android:text="@{staff.acadPanelGrade}"
+                        android:textColor="@color/black" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

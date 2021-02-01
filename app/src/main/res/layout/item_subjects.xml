@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="subjects"
+            type="com.cgg.twdinspection.inspection.source.academic_overview.AcademicSubjectsEntity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_5dp"
+        android:id="@+id/ll_subjects"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/absent_init" />
+
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_5dp"
+            android:text="@={subjects.name}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp" />
+
+    </LinearLayout>
+
+</layout>

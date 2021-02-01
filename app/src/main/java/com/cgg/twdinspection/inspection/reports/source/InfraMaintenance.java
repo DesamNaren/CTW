@@ -28,6 +28,9 @@ public class InfraMaintenance {
     @SerializedName("compWall_required")
     @Expose
     private String compWallRequired;
+    @SerializedName("construction_part_type")
+    @Expose
+    private String constructionPartType;
     @SerializedName("compWall_cnt")
     @Expose
     private String compWall_cnt;
@@ -272,6 +275,14 @@ public class InfraMaintenance {
 
     public void setCompWallRequired(String compWallRequired) {
         this.compWallRequired = compWallRequired;
+    }
+
+    public String getConstructionPartType() {
+        return constructionPartType;
+    }
+
+    public void setConstructionPartType(String constructionPartType) {
+        this.constructionPartType = constructionPartType;
     }
 
     public String getCompWall_cnt() {

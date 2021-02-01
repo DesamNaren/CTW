@@ -60,10 +60,10 @@
                     android:visibility="@{inspData.academicGradeEntities.size()>0? View.VISIBLE : View.GONE}">
 
                     <TextView
+                        android:id="@+id/slno1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno1"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -105,10 +105,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno2"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -223,10 +223,10 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/slno3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno3"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -292,10 +292,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno4"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -353,31 +353,15 @@
                             android:orientation="vertical"
                             android:visibility="@{inspData.staffAccomodatedAsperStudStrength.equalsIgnoreCase(`No`)?View.VISIBLE:View.GONE}">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            <com.cgg.twdinspection.common.custom.CustomFontTextView
+                                android:id="@+id/et_subject_names"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:imeOptions="actionNext"
                                 android:padding="@dimen/dimen_5dp"
-                                android:textColorHint="@color/colorAccent"
-                                app:errorEnabled="true">
+                                android:textColor="@color/black"
+                                android:text="@{`Subjects: `+inspData.subject_names}" />
 
-
-                                <com.cgg.twdinspection.common.custom.CustomFontEditText
-                                    android:id="@+id/et_subject_names"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
-                                    android:focusableInTouchMode="false"
-                                    android:hint="@string/subject_names"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:paddingLeft="@dimen/dimen_5dp"
-                                    android:paddingTop="@dimen/dimen_10dp"
-                                    android:paddingRight="@dimen/dimen_5dp"
-                                    android:paddingBottom="@dimen/dimen_10dp"
-                                    android:text="@{inspData.subject_names}" />
-
-                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -396,10 +380,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno5"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -513,10 +497,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno6"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -578,10 +562,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno7"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -873,10 +857,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno8"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -966,10 +950,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno9"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1058,10 +1042,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno10"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1149,10 +1133,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno11"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1268,10 +1252,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno12"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1472,10 +1456,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno13"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1671,10 +1655,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno14"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1788,10 +1772,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno15"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -1944,10 +1928,10 @@
                     android:padding="@dimen/dimen_5dp">
 
                     <TextView
+                        android:id="@+id/slno16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno16"
                         android:textColor="@color/black" />
 
                     <LinearLayout
@@ -2362,10 +2346,10 @@
 
 
                     <TextView
+                        android:id="@+id/slno17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dimen_5dp"
-                        android:id="@+id/slno17"
                         android:textColor="@color/black" />
 
                     <LinearLayout
