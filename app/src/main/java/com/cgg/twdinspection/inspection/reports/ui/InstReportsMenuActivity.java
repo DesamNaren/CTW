@@ -106,13 +106,33 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
         TextView[] ids5 = new TextView[]{binding.slno51, binding.slno52, binding.slno53, binding.slno54, binding.slno55};
         BaseActivity.setIds(ids5, 21);
 
-        /*TextView[] ids6 = new TextView[]{binding.slno1, binding.slno2, binding.slno3, binding.slno4, binding.slno5,
-                binding.slno6, binding.slno7, binding.slno8, binding.slno9, binding.slno10, binding.slno11, binding.slno12,
-                binding.slno13, binding.slno14, binding.slno15, binding.slno16, binding.slno17, binding.slno18,
-                binding.slno19, binding.slno20, binding.slno21, binding.slno22, binding.slno23, binding.slno24,
-                binding.slno25, binding.slno26};
+        TextView[] ids6 = new TextView[]{binding.slno61, binding.slno62, binding.slno63, binding.slno64, binding.slno65,
+                binding.slno66, binding.slno67, binding.slno68, binding.slno69, binding.slno610, binding.slno611,
+                binding.slno612, binding.slno613, binding.slno614, binding.slno615, binding.slno616, binding.slno617,
+                binding.slno618, binding.slno619, binding.slno620, binding.slno621, binding.slno622, binding.slno623,
+                binding.slno624, binding.slno625, binding.slno626};
         BaseActivity.setIds(ids6, 27);
-        binding.slno261.setText(binding.slno26.getText().toString() + "1.");*/
+        binding.slno6261.setText(binding.slno626.getText().toString() + "1.");
+
+        TextView[] ids7 = new TextView[]{binding.slno71, binding.slno72, binding.slno73, binding.slno74, binding.slno75,
+                binding.slno76, binding.slno77, binding.slno78, binding.slno79, binding.slno710, binding.slno711,
+                binding.slno712, binding.slno713, binding.slno714, binding.slno715, binding.slno716};
+        BaseActivity.setIds(ids7, 54);
+
+        TextView[] ids8 = new TextView[]{binding.slno81, binding.slno82, binding.slno83, binding.slno84, binding.slno85,
+                binding.slno86, binding.slno87, binding.slno88};
+        BaseActivity.setIds(ids8, 70);
+
+        TextView[] ids9 = new TextView[]{binding.slno91, binding.slno92, binding.slno93, binding.slno94, binding.slno95,
+                binding.slno96};
+        BaseActivity.setIds(ids9, 78);
+
+        TextView[] ids10 = new TextView[]{binding.slno101};
+        BaseActivity.setIds(ids10, 84);
+
+        TextView[] ids11 = new TextView[]{binding.slno111, binding.slno112, binding.slno113, binding.slno114,
+                binding.slno115, binding.slno116};
+        BaseActivity.setIds(ids11, 85);
 
         binding.actionBar.headerTitle.setText(getString(R.string.insp_reports));
         binding.actionBar.ivPdf.setVisibility(View.VISIBLE);
@@ -196,7 +216,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             }
 
             String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
-            if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")) {
+            if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")
+                    && inspReportData.getCoCurricularInfo().getInstituteId() != null) {
                 binding.setCocurricular(inspReportData.getCoCurricularInfo());
                 binding.executePendingBindings();
             }
@@ -271,12 +292,19 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                             views.add(binding.academicPdf2);
                             views.add(binding.academicPdf3);
                             views.add(binding.academicPdf4);
-                            views.add(binding.cocurricularPdf1);
-                            views.add(binding.cocurricularPdf2);
+
+                            String cocurricular = gson.toJson(inspReportData.getCoCurricularInfo());
+                            if (!TextUtils.isEmpty(cocurricular) && !cocurricular.equalsIgnoreCase("{}")
+                                    && inspReportData.getCoCurricularInfo().getInstituteId() != null) {
+                                views.add(binding.cocurricularPdf1);
+                                views.add(binding.cocurricularPdf2);
+                            }
+
                             views.add(binding.entitlementPdf);
                             views.add(binding.registersPdf1);
                             views.add(binding.registersPdf2);
-                            views.add(binding.generalCommentsPdf);
+                            views.add(binding.generalCommentsPdf1);
+                            views.add(binding.generalCommentsPdf2);
                             views.add(binding.photosPdf);
 
                             PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
@@ -345,6 +373,8 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     @Override
     public void onBackPressed() {
+        if (customProgressDialog.isShowing())
+            customProgressDialog.hide();
         finish();
     }
 
@@ -440,16 +470,16 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     private void createStaffTable(Document document) throws BadElementException {
 
-        PdfPTable table = new PdfPTable(11);
+        PdfPTable table = new PdfPTable(7);
         table.setTotalWidth(550);
         table.setLockedWidth(true);
         createCell("ID", table);
         createCell("Name", table);
         createCell("Designation", table);
-        createCell("Category", table);
-        createCell("Total Leaves", table);
-        createCell("Leaves Taken", table);
-        createCell("Leave Balance", table);
+//        createCell("Category", table);
+//        createCell("Total Leaves", table);
+//        createCell("Leaves Taken", table);
+//        createCell("Leave Balance", table);
         createCell("Attendance", table);
         createCell("Yesterday super vision duty allotted", table);
         createCell("Last week turn duties attended", table);
@@ -464,10 +494,10 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 createCell(staffAttendenceInfoList.get(i).getEmpId(), table);
                 createCell(staffAttendenceInfoList.get(i).getEmpName(), table);
                 createCell(staffAttendenceInfoList.get(i).getDesignation(), table);
-                createCell(staffAttendenceInfoList.get(i).getCategory(), table);
-                createCell(staffAttendenceInfoList.get(i).getLeavesAvailed(), table);
-                createCell(staffAttendenceInfoList.get(i).getLeavesTaken(), table);
-                createCell(staffAttendenceInfoList.get(i).getLeavesBal(), table);
+//                createCell(staffAttendenceInfoList.get(i).getCategory(), table);
+//                createCell(staffAttendenceInfoList.get(i).getLeavesAvailed(), table);
+//                createCell(staffAttendenceInfoList.get(i).getLeavesTaken(), table);
+//                createCell(staffAttendenceInfoList.get(i).getLeavesBal(), table);
                 createCell(staffAttendenceInfoList.get(i).getEmpPresence(), table);
                 createCell(staffAttendenceInfoList.get(i).getYdayDutyAllotted(), table);
                 createCell(staffAttendenceInfoList.get(i).getLastWeekTeacherAttended(), table);
