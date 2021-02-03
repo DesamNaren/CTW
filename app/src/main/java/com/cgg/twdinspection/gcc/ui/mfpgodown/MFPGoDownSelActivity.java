@@ -22,7 +22,7 @@ import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMfpGodownSelBinding;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
-import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

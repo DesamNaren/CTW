@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel" />
+            type="com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel" />
     </data>
 
 

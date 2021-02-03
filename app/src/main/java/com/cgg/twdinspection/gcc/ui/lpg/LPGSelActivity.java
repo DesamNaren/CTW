@@ -23,7 +23,7 @@ import com.cgg.twdinspection.databinding.ActivityLpgSelBinding;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
-import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 

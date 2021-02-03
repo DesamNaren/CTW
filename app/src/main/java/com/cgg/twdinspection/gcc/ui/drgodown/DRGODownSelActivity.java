@@ -20,28 +20,36 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownSelBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
-import com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DRGODownSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DRGODownSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
     ActivityDrGodownSelBinding binding;
     private Context context;
     private DivisionSelectionViewModel viewModel;
+    private GCCOfflineViewModel gccOfflineViewModel;
     private String selectedDivId, selectedSocietyId, selectedGoDownId;
     private List<DivisionsInfo> divisionsInfos;
     private List<String> societies;
     private List<String> drGodowns;
     private DrGodowns selectedDrGodowns;
+    private GCCOfflineRepository gccOfflineRepository;
     ArrayAdapter<String> selectAdapter;
 
     @Override
@@ -54,6 +62,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         drGodowns = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_dr_godown));
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         });
         viewModel = new DivisionSelectionViewModel(getApplication());
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
 
@@ -141,6 +151,71 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 }
             }
         });
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validateFields()) {
+                    Gson gson = new Gson();
+                    StockViewModel viewModel = new StockViewModel(getApplication(), DRGODownSelActivity.this);
+                    if (Utils.checkInternetConnection(DRGODownSelActivity.this)) {
+                        customProgressDialog.show();
+                        LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(selectedGoDownId);
+                        officesResponseLiveData.observe(DRGODownSelActivity.this, new Observer<StockDetailsResponse>() {
+                            @Override
+                            public void onChanged(StockDetailsResponse stockDetailsResponse) {
+
+                                customProgressDialog.hide();
+                                officesResponseLiveData.removeObservers(DRGODownSelActivity.this);
+
+                                if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                                    if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                        DrGodownOffline drGodownOffline = new DrGodownOffline();
+                                        drGodownOffline.setDivisionId(selectedDivId);
+                                        drGodownOffline.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        drGodownOffline.setSocietyId(selectedSocietyId);
+                                        drGodownOffline.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        drGodownOffline.setDrgownId(selectedGoDownId);
+                                        drGodownOffline.setDrgownName(binding.spGodown.getSelectedItem().toString());
+                                        drGodownOffline.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        drGodownOffline.setDailyReq(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        drGodownOffline.setEmpties(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+
+                                        gccOfflineRepository.insertDRGodowns(DRGODownSelActivity.this, drGodownOffline);
+
+                                    } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                        callSnackBar(getString(R.string.something));
+                                    } else {
+                                        callSnackBar(getString(R.string.something));
+                                    }
+
+                                } else {
+                                    callSnackBar(getString(R.string.something));
+                                }
+
+                            }
+
+                        });
+                    } else {
+                        Utils.customWarningAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                    }
+                }
+            }
+        });
+
+        binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gccOfflineRepository.deleteGoDown(DRGODownSelActivity.this, selectedDivId, selectedSocietyId, selectedGoDownId);
+            }
+        });
+
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
     }
 
     @Override
@@ -172,6 +247,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
+            binding.llDownload.setVisibility(View.GONE);
             selectedDrGodowns = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -221,6 +297,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 binding.spGodown.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
+            binding.llDownload.setVisibility(View.GONE);
             if (position != 0) {
                 selectedDrGodowns = null;
                 selectedSocietyId = "";
@@ -264,6 +341,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         } else if (adapterView.getId() == R.id.sp_godown) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedDrGodowns = null;
                 selectedGoDownId = "";
                 LiveData<DrGodowns> drGodownsLiveData = viewModel.getGODownID(selectedDivId, selectedSocietyId, binding.spGodown.getSelectedItem().toString());
@@ -273,6 +351,22 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                         if (drGodowns != null) {
                             selectedGoDownId = drGodowns.getGodownId();
                             selectedDrGodowns = drGodowns;
+
+                            LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
+                            drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<DrGodownOffline>() {
+                                @Override
+                                public void onChanged(DrGodownOffline drGodowns) {
+                                    drGodownLiveData.removeObservers(DRGODownSelActivity.this);
+
+                                    if (drGodowns == null) {
+                                        binding.btnDownload.setText("Download");
+                                        binding.btnRemove.setVisibility(View.GONE);
+                                    } else {
+                                        binding.btnDownload.setText("Re-Download");
+                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            });
                         } else {
                             showSnackBar(getString(R.string.something));
                         }
@@ -281,6 +375,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             } else {
                 selectedDrGodowns = null;
                 selectedGoDownId = "";
+                binding.llDownload.setVisibility(View.GONE);
             }
         }
     }
@@ -288,5 +383,35 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void drGoDownCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Re-Download");
+                binding.btnRemove.setVisibility(View.VISIBLE);
+                Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data downloaded successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Download");
+                binding.btnRemove.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data deleted successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

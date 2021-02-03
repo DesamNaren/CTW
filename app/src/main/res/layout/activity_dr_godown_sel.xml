@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.cgg.twdinspection.inspection.viewmodel.DivisionSelectionViewModel" />
+            type="com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel" />
     </data>
 
 
@@ -184,6 +184,33 @@
                             android:spinnerMode="dropdown" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ll_download"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/bg"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btn_download"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:text="Download" />
+
+                        <Button
+                            android:id="@+id/btn_remove"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_5dp"
+                            android:layout_weight="1"
+                            android:padding="@dimen/dimen_5dp"
+                            android:visibility="gone"
+                            android:text="Remove" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

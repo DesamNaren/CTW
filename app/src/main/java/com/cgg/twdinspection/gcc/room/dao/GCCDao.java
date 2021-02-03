@@ -28,9 +28,6 @@ public interface GCCDao {
 //    @Query("SELECT DISTINCT divisionName from Divisions")
 //    LiveData<List<String>> getDivisionsInfo();
 
-
-
-
     @Query("SELECT * from DR_GoDown where divisionId LIKE :divId AND societyId LIKE :socId")
     LiveData<List<DrGodowns>> getDrGoDowns(String divId, String socId);
 
@@ -74,17 +71,6 @@ public interface GCCDao {
     @Query("SELECT * from P_Unit where divisionId LIKE :divId")
     LiveData<List<PUnits>> getPUnitsDiv(String divId);
 
-
-
-
-
-
-
-
-
-
-
-
     @Query("SELECT DISTINCT divisionName from Divisions")
     LiveData<List<String>> getDivisionsInfo();
 
@@ -96,23 +82,6 @@ public interface GCCDao {
 
     @Query("SELECT societyId from Divisions where  divisionId LIKE :divisionID AND societyName LIKE :societyName")
     LiveData<String> getSocietyID(String divisionID, String societyName);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Query("SELECT * from DR_GoDown where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :goDownName")
     LiveData<DrGodowns> getGoDownID(String divisionID, String societyID, String goDownName);
