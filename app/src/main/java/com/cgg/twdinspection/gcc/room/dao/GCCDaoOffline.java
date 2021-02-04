@@ -3,9 +3,11 @@ package com.cgg.twdinspection.gcc.room.dao;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 /**
  * The Room Magic is in this file, where you map file_provider_paths Java method call to an SQL query.
@@ -18,8 +20,7 @@ import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
 
 @Dao
 public interface GCCDaoOffline {
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDRGodown(DrGodownOffline drGodownOffline);
 
     @Query("SELECT COUNT(*) FROM DR_GoDown_Offline")

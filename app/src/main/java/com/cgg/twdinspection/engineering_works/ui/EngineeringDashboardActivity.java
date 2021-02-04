@@ -44,7 +44,6 @@ import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;

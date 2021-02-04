@@ -69,7 +69,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         try {
             if (getSupportActionBar() != null) {
-//                getSupportActionBar().setTitle(getResources().getString(R.string.ben_report));
                 TextView tv = new TextView(getApplicationContext());
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT, // Width of TextView

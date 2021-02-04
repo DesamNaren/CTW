@@ -34,9 +34,7 @@ import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -48,7 +46,7 @@ public class DashboardMenuActivity extends AppCompatActivity {
     private String cacheDate, currentDate;
     private InstMainViewModel instMainViewModel;
     private ActivityHomeBinding binding;
-    private MenuItem nav_home,nav_schemes,nav_school,nav_gcc,nav_eng,nav_reports,nav_my_insp,nav_logout;
+    private MenuItem nav_home, nav_schemes, nav_school, nav_gcc, nav_eng, nav_reports, nav_my_insp, nav_logout;
     private Context context;
     private InstSelectionViewModel instSelectionViewModel;
     private String instId;
@@ -56,10 +54,10 @@ public class DashboardMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_home);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        context=DashboardMenuActivity.this;
+        context = DashboardMenuActivity.this;
         instSelectionViewModel = new InstSelectionViewModel(getApplication());
         try {
             sharedPreferences = TWDApplication.get(this).getPreferences();
@@ -84,21 +82,21 @@ public class DashboardMenuActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home,R.id.nav_schemes,R.id.nav_school,R.id.nav_gcc,R.id.nav_eng,R.id.nav_reports,R.id.nav_my_insp,R.id.nav_logout)
+                R.id.nav_home, R.id.nav_schemes, R.id.nav_school, R.id.nav_gcc, R.id.nav_eng, R.id.nav_reports, R.id.nav_my_insp, R.id.nav_logout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        nav_home= navigationView.getMenu().findItem(R.id.nav_home);
-        nav_schemes= navigationView.getMenu().findItem(R.id.nav_schemes);
-        nav_school= navigationView.getMenu().findItem(R.id.nav_school);
-        nav_gcc= navigationView.getMenu().findItem(R.id.nav_gcc);
-        nav_eng= navigationView.getMenu().findItem(R.id.nav_eng);
-        nav_reports= navigationView.getMenu().findItem(R.id.nav_reports);
-        nav_my_insp= navigationView.getMenu().findItem(R.id.nav_my_insp);
-        nav_logout= navigationView.getMenu().findItem(R.id.nav_logout);
+        nav_home = navigationView.getMenu().findItem(R.id.nav_home);
+        nav_schemes = navigationView.getMenu().findItem(R.id.nav_schemes);
+        nav_school = navigationView.getMenu().findItem(R.id.nav_school);
+        nav_gcc = navigationView.getMenu().findItem(R.id.nav_gcc);
+        nav_eng = navigationView.getMenu().findItem(R.id.nav_eng);
+        nav_reports = navigationView.getMenu().findItem(R.id.nav_reports);
+        nav_my_insp = navigationView.getMenu().findItem(R.id.nav_my_insp);
+        nav_logout = navigationView.getMenu().findItem(R.id.nav_logout);
 
         nav_home.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -230,11 +228,11 @@ public class DashboardMenuActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-//                Intent newIntent = new Intent(context, ReportActivity.class);
-//                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-//                        Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(newIntent);
-                //do as you want with the button click
+                Intent newIntent = new Intent(context, ReportActivity.class);
+                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(newIntent);
+//                do as you want with the button click
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);

@@ -1082,6 +1082,7 @@
     <string name="search_by_workId">Search by work ID/workname</string>
     <string name="work_id">Work ID</string>
     <string name="do_you_want">Are you sure, Do you want submit data?</string>
+    <string name="do_you_want_save">Are you sure, Do you want save data?</string>
     <string name="mark_att_emp">Please mark attendance of all employees</string>
     <string name="yes_duty_alloted">Please mark yesterday duty alloted to all employees</string>
     <string name="sel_ground_bal">Please enter valid Ground Balance</string>
@@ -1163,4 +1164,5 @@
     <string name="sel_insp_remarks">Enter Inspection Officer Remarks</string>
     <string name="new_construction">New Construction</string>
     <string name="part_construction">Part Construction</string>
+    <string name="no_comm">No commodities found</string>
 </resources>

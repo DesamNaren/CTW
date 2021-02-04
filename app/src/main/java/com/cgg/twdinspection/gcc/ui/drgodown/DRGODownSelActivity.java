@@ -1,13 +1,20 @@
 package com.cgg.twdinspection.gcc.ui.drgodown;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,6 +31,7 @@ import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
@@ -32,7 +40,9 @@ import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +61,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     private DrGodowns selectedDrGodowns;
     private GCCOfflineRepository gccOfflineRepository;
     ArrayAdapter<String> selectAdapter;
+    private boolean dailyreq_flag, emp_flag, ess_flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,64 +153,68 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    Gson gson = new Gson();
-                    String goDownData = gson.toJson(selectedDrGodowns);
-                    editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
+
+                    editor.putString(AppConstants.StockDetailsResponse, "");
                     editor.commit();
 
-                    startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
+                    LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
+                    drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<DrGodownOffline>() {
+                        @Override
+                        public void onChanged(DrGodownOffline drGodowns) {
+                            drGodownLiveData.removeObservers(DRGODownSelActivity.this);
+
+                            if (drGodowns != null) {
+
+                                Type listType = new TypeToken<ArrayList<CommonCommodity>>() {
+                                }.getType();
+                                List<CommonCommodity> essestinalCommodities = new Gson().fromJson(drGodowns.getEssentials(), listType);
+                                List<CommonCommodity> dailyReqCommodities = new Gson().fromJson(drGodowns.getDailyReq(), listType);
+                                List<CommonCommodity> emptiesCommodities = new Gson().fromJson(drGodowns.getEmpties(), listType);
+
+
+                                if (essestinalCommodities != null && essestinalCommodities.size() > 0) {
+                                    ess_flag = true;
+                                }
+                                if (dailyReqCommodities != null && dailyReqCommodities.size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+                                if (emptiesCommodities != null && emptiesCommodities.size() > 0) {
+                                    emp_flag = true;
+                                }
+
+
+                                if (ess_flag || dailyreq_flag || emp_flag) {
+                                    Gson gson = new Gson();
+                                    String goDownData = gson.toJson(selectedDrGodowns);
+                                    editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
+
+                                    StockDetailsResponse stockDetailsResponse = new StockDetailsResponse();
+                                    stockDetailsResponse.setEssential_commodities(essestinalCommodities);
+                                    stockDetailsResponse.setDialy_requirements(dailyReqCommodities);
+                                    stockDetailsResponse.setEmpties(emptiesCommodities);
+
+                                    editor.putString(AppConstants.StockDetailsResponse, new Gson().toJson(stockDetailsResponse));
+                                    editor.commit();
+
+                                    startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else {
+                                customOnlineAlert("Do you want to proceed in Online mode?");
+                            }
+                        }
+                    });
+
                 }
             }
         });
         binding.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateFields()) {
-                    Gson gson = new Gson();
-                    StockViewModel viewModel = new StockViewModel(getApplication(), DRGODownSelActivity.this);
-                    if (Utils.checkInternetConnection(DRGODownSelActivity.this)) {
-                        customProgressDialog.show();
-                        LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(selectedGoDownId);
-                        officesResponseLiveData.observe(DRGODownSelActivity.this, new Observer<StockDetailsResponse>() {
-                            @Override
-                            public void onChanged(StockDetailsResponse stockDetailsResponse) {
-
-                                customProgressDialog.hide();
-                                officesResponseLiveData.removeObservers(DRGODownSelActivity.this);
-
-                                if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
-                                    if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
-
-                                        DrGodownOffline drGodownOffline = new DrGodownOffline();
-                                        drGodownOffline.setDivisionId(selectedDivId);
-                                        drGodownOffline.setDivisionName(binding.spDivision.getSelectedItem().toString());
-                                        drGodownOffline.setSocietyId(selectedSocietyId);
-                                        drGodownOffline.setSocietyName(binding.spSociety.getSelectedItem().toString());
-                                        drGodownOffline.setDrgownId(selectedGoDownId);
-                                        drGodownOffline.setDrgownName(binding.spGodown.getSelectedItem().toString());
-                                        drGodownOffline.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
-                                        drGodownOffline.setDailyReq(gson.toJson(stockDetailsResponse.getEssential_commodities()));
-                                        drGodownOffline.setEmpties(gson.toJson(stockDetailsResponse.getEssential_commodities()));
-
-                                        gccOfflineRepository.insertDRGodowns(DRGODownSelActivity.this, drGodownOffline);
-
-                                    } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                                        callSnackBar(getString(R.string.something));
-                                    } else {
-                                        callSnackBar(getString(R.string.something));
-                                    }
-
-                                } else {
-                                    callSnackBar(getString(R.string.something));
-                                }
-
-                            }
-
-                        });
-                    } else {
-                        Utils.customWarningAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
-                    }
-                }
+                callService(false);
             }
         });
 
@@ -210,6 +225,84 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         });
 
+    }
+
+
+    void callService(boolean flag) {
+        if (validateFields()) {
+            Gson gson = new Gson();
+            StockViewModel viewModel = new StockViewModel(getApplication(), DRGODownSelActivity.this);
+            if (Utils.checkInternetConnection(DRGODownSelActivity.this)) {
+                customProgressDialog.show();
+                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(selectedGoDownId);
+                officesResponseLiveData.observe(DRGODownSelActivity.this, new Observer<StockDetailsResponse>() {
+                    @Override
+                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
+
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(DRGODownSelActivity.this);
+
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
+                                }
+
+                                if (ess_flag || dailyreq_flag || emp_flag) {
+                                    if (flag) {
+                                        Gson gson = new Gson();
+                                        String goDownData = gson.toJson(selectedDrGodowns);
+                                        editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
+                                        editor.putString(AppConstants.StockDetailsResponse, new Gson().toJson(stockDetailsResponse));
+                                        editor.commit();
+
+                                        startActivity(new Intent(context, DRGodownActivity.class));
+                                    } else {
+                                        DrGodownOffline drGodownOffline = new DrGodownOffline();
+                                        drGodownOffline.setDivisionId(selectedDivId);
+                                        drGodownOffline.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        drGodownOffline.setSocietyId(selectedSocietyId);
+                                        drGodownOffline.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        drGodownOffline.setDrgownId(selectedGoDownId);
+                                        drGodownOffline.setDrgownName(binding.spGodown.getSelectedItem().toString());
+                                        drGodownOffline.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        drGodownOffline.setDailyReq(gson.toJson(stockDetailsResponse.getDialy_requirements()));
+                                        drGodownOffline.setEmpties(gson.toJson(stockDetailsResponse.getEmpties()));
+                                        drGodownOffline.setType(AppConstants.REPORT_GODOWN);
+
+                                        gccOfflineRepository.insertDRGodowns(DRGODownSelActivity.this, drGodownOffline);
+                                    }
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                callSnackBar(getString(R.string.no_comm));
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+
+                        } else {
+                            callSnackBar(getString(R.string.something));
+                        }
+
+                    }
+
+                });
+            } else {
+                Utils.customWarningAlert(DRGODownSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
     }
 
     void callSnackBar(String msg) {
@@ -414,4 +507,51 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             e.printStackTrace();
         }
     }
+
+    private void customOnlineAlert(String msg) {
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(getString(R.string.app_name));
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callService(true);
+
+
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -39,6 +39,40 @@ public class DrGodownOffline {
     @Expose
     private String empties;
 
+    @SerializedName("data")
+    @Expose
+    private String data;
+    @SerializedName("photos")
+    @Expose
+    private String photos;
+    @SerializedName("type")
+    @Expose
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
+
     public int getId() {
         return id;
     }

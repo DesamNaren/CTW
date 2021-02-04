@@ -49,7 +49,7 @@
             android:id="@+id/nav_my_insp"
             android:icon="@drawable/dmv"
             android:title="@string/my_inspections"
-            android:visible="false" />
+            android:visible="true" />
         <item
             android:id="@+id/nav_logout"
             app:iconTint="@color/colorPrimaryDark"

@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
@@ -39,8 +41,11 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityGccPhotoCaptureBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
+import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockSubmitRequest;
 import com.cgg.twdinspection.gcc.source.stock.SubmitReqCommodities;
@@ -51,18 +56,22 @@ import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +81,7 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface {
+public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface, GCCOfflineInterface {
 
     ActivityGccPhotoCaptureBinding binding;
     String PIC_NAME, PIC_TYPE;
@@ -82,7 +91,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     int flag_entrance = 0, flag_ceiling = 0, flag_floor = 0, flag_stock_arrang1 = 0, flag_stock_arrang2 = 0, flag_machinary = 0, flag_repair = 0, flag_pUnits = 0;
     File file_repair, file_entrance, file_ceiling, file_floor, file_stock_arrang1, file_stock_arrang2, file_machinary;
     String FilePath, repairPath;
-    private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
+    private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
@@ -92,6 +101,10 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     StockSubmitRequest stockSubmitRequest;
     private String randomNum;
     File mediaStorageDir;
+    private boolean flag;
+    private GCCOfflineViewModel gccOfflineViewModel;
+    private GCCOfflineRepository gccOfflineRepository;
+    private GCCSubmitRequest request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +118,8 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         binding.header.ivHome.setVisibility(View.GONE);
         binding.btnLayout.btnNext.setText(getString(R.string.submit));
         customProgressDialog = new CustomProgressDialog(this);
-
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
         viewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
         binding.setViewModel(viewModel);
@@ -187,6 +201,23 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             suppId = mfpGoDowns.getGodownId();
             godName = mfpGoDowns.getGodownName();
         }
+
+        LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                divId, socId, suppId);
+
+        drGodownLiveData.observe(GCCPhotoActivity.this, new Observer<DrGodownOffline>() {
+            @Override
+            public void onChanged(DrGodownOffline drGodownOffline) {
+                if (drGodownOffline != null) {
+                    flag = true;
+                    binding.btnLayout.btnNext.setText(getString(R.string.save));
+                } else {
+                    flag = false;
+                    binding.btnLayout.btnNext.setText(getString(R.string.submit));
+                }
+            }
+        });
+
         binding.ivEntrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,18 +306,20 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             @Override
             public void onClick(View view) {
                 if (validate()) {
-                    if (Utils.checkInternetConnection(GCCPhotoActivity.this)) {
-                        customSaveAlert(GCCPhotoActivity.this, getString(R.string.app_name), getString(R.string.do_you_want));
-                    } else {
-                        Utils.customWarningAlert(GCCPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
-                    }
+                    customSaveAlert(GCCPhotoActivity.this, getString(R.string.app_name));
                 }
             }
         });
     }
 
-    public void customSaveAlert(Activity activity, String title, String msg) {
+    public void customSaveAlert(Activity activity, String title) {
         try {
+            String msg = "";
+            if (flag) {
+                msg = getString(R.string.do_you_want_save);
+            } else {
+                msg = getString(R.string.do_you_want);
+            }
             final Dialog dialog = new Dialog(activity);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
@@ -315,8 +348,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-
-
                         callDataSubmit();
                     }
                 });
@@ -331,7 +362,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
 
     private void callDataSubmit() {
-        GCCSubmitRequest request = new GCCSubmitRequest();
+        request = new GCCSubmitRequest();
         request.setInspectionFindings(inspectionSubmitResponse);
         request.setOfficerId(officerID);
         request.setDivisionId(divId);
@@ -349,10 +380,18 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         setStockDetailsSubmitRequest();
         request.setStockDetails(stockSubmitRequest);
 
-        customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploading Data");
 
-        viewModel.submitGCCDetails(request);
+        if (flag) {
+            callPhotoSubmit();
+        } else {
+            if (Utils.checkInternetConnection(GCCPhotoActivity.this)) {
+                customProgressDialog.show();
+                customProgressDialog.addText("Please wait...Uploading Data");
+                viewModel.submitGCCDetails(request);
+            } else {
+                Utils.customWarningAlert(GCCPhotoActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
     }
 
     private void setStockDetailsSubmitRequest() {
@@ -509,9 +548,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             body6 = MultipartBody.Part.createFormData("image", file_repair.getName(), requestFile9);
         }
 
-        customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploadig Photos");
-
         List<MultipartBody.Part> partList = new ArrayList<>();
         partList.add(body);
         partList.add(body1);
@@ -525,7 +561,29 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             partList.add(body6);
         }
 
-        viewModel.UploadImageServiceCall(partList);
+        if (flag) {
+            String data = new Gson().toJson(request);
+            String photos = new Gson().toJson(partList);
+            DrGodownOffline drGodownOffline = new DrGodownOffline();
+            drGodownOffline.setDivisionId(divId);
+            drGodownOffline.setDivisionName(divName);
+            drGodownOffline.setSocietyId(socId);
+            drGodownOffline.setSocietyName(socName);
+            drGodownOffline.setDrgownId(suppId);
+            drGodownOffline.setDrgownName(godName);
+
+            drGodownOffline.setData(data);
+            drGodownOffline.setPhotos(photos);
+            drGodownOffline.setType(AppConstants.REPORT_GODOWN);
+
+            gccOfflineRepository.insertDRGodowns(GCCPhotoActivity.this, drGodownOffline);
+
+        } else {
+            customProgressDialog.show();
+            customProgressDialog.addText("Please wait...Uploadig Photos");
+
+            viewModel.UploadImageServiceCall(partList);
+        }
     }
 
     private boolean validate() {
@@ -871,5 +929,26 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             mediaStorageDir.delete();
         }
         Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+    }
+
+    @Override
+    public void drGoDownCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+
+
+                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, DashboardMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
     }
 }

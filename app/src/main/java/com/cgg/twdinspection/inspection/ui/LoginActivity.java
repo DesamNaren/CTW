@@ -14,26 +14,36 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
+import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MultipartBody;
 
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
@@ -47,7 +57,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences= TWDApplication.get(this).getPreferences();
+        sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         instMainViewModel = new InstMainViewModel(getApplication());
         instSelectionViewModel = new InstSelectionViewModel(getApplication());
@@ -59,9 +69,9 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         instSelectionViewModel.getSelectedInst().observe(this, new Observer<InstSelectionInfo>() {
             @Override
             public void onChanged(InstSelectionInfo instSelectionInfo) {
-                if(instSelectionInfo!=null){
+                if (instSelectionInfo != null) {
                     instId = instSelectionInfo.getInst_id();
-                    if(!TextUtils.isEmpty(instId)) {
+                    if (!TextUtils.isEmpty(instId)) {
                         instMainViewModel.getAllSections().observe(LoginActivity.this, new Observer<List<InstMenuInfoEntity>>() {
                             @Override
                             public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
@@ -86,10 +96,10 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                             }
 
                         });
-                    }else {
+                    } else {
                         callLoginProcess();
                     }
-                }else {
+                } else {
                     callLoginProcess();
                 }
             }
@@ -210,6 +220,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
             }
         }
     };
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -229,7 +240,7 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
         }
     }
 
-    private void clearSession(){
+    private void clearSession() {
         currentDate = Utils.getCurrentDate();
         cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
 
@@ -237,8 +248,8 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
             if (!cacheDate.equalsIgnoreCase(currentDate)) {
 
                 Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.ses_expire_re), instMainViewModel);
 
             }
         }

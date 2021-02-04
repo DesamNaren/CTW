@@ -23,7 +23,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
-import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
+import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
@@ -31,6 +31,7 @@ import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,12 +53,14 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
     private List<String> mFragmentTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
     private boolean dailyreq_flag, emp_flag, ess_flag;
+    private GCCOfflineViewModel gccOfflineViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_godown);
         customProgressDialog = new CustomProgressDialog(this);
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         stockDetailsResponsemain = null;
         EssentialFragment.commonCommodities = null;
         DailyFragment.commonCommodities = null;
@@ -88,6 +91,8 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
             Gson gson = new Gson();
             String str = sharedPreferences.getString(AppConstants.DR_GODOWN_DATA, "");
             drGodowns = gson.fromJson(str, DrGodowns.class);
+
+
             if (drGodowns != null) {
                 binding.includeBasicLayout.divName.setText(drGodowns.getDivisionName());
                 binding.includeBasicLayout.socName.setText(drGodowns.getSocietyName());
@@ -144,30 +149,8 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                     }
                 }
 
-
-//                if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-//
-//                if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-//                    stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-//                    for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-//                        if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-//                            String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-//                            setFragPos(header, z);
-//                            return;
-//                        }
-//                    }
-//                }
-
                 if (existFlag) {
+
                     Gson gson = new Gson();
                     String stockData = gson.toJson(stockDetailsResponsemain);
 
@@ -178,8 +161,11 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                     }
                     editor.putString(AppConstants.stockData, stockData);
                     editor.commit();
+
                     Intent intent = new Intent(DRGodownActivity.this, DRGodownFindingsActivity.class);
                     startActivity(intent);
+
+
                 } else {
                     Utils.customErrorAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
@@ -187,162 +173,94 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
         });
 
-        if (Utils.checkInternetConnection(DRGodownActivity.this)) {
-            if (drGodowns != null && drGodowns.getGodownId() != null) {
-                customProgressDialog.show();
-                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(drGodowns.getGodownId());
-                officesResponseLiveData.observe(DRGodownActivity.this, new Observer<StockDetailsResponse>() {
-                    @Override
-                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
 
-                        customProgressDialog.hide();
-                        officesResponseLiveData.removeObservers(DRGodownActivity.this);
-                        stockDetailsResponsemain = stockDetailsResponse;
+        LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                drGodowns.getDivisionId(), drGodowns.getSocietyId(), drGodowns.getGodownId());
+        drGodownLiveData.observe(DRGodownActivity.this, new Observer<DrGodownOffline>() {
+            @Override
+            public void onChanged(DrGodownOffline drGodowns) {
+                drGodownLiveData.removeObservers(DRGodownActivity.this);
+                String strStock = sharedPreferences.getString(AppConstants.StockDetailsResponse, "");
+                StockDetailsResponse stockDetailsResponse = new Gson().fromJson(strStock, StockDetailsResponse.class);
+                stockDetailsResponsemain = stockDetailsResponse;
 
-                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
-                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+                if (stockDetailsResponse != null) {
 
-                                ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+                    ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
-                                    ess_flag = true;
-                                    stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
-                                    EssentialFragment essentialFragment = new EssentialFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.essComm, essentialComm);
-                                    essentialFragment.setArguments(bundle);
-                                    adapter.addFrag(essentialFragment, "Essential Commodities");
-                                }
-
-                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
-                                    dailyreq_flag = true;
-                                    stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
-                                    DailyFragment dailyFragment = new DailyFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.dailyReq, essentialComm);
-                                    dailyFragment.setArguments(bundle);
-                                    adapter.addFrag(dailyFragment, "Daily Requirements");
-                                }
-
-                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
-                                    emp_flag = true;
-                                    stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
-                                    EmptiesFragment emptiesFragment = new EmptiesFragment();
-                                    Gson gson = new Gson();
-                                    String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString(AppConstants.empties, essentialComm);
-                                    emptiesFragment.setArguments(bundle);
-                                    adapter.addFrag(emptiesFragment, "Empties");
-                                }
-
-                                if(ess_flag || dailyreq_flag|| emp_flag)
-                                {
-                                    binding.viewPager.setVisibility(View.VISIBLE);
-                                    binding.tabs.setVisibility(View.VISIBLE);
-                                    binding.noDataTv.setVisibility(View.GONE);
-                                    binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
-                                    binding.tabs.setupWithViewPager(binding.viewPager);
-                                    binding.viewPager.setAdapter(adapter);
-                                }else {
-                                    binding.viewPager.setVisibility(View.GONE);
-                                    binding.tabs.setVisibility(View.GONE);
-                                    binding.noDataTv.setVisibility(View.VISIBLE);
-                                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                    binding.noDataTv.setText("No data found");
-                                    callSnackBar("No data found");
-                                }
-
-//                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-//                                    stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
-//                                    MFPFragment mfpFragment = new MFPFragment();
-//                                    Gson gson = new Gson();
-//                                    String essentialComm = gson.toJson(stockDetailsResponse.getMfp_commodities());
-//                                    Bundle bundle = new Bundle();
-//                                    bundle.putString(AppConstants.mfp, essentialComm);
-//                                    mfpFragment.setArguments(bundle);
-//                                    adapter.addFrag(mfpFragment, "MFP Commodities");
-//                                }
-//
-//                                if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
-//                                    stockDetailsResponse.getProcessing_units().get(0).setComHeader("Processing Units");
-//                                    PUnitFragment pUnitFragment = new PUnitFragment();
-//                                    Gson gson = new Gson();
-//                                    String essentialComm = gson.toJson(stockDetailsResponse.getProcessing_units());
-//                                    Bundle bundle = new Bundle();
-//                                    bundle.putString(AppConstants.punit, essentialComm);
-//                                    pUnitFragment.setArguments(bundle);
-//                                    adapter.addFrag(pUnitFragment, "Processing Units");
-//                                }
-
-
-
-                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
-                                binding.viewPager.setVisibility(View.GONE);
-                                binding.tabs.setVisibility(View.GONE);
-                                binding.noDataTv.setVisibility(View.VISIBLE);
-                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                                callSnackBar(stockDetailsResponse.getStatusMessage());
-                            } else {
-                                callSnackBar(getString(R.string.something));
-                            }
-
-                            if (!dailyreq_flag && !emp_flag && !ess_flag) {
-                                binding.viewPager.setVisibility(View.GONE);
-                                binding.tabs.setVisibility(View.GONE);
-                                binding.noDataTv.setVisibility(View.VISIBLE);
-                                binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                                binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
-                                callSnackBar(stockDetailsResponse.getStatusMessage());
-                            }
-
-                        } else {
-                            callSnackBar(getString(R.string.something));
-                        }
-
+                    if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                        ess_flag = true;
+                        stockDetailsResponse.getEssential_commodities().get(0).setComHeader("Essential Commodities");
+                        EssentialFragment essentialFragment = new EssentialFragment();
+                        Gson gson = new Gson();
+                        String essentialComm = gson.toJson(stockDetailsResponse.getEssential_commodities());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(AppConstants.essComm, essentialComm);
+                        essentialFragment.setArguments(bundle);
+                        adapter.addFrag(essentialFragment, "Essential Commodities");
                     }
 
-                });
-            } else {
-                Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), getString(R.string.something));
-            }
-        } else {
-            Utils.customWarningAlert(DRGodownActivity.this, getResources().getString(R.string.app_name), "Please check internet");
-        }
+                    if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                        dailyreq_flag = true;
+                        stockDetailsResponse.getDialy_requirements().get(0).setComHeader("Daily Requirements");
+                        DailyFragment dailyFragment = new DailyFragment();
+                        Gson gson = new Gson();
+                        String essentialComm = gson.toJson(stockDetailsResponse.getDialy_requirements());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(AppConstants.dailyReq, essentialComm);
+                        dailyFragment.setArguments(bundle);
+                        adapter.addFrag(dailyFragment, "Daily Requirements");
+                    }
 
+                    if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                        emp_flag = true;
+                        stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
+                        EmptiesFragment emptiesFragment = new EmptiesFragment();
+                        Gson gson = new Gson();
+                        String essentialComm = gson.toJson(stockDetailsResponse.getEmpties());
+                        Bundle bundle = new Bundle();
+                        bundle.putString(AppConstants.empties, essentialComm);
+                        emptiesFragment.setArguments(bundle);
+                        adapter.addFrag(emptiesFragment, "Empties");
+                    }
+
+                    if (ess_flag || dailyreq_flag || emp_flag) {
+                        binding.viewPager.setVisibility(View.VISIBLE);
+                        binding.tabs.setVisibility(View.VISIBLE);
+                        binding.noDataTv.setVisibility(View.GONE);
+                        binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
+                        binding.tabs.setupWithViewPager(binding.viewPager);
+                        binding.viewPager.setAdapter(adapter);
+                    } else {
+                        binding.viewPager.setVisibility(View.GONE);
+                        binding.tabs.setVisibility(View.GONE);
+                        binding.noDataTv.setVisibility(View.VISIBLE);
+                        binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                        binding.noDataTv.setText("No data found");
+                        callSnackBar("No data found");
+                    }
+
+                } else {
+                    binding.viewPager.setVisibility(View.GONE);
+                    binding.tabs.setVisibility(View.GONE);
+                    binding.noDataTv.setVisibility(View.VISIBLE);
+                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                    callSnackBar(stockDetailsResponse.getStatusMessage());
+                }
+                if (!dailyreq_flag && !emp_flag && !ess_flag) {
+                    binding.viewPager.setVisibility(View.GONE);
+                    binding.tabs.setVisibility(View.GONE);
+                    binding.noDataTv.setVisibility(View.VISIBLE);
+                    binding.bottomLl.btnLayout.setVisibility(View.GONE);
+                    binding.noDataTv.setText(stockDetailsResponse.getStatusMessage());
+                    callSnackBar(stockDetailsResponse.getStatusMessage());
+                }
+
+            }
+        });
 
     }
-
-//    void setFragPos(String header, int pos) {
-//        for (int x = 0; x < mFragmentTitleList.size(); x++) {
-//            if (header.equalsIgnoreCase(mFragmentTitleList.get(x))) {
-//                callSnackBar("Submit all records in " + header);
-//                binding.viewPager.setCurrentItem(x);
-//                if (header.contains("Essential Commodities")) {
-//                    ((EssentialFragment) mFragmentList.get(x)).setPos(pos);
-//                }
-//                if (header.equalsIgnoreCase("Daily Requirements")) {
-//                    ((DailyFragment) mFragmentList.get(x)).setPos(pos);
-//                }
-//                if (header.equalsIgnoreCase("Empties")) {
-//                    ((EmptiesFragment) mFragmentList.get(x)).setPos(pos);
-//                }
-////                if (header.equalsIgnoreCase("MFP Commodities")) {
-////                    ((MFPFragment) mFragmentList.get(x)).setPos(pos);
-////                }
-////                if (header.equalsIgnoreCase("Processing Units")) {
-////                    ((PUnitFragment) mFragmentList.get(x)).setPos(pos);
-////                }
-//                break;
-//            }
-//        }
-//    }
-
 
     void callSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
@@ -353,14 +271,9 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
-                && (ess_flag|| dailyreq_flag|| emp_flag)) {
-            Utils.customDiscardAlert(this,
-                    getResources().getString(R.string.app_name),
-                    getString(R.string.are_go_back));
-        } else {
-            finish();
-        }
+        Utils.customDiscardAlert(this,
+                getResources().getString(R.string.app_name),
+                getString(R.string.are_go_back));
     }
 
     @Override
@@ -400,5 +313,4 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
             return mFragmentTitleList.get(position);
         }
     }
-
 }

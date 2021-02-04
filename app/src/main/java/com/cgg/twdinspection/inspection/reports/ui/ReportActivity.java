@@ -22,7 +22,6 @@ import com.cgg.twdinspection.databinding.ActivityReportBinding;
 import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.gcc.reports.ui.GCCReportsDashboard;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
-import com.cgg.twdinspection.inspection.ui.DashboardActivity;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.ReportsViewModel;
