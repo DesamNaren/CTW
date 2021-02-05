@@ -189,13 +189,6 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                         }
                     });
 
-                    Gson gson = new Gson();
-                    String lpgData = gson.toJson(selectedLPGs);
-                    editor.putString(AppConstants.LPG_DATA, lpgData);
-                    editor.commit();
-
-                    startActivity(new Intent(LPGSelActivity.this, LPGActivity.class));
-
                 }
             }
         });
