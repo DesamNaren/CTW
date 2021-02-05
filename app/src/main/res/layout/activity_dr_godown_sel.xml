@@ -16,13 +16,6 @@
         android:layout_height="match_parent"
         android:background="@color/bg">
 
-
-        <!-- <RelativeLayout
-             android:id="@+id/cv_profile"
-             android:layout_width="match_parent"
-             android:layout_height="200dp"
-             android:background="@color/colorPrimary" />-->
-
         <include
             android:id="@+id/header"
             layout="@layout/action_bar_layout" />

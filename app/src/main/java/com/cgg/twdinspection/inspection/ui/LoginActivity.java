@@ -14,7 +14,6 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -24,9 +23,6 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
-import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
-import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
@@ -36,14 +32,8 @@ import com.cgg.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.MultipartBody;
 
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;

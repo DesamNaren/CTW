@@ -23,7 +23,7 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrGodownBinding;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
@@ -174,11 +174,11 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
         });
 
 
-        LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
                 drGodowns.getDivisionId(), drGodowns.getSocietyId(), drGodowns.getGodownId());
-        drGodownLiveData.observe(DRGodownActivity.this, new Observer<DrGodownOffline>() {
+        drGodownLiveData.observe(DRGodownActivity.this, new Observer<GccOfflineEntity>() {
             @Override
-            public void onChanged(DrGodownOffline drGodowns) {
+            public void onChanged(GccOfflineEntity drGodowns) {
                 drGodownLiveData.removeObservers(DRGodownActivity.this);
                 String strStock = sharedPreferences.getString(AppConstants.StockDetailsResponse, "");
                 StockDetailsResponse stockDetailsResponse = new Gson().fromJson(strStock, StockDetailsResponse.class);

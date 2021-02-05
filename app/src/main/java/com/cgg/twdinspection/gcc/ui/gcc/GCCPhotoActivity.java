@@ -45,7 +45,7 @@ import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
 import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockSubmitRequest;
 import com.cgg.twdinspection.gcc.source.stock.SubmitReqCommodities;
@@ -64,16 +64,15 @@ import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -100,6 +99,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     StockDetailsResponse stockDetailsResponse;
     StockSubmitRequest stockSubmitRequest;
     private String randomNum;
+    private String type;
     File mediaStorageDir;
     private boolean flag;
     private GCCOfflineViewModel gccOfflineViewModel;
@@ -110,8 +110,21 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_photo_capture);
-        if (getIntent() != null) {
+        if (getIntent() != null ) {
             binding.header.headerTitle.setText(getIntent().getStringExtra(AppConstants.TITLE));
+            if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("DR GODOWN")){
+                type = AppConstants.OFFLINE_DR_GODOWN;
+            }else  if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("DEPOT")){
+                type = AppConstants.OFFLINE_DR_DEPOT;
+            }else  if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("MFP")){
+                type = AppConstants.OFFLINE_MFP;
+            }else  if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("Processing")){
+                type = AppConstants.OFFLINE_P_UNIT;
+            }else  if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("PETROL")){
+                type = AppConstants.OFFLINE_PETROL;
+            }else  if(Objects.requireNonNull(getIntent().getStringExtra(AppConstants.TITLE)).contains("LPG")){
+                type = AppConstants.OFFLINE_LPG;
+            }
         } else {
             binding.header.headerTitle.setText(getString(R.string.upload_photos));
         }
@@ -202,13 +215,13 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             godName = mfpGoDowns.getGodownName();
         }
 
-        LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
                 divId, socId, suppId);
 
-        drGodownLiveData.observe(GCCPhotoActivity.this, new Observer<DrGodownOffline>() {
+        drGodownLiveData.observe(GCCPhotoActivity.this, new Observer<GccOfflineEntity>() {
             @Override
-            public void onChanged(DrGodownOffline drGodownOffline) {
-                if (drGodownOffline != null) {
+            public void onChanged(GccOfflineEntity GCCOfflineEntity) {
+                if (GCCOfflineEntity != null) {
                     flag = true;
                     binding.btnLayout.btnNext.setText(getString(R.string.save));
                 } else {
@@ -564,23 +577,24 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         if (flag) {
             String data = new Gson().toJson(request);
             String photos = new Gson().toJson(partList);
-            DrGodownOffline drGodownOffline = new DrGodownOffline();
-            drGodownOffline.setDivisionId(divId);
-            drGodownOffline.setDivisionName(divName);
-            drGodownOffline.setSocietyId(socId);
-            drGodownOffline.setSocietyName(socName);
-            drGodownOffline.setDrgownId(suppId);
-            drGodownOffline.setDrgownName(godName);
+            GccOfflineEntity GCCOfflineEntity = new GccOfflineEntity();
+            GCCOfflineEntity.setDivisionId(divId);
+            GCCOfflineEntity.setDivisionName(divName);
+            GCCOfflineEntity.setSocietyId(socId);
+            GCCOfflineEntity.setSocietyName(socName);
+            GCCOfflineEntity.setDrgownId(suppId);
+            GCCOfflineEntity.setDrgownName(godName);
+            GCCOfflineEntity.setTime(Utils.getCurrentDateTimeDisplay());
 
-            drGodownOffline.setData(data);
-            drGodownOffline.setPhotos(photos);
-            drGodownOffline.setType(AppConstants.REPORT_GODOWN);
+            GCCOfflineEntity.setData(data);
+            GCCOfflineEntity.setPhotos(photos);
+            GCCOfflineEntity.setType(type);
 
-            gccOfflineRepository.insertDRGodowns(GCCPhotoActivity.this, drGodownOffline);
+            gccOfflineRepository.insertGCCRecord(GCCPhotoActivity.this, GCCOfflineEntity);
 
         } else {
             customProgressDialog.show();
-            customProgressDialog.addText("Please wait...Uploadig Photos");
+            customProgressDialog.addText("Please wait...Uploading Photos");
 
             viewModel.UploadImageServiceCall(partList);
         }
@@ -932,7 +946,7 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     @Override
-    public void drGoDownCount(int cnt) {
+    public void gccRecCount(int cnt) {
         customProgressDialog.hide();
         try {
             if (cnt > 0) {

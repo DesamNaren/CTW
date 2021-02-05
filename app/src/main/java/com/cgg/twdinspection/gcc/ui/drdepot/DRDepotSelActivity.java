@@ -1,13 +1,20 @@
 package com.cgg.twdinspection.gcc.ui.drdepot;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,17 +27,27 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotSelBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
+import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
-import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
+import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DRDepotSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DRDepotSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
@@ -43,11 +60,16 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     private List<String> drDepots;
     private DRDepots selectedDRDepots;
     ArrayAdapter selectAdapter;
+    private boolean dailyreq_flag, emp_flag, ess_flag;
+    private GCCOfflineRepository gccOfflineRepository;
+    private GCCOfflineViewModel gccOfflineViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dr_depot_sel);
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         context = DRDepotSelActivity.this;
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
@@ -130,15 +152,155 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    Gson gson = new Gson();
-                    String depotData = gson.toJson(selectedDRDepots);
-                    editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
-                    editor.commit();
 
-                    startActivity(new Intent(DRDepotSelActivity.this, DRDepotActivity.class));
+                    LiveData<GccOfflineEntity> drDepotLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedDepotID);
+                    drDepotLiveData.observe(DRDepotSelActivity.this, new Observer<GccOfflineEntity>() {
+                        @Override
+                        public void onChanged(GccOfflineEntity drDepots) {
+                            drDepotLiveData.removeObservers(DRDepotSelActivity.this);
+
+                            if (drDepots != null) {
+
+                                Type listType = new TypeToken<ArrayList<CommonCommodity>>() {
+                                }.getType();
+                                List<CommonCommodity> essestinalCommodities = new Gson().fromJson(drDepots.getEssentials(), listType);
+                                List<CommonCommodity> dailyReqCommodities = new Gson().fromJson(drDepots.getDailyReq(), listType);
+                                List<CommonCommodity> emptiesCommodities = new Gson().fromJson(drDepots.getEmpties(), listType);
+
+
+                                if (essestinalCommodities != null && essestinalCommodities.size() > 0) {
+                                    ess_flag = true;
+                                }
+                                if (dailyReqCommodities != null && dailyReqCommodities.size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+                                if (emptiesCommodities != null && emptiesCommodities.size() > 0) {
+                                    emp_flag = true;
+                                }
+
+
+                                if (ess_flag || dailyreq_flag || emp_flag) {
+                                    Gson gson = new Gson();
+                                    String depotData = gson.toJson(selectedDRDepots);
+                                    editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
+
+                                    StockDetailsResponse stockDetailsResponse = new StockDetailsResponse();
+                                    stockDetailsResponse.setEssential_commodities(essestinalCommodities);
+                                    stockDetailsResponse.setDialy_requirements(dailyReqCommodities);
+                                    stockDetailsResponse.setEmpties(emptiesCommodities);
+
+                                    editor.putString(AppConstants.StockDetailsResponse, new Gson().toJson(stockDetailsResponse));
+                                    editor.commit();
+
+                                    startActivity(new Intent(DRDepotSelActivity.this, DRDepotActivity.class));
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else {
+                                customOnlineAlert("Do you want to proceed in Online mode?");
+                            }
+                        }
+                    });
+
                 }
             }
         });
+
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService(false);
+            }
+        });
+
+        binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gccOfflineRepository.deleteGCCRecord(DRDepotSelActivity.this, selectedDivId, selectedSocietyId, selectedDepotID);
+            }
+        });
+    }
+
+    void callService(boolean flag) {
+        if (validateFields()) {
+
+            StockViewModel viewModel = new StockViewModel(getApplication(), DRDepotSelActivity.this);
+            if (Utils.checkInternetConnection(DRDepotSelActivity.this)) {
+                customProgressDialog.show();
+                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(selectedDepotID);
+                officesResponseLiveData.observe(DRDepotSelActivity.this, new Observer<StockDetailsResponse>() {
+                    @Override
+                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(DRDepotSelActivity.this);
+                        Gson gson = new Gson();
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
+                                }
+
+                                if (ess_flag || dailyreq_flag || emp_flag) {
+                                    if (flag) {
+                                        String depotData = gson.toJson(selectedDRDepots);
+                                        editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
+                                        editor.putString(AppConstants.StockDetailsResponse,gson.toJson(stockDetailsResponse));
+                                        editor.commit();
+
+                                        startActivity(new Intent(context, DRDepotActivity.class));
+                                    } else {
+                                        GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+                                        gccOfflineEntity.setDivisionId(selectedDivId);
+                                        gccOfflineEntity.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        gccOfflineEntity.setSocietyId(selectedSocietyId);
+                                        gccOfflineEntity.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        gccOfflineEntity.setDrgownId(selectedDepotID);
+                                        gccOfflineEntity.setDrgownName(binding.spDepot.getSelectedItem().toString());
+                                        gccOfflineEntity.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        gccOfflineEntity.setDailyReq(gson.toJson(stockDetailsResponse.getDialy_requirements()));
+                                        gccOfflineEntity.setEmpties(gson.toJson(stockDetailsResponse.getEmpties()));
+                                        gccOfflineEntity.setType(AppConstants.OFFLINE_DR_DEPOT);
+
+                                        gccOfflineRepository.insertGCCRecord(DRDepotSelActivity.this, gccOfflineEntity);
+                                    }
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                callSnackBar(getString(R.string.no_comm));
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+
+                        } else {
+                            callSnackBar(getString(R.string.something));
+                        }
+
+                    }
+                });
+            } else {
+                Utils.customWarningAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
     }
 
     @Override
@@ -170,6 +332,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
+            binding.llDownload.setVisibility(View.GONE);
             selectedDRDepots = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -220,6 +383,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.GONE);
                 selectedDRDepots = null;
                 selectedSocietyId = "";
                 selectedDepotID = "";
@@ -262,6 +426,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             }
         } else if (adapterView.getId() == R.id.sp_depot) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedDRDepots = null;
                 selectedDepotID = "";
                 LiveData<DRDepots> liveData = viewModel.getDRDepotID(selectedDivId, selectedSocietyId, binding.spDepot.getSelectedItem().toString());
@@ -269,9 +434,27 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                     @Override
                     public void onChanged(DRDepots drDepots) {
                         liveData.removeObservers(DRDepotSelActivity.this);
+
                         if (drDepots != null) {
                             selectedDepotID = drDepots.getGodownId();
                             selectedDRDepots = drDepots;
+
+                            LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedDepotID);
+                            drGodownLiveData.observe(DRDepotSelActivity.this, new Observer<GccOfflineEntity>() {
+                                @Override
+                                public void onChanged(GccOfflineEntity drGodowns) {
+                                    drGodownLiveData.removeObservers(DRDepotSelActivity.this);
+
+                                    if (drGodowns == null) {
+                                        binding.btnDownload.setText("Download");
+                                        binding.btnRemove.setVisibility(View.GONE);
+                                    } else {
+                                        binding.btnDownload.setText("Re-Download");
+                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            });
+
                         } else {
                             showSnackBar(getString(R.string.something));
                         }
@@ -280,6 +463,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             } else {
                 selectedDRDepots = null;
                 selectedDepotID = "";
+                binding.llDownload.setVisibility(View.GONE);
             }
         }
     }
@@ -288,4 +472,83 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @Override
+    public void gccRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Re-Download");
+                binding.btnRemove.setVisibility(View.VISIBLE);
+                Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data downloaded successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Download");
+                binding.btnRemove.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data deleted successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void customOnlineAlert(String msg) {
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(getString(R.string.app_name));
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callService(true);
+
+
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

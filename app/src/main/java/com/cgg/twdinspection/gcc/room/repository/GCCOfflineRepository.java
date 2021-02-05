@@ -9,7 +9,9 @@ import androidx.lifecycle.LiveData;
 import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.room.dao.GCCDaoOffline;
 import com.cgg.twdinspection.gcc.room.database.GCCDatabase;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+
+import java.util.List;
 
 public class GCCOfflineRepository {
     private GCCDaoOffline offlineDao;
@@ -19,49 +21,52 @@ public class GCCOfflineRepository {
         offlineDao = db.gccOfflineDao();
     }
 
-    public void insertDRGodowns(final GCCOfflineInterface gccOfflineInterface, final DrGodownOffline drGodownOffline) {
-        new InsertDrGodownOfflineAsyncTask(gccOfflineInterface, drGodownOffline).execute();
+    public void insertGCCRecord(final GCCOfflineInterface gccOfflineInterface, final GccOfflineEntity GCCOfflineEntity) {
+        new InsertGCCOfflineAsyncTask(gccOfflineInterface, GCCOfflineEntity).execute();
     }
 
-    public LiveData<DrGodownOffline> getGoDownsOffline(String divId, String socId, String godownId) {
-        return offlineDao.getDrGoDowns(divId, socId, godownId);
+    public LiveData<GccOfflineEntity> getGCCRecords(String divId, String socId, String godownId) {
+        return offlineDao.getGCCRecords(divId, socId, godownId);
     }
 
-    public void deleteGoDown(final GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
-        new DeleteDrGodownOfflineAsyncTask(gccOfflineInterface, divId, socId, godownId).execute();
-//        return offlineDao.deleteDRGodown(divId, socId, godownId);
+    public LiveData<List<GccOfflineEntity>> getGCCOfflineCount(String type) {
+        return offlineDao.getGccRecCount(type);
+    }
+
+    public void deleteGCCRecord(final GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
+        new DeleteGCCRecordOfflineAsyncTask(gccOfflineInterface, divId, socId, godownId).execute();
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class InsertDrGodownOfflineAsyncTask extends AsyncTask<Void, Void, Integer> {
-        DrGodownOffline drGodownOffline;
+    private class InsertGCCOfflineAsyncTask extends AsyncTask<Void, Void, Integer> {
+        GccOfflineEntity gccOfflineEntity;
         GCCOfflineInterface gccOfflineInterface;
 
-        InsertDrGodownOfflineAsyncTask(GCCOfflineInterface dmvInterface, DrGodownOffline divisionsInfos) {
-            this.drGodownOffline = divisionsInfos;
+        InsertGCCOfflineAsyncTask(GCCOfflineInterface dmvInterface, GccOfflineEntity divisionsInfos) {
+            this.gccOfflineEntity = divisionsInfos;
             this.gccOfflineInterface = dmvInterface;
         }
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            offlineDao.deleteDRGodown(drGodownOffline.getDivisionId(), drGodownOffline.getSocietyId(), drGodownOffline.getDrgownId());
-            offlineDao.insertDRGodown(drGodownOffline);
-            return offlineDao.DRGodownCount();
+            offlineDao.deleteGCCRecord(gccOfflineEntity.getDivisionId(), gccOfflineEntity.getSocietyId(), gccOfflineEntity.getDrgownId());
+            offlineDao.insertGCCRecord(gccOfflineEntity);
+            return offlineDao.gccRecCount();
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            gccOfflineInterface.drGoDownCount(integer);
+            gccOfflineInterface.gccRecCount(integer);
         }
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class DeleteDrGodownOfflineAsyncTask extends AsyncTask<Void, Void, Integer> {
+    private class DeleteGCCRecordOfflineAsyncTask extends AsyncTask<Void, Void, Integer> {
         String divId, socId, godownId;
         GCCOfflineInterface gccOfflineInterface;
 
-        DeleteDrGodownOfflineAsyncTask(GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
+        DeleteGCCRecordOfflineAsyncTask(GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
             this.gccOfflineInterface = gccOfflineInterface;
             this.divId = divId;
             this.socId = socId;
@@ -70,7 +75,7 @@ public class GCCOfflineRepository {
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            return offlineDao.deleteDRGodown(divId, socId, godownId);
+            return offlineDao.deleteGCCRecord(divId, socId, godownId);
         }
 
         @Override

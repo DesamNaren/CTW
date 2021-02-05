@@ -680,6 +680,8 @@
     <string name="deficit_excess">Deficit / Excess</string>
     <string name="report">Reports</string>
     <string name="gcc_reports">GCC REPORTS</string>
+    <string name="gcc_reports_offline">GCC OFFLINE REPORTS</string>
+    <string name="gcc_reports_offline_data">GCC OFFLINE DATA</string>
     <string name="gcc">GCC DASHBOARD</string>
     <string name="reason_mentioned_by_incharge_regarding_deficit_surplus">Reason mentioned by incharge regarding deficit / surplus</string>
     <string name="abstract_sales_register">Abstract sales register</string>
@@ -1046,7 +1048,7 @@
     <string name="ane_stud_cnt">Enter how many students found anemic,out of a total</string>
     <string name="gen_haircut">Check whether haircut is on time</string>
     <string name="gen_sup_date">Select capture supplied date</string>
-    <string name="gen_stock">Check whether stock is supplied as per the intent</string>
+    <string name="gen_stock">Check whether stock is supplied as per the indent</string>
     <string name="gen_food_supp">Select date of supply of food provision by GCC and others</string>
     <string name="gen_hm">Select date of last indent raised by HM/ HWO</string>
     <string name="gen_qua_food">Check the quality of food provisions supplied</string>

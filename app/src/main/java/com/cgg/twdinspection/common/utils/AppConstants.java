@@ -162,4 +162,11 @@ public class AppConstants {
     public static final String BAD = "BAD";
     public static final String INFERIOR = "INFERIOR";
     public static String randomNum = "randomNum";
+
+    public static final String OFFLINE_DR_GODOWN = "dr_godown";
+    public static final String OFFLINE_DR_DEPOT = "dr_depot";
+    public static final String OFFLINE_MFP = "mfp_godown";
+    public static final String OFFLINE_P_UNIT = "p_unit_godown";
+    public static final String OFFLINE_PETROL = "petrol_godown";
+    public static final String OFFLINE_LPG = "lpg_godown";
 }

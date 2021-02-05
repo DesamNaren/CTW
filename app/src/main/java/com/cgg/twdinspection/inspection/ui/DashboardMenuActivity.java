@@ -27,6 +27,7 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityHomeBinding;
 import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
+import com.cgg.twdinspection.offline.GCCOfflineDashboard;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
@@ -228,12 +229,8 @@ public class DashboardMenuActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                Intent newIntent = new Intent(context, ReportActivity.class);
-                newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent newIntent = new Intent(context, GCCOfflineDashboard.class);
                 startActivity(newIntent);
-//                do as you want with the button click
-
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
 

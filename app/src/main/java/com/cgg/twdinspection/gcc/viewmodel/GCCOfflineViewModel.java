@@ -7,33 +7,36 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
-import com.cgg.twdinspection.gcc.room.repository.GCCRepository;
-import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
-import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
-import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
-import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
-import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 
 import java.util.List;
 
 public class GCCOfflineViewModel extends AndroidViewModel {
 
     private GCCOfflineRepository mRepository;
-    private LiveData<DrGodownOffline> godownOfflineLiveData;
+    private LiveData<GccOfflineEntity> godownOfflineLiveData;
+    private LiveData<List<GccOfflineEntity>> getGoDownsOfflineCount;
 
     public GCCOfflineViewModel(Application application) {
         super(application);
         mRepository = new GCCOfflineRepository(application);
         godownOfflineLiveData = new MutableLiveData<>();
+        getGoDownsOfflineCount = new MutableLiveData<>();
     }
 
-    public LiveData<DrGodownOffline> getDRGoDownsOffline(String divId, String socId, String godownId) {
+    public LiveData<GccOfflineEntity> getDRGoDownsOffline(String divId, String socId, String godownId) {
         if (godownOfflineLiveData != null) {
-            godownOfflineLiveData = mRepository.getGoDownsOffline(divId, socId, godownId);
+            godownOfflineLiveData = mRepository.getGCCRecords(divId, socId, godownId);
         }
         return godownOfflineLiveData;
     }
+
+
+    public LiveData<List<GccOfflineEntity>> getGoDownsOfflineCount(String type) {
+        if (getGoDownsOfflineCount != null) {
+            getGoDownsOfflineCount = mRepository.getGCCOfflineCount(type);
+        }
+        return getGoDownsOfflineCount;
+    }
+
 }

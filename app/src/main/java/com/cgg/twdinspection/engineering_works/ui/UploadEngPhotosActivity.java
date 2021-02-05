@@ -276,7 +276,7 @@ public class UploadEngPhotosActivity extends LocBaseActivity implements UploadEn
 
 
         customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploadig Photos");
+        customProgressDialog.addText("Please wait...Uploading Photos");
 
         List<MultipartBody.Part> partList = new ArrayList<>();
         partList.add(body);

@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
@@ -30,22 +29,11 @@ import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivitySplashBinding;
 import com.cgg.twdinspection.databinding.CustomLayoutForPermissionsBinding;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
-import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
-import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.inspection.viewmodel.SplashViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-
-import okhttp3.MultipartBody;
 
 public class SplashActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
@@ -64,33 +52,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
         appVersion = Utils.getVersionName(this);
         splashViewModel = new SplashViewModel(this, getApplication());
 
-
-        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
-        LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline("9", "17", "2160");
-        drGodownLiveData.observe(SplashActivity.this, new Observer<DrGodownOffline>() {
-            @Override
-            public void onChanged(DrGodownOffline drGodowns) {
-                drGodownLiveData.removeObservers(SplashActivity.this);
-
-                if (drGodowns != null) {
-
-                    Type listType1 = new TypeToken<GCCSubmitRequest>() {
-                    }.getType();
-                    Type listType2 = new TypeToken<ArrayList<MultipartBody.Part>>() {
-                    }.getType();
-                    try {
-                        GCCSubmitRequest data = new Gson().fromJson(drGodowns.getData(), GCCSubmitRequest.class);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        ArrayList<MultipartBody.Part> photos = new Gson().fromJson(drGodowns.getPhotos(), listType2);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
 
         if (Utils.checkInternetConnection(this)) {
             splashViewModel.getCurrentVersion().observe(this, new Observer<VersionResponse>() {

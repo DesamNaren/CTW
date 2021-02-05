@@ -1,4 +1,4 @@
-package com.cgg.twdinspection.gcc.source.offline.drgodown;
+package com.cgg.twdinspection.gcc.source.offline;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "DR_GoDown_Offline")
+@Entity(tableName = "GCC_Offline")
 
-public class DrGodownOffline {
+public class GccOfflineEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @SerializedName("divisionId")
@@ -35,9 +35,56 @@ public class DrGodownOffline {
     @SerializedName("daily_req")
     @Expose
     private String dailyReq;
+
+    @SerializedName("mfp_commodities")
+    @Expose
+    private String mfpCommodities;
+    @SerializedName("processing_uniit")
+    @Expose
+    private String processingUniit;
     @SerializedName("empties")
     @Expose
     private String empties;
+
+    @SerializedName("petrol_commodities")
+    @Expose
+    private String petrolCommodities;
+    @SerializedName("lph_commodities")
+    @Expose
+    private String lpgCommodities;
+
+
+    public String getPetrolCommodities() {
+        return petrolCommodities;
+    }
+
+    public void setPetrolCommodities(String petrolCommodities) {
+        this.petrolCommodities = petrolCommodities;
+    }
+
+    public String getLpgCommodities() {
+        return lpgCommodities;
+    }
+
+    public void setLpgCommodities(String lpgCommodities) {
+        this.lpgCommodities = lpgCommodities;
+    }
+
+    public String getMfpCommodities() {
+        return mfpCommodities;
+    }
+
+    public void setMfpCommodities(String mfpCommodities) {
+        this.mfpCommodities = mfpCommodities;
+    }
+
+    public String getProcessingUniit() {
+        return processingUniit;
+    }
+
+    public void setProcessingUniit(String processingUniit) {
+        this.processingUniit = processingUniit;
+    }
 
     @SerializedName("data")
     @Expose
@@ -48,6 +95,17 @@ public class DrGodownOffline {
     @SerializedName("type")
     @Expose
     private String type;
+    @SerializedName("time")
+    @Expose
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getType() {
         return type;

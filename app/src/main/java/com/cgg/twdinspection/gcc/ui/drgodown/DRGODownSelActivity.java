@@ -30,7 +30,7 @@ import com.cgg.twdinspection.databinding.ActivityDrGodownSelBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
@@ -157,10 +157,10 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                     editor.putString(AppConstants.StockDetailsResponse, "");
                     editor.commit();
 
-                    LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
-                    drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<DrGodownOffline>() {
+                    LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
+                    drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<GccOfflineEntity>() {
                         @Override
-                        public void onChanged(DrGodownOffline drGodowns) {
+                        public void onChanged(GccOfflineEntity drGodowns) {
                             drGodownLiveData.removeObservers(DRGODownSelActivity.this);
 
                             if (drGodowns != null) {
@@ -193,7 +193,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                     stockDetailsResponse.setDialy_requirements(dailyReqCommodities);
                                     stockDetailsResponse.setEmpties(emptiesCommodities);
 
-                                    editor.putString(AppConstants.StockDetailsResponse, new Gson().toJson(stockDetailsResponse));
+                                    editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
                                     editor.commit();
 
                                     startActivity(new Intent(DRGODownSelActivity.this, DRGodownActivity.class));
@@ -221,7 +221,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGoDown(DRGODownSelActivity.this, selectedDivId, selectedSocietyId, selectedGoDownId);
+                gccOfflineRepository.deleteGCCRecord(DRGODownSelActivity.this, selectedDivId, selectedSocietyId, selectedGoDownId);
             }
         });
 
@@ -262,24 +262,24 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                         Gson gson = new Gson();
                                         String goDownData = gson.toJson(selectedDrGodowns);
                                         editor.putString(AppConstants.DR_GODOWN_DATA, goDownData);
-                                        editor.putString(AppConstants.StockDetailsResponse, new Gson().toJson(stockDetailsResponse));
+                                        editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
                                         editor.commit();
 
                                         startActivity(new Intent(context, DRGodownActivity.class));
                                     } else {
-                                        DrGodownOffline drGodownOffline = new DrGodownOffline();
-                                        drGodownOffline.setDivisionId(selectedDivId);
-                                        drGodownOffline.setDivisionName(binding.spDivision.getSelectedItem().toString());
-                                        drGodownOffline.setSocietyId(selectedSocietyId);
-                                        drGodownOffline.setSocietyName(binding.spSociety.getSelectedItem().toString());
-                                        drGodownOffline.setDrgownId(selectedGoDownId);
-                                        drGodownOffline.setDrgownName(binding.spGodown.getSelectedItem().toString());
-                                        drGodownOffline.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
-                                        drGodownOffline.setDailyReq(gson.toJson(stockDetailsResponse.getDialy_requirements()));
-                                        drGodownOffline.setEmpties(gson.toJson(stockDetailsResponse.getEmpties()));
-                                        drGodownOffline.setType(AppConstants.REPORT_GODOWN);
+                                        GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+                                        gccOfflineEntity.setDivisionId(selectedDivId);
+                                        gccOfflineEntity.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        gccOfflineEntity.setSocietyId(selectedSocietyId);
+                                        gccOfflineEntity.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        gccOfflineEntity.setDrgownId(selectedGoDownId);
+                                        gccOfflineEntity.setDrgownName(binding.spGodown.getSelectedItem().toString());
+                                        gccOfflineEntity.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        gccOfflineEntity.setDailyReq(gson.toJson(stockDetailsResponse.getDialy_requirements()));
+                                        gccOfflineEntity.setEmpties(gson.toJson(stockDetailsResponse.getEmpties()));
+                                        gccOfflineEntity.setType(AppConstants.OFFLINE_DR_GODOWN);
 
-                                        gccOfflineRepository.insertDRGodowns(DRGODownSelActivity.this, drGodownOffline);
+                                        gccOfflineRepository.insertGCCRecord(DRGODownSelActivity.this, gccOfflineEntity);
                                     }
                                 } else {
                                     callSnackBar(getString(R.string.no_comm));
@@ -339,8 +339,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        binding.llDownload.setVisibility(View.GONE);
         if (adapterView.getId() == R.id.sp_division) {
-            binding.llDownload.setVisibility(View.GONE);
             selectedDrGodowns = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -433,8 +433,8 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 binding.spGodown.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_godown) {
+            binding.llDownload.setVisibility(View.VISIBLE);
             if (position != 0) {
-                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedDrGodowns = null;
                 selectedGoDownId = "";
                 LiveData<DrGodowns> drGodownsLiveData = viewModel.getGODownID(selectedDivId, selectedSocietyId, binding.spGodown.getSelectedItem().toString());
@@ -445,10 +445,10 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                             selectedGoDownId = drGodowns.getGodownId();
                             selectedDrGodowns = drGodowns;
 
-                            LiveData<DrGodownOffline> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
-                            drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<DrGodownOffline>() {
+                            LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedGoDownId);
+                            drGodownLiveData.observe(DRGODownSelActivity.this, new Observer<GccOfflineEntity>() {
                                 @Override
-                                public void onChanged(DrGodownOffline drGodowns) {
+                                public void onChanged(GccOfflineEntity drGodowns) {
                                     drGodownLiveData.removeObservers(DRGODownSelActivity.this);
 
                                     if (drGodowns == null) {
@@ -479,7 +479,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     }
 
     @Override
-    public void drGoDownCount(int cnt) {
+    public void gccRecCount(int cnt) {
         customProgressDialog.hide();
         try {
             if (cnt > 0) {

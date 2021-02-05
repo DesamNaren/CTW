@@ -205,29 +205,6 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         }
                     }
 
-
-//                    if (MFPFragment.commonCommodities != null && MFPFragment.commonCommodities.size() > 0) {
-//                        stockDetailsResponsemain.setMfp_commodities(MFPFragment.commonCommodities);
-//                        for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
-//                            if (TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-//                                String header = stockDetailsResponsemain.getMfp_commodities().get(0).getComHeader();
-//                                setFragPos(header, z);
-//                                return;
-//                            }
-//                        }
-//                    }
-//
-//                    if (PUnitFragment.commonCommodities != null && PUnitFragment.commonCommodities.size() > 0) {
-//                        stockDetailsResponsemain.setProcessing_units(PUnitFragment.commonCommodities);
-//                        for (int z = 0; z < stockDetailsResponsemain.getProcessing_units().size(); z++) {
-//                            if (TextUtils.isEmpty(stockDetailsResponsemain.getProcessing_units().get(z).getPhyQuant())) {
-//                                String header = stockDetailsResponsemain.getProcessing_units().get(0).getComHeader();
-//                                setFragPos(header, z);
-//                                return;
-//                            }
-//                        }
-//                    }
-
                     if (existFlag) {
                         Gson gson = new Gson();
                         String stockData = gson.toJson(stockDetailsResponsemain);
@@ -370,7 +347,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         binding.viewPager.setVisibility(View.GONE);
                         binding.noDataTv.setVisibility(View.VISIBLE);
                         binding.bottomLl.btnLayout.setVisibility(View.GONE);
-                        binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
+//                        binding.noDataTv.setText(stockDetailsResponsemain.getStatusMessage());
                     }
 
                 } else if (radioGroup.getCheckedRadioButtonId() == R.id.shop_avail_rb_close) {

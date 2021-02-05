@@ -356,7 +356,7 @@ public class BenDetailsActivity extends LocBaseActivity implements ErrorHandlerI
 
     void callUploadPhoto(List<MultipartBody.Part> partList) {
         customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploadig Photos");
+        customProgressDialog.addText("Please wait...Uploading Photos");
 
         viewModel.UploadImageServiceCall(partList);
     }

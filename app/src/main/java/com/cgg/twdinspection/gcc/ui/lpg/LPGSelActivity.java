@@ -1,13 +1,20 @@
 package com.cgg.twdinspection.gcc.ui.lpg;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,17 +27,28 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLpgSelBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpActivity;
+import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
@@ -43,12 +61,16 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
     private List<String> LPGs;
     private LPGSupplierInfo selectedLPGs;
     ArrayAdapter selectAdapter;
+    private GCCOfflineViewModel gccOfflineViewModel;
+    private GCCOfflineRepository gccOfflineRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_lpg_sel);
         context = LPGSelActivity.this;
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
         LPGs = new ArrayList<>();
@@ -129,6 +151,44 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
+
+
+                    LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectLPGId);
+                    drGodownLiveData.observe(LPGSelActivity.this, new Observer<GccOfflineEntity>() {
+                        @Override
+                        public void onChanged(GccOfflineEntity drGodowns) {
+                            drGodownLiveData.removeObservers(LPGSelActivity.this);
+
+                            if (drGodowns != null) {
+
+                                Type listType = new TypeToken<ArrayList<CommonCommodity>>() {
+                                }.getType();
+                                List<CommonCommodity> petrolCommodities = new Gson().fromJson(drGodowns.getPetrolCommodities(), listType);
+
+
+                                if (petrolCommodities != null && petrolCommodities.size() > 0) {
+                                    Gson gson = new Gson();
+                                    String lpgData = gson.toJson(selectedLPGs);
+                                    editor.putString(AppConstants.LPG_DATA, lpgData);
+
+                                    PetrolStockDetailsResponse stockDetailsResponse = new PetrolStockDetailsResponse();
+                                    stockDetailsResponse.setCommonCommodities(petrolCommodities);
+
+                                    editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                    editor.commit();
+
+                                    startActivity(new Intent(LPGSelActivity.this, LPGActivity.class));
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else {
+                                customOnlineAlert("Do you want to proceed in Online mode?");
+                            }
+                        }
+                    });
+
                     Gson gson = new Gson();
                     String lpgData = gson.toJson(selectedLPGs);
                     editor.putString(AppConstants.LPG_DATA, lpgData);
@@ -139,6 +199,136 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 }
             }
         });
+
+
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService(false);
+            }
+        });
+
+        binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gccOfflineRepository.deleteGCCRecord(LPGSelActivity.this, selectedDivId, selectedSocietyId, selectLPGId);
+            }
+        });
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
+    }
+
+    private void customOnlineAlert(String msg) {
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(getString(R.string.app_name));
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callService(true);
+
+
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void callService(boolean flag) {
+        if (validateFields()) {
+            Gson gson = new Gson();
+            StockViewModel viewModel = new StockViewModel(getApplication(), LPGSelActivity.this);
+            if (Utils.checkInternetConnection(LPGSelActivity.this)) {
+                customProgressDialog.show();
+                LiveData<PetrolStockDetailsResponse> officesResponseLiveData = viewModel.getPLPGStockData(selectLPGId);
+                officesResponseLiveData.observe(LPGSelActivity.this, new Observer<PetrolStockDetailsResponse>() {
+                    @Override
+                    public void onChanged(PetrolStockDetailsResponse stockDetailsResponse) {
+
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(LPGSelActivity.this);
+
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {
+                                    if (flag) {
+                                        Gson gson = new Gson();
+                                        String lpgData = gson.toJson(selectedLPGs);
+                                        editor.putString(AppConstants.LPG_DATA, lpgData);
+                                        editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                        editor.commit();
+
+                                        startActivity(new Intent(context, LPGActivity.class));
+                                    } else {
+                                        GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+                                        gccOfflineEntity.setDivisionId(selectedDivId);
+                                        gccOfflineEntity.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        gccOfflineEntity.setSocietyId(selectedSocietyId);
+                                        gccOfflineEntity.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        gccOfflineEntity.setDrgownId(selectLPGId);
+                                        gccOfflineEntity.setDrgownName(binding.spLpg.getSelectedItem().toString());
+                                        gccOfflineEntity.setPetrolCommodities(gson.toJson(stockDetailsResponse.getCommonCommodities()));
+                                        gccOfflineEntity.setType(AppConstants.OFFLINE_LPG);
+
+                                        gccOfflineRepository.insertGCCRecord(LPGSelActivity.this, gccOfflineEntity);
+                                    }
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                callSnackBar(getString(R.string.no_comm));
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+
+                        } else {
+                            callSnackBar(getString(R.string.something));
+                        }
+
+                    }
+
+                });
+            } else {
+                Utils.customWarningAlert(LPGSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
     }
 
     @Override
@@ -169,6 +359,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        binding.llDownload.setVisibility(View.GONE);
         if (adapterView.getId() == R.id.sp_division) {
             selectedLPGs = null;
             selectedSocietyId = "";
@@ -219,6 +410,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 binding.spLpg.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
+            binding.llDownload.setVisibility(View.GONE);
             if (position != 0) {
                 selectedLPGs = null;
                 selectedSocietyId = "";
@@ -262,6 +454,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             }
         } else if (adapterView.getId() == R.id.sp_lpg) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedLPGs = null;
                 selectLPGId = "";
                 LiveData<LPGSupplierInfo> lpgLiveData = viewModel.getLPGID(selectedDivId, selectedSocietyId, binding.spLpg.getSelectedItem().toString());
@@ -271,12 +464,29 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                         if (lpgSupplierInfo != null) {
                             selectLPGId = lpgSupplierInfo.getGodownId();
                             selectedLPGs = lpgSupplierInfo;
+
+                            LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectLPGId);
+                            drGodownLiveData.observe(LPGSelActivity.this, new Observer<GccOfflineEntity>() {
+                                @Override
+                                public void onChanged(GccOfflineEntity drGodowns) {
+                                    drGodownLiveData.removeObservers(LPGSelActivity.this);
+
+                                    if (drGodowns == null) {
+                                        binding.btnDownload.setText("Download");
+                                        binding.btnRemove.setVisibility(View.GONE);
+                                    } else {
+                                        binding.btnDownload.setText("Re-Download");
+                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            });
                         } else {
                             showSnackBar(getString(R.string.something));
                         }
                     }
                 });
             } else {
+                binding.llDownload.setVisibility(View.GONE);
                 selectedLPGs = null;
                 selectLPGId = "";
             }
@@ -286,5 +496,35 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void gccRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Re-Download");
+                binding.btnRemove.setVisibility(View.VISIBLE);
+                Utils.customSyncSuccessAlert(LPGSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data downloaded successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Download");
+                binding.btnRemove.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(LPGSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data deleted successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

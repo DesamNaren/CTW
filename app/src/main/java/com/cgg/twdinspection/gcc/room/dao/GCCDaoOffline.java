@@ -6,8 +6,10 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.cgg.twdinspection.gcc.source.offline.drgodown.DrGodownOffline;
-import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+
+import java.util.List;
 
 /**
  * The Room Magic is in this file, where you map file_provider_paths Java method call to an SQL query.
@@ -21,15 +23,18 @@ import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEnt
 @Dao
 public interface GCCDaoOffline {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertDRGodown(DrGodownOffline drGodownOffline);
+    void insertGCCRecord(GccOfflineEntity GCCOfflineEntity);
 
-    @Query("SELECT COUNT(*) FROM DR_GoDown_Offline")
-    int DRGodownCount();
+    @Query("SELECT COUNT(*) FROM GCC_Offline")
+    int gccRecCount();
 
-    @Query("DELETE FROM DR_GoDown_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
-    int deleteDRGodown(String divId, String socId, String godownId);
+    @Query("DELETE FROM GCC_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
+    int deleteGCCRecord(String divId, String socId, String godownId);
 
-    @Query("SELECT * from DR_GoDown_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
-    LiveData<DrGodownOffline> getDrGoDowns(String divId, String socId, String godownId);
+    @Query("SELECT * from GCC_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
+    LiveData<GccOfflineEntity> getGCCRecords(String divId, String socId, String godownId);
+
+    @Query("SELECT * from GCC_Offline where type LIKE :type")
+    LiveData<List<GccOfflineEntity>> getGccRecCount(String type);
 
 }

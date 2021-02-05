@@ -1,13 +1,20 @@
 package com.cgg.twdinspection.gcc.ui.petrolpump;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,17 +27,30 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpSelBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
+import com.cgg.twdinspection.gcc.room.dao.GCCDaoOffline;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
+import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
+import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
@@ -43,12 +63,16 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     private List<String> petrolPumps;
     private PetrolSupplierInfo selectedPetrolPumps;
     ArrayAdapter selectAdapter;
+    private GCCOfflineRepository gccOfflineRepository;
+    private GCCOfflineViewModel gccOfflineViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_petrol_pump_sel);
         context = PetrolPumpSelActivity.this;
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         divisionsInfos = new ArrayList<>();
         societies = new ArrayList<>();
         petrolPumps = new ArrayList<>();
@@ -130,15 +154,136 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    Gson gson = new Gson();
-                    String petrolPumpData = gson.toJson(selectedPetrolPumps);
-                    editor.putString(AppConstants.PETROL_PUMP_DATA, petrolPumpData);
+
+                    editor.putString(AppConstants.StockDetailsResponse, "");
                     editor.commit();
 
-                    startActivity(new Intent(PetrolPumpSelActivity.this, PetrolPumpActivity.class));
+
+                    LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectPetrolId);
+                    drGodownLiveData.observe(PetrolPumpSelActivity.this, new Observer<GccOfflineEntity>() {
+                        @Override
+                        public void onChanged(GccOfflineEntity drGodowns) {
+                            drGodownLiveData.removeObservers(PetrolPumpSelActivity.this);
+
+                            if (drGodowns != null) {
+
+                                Type listType = new TypeToken<ArrayList<CommonCommodity>>() {
+                                }.getType();
+                                List<CommonCommodity> petrolCommodities = new Gson().fromJson(drGodowns.getPetrolCommodities(), listType);
+
+
+                                if (petrolCommodities != null && petrolCommodities.size() > 0) {
+                                    Gson gson = new Gson();
+                                    String petrolData = gson.toJson(selectedPetrolPumps);
+                                    editor.putString(AppConstants.PETROL_PUMP_DATA, petrolData);
+
+                                    PetrolStockDetailsResponse stockDetailsResponse = new PetrolStockDetailsResponse();
+                                    stockDetailsResponse.setCommonCommodities(petrolCommodities);
+
+                                    editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                    editor.commit();
+
+                                    startActivity(new Intent(PetrolPumpSelActivity.this, PetrolPumpActivity.class));
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else {
+                                customOnlineAlert("Do you want to proceed in Online mode?");
+                            }
+                        }
+                    });
+
                 }
             }
         });
+
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService(false);
+            }
+        });
+
+        binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gccOfflineRepository.deleteGCCRecord(PetrolPumpSelActivity.this, selectedDivId, selectedSocietyId, selectPetrolId);
+            }
+        });
+
+    }
+
+
+
+    void callService(boolean flag) {
+        if (validateFields()) {
+            Gson gson = new Gson();
+            StockViewModel viewModel = new StockViewModel(getApplication(), PetrolPumpSelActivity.this);
+            if (Utils.checkInternetConnection(PetrolPumpSelActivity.this)) {
+                customProgressDialog.show();
+                LiveData<PetrolStockDetailsResponse> officesResponseLiveData = viewModel.getPLPGStockData(selectPetrolId);
+                officesResponseLiveData.observe(PetrolPumpSelActivity.this, new Observer<PetrolStockDetailsResponse>() {
+                    @Override
+                    public void onChanged(PetrolStockDetailsResponse stockDetailsResponse) {
+
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(PetrolPumpSelActivity.this);
+
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {
+                                    if (flag) {
+                                        Gson gson = new Gson();
+                                        String petrolData = gson.toJson(selectedPetrolPumps);
+                                        editor.putString(AppConstants.PETROL_PUMP_DATA, petrolData);
+                                        editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                        editor.commit();
+
+                                        startActivity(new Intent(context, PetrolPumpActivity.class));
+                                    } else {
+                                        GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+                                        gccOfflineEntity.setDivisionId(selectedDivId);
+                                        gccOfflineEntity.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        gccOfflineEntity.setSocietyId(selectedSocietyId);
+                                        gccOfflineEntity.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        gccOfflineEntity.setDrgownId(selectPetrolId);
+                                        gccOfflineEntity.setDrgownName(binding.spPetrol.getSelectedItem().toString());
+                                        gccOfflineEntity.setPetrolCommodities(gson.toJson(stockDetailsResponse.getCommonCommodities()));
+                                        gccOfflineEntity.setType(AppConstants.OFFLINE_PETROL);
+
+                                        gccOfflineRepository.insertGCCRecord(PetrolPumpSelActivity.this, gccOfflineEntity);
+                                    }
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                callSnackBar(getString(R.string.no_comm));
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+
+                        } else {
+                            callSnackBar(getString(R.string.something));
+                        }
+
+                    }
+
+                });
+            } else {
+                Utils.customWarningAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
     }
 
     @Override
@@ -170,6 +315,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
+            binding.llDownload.setVisibility(View.GONE);
             selectedPetrolPumps = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -219,6 +365,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 binding.spPetrol.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
+            binding.llDownload.setVisibility(View.GONE);
             if (position != 0) {
                 selectedPetrolPumps = null;
                 selectedSocietyId = "";
@@ -262,6 +409,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             }
         } else if (adapterView.getId() == R.id.sp_petrol) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedPetrolPumps = null;
                 selectPetrolId = "";
                 LiveData<PetrolSupplierInfo> drGodownsLiveData = viewModel.getPetrolPumpID(selectedDivId, selectedSocietyId, binding.spPetrol.getSelectedItem().toString());
@@ -271,12 +419,30 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                         if (petrolSupplierInfo != null) {
                             selectPetrolId = petrolSupplierInfo.getGodownId();
                             selectedPetrolPumps = petrolSupplierInfo;
+
+                            LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectPetrolId);
+                            drGodownLiveData.observe(PetrolPumpSelActivity.this, new Observer<GccOfflineEntity>() {
+                                @Override
+                                public void onChanged(GccOfflineEntity drGodowns) {
+                                    drGodownLiveData.removeObservers(PetrolPumpSelActivity.this);
+
+                                    if (drGodowns == null) {
+                                        binding.btnDownload.setText("Download");
+                                        binding.btnRemove.setVisibility(View.GONE);
+                                    } else {
+                                        binding.btnDownload.setText("Re-Download");
+                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            });
+
                         } else {
                             showSnackBar(getString(R.string.something));
                         }
                     }
                 });
             } else {
+                binding.llDownload.setVisibility(View.GONE);
                 selectedPetrolPumps = null;
                 selectPetrolId = "";
             }
@@ -286,5 +452,81 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void gccRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Re-Download");
+                binding.btnRemove.setVisibility(View.VISIBLE);
+                Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data downloaded successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Download");
+                binding.btnRemove.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(PetrolPumpSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data deleted successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void customOnlineAlert(String msg) {
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(getString(R.string.app_name));
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callService(true);
+
+
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -296,8 +296,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
+            submitCall();
             if (distance <= AppConstants.DISTANCE) {
-                submitCall();
+
             } else {
                 Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the "
                         + AppConstants.DISTANCE + " meter radius of selected institute");
@@ -366,7 +367,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 MultipartBody.Part.createFormData("image", file_officer.getName(), requestFile11);
 
         customProgressDialog.show();
-        customProgressDialog.addText("Please wait...Uploadig Photos");
+        customProgressDialog.addText("Please wait...Uploading Photos");
 
 
         List<MultipartBody.Part> partList = new ArrayList<>();
