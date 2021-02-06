@@ -1,13 +1,20 @@
 package com.cgg.twdinspection.gcc.ui.punit;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,17 +27,26 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPUnitSelBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
+import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
+import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
-import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
+import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PUnitSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class PUnitSelActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     CustomProgressDialog customProgressDialog;
@@ -43,6 +59,9 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     private List<String> pUnits;
     private PUnits selectedPUnits;
     ArrayAdapter selectAdapter;
+    private boolean dailyreq_flag, emp_flag, ess_flag, p_unit_flag, mfp_flag;
+    private GCCOfflineRepository gccOfflineRepository;
+    private GCCOfflineViewModel gccOfflineViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +73,8 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         pUnits = new ArrayList<>();
         customProgressDialog = new CustomProgressDialog(context);
         binding.header.headerTitle.setText(getResources().getString(R.string.gcc_p_unit));
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,15 +151,180 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 if (validateFields()) {
-                    Gson gson = new Gson();
-                    String pUnitData = gson.toJson(selectedPUnits);
-                    editor.putString(AppConstants.P_UNIT_DATA, pUnitData);
+
+                    editor.putString(AppConstants.StockDetailsResponse, "");
                     editor.commit();
 
-                    startActivity(new Intent(PUnitSelActivity.this, PUnitActivity.class));
+                    LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedPUnitID);
+                    drGodownLiveData.observe(PUnitSelActivity.this, new Observer<GccOfflineEntity>() {
+                        @Override
+                        public void onChanged(GccOfflineEntity drGodowns) {
+                            drGodownLiveData.removeObservers(PUnitSelActivity.this);
+
+                            if (drGodowns != null) {
+
+                                Type listType = new TypeToken<ArrayList<CommonCommodity>>() {
+                                }.getType();
+                                List<CommonCommodity> essestinalCommodities = new Gson().fromJson(drGodowns.getEssentials(), listType);
+                                List<CommonCommodity> dailyReqCommodities = new Gson().fromJson(drGodowns.getDailyReq(), listType);
+                                List<CommonCommodity> emptiesCommodities = new Gson().fromJson(drGodowns.getEmpties(), listType);
+                                List<CommonCommodity> mfpCommodities = new Gson().fromJson(drGodowns.getMfpCommodities(), listType);
+                                List<CommonCommodity> pUnitCommodities = new Gson().fromJson(drGodowns.getProcessingUniit(), listType);
+
+
+                                if (essestinalCommodities != null && essestinalCommodities.size() > 0) {
+                                    ess_flag = true;
+                                }
+                                if (dailyReqCommodities != null && dailyReqCommodities.size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+                                if (emptiesCommodities != null && emptiesCommodities.size() > 0) {
+                                    emp_flag = true;
+                                }
+                                if (mfpCommodities != null && mfpCommodities.size() > 0) {
+                                    mfp_flag = true;
+                                }
+                                if (pUnitCommodities != null && pUnitCommodities.size() > 0) {
+                                    p_unit_flag = true;
+                                }
+
+
+                                if (ess_flag || dailyreq_flag || emp_flag || mfp_flag || p_unit_flag) {
+                                    Gson gson = new Gson();
+                                    String pUnitData = gson.toJson(selectedPUnits);
+                                    editor.putString(AppConstants.P_UNIT_DATA, pUnitData);
+
+                                    StockDetailsResponse stockDetailsResponse = new StockDetailsResponse();
+                                    stockDetailsResponse.setEssential_commodities(essestinalCommodities);
+                                    stockDetailsResponse.setDialy_requirements(dailyReqCommodities);
+                                    stockDetailsResponse.setEmpties(emptiesCommodities);
+                                    stockDetailsResponse.setMfp_commodities(mfpCommodities);
+                                    stockDetailsResponse.setProcessing_units(pUnitCommodities);
+
+                                    editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                    editor.commit();
+
+                                    startActivity(new Intent(PUnitSelActivity.this, PUnitActivity.class));
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else {
+                                customOnlineAlert("Do you want to proceed in Online mode?");
+                            }
+                        }
+                    });
                 }
             }
         });
+
+
+        binding.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callService(false);
+            }
+        });
+
+        binding.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gccOfflineRepository.deleteGCCRecord(PUnitSelActivity.this, selectedDivId, selectedSocietyId, selectedPUnitID);
+            }
+        });
+    }
+
+
+    void callService(boolean flag) {
+        if (validateFields()) {
+            Gson gson = new Gson();
+            StockViewModel viewModel = new StockViewModel(getApplication(), PUnitSelActivity.this);
+            if (Utils.checkInternetConnection(PUnitSelActivity.this)) {
+                customProgressDialog.show();
+                LiveData<StockDetailsResponse> officesResponseLiveData = viewModel.getStockData(selectedPUnitID);
+                officesResponseLiveData.observe(PUnitSelActivity.this, new Observer<StockDetailsResponse>() {
+                    @Override
+                    public void onChanged(StockDetailsResponse stockDetailsResponse) {
+
+                        customProgressDialog.hide();
+                        officesResponseLiveData.removeObservers(PUnitSelActivity.this);
+
+                        if (stockDetailsResponse != null && stockDetailsResponse.getStatusCode() != null) {
+                            if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+
+                                if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
+                                    ess_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getDialy_requirements() != null && stockDetailsResponse.getDialy_requirements().size() > 0) {
+                                    dailyreq_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                    emp_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
+                                    mfp_flag = true;
+                                }
+
+                                if (stockDetailsResponse.getProcessing_units() != null && stockDetailsResponse.getProcessing_units().size() > 0) {
+                                    p_unit_flag = true;
+                                }
+
+                                if (ess_flag || dailyreq_flag || emp_flag || mfp_flag || p_unit_flag) {
+                                    if (flag) {
+                                        Gson gson = new Gson();
+                                        String pUnitData = gson.toJson(selectedPUnits);
+                                        editor.putString(AppConstants.P_UNIT_DATA, pUnitData);
+                                        editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
+                                        editor.commit();
+
+                                        startActivity(new Intent(context, PUnitActivity.class));
+                                    } else {
+                                        GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+                                        gccOfflineEntity.setDivisionId(selectedDivId);
+                                        gccOfflineEntity.setDivisionName(binding.spDivision.getSelectedItem().toString());
+                                        gccOfflineEntity.setSocietyId(selectedSocietyId);
+                                        gccOfflineEntity.setSocietyName(binding.spSociety.getSelectedItem().toString());
+                                        gccOfflineEntity.setDrgownId(selectedPUnitID);
+                                        gccOfflineEntity.setDrgownName(binding.spPUnit.getSelectedItem().toString());
+                                        gccOfflineEntity.setEssentials(gson.toJson(stockDetailsResponse.getEssential_commodities()));
+                                        gccOfflineEntity.setDailyReq(gson.toJson(stockDetailsResponse.getDialy_requirements()));
+                                        gccOfflineEntity.setEmpties(gson.toJson(stockDetailsResponse.getEmpties()));
+                                        gccOfflineEntity.setType(AppConstants.OFFLINE_P_UNIT);
+
+                                        gccOfflineRepository.insertGCCRecord(PUnitSelActivity.this, gccOfflineEntity);
+                                    }
+                                } else {
+                                    callSnackBar(getString(R.string.no_comm));
+                                }
+
+
+                            } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
+                                callSnackBar(getString(R.string.no_comm));
+                            } else {
+                                callSnackBar(getString(R.string.something));
+                            }
+
+                        } else {
+                            callSnackBar(getString(R.string.something));
+                        }
+
+                    }
+
+                });
+            } else {
+                Utils.customWarningAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
+        }
+    }
+
+    void callSnackBar(String msg) {
+        Snackbar snackbar = Snackbar.make(binding.cl, msg, Snackbar.LENGTH_SHORT);
+        snackbar.setActionTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
     }
 
     @Override
@@ -173,6 +359,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
+            binding.llDownload.setVisibility(View.GONE);
             selectedPUnits = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -242,7 +429,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 binding.spPUnit.setAdapter(selectAdapter);
             }
         } else if (adapterView.getId() == R.id.sp_society) {
-
+            binding.llDownload.setVisibility(View.GONE);
             if (position != 0) {
                 selectedPUnits = null;
                 selectedSocietyId = "";
@@ -286,6 +473,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             }
         } else if (adapterView.getId() == R.id.sp_p_unit) {
             if (position != 0) {
+                binding.llDownload.setVisibility(View.VISIBLE);
                 selectedPUnits = null;
                 selectedPUnitID = "";
                 if (!TextUtils.isEmpty(selectedSocietyId)) {
@@ -318,6 +506,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                     });
                 }
             } else {
+                binding.llDownload.setVisibility(View.GONE);
                 selectedPUnits = null;
                 selectedPUnitID = "";
             }
@@ -327,5 +516,81 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void gccRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Re-Download");
+                binding.btnRemove.setVisibility(View.VISIBLE);
+                Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data downloaded successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+
+        try {
+            if (cnt > 0) {
+                binding.btnDownload.setText("Download");
+                binding.btnRemove.setVisibility(View.GONE);
+                Utils.customSyncSuccessAlert(PUnitSelActivity.this, getResources().getString(R.string.app_name),
+                        "Data deleted successfully");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void customOnlineAlert(String msg) {
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_confirmation);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(getString(R.string.app_name));
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogNo = dialog.findViewById(R.id.btDialogNo);
+                btDialogNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+
+
+                        callService(true);
+
+
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
