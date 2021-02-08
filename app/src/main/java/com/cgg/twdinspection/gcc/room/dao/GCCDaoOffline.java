@@ -6,7 +6,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 
 import java.util.List;
@@ -34,7 +33,7 @@ public interface GCCDaoOffline {
     @Query("SELECT * from GCC_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
     LiveData<GccOfflineEntity> getGCCRecords(String divId, String socId, String godownId);
 
-    @Query("SELECT * from GCC_Offline where type LIKE :type")
+    @Query("SELECT * from GCC_Offline where type LIKE :type AND flag = 1")
     LiveData<List<GccOfflineEntity>> getGccRecCount(String type);
 
 }

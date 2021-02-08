@@ -234,8 +234,7 @@ public class GCCReportActivity extends AppCompatActivity implements ReportClickC
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(GCCReportActivity.this, GCCReportsDashboard.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
         finish();
     }
 }

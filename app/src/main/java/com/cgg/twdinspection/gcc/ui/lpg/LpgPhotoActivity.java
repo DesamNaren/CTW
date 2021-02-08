@@ -449,6 +449,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             gccOfflineEntity.setData(data);
             gccOfflineEntity.setPhotos(photos);
             gccOfflineEntity.setType(AppConstants.OFFLINE_LPG);
+            gccOfflineEntity.setFlag(true);
 
             gccOfflineRepository.insertGCCRecord(LpgPhotoActivity.this, gccOfflineEntity);
 
@@ -823,5 +824,10 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
     @Override
     public void deletedrGoDownCount(int cnt) {
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 }

@@ -33,8 +33,12 @@ public class GCCOfflineRepository {
         return offlineDao.getGccRecCount(type);
     }
 
-    public void deleteGCCRecord(final GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
-        new DeleteGCCRecordOfflineAsyncTask(gccOfflineInterface, divId, socId, godownId).execute();
+    public void deleteGCCRecord(final GCCOfflineInterface gccOfflineInterface, GccOfflineEntity entity) {
+        new DeleteGCCRecordOfflineAsyncTask(gccOfflineInterface, entity).execute();
+    }
+
+    public void deleteGCCRecordSubmitted(final GCCOfflineInterface gccOfflineInterface, GccOfflineEntity entity, String msg) {
+        new DeleteGCCRecordOfflineSubmittedAsyncTask(gccOfflineInterface, entity, msg).execute();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -63,25 +67,47 @@ public class GCCOfflineRepository {
 
     @SuppressLint("StaticFieldLeak")
     private class DeleteGCCRecordOfflineAsyncTask extends AsyncTask<Void, Void, Integer> {
-        String divId, socId, godownId;
+        GccOfflineEntity entity;
         GCCOfflineInterface gccOfflineInterface;
 
-        DeleteGCCRecordOfflineAsyncTask(GCCOfflineInterface gccOfflineInterface, String divId, String socId, String godownId) {
+        DeleteGCCRecordOfflineAsyncTask(GCCOfflineInterface gccOfflineInterface, GccOfflineEntity entity) {
             this.gccOfflineInterface = gccOfflineInterface;
-            this.divId = divId;
-            this.socId = socId;
-            this.godownId = godownId;
+            this.entity = entity;
         }
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            return offlineDao.deleteGCCRecord(divId, socId, godownId);
+            return offlineDao.deleteGCCRecord(entity.getDivisionId(), entity.getSocietyId(), entity.getDrgownId());
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             gccOfflineInterface.deletedrGoDownCount(integer);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class DeleteGCCRecordOfflineSubmittedAsyncTask extends AsyncTask<Void, Void, Integer> {
+        GccOfflineEntity entity;
+        String msg;
+        GCCOfflineInterface gccOfflineInterface;
+
+        DeleteGCCRecordOfflineSubmittedAsyncTask(GCCOfflineInterface gccOfflineInterface, GccOfflineEntity entity, String msg) {
+            this.gccOfflineInterface = gccOfflineInterface;
+            this.entity = entity;
+            this.msg = msg;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            return offlineDao.deleteGCCRecord(entity.getDivisionId(), entity.getSocietyId(), entity.getDrgownId());
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            gccOfflineInterface.deletedrGoDownCountSubmitted(integer,msg);
         }
     }
 

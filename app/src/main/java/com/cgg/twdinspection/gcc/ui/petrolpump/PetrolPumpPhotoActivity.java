@@ -466,7 +466,7 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
             gccOfflineEntity.setData(data);
             gccOfflineEntity.setPhotos(photos);
             gccOfflineEntity.setType(AppConstants.OFFLINE_PETROL);
-
+            gccOfflineEntity.setFlag(true);
             gccOfflineRepository.insertGCCRecord(PetrolPumpPhotoActivity.this, gccOfflineEntity);
 
         } else {
@@ -850,5 +850,10 @@ public class PetrolPumpPhotoActivity extends LocBaseActivity implements GCCSubmi
 
     @Override
     public void deletedrGoDownCount(int cnt) {
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 }

@@ -52,7 +52,17 @@ public class GccOfflineEntity {
     @SerializedName("lph_commodities")
     @Expose
     private String lpgCommodities;
+    @SerializedName("flag")
+    @Expose
+    private boolean flag;
 
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public String getPetrolCommodities() {
         return petrolCommodities;

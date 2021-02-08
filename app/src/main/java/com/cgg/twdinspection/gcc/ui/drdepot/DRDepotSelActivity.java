@@ -34,11 +34,11 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -208,6 +208,15 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DRDepotSelActivity.this, GCCOfflineDataActivity.class)
+                .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_DEPOT));
+                finish();
+            }
+        });
+
         binding.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,7 +227,12 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(DRDepotSelActivity.this, selectedDivId, selectedSocietyId, selectedDepotID);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId(selectedSocietyId);
+                entity.setDrgownId(selectedDepotID);
+
+                gccOfflineRepository.deleteGCCRecord(DRDepotSelActivity.this, entity);
             }
         });
     }
@@ -255,7 +269,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                     if (flag) {
                                         String depotData = gson.toJson(selectedDRDepots);
                                         editor.putString(AppConstants.DR_DEPOT_DATA, depotData);
-                                        editor.putString(AppConstants.StockDetailsResponse,gson.toJson(stockDetailsResponse));
+                                        editor.putString(AppConstants.StockDetailsResponse, gson.toJson(stockDetailsResponse));
                                         editor.commit();
 
                                         startActivity(new Intent(context, DRDepotActivity.class));
@@ -333,6 +347,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             selectedDRDepots = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -384,6 +399,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         } else if (adapterView.getId() == R.id.sp_society) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
                 selectedDRDepots = null;
                 selectedSocietyId = "";
                 selectedDepotID = "";
@@ -427,6 +443,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         } else if (adapterView.getId() == R.id.sp_depot) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.VISIBLE);
+                binding.llView.setVisibility(View.GONE);
                 selectedDRDepots = null;
                 selectedDepotID = "";
                 LiveData<DRDepots> liveData = viewModel.getDRDepotID(selectedDivId, selectedSocietyId, binding.spDepot.getSelectedItem().toString());
@@ -446,11 +463,21 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                     drGodownLiveData.removeObservers(DRDepotSelActivity.this);
 
                                     if (drGodowns == null) {
-                                        binding.btnDownload.setText("Download");
+                                        binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
                                     } else {
-                                        binding.btnDownload.setText("Re-Download");
-                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                        if(drGodowns.isFlag()){
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        }else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
                                     }
                                 }
                             });
@@ -464,6 +491,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                 selectedDRDepots = null;
                 selectedDepotID = "";
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
             }
         }
     }
@@ -478,7 +506,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Re-Download");
+                binding.btnDownload.setText(getString(R.string.re_download));
                 binding.btnRemove.setVisibility(View.VISIBLE);
                 Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
                         "Data downloaded successfully");
@@ -493,7 +521,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
 
         try {
             if (cnt > 0) {
-                binding.btnDownload.setText("Download");
+                binding.btnDownload.setText(getString(R.string.download));
                 binding.btnRemove.setVisibility(View.GONE);
                 Utils.customSyncSuccessAlert(DRDepotSelActivity.this, getResources().getString(R.string.app_name),
                         "Data deleted successfully");
@@ -501,6 +529,11 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
 

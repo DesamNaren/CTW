@@ -230,7 +230,12 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(PUnitSelActivity.this, selectedDivId, selectedSocietyId, selectedPUnitID);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId(selectedSocietyId);
+                entity.setDrgownId(selectedPUnitID);
+
+                gccOfflineRepository.deleteGCCRecord(PUnitSelActivity.this, entity);
             }
         });
     }
@@ -546,6 +551,11 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
     private void customOnlineAlert(String msg) {

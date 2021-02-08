@@ -207,7 +207,12 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(MFPGoDownSelActivity.this, selectedDivId, "", selectedMfpID);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId("");
+                entity.setDrgownId(selectedMfpID);
+
+                gccOfflineRepository.deleteGCCRecord(MFPGoDownSelActivity.this, entity);
             }
         });
     }
@@ -438,6 +443,11 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
     private void customOnlineAlert(String msg) {

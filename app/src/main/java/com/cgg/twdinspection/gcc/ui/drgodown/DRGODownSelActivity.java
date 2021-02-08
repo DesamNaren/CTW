@@ -221,7 +221,11 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(DRGODownSelActivity.this, selectedDivId, selectedSocietyId, selectedGoDownId);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId(selectedSocietyId);
+                entity.setDrgownId(selectedGoDownId);
+                gccOfflineRepository.deleteGCCRecord(DRGODownSelActivity.this, entity);
             }
         });
 
@@ -506,6 +510,11 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
     private void customOnlineAlert(String msg) {

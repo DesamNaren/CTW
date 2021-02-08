@@ -41,82 +41,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_offline_dashboard);
         binding.header.headerTitle.setText(getString(R.string.gcc_reports_offline));
 
-        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
 
-        LiveData<List<GccOfflineEntity>> drGodownLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_DR_GODOWN);
-        drGodownLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> drGodown) {
-                GCCOfflineDashboard.this.drGodown = drGodown;
-                drGodownLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (drGodown != null && drGodown.size() > 0) {
-                    binding.drGodownCnt.setText(String.valueOf(drGodown.size()));
-                }
-            }
-        });
-
-
-        LiveData<List<GccOfflineEntity>> drDepotLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_DR_DEPOT);
-        drDepotLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> drDepot) {
-                GCCOfflineDashboard.this.drDepot = drDepot;
-                drDepotLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (drDepot != null && drDepot.size() > 0) {
-                    binding.drDepotCnt.setText(String.valueOf(drDepot.size()));
-                }
-            }
-        });
-
-
-        LiveData<List<GccOfflineEntity>> mfpGodownLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_MFP);
-        mfpGodownLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> mfpGodown) {
-                GCCOfflineDashboard.this.mfpGodown = mfpGodown;
-                mfpGodownLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (mfpGodown != null && mfpGodown.size() > 0) {
-                    binding.mfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
-                }
-            }
-        });
-
-
-        LiveData<List<GccOfflineEntity>> pUnitLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_P_UNIT);
-        pUnitLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> processingUnit) {
-                GCCOfflineDashboard.this.processingUnit = processingUnit;
-                pUnitLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (processingUnit != null && processingUnit.size() > 0) {
-                    binding.pUnitCnt.setText(String.valueOf(processingUnit.size()));
-                }
-            }
-        });
-
-        LiveData<List<GccOfflineEntity>> petrolPumpLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_PETROL);
-        petrolPumpLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> petrolpump) {
-                GCCOfflineDashboard.this.petrolpump = petrolpump;
-                petrolPumpLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (petrolpump != null && petrolpump.size() > 0) {
-                    binding.petrolPumpCnt.setText(String.valueOf(petrolpump.size()));
-                }
-            }
-        });
-
-        LiveData<List<GccOfflineEntity>> lpgLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_LPG);
-        lpgLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
-            @Override
-            public void onChanged(List<GccOfflineEntity> lpg) {
-                GCCOfflineDashboard.this.lpg = lpg;
-                lpgLiveData.removeObservers(GCCOfflineDashboard.this);
-                if (lpg != null && lpg.size() > 0) {
-                    binding.lpgCnt.setText(String.valueOf(lpg.size()));
-                }
-            }
-        });
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +75,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (drDepot != null && drDepot.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_DEPOT));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -161,7 +87,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (drGodown != null && drGodown.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                    .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_GODOWN));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -172,7 +99,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mfpGodown != null && mfpGodown.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_MFP));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -183,7 +111,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (processingUnit != null && processingUnit.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_P_UNIT));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -194,7 +123,8 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (petrolpump != null && petrolpump.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_PETROL));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -205,9 +135,104 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (lpg != null && lpg.size() > 0) {
-                    startActivity(new Intent(GCCOfflineDashboard.this, GCCReportActivity.class));
+                    startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_LPG));
                 } else {
                     callSnackBar("No data found");
+                }
+            }
+        });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+
+        LiveData<List<GccOfflineEntity>> drGodownLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_DR_GODOWN);
+        drGodownLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> drGodown) {
+                GCCOfflineDashboard.this.drGodown = drGodown;
+                drGodownLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (drGodown != null && drGodown.size() > 0) {
+                    binding.drGodownCnt.setText(String.valueOf(drGodown.size()));
+                }else {
+                    binding.drGodownCnt.setText(R.string.na);
+                }
+            }
+        });
+
+
+        LiveData<List<GccOfflineEntity>> drDepotLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_DR_DEPOT);
+        drDepotLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> drDepot) {
+                GCCOfflineDashboard.this.drDepot = drDepot;
+                drDepotLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (drDepot != null && drDepot.size() > 0) {
+                    binding.drDepotCnt.setText(String.valueOf(drDepot.size()));
+                }else {
+                    binding.drDepotCnt.setText(R.string.na);
+                }
+            }
+        });
+
+
+        LiveData<List<GccOfflineEntity>> mfpGodownLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_MFP);
+        mfpGodownLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> mfpGodown) {
+                GCCOfflineDashboard.this.mfpGodown = mfpGodown;
+                mfpGodownLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (mfpGodown != null && mfpGodown.size() > 0) {
+                    binding.mfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
+                }else {
+                    binding.mfpGodownCnt.setText(R.string.na);
+                }
+            }
+        });
+
+
+        LiveData<List<GccOfflineEntity>> pUnitLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_P_UNIT);
+        pUnitLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> processingUnit) {
+                GCCOfflineDashboard.this.processingUnit = processingUnit;
+                pUnitLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (processingUnit != null && processingUnit.size() > 0) {
+                    binding.pUnitCnt.setText(String.valueOf(processingUnit.size()));
+                }else {
+                    binding.pUnitCnt.setText(R.string.na);
+                }
+            }
+        });
+
+        LiveData<List<GccOfflineEntity>> petrolPumpLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_PETROL);
+        petrolPumpLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> petrolpump) {
+                GCCOfflineDashboard.this.petrolpump = petrolpump;
+                petrolPumpLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (petrolpump != null && petrolpump.size() > 0) {
+                    binding.petrolPumpCnt.setText(String.valueOf(petrolpump.size()));
+                }else {
+                    binding.petrolPumpCnt.setText(R.string.na);
+                }
+            }
+        });
+
+        LiveData<List<GccOfflineEntity>> lpgLiveData = gccOfflineViewModel.getGoDownsOfflineCount(AppConstants.OFFLINE_LPG);
+        lpgLiveData.observe(GCCOfflineDashboard.this, new Observer<List<GccOfflineEntity>>() {
+            @Override
+            public void onChanged(List<GccOfflineEntity> lpg) {
+                GCCOfflineDashboard.this.lpg = lpg;
+                lpgLiveData.removeObservers(GCCOfflineDashboard.this);
+                if (lpg != null && lpg.size() > 0) {
+                    binding.lpgCnt.setText(String.valueOf(lpg.size()));
+                }else {
+                    binding.lpgCnt.setText(R.string.na);
                 }
             }
         });

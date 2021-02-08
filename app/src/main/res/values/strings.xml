@@ -137,7 +137,7 @@
     <string name="stock_issue">Stock Issue (Food Provision) Register</string>
     <string name="per_article">Permanent Article Register</string>
     <string name="bud_watch">Budget Watch Register</string>
-    <string name="acq_reg">Aquittance Register</string>
+    <string name="acq_reg">Acquaintance Register</string>
     <string name="acq_dress">Acquaintance Dresses, Notebooks, Register</string>
     <string name="acq_cos">Acquaintance Cosmetics Register</string>
     <string name="pay_bill">Pay Bill Register</string>
@@ -418,6 +418,7 @@
     <string name="failed">Failed to insert data, please try again!</string>
     <string name="data_saved">Data saved successfully!</string>
     <string name="are_you_sure">Are you sure to submit the data?</string>
+    <string name="are_you_sure_remove">Are you sure to remove the data?</string>
     <string name="hm_presence">Select HM presence</string>
     <string name="hwo_presence">Select HWO presence</string>
     <string name="sel_leave_type">Select capture reason type</string>
@@ -1167,4 +1168,11 @@
     <string name="new_construction">New Construction</string>
     <string name="part_construction">Part Construction</string>
     <string name="no_comm">No commodities found</string>
+    <string name="remove">Remove</string>
+    <string name="view">View</string>
+    <string name="data_already_exists_click_view_button_to_proceed">Data already exists. Click view button to proceed</string>
+    <string name="click_download_to_save_data_in_offline_mode">Click download to save data in offline mode</string>
+    <string name="download">Download</string>
+    <string name="re_download">Re-Download</string>
+    <string name="na">NA</string>
 </resources>

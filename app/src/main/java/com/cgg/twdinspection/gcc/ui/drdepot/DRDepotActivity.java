@@ -37,7 +37,10 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityDrDepotBinding;
+import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
+import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
@@ -48,8 +51,10 @@ import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -72,7 +77,7 @@ import okhttp3.RequestBody;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface {
+public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterface, ErrorHandlerInterface, GCCOfflineInterface {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private StockViewModel viewModel;
@@ -96,6 +101,10 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     private String randomNum;
     private boolean punit_flag, dailyreq_flag, emp_flag, ess_flag, mfp_flag;
     File mediaStorageDir;
+    private GCCSubmitRequest request;
+    private GCCOfflineViewModel gccOfflineViewModel;
+    private boolean flag;
+    private GCCOfflineRepository gccOfflineRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +131,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         binding.header.ivHome.setVisibility(View.GONE);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         officerID = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
+        gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        gccOfflineRepository = new GCCOfflineRepository(getApplication());
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +171,22 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                drDepots.getDivisionId(), drDepots.getSocietyId(), drDepots.getGodownId());
+
+        drGodownLiveData.observe(DRDepotActivity.this, new Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity GCCOfflineEntity) {
+                if (GCCOfflineEntity != null) {
+                    flag = true;
+                    binding.bottomLl.btnNext.setText(getString(R.string.save));
+                } else {
+                    flag = false;
+                    binding.bottomLl.btnNext.setText(getString(R.string.submit));
+                }
+            }
+        });
 
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,25 +251,31 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     if (shopFlag == 0) {
                         showSnackBar("Please capture shop image");
                     } else {
-                        if (Utils.checkInternetConnection(DRDepotActivity.this)) {
-                            GCCSubmitRequest request = new GCCSubmitRequest();
-                            request.setOfficerId(officerID);
-                            request.setDivisionId(divId);
-                            request.setDivisionName(drDepots.getDivisionName());
-                            request.setSocietyId(drDepots.getSocietyId());
-                            request.setSocietyName(drDepots.getSocietyName());
-                            request.setInchargeName(drDepots.getIncharge());
-                            request.setSupplierType(getString(R.string.dr_depot_req));
-                            request.setInspectionTime(Utils.getCurrentDateTime());
-                            request.setGodown_name(drDepots.getGodownName());
-                            request.setGodownId(drDepots.getGodownId());
-                            request.setShop_avail(shopAvail);
-                            request.setDeviceId(Utils.getDeviceID(DRDepotActivity.this));
-                            request.setVersionNo(Utils.getVersionName(DRDepotActivity.this));
-                            request.setPhoto_key_id(randomNum);
-                            gccPhotoViewModel.submitGCCDetails(request);
+                        request = new GCCSubmitRequest();
+                        request.setOfficerId(officerID);
+                        request.setDivisionId(divId);
+                        request.setDivisionName(drDepots.getDivisionName());
+                        request.setSocietyId(drDepots.getSocietyId());
+                        request.setSocietyName(drDepots.getSocietyName());
+                        request.setInchargeName(drDepots.getIncharge());
+                        request.setSupplierType(getString(R.string.dr_depot_req));
+                        request.setInspectionTime(Utils.getCurrentDateTime());
+                        request.setGodown_name(drDepots.getGodownName());
+                        request.setGodownId(drDepots.getGodownId());
+                        request.setShop_avail(shopAvail);
+                        request.setDeviceId(Utils.getDeviceID(DRDepotActivity.this));
+                        request.setVersionNo(Utils.getVersionName(DRDepotActivity.this));
+                        request.setPhoto_key_id(randomNum);
+
+                        if (flag) {
+                            callPhotoSubmit();
                         } else {
-                            Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                            if (Utils.checkInternetConnection(DRDepotActivity.this)) {
+                                customProgressDialog.show();
+                                gccPhotoViewModel.submitGCCDetails(request);
+                            } else {
+                                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+                            }
                         }
                     }
                 }
@@ -341,7 +374,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                         binding.viewPager.setVisibility(View.VISIBLE);
                         binding.tabs.setVisibility(View.VISIBLE);
                         binding.noDataTv.setVisibility(View.GONE);
-                        binding.bottomLl.btnNext.setText("Next");
+                        binding.bottomLl.btnNext.setText(getString(R.string.next));
                     } else {
                         binding.tabs.setVisibility(View.GONE);
                         binding.viewPager.setVisibility(View.GONE);
@@ -356,7 +389,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     binding.ivShopCam.setVisibility(View.VISIBLE);
                     binding.tvClose.setVisibility(View.VISIBLE);
                     shopAvail = AppConstants.close;
-                    binding.bottomLl.btnNext.setText("Submit");
+                    if (flag)
+                        binding.bottomLl.btnNext.setText(getString(R.string.save));
+                    else
+                        binding.bottomLl.btnNext.setText(getString(R.string.submit));
+
                 }
             }
         });
@@ -379,21 +416,44 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private void callPhotoSubmit() {
-        if (Utils.checkInternetConnection(DRDepotActivity.this)) {
-            RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            MultipartBody.Part body =
-                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
-            customProgressDialog.show();
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 
+        List<MultipartBody.Part> partList = new ArrayList<>();
+        List<File> photoList = new ArrayList<>();
+        partList.add(body);
+        photoList.add(file);
 
-            List<MultipartBody.Part> partList = new ArrayList<>();
-            partList.add(body);
-            gccPhotoViewModel.UploadImageServiceCall(partList);
+        if (flag) {
+            String data = new Gson().toJson(request);
+            String photos = new Gson().toJson(photoList);
+            GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+            gccOfflineEntity.setDivisionId(drDepots.getDivisionId());
+            gccOfflineEntity.setDivisionName(drDepots.getDivisionName());
+            gccOfflineEntity.setSocietyId(drDepots.getSocietyId());
+            gccOfflineEntity.setSocietyName(drDepots.getSocietyName());
+            gccOfflineEntity.setDrgownId(drDepots.getGodownId());
+            gccOfflineEntity.setDrgownName(drDepots.getGodownName());
+            gccOfflineEntity.setTime(Utils.getCurrentDateTimeDisplay());
+
+            gccOfflineEntity.setData(data);
+            gccOfflineEntity.setPhotos(photos);
+            gccOfflineEntity.setType(AppConstants.OFFLINE_DR_DEPOT);
+            gccOfflineEntity.setFlag(true);
+
+            gccOfflineRepository.insertGCCRecord(DRDepotActivity.this, gccOfflineEntity);
         } else {
-            Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            if (Utils.checkInternetConnection(DRDepotActivity.this)) {
+                customProgressDialog.show();
+                gccPhotoViewModel.UploadImageServiceCall(partList);
+            } else {
+                Utils.customWarningAlert(DRDepotActivity.this, getResources().getString(R.string.app_name), "Please check internet");
+            }
         }
+
     }
 
     private void showSnackBar(String str) {
@@ -483,6 +543,30 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         String errMsg = ErrorHandler.handleError(e, context);
         Log.i("MSG", "handleError: " + errMsg);
         callSnackBar(errMsg);
+    }
+
+    @Override
+    public void gccRecCount(int cnt) {
+        customProgressDialog.hide();
+        try {
+            if (cnt > 0) {
+                Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, DashboardMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletedrGoDownCount(int cnt) {
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

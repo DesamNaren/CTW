@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/header_layout"
+            android:id="@+id/header"
+            android:visibility="gone"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_below="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg"
+            android:padding="@dimen/dimen_5dp"
+            tools:listitem="@layout/adapter_gcc_report" />
+
+        <com.cgg.twdinspection.common.custom.CustomFontTextView
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_empty"
+            android:text="No records found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ProgressBarTheme"
+            android:visibility="gone" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent" />
+
+    </RelativeLayout>
+
+
+</layout>

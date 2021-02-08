@@ -34,11 +34,9 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpActivity;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpSelActivity;
+import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
-import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -204,7 +202,12 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(LPGSelActivity.this, selectedDivId, selectedSocietyId, selectLPGId);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId(selectedSocietyId);
+                entity.setDrgownId(selectLPGId);
+
+                gccOfflineRepository.deleteGCCRecord(LPGSelActivity.this, entity);
             }
         });
     }
@@ -519,5 +522,10 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 }

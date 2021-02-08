@@ -577,20 +577,20 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         if (flag) {
             String data = new Gson().toJson(request);
             String photos = new Gson().toJson(partList);
-            GccOfflineEntity GCCOfflineEntity = new GccOfflineEntity();
-            GCCOfflineEntity.setDivisionId(divId);
-            GCCOfflineEntity.setDivisionName(divName);
-            GCCOfflineEntity.setSocietyId(socId);
-            GCCOfflineEntity.setSocietyName(socName);
-            GCCOfflineEntity.setDrgownId(suppId);
-            GCCOfflineEntity.setDrgownName(godName);
-            GCCOfflineEntity.setTime(Utils.getCurrentDateTimeDisplay());
+            GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
+            gccOfflineEntity.setDivisionId(divId);
+            gccOfflineEntity.setDivisionName(divName);
+            gccOfflineEntity.setSocietyId(socId);
+            gccOfflineEntity.setSocietyName(socName);
+            gccOfflineEntity.setDrgownId(suppId);
+            gccOfflineEntity.setDrgownName(godName);
+            gccOfflineEntity.setTime(Utils.getCurrentDateTimeDisplay());
 
-            GCCOfflineEntity.setData(data);
-            GCCOfflineEntity.setPhotos(photos);
-            GCCOfflineEntity.setType(type);
-
-            gccOfflineRepository.insertGCCRecord(GCCPhotoActivity.this, GCCOfflineEntity);
+            gccOfflineEntity.setData(data);
+            gccOfflineEntity.setPhotos(photos);
+            gccOfflineEntity.setType(type);
+            gccOfflineEntity.setFlag(true);
+            gccOfflineRepository.insertGCCRecord(GCCPhotoActivity.this, gccOfflineEntity);
 
         } else {
             customProgressDialog.show();
@@ -964,5 +964,10 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
     @Override
     public void deletedrGoDownCount(int cnt) {
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 }

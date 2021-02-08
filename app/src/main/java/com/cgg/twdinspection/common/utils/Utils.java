@@ -48,8 +48,6 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.custom.CustomFontTextView;
 import com.cgg.twdinspection.engineering_works.ui.EngSyncActivity;
-import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCSyncActivity;
 import com.cgg.twdinspection.inspection.interfaces.SaveListener;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
@@ -59,7 +57,6 @@ import com.cgg.twdinspection.inspection.ui.QuitAppActivity;
 import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.ui.SchemeSyncActivity;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -802,6 +799,41 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
+                    }
+                });
+
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void customSyncOfflineSuccessAlert(Activity activity, String title, String msg) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_success);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        activity.startActivity(activity.getIntent()
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        activity.finish();
                     }
                 });
 

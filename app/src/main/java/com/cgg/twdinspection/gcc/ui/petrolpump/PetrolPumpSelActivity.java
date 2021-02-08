@@ -28,19 +28,15 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPetrolPumpSelBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCOfflineInterface;
-import com.cgg.twdinspection.gcc.room.dao.GCCDaoOffline;
 import com.cgg.twdinspection.gcc.room.repository.GCCOfflineRepository;
 import com.cgg.twdinspection.gcc.source.divisions.DivisionsInfo;
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownActivity;
+import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
-import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -209,12 +205,16 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         binding.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gccOfflineRepository.deleteGCCRecord(PetrolPumpSelActivity.this, selectedDivId, selectedSocietyId, selectPetrolId);
+                GccOfflineEntity entity = new GccOfflineEntity();
+                entity.setDivisionId(selectedDivId);
+                entity.setSocietyId(selectedSocietyId);
+                entity.setDrgownId(selectPetrolId);
+
+                gccOfflineRepository.deleteGCCRecord(PetrolPumpSelActivity.this, entity);
             }
         });
 
     }
-
 
 
     void callService(boolean flag) {
@@ -482,6 +482,11 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deletedrGoDownCountSubmitted(int cnt, String msg) {
+
     }
 
     private void customOnlineAlert(String msg) {
