@@ -34,10 +34,12 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
+import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -229,6 +231,15 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         });
 
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DRGODownSelActivity.this, GCCOfflineDataActivity.class)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_GODOWN));
+                finish();
+            }
+        });
+
     }
 
 
@@ -344,6 +355,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         binding.llDownload.setVisibility(View.GONE);
+        binding.llView.setVisibility(View.GONE);
         if (adapterView.getId() == R.id.sp_division) {
             selectedDrGodowns = null;
             selectedSocietyId = "";
@@ -395,6 +407,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             if (position != 0) {
                 selectedDrGodowns = null;
                 selectedSocietyId = "";
@@ -438,6 +451,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
             }
         } else if (adapterView.getId() == R.id.sp_godown) {
             binding.llDownload.setVisibility(View.VISIBLE);
+            binding.llView.setVisibility(View.GONE);
             if (position != 0) {
                 selectedDrGodowns = null;
                 selectedGoDownId = "";
@@ -456,11 +470,22 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                     drGodownLiveData.removeObservers(DRGODownSelActivity.this);
 
                                     if (drGodowns == null) {
-                                        binding.btnDownload.setText("Download");
+                                        binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
-                                    } else {
-                                        binding.btnDownload.setText("Re-Download");
-                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
+                                    }else {
+                                        if(drGodowns.isFlag()){
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        }else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
                                     }
                                 }
                             });
@@ -473,6 +498,7 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                 selectedDrGodowns = null;
                 selectedGoDownId = "";
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
             }
         }
     }

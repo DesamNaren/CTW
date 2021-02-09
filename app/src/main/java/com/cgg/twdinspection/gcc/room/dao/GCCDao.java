@@ -98,10 +98,7 @@ public interface GCCDao {
     @Query("SELECT * from MFP_GoDown where  divisionId LIKE :divisionID AND godownName LIKE :mfpName")
     LiveData<MFPGoDowns> getMFPGoDownID(String divisionID, String mfpName);
 
-    @Query("SELECT * from P_Unit where  divisionId LIKE :divisionID AND societyId LIKE :societyID AND godownName LIKE :pUnitNmae")
-    LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitNmae);
-
-    @Query("SELECT * from P_Unit where  divisionId LIKE :divisionID AND godownName LIKE :pUnitNmae")
-    LiveData<PUnits> getPUnitID(String divisionID, String pUnitNmae);
+    @Query("SELECT * from P_Unit where  divisionId LIKE :divisionID AND godownName LIKE :pUnitName OR societyId LIKE :societyID ")
+    LiveData<PUnits> getPUnitID(String divisionID, String societyID , String pUnitName);
 
 }

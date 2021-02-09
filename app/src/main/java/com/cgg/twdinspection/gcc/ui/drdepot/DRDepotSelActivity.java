@@ -465,6 +465,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                     if (drGodowns == null) {
                                         binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
                                         if(drGodowns.isFlag()){
                                             binding.llView.setVisibility(View.VISIBLE);

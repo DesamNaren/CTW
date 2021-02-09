@@ -53,11 +53,10 @@ import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpPhotoActivity;
+import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
-import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -89,6 +88,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     String FilePath, repairPath;
     private String officerID, divId, divName, socId, socName, inchName, suppType, suppId, godId, godName;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static String IMAGE_DIRECTORY_NAME_MODE;
     private CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
     GCCPhotoViewModel viewModel;
@@ -101,6 +101,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     private GCCOfflineViewModel gccOfflineViewModel;
     private GCCOfflineRepository gccOfflineRepository;
     private GCCSubmitRequest request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,9 +263,13 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
                 if (gccOfflineEntity != null) {
                     flag = true;
                     binding.btnLayout.btnNext.setText(getString(R.string.save));
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                    IMAGE_DIRECTORY_NAME_MODE = AppConstants.OFFLINE;
                 } else {
                     flag = false;
                     binding.btnLayout.btnNext.setText(getString(R.string.submit));
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                    IMAGE_DIRECTORY_NAME_MODE = AppConstants.ONLINE;
                 }
             }
         });
@@ -390,53 +395,20 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private void callPhotoSubmit() {
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_entrance);
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file_entrance.getName(), requestFile);
-        RequestBody requestFile1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_floor);
-        MultipartBody.Part body1 =
-                MultipartBody.Part.createFormData("image", file_floor.getName(), requestFile1);
-        RequestBody requestFile2 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_ceiling);
-        MultipartBody.Part body2 =
-                MultipartBody.Part.createFormData("image", file_ceiling.getName(), requestFile2);
-        RequestBody requestFile3 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq1);
-        MultipartBody.Part body3 =
-                MultipartBody.Part.createFormData("image", file_safety_eq1.getName(), requestFile3);
-        RequestBody requestFile4 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq2);
-        MultipartBody.Part body4 =
-                MultipartBody.Part.createFormData("image", file_safety_eq2.getName(), requestFile4);
-
-        RequestBody requestFile5 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file_office);
-        MultipartBody.Part body5 = MultipartBody.Part.createFormData("image", file_office.getName(), requestFile5);
-        MultipartBody.Part body6 = null;
-        if (file_repair != null) {
-            RequestBody requestFile6 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), file_repair);
-            body6 = MultipartBody.Part.createFormData("image", file_repair.getName(), requestFile6);
-
-        }
-
-        List<MultipartBody.Part> partList = new ArrayList<>();
-        partList.add(body);
-        partList.add(body1);
-        partList.add(body2);
-        partList.add(body3);
-        partList.add(body4);
-        partList.add(body5);
-
-        if (body6 != null) {
-            partList.add(body6);
-        }
 
         if (flag) {
+            List<File> photoList = new ArrayList<>();
+            photoList.add(file_entrance);
+            photoList.add(file_floor);
+            photoList.add(file_ceiling);
+            photoList.add(file_safety_eq1);
+            photoList.add(file_safety_eq2);
+            photoList.add(file_office);
+            if (file_repair != null)
+                photoList.add(file_repair);
+
             String data = new Gson().toJson(request);
-            String photos = new Gson().toJson(partList);
+            String photos = new Gson().toJson(photoList);
             GccOfflineEntity gccOfflineEntity = new GccOfflineEntity();
             gccOfflineEntity.setDivisionId(divId);
             gccOfflineEntity.setDivisionName(divName);
@@ -454,11 +426,56 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
             gccOfflineRepository.insertGCCRecord(LpgPhotoActivity.this, gccOfflineEntity);
 
         } else {
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_entrance);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("image", file_entrance.getName(), requestFile);
+            RequestBody requestFile1 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_floor);
+            MultipartBody.Part body1 =
+                    MultipartBody.Part.createFormData("image", file_floor.getName(), requestFile1);
+            RequestBody requestFile2 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_ceiling);
+            MultipartBody.Part body2 =
+                    MultipartBody.Part.createFormData("image", file_ceiling.getName(), requestFile2);
+            RequestBody requestFile3 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq1);
+            MultipartBody.Part body3 =
+                    MultipartBody.Part.createFormData("image", file_safety_eq1.getName(), requestFile3);
+            RequestBody requestFile4 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_safety_eq2);
+            MultipartBody.Part body4 =
+                    MultipartBody.Part.createFormData("image", file_safety_eq2.getName(), requestFile4);
+
+            RequestBody requestFile5 =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file_office);
+            MultipartBody.Part body5 = MultipartBody.Part.createFormData("image", file_office.getName(), requestFile5);
+            MultipartBody.Part body6 = null;
+            if (file_repair != null) {
+                RequestBody requestFile6 =
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file_repair);
+                body6 = MultipartBody.Part.createFormData("image", file_repair.getName(), requestFile6);
+
+            }
+
+            List<MultipartBody.Part> partList = new ArrayList<>();
+            partList.add(body);
+            partList.add(body1);
+            partList.add(body2);
+            partList.add(body3);
+            partList.add(body4);
+            partList.add(body5);
+
+            if (body6 != null) {
+                partList.add(body6);
+            }
+
             customProgressDialog.show();
             customProgressDialog.addText("Please wait...Uploading Photos");
 
             viewModel.UploadImageServiceCall(partList);
-        }    }
+        }
+    }
 
     private boolean validate() {
         boolean returnFlag = true;
@@ -608,8 +625,8 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     public String getFilename() {
-        FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME;
+        FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_LPG + "_" + suppId;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -662,8 +679,8 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME;
+                FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                        + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_LPG + "_" + suppId;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
@@ -740,7 +757,8 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
     }
 
     private File getOutputMediaFile(int type) {
-        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_LPG + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"
@@ -813,7 +831,7 @@ public class LpgPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
 
 
                 Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, DashboardMenuActivity.class)
+                startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

@@ -2,6 +2,7 @@ package com.cgg.twdinspection.offline;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -38,6 +39,7 @@ import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
+import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.offline.interfaces.GCCOfflineSubmitInterface;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -64,6 +66,7 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
     private GCCPhotoViewModel gccPhotoViewModel;
     private GccOfflineEntity gccOfflineEntity;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static String IMAGE_DIRECTORY_NAME_MODE = AppConstants.OFFLINE;
     private String fromClass;
 
     @Override
@@ -77,7 +80,15 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
         gccReportBinding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_offline_report);
         gccReportBinding.executePendingBindings();
         gccReportBinding.header.headerTitle.setText(getString(R.string.gcc_reports_offline_data));
-        gccReportBinding.header.ivHome.setVisibility(View.GONE);
+
+        gccReportBinding.header.ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(GCCOfflineDataActivity.this, DashboardMenuActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
         gccOfflineRepository = new GCCOfflineRepository(getApplication());
         gccPhotoViewModel = ViewModelProviders.of(this,
                 new GCCPhotoCustomViewModel(this)).get(GCCPhotoViewModel.class);
@@ -100,9 +111,15 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
                 public void onChanged(List<GccOfflineEntity> drGodownData) {
                     drGodownLiveData.removeObservers(GCCOfflineDataActivity.this);
                     if (drGodownData != null && drGodownData.size() > 0) {
+                        gccReportBinding.tvEmpty.setVisibility(View.GONE);
+                        gccReportBinding.recyclerView.setVisibility(View.VISIBLE);
+
                         GCCOfflineDataAdapter adapter = new GCCOfflineDataAdapter(GCCOfflineDataActivity.this, drGodownData);
                         gccReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(GCCOfflineDataActivity.this));
                         gccReportBinding.recyclerView.setAdapter(adapter);
+                    } else {
+                        gccReportBinding.tvEmpty.setVisibility(View.VISIBLE);
+                        gccReportBinding.recyclerView.setVisibility(View.GONE);
                     }
                 }
             });
@@ -184,6 +201,15 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
                                 Utils.customWarningAlert(GCCOfflineDataActivity.this, getResources().getString(R.string.app_name), "Please check internet");
                             }
                         } else {
+                            File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME +
+                                    "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + fromClass + "_" + entity.getDrgownId());
+
+                            if (mediaStorageDir.isDirectory()) {
+                                String[] children = mediaStorageDir.list();
+                                for (int i = 0; i < children.length; i++)
+                                    new File(mediaStorageDir, children[i]).delete();
+                                mediaStorageDir.delete();
+                            }
                             gccOfflineRepository.deleteGCCRecord(GCCOfflineDataActivity.this, entity);
                         }
                     }
@@ -219,7 +245,7 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
     public void deletedrGoDownCountSubmitted(int cnt, String msg) {
         try {
             if (cnt > 0) {
-                Utils.customSuccessAlert(this, getResources().getString(R.string.app_name), msg);
+                Utils.customSyncOfflineSuccessAlert(this, getResources().getString(R.string.app_name), msg);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -272,7 +298,8 @@ public class GCCOfflineDataActivity extends AppCompatActivity implements GCCOffl
     }
 
     private void CallSuccessAlert(String msg) {
-        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        File mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME +
+                "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + fromClass + "_" + gccOfflineEntity.getDrgownId());
 
         if (mediaStorageDir.isDirectory()) {
             String[] children = mediaStorageDir.list();

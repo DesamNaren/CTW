@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.RadioGroup;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -22,10 +23,13 @@ import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUStockDetail
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp;
 import com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitRegisterBookCertificates;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnits;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
+import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGodownFindingsActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -80,6 +84,22 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                pUnits.getDivisionId(), pUnits.getSocietyId(), pUnits.getGodownId());
+
+        drGodownLiveData.observe(PUnitsFindingsActivity.this, new androidx.lifecycle.Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
             }
         });
 
@@ -268,7 +288,7 @@ public class PUnitsFindingsActivity extends LocBaseActivity {
                     editor.commit();
 
                     startActivity(new Intent(PUnitsFindingsActivity.this, GCCPhotoActivity.class)
-                            .putExtra(AppConstants.TITLE, getString(R.string.p_unit_upload_photos)));
+                            .putExtra(AppConstants.TITLE, AppConstants.OFFLINE_P_UNIT));
                 }
             }
         });

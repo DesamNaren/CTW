@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
@@ -37,10 +39,12 @@ import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindin
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownInsp;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -117,6 +121,21 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
         DrGodowns drGodown = gson.fromJson(godownData, DrGodowns.class);
         divId = drGodown.getDivisionId();
         suppId = drGodown.getGodownId();
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                drGodown.getDivisionId(), drGodown.getSocietyId(), drGodown.getGodownId());
+
+        drGodownLiveData.observe(DRGodownFindingsActivity.this, new Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+            }
+        });
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -560,7 +579,7 @@ public class DRGodownFindingsActivity extends LocBaseActivity {
 
 
                     startActivity(new Intent(DRGodownFindingsActivity.this, GCCPhotoActivity.class)
-                            .putExtra(AppConstants.TITLE, getString(R.string.dr_godown_upload_photos)));
+                            .putExtra(AppConstants.TITLE, AppConstants.OFFLINE_DR_GODOWN));
                 }
             }
         });

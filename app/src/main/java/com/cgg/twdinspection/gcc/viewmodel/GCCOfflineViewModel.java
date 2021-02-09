@@ -31,6 +31,13 @@ public class GCCOfflineViewModel extends AndroidViewModel {
         return godownOfflineLiveData;
     }
 
+    public LiveData<GccOfflineEntity> getDRGoDownsOfflinePUnit(String divId, String socId, String godownId) {
+        if (godownOfflineLiveData != null) {
+            godownOfflineLiveData = mRepository.getGCCRecordsPUnit(divId, socId, godownId);
+        }
+        return godownOfflineLiveData;
+    }
+
 
     public LiveData<List<GccOfflineEntity>> getGoDownsOfflineCount(String type) {
         if (getGoDownsOfflineCount != null) {

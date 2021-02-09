@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
@@ -37,10 +38,13 @@ import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPGeneralFinding
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MfpGodownsInsp;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -111,6 +115,21 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
         MFPGoDowns mfpGoDowns = gson.fromJson(godownData, MFPGoDowns.class);
         divId = mfpGoDowns.getDivisionId();
         suppId = mfpGoDowns.getGodownId();
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                mfpGoDowns.getDivisionId(), mfpGoDowns.getSocietyId(), mfpGoDowns.getGodownId());
+
+        drGodownLiveData.observe(MFPGodownFindingsActivity.this, new androidx.lifecycle.Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+            }
+        });
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
@@ -444,7 +463,7 @@ public class MFPGodownFindingsActivity extends LocBaseActivity {
                     editor.commit();
 
                     startActivity(new Intent(MFPGodownFindingsActivity.this, GCCPhotoActivity.class)
-                            .putExtra(AppConstants.TITLE, getString(R.string.mfp_godown_upload_photos)));
+                            .putExtra(AppConstants.TITLE, AppConstants.OFFLINE_MFP));
                 }
             }
         });

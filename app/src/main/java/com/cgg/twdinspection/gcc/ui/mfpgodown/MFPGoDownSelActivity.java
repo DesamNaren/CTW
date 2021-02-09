@@ -34,10 +34,12 @@ import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
 import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGODownSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -215,6 +217,17 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 gccOfflineRepository.deleteGCCRecord(MFPGoDownSelActivity.this, entity);
             }
         });
+
+
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MFPGoDownSelActivity.this, GCCOfflineDataActivity.class)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_MFP));
+                finish();
+            }
+        });
+
     }
 
     void callService(boolean flag) {
@@ -323,6 +336,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             selectedMfpGoDowns = null;
             selectedDivId = "";
             selectedMfpID = "";
@@ -370,6 +384,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
         } else if (adapterView.getId() == R.id.sp_mfp) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.VISIBLE);
+                binding.llView.setVisibility(View.GONE);
                 selectedMfpGoDowns = null;
                 selectedMfpID = "";
                 LiveData<MFPGoDowns> liveData = viewModel.getMFPGoDownID(selectedDivId, binding.spMfp.getSelectedItem().toString());
@@ -388,11 +403,22 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                                     drGodownLiveData.removeObservers(MFPGoDownSelActivity.this);
 
                                     if (drGodowns == null) {
-                                        binding.btnDownload.setText("Download");
+                                        binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
-                                        binding.btnDownload.setText("Re-Download");
-                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                        if(drGodowns.isFlag()){
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        }else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
                                     }
                                 }
                             });
@@ -404,6 +430,7 @@ public class MFPGoDownSelActivity extends AppCompatActivity implements AdapterVi
                 });
             } else {
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
                 selectedMfpGoDowns = null;
                 selectedMfpID = "";
             }

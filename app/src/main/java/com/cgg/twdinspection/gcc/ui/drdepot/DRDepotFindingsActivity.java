@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
@@ -39,10 +40,13 @@ import com.cgg.twdinspection.gcc.source.inspections.DrDepot.MFPRegisters;
 import com.cgg.twdinspection.gcc.source.inspections.DrDepot.RegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.DrDepot.StockDetails;
 import com.cgg.twdinspection.gcc.source.inspections.InspectionSubmitResponse;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepots;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCPhotoActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -124,6 +128,21 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
         DRDepots drDepot = gson.fromJson(depotData, DRDepots.class);
         divId = drDepot.getDivisionId();
         suppId = drDepot.getGodownId();
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                drDepot.getDivisionId(), drDepot.getSocietyId(), drDepot.getGodownId());
+
+        drGodownLiveData.observe(DRDepotFindingsActivity.this, new androidx.lifecycle.Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+            }
+        });
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getEssential_commodities() != null && stockDetailsResponse.getEssential_commodities().size() > 0) {
@@ -609,7 +628,7 @@ public class DRDepotFindingsActivity extends LocBaseActivity {
                     editor.commit();
 
                     startActivity(new Intent(DRDepotFindingsActivity.this, GCCPhotoActivity.class)
-                            .putExtra(AppConstants.TITLE, getString(R.string.dr_depot_upload_photos)));
+                            .putExtra(AppConstants.TITLE, AppConstants.OFFLINE_DR_DEPOT));
                 }
             }
         });

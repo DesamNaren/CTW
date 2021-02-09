@@ -1161,7 +1161,7 @@
     <string name="title_activity_menu_dashboard">MenuDashboardActivity</string>
     <string name="institute_inspection">Institute Inspection</string>
     <string name="gcc_title">GCC</string>
-    <string name="my_inspections">My Inspections</string>
+    <string name="my_inspections">GCC Inspections</string>
     <string name="logout_str">Logout</string>
     <string name="insp_remarks">Inspection Officer Remarks</string>
     <string name="sel_insp_remarks">Enter Inspection Officer Remarks</string>
@@ -1175,4 +1175,5 @@
     <string name="download">Download</string>
     <string name="re_download">Re-Download</string>
     <string name="na">NA</string>
+    <string name="inspection_time">Inspection Time</string>
 </resources>

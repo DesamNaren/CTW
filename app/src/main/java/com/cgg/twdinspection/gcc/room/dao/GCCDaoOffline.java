@@ -33,6 +33,9 @@ public interface GCCDaoOffline {
     @Query("SELECT * from GCC_Offline where divisionId LIKE :divId AND societyId LIKE :socId AND drgownId LIKE :godownId")
     LiveData<GccOfflineEntity> getGCCRecords(String divId, String socId, String godownId);
 
+    @Query("SELECT * from GCC_Offline where  divisionId LIKE :divId AND drgownId LIKE :godownId OR societyId LIKE :socId ")
+    LiveData<GccOfflineEntity> getGCCRecordsPUnit(String divId, String socId, String godownId);
+
     @Query("SELECT * from GCC_Offline where type LIKE :type AND flag = 1")
     LiveData<List<GccOfflineEntity>> getGccRecCount(String type);
 

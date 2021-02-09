@@ -125,7 +125,4 @@ public class GCCRepository {
     public LiveData<PUnits> getPUnitID(String divisionID, String societyID, String pUnitName) {
         return gccDao.getPUnitID(divisionID, societyID, pUnitName);
     }
-    public LiveData<PUnits> getPUnitID(String divisionID, String pUnitName) {
-        return gccDao.getPUnitID(divisionID,  pUnitName);
-    }
 }

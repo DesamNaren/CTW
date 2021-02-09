@@ -199,8 +199,5 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
     public LiveData<PUnits> getPUnitID(String divId, String socID, String pUnitName) {
         return mRepository.getPUnitID(divId, socID, pUnitName);
     }
-    public LiveData<PUnits> getPUnitID(String divId, String pUnitName) {
-        return mRepository.getPUnitID(divId, pUnitName);
-    }
 
 }

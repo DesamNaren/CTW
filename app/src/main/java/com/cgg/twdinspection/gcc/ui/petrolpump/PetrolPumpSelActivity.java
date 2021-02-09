@@ -34,10 +34,12 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
+import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -213,6 +215,14 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 gccOfflineRepository.deleteGCCRecord(PetrolPumpSelActivity.this, entity);
             }
         });
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PetrolPumpSelActivity.this, GCCOfflineDataActivity.class)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_PETROL));
+                finish();
+            }
+        });
 
     }
 
@@ -316,6 +326,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             selectedPetrolPumps = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -366,6 +377,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             if (position != 0) {
                 selectedPetrolPumps = null;
                 selectedSocietyId = "";
@@ -410,6 +422,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
         } else if (adapterView.getId() == R.id.sp_petrol) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.VISIBLE);
+                binding.llView.setVisibility(View.GONE);
                 selectedPetrolPumps = null;
                 selectPetrolId = "";
                 LiveData<PetrolSupplierInfo> drGodownsLiveData = viewModel.getPetrolPumpID(selectedDivId, selectedSocietyId, binding.spPetrol.getSelectedItem().toString());
@@ -427,11 +440,22 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                     drGodownLiveData.removeObservers(PetrolPumpSelActivity.this);
 
                                     if (drGodowns == null) {
-                                        binding.btnDownload.setText("Download");
+                                        binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
-                                        binding.btnDownload.setText("Re-Download");
-                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                        if(drGodowns.isFlag()){
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        }else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
                                     }
                                 }
                             });
@@ -443,6 +467,7 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                 });
             } else {
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
                 selectedPetrolPumps = null;
                 selectPetrolId = "";
             }

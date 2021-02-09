@@ -51,6 +51,7 @@ import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoCustomViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCPhotoViewModel;
@@ -181,9 +182,11 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                 if (GCCOfflineEntity != null) {
                     flag = true;
                     binding.bottomLl.btnNext.setText(getString(R.string.save));
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
                 } else {
                     flag = false;
                     binding.bottomLl.btnNext.setText(getString(R.string.submit));
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
                 }
             }
         });
@@ -551,7 +554,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         try {
             if (cnt > 0) {
                 Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, DashboardMenuActivity.class)
+                startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
             }

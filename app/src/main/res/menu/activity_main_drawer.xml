@@ -47,9 +47,9 @@
             android:title="@string/report" />
         <item
             android:id="@+id/nav_my_insp"
-            android:icon="@drawable/dmv"
+            android:icon="@drawable/gcc_icon"
             android:title="@string/my_inspections"
-            android:visible="true" />
+            app:iconTint="@color/colorPrimaryDark" />
         <item
             android:id="@+id/nav_logout"
             app:iconTint="@color/colorPrimaryDark"

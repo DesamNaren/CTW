@@ -38,6 +38,7 @@ import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -210,6 +211,14 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 gccOfflineRepository.deleteGCCRecord(LPGSelActivity.this, entity);
             }
         });
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LPGSelActivity.this, GCCOfflineDataActivity.class)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_LPG));
+                finish();
+            }
+        });
     }
 
     void callSnackBar(String msg) {
@@ -356,6 +365,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         binding.llDownload.setVisibility(View.GONE);
+        binding.llView.setVisibility(View.GONE);
         if (adapterView.getId() == R.id.sp_division) {
             selectedLPGs = null;
             selectedSocietyId = "";
@@ -407,6 +417,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             if (position != 0) {
                 selectedLPGs = null;
                 selectedSocietyId = "";
@@ -451,6 +462,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
         } else if (adapterView.getId() == R.id.sp_lpg) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.VISIBLE);
+                binding.llView.setVisibility(View.GONE);
                 selectedLPGs = null;
                 selectLPGId = "";
                 LiveData<LPGSupplierInfo> lpgLiveData = viewModel.getLPGID(selectedDivId, selectedSocietyId, binding.spLpg.getSelectedItem().toString());
@@ -466,13 +478,23 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                                 @Override
                                 public void onChanged(GccOfflineEntity drGodowns) {
                                     drGodownLiveData.removeObservers(LPGSelActivity.this);
-
                                     if (drGodowns == null) {
-                                        binding.btnDownload.setText("Download");
+                                        binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
-                                        binding.btnDownload.setText("Re-Download");
-                                        binding.btnRemove.setVisibility(View.VISIBLE);
+                                        if (drGodowns.isFlag()) {
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        } else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
                                     }
                                 }
                             });
@@ -483,6 +505,7 @@ public class LPGSelActivity extends AppCompatActivity implements AdapterView.OnI
                 });
             } else {
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
                 selectedLPGs = null;
                 selectLPGId = "";
             }

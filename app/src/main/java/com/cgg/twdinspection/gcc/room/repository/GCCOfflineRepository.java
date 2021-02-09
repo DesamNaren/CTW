@@ -29,6 +29,10 @@ public class GCCOfflineRepository {
         return offlineDao.getGCCRecords(divId, socId, godownId);
     }
 
+    public LiveData<GccOfflineEntity> getGCCRecordsPUnit(String divId, String socId, String godownId) {
+        return offlineDao.getGCCRecordsPUnit(divId, socId, godownId);
+    }
+
     public LiveData<List<GccOfflineEntity>> getGCCOfflineCount(String type) {
         return offlineDao.getGccRecCount(type);
     }

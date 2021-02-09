@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.cgg.twdinspection.BuildConfig;
@@ -37,9 +38,12 @@ import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpGenera
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpIns;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpRegisterBookCertificates;
 import com.cgg.twdinspection.gcc.source.inspections.petrol_pump.PetrolPumpStockDetails;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
+import com.cgg.twdinspection.gcc.ui.punit.PUnitsFindingsActivity;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.LocBaseActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -111,6 +115,21 @@ public class PetrolPumpFindingsActivity extends LocBaseActivity {
         PetrolSupplierInfo petrolSupplierInfo = gson.fromJson(petrolData, PetrolSupplierInfo.class);
         divId = petrolSupplierInfo.getDivisionId();
         suppId = petrolSupplierInfo.getGodownId();
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                petrolSupplierInfo.getDivisionId(), petrolSupplierInfo.getSocietyId(), petrolSupplierInfo.getGodownId());
+
+        drGodownLiveData.observe(PetrolPumpFindingsActivity.this, new androidx.lifecycle.Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+            }
+        });
 
         if (stockDetailsResponse != null) {
             if (stockDetailsResponse.getCommonCommodities() != null && stockDetailsResponse.getCommonCommodities().size() > 0) {

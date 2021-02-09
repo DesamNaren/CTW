@@ -174,11 +174,18 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
         });
 
 
+
         LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
                 drGodowns.getDivisionId(), drGodowns.getSocietyId(), drGodowns.getGodownId());
         drGodownLiveData.observe(DRGodownActivity.this, new Observer<GccOfflineEntity>() {
             @Override
             public void onChanged(GccOfflineEntity drGodowns) {
+                if (drGodowns != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+
                 drGodownLiveData.removeObservers(DRGodownActivity.this);
                 String strStock = sharedPreferences.getString(AppConstants.StockDetailsResponse, "");
                 StockDetailsResponse stockDetailsResponse = new Gson().fromJson(strStock, StockDetailsResponse.class);
@@ -240,7 +247,8 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                         callSnackBar("No data found");
                     }
 
-                } else {
+                }
+                else {
                     binding.viewPager.setVisibility(View.GONE);
                     binding.tabs.setVisibility(View.GONE);
                     binding.noDataTv.setVisibility(View.VISIBLE);

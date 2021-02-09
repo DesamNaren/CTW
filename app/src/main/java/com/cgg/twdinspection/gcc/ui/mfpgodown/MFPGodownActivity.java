@@ -23,13 +23,17 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityMfpGodownBinding;
+import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
+import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotActivity;
+import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
+import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
@@ -100,6 +104,21 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        GCCOfflineViewModel gccOfflineViewModel = new GCCOfflineViewModel(getApplication());
+        LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
+                mfpGoDowns.getDivisionId(), mfpGoDowns.getSocietyId(), mfpGoDowns.getGodownId());
+
+        drGodownLiveData.observe(MFPGodownActivity.this, new Observer<GccOfflineEntity>() {
+            @Override
+            public void onChanged(GccOfflineEntity gccOfflineEntity) {
+                if (gccOfflineEntity != null) {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                } else {
+                    binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                }
+            }
+        });
 
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

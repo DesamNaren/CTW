@@ -38,6 +38,7 @@ import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDataActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -238,6 +239,14 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
                 gccOfflineRepository.deleteGCCRecord(PUnitSelActivity.this, entity);
             }
         });
+        binding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PUnitSelActivity.this, GCCOfflineDataActivity.class)
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_P_UNIT));
+                finish();
+            }
+        });
     }
 
 
@@ -365,6 +374,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         if (adapterView.getId() == R.id.sp_division) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             selectedPUnits = null;
             selectedSocietyId = "";
             selectedDivId = "";
@@ -435,6 +445,7 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
             }
         } else if (adapterView.getId() == R.id.sp_society) {
             binding.llDownload.setVisibility(View.GONE);
+            binding.llView.setVisibility(View.GONE);
             if (position != 0) {
                 selectedPUnits = null;
                 selectedSocietyId = "";
@@ -479,39 +490,55 @@ public class PUnitSelActivity extends AppCompatActivity implements AdapterView.O
         } else if (adapterView.getId() == R.id.sp_p_unit) {
             if (position != 0) {
                 binding.llDownload.setVisibility(View.VISIBLE);
+                binding.llView.setVisibility(View.GONE);
+
                 selectedPUnits = null;
                 selectedPUnitID = "";
-                if (!TextUtils.isEmpty(selectedSocietyId)) {
-                    LiveData<PUnits> liveData = viewModel.getPUnitID(selectedDivId, selectedSocietyId, binding.spPUnit.getSelectedItem().toString());
-                    liveData.observe(PUnitSelActivity.this, new Observer<PUnits>() {
-                        @Override
-                        public void onChanged(PUnits pUnits) {
-                            liveData.removeObservers(PUnitSelActivity.this);
-                            if (pUnits != null) {
-                                selectedPUnitID = pUnits.getGodownId();
-                                selectedPUnits = pUnits;
-                            } else {
-                                showSnackBar(getString(R.string.something));
-                            }
+                LiveData<PUnits> liveData = viewModel.getPUnitID(selectedDivId, selectedSocietyId, binding.spPUnit.getSelectedItem().toString());
+                liveData.observe(PUnitSelActivity.this, new Observer<PUnits>() {
+                    @Override
+                    public void onChanged(PUnits pUnits) {
+                        liveData.removeObservers(PUnitSelActivity.this);
+                        if (pUnits != null) {
+                            selectedPUnitID = pUnits.getGodownId();
+                            selectedPUnits = pUnits;
+
+                            LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.
+                                    getDRGoDownsOffline(selectedDivId, selectedSocietyId, selectedPUnitID);
+                            drGodownLiveData.observe(PUnitSelActivity.this, new Observer<GccOfflineEntity>() {
+                                @Override
+                                public void onChanged(GccOfflineEntity drGodowns) {
+                                    drGodownLiveData.removeObservers(PUnitSelActivity.this);
+
+                                    if (drGodowns == null) {
+                                        binding.btnDownload.setText(getString(R.string.download));
+                                        binding.btnRemove.setVisibility(View.GONE);
+                                        binding.btnProceed.setVisibility(View.VISIBLE);
+                                    } else {
+                                        if (drGodowns.isFlag()) {
+                                            binding.llView.setVisibility(View.VISIBLE);
+                                            binding.llDownload.setVisibility(View.GONE);
+                                            binding.btnProceed.setVisibility(View.GONE);
+                                        } else {
+                                            binding.llDownload.setVisibility(View.VISIBLE);
+                                            binding.llView.setVisibility(View.GONE);
+                                            binding.btnDownload.setText(R.string.re_download);
+                                            binding.btnRemove.setVisibility(View.VISIBLE);
+                                            binding.btnProceed.setVisibility(View.VISIBLE);
+                                        }
+
+                                    }
+                                }
+                            });
+
+                        } else {
+                            showSnackBar(getString(R.string.something));
                         }
-                    });
-                } else {
-                    LiveData<PUnits> liveDataPUnit = viewModel.getPUnitID(selectedDivId, binding.spPUnit.getSelectedItem().toString());
-                    liveDataPUnit.observe(PUnitSelActivity.this, new Observer<PUnits>() {
-                        @Override
-                        public void onChanged(PUnits pUnits) {
-                            liveDataPUnit.removeObservers(PUnitSelActivity.this);
-                            if (pUnits != null) {
-                                selectedPUnitID = pUnits.getGodownId();
-                                selectedPUnits = pUnits;
-                            } else {
-                                showSnackBar(getString(R.string.something));
-                            }
-                        }
-                    });
-                }
+                    }
+                });
             } else {
                 binding.llDownload.setVisibility(View.GONE);
+                binding.llView.setVisibility(View.GONE);
                 selectedPUnits = null;
                 selectedPUnitID = "";
             }
