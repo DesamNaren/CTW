@@ -4,20 +4,15 @@ package com.cgg.twdinspection.inspection.reports.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.databinding.AdapterDietIssuesBinding;
 import com.cgg.twdinspection.databinding.AdapterReportDietIssuesBinding;
 import com.cgg.twdinspection.inspection.reports.source.DietListEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DietIssuesReportAdapter extends RecyclerView.Adapter<DietIssuesReportAdapter.ItemHolder> {
@@ -28,7 +23,7 @@ public class DietIssuesReportAdapter extends RecyclerView.Adapter<DietIssuesRepo
 
     public DietIssuesReportAdapter(Context context, List<DietListEntity> list) {
         this.context = context;
-        this.list=list;
+        this.list = list;
     }
 
     @NonNull

@@ -21,6 +21,4 @@ public class GeneralInfoViewModel extends AndroidViewModel {
     }
 
 
-
-
 }

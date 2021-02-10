@@ -13,14 +13,16 @@ public class MedicalRecordsConverter {
     @TypeConverter
     public static List<MedicalDetailsBean> stringToMedical(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MedicalDetailsBean>>() {}.getType();
+        Type type = new TypeToken<List<MedicalDetailsBean>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String medicalToString(List<MedicalDetailsBean> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MedicalDetailsBean>>() {}.getType();
+        Type type = new TypeToken<List<MedicalDetailsBean>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

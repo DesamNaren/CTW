@@ -365,7 +365,6 @@ public class CoCurricularEntity {
     }
 
 
-
     public String getStu_cou_date() {
         return stu_cou_date;
     }

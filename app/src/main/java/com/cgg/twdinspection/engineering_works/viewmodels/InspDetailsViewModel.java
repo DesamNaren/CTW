@@ -12,12 +12,9 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.engineering_works.room.repository.GrantSchemeRepository;
 import com.cgg.twdinspection.engineering_works.room.repository.SectorsRepository;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
-import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
-import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.StagesResponse;
 import com.cgg.twdinspection.engineering_works.source.SubmittedStageResponse;
-import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,8 +39,8 @@ public class InspDetailsViewModel extends AndroidViewModel {
 
     public InspDetailsViewModel(Context context, Application application) {
         super(application);
-        sectorsRepository=new SectorsRepository(application);
-        schemeRepository=new GrantSchemeRepository(application);
+        sectorsRepository = new SectorsRepository(application);
+        schemeRepository = new GrantSchemeRepository(application);
         stagesResponseMutableLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         schemesListLiveData = new MutableLiveData<>();
@@ -59,6 +56,7 @@ public class InspDetailsViewModel extends AndroidViewModel {
         }
         return sectorsListLiveData;
     }
+
     public LiveData<SubmittedStageResponse> getSubmittedStageResponse(int workId) {
         if (submittedStage != null) {
             callSubmittedStageResponse(workId);
@@ -123,11 +121,11 @@ public class InspDetailsViewModel extends AndroidViewModel {
         return schemeRepository.insertSchemes(grantSchemes);
     }
 
-    public LiveData<Integer> getSectorId(String sectorName){
+    public LiveData<Integer> getSectorId(String sectorName) {
         return sectorsRepository.getSectorId(sectorName);
     }
 
-    public LiveData<Integer> getgrantSchemeId(String schemeName){
+    public LiveData<Integer> getgrantSchemeId(String schemeName) {
         return schemeRepository.getSchemeId(schemeName);
     }
 

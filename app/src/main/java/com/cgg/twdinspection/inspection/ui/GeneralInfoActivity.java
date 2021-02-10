@@ -38,7 +38,7 @@ public class GeneralInfoActivity extends BaseActivity implements SaveListener {
 
 
     private void ScrollToView(View view) {
-        view.getParent().requestChildFocus(view,view);
+        view.getParent().requestChildFocus(view, view);
     }
 
     @Override

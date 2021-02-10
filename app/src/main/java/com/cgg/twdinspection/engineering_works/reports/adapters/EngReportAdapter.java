@@ -18,7 +18,6 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.AdapterEngReportBinding;
 import com.cgg.twdinspection.engineering_works.reports.interfaces.EngReportClickCallback;
 import com.cgg.twdinspection.engineering_works.reports.source.ReportWorkDetails;
-import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
     public EngReportAdapter(Context context, List<ReportWorkDetails> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             reportClickCallback = (EngReportClickCallback) context;
@@ -42,6 +41,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -79,6 +79,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -140,7 +141,7 @@ public class EngReportAdapter extends RecyclerView.Adapter<EngReportAdapter.Item
         return position;
     }
 
-    public  void setData(List<ReportWorkDetails> beneficiaryDetailArrayList){
+    public void setData(List<ReportWorkDetails> beneficiaryDetailArrayList) {
         filterList.clear();
         filterList.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

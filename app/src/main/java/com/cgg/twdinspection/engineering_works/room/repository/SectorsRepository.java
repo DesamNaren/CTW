@@ -18,18 +18,20 @@ public class SectorsRepository {
     SectorsDao sectorsDao;
     private LiveData<List<SectorsEntity>> sectorsLiveData = new MutableLiveData<>();
     private int x;
+
     public SectorsRepository(Application application) {
-        EngWorksDatabase database=EngWorksDatabase.getDatabase(application);
-        sectorsDao=database.sectorsDao();
+        EngWorksDatabase database = EngWorksDatabase.getDatabase(application);
+        sectorsDao = database.sectorsDao();
     }
+
     public LiveData<List<SectorsEntity>> getSectors() {
-        if(sectorsLiveData !=null){
+        if (sectorsLiveData != null) {
             sectorsLiveData = sectorsDao.getSectors();
         }
         return sectorsLiveData;
     }
 
-    public int insertSectors(List<SectorsEntity> sectorsEntities){
+    public int insertSectors(List<SectorsEntity> sectorsEntities) {
         new InsertSectorsAsyncTask(sectorsEntities).execute();
         return x;
     }
@@ -51,7 +53,7 @@ public class SectorsRepository {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            x=integer;
+            x = integer;
         }
     }
 

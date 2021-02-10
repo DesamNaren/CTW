@@ -13,14 +13,16 @@ public class CallHealthConverter {
     @TypeConverter
     public static List<CallHealthInfoEntity> stringToCallHealth(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<CallHealthInfoEntity>>() {}.getType();
+        Type type = new TypeToken<List<CallHealthInfoEntity>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String callHealthToString(List<CallHealthInfoEntity> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<CallHealthInfoEntity>>() {}.getType();
+        Type type = new TypeToken<List<CallHealthInfoEntity>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

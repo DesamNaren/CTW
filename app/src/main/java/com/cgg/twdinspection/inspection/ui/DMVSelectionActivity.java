@@ -86,8 +86,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         });
 
 
-
-
         viewModel = new DMVDetailsViewModel(getApplication());
         dmvSelectionActivityBinding.setViewModel(viewModel);
         dmvSelectionActivityBinding.executePendingBindings();

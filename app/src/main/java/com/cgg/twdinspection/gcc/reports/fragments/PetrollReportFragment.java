@@ -33,7 +33,8 @@ public class PetrollReportFragment extends Fragment {
 
         if (getArguments() != null) {
             String esComm = getArguments().getString(AppConstants.petrolPumpRep);
-            Type listType = new TypeToken<ArrayList<ReportSubmitReqCommodities>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ReportSubmitReqCommodities>>() {
+            }.getType();
             commonCommodities = new Gson().fromJson(esComm, listType);
         }
     }
@@ -41,7 +42,7 @@ public class PetrollReportFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.stock_main_row, container, false);
         View view = binding.getRoot();
         CommCommodityAdapter stockSubAdapter = new CommCommodityAdapter(getActivity(), commonCommodities);
@@ -51,10 +52,10 @@ public class PetrollReportFragment extends Fragment {
         return view;
     }
 
-    public   void setPos(int pos){
-        if(binding!=null && binding.groupRV!=null && pos>=0) {
+    public void setPos(int pos) {
+        if (binding != null && binding.groupRV != null && pos >= 0) {
             binding.groupRV.smoothScrollToPosition(pos);
-   }
+        }
     }
 
 }

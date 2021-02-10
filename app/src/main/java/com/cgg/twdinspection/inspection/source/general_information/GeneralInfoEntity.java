@@ -48,7 +48,6 @@ public class GeneralInfoEntity {
     private String hwomovementRegisterEntry;
 
 
-
     private String hmheadquarters;
 
     private String hmcaptureDistance;

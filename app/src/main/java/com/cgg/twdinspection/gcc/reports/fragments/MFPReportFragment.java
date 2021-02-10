@@ -32,7 +32,8 @@ public class MFPReportFragment extends Fragment {
 
         if (getArguments() != null) {
             String esComm = getArguments().getString(AppConstants.mfpRep);
-            Type listType = new TypeToken<ArrayList<ReportSubmitReqCommodities>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ReportSubmitReqCommodities>>() {
+            }.getType();
             commonCommodities = new Gson().fromJson(esComm, listType);
         }
     }
@@ -40,7 +41,7 @@ public class MFPReportFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.stock_main_row, container, false);
         View view = binding.getRoot();
         CommCommodityAdapter stockSubAdapter = new CommCommodityAdapter(getActivity(), commonCommodities);
@@ -50,7 +51,7 @@ public class MFPReportFragment extends Fragment {
         return view;
     }
 
-    public void setPos(int pos){
+    public void setPos(int pos) {
         binding.groupRV.smoothScrollToPosition(pos);
     }
 }

@@ -1,21 +1,25 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:top="13dp" android:left="0dp" android:height="40dp" android:width="@dimen/dimen_300dp">
+    <item
+        android:top="13dp"
+        android:left="0dp"
+        android:height="40dp"
+        android:width="@dimen/dimen_300dp">
 
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorAccent">
-            </solid>
-            <corners android:radius="4dp"/>
+            <solid android:color="@color/colorAccent"></solid>
+            <corners android:radius="4dp" />
         </shape>
     </item>
-    <item android:left="25dp" android:height="@dimen/dimen_50dp" android:width="25dp">
+    <item
+        android:left="25dp"
+        android:height="@dimen/dimen_50dp"
+        android:width="25dp">
 
         <rotate
             android:fromDegrees="45"
             android:toDegrees="45">
-            <shape
-                android:shape="rectangle" >
-                <solid
-                    android:color="@color/colorAccent" />
+            <shape android:shape="rectangle">
+                <solid android:color="@color/colorAccent" />
             </shape>
         </rotate>
     </item>

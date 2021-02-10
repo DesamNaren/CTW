@@ -35,8 +35,8 @@ public class StudentsAttndViewModel extends ViewModel {
         return mRepository.getMasterClassIdsList(inst_id);
     }
 
-     public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
-         return mRepository.getClassIdsList(inst_id);
+    public LiveData<List<StudAttendInfoEntity>> getClassInfo(String inst_id) {
+        return mRepository.getClassIdsList(inst_id);
     }
 
 

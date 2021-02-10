@@ -1,6 +1,7 @@
 package com.cgg.twdinspection.inspection.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -67,7 +68,10 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                         public void run() {
                                             try {
                                                 if (versionResponse.getRadius() != null) {
-                                                    Float.parseFloat(versionResponse.getRadius());
+                                                    AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
+                                                } else {
+                                                    handleError(SplashActivity.this, "RADIUS not found from server level");
+                                                    return;
                                                 }
                                                 int permissionCheck1 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -87,7 +91,6 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                 } else {
                                                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                                                     finish();
-
                                                 }
                                             } catch (Exception e) {
                                                 e.printStackTrace();
@@ -121,6 +124,10 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
             Utils.customSplashErrorAlert(SplashActivity.this, getResources().getString(R.string.app_name), getString(R.string.plz_check_int));
         }
 
+    }
+
+    private void handleError(Activity context, String errMsg) {
+        Utils.customSplashErrorAlert(context, getResources().getString(R.string.app_name), errMsg);
     }
 
     View.OnClickListener onBtnClick = new View.OnClickListener() {

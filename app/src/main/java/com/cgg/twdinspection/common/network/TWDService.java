@@ -10,30 +10,30 @@ import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.engineering_works.source.SubmittedStageResponse;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
-import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
+import com.cgg.twdinspection.gcc.source.divisions.GetOfficesResponse;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
-import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
-import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
-import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
 import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.depot.DRDepotMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DRGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDownMasterResponse;
+import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolPumpMasterResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.punit.PUnitMasterResponse;
-import com.cgg.twdinspection.inspection.source.login.LoginResponse;
-import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
-import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
 import com.cgg.twdinspection.inspection.reports.source.InspReportResponse;
 import com.cgg.twdinspection.inspection.reports.source.ReportCountsResponse;
+import com.cgg.twdinspection.inspection.source.dmv.SchoolDMVResponse;
+import com.cgg.twdinspection.inspection.source.inst_master.InstMasterResponse;
+import com.cgg.twdinspection.inspection.source.login.LoginResponse;
 import com.cgg.twdinspection.inspection.source.submit.InstSubmitRequest;
 import com.cgg.twdinspection.inspection.source.submit.InstSubmitResponse;
-import com.cgg.twdinspection.schemes.source.dmv.SchemeDMVResponse;
+import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
+import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryReport;
+import com.cgg.twdinspection.schemes.source.dmv.SchemeDMVResponse;
 import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
@@ -101,10 +101,11 @@ public interface TWDService {
     @GET("CTWWorks/viewWorkDetails")
     Call<WorkReportResponse> getEngReports(@Query("officerId") String officerId);
 
-    @GET("CTWServiceDetails/getSchemeDetails") //
+    @GET("CTWServiceDetails/getSchemeDetails")
+        //
     Call<SchemeReportResponse> getSchemeReports(@Query("officerId") String username);
 
-   @GET("CTWServiceDetails/getSchoolDetails")
+    @GET("CTWServiceDetails/getSchoolDetails")
     Call<InspReportResponse> getInspectionReports(@Query("officerId") String username);
 
     @GET("getBenificiaryDetails")
@@ -188,7 +189,7 @@ public interface TWDService {
     Call<WorksMasterResponse> getWorksMaster();
 
     @GET("CTWWorks/getMajorStage")
-    Call<SubmittedStageResponse> getSubmittedStage(@Query("work_id")int workId);
+    Call<SubmittedStageResponse> getSubmittedStage(@Query("work_id") int workId);
 
 
     @GET("CTWWorks/getSectors")
@@ -199,7 +200,7 @@ public interface TWDService {
     Call<GrantSchemesResponse> getGrantSandSchemes();
 
     @GET("CTWWorks/getStages")
-    Call<StagesResponse> getStages(@Query("sector_id")int sectorId);
+    Call<StagesResponse> getStages(@Query("sector_id") int sectorId);
 
     @Multipart
     @POST("upload/uploadEngineeringWorksPhotos")

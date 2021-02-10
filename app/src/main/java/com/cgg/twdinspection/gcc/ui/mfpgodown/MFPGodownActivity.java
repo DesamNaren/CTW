@@ -26,8 +26,6 @@ import com.cgg.twdinspection.databinding.ActivityMfpGodownBinding;
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.mfp.MFPGoDowns;
-import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotActivity;
-import com.cgg.twdinspection.gcc.ui.drgodown.DRGodownFindingsActivity;
 import com.cgg.twdinspection.gcc.ui.fragment.DailyFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
@@ -130,7 +128,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
 
                     for (int z = 0; z < stockDetailsResponsemain.getMfp_commodities().size(); z++) {
                         if (!TextUtils.isEmpty(stockDetailsResponsemain.getMfp_commodities().get(z).getPhyQuant())) {
-                            existFlag= true;
+                            existFlag = true;
                             break;
                         }
                     }
@@ -186,7 +184,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                 ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
                                 if (stockDetailsResponse.getMfp_commodities() != null && stockDetailsResponse.getMfp_commodities().size() > 0) {
-                                    mfp_flag=true;
+                                    mfp_flag = true;
                                     stockDetailsResponse.getMfp_commodities().get(0).setComHeader("MFP Commodities");
                                     MFPFragment mfpFragment = new MFPFragment();
                                     Gson gson = new Gson();
@@ -202,7 +200,8 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
                                     binding.tabs.setupWithViewPager(binding.viewPager);
                                     binding.viewPager.setAdapter(adapter);
-                                }if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
+                                }
+                                if (stockDetailsResponse.getEmpties() != null && stockDetailsResponse.getEmpties().size() > 0) {
                                     emp_flag = true;
                                     stockDetailsResponse.getEmpties().get(0).setComHeader("Empties");
                                     EmptiesFragment emptiesFragment = new EmptiesFragment();
@@ -214,15 +213,14 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     adapter.addFrag(emptiesFragment, "Empties");
                                 }
 
-                                if(mfp_flag|| emp_flag)
-                                {
+                                if (mfp_flag || emp_flag) {
                                     binding.viewPager.setVisibility(View.VISIBLE);
                                     binding.tabs.setVisibility(View.VISIBLE);
                                     binding.noDataTv.setVisibility(View.GONE);
                                     binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
                                     binding.tabs.setupWithViewPager(binding.viewPager);
                                     binding.viewPager.setAdapter(adapter);
-                                }else {
+                                } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
@@ -230,7 +228,6 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                                     binding.noDataTv.setText("No data found");
                                     callSnackBar("No data found");
                                 }
-
 
 
                             } else if (stockDetailsResponse.getStatusCode().equalsIgnoreCase(AppConstants.FAILURE_STRING_CODE)) {
@@ -243,7 +240,7 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
                             } else {
                                 callSnackBar(getString(R.string.something));
                             }
-                            if (!mfp_flag && !emp_flag ) {
+                            if (!mfp_flag && !emp_flag) {
                                 binding.viewPager.setVisibility(View.GONE);
                                 binding.tabs.setVisibility(View.GONE);
                                 binding.noDataTv.setVisibility(View.VISIBLE);
@@ -299,8 +296,8 @@ public class MFPGodownActivity extends AppCompatActivity implements ErrorHandler
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
-                && (mfp_flag|| emp_flag)) {
+        if (stockDetailsResponsemain != null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+                && (mfp_flag || emp_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
-import com.cgg.twdinspection.databinding.ActivityBeneficiaryReportBinding;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryDetail;
 
 public class BenCustomDetailViewModel implements ViewModelProvider.Factory {

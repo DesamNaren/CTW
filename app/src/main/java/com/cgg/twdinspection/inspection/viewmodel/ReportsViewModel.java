@@ -23,6 +23,7 @@ public class ReportsViewModel extends ViewModel {
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     CustomProgressDialog customProgressDialog;
+
     ReportsViewModel(Context context) {
         this.context = context;
         customProgressDialog = new CustomProgressDialog(context);

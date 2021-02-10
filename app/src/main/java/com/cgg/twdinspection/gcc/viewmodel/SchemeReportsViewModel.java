@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.network.TWDService;
-import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
+import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 
 import org.jetbrains.annotations.NotNull;
 

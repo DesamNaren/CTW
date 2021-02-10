@@ -5,5 +5,6 @@ import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 
 public interface GCCSubmitInterface {
     void getData(GCCSubmitResponse gccSubmitResponse);
+
     void getPhotoData(GCCPhotoSubmitResponse gccPhotoSubmitResponse);
 }

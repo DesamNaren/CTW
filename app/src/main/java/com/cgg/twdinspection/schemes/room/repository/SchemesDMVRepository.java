@@ -31,7 +31,7 @@ public class SchemesDMVRepository {
     // Room executes all queries on file_provider_paths separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<SchemeDistrict>> getDistricts() {
-        LiveData<List<SchemeDistrict>> districts=dmvDao.getDistricts();
+        LiveData<List<SchemeDistrict>> districts = dmvDao.getDistricts();
         return districts;
     }
 
@@ -49,7 +49,7 @@ public class SchemesDMVRepository {
 
 
     public LiveData<List<FinancialYearsEntity>> getFinancialYrs() {
-        LiveData<List<FinancialYearsEntity>> financialYrs=dmvDao.getFinancialYrs();
+        LiveData<List<FinancialYearsEntity>> financialYrs = dmvDao.getFinancialYrs();
         return financialYrs;
     }
 

@@ -28,24 +28,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center">
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10dp">
-            <ImageView
-                android:id="@+id/iv_repairs"
-                android:layout_width="@dimen/_125dp"
-                android:layout_height="@dimen/_125dp"
-                android:layout_gravity="center"
-                android:scaleType="fitXY"
-                app:profileImage="@{imageUrl}" />
+
+                <ImageView
+                    android:id="@+id/iv_repairs"
+                    android:layout_width="@dimen/_125dp"
+                    android:layout_height="@dimen/_125dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    app:profileImage="@{imageUrl}" />
+
                 <ProgressBar
                     android:id="@+id/pbar"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center" />
             </FrameLayout>
 
             <com.cgg.twdinspection.common.custom.CustomFontTextView
@@ -54,7 +57,7 @@
                 android:text="@{photo.fileName.replace(`.png`, ``)}"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:padding="@dimen/dimen_5dp"/>
+                android:padding="@dimen/dimen_5dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

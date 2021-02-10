@@ -1,8 +1,9 @@
 package com.cgg.twdinspection.gcc.source.suppliers.dr_godown;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class DRGoDownMasterResponse {
 

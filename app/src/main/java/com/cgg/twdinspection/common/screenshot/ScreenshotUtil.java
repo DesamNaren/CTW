@@ -198,6 +198,7 @@ public class ScreenshotUtil {
     }
 
     private CustomProgressDialog progressDialog;
+
     public static void CallPDFGenerator(RecyclerView view, final Activity activity, String fromDate, String toDate) {
 //        progressDialog = new CustomProgressDialog(activity);
         new AsyncBTCheckTask(view, activity, fromDate, toDate).execute();

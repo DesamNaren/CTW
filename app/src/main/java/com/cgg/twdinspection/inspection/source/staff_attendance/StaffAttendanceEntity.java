@@ -139,7 +139,6 @@ public class StaffAttendanceEntity {
     private boolean leavesFlag;
 
 
-
     public StaffAttendanceEntity(String officer_id, String institute_id, String inst_name, String emp_id, String emp_name, String designation) {
         this.officer_id = officer_id;
         this.institute_id = institute_id;

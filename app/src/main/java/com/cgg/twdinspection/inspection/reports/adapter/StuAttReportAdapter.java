@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.databinding.AdapterInspReportBinding;
 import com.cgg.twdinspection.databinding.AdapterStuAttReoprtBinding;
 import com.cgg.twdinspection.inspection.reports.interfaces.InspReportClickCallback;
 import com.cgg.twdinspection.inspection.reports.source.StudentAttendenceInfo;
@@ -31,7 +30,7 @@ public class StuAttReportAdapter extends RecyclerView.Adapter<StuAttReportAdapte
     public StuAttReportAdapter(Context context, List<StudentAttendenceInfo> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             inspreportClickCallback = (InspReportClickCallback) context;
@@ -39,6 +38,7 @@ public class StuAttReportAdapter extends RecyclerView.Adapter<StuAttReportAdapte
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -124,7 +124,7 @@ public class StuAttReportAdapter extends RecyclerView.Adapter<StuAttReportAdapte
         return position;
     }
 
-    public  void setData(List<StudentAttendenceInfo> studentAttendenceInfos){
+    public void setData(List<StudentAttendenceInfo> studentAttendenceInfos) {
         filterList.clear();
         filterList.addAll(studentAttendenceInfos);
         notifyDataSetChanged();

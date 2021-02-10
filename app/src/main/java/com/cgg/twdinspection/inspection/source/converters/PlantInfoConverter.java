@@ -13,14 +13,16 @@ public class PlantInfoConverter {
     @TypeConverter
     public static List<PlantsEntity> stringToPlants(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<PlantsEntity>>() {}.getType();
+        Type type = new TypeToken<List<PlantsEntity>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String plantsToString(List<PlantsEntity> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<PlantsEntity>>() {}.getType();
+        Type type = new TypeToken<List<PlantsEntity>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

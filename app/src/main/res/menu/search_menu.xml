@@ -29,7 +29,7 @@
         android:title="Sync"
         app:showAsAction="ifRoom"
         android:icon="@drawable/sync_white"
-        android:iconTint="@color/white"/>
+        android:iconTint="@color/white" />
 
 
 </menu>

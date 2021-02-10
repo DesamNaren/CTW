@@ -22,7 +22,7 @@ public class InfraViewModel extends ViewModel {
     }
 
     public long insertInfraStructureInfo(InfraStructureEntity infrastuctureEntity) {
-       long flag=mRepository.insertInfraStructureInfo(infrastuctureEntity);
+        long flag = mRepository.insertInfraStructureInfo(infrastuctureEntity);
         return flag;
     }
 }

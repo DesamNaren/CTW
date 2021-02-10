@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 @Entity
 public class InspectionRemarksEntity {
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo()
     private int id;
 

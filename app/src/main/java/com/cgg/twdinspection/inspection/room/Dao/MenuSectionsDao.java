@@ -6,15 +6,15 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
-import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
-import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
-import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
@@ -86,28 +86,30 @@ public interface MenuSectionsDao {
 
     @Query("Delete from class_info")
     void deleteClassInfo();
+
     @Query("Delete from cocurricular_info")
     void deleteCoCurricularEntity();
 
 
     @Query("Delete from diet_issues_info")
     void deleteDietIssuesInfo();
+
     @Query("Delete from diet_list_info")
     void deleteDietListInfo();
 
 
-
     @Query("Delete from entitlements_info")
     void deleteEntitlementsInfo();
+
     @Query("Delete from general_comments_info")
     void deleteGeneralCommentsInfo();
 
 
     @Query("Delete from general_info")
     void deleteGeneralInfo();
+
     @Query("Delete from infrastructure_info")
     void deleteInfraStructureInfo();
-
 
 
     @Query("Delete from inst_menu_info")
@@ -119,9 +121,9 @@ public interface MenuSectionsDao {
 
     @Query("Delete from medical_info")
     void deleteMedicalInfoEntity();
+
     @Query("Delete from plants_info")
     void deletePlantsEntity();
-
 
 
     @Query("Delete from registers_info")

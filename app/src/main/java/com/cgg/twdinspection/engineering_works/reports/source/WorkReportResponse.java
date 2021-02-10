@@ -1,6 +1,5 @@
 package com.cgg.twdinspection.engineering_works.reports.source;
 
-import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

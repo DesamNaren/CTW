@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.AdapterGccOfflineDataBinding;
 import com.cgg.twdinspection.gcc.interfaces.GCCSubmitInterface;
-import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.offline.interfaces.GCCOfflineSubmitInterface;
 

@@ -35,22 +35,15 @@ import com.cgg.twdinspection.common.utils.CustomProgressDialog;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityEngDashboardBinding;
 import com.cgg.twdinspection.engineering_works.adapters.EngWorksAdapter;
-import com.cgg.twdinspection.engineering_works.reports.adapters.EngReportAdapter;
-import com.cgg.twdinspection.engineering_works.reports.ui.EngReportActivity;
 import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
-import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardCustomViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.EngDashboardViewModel;
 import com.cgg.twdinspection.engineering_works.viewmodels.InspDetailsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,9 +117,9 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
             @Override
             public void onChanged(List<String> strings) {
                 if (strings != null && strings.size() > 0) {
-                    strings.add(0,"Select");
-                    for(int i=0;i<strings.size();i++){
-                        if(TextUtils.isEmpty(strings.get(i))){
+                    strings.add(0, "Select");
+                    for (int i = 0; i < strings.size(); i++) {
+                        if (TextUtils.isEmpty(strings.get(i))) {
                             strings.remove(i);
                         }
                     }
@@ -139,7 +132,7 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                 }
             }
         });
-        inspDetailsViewModel=new InspDetailsViewModel(EngineeringDashboardActivity.this,getApplication());
+        inspDetailsViewModel = new InspDetailsViewModel(EngineeringDashboardActivity.this, getApplication());
         LiveData<List<GrantScheme>> grantListLiveData = inspDetailsViewModel.getGrantSchemes();
         grantListLiveData.observe(EngineeringDashboardActivity.this, new Observer<List<GrantScheme>>() {
             @Override
@@ -175,9 +168,9 @@ public class EngineeringDashboardActivity extends AppCompatActivity implements E
                                     @Override
                                     public void onChanged(List<String> strings) {
                                         if (strings != null && strings.size() > 0) {
-                                            strings.add(0,"Select");
-                                            for(int i=0;i<strings.size();i++){
-                                                if(TextUtils.isEmpty(strings.get(i))){
+                                            strings.add(0, "Select");
+                                            for (int i = 0; i < strings.size(); i++) {
+                                                if (TextUtils.isEmpty(strings.get(i))) {
                                                     strings.remove(i);
                                                 }
                                             }

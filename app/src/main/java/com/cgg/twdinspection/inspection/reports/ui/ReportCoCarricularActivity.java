@@ -60,8 +60,8 @@ public class ReportCoCarricularActivity extends BaseActivity {
             }
         });
 
-        String jsonObject  = gson.toJson(reportData.getCoCurricularInfo());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(reportData.getCoCurricularInfo());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getCoCurricularInfo());
 
           /*  if (reportData.getCoCurricularInfo() != null && reportData.getCoCurricularInfo().getPlantsEntities() != null
@@ -93,7 +93,6 @@ public class ReportCoCarricularActivity extends BaseActivity {
 
             binding.executePendingBindings();
         }
-
 
 
     }

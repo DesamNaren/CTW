@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-@Entity (tableName = "Photos")
+@Entity(tableName = "Photos")
 public class UploadPhoto {
     private int id;
     private String institute_id;

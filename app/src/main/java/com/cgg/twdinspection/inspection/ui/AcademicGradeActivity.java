@@ -14,6 +14,7 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityAcademicGradeBinding;
 import com.cgg.twdinspection.inspection.adapter.AcademicGradeAdapter;
 import com.cgg.twdinspection.inspection.interfaces.AcademicGradeInterface;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
@@ -21,7 +22,6 @@ import com.cgg.twdinspection.inspection.source.inst_master.MasterClassInfo;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.viewmodel.AcademicViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StudentsAttndViewModel;
-import com.cgg.twdinspection.databinding.ActivityAcademicGradeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class AcademicGradeActivity extends AppCompatActivity implements Academic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding =  DataBindingUtil.setContentView(this, R.layout.activity_academic_grade);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_academic_grade);
         sharedPreferences = TWDApplication.get(this).getPreferences();
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
@@ -51,7 +51,7 @@ public class AcademicGradeActivity extends AppCompatActivity implements Academic
         academicViewModel = new AcademicViewModel(AcademicGradeActivity.this);
         studentsAttndViewModel = new StudentsAttndViewModel(AcademicGradeActivity.this);
 
-         academicViewModel.getAcademicGradeInfo(instId).observe(AcademicGradeActivity.this, new Observer<List<AcademicGradeEntity>>() {
+        academicViewModel.getAcademicGradeInfo(instId).observe(AcademicGradeActivity.this, new Observer<List<AcademicGradeEntity>>() {
             @Override
             public void onChanged(List<AcademicGradeEntity> academicGradeEntities) {
 
@@ -98,7 +98,7 @@ public class AcademicGradeActivity extends AppCompatActivity implements Academic
 
     @Override
     public void onBackPressed() {
-       Utils.customDiscardAlert(AcademicGradeActivity.this, getString(R.string.app_name), getString(R.string.go_back));
+        Utils.customDiscardAlert(AcademicGradeActivity.this, getString(R.string.app_name), getString(R.string.go_back));
     }
 
     @Override

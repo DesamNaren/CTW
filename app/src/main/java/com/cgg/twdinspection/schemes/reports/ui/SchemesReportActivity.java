@@ -29,16 +29,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.cgg.twdinspection.gcc.adapter.SchemeReportAdapter;
 import com.cgg.twdinspection.gcc.reports.interfaces.ReportClickCallback;
 import com.cgg.twdinspection.gcc.reports.source.ReportData;
 import com.cgg.twdinspection.gcc.viewmodel.SchemeReportsViewModel;
-import com.cgg.twdinspection.schemes.adapter.SchemeInfoAdapter;
 import com.cgg.twdinspection.schemes.adapter.SchemeInfoReportAdapter;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.interfaces.SchemeClickCallback;
@@ -47,7 +47,6 @@ import com.cgg.twdinspection.schemes.reports.source.SchemeReportResponse;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 import com.cgg.twdinspection.schemes.viewmodel.BenCustomReportViewModel;
 import com.cgg.twdinspection.schemes.viewmodel.BenReportViewModel;
-import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
@@ -139,7 +138,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
                         if (schemeReportResponse.getSchemeReportData() != null && schemeReportResponse.getSchemeReportData().size() > 0) {
                             beneficiaryDetailsMain = schemeReportResponse.getSchemeReportData();
                             tempBeneficiaryDetails.addAll(schemeReportResponse.getSchemeReportData());
-                            if(mMenu!=null) {
+                            if (mMenu != null) {
                                 mMenu.findItem(R.id.action_search).setVisible(true);
                                 mMenu.findItem(R.id.mi_filter).setVisible(true);
                             }
@@ -149,7 +148,7 @@ public class SchemesReportActivity extends AppCompatActivity implements ReportCl
                             schemeReportBinding.recyclerView.setLayoutManager(new LinearLayoutManager(SchemesReportActivity.this));
                             schemeReportBinding.recyclerView.setAdapter(adapter);
                         } else if (schemeReportResponse.getSchemeReportData() != null && schemeReportResponse.getSchemeReportData().size() == 0) {
-                            if(mMenu!=null) {
+                            if (mMenu != null) {
                                 mMenu.findItem(R.id.action_search).setVisible(false);
                                 mMenu.findItem(R.id.mi_filter).setVisible(false);
                             }

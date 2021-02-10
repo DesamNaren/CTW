@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.network.TWDService;
-import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
+import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ public class StockViewModel extends AndroidViewModel {
 
     public StockViewModel(@NonNull Application application, Context context) {
         super(application);
-        this.application=application;
+        this.application = application;
         commodities = new MutableLiveData<>();
         pLPGCommodities = new MutableLiveData<>();
         try {
@@ -65,6 +65,7 @@ public class StockViewModel extends AndroidViewModel {
             }
         });
     }
+
     private void getPLPGStockDetails(String supplierID) {
         TWDService twdService = TWDService.Factory.create("gcc");
         twdService.getPLPGMasterResponse(supplierID).enqueue(new Callback<PetrolStockDetailsResponse>() {

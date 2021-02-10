@@ -34,7 +34,6 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.StockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.dr_godown.DrGodowns;
-import com.cgg.twdinspection.gcc.ui.drdepot.DRDepotSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
@@ -473,12 +472,12 @@ public class DRGODownSelActivity extends AppCompatActivity implements AdapterVie
                                         binding.btnDownload.setText(getString(R.string.download));
                                         binding.btnRemove.setVisibility(View.GONE);
                                         binding.btnProceed.setVisibility(View.VISIBLE);
-                                    }else {
-                                        if(drGodowns.isFlag()){
+                                    } else {
+                                        if (drGodowns.isFlag()) {
                                             binding.llView.setVisibility(View.VISIBLE);
                                             binding.llDownload.setVisibility(View.GONE);
                                             binding.btnProceed.setVisibility(View.GONE);
-                                        }else {
+                                        } else {
                                             binding.llDownload.setVisibility(View.VISIBLE);
                                             binding.llView.setVisibility(View.GONE);
                                             binding.btnDownload.setText(R.string.re_download);

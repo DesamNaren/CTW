@@ -30,7 +30,7 @@
             android:layout_centerInParent="true"
             android:text="@string/no_records_found"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_above="@+id/btn_layout"

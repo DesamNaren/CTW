@@ -13,14 +13,16 @@ public class DietInfoConverter {
     @TypeConverter
     public static List<MasterDietInfo> stringToDiet(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MasterDietInfo>>() {}.getType();
+        Type type = new TypeToken<List<MasterDietInfo>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String dietToString(List<MasterDietInfo> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MasterDietInfo>>() {}.getType();
+        Type type = new TypeToken<List<MasterDietInfo>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

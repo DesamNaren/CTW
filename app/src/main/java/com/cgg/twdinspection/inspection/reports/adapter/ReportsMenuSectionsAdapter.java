@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.InstMainRowBinding;
+import com.cgg.twdinspection.inspection.reports.ui.ReportCoCarricularActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportGeneralCommentsActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportMedicalActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportPhotosActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportStaffAttendActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportStudentsAttendActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportsAcademicActivity;
-import com.cgg.twdinspection.inspection.reports.ui.ReportCoCarricularActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportsDietIssuesActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportsEntitlementsActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportsGeneralInfoActivity;

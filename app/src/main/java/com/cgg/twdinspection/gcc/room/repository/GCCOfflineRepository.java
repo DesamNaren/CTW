@@ -111,7 +111,7 @@ public class GCCOfflineRepository {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            gccOfflineInterface.deletedrGoDownCountSubmitted(integer,msg);
+            gccOfflineInterface.deletedrGoDownCountSubmitted(integer, msg);
         }
     }
 

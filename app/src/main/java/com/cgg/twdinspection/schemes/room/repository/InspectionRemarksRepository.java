@@ -24,7 +24,7 @@ public class InspectionRemarksRepository {
     }
 
 
-    public LiveData<String> getRemarkId(String remType){
+    public LiveData<String> getRemarkId(String remType) {
         return remarksDao.getRemarkId(remType);
     }
 }

@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.inspection.viewmodel;
 
 import android.content.Context;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -33,6 +32,7 @@ public class LoginViewModel extends ViewModel {
     private ActivityLoginCreBinding binding;
     private ErrorHandlerInterface errorHandlerInterface;
     CustomProgressDialog customProgressDialog;
+
     LoginViewModel(ActivityLoginCreBinding binding, Context context) {
         this.binding = binding;
         this.context = context;
@@ -67,31 +67,31 @@ public class LoginViewModel extends ViewModel {
 
         if (Utils.checkInternetConnection(context)) {
             callLoginAPI(loginUser);
-        }else{
-            Utils.customErrorAlert(context,context.getResources().getString(R.string.app_name),context.getString(R.string.plz_check_int));
+        } else {
+            Utils.customErrorAlert(context, context.getResources().getString(R.string.app_name), context.getString(R.string.plz_check_int));
         }
     }
 
     private void callLoginAPI(LoginUser loginUser) {
-            Utils.hideKeyboard(context, binding.btnLogin);
-            binding.btnLogin.setVisibility(View.GONE);
-            customProgressDialog.show();
-            TWDService twdService = TWDService.Factory.create("school");
-            twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), Utils.getDeviceID(context), Utils.getVersionName(context))
-                    .enqueue(new Callback<LoginResponse>() {
-                @Override
-                public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
-                    customProgressDialog.dismiss();
-                    binding.btnLogin.setVisibility(View.VISIBLE);
-                    responseMutableLiveData.setValue(response.body());
-                }
+        Utils.hideKeyboard(context, binding.btnLogin);
+        binding.btnLogin.setVisibility(View.GONE);
+        customProgressDialog.show();
+        TWDService twdService = TWDService.Factory.create("school");
+        twdService.getLoginResponse(loginUser.getEmail(), loginUser.getPassword(), Utils.getDeviceID(context), Utils.getVersionName(context))
+                .enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(@NotNull Call<LoginResponse> call, @NotNull Response<LoginResponse> response) {
+                        customProgressDialog.dismiss();
+                        binding.btnLogin.setVisibility(View.VISIBLE);
+                        responseMutableLiveData.setValue(response.body());
+                    }
 
-                @Override
-                public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
-                    customProgressDialog.dismiss();
-                    binding.btnLogin.setVisibility(View.VISIBLE);
-                    errorHandlerInterface.handleError(t, context);
-                }
-            });
+                    @Override
+                    public void onFailure(@NotNull Call<LoginResponse> call, @NotNull Throwable t) {
+                        customProgressDialog.dismiss();
+                        binding.btnLogin.setVisibility(View.VISIBLE);
+                        errorHandlerInterface.handleError(t, context);
+                    }
+                });
     }
 }

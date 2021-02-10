@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.databinding.ActivityMedicalBinding;
-import com.cgg.twdinspection.databinding.ActivityStudentsAttendanceBinding;
 
 
 public class MedicalCustomViewModel implements ViewModelProvider.Factory {

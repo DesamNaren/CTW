@@ -19,14 +19,13 @@ public class GeneralInfoRepository {
 
     private GeneralInfoDao generalInfoDao;
     private long x;
-    private  String tag=GeneralInfoRepository.class.getSimpleName();
+    private String tag = GeneralInfoRepository.class.getSimpleName();
 
 
     public GeneralInfoRepository(Application application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         generalInfoDao = db.generalInfoDao();
     }
-
 
 
     public long insertGeneralInfo(GeneralInfoEntity generalInformationEntity) {
@@ -40,24 +39,24 @@ public class GeneralInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
-                Log.i("Tag", tag+"onNext: ");
+                Log.i("Tag", tag + "onNext: ");
                 x = aLong;
             }
 
 
             @Override
             public void onError(Throwable e) {
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

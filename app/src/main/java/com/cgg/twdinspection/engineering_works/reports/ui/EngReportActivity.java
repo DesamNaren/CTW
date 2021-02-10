@@ -14,13 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -53,8 +53,8 @@ public class EngReportActivity extends AppCompatActivity implements ErrorHandler
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String officerId;
-    List<ReportWorkDetails> workDetails,tempWorkDetails;
-    private Menu mMenu=null;
+    List<ReportWorkDetails> workDetails, tempWorkDetails;
+    private Menu mMenu = null;
     EngReportAdapter adapter;
     SearchView mSearchView;
 
@@ -116,14 +116,14 @@ public class EngReportActivity extends AppCompatActivity implements ErrorHandler
                                 adapter = new EngReportAdapter(EngReportActivity.this, workDetails);
                                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(EngReportActivity.this));
                                 binding.recyclerView.setAdapter(adapter);
-                                if(mMenu!=null)
+                                if (mMenu != null)
                                     mMenu.findItem(R.id.action_search).setVisible(true);
 
                             } else {
                                 binding.recyclerView.setVisibility(View.GONE);
                                 binding.tvEmpty.setVisibility(View.VISIBLE);
                                 callSnackBar("No data available");
-                                if(mMenu!=null)
+                                if (mMenu != null)
                                     mMenu.findItem(R.id.action_search).setVisible(false);
                             }
 

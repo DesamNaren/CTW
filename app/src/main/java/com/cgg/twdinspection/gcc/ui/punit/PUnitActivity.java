@@ -17,10 +17,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityPUnitBinding;
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
@@ -31,7 +31,6 @@ import com.cgg.twdinspection.gcc.ui.fragment.EmptiesFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.EssentialFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.MFPFragment;
 import com.cgg.twdinspection.gcc.ui.fragment.PUnitFragment;
-import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGodownActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -272,15 +271,14 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
                                     pUnitFragment.setArguments(bundle);
                                     adapter.addFrag(pUnitFragment, "Processing Units");
                                 }
-                                if(ess_flag || dailyreq_flag|| emp_flag || mfp_flag || punit_flag)
-                                {
+                                if (ess_flag || dailyreq_flag || emp_flag || mfp_flag || punit_flag) {
                                     binding.viewPager.setVisibility(View.VISIBLE);
                                     binding.tabs.setVisibility(View.VISIBLE);
                                     binding.noDataTv.setVisibility(View.GONE);
                                     binding.bottomLl.btnLayout.setVisibility(View.VISIBLE);
                                     binding.tabs.setupWithViewPager(binding.viewPager);
                                     binding.viewPager.setAdapter(adapter);
-                                }else {
+                                } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
@@ -351,8 +349,8 @@ public class PUnitActivity extends AppCompatActivity implements ErrorHandlerInte
 
     @Override
     public void onBackPressed() {
-        if (stockDetailsResponsemain!=null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
-                && (ess_flag|| dailyreq_flag|| emp_flag || mfp_flag || punit_flag)) {
+        if (stockDetailsResponsemain != null && stockDetailsResponsemain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)
+                && (ess_flag || dailyreq_flag || emp_flag || mfp_flag || punit_flag)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

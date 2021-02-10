@@ -3,7 +3,6 @@ package com.cgg.twdinspection.inspection.ui;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityViewMedicalBinding;
 import com.cgg.twdinspection.inspection.adapter.GViewMedicalDetailsAdapter;
@@ -58,7 +56,7 @@ public class ViewMedicalActivity extends AppCompatActivity {
         dMedicalDetailsBeans = new ArrayList<>();
         mMedicalDetailsBeans = new ArrayList<>();
         oMedicalDetailsBeans = new ArrayList<>();
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         viewModel.getMedicalDetails().observe(ViewMedicalActivity.this, new Observer<List<MedicalDetailsBean>>() {
             @Override

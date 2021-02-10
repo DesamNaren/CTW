@@ -60,9 +60,9 @@ public class AcademicGradeAdapter extends RecyclerView.Adapter<AcademicGradeAdap
         final AcademicGradeEntity dataModel = academicGradeEntities.get(i);
         holder.listItemBinding.setAcademicGrade(dataModel);
 
-        if(i==academicGradeEntities.size()-1){
+        if (i == academicGradeEntities.size() - 1) {
             holder.listItemBinding.btnSave.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.listItemBinding.btnSave.setVisibility(View.GONE);
         }
 
@@ -191,32 +191,32 @@ public class AcademicGradeAdapter extends RecyclerView.Adapter<AcademicGradeAdap
         holder.listItemBinding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean flag =  true;
-                if(academicGradeEntities!=null && academicGradeEntities.size()>0) {
+                boolean flag = true;
+                if (academicGradeEntities != null && academicGradeEntities.size() > 0) {
                     for (int z = 0; z < academicGradeEntities.size(); z++) {
                         if (academicGradeEntities.get(z).getFlag_completed() == -1) {
                             Toast.makeText(context, context.getResources().getString(R.string.claer_errors), Toast.LENGTH_SHORT).show();
-                            flag =  false;
+                            flag = false;
                             break;
                         }
                     }
 
-                    if(flag){
+                    if (flag) {
                         boolean submitFlag = false;
                         for (int z = 0; z < academicGradeEntities.size(); z++) {
                             if (academicGradeEntities.get(z).getFlag_completed() == 1) {
-                                submitFlag =  true;
+                                submitFlag = true;
                                 break;
                             }
                         }
-                        if(submitFlag){
+                        if (submitFlag) {
                             customSaveAlert(context, context.getString(R.string.app_name), context.getString(R.string.are_you_sure));
-                        }else {
+                        } else {
                             customSaveAlert(context, context.getString(R.string.app_name), context.getString(R.string.not_submitted_records));
                         }
 
                     }
-                }else {
+                } else {
                     Toast.makeText(context, context.getResources().getString(R.string.no_records_found), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -321,29 +321,29 @@ public class AcademicGradeAdapter extends RecyclerView.Adapter<AcademicGradeAdap
                              String gradeBCount, String gradeCCount, String gradeDCount,
                              String gradeECount, String gradeAPCount, String gradeBPCount, int i) {
 
-        int gradeACnt=0, gradeBCnt=0,gradeCCnt=0, gradeDCnt=0,gradeECnt=0, gradeAPCnt=0,gradeBPCnt=0;
-        if(!TextUtils.isEmpty(gradeACount)){
+        int gradeACnt = 0, gradeBCnt = 0, gradeCCnt = 0, gradeDCnt = 0, gradeECnt = 0, gradeAPCnt = 0, gradeBPCnt = 0;
+        if (!TextUtils.isEmpty(gradeACount)) {
             gradeACnt = Integer.valueOf(gradeACount);
         }
-        if(!TextUtils.isEmpty(gradeBCount)){
+        if (!TextUtils.isEmpty(gradeBCount)) {
             gradeBCnt = Integer.valueOf(gradeBCount);
         }
-        if(!TextUtils.isEmpty(gradeCCount)){
+        if (!TextUtils.isEmpty(gradeCCount)) {
             gradeCCnt = Integer.valueOf(gradeCCount);
         }
-        if(!TextUtils.isEmpty(gradeDCount)){
+        if (!TextUtils.isEmpty(gradeDCount)) {
             gradeDCnt = Integer.valueOf(gradeDCount);
         }
-        if(!TextUtils.isEmpty(gradeECount)){
+        if (!TextUtils.isEmpty(gradeECount)) {
             gradeECnt = Integer.valueOf(gradeECount);
         }
-        if(!TextUtils.isEmpty(gradeAPCount)){
+        if (!TextUtils.isEmpty(gradeAPCount)) {
             gradeAPCnt = Integer.valueOf(gradeAPCount);
         }
-        if(!TextUtils.isEmpty(gradeBPCount)){
+        if (!TextUtils.isEmpty(gradeBPCount)) {
             gradeBPCnt = Integer.valueOf(gradeBPCount);
         }
-        if ((gradeACnt+gradeBCnt+gradeCCnt+gradeDCnt+gradeECnt+gradeAPCnt+gradeBPCnt)> Integer.valueOf(dataModel.getTotal_students())) {
+        if ((gradeACnt + gradeBCnt + gradeCCnt + gradeDCnt + gradeECnt + gradeAPCnt + gradeBPCnt) > Integer.valueOf(dataModel.getTotal_students())) {
             callSnackBar(holder, dataModel);
         } else {
             dataModel.setGrade_a_stu_count(gradeACount);

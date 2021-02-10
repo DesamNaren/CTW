@@ -70,10 +70,10 @@
                             </androidx.cardview.widget.CardView>
 
 
-
                         </RelativeLayout>
 
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
+
                     <LinearLayout
                         android:id="@+id/shop_avail_ll"
                         android:layout_width="match_parent"
@@ -127,7 +127,8 @@
                             android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Capture Shop Image"/>
+                            android:text="Capture Shop Image" />
+
                         <ImageView
                             android:id="@+id/iv_shop_cam"
                             android:layout_width="@dimen/_100dp"

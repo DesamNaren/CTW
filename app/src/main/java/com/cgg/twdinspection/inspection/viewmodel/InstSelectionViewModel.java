@@ -20,7 +20,7 @@ public class InstSelectionViewModel extends AndroidViewModel {
         super(context);
         infoLiveData = new MutableLiveData<>();
         mRepository = new InstSelectionRepository(context);
-        this.context=context;
+        this.context = context;
 
     }
 
@@ -30,8 +30,9 @@ public class InstSelectionViewModel extends AndroidViewModel {
         }
         return infoLiveData;
     }
-    public void insertInstitutes(InstSelInterface instSelInterface,InstSelectionInfo instSelectionInfo) {
-        mRepository.insertSelInst(instSelInterface,instSelectionInfo);
+
+    public void insertInstitutes(InstSelInterface instSelInterface, InstSelectionInfo instSelectionInfo) {
+        mRepository.insertSelInst(instSelInterface, instSelectionInfo);
     }
 
 

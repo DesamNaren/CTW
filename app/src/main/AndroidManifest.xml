@@ -124,10 +124,6 @@
             android:name=".inspection.ui.MedicalDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".inspection.ui.DashboardActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".inspection.ui.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
@@ -409,15 +405,18 @@
             android:name=".gcc.reports.ui.LPGInspRepActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".offline.GCCOfflineDataActivity"
+        <activity
+            android:name=".offline.GCCOfflineDataActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".inspection.ui.ValidateMPINActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".inspection.ui.ValidateMPINActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".inspection.ui.GenerateMPINActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".inspection.ui.GenerateMPINActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

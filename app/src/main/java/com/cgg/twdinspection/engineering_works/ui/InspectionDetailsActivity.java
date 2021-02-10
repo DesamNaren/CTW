@@ -1,10 +1,5 @@
 package com.cgg.twdinspection.engineering_works.ui;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +16,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -628,10 +628,10 @@ public class InspectionDetailsActivity extends LocBaseActivity implements ErrorH
         } else if (binding.llStageWork.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etStageOthers.getText())) {
             callSnackBar(getString(R.string.enter_stage_of_work_in_progress_work));
             return false;
-        }else if (binding.llFinProgRat.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etFinProgressOthers.getText())) {
+        } else if (binding.llFinProgRat.getVisibility() == View.GONE && TextUtils.isEmpty(binding.etFinProgressOthers.getText())) {
             callSnackBar(getString(R.string.enter_fin_prog_acheived));
             return false;
-        }else if (physProgRating>100.00) {
+        } else if (physProgRating > 100.00) {
             callSnackBar(getString(R.string.enter_valid_fin_progress_percentage));
             return false;
         } else if (TextUtils.isEmpty(overallAppearance)) {

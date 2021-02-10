@@ -19,7 +19,7 @@ public class CallHealthViewModel extends ViewModel {
     Context context;
 
     CallHealthViewModel(Context application) {
-        context=application;
+        context = application;
         mRepository = new MedicalInfoRepository(context);
         callListLiveData = new MutableLiveData<>();
     }

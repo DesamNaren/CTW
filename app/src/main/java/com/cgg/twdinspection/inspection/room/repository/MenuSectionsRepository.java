@@ -8,15 +8,15 @@ import androidx.lifecycle.LiveData;
 import com.cgg.twdinspection.inspection.room.Dao.MenuSectionsDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
-import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
-import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
-import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 
@@ -43,36 +43,47 @@ public class MenuSectionsRepository {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
         menuSectionsDao = db.menuSectionsDao();
     }
+
     public LiveData<GeneralInfoEntity> getGeneralInfo() {
         return menuSectionsDao.getGeneralInfo();
     }
+
     public LiveData<List<StudAttendInfoEntity>> getStudAttendInfo() {
         return menuSectionsDao.getStudAttendInfo();
     }
+
     public LiveData<List<StaffAttendanceEntity>> getStaffInfo() {
         return menuSectionsDao.getStaffAttendInfo();
     }
+
     public LiveData<MedicalInfoEntity> getMedicalInfo() {
         return menuSectionsDao.getMedicalInfo();
     }
+
     public LiveData<DietIssuesEntity> getDietInfo() {
         return menuSectionsDao.getDietInfo();
     }
+
     public LiveData<InfraStructureEntity> getInfrastructureInfo() {
         return menuSectionsDao.getInfraInfo();
     }
+
     public LiveData<AcademicEntity> getAcademicInfo() {
         return menuSectionsDao.getAcademicInfo();
     }
+
     public LiveData<CoCurricularEntity> getCocurricularInfo() {
         return menuSectionsDao.getCocurricularInfo();
     }
+
     public LiveData<EntitlementsEntity> getEntitlementInfo() {
         return menuSectionsDao.getEntitlementInfo();
     }
+
     public LiveData<RegistersEntity> getRegistersInfo() {
         return menuSectionsDao.getRegisterInfo();
     }
+
     public LiveData<GeneralCommentsEntity> getGeneralCommentsInfo() {
         return menuSectionsDao.getGeneralCommentsInfo();
     }
@@ -125,11 +136,11 @@ public class MenuSectionsRepository {
         return x;
     }
 
-    public long updateSectionInfo(String time,int id,String instId) {
+    public long updateSectionInfo(String time, int id, String instId) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
             public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
-                menuSectionsDao.updateSectionInfo(time,id,instId);
+                menuSectionsDao.updateSectionInfo(time, id, instId);
             }
         });
 
@@ -191,7 +202,7 @@ public class MenuSectionsRepository {
     }
 
 
-    public void deleteMenuData(){
+    public void deleteMenuData() {
         menuSectionsDao.deleteInstMenuInfoEntity();
     }
 

@@ -21,14 +21,15 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
 
     Context context;
     List<StudAttendInfoEntity> list;
-    private int selectedPos=-1;
+    private int selectedPos = -1;
     StudAttendInterface studAttendInterface;
+
     public StudentsAttAdapter(Context context, List<StudAttendInfoEntity> list) {
         this.context = context;
         this.list = list;
         try {
-            studAttendInterface=(StudAttendInterface)context;
-        }catch (Exception e){
+            studAttendInterface = (StudAttendInterface) context;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -50,9 +51,9 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         final StudAttendInfoEntity dataModel = list.get(position);
         holder.listItemBinding.setStudentAttend(dataModel);
 
-        if(dataModel.getFlag_completed()==1){
+        if (dataModel.getFlag_completed() == 1) {
             holder.listItemBinding.tvExpand.setImageDrawable(context.getResources().getDrawable(R.drawable.completed));
-        }else{
+        } else {
             holder.listItemBinding.tvExpand.setImageDrawable(context.getResources().getDrawable(R.drawable.pending));
         }
 
@@ -72,7 +73,7 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
 
     @Override
     public int getItemCount() {
-        return list!=null && list.size()>0? list.size():0;
+        return list != null && list.size() > 0 ? list.size() : 0;
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
@@ -91,6 +92,7 @@ public class StudentsAttAdapter extends RecyclerView.Adapter<StudentsAttAdapter.
         }
 
     }
+
     @Override
     public long getItemId(int position) {
         return position;

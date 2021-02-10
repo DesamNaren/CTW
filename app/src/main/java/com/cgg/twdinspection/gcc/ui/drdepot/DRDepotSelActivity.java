@@ -212,7 +212,7 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DRDepotSelActivity.this, GCCOfflineDataActivity.class)
-                .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_DEPOT));
+                        .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_DEPOT));
                 finish();
             }
         });
@@ -467,11 +467,11 @@ public class DRDepotSelActivity extends AppCompatActivity implements AdapterView
                                         binding.btnRemove.setVisibility(View.GONE);
                                         binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
-                                        if(drGodowns.isFlag()){
+                                        if (drGodowns.isFlag()) {
                                             binding.llView.setVisibility(View.VISIBLE);
                                             binding.llDownload.setVisibility(View.GONE);
                                             binding.btnProceed.setVisibility(View.GONE);
-                                        }else {
+                                        } else {
                                             binding.llDownload.setVisibility(View.VISIBLE);
                                             binding.llView.setVisibility(View.GONE);
                                             binding.btnDownload.setText(R.string.re_download);

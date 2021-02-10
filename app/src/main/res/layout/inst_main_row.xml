@@ -30,7 +30,7 @@
                 android:id="@+id/tv_class"
                 android:layout_width="0dp"
                 android:textSize="20sp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_gravity="center"
@@ -45,7 +45,7 @@
                 android:layout_marginBottom="@dimen/dimen_5dp"
                 android:gravity="center_vertical" />
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

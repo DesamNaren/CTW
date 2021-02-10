@@ -6,9 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cgg.twdinspection.databinding.ActivityBenDetailsActivtyBinding;
-import com.cgg.twdinspection.databinding.ActivityUploadedPhotoBinding;
-
 public class UploadPhotoCustomViewModel implements ViewModelProvider.Factory {
     private Context context;
 

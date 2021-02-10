@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
-import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
+import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -95,7 +95,7 @@ public class SchoolSyncRepository {
         SchoolDMVInterface dmvInterface;
 
         InsertVillageAsyncTask(SchoolDMVInterface dmvInterface,
-                              List<SchoolVillage> villageEntites) {
+                               List<SchoolVillage> villageEntites) {
             this.villageEntites = villageEntites;
             this.dmvInterface = dmvInterface;
         }

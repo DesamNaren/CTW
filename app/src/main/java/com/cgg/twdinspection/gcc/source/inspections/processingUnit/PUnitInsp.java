@@ -1,6 +1,5 @@
 package com.cgg.twdinspection.gcc.source.inspections.processingUnit;
 
-import com.cgg.twdinspection.gcc.source.inspections.MFPGodowns.MFPStockDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

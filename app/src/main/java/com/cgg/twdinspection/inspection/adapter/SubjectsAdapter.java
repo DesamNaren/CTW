@@ -1,19 +1,11 @@
 package com.cgg.twdinspection.inspection.adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -21,11 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.BR;
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.databinding.ItemStaffAttendanceBinding;
 import com.cgg.twdinspection.databinding.ItemSubjectsBinding;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicSubjectsEntity;
-import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
 import java.util.List;
 import java.util.Random;
@@ -71,7 +60,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.UserHo
         if (academicSubjectsEntity.isStatus()) {
             holder.binding.ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.absent));
             holder.binding.tvName.setTextColor(context.getResources().getColor(R.color.red));
-        }else {
+        } else {
             holder.binding.ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.absent_init));
             holder.binding.tvName.setTextColor(context.getResources().getColor(R.color.black));
         }
@@ -83,7 +72,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsAdapter.UserHo
                     academicSubjectsEntity.setStatus(true);
                     holder.binding.ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.absent));
                     holder.binding.tvName.setTextColor(context.getResources().getColor(R.color.red));
-                }else {
+                } else {
                     academicSubjectsEntity.setStatus(false);
                     holder.binding.ivCheck.setImageDrawable(context.getResources().getDrawable(R.drawable.absent_init));
                     holder.binding.tvName.setTextColor(context.getResources().getColor(R.color.black));

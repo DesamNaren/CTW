@@ -281,7 +281,7 @@
                         android:padding="5dp"
                         android:text="@{stuData.variance}"
                         android:textColor="@color/black"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 

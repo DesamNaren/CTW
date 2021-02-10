@@ -174,7 +174,6 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
         });
 
 
-
         LiveData<GccOfflineEntity> drGodownLiveData = gccOfflineViewModel.getDRGoDownsOffline(
                 drGodowns.getDivisionId(), drGodowns.getSocietyId(), drGodowns.getGodownId());
         drGodownLiveData.observe(DRGodownActivity.this, new Observer<GccOfflineEntity>() {
@@ -247,8 +246,7 @@ public class DRGodownActivity extends AppCompatActivity implements ErrorHandlerI
                         callSnackBar("No data found");
                     }
 
-                }
-                else {
+                } else {
                     binding.viewPager.setVisibility(View.GONE);
                     binding.tabs.setVisibility(View.GONE);
                     binding.noDataTv.setVisibility(View.VISIBLE);

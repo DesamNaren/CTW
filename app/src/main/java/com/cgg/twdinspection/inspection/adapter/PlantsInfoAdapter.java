@@ -18,7 +18,7 @@ import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEnti
 
 import java.util.List;
 
-public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.ItemHolder>{
+public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.ItemHolder> {
     private Context context;
     private PlantsInfoInterface plantsInfoInterface;
     private List<PlantsEntity> plantsEntities;
@@ -29,8 +29,8 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
         this.plantsEntities = plantsEntities;
         this.fromClass = fromClass;
         try {
-            plantsInfoInterface=(PlantsInfoInterface) context;
-        }catch (Exception e){
+            plantsInfoInterface = (PlantsInfoInterface) context;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -43,9 +43,9 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_plants_info, parent, false);
 
-        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+        if (fromClass != null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)) {
             listItemBinding.ivDelete.setVisibility(View.GONE);
-        }else {
+        } else {
             listItemBinding.ivDelete.setVisibility(View.VISIBLE);
         }
 
@@ -57,7 +57,7 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
         final PlantsEntity dataModel = plantsEntities.get(i);
         holder.listItemBinding.setPlantInfo(dataModel);
 
-        holder.listItemBinding.tvSlNo.setText(String.valueOf(i+1));
+        holder.listItemBinding.tvSlNo.setText(String.valueOf(i + 1));
         holder.listItemBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +72,7 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
 
     @Override
     public int getItemCount() {
-        return plantsEntities!=null && plantsEntities.size()>0? plantsEntities.size():0;
+        return plantsEntities != null && plantsEntities.size() > 0 ? plantsEntities.size() : 0;
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
@@ -91,6 +91,7 @@ public class PlantsInfoAdapter extends RecyclerView.Adapter<PlantsInfoAdapter.It
         }
 
     }
+
     @Override
     public long getItemId(int position) {
         return position;

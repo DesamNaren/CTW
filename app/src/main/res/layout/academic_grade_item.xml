@@ -64,7 +64,7 @@
 
                 </LinearLayout>
 
-               <View
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/light_gray" />
@@ -112,7 +112,7 @@
                                 </LinearLayout>
 
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -136,7 +136,7 @@
                                         android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -160,7 +160,7 @@
                                         android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -184,7 +184,7 @@
                                         android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -208,7 +208,7 @@
                                         android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -232,7 +232,7 @@
                                         android:textColor="@color/colorPrimary" />
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -258,8 +258,6 @@
 
 
                             </LinearLayout>
-                            
-        
 
 
                             <LinearLayout
@@ -297,7 +295,7 @@
                                 </LinearLayout>
 
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -341,7 +339,7 @@
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -385,7 +383,7 @@
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -429,7 +427,7 @@
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -473,7 +471,7 @@
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"
@@ -517,7 +515,7 @@
                                     </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
-                               <View
+                                <View
                                     android:visibility="invisible"
                                     android:layout_width="12dp"
                                     android:layout_height="1dp"

@@ -3,11 +3,9 @@ package com.cgg.twdinspection.inspection.room.database;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cgg.twdinspection.inspection.room.Dao.AcademicInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
@@ -27,15 +25,8 @@ import com.cgg.twdinspection.inspection.room.Dao.RegistersInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
 import com.cgg.twdinspection.inspection.room.Dao.StaffInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.StudAchDao;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
-import com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
-import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
-import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
-import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
-import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
-import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
@@ -44,10 +35,17 @@ import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
+import com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
+import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
+import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
+import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
+import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
@@ -65,7 +63,7 @@ import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
         , SchoolDistrict.class, SchoolMandal.class, SchoolVillage.class, MasterInstituteInfo.class, PlantsEntity.class
         , InstMenuInfoEntity.class, StudAchievementEntity.class, MedicalDetailsBean.class
         , CoCurricularEntity.class, UploadPhoto.class, AcademicGradeEntity.class
-, InstSelectionInfo.class}, version = 1, exportSchema = false)
+        , InstSelectionInfo.class}, version = 1, exportSchema = false)
 public abstract class SchoolDatabase extends RoomDatabase {
 
     public abstract DistrictDao distDao();

@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginTop="@dimen/dimen_5dp"
             android:layout_width="match_parent"
@@ -146,9 +147,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-
-
 
 
     </LinearLayout>

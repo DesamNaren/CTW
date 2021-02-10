@@ -54,7 +54,6 @@ public class GCCSyncRepository {
     }
 
 
-
     @SuppressLint("StaticFieldLeak")
     private class InsertDivisionAsyncTask extends AsyncTask<Void, Void, Integer> {
         List<DivisionsInfo> divisionsInfos;
@@ -212,7 +211,7 @@ public class GCCSyncRepository {
         GCCDivisionInterface dmvInterface;
 
         InsertLPGAsyncTask(GCCDivisionInterface dmvInterface,
-                              List<LPGSupplierInfo> lpgSupplierInfos) {
+                           List<LPGSupplierInfo> lpgSupplierInfos) {
             this.lpgSupplierInfos = lpgSupplierInfos;
             this.dmvInterface = dmvInterface;
         }

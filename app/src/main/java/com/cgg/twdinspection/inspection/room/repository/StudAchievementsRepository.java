@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 public class StudAchievementsRepository {
 
     public StudAchDao studAchDao;
-    private String tag= StudAchievementsRepository.class.getSimpleName();
+    private String tag = StudAchievementsRepository.class.getSimpleName();
 
     public StudAchievementsRepository(Context application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
@@ -33,6 +33,7 @@ public class StudAchievementsRepository {
     public LiveData<List<StudAchievementEntity>> getStudAchvListLiveData() {
         return studAchDao.getStudAchievements();
     }
+
     long x;
 
     public long deleteAchievementsInfo(StudAchievementEntity studAchievementEntity) {
@@ -48,27 +49,27 @@ public class StudAchievementsRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

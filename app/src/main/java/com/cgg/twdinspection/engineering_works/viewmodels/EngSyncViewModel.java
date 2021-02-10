@@ -17,17 +17,17 @@ import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.GrantSchemesResponse;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
+import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.cgg.twdinspection.engineering_works.source.WorkDetail;
-
-import java.util.List;
 
 public class EngSyncViewModel extends AndroidViewModel {
     private MutableLiveData<WorksMasterResponse> worksMasterLiveData;
@@ -45,8 +45,8 @@ public class EngSyncViewModel extends AndroidViewModel {
 
     public EngSyncViewModel(Context context, Application application, ActivityEngSyncBinding binding) {
         super(application);
-        this.context=context;
-        this.binding=binding;
+        this.context = context;
+        this.binding = binding;
         worksMasterLiveData = new MutableLiveData<>();
         sectorsResponseLiveData = new MutableLiveData<>();
         schemesResponseMutableLiveData = new MutableLiveData<>();
@@ -134,19 +134,21 @@ public class EngSyncViewModel extends AndroidViewModel {
 
     public LiveData<List<WorkDetail>> getEngWorks() {
         if (engWorks != null) {
-            engWorks=worksRepository.getWorks();
+            engWorks = worksRepository.getWorks();
         }
         return engWorks;
     }
+
     public LiveData<List<GrantScheme>> getGrantSchemes() {
         if (grantSchemes != null) {
-            grantSchemes=schemesRepository.getGrantSchemes();
+            grantSchemes = schemesRepository.getGrantSchemes();
         }
         return grantSchemes;
     }
+
     public LiveData<List<SectorsEntity>> getSectors() {
         if (sectors != null) {
-            sectors=sectorRepository.getSectors();
+            sectors = sectorRepository.getSectors();
         }
         return sectors;
     }

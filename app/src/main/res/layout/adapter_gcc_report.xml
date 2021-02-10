@@ -30,13 +30,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:textColor="@color/black"
-                    android:text="Division"/>
+                    android:text="Division" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -47,23 +48,26 @@
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:id="@+id/v_soc"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ll_soc"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Society"/>
+                    android:text="Society" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -74,21 +78,24 @@
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Incharge"/>
+                    android:text="Incharge" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -99,14 +106,17 @@
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -114,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="Godown/Depot/Unit"/>
+                    android:text="Godown/Depot/Unit" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -125,14 +135,17 @@
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/bg"/>
+                android:background="@color/bg" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -140,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:layout_margin="@dimen/dimen_5dp"
-                    android:text="@string/inspection_time"/>
+                    android:text="@string/inspection_time" />
 
                 <TextView
                     android:layout_width="0dp"

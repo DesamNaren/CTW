@@ -35,8 +35,7 @@ public class ClassInfoRepository {
     }
 
 
-
-    public  LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
+    public LiveData<List<StudAttendInfoEntity>> getClassIdsList(String inst_id) {
         return classInfoDao.getClassIdList(inst_id);
     }
 
@@ -117,7 +116,6 @@ public class ClassInfoRepository {
                 .subscribeOn(Schedulers.io())
                 .subscribe(observer);
     }
-
 
 
 }

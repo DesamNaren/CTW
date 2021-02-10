@@ -55,7 +55,7 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
         final InstMenuInfoEntity dataModel = list.get(i);
         holder.listItemBinding.setSectionMenu(dataModel);
         holder.listItemBinding.tvClass.setText(list.get(i).getSection_name());
-        if (dataModel.getFlag_completed()==1) {
+        if (dataModel.getFlag_completed() == 1) {
             holder.listItemBinding.ivSync.setImageDrawable(context.getResources().getDrawable(R.drawable.completed));
         } else {
             holder.listItemBinding.ivSync.setImageDrawable(context.getResources().getDrawable(R.drawable.pending));
@@ -65,42 +65,42 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
             @Override
             public void onClick(View v) {
 //                if (dataModel.getFlag_completed()==0) {
-                    switch (dataModel.getSection_id()) {
-                        case 1:
-                            callActivity(GeneralInfoActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 2:
-                            callActivity(StudentsAttendActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 3:
-                            callActivity(StaffAttendActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 4:
-                            callActivity(MedicalActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 5:
-                            callActivity(DietIssuesActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 6:
-                            callActivity(InfraActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 7:
-                            callActivity(AcademicActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 8:
-                            callActivity(CoCurricularActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 9:
-                            callActivity(EntitlementsActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 10:
-                            callActivity(RegistersActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 11:
-                            callActivity(GeneralCommentsActivity.class, dataModel.getFlag_completed());
-                            break;
-                        case 12:
-                            callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
+                switch (dataModel.getSection_id()) {
+                    case 1:
+                        callActivity(GeneralInfoActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 2:
+                        callActivity(StudentsAttendActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 3:
+                        callActivity(StaffAttendActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 4:
+                        callActivity(MedicalActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 5:
+                        callActivity(DietIssuesActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 6:
+                        callActivity(InfraActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 7:
+                        callActivity(AcademicActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 8:
+                        callActivity(CoCurricularActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 9:
+                        callActivity(EntitlementsActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 10:
+                        callActivity(RegistersActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 11:
+                        callActivity(GeneralCommentsActivity.class, dataModel.getFlag_completed());
+                        break;
+                    case 12:
+                        callActivity(UploadedPhotoActivity.class, dataModel.getFlag_completed());
 
 //                            boolean flag = true;
 //                            for (int i = 0; i < list.size()-1; i++) {
@@ -114,9 +114,9 @@ public class MenuSectionsAdapter extends RecyclerView.Adapter<MenuSectionsAdapte
 //                            } else {
 //                                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please complete other sections and submit photos");
 //                            }
-                            break;
-                    }
+                        break;
                 }
+            }
 
 //            }
         });

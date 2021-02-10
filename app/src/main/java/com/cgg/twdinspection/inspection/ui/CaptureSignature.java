@@ -20,7 +20,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.utils.AppConstants;

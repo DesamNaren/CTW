@@ -52,10 +52,10 @@ public class ReportsGeneralInfoActivity extends AppCompatActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         reportData = gson.fromJson(data, InspReportData.class);
 
-        String jsonObject  = gson.toJson(reportData.getGeneralInfo());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(reportData.getGeneralInfo());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getGeneralInfo());
-            binding.manNameTv.setText(reportData.getMandalName()+" & "+reportData.getVillageName());
+            binding.manNameTv.setText(reportData.getMandalName() + " & " + reportData.getVillageName());
             binding.disNameTv.setText(reportData.getDistName());
             binding.instNameTv.setText(reportData.getInstituteName());
 

@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.engineering_works.reports.source;
 
 import com.cgg.twdinspection.gcc.reports.source.ReportPhoto;
-import com.cgg.twdinspection.inspection.reports.source.Photo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

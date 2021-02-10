@@ -1,8 +1,5 @@
 package com.cgg.twdinspection.gcc.source.inspections.petrol_pump;
 
-import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindings;
-import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
-import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownStockDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

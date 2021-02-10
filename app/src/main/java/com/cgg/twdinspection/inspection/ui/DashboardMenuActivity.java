@@ -27,13 +27,13 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityHomeBinding;
 import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
-import com.cgg.twdinspection.offline.GCCOfflineDashboard;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
 import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
+import com.cgg.twdinspection.offline.GCCOfflineDashboard;
 import com.cgg.twdinspection.schemes.ui.SchemesDMVActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -71,8 +71,11 @@ public class DashboardMenuActivity extends AppCompatActivity {
         binding.appBarLayout.ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.customLogoutAlert(DashboardMenuActivity.this, getResources().getString(R.string.app_name),
-                        getString(R.string.logout), instMainViewModel, editor);
+                Utils.customExitAlert(DashboardMenuActivity.this,
+                        getResources().getString(R.string.app_name),
+                        getString(R.string.logout));
+//                Utils.customLogoutAlert(DashboardMenuActivity.this, getResources().getString(R.string.app_name),
+//                        getString(R.string.logout), instMainViewModel, editor);
             }
         });
 
@@ -132,7 +135,6 @@ public class DashboardMenuActivity extends AppCompatActivity {
         nav_school.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
                 instSelectionViewModel.getSelectedInst().observe(DashboardMenuActivity.this, new Observer<InstSelectionInfo>() {
                     @Override
                     public void onChanged(InstSelectionInfo instSelectionInfo) {
@@ -171,13 +173,6 @@ public class DashboardMenuActivity extends AppCompatActivity {
                         }
                     }
                 });
-                startActivity(new Intent(context, DMVSelectionActivity.class));
-
-                //do as you want with the button click
-
-                DrawerLayout drawer = findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-
                 return true;
             }
         });

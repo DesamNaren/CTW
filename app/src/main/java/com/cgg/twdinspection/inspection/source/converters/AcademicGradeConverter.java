@@ -13,14 +13,16 @@ public class AcademicGradeConverter {
     @TypeConverter
     public static List<AcademicGradeEntity> stringToGrade(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<AcademicGradeEntity>>() {}.getType();
+        Type type = new TypeToken<List<AcademicGradeEntity>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String gradeToString(List<AcademicGradeEntity> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<AcademicGradeEntity>>() {}.getType();
+        Type type = new TypeToken<List<AcademicGradeEntity>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

@@ -20,7 +20,7 @@ public class MedicalDetailsViewModel extends AndroidViewModel {
     public MedicalDetailsViewModel(@NonNull Application application) {
         super(application);
         medicalMutableLiveData = new MutableLiveData<>();
-        mRepository= new MedicalInfoRepository(application);
+        mRepository = new MedicalInfoRepository(application);
     }
 
     public LiveData<List<MedicalDetailsBean>> getMedicalDetails() {

@@ -41,7 +41,7 @@ public class DietIssuesInfoRepository {
         return dietIssuesInfoDao.getMasterDietList(inst_id);
     }
 
-    public  LiveData<List<DietListEntity>> getDietList(String inst_id) {
+    public LiveData<List<DietListEntity>> getDietList(String inst_id) {
         return dietIssuesInfoDao.getDietList(inst_id);
     }
 
@@ -149,27 +149,27 @@ public class DietIssuesInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

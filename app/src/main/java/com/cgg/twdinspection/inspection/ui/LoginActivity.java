@@ -23,23 +23,17 @@ import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
-import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.source.login.LoginResponse;
-import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
-import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.LoginCustomViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.LoginViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterface {
     ActivityLoginCreBinding binding;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String  mpin;
+    private String mpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.schemes.source.bendetails;
 
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

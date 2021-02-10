@@ -1,4 +1,5 @@
 package com.cgg.twdinspection.schemes.source.submit;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,6 +14,7 @@ public class SchemeSubmitResponse {
     @SerializedName("inspection_id")
     @Expose
     private String inspection_id;
+
     public Integer getStatusCode() {
         return statusCode;
     }

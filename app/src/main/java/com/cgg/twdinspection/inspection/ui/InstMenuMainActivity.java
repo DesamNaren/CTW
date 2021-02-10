@@ -205,7 +205,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
                     boolean flag = true;
                     for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                        if (i != 7 &&arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                        if (i != 7 && arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
@@ -245,7 +245,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 if (arrayListLiveData.getValue() != null && arrayListLiveData.getValue().size() > 0) {
                     boolean flag = true;
                     for (int i = 0; i < arrayListLiveData.getValue().size(); i++) {
-                        if (i != 7 &&arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
+                        if (i != 7 && arrayListLiveData.getValue().get(i).getFlag_completed() == 0) {
                             flag = false;
                             break;
                         }
@@ -288,9 +288,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
 
         if (dLocation != null && dLocation.getLatitude() > 0 && dLocation.getLongitude() > 0) {
             float distance = Utils.calcDistance(cLocation, dLocation);
-            submitCall();
-            if (distance <= AppConstants.DISTANCE) {
 
+            if (distance <= AppConstants.DISTANCE) {
+                submitCall();
             } else {
                 Utils.customDistanceAlert(InstMenuMainActivity.this, getResources().getString(R.string.app_name), "Sorry, inspection submit not allowed, You are not within the "
                         + AppConstants.DISTANCE + " meter radius of selected institute");

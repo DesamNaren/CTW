@@ -36,8 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
-                    android:text="Work ID"
-                     />
+                    android:text="Work ID" />
 
                 <TextView
                     android:textColor="@color/black"
@@ -65,8 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
-                    android:text="Work Name"
-                   />
+                    android:text="Work Name" />
 
                 <TextView
                     android:textColor="@color/black"
@@ -96,8 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
-                    android:text="District name"
-                    />
+                    android:text="District name" />
 
                 <TextView
                     android:textColor="@color/black"
@@ -125,8 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
-                    android:text="Mandal name"
-                    />
+                    android:text="Mandal name" />
 
                 <TextView
                     android:textColor="@color/black"
@@ -155,8 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_5dp"
                     android:layout_weight="1"
-                    android:text="Village name"
-                    />
+                    android:text="Village name" />
 
                 <TextView
                     android:textColor="@color/black"

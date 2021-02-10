@@ -21,13 +21,13 @@ public class SchemeInfoReportAdapter extends RecyclerView.Adapter<SchemeInfoRepo
     private Context context;
     private List<SchemeEntity> list;
     private SchemeClickCallback schemeClickCallback;
-    private int selectedPos=-1;
+    private int selectedPos = -1;
 
     public SchemeInfoReportAdapter(Context context, List<SchemeEntity> list) {
         this.context = context;
         this.list = list;
         try {
-            schemeClickCallback = (SchemeClickCallback)context;
+            schemeClickCallback = (SchemeClickCallback) context;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,10 +49,10 @@ public class SchemeInfoReportAdapter extends RecyclerView.Adapter<SchemeInfoRepo
         final SchemeEntity dataModel = list.get(i);
         holder.listItemBinding.setSchemeInfo(dataModel);
 
-        if(dataModel.isSelection()) {
+        if (dataModel.isSelection()) {
             holder.listItemBinding.llItem.setBackgroundColor(context.getResources().getColor(R.color.list_blue));
             holder.listItemBinding.tvItem.setTextColor(context.getResources().getColor(R.color.white));
-        }else {
+        } else {
             holder.listItemBinding.llItem.setBackgroundColor(context.getResources().getColor(R.color.white));
             holder.listItemBinding.tvItem.setTextColor(context.getResources().getColor(R.color.black));
         }

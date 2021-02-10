@@ -89,7 +89,7 @@ public class AcademicActivity extends BaseActivity implements SaveListener {
         studentsAttndViewModel = new StudentsAttndViewModel(getApplication());
 
         subjectsList = new ArrayList<>();
-        List<String> subjectsNamesList=Arrays.asList(getResources().getStringArray(R.array.subjects));
+        List<String> subjectsNamesList = Arrays.asList(getResources().getStringArray(R.array.subjects));
 
         for (int x = 0; x < subjectsNamesList.size(); x++) {
             AcademicSubjectsEntity entity = new AcademicSubjectsEntity();

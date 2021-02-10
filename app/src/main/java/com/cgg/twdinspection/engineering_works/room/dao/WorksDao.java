@@ -5,7 +5,6 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface WorksDao {
     void insertWorks(List<WorkDetail> workDetails);
 
     @Query("SELECT * from workdetail where distId LIKE :distId AND mandId LIKE :mandalId AND is_sanctioned LIKE 'Y'")
-    LiveData<List<WorkDetail>> getWorkDetails(String distId,String mandalId);
+    LiveData<List<WorkDetail>> getWorkDetails(String distId, String mandalId);
 
     @Query("SELECT COUNT(*) FROM workdetail")
     LiveData<Integer> getWorksCount();

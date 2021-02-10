@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -287,8 +286,8 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(adapter!=null)
-                     adapter.getFilter().filter(newText);
+                if (adapter != null)
+                    adapter.getFilter().filter(newText);
 
                 return true;
             }

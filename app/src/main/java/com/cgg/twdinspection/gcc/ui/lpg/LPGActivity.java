@@ -27,7 +27,6 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.lpg.LPGSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.fragment.PLPGFragment;
-import com.cgg.twdinspection.gcc.ui.petrolpump.PetrolPumpActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -117,14 +116,14 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                     petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
                     for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
                         if (!TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
-                            existFlag=true;
+                            existFlag = true;
 //                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
 //                            setFragPos(header, z);
                             break;
                         }
                     }
                 }
-                if(existFlag) {
+                if (existFlag) {
                     Gson gson = new Gson();
                     String stockData = gson.toJson(petrolStockDetailsResponseMain);
                     try {
@@ -136,7 +135,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                     editor.commit();
                     Intent intent = new Intent(LPGActivity.this, LPGFindingsActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Utils.customErrorAlert(LPGActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
             }
@@ -172,7 +171,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                                     bundle.putString(AppConstants.petComm, petrolComm);
                                     plpgFragment.setArguments(bundle);
                                     adapter.addFrag(plpgFragment, "LPG Commodities");
-                                }else {
+                                } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
@@ -180,7 +179,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
                                     binding.noDataTv.setText(petrolStockDetailsResponse.getStatusMessage());
                                     callSnackBar(petrolStockDetailsResponse.getStatusMessage());
                                 }
-                                
+
                                 binding.tabs.setupWithViewPager(binding.viewPager);
                                 binding.viewPager.setAdapter(adapter);
 
@@ -234,7 +233,7 @@ public class LPGActivity extends AppCompatActivity implements ErrorHandlerInterf
 
     @Override
     public void onBackPressed() {
-        if (petrolStockDetailsResponseMain!=null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (petrolStockDetailsResponseMain != null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

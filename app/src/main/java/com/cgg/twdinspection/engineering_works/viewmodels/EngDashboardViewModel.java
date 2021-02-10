@@ -7,23 +7,13 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.cgg.twdinspection.common.network.TWDService;
-import com.cgg.twdinspection.engineering_works.room.repository.SectorsRepository;
 import com.cgg.twdinspection.engineering_works.room.repository.WorksRepository;
-import com.cgg.twdinspection.engineering_works.source.GrantScheme;
 import com.cgg.twdinspection.engineering_works.source.SectorsEntity;
 import com.cgg.twdinspection.engineering_works.source.SectorsResponse;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
-import com.cgg.twdinspection.engineering_works.source.WorksMasterResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EngDashboardViewModel extends AndroidViewModel {
 
@@ -36,7 +26,7 @@ public class EngDashboardViewModel extends AndroidViewModel {
 
     public EngDashboardViewModel(Context context, Application application) {
         super(application);
-        worksRepository =new WorksRepository(application);
+        worksRepository = new WorksRepository(application);
         sectorsResponseLiveData = new MutableLiveData<>();
         sectorsListLiveData = new MutableLiveData<>();
         this.context = context;
@@ -51,6 +41,7 @@ public class EngDashboardViewModel extends AndroidViewModel {
     public LiveData<List<String>> getDistricts() {
         return worksRepository.getDistricts();
     }
+
     public LiveData<List<String>> getMandals(String distId) {
         return worksRepository.getMandals(distId);
     }
@@ -58,6 +49,7 @@ public class EngDashboardViewModel extends AndroidViewModel {
     public LiveData<String> getDistId(String distName) {
         return worksRepository.getDistId(distName);
     }
+
     public LiveData<String> getMandalId(String mandalName) {
         return worksRepository.getMandalId(mandalName);
     }
@@ -67,13 +59,9 @@ public class EngDashboardViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId,String mandId){
-        return worksRepository.getSelWorkDetails(distId,mandId);
+    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId, String mandId) {
+        return worksRepository.getSelWorkDetails(distId, mandId);
     }
-
-
-
-
 
 
 }

@@ -18,7 +18,8 @@
             android:paddingLeft="@dimen/dimen_5dp"
             android:paddingTop="@dimen/dimen_10dp"
             android:paddingRight="@dimen/dimen_5dp"
-            android:paddingBottom="@dimen/dimen_10dp"     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
+            android:paddingBottom="@dimen/dimen_10dp"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.\n "
             android:hint="@string/remarks"
             android:imeOptions="actionNext"
             android:inputType="textMultiLine" />

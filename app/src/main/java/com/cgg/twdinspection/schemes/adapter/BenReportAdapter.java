@@ -32,7 +32,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
     public BenReportAdapter(Context context, List<BeneficiaryDetail> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             benClickCallback = (BenClickCallback) context;
@@ -40,6 +40,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -77,6 +78,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -138,7 +140,7 @@ public class BenReportAdapter extends RecyclerView.Adapter<BenReportAdapter.Item
         return position;
     }
 
-    public  void setData(List<BeneficiaryDetail> beneficiaryDetailArrayList){
+    public void setData(List<BeneficiaryDetail> beneficiaryDetailArrayList) {
         filterList.clear();
         filterList.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

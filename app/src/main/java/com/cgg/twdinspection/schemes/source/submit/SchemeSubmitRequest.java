@@ -81,7 +81,7 @@ public class SchemeSubmitRequest {
     @SerializedName("Device_Id")
     @Expose
     private String deviceId;
-@SerializedName("photo_key_id")
+    @SerializedName("photo_key_id")
     @Expose
     private String photo_key_id;
 

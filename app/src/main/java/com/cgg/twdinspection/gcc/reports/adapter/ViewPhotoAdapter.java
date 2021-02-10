@@ -76,7 +76,7 @@ public class ViewPhotoAdapter extends RecyclerView.Adapter<ViewPhotoAdapter.Item
         holder.listItemBinding.ivRepairs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dataModel.getFilePath() != null && dataModel.getFileName()!=null)
+                if (dataModel.getFilePath() != null && dataModel.getFileName() != null)
                     Utils.displayPhotoDialogBox(dataModel.getFilePath(), context, dataModel.getFileName(), true);
             }
         });

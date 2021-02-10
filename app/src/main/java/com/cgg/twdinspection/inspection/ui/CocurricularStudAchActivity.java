@@ -1,16 +1,15 @@
 package com.cgg.twdinspection.inspection.ui;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
@@ -50,19 +49,19 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
         viewModel = ViewModelProviders.of(this,
                 new StudAchCustomViewModel(binding, this, getApplication())).get(StudAchViewModel.class);
         binding.setViewModel(viewModel);
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
         sharedPreferences = TWDApplication.get(this).getPreferences();
         editor = sharedPreferences.edit();
         Gson gson = new Gson();
 
         fromClass = getIntent().getStringExtra(AppConstants.FROM_CLASS);
-        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.COCAR)){
+        if (fromClass != null && fromClass.equalsIgnoreCase(AppConstants.COCAR)) {
             calCoCir();
-        }else if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+        } else if (fromClass != null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)) {
             String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
             InspReportData reportData = gson.fromJson(data, InspReportData.class);
-            if(reportData!=null && reportData.getCoCurricularInfo()!=null) {
+            if (reportData != null && reportData.getCoCurricularInfo() != null) {
                 List<StudAchievementEntity> studAchievementEntities = reportData.getCoCurricularInfo().getStudAchievementEntities();
                 if (studAchievementEntities != null && studAchievementEntities.size() > 0) {
                     binding.noDataTv.setVisibility(View.GONE);
@@ -79,7 +78,6 @@ public class CocurricularStudAchActivity extends AppCompatActivity implements St
                 binding.callRv.setVisibility(View.GONE);
             }
         }
-
 
 
     }

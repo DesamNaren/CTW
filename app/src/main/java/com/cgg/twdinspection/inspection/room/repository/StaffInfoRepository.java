@@ -23,8 +23,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class StaffInfoRepository {
 
-    public String tag=ClassInfoRepository.class.getSimpleName();
+    public String tag = ClassInfoRepository.class.getSimpleName();
     public StaffInfoDao staffInfoDao;
+
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
@@ -41,7 +42,7 @@ public class StaffInfoRepository {
     }
 
     public LiveData<List<StaffAttendanceEntity>> getStaffInfoList(String inst_id) {
-        LiveData<List<StaffAttendanceEntity>> classIdList= staffInfoDao.getStaffInfoList(inst_id);
+        LiveData<List<StaffAttendanceEntity>> classIdList = staffInfoDao.getStaffInfoList(inst_id);
         return classIdList;
     }
 
@@ -92,6 +93,7 @@ public class StaffInfoRepository {
     }
 
     long x;
+
     public long updateStaffInfo(List<StaffAttendanceEntity> staffAttendanceEntities) {
         Observable observable = Observable.create(new ObservableOnSubscribe<Long>() {
             @Override
@@ -103,24 +105,24 @@ public class StaffInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
-                Log.i("Tag", tag+"onNext: ");
+                Log.i("Tag", tag + "onNext: ");
                 x = aLong;
             }
 
 
             @Override
             public void onError(Throwable e) {
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 

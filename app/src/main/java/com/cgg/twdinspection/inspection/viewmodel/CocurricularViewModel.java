@@ -40,7 +40,6 @@ public class CocurricularViewModel extends ViewModel {
     }
 
 
-
     public long insertCoCurricularInfo(CoCurricularEntity coCurricularEntity) {
         return mRepository.insertCoCurricularInfo(coCurricularEntity);
     }
@@ -56,6 +55,7 @@ public class CocurricularViewModel extends ViewModel {
     public LiveData<Integer> getAchievementsCnt() {
         return mRepository.getAchievementsCnt();
     }
+
     public LiveData<Integer> getPlantsCnt() {
         return mRepository.getPlantsCnt();
     }

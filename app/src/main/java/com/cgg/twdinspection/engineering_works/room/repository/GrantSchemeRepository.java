@@ -23,14 +23,15 @@ public class GrantSchemeRepository {
         EngWorksDatabase db = EngWorksDatabase.getDatabase(application);
         grantSchemeDao = db.schemeDao();
     }
+
     public LiveData<List<GrantScheme>> getGrantSchemes() {
-        if(schemesLiveData !=null){
+        if (schemesLiveData != null) {
             schemesLiveData = grantSchemeDao.getGrantSchemes();
         }
         return schemesLiveData;
     }
 
-    public int insertSchemes(List<GrantScheme> schemes){
+    public int insertSchemes(List<GrantScheme> schemes) {
         new InsertSchemesAsyncTask(schemes).execute();
         return x;
     }
@@ -52,9 +53,10 @@ public class GrantSchemeRepository {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            x=integer;
+            x = integer;
         }
     }
+
     public LiveData<Integer> getSchemeId(String schemeName) {
         return grantSchemeDao.getSchemeId(schemeName);
     }

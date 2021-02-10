@@ -46,6 +46,7 @@ public class GCCRepository {
     public LiveData<List<PetrolSupplierInfo>> getPetrolSuppliers(String divId, String socId) {
         return gccDao.getPetrolPumps(divId, socId);
     }
+
     public LiveData<List<LPGSupplierInfo>> getLPGSuppliers(String divId, String socId) {
         return gccDao.getLPGSuppliers(divId, socId);
     }
@@ -53,6 +54,7 @@ public class GCCRepository {
     public LiveData<List<DrGodowns>> getAllGoDowns() {
         return gccDao.getAllDrGoDowns();
     }
+
     public LiveData<List<DivisionsInfo>> getAllDivisions() {
         return gccDao.getAllDivisions();
     }

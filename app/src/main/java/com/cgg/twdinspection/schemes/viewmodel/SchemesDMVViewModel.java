@@ -12,7 +12,6 @@ import com.cgg.twdinspection.schemes.source.dmv.SchemeMandal;
 import com.cgg.twdinspection.schemes.source.dmv.SchemeVillage;
 import com.cgg.twdinspection.schemes.source.finyear.FinancialYearsEntity;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarksEntity;
-import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 
 import java.util.List;
 
@@ -42,38 +41,38 @@ public class SchemesDMVViewModel extends AndroidViewModel {
     }
 
 
-
     public LiveData<List<SchemeMandal>> getAllMandals(String distId) {
         if (mandals != null) {
-            mandals=mRepository.getMandals(distId);
+            mandals = mRepository.getMandals(distId);
         }
         return mandals;
     }
 
-    public LiveData<List<SchemeVillage>> getAllVillages(String mandalId,String distId) {
-        villages=mRepository.getVillages(mandalId,distId);
+    public LiveData<List<SchemeVillage>> getAllVillages(String mandalId, String distId) {
+        villages = mRepository.getVillages(mandalId, distId);
         return villages;
     }
 
     public LiveData<List<FinancialYearsEntity>> getFinancialYrs() {
         if (financialYrs != null) {
-            financialYrs=mRepository.getFinancialYrs();
+            financialYrs = mRepository.getFinancialYrs();
         }
         return financialYrs;
     }
 
-    public LiveData<String> getDistId(String distName){
+    public LiveData<String> getDistId(String distName) {
         return mRepository.getDistId(distName);
     }
-    public LiveData<String> getMandalId(String mandalName,String distId){
-        return mRepository.getMandalId(mandalName,distId);
+
+    public LiveData<String> getMandalId(String mandalName, String distId) {
+        return mRepository.getMandalId(mandalName, distId);
     }
 
-    public LiveData<String> getVillageId(String mandalName,String manId, String distId){
-        return mRepository.getVillageId(mandalName,manId,distId);
+    public LiveData<String> getVillageId(String mandalName, String manId, String distId) {
+        return mRepository.getVillageId(mandalName, manId, distId);
     }
 
-    public LiveData<String> getFinYearId(String finYear){
+    public LiveData<String> getFinYearId(String finYear) {
         return mRepository.getFinYearId(finYear);
     }
 

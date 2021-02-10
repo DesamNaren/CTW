@@ -32,6 +32,7 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
     private SharedPreferences sharedPreferences;
     String directory_path, filePath;
     private ReportWorkDetails reportWorkDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +57,13 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
             e.printStackTrace();
         }
 
-        if(reportWorkDetails.getPhotos().size()>0){
+        if (reportWorkDetails.getPhotos().size() > 0) {
             binding.photos.recyclerView.setVisibility(View.VISIBLE);
             binding.photos.tvEmpty.setVisibility(View.GONE);
             ViewPhotoAdapter adapter = new ViewPhotoAdapter(EngPDFActivity.this, reportWorkDetails.getPhotos());
-            binding.photos.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+            binding.photos.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             binding.photos.recyclerView.setAdapter(adapter);
-        }else{
+        } else {
             binding.photos.tvEmpty.setVisibility(View.VISIBLE);
             binding.photos.recyclerView.setVisibility(View.GONE);
         }
@@ -81,8 +82,8 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
                             + "/" + "TWD/Engineering_Works/";
 
                     filePath = directory_path + "works_" + reportWorkDetails.getWorkId() + "_" + reportWorkDetails.getInspectionTime() + ".pdf";
-                    File file =new File(filePath);
-                    PDFUtil.getInstance(EngPDFActivity.this).generatePDF(views, filePath, EngPDFActivity.this,"engworks", "Engineerinig");
+                    File file = new File(filePath);
+                    PDFUtil.getInstance(EngPDFActivity.this).generatePDF(views, filePath, EngPDFActivity.this, "engworks", "Engineerinig");
                 } catch (Exception e) {
                     if (customProgressDialog.isShowing())
                         customProgressDialog.hide();
@@ -103,7 +104,7 @@ public class EngPDFActivity extends AppCompatActivity implements PDFUtil.PDFUtil
     @Override
     public void pdfGenerationFailure(Exception exception) {
         customProgressDialog.hide();
-        Utils.customErrorAlert(EngPDFActivity.this, getString(R.string.app_name), getString(R.string.something)+" "+exception.getMessage());
+        Utils.customErrorAlert(EngPDFActivity.this, getString(R.string.app_name), getString(R.string.something) + " " + exception.getMessage());
     }
 
 }

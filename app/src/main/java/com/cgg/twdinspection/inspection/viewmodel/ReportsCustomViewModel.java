@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cgg.twdinspection.databinding.ActivityLoginCreBinding;
-
 public class ReportsCustomViewModel implements ViewModelProvider.Factory {
     private Context context;
 

@@ -106,7 +106,7 @@ public class SchemeSyncRepository {
         SchemeDMVInterface dmvInterface;
 
         InsertVillageAsyncTask(SchemeDMVInterface dmvInterface,
-                              List<SchemeVillage> villageEntites) {
+                               List<SchemeVillage> villageEntites) {
             this.villageEntites = villageEntites;
             this.dmvInterface = dmvInterface;
         }
@@ -131,7 +131,7 @@ public class SchemeSyncRepository {
         SchemeDMVInterface dmvInterface;
 
         InsertFinYearAsyncTask(SchemeDMVInterface dmvInterface,
-                                List<FinancialYearsEntity> financialYrsEntities) {
+                               List<FinancialYearsEntity> financialYrsEntities) {
             this.financialYrsEntities = financialYrsEntities;
             this.dmvInterface = dmvInterface;
         }
@@ -156,7 +156,7 @@ public class SchemeSyncRepository {
         SchemeDMVInterface dmvInterface;
 
         InsertInsRemarkAsyncTask(SchemeDMVInterface dmvInterface,
-                               List<InspectionRemarksEntity> inspectionRemarksEntities) {
+                                 List<InspectionRemarksEntity> inspectionRemarksEntities) {
             this.inspectionRemarksEntities = inspectionRemarksEntities;
             this.dmvInterface = dmvInterface;
         }
@@ -181,7 +181,7 @@ public class SchemeSyncRepository {
         SchemeDMVInterface dmvInterface;
 
         InsertSchemeAsyncTask(SchemeDMVInterface dmvInterface,
-                                 List<SchemeEntity> schemeEntities) {
+                              List<SchemeEntity> schemeEntities) {
             this.schemeEntities = schemeEntities;
             this.dmvInterface = dmvInterface;
         }

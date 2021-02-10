@@ -8,21 +8,16 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.contentcapture.ContentCaptureCondition;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
-import com.cgg.twdinspection.databinding.ActivityDashboardBinding;
 import com.cgg.twdinspection.databinding.FragmentHomeBinding;
 import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
 import com.cgg.twdinspection.gcc.ui.gcc.GCCDashboardActivity;
@@ -30,7 +25,6 @@ import com.cgg.twdinspection.inspection.reports.ui.ReportActivity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstMenuInfoEntity;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 import com.cgg.twdinspection.inspection.ui.DMVSelectionActivity;
-import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
 import com.cgg.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.InstSelectionViewModel;
@@ -145,7 +139,7 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(context, ReportActivity.class));
             }
         });
-       
+
         return binding.getRoot();
     }
 }

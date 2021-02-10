@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.MedicalInfoDao;
 import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
-import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MedicalInfoRepository {
 
     private MedicalInfoDao medicalInfoDao;
-    private String tag=MedicalInfoRepository.class.getSimpleName();
+    private String tag = MedicalInfoRepository.class.getSimpleName();
 
     public MedicalInfoRepository(Context application) {
         SchoolDatabase db = SchoolDatabase.getDatabase(application);
@@ -44,27 +44,27 @@ public class MedicalInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -87,27 +87,27 @@ public class MedicalInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -134,27 +134,27 @@ public class MedicalInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -186,7 +186,7 @@ public class MedicalInfoRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override

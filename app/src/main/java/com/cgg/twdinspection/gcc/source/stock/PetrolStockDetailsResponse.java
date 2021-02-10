@@ -1,7 +1,6 @@
 package com.cgg.twdinspection.gcc.source.stock;
 
 
-import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

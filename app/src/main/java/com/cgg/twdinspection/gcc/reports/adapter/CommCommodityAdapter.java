@@ -44,15 +44,15 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
         final ReportSubmitReqCommodities dataModel = commonCommodities.get(i);
         holder.stockChildRowBinding.tvComCode.setText(dataModel.getComCode());
         holder.stockChildRowBinding.tvComName.setText(dataModel.getComType());
-        if(dataModel.getUnits()!=null && !dataModel.getUnits().contains("No")) {
+        if (dataModel.getUnits() != null && !dataModel.getUnits().contains("No")) {
             holder.stockChildRowBinding.sysQty.setText(dataModel.getSystemQty() + " " + dataModel.getUnits());
-        }else {
+        } else {
             holder.stockChildRowBinding.sysQty.setText(String.valueOf(dataModel.getSystemQty()));
         }
 
-        holder.stockChildRowBinding.tvSysRate.setText("Rs "+dataModel.getSystemRate());
+        holder.stockChildRowBinding.tvSysRate.setText("Rs " + dataModel.getSystemRate());
         holder.stockChildRowBinding.tvSysVal.setText(String.valueOf(dataModel.getSystemValue()));
-        holder.stockChildRowBinding.tvPhyRate.setText("Rs "+dataModel.getPhysicalRate());
+        holder.stockChildRowBinding.tvPhyRate.setText("Rs " + dataModel.getPhysicalRate());
         holder.stockChildRowBinding.tvPhyAvailQnty.setText(String.valueOf(dataModel.getPhysiacalQty()));
         holder.stockChildRowBinding.tvPhyVal.setText(String.valueOf(dataModel.getPhysicalValue()));
     }
@@ -88,7 +88,6 @@ public class CommCommodityAdapter extends RecyclerView.Adapter<CommCommodityAdap
     public int getItemViewType(int position) {
         return position;
     }
-
 
 
 }

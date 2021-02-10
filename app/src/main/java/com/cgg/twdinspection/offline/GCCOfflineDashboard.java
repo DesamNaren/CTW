@@ -15,7 +15,6 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.databinding.ActivityGccOfflineDashboardBinding;
-import com.cgg.twdinspection.gcc.reports.ui.GCCReportActivity;
 import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
@@ -40,7 +39,6 @@ public class GCCOfflineDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_gcc_offline_dashboard);
         binding.header.headerTitle.setText(getString(R.string.gcc_reports_offline));
-
 
 
         binding.header.ivHome.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +86,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
             public void onClick(View view) {
                 if (drGodown != null && drGodown.size() > 0) {
                     startActivity(new Intent(GCCOfflineDashboard.this, GCCOfflineDataActivity.class)
-                    .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_GODOWN));
+                            .putExtra(AppConstants.FROM_CLASS, AppConstants.OFFLINE_DR_GODOWN));
                 } else {
                     callSnackBar("No data found");
                 }
@@ -158,7 +156,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 drGodownLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (drGodown != null && drGodown.size() > 0) {
                     binding.drGodownCnt.setText(String.valueOf(drGodown.size()));
-                }else {
+                } else {
                     binding.drGodownCnt.setText(R.string.na);
                 }
             }
@@ -173,7 +171,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 drDepotLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (drDepot != null && drDepot.size() > 0) {
                     binding.drDepotCnt.setText(String.valueOf(drDepot.size()));
-                }else {
+                } else {
                     binding.drDepotCnt.setText(R.string.na);
                 }
             }
@@ -188,7 +186,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 mfpGodownLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (mfpGodown != null && mfpGodown.size() > 0) {
                     binding.mfpGodownCnt.setText(String.valueOf(mfpGodown.size()));
-                }else {
+                } else {
                     binding.mfpGodownCnt.setText(R.string.na);
                 }
             }
@@ -203,7 +201,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 pUnitLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (processingUnit != null && processingUnit.size() > 0) {
                     binding.pUnitCnt.setText(String.valueOf(processingUnit.size()));
-                }else {
+                } else {
                     binding.pUnitCnt.setText(R.string.na);
                 }
             }
@@ -217,7 +215,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 petrolPumpLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (petrolpump != null && petrolpump.size() > 0) {
                     binding.petrolPumpCnt.setText(String.valueOf(petrolpump.size()));
-                }else {
+                } else {
                     binding.petrolPumpCnt.setText(R.string.na);
                 }
             }
@@ -231,7 +229,7 @@ public class GCCOfflineDashboard extends AppCompatActivity {
                 lpgLiveData.removeObservers(GCCOfflineDashboard.this);
                 if (lpg != null && lpg.size() > 0) {
                     binding.lpgCnt.setText(String.valueOf(lpg.size()));
-                }else {
+                } else {
                     binding.lpgCnt.setText(R.string.na);
                 }
             }

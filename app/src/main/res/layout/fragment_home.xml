@@ -209,6 +209,7 @@
                         android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         app:cardElevation="5dp">
+
                         <LinearLayout
                             android:id="@+id/btn_eng_works"
                             android:layout_width="match_parent"
@@ -250,6 +251,7 @@
                         android:layout_marginBottom="@dimen/dimen_10dp"
                         android:layout_weight="1"
                         app:cardElevation="5dp">
+
                         <LinearLayout
                             android:id="@+id/btn_reports"
                             android:layout_width="match_parent"

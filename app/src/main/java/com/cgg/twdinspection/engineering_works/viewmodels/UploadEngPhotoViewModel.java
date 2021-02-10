@@ -10,8 +10,6 @@ import com.cgg.twdinspection.engineering_works.interfaces.UploadEngPhotosSubmitI
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksRequest;
 import com.cgg.twdinspection.engineering_works.source.SubmitEngWorksResponse;
 import com.cgg.twdinspection.gcc.source.submit.GCCPhotoSubmitResponse;
-import com.cgg.twdinspection.gcc.source.submit.GCCSubmitRequest;
-import com.cgg.twdinspection.gcc.source.submit.GCCSubmitResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.google.gson.Gson;
 
@@ -41,9 +39,9 @@ public class UploadEngPhotoViewModel extends ViewModel {
     }
 
     public void submitEngWorksDetails(SubmitEngWorksRequest engWorksRequest) {
-        Gson gson=new Gson();
-        String request=gson.toJson(engWorksRequest);
-        Log.i("Request",request);
+        Gson gson = new Gson();
+        String request = gson.toJson(engWorksRequest);
+        Log.i("Request", request);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getEngWorksSubmitResponse(engWorksRequest).enqueue(new Callback<SubmitEngWorksResponse>() {
             @Override

@@ -217,7 +217,6 @@ public class AcademicEntity {
     public String eLearning_stud_using_as_per_sched;
 
 
-
     public int getId() {
         return id;
     }
@@ -659,7 +658,6 @@ public class AcademicEntity {
     public void seteLearningInchargeName(String eLearningInchargeName) {
         this.eLearningInchargeName = eLearningInchargeName;
     }
-
 
 
     public String getSeparate_timetable_disp() {

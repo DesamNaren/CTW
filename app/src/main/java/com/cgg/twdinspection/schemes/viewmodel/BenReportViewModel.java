@@ -11,12 +11,12 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.network.TWDService;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityBeneficiaryReportBinding;
+import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 import com.cgg.twdinspection.schemes.room.repository.SchemesInfoRepository;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryReport;
 import com.cgg.twdinspection.schemes.source.bendetails.BeneficiaryRequest;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
-import com.cgg.twdinspection.databinding.ActivitySchemeReportBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +38,7 @@ public class BenReportViewModel extends ViewModel {
 
     BenReportViewModel(ActivityBeneficiaryReportBinding binding, Activity context) {
         this.binding = binding;
-        this.context= context;
+        this.context = context;
         beneficiaryLiveData = new MutableLiveData<>();
         schemesMutableLiveData = new MutableLiveData<>();
         schemesInfoRepository = new SchemesInfoRepository(context);
@@ -49,8 +49,8 @@ public class BenReportViewModel extends ViewModel {
         }
     }
 
-    public BenReportViewModel( Activity context) {
-        this.context= context;
+    public BenReportViewModel(Activity context) {
+        this.context = context;
         schemesMutableLiveData = new MutableLiveData<>();
         schemesInfoRepository = new SchemesInfoRepository(context);
         try {
@@ -61,15 +61,14 @@ public class BenReportViewModel extends ViewModel {
     }
 
 
-
     public LiveData<BeneficiaryReport> getBeneficiaryInfo(BeneficiaryRequest beneficiaryRequest) {
         if (beneficiaryLiveData != null) {
             if (Utils.checkInternetConnection(context)) {
                 getBeneficiaryDetails(beneficiaryRequest);
-            }else{
+            } else {
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 binding.recyclerView.setVisibility(View.GONE);
-                Utils.customWarningAlert(context,context.getResources().getString(R.string.app_name),"Please check internet",true);
+                Utils.customWarningAlert(context, context.getResources().getString(R.string.app_name), "Please check internet", true);
             }
         }
         return beneficiaryLiveData;

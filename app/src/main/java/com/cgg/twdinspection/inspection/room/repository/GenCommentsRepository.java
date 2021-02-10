@@ -18,7 +18,8 @@ import io.reactivex.schedulers.Schedulers;
 public class GenCommentsRepository {
 
     public GenCommentsInfoDao genCommentsInfoDao;
-    private String tag= GenCommentsRepository.class.getSimpleName();
+    private String tag = GenCommentsRepository.class.getSimpleName();
+
     // Note that in order to unit test the WordRepository, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
@@ -45,27 +46,27 @@ public class GenCommentsRepository {
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i("Tag", tag+"onSubscribe: ");
+                Log.i("Tag", tag + "onSubscribe: ");
             }
 
             @Override
             public void onNext(Long aLong) {
                 x = aLong;
 //                flag = true;
-                Log.i("Tag", tag+"onNext: " + x);
+                Log.i("Tag", tag + "onNext: " + x);
             }
 
 
             @Override
             public void onError(Throwable e) {
 //                flag = false;
-                Log.i("Tag", tag+"onError: " + x);
+                Log.i("Tag", tag + "onError: " + x);
             }
 
             @Override
             public void onComplete() {
 //                flag = true;
-                Log.i("Tag", tag+"onComplete: " + x);
+                Log.i("Tag", tag + "onComplete: " + x);
             }
         };
 
@@ -74,7 +75,6 @@ public class GenCommentsRepository {
                 .subscribe(observer);
         return x;
     }
-
 
 
     public long updateGeneralCommentsInfo(GeneralCommentsEntity generalCommentsEntity) {

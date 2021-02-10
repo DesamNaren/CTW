@@ -13,14 +13,16 @@ public class StaffInfoConverter {
     @TypeConverter
     public static List<MasterStaffInfo> stringToStaff(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MasterStaffInfo>>() {}.getType();
+        Type type = new TypeToken<List<MasterStaffInfo>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String staffToString(List<MasterStaffInfo> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<MasterStaffInfo>>() {}.getType();
+        Type type = new TypeToken<List<MasterStaffInfo>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

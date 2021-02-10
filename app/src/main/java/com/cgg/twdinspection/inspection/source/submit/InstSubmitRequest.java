@@ -1,18 +1,16 @@
 package com.cgg.twdinspection.inspection.source.submit;
 
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
+import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
+import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.entitlements_distribution.EntitlementsEntity;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
-import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
-import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
-import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
+import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 

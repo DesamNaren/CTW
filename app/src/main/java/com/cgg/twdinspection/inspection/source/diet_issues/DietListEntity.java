@@ -7,8 +7,6 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.math.BigDecimal;
-
 @Entity(tableName = "diet_list_info")
 public class DietListEntity {
 

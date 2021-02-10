@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,17 +29,19 @@
                     <include
                         android:id="@+id/eng_details"
                         layout="@layout/activity_eng_report_details" />
-                <include
+
+                    <include
                         android:id="@+id/photos"
                         layout="@layout/activity_view_eng_photos" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
+
         <include
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:id="@+id/btnLayout"
-            layout="@layout/buttons_layout"/>
+            layout="@layout/buttons_layout" />
     </RelativeLayout>
 </layout>

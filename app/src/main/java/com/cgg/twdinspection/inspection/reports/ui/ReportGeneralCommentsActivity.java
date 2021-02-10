@@ -59,8 +59,8 @@ public class ReportGeneralCommentsActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         inspReportData = gson.fromJson(data, InspReportData.class);
 
-        String jsonObject  = gson.toJson(inspReportData.getGeneralComments());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(inspReportData.getGeneralComments());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setComments(inspReportData.getGeneralComments());
             binding.etAnaemicStudCnt.setText(inspReportData.getAcademicOverview().getLastYrSscPercent());
             binding.executePendingBindings();

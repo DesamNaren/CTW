@@ -1,30 +1,16 @@
 package com.cgg.twdinspection.inspection.reports.adapter;
 
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.databinding.AcademicGradeItemBinding;
 import com.cgg.twdinspection.databinding.ReportAcademicGradeItemBinding;
-import com.cgg.twdinspection.inspection.interfaces.AcademicGradeInterface;
 import com.cgg.twdinspection.inspection.reports.source.AcademicGradeEntity;
 
 import java.util.List;
@@ -57,7 +43,6 @@ public class ReportAcademicGradeAdapter extends RecyclerView.Adapter<ReportAcade
 
         holder.bind(dataModel);
     }
-
 
 
     @Override

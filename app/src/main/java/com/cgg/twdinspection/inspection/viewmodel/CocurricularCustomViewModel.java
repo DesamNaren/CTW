@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.databinding.ActivityCoCurricularBinding;
-import com.cgg.twdinspection.databinding.ActivityEntitlementsBinding;
 
 
 public class CocurricularCustomViewModel implements ViewModelProvider.Factory {

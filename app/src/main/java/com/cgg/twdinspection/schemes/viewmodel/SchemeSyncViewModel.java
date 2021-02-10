@@ -15,7 +15,6 @@ import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
 
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,8 +30,8 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public SchemeSyncViewModel(Context context, Application application, ActivitySchemeSyncBinding binding) {
         super(application);
-        this.context=context;
-        this.binding=binding;
+        this.context = context;
+        this.binding = binding;
         schemeDMVResponseMutableLiveData = new MutableLiveData<>();
         financialYearResponseMutableLiveData = new MutableLiveData<>();
         inspectionRemarkResponseMutableLiveData = new MutableLiveData<>();
@@ -44,7 +43,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
     public LiveData<SchemeDMVResponse> getSchemeDMVReposnse() {
         if (schemeDMVResponseMutableLiveData != null) {
 
-                getSchemeDMVReposnseCall();
+            getSchemeDMVReposnseCall();
 
         }
         return schemeDMVResponseMutableLiveData;
@@ -54,14 +53,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeDMV().enqueue(new Callback<SchemeDMVResponse>() {
             @Override
-            public void onResponse( Call<SchemeDMVResponse> call,  Response<SchemeDMVResponse> response) {
+            public void onResponse(Call<SchemeDMVResponse> call, Response<SchemeDMVResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     schemeDMVResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure( Call<SchemeDMVResponse> call,  Throwable t) {
+            public void onFailure(Call<SchemeDMVResponse> call, Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -78,13 +77,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getFinancialYears().enqueue(new Callback<FinancialYearResponse>() {
             @Override
-            public void onResponse( Call<FinancialYearResponse> call,  Response<FinancialYearResponse> response) {
+            public void onResponse(Call<FinancialYearResponse> call, Response<FinancialYearResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                        financialYearResponseMutableLiveData.setValue(response.body());
+                    financialYearResponseMutableLiveData.setValue(response.body());
                 }
             }
+
             @Override
-            public void onFailure( Call<FinancialYearResponse> call,  Throwable t) {
+            public void onFailure(Call<FinancialYearResponse> call, Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -92,7 +92,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public LiveData<InspectionRemarkResponse> getInspectionRemarks() {
         if (inspectionRemarkResponseMutableLiveData != null) {
-                getInspectionRemarksCall();
+            getInspectionRemarksCall();
 
         }
         return inspectionRemarkResponseMutableLiveData;
@@ -102,14 +102,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getInspectionRemarks().enqueue(new Callback<InspectionRemarkResponse>() {
             @Override
-            public void onResponse( Call<InspectionRemarkResponse> call,  Response<InspectionRemarkResponse> response) {
+            public void onResponse(Call<InspectionRemarkResponse> call, Response<InspectionRemarkResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                        inspectionRemarkResponseMutableLiveData.setValue(response.body());
+                    inspectionRemarkResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure( Call<InspectionRemarkResponse> call,  Throwable t) {
+            public void onFailure(Call<InspectionRemarkResponse> call, Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -117,7 +117,7 @@ public class SchemeSyncViewModel extends AndroidViewModel {
 
     public LiveData<SchemeResponse> getSchemeResponse() {
         if (schemeResponseMutableLiveData != null) {
-                getSchemeResponseCall();
+            getSchemeResponseCall();
         }
         return schemeResponseMutableLiveData;
     }
@@ -126,14 +126,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeResponse().enqueue(new Callback<SchemeResponse>() {
             @Override
-            public void onResponse( Call<SchemeResponse> call,  Response<SchemeResponse> response) {
+            public void onResponse(Call<SchemeResponse> call, Response<SchemeResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                        schemeResponseMutableLiveData.setValue(response.body());
+                    schemeResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure( Call<SchemeResponse> call,  Throwable t) {
+            public void onFailure(Call<SchemeResponse> call, Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });

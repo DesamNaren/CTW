@@ -11,6 +11,7 @@
         <variable
             name="imageUrl"
             type="String" />
+
         <variable
             name="drgodown"
             type="com.cgg.twdinspection.gcc.reports.source.DrGodownInspReport" />
@@ -26,7 +27,7 @@
         <variable
             name="pUnit"
             type="com.cgg.twdinspection.gcc.source.inspections.processingUnit.PUnitInsp" />
-        
+
         <variable
             name="petrolpump"
             type="com.cgg.twdinspection.gcc.reports.source.PetrolPumpInspRep" />
@@ -7997,6 +7998,6 @@
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        
+
     </RelativeLayout>
 </layout>

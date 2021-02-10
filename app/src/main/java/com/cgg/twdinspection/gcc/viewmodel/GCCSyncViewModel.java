@@ -117,6 +117,7 @@ public class GCCSyncViewModel extends AndroidViewModel {
         }
         return lpgMasterResponseMutableLiveData;
     }
+
     private void getDRDepotMasterCall() {
         TWDService twdService = TWDService.Factory.create("gcc");
         twdService.getDRDepotMasterResponse().enqueue(new Callback<DRDepotMasterResponse>() {

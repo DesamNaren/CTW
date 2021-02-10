@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cgg.twdinspection.databinding.ActivityCocurricularAchDetailsBinding;
 import com.cgg.twdinspection.databinding.ActivityPlantsInfoBinding;
 
 

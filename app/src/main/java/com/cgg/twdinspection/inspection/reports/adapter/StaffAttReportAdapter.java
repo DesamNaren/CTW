@@ -21,14 +21,14 @@ import java.util.List;
 public class StaffAttReportAdapter extends RecyclerView.Adapter<StaffAttReportAdapter.ItemHolder> implements Filterable {
 
     private Context context;
-    private List<StaffAttendenceInfo>  list;
+    private List<StaffAttendenceInfo> list;
     private List<StaffAttendenceInfo> filterList;
     private InspReportClickCallback inspreportClickCallback;
 
-    public StaffAttReportAdapter(Context context, List<StaffAttendenceInfo>  list) {
+    public StaffAttReportAdapter(Context context, List<StaffAttendenceInfo> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             inspreportClickCallback = (InspReportClickCallback) context;
@@ -36,6 +36,7 @@ public class StaffAttReportAdapter extends RecyclerView.Adapter<StaffAttReportAd
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -118,7 +119,7 @@ public class StaffAttReportAdapter extends RecyclerView.Adapter<StaffAttReportAd
         return position;
     }
 
-    public  void setData(List<StaffAttendenceInfo> staffAttendenceInfos){
+    public void setData(List<StaffAttendenceInfo> staffAttendenceInfos) {
         filterList.clear();
         filterList.addAll(staffAttendenceInfos);
         notifyDataSetChanged();

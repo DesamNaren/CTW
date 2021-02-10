@@ -48,7 +48,7 @@
                 android:layout_gravity="top|center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:id="@+id/header_tv"/>
+                android:id="@+id/header_tv" />
 
             <ImageView
                 android:id="@+id/close"

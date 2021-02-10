@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.databinding.ActivityReportEntitlementsBinding;
 import com.cgg.twdinspection.databinding.ActivityReportRegistersBinding;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.ui.BaseActivity;
@@ -52,8 +51,8 @@ public class ReportsRegistersActivity extends BaseActivity {
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
         reportData = gson.fromJson(data, InspReportData.class);
 
-        String jsonObject  = gson.toJson(reportData.getRegisters());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(reportData.getRegisters());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getRegisters());
             binding.executePendingBindings();
         }

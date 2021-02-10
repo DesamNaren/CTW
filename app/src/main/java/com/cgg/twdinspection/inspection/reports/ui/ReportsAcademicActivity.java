@@ -55,9 +55,8 @@ public class ReportsAcademicActivity extends BaseActivity {
         reportData = gson.fromJson(data, InspReportData.class);
 
 
-
-        String jsonObject  = gson.toJson(reportData.getAcademicOverview());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(reportData.getAcademicOverview());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setInspData(reportData.getAcademicOverview());
             binding.executePendingBindings();
 
@@ -66,7 +65,7 @@ public class ReportsAcademicActivity extends BaseActivity {
         binding.btnAddStud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ReportsAcademicActivity.this,ReportAcademicGradeActivity.class));
+                startActivity(new Intent(ReportsAcademicActivity.this, ReportAcademicGradeActivity.class));
             }
         });
 

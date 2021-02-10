@@ -26,4 +26,5 @@ public class Photo {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }}
+    }
+}

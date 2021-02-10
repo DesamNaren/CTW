@@ -19,7 +19,6 @@ import com.cgg.twdinspection.schemes.source.submit.SchemeSubmitRequest;
 import com.cgg.twdinspection.schemes.source.submit.SchemeSubmitResponse;
 import com.google.gson.Gson;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -40,14 +39,15 @@ public class BenDetailsViewModel extends ViewModel {
     private ErrorHandlerInterface errorHandlerInterface;
     private SchemeSubmitInterface schemeSubmitInterface;
 
-   public BenDetailsViewModel(
-                        Context context) {
+    public BenDetailsViewModel(
+            Context context) {
 
         this.context = context;
 
         remarksRepository = new InspectionRemarksRepository(context);
 
     }
+
     BenDetailsViewModel(BeneficiaryDetail beneficiaryDetail,
                         ActivityBenDetailsActivtyBinding benDetailsActivtyBinding,
                         Context context) {
@@ -75,9 +75,9 @@ public class BenDetailsViewModel extends ViewModel {
     }
 
     public void submitSchemeDetails(SchemeSubmitRequest schemeSubmitRequest) {
-        Gson gson=new Gson();
-        String req=gson.toJson(schemeSubmitRequest);
-        Log.i("schemesRequest",req);
+        Gson gson = new Gson();
+        String req = gson.toJson(schemeSubmitRequest);
+        Log.i("schemesRequest", req);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getSchemeSubmitResponse(schemeSubmitRequest).enqueue(new Callback<SchemeSubmitResponse>() {
             @Override

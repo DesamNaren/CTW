@@ -18,18 +18,19 @@ import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchiev
 
 import java.util.List;
 
-public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievementsAdapter.ItemHolder>{
+public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievementsAdapter.ItemHolder> {
     private Context context;
     private StudAchievementsInterface studAchievementsInterface;
     private List<StudAchievementEntity> studAchievementEntities;
     private String fromClass;
+
     public StudAchievementsAdapter(Context context, List<StudAchievementEntity> studAchievementEntities, String fromClass) {
         this.context = context;
         this.studAchievementEntities = studAchievementEntities;
         this.fromClass = fromClass;
         try {
-            studAchievementsInterface=(StudAchievementsInterface) context;
-        }catch (Exception e){
+            studAchievementsInterface = (StudAchievementsInterface) context;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -40,9 +41,9 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
         AdapterCocurricularStudBinding listItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.adapter_cocurricular_stud, parent, false);
-        if(fromClass!=null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)){
+        if (fromClass != null && fromClass.equalsIgnoreCase(AppConstants.REPORT_COCAR)) {
             listItemBinding.ivDelete.setVisibility(View.GONE);
-        }else {
+        } else {
             listItemBinding.ivDelete.setVisibility(View.VISIBLE);
         }
 
@@ -54,7 +55,7 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
         final StudAchievementEntity dataModel = studAchievementEntities.get(i);
         holder.listItemBinding.setCocurricularStud(dataModel);
 
-        holder.listItemBinding.tvSlNo.setText(String.valueOf(i+1));
+        holder.listItemBinding.tvSlNo.setText(String.valueOf(i + 1));
         holder.listItemBinding.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +70,7 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
 
     @Override
     public int getItemCount() {
-        return studAchievementEntities!=null && studAchievementEntities.size()>0? studAchievementEntities.size():0;
+        return studAchievementEntities != null && studAchievementEntities.size() > 0 ? studAchievementEntities.size() : 0;
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
@@ -88,6 +89,7 @@ public class StudAchievementsAdapter extends RecyclerView.Adapter<StudAchievemen
         }
 
     }
+
     @Override
     public long getItemId(int position) {
         return position;

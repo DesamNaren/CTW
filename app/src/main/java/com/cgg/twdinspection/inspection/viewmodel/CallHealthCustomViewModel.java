@@ -6,9 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cgg.twdinspection.databinding.ActivityAcademicBinding;
-import com.cgg.twdinspection.databinding.ActivityCallHealthBinding;
-
 
 public class CallHealthCustomViewModel implements ViewModelProvider.Factory {
     private Context context;

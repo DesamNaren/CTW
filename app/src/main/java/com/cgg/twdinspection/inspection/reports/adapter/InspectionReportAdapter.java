@@ -32,7 +32,7 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
     public InspectionReportAdapter(Context context, List<InspReportData> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             inspreportClickCallback = (InspReportClickCallback) context;
@@ -40,6 +40,7 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
             e.printStackTrace();
         }
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -77,6 +78,7 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -94,11 +96,11 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
                 } else {
                     for (InspReportData otData : list) {
                         if (otData.getInstituteName().toLowerCase().contains(charString.toLowerCase())
-                        ||
+                                ||
                                 otData.getDistName().toLowerCase().contains(charString.toLowerCase())
-                        ||
+                                ||
                                 otData.getMandalName().toLowerCase().contains(charString.toLowerCase())
-                        ||
+                                ||
                                 otData.getVillageName().toLowerCase().contains(charString.toLowerCase())) {
                             filterList.add(otData);
                         }
@@ -144,7 +146,7 @@ public class InspectionReportAdapter extends RecyclerView.Adapter<InspectionRepo
         return position;
     }
 
-    public  void setData(List<InspReportData> beneficiaryDetailArrayList){
+    public void setData(List<InspReportData> beneficiaryDetailArrayList) {
         filterList.clear();
         filterList.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

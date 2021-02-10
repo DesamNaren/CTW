@@ -23,7 +23,7 @@ public class PlantsInfoViewModel extends ViewModel {
         this.application = application;
         this.binding = binding;
         mRepository = new PlantsInfoRepository(application);
-        plantsLiveData =new MutableLiveData<>();
+        plantsLiveData = new MutableLiveData<>();
     }
 
     public LiveData<List<PlantsEntity>> getPlantsData() {

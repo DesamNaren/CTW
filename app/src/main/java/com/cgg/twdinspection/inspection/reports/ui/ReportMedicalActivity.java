@@ -54,12 +54,12 @@ public class ReportMedicalActivity extends BaseActivity {
         instId = sharedPreferences.getString(AppConstants.INST_ID, "");
         officerId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
 
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         String data = sharedPreferences.getString(AppConstants.INSP_REP_DATA, "");
-        inspReportData=gson.fromJson(data, InspReportData.class);
+        inspReportData = gson.fromJson(data, InspReportData.class);
 
-        String jsonObject  = gson.toJson(inspReportData.getMedicalIssues());
-        if(!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
+        String jsonObject = gson.toJson(inspReportData.getMedicalIssues());
+        if (!TextUtils.isEmpty(jsonObject) && !jsonObject.equalsIgnoreCase("{}")) {
             binding.setMedical(inspReportData.getMedicalIssues());
             binding.executePendingBindings();
         }

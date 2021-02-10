@@ -1,9 +1,5 @@
 package com.cgg.twdinspection.engineering_works.adapters;
 
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,15 +11,15 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
-import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.AdapterEngWorksBinding;
-import com.cgg.twdinspection.databinding.AdapterEngWorksBinding;
-import com.cgg.twdinspection.engineering_works.reports.interfaces.EngReportClickCallback;
 import com.cgg.twdinspection.engineering_works.source.WorkDetail;
-import com.cgg.twdinspection.engineering_works.ui.EngineeringDashboardActivity;
 import com.cgg.twdinspection.engineering_works.ui.InspectionDetailsActivity;
 import com.google.gson.Gson;
 
@@ -42,7 +38,7 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
     public EngWorksAdapter(Context context, List<WorkDetail> list) {
         this.context = context;
         this.list = list;
-        filterList=new ArrayList<>();
+        filterList = new ArrayList<>();
         filterList.addAll(list);
         try {
             sharedPreferences = TWDApplication.get(context).getPreferences();
@@ -52,6 +48,7 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
         }
 
     }
+
     private int lastPosition = -1;
 
     @NonNull
@@ -73,9 +70,9 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
         holder.listItemBinding.cvEngReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Gson gson=new Gson();
-                String worksMaster =gson.toJson(dataModel);
-                editor.putString(AppConstants.ENGWORKSMASTER,worksMaster);
+                Gson gson = new Gson();
+                String worksMaster = gson.toJson(dataModel);
+                editor.putString(AppConstants.ENGWORKSMASTER, worksMaster);
                 editor.commit();
                 context.startActivity(new Intent(context, InspectionDetailsActivity.class));
 
@@ -94,6 +91,7 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
             lastPosition = position;
         }
     }
+
     @Override
     public int getItemCount() {
         return filterList != null && filterList.size() > 0 ? filterList.size() : 0;
@@ -156,7 +154,7 @@ public class EngWorksAdapter extends RecyclerView.Adapter<EngWorksAdapter.ItemHo
         return position;
     }
 
-    public  void setData(List<WorkDetail> beneficiaryDetailArrayList){
+    public void setData(List<WorkDetail> beneficiaryDetailArrayList) {
         filterList.clear();
         filterList.addAll(beneficiaryDetailArrayList);
         notifyDataSetChanged();

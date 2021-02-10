@@ -126,7 +126,7 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String construction_part_type;
 
-     @ColumnInfo()
+    @ColumnInfo()
     private String compWall_cnt;
 
     @ColumnInfo()
@@ -138,7 +138,7 @@ public class InfraStructureEntity {
     @ColumnInfo()
     private String bunker_beds;
 
-     @ColumnInfo()
+    @ColumnInfo()
     private String bunker_beds_cnt;
 
     @ColumnInfo()

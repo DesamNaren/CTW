@@ -23,19 +23,22 @@ public class InstSelectionRepository {
     }
 
     public LiveData<InstSelectionInfo> getSelectedInst() {
-        if(infoLiveData!=null){
+        if (infoLiveData != null) {
             infoLiveData = instSelectionDao.getInstSelection();
         }
         return infoLiveData;
     }
-    public void insertSelInst(InstSelInterface instSelInterface,InstSelectionInfo instSelectionInfo) {
-        new InsertDivisionAsyncTask(instSelInterface,instSelectionInfo).execute();
+
+    public void insertSelInst(InstSelInterface instSelInterface, InstSelectionInfo instSelectionInfo) {
+        new InsertDivisionAsyncTask(instSelInterface, instSelectionInfo).execute();
     }
+
     @SuppressLint("StaticFieldLeak")
     private class InsertDivisionAsyncTask extends AsyncTask<Void, Void, Integer> {
         InstSelectionInfo instSelectionInfo;
         InstSelInterface instSelInterface;
-        InsertDivisionAsyncTask(InstSelInterface instSelInterface,InstSelectionInfo instSelectionInfo) {
+
+        InsertDivisionAsyncTask(InstSelInterface instSelInterface, InstSelectionInfo instSelectionInfo) {
             this.instSelectionInfo = instSelectionInfo;
             this.instSelInterface = instSelInterface;
 

@@ -55,7 +55,6 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 
@@ -92,8 +91,8 @@ public class LocBaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences= TWDApplication.get(this).getPreferences();
-        instMainViewModel=new InstMainViewModel(getApplication());
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        instMainViewModel = new InstMainViewModel(getApplication());
         callPermissions();
     }
 

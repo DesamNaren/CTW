@@ -20,7 +20,8 @@
             android:id="@+id/tv_empty"
             android:text="No records found"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <ProgressBar
             android:layout_centerInParent="true"
             android:id="@+id/progress"

@@ -84,6 +84,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return petrolSuppliers;
     }
+
     public LiveData<List<LPGSupplierInfo>> getLPGSuppliers(String divId, String socId) {
         if (lpgSuppliers != null) {
             lpgSuppliers = mRepository.getLPGSuppliers(divId, socId);
@@ -97,6 +98,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return allDrGodowns;
     }
+
     public LiveData<List<DivisionsInfo>> getAllDivisionsMaster() {
         if (allDivisions != null) {
             allDivisions = mRepository.getAllDivisions();
@@ -125,6 +127,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return drDepots;
     }
+
     public LiveData<List<DRDepots>> getAllDRDepots() {
         if (allDrDepots != null) {
             allDrDepots = mRepository.getAllDRDepots();
@@ -153,6 +156,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return pUnits;
     }
+
     public LiveData<List<PUnits>> getAllPUnits() {
         if (allpUnits != null) {
             allpUnits = mRepository.getAllPUnits();
@@ -166,6 +170,7 @@ public class DivisionSelectionViewModel extends AndroidViewModel {
         }
         return pUnits;
     }
+
     public LiveData<String> getDivisionId(String divName) {
         return mRepository.getDivisionID(divName);
     }

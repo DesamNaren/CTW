@@ -1,11 +1,5 @@
 package com.cgg.twdinspection.gcc.reports.source;
 
-import android.widget.ImageView;
-
-import androidx.databinding.BindingAdapter;
-
-import com.bumptech.glide.Glide;
-import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownGeneralFindings;
 import com.cgg.twdinspection.gcc.source.inspections.godown.DrGodownRegisterBookCertificates;
 import com.google.gson.annotations.Expose;

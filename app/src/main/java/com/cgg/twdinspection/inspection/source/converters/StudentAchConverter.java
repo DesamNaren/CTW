@@ -13,14 +13,16 @@ public class StudentAchConverter {
     @TypeConverter
     public static List<StudAchievementEntity> stringToAch(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<StudAchievementEntity>>() {}.getType();
+        Type type = new TypeToken<List<StudAchievementEntity>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
     @TypeConverter
     public static String achToString(List<StudAchievementEntity> list) {
         Gson gson = new Gson();
-        Type type = new TypeToken<List<StudAchievementEntity>>() {}.getType();
+        Type type = new TypeToken<List<StudAchievementEntity>>() {
+        }.getType();
         return gson.toJson(list, type);
     }
 }

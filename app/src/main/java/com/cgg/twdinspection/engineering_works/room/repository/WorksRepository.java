@@ -18,18 +18,20 @@ public class WorksRepository {
     WorksDao worksDao;
     private LiveData<List<WorkDetail>> workDetailLiveData = new MutableLiveData<>();
     private int x;
+
     public WorksRepository(Application application) {
-        EngWorksDatabase database=EngWorksDatabase.getDatabase(application);
-        worksDao =database.worksDao();
+        EngWorksDatabase database = EngWorksDatabase.getDatabase(application);
+        worksDao = database.worksDao();
     }
-    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId,String mandId) {
-        if(workDetailLiveData !=null){
-            workDetailLiveData = worksDao.getWorkDetails(distId,mandId);
+
+    public LiveData<List<WorkDetail>> getSelWorkDetails(String distId, String mandId) {
+        if (workDetailLiveData != null) {
+            workDetailLiveData = worksDao.getWorkDetails(distId, mandId);
         }
         return workDetailLiveData;
     }
 
-    public int insertWorks(List<WorkDetail> workDetails){
+    public int insertWorks(List<WorkDetail> workDetails) {
         new InsertWorksAsyncTask(workDetails).execute();
         return x;
     }
@@ -50,8 +52,8 @@ public class WorksRepository {
         return worksDao.getMandalId(mandalName);
     }
 
-    public LiveData<Integer> getWorksCnt(){
-       return worksDao.getWorksCount();
+    public LiveData<Integer> getWorksCnt() {
+        return worksDao.getWorksCount();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -71,7 +73,7 @@ public class WorksRepository {
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-           x=integer;
+            x = integer;
         }
     }
 
@@ -80,7 +82,7 @@ public class WorksRepository {
     }
 
     public LiveData<List<WorkDetail>> getWorks() {
-        LiveData<List<WorkDetail>> works=worksDao.getWorks();
+        LiveData<List<WorkDetail>> works = worksDao.getWorks();
         return works;
     }
 

@@ -27,7 +27,6 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
 import com.cgg.twdinspection.gcc.ui.fragment.PLPGFragment;
-import com.cgg.twdinspection.gcc.ui.punit.PUnitActivity;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.viewmodel.StockViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
@@ -111,20 +110,20 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
         binding.bottomLl.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean existFlag=false;
+                boolean existFlag = false;
                 petrolStockDetailsResponseMain.setCommonCommodities(PLPGFragment.commonCommodities);
                 if (PLPGFragment.commonCommodities != null && PLPGFragment.commonCommodities.size() > 0) {
 
                     for (int z = 0; z < petrolStockDetailsResponseMain.getCommonCommodities().size(); z++) {
                         if (!TextUtils.isEmpty(petrolStockDetailsResponseMain.getCommonCommodities().get(z).getPhyQuant())) {
-                            existFlag=true;
+                            existFlag = true;
 //                            String header = petrolStockDetailsResponseMain.getCommonCommodities().get(0).getComHeader();
 //                            setFragPos(header, z);
                             break;
                         }
                     }
                 }
-                if(existFlag) {
+                if (existFlag) {
                     Gson gson = new Gson();
                     String stockData = gson.toJson(petrolStockDetailsResponseMain);
                     try {
@@ -136,7 +135,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                     editor.commit();
                     Intent intent = new Intent(PetrolPumpActivity.this, PetrolPumpFindingsActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Utils.customErrorAlert(PetrolPumpActivity.this, getResources().getString(R.string.app_name), getString(R.string.one_record));
                 }
             }
@@ -172,7 +171,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
                                     bundle.putString(AppConstants.petComm, petrolComm);
                                     plpgFragment.setArguments(bundle);
                                     adapter.addFrag(plpgFragment, "Petrol Commodities");
-                                }else {
+                                } else {
                                     binding.viewPager.setVisibility(View.GONE);
                                     binding.tabs.setVisibility(View.GONE);
                                     binding.noDataTv.setVisibility(View.VISIBLE);
@@ -234,7 +233,7 @@ public class PetrolPumpActivity extends AppCompatActivity implements ErrorHandle
 
     @Override
     public void onBackPressed() {
-        if (petrolStockDetailsResponseMain!=null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
+        if (petrolStockDetailsResponseMain != null && petrolStockDetailsResponseMain.getStatusCode().equalsIgnoreCase(AppConstants.SUCCESS_STRING_CODE)) {
             Utils.customDiscardAlert(this,
                     getResources().getString(R.string.app_name),
                     getString(R.string.are_go_back));

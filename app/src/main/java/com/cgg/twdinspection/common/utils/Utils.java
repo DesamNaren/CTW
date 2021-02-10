@@ -409,7 +409,6 @@ public class Utils {
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(newIntent);
                         activity.finish();
-                        activity.finish();
                     }
                 });
 
@@ -560,20 +559,20 @@ public class Utils {
                         if (dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        editor.putString(AppConstants.INST_ID, "");
-                        editor.putString(AppConstants.INST_NAME, "");
-                        editor.putInt(AppConstants.DIST_ID, -1);
-                        editor.putInt(AppConstants.MAN_ID, -1);
-                        editor.putInt(AppConstants.VILL_ID, -1);
-                        editor.putString(AppConstants.DIST_NAME, "");
-                        editor.putString(AppConstants.MAN_NAME, "");
-                        editor.putString(AppConstants.VIL_NAME, "");
-                        editor.putString(AppConstants.LAT, "");
-                        editor.putString(AppConstants.LNG, "");
-                        editor.putString(AppConstants.ADDRESS, "");
-
-                        editor.commit();
-                        instMainViewModel.deleteAllInspectionData();
+//                        editor.putString(AppConstants.INST_ID, "");
+//                        editor.putString(AppConstants.INST_NAME, "");
+//                        editor.putInt(AppConstants.DIST_ID, -1);
+//                        editor.putInt(AppConstants.MAN_ID, -1);
+//                        editor.putInt(AppConstants.VILL_ID, -1);
+//                        editor.putString(AppConstants.DIST_NAME, "");
+//                        editor.putString(AppConstants.MAN_NAME, "");
+//                        editor.putString(AppConstants.VIL_NAME, "");
+//                        editor.putString(AppConstants.LAT, "");
+//                        editor.putString(AppConstants.LNG, "");
+//                        editor.putString(AppConstants.ADDRESS, "");
+//
+//                        editor.commit();
+//                        instMainViewModel.deleteAllInspectionData();
 
                         Intent newIntent = new Intent(activity, LoginActivity.class);
                         newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |

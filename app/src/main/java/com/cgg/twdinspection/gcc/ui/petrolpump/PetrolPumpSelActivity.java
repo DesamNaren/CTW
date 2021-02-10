@@ -34,7 +34,6 @@ import com.cgg.twdinspection.gcc.source.offline.GccOfflineEntity;
 import com.cgg.twdinspection.gcc.source.stock.CommonCommodity;
 import com.cgg.twdinspection.gcc.source.stock.PetrolStockDetailsResponse;
 import com.cgg.twdinspection.gcc.source.suppliers.petrol_pump.PetrolSupplierInfo;
-import com.cgg.twdinspection.gcc.ui.mfpgodown.MFPGoDownSelActivity;
 import com.cgg.twdinspection.gcc.viewmodel.DivisionSelectionViewModel;
 import com.cgg.twdinspection.gcc.viewmodel.GCCOfflineViewModel;
 import com.cgg.twdinspection.inspection.ui.DashboardMenuActivity;
@@ -444,11 +443,11 @@ public class PetrolPumpSelActivity extends AppCompatActivity implements AdapterV
                                         binding.btnRemove.setVisibility(View.GONE);
                                         binding.btnProceed.setVisibility(View.VISIBLE);
                                     } else {
-                                        if(drGodowns.isFlag()){
+                                        if (drGodowns.isFlag()) {
                                             binding.llView.setVisibility(View.VISIBLE);
                                             binding.llDownload.setVisibility(View.GONE);
                                             binding.btnProceed.setVisibility(View.GONE);
-                                        }else {
+                                        } else {
                                             binding.llDownload.setVisibility(View.VISIBLE);
                                             binding.llView.setVisibility(View.GONE);
                                             binding.btnDownload.setText(R.string.re_download);

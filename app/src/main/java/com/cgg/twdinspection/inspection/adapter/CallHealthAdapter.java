@@ -14,18 +14,20 @@ import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.databinding.CallHealthRowBinding;
 import com.cgg.twdinspection.inspection.interfaces.MedicalInterface;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
+
 import java.util.List;
 
-public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.ItemHolder>{
+public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.ItemHolder> {
     private Context context;
     private List<CallHealthInfoEntity> callHealthInfoEntities;
     private MedicalInterface medicalInterface;
+
     public CallHealthAdapter(Context context, List<CallHealthInfoEntity> callHealthInfoEntities) {
         this.context = context;
         this.callHealthInfoEntities = callHealthInfoEntities;
         try {
-            medicalInterface=(MedicalInterface)context;
-        }catch (Exception e){
+            medicalInterface = (MedicalInterface) context;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -45,7 +47,7 @@ public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.It
         final CallHealthInfoEntity dataModel = callHealthInfoEntities.get(i);
         holder.listItemBinding.setCallModel(dataModel);
 
-        holder.listItemBinding.tvSlNo.setText(String.valueOf(i+1));
+        holder.listItemBinding.tvSlNo.setText(String.valueOf(i + 1));
         holder.listItemBinding.tvStuName.setText(String.valueOf(callHealthInfoEntities.get(i).getStu_name()));
         holder.listItemBinding.tvDisease.setText(String.valueOf(callHealthInfoEntities.get(i).getDisease()));
         holder.listItemBinding.tvDate.setText(String.valueOf(callHealthInfoEntities.get(i).getPlanDate()));
@@ -63,7 +65,7 @@ public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.It
 
     @Override
     public int getItemCount() {
-        return callHealthInfoEntities!=null && callHealthInfoEntities.size()>0? callHealthInfoEntities.size():0;
+        return callHealthInfoEntities != null && callHealthInfoEntities.size() > 0 ? callHealthInfoEntities.size() : 0;
     }
 
     class ItemHolder extends RecyclerView.ViewHolder {
@@ -82,6 +84,7 @@ public class CallHealthAdapter extends RecyclerView.Adapter<CallHealthAdapter.It
         }
 
     }
+
     @Override
     public long getItemId(int position) {
         return position;

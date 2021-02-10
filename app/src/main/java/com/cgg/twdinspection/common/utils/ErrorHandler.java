@@ -3,7 +3,6 @@ package com.cgg.twdinspection.common.utils;
 import android.content.Context;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.Utils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;

@@ -25,10 +25,11 @@ public class SchoolSyncViewModel extends AndroidViewModel {
     private Context context;
     private ErrorHandlerInterface errorHandlerInterface;
     private ActivitySchoolSyncBinding binding;
+
     public SchoolSyncViewModel(Context context, Application application, ActivitySchoolSyncBinding binding) {
         super(application);
-        this.context=context;
-        this.binding=binding;
+        this.context = context;
+        this.binding = binding;
         schoolDMVResponseMutableLiveData = new MutableLiveData<>();
         instMasterResponseMutableLiveData = new MutableLiveData<>();
         errorHandlerInterface = (ErrorHandlerInterface) context;
@@ -36,7 +37,7 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
     public LiveData<SchoolDMVResponse> getSchoolDMVReposnse(String officerID) {
         if (schoolDMVResponseMutableLiveData != null) {
-                getSchoolDMVResponseCall(officerID);
+            getSchoolDMVResponseCall(officerID);
         }
         return schoolDMVResponseMutableLiveData;
     }
@@ -65,7 +66,7 @@ public class SchoolSyncViewModel extends AndroidViewModel {
 
     public LiveData<InstMasterResponse> getInstMasterResponse() {
         if (instMasterResponseMutableLiveData != null) {
-                getInstMasterResponseCall();
+            getInstMasterResponseCall();
         }
         return instMasterResponseMutableLiveData;
     }

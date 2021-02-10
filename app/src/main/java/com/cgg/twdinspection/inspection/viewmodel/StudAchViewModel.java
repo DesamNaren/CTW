@@ -23,7 +23,7 @@ public class StudAchViewModel extends ViewModel {
         this.application = application;
         this.binding = binding;
         mRepository = new StudAchievementsRepository(application);
-        studAchievementsLiveData=new MutableLiveData<>();
+        studAchievementsLiveData = new MutableLiveData<>();
     }
 
     public LiveData<List<StudAchievementEntity>> getStudAchievementsData() {

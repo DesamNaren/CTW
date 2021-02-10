@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.common.network.TWDService;
-import com.cgg.twdinspection.gcc.reports.source.GCCReportResponse;
 import com.cgg.twdinspection.inspection.source.version_check.VersionResponse;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 

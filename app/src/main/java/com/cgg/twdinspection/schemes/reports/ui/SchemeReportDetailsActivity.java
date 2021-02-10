@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
-
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -108,7 +107,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                     List<View> views = new ArrayList<>();
                     views.add(binding.scrlPdf);
 
-                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath+ "_temp" + ".pdf", SchemeReportDetailsActivity.this, "schemes", "Schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath + "_temp" + ".pdf", SchemeReportDetailsActivity.this, "schemes", "Schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
@@ -251,6 +250,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         }
 
     }
+
     public void addWatermark() throws IOException, DocumentException {
 
         PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");

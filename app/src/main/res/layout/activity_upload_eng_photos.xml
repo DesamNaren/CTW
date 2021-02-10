@@ -16,6 +16,7 @@
         <include
             android:id="@+id/header"
             layout="@layout/action_bar_layout" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -184,6 +185,7 @@
 
             </LinearLayout>
         </ScrollView>
+
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="match_parent"
@@ -197,7 +199,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btn_layout"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
         <include
             android:id="@+id/btn_layout"
             layout="@layout/buttons_layout" />

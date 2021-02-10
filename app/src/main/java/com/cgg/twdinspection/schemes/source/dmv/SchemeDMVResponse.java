@@ -1,4 +1,5 @@
 package com.cgg.twdinspection.schemes.source.dmv;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

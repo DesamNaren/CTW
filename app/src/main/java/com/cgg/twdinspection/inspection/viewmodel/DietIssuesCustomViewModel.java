@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.databinding.ActivityDietIssuesBinding;
-import com.cgg.twdinspection.databinding.ActivityMedicalBinding;
 
 
 public class DietIssuesCustomViewModel implements ViewModelProvider.Factory {

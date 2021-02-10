@@ -26,18 +26,18 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
-import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.application.TWDApplication;
 import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.CustomProgressDialog;
+import com.cgg.twdinspection.common.utils.ErrorHandler;
 import com.cgg.twdinspection.common.utils.Utils;
+import com.cgg.twdinspection.databinding.ActivityInspReportBinding;
 import com.cgg.twdinspection.inspection.reports.adapter.InspectionReportAdapter;
 import com.cgg.twdinspection.inspection.reports.interfaces.InspReportClickCallback;
 import com.cgg.twdinspection.inspection.reports.source.InspReportData;
 import com.cgg.twdinspection.inspection.reports.source.InspReportResponse;
 import com.cgg.twdinspection.inspection.viewmodel.InspectionReportsViewModel;
 import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
-import com.cgg.twdinspection.databinding.ActivityInspReportBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -114,15 +114,15 @@ public class InspectionReportsDashboard extends AppCompatActivity implements Err
                                 adapter = new InspectionReportAdapter(InspectionReportsDashboard.this, inspReportDataList);
                                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(InspectionReportsDashboard.this));
                                 binding.recyclerView.setAdapter(adapter);
-                                if(mMenu!=null)
-                                mMenu.findItem(R.id.action_search).setVisible(true);
+                                if (mMenu != null)
+                                    mMenu.findItem(R.id.action_search).setVisible(true);
 
                             } else {
                                 binding.recyclerView.setVisibility(View.GONE);
                                 binding.tvEmpty.setVisibility(View.VISIBLE);
                                 callSnackBar("No data available");
-                                if(mMenu!=null)
-                                mMenu.findItem(R.id.action_search).setVisible(false);
+                                if (mMenu != null)
+                                    mMenu.findItem(R.id.action_search).setVisible(false);
                             }
 
                         } else if (inspReportResponse.getData() != null && inspReportResponse.getData().size() == 0) {

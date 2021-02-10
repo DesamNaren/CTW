@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.cgg.twdinspection.databinding.ActivityGeneralCommentsBinding;
-import com.cgg.twdinspection.databinding.ActivityRegistersBinding;
 
 
 public class GenCommentsCustomViewModel implements ViewModelProvider.Factory {

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -48,13 +47,14 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     CustomProgressDialog customProgressDialog;
     InstMainViewModel instMainViewModel;
     DMVDetailsViewModel dmvViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         customProgressDialog = new CustomProgressDialog(this);
 
         binding = DataBindingUtil.setContentView(SchoolSyncActivity.this, R.layout.activity_school_sync);
-       dmvViewModel = new DMVDetailsViewModel(getApplication());
+        dmvViewModel = new DMVDetailsViewModel(getApplication());
         SchoolSyncViewModel viewModel = new SchoolSyncViewModel(SchoolSyncActivity.this, getApplication(), binding);
         binding.setViewModel(viewModel);
         binding.executePendingBindings();
@@ -81,7 +81,8 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 if (schoolDistricts != null && schoolDistricts.size() > 0) {
                     binding.btnDmv.setText("Re-Download");
                 } else {
-                    binding.btnDmv.setText("Download");                }
+                    binding.btnDmv.setText("Download");
+                }
             }
         });
         dmvViewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
@@ -91,10 +92,10 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 if (masterInstituteInfos != null && masterInstituteInfos.size() > 0) {
                     binding.syncBtnYears.setText("Re-Download");
                 } else {
-                    binding.syncBtnYears.setText("Download");                }
+                    binding.syncBtnYears.setText("Download");
+                }
             }
         });
-
 
 
         binding.header.backBtn.setOnClickListener(new View.OnClickListener() {

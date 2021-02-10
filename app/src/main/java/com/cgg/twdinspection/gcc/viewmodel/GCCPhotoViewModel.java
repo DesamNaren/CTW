@@ -57,10 +57,11 @@ public class GCCPhotoViewModel extends ViewModel {
             e.printStackTrace();
         }
     }
+
     public void submitGCCDetails(GCCSubmitRequest gccSubmitRequest) {
-        Gson gson=new Gson();
-        String request=gson.toJson(gccSubmitRequest);
-        Log.i("Request",request);
+        Gson gson = new Gson();
+        String request = gson.toJson(gccSubmitRequest);
+        Log.i("Request", request);
         TWDService twdService = TWDService.Factory.create("school");
         twdService.getGCCSubmitResponse(gccSubmitRequest).enqueue(new Callback<GCCSubmitResponse>() {
             @Override

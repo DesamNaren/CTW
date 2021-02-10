@@ -3,11 +3,9 @@ package com.cgg.twdinspection.engineering_works.room.database;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cgg.twdinspection.engineering_works.room.dao.EngWorksSyncDao;
 import com.cgg.twdinspection.engineering_works.room.dao.GrantSchemeDao;
@@ -29,8 +27,11 @@ public abstract class EngWorksDatabase extends RoomDatabase {
     private static EngWorksDatabase INSTANCE;
 
     public abstract SectorsDao sectorsDao();
+
     public abstract WorksDao worksDao();
+
     public abstract GrantSchemeDao schemeDao();
+
     public abstract EngWorksSyncDao engWorksSyncDao();
 
     public static EngWorksDatabase getDatabase(final Context context) {
