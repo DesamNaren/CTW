@@ -31,8 +31,11 @@ import com.cgg.twdinspection.schemes.source.schemes.SchemeEntity;
 public abstract class SchemesDatabase extends RoomDatabase {
 
     public abstract SchemesInfoDao schemesInfoDao();
+
     public abstract SchemeDmvDao schemeDmvDao();
+
     public abstract SchemeSyncDao schemeSyncDao();
+
     public abstract InspectionRemarksDao inspectionRemarksDao();
 
 
@@ -43,28 +46,15 @@ public abstract class SchemesDatabase extends RoomDatabase {
             synchronized (SchemesDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            SchemesDatabase.class, "schemesDb.db")
+                            SchemesDatabase.class, "schemes.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
 //                            .createFromFile(new File("database/districts.json"))
-                            .createFromAsset("database/schemesDb.db")
+                            .createFromAsset("database/schemes.db")
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-
-    /**
-     * Override the onOpen method to populate the database.
-     * For this sample, we clear the database every time it is created or opened.
-     */
-    private static Callback sRoomDatabaseCallback = new Callback() {
-
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-        }
-    };
-
 }

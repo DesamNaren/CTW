@@ -12,13 +12,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -29,11 +29,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.BuildConfig;
@@ -62,25 +63,13 @@ import java.util.Random;
 import okhttp3.ResponseBody;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-import static android.Manifest.permission.READ_PHONE_STATE;
-
 public class UtilsCopy {
-    public static String getDeviceID(Context context) {
-        String deviceID = null;
-        try {
-            ContextCompat.checkSelfPermission(context, READ_PHONE_STATE);
 
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                deviceID = Settings.Secure.getString(
-                        context.getContentResolver(), Settings.Secure.ANDROID_ID);
-            } else {
-                deviceID = null;
-                deviceID = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                if (deviceID == null)
-                    deviceID = Settings.Secure.getString(context.getContentResolver(), "android_id");
-                if (deviceID == null)
-                    deviceID = "NODeviceID";
-            }
+    public static String getDeviceID(Context context) {
+        String deviceID = "";
+        try {
+            deviceID = Settings.Secure.getString(
+                    context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,15 +110,15 @@ public class UtilsCopy {
                 .load(photo)
                 .error(R.drawable.no_image)
                 .placeholder(R.drawable.camera)
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         pb.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         pb.setVisibility(View.GONE);
                         PhotoViewAttacher pAttacher;
                         pAttacher = new PhotoViewAttacher(imageView);
@@ -138,6 +127,7 @@ public class UtilsCopy {
                     }
                 })
                 .into(imageView);
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,8 +135,6 @@ public class UtilsCopy {
             }
         });
         dialog.show();
-
-
     }
 
     public static void hideKeyboard(Context context, View mView) {
@@ -211,7 +199,7 @@ public class UtilsCopy {
                             dialog.dismiss();
                         }
                         activity.startActivity(new Intent(activity, InstMenuMainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                         activity.finish();
                     }
                 });
@@ -629,7 +617,7 @@ public class UtilsCopy {
         // this will convert any number sequence into 6 character.
         String randomNum = String.format("%06d", number);
         String time = getRandomCurrentDateTime();
-        return  randomNum.concat(time);
+        return randomNum.concat(time);
     }
 
     public static void customErrorAlert(Context activity, String title, String msg) {
@@ -1083,13 +1071,13 @@ public class UtilsCopy {
                 TextView tvDesig = dialog.findViewById(R.id.designation);
                 TextView tvPlace = dialog.findViewById(R.id.place_of_work);
                 SharedPreferences sharedPreferences = TWDApplication.get(activity).getPreferences();
-                String userName=sharedPreferences.getString(AppConstants.OFFICER_NAME,"");
+                String userName = sharedPreferences.getString(AppConstants.OFFICER_NAME, "");
                 tvUserName.setText(userName);
-                String userId=sharedPreferences.getString(AppConstants.OFFICER_ID,"");
+                String userId = sharedPreferences.getString(AppConstants.OFFICER_ID, "");
                 tvUserId.setText(userId);
-                String designation=sharedPreferences.getString(AppConstants.OFFICER_DES,"");
+                String designation = sharedPreferences.getString(AppConstants.OFFICER_DES, "");
                 tvDesig.setText(designation);
-                String place=sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK,"");
+                String place = sharedPreferences.getString(AppConstants.OFF_PLACE_OF_WORK, "");
                 tvPlace.setText(place);
                 Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
                 btDialogYes.setOnClickListener(new View.OnClickListener() {
@@ -1126,13 +1114,14 @@ public class UtilsCopy {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+
     private static Uri fileUri;
     private static Uri imageUri;
     private static final int MEDIA_TYPE_IMAGE = 1;
     final static String dirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/CTW";
     private static File mediaFile;
 
-    public static void takeSCImage(Activity activity,Bitmap bitmap) {
+    public static void takeSCImage(Activity activity, Bitmap bitmap) {
         try {
             fileUri = getOutputMediaFileUri(activity, MEDIA_TYPE_IMAGE);
 
@@ -1143,6 +1132,7 @@ public class UtilsCopy {
             e.printStackTrace();
         }
     }
+
     public static Bitmap getScreenShot(View ll) {
         ll.setDrawingCacheEnabled(true);
         ll.buildDrawingCache(true);
@@ -1181,6 +1171,7 @@ public class UtilsCopy {
             e.printStackTrace();
         }
     }
+
     private static Uri getOutputMediaFileUri(Activity activity, int type) {
         File imageFile = getOutputMediaFile(type);
         imageUri = FileProvider.getUriForFile(
@@ -1198,7 +1189,7 @@ public class UtilsCopy {
 
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                     + getTimeStamp() + ".png");
+                    + getTimeStamp() + ".png");
         } else {
             return null;
         }

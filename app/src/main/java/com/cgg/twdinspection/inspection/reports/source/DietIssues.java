@@ -156,14 +156,4 @@ public class DietIssues {
     public void setId(String id) {
         this.id = id;
     }
-
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.loader_black1)
-                .into(view);
-    }
-
 }

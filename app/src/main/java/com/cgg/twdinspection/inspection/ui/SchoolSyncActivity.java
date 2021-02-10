@@ -46,7 +46,6 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
     SharedPreferences.Editor editor;
     private String officerId;
     CustomProgressDialog customProgressDialog;
-    private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     DMVDetailsViewModel dmvViewModel;
     @Override
@@ -84,7 +83,8 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 } else {
                     binding.btnDmv.setText("Download");                }
             }
-        }); dmvViewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
+        });
+        dmvViewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
             @Override
             public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
 
@@ -273,29 +273,9 @@ public class SchoolSyncActivity extends AppCompatActivity implements SchoolDMVIn
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
     }
 
     @Override

@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.StudAchDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class StudAchievementsRepository {
     private String tag= StudAchievementsRepository.class.getSimpleName();
 
     public StudAchievementsRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         studAchDao = db.studAchDao();
 
     }

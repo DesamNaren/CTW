@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.DietIssuesInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
 import com.cgg.twdinspection.inspection.source.diet_issues.DietListEntity;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
@@ -32,7 +32,7 @@ public class DietIssuesInfoRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public DietIssuesInfoRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         dietIssuesInfoDao = db.dietIssuesInfoDao();
 
     }

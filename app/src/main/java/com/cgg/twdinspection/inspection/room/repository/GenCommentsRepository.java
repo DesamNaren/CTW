@@ -4,10 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.cgg.twdinspection.inspection.room.Dao.GenCommentsInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
-import com.cgg.twdinspection.inspection.source.diet_issues.DietIssuesEntity;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.general_comments.GeneralCommentsEntity;
-import com.cgg.twdinspection.inspection.ui.GeneralCommentsActivity;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -26,7 +24,7 @@ public class GenCommentsRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public GenCommentsRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         genCommentsInfoDao = db.genCommentsInfoDao();
 
     }

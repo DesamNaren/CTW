@@ -51,16 +51,4 @@ public abstract class EngWorksDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    /**
-     * Override the onOpen method to populate the database.
-     * For this sample, we clear the database every time it is created or opened.
-     */
-    private static Callback sRoomDatabaseCallback = new Callback() {
-
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-        }
-    };
-
 }

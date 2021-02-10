@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.inspection.interfaces.InstSelInterface;
 import com.cgg.twdinspection.inspection.room.Dao.InstSelectionDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.inst_menu_info.InstSelectionInfo;
 
 public class InstSelectionRepository {
@@ -18,7 +18,7 @@ public class InstSelectionRepository {
     private InstSelectionDao instSelectionDao;
 
     public InstSelectionRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         instSelectionDao = db.instSelectionDao();
     }
 

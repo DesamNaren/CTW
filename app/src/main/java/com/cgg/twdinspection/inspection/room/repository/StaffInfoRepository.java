@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.StaffInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.staff_attendance.StaffAttendanceEntity;
 
@@ -30,7 +30,7 @@ public class StaffInfoRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public StaffInfoRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         staffInfoDao = db.staffInfoDao();
 
     }

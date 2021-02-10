@@ -93,6 +93,7 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public Uri fileUri;
     public static final String IMAGE_DIRECTORY_NAME = "GCC_IMAGES";
+    public static String IMAGE_DIRECTORY_NAME_MODE;
     String FilePath, checkUpDate;
     Bitmap bm;
     File file;
@@ -183,10 +184,12 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
                     flag = true;
                     binding.bottomLl.btnNext.setText(getString(R.string.save));
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.offline_mode));
+                    IMAGE_DIRECTORY_NAME_MODE = AppConstants.OFFLINE;
                 } else {
                     flag = false;
                     binding.bottomLl.btnNext.setText(getString(R.string.submit));
                     binding.header.ivMode.setBackground(getResources().getDrawable(R.drawable.online_mode));
+                    IMAGE_DIRECTORY_NAME_MODE = AppConstants.ONLINE;
                 }
             }
         });
@@ -721,8 +724,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     public String getFilename() {
-        FilePath = getExternalFilesDir(null)
-                + "/" + IMAGE_DIRECTORY_NAME;
+        FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_DR_DEPOT + "_" + suppId;
 
         String Image_name = PIC_NAME;
         FilePath = FilePath + "/" + Image_name;
@@ -774,8 +777,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
 
-                FilePath = getExternalFilesDir(null)
-                        + "/" + IMAGE_DIRECTORY_NAME;
+                FilePath = getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                        + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_DR_DEPOT + "_" + suppId;
 
                 String Image_name = PIC_TYPE + ".png";
                 FilePath = FilePath + "/" + Image_name;
@@ -816,7 +819,8 @@ public class DRDepotActivity extends LocBaseActivity implements GCCSubmitInterfa
     }
 
     private File getOutputMediaFile(int type) {
-        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME);
+        mediaStorageDir = new File(getExternalFilesDir(null) + "/" + IMAGE_DIRECTORY_NAME
+                + "/" + IMAGE_DIRECTORY_NAME_MODE + "/" + AppConstants.OFFLINE_DR_DEPOT + "_" + suppId);
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.d("TAG", "Oops! Failed create " + "Android File Upload"

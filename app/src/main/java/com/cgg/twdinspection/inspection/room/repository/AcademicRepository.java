@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.AcademicInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicEntity;
 import com.cgg.twdinspection.inspection.source.academic_overview.AcademicGradeEntity;
 
@@ -29,7 +29,7 @@ public class AcademicRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public AcademicRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         academicInfoDao = db.academicInfoDao();
 
     }

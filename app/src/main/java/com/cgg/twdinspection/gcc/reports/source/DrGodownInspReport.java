@@ -47,13 +47,4 @@ public class DrGodownInspReport {
         this.generalFindings = generalFindings;
     }
 
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.camera)
-                .error(R.drawable.ic_menu_camera)
-                .into(view);
-    }
-
 }

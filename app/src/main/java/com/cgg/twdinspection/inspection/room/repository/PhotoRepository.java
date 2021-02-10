@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.PhotoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.upload_photo.UploadPhoto;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class PhotoRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public PhotoRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         photoDao = db.photoDao();
 
     }

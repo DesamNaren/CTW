@@ -67,7 +67,6 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
     private CustomProgressDialog customProgressDialog;
     SearchView mSearchView;
     Menu mMenu = null;
-    private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -327,28 +326,9 @@ public class BeneficiaryReportActivity extends AppCompatActivity implements Sche
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-    }
 }

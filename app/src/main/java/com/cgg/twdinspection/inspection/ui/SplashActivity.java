@@ -35,6 +35,7 @@ import com.cgg.twdinspection.schemes.interfaces.ErrorHandlerInterface;
 
 import org.jetbrains.annotations.NotNull;
 
+
 public class SplashActivity extends AppCompatActivity implements ErrorHandlerInterface {
 
     private static final int REQUEST_PERMISSION_CODE = 2000;
@@ -74,14 +75,11 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                         SplashActivity.this, Manifest.permission.CAMERA);
                                                 int permissionCheck3 = ContextCompat.checkSelfPermission(
                                                         SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                                                int permissionCheck4 = ContextCompat.checkSelfPermission(
-                                                        SplashActivity.this, Manifest.permission.READ_PHONE_STATE);
 
 
                                                 if ((permissionCheck1 != PackageManager.PERMISSION_GRANTED)
                                                         && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)
-                                                        && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)
-                                                        && (permissionCheck4 != PackageManager.PERMISSION_GRANTED)) {
+                                                        && (permissionCheck3 != PackageManager.PERMISSION_GRANTED)) {
 
                                                     customBinding = DataBindingUtil.setContentView(SplashActivity.this,
                                                             R.layout.custom_layout_for_permissions);
@@ -133,8 +131,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                     case R.id.accept:
                         ActivityCompat.requestPermissions(SplashActivity.this,
                                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION
-                                        , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        Manifest.permission.READ_PHONE_STATE},
+                                        , Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSION_CODE);
                         break;
                 }
@@ -152,8 +149,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
 
                     if ((grantResults[0] == PackageManager.PERMISSION_GRANTED)
                             && (grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)
-                            && (grantResults[3] == PackageManager.PERMISSION_GRANTED)) {
+                            && (grantResults[2] == PackageManager.PERMISSION_GRANTED)) {
                         //TODO
                         new Handler().postDelayed(new Runnable() {
                             @Override
@@ -199,8 +195,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                 new String[]{
                                         Manifest.permission.ACCESS_FINE_LOCATION
                                         , Manifest.permission.CAMERA
-                                        , Manifest.permission.WRITE_EXTERNAL_STORAGE
-                                        , Manifest.permission.READ_PHONE_STATE},
+                                        , Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSION_CODE);
                     }
                 });

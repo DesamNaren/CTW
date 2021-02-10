@@ -43,7 +43,6 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
     private int issueType = 1, selectedType = 0;
     private int f_cnt, c_cnt, h_cnt, d_cnt, m_cnt, o_cnt, tot_cnt;
     private MedicalDetailsViewModel medicalDetailsViewModel;
-    private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -289,29 +288,9 @@ public class MedicalDetailsActivity extends AppCompatActivity implements View.On
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
     }
 
     @Override

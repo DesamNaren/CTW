@@ -36,7 +36,6 @@ import java.util.List;
 public class DashboardActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String cacheDate, currentDate;
     ActivityDashboardBinding binding;
     InstMainViewModel instMainViewModel;
     InstSelectionViewModel instSelectionViewModel;
@@ -203,32 +202,12 @@ public class DashboardActivity extends AppCompatActivity {
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
         super.onResume();
     }
 
-    @Override
-    protected void onPause() {
-
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-        super.onPause();
-    }
 
     @Override
     public void onBackPressed() {

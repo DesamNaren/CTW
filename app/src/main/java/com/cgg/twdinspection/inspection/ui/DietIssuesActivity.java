@@ -93,9 +93,8 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
     List<String> itemsList;
     DietIssuesTempItemsAdapter adapter;
     MasterInstituteInfo masterInstituteInfos;
-    String menu_chart_served, menu_chart_painted, menu_served, food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
-    private String cacheDate, currentDate;
-
+    String menu_chart_served, menu_chart_painted, menu_served,
+            food_provisions, matching_with_samples, committee_exist, discussed_with_committee, maintaining_register;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     public static final String IMAGE_DIRECTORY_NAME = "SCHOOL_INSP_IMAGES";
     String PIC_NAME, PIC_TYPE;
@@ -987,31 +986,10 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-    }
-
 
     @Override
     public void validate() {

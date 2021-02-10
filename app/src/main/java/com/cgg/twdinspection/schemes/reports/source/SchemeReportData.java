@@ -299,10 +299,4 @@ public class SchemeReportData {
         this.remarksType = remarksType;
     }
 
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
-    }
 }

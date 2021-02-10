@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.CocurricularDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.CoCurricularEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.StudAchievementEntity;
@@ -30,7 +30,7 @@ public class CocurricularRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public CocurricularRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         cocurricularDao = db.cocurricularDao();
 
     }

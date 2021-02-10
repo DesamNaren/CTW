@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.PlantsInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.cocurriular_activities.PlantsEntity;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class PlantsInfoRepository {
     private String tag= PlantsInfoRepository.class.getSimpleName();
 
     public PlantsInfoRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         plantsInfoDao = db.plantsInfoDao();
 
     }

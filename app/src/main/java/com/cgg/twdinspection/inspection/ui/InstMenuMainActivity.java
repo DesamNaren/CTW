@@ -84,7 +84,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     InstMainViewModel instMainViewModel;
     private String desLat, desLng;
     private CustomProgressDialog customProgressDialog;
-    private String cacheDate, currentDate;
     LiveData<List<InstMenuInfoEntity>> arrayListLiveData;
     private UploadPhotoViewModel viewModel;
     private InstSubmitRequest instSubmitRequest;
@@ -148,13 +147,6 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             String randomno = Utils.getRandomNumberString();
             editor.putString(AppConstants.RANDOM_NO, randomno);
             editor.commit();
-        }
-
-        if (TextUtils.isEmpty(instId)) {
-            Utils.ShowDeviceSessionAlert(this,
-                    getResources().getString(R.string.app_name),
-                    getString(R.string.ses_expire_re), instMainViewModel);
-            return;
         }
 
         LiveData<List<UploadPhoto>> listLiveData = viewModel.getPhotos();
@@ -716,28 +708,9 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
     }
 
     private BroadcastReceiver mGpsSwitchStateReceiver = new BroadcastReceiver() {

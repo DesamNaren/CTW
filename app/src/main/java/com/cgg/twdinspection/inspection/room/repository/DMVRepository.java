@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.DistrictDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolMandal;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolVillage;
@@ -27,7 +27,7 @@ public class DMVRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public DMVRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         districtDao = db.distDao();
 
     }

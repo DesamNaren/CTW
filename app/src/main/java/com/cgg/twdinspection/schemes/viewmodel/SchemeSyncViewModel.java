@@ -15,7 +15,6 @@ import com.cgg.twdinspection.schemes.source.finyear.FinancialYearResponse;
 import com.cgg.twdinspection.schemes.source.remarks.InspectionRemarkResponse;
 import com.cgg.twdinspection.schemes.source.schemes.SchemeResponse;
 
-import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,14 +54,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeDMV().enqueue(new Callback<SchemeDMVResponse>() {
             @Override
-            public void onResponse(@NotNull Call<SchemeDMVResponse> call, @NotNull Response<SchemeDMVResponse> response) {
+            public void onResponse( Call<SchemeDMVResponse> call,  Response<SchemeDMVResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     schemeDMVResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<SchemeDMVResponse> call, @NotNull Throwable t) {
+            public void onFailure( Call<SchemeDMVResponse> call,  Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -79,13 +78,13 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getFinancialYears().enqueue(new Callback<FinancialYearResponse>() {
             @Override
-            public void onResponse(@NotNull Call<FinancialYearResponse> call, @NotNull Response<FinancialYearResponse> response) {
+            public void onResponse( Call<FinancialYearResponse> call,  Response<FinancialYearResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                         financialYearResponseMutableLiveData.setValue(response.body());
                 }
             }
             @Override
-            public void onFailure(@NotNull Call<FinancialYearResponse> call, @NotNull Throwable t) {
+            public void onFailure( Call<FinancialYearResponse> call,  Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -103,14 +102,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getInspectionRemarks().enqueue(new Callback<InspectionRemarkResponse>() {
             @Override
-            public void onResponse(@NotNull Call<InspectionRemarkResponse> call, @NotNull Response<InspectionRemarkResponse> response) {
+            public void onResponse( Call<InspectionRemarkResponse> call,  Response<InspectionRemarkResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                         inspectionRemarkResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<InspectionRemarkResponse> call, @NotNull Throwable t) {
+            public void onFailure( Call<InspectionRemarkResponse> call,  Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });
@@ -127,14 +126,14 @@ public class SchemeSyncViewModel extends AndroidViewModel {
         TWDService twdService = TWDService.Factory.create("schemes");
         twdService.getSchemeResponse().enqueue(new Callback<SchemeResponse>() {
             @Override
-            public void onResponse(@NotNull Call<SchemeResponse> call, @NotNull Response<SchemeResponse> response) {
+            public void onResponse( Call<SchemeResponse> call,  Response<SchemeResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                         schemeResponseMutableLiveData.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NotNull Call<SchemeResponse> call, @NotNull Throwable t) {
+            public void onFailure( Call<SchemeResponse> call,  Throwable t) {
                 errorHandlerInterface.handleError(t, context);
             }
         });

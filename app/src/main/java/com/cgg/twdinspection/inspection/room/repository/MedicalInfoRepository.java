@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.MedicalInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalDetailsBean;
 import com.cgg.twdinspection.inspection.source.medical_and_health.CallHealthInfoEntity;
 import com.cgg.twdinspection.inspection.source.medical_and_health.MedicalInfoEntity;
@@ -27,7 +27,7 @@ public class MedicalInfoRepository {
     private String tag=MedicalInfoRepository.class.getSimpleName();
 
     public MedicalInfoRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         medicalInfoDao = db.medicalInfoDao();
     }
 

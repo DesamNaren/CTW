@@ -166,11 +166,5 @@ public class ReportData {
     public void setPhotos(List<ReportPhoto> photos) {
         this.photos = photos;
     }
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
 
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
-    }
 }

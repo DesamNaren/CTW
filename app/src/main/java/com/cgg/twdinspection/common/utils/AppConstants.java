@@ -71,7 +71,6 @@ public class AppConstants {
     public static final String KITCHEN = "Kitchen";
 
     public static float DISTANCE;
-    public static final String CACHE_DATE = "CACHE_DATE";
     public static final String GCC_AUTH_USER = "gccinventory";
     public static final String GCC_AUTH_PWD = "gcc@wsdata";
     public static final String ENTRANCE = "ENTRANCE";
@@ -171,4 +170,5 @@ public class AppConstants {
     public static final String OFFLINE_P_UNIT = "p_unit_godown";
     public static final String OFFLINE_PETROL = "petrol_godown";
     public static final String OFFLINE_LPG = "lpg_godown";
+    public static final String MPIN = "MPIN";
 }

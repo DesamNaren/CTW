@@ -44,7 +44,6 @@ public class DashboardMenuActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private AppBarConfiguration mAppBarConfiguration;
-    private String cacheDate, currentDate;
     private InstMainViewModel instMainViewModel;
     private ActivityHomeBinding binding;
     private MenuItem nav_home, nav_schemes, nav_school, nav_gcc, nav_eng, nav_reports, nav_my_insp, nav_logout;
@@ -280,31 +279,10 @@ public class DashboardMenuActivity extends AppCompatActivity {
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
         super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-        super.onPause();
     }
 
     @Override

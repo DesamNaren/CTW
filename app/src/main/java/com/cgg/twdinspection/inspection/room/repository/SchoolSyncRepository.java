@@ -5,7 +5,7 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import com.cgg.twdinspection.inspection.room.Dao.SchoolSyncDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.interfaces.SchoolDMVInterface;
 import com.cgg.twdinspection.inspection.interfaces.SchoolInstInterface;
 import com.cgg.twdinspection.inspection.source.dmv.SchoolDistrict;
@@ -19,7 +19,7 @@ public class SchoolSyncRepository {
     private SchoolSyncDao syncDao;
 
     public SchoolSyncRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         syncDao = db.schoolSyncDao();
     }
 

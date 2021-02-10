@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.cgg.twdinspection.inspection.room.Dao.InfraStructureInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.infra_maintenance.InfraStructureEntity;
 
 import io.reactivex.Observable;
@@ -24,7 +24,7 @@ public class InfraStructureRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public InfraStructureRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         infraStructureInfoDao = db.infraStructureInfoDao();
 
     }

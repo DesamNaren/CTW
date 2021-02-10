@@ -46,7 +46,6 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
     SharedPreferences.Editor editor;
     List<MasterInstituteInfo> institutesEntityList;
     CustomProgressDialog customProgressDialog;
-    private String cacheDate, currentDate;
     InstMainViewModel instMainViewModel;
     private InstSelectionViewModel selectionViewModel;
     ArrayAdapter selectAdapter;
@@ -126,8 +125,20 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                             android.R.layout.simple_spinner_dropdown_item, distNames
                     );
                     dmvSelectionActivityBinding.spDist.setAdapter(adapter);
+
+
                 } else {
                     Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No districts found...\n Do you want to sync district master?");
+                }
+            }
+        });
+
+        viewModel.getAllInstitutes().observe(this, new Observer<List<MasterInstituteInfo>>() {
+            @Override
+            public void onChanged(List<MasterInstituteInfo> masterInstituteInfos) {
+                customProgressDialog.dismiss();
+                if (masterInstituteInfos == null || masterInstituteInfos.size() == 0) {
+                    Utils.customSchoolSyncAlert(DMVSelectionActivity.this, getString(R.string.app_name), "No institutes found...\n Do you want to sync institutes master?");
                 }
             }
         });
@@ -290,29 +301,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
     }
 
     @Override

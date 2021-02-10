@@ -1,16 +1,19 @@
 package com.cgg.twdinspection.gcc.reports.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.R;
@@ -53,16 +56,18 @@ public class ViewPhotoAdapterPdf extends RecyclerView.Adapter<ViewPhotoAdapterPd
                 .load(dataModel.getFilePath())
                 .error(R.drawable.no_image)
                 .placeholder(R.drawable.camera)
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         holder.listItemBinding.pbar.setVisibility(View.GONE);
+
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         holder.listItemBinding.pbar.setVisibility(View.GONE);
+
                         return false;
                     }
                 })
@@ -71,7 +76,7 @@ public class ViewPhotoAdapterPdf extends RecyclerView.Adapter<ViewPhotoAdapterPd
         holder.listItemBinding.ivRepairs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dataModel.getFilePath() != null && dataModel.getFileName()!=null)
+                if (dataModel.getFilePath() != null && dataModel.getFileName() != null)
                     Utils.displayPhotoDialogBox(dataModel.getFilePath(), context, dataModel.getFileName(), true);
             }
         });

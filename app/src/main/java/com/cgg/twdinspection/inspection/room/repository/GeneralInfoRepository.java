@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.cgg.twdinspection.inspection.room.Dao.GeneralInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.general_information.GeneralInfoEntity;
 
 import io.reactivex.Observable;
@@ -23,7 +23,7 @@ public class GeneralInfoRepository {
 
 
     public GeneralInfoRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         generalInfoDao = db.generalInfoDao();
     }
 

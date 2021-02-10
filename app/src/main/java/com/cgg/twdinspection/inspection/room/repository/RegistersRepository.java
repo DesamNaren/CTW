@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.cgg.twdinspection.inspection.room.Dao.RegistersInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.registers_upto_date.RegistersEntity;
 
 import io.reactivex.Observable;
@@ -24,7 +24,7 @@ public class RegistersRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public RegistersRepository(Application application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         registersInfoDao = db.registersInfoDao();
 
     }

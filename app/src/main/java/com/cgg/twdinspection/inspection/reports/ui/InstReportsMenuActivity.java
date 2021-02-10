@@ -269,7 +269,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     public void run() {
                         try {
 
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
                                 directory_path = getExternalFilesDir(null)
                                         + "/" + "CTW/Schools/";
                             } else {

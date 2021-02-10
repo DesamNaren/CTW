@@ -14,6 +14,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfDocument;
 import android.location.Location;
 import android.net.ConnectivityManager;
@@ -21,7 +22,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -36,11 +36,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cgg.twdinspection.BuildConfig;
@@ -55,6 +56,7 @@ import com.cgg.twdinspection.inspection.ui.InstMenuMainActivity;
 import com.cgg.twdinspection.inspection.ui.LoginActivity;
 import com.cgg.twdinspection.inspection.ui.QuitAppActivity;
 import com.cgg.twdinspection.inspection.ui.SchoolSyncActivity;
+import com.cgg.twdinspection.inspection.ui.ValidateMPINActivity;
 import com.cgg.twdinspection.inspection.viewmodel.InstMainViewModel;
 import com.cgg.twdinspection.schemes.ui.SchemeSyncActivity;
 
@@ -72,25 +74,13 @@ import java.util.Random;
 import okhttp3.ResponseBody;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-import static android.Manifest.permission.READ_PHONE_STATE;
-
 public class Utils {
-    public static String getDeviceID(Context context) {
-        String deviceID = null;
-        try {
-            ContextCompat.checkSelfPermission(context, READ_PHONE_STATE);
 
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                deviceID = Settings.Secure.getString(
-                        context.getContentResolver(), Settings.Secure.ANDROID_ID);
-            } else {
-                deviceID = null;
-                deviceID = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                if (deviceID == null)
-                    deviceID = Settings.Secure.getString(context.getContentResolver(), "android_id");
-                if (deviceID == null)
-                    deviceID = "NODeviceID";
-            }
+    public static String getDeviceID(Context context) {
+        String deviceID = "";
+        try {
+            deviceID = Settings.Secure.getString(
+                    context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,15 +121,15 @@ public class Utils {
                 .load(photo)
                 .error(R.drawable.no_image)
                 .placeholder(R.drawable.camera)
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         pb.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         pb.setVisibility(View.GONE);
                         PhotoViewAttacher pAttacher;
                         pAttacher = new PhotoViewAttacher(imageView);
@@ -148,6 +138,7 @@ public class Utils {
                     }
                 })
                 .into(imageView);
+
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,8 +146,104 @@ public class Utils {
             }
         });
         dialog.show();
+    }
+
+    public static void customMPINSuccessAlert(Activity activity, String title, String
+            msg, String mPIN, SharedPreferences.Editor editor) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_success);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setVisibility(View.VISIBLE);
+                dialogMessage.setText(msg);
+                Button btDialogYes = dialog.findViewById(R.id.btDialogYes);
+                btDialogYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        editor.putString(AppConstants.MPIN, mPIN);
+                        editor.commit();
+                        activity.startActivity(new Intent(activity, ValidateMPINActivity.class));
+                        activity.finish();
+                    }
+                });
 
 
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void customCancelAlert(Activity activity, String title, String
+            msg, SharedPreferences.Editor editor) {
+        try {
+            final Dialog dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
+                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.setContentView(R.layout.custom_alert_exit);
+                dialog.setCancelable(false);
+                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
+                dialogTitle.setText(title);
+                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
+                dialogMessage.setText(msg);
+                Button exit = dialog.findViewById(R.id.btDialogExit);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        editor.clear();
+                        editor.commit();
+                        Intent newIntent = new Intent(activity, LoginActivity.class);
+                        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(newIntent);
+                        activity.finish();
+                    }
+                });
+
+                Button cancel = dialog.findViewById(R.id.btDialogCancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+                if (!dialog.isShowing())
+                    dialog.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showKeyboard(Context context) {
+        try {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void hideKeyboard(Context context, View mView) {
@@ -838,46 +925,6 @@ public class Utils {
                 });
 
 
-                if (!dialog.isShowing())
-                    dialog.show();
-            }
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public static void ShowDeviceSessionAlert(Activity activity, String title, String msg, InstMainViewModel instMainViewModel) {
-        try {
-            final Dialog dialog = new Dialog(activity);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            if (dialog.getWindow() != null && dialog.getWindow().getAttributes() != null) {
-                dialog.getWindow().getAttributes().windowAnimations = R.style.exitdialog_animation1;
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.custom_alert_error);
-                dialog.setCancelable(false);
-                TextView dialogTitle = dialog.findViewById(R.id.dialog_title);
-                dialogTitle.setText(title);
-                TextView dialogMessage = dialog.findViewById(R.id.dialog_message);
-                dialogMessage.setText(msg);
-                Button yes = dialog.findViewById(R.id.btDialogYes);
-                yes.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (dialog.isShowing())
-                            dialog.dismiss();
-                        instMainViewModel.deleteAllInspectionData();
-
-                        SharedPreferences sharedPreferences = TWDApplication.get(activity).getPreferences();
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear();
-                        editor.commit();
-
-                        activity.startActivity(new Intent(activity, LoginActivity.class));
-                        activity.finish();
-                    }
-                });
                 if (!dialog.isShowing())
                     dialog.show();
             }

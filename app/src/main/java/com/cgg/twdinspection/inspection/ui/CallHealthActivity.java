@@ -3,7 +3,6 @@ package com.cgg.twdinspection.inspection.ui;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cgg.twdinspection.R;
 import com.cgg.twdinspection.common.application.TWDApplication;
-import com.cgg.twdinspection.common.utils.AppConstants;
 import com.cgg.twdinspection.common.utils.Utils;
 import com.cgg.twdinspection.databinding.ActivityCallHealthBinding;
 import com.cgg.twdinspection.inspection.adapter.CallHealthAdapter;
@@ -32,7 +30,6 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
     private ActivityCallHealthBinding binding;
     private CallHealthViewModel viewModel;
     private CallHealthAdapter callHealthAdapter;
-    private String cacheDate, currentDate;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     InstMainViewModel instMainViewModel;
@@ -44,10 +41,10 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
         binding.appBarLayout.backBtn.setVisibility(View.VISIBLE);
         binding.appBarLayout.ivHome.setVisibility(View.GONE);
         binding.appBarLayout.headerTitle.setText(getString(R.string.call_health));
-        instMainViewModel=new InstMainViewModel(getApplication());
+        instMainViewModel = new InstMainViewModel(getApplication());
 
-        sharedPreferences= TWDApplication.get(this).getPreferences();
-        editor= sharedPreferences.edit();
+        sharedPreferences = TWDApplication.get(this).getPreferences();
+        editor = sharedPreferences.edit();
         binding.appBarLayout.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +53,7 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
         });
 
         viewModel = ViewModelProviders.of(CallHealthActivity.this,
-                new CallHealthCustomViewModel( this)).get(CallHealthViewModel.class);
+                new CallHealthCustomViewModel(this)).get(CallHealthViewModel.class);
         binding.setViewModel(viewModel);
 
         viewModel.getCallHealthData().observe(CallHealthActivity.this, new Observer<List<CallHealthInfoEntity>>() {
@@ -88,6 +85,7 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
     private void showBottomSheetSnackBar(String str) {
         Snackbar.make(binding.cl, str, Snackbar.LENGTH_SHORT).show();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -101,29 +99,9 @@ public class CallHealthActivity extends AppCompatActivity implements MedicalInte
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
     }
 
 }

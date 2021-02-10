@@ -79,7 +79,6 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
     SharedPreferences.Editor editor;
     private String officerID, instID, insTime, randomNo;
     private CustomProgressDialog customProgressDialog;
-    private String cacheDate, currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -988,29 +987,9 @@ public class UploadedPhotoActivity extends LocBaseActivity implements SaveListen
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-    }
 }

@@ -46,11 +46,4 @@ public class MfpGodownsInspRep {
     public void setGeneralFindings(MFPGeneralFindings generalFindings) {
         this.generalFindings = generalFindings;
     }
-
-    @BindingAdapter("profileImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
-    }
 }

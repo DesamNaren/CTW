@@ -39,62 +39,26 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
     ActivityLoginCreBinding binding;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    InstMainViewModel instMainViewModel;
-    InstSelectionViewModel instSelectionViewModel;
-    private String cacheDate, currentDate;
-    private String instId;
+    private String  mpin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = TWDApplication.get(this).getPreferences();
-        editor = sharedPreferences.edit();
-        instMainViewModel = new InstMainViewModel(getApplication());
-        instSelectionViewModel = new InstSelectionViewModel(getApplication());
+        try {
+            sharedPreferences = TWDApplication.get(this).getPreferences();
+            editor = sharedPreferences.edit();
 
+            mpin = sharedPreferences.getString(AppConstants.MPIN, "");
 
-
-        clearSession();
-
-        instSelectionViewModel.getSelectedInst().observe(this, new Observer<InstSelectionInfo>() {
-            @Override
-            public void onChanged(InstSelectionInfo instSelectionInfo) {
-                if (instSelectionInfo != null) {
-                    instId = instSelectionInfo.getInst_id();
-                    if (!TextUtils.isEmpty(instId)) {
-                        instMainViewModel.getAllSections().observe(LoginActivity.this, new Observer<List<InstMenuInfoEntity>>() {
-                            @Override
-                            public void onChanged(List<InstMenuInfoEntity> instMenuInfoEntities) {
-                                if (instMenuInfoEntities != null && instMenuInfoEntities.size() > 0) {
-
-                                    boolean flag = false;
-                                    for (int i = 0; i < instMenuInfoEntities.size(); i++) {
-                                        if (instMenuInfoEntities.get(i).getFlag_completed() == 1) {
-                                            flag = true;
-                                            break;
-                                        }
-                                    }
-                                    if (flag) {
-                                        startActivity(new Intent(LoginActivity.this, DashboardMenuActivity.class));
-                                        finish();
-                                    } else {
-                                        callLoginProcess();
-                                    }
-                                } else {
-                                    callLoginProcess();
-                                }
-                            }
-
-                        });
-                    } else {
-                        callLoginProcess();
-                    }
-                } else {
-                    callLoginProcess();
-                }
+            if (!TextUtils.isEmpty(mpin)) {
+                startActivity(new Intent(LoginActivity.this, ValidateMPINActivity.class));
+                finish();
+            } else {
+                callLoginProcess();
             }
-        });
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -111,16 +75,16 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
             public void onChanged(LoginResponse employeeResponses) {
 
                 if (employeeResponses != null && employeeResponses.getStatusCode() != null) {
-                    if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
+                    if (Integer.parseInt(employeeResponses.getStatusCode()) == AppConstants.SUCCESS_CODE) {
                         editor.putString(AppConstants.OFFICER_ID, employeeResponses.getUserId());
                         editor.putString(AppConstants.OFFICER_NAME, employeeResponses.getUserName());
                         editor.putString(AppConstants.OFFICER_DES, employeeResponses.getDesignation());
                         editor.putString(AppConstants.OFF_PLACE_OF_WORK, employeeResponses.getPlaceOfWork());
                         editor.commit();
 
-                        startActivity(new Intent(LoginActivity.this, DashboardMenuActivity.class));
+                        startActivity(new Intent(LoginActivity.this, GenerateMPINActivity.class));
                         finish();
-                    } else if (Integer.valueOf(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
+                    } else if (Integer.parseInt(employeeResponses.getStatusCode()) == AppConstants.FAILURE_CODE) {
                         Snackbar.make(binding.rlRoot, employeeResponses.getStatusMessage(), Snackbar.LENGTH_SHORT).show();
                     } else {
                         callSnackBar(getString(R.string.something));
@@ -223,37 +187,9 @@ public class LoginActivity extends LocBaseActivity implements ErrorHandlerInterf
                 return;
             }
 
-            clearSession();
-
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void clearSession() {
-        currentDate = Utils.getCurrentDate();
-        cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-        if (!TextUtils.isEmpty(cacheDate)) {
-            if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                Utils.ShowDeviceSessionAlert(this,
-                        getResources().getString(R.string.app_name),
-                        getString(R.string.ses_expire_re), instMainViewModel);
-
-            }
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        if (mRequestingLocationUpdates) {
-            stopLocationUpdates();
-        }
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-        super.onPause();
-    }
 }

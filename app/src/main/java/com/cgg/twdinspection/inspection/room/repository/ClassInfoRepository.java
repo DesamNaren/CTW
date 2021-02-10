@@ -6,10 +6,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
-import com.cgg.twdinspection.inspection.room.database.DistrictDatabase;
+import com.cgg.twdinspection.inspection.room.database.SchoolDatabase;
 import com.cgg.twdinspection.inspection.source.inst_master.MasterInstituteInfo;
 import com.cgg.twdinspection.inspection.source.student_attendence_info.StudAttendInfoEntity;
-import com.google.common.reflect.ClassPath;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ClassInfoRepository {
     public String tag = ClassInfoRepository.class.getSimpleName();
 
     public ClassInfoRepository(Context application) {
-        DistrictDatabase db = DistrictDatabase.getDatabase(application);
+        SchoolDatabase db = SchoolDatabase.getDatabase(application);
         classInfoDao = db.classInfoDao();
     }
 

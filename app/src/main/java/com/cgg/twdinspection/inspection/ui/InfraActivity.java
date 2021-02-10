@@ -92,7 +92,6 @@ public class InfraActivity extends BaseActivity implements SaveListener {
     File file_tds;
     int flag_tds = 0;
     SharedPreferences.Editor editor;
-    private String cacheDate, currentDate;
     private int localFlag = -1;
 
     private void ScrollToView(View view) {
@@ -1635,28 +1634,9 @@ public class InfraActivity extends BaseActivity implements SaveListener {
                 return;
             }
 
-            currentDate = Utils.getCurrentDate();
-            cacheDate = sharedPreferences.getString(AppConstants.CACHE_DATE, "");
-
-            if (!TextUtils.isEmpty(cacheDate)) {
-                if (!cacheDate.equalsIgnoreCase(currentDate)) {
-
-                    Utils.ShowDeviceSessionAlert(this,
-                            getResources().getString(R.string.app_name),
-                            getString(R.string.ses_expire_re), instMainViewModel);
-                }
-            }
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cacheDate = currentDate;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(AppConstants.CACHE_DATE, cacheDate);
-        editor.commit();
-    }
 }
