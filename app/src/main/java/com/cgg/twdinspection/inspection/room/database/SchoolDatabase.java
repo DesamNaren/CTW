@@ -114,8 +114,7 @@ public abstract class SchoolDatabase extends RoomDatabase {
                             SchoolDatabase.class, "Schools.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
-//                            .createFromFile(f)
-                            .createFromAsset("database/Schools.db")
+//                            .createFromAsset("database/Schools.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }
@@ -123,16 +122,4 @@ public abstract class SchoolDatabase extends RoomDatabase {
         }
         return INSTANCE1;
     }
-
-    /**
-     * Override the onOpen method to populate the database.
-     * For this sample, we clear the database every time it is created or opened.
-     */
-    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
-
-        @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
-        }
-    };
 }

@@ -179,6 +179,7 @@ public class MenuSectionsRepository {
 
 
     public void deleteAllInspectionData() {
+        Log.i("DELETE", "deleteAllInspectionData: ");
         menuSectionsDao.deleteInstSelectionInfo();
         menuSectionsDao.deleteAcademicEntity();
         menuSectionsDao.deleteAcademicGradeEntity();
