@@ -70,7 +70,7 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
                                                 if (versionResponse.getRadius() != null) {
                                                     AppConstants.DISTANCE = Float.parseFloat(versionResponse.getRadius());
                                                 } else {
-                                                    handleError(SplashActivity.this, "RADIUS not found from server level");
+                                                    handleError(SplashActivity.this);
                                                     return;
                                                 }
                                                 int permissionCheck1 = ContextCompat.checkSelfPermission(
@@ -126,8 +126,8 @@ public class SplashActivity extends AppCompatActivity implements ErrorHandlerInt
 
     }
 
-    private void handleError(Activity context, String errMsg) {
-        Utils.customSplashErrorAlert(context, getResources().getString(R.string.app_name), errMsg);
+    private void handleError(Activity context) {
+        Utils.customSplashErrorAlert(context, getResources().getString(R.string.app_name), getString(R.string.radius_not_found));
     }
 
     View.OnClickListener onBtnClick = new View.OnClickListener() {

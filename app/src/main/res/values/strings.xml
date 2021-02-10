@@ -1193,5 +1193,6 @@
     <string name="mpin_generated_successfully">MPIN Generated Successfully</string>
     <string name="cancel_otp_process">Are you sure, Do you want cancel setting MPIN?</string>
     <string name="enter_valid_mpin">Enter valid MPIN</string>
+    <string name="radius_not_found">Radius value not found from server level</string>
 
 </resources>
