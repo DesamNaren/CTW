@@ -511,6 +511,7 @@ public class Utils {
                         editor.putString(AppConstants.ADDRESS, "");
 
                         editor.commit();
+                        Log.i("DELETE", "customChangeAppAlert");
                         instMainViewModel.deleteAllInspectionData();
 
                         Intent newIntent = new Intent(activity, DashboardMenuActivity.class);

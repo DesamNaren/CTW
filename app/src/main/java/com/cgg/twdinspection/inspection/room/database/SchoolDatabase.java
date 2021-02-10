@@ -3,9 +3,11 @@ package com.cgg.twdinspection.inspection.room.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cgg.twdinspection.inspection.room.Dao.AcademicInfoDao;
 import com.cgg.twdinspection.inspection.room.Dao.ClassInfoDao;
@@ -121,4 +123,16 @@ public abstract class SchoolDatabase extends RoomDatabase {
         }
         return INSTANCE1;
     }
+
+    /**
+     * Override the onOpen method to populate the database.
+     * For this sample, we clear the database every time it is created or opened.
+     */
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+        }
+    };
 }

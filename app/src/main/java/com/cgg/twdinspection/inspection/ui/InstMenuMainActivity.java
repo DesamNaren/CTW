@@ -572,6 +572,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
     public void getSubmitData(InstSubmitResponse schemeSubmitResponse) {
         customProgressDialog.hide();
         if (schemeSubmitResponse != null && schemeSubmitResponse.getStatusCode() != null && schemeSubmitResponse.getStatusCode().equals(AppConstants.SUCCESS_STRING_CODE)) {
+            Log.i("DELETE", "getSubmitData");
             instMainViewModel.deleteAllInspectionData();
             clearSharedPref();
             CallSuccessAlert(schemeSubmitResponse.getStatusMessage());
@@ -635,6 +636,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
             if (!flag) {
                 clearSharedPref();
+                Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
                 instMainViewModel.deleteMenuData();
                 startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -647,6 +649,7 @@ public class InstMenuMainActivity extends LocBaseActivity implements SchemeSubmi
             }
         } else {
             clearSharedPref();
+            Log.i("DELETE", "onBackPressed: DELETE INonBackPressed ");
             instMainViewModel.deleteMenuData();
             startActivity(new Intent(InstMenuMainActivity.this, DMVSelectionActivity.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
