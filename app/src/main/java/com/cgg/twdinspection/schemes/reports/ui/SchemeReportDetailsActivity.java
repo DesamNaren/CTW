@@ -54,6 +54,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     String directory_path, filePath;
     private String TAG = SchemeReportDetailsActivity.class.getSimpleName();
     String folder = "Schemes";
+    private String filePath_temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,28 +100,19 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                     views.add(binding.scrlPdf);
 
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                        filePath = PDFUtil.createPdfFile(SchemeReportDetailsActivity.this,
+                        filePath_temp = PDFUtil.createPdfFile(SchemeReportDetailsActivity.this,
                                 "Schemes_" + schemeReportData.getOfficerId()
-                                        + "_" + schemeReportData.getInspectionTime(), folder);
+                                        + "_" + schemeReportData.getInspectionTime() + "_temp", folder);
                     } else {
                         directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                                 + "/" + "CTW/Schemes/";
 
-                        filePath = directory_path + "Schemes_" + schemeReportData.getOfficerId() + "_" +
+                        filePath_temp = directory_path + "Schemes_" + schemeReportData.getOfficerId() + "_" +
                                 schemeReportData.getInspectionTime();
-
+                        filePath_temp = filePath + "_temp" + ".pdf";
                     }
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                        directory_path = getExternalFilesDir(null)
-                                + "/" + "CTW/Schemes/";
-                    } else {
-                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                + "/" + "CTW/Schemes/";
-                    }
-
-
-                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath + "_temp" + ".pdf", SchemeReportDetailsActivity.this, "schemes", "Schemes");
+                    PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views,filePath_temp , SchemeReportDetailsActivity.this, "schemes", "Schemes");
                     Log.i(TAG, "onClick: try");
 
                 } catch (Exception e) {
@@ -268,7 +260,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         PdfStamper stamper;
         PdfReader reader;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            reader = new PdfReader(filePath);
+            reader = new PdfReader(filePath_temp);
             stamper = new PdfStamper(reader, new FileOutputStream(filePath));
         } else {
             reader = new PdfReader(filePath + "_temp" + ".pdf");
@@ -295,7 +287,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         reader.close();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            File file = new File(filePath);
+            File file = new File(filePath_temp);
             file.delete();
         } else {
             File file = new File(filePath + "_temp" + ".pdf");
@@ -312,8 +304,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
             filePath = PDFUtil.createPdfFile(SchemeReportDetailsActivity.this, "Schemes_" +
                     schemeReportData.getOfficerId()
-                    + "_" + schemeReportData.getInspectionTime()
-                    + ".pdf", folder);
+                    + "_" + schemeReportData.getInspectionTime() + ".pdf", folder);
 
             savedPDFFile = new File(filePath);
 
