@@ -228,7 +228,7 @@
     <string name="camera">Camera</string>
     <string name="cameratxt">Camera allowing you to capture pictures in the application</string>
     <string name="storage">Storage</string>
-    <string name="permissionText">Make your TW app experience better with these permissions</string>
+    <string name="permissionText">Make your TWD app experience better with these permissions</string>
     <string name="storagetxt">Collect storage information to work with captured photos through device</string>
     <string name="iaccept">I accept</string>
     <string name="ideclined"><![CDATA[Declined & Proceed to Login]]></string>

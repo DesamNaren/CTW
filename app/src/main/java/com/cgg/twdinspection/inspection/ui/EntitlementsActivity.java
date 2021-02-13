@@ -474,7 +474,6 @@ public class EntitlementsActivity extends BaseActivity implements SaveListener {
                 liveData.observe(EntitlementsActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
-                        liveData.removeObservers(EntitlementsActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
                         }

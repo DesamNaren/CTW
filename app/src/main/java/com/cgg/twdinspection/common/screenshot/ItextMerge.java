@@ -142,8 +142,12 @@ public class ItextMerge {
 
 //        String directory_path = context.getExternalFilesDir(null)
 //                + "/" + "CTW/Schools/";
-        String path = filePath + ".pdf";
-
+        String path;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            path = filePath;
+        } else {
+            path = filePath + ".pdf";
+        }
 
         if (filePath.isEmpty()) {
             try {

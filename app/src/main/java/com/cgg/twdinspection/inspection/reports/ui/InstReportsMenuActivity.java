@@ -2,9 +2,12 @@ package com.cgg.twdinspection.inspection.reports.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -71,7 +74,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     CustomProgressDialog customProgressDialog;
     SharedPreferences sharedPreferences;
     private InspReportData inspReportData;
-    String directory_path, filePath, filePath1, filePath2;
+    String directory_path, filePath, filePath1, filePath2, filePath_temp;
     File file;
 
     private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
@@ -88,6 +91,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     private java.util.List<AcademicGradeEntity> academicGradeEntityList;
     private RecyclerView.LayoutManager layoutManager;
     ViewPhotoAdapterPdf adapter;
+    String folder = "Schools";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,18 +272,6 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                     @Override
                     public void run() {
                         try {
-
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                                directory_path = getExternalFilesDir(null)
-                                        + "/" + "CTW/Schools/";
-                            } else {
-                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                                        + "/" + "CTW/Schools/";
-                            }
-
-                            filePath = directory_path + "Schools_" + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
-
-                            filePath1 = filePath + "_1" + ".pdf";
                             List<View> views = new ArrayList<>();
                             views.add(binding.generalInfoPdf1);
                             views.add(binding.generalInfoPdf2);
@@ -306,6 +298,18 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                             views.add(binding.generalCommentsPdf1);
                             views.add(binding.generalCommentsPdf2);
                             views.add(binding.photosPdf);
+
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                                filePath1 = PDFUtil.createPdfFile(InstReportsMenuActivity.this,
+                                        "Schools_" + inspReportData.getOfficerId()
+                                                + "_" + inspReportData.getInspectionTime()
+                                                + "_1" + ".pdf", folder);
+                            } else {
+                                directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                        + "/" + "CTW/Schools/";
+                                filePath = directory_path + "Schools_" + inspReportData.getOfficerId() + "_" + inspReportData.getInspectionTime();
+                                filePath1 = filePath + "_1" + ".pdf";
+                            }
 
                             PDFUtil.getInstance(InstReportsMenuActivity.this).generatePDF(views, filePath1, InstReportsMenuActivity.this, "schemes", "GCC");
 
@@ -335,6 +339,7 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
 
     }
+
 
     private void setStudAdapter(java.util.List<StudentAttendenceInfo> studentAttendInfoList) {
         StuAttReportAdapter stockSubAdapter = new StuAttReportAdapter(this, studentAttendInfoList);
@@ -381,7 +386,14 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        filePath2 = filePath + "_2" + ".pdf";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            filePath2 = PDFUtil.createPdfFile(InstReportsMenuActivity.this, "Schools_" + inspReportData.getOfficerId()
+                    + "_" + inspReportData.getInspectionTime()
+                    + "_2" + ".pdf", folder);
+        } else {
+            filePath2 = filePath + "_2" + ".pdf";
+        }
 
         try {
             customProgressDialog.show();
@@ -399,7 +411,17 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
                 addAcademicContent(document);
 
             document.close();
-            new ItextMerge(InstReportsMenuActivity.this, filePath + "_temp", filePath1, filePath2, InstReportsMenuActivity.this);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                filePath_temp = PDFUtil.createPdfFile(InstReportsMenuActivity.this, "Schools_" + inspReportData.getOfficerId()
+                        + "_" + inspReportData.getInspectionTime()
+                        + "_temp" + ".pdf", folder);
+
+                new ItextMerge(InstReportsMenuActivity.this, filePath_temp, filePath1, filePath2, InstReportsMenuActivity.this);
+
+            } else {
+                new ItextMerge(InstReportsMenuActivity.this, filePath + "_temp", filePath1, filePath2, InstReportsMenuActivity.this);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -641,25 +663,39 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
 
     @Override
     public void pdfMergeSuccess() {
-        File savedPDFFile = new File(filePath + ".pdf");
+        File savedPDFFile = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            filePath = PDFUtil.createPdfFile(InstReportsMenuActivity.this, "Schools_" + inspReportData.getOfficerId()
+                    + "_" + inspReportData.getInspectionTime()
+                    + ".pdf", folder);
+
+            savedPDFFile = new File(filePath);
+
+        } else {
+            savedPDFFile = new File(filePath + ".pdf");
+        }
+
         customProgressDialog.hide();
         try {
-            addWatermark();
+            addWatermark(savedPDFFile);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        File file = new File(filePath + "_temp" + ".pdf");
-        file.delete();
-        Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
     }
 
-    public void addWatermark() throws IOException, DocumentException {
+    public void addWatermark(File savedPDFFile) throws IOException, DocumentException {
+        PdfStamper stamper;
+        PdfReader reader;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            reader = new PdfReader(filePath_temp);
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath));
+        } else {
+            reader = new PdfReader(filePath + "_temp" + ".pdf");
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        }
 
-        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
-        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
         Font f = new Font(Font.FontFamily.HELVETICA, 11);
         f.setColor(BaseColor.GRAY);
         int n = reader.getNumberOfPages();
@@ -677,9 +713,20 @@ public class InstReportsMenuActivity extends LocBaseActivity implements PDFUtil.
             over.restoreState();
         }
 
-
         stamper.close();
         reader.close();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            File file = new File(filePath_temp);
+            file.delete();
+        } else {
+            File file = new File(filePath + "_temp" + ".pdf");
+            file.delete();
+        }
+
+
+        Utils.customPDFAlert(InstReportsMenuActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedPDFFile + "\n Do you want open it?", savedPDFFile);
+
     }
 
     @Override

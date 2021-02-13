@@ -1,20 +1,27 @@
 package com.cgg.twdinspection.common.screenshot;
 
 import android.annotation.TargetApi;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +77,7 @@ public class PDFUtil {
         }
         return sInstance;
     }
+
 
     /**
      * Generates PDF for the given content views to the file path specified.
@@ -172,7 +180,6 @@ public class PDFUtil {
                 return savePDFDocumentToStorage(pdfDocument);
             } catch (Exception exception) {
                 mException = exception;
-                Log.e(TAG, exception.getMessage());
                 return null;
             }
         }
@@ -383,5 +390,33 @@ public class PDFUtil {
 
         return bitmaps;
 
+    }
+
+    public static String getPath(Context context, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s = cursor.getString(column_index);
+        cursor.close();
+        return s;
+    }
+
+    public static String createPdfFile(Context context, String fileName, String folder) {
+        try {
+            ContentResolver resolver = context.getContentResolver();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + File.separator + "CTW/" + folder);
+            final Uri contentUri = MediaStore.Files.getContentUri("external");
+            Uri uri = resolver.insert(contentUri, contentValues);
+            OutputStream outputStream = resolver.openOutputStream(uri);
+            return PDFUtil.getPath(context, uri);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

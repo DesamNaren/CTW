@@ -104,7 +104,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         }
 
         ArrayList selectList = new ArrayList();
-        selectList.add("Select");
+        selectList.add("-Select-");
         selectAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, selectList);
 
         instNames = new ArrayList<>();
@@ -189,7 +189,7 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
         if (adapterView.getId() == R.id.sp_dist) {
             instNames = new ArrayList<>();
             institutesEntityList = new ArrayList<>();
-            instNames.add("--Select--");
+            instNames.add("-Select-");
             if (i != 0) {
                 viewModel.getDistId(dmvSelectionActivityBinding.spDist.getSelectedItem().toString()).observe(DMVSelectionActivity.this, new Observer<String>() {
                     @Override
@@ -318,9 +318,9 @@ public class DMVSelectionActivity extends AppCompatActivity implements AdapterVi
                 public void onChanged(InstSelectionInfo instSelectionInfo) {
                     liveData.removeObservers(DMVSelectionActivity.this);
                     if (instSelectionInfo != null) {
-                        editor.putInt(AppConstants.DIST_ID, Integer.valueOf(instSelectionInfo.getDist_id()));
-                        editor.putInt(AppConstants.MAN_ID, Integer.valueOf(instSelectionInfo.getMan_id()));
-                        editor.putInt(AppConstants.VILL_ID, Integer.valueOf(instSelectionInfo.getVil_id()));
+                        editor.putInt(AppConstants.DIST_ID, Integer.parseInt(instSelectionInfo.getDist_id()));
+                        editor.putInt(AppConstants.MAN_ID, Integer.parseInt(instSelectionInfo.getMan_id()));
+                        editor.putInt(AppConstants.VILL_ID, Integer.parseInt(instSelectionInfo.getVil_id()));
                         editor.putString(AppConstants.INST_ID, instSelectionInfo.getInst_id());
                         editor.putString(AppConstants.INST_NAME, instSelectionInfo.getInst_name());
                         editor.putString(AppConstants.DIST_NAME, instSelectionInfo.getDist_name());

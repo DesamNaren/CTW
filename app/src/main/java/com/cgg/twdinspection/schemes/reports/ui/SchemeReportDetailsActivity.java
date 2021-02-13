@@ -53,6 +53,7 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
     CustomProgressDialog customProgressDialog;
     String directory_path, filePath;
     private String TAG = SchemeReportDetailsActivity.class.getSimpleName();
+    String folder = "Schemes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,21 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
             public void onClick(View view) {
                 try {
                     customProgressDialog.show();
+                    List<View> views = new ArrayList<>();
+                    views.add(binding.scrlPdf);
+
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                        filePath = PDFUtil.createPdfFile(SchemeReportDetailsActivity.this,
+                                "Schemes_" + schemeReportData.getOfficerId()
+                                        + "_" + schemeReportData.getInspectionTime(), folder);
+                    } else {
+                        directory_path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                                + "/" + "CTW/Schemes/";
+
+                        filePath = directory_path + "Schemes_" + schemeReportData.getOfficerId() + "_" +
+                                schemeReportData.getInspectionTime();
+
+                    }
 
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
                         directory_path = getExternalFilesDir(null)
@@ -103,9 +119,6 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
                                 + "/" + "CTW/Schemes/";
                     }
 
-                    filePath = directory_path + "Schemes_" + schemeReportData.getOfficerId() + "_" + schemeReportData.getInspectionTime();
-                    List<View> views = new ArrayList<>();
-                    views.add(binding.scrlPdf);
 
                     PDFUtil.getInstance(SchemeReportDetailsActivity.this).generatePDF(views, filePath + "_temp" + ".pdf", SchemeReportDetailsActivity.this, "schemes", "Schemes");
                     Log.i(TAG, "onClick: try");
@@ -251,10 +264,17 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
 
     }
 
-    public void addWatermark() throws IOException, DocumentException {
+    public void addWatermark(File savedFile) throws IOException, DocumentException {
+        PdfStamper stamper;
+        PdfReader reader;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            reader = new PdfReader(filePath);
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath));
+        } else {
+            reader = new PdfReader(filePath + "_temp" + ".pdf");
+            stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
+        }
 
-        PdfReader reader = new PdfReader(filePath + "_temp" + ".pdf");
-        PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(filePath + ".pdf"));
         Font f = new Font(Font.FontFamily.HELVETICA, 11);
         f.setColor(BaseColor.GRAY);
         int n = reader.getNumberOfPages();
@@ -273,24 +293,42 @@ public class SchemeReportDetailsActivity extends AppCompatActivity implements PD
         }
         stamper.close();
         reader.close();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            File file = new File(filePath);
+            file.delete();
+        } else {
+            File file = new File(filePath + "_temp" + ".pdf");
+            file.delete();
+        }
+        Utils.customPDFAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name),
+                "PDF File Generated Successfully. \n File saved at " + savedFile + "\n Do you want open it?", savedFile);
     }
 
     @Override
     public void pdfGenerationSuccess(File savedPDFFile) {
         customProgressDialog.hide();
-        File savedFile = new File(filePath + ".pdf");
-        customProgressDialog.hide();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            filePath = PDFUtil.createPdfFile(SchemeReportDetailsActivity.this, "Schemes_" +
+                    schemeReportData.getOfficerId()
+                    + "_" + schemeReportData.getInspectionTime()
+                    + ".pdf", folder);
+
+            savedPDFFile = new File(filePath);
+
+        } else {
+            savedPDFFile = new File(filePath + ".pdf");
+        }
+
         try {
-            addWatermark();
+            addWatermark(savedPDFFile);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
         }
-        File file = new File(filePath + "_temp" + ".pdf");
-        file.delete();
-        Utils.customPDFAlert(SchemeReportDetailsActivity.this, getString(R.string.app_name),
-                "PDF File Generated Successfully. \n File saved at " + savedFile + "\n Do you want open it?", savedFile);
+
     }
 
     @Override

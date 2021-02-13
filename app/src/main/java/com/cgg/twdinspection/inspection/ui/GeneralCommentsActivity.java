@@ -539,7 +539,6 @@ public class GeneralCommentsActivity extends BaseActivity implements SaveListene
                 liveData.observe(GeneralCommentsActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
-                        liveData.removeObservers(GeneralCommentsActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instID);
                         }

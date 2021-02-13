@@ -188,7 +188,6 @@ public class StaffAttendActivity extends BaseActivity implements SaveListener {
                 liveData.observe(StaffAttendActivity.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer id) {
-                        liveData.removeObservers(StaffAttendActivity.this);
                         if (id != null) {
                             z[0] = instMainViewModel.updateSectionInfo(Utils.getCurrentDateTime(), id, instId);
                         }

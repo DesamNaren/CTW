@@ -985,8 +985,6 @@ public class GCCPhotoActivity extends LocBaseActivity implements GCCSubmitInterf
         customProgressDialog.hide();
         try {
             if (cnt > 0) {
-
-
                 Toast.makeText(this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, GCCDashboardActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));

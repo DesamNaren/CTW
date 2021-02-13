@@ -690,7 +690,6 @@ public class DietIssuesActivity extends BaseActivity implements SaveListener, Di
                 final long[] z = {0};
                 try {
                     LiveData<Integer> liveData = instMainViewModel.getSectionId("Diet");
-                    ;
                     liveData.observe(DietIssuesActivity.this, new Observer<Integer>() {
                         @Override
                         public void onChanged(Integer id) {
